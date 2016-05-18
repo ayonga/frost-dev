@@ -6,15 +6,15 @@
 *.#*
 
 ## image files
-*.png
-*.svg
-*.pdf
-*.gif
-*.tif
-*.jpg
-*.eps
-*.ps
-*.pdf
+#*.png
+#*.svg
+#*.pdf
+#*.gif
+#*.tif
+#*.jpg
+#*.eps
+#*.ps
+#*.pdf
 
 ## video files
 *.avi
