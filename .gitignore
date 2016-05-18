@@ -1,0 +1,48 @@
+
+
+## temporary files
+*~
+*.asv
+*.#*
+
+## image files
+*.png
+*.svg
+*.pdf
+*.gif
+*.tif
+*.jpg
+*.eps
+*.ps
+*.pdf
+
+## video files
+*.avi
+*.mp4
+## build files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+
+## data files
+*.mat
+*.bin
+
+## build directories
+*.cc
+*.mexa64
+*.o
+*.hh
+## temp files from adigator
+#.DS_Store
+
+## build files from ADiMAT
+#.adimat/
+#g_*.m
+
+results/
+
+.dropbox
