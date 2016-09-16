@@ -1,0 +1,743 @@
+\hypertarget{class_matlab_doc_maker}{}\subsection{Matlab\+Doc\+Maker Class Reference}
+\label{class_matlab_doc_maker}\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+
+
+\hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker}\+: Automated documentation creation using doxygen and mtoc++ from within Mat\+Lab.  
+
+
+
+
+Collaboration diagram for Matlab\+Doc\+Maker\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_matlab_doc_maker__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static mlhs\+Inner\+Subst$<$\+::\hyperlink{classchar}{char}, name $>$ \hyperlink{class_matlab_doc_maker_a9f84ff8d3f39824b54626862780b342c}{get\+Project\+Name} ()
+\begin{DoxyCompactList}\small\item\em Returns the project name. \end{DoxyCompactList}\item 
+static mlhs\+Inner\+Subst$<$\+::\hyperlink{classchar}{char}, dir $>$ \hyperlink{class_matlab_doc_maker_a1957c12ff4fb6a9d8e1b009961a5f499}{get\+Output\+Directory} ()
+\begin{DoxyCompactList}\small\item\em Returns the directory where the applications source files reside. \end{DoxyCompactList}\item 
+static mlhs\+Inner\+Subst$<$\+::\hyperlink{classchar}{char}, dir $>$ \hyperlink{class_matlab_doc_maker_a1481c6e95be338b758ec97b8090ee7c9}{get\+Source\+Directory} ()
+\begin{DoxyCompactList}\small\item\em Returns the directory where the applications source files reside. \end{DoxyCompactList}\item 
+static mlhs\+Inner\+Subst$<$\+::\hyperlink{classchar}{char}, dir $>$ \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{get\+Config\+Directory} ()
+\begin{DoxyCompactList}\small\item\em Returns the directory where the applications documentation configuration files reside. \end{DoxyCompactList}\item 
+static mlhs\+Inner\+Subst$<$\+::\hyperlink{classchar}{char}, desc $>$ \hyperlink{class_matlab_doc_maker_af63bb7f2a5008a7b786d2b83b4f72b1b}{get\+Project\+Description} ()
+\begin{DoxyCompactList}\small\item\em Returns the short project description. \end{DoxyCompactList}\item 
+static noret\+::substitute \hyperlink{class_matlab_doc_maker_a88037a33f6ed26b8b3e60e1cbfd5dfd6}{set\+Project\+Description} (\+::\hyperlink{classchar}{char} value)
+\begin{DoxyCompactList}\small\item\em Sets the project description. \end{DoxyCompactList}\item 
+static mlhs\+Inner\+Subst$<$\+::\hyperlink{classchar}{char}, version $>$ \hyperlink{class_matlab_doc_maker_afce5384fb7c395546431b7a6c4e1f790}{get\+Project\+Version} ()
+\begin{DoxyCompactList}\small\item\em Returns the current version of the project. \end{DoxyCompactList}\item 
+static noret\+::substitute \hyperlink{class_matlab_doc_maker_a532ff6bc4beaeff5c3d2f12305bbaa5d}{set\+Project\+Version} (\+::\hyperlink{classchar}{char} value)
+\begin{DoxyCompactList}\small\item\em Sets the project version. \end{DoxyCompactList}\item 
+static mlhs\+Inner\+Subst$<$ matlabtypesubstitute, full\+Path $>$ \hyperlink{class_matlab_doc_maker_a6767085b13dc2600cb6beda7f7d6acd9}{get\+Project\+Logo} ()
+\begin{DoxyCompactList}\small\item\em Returns the logo image file for the project. Either an absolute path or a plain filename. For the latter case the image file is assumed to reside inside the directory returned by \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory}. \end{DoxyCompactList}\item 
+static noret\+::substitute \hyperlink{class_matlab_doc_maker_a6e84afe2189a851665133b6e7c412d4c}{set\+Project\+Logo} (\+::\hyperlink{classchar}{char} value)
+\begin{DoxyCompactList}\small\item\em Sets the project logo. Set to \textquotesingle{} to unset. \end{DoxyCompactList}\item 
+static noret\+::substitute \hyperlink{class_matlab_doc_maker_ac0a03050ca09039ccd6a1fc97367a38b}{open} ()
+\begin{DoxyCompactList}\small\item\em Opens the generated documentation. \end{DoxyCompactList}\item 
+static noret\+::substitute \hyperlink{class_matlab_doc_maker_a278883e6b83f6c6e7780e0d567dee119}{create} (matlabtypesubstitute \hyperlink{classvarargin}{varargin})
+\begin{DoxyCompactList}\small\item\em Creates the Doxygen documentation. \end{DoxyCompactList}\item 
+static noret\+::substitute \hyperlink{class_matlab_doc_maker_a434c176c2421dd18a40003919b19f4f2}{setup} ()
+\begin{DoxyCompactList}\small\item\em Runs the setup script for \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker} and collects all necessary paths in order for the documentation creation to work properly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const \+::\hyperlink{classchar}{char} \hyperlink{class_matlab_doc_maker_ab9514d0ba074c3b92a7fae2b50846b90}{D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE} = \char`\"{}Doxyfile.\+template\char`\"{}
+\begin{DoxyCompactList}\small\item\em File name for the doxygen configuration file processed by the \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker}. \end{DoxyCompactList}\item 
+static const \+::\hyperlink{classchar}{char} \hyperlink{class_matlab_doc_maker_a5fd9647b943b91d54acbfce17d0d7416}{L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE} = \char`\"{}latexextras.\+template\char`\"{}
+\begin{DoxyCompactList}\small\item\em File name for the latex extras style file processed by the \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker}. \end{DoxyCompactList}\item 
+static const \+::\hyperlink{classchar}{char} \hyperlink{class_matlab_doc_maker_ab61ab79ccd92642c4fef74c6abbee559}{M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE} = \char`\"{}mtocpp.\+conf\char`\"{}
+\begin{DoxyCompactList}\small\item\em File name the mtoc++ configuration file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker}\+: Automated documentation creation using doxygen and mtoc++ from within Mat\+Lab. 
+
+Currently documentation creation for unix and windows environment is supported.
+
+\begin{DoxyParagraph}{Prerequisites}
+The following tools must be installed and present on the P\+A\+TH or reside inside the folder returned by \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory}.
+\begin{DoxyItemize}
+\item {\ttfamily mtocpp}, {\ttfamily mtocpp\+\_\+post} (the main tool)
+\item {\ttfamily doxygen} (mtoc++ is a filter for doxygen)
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Strongly recommended}
+
+\begin{DoxyItemize}
+\item {\ttfamily latex} Doxygen supports built-\/in latex formulas and Matlab\+Doc\+Maker/mtoc++ allows for easy extra latex inclusions and notation in code
+\item {\ttfamily dot} Doxygen creates really nice inheritance graphs and collaboration diagrams with dot.
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyAuthor}{Author}
+Daniel Wirtz 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2011-\/10-\/13
+\end{DoxyDate}
+\begin{DoxyRefDesc}{Change in 1.\+5}
+\item[\hyperlink{changelog1_5__changelog1_5000001}{Change in 1.\+5}](dw, 2013-\/12-\/03) Fixed default value selection for properties, now not having set a description or logo does not cause an error to be thrown.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+5}
+\item[\hyperlink{changelog1_5__changelog1_5000002}{Change in 1.\+5}](dw, 2013-\/02-\/21) Fixed the callback for suggested direct documentation creation after \hyperlink{class_matlab_doc_maker_a434c176c2421dd18a40003919b19f4f2}{Matlab\+Doc\+Maker.\+setup} (Thanks to Aurelien Queffurust)\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+5}
+\item[\hyperlink{changelog1_5__changelog1_5000003}{Change in 1.\+5}](dw, 2013-\/02-\/12) Also added the escaping for the Logo file. Thanks to Chris Olien for the hint.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+5}
+\item[\hyperlink{changelog1_5__changelog1_5000004}{Change in 1.\+5}](dw, 2013-\/01-\/07) Included some backslash escaping for paths on windows platforms. Thanks to Math\+Works Pilot Engineer \textquotesingle{}{\ttfamily Arvind Jayaraman}\textquotesingle{} for providing the feedback and code!\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+4}
+\item[\hyperlink{changelog1_4__changelog1_4000001}{Change in 1.\+4}](dw, 2012-\/10-\/18) Removed {\ttfamily m4} dependency and included constant properties for configuration file names.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{New in 1.\+4}
+\item[\hyperlink{newfeat1_4__newfeat1_4000001}{New in 1.\+4}](dw, 2012-\/10-\/16)
+\begin{DoxyItemize}
+\item Added two more configuration variables \char`\"{}\+Project\+Description\char`\"{} and \char`\"{}\+Project\+Logo\char`\"{} for easier configuration of the \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker} in many cases. Thanks to Wolfgang Mennerich \href{http://www.mathworks.com/matlabcentral/fileexchange/authors/272859}{\tt http\+://www.\+mathworks.\+com/matlabcentral/fileexchange/authors/272859} for the suggestion.
+\item Restructured the configuration, now only the project name function has to be implemented (the preferences tag depends on it, there might be more than one project within the same Matlab installation whos documentation is created using this tool). The rest can be provided either at setup time or later via suitable setters for the version, description and logo.
+\item Automatically setting Have\+Dot in the doxygen config whenever its found on the environment path.
+\item Added basic support for La\+TeX documentation creation. Using the parameter {\ttfamily latex}=true for the create method creates the La\+TeX version of the documentation in a folder \char`\"{}latex\char`\"{} in the Output\+Directory (default behaviour)
+\end{DoxyItemize}\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+4}
+\item[\hyperlink{changelog1_4__changelog1_4000002}{Change in 1.\+4}](dw, 2012-\/09-\/27) Added automatic dot Graphviz tool detection on call to create.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+3}
+\item[\hyperlink{changelog1_3__changelog1_3000001}{Change in 1.\+3}](dw, 2012-\/02-\/16)
+\begin{DoxyItemize}
+\item Now also collecting error messages from mtocpp\+\_\+post and adding them to the warnings.\+log file.
+\item Added the directive \char`\"{}\+L\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+P\+A\+T\+H= \char`\"{} for unix systems, as Mat\+Lab sets it inside its executing environment. This can lead to errors if doxygen and/or mtoc++ have been built using never G\+L\+I\+BC (libstd) versions than the one shipped with Mat\+Lab.
+\end{DoxyItemize}\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+3}
+\item[\hyperlink{changelog1_3__changelog1_3000002}{Change in 1.\+3}](dw, 2012-\/01-\/16)
+\begin{DoxyItemize}
+\item Properly using the correct file separators everywhere now
+\item Hyperlinked the log file so it can be opened directly
+\end{DoxyItemize}\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+3}
+\item[\hyperlink{changelog1_3__changelog1_3000003}{Change in 1.\+3}](dw, 2012-\/01-\/14) Not displaying the \char`\"{}generated warnings\char`\"{}-\/text if there have not been any during documentation creation.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+2}
+\item[\hyperlink{changelog1_2__changelog1_2000001}{Change in 1.\+2}](dw, 2011-\/11-\/27)
+\begin{DoxyItemize}
+\item Included documentation creation for the Windows platform and combined the old methods into one (small effective differences)
+\item No longer storing the doxygen binary file in the prefs as a lot of tools must be present on the path anyways. The new paradigm is to expect all required 3rd-\/party programmes to be available on P\+A\+TH. As backup the configuration files directory is added to the Matlab P\+A\+TH environment {\bfseries nonpermanently} and any executables found there will thus also be usable.
+\item Included checks for {\ttfamily dot} and {\ttfamily latex} at the setup stage to recommend installation of those tools if not present (the default doxygen settings in Doxyfile.\+m4 are to use both)
+\end{DoxyItemize}\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+2}
+\item[\hyperlink{changelog1_2__changelog1_2000002}{Change in 1.\+2}](dw, 2011-\/11-\/08) Improved the create\+Unix method by displaying the warnings and writing the output to a log file afterwards. Not using cprintf anymore as this is 3rd party software.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+2}
+\item[\hyperlink{changelog1_2__changelog1_2000003}{Change in 1.\+2}](dw, 2011-\/11-\/07) Fixed a recursion bug caused by copy and paste. Now the preferences are stored on an per-\/application basis.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Change in 1.\+2}
+\item[\hyperlink{changelog1_2__changelog1_2000004}{Change in 1.\+2}](dw, 2011-\/11-\/04) Changed the name to \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker} in order to export it into the mtoc++ distribution later.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{New in 1.\+2}
+\item[\hyperlink{newfeat1_2__newfeat1_2000001}{New in 1.\+2}](dw, 2011-\/10-\/13) Added this class and moved documentation related stuff here from the Ker\+Mor class.\end{DoxyRefDesc}
+
+
+This class is part of the mtoc++ tool
+\begin{DoxyItemize}
+\item {\ttfamily Homepage} \href{http://www.morepas.org/software/mtocpp/}{\tt http\+://www.\+morepas.\+org/software/mtocpp/}
+\item {\ttfamily License} \href{http://www.morepas.org/software/mtocpp/docs/licensing.html}{\tt http\+://www.\+morepas.\+org/software/mtocpp/docs/licensing.\+html}
+\end{DoxyItemize}
+
+Copyright (c) 2012, Daniel Wirtz All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted only in compliance with the B\+SD license, see \href{http://www.opensource.org/licenses/bsd-license.php}{\tt http\+://www.\+opensource.\+org/licenses/bsd-\/license.\+php} 
+
+Definition at line 17 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!create@{create}}
+\index{create@{create}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{create(matlabtypesubstitute varargin)}{create(matlabtypesubstitute varargin)}}]{\setlength{\rightskip}{0pt plus 5cm}noret\+::substitute Matlab\+Doc\+Maker\+::create (
+\begin{DoxyParamCaption}
+\item[{matlabtypesubstitute}]{varargin}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a278883e6b83f6c6e7780e0d567dee119}{}\label{class_matlab_doc_maker_a278883e6b83f6c6e7780e0d567dee119}
+
+
+Creates the Doxygen documentation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em varargin} & Optional parameters for creation. 
+\begin{DoxyCode}
+\hyperlink{class_matlab_doc_maker_a278883e6b83f6c6e7780e0d567dee119}{create} (  [ \textcolor{stringliteral}{"open"}, open\_value ] [, \textcolor{stringliteral}{"latex"}, latex\_value ] ) 
+\end{DoxyCode}
+ {\itshape Named Parameters for varargin\+:}
+\begin{DoxyItemize}
+\item  open Set to true if the documentation should be opened after successful compilation {\bfseries Default\+:} false
+\item  latex Set to true if $\text{\LaTeX}$ output should be generated, too. {\bfseries Default\+:} false
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 412 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+References D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE, get\+Config\+Directory(), get\+Output\+Directory(), get\+Project\+Description(), get\+Project\+Logo(), get\+Project\+Name(), get\+Project\+Version(), get\+Source\+Directory(), L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE, M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE, and open().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a278883e6b83f6c6e7780e0d567dee119_cgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Config\+Directory@{get\+Config\+Directory}}
+\index{get\+Config\+Directory@{get\+Config\+Directory}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Config\+Directory()}{getConfigDirectory()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$\+::{\bf char}, dir $>$ Matlab\+Doc\+Maker\+::get\+Config\+Directory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{}\label{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}
+
+
+Returns the directory where the applications documentation configuration files reside. 
+
+This folder must contain at least the files \char`\"{}mtoc.\+conf\char`\"{} and \char`\"{}\+Doxyfile.\+template\char`\"{}
+
+
+\begin{DoxyRetVals}{Return values}
+{\em dir} & The documentation configuration directory\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 225 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create(), get\+Project\+Logo(), and set\+Project\+Logo().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Output\+Directory@{get\+Output\+Directory}}
+\index{get\+Output\+Directory@{get\+Output\+Directory}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Output\+Directory()}{getOutputDirectory()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$\+::{\bf char}, dir $>$ Matlab\+Doc\+Maker\+::get\+Output\+Directory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a1957c12ff4fb6a9d8e1b009961a5f499}{}\label{class_matlab_doc_maker_a1957c12ff4fb6a9d8e1b009961a5f499}
+
+
+Returns the directory where the applications source files reside. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em dir} & The output directory\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 195 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create(), and open().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a1957c12ff4fb6a9d8e1b009961a5f499_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Project\+Description@{get\+Project\+Description}}
+\index{get\+Project\+Description@{get\+Project\+Description}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Project\+Description()}{getProjectDescription()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$\+::{\bf char}, desc $>$ Matlab\+Doc\+Maker\+::get\+Project\+Description (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_af63bb7f2a5008a7b786d2b83b4f72b1b}{}\label{class_matlab_doc_maker_af63bb7f2a5008a7b786d2b83b4f72b1b}
+
+
+Returns the short project description. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_matlab_doc_maker_a88037a33f6ed26b8b3e60e1cbfd5dfd6}{set\+Project\+Description}
+\end{DoxySeeAlso}
+
+\begin{DoxyRetVals}{Return values}
+{\em desc} & The short project description \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyParagraph}{Default\+:}
+\mbox{[}\mbox{]}
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 244 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_af63bb7f2a5008a7b786d2b83b4f72b1b_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Project\+Logo@{get\+Project\+Logo}}
+\index{get\+Project\+Logo@{get\+Project\+Logo}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Project\+Logo()}{getProjectLogo()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$ matlabtypesubstitute, full\+Path $>$ Matlab\+Doc\+Maker\+::get\+Project\+Logo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a6767085b13dc2600cb6beda7f7d6acd9}{}\label{class_matlab_doc_maker_a6767085b13dc2600cb6beda7f7d6acd9}
+
+
+Returns the logo image file for the project. Either an absolute path or a plain filename. For the latter case the image file is assumed to reside inside the directory returned by \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_matlab_doc_maker_a6e84afe2189a851665133b6e7c412d4c}{set\+Project\+Logo}
+\end{DoxySeeAlso}
+
+\begin{DoxyRetVals}{Return values}
+{\em logo\+File} & The projects logo image file. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyParagraph}{Default\+:}
+\mbox{[}\mbox{]}
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 317 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+References get\+Config\+Directory().
+
+
+
+Referenced by create().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a6767085b13dc2600cb6beda7f7d6acd9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a6767085b13dc2600cb6beda7f7d6acd9_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Project\+Name@{get\+Project\+Name}}
+\index{get\+Project\+Name@{get\+Project\+Name}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Project\+Name()}{getProjectName()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$\+::{\bf char}, name $>$ Matlab\+Doc\+Maker\+::get\+Project\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a9f84ff8d3f39824b54626862780b342c}{}\label{class_matlab_doc_maker_a9f84ff8d3f39824b54626862780b342c}
+
+
+Returns the project name. 
+
+\begin{DoxyNote}{Note}
+Changing the return value of this method will require another execution of \hyperlink{class_matlab_doc_maker_a434c176c2421dd18a40003919b19f4f2}{Matlab\+Doc\+Maker.\+setup} as the preferences storage key also depends on it.
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Return values}
+{\em name} & The project name \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 170 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create(), and setup().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a9f84ff8d3f39824b54626862780b342c_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Project\+Version@{get\+Project\+Version}}
+\index{get\+Project\+Version@{get\+Project\+Version}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Project\+Version()}{getProjectVersion()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$\+::{\bf char}, version $>$ Matlab\+Doc\+Maker\+::get\+Project\+Version (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_afce5384fb7c395546431b7a6c4e1f790}{}\label{class_matlab_doc_maker_afce5384fb7c395546431b7a6c4e1f790}
+
+
+Returns the current version of the project. 
+
+\begin{DoxyNote}{Note}
+The built-\/in @new and @change tags from the Doxyfile.\+template support two-\/level versioning a la X.\+X.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_matlab_doc_maker_a532ff6bc4beaeff5c3d2f12305bbaa5d}{set\+Project\+Version}
+\end{DoxySeeAlso}
+
+\begin{DoxyRetVals}{Return values}
+{\em version} & The project version \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyParagraph}{Default\+:}
+\mbox{[}\mbox{]}
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 279 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_afce5384fb7c395546431b7a6c4e1f790_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!get\+Source\+Directory@{get\+Source\+Directory}}
+\index{get\+Source\+Directory@{get\+Source\+Directory}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{get\+Source\+Directory()}{getSourceDirectory()}}]{\setlength{\rightskip}{0pt plus 5cm}mlhs\+Inner\+Subst$<$\+::{\bf char}, dir $>$ Matlab\+Doc\+Maker\+::get\+Source\+Directory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a1481c6e95be338b758ec97b8090ee7c9}{}\label{class_matlab_doc_maker_a1481c6e95be338b758ec97b8090ee7c9}
+
+
+Returns the directory where the applications source files reside. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em dir} & The project source directory\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 210 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a1481c6e95be338b758ec97b8090ee7c9_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!open@{open}}
+\index{open@{open}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{open()}{open()}}]{\setlength{\rightskip}{0pt plus 5cm}noret\+::substitute Matlab\+Doc\+Maker\+::open (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_ac0a03050ca09039ccd6a1fc97367a38b}{}\label{class_matlab_doc_maker_ac0a03050ca09039ccd6a1fc97367a38b}
+
+
+Opens the generated documentation. 
+
+Depending on the system{\ttfamily s type the generated index.\+html is opened in the system}s default browser. 
+
+Definition at line 391 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+References get\+Output\+Directory().
+
+
+
+Referenced by create().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_ac0a03050ca09039ccd6a1fc97367a38b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_ac0a03050ca09039ccd6a1fc97367a38b_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!set\+Project\+Description@{set\+Project\+Description}}
+\index{set\+Project\+Description@{set\+Project\+Description}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{set\+Project\+Description(\+::char value)}{setProjectDescription(::char value)}}]{\setlength{\rightskip}{0pt plus 5cm}noret\+::substitute Matlab\+Doc\+Maker\+::set\+Project\+Description (
+\begin{DoxyParamCaption}
+\item[{\+::{\bf char}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a88037a33f6ed26b8b3e60e1cbfd5dfd6}{}\label{class_matlab_doc_maker_a88037a33f6ed26b8b3e60e1cbfd5dfd6}
+
+
+Sets the project description. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_matlab_doc_maker_af63bb7f2a5008a7b786d2b83b4f72b1b}{get\+Project\+Description}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The description\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 260 of file Matlab\+Doc\+Maker.\+m.
+
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!set\+Project\+Logo@{set\+Project\+Logo}}
+\index{set\+Project\+Logo@{set\+Project\+Logo}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{set\+Project\+Logo(\+::char value)}{setProjectLogo(::char value)}}]{\setlength{\rightskip}{0pt plus 5cm}noret\+::substitute Matlab\+Doc\+Maker\+::set\+Project\+Logo (
+\begin{DoxyParamCaption}
+\item[{\+::{\bf char}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a6e84afe2189a851665133b6e7c412d4c}{}\label{class_matlab_doc_maker_a6e84afe2189a851665133b6e7c412d4c}
+
+
+Sets the project logo. Set to \textquotesingle{} to unset. 
+
+See the doxygen documentation for valid logo file types (wont be checked here).
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_matlab_doc_maker_a6767085b13dc2600cb6beda7f7d6acd9}{get\+Project\+Logo}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The logo file to use. Must be either an absolute path or a plain filename, in which case the image is assumed to reside inside the \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory} directory.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 347 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+References get\+Config\+Directory().
+
+
+
+Referenced by setup().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a6e84afe2189a851665133b6e7c412d4c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a6e84afe2189a851665133b6e7c412d4c_icgraph}
+\end{center}
+\end{figure}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!set\+Project\+Version@{set\+Project\+Version}}
+\index{set\+Project\+Version@{set\+Project\+Version}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{set\+Project\+Version(\+::char value)}{setProjectVersion(::char value)}}]{\setlength{\rightskip}{0pt plus 5cm}noret\+::substitute Matlab\+Doc\+Maker\+::set\+Project\+Version (
+\begin{DoxyParamCaption}
+\item[{\+::{\bf char}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a532ff6bc4beaeff5c3d2f12305bbaa5d}{}\label{class_matlab_doc_maker_a532ff6bc4beaeff5c3d2f12305bbaa5d}
+
+
+Sets the project version. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_matlab_doc_maker_afce5384fb7c395546431b7a6c4e1f790}{get\+Project\+Version}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The version string\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This method has the M\+A\+T\+L\+AB method attribute {\ttfamily Sealed} set to true. It cannot be overwritten. 
+
+\href{http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html}{\tt matlab documentation of method attributes.} 
+\end{DoxyNote}
+
+
+Definition at line 298 of file Matlab\+Doc\+Maker.\+m.
+
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!setup@{setup}}
+\index{setup@{setup}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{setup()}{setup()}}]{\setlength{\rightskip}{0pt plus 5cm}noret\+::substitute Matlab\+Doc\+Maker\+::setup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a434c176c2421dd18a40003919b19f4f2}{}\label{class_matlab_doc_maker_a434c176c2421dd18a40003919b19f4f2}
+
+
+Runs the setup script for \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker} and collects all necessary paths in order for the documentation creation to work properly. 
+
+
+
+Definition at line 631 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+References get\+Project\+Name(), and set\+Project\+Logo().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matlab_doc_maker_a434c176c2421dd18a40003919b19f4f2_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsubsection{Member Data Documentation}
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{DOXYFILE\_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}Matlab\+Doc\+Maker\+::\+D\+O\+X\+Y\+F\+I\+L\+E\+\_\+\+T\+E\+M\+P\+L\+A\+TE = \char`\"{}Doxyfile.\+template\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_ab9514d0ba074c3b92a7fae2b50846b90}{}\label{class_matlab_doc_maker_ab9514d0ba074c3b92a7fae2b50846b90}
+
+
+File name for the doxygen configuration file processed by the \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker}. 
+
+Assumed to reside in the \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory}
+
+{\bfseries Default\+:} {\ttfamily Doxyfile.\+template} 
+
+Definition at line 130 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create().
+
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE}}
+\index{L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE@{L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE}{LATEXEXTRAS\_TEMPLATE}}]{\setlength{\rightskip}{0pt plus 5cm}Matlab\+Doc\+Maker\+::\+L\+A\+T\+E\+X\+E\+X\+T\+R\+A\+S\+\_\+\+T\+E\+M\+P\+L\+A\+TE = \char`\"{}latexextras.\+template\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_a5fd9647b943b91d54acbfce17d0d7416}{}\label{class_matlab_doc_maker_a5fd9647b943b91d54acbfce17d0d7416}
+
+
+File name for the latex extras style file processed by the \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker}. 
+
+Assumed to reside in the \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory}. If not found, no latex extras are used.
+
+{\bfseries Default\+:} {\ttfamily latexextras.\+template} 
+
+Definition at line 142 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create().
+
+\index{Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}!M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE@{M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE}}
+\index{M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE@{M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE}!Matlab\+Doc\+Maker@{Matlab\+Doc\+Maker}}
+\paragraph[{\texorpdfstring{M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE}{MTOCPP\_CONFIGFILE}}]{\setlength{\rightskip}{0pt plus 5cm}Matlab\+Doc\+Maker\+::\+M\+T\+O\+C\+P\+P\+\_\+\+C\+O\+N\+F\+I\+G\+F\+I\+LE = \char`\"{}mtocpp.\+conf\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_matlab_doc_maker_ab61ab79ccd92642c4fef74c6abbee559}{}\label{class_matlab_doc_maker_ab61ab79ccd92642c4fef74c6abbee559}
+
+
+File name the mtoc++ configuration file. 
+
+Assumed to reside in the \hyperlink{class_matlab_doc_maker_a11a2a8ec616df969a911b325e39b0b4f}{Matlab\+Doc\+Maker.\+get\+Config\+Directory}. If not found, no special configuration is used.
+
+{\bfseries Default\+:} {\ttfamily mtocpp.\+conf} 
+
+Definition at line 155 of file Matlab\+Doc\+Maker.\+m.
+
+
+
+Referenced by create().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_matlab_doc_maker_8m}{Matlab\+Doc\+Maker.\+m}\end{DoxyCompactItemize}

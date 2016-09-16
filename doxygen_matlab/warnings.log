@@ -1,0 +1,39 @@
+warning: Tag `SYMBOL_CACHE_SIZE' at line 363 of file `/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/docs/config/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_SCHEMA' at line 1325 of file `/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/docs/config/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: Tag `XML_DTD' at line 1331 of file `/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/docs/config/Doxyfile' has become obsolete.
+         To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
+warning: doxygen no longer ships with the FreeSans font.
+You may want to clear or change DOT_FONTNAME.
+Otherwise you run the risk that the wrong font is being used for dot generated graphs.
+changelog1_2:2: warning: unable to resolve reference to `dw' for \ref command
+changelog1_2:13: warning: unable to resolve reference to `dw' for \ref command
+changelog1_2:14: warning: unable to resolve reference to `dw' for \ref command
+changelog1_2:15: warning: unable to resolve reference to `dw' for \ref command
+changelog1_3:2: warning: unable to resolve reference to `dw' for \ref command
+changelog1_3:8: warning: unable to resolve reference to `dw' for \ref command
+changelog1_3:10: warning: unable to resolve reference to `dw' for \ref command
+changelog1_4:2: warning: unable to resolve reference to `dw' for \ref command
+changelog1_4:3: warning: unable to resolve reference to `dw' for \ref command
+changelog1_5:2: warning: unable to resolve reference to `dw' for \ref command
+changelog1_5:4: warning: unable to resolve reference to `dw' for \ref command
+changelog1_5:5: warning: unable to resolve reference to `dw' for \ref command
+changelog1_5:6: warning: unable to resolve reference to `dw' for \ref command
+newfeat1_2:2: warning: unable to resolve reference to `dw' for \ref command
+newfeat1_4:2: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:38: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:42: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:45: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:48: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:51: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:54: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:68: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:71: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:79: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:83: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:86: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:99: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:102: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:105: warning: unable to resolve reference to `dw' for \ref command
+/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/matlab/MatlabDocMaker.m:108: warning: unable to resolve reference to `dw' for \ref command

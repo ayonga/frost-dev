@@ -1,0 +1,17 @@
+
+\begin{DoxyRefList}
+\item[\label{changelog1_2__changelog1_2000001}%
+\hypertarget{changelog1_2__changelog1_2000001}{}%
+Class \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker} ](dw, 2011-\/11-\/27)
+\begin{DoxyItemize}
+\item Included documentation creation for the Windows platform and combined the old methods into one (small effective differences)
+\item No longer storing the doxygen binary file in the prefs as a lot of tools must be present on the path anyways. The new paradigm is to expect all required 3rd-\/party programmes to be available on P\+A\+TH. As backup the configuration files directory is added to the Matlab P\+A\+TH environment {\bfseries nonpermanently} and any executables found there will thus also be usable.
+\item Included checks for {\ttfamily dot} and {\ttfamily latex} at the setup stage to recommend installation of those tools if not present (the default doxygen settings in Doxyfile.\+m4 are to use both)
+\end{DoxyItemize}
+
+(dw, 2011-\/11-\/08) Improved the create\+Unix method by displaying the warnings and writing the output to a log file afterwards. Not using cprintf anymore as this is 3rd party software.
+
+(dw, 2011-\/11-\/07) Fixed a recursion bug caused by copy and paste. Now the preferences are stored on an per-\/application basis.
+
+(dw, 2011-\/11-\/04) Changed the name to \hyperlink{class_matlab_doc_maker}{Matlab\+Doc\+Maker} in order to export it into the mtoc++ distribution later.
+\end{DoxyRefList}
