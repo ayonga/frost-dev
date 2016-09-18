@@ -1,0 +1,12 @@
+Resources[
+    Version[1],
+    Java[
+        Directory["javaOutput"],
+        Directory["SnakeYaml/Java"]
+    ],
+    ExecutionBuildCommand["<<SnakeYaml`"],
+    Paclet[
+        PacletFolder["SnakeYaml"],
+        FunctionPaclet[False]
+    ]
+]
