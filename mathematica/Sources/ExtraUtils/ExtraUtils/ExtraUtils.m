@@ -11,7 +11,6 @@
 This package provides custom commonly used functions. 
 *)
 
-(* :Context: SnakeYaml` *)
 
 BeginPackage["ExtraUtils`"]
 (* Exported symbols added here with SymbolName::usage *) 
@@ -19,35 +18,35 @@ BeginPackage["ExtraUtils`"]
 
 
 
-ParallelSimplify::usage="
+ParallelSimplify::usage = "
 ParallelSimplify[A_?MatrixQ]  
 Simplifies a matrix in parallel.
 ParallelSimplify[V_?VectorQ]  
 Simplifies a vector in parallel.";
 
-ParallelFullSimplify::usage="
+ParallelFullSimplify::usage = "
 ParallelFullSimplify[A_?MatrixQ]  
 Fully simplifies a matrix in parallel.
 ParallelFullSimplify[V_?VectorQ]  
-Fully simplifies a vector in parallel."
+Fully simplifies a vector in parallel.";
 
 
 
-Vec::usage="Vec[x]  Turn arbitrary list into vector";
+Vec::usage = "Vec[x]  Turn an arbitrary list x into a vector";
 
-ToExpressionEx::usage="ToExpressionEx[expr]  loosely converts any string types in an 0- to n-dimensional list to an expression.";
+ToExpressionEx::usage = "ToExpressionEx[expr]  loosely converts any string types in an 0- to n-dimensional list to an expression.";
 
-RationalizeEx::usage="RationalizeEx[expr]  loosely rationalize any expression to an arbitrary precision";
+RationalizeEx::usage = "RationalizeEx[expr]  loosely rationalize any expression to an arbitrary precision";
 
-RationalizeAny::usage="RationalizeAny[value]  convert `value` to an expression and use RationalizeEx";
+RationalizeAny::usage = "RationalizeAny[value]  convert `value` to an expression and use RationalizeEx";
 
-BlockDiagonalMatrix::usage="BlockDiagonalMatrix[b:{__?MatrixQ}]
+BlockDiagonalMatrix::usage = "BlockDiagonalMatrix[b:{__?MatrixQ}]
 Create block diagonal matrx.";
 
-EnsureDirectoryExists::usage="EnsureDirectoryExists[dir]
+EnsureDirectoryExists::usage = "EnsureDirectoryExists[dir]
 Ensure directory exists, if not create one.";
 
-CRoundEx::usage="CRoundEx[expr,n]
+CRoundEx::usage = "CRoundEx[expr,n]
 For eliminating those pesky small numbers in rotation matrices";
 
 EmptyQ::usage =
@@ -112,8 +111,7 @@ EnsureDirectoryExists[dir_?StringQ]:=
 		];
 	];	
 	
-SyntaxInformation[LoadConfig]={"ArgumentsPattern"->{_}};
-LoadConfig[file_]:=Apply[Association,Association@SnakeYaml`YamlReadFile[file],{2}];
+
 	
 End[]
 
