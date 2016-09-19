@@ -52,13 +52,23 @@ For eliminating those pesky small numbers in rotation matrices";
 EmptyQ::usage =
 "EmptyQ[x]  Expression is a list that, when flattened, has no elements.";
 
+SprintF::usage =
+"SprintF[format, args ...]  shortened version of StringForm that returns a string";
+
+StringImplode::usage = "
+StringImplode[list, delim = '', format = '``']  joins list of strings with  delim  and formats each arg with format";
 
 Begin["`Private`"]
 (* Implementation of the package *)
 
 EmptyQ[x_List]:=ListQ[x]&&Length[Flatten[x]]==0;
 
+StringImplode[list_, delim_: "", format_: "``"] := 
+  StringJoin[
+    Riffle[Table[SprintF[format, item], {item, list}], delim]
+  ];
 
+SprintF[args__] := ToString[StringForm[args]];
 
 Vec[x_]:=Transpose[{Flatten[x]}];
 

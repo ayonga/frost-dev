@@ -1,1 +1,210 @@
-Notebook[{}]
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7274,        202]
+NotebookOptionsPosition[      6663,        177]
+NotebookOutlinePosition[      7003,        192]
+CellTagsIndexPosition[      6960,        189]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Get", "[", "\"\<MathToCpp`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.68322697348263*^9, 3.683226996228455*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"y", "[", "1", "]"}], "+", 
+     RowBox[{"y", "[", "3", "]"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6832287356596823`*^9, 3.683228748824398*^9}, {
+  3.683229175457333*^9, 3.683229178569187*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"subs", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"y", "[", "1", "]"}], "\[Rule]", " ", 
+      RowBox[{"HoldForm", "@", 
+       RowBox[{"x", "[", 
+        RowBox[{"[", "0", "]"}], "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"y", "[", "3", "]"}], "\[Rule]", 
+      RowBox[{"HoldForm", "@", 
+       RowBox[{"x", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}]}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.683228752431229*^9, 3.683228790912715*^9}, {
+  3.683229181521735*^9, 3.6832291845721283`*^9}, {3.683229777377143*^9, 
+  3.683229779635003*^9}, {3.6832298188355*^9, 3.683229820826723*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"SetOptions", "[", 
+    RowBox[{"CseWriteCpp", ",", "\n", "    ", 
+     RowBox[{"ExportDirectory", "\[Rule]", 
+      RowBox[{"NotebookDirectory", "[", "]"}]}], ",", "\n", "\t", 
+     RowBox[{"ArgumentLists", "->", 
+      RowBox[{"{", "Global`x", "}"}]}], ",", "\n", "\t", 
+     RowBox[{"ArgumentDimensions", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "1"}], "}"}], "}"}]}], ",", "\n", "\t", 
+     RowBox[{"SubstitutionRules", "->", " ", "subs"}]}], "\n", "]"}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.68322933409242*^9, 3.6832293344272223`*^9}, {
+  3.683229758059367*^9, 3.683229761970862*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Options", "[", "CseWriteCpp", "]"}]], "Input",
+ CellChangeTimes->{{3.68322898178588*^9, 3.683228997608267*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+   "MathToCpp`Private`ExportDirectory", 
+    "\[Rule]", \
+"\<\"/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/mathematica/\
+Sources/MathToCpp/\"\>"}], ",", 
+   RowBox[{"MathToCpp`Private`ArgumentLists", "\[Rule]", 
+    RowBox[{"{", "x", "}"}]}], ",", 
+   RowBox[{"MathToCpp`Private`ArgumentDimensions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], "}"}]}], ",", 
+   RowBox[{"MathToCpp`Private`SubstitutionRules", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"y", "[", "1", "]"}], "\[Rule]", 
+       TagBox[
+        RowBox[{"x", "\[LeftDoubleBracket]", "0", "\[RightDoubleBracket]"}],
+        HoldForm]}], ",", 
+      RowBox[{
+       RowBox[{"y", "[", "3", "]"}], "\[Rule]", 
+       TagBox[
+        RowBox[{"x", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}],
+        HoldForm]}]}], "}"}]}], ",", 
+   RowBox[{
+   "MathToCpp`Private`TemplateFile", 
+    "\[Rule]", \
+"\<\"/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/mathematica/\
+Sources/MathToCpp/MathToCpp/Template/template.cc\"\>"}], ",", 
+   RowBox[{
+   "MathToCpp`Private`TemplateHeader", 
+    "\[Rule]", \
+"\<\"/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/mathematica/\
+Sources/MathToCpp/MathToCpp/Template/template.hh\"\>"}], ",", 
+   RowBox[{
+   "MathToCpp`Private`Namespace", "\[Rule]", "\<\"symbolic_expression\"\>"}], 
+   ",", 
+   RowBox[{"MathToCpp`Private`Behavior", "\[Rule]", "\<\"basic\"\>"}], ",", 
+   RowBox[{"MathToCpp`Private`ExportFull", "\[Rule]", "False"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.683228988474084*^9, 3.683228998084847*^9}, {
+   3.683229071555256*^9, 3.683229133786211*^9}, 3.6832291888521433`*^9, {
+   3.683229744324416*^9, 3.683229781443357*^9}, 3.683229822733042*^9, 
+   3.683229945422008*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CseWriteCpp", "[", 
+  RowBox[{"\"\<a\>\"", ",", 
+   RowBox[{"{", "a", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.683228804597375*^9, 3.683228889486244*^9}, {
+  3.683228939105044*^9, 3.683228948088622*^9}, {3.683229017697275*^9, 
+  3.683229023552804*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"StringJoin", "::", "string"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"String expected at position \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"2\\\"}]\\)\[NoBreak] in \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"  output1(p_output1, \\\\\\\"\\\", \
+\\\"<>\\\", RowBox[{\\\"StringImplode\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\
+\", \\\"\\\\\\\"x\\\\\\\"\\\", \\\"}\\\"}], \\\",\\\", \\\"\\\\\\\", \\\\\\\"\
+\\\"}], \\\"]\\\"}], \\\"<>\\\", \\\"\\\\\\\");\\\\\\\\n\\\\\\\"\\\"}]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/StringJoin\\\", ButtonNote -> \
+\\\"StringJoin::string\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.683228941552112*^9, 3.6832290242474337`*^9, 3.683229138168273*^9, 
+   3.6832291908995132`*^9, {3.6832297468740597`*^9, 3.683229782483089*^9}, 
+   3.6832298233841753`*^9, 3.683229947483095*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"StringJoin", "::", "string"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"String expected at position \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"2\\\"}]\\)\[NoBreak] in \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"  output1(p_output1, \\\\\\\"\\\", \
+\\\"<>\\\", RowBox[{\\\"StringImplode\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\
+\", \\\"\\\\\\\"x\\\\\\\"\\\", \\\"}\\\"}], \\\",\\\", \\\"\\\\\\\", \\\\\\\"\
+\\\"}], \\\"]\\\"}], \\\"<>\\\", \\\"\\\\\\\");\\\\\\\\n\\\\\\\"\\\"}]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/StringJoin\\\", ButtonNote -> \
+\\\"StringJoin::string\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.683228941552112*^9, 3.6832290242474337`*^9, 3.683229138168273*^9, 
+   3.6832291908995132`*^9, {3.6832297468740597`*^9, 3.683229782483089*^9}, 
+   3.6832298233841753`*^9, 3.6832299474840508`*^9}]
+}, Open  ]]
+},
+WindowSize->{805, 876},
+WindowMargins->{{Automatic, -10}, {-10, Automatic}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (February 25, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 138, 2, 32, "Input"],
+Cell[699, 24, 295, 8, 32, "Input"],
+Cell[997, 34, 664, 17, 32, "Input"],
+Cell[1664, 53, 705, 16, 165, "Input"],
+Cell[CellGroupData[{
+Cell[2394, 73, 135, 2, 32, "Input"],
+Cell[2532, 77, 1863, 46, 297, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4432, 128, 283, 6, 89, "Input"],
+Cell[4718, 136, 962, 18, 41, "Message"],
+Cell[5683, 156, 964, 18, 41, "Message"]
+}, Open  ]]
+}
+]
+*)
+

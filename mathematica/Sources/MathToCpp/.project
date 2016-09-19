@@ -3,6 +3,7 @@
 	<name>MathToCpp</name>
 	<comment></comment>
 	<projects>
+		<project>ExtraUtils</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
