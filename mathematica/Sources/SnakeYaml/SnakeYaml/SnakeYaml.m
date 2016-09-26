@@ -193,6 +193,17 @@ Module[{result, key, value},
 	Return[result];
 ];
 
+ToYaml[obj_?AssociationQ]:=
+Module[{result, key, value, keys},
+	result = JLink`JavaNew["java.util.LinkedHashMap"];
+	keys = Keys[obj];
+	Table[
+		value = obj[key];
+		result@put[ToYaml[key], ToYaml[value]];
+	, {key, keys}
+	];
+	Return[result];
+];
 
 
 End[];
