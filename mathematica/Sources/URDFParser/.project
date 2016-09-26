@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>RobotModel</name>
+	<name>URDFParser</name>
 	<comment></comment>
 	<projects>
 		<project>ExtraUtils</project>
-		<project>MathToCpp</project>
-		<project>Screws</project>
-		<project>SnakeYaml</project>
-		<project>URDFParser</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

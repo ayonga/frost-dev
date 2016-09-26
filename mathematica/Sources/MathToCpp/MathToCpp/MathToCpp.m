@@ -5,7 +5,7 @@
 (*********CseOptimization: Simplify Expression via Common Subexpression Elimination Technique(CSE) ***********)
 (* Developed and maintained by Ayonga Hereid @ AMBER Lab*)
 
-BeginPackage["MathToCpp`",{"ExtraUtils`"}]
+BeginPackage["MathToCpp`",{"ExtraUtils`","Experimental`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
 ToMatrixForm::usage="ToMatrixForm[expr] converts expr to Matrix form (two dimensional tensor)."

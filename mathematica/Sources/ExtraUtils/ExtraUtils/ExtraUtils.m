@@ -12,54 +12,61 @@ This package provides custom commonly used functions.
 *)
 
 
-BeginPackage["ExtraUtils`"]
+BeginPackage["ExtraUtils`",{"GeneralUtilities`","SnakeYaml`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
 
+LoadConfig::usage = 
+	"LoadConfig[file] loads configuration YAML file into an association structure."
 
+ParallelSimplify::usage = 
+	"ParallelSimplify[A_?MatrixQ] simplifies a matrix in parallel.
+	ParallelSimplify[V_?VectorQ]  simplifies a vector in parallel.";
 
-ParallelSimplify::usage = "
-ParallelSimplify[A_?MatrixQ]  
-Simplifies a matrix in parallel.
-ParallelSimplify[V_?VectorQ]  
-Simplifies a vector in parallel.";
-
-ParallelFullSimplify::usage = "
-ParallelFullSimplify[A_?MatrixQ]  
-Fully simplifies a matrix in parallel.
-ParallelFullSimplify[V_?VectorQ]  
-Fully simplifies a vector in parallel.";
+ParallelFullSimplify::usage = 
+	"ParallelFullSimplify[A_?MatrixQ] fully simplifies a matrix in parallel.
+	ParallelFullSimplify[V_?VectorQ] fully simplifies a vector in parallel.";
 
 
 
-Vec::usage = "Vec[x]  Turn an arbitrary list x into a vector";
+Vec::usage = "Vec[x] turns an arbitrary list x into a vector";
 
-ToExpressionEx::usage = "ToExpressionEx[expr]  loosely converts any string types in an 0- to n-dimensional list to an expression.";
+ToExpressionEx::usage = "ToExpressionEx[expr] loosely converts any string types in an 0- \ 
+to n-dimensional list to an expression.";
 
-RationalizeEx::usage = "RationalizeEx[expr]  loosely rationalize any expression to an arbitrary precision";
+RationalizeEx::usage = "RationalizeEx[expr] loosely rationalizes any expression to an arbitrary precision";
 
-RationalizeAny::usage = "RationalizeAny[value]  convert `value` to an expression and use RationalizeEx";
+RationalizeAny::usage = "RationalizeAny[value] converts `value` to an expression and use RationalizeEx";
 
-BlockDiagonalMatrix::usage = "BlockDiagonalMatrix[b:{__?MatrixQ}]
-Create block diagonal matrx.";
+BlockDiagonalMatrix::usage = 
+	"BlockDiagonalMatrix[b:{__?MatrixQ}] creates block diagonal matrx.";
 
-EnsureDirectoryExists::usage = "EnsureDirectoryExists[dir]
-Ensure directory exists, if not create one.";
+EnsureDirectoryExists::usage = 
+	"EnsureDirectoryExists[dir] ensure directory exists, if not create one.";
 
-CRoundEx::usage = "CRoundEx[expr,n]
-For eliminating those pesky small numbers in rotation matrices";
+CRoundEx::usage = 
+	"CRoundEx[expr,n] eliminates those pesky small numbers in rotation matrices";
 
-EmptyQ::usage =
-"EmptyQ[x]  Expression is a list that, when flattened, has no elements.";
+EmptyQ::usage ="EmptyQ[x] expression is a list that, when flattened, has no elements.";
 
 SprintF::usage =
-"SprintF[format, args ...]  shortened version of StringForm that returns a string";
+	"SprintF[format, args ...] shortened version of StringForm that returns a string";
 
-StringImplode::usage = "
-StringImplode[list, delim = '', format = '``']  joins list of strings with  delim  and formats each arg with format";
+StringImplode::usage = 
+	"StringImplode[list, delim = '', format = '``'] joins list of strings with \
+delim  and formats each arg with format";
+
+Str2Num::usage = "Str2Num[s] Convert a string s into a number";
+
+
+GetFieldIndices::usage = 
+	"GetFieldIndices[list, field] returns field position indices of element in the list based.";
 
 Begin["`Private`"]
 (* Implementation of the package *)
+
+Str2Num[s_String]:=Read[StringToStream[s],Number];
+Str2Num[sl_?ListQ]:=Map[Read[StringToStream[#],Number]&,Flatten@sl];
 
 EmptyQ[x_List]:=ListQ[x]&&Length[Flatten[x]]==0;
 
@@ -73,7 +80,7 @@ SprintF[args__] := ToString[StringForm[args]];
 Vec[x_]:=Transpose[{Flatten[x]}];
 
 
-ToExpressionEx[value_]:=Module[{result},result=If[StringQ[value],ToExpression[value],If[ListQ[value],Map[If[StringQ[#],ToExpression[#],#]&,value,-1],value]];
+ToExpressionEx[value_]:=Block[{result},result=If[StringQ[value],ToExpression[value],If[ListQ[value],Map[If[StringQ[#],ToExpression[#],#]&,value,-1],value]];
 Return[result];];
 RationalizeEx[expr_]:=Rationalize[expr,0];
 RationalizeEx[expr_List]:=Map[RationalizeEx,expr,-1];
@@ -97,7 +104,7 @@ CRoundEx[expr_, n_:-5] := Map[CRound[#, n]&, expr, {-1}];
 
 (*From:http://mathworld.wolfram.com/BlockDiagonalMatrix.html*)
 BlockDiagonalMatrix[b:{__?MatrixQ}]:=
-	Module[{r,c,n=Length[b],i,j},
+	Block[{r,c,n=Length[b],i,j},
 		{r,c}=Transpose[Dimensions/@b];
 		ArrayFlatten[
 			Table[
@@ -109,7 +116,7 @@ BlockDiagonalMatrix[b:{__?MatrixQ}]:=
 	];
 	
 EnsureDirectoryExists[dir_?StringQ]:=
-	Module[{pieces,cur},
+	Block[{pieces,cur},
 		pieces=FileNameSplit[dir];
 		Table[
 			cur=FileNameJoin[pieces[[1;;i]]];
@@ -122,6 +129,18 @@ EnsureDirectoryExists[dir_?StringQ]:=
 	];	
 	
 
+LoadConfig[file_] := 
+	Block[{tmp},
+		tmp = YamlReadFile[file];
+		ToAssociations[tmp]
+	];
+
+
+GetFieldIndices[arg_?ListQ, field_] := 
+	Block[{},
+		Return[PositionIndex[Map[#[field]&,arg]]];
+	];
+	
 	
 End[]
 

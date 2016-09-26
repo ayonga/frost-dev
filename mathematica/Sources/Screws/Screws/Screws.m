@@ -381,7 +381,7 @@ TwistToHomogeneous[xi_?VectorQ] :=
     {w = xitow[xi], v = xitov[xi], R, p},
     
     (* Make sure that we got a real twist *)
-    If[w == Null || v == NULL, Return Null];
+    If[w == Null || v == Null, Return Null];
 
     (* Now put everything together into a homogeneous transformation *)
     StackCols[
@@ -398,7 +398,7 @@ TwistExp[xi_?VectorQ, theta_:1] :=
     {w = xitow[xi], v = xitov[xi], R, p},
     
     (* Make sure that we got a real twist *)
-    If[w == Null || v == NULL, Return Null];
+    If[w == Null || v == Null, Return Null];
 
     (* Use the exponential formula from MLS *)
     If [(MatchQ[w,{0,0,0}] || MatchQ[w, {{0},{0},{0}}]),

@@ -1,12 +1,12 @@
 (* Paclet Info File *)
 
-(* created 2016/09/18*)
+(* created 2016/09/19*)
 
 Paclet[
-    Name -> "RobotModel",
+    Name -> "URDFParser",
     Version -> "1.0.0",
     MathematicaVersion -> "10+",
-    Description -> "Kinematic and kinetic model of multi-body robotic system",
+    Description -> "This package provides functions that parse URDF files.",
     Creator -> "Ayonga Hereid",
     Extensions -> 
         {
