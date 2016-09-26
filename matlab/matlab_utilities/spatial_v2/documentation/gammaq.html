@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    b.black { color: rgb(0,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+    th { color: rgb(0,0,102); font-weight: bold; font-size: larger }
+    td { vertical-align: top }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>Describing Constraints with gamma_q</title>
+</head>
+
+<body>
+
+<h2>Describing Constraints with <b>gamma_q</b></h2>
+
+<p><i>
+This document explains how to write a function called gamma_q that imposes
+constraints on the joint position variables of a kinematic tree.&nbsp; It can
+be used to implement gearing between joints, kinematic loops, etc.&nbsp; This
+document first gives a bit of background, then explains how to write gamma_q,
+and finishes with an example.
+</i></p>
+
+<h2>Background</h2>
+
+<p>
+As explained in &sect;3.2 of <a href="index.html#RBDA">RBDA</a>, there are two
+ways to describe a constraint on the vector of joint position
+variables, <b>q</b>.&nbsp; One way is to define a function, <b>&phi;</b>, such
+that <b>&phi;(q)=0</b> for every <b>q</b> that satisfies the constraint.&nbsp;
+The other way is to identify a vector of independent position
+variables, <b>y</b>, and define a function <b>&gamma;</b> such
+that <b>q=&gamma;(y)</b>.&nbsp; <i>Spatial_v2</i> takes the second
+approach.&nbsp; Differentiating this equation once
+gives <nobr><b>q' = G y'</b></nobr>, and differentiating it a second time
+gives
+<ul>
+<b>q&quot; = G y&quot; + g</b>
+</ul>
+where <b>G</b> is <i>partial</i> <b>d&gamma;/dy</b> (i.e., it is the Jacobian
+of <b>&gamma;</b>) and <b>g=G'y'</b>.&nbsp; The
+symbols <b>q'</b>, <b>q&quot;</b>, etc., mean <i>q dot</i>, <i>q
+double-dot</i>, etc.&nbsp; If the equation of motion for an unconstrained
+kinematic tree is <nobr><b>H q&quot; + C = &tau;</b></nobr> then the equation
+of motion for the same tree subject to a kinematic constraint is
+<ul>
+<b>H q&quot; + C = &tau; + &tau;<sub>c</sub></b>
+</ul>
+where <b>&tau;<sub>c</sub></b> is the <i>constraint force</i>, i.e., the force
+that imposes the constraint on the tree.&nbsp; <b>&tau;<sub>c</sub></b>
+therefore has the following special property:
+<ul>
+<b>G<sup>T</sup> &tau;<sub>c</sub> = 0</b> .
+</ul>
+Combining these three equations gives
+<ul>
+<b>
+G<sup>T</sup> H q&quot; = G<sup>T</sup>(&tau; &minus; C)<br>
+G<sup>T</sup> H (G y&quot; + g) = G<sup>T</sup>(&tau; &minus; C)<br>
+y&quot; = (G<sup>T</sup> H G)<sup>&minus;1</sup> G<sup>T</sup>(&tau;
+  &minus; C &minus; H g)
+</b>
+</ul>
+and finally
+<ul>
+<b>q&quot; = G (G<sup>T</sup> H G)<sup>&minus;1</sup>
+  G<sup>T</sup>(&tau; &minus; C &minus; H g) + g</b>
+</ul>
+which is the equation you will find in the source code
+of <a href="index.html#FDgq">FDgq</a>.
+</p>
+
+<h2>Defining gamma_q</h2>
+
+<p>
+<b>gamma_q</b> can now be defined as follows: it is a function to
+compute <b>&gamma;(y)</b>, <b>G</b>
+and <b>g<sub>s</sub>=g+g<sub>stab</sub></b> from <b>q</b> and <b>q'</b>,
+where <b>g<sub>stab</sub></b> is a stabilization term described below.&nbsp;
+The calling convention for <b>gamma_q</b> is
+</p>
+
+<ul>
+<b>[qn,qdn,G,gs] = gamma_q( model, qo, qdo )</b>
+</ul>
+
+<p>
+where <b>model</b> is a <a href="sysmodel.html">system model data
+structure</a> describing the kinematic tree that is to be subjected to
+constraint; <b>qo</b> and <b>qdo</b> are the given values of <b>q</b>
+and <b>q'</b>; <b>qn</b> and <b>qdn</b> are more accurate values for <b>q</b>
+and <b>q'</b>; and <b>G</b> and <b>g<sub>s</sub></b> are as described
+above.&nbsp; Ideally, <b>qn=&gamma;(y)</b>, where <b>y=&gamma;*(qo)</b>
+and <b>&gamma;*</b> is a pseudoinverse of <b>&gamma;</b> that first
+projects <b>qo</b> onto the range space of <b>&gamma;</b> and then maps it
+to <b>y</b>.&nbsp; However, some deviation from this ideal is possible, as
+explained below.
+</p>
+
+<p>
+The purpose of supplying <b>model</b> as an argument is to
+allow <b>gamma_q</b> to have access to parameters contained within the system
+model data structure.&nbsp; This gives you the option of writing a single
+generic <b>gamma_q</b> for a whole class of system models, rather than a
+separate <b>gamma_q</b> for each individual model in that class.&nbsp; Note
+that there is nothing stopping you from adding your own private extra fields
+to your system model data structures, such as <b>my_gamma_q_pars</b>, to
+contain any parameters that your <b>gamma_q</b> might need.
+</p>
+
+<p>
+It is assumed that <b>qo</b> and <b>qdo</b> do not satisfy the constraints
+accurately, e.g. because of integration truncation error.&nbsp; For this
+reason, <b>gamma_q</b> returns the vectors <b>qn</b> and <b>qdn</b>, which are
+expected to satisfy the constraints more accurately than <b>qo</b>
+and <b>qdo</b>.&nbsp; <a href="index.html#FDgq">FDgq</a> uses these vectors to
+calculate <b>H</b> and <b>C</b>, so that the equation of motion is not
+adversely affected by constraint-violation errors.&nbsp; Ideally, <b>qn</b>
+and <b>qdn</b> should satisfy the constraints exactly.&nbsp; However, it is
+enough that they be more accurate than <b>qo</b> and <b>qdo</b>.&nbsp; The
+reason for accepting inexact values is this: some constraints cannot be
+expressed in the form of exact analytical expressions, but only as the roots
+of some nonlinear equation.&nbsp; For such a constraint, <b>qn</b> can only be
+calculated via an iterative root-finding process, such as Newton-Raphson
+iteration.&nbsp; Under such circumstances, it is convenient to allow <b>qn</b>
+to be the result of a single iteration with <b>qo</b> as the starting point.
+</p>
+
+<p>
+One important consequence of integrating <b>q&quot;</b> to obtain <b>q'</b>
+and <b>q</b> instead of integrating <b>y&quot;</b> to obtain <b>y'</b>
+and <b>y</b> is that constraint-violation errors will gradually accumulate
+in <b>q'</b> and <b>q</b>.&nbsp; This problem can be solved by including
+a <i>constraint-stabilization term</i>, <b>g<sub>stab</sub></b>, in the return
+value <b>g<sub>s</sub></b>.&nbsp; This term is a function of the difference
+between <b>qn</b> and <b>qo</b>, and between <b>qdn</b> and <b>qdo</b>.&nbsp;
+If both differences are zero then <b>g<sub>stab</sub>=0</b>.&nbsp;
+Otherwise, <b>g<sub>stab</sub></b> introduces a bias into <b>q&quot;</b> that
+gradually reduces the differences as the integration proceeds.&nbsp;
+Constraint stabilization is discussed in &sect;8.3
+of <a href="index.html#RBDA">RBDA</a>.
+</p>
+
+<h2>Writing gamma_q</h2>
+
+<p>
+The first step is to identify a vector of independent variables, <b>y</b>, and
+work out the formulae for <b>&gamma;(y)</b>, <b>G</b> and <b>g</b>.&nbsp;
+Typically, <b>y</b> is a subset of the elements in <b>q</b>.&nbsp; The next
+step is to decide how you are going to calculate <b>y</b> and <b>y'</b>
+from <b>qo</b> and <b>qdo</b>.&nbsp; If <b>y</b> is a subset of <b>q</b> then
+this step is very easy: just extract the appropriate elements from <b>qo</b>
+and <b>qdo</b>.&nbsp; Finally, you have to decide how you are going to
+stabilize constraint-violation errors.&nbsp; If you choose to use the formula
+below, then the only decision you have to make is to pick a value
+for <b>Tstab</b>.&nbsp; A value around 0.1 would be appropriate for a system
+that moves at the speed of a humanoid, and 0.01 for something that moves at
+the speed of a sewing machine.&nbsp; The exact value is not critical&mdash;you
+only need to be roughly in the right ballpark.&nbsp; You are now ready to
+write <b>gamma_q</b>.
+</p>
+
+<h3>Suggested Template</h3>
+
+<pre>
+function  [q,qd,G,gs] = gamma_q( model, qo, qdo )
+
+  y = formula for calculating y from qo;
+  q = formula for gamma(y);
+
+  G = Jacobian of gamma;
+
+  yd = formula for calculating yd from qo (or y) and qdo;
+  qd = G * yd;  (or a formula equivalent to this expression)
+
+  g = formula for dG/dt * yd;
+
+  Tstab = some suitable value, such as 0.1;
+  gstab = 2/Tstab * (qd - qdo) + 1/Tstab^2 * (q - qo);
+
+  gs = g + gstab;
+end
+</pre>
+
+
+<h3>An Example</h3>
+
+<p>
+The fuction below creates a modified version of the
+robot <b><a href="index.html#planar">planar</a>(2)</b> in which <b>q(2)</b> is
+subject to the constraint <b>q(2)=2*sin(q(1))</b>.&nbsp; The independent
+variable is chosen to be <b>y=q(1)</b>.&nbsp; If you want to try this example
+yourself, then try the following: set up a simulation in which the robot is
+subject to a constant joint torque <b>tau=[1;0]</b>.&nbsp; At the end of the
+simulation run, the work done by this torque will be equal to the final value
+of <b>q(1)</b>; so you can check if the simulation is working properly by
+comparing this value with the calculated kinetic energy
+(e.g. use <a href="index.html#EnerMo">EnerMo</a>).&nbsp; The two should be the
+same modulo the integration truncation error.&nbsp; Another example can be
+found in <a href="index.html#simulink">Simulink tutorial example 6</a>.
+</p>
+
+<pre>
+function  robot = planar2g
+
+  persistent memory;
+
+  if length(memory) == 0
+    memory = planar(2);
+    memory.gamma_q = @gamma_q;
+  end
+
+  robot = memory;
+end
+
+function  [q,qd,G,gs] = gamma_q( model, qo, qdo )
+
+  y = qo(1);
+  q = [ y; 2*sin(y) ];
+
+  G = [ 1; 2*cos(y) ];
+
+  yd = qdo(1);
+  qd = [ yd; 2*cos(y)*yd ];
+
+  g = [ 0; -2*sin(y)*yd^2 ];
+
+  Tstab = 0.1;
+  gstab = 2/Tstab * (qd - qdo) + 1/Tstab^2 * (q - qo);
+
+  gs = g + gstab;
+end
+</pre>
+
+<h3>Notes</h3>
+
+<ol>
+<li>
+  When using constrained models in simulations, it is important to choose
+  initial values of <b>q</b> and <b>qd</b> that satisfy the constraints.&nbsp;
+  One way to achieve this is to store suitable initial values directly in the
+  model data structure (at the time it is created) so that they can be
+  extracted by the m-code that initializes the Simulink model's
+  workspace.&nbsp; Another way is to use the model's <b>gamma_q</b>
+  directly; i.e., the m-code calls <b>model.gamma_q</b> directly (with initial
+  guesses for <b>q</b> and <b>qd</b>) and uses the returned values of <b>q</b>
+  and <b>qd</b> as the initial values for the simulation.
+</li>
+</ol>
+
+<hr>
+<small>
+Page last modified:&nbsp; June 2012<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>

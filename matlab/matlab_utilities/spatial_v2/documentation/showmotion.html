@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    b.black { color: rgb(0,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+    th { color: rgb(0,0,102); font-weight: bold }
+    td { vertical-align: top }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>How to Use Showmotion</title>
+</head>
+
+<body>
+
+<h2>How to Use Showmotion</h2>
+
+<strong>Contents</strong>
+<div style="margin-left: 40px">
+<a href="#calling">Calling Showmotion</a><br>
+<a href="#viewing">Viewing Commands</a><br>
+<a href="#refocus">Refocus</a><br>
+<a href="#tips">Tips</a><br>
+<a href="#summary">Command Summary</a><br>
+<a href="#bugs">Bugs, Problems, Etc.</a>
+</div>
+
+<p>
+<b>Showmotion</b> is a Matlab function for displaying animations of rigid-body
+systems using Matlab's handle graphics.&nbsp; It is typically used to display
+the results of a dynamics simulation, but the motion data can come from any
+source, and does not have to be the result of a dynamics calculation.&nbsp;
+<b>Showmotion</b> can display an animation from any angle, at any
+magnification, and at any speed (including backwards); but the one thing it
+cannot do is display the data while it is still being calculated.&nbsp; In
+other words, <b>showmotion</b> is a post-processing tool: you use it after a
+simulation run has finished, or after it has been stopped or paused.
+</p>
+
+<p>
+<b>Showmotion</b> is intended to be easy to use.&nbsp; So, why not
+type <b>showmotion(planar(2))</b> into the Matlab command window now, and see
+how much you can figure out without reading this document.
+</p>
+
+<a name="calling"></a>
+<h3>Calling Showmotion</h3>
+
+<table>
+<tbody>
+<tr>
+  <td>
+    <b>showmotion( model [, tdata, qdata ] )</b><br>
+    <b>showmotion( filename )</b><br>
+    <b>showmotion( 'save', filename )</b><br>
+    <b>showmotion( 'about' [, meta ] )</b>
+  </td>
+  <td>&nbsp;&nbsp;&nbsp;</td>
+  <td>
+    <b>&nbsp;</b>start a new animation<br>
+    <b>&nbsp;</b>load animation from file<br>
+    <b>&nbsp;</b>save current animation<br>
+    <b>&nbsp;</b>display/edit metadata
+  </td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The first two calls start a new animation, terminating the current one if
+any.&nbsp; They can be issued at any time.&nbsp; The second two calls can be
+issued only if there is a current animation.
+</p>
+
+<p>
+In the first call, <b>model</b> is a <a href="sysmodel.html">system model data
+structure</a> containing an <b>appearance</b> field and, optionally, also
+a <b>camera</b> field.&nbsp; The former supplies
+the <a href="sysmodel.html#appearance">drawing instructions</a> that
+<b>showmotion</b> needs in order to display the model; and the latter controls
+how the model is viewed
+(details <a href="sysmodel.html#camera">here</a>).&nbsp; <b>tdata</b> is a row
+or column vector of monotonically-increasing time values.&nbsp; It is not
+necessary for the time values to be strictly monotonic.&nbsp; However, the
+last element in <b>tdata</b> must be strictly greater than the first.&nbsp;
+<b>qdata</b> is a matrix containing joint position data.&nbsp; It can be
+either an <b>m&times;n</b> array or an <b>m&times;1&times;n</b> array,
+where <b>m</b> is the number of joint variables (i.e., <b>m=model.NB</b>)
+and <b>n</b> is the number of elements in <b>tdata</b>.&nbsp; The second
+option is the array output format of Simulink, so that Simulink outputs can be
+fed directly into <b>showmotion</b>.&nbsp; The contents of <b>qdata(:,i)</b>
+or <b>qdata(:,1,i)</b> (as appropriate) are interpreted as the vector of joint
+position variables at time <b>tdata(i)</b>.&nbsp; To achieve a smooth
+animation, <b>showmotion</b> uses linear interpolation to calculate the values
+of the position variables at intermediate times.
+</p>
+
+<strong>Example:</strong>
+<div style="margin-left: 40px">
+To view an animation in which the robot <b>planar(2)</b> moves from
+position <b>[0;0]</b> (=straight) at time <b>0</b> to <b>[1;-2]</b> at
+time <b>1</b>, and then returns to <b>[0;0]</b> at time <b>3</b>, type<br>
+<b>showmotion( planar(2), [0 1 3], [[0;0] [1;-2] [0;0]] )</b>
+</div>
+
+<p>
+If the arguments <b>tdata</b> and <b>qdata</b> are omitted,
+then <b>showmotion</b> supplies a default animation in which each joint
+variable in turn is ramped from 0 to 1 and back to 0 in the space of one
+second (so the complete animation lasts <b>model.NB</b> seconds).&nbsp; This
+is useful when you just want to view an existing model, or when you are
+building your own models and want to see if you have got the drawing
+instructions right and put the joints in the right places.
+</p>
+
+<p>
+In the second and third calls listed above, <b>filename</b> is the name of a
+Matlab '.mat' file.&nbsp; In the second call, <b>filename</b> is the name of
+an existing file containing a previously-saved animation
+that <b>showmotion</b> is to load.&nbsp; In the third call, <b>filename</b> is
+the name of the file to which the current animation is to be saved.&nbsp;
+(<strong>Note:</strong> <b>showmotion</b> does not check to see if the
+save-file already exists, and does not warn you if you are about to overwrite
+an existing file.)&nbsp; In both cases, the '.mat' extension is
+optional.&nbsp; Thus, to load an animation from the file
+'results.mat', <b>filename</b> can be either 'results' or 'results.mat'.
+</p>
+
+<p>
+The fourth call allows you to view and edit the metadata associated with an
+animation.&nbsp; The metadata consists of the following
+items: <i>title</i>, <i>author(s)</i>, <i>date stamp</i>
+and <i>description</i>.&nbsp; Calling <b>showmotion('about')</b>
+causes <b>showmotion</b> to print the metadata associated with the current
+animation in the Matlab command window.&nbsp;
+Calling <b>showmotion('about',meta)</b> lets you replace one or more items of
+metadata with new values.&nbsp; <b>meta</b> is a structure containing one or
+more of the following fields: <b>author</b>, <b>title</b>
+and <b>description</b>.&nbsp; For each field present, <b>showmotion</b>
+replaces the relevant item with the specified new value.&nbsp; All three
+fields are strings.&nbsp; However, whereas <b>author</b> and <b>title</b>
+specify the new value directly, <b>description</b> is the full file name of a
+plain text file containing the new description.&nbsp; The date stamp is set
+automatically when an animation is saved, and cannot be edited.&nbsp;
+Probably, the easiest way to set the metadata is as follows:
+<ul><b>
+showmotion( 'about', struct( 'author', 'John Smith' ));<br>
+showmotion( 'about', struct( 'title', 'A Perfect Animation' ));<br>
+showmotion( 'about', struct( 'description', 'perfect.txt' ));
+</b></ul>
+</p>
+
+<a name="viewing"></a>
+<h3>Viewing Commands</h3>
+
+<p>
+<b>Showmotion</b>'s viewing commands make sense if you regard them as acting
+on the scene rather than the camera.&nbsp; For example, the left-arrow key (in
+the arrow-key cluster) performs the command <i>pan left</i>.&nbsp; If you
+press this key then the scene moves a little bit to the left.&nbsp; Now, to
+make this happen, it is necessary to turn the camera a little bit to the
+right, so one could argue that this is really a <i>pan right</i> command,
+since the camera has panned to the right.&nbsp; Nevertheless, the scene is
+what you see, and the scene has moved to the left, so <b>showmotion</b> calls
+this operation <i>pan left</i>.
+</p>
+
+<p>
+The same idea applies when using the mouse.&nbsp; For example, to pan with the
+mouse, you press the middle mouse button (or left and right simultaneously if
+you only have a two-button mouse).&nbsp; If you now drag the cursor, you will
+see that the scene is dragged along with it.&nbsp; In other words, it is the
+scene, not the camera, that moves in the direction of the drag.
+</p>
+
+<p>
+The same idea applies also to zooming.&nbsp; One way you can zoom is with the
+scroll wheel on the mouse (if you have one).&nbsp; Pushing the wheel away from
+you causes the scene to move away from you, so that things in the scene look
+smaller; and if you pull the scroll wheel towards you then you are pulling the
+scene towards you, so that things look bigger.&nbsp; Another way to zoom is to
+use the up- and down-arrows with the control key pressed.&nbsp; As the
+up-arrow is pointing away from you, it pushes the scene away, and the
+down-arrow pulls the scene towards you.
+</p>
+
+<p>
+Rotation is a bit more complicated.&nbsp; Nevertheless, it too follows the
+same basic idea.&nbsp; To rotate using the mouse, you press the left mouse
+button.&nbsp; As soon as you do this, a large <i>crystal ball</i> appears and
+remains visible until you release the button.&nbsp; What happens next depends
+on where the cursor is relative to the crystal ball.&nbsp; If the cursor is
+somewhere near the middle, then dragging the cursor causes the crystal ball to
+rotate as if you were rotating it with your finger (i.e., it's as if the
+cursor is touching the ball, and the contact point on the ball follows the
+cursor as it is dragged).&nbsp; Meanwhile, the scene behaves as if it is fixed
+to the crystal ball, and therefore undergoes the same rotation.&nbsp; The
+overall effect is that things in the scene which are closer to you than the
+centre of the crystal ball move in the same direction that the cursor is being
+dragged, while things that are further away move in the opposite
+direction.&nbsp; The same effect can be obtained using the arrow keys with the
+shift key pressed.&nbsp; In each case, the scene rotates such that the
+foreground moves in the direction of the arrow.
+</p>
+
+<p>
+If, instead, the cursor is not over the crystal ball, then dragging the cursor
+causes the scene to spin about its centre point in step with the orbital
+motion of the cursor.&nbsp; For example, if you drag the cursor clockwise then
+the scene rotates clockwise by the same amount.&nbsp; If the cursor is near
+the edge of the crystal ball then you get a rotational behavoiur that is
+intermediate (in 3D space) between the two behaviours.
+</p>
+
+<a name="refocus"></a>
+<h3>Refocus</h3>
+
+<p>
+<b>Showmotion</b> provides one more viewing command, which is a bit
+unusual.&nbsp; It is called <i>refocus</i>, and what it does is alter the
+depth of the crystal ball.&nbsp; You perform a refocus using the scroll wheel
+while the left mouse button is pressed (i.e., while the crystal ball is
+visible).&nbsp; Pulling the scroll wheel towards you will pull the crystal
+ball towards you, and pushing the scroll wheel away will push the crystal ball
+away.&nbsp; However, because the crystal ball automatically resizes itself to
+fill a fixed fraction of the window, you won't see a change in the apparent
+size of the crystal ball.&nbsp; The only way you can tell it is moving is by
+watching the intersections between the crystal ball and objects in the scene,
+or by performing an exploratory small rotation to see if the depth is where
+you want it to be.
+</p>
+
+<p>
+Refocus solves the following problem.&nbsp; Suppose you want to zoom in on
+some particular object in the scene and study it from more than one
+direction.&nbsp; Panning will bring the object to the centre of the window,
+and zooming will make it larger; but if you try to rotate it then the result
+may not be quite what you really wanted.&nbsp; Ideally, you would like the
+centre of the crystal ball to be in the middle of the object, so that rotating
+the scene makes the object rotate in place, as if you were holding it in your
+hand.&nbsp; However, it is possible (and quite likely) that the crystal ball
+is substantially in front of or behind the object of interest, in which case
+attempting to rotate it causes it to shoot off to one side.&nbsp; Refocus
+solves this problem by letting you adjust the depth of the crystal ball to be
+the same as that of the object you want to study.
+</p>
+
+<a name="tips"></a>
+<h3>Tips</h3>
+
+<ol>
+  <li>If you are having trouble clicking on the sliders in the control panel
+    then see <a href="#bugs">bug 1</a></li>
+  <li>You can use mouse and keyboard commands simultaneously.&nbsp; For
+    example, you can press the left mouse button to make the crystal ball
+    visible, and then use the arrow keys (with the left mouse button still
+    pressed) to pan an object of interest accurately to the centre of the
+    crystal ball.</li>
+  <li>When the crystal ball is visible, zooming can be done using 'z' and 'Z',
+    or ctrl-up/down-arrow.</li>
+  <li>You do not have to stop an animation simply to alter the speed,
+    viewpoint, lighting, etc.: nearly all commands still work while an
+    animation is playing.</li>
+  <li>Keyboard commands work in all three windows created by <b>showmotion</b>
+    (main window, control panel and help window).</li>
+  <li><b>Showmotion</b> does not use the numeric keypad.&nbsp; Use the arrow
+    keys in the arrow-key cluster and the digits on the main keyboard.</li>
+  <li>If you have typed <b>showmotion(model,tout,qout)</b> to see the results
+    of one simulation run, and then run Simulink again to get new data, then
+    you have to re-issue the <b>showmotion</b> command to see the new
+    data.</li>
+</ol>
+
+<a name="summary"></a>
+<h3>Command Summary</h3>
+
+<table style="text-align: left; background: rgb(200,190,170)">
+<tbody>
+<tr>
+  <th colspan="2">Keyboard Commands</th>
+</tr>
+<tr>
+  <td>space bar</td>
+  <td>play/pause toggle</td>
+</tr>
+<tr>
+  <td>0 (zero)</td>
+  <td>pause (if playing), rewind (if paused), skip to end (if rewound)</td>
+</tr>
+<tr>
+  <td>r</td>
+  <td>auto-repeat on/off</td>
+</tr>
+<tr>
+  <td>p</td>
+  <td>display/hide control panel (see <a href="#bugs">bug 1</a>)</td>
+</tr>
+<tr>
+  <td>h, ?</td>
+  <td>show the help window, which contains a shorter version of this command
+  summary</td>
+</tr>
+<tr>
+  <td>comma, dot</td>
+  <td>increase/decrease animation speed</td>
+</tr>
+<tr>
+  <td>slash</td>
+  <td>backwards/forwards toggle</td>
+</tr>
+<tr>
+  <td>1 (one)</td>
+  <td>reset animation speed to +1</td>
+</tr>
+<tr>
+  <td>arrow keys</td>
+  <td>pan</td>
+</tr>
+<tr>
+  <td>shift-arrow keys</td>
+  <td>rotate (change viewing direction)</td>
+</tr>
+<tr>
+  <td>z, Z, ctrl-up/down</td>
+  <td>zoom</td>
+</tr>
+<tr>
+  <td>ctrl-left/right</td>
+  <td>rotate (spin about viewing direction)</td>
+</tr>
+<tr>
+  <td>i</td>
+  <td>restore initial view</td>
+</tr>
+<tr>
+  <td>l, L, o, O</td>
+  <td>decrease/increase intensity of camera headlight (l, L) and overhead
+  light (o, O)</td>
+</tr>
+<tr>
+  <td>n, m, N, M, ctrl-n, ctrl-m</td>
+  <td>adjust time backwards/forwards in big (n, m), medium (N, M) and small
+  (ctrl-n, ctrl-m) steps</td>
+</tr>
+<tr>
+  <th colspan="2">Mouse Commands (main mindow)</th>
+</tr>
+<tr>
+  <td>left button</td>
+  <td>rotate using the crystal ball</td>
+</tr>
+<tr>
+  <td>shift-left button</td>
+  <td>pan</td>
+</tr>
+<tr>
+  <td>middle button</td>
+  <td>pan (UNIX)</td>
+</tr>
+<tr>
+  <td>left &amp; right buttons</td>
+  <td>pan (Windows)</td>
+</tr>
+<tr>
+  <td>scroll wheel</td>
+  <td><a href="#refocus">refocus</a> if crystal ball is visible, otherwise
+  zoom</td>
+</tr>
+<tr>
+  <td>right button</td>
+  <td>pop-up menu with self-explanatory options</td>
+</tr>
+<tr>
+  <th colspan="2">Control Panel Commands</th>
+</tr>
+<tr>
+  <td>triangle</td>
+  <td>play/pause toggle</td>
+</tr>
+<tr>
+  <td>square</td>
+  <td>pause (if playing), rewind (if paused), skip to end (if rewound)</td>
+</tr>
+<tr>
+  <td>loop icon</td>
+  <td>auto-repeat on/off</td>
+</tr>
+<tr>
+  <td>help</td>
+  <td>show the help window, which contains a shorter version of this command
+  summary</td>
+</tr>
+<tr>
+  <td>two-arrow icon</td>
+  <td>backwards/forwards toggle</td>
+</tr>
+<tr>
+  <td>speed slider</td>
+  <td>adjust animation speed</td>
+</tr>
+<tr>
+  <td>time slider</td>
+  <td>coarse time adjustment</td>
+</tr>
+<tr>
+  <td>fine time slider</td>
+  <td>fine time adjustment</td>
+</tr>
+</tbody>
+</table>
+
+<a name="bugs"></a>
+<h3>Bugs, Problems, Etc.</h3>
+
+<ol>
+  <li>If you are using Matlab on a Linux machine, you may find that the place
+    where you have to click on an icon or graphic in the control panel is
+    about 5 pixels higher than where it appears on the screen.&nbsp; This is
+    an intermittent bug, so your options are (1) put up with it, and aim high;
+    (2) delete and recreate the control panel, using the keyboard command 'p',
+    until you get one that works properly; or (3) just use the control panel
+    as a status display.</li>
+  <li>Issuing a Matlab <b>clear all</b> or <b>clear global</b> command will
+    clear the global variable used by <b>showmotion</b> to store its
+    data.&nbsp; If this happens, then you will have to delete
+    the <b>showmotion</b> windows manually before starting a new
+    animation.&nbsp; (The main window will die as soon as you move the cursor
+    over it.)</li>
+  <li>Certain viewing parameters cause the scene to vanish (i.e., the main
+    window goes black).&nbsp; This bug is repeatable, but affects only a very
+    small percentage of viewing parameters.&nbsp; If this happens to you, then
+    the remedy is to move the camera a bit.</li>
+  <li>Drawing models with a lot of bodies is slower than it should be.&nbsp;
+    For example, drawing a 100-link robot in which each body is drawn as a
+    single box is significantly slower than drawing a 10-link robot in which
+    each body is drawn as ten boxes.</li>
+</ol>
+
+<hr>
+<small>
+Page last modified:&nbsp; June 2012<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>

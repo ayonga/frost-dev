@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>Note for Robotics Handbook Readers</title>
+</head>
+
+<body>
+<h3>A Note for Robotics Handbook Readers</h3>
+
+<p>
+There are a few notational differences between the dynamics chapter in the
+Springer Handbook of Robotics and spatial_v2, which are summarised in the
+table below.
+</p>
+
+<center>
+<table border="1" style="text-align: left; background: rgb(190,190,170)">
+<tbody>
+<tr>
+  <th>Handbook</th>
+  <th>Spatial_v2</th>
+  <th>&nbsp;</th>
+</tr>
+<tr>
+  <td>S(<b>u</b>)</td>
+  <td>skew(<b>u</b>)</td>
+  <td>(<b>u</b>: 3D vector)</td>
+</tr>
+<tr>
+  <td>S(<b>m</b><sub>1</sub>) <b>m</b><sub>2</sub></td>
+  <td>crm(<b>m</b><sub>1</sub>) &ast; <b>m</b><sub>2</sub></td>
+  <td>(cross product of two motion vectors)</td>
+</tr>
+<tr>
+  <td>&minus;S(<b>m</b>)<sup>T</sup> <b>f</b></td>
+  <td>crf(<b>m</b>) &ast; <b>f</b></td>
+  <td>(cross product of motion and force vector)</td>
+</tr>
+<tr>
+  <td><b>&Phi;</b></td>
+  <td><b>S</b></td>
+  <td>(joint motion subspace)</td>
+</tr>
+<tr>
+  <td>xjcalc, pcalc</td>
+  <td>jcalc</td>
+  <td>(joint data calculation functions)</td>
+</tr>
+</tbody>
+</table>
+</center>
+
+</body>
+</html>

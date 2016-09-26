@@ -1,0 +1,1590 @@
+Model {
+  Name			  "example2"
+  Version		  7.1
+  MdlSubVersion		  0
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.6"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+  }
+  SavedCharacterEncoding  "UTF-8"
+  SaveDefaultBlockParams  on
+  SampleTimeColors	  on
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Wed Feb 29 14:45:11 2012"
+  Creator		  "roy"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "roy"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Sun May 13 19:18:03 2012"
+  RTWModifiedTimeStamp	  0
+  ModelVersionFormat	  "1.%<AutoIncrement:6>"
+  ConfigurationManager	  "None"
+  SimulationMode	  "normal"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  CovModelRefEnable	  "Off"
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  BufferReuse		  on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      1
+      Version		      "1.4.0"
+      Array {
+	Type			"Handle"
+	Dimension		7
+	Simulink.SolverCC {
+	  $ObjectID		  2
+	  Version		  "1.4.0"
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  SolverMode		  "Auto"
+	  Solver		  "ode45"
+	  SolverName		  "ode45"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Non-adaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  3
+	  Version		  "1.4.0"
+	  Decimation		  "1"
+	  ExternalInput		  "[t, u]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveFormat		  "Array"
+	  SaveOutput		  on
+	  SaveState		  off
+	  SignalLogging		  on
+	  InspectSignalLogs	  off
+	  SaveTime		  on
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  4
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    5
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "InitFltsAndDblsToZero"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    PropName		    "DisabledProps"
+	  }
+	  Version		  "1.4.0"
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  InlineParams		  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  EnforceIntegerDowncast  on
+	  ExpressionFolding	  on
+	  ExpressionDepthLimit	  2147483647
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  on
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  5
+	  Version		  "1.4.0"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "Use local settings"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  ModelReferenceSimTargetVerbose off
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  StrictBusMsg		  "Warning"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  6
+	  Version		  "1.4.0"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "Unspecified"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdHWDeviceType	  "32-bit Generic"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetShiftRightIntArith on
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  7
+	  Version		  "1.4.0"
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  CheckModelReferenceTargetMessage "error"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  ModelReferenceSigSizeVariationType "Always allowed"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  8
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    6
+	    Cell		    "IncludeHyperlinkInReport"
+	    Cell		    "GenerateTraceInfo"
+	    Cell		    "GenerateTraceReport"
+	    Cell		    "GenerateTraceReportSl"
+	    Cell		    "GenerateTraceReportSf"
+	    Cell		    "GenerateTraceReportEml"
+	    PropName		    "DisabledProps"
+	  }
+	  Version		  "1.4.0"
+	  SystemTargetFile	  "grt.tlc"
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  TemplateMakefile	  "grt_default_tmf"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ConfigAtBuild		  off
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  off
+	  RTWCompilerOptimization "Off"
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      9
+	      Array {
+		Type			"Cell"
+		Dimension		16
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"InsertBlockDesc"
+		Cell			"SFDataObjDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		PropName		"DisabledProps"
+	      }
+	      Version		      "1.4.0"
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      IgnoreCustomStorageClasses on
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      SimulinkBlockComments   on
+	      EnableCustomComments    off
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      10
+	      Array {
+		Type			"Cell"
+		Dimension		16
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"CombineOutputUpdateFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"GenerateTestInterfaces"
+		Cell			"ModelStepFunctionPrototypeControlCompliant"
+		Cell			"CPPClassGenCompliant"
+		Cell			"MultiInstanceERTCode"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportNonFinite"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		Cell			"PortableWordSizes"
+		PropName		"DisabledProps"
+	      }
+	      Version		      "1.4.0"
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      TargetFunctionLibrary   "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      IsPILTarget	      off
+	      ModelReferenceCompliant on
+	      CompOptLevelCompliant   on
+	      IncludeMdlTerminateFcn  on
+	      CombineOutputUpdateFcns off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      PortableWordSizes	      off
+	      ModelStepFunctionPrototypeControlCompliant off
+	      AutosarCompliant	      off
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeIntrfLevel	      "Level1"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      GenerateASAP2	      off
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      CurrentDlgPage	      "Data Import//Export"
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    1
+  }
+  WSMdlFileData		  "DataTag0"
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Graph"
+    FontSize		    12
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      BusCreator
+      Inputs		      "4"
+      DisplayOption	      "none"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
+      BlockType		      BusSelector
+      OutputAsBus	      off
+    }
+    Block {
+      BlockType		      Clock
+      DisplayTime	      off
+    }
+    Block {
+      BlockType		      Fcn
+      Expr		      "sin(u[1])"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ParamMin		      "[]"
+      ParamMax		      "[]"
+      ParameterDataTypeMode   "Same as input"
+      ParameterDataType	      "fixdt(1,16,0)"
+      ParameterScalingMode    "Best Precision: Matrix-wise"
+      ParameterScaling	      "[]"
+      ParamDataTypeStr	      "Inherit: Same as input"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeMode	      "Same as input"
+      OutDataType	      "fixdt(1,16,0)"
+      OutScaling	      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      SignalConversion
+      OverrideOpt	      off
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      DataType		      "auto"
+      OutDataType	      "fixdt(1,16,0)"
+      OutScaling	      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchByCopyingInsideSignal off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Integrator
+      ExternalReset	      "none"
+      InitialConditionSource  "internal"
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit    "inf"
+      LowerSaturationLimit    "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+      IgnoreLimit	      off
+      ZeroCross		      on
+      ContinuousStateAttributes	"''"
+    }
+    Block {
+      BlockType		      MATLABFcn
+      MATLABFcn		      "sin"
+      OutputDimensions	      "-1"
+      OutputSignalType	      "auto"
+      Output1D		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      DataType		      "auto"
+      OutDataType	      "fixdt(1,16,0)"
+      OutScaling	      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Scope
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      "S-Function"
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+      SFunctionDeploymentMode off
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      CheckFcnCallInpInsideContextMsg off
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Sum
+      IconShape		      "rectangular"
+      Inputs		      "++"
+      CollapseMode	      "All dimensions"
+      CollapseDim	      "1"
+      InputSameDT	      on
+      AccumDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "fixdt(1,16,0)"
+      OutScaling	      "[]"
+      OutDataTypeStr	      "Inherit: Same as first input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      VariableName	      "simulink_output"
+      MaxDataPoints	      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+      FixptAsFi		      off
+    }
+    Block {
+      BlockType		      Terminator
+    }
+    Block {
+      BlockType		      UnitDelay
+      X0		      "0"
+      SampleTime	      "1"
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+    }
+    Block {
+      BlockType		      Lookup
+      InputValues	      "[-4:5]"
+      Table		      " rand(1,10)-0.5"
+      LookUpMeth	      "Interpolation-Extrapolation"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeMode	      "Same as input"
+      OutDataType	      "fixdt(1,16,0)"
+      OutScaling	      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+      LUTDesignTableMode      "Redesign Table"
+      LUTDesignDataSource     "Block Dialog"
+      LUTDesignFunctionName   "sqrt(x)"
+      LUTDesignUseExistingBP  on
+      LUTDesignRelError	      "0.01"
+      LUTDesignAbsError	      "1e-6"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Graph"
+    FontSize		    12
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    UseDisplayTextAsClickCallback off
+  }
+  LineDefaults {
+    FontName		    "Graph"
+    FontSize		    12
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "example2"
+    Location		    [950, 49, 1276, 318]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "centimeters"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "Command"
+      Ports		      [0, 1]
+      Position		      [40, 73, 100, 117]
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"Command"
+	Location		[1051, 427, 1257, 624]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [110, 96, 115, 134]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "q(1)"
+	  Ports			  [0, 1]
+	  Position		  [30, 70, 60, 100]
+	  SourceBlock		  "simulink/Sources/Repeating\nSequence"
+	  SourceType		  "Repeating table"
+	  ShowPortLabels	  "FromPortIcon"
+	  SystemSampleTime	  "-1"
+	  FunctionWithSeparateData off
+	  RTWMemSecFuncInitTerm	  "Inherit from model"
+	  RTWMemSecFuncExecute	  "Inherit from model"
+	  RTWMemSecDataConstants  "Inherit from model"
+	  RTWMemSecDataInternal	  "Inherit from model"
+	  RTWMemSecDataParameters "Inherit from model"
+	  rep_seq_t		  "[0 1 2 3 4]"
+	  rep_seq_y		  "[0 1 1 0 0]"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "q(2)"
+	  Ports			  [0, 1]
+	  Position		  [30, 130, 60, 160]
+	  SourceBlock		  "simulink/Sources/Repeating\nSequence"
+	  SourceType		  "Repeating table"
+	  ShowPortLabels	  "FromPortIcon"
+	  SystemSampleTime	  "-1"
+	  FunctionWithSeparateData off
+	  RTWMemSecFuncInitTerm	  "Inherit from model"
+	  RTWMemSecFuncExecute	  "Inherit from model"
+	  RTWMemSecDataConstants  "Inherit from model"
+	  RTWMemSecDataInternal	  "Inherit from model"
+	  RTWMemSecDataParameters "Inherit from model"
+	  rep_seq_t		  "[0 1 2 3 4]"
+	  rep_seq_y		  "[0 2 2 0 0]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out"
+	  Position		  [150, 108, 180, 122]
+	  IconDisplay		  "Port number"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	}
+	Line {
+	  SrcBlock		  "q(1)"
+	  SrcPort		  1
+	  Points		  [20, 0; 0, 20]
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "q(2)"
+	  SrcPort		  1
+	  Points		  [20, 0; 0, -20]
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "Out"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "position commands for\nindividual joints"
+	  Position		  [104, 36]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Controller"
+      Ports		      [2, 1]
+      Position		      [175, 80, 265, 135]
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"Controller"
+	Location		[700, 49, 1275, 284]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Cmd"
+	  Position		  [40, 63, 70, 77]
+	  IconDisplay		  "Port number"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Feedback"
+	  Position		  [40, 178, 70, 192]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "1/Tsamp"
+	  Position		  [430, 120, 460, 150]
+	  Orientation		  "down"
+	  NamePlacement		  "alternate"
+	  Gain			  "1/Tsamp"
+	  ParameterDataTypeMode	  "Inherit via internal rule"
+	  ParameterDataType	  "sfix(16)"
+	  ParameterScaling	  "2^0"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeMode	  "Inherit via internal rule"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	  SampleTime		  "Tsamp"
+	}
+	Block {
+	  BlockType		  BusSelector
+	  Name			  "Bus\nSelector"
+	  Ports			  [1, 2]
+	  Position		  [100, 166, 105, 204]
+	  ShowName		  off
+	  OutputSignals		  "q,qd"
+	  Port {
+	    PortNumber		    1
+	    Name		    "<q>"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    2
+	    Name		    "<qd>"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "DocBlock"
+	  Ports			  []
+	  Position		  [267, 135, 307, 174]
+	  BackgroundColor	  "[0.753000, 0.851000, 1.000000]"
+	  ShowName		  off
+	  UserDataPersistent	  on
+	  UserData		  "DataTag1"
+	  SourceBlock		  "simulink/Model-Wide\nUtilities/DocBlock"
+	  SourceType		  "DocBlock"
+	  ShowPortLabels	  "FromPortIcon"
+	  SystemSampleTime	  "-1"
+	  FunctionWithSeparateData off
+	  RTWMemSecFuncInitTerm	  "Inherit from model"
+	  RTWMemSecFuncExecute	  "Inherit from model"
+	  RTWMemSecDataConstants  "Inherit from model"
+	  RTWMemSecDataInternal	  "Inherit from model"
+	  RTWMemSecDataParameters "Inherit from model"
+	  DocumentType		  "Text"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Scope_q"
+	  Ports			  [1]
+	  Position		  [175, 114, 205, 146]
+	  Floating		  off
+	  Location		  [724, 585, 1276, 969]
+	  Open			  on
+	  NumInputPorts		  "1"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  YMin			  "-0.2"
+	  YMax			  "2.2"
+	  DataFormat		  "StructureWithTime"
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Scope_tau"
+	  Ports			  [1]
+	  Position		  [515, 114, 545, 146]
+	  Floating		  off
+	  Location		  [6, 380, 556, 763]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  YMin			  "-60"
+	  YMax			  "80"
+	  SaveName		  "ScopeData1"
+	  DataFormat		  "StructureWithTime"
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  Ports			  [2, 1]
+	  Position		  [435, 180, 455, 200]
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "++|"
+	  InputSameDT		  off
+	  OutDataTypeMode	  "Inherit via internal rule"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum1"
+	  Ports			  [2, 1]
+	  Position		  [125, 60, 145, 80]
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "|+-"
+	  InputSameDT		  off
+	  OutDataTypeMode	  "Inherit via internal rule"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum2"
+	  Ports			  [2, 1]
+	  Position		  [435, 60, 455, 80]
+	  Orientation		  "down"
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  IconShape		  "round"
+	  Inputs		  "-+|"
+	  InputSameDT		  off
+	  OutDataTypeMode	  "Inherit via internal rule"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [160, 185, 180, 205]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  UnitDelay
+	  Name			  "Unit Delay"
+	  Position		  [370, 57, 405, 83]
+	  SampleTime		  "Tsamp"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "derivative\ngain"
+	  Position		  [275, 46, 330, 94]
+	  Gain			  "0.015"
+	  ParameterDataTypeMode	  "Inherit via internal rule"
+	  ParameterDataType	  "sfix(16)"
+	  ParameterScaling	  "2^0"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeMode	  "Inherit via internal rule"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	  SampleTime		  "Tsamp"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "proportional\ngain"
+	  Position		  [175, 47, 225, 93]
+	  NamePlacement		  "alternate"
+	  Gain			  "800"
+	  ParameterDataTypeMode	  "Inherit via internal rule"
+	  ParameterDataType	  "sfix(16)"
+	  ParameterScaling	  "2^0"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeMode	  "Inherit via internal rule"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	  SampleTime		  "Tsamp"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "tau"
+	  Position		  [520, 183, 550, 197]
+	  IconDisplay		  "Port number"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	}
+	Line {
+	  SrcBlock		  "Sum1"
+	  SrcPort		  1
+	  DstBlock		  "proportional\ngain"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "proportional\ngain"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  Branch {
+	    Points		    [0, 120]
+	    DstBlock		    "Sum"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "derivative\ngain"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "derivative\ngain"
+	  SrcPort		  1
+	  Points		  [10, 0]
+	  Branch {
+	    DstBlock		    "Unit Delay"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -40; 100, 0]
+	    DstBlock		    "Sum2"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  Points		  [20, 0]
+	  Branch {
+	    DstBlock		    "tau"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -60]
+	    DstBlock		    "Scope_tau"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Feedback"
+	  SrcPort		  1
+	  DstBlock		  "Bus\nSelector"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<qd>"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Bus\nSelector"
+	  SrcPort		  2
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Cmd"
+	  SrcPort		  1
+	  DstBlock		  "Sum1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "1/Tsamp"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sum2"
+	  SrcPort		  1
+	  DstBlock		  "1/Tsamp"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Unit Delay"
+	  SrcPort		  1
+	  DstBlock		  "Sum2"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<q>"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Bus\nSelector"
+	  SrcPort		  1
+	  Points		  [25, 0; 0, -45]
+	  Branch {
+	    DstBlock		    "Sum1"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Scope_q"
+	    DstPort		    1
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "READ ME\n(double click)"
+      Ports		      []
+      Position		      [52, 165, 92, 204]
+      BackgroundColor	      "[0.753000, 0.851000, 1.000000]"
+      UserDataPersistent      on
+      UserData		      "DataTag2"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/DocBlock"
+      SourceType	      "DocBlock"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      DocumentType	      "Text"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Robot"
+      Ports		      [1, 1]
+      Position		      [175, 186, 265, 234]
+      Orientation	      "left"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"Robot"
+	Location		[748, 133, 1275, 314]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "tau"
+	  Position		  [35, 113, 65, 127]
+	  IconDisplay		  "Port number"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	}
+	Block {
+	  BlockType		  BusCreator
+	  Name			  "Bus\nCreator"
+	  Ports			  [2, 1]
+	  Position		  [420, 111, 425, 149]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "DocBlock"
+	  Ports			  []
+	  Position		  [37, 45, 77, 84]
+	  BackgroundColor	  "[0.753000, 0.851000, 1.000000]"
+	  ShowName		  off
+	  UserDataPersistent	  on
+	  UserData		  "DataTag3"
+	  SourceBlock		  "simulink/Model-Wide\nUtilities/DocBlock"
+	  SourceType		  "DocBlock"
+	  ShowPortLabels	  "FromPortIcon"
+	  SystemSampleTime	  "-1"
+	  FunctionWithSeparateData off
+	  RTWMemSecFuncInitTerm	  "Inherit from model"
+	  RTWMemSecFuncExecute	  "Inherit from model"
+	  RTWMemSecDataConstants  "Inherit from model"
+	  RTWMemSecDataInternal	  "Inherit from model"
+	  RTWMemSecDataParameters "Inherit from model"
+	  DocumentType		  "Text"
+	}
+	Block {
+	  BlockType		  ToWorkspace
+	  Name			  "To Workspace"
+	  Position		  [435, 35, 495, 65]
+	  VariableName		  "qout"
+	  MaxDataPoints		  "inf"
+	  SampleTime		  "-1"
+	  SaveFormat		  "Array"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "planar(2) dynamics"
+	  Ports			  [3, 1]
+	  Position		  [135, 71, 215, 129]
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "planar(2) dynamics"
+	    Location		    [427, 173, 751, 351]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "q"
+	      Position		      [35, 48, 65, 62]
+	      IconDisplay	      "Port number"
+	      OutDataType	      "sfix(16)"
+	      OutScaling	      "2^0"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "qd"
+	      Position		      [35, 88, 65, 102]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      OutDataType	      "sfix(16)"
+	      OutScaling	      "2^0"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "tau"
+	      Position		      [35, 128, 65, 142]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      OutDataType	      "sfix(16)"
+	      OutScaling	      "2^0"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "DocBlock"
+	      Ports		      []
+	      Position		      [247, 25, 287, 64]
+	      BackgroundColor	      "[0.753000, 0.851000, 1.000000]"
+	      ShowName		      off
+	      UserDataPersistent      on
+	      UserData		      "DataTag4"
+	      SourceBlock	      "simulink/Model-Wide\nUtilities/DocBlock"
+	      SourceType	      "DocBlock"
+	      ShowPortLabels	      "FromPortIcon"
+	      SystemSampleTime	      "-1"
+	      FunctionWithSeparateData off
+	      RTWMemSecFuncInitTerm   "Inherit from model"
+	      RTWMemSecFuncExecute    "Inherit from model"
+	      RTWMemSecDataConstants  "Inherit from model"
+	      RTWMemSecDataInternal   "Inherit from model"
+	      RTWMemSecDataParameters "Inherit from model"
+	      DocumentType	      "Text"
+	    }
+	    Block {
+	      BlockType		      Mux
+	      Name		      "Mux"
+	      Ports		      [3, 1]
+	      Position		      [105, 66, 110, 124]
+	      ShowName		      off
+	      Inputs		      "3"
+	      DisplayOption	      "bar"
+	    }
+	    Block {
+	      BlockType		      MATLABFcn
+	      Name		      "forward\ndynamics\nusing FDab"
+	      Ports		      [1, 1]
+	      Position		      [155, 76, 215, 114]
+	      MATLABFcn		      "FDab( planar(2), u(1:2), u(3:4), u(5:6) )"
+	      OutputDimensions	      "[2 1]"
+	      OutputSignalType	      "real"
+	      Output1D		      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "qdd"
+	      Position		      [255, 88, 285, 102]
+	      IconDisplay	      "Port number"
+	      OutDataType	      "sfix(16)"
+	      OutScaling	      "2^0"
+	    }
+	    Line {
+	      SrcBlock		      "qd"
+	      SrcPort		      1
+	      DstBlock		      "Mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "q"
+	      SrcPort		      1
+	      Points		      [10, 0; 0, 20]
+	      DstBlock		      "Mux"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "tau"
+	      SrcPort		      1
+	      Points		      [10, 0; 0, -20]
+	      DstBlock		      "Mux"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "Mux"
+	      SrcPort		      1
+	      DstBlock		      "forward\ndynamics\nusing FDab"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "forward\ndynamics\nusing FDab"
+	      SrcPort		      1
+	      DstBlock		      "qdd"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "qd_int"
+	  Ports			  [1, 1]
+	  Position		  [335, 85, 365, 115]
+	  ShowName		  off
+	  Port {
+	    PortNumber		    1
+	    Name		    "q"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "qdd_int"
+	  Ports			  [1, 1]
+	  Position		  [245, 85, 275, 115]
+	  ShowName		  off
+	  Port {
+	    PortNumber		    1
+	    Name		    "qd"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Feedback"
+	  Position		  [460, 123, 490, 137]
+	  IconDisplay		  "Port number"
+	  OutDataType		  "sfix(16)"
+	  OutScaling		  "2^0"
+	}
+	Line {
+	  SrcBlock		  "Bus\nCreator"
+	  SrcPort		  1
+	  DstBlock		  "Feedback"
+	  DstPort		  1
+	}
+	Line {
+	  Labels		  [0, 0]
+	  SrcBlock		  "tau"
+	  SrcPort		  1
+	  DstBlock		  "planar(2) dynamics"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "planar(2) dynamics"
+	  SrcPort		  1
+	  DstBlock		  "qdd_int"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "qd"
+	  Labels		  [0, 0]
+	  SrcBlock		  "qdd_int"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "qd_int"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -65; -205, 0; 0, 65]
+	    DstBlock		    "planar(2) dynamics"
+	    DstPort		    2
+	  }
+	  Branch {
+	    Points		    [0, 40]
+	    DstBlock		    "Bus\nCreator"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  Name			  "q"
+	  Labels		  [0, 0]
+	  SrcBlock		  "qd_int"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    Points		    [0, 20]
+	    DstBlock		    "Bus\nCreator"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -50]
+	    Branch {
+	      Points		      [-280, 0; 0, 30]
+	      DstBlock		      "planar(2) dynamics"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "To Workspace"
+	      DstPort		      1
+	    }
+	  }
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "Command"
+      SrcPort		      1
+      DstBlock		      "Controller"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Robot"
+      SrcPort		      1
+      Points		      [-20, 0; 0, -90]
+      DstBlock		      "Controller"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Controller"
+      SrcPort		      1
+      Points		      [20, 0; 0, 100]
+      DstBlock		      "Robot"
+      DstPort		      1
+    }
+    Annotation {
+      Name		      "Example 2: Discrete PD Control\nof a Planar 2R Robot"
+      Position		      [159, 33]
+      ForegroundColor	      "blue"
+      FontName		      "helvetica"
+      FontSize		      14
+    }
+  }
+}
+MatData {
+  NumRecords		  5
+  DataRecord {
+    Tag			    DataTag4
+    Data		    "  %)30     .    @ H   8    (     @         %    \"     $    !     0         %  0 \"     $    0    =F5R<VEO;@!C;VYT96YT  X    X    !@    @    &          4    (     0    $    !          D    (    FIF9F9F9\\3\\.    \\ D   8    (    !          %    \"     $   \"Z\"0   0         0    N@D  %1H:7,@<W5B<WES=&5M('-H;W=S('1H92!S:6UP;&5S=\"!M971H;V0@9F]R(&EN8V]R<&]R871I;F<@9'EN86UI8W,*8V%L8W5L871I;VYS(&EN=&\\@82!3:6UU;&EN:R!M;V1E;\"X@(%-I;75L:6YK('!R;W9I9&5S(&$@(DU!5$Q!0B!F=6YC=&EO;B(*8FQO8VLL('1O(&%L;&]W($UA=&QA8B!F=6YC=&EO;G,@=&\\@8F4@:6YC;W)P;W)A=&5D(&EN=&\\@82!3:6UU;&EN:R!M;V1E;\"X*2&]W979E<BP@=&AI<R!B;&]C:R!H87,@;VYL>2!A('-I;F=L92!I;G!U=\"!A;F0@82!S:6YG;&4@;W5T<'5T+@I4:&5R969O<F4L('1H92!F:7)S=\"!T:&EN9R!T:&%T(&UU<W0@:&%P<&5N(&ES('1H870@=&AE('1H<F5E('9A<FEA8FQE<PIN965D960@9F]R('1H92!D>6YA;6EC<R!C86QC=6QA=&EO;B H<2P@<60@86YD('1A=2D@;75S=\"!B92!C;VUB:6YE9\"!I;G1O\"F$@<VEN9VQE('9E8W1O<BP@<V\\@=&AA=\"!I=\"!C86X@8F4@9F5D(&EN(&%S('1H92!S:6YG;&4@:6YP=70@=&\\@=&AE\"DUA=&QA8B!F=6YC=&EO;B!B;&]C:RX@($EF('EO=2!O<&5N('1H:7,@8FQO8VLL('EO=2!W:6QL(&9I;F0@=&AA=\"!T:&4*86-T=6%L(&9U;F-T:6]N(&-A;&P@:7,@(D9$86(H('!L86YA<B@R*2P@=2@Q.C(I+\"!U*#,Z-\"DL('4H-3HV*2 I(BX@(%1H90IE>'!R97-S:6]N<R!U*#$Z,BDL('4H,SHT*2!A;F0@=2@U.C8I(&5X=')A8W0@=&AE(#)X,2!V96-T;W)S('$L('%D(&%N9 IT874@9G)O;2!T:&4@-G@Q(&EN<'5T('9E8W1O<B!U+\"!S;R!T:&%T('1H92!C86QL(&ES(&5F9F5C=&EV96QY\"B)&1&%B*\"!P;&%N87(H,BDL('$L('%D+\"!T874@*2(N\"@I4:&5R92!I<R!O;F4@;6]R92!I;7!O<G1A;G0@=&AI;F<@=&\\@;F]T92!A8F]U=\"!T:&ES(&)L;V-K.B!3:6UU;&EN:R!N965D<PIT;R!B92!T;VQD('1H92!T>7!E(&%N9\"!D:6UE;G-I;VYS(&]F('1H92!R971U<FX@=F%L=64N(\"!.;W<L('1H92!R971U<FX*=F%L=64@*'%D9\"D@:7,@82 R>#$@=F5C=&]R(&]F(')E86P@;G5M8F5R<R H8F5C875S92!P;&%N87(H,BD@:&%S('1W;PIJ;VEN=\"!V87)I86)L97,I.R!S;R!T:&4@36%T;&%B(&9U;F-T:6]N(&)L;V-K)W,@<&%R86UE=&5R(\")/=71P=70*9&EM96YS:6]N<SHB(&AA<R!T;R!B92!S970@=&\\@(ELR(#%=(BP@=&AE(&]U='!U=\"!S:6=N86P@='EP92!M=7-T(&)E('-E= IT;R B<F5A;\"(L(&%N9\"!T:&4@8F]X(\")#;VQL87!S92 R+40@<F5S=6QT<R!T;R Q+40B(&UU<W0@8F4@=6XM8VAE8VME9\"X*\"B)P;&%N87(H,BDB(&ES(&$@8V%L;\"!T;R!T:&4@;6]D96PM8W)E871I;F<@9G5N8W1I;VX@(G!L86YA<B(N(\"!4:&ES\"F9U;F-T:6]N('=I;&P@8F4@8V%L;&5D(&5V97)Y('1I;64@=&AA=\"!&1&%B(&ES(&-A;&QE9\"P@=VAI8V@@:7,@<V5V97)A; IT:6UE<R!P97(@:6YT96=R871I;VX@<W1E<\"X@($EF('!L86YA<B!W97)E('1O(&-R96%T92!A(&YE=R!M;V1E;\"!E=F5R>0IT:6UE(&ET('=A<R!C86QL960L(&ET('=O=6QD(&)E(&%N(&]B=FEO=7,@<&EE8V4@;V8@:6YE9F9I8VEE;F-Y+@I(;W=E=F5R+\"!I9B!Y;W4@;&]O:R!A=\"!T:&4@<V]U<F-E(&-O9&4@;V8@<&QA;F%R(\"AI;B!M;V1E;',O<&QA;F%R+FTI+ IY;W4@=VEL;\"!F:6YD('1H870@:70@<W1O<F5S(&$@8V]P>2!O9B!T:&4@;&%S=\"!M;V1E;\"!I=\"!M861E+\"!A;F0@<F5T=7)N<PIT:&%T(&-O<'D@:68@=&AE(&%R9W5M96YT(&UA=&-H97,N\"@I4:&ES('-T>6QE(&]F('5S92P@:6X@=VAI8V@@82!D>6YA;6EC<R!F=6YC=&EO;B H;&EK92!&1&%B*2!I<R!C86QL960*9&ER96-T;'DL('1H92!I;G!U=\"!V96-T;W(@=2!I<R!E>'!L:6-I=&QY('-P;&ET(&EN=&\\@:71S(&-O;7!O;F5N=\"!P87)T<RP*86YD(&$@;6]D96PM<')E<&%R871I;VX@9G5N8W1I;VX@*&QI:V4@<&QA;F%R*2!S=7!P;&EE<R!A(&UO9&5L(&%T(&5V97)Y\"F-A;&PL(&ES('1H92!S:6UP;&5S=\"!W87D@=&\\@<')O8V5E9\"X@(%1H92!O;FQY('-N86=S(&%R93H@*#$I('EO=2!N965D('1O\"F=E=\"!T:&4@;G5M8F5R<R!R:6=H=\"P@86YD(\"@R*2!F;W(@=&AE('-A:V4@;V8@969F:6-I96YC>2P@=&AE\"FUO9&5L+7!R97!A<F%T:6]N(&9U;F-T:6]N(&]U9VAT('1O('5S92!T:&4@<V%M92!S=')A=&5G>2!T:&%T('EO=2!S964@:6X*<&QA;F%R+B @268@>6]U('=A;G1E9\"!T;R!M;V1I9GD@=&AI<R!3:6UU;&EN:R!M;V1E;\"!T;R!U<V4@<&QA;F%R*#,I\"BAI+F4N+\"!A('1H<F5E+6IO:6YT(')O8F]T*2!I;G-T96%D(&]F('!L86YA<B@R*2P@=&AE;B!Y;W4@=V]U;&0@:&%V92!T;PIC:&%N9V4@=&AE(&9U;F-T:6]N(&-A;&P@=&\\@<F5A9 HB1D1A8B@@<&QA;F%R*#,I+\"!U*#$Z,RDL('4H-#HV*2P@=2@W.CDI(\"DB+\"!A;F0@>6]U('=O=6QD(&AA=F4@=&\\@8VAA;F=E\"G1H92!O=71P=70@9&EM96YS:6]N<R!T;R B6S,@,5TB+B @66]U('=O=6QD(&%L<V\\@:&%V92!T;R!S=7!P;'D@82!M;W1I;VX*8V]M;6%N9\"!S:6=N86P@9F]R('$H,RDN\"@        "
+  }
+  DataRecord {
+    Tag			    DataTag3
+    Data		    "  %)30     .    : 4   8    (     @         %    \"     $    !     0         %  0 \"     $    0    =F5R<VEO;@!C;VYT96YT  X    X    !@    @    &          4    (     0    $    !          D    (    FIF9F9F9\\3\\.    V 0   8    (    !          %    \"     $   \"B!    0         0    H@0  %1H:7,@<W5B<WES=&5M(&ES(')E<W!O;G-I8FQE(&9O<B!C86QC=6QA=&EN9R!T:&4@9'EN86UI8W,@;V8@=&AE(')O8F]T+@I);B!O=&AE<B!W;W)D<RP@:70@:7,@<F5S<&]N<VEB;&4@9F]R(&-A;&-U;&%T:6YG('1H92!R;V)O=\"=S(&IO:6YT\"F%C8V5L97)A=&EO;B!V87)I86)L97,@*'%D9\"D@:6X@<F5S<&]N<V4@=&\\@=&AE(&%P<&QI960@:F]I;G0@9F]R8V5S\"BAT874I+\"!A;F0@:6YT96=R871I;F<@=&AO<V4@=F%R:6%B;&5S('1O(&]B=&%I;B!T:&4@:F]I;G0@=F5L;V-I='D@*'%D*0IA;F0@<&]S:71I;VX@*'$I('9A<FEA8FQE<RX@(%1H:7,@<W5B<WES=&5M(&%L<V\\@<V%V97,@<2!T;R!T:&4@36%T;&%B\"G9A<FEA8FQE('%O=70@<V\\@=&AA=\"!I=\"!C86X@8F4@=7-E9\"!B>2!S:&]W;6]T:6]N+B @5&AE(&1Y;F%M:6-S\"F-A;&-U;&%T:6]N(&ES(&5S<V5N=&EA;&QY('1H92!S86UE(&%S(&EN($5X86UP;&4@,2X@($EN('!A<G1I8W5L87(L('1H90IB;&]C:R B<&QA;F%R*#(I(&1Y;F%M:6-S(B!I<R!T:&4@<V%M92!A<R!T:&4@;VYE(&EN($5X86UP;&4@,2X*\"E1H92!O;F4@=&AI;F<@=&AA=\"!I<R!N97<@:&5R92!I<R!T:&%T+\"!I;G-T96%D(&]F(&]U='!U='1I;F<@<2!A;F0@<60@87,*<V5P87)A=&4@;W5T<'5T('-I9VYA;',L('1H97D@87)E(&-O;6)I;F5D(&EN=&\\@82!S:6YG;&4@;75L=&DM<VEG;F%L\"F)U<RX@(%1H92!B=7,@:71S96QF(&ES(&-R96%T960@8GD@=&AE(\")\"=7,@0W)E871O<B(@8FQO8VLN(\"!(;W=E=F5R+\"!E86-H\"G-I9VYA;\"!T:&%T(&9E961S(&EN=&\\@=&AI<R!B;&]C:R!M=7-T(&)E(&=I=F5N(&$@;F%M92P@<V\\@=&AA=\"!T:&5Y(&-A;@IB92!C;W)R96-T;'D@:61E;G1I9FEE9\"!A=\"!T:&4@;W1H97(@96YD(&]F('1H92!B=7,N(\" H5&AE(&QA8F5L<R B<2(@86YD\"B)Q9\"(@87!P96%R:6YG(&%T('1H92!O=71P=71S(&]F('1H92!T=V\\@:6YT96=R871O<B!B;&]C:W,@87)E('-I9VYA; IN86UE<RP@;F]T(&)L;V-K(&YA;65S+BD@(%EO=2!C86X@9VEV92!A(&YA;64@=&\\@82!S:6=N86P@8GD*<FEG:'0M8VQI8VMI;F<@;VX@=&AE('-I9VYA;\"!L:6YE+\"!S96QE8W1I;F<@(G-I9VYA;\"!P<F]P97)T:65S(B!F<F]M('1H90IM96YU+\"!A;F0@='EP:6YG(&$@;F%M92!I;G1O('1H92!A<'!R;W!R:6%T92!T97AT(&9I96QD+@H        "
+  }
+  DataRecord {
+    Tag			    DataTag2
+    Data		    "  %)30     .    8 @   8    (     @         %    \"     $    !     0         %  0 \"     $    0    =F5R<VEO;@!C;VYT96YT  X    X    !@    @    &          4    (     0    $    !          D    (    FIF9F9F9\\3\\.    T <   8    (    !          %    \"     $   \";!P   0         0    FP<  %1H:7,@4VEM=6QI;FL@;6]D96P@9F]L;&]W<R!O;B!F<F]M($5X86UP;&4@,2X@(%1H92!R;V)O=\"!A;F0@=&AE(&-O;G1R;VP*<WES=&5M(&%R92!T:&4@<V%M92!A<R!F;W(@97AA;7!L92 Q+\"!E>&-E<'0@=&AA=\"!T:&4@8V]N=')O;\"!S>7-T96T@:7,*;F]W(&EM<&QE;65N=&5D('=I=&@@82!D:7-C<F5T92!S86UP;&4@=&EM92X@(%1H:7,@;65A;G,@=&AA=\"!T:&4*8V]N=')O;&QE<B!S86UP;&5S('1H92!R;V)O=\"=S(&UO=&EO;B!A=\"!A(&9I>&5D('-A;7!L:6YG(')A=&4L(&%N9 IU<&1A=&5S(&ET<R!O=71P=70@86QS;R!A=\"!A(&9I>&5D(')A=&4N(\"!4:&ES(&)E:&%V:6]U<B!C;&]S96QY(')E<V5M8FQE<PIH;W<@82!C;VUP=71E<BUB87-E9\"!C;VYT<F]L('-Y<W1E;2!W;W5L9\"!C;VYT<F]L(&$@<F5A;\"!R;V)O=\"X*\"E1H92!M;W-T(&]B=FEO=7,@9&EF9F5R96YC92!F<F]M($5X86UP;&4@,2!I<R!T:&%T('1H92!M;V1E;\"!H87,@8F5E;@IR96]R9V%N:7IE9\"!I;G1O('1H<F5E(&UA:6X@<W5B<WES=&5M<SH@8V]M;6%N9\"P@8V]N=')O;&QE<B!A;F0@<F]B;W0N\"E1H:7,@:&5L<',@=&\\@:V5E<\"!T:&4@;6]D96P@=&ED>2!A;F0@96%S:65R('1O('5N9&5R<W1A;F0N(\"!/;F4*8V]N<V5Q=65N8V4@;V8@=&AI<R!R96]R9V%N:7IA=&EO;B!I<R!T:&%T('1H92!F965D8F%C:R!C;VYN96-T:6]N(&9R;VT*=&AE(')O8F]T('1O('1H92!C;VYT<F]L;&5R(&YO=R!E;7!L;WES(&$@8G5S+B @5&AI<R!B=7,@:7,@9&5S8W)I8F5D(&EN\"FUO<F4@9&5T86EL(&EN('-O;64@;V8@=&AE(&]T:&5R(&1O8W5M96YT871I;VX@8FQO8VMS+@H*268@>6]U(&AA=F4@86QR96%D>2!T<FEE9\"!R=6YN:6YG('1H:7,@;6]D96PL('1H96X@>6]U('=I;&P@:&%V92!N;W1I8V5D\"G1H870@<V]M92!O9B!T:&4@8FQO8VMS(&%N9\"!S:6=N86QS(&AA=F4@8VAA;F=E9\"!C;VQO=7(N(\"!4:&ES(&ES(&)E8V%U<V4*=&AE(&]P=&EO;B B<V%M<&QE('1I;64@8V]L;W5R<R(@:6X@=&AE(\")P;W)T+W-I9VYA;\"!D:7-P;&%Y<R(@<W5B;65N=2!O9@IT:&4@(D9O<FUA=\"(@;65N=2!H87,@8F5E;B!S=VET8VAE9\"!O;BX@(%1H92!C;VQO=7)S(%-I;75L:6YK(&ES('5S:6YG(&%R90IT:&5S93H@8FQA8VL@9F]R(&-O;G1I;G5O=7,@8FQO8VMS(&%N9\"!S:6=N86QS+\"!R960@9F]R('-A;7!L960@8FQO8VMS(&%N9 IS:6=N86QS+\"!A;F0@>65L;&]W(&9O<B!M:7AE9\"!B;&]C:W,@*'5S=6%L;'D@<W5B<WES=&5M<RDN(\"!4:'5S+\"!Y;W4@8V%N\"FEM;65D:6%T96QY('-E92!F<F]M('1H92!C;VQO=7)S('1H870@=&AE($-O;6UA;F0@8FQO8VL@<')O=FED97,@80IC;VYT:6YU;W5S('-I9VYA;\"P@=&AE(&-O;G1R;VQL97(@8V]N=&%I;G,@82!M:7@@;V8@8V]N=&EN=6]U<R!A;F0@<V%M<&QE9 IS:6=N86QS+\"!T:&4@8V]N=')O;&QE<B=S(&]U='!U=\"!I<R!A('-A;7!L960@<VEG;F%L+\"!A;F0@=&AE(%)O8F]T(&)L;V-K\"F-O;G1A:6YS(&]N;'D@8V]N=&EN=6]U<R!S:6=N86QS(\"AA<&%R=\"!F<F]M('1H92!O;F4@<V%M<&QE9\"!S:6=N86P*9F5E9&EN9R!I;B!T;R!I=\"DN\"@I4:&4@8V]N=')O;&QE<B!I<R!B861L>2!T=6YE9\"P@;&EK92!I;B!%>&%M<&QE(#$L('-O('1H92!C;&]S960M;&]O< IP97)F;W)M86YC92!O9B!T:&4@<WES=&5M(&ES('!O;W(N(\"!(;W=E=F5R+\"!T:&5R92!A<F4@<V]M92!S=6)T;&4*9&EF9F5R96YC97,@9'5E('1O('1H92!S86UP;&5D(&YA='5R92!O9B!T:&4@8V]N=')O;\"!S>7-T96TN(\"!4:&5S92!A<F4*97AP;&%I;F5D(&EN('1H92!C;VYT<F]L;&5R(&1O8W5M96YT871I;VXN(\"!!<R!B969O<F4L('EO=2!C86X@=FEE=R!A;@IA;FEM871I;VX@;V8@=&AE(')E<W5L=&EN9R!M;W1I;VX@=FEA('1H92!-871L86(@8V]M;6%N9 HB<VAO=VUO=&EO;BAP;&%N87(H,BDL=&]U=\"QQ;W5T*2(N\"@      "
+  }
+  DataRecord {
+    Tag			    DataTag1
+    Data		    "  %)30     .    <!0   8    (     @         %    \"     $    !     0         %  0 \"     $    0    =F5R<VEO;@!C;VYT96YT  X    X    !@    @    &          4    (     0    $    !          D    (    FIF9F9F9\\3\\.    X!,   8    (    !          %    \"     $   \"O$P   0         0    KQ,  %1H:7,@<W5B<WES=&5M(&EM<&QE;65N=',@82!S:6UP;&4@9&ES8W)E=&4@<')O<&]R=&EO;F%L+7!L=7,M9&5R:79A=&EV90HH4$0I(&-O;G1R;VQL97(N(\"!&:7)S=\"P@=&AE(&9E961B86-K(&)U<R!I<R!S<&QI=\"!I;G1O(&ET<R!C;VUP;VYE;G0*<VEG;F%L<R H<2!A;F0@<60I+\"!A;F0@<60@:7,@<V5N=\"!T;R!A('1E<FUI;F%T;W(@*&DN92XL(&ET(&ES;B=T('5S960I+@I.97AT+\"!T:&4@<VEG;F%L('$@*'1H92!V96-T;W(@;V8@86-T=6%L(&IO:6YT('!O<VET:6]N<RD@:7,@<W5B=')A8W1E9 IF<F]M('1H92!C;VUM86YD(&EN<'5T(\"AT:&4@=F5C=&]R(&]F(&-O;6UA;F1E9\"!J;VEN=\"!P;W-I=&EO;G,I('1O(&]B=&%I;@IT:&4@=')A8VMI;F<@97)R;W(@<VEG;F%L(\"AT:&4@9&EF9F5R96YC92!B971W965N('=H97)E('1H92!R;V)O=\"!O=6=H=\"!T;PIB92!A;F0@=VAE<F4@:70@86-T=6%L;'D@:7,I+B @5&AE(&5R<F]R('-I9VYA;\"!I<R!T:&5N('-C86QE9\"!B>2!T:&4*(G!R;W!O<G1I;VYA;\"!G86EN(BP@=&\\@;V)T86EN('1H92!P<F]P;W)T:6]N86P@8V]M<&]N96YT(&]F('1H90IC;VYT<F]L;&5R)W,@;W5T<'5T('-I9VYA;\"X@(%1H92!S8V%L960@97)R;W(@<VEG;F%L(&ES(&%L<V\\@<V5N=\"!T;R!A\"G-E8V]N9\"!G86EN(&)L;V-K+\"!L86)E;&QE9\" B9&5R:79A=&EV92!G86EN(B H=VAI8V@@:7,@97%U:79A;&5N=\"!T;PHB=&EM92!C;VYS=&%N=\"(@:6X@17AA;7!L92 Q*2!I;B!P<F5P87)A=&EO;B!F;W(@8F5I;F<@9&EF9F5R96YT:6%T960N\"DAO=V5V97(L('1H92!N97AT('-T97 @:7,@=VAE<F4@=&AI<R!C;VYT<F]L('-Y<W1E;2!D:69F97)S(&9R;VT@=&AE(&]N90II;B!%>&%M<&QE(#$Z(&EN($5X86UP;&4@,2P@=&AE(&YE>'0@<W1E<\"!W87,@=&\\@9&EF9F5R96YT:6%T92!T:&4@<VEG;F%L\"F%N9\"!F965D(&ET(&EN=&\\@=&AE('-U;6UA=&EO;B!B;&]C:RX@($EN('1H:7,@8V]N=')O;&QE<BP@=&AE(\"AG;V]D\"F%P<')O>&EM871I;VX@=&\\@82!C;VYT:6YU;W5S*2!D97)I=F%T:79E(&ES(')E<&QA8V5D(&)Y('1H<F5E(&)L;V-K<R!T:&%T\"FUI;6EC('1H92!O<&5R871I;VX@;V8@9&EF9F5R96YT:6%T:6]N(&)Y('-U8G1R86-T:6YG('1H92!P<F5V:6]U<R!V86QU90IO9B!T:&4@<VEG;F%L(&9R;VT@:71S('!R97-E;G0@=F%L=64L(&%N9\"!M=6QT:7!L>6EN9R!T:&4@<F5S=6QT(&)Y\"C$O*'-A;7!L92!T:6UE*2X@(%1H:7,@:7,@:&]W(&$@<F5A;\"!C;VUP=71E<BUB87-E9\"!C;VYT<F]L;&5R('=O=6QD\"FEM<&QE;65N=\"!D:69F97)E;G1I871I;VXN\"@I4:&ES('-U8G-Y<W1E;2!A;'-O(&EN8VQU9&5S(&$@<V5C;VYD('-C;W!E+\"!F;W(@=FEE=VEN9R!T:&4@<VEG;F%L('1A=2X*268@>6]U(&]P96X@=&AI<R!S8V]P92!A;F0@>F]O;2!I;B!O;B!T:&4@<VEG;F%L+\"!Y;W4@=VEL;\"!S964@=&AA=\"!T874@:7,*;F]T(&$@<VUO;W1H(&-U<G9E+\"!B=70@82!S97)I97,@;V8@<W1E<',Z(&]N92!S=&5P('!E<B!S86UP;&4@=&EM92 H=VAI8V@*:7,@-2!M:6QL:7-E8V]N9',I+B @5&AI<R!I<R!H;W<@4VEM=6QI;FL@<V-O<&5S(&1I<W!L87D@82!S86UP;&5D('-I9VYA;\"X*\"D]B<V5R=F4@=&AA=\"!A;&P@;V8@=&AE(&=A:6X@8FQO8VMS+\"!A;F0@=&AE('5N:70M9&5L87D@8FQO8VLL(&%R92!R960N\"DEF('EO=2!L;V]K(&EN<VED92!T:&5S92!B;&]C:W,L('EO=2!W:6QL(&9I;F0@=&AA=\"!T:&5I<B!S86UP;&4@=&EM97,*:&%V92!A;&P@8F5E;B!S970@=&\\@(E1S86UP(BX@($9U<G1H97)M;W)E+\"!T:&4@9V%I;B!O9B!T:&4@;&%S=\"!G86EN\"F)L;V-K(&AA<R!B965N('-E=\"!T;R B,2]4<V%M<\"(N(\"!4:&ES('9A<FEA8FQE(&ES(&1E9FEN960@:6X@=&AE(%-I;75L:6YK\"FUO9&5L)W,@(FUO9&5L('=O<FMS<&%C92(N(\"!4:&ES(&ES(&$@<&QA8V4@=VAE<F4@>6]U(&-A;B!D969I;F4@=F%R:6%B;&5S\"G1H870@87)E(&QO8V%L('1O(&$@<W!E8VEF:6,@<VEM=6QI;FL@;6]D96P@+2T@=&AE>2!C86YN;W0@8F4@86-C97-S960@=FEA\"G1H92!M871L86(@=V]R:W-P86-E+\"!N;W(@8GD@86YY(&]T:&5R('-I;75L:6YK(&UO9&5L+B @270@:7,@82!G;V]D('!L86-E\"G1O(&1E9FEN92!A(&YU;65R:6,@<')O<&5R='D@;V8@82!3:6UU;&EN:R!M;V1E;\"P@<W5C:\"!A<R!I=',@<V%M<&QE('1I;64N\"E1O('9I97<@=&AE(&UO9&5L('=O<FMS<&%C92!F;W(@=&AI<R!M;V1E;\"P@9FER<W0@<V5L96-T(\")-;V1E;\"!%>'!L;W)E<B(*9G)O;2!T:&4@(E9I97<B(&UE;G4N(\"!4:&4@;&5F=\"UH86YD('!A;F4@:6X@=&AE(&UO9&5L(&5X<&QO<F5R(&ES\"FQA8F5L;&5D(\")-;V1E;\"!(:65R87)C:'DB+B @26X@=&AI<R!P86YE+\"!Y;W4@;75S=\"!F:7)S=\"!E>'!A;F0*(F5X86UP;&4R(BP@:68@:70@:7-N)W0@86QR96%D>2!E>'!A;F1E9\"P@86YD('1H96X@8VQI8VL@;VX@(DUO9&5L\"E=O<FMS<&%C92(N(\"!4:&4@;F5X=\"!P86YE('=I;&P@=&AE;B!S:&]W('EO=2!T:&4@8V]N=&5N=',@;V8@=&AE(&UO9&5L\"G=O<FMS<&%C92!F;W(@97AA;7!L93([(&%N9\"!Y;W4@=VEL;\"!S964@=&AA=\"!I=\"!C;VYT86EN<R!O;FQY('1H92!O;F4*=F%R:6%B;&4@(E1S86UP(BP@=VAI8V@@:&%S(&$@=F%L=64@;V8@,\"XP,#4N(\"!9;W4@8V%N(&-H86YG92!T:&4@=F%L=64@;V8*82!W;W)K<W!A8V4@=F%R:6%B;&4@87,@9F]L;&]W<SH@($9I<G-T+\"!C;&EC:R!O;B!T:&4@=F%L=64@>6]U('=A;G0@=&\\*8VAA;F=E+B @02!N97<@<FEG:'0M:&%N9\"!P86YE('=I;&P@87!P96%R+\"!C;VYT86EN:6YG(&%N(&%P<')O<')I871E\"F9I96QD(&9O<B!Y;W4@=&\\@='EP92!I;B!T:&4@;F5W('9A;'5E+B @2&%V:6YG(&1O;F4@=&AA=\"P@>6]U('1H96X@:&%V90IT;R!C;&EC:R!O;B B07!P;'DB('1O(&%P<&QY('1H92!C:&%N9V4N(\"!&:6YA;&QY+\"!Y;W4@:&%V92!T;R!D97-E;&5C= IT:&4@=F%R:6%B;&4@8GD@8VQI8VMI;F<@;VX@=&AE(&5M<'1Y('!O<G1I;VX@;V8@=&AE('!A;F4@9&ES<&QA>6EN9R!T:&4*;6]D96P@=V]R:W-P86-E(&-O;G1E;G1S+B @5VAE;B!Y;W4@:&%V92!D;VYE('1H870L('1H92!S<&5C:6%L(')I9VAT+6AA;F0*<&%N92!F;W(@961I=&EN9R!T:&4@=F%R:6%B;&4@9V]E<R!A=V%Y+@H*5&AI<R!C;VYT<F]L('-Y<W1E;2P@;&EK92!T:&4@;VYE(&EN($5X86UP;&4@,2P@:7,@9&5L:6)E<F%T96QY(&)A9&QY\"G1U;F5D+B @2&]W979E<BP@:68@>6]U('1R>2!I;7!R;W9I;F<@=&AE('!E<F9O<FUA;F-E(&)Y(&EN8W)E87-I;F<@=&AE\"F=A:6YS+\"!T:&5N('1H92!C;VYT<F]L;&5R(&=O97,@=6YS=&%B;&4N(\"!&;W(@97AA;7!L92P@=')Y(&EN8W)E87-I;F<@=&AE\"G!R;W!O<G1I;VYA;\"!G86EN(&9R;VT@.# P('1O(#$U,# L(&%N9\"!R92UR=6X@=&AE('-I;75L871I;VXN(\"!4:&4@<V-O<&4**&9O<B!Q*2!W:6QL('-H;W<@82!H;W)R:6)L92!M97-S('=H96X@=&AE('!O<VET:6]N(&]F(&IO:6YT(#(@*'1H92!E;&)O=RD*:7,@;F5A<FQY('-T<F%I9VAT(\"AJ;VEN=\"!A;F=L92!C;&]S92!T;R!Z97)O*2X@(%1H:7,@:&%P<&5N<R!R;W5G:&QY\"F)E='=E96X@=&EM97,@,R!A;F0@-\"!S96-O;F1S+\"!A;F0@86=A:6X@8F5T=V5E;B!T:6UE<R W(&%N9\" X+B @0G5T('1H90IC;VYT<F]L('-Y<W1E;2!M86YA9V5S('1O('=O<FL@=V5L;\"!A=\"!O=&AE<B!T:6UE<RX@(\"A9;W4@8V%N('9I97<@=&AE\"G)E<W5L=&EN9R!M;W1I;VX@=VET:\"!S:&]W;6]T:6]N+\"!I9B!Y;W4@=VES:\"XI(\"!4:&ES('!H96YO;65N;VX@;V8*<&]S:71I;VX@9&5P96YD96YT('-T86)I;&ET>2!I<R!C875S960@8GD@=&AE(&1Y;F%M:6-S(&]F('1H92!R;V)O=\"X@($EN\"G!A<G1I8W5L87(L(&ET(&ES(&-A=7-E9\"!B>2!T:&4@=V%Y('1H870@=&AE(')O8F]T)W,@:6YE<G1I82!V87)I97,@87,@80IF=6YC=&EO;B!O9B!I=',@<&]S:71I;VXN\"@I4:&4@<W1A8FEL:71Y('!R;V)L96T@:7,@8V%U<V5D(&)Y('1H92!T:6UE(&1E;&%Y<R!I;FAE<F5N=\"!I;B!T:&4@<V%M<&QE9 IN871U<F4@;V8@=&AE(&-O;G1R;VP@<WES=&5M+B @3VYE(')E;65D>2!I<R!T;R!R961U8V4@=&AE('-I>F4@;V8@=&AE\"G-A;7!L:6YG('1I;64N(\"!&;W(@97AA;7!L92P@:68@>6]U(')E9'5C92!I=\"!F<F]M(# N,# U('1O(# N,# R('1H96X@:70*=VEL;\"!W;W)K('-T86)L>2!W:71H(&$@<')O<&]R=&EO;F%L(&=A:6X@;V8@,34P,\"X@($AO=V5V97(L('EO=2!W:6QL(&%L<V\\*;F]T:6-E('1H870@4VEM=6QI;FL@=&%K97,@<VEG;FEF:6-A;G1L>2!L;VYG97(@=&\\@<G5N('1H92!S:6UU;&%T:6]N+@I4:&ES(&ES(&$@8V]N<V5Q=65N8V4@;V8@:&]W('1H92!M:7AI;F<@;V8@9&ES8W)E=&4@979E;G1S(\"AI;B!T:&4*8V]N=')O;&QE<BD@=V]R:W,@:6X@8V]M8FEN871I;VX@=VET:\"!C;VYT:6YU;W5S(&1Y;F%M:6-S(\"AO9B!T:&4@<F]B;W0I.@I$:7-C<F5T92!E=F5N=',@:&%V92!T;R!B92!P<F]C97-S960@8F5T=V5E;B!I;G1E9W)A=&EO;B!S=&5P<RX*5&AE<F5F;W)E+\"!B>2!S971T:6YG(%1S86UP('1O(# N,# R+\"!3:6UU;&EN:R!I<R!F;W)C960@=&\\@;&EM:70@:71S\"FEN=&5G<F%T:6]N('-T97 @<VEZ92!T;R!A(&UA>&EM=6T@;V8@,\"XP,#(L('=H97)E87,@=VET:\"!4<V%M<#TP+C P-0I3:6UU;&EN:R!C;W5L9\" H86YD(&1I9\"D@=7-E(&$@<W1E<\"!S:7IE(&]F(# N,# U+@H*06-T=6%L;'DL('1H92!R96%L('!R;V)L96T@:7,@=&AA=\" Q-3 P(&ES('1O;R!H:6=H(&$@9V%I;B!F;W(@:F]I;G0@,BX*268@>6]U('-E=\"!T:&4@<')O<&]R=&EO;F%L(&=A:6X@=&\\@6S$U,# [.# P72P@86YD('-E=\"!T:&4@9&5R:79A=&EV90IG86EN('1O(%LP+C U.S N,#$U72P@=&AE;B!T:&ES(&-O;G1R;VQL97(@=VEL;\"!S=&EL;\"!W;W)K('-T86)L>2!W:71H(&$*<V%M<&QE('1I;64@;V8@,\"XP,#4L('=I=&@@<VEG;FEF:6-A;G1L>2!I;7!R;W9E9\"!T<F%C:VEN9R!A8V-U<F%C>2X*  "
+  }
+  DataRecord {
+    Tag			    DataTag0
+    Data		    "  %)30     .    > 4   8    (     @         %    \"     $    !     0         %  0 !@    $    ,    3F%M90  5F%L=64       X    X    !@    @    $          4    (     0    4    !         !     %    5'-A;7     .    Z 0   8    (    $0         !          $    &    :&%N9&QE   !    $@   %-I;75L:6YK+E!A<F%M971E<@        X   \"8!   !@    @    !          4    (    !P    $    !          X   \"( @  !@    @    )          4    (    6 (   $    !          (   !8 @   0   !4      0  0 $  $@!  \"H 0  4 (  %@\"             %-I;75L:6YK %!A<F%M971E<@!686QU90!25%=);F9O %!A<F%M4E1726YF;P!3=&]R86=E0VQA<W, 075T;P!4>7!E475A;&EF:65R  !!;&EA<P!#=7-T;VU3=&]R86=E0VQA<W, 1&5F875L= !#=7-T;VU!='1R:6)U=&5S %-I;75L:6YK0U-# $%T=')I8D-L87-S7U-I;75L:6YK7T1E9F%U;'0 1&5S8W)I<'1I;VX 1&%T851Y<&4 875T;P!-:6X 36%X $1O8U5N:71S                           !     @               0    4               X    /                                                          $                    !          (                    \"          ,                    #                    !P    ,    !          0    !     @   !          \"0   !$         $@   !,    !     P   !0    !    !    !4         \"0    4    &          <    (          D    *          D    +          P    -     0    $                         #@   '@    &    \"     $         !0    @    !     0    $         #@   $@    &    \"     T         !0    @    %     0    $         !@   !0       #= @    $    !     0         .    .     8    (    !@         %    \"     $    !     0         )    \"    'L4KD?A>G0_#@   $@    &    \"     T         !0    @    %     0    $         !@   !0       #= @    $    !     P         .    2     8    (    #0         %    \"     4    !     0         &    %        -T\"     0    $    \"          X    X    !@    @    &          4    (     0    $    !          D    (            \\/\\.    .     8    (    !@         %    \"     $    !     0         )    \"            /!_#@   (@    &    \"     D         !0    @    !    6     $          @   %@      4E-      X   !(    !@    @    \"          4    (     0    $    !          4 !  '     0    <   !H86YD;&4   X         "
+  }
+}

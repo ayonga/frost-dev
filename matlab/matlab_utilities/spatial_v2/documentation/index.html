@@ -1,0 +1,2035 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+    span.red { color: rgb(102,0,0) }
+    th { color: rgb(0,0,102); font-weight: bold; font-size: larger }
+    td { vertical-align: top }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>Spatial_v2: Spatial Vector and Rigid-Body Dynamics Software</title>
+</head>
+
+<body>
+
+<h2>Spatial Vector and Rigid-Body Dynamics Software</h2>
+
+<p>
+<big style="font-weight: bold; color: rgb(0,60,0);">Version 2: June 2012</big>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(latest <a href="#bugs">bug fix</a>: none yet)
+</p>
+<p>
+<b style="color: rgb(0,60,0)">Released Under GNU GPL
+&mdash; <a href="notice.html">Legal Notices</a>
+&mdash; <a href="download.html">Download</a></b>
+</p>
+
+<p>
+Spatial_v2 is a suite of functions that implement spatial vector arithmetic
+and dynamics algorithms in Matlab code.&nbsp;  Spatial_v2 accompanies the
+book <a name="RBDA"></a>
+<a href="http://www.springer.com/engineering/robotics/book/978-0-387-74314-1">
+Rigid Body Dynamics Algorithms</a> (RBDA) and is also mentioned in the
+<a href="http://www.springer.com/engineering/robotics/book/978-3-540-23957-4">
+Springer Handbook of Robotics</a>.&nbsp;  (Handbook readers may wish to
+<a href="hbknote.html">read this</a>.)&nbsp;  Ideally, you should have a copy
+of RBDA.&nbsp;  However, if you don't have access to either of these books
+then you can still use spatial_v2, and you will find relevant tutorial
+materials on the
+<a href="http://royfeatherstone.org/spatial/index.html">
+spatial vectors home page</a>.&nbsp;  If you are new to this package then a
+good place to start is the
+<a href="#simulink">Simulink Tutorial Examples</a>.&nbsp; Alternatively, if
+you are not familiar with Simulink, then maybe try
+<a href="showmotion.html">showmotion</a> first.
+</p>
+
+<table style="text-align: left; width: 100%" border="0" cellspacing="0"
+ cellpadding="1">
+<tbody>
+<tr>
+  <th colspan="2">Additional Documents</th>
+</tr>
+<tr>
+  <td colspan="2">
+  <ul>
+    <li><a href="migrate.html">Migrating from Spatial_v1 to Spatial_v2</a></li>
+    <li><a href="xforms.html">General Comments on Coordinate Transforms</a></li>
+    <li><a href="sysmodel.html">The System Model Data Structure</a></li>
+    <li><a href="showmotion.html">How to Use Showmotion</a></li>
+    <li><a href="gammaq.html">Describing Constraints with gamma_q</a></li>
+    <li><a href="gcmodel.html">The Simulink Ground-Contact Model</a></li>
+  </ul>
+  </td>
+</tr>
+
+<tr>
+  <th colspan="2">3D Vectors and Rotation</th>
+</tr>
+<tr>
+  <td><a href="#rxyz">rx, ry, rz</a></td>
+  <td>rotational coordinate transforms about x, y and z axes</td>
+</tr>
+<tr>
+  <td><a href="#rv">rv</a></td>
+  <td>convert between rotational coordinate transform matrix and rotation
+  vector</td>
+</tr>
+<tr>
+  <td><a href="#rq">rq</a></td>
+  <td>convert between rotational coordinate transform matrix and
+  quaternion</td>
+</tr>
+<tr>
+  <td><a href="#rqd">rqd</a></td>
+  <td>calculate quaternion derivative from angular velocity</td>
+</tr>
+<tr>
+  <td><a href="#skew">skew</a></td>
+  <td>convert between vector and skew-symmetric matrix</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Spatial and Planar Vector Arithmetic</th>
+</tr>
+<tr>
+  <td><a href="#crf">crf</a></td>
+  <td>cross product operator (force)</td>
+</tr>
+<tr>
+  <td><a href="#crm">crm</a></td>
+  <td>cross product operator (motion)</td>
+</tr>
+<tr>
+  <td><a href="#mcI">mcI</a></td>
+  <td>(de)compose rigid-body inertia to/from mass, centre of mass and
+  rotational inertia</td>
+</tr>
+<tr>
+  <td><a href="#rotxyz">rotx, roty, rotz</a></td>
+  <td>spatial coordinate transforms (rotations about x, y and z axes)</td>
+</tr>
+<tr>
+  <td><a href="#xlt">xlt</a></td>
+  <td>spatial coordinate transform (translation)</td>
+</tr>
+<tr>
+  <td><a href="#plnr">plnr</a></td>
+  <td>compose/decompose a planar coordinate transform</td>
+</tr>
+<tr>
+  <td><a href="#plux">plux</a></td>
+  <td>compose/decompose a spatial (Pl&uuml;cker) coordinate transform</td>
+</tr>
+<tr>
+  <td><a href="#pluho">pluho</a></td>
+  <td>convert between spatial and homogeneous (4&times;4) coordinate
+  transforms</td>
+</tr>
+<tr>
+  <td><a href="#XtoV">XtoV</a></td>
+  <td>compute a displacement vector from a coordinate transform</td>
+</tr>
+<tr>
+  <td><a href="#Xpt">Xpt</a></td>
+  <td>apply a coordinate transform to one or more points</td>
+</tr>
+<tr>
+  <td><a href="#Vpt">Vpt</a></td>
+  <td>calculate linear velocities from a spatial/planar velocity</td>
+</tr>
+<tr>
+  <td><a href="#Fpt">Fpt</a></td>
+  <td>convert linear forces to spatial/planar forces</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Dynamics Functions</th>
+</tr>
+<tr>
+  <td><a href="#FDab">FDab</a></td>
+  <td>forward dynamics (articulated-body algorithm)</td>
+</tr>
+<tr>
+  <td><a href="#FDcrb">FDcrb</a></td>
+  <td>forward dynamics (composite-rigid-body algorithm)</td>
+</tr>
+<tr>
+  <td><a href="#FDgq">FDgq</a></td>
+  <td>forward dynamics with constraints (composite-rigid-body algorithm)</td>
+</tr>
+<tr>
+  <td><a href="#HandC">HandC</a></td>
+  <td>coefficients of joint-space equation of motion</td>
+</tr>
+<tr>
+  <td><a href="#HD">HD</a></td>
+  <td>hybrid dynamics (articulated-body algorithm)</td>
+</tr>
+<tr>
+  <td><a href="#ID">ID</a></td>
+  <td>inverse dynamics (recursive Newton-Euler algorithm)</td>
+</tr>
+<tr>
+  <td><a href="#FDfb">FDfb</a></td>
+  <td>floating-base forward dynamics (articulated-body algorithm)</td>
+</tr>
+<tr>
+  <td><a href="#IDfb">IDfb</a></td>
+  <td>floating-base inverse dynamics</td>
+</tr>
+<tr>
+  <td><a href="#fbkin">fbkin</a></td>
+  <td>forward and inverse kinematics of a floating base</td>
+</tr>
+<tr>
+  <td><a href="#fbanim">fbanim</a></td>
+  <td>wrap-free floating-base kinematics for use
+  with <a href="#showmotion">showmotion</a></td>
+</tr>
+<tr>
+  <td><a href="#EnerMo">EnerMo</a></td>
+  <td>calculates kinetic and potential energy, momentum and related
+  quantities</td>
+</tr>
+<tr>
+  <td><a href="#jcalc">jcalc</a></td>
+  <td>joint data calculation function used by dynamics functions</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Model Constructors</th>
+</tr>
+<tr>
+  <td colspan="2"><i>See also</i>&nbsp; <a href="sysmodel.html">The System
+  Model Data Structure</a></td>
+</tr>
+<tr>
+  <td><a href="#autoTree">autoTree</a></td>
+  <td>construct a variety of spatial kinematic trees</td>
+</tr>
+<tr>
+  <td><a href="#floatbase">floatbase</a></td>
+  <td>construct a spatial floating-base model from a given spatial fixed-base
+  model</td>
+</tr>
+<tr>
+  <td><a href="#planar">planar</a></td>
+  <td>construct a simple unbranched planar robot with revolute joints and
+  identical links</td>
+</tr>
+<tr>
+  <td><a href="#gfxExample">gfxExample</a></td>
+  <td>illustrates and explains a variety of drawing instructions</td>
+</tr>
+<tr>
+  <td><a href="#vee">vee</a></td>
+  <td>model used in Simulink tutorial example 3</td>
+</tr>
+<tr>
+  <td><a href="#singlebody">singlebody</a></td>
+  <td>model used in Simulink tutorial example 4</td>
+</tr>
+<tr>
+  <td><a href="#scissor">scissor</a></td>
+  <td>model used in Simulink tutorial example 5</td>
+</tr>
+<tr>
+  <td><a href="#doubleElbow">doubleElbow</a></td>
+  <td>model used in Simulink tutorial example 6</td>
+</tr>
+<tr>
+  <td><a href="#rollingdisc">rollingdisc</a></td>
+  <td>model used in Simulink tutorial example 7</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Animation</th>
+<tr>
+<tr>
+  <td><a href="#showmotion">showmotion</a></td>
+  <td>displays animations using Matlab's handle graphics</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Simulink Tutorial Examples<a name="simulink"></a></th>
+<tr>
+<tr>
+  <td colspan="2"><i>These Simulink models are all self-documenting, and can
+  be found in the directory spatial_v2/simulink.</i></td>
+</tr>
+<tr>
+  <td><a name="example1"></a>example1.mdl</td>
+  <td><span class=red>PD Control of a Planar 2R Robot</span> &mdash; a basic
+  example for beginners</td>
+</tr>
+<tr>
+  <td><a name="example2"></a>example2.mdl</td>
+  <td><span class=red>Discrete PD Control of a Planar 2R Robot</span> &mdash;
+  combines a sampled-time controller with continuous-time dynamics</td>
+</tr>
+<tr>
+  <td><a name="example3"></a>example3.mdl</td>
+  <td><span class=red>Free-Floating 'Vee' Robot</span> &mdash; illustrates the
+  use of <a href="#HD">HD</a></td>
+</tr>
+<tr>
+  <td><a name="example4"></a>example4.mdl</td>
+  <td><span class=red>Free-Floating Single Rigid Body</span> &mdash;
+  illustrates the use of <a href="#FDfb">FDfb</a>
+  and <a href="#fbanim">fbanim</a></td>
+</tr>
+<tr>
+  <td><a name="example5"></a>example5.mdl</td>
+  <td><span class=red>Free-Floating Two-Body Spinning Scissor</span> &mdash;
+  illustrates the use of <a href="#gcFD">gcFD</a>, <a href="#FDfb">FDfb</a>
+  and <a href="#fbanim">fbanim</a></td>
+</tr>
+<tr>
+  <td><a name="example6"></a>example6.mdl</td>
+  <td><span class=red>Controlling a Robot with Kinematic Constraints</span>
+  &mdash; illustrates the use of <a href="#FDgq">FDgq</a></td>
+</tr>
+<tr>
+  <td><a name="example7"></a>example7.mdl</td>
+  <td><span class=red>Disc Bouncing and Rolling on a Horizontal Surface</span>
+  &mdash; demonstrates the
+  <a href="gcmodel.html">Simulink ground-contact model</a></td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Simulink Ground-Contact Functions</th>
+</tr>
+<tr>
+  <td><a href="#gcFD">gcFD</a></td>
+  <td>Simulink wrapper for several dynamics functions</td>
+</tr>
+<tr>
+  <td><a href="#gcPosVel">gcPosVel</a></td>
+  <td>calculates the positions and velocities of ground-contact points</td>
+</tr>
+<tr>
+  <td><a href="#gcontact">gcontact</a></td>
+  <td>calculates the forces acting on ground-contact points</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Branch Induced Sparsity</th>
+</tr>
+<tr>
+  <td><a href="#expandLambda">expandLambda</a></td>
+  <td>calculate expanded parent array</td>
+</tr>
+<tr>
+  <td><a href="#LTDL">LTDL</a></td>
+  <td>LTDL factorization (given H, calculate L and D such that L'*D*L=H)</td>
+</tr>
+<tr>
+  <td><a href="#LTL">LTL</a></td>
+  <td>LTL factorization (given H, calculate L such that L'*L=H)</td>
+</tr>
+<tr>
+  <td><a href="#mpyH">mpyH</a></td>
+  <td>multiply a vector by H</td>
+</tr>
+<tr>
+  <td><a href="#mpyL">mpyL</a></td>
+  <td>multiply a vector by L</td>
+</tr>
+<tr>
+  <td><a href="#mpyLt">mpyLt</a></td>
+  <td>multiply a vector by the transpose of L</td>
+</tr>
+<tr>
+  <td><a href="#mpyLi">mpyLi</a></td>
+  <td>multiply a vector by the inverse of L</td>
+</tr>
+<tr>
+  <td><a href="#mpyLit">mpyLit</a></td>
+  <td>multiply a vector by the transpose of the inverse of L</td>
+</tr>
+</tbody>
+</table>
+<br>
+
+<hr>
+<hr><a name="rxyz"></a>
+<br>
+
+<b>E = rx( theta )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rx.txt">source code</a>]<br>
+<b>E = ry( theta )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/ry.txt">source code</a>]<br>
+<b>E = rz( theta )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rz.txt">source code</a>]
+
+<p>
+These functions return 3&times;3 orthonormal matrices expressing coordinate
+transforms for 3-D Euclidean vectors from <b>A</b> to <b>B</b> coordinates, in
+which frame <b>B</b> (the frame that defines <b>B</b> coordinates) is rotated
+relative to frame <b>A</b> by an angle <b>theta</b> (radians) about their
+common <b>x</b>, <b>y</b> or <b>z</b> axis, as appropriate.&nbsp;
+<i>See also</i>
+<a href="xforms.html">general comments on coordinate transforms</a>.
+</p>
+
+<hr><a name="rv"></a>
+<br>
+
+<b>E = rv( v )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rv.txt">source code</a>]<br>
+<b>v = rv( E )</b>
+
+<p>
+<b>rv(v)</b> calculates a 3&times;3 orthonormal matrix expressing the
+coordinate transform for 3-D Euclidean vectors from <b>A</b> to <b>B</b>
+coordinates, in which frame <b>B</b> (the frame that defines <b>B</b>
+coordinates) is rotated relative to frame <b>A</b> by an angle (in radians)
+given by the magnitude of <b>v</b>, about an axis given by the direction
+of <b>v</b>; and <b>rv(E)</b> performs the inverse operation.&nbsp; For
+example, <b>rv([1;0;0])</b> returns the same matrix as <b>rx(1)</b>,
+and <b>rv(ry(2))</b> returns the vector <b>[0;2;0]</b>.&nbsp; <b>rv(v)</b>
+accepts any 3-D row or column vector as an argument, but <b>rv(E)</b>
+expects <b>E</b> to be accurately orthonormal, and returns a column vector
+with a magnitude in the range <b>[0,pi]</b>.&nbsp; (If the magnitide of the
+returned vector is (almost) exactly <b>pi</b> then its sign is unpredictable,
+as both <b>v</b> and <b>&minus;v</b> represent the same rotation in this
+special case.)&nbsp; If the argument is a 3&times;3 matrix then it is assumed
+to be <b>E</b>, otherwise <b>v</b>.&nbsp; Note that <b>v</b> is common to both
+coordinate systems (i.e., it satisfies <b>v=rv(v)*v</b>), so it does not
+matter whether <b>v</b> is expressed in <b>A</b> coordinates or <b>B</b>
+coordinates.&nbsp; <i>See also</i>
+<a href="xforms.html">general comments on coordinate transforms</a>.
+</p>
+
+<hr><a name="rq"></a>
+<br>
+
+<b>E = rq( q )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rq.txt">source code</a>]<br>
+<b>q = rq( E )</b>
+
+<p>
+This function converts between a unit quaternion, <b>q</b>, representing
+the orientation of a coordinate frame <b>B</b> relative to frame <b>A</b>, and
+the 3&times;3 coordinate rotation matrix <b>E</b> that transforms 3-D
+Euclidean vectors from <b>A</b> to <b>B</b> coordinates.&nbsp; For example,
+if <b>B</b> is rotated relative to <b>A</b> about their common <b>x</b> axis
+by an angle <b>h</b>, then <b>q=[cos(h/2);sin(h/2);0;0]</b> and <b>rq(q)</b>
+produces the same matrix as <b>rx(h)</b>.&nbsp; If the argument is a 3&times;3
+matrix then it is assumed to be <b>E</b>,
+otherwise <b>q</b>.&nbsp; <b>rq(E)</b> expects <b>E</b> to be accurately
+orthonormal, and returns a quaternion in a 4&times;1 matrix; but <b>rq(q)</b>
+accepts any nonzero quaternion, contained in either a row or a column vector,
+and normalizes it before use.&nbsp; As both <b>q</b> and <b>&minus;q</b>
+represent the same rotation, <b>rq(E)</b> returns a value that
+satisfies <b>q(1)&ge;0</b>.
+</p>
+
+<hr><a name="rqd"></a>
+<br>
+
+<b>qd = rqd( wA, q )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rqd.txt">source code</a>]<br>
+<b>qd = rqd( q, wB )</b>
+
+<p>
+This function calculates the time derivative of a quaternion representing the
+relative orientation of two coordinate frames, given the relative angular
+velocity of those frames.&nbsp; Specifically, let the two frames be
+called <b>A</b> and <b>B</b>, and let <b>q</b> be a quaternion representing
+the orientation of frame <b>B</b> relative to frame <b>A</b> in the same sense
+as in function <a href="#rq">rq</a>.&nbsp; Also, let <b>wA</b> and <b>wB</b>
+be the angular velocity of frame <b>B</b> relative to frame <b>A</b>,
+expressed in <b>A</b> and <b>B</b> coordinates, respectively; and
+let <b>qd</b> be the time derivative of <b>q</b>.&nbsp; Given these
+definitions, the precise operation of <b>rqd</b> can be stated as follows:
+both <b>rqd(wA,q)</b> and <b>rqd(q,wB)</b> calculate <b>qd</b>, the only
+difference between them being that one uses <b>wA</b> and the
+other <b>wB</b>.&nbsp; <b>rqd</b> examines the length of its first argument in
+order to work out how it is being called.&nbsp; If the first argument's length
+is 4 then it is assumed to be <b>q</b>, otherwise <b>wA</b>.&nbsp; The return
+value is a column vector, but each argument can be a row or a column vector.
+</p>
+
+<p>
+The primary use of <b>rqd</b> is to support the calculation of <b>q</b>
+from <b>qd</b> by numerical integration.&nbsp; In this application, the
+magnitude of <b>q</b> has the capacity to drift without limit, due to
+integration truncation errors.&nbsp; (This is the main reason
+why <a href="#rq">rq</a> accepts quaternions of any magnitude and normalizes
+them before use.)&nbsp; To prevent this from happening, <b>rqd</b> includes a
+magnitude-stabilizing term in the computed value of <b>qd</b>, so that
+if <b>q</b> is indeed obtained by integrating <b>qd</b> then its magnitude
+will converge towards 1.
+</p>
+
+<hr><a name="skew"></a>
+<br>
+
+<b>S = skew( v )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/skew.txt">source code</a>]<br>
+<b>v = skew( A )</b>
+
+<p>
+<b>skew(v)</b> returns the 3&times;3 skew-symmetric matrix <b>S</b>
+corresponding to the given 3-D vector <b>v</b>; and <b>skew(A)</b> returns the
+3-D vector corresponding to the skew-symmetric component of the given
+arbitrary 3&times;3 matrix <b>A</b>.&nbsp; For any two vectors <b>a</b>
+and <b>b</b>, <b>skew(a)*b</b> is the cross product of <b>a</b>
+and <b>b</b>.&nbsp; If the argument is a 3&times;3 matrix then it is assumed
+to be <b>A</b>, otherwise <b>v</b>.&nbsp; <b>skew(A)</b> returns a column
+vector, but <b>skew(v)</b> accepts a row or column vector argument.
+</p>
+
+<hr><a name="crf"></a><a name="crm"></a>
+<br>
+
+<b>vcross = crf( v )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/crf.txt">source code</a>]<br>
+<b>vcross = crm( v )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/crm.txt">source code</a>]
+
+<p>
+<b>crf(v)</b> and <b>crm(v)</b> calculate the 6&times;6 and 3&times;3 matrices
+such that the expressions <b>crf(v)*f</b> and <b>crm(v)*m</b> are the cross
+products of the motion vector <b>v</b> with the force vector <b>f</b> and
+motion vector <b>m</b>, respectively.&nbsp; If <b>f</b> and <b>m</b> are fixed
+in a rigid body that is moving with velocity <b>v</b>, then these expressions
+give the time derivatives of <b>f</b> and <b>m</b> due to the motion of the
+body.&nbsp; If <b>v</b> is a 6-D vector then it is a spatial vector, and the
+return value is 6&times;6; otherwise <b>v</b> is assumed to be planar, and the
+return value is 3&times;3.
+</p>
+
+<hr><a name="mcI"></a>
+<br>
+
+<b>rbi = mcI( m, c, I )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/mcI.txt">source code</a>]<br>
+<b>[m,c,I] = mcI( rbi )</b>
+
+<p>
+This function converts between a rigid-body inertia matrix, <b>rbi</b>, and
+the three quantities <b>m</b>, <b>c</b> and <b>I</b>, representing the mass,
+centre of mass, and rotational inertia about the centre of mass,
+respectively, of a rigid body.&nbsp; In the planar case, <b>rbi</b> is a
+3&times;3 matrix, <b>c</b> is a 2-D vector, and <b>I</b> is a scalar.&nbsp; In
+the spatial case, <b>rbi</b> is a 6&times;6 matrix, <b>c</b> is a 3-D vector,
+and <b>I</b> is a 3&times;3 matrix.&nbsp; When <b>c</b> is an argument, it can
+be a row vector or a column vector, but it is returned as a column
+vector.&nbsp; <b>mcI</b> counts its arguments in order to decide which
+operation to perform, and it tests the dimensions of argument <b>c</b>
+or <b>rbi</b>, as appropriate, to determine whether to use planar or spatial
+arithmetic.&nbsp; Calculating <b>m</b>, <b>c</b> and <b>I</b> from <b>rbi</b>
+is possible only if <b>m</b> is not zero.
+</p>
+
+<hr><a name="rotxyz"></a>
+<br>
+
+<b>X = rotx( theta )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rotx.txt">source code</a>]<br>
+<b>X = roty( theta )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/roty.txt">source code</a>]<br>
+<b>X = rotz( theta )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rotz.txt">source code</a>]
+
+<p>
+These functions calculate the spatial coordinate transform matrices that
+transform a motion vector from <b>A</b> coordinates to <b>B</b> coordinates,
+where frame <b>B</b> (the frame that defines <b>B</b> coordinates) is rotated
+relative to frame <b>A</b> by an angle <b>theta</b> (radians) about their
+common <b>x</b>, <b>y</b> or <b>z</b> axis, as appropriate.&nbsp;
+<i>See also</i>
+<a href="xforms.html">general comments on coordinate transforms</a>.
+</p>
+
+<hr><a name="xlt"></a>
+<br>
+
+<b>X = xlt( r )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/xlt.txt">source code</a>]
+
+<p>
+This function calculates the spatial coordinate transform matrix that
+transforms a motion vector from <b>A</b> coordinates to <b>B</b> coordinates,
+where frame <b>B</b> (the frame that defines <b>B</b> coordinates) is
+translated relative to frame <b>A</b> by an amount <b>r</b>, which is a 3-D
+vector giving the coordinates of the origin of frame <b>B</b> expressed in
+<b>A</b> coordinates.&nbsp; <b>r</b> can be a row vector or a column
+vector.&nbsp; <i>See also</i>
+<a href="xforms.html">general comments on coordinate transforms</a>.
+</p>
+
+<hr><a name="plnr"></a>
+<br>
+
+<b>X = plnr( theta, r )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/plnr.txt">source code</a>]<br>
+<b>[theta,r] = plnr( X )</b>
+
+<p>
+This function calculates the 3&times;3 matrix <b>X</b> expressing the planar
+coordinate transform from <b>A</b> to <b>B</b> coordinates, given a 2-D
+vector <b>r</b> locating the origin of frame <b>B</b> in <b>A</b> coordinates,
+and the angle <b>theta</b> (radians) by which frame <b>B</b> is rotated
+relative to frame <b>A</b>.&nbsp; (Positive rotation is
+counter-clockwise.)&nbsp; It can also perform the reverse
+calculation.&nbsp; <b>r</b> can be supplied as either a row or a column
+vector, but it is returned as a column vector.&nbsp; <b>plnr</b> counts its
+arguments in order to decide which operation to perform.&nbsp; <i>See also</i>
+<a href="xforms.html">general comments on coordinate transforms</a>.
+</p>
+
+<hr><a name="plux"></a>
+<br>
+
+<b>X = plux( E, r )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/plux.txt">source code</a>]<br>
+<b>[E,r] = plux( X )</b>
+
+<p>
+This function calculates the 6&times;6 matrix <b>X</b> expressing the
+Pl&uuml;cker (i.e., spatial) coordinate transform from <b>A</b> to <b>B</b>
+coordinates, given a 3-D vector <b>r</b> locating the origin of frame <b>B</b>
+in <b>A</b> coordinates, and the 3&times;3 matrix <b>E</b> expressing the
+rotational coordinate transform from <b>A</b> to <b>B</b> coordinates.&nbsp;
+It can also perform the reverse calculation.&nbsp; <b>r</b> can be supplied as
+either a row or a column vector, but it is returned as a column
+vector.&nbsp; <b>plux</b> counts its arguments in order to decide which
+operation to perform.&nbsp;
+<strong>Example:</strong> <b>plux(rx(1),[2 3 4])</b> makes the same transform
+as <b>rotx(1)*xlt([2 3 4])</b>.&nbsp; <i>See also</i>
+<a href="xforms.html">general comments on coordinate transforms</a>.
+</p>
+
+<hr><a name="pluho"></a>
+<br>
+
+<b>T = pluho( X )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/pluho.txt">source code</a>]<br>
+<b>X = pluho( T )</b>
+
+<p>
+This function converts a 6&times;6 Pl&uuml;cker (i.e., spatial) coordinate
+transform matrix to an equivalent 4&times;4 homogeneous coordinate transform
+matrix, and vice versa.&nbsp; <b>X</b> and <b>T</b> are equivalent if they
+both express a coordinate transform from a coordinate system defined by
+Cartesian frame <b>A</b> to a coordinate system defined by Cartesian
+frame <b>B</b>.&nbsp; <b>pluho</b> examines the dimensions of its argument in
+order to decide which operation to perform.&nbsp; <strong>Note:</strong> the
+4&times;4 matrices used in Matlab handle graphics are <i>displacement
+operators</i> which are the inverses of coordinate transforms.&nbsp; (See
+<a href="xforms.html">general comments on coordinate transforms</a>.)&nbsp;
+Therefore, if you want (e.g.) to translate the children of an hgtransform
+object by an amount <b>r</b>, and then rotate them by an angle <b>h</b> about
+the (translated) x axis, and you have already
+calculated <b>X=plux(rx(h),r)</b>, then the correct matrix for the hgtransform
+object is <b>inv(pluho(X))</b>.
+</p>
+
+<hr><a name="XtoV"></a>
+<br>
+
+<b>v = XtoV( X )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/XtoV.txt">source code</a>]
+
+<p>
+Calculate a motion vector <b>v</b> representing the relative location of
+coordinate frame <b>B</b> with respect to frame <b>A</b>, given the coordinate
+transform <b>X</b> from <b>A</b> to <b>B</b> coordinates.&nbsp; Specifically,
+let <b>u</b> be the smallest velocity vector that carries frame <b>A</b> to
+coincide with <b>B</b> in one time unit; then <b>v</b> approximates
+to <b>u</b> when the angle between the frames is small, and converges to the
+exact value as the angle between the frames converges to zero.&nbsp;  The
+particular value of <b>v</b> calculated by <b>XtoV</b> also has the special
+property of being an invariant of <b>X</b>, meaning that <b>v = X*v</b>;
+so <b>v</b> can be regarded as being expressed in both <b>A</b> and <b>B</b>
+coordinates simultaneously.&nbsp; <b>X</b> can be either a spatial (6&times;6)
+or a planar (3&times;3) coordinate transform, and <b>XtoV</b> returns either a
+spatial or a planar vector accordingly.
+</p>
+
+<h3>Examples:</h3>
+<ul>
+  <li><b>XtoV( xlt( [a b c] ) )&nbsp; =&nbsp; [ 0; 0; 0; a; b; c ]</b></li>
+  <li><b>XtoV( plnr( 0, [a b] ) )&nbsp; =&nbsp; [ 0; a; b ]</b></li>
+  <li><b>XtoV( roty(0.01) )</b>&nbsp; is approximately equal to&nbsp; <b>[ 0;
+  0.01; 0; 0; 0; 0 ]</b></li>
+</ul>
+
+<hr><a name="Xpt"></a><a name="Vpt"></a><a name="Fpt"></a>
+<br>
+
+<b>xp = Xpt( X, p )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/Xpt.txt">source code</a>]<br>
+<b>vp = Vpt( v, p )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/Vpt.txt">source code</a>]<br>
+<b>f = Fpt( fp, p )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/Fpt.txt">source code</a>]
+
+<p>
+These functions provide an interface between spatial and planar quantities, on
+the one hand, and 2-D and 3-D points and vectors, on the other hand.&nbsp; In
+each case, the function tests the dimensions of the first argument in order to
+determine whether it is working in 3-D or 2-D.&nbsp; The second
+argument, <b>p</b>, is then expected to be either a 3&times;n or 2&times;n
+array, as appropriate, containing the coordinates of a set of n 3-D or 2-D
+points.&nbsp; <b>Xpt</b> applies the Pl&uuml;cker or planar coordinate
+transform <b>X</b> to each point in <b>p</b>, returning the new coordinates
+in the array <b>xp</b>, which has the same dimensions as <b>p</b>.&nbsp;
+<b>Vpt</b> expects its first argument to be either a single spatial or planar
+vector, or else a 6&times;n or 3&times;n array of n spatial or planar
+vectors.&nbsp; In the first case, it calculates the linear velocity at each
+point in <b>p</b> due to the given single spatial or planar velocity <b>v</b>,
+and returns the results in <b>vp</b>.&nbsp; (This amounts to a <i>vector
+field</i> calculation: <b>Vpt</b> maps each point to the vector at that point,
+in accordance with the vector field defined by <b>v</b>.)&nbsp; In the second
+case, column i of <b>vp</b> is calculated from columns i of <b>v</b>
+and <b>p</b>.&nbsp; In both cases, <b>vp</b> has the same dimension
+as <b>p</b>.&nbsp; Finally, <b>Fpt</b> calculates spatial and planar forces
+from linear forces acting at points.&nbsp; Both <b>fp</b> and <b>p</b> must be
+either 3&times;n or 2&times;n matrices, and the return value, <b>f</b>, is
+either 6&times;n or 3&times;n, as appropriate.&nbsp; In both cases, column i
+of <b>f</b> is calculated from columns i of <b>fp</b> and <b>p</b>.&nbsp; If
+you want to calculate a single spatial or planar force that is the resultant
+of a system of n forces acting at n points, then
+use <b>f=sum(Fpt(fp,p),2)</b>.
+</p>
+
+<hr><a name="FDab"></a>
+<br>
+
+<b>qdd = FDab( model, q, qd, tau [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/FDab.txt">source code</a>]
+
+<p>
+Calculate the forward dynamics of a kinematic tree using the articulated-body
+algorithm.&nbsp; <b>model</b> is a <a href="sysmodel.html">system model data
+structure</a> describing the rigid-body
+system.&nbsp; <b>q</b>, <b>qd</b>, <b>qdd</b> and <b>tau</b> are column
+vectors of length <b>model.NB</b> containing the joint position, velocity,
+acceleration and force variables, respectively.&nbsp; <b>f_ext</b> is an
+optional argument specifying the external forces acting on the bodies.&nbsp;
+If there are no external forces then this argument can be omitted, or it can
+be given the value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial or planar force vector (as appropriate) specifying the force
+acting on body <b>i</b>, expressed in absolute (i.e., base) coordinates.
+</p>
+
+<hr><a name="FDcrb"></a>
+<br>
+
+<b>qdd = FDcrb( model, q, qd, tau [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/FDcrb.txt">source code</a>]
+
+<p>
+Calculate the forward dynamics of a kinematic tree using the
+composite-rigid-body algorithm.&nbsp; <b>model</b> is
+a <a href="sysmodel.html">system model data structure</a> describing the
+rigid-body system.&nbsp; <b>q</b>, <b>qd</b>, <b>qdd</b> and <b>tau</b> are
+column vectors of length <b>model.NB</b> containing the joint position,
+velocity, acceleration and force variables, respectively.&nbsp; <b>f_ext</b>
+is an optional argument specifying the external forces acting on the
+bodies.&nbsp; If there are no external forces then this argument can be
+omitted, or it can be given the value <b>{}</b>.&nbsp; Otherwise, it must be a
+cell array of length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must
+either be an empty array, to indicate that there is no external force acting
+on body <b>i</b>, or else a spatial or planar force vector (as appropriate)
+specifying the force acting on body <b>i</b>, expressed in absolute (i.e.,
+base) coordinates.&nbsp; This function calls <a href="#HandC">HandC</a> to
+calculate the coefficients of the equation of motion, and then solves the
+resulting linear equation for <b>qdd</b>.
+</p>
+
+<hr><a name="FDgq"></a>
+<br>
+
+<b>qdd = FDgq( model, q, qd, tau [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/FDgq.txt">source code</a>]
+
+<p>
+Calculate the forward dynamics of a constrained kinematic tree using the
+composite-rigid-body algorithm and a constraint function.&nbsp; <b>model</b>
+is a <a href="sysmodel.html">system model data structure</a> describing the
+rigid-body system.&nbsp; It must include the field <b>model.gamma_q</b>,
+which must contain the handle of a function describing the constraints on the
+kinematic tree.&nbsp; See <a href="gammaq.html">describing constraints with
+gamma_q</a> for a description of how gamma_q works, and how to write your
+own.&nbsp; <b>q</b>, <b>qd</b>, <b>qdd</b> and <b>tau</b> are column vectors
+of length <b>model.NB</b> containing the joint position, velocity,
+acceleration and force variables, respectively.&nbsp; <b>q</b> and <b>qd</b>
+are not required to satisfy the constraints exactly, but they are expected to
+be reasonably close.&nbsp; The return value, <b>qdd</b>, will normally include
+a constraint-stabilization term such that if <b>q</b> and <b>qd</b> are
+obtained from <b>qdd</b> by numerical integration then the constraint
+violations will tend towards zero.&nbsp; Internally, <b>FDgq</b> uses
+corrected values of <b>q</b> and <b>qd</b> that satisfy the constraints either
+exactly or more accurately than the given values.&nbsp; <b>f_ext</b> is an
+optional argument specifying the external forces acting on the bodies.&nbsp;
+If there are no external forces then this argument can be omitted, or it can
+be given the value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial or planar force vector (as appropriate) specifying the force
+acting on body <b>i</b>, expressed in absolute (i.e., base) coordinates.
+</p>
+
+<hr><a name="HandC"></a>
+<br>
+
+<b>[H, C] = HandC( model, q, qd [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/HandC.txt">source code</a>]
+
+<p>
+Calculate the coefficients <b>H</b> and <b>C</b> of the joint-space equation
+of motion <b>H*qdd+C=tau</b> for the kinematic tree described
+by <b>model</b>.&nbsp; <b>H</b> is a symmetric, positive-definite matrix
+called the <i>joint-space inertia matrix</i>.&nbsp; <b>C</b> is the
+joint-space bias force, and has the same value as the vector calculated by
+<b>ID(model,q,qd,zeros(model.NB,1),f_ext)</b>.&nbsp; <b>H</b> and <b>C</b> are
+calculated using the composite-rigid-body and recursive Newton-Euler
+algorithms, respectively.&nbsp; <b>model</b> is
+a <a href="sysmodel.html">system model data structure</a> describing the
+rigid-body system.&nbsp; <b>q</b> and <b>qd</b> are column vectors of
+length <b>model.NB</b> containing the joint position and velocity variables,
+respectively.&nbsp; <b>f_ext</b> is an optional argument specifying the
+external forces acting on the bodies.&nbsp; If there are no external forces
+then this argument can be omitted, or it can be given the
+value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial or planar force vector (as appropriate) specifying the force
+acting on body <b>i</b>, expressed in absolute (i.e., base) coordinates.
+</p>
+
+<hr><a name="HD"></a>
+<br>
+
+<b>[qdd_out, tau_out] = HD( model, fd, q, qd, qdd, tau [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/HD.txt">source code</a>]
+
+<p>
+Calculate a hybrid of forward and inverse dynamics using the
+articulated-body algorithm.&nbsp; <b>model</b> is
+a <a href="sysmodel.html">system model data structure</a> describing the
+rigid-body system; and <b>fd</b> is an array of <b>model.NB</b> boolean values
+identifying the forward-dynamics joints.&nbsp; <b>q</b> and <b>qd</b> are
+vectors of joint position and velocity variables; <b>qdd</b> and <b>tau</b>
+are vectors of joint acceleration and force input variables;
+and <b>qdd_out</b> and <b>tau_out</b> are vectors of joint acceleration and
+force output variables.&nbsp; They are all column vectors of
+length <b>model.NB</b>.&nbsp; <b>f_ext</b> is an optional argument specifying
+the external forces acting on the bodies.&nbsp; If there are no external
+forces then this argument can be omitted, or it can be given the
+value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial or planar force vector (as appropriate) specifying the force
+acting on body <b>i</b>, expressed in absolute (i.e., base) coordinates.
+</p>
+
+<p>
+In hybrid dynamics, each joint is identified as being either a
+forward-dynamics joint or an inverse-dynamics joint.&nbsp; The task of the
+hybrid dynamics function is then to calculate the unknown acceleration from
+the given force at each forward-dynamics joint, and the unknown force from the
+given acceleration at each inverse-dynamics joint.&nbsp; <b>HD</b> uses the
+argument <b>fd</b> for this purpose.&nbsp; Specifically, <b>fd(i)=1</b> for
+each joint <b>i</b> that is a forward-dynamics joint, and <b>fd(i)=0</b> for
+each joint <b>i</b> that is an inverse-dynamics joint.&nbsp;
+If <b>fd(i)=1</b> then <b>tau(i)</b> contains the given force at
+joint <b>i</b>, and the value of <b>qdd(i)</b> is ignored; and
+if <b>fd(i)=0</b> then <b>qdd(i)</b> contains the given acceleration at
+joint <b>i</b>, and the value of <b>tau(i)</b> is ignored.&nbsp; Likewise, if
+<b>fd(i)=1</b> then <b>qdd_out(i)</b> contains the calculated acceleration at
+joint <b>i</b>, and <b>tau_out(i)</b> contains the given force copied
+from <b>tau(i)</b>; and if <b>fd(i)=0</b> then <b>tau_out(i)</b> contains the
+calculated force, and <b>qdd_out(i)</b> the given acceleration copied
+from <b>qdd(i)</b>.&nbsp; Thus, the two output vectors are always fully
+instantiated.
+</p>
+
+<hr><a name="ID"></a>
+<br>
+
+<b>tau = ID( model, q, qd, qdd [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/ID.txt">source code</a>]
+
+<p>
+Calculate the inverse dynamics of a kinematic tree using the recursive
+Newton-Euler algorithm.&nbsp; <b>model</b> is a <a href="sysmodel.html">system
+model data structure</a> describing the rigid-body
+system.&nbsp; <b>q</b>, <b>qd</b>, <b>qdd</b> and <b>tau</b> are column
+vectors of length <b>model.NB</b> containing the joint position, velocity,
+acceleration and force variables, respectively.&nbsp; <b>f_ext</b> is an
+optional argument specifying the external forces acting on the bodies.&nbsp;
+If there are no external forces then this argument can be omitted, or it can
+be given the value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial or planar force vector (as appropriate) specifying the force
+acting on body <b>i</b>, expressed in absolute (i.e., base) coordinates.
+</p>
+
+<hr><a name="FDfb"></a>
+<br>
+
+<b>[xdfb, qdd] = FDfb( model, xfb, q, qd, tau [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/FDfb.txt">source code</a>]
+
+<p>
+Calculate the forward dynamics of a spatial floating-base kinematic tree using
+the articulated-body algorithm and a quaternion to represent the orientation
+of the floating base.&nbsp; Use this function if you are worried about the
+kinematic singularities in the three-prismatic, three-revolute chain used
+by <a href="#floatbase">floatbase</a> to emulate a 6-DoF joint between the
+fixed and floating bases.&nbsp; If this singularity is not a problem, then you
+can use <b>FDab</b> or <b>FDcrb</b> instead.&nbsp; Note that <b>FDfb</b> works
+only with spatial models, not planar.
+</p>
+
+<p>
+<b>model</b> is a <a href="sysmodel.html">system model data structure</a>
+created by <a href="#floatbase">floatbase</a>, or any other system model that
+adheres to the same conventions.&nbsp; <b>xfb</b> is a <b>13&times;1</b>
+state vector containing the following quantities: a unit quaternion expressing
+the orientation of the floating base relative to the fixed base; a 3-D vector
+specifying the position of the origin of the floating base's coordinate frame
+in fixed-base coordinates; and a spatial vector giving the velocity of the
+floating base in fixed-base coordinates.&nbsp; The return value <b>xdfb</b> is
+the time-derivative of <b>xfb</b>.&nbsp; The
+variables <b>q</b>, <b>qd</b>, <b>qdd</b> and <b>tau</b> are all column
+vectors of length <b>model.NB&minus;6</b> containing the position, velocity,
+acceleration and force variables, respectively, for the real joints in the
+system; that is, joints <b>7</b> to <b>model.NB</b>.&nbsp; (So
+element <b>i</b> in any of these vectors contains a variable belonging to
+joint <b>i+6</b>.)&nbsp; <b>f_ext</b> is an optional argument specifying the
+external forces acting on the bodies.&nbsp; If there are no external forces
+then this argument can be omitted, or it can be given the
+value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial force vector specifying the force acting on body <b>i</b>,
+expressed in absolute (i.e., base) coordinates.&nbsp; <b>FDfb</b> ignores the
+first five entries in <b>f_ext</b>.
+</p>
+
+<p>
+In a system model created by floatbase, body 6 is the floating base, and it is
+connected to the fixed base by a chain of three prismatic and three revolute
+joints, and five massless rigid bodies.&nbsp; A singularity occurs in this
+chain when <b>q(5)=&plusmn;pi/2</b>.&nbsp; <b>FDfb</b> avoids this singularity
+by ignoring this chain, and using instead the contents of <b>xfb</b> to
+directly define the position, orientation and velocity of body 6.&nbsp; In
+effect, <b>FDfb</b> is replacing an emulated 6-DoF joint with a real
+one.&nbsp; The use of a quaternion to represent orientation ensures that there
+are no singularities.
+</p>
+
+<p>
+<i>See also</i>: <a href="#fbkin">fbkin</a> for more information
+about <b>xfb</b>, <a href="#fbanim">fbanim</a> if you want to view an
+animation of a simulation run employing <b>FDfb</b>,
+and <a href="#simulink">Simulink tutorial examples 4 and 5</a> for examples of
+how to use <b>FDfb</b> in a Simulink model.
+</p>
+
+<hr><a name="IDfb"></a>
+<br>
+
+<b>[xdfb, tau] = IDfb( model, xfb, q, qd, qdd [, f_ext] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/IDfb.txt">source code</a>]
+
+<p>
+Calculate the inverse dynamics of a floating-base kinematic tree
+using the algorithm described in Table 9.6 of <a href="#RBDA">RBDA</a> and the
+same quaternion-based singularity-free representation of floating-base
+orientation as used by <a href="#FDfb">FDfb</a>.&nbsp; Note that <b>IDfb</b>
+is really a hybrid dynamics algorithm, despite its name, since the
+accelerations of the joints are given (i.e., the real joints&mdash;joints 7
+onwards in a model created by <a href="#floatbase">floatbase</a>), but not the
+acceleration of the floating base; and the objective of <b>IDfb</b> is to
+calculate the forces required at the joints and the resulting acceleration of
+the floating base.&nbsp; Use <b>IDfb</b> if you are worried about the
+kinematic singularities in the three-prismatic, three-revolute chain used
+by <a href="#floatbase">floatbase</a> to emulate a 6-DoF joint between the
+fixed and floating bases.&nbsp; If the singularity is not a problem then you
+can use <a href="#HD">HD</a> instead.&nbsp; If you want to calculate pure
+inverse dynamics then use <a href="#ID">ID</a> instead.&nbsp; (<b>ID</b>
+itself will work at a singularity, but your ability to specify a velocity and
+acceleration of your choice is restricted.)
+</p>
+
+<p>
+<b>model</b> is a <a href="sysmodel.html">system model data structure</a>
+created by <a href="#floatbase">floatbase</a>, or any other system model that
+adheres to the same conventions.&nbsp; <b>xfb</b> is a <b>13&times;1</b>
+state vector containing the following quantities: a unit quaternion expressing
+the orientation of the floating base relative to the fixed base; a 3-D vector
+specifying the position of the origin of the floating base's coordinate frame
+in fixed-base coordinates; and a spatial vector giving the velocity of the
+floating base in fixed-base coordinates.&nbsp; The return value <b>xdfb</b> is
+the time-derivative of <b>xfb</b>.&nbsp; The
+variables <b>q</b>, <b>qd</b>, <b>qdd</b> and <b>tau</b> are all column
+vectors of length <b>model.NB&minus;6</b> containing the position, velocity,
+acceleration and force variables, respectively, for the real joints in the
+system; that is, joints <b>7</b> to <b>model.NB</b>.&nbsp; (So
+element <b>i</b> in any of these vectors contains a variable belonging to
+joint <b>i+6</b>.)&nbsp; <b>f_ext</b> is an optional argument specifying the
+external forces acting on the bodies.&nbsp; If there are no external forces
+then this argument can be omitted, or it can be given the
+value <b>{}</b>.&nbsp; Otherwise, it must be a cell array of
+length <b>model.NB</b>, and each entry <b>f_ext{i}</b> must either be an empty
+array, to indicate that there is no external force acting on body <b>i</b>, or
+else a spatial force vector specifying the force acting on body <b>i</b>,
+expressed in absolute (i.e., base) coordinates.&nbsp; <b>IDfb</b> ignores the
+first five entries in <b>f_ext</b>.
+</p>
+
+<p>
+In a system model created by floatbase, body 6 is the floating base, and it is
+connected to the fixed base by a chain of three prismatic and three revolute
+joints, and five massless rigid bodies.&nbsp; A singularity occurs in this
+chain when <b>q(5)=&plusmn;pi/2</b>.&nbsp; <b>IDfb</b> avoids this singularity
+by ignoring this chain, and using instead the contents of <b>xfb</b> to
+directly define the position, orientation and velocity of body 6.&nbsp; In
+effect, <b>IDfb</b> is replacing an emulated 6-DoF joint with a real
+one.&nbsp; The use of a quaternion to represent orientation ensures that there
+are no singularities.&nbsp; See <a href="#fbkin">fbkin</a> for more
+information about <b>xfb</b>.
+</p>
+
+
+<hr><a name="fbkin"></a>
+<br>
+
+<table>
+<tbody>
+<tr>
+  <td>
+    <b>[x, xd] = fbkin( q, qd, qdd )</b><br>
+    <b>x = fbkin( q, qd )</b><br>
+    <b>p = fbkin( q )</b>
+  </td>
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td>
+    <b>[q, qd, qdd] = fbkin( x, xd )</b><br>
+    <b>[q, qd] = fbkin( x )</b><br>
+    <b>q = fbkin( p )</b>
+  </td>
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td>[<a href="sourceText/fbkin.txt">source code</a>]</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This function performs kinematics calculations relating to a system model
+created by <a href="#floatbase">floatbase</a>, or any system model that
+follows the same convention.&nbsp; In particular, <b>fbkin</b> converts
+between the singularity-free representation of the motion of a floating base
+used by <a href="#FDfb">FDfb</a> and <a href="#IDfb">IDfb</a>, and the joint
+variables of the six joints used to emulate the 6-DoF joint between the fixed
+and floating bases.&nbsp; The two calls on the top row perform position,
+velocity and acceleration calculations; the two on the middle row perform
+position and velocity calculations; and the two on the bottom row perform
+position calculations only.&nbsp; <b>q</b>, <b>qd</b> and <b>qdd</b> contain
+the position, velocity and acceleration variables, respectively, of the six
+joints emulating the 6-DoF joint.&nbsp; When <b>q</b> is an
+output, <b>q(4)</b> and <b>q(6)</b> are normalized to the range &plusmn;pi,
+and <b>q(5)</b> is normalized to the range &plusmn;pi/2.&nbsp; <b>p</b> is a
+7-element vector having the form <b>p=[qn;r]</b>, where <b>qn</b> is a
+quaternion describing the orientation of the floating base relative to the
+fixed base, and <b>r</b> is a 3-D vector specifying the position of the
+floating base's origin in fixed-base coordinates.&nbsp; <b>x</b> is a
+13-element state vector having the form <b>x=[qn;r;v]</b>, where <b>v</b> is
+the spatial velocity of the floating base expressed in fixed-base
+coordinates.&nbsp; <b>xd</b> is the time-derivative of <b>x</b>, and is
+therefore a 13-element vector of the form <b>xd=[qnd;rd;a]</b>,
+where <b>qnd</b>, <b>rd</b> and <b>a</b> are the time-derivatives
+of <b>qn</b>, <b>r</b> and <b>v</b>.&nbsp; In particular, <b>a</b> is the
+spatial acceleration of the floating base in fixed-base coordinates.&nbsp; All
+inputs and outputs are column vectors.&nbsp; <b>fbkin</b> uses a combination
+of counting its inputs and outputs, and measuring the length of its first
+argument, in order to decide which calculations to perform.
+</p>
+
+<p>
+In a system model created by <a href="#floatbase">floatbase</a>, the first
+three joints are prismatic joints on the x, y and z axes; the next three are
+revolute joints on the x, y and z axes; body 6 is regarded as the floating
+base; and bodies 1 to 5 are massless.&nbsp; This arrangement suffers from a
+pair of singularities, which occur when the angle of joint 5 is
+&plusmn;pi/2.&nbsp; <a href="#FDfb">FDfb</a> and <a href="#IDfb">IDfb</a>
+avoid this problem by using a quaternion to represent the orientation of the
+floating base.&nbsp; The main purpose of <b>fbkin</b> is to translate between
+the quaternion-based representation used by these two functions and the
+joint-based representation used by all the other dynamics functions.&nbsp;
+However, the translation is not perfect for two reasons.&nbsp; First, the
+translation from <b>x</b> and <b>xd</b> to <b>q</b>, <b>qd</b> and <b>qdd</b>
+breaks down at the two singularities.&nbsp; (To be specific, it is the
+calculation of <b>qd</b> and <b>qdd</b> that breaks down.&nbsp; The
+calculation of <b>q</b> is still OK.)&nbsp; Second, the two singularities and
+the normalization of joint angles (mentioned above) mess
+up <a href="#showmotion">showmotion</a>'s strategy of linearly interpolating
+the joint variables between sample times.&nbsp; If the floating base gets
+close to a singularity then a <a href="#showmotion">showmotion</a> animation
+may exhibit a disturbing amount of wobble that isn't really there; and the
+only way to fix it is to increase the sampling rate in the vicinity of the
+singularity, e.g. by decreasing the integration step size in the dynamics
+simulation that generated the data.&nbsp; The problems caused by normalization
+can be fixed by <a href="#fbanim">fbanim</a>.
+</p>
+
+<p>
+There are several formulae involving <b>x</b>, <b>xd</b>, etc., that are worth
+knowing.&nbsp; First, let <b>X</b> be the Pl&uuml;cker coordinate transform
+from fixed-base to floating-base coordinates; and let <b>E</b> be the
+rotational part of <b>X</b> (i.e., <b>E</b> is the 3&times;3 matrix that
+transforms 3-D vectors from fixed-base to floating-base coordinates).&nbsp; We
+now have <b>E=<a href="#rxyz">rz</a>(q(6))*<a href="#rxyz">ry</a>(q(5))*<a
+href="#rxyz">rx</a>(q(4))</b>, and also <b>E=<a href="#rq">rq</a>(qn)</b>,
+<b>r=q(1:3)</b>, and <b>X=<a href="#plux">plux</a>(E,r)</b>.&nbsp;
+Furthermore, as <b>rq</b> and <b>plux</b> are reversible, we also
+have <b>qn=rq(E)</b> and <b>[E,r]=plux(X)</b>.&nbsp; If we divide <b>v</b>
+into its linear and angular components, so that <b>v=[&omega;;vo]</b>,
+then <b>rd=qd(1:3)</b>, <b>vo=rd+r&times;&omega;</b>
+and <b>qnd=<a href="#rqd">rqd</a>(&omega;,qn)</b>.&nbsp; More details can be
+found in the <a href="sourceText/fbkin.txt">source code</a>.
+</p>
+
+<hr><a name="fbanim"></a>
+<br>
+
+<b>Q = fbanim( X [, Qr] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/fbanim.txt">source code</a>]
+
+<p>
+This function converts floating-base position data from the quaternion-based
+format used by <a href="#FDfb">FDfb</a> and <a href="#IDfb">IDfb</a> to the
+joint-angle-based format required
+by <a href="#showmotion">showmotion</a>.&nbsp; <b>X</b> is a matrix containing
+N sets of quaternion-based position data, and can have any of the following
+dimensions: 13&times;1&times;N, 13&times;N, 7&times;1&times;N or
+7&times;N.&nbsp; Each column of <b>X</b> has the format described
+under <a href="#fbkin">fbkin</a> for the vector <b>x</b> or <b>p</b>, and
+represents the position of a floating base at a particular time sample.&nbsp;
+If 13 rows are supplied then only the first 7 are actually
+used.&nbsp; <b>Qr</b> is an optional argument containing the joint position
+data for joints 7 onwards in the model to which <b>X</b> and <b>Qr</b>
+pertain.&nbsp; If <b>Qr</b> is supplied then its dimensions must be either
+M&times;1&times;N or M&times;N, where M=model.NB-6 for the relevant
+model.&nbsp; <b>Q</b> is either a 6&times;N or a (6+M)&times;N matrix,
+depending on whether or not <b>Qr</b> is supplied, containing joint position
+data in the format required by showmotion.&nbsp; The first 6 rows of <b>Q</b>
+contain the position data for the three prismatic and three revolute joints
+used in a <a href="#floatbase">floatbase</a>-generated model to emulate a
+6-DoF joint between the fixed and floating bases; and the remaining rows
+contain data copied across from <b>Qr</b>.
+</p>
+
+<p>
+The purpose of <b>fbanim</b> is to solve the wrap-around problem.&nbsp; If you
+were to translate <b>X</b> into <b>Q</b> by
+applying <a href="#fbkin">fbkin</a> to each column, then rows 4 and 6 in the
+resulting matrix would be normalized to the range &plusmn;pi; and row 5 would
+be normalized to &plusmn;pi/2.&nbsp; If you send this data to showmotion, then
+this is what you will see.&nbsp; Suppose the floating base is rotating about
+the x axis: the angle of rotation increases smoothly until it gets close to
+pi, then the floating base suddenly spins very rapidly backwards to an angle
+close to &minus;pi, and then it continues rotating smoothly until the angle
+gets close to pi again, and so on.&nbsp; <b>fbanim</b> solves this problem by:
+(1) first translating <b>X</b> to <b>Q</b> using fbkin, and then (2) comparing
+adjacent columns to see if a wrap-around has occurred between them, and (3)
+fixing each wrap-around by adjusting the angles and carrying the adjustment
+forward.&nbsp; Item 2 relies on the assumption that the orientation of the
+floating base does not change very much from one sample time to the next, so
+that any large angle change can be assumed to be caused by a
+wrap-around.&nbsp; This assumption can break down close to a singularity.
+</p>
+
+<h3>Usage</h3>
+
+<p>
+If <b>tout</b>, <b>xout</b> and <b>qout</b> contain the sample times,
+floating-base data and remaining joint data (i.e., joints 7 onwards), and you
+want to see the animation, then call <a href="#showmotion">showmotion</a> as
+follows:
+<ul>
+<b>showmotion( model, tout, fbanim(xout,qout) )</b>
+</ul>
+If the model describes a single rigid body, meaning that there is no joint 7,
+then omit <b>qout</b> from the argument list.&nbsp; <b>fbanim</b> is used
+in <a href="#simulink">Simulink tutorial examples 4 and 5</a>.
+</p>
+
+<hr><a name="EnerMo"></a>
+<br>
+
+<b>ret = EnerMo( model, q, qd )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/EnerMo.txt">source code</a>]
+
+<p>
+Calculate the energy, momentum, and some related quantities, of a given
+rigid-body system.&nbsp; <b>model</b> is a <a href="sysmodel.html">system
+model data structure</a> describing the rigid-body system; and <b>q</b>
+and <b>qd</b> are column vectors of length <b>model.NB</b> containing the
+joint position and velocity variables, respectively.&nbsp; The return value is
+a structure with the following fields:
+<ul>
+<table>
+<tbody>
+<tr>
+  <td><b>ret.KE</b></td>
+  <td>&nbsp;&nbsp;</td>
+  <td>total kinetic energy</td>
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td><b>ret.mass</b></td>
+  <td>&nbsp;&nbsp;</td>
+  <td>total mass</td>
+</tr>
+<tr>
+  <td><b>ret.PE</b></td>
+  <td></td>
+  <td>total potential energy</td>
+  <td></td>
+  <td><b>ret.cm</b></td>
+  <td></td>
+  <td>position of the centre of mass</td>
+</tr>
+<tr>
+  <td><b>ret.htot</b></td>
+  <td></td>
+  <td>total spatial momentum</td>
+  <td></td>
+  <td><b>ret.vcm</b></td>
+  <td></td>
+  <td>linear velocity of centre of mass</td>
+</tr>
+<tr>
+  <td><b>ret.Itot</b></td>
+  <td></td>
+  <td>total spatial inertia</td>
+</tr>
+</tbody>
+</table>
+</ul>
+Vector and matrix quantities are expressed in base (body 0) coordinates.&nbsp;
+Potential energy is defined to be zero when the centre of mass is at the
+origin.
+</p>
+
+<hr><a name="jcalc"></a>
+<br>
+
+<b>[Xj, S] = jcalc( jtyp, q )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/jcalc.txt">source code</a>]
+
+<p>
+This function is used by the dynamics functions to calculate the joint
+transform, <b>Xj</b>, and motion subspace matrix, <b>S</b>, for each joint in
+the given system model.&nbsp; The arguments specify the type of joint and the
+value of the joint's position variable.&nbsp; By convention, <b>Xj</b> is the
+coordinate transform from the joint's predecessor frame to its successor
+frame, and <b>S</b> is expressed in successor frame coordinates.&nbsp; What
+this means is that, if <b>Xj</b> and <b>S</b> have been calculated for
+joint <b>i</b>, and <b>Xup</b> is the coordinate transform from
+body <b>i</b>'s parent to body <b>i</b>, then <b>Xup=Xj*model.Xtree{i}</b>;
+and if <b>vj</b> is the velocity of body <b>i</b> relative to its parent,
+expressed in body <b>i</b> coordinates, then <b>vj=S*qd(i)</b>,
+where <b>qd(i)</b> is the velocity variable for joint <b>i</b>.
+</p>
+
+<p>
+Each type of joint is identified by a joint type code, which is a
+string.&nbsp; The argument <b>jtyp</b> can either be a string containing the
+type code, or else a structure containing a field called <b>code</b> that
+contains the type code.&nbsp; The latter format is required for any joint that
+takes parameters, in which case <b>jtyp</b> must also contain a field
+called <b>pars</b> that contains the parameters.&nbsp; At present, the only
+joint type that takes a parameter is the helical joint.&nbsp; For this
+joint, <b>jtyp.code</b> must be set to 'H', and <b>jtyp.pars.pitch</b> must be
+set to the pitch of the joint.&nbsp; <b>jcalc</b> handles both spatial and
+planar joint types.&nbsp; For all spatial joint types, <b>Xj</b> is a
+Pl&uuml;cker coordinate transform and <b>S</b> is a 6&times;1 matrix.&nbsp;
+For planar joint types, <b>Xj</b> is a planar coordinate transform
+and <b>S</b> is a 3&times;1 matrix.&nbsp; For all revolute joints, and also
+the helical joint, <b>q</b> is an angle in radians.&nbsp; For all prismatic
+joints, <b>q</b> is a length in metres.&nbsp; (If you know what you are doing,
+then you can choose a different length unit; but you must be sure you are
+using a <i>consistent</i> set of physical units overall.)
+</p>
+
+<table>
+<tbody>
+<tr>
+  <th colspan="2">Spatial Joint Types</th>
+  <td></td>
+  <th colspan="2">Planar Joint Types</th>
+</tr>
+<tr>
+  <td style="font-weight: bold">Code&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td style="font-weight: bold">Description</td>
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td style="font-weight: bold">Code&nbsp;</td>
+  <td style="font-weight: bold">Description</td>
+<tr>
+  <td>'Rx'</td>
+  <td>revolute joint on x axis</td>
+  <td></td>
+  <td>'r'</td>
+  <td>revolute joint</td>
+</tr>
+<tr>
+  <td>'Ry'</td>
+  <td>revolute joint on y axis</td>
+  <td></td>
+  <td>'px'</td>
+  <td>prismatic joint on x axis</td>
+</tr>
+<tr>
+  <td>'Rz', 'R'</td>
+  <td>revolute joint on z axis</td>
+  <td></td>
+  <td>'py'</td>
+  <td>prismatic joint on y axis</td>
+</tr>
+<tr>
+  <td>'Px'</td>
+  <td>prismatic joint on x axis</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>'Py'</td>
+  <td>prismatic joint on y axis</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>'Pz', 'P'</td>
+  <td>prismatic joint on z axis</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>'H'</td>
+  <td colspan="4">helical joint on z axis; pars.pitch: pitch in length
+  units<br> per radian, +ve for right-handed screw</td>
+</tr>
+</tbody>
+</table>
+
+<hr><a name="autoTree"></a>
+<br>
+
+<b>model = autoTree( nb [, bf [, skew [, taper ] ] ] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/autoTree.txt">source code</a>]<br>
+
+<p>
+Generate system models of a variety of spatial kinematic trees having revolute
+joints, mainly for the purpose of generating test examples for dynamics
+functions.&nbsp; <b>nb</b> specifies the number of bodies in the tree, and
+must be an integer &ge;1.&nbsp; <b>bf</b> specifies the branching factor of
+the tree, which is a number &ge;1 indicating the average number of children of
+a nonterminal node.&nbsp; <b>bf=1</b> produces an unbranched tree; <b>bf=2</b>
+produces a binary tree; and non-integer values produce trees in which the
+number of children alternate between <b>floor(bf)</b> and <b>ceil(bf)</b> in
+such a way that the average is <b>bf</b>.&nbsp; However, the tree is designed
+so that the fixed base always has exactly one child, regardless of the value
+of <b>bf</b>.&nbsp; Trees are constructed breadth-first, so that the depth of
+the finished tree is a minimum for the given values of <b>nb</b>
+and <b>bf</b>.&nbsp; This means that the bodies and joints are numbered in
+breadth-first order.
+</p>
+
+<p>
+Body <b>i</b> is taken to be a thin-walled cylinder of length <b>l(i)</b>,
+radius <b>l(i)/20</b> and mass <b>m(i)</b>, lying between 0 and <b>l(i)</b> on
+the x axis of body <b>i</b>'s local coordinate system.&nbsp; The values
+of <b>l(i)</b> and <b>m(i)</b> are determined by the argument <b>taper</b>,
+which specifies the linear size ratio of consecutively-numbered bodies (i.e.,
+body <b>i</b> is <b>taper</b> times larger than body <b>i&minus;1</b>).&nbsp;
+The formulae are <b>l(i)=taper^(i&minus;1)</b>
+and <b>m(i)=taper^(3*(i&minus;1))</b>.&nbsp; Thus, if <b>taper=1</b>
+then <b>l(i)=1</b> and <b>m(i)=1</b> for all <b>i</b>.
+</p>
+
+<p>
+Two axes are embedded in body <b>i</b>: an inboard axis, which is aligned with
+the z axis of body <b>i</b>'s local coordinate frame, and an outboard axis,
+which passes through the point <b>(l(i),0,0)</b> and is rotated relative to
+the inboard axis by an angle <b>skew</b> about the x axis.&nbsp; Thus,
+if <b>skew=0</b> then the two axes are parallel, and if <b>skew=pi/4</b> then
+the outboard axis points in the direction <b>(0,&minus;1,1)</b> in the local
+coordinate system.&nbsp; The inboard axis serves as the axis for
+joint <b>i</b>; and the outboard axis serves as the axis for each joint that
+connects body <b>i</b> to one of its children.&nbsp; If <b>skew=0</b> then
+every joint axis is parallel to the z axis, and the kinematic tree is a planar
+mechanism moving in the x&ndash;y plane.
+</p>
+
+<p>
+<b>autoTree</b> also creates a set of drawing instructions, so that the
+resulting model can be viewed
+using <a href="#showmotion">showmotion</a>.&nbsp; The
+arguments <b>bf</b>, <b>skew</b> and <b>taper</b> are all optional.&nbsp; If
+omitted, they default to the values <b>bf=1</b>, <b>skew=0</b>
+and <b>taper=1</b>.
+</p>
+
+<hr><a name="floatbase"></a>
+<br>
+
+<b>fbmodel = floatbase( model )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/floatbase.txt">source code</a>]
+
+<p>
+This function constructs a floating-base spatial kinematic tree from a given
+fixed-base spatial kinematic tree.&nbsp; It does this by replacing joint 1 in
+the given tree with a chain of 5 massless bodies and 6 joints, which is
+designed to emulate a 6-DoF joint.&nbsp; As a result, body 1 in <b>model</b>
+becomes body 6 in <b>fbmodel</b>, and is regarded as the floating base.&nbsp;
+Likewise, joints 2 to <b>model.NB</b> in <b>model</b> become joints 7
+to <b>fbmodel.NB</b> in <b>fbmodel</b>, and <b>fbmodel.NB =
+model.NB+5</b>.&nbsp; The joints added by <b>floatbase</b> are: three
+prismatic joints in the x, y and z directions, followed by three revolute
+joints about the x, y and z axes.&nbsp; This chain has a kinematic singularity
+when the angle of joint 5 is &plusmn;pi/2.&nbsp; The standard forward and
+hybrid dynamics functions will break down at this singularity, but will work
+properly elsewhere.&nbsp; Furthermore, if you use an adaptive variable-step
+integrator, like Matlab's Ode45, then you can get very close to the
+singularity before suffering a significant loss of accuracy.&nbsp; (For
+example, it should be possible to approach to within about 0.01 radians of the
+singularity.)&nbsp; Nevertheless, several special floating-base functions are
+included in <b><i>spatial_v2</i></b> that avoid this singularity by using a
+quaternion instead of three joint angles to represent the orientation of the
+floating base.
+</p>
+
+<p>
+<b>floatbase</b> requires that <b>model</b> uses spatial arithmetic, and that
+only one body is connected to the base.&nbsp; It issues a warning
+if <b>model.Xtree{1}</b> is not the identity matrix, because any offset
+contained in this coordinate transform will be lost; and it issues a warning
+if <b>model</b> contains the field <b>gamma_q</b>, because floating the base
+will change the joint numbers, which may invalidate the function stored
+in this field.&nbsp; Drawing instructions, camera settings and Simulink
+ground-contact data are all preserved, and are edited to account for the
+changes in body numbers.
+</p>
+
+<hr><a name="planar"></a>
+<br>
+
+<b>robot = planar( n )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/planar.txt">source code</a>]
+
+<p>
+Construct a planar robot consisting of <b>n</b> identical links connected by
+revolute joints.&nbsp; The model uses planar-vector arithmetic.&nbsp; Each
+link lies on its local x axis, and has unit length, unit mass, and a
+rotational inertia of 1/12 about its centre of mass.&nbsp; This is consistent
+with the link being a uniform thin rod.&nbsp; When the joint angles are zero,
+the links are lined up on the x axis of the base coordinate system.&nbsp;
+Drawing instructions are included in the model.&nbsp; This function is
+suitable for use with Simulink.
+</p>
+
+<hr><a name="gfxExample"></a>
+<br>
+
+<b>robot = gfxExample( [ arg ] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/gfxExample.txt">source code</a>]
+
+<p>
+This function constructs a robot having the same kinematics as planar(2), but
+adorned with a variety of graphical objects which, between them, illustrate
+all of the available <a href="sysmodel.html#appearance">drawing
+instructions</a>.&nbsp; The source code is full of comments explaining how to
+use the various drawing instructions, and can be treated as a tutorial on how
+to prepare the drawing instructions for your own models.&nbsp;
+If <b>gfxExample</b> is called with an argument (any argument) then it gives
+the robot a <a href="sysmodel.html#camera">tracking camera</a> that tracks the
+tip of the white triangle.&nbsp; Otherwise, the robot is viewed with a fixed
+camera.&nbsp; To view this model, type <b>showmotion(gfxExample)</b>.
+</p>
+
+<hr><a name="vee"></a>
+<br>
+
+<b>robot = vee( [ L2 ] )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/vee.txt">source code</a>]
+
+<p>
+This function creates the robot used in <a href="#simulink">Simulink tutorial
+example 3</a>.&nbsp; It is a free-floating spatial two-body system, in a
+zero-gravity environment, consisting of two thin rods connected by a revolute
+joint.&nbsp; The first rod has a mass and length of 1, and the second rod has
+a mass and length of <b>L2</b>.&nbsp; If the argument <b>L2</b> is omitted
+then it defaults to 1, making the two rods identical.&nbsp; The unusual
+feature of this robot is that the two rods are at 45&deg; to the joint
+axis.&nbsp; Specifically, when the robot is in its initial position, rod 1
+lies on the x axis of the base coordinate frame, rod 2 lies on the y axis, and
+the revolute joint's axis points in the direction (1,1,0).&nbsp; Despite its
+simplicity, it is not immediately obvious what will happen when the robot
+starts to turn its joint.&nbsp; To help the viewer understand the motion, some
+construction lines are drawn in the base coordinate system to show the x, y
+and z axes, the line at 45&deg; to the x and y axes, and the line joining the
+centres of mass of the two rods.&nbsp; The centre of mass on each rod is
+marked with a little red sphere; and if <b>L2&ne;1</b> then three orange
+spheres are added: one to mark the system's centre of mass, and two to mark
+the points on each rod that coincide with the system's centre of mass when the
+angle between the two rods is zero.&nbsp; The source code is well commented.
+</p>
+
+<hr><a name="singlebody"></a>
+<br>
+
+<b>model = singlebody</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/singlebody.txt">source code</a>]
+
+<p>
+This function creates a model of a box-shaped, free-floating single rigid body
+in a zero-gravity environment.&nbsp; The body has unit mass and dimensions of
+3, 2 and 1 in the x, y and z directions, respectively.&nbsp; In its initial
+position, it has one vertex at the origin and another at the point
+(3,2,1).&nbsp; Its centre of mass is therefore offset from the origin.&nbsp;
+For visual guidance, the positive x, y and z axes are drawn in red, green and
+blue.&nbsp; This model is used in <a href="#simulink">Simulink tutorial
+example 4</a> (chaotic tumbling).
+</p>
+
+<hr><a name="scissor"></a>
+<br>
+
+<b>model = scissor</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/scissor.txt">source code</a>]
+
+<p>
+This function creates a model of a free-floating rigid-body system, in a
+zero-gravity environment, consisting of two identical strip-shaped bodies
+which are connected at their middles by a revolute joint so that the system as
+a whole resembles a pair of scissors.&nbsp; In its initial position, the
+system's centre of mass lies at the origin, the revolute joint lies on the y
+axis, and the long axes of the strips are parallel to the z axis.&nbsp; This
+model is used in <a href="#simulink">Simulink tutorial example 5</a>.
+</p>
+
+<hr><a name="doubleElbow"></a>
+<br>
+
+<b>robot = doubleElbow</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/doubleElbow.txt">source code</a>]
+
+<p>
+This function creates a planar robot
+resembling <a href="#planar">planar(2)</a>, in which the second joint (the
+elbow) has been replaced by a pair of closely-spaced revolute joints which are
+constrained to both have the same joint angle.&nbsp; A compound joint of this
+kind can be implemented by a pair of gears, or a pair of pulleys and a
+figure-eight cable, both implementing a 1:1 gearing between the two joints at
+the elbow.&nbsp; This constraint is implemented via a <b>gamma_q</b> function,
+which is included in the model.&nbsp; (See <a href="gammaq.html">Describing
+Constraints with gamma_q</a>.)&nbsp; So the dynamics of this particular robot
+must be calculated using <a href="#FDgq">FDgq</a>.&nbsp; This model is used
+in <a href="#simulink">Simulink tutorial example 6</a>.
+</p>
+
+<hr><a name="rollingdisc"></a>
+<br>
+
+<b>model = rollingdisc( npt )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/rollingdisc.txt">source code</a>]
+
+<p>
+This function creates a system model consisting of a free-floating single
+rigid body in the shape of a polyhedral approximation to a disc.&nbsp; The
+argument <b>npt</b> specifies the number of vertices in the polygon used to
+approximate a circle.&nbsp; The special feature of this model is that it
+includes a set of <b>2*npt</b> ground-contact points&mdash;one for each vertex
+in the polyhedron&mdash;so that it can be used in conjunction with
+the <a href="gcmodel.html">Simulink ground-contact model</a>.&nbsp; In this
+context, the disc can bounce, roll and tumble over a simulated compliant
+ground plane at z=0, as demonstrated in <a href="#simulink">Simulink tutorial
+example 7</a>.
+</p>
+
+<hr><a name="showmotion"></a>
+<br>
+
+<table>
+<tbody>
+<tr>
+  <td>
+    <b>showmotion( model [, tdata, qdata ] )</b><br>
+    <b>showmotion( filename )</b><br>
+    <b>showmotion( 'save', filename )</b><br>
+    <b>showmotion( 'about' [, meta ] )</b>
+  </td>
+  <td>&nbsp;&nbsp;&nbsp;</td>
+  <td>
+    <b>&nbsp;</b>start a new animation<br>
+    <b>&nbsp;</b>load animation from file<br>
+    <b>&nbsp;</b>save current animation<br>
+    <b>&nbsp;</b>display/edit metadata
+  </td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This function displays animations of system models.&nbsp; Typically, the
+motion data comes from a dynamics simulation run, in which
+case <b>showmotion</b> shows you how the system moved during that
+simulation.&nbsp; However, the motion data can come from any source, and does
+not have to be the result of a dynamics calculation.&nbsp; Note
+that <b>showmotion</b> is a post-processing tool: it displays a set of
+recorded motion data <i>after</i> that data has been calculated.&nbsp; You can
+use <b>showmotion</b> after a simulation run has finished, or after it has
+been stopped or paused, but you cannot use it to show you what is happening
+while the simulation run is in progress.
+</p>
+
+<p>
+<b>showmotion</b> can be called with several argument formats.&nbsp; In the
+first call listed above, <b>model</b> is a <a href="sysmodel.html">system
+model data structure</a> containing an <b>appearance</b> field and,
+optionally, also a <b>camera</b> field.&nbsp; The former supplies
+the <a href="sysmodel.html#appearance">drawing instructions</a>
+that <b>showmotion</b> needs in order to display the model; and the latter
+controls how the model is viewed
+(details <a href="sysmodel.html#camera">here</a>).&nbsp; <b>tdata</b> is a row
+or column vector of monotonically-increasing time values.&nbsp; It is not
+necessary for the time values to be strictly monotonic.&nbsp; However, the
+last element in <b>tdata</b> must be strictly greater than the first.&nbsp;
+<b>qdata</b> is a matrix containing joint position data.&nbsp; It can be
+either an <b>m&times;n</b> array or an <b>m&times;1&times;n</b> array,
+where <b>m</b> is the number of joint variables (i.e., <b>m=model.NB</b>)
+and <b>n</b> is the number of elements in <b>tdata</b>.&nbsp; The second
+option is the array output format of Simulink; so Simulink outputs can be fed
+directly into <b>showmotion</b>.&nbsp; The contents of <b>qdata(:,i)</b>
+or <b>qdata(:,1,i)</b> (as appropriate) are interpreted as the vector of joint
+position variables at time <b>tdata(i)</b>.&nbsp; To achieve a smooth
+animation, <b>showmotion</b> uses linear interpolation to calculate the values
+of the position variables at intermediate times.
+</p>
+
+<p>
+If the arguments <b>tdata</b> and <b>qdata</b> are omitted,
+then <b>showmotion</b> supplies a default animation in which each joint
+variable in turn is ramped from 0 to 1 and back to 0 in the space of one
+second (so the complete animation lasts <b>model.NB</b> seconds).&nbsp; This
+is useful when you just want to view an existing model, or when you are
+building your own models and want to see if you have got the drawing
+instructions right and put the joints in the right places.&nbsp;
+(<strong>Note:</strong> the default animation ignores any kinematic
+constraints that may have been specified in <b>model.gamma_q</b>, and
+therefore cannot be used to test the correctness of this function.)
+</p>
+
+<p>
+In the second and third calls listed above, <b>filename</b> is the name of a
+Matlab '.mat' file.&nbsp; In the second call, <b>filename</b> is the name of
+an existing file containing a previously-saved animation
+that <b>showmotion</b> is to load.&nbsp; In the third call, <b>filename</b> is
+the name of the file to which the current animation is to be saved.&nbsp;
+(<strong>Note:</strong> <b>showmotion</b> does not check to see if the
+save-file already exists, and does not warn you if you are about to overwrite
+an existing file.)&nbsp; In both cases, the '.mat' extension is
+optional.&nbsp; Thus, to load an animation from the file
+'results.mat', <b>filename</b> can be either 'results' or 'results.mat'.
+</p>
+
+<p>
+The fourth call listed above allows you to view and edit the metadata
+associated with an animation.&nbsp; The metadata consists of the following
+items: title, author(s), date stamp and description.&nbsp;
+Calling <b>showmotion('about')</b> causes <b>showmotion</b> to print the
+metadata associated with the current animation in the Matlab command
+window.&nbsp; Calling <b>showmotion('about',meta)</b> lets you replace one or
+more items of metadata with new values.&nbsp; <b>meta</b> is a structure
+containing one or more of the following fields: <b>author</b>, <b>title</b>
+and <b>description</b>.&nbsp; For each field present, <b>showmotion</b>
+replaces the relevant item with the specified new value.&nbsp; All three
+fields are strings.&nbsp; However, whereas <b>author</b> and <b>title</b>
+specify the new value directly, <b>description</b> is the full file name of a
+plain text file containing the new description.&nbsp; The date stamp is set
+automatically when an animation is saved, and cannot be edited.&nbsp;
+Probably, the easiest way to set the metadata is as follows:
+<ul><b>
+showmotion( 'about', struct( 'author', 'John Smith' ));<br>
+showmotion( 'about', struct( 'title', 'A Perfect Animation' ));<br>
+showmotion( 'about', struct( 'description', 'perfect.txt' ));
+</b></ul>
+</p>
+
+<p>
+<b>showmotion</b> lets you view an animation at any speed, from any angle, and
+at any magnification.&nbsp; It is intended to be easy and intuitive to
+use.&nbsp; However, there are, inevitably, some aspects of <b>showmotion</b>
+that are not so obvious.&nbsp; To find out more about how to use this program,
+see <a href="showmotion.html">How to Use Showmotion</a>.&nbsp; A few tips are
+listed below.
+<ul>
+<li>You do not have to exit from the current animation before starting a new
+  one.&nbsp; Any call to <b>showmotion</b> that starts a new animation
+  automatically discards the current animation.</li>
+<li>There is a bug in the way that Matlab interacts with GNU/Linux window
+  managers, which causes clickable items in <b>showmotion</b>'s control panel
+  to sometimes appear about 5 pixels below their correct positions.&nbsp; If
+  you find that an icon or slider (for example) isn't responding, then try
+  aiming a little higher.</li>
+<li>Most of the things you can do with the mouse can also be done with
+  keyboard commands.&nbsp; For example, the play/pause toggle is operated by
+  the space bar.</li>
+</ul>
+</p>
+
+<hr><a name="gcFD"></a>
+<br>
+
+<b>y = gcFD( model, FDfun, u )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/gcFD.txt">source code</a>]
+
+<p>
+This is a Simulink wrapper for the forward-dynamics
+functions <b><a href="#FDab">FDab</a></b>, <b><a href="#FDcrb">FDcrb</a></b>,
+<b><a href="#FDfb">FDfb</a></b> and <b><a href="#FDgq">FDgq</a></b>.&nbsp; It
+serves two purposes: (1) to accept ground contact forces in the format used in
+the <a href="gcmodel.html">Simulink ground-contact model</a>, and convert
+them into the format required by the forward-dynamics functions; and (2) to
+concatenate into a single vector the two return values of <b>FDfb</b>.&nbsp;
+The first argument is a <a href="sysmodel.html">system model data
+structure</a>; the second is the Matlab function handle of the dynamics
+function to be used; and the third is the concatenation of the
+vectors <b>q</b>, <b>qd</b>, <b>tau</b> and (optionally) the ground contact
+force data from which <b>f_ext</b> is obtained.&nbsp; However, if the dynamics
+function is <b>FDfb</b> then <b>u</b> is the concatenation
+of <b>x</b>, <b>q</b>, <b>qd</b>, <b>tau</b> and optional ground contact force
+data.&nbsp; The return value is either the vector <b>qdd</b> calculated by the
+dynamics function, or the concatenation of <b>xdfb</b> and <b>qdd</b> in the
+case of <b>FDfb</b>.&nbsp; To allow <b>u</b> to have the dimensions of a
+column vector, the 3&times;n or 6&times;n (as appropriate) matrix of planar or
+spatial ground contact forces must be reshaped into a single column vector in
+which the first 3 or 6 elements contain the coordinates of the force acting on
+the first point, and so on.&nbsp; Both the Matlab reshape function and the
+Simulink reshape block can perform this operation.&nbsp; Examples of how to
+use <b>gcFD</b> can be found in <a href="#simulink">Simulink tutorial examples
+5 and 7</a>.
+</p>
+
+<hr><a name="gcPosVel"></a>
+<br>
+
+<b>posvel = gcPosVel( model, q, qd )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/gcPosVel.txt">source code</a>]<br>
+<b>posvel = gcPosVel( model, xfb [, q, qd ] )</b>
+
+<p>
+This function calculates the positions and velocities of points that can make
+contact with the ground plane.&nbsp; It is used in conjunction
+with <a href="#gcontact">gcontact</a> to implement
+the <a href="gcmodel.html">Simulink ground-contact
+model</a>.&nbsp; <b>model</b> is a <a href="sysmodel.html">system model data
+structure</a> containing the field <b>gc</b>, which is a structure containing
+the fields <b>body</b> and <b>point</b>.&nbsp; The latter is either
+a <b>2&times;np</b> matrix, or a <b>3&times;np</b> matrix, depending on
+whether <b>model</b> uses planar or spatial arithmetic, and the former is
+an <b>np</b>-element array of body numbers, where <b>np</b> is the number of
+points in the ground-contact model, which can be any number greater than
+zero.&nbsp; Thus, <b>gc</b> defines a total of <b>np</b> points, such that
+point <b>i</b> is fixed in body <b>gc.body(i)</b> and has
+coordinates <b>gc.point(:,i)</b> in the local coordinate system of
+body <b>gc.body(i)</b>.&nbsp; The return value, <b>posvel</b> is either
+a <b>4&times;np</b> or <b>6&times;np</b> matrix, depending on
+whether <b>model</b> uses planar or spatial arithmetic, such that the top half
+of <b>posvel(:,i)</b> contains the position of point <b>i</b>, and the bottom
+half contains the linear velocity of point <b>i</b>, both expressed in base
+coordinates.
+</p>
+
+<p>
+<b>gcPosVel</b> counts its arguments in order to determine how it has been
+called.&nbsp; If three arguments have been supplied then the second and third
+arguments are assumed to be <b>q</b> and <b>qd</b>.&nbsp; If either two or
+four arguments have been supplied then the second argument is assumed to
+be <b>xfb</b>.&nbsp; In the case of three arguments, <b>q</b> and <b>qd</b>
+are column vectors containing the position and velocity variables of every
+joint in <b>model</b>.&nbsp; In the case of two or four arguments, <b>xfb</b>
+is a 13-element state vector in the same format as used by the floating-base
+dynamics functions (e.g. see <a href="#FDfb">FDfb</a>), and <b>q</b>
+and <b>qd</b> contain the position and velocity variables for joint 7
+onwards.&nbsp; In this case, <b>model</b> must be a system model created by
+<a href="#floatbase">floatbase</a>, or any other system model that adheres to
+the same conventions; and <b>q</b> and <b>qd</b> may be omitted if and only
+if <b>model.NB=6</b>.
+</p>
+
+<hr><a name="gcontact"></a>
+<br>
+
+<b>[f, ud, fcone] = gcontact( K, D, mu, p, pd, u )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/gcontact.txt">source code</a>]<br>
+<b>f = gcontact( K, D, 0, p, pd )</b>
+
+<p>
+This function calculates the forces acting on a set of points due to contact
+with a compliant ground plane.&nbsp; It is the main component in
+the <a href="gcmodel.html">Simulink ground-contact model</a>.&nbsp; In 3D
+space, the ground plane is defined to be the x-y plane, and the z axis points
+up.&nbsp; In 2D space, the x axis is defined to be the ground plane, and the y
+axis points up.
+</p>
+
+<p>
+In the first call listed above, <b>gcontact</b> uses a contact model that
+includes friction.&nbsp; In this case, <b>K</b>, <b>D</b> and <b>mu</b> are
+strictly-positive scalars giving the stiffness, damping and friction
+coefficients of the ground plane; <b>p</b> and <b>pd</b>
+are <b>nd&times;np</b> matrices giving the positions and linear velocities of
+a set of <b>np</b> points, where <b>nd</b> is the dimension of the space
+containing the points (so <b>nd=2</b> or <b>3</b>); <b>u</b> is
+an <b>(nd-1)&times;np</b> matrix of ground tangential-deformation state
+variables, which are used to calculate the friction forces; <b>f</b> is
+an <b>nd&times;np</b> matrix of ground-reaction forces acting on the points
+specified in <b>p</b>; <b>ud</b> is the time derivative of <b>u</b>;
+and <b>fcone</b> is a <b>1&times;np</b> matrix used to distinguish between
+those points which are in contact with the ground and sliding over it, and
+those which are in contact and not sliding.&nbsp; (The latter are said to
+be <i>sticking</i>.)&nbsp; Specifically, point <b>i</b> is in contact with the
+ground if <b>f(nd,i)&gt;0</b>, and it is sticking
+if <b>fcone(i)&le;1</b>.&nbsp; The test for sticking will always return false
+for any point that is not in contact.
+</p>
+
+<p>
+In the second call listed above, <b>gcontact</b> uses a frictionless contact
+model, and returns only the normal component of the contact force.&nbsp; In
+this case, <b>K</b> is a strictly-positive scalar giving the stiffness of the
+ground plane in the normal direction; <b>D</b> is a non-negative scalar giving
+the damping coefficient in the normal direction; the third argument is zero
+(<b>gcontact</b> distinguishes between the two calls by testing the value of
+its third argument); <b>p</b> and <b>pd</b> are <b>1&times;np</b> matrices
+giving the normal components of the positions and velocities of a set
+of <b>np</b> ground-contact points; and <b>f</b> is a <b>1&times;np</b> matrix
+giving the normal components of the ground-reaction forces acting on those
+points.&nbsp; Point <b>i</b> can be classified as being in contact with the
+ground if <b>f(i)&gt;0</b>.
+</p>
+
+<p>
+In both cases, <b>gcontact</b> determines the values of <b>np</b> and (if
+appropriate) <b>nd</b> from the size of <b>p</b>.&nbsp; Also, to facilitate
+its use with Simulink, if <b>gcontact</b> is called with only one return
+variable then it returns the concatenation of <b>f</b>, <b>ud</b>
+and <b>fcone</b> (i.e., the return value is <b>[f;ud;fcone]</b>).
+</p>
+
+<hr><a name="expandLambda"></a>
+<br>
+
+<b>newLambda = expandLambda( lambda, nf )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/expandLambda.txt">source code</a>]
+
+<p>
+This function calculates the <i>expanded parent array</i>, which is the
+parent array used by branch-induced sparsity functions, from the parent
+array of a kinematic tree (<b>lambda</b>) and an array of joint motion
+freedoms (<b>nf</b>), using the algorithm described in Table 6.4
+of <a href="#RBDA">RBDA</a>.&nbsp; Specifically, <b>lambda</b> is an array of
+integers, containing one entry per body, such that <b>lambda(i)</b> is the
+parent of body <b>i</b>; <b>nf</b> is an array of integers, containing one
+entry per tree joint (which is the same thing as one entry per body), such
+that <b>nf(i)</b> is the number of degrees of motion freedom (DoF) allowed by
+joint <b>i</b>; and <b>newLambda</b> is an array of integers,
+containing <b>sum(nf)</b> elements, such that <b>newLambda</b> can be regarded
+as the parent array of a new kinematic tree that is obtained from the original
+by replacing every joint having more than one DoF with an appropriate chain of
+single-DoF joints.&nbsp; Thus <b>newLambda</b> is an array containing one
+entry per joint variable, rather than one entry per joint.&nbsp; The idea of
+an expanded parent array is explained further in <a href="#RBDA">RBDA</a> and
+in [<a href="http://royfeatherstone.org/abstracts.html#factorize-sparse-JSIM">Fea05</a>].
+</p>
+
+<p>
+By definition, if every joint in the kinematic tree has only one DoF,
+then <b>newLambda=lambda</b>.&nbsp; As the functions and data structures in
+this library only support single-DoF joints, it follows that the use
+of <b>expandLambda</b> is not strictly necessary with the current set of
+dynamics functions.
+</p>
+
+<hr><a name="LTL"></a><a name="LTDL"></a>
+<br>
+
+<b>L = LTL( H, lambda )</b> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/LTL.txt">source code</a>]<br>
+
+<b>[L, D] = LTDL( H, lambda )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/LTDL.txt">source code</a>]<br>
+
+<p>
+These functions perform the LTL and LTDL factorizations on a given
+matrix, <b>H</b>, which must be symmetric and positive-definite, and must
+satisfy the following condition: the nonzero elements on row <b>i</b>
+of <b>H</b> below the main diagonal must appear only in
+columns <b>lambda(i)</b>, <b>lambda(lambda(i))</b>, and so
+on.&nbsp; <b>lambda</b> can be any array of integers such
+that <b>length(lambda)</b> equals the dimension of <b>H</b>,
+and <b>0&le;lambda(i)&lt;i</b> for all <b>i</b>.&nbsp; This sparsity
+pattern is called <i>branch-induced sparsity</i>, and it is explained in
+detail in <a href="#RBDA">RBDA</a> and
+[<a href="http://royfeatherstone.org/abstracts.html#factorize-sparse-JSIM">Fea05</a>].&nbsp;
+Its relevance to dynamics is that the joint-space inertia matrix
+(see <a href="#HandC">HandC</a>) exhibits branch-induced sparsity, and the
+exploitation of this sparsity can result in significant cost savings.
+</p>
+
+<p>
+<b>LTL</b> calculates a lower-triangular matrix, <b>L</b>, that
+satisfies <b>L'*L=H</b> (LTL factorization); and <b>LTDL</b> calculates a
+unit-lower-triangular matrix, <b>L</b>, and a diagonal matrix, <b>D</b>, that
+satisfy <b>L'*D*L=H</b> (LTDL factorization).&nbsp; Both of these
+factorizations preserve the branch-induced sparsity pattern of <b>H</b>.&nbsp;
+Thus, the nonzero elements on row <b>i</b> of <b>L</b> below the main diagonal
+appear only in columns <b>lambda(i)</b>, <b>lambda(lambda(i))</b>, and so on.
+</p>
+
+<hr><a name="mpyH"></a>
+<br>
+
+<b>y = mpyH( H, lambda, x )</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/mpyH.txt">source code</a>]
+
+<p>
+This function calculates the product <b>y=H*x</b>, where <b>x</b> and <b>y</b>
+are vectors, and <b>H</b> is a symmetric matrix with branch-induced
+sparsity; i.e., <b>H</b> must satisfy the following condition: the nonzero
+elements on row <b>i</b> of <b>H</b> below the main diagonal must appear only
+in columns <b>lambda(i)</b>, <b>lambda(lambda(i))</b>, and so
+on.&nbsp; <b>lambda</b> can be any array of integers such
+that <b>length(lambda)</b> equals the dimension of <b>H</b>,
+and <b>0&le;lambda(i)&lt;i</b> for all <b>i</b>.
+</p>
+
+<hr><a name="mpyL"></a><a name="mpyLt"></a><a name="mpyLi"></a>
+<a name="mpyLit"></a>
+<br>
+
+<b>y = mpyL( L, lambda, x )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/mpyL.txt">source code</a>]<br>
+
+<b>y = mpyLt( L, lambda, x )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/mpyLt.txt">source code</a>]<br>
+
+<b>y = mpyLi( L, lambda, x )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/mpyLi.txt">source code</a>]<br>
+
+<b>y = mpyLit( L, lambda, x )</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<a href="sourceText/mpyLit.txt">source code</a>]
+
+<p>
+These functions calculate the following products: <b>y=L*x</b>, <b>y=L'*x</b>,
+<b>y=inv(L)*x</b> and <b>y=inv(L')*x</b>, respectively.&nbsp; In every
+case, <b>x</b> and <b>y</b> are vectors, and <b>L</b> is a lower-triangular
+matrix with branch-induced sparsity, such as those calculated
+by <a href="#LTL">LTL</a> and <a href="#LTDL">LTDL</a>.&nbsp; Thus, <b>L</b>
+must satisfy the condition that the nonzero elements on row <b>i</b> below the
+main diagonal appear only in
+columns <b>lambda(i)</b>, <b>lambda(lambda(i))</b>, and so
+on.&nbsp; <b>mpyLi</b> and <b>mpyLit</b> also require that the diagonal
+elements of <b>L</b> be nonzero.&nbsp; <b>lambda</b> can be any array of
+integers such that <b>length(lambda)</b> equals the dimension of <b>H</b>,
+and <b>0&le;lambda(i)&lt;i</b> for all <b>i</b>.
+</p>
+
+<strong>Example:</strong><br>
+<div style="margin-left: 40px;">To solve the linear equation <b>H*y=x</b>
+  for <b>y</b> via the LTL factorization, proceed as follows:<br>
+  <b>L = LTL( H, lambda );</b><br>
+  <b>tmp = mpyLit( L, lambda, x );</b><br>
+  <b>y = mpyLi( L, lambda, tmp );</b></div>
+
+<hr><a name="bugs"></a>
+
+<h3>Bug Fixes</h3>
+
+<ul>
+<li>
+No bugs have been reported yet.
+</li>
+</ul>
+
+<hr>
+<small>
+Page last modified:&nbsp; September 2013<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>

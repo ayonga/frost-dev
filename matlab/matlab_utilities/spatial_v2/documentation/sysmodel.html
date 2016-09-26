@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    b.black { color: rgb(0,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+    th { color: rgb(0,0,102); font-weight: bold; font-size: larger }
+    td { vertical-align: top }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>System Model Data Structure</title>
+</head>
+
+<body>
+
+<h2>The System Model Data Structure</h2>
+
+<p>
+<b><i>Spatial_v2</i></b> uses a system model data structure that can describe
+a general fixed-base kinematic tree based either on spatial-vector arithmetic
+or on planar-vector arithmetic.&nbsp; A mixture of the two is not
+allowed.&nbsp; A spatial model (i.e., one based on spatial-vector arithmetic)
+may contain revolute, prismatic and helical joints; whereas a planar model may
+contain revolute and prismatic joints only.&nbsp; Joint types are identified
+by type codes, and there are separate codes for spatial-arithmetic joints and
+planar-arithmetic joints.&nbsp; One must use the correct type of joint for the
+given underlying arithmetic.
+</p>
+
+<p>
+Optionally, a user-defined function can be added to the data structure, which
+defines arbitrary constraints on the joint position variables.&nbsp; This
+function can be used to incorporate into the system model the effects of
+closed kinematic loops, gearing between joints, and the kinematics of
+unsupported joint types.&nbsp; Furthermore, as massless bodies are allowed
+(provided the joint-space inertia matrix remains nonsingular), it is possible
+to emulate cylindrical, planar, spherical and 6-DoF joints using appropriate
+chains of revolute and prismatic joints interconnected with massless
+bodies.&nbsp; Planar and 6-DoF emulations, in particular, support the
+modelling of floating-base planar and spatial rigid-body systems.
+</p>
+
+<table style="text-align: left; width: 100%;" border="1" cellspacing="2"
+ cellpadding="2">
+<tbody>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Description</th>
+</tr>
+<tr>
+  <td><b>NB</b></td>
+  <td>int</td>
+  <td>the number of bodies in the tree, excluding the fixed
+    base.&nbsp; <b>NB</b> is also the number of joints.</td>
+</tr>
+<tr>
+  <td><b>parent</b></td>
+  <td>int[NB]</td>
+  <td><b>parent(i)</b> is the body number of the parent of body <b>i</b> in
+    the tree.&nbsp; The fixed base is defined to be body number 0; and the
+    remaining bodies are numbered from 1 to NB in any order such that each
+    body has a higher number than its parent (so <b>parent(i) &lt; i</b>
+    for all <b>i</b>).&nbsp; Joint <b>i</b> connects from
+    body <b>parent(i)</b> to body <b>i</b>.
+  </td>
+</tr>
+<tr>
+  <td><b>jtype</b></td>
+  <td>jd{NB}</td>
+  <td><b>jtype{i}</b> contains either the joint type code or the
+    joint-descriptor data structure for joint <b>i</b>.&nbsp; Joint type codes
+    are strings, and joint descriptors are data structures containing a field
+    called <b>code</b> and an optional second field called <b>pars</b>, the
+    former containing the joint type code and the latter any parameters that
+    are needed by that type of joint.&nbsp; A complete listing of joint type
+    codes appears with the documentation
+    for <a href="index.html#jcalc">jcalc</a>.</td>
+</tr>
+<tr>
+  <td><b>Xtree</b></td>
+  <td>xfm{NB}</td>
+  <td><b>Xtree{i}</b> is the coordinate transform from the coordinate system
+    of body <b>parent(i)</b> to the coordinate system of the predecessor frame
+    of joint <b>i</b> (which is embedded in body <b>parent(i)</b>).&nbsp; The
+    product of this transform with the joint transform for joint <b>i</b>, as
+    calculated by <a href="index.html#jcalc">jcalc</a>, is the transform from
+    body <b>parent(i)</b> coordinates to body <b>i</b> coordinates.</td>
+</tr>
+<tr>
+  <td><b>I</b></td>
+  <td>spI{NB}</td>
+  <td><b>I{i}</b> is the spatial or planar (as appropriate) inertia of
+    body <b>i</b>, expressed in body <b>i</b> coordinates.</td>
+</tr>
+<tr>
+  <td><b>gravity</b></td>
+  <td>rn[d]</td>
+  <td>This is an optional field specifying the gravitational acceleration
+    vector in base (body 0) coordinates.&nbsp; <b>d</b> is either 2 or 3,
+    depending on whether the underlying arithmetic is planar or spatial.&nbsp;
+    If this field is omitted then a default value of <b>[0;0;&minus;9.81]</b>
+    is used in spatial models, and <b>[0;0]</b> in planar models.</td>
+</tr>
+<tr>
+  <td><b>gamma_q</b></td>
+  <td>@fh</td>
+  <td>This field is optional.&nbsp; If present, it must contain the Matlab
+    function handle of a function that imposes kinematic constraints on the
+    joint variables.&nbsp; For a description of how this function works, and
+    how to write your own, see <a href="gammaq.html">Describing Constraints
+    with gamma_q</a>.</td>
+</tr>
+<tr>
+  <td><b>appearance<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.base<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.body</b></td>
+  <td><b>&nbsp;</b><br> dil<b>&nbsp;</b><br> dil{NB}</td>
+  <td>This is an optional field containing drawing instructions for use
+    by <a href="index.html#showmotion">showmotion</a>.&nbsp; If this field is
+    present, then <b>appearance.body</b> is a cell array such
+    that <b>appearance.body{i}</b> contains the drawing instruction list for
+    body <b>i</b>, and <b>appearance.base</b> is a field containing the
+    drawing instruction list for the base (body 0).&nbsp;
+    (<b>appearance.base</b> can be omitted if there are no drawing
+    instructions for the base.)&nbsp; A drawing instruction list is permitted
+    to be empty, in which case the affected body is invisible.&nbsp; A
+    detailed description of drawing instructions appears
+    <a href="#appearance">below</a>.</td>
+</tr>
+<tr>
+  <td><b>camera</b></td>
+  <td>&nbsp;</td>
+  <td>This is an optional field containing data that affects
+    how <a href="index.html#showmotion">showmotion</a> views this model.&nbsp;
+    It is a structure with several fields, and is described in
+    detail <a href="#camera">below</a>.</td>
+</tr>
+<tr>
+  <td><b>gc<br>gc.body<br>gc.point</b></td>
+  <td><b>&nbsp;</b><br> int[npt]<b>&nbsp;</b><br> rn[d&times;npt]</td>
+  <td>This is an optional field that is used in connection with
+  the <a href="gcmodel.html">Simulink ground contact
+  model</a>.&nbsp; It contains a list of body numbers and the coordinates of
+  a set of points.&nbsp; <b>npt</b> is the number of points in the
+  ground-contact model; and <b>d</b> is either 2 or 3, depending on whether
+  the underlying arithmetic is planar or spatial.&nbsp; Point number <b>i</b>
+  is fixed in body <b>gc.body(i)</b>, and <b>gc.point(:,i)</b> contains the
+  coordinates of that point expressed in the local coordinate system of
+  body <b>i</b>.&nbsp; There are no restrictions on the number of points in
+  the model, or the number of points in any one body, or the order in which
+  points can be listed.</td>
+</tr>
+<tr>
+  <td colspan="3"><strong>codes appearing in the 'Type'
+    column:</strong>&nbsp; <b class=black>int</b>: integer-valued
+    number;&nbsp; <b class=black>rn</b>: real
+    number;&nbsp; <b class=black>jd</b>: type-code string or joint-descriptor
+    data structure;&nbsp; <b class=black>xfm</b>: spatial (6&times;6) or
+    planar (3&times;3) coordinate transform;&nbsp; <b class=black>spI</b>:
+    spatial (6&times;6) or planar (3&times;3) inertia
+    matrix;&nbsp; <b class=black>@fh</b>: Matlab function
+    handle;&nbsp; <b class=black>dil</b>: drawing instruction
+    list;&nbsp; <b class=black>[...]</b>: array of specified dimension;&nbsp;
+    <b class=black>{...}</b>: cell array of specified dimension</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Drawing Instructions<a name="appearance"></a></h3>
+
+<p>
+The appearance of a body is specified by a <i>drawing instructions list</i>,
+which is a cell array containing, in any order, zero or more drawing
+instructions, and zero or more drawing instructions lists.&nbsp; Thus,
+according to this definition, <b>{}</b> is a valid drawing instructions list,
+and so is <b>{{},{{}}}</b>, although neither contains any drawing
+instructions.&nbsp; A <i>drawing instruction</i> is a sequence of either two
+or three elements in a drawing instructions list.&nbsp; The first element is a
+string identifying the type of drawing instruction, and the rest are numeric
+arguments.
+</p>
+
+<p>
+Drawing instructions can be divided into two groups: those that create
+something visible, and those that alter the <i>graphics context</i>.&nbsp; The
+latter is a data structure containing three items: the current colour, the
+current level of facetting (which controls the number of triangles used to
+make a sphere or a cylinder), and the current vertex list.&nbsp; The graphics
+context behaves as follows: (1) whenever a component of the graphics context
+is changed by a drawing instruction, the new value remains in effect until
+it is changed again by another drawing instruction, or until the end of the
+list or sublist in which it appeared; (2) whenever a sublist is encountered,
+it inherits the graphics context of its enclosing list, but any changes made
+within it remain local to the sublist.&nbsp; For example, if <b>B</b> denotes
+the drawing instruction to draw a box, and <b>Cr</b>, <b>Cg</b> and <b>Cb</b>
+denote the drawing instructions to set the current colour to red, green or
+blue, respectively, then the list <b>{Cr,B,{B,Cg,B,Cb,B},B}</b> draws a red
+box, another red box, a green box, a blue box, and one more red box.
+</p>
+
+<p>
+The complete list of drawing instructions is set out below.&nbsp; Note that
+drawing instructions are always 3D, regardless of whether the model is based
+on spatial or planar arithmetic.&nbsp; Note, also, that vectors appearing in
+the drawing instructions are always row vectors.&nbsp; For a practical
+demonstration of drawing instructions,
+see <a href="index.html#gfxExample">gfxExample</a>.
+<ul>
+  <li><b>'box', [p1; p2]</b>&nbsp; &mdash;&nbsp; draw a box aligned with the
+    local coordinate axes.&nbsp; <b>p1</b> and <b>p2</b> are row vectors
+    giving the coordinates of any two diametrically opposite vertices of the
+    box.
+  </li>
+  <li><b>'cyl', [p1; p2], r</b>&nbsp; &mdash;&nbsp; draw a cylinder of
+    radius <b>r</b>.&nbsp; <b>p1</b> and <b>p2</b> are row vectors giving the
+    coordinates of the centres of the two end faces of the cylinder.
+  </li>
+  <li><b>'sphere', c, r</b>&nbsp; &mdash;&nbsp; draw a sphere of
+    radius <b>r</b> centred on the point <b>c</b>.&nbsp; If a secondary
+    current colour has been specified, then this drawing instruction creates a
+    two-tone sphere.&nbsp; Otherwise, it creates a sphere in a single colour.
+  </li>
+  <li><b>'colour', rgb</b>&nbsp; &mdash;&nbsp; change the current
+    colour.&nbsp; The argument is either a 1&times3 vector specifying a colour
+    in RGB format (three real numbers in the range 0 to 1), or a 2&times;3
+    matrix specifying a primary and a secondary colour.&nbsp; At present, only
+    the <b>'sphere'</b> drawing instruction makes use of the secondary
+    colour.&nbsp; Showmotion chooses an initial colour for each body according
+    to its body number, resulting in a default colouring scheme that is
+    adequate for basic viewing purposes.&nbsp; There is therefore no need to
+    specify colours of your own unless you wish to deviate from the default
+    colour scheme.&nbsp; <strong>Tip:</strong> the default colours all have
+    intensities of 80% or less, and are not fully saturated.&nbsp;  Thus, if
+    you use extreme RGB values, like [1 0 0], the result will be noticably
+    bright and lurid compared with the defaults.&nbsp; Therefore, reserve the
+    use of such colours for things that need to be especially bright and
+    prominent.
+  </li>
+  <li><b>'facets', N</b>&nbsp; &mdash;&nbsp; change the current level of
+    facetting.&nbsp; The argument is an integer greater than 2, specifying the
+    number of triangles to appear arount the rim of a cylinder or the equator
+    of a sphere.&nbsp; (In the case of a sphere, the actual number used
+    is <b>N</b> rounded up to the next multiple of 4.)&nbsp; The initial value
+    of <b>N</b> is 24.&nbsp; Be aware that the number of triangles in a sphere
+    grows quadratically with <b>N</b>.&nbsp; If you set <b>N=1000</b> then
+    your spheres will look flawlessly smooth, and they will take forever to
+    draw.
+  </li>
+  <li><b>'vertices', V</b>&nbsp; &mdash;&nbsp; specify a list of vertices for
+    use in subsequent <b>'line'</b> and <b>'triangles'</b> drawing
+    instructions.&nbsp; <b>V</b> is an N&times;3 matrix, N&gt;=2, specifying
+    the coordinates of N vertices.&nbsp; <b>V</b> supercedes any previous list
+    of vertices, and remains in force until it too is superceded, or until the
+    end of the (sub-)list in which <b>V</b> appears.&nbsp; <b>V(i,:)</b>
+    defines vertex number <b>i</b>.
+  </li>
+  <li><b>'line', V</b> or <b>'line', vlist</b>&nbsp; &mdash;&nbsp; draw a
+    polyline.&nbsp; <b>V</b> is an N&times;3 matrix, N&gt;=2, specifying
+    directly the coordinates of a list of N vertices, whereas <b>vlist</b> is
+    a list of vertex numbers referring to entries in the current vertex list,
+    as defined by <b>'vertices'</b>.&nbsp; In both cases, the specified
+    vertices are joined together by straight line segments.&nbsp; The only
+    difference between the two forms is the source of the vertex data.
+  </li>
+  <li><b>'triangles', T</b>&nbsp; &mdash;&nbsp; draw a set of
+    triangles.&nbsp; <b>T</b> is an N&times;3 matrix of vertex numbers such
+    that each row defines one triangle.&nbsp; (So this drawing instruction
+    requires a current vertices list that defines at least three
+    vertices.)&nbsp; A triangle is deemed to have two faces: a front face and
+    a back face.&nbsp; The former reflects light, and is intended to be
+    seen.&nbsp; The latter ought to be invisible, but Matlab draws it as
+    visible but unlit.&nbsp; To make your triangles face the right way, use
+    the following rule: list the vertices in counter-clockwise order, as
+    viewed from the front face.
+  </li>
+  <li><b>'tiles', [x0 x1; y0 y1; z0 z1], size</b>&nbsp; &mdash;&nbsp; draw a
+    rectangular surface with a chequer-board pattern of square
+    tiles.&nbsp; The surface is parallel to any two of the three coordinate
+    axes.&nbsp; This is a special drawing instruction that is allowed only in
+    the base, and is intended for drawing a tiled floor.&nbsp; The first
+    argument is a 3&times;2 matrix containing three ordered pairs.&nbsp; Any
+    two of these must define strictly-positive ranges (i.e., second number
+    bigger than first).&nbsp; These two ranges identify the two axes that are
+    parallel to the floor, and also the location and extent of the floor in
+    those two directions.&nbsp; The first element of the third ordered pair
+    specifies the third coordinate of the floor rectangle; and the second
+    element must be either equal to or less than the first, and controls
+    whether the floor faces in the positive direction (equal) or negative
+    direction (less than) of the third axis.&nbsp; For example, <b>'tiles', [1
+    2; 3 4; &minus;1 &minus;1], 0.4</b> creates a floor rectangle extending
+    from 1 to 2 in the x direction, from 3 to 4 in the y direction, located at
+    &minus;1 in the z direction, and facing in the positive z direction.&nbsp;
+    The tile size is 0.4, so the floor contains four whole tiles, four half
+    tiles and one quarter tile.&nbsp; A floor made with this drawing
+    instruction is always grey, regardless of the current colour.
+  </li>
+</ul>
+
+<h3>Camera Data Structure<a name="camera"></a></h3>
+
+<p>
+Showmotion supports two kinds of camera: a fixed camera, which does not move
+of its own accord, and a tracking camera, which automatically translates in
+the horizontal plane in order to follow the horizontal coordinates of a
+specified point in a specified body as it moves.&nbsp; Tracking cameras are
+useful for mobile robots, vehicles, and the like.&nbsp; By default, showmotion
+gives you a fixed camera with a default initial view.&nbsp; If you want a
+tracking camera, or a different initial view, then you specify it in the
+fields of the <b>camera</b> data structure, as listed below.&nbsp; Every field
+is optional, and all vectors can be in either row or column format.&nbsp; Note
+that showmotion's camera is always a 3D camera, regardless of whether the
+model's underlying arithmetic is spatial or planar.
+
+<ul>
+  <li><b>body</b>&nbsp; &mdash;&nbsp; the body number of the body to
+    track.&nbsp; If this field is either absent or set to zero, then you get a
+    fixed camera.&nbsp; Otherwise, <b>camera.body</b> must be an integer in
+    the range <b>1...NB</b> specifying the body number of the body to track.
+  </li>
+  <li><b>trackpoint</b>&nbsp; &mdash;&nbsp; a 3D vector giving the coordinates,
+    expressed in the relevant body coordinate system, of the point to be
+    tracked.&nbsp;  If <b>trackpoint</b> is not specified then it defaults
+    to <b>[0 0 0]</b>.
+  </li>
+  <li><b>direction</b>&nbsp; &mdash;&nbsp; a 3D vector, expressed in base
+    coordinates, pointing into the camera (i.e., the opposite of the camera's
+    viewing direction).&nbsp; If this field is omitted, then ShowMotion
+    selects one of two possible default values, depending on whether it thinks
+    the Y axis or the Z axis ought to be pointing up.
+  </li>
+  <li><b>up</b>&nbsp; &mdash;&nbsp; a 3D vector, expressed in base coordinates,
+    pointing up.&nbsp; This field serves two purposes.&nbsp; Firstly, it
+    defines a direction that must be pointing up in the initial view provided
+    by the camera.&nbsp; Secondly, it defines the orientation of the
+    horizontal plane used by the tracking camera (i.e., the horizontal plane
+    is defined to be the plane normal to the <b>up</b> vector).&nbsp; If this
+    field is not specified, then showmotion chooses <b>up=[0 1 0]</b> for
+    planar robots with gravity pointing in the &minus;Y direction,
+    and <b>up=[0 0 1]</b> for all other cases.
+  </li>
+  <li><b>zoom</b>&nbsp; &mdash;&nbsp; a scalar indicating a zoom factor
+    relative to the default view.&nbsp; Showmotion's default initial view is
+    calculated to show every moving body in the model.&nbsp; If you want
+    things to appear bigger or smaller than this, then set <b>zoom</b> to a
+    value greater than or less than 1, as appropriate.&nbsp;  If omitted, this
+    field defaults to 1.
+  </li>
+  <li><b>locus</b>&nbsp; &mdash;&nbsp; a 2D vector in normalized window
+    coordinates indicating where in the window the tracked point is to
+    appear.&nbsp; The coordinates must be in the range &minus;1 to +1, with
+    [0,0] indicating the centre of the window, and other coordinates covering
+    the largest square that will fit in the window.&nbsp; If this field is
+    present, then ShowMotion makes <b>trackpoint</b> appear at the specified
+    location in the window, even if the camera is not a tracking camera.&nbsp;
+    If this field is not specified then the camera points at the centre of the
+    bounding box containing all of the drawing instructions for the moving
+    bodies.
+  </li>
+</ul>
+
+<hr>
+<small>
+Page last modified:&nbsp; June 2012<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>

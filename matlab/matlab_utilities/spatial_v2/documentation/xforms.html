@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>General Comments on Coordinate Transforms</title>
+</head>
+
+<body>
+
+<h2>General Comments on Coordinate Transforms</h2>
+
+<i>
+This document explains how coordinate systems and coordinate transforms are
+defined; sets out the conventions used to describe coordinate transforms;
+presents the transformation rules for spatial and planar quantities; and says
+a few words about the difference between a coordinate transform and a
+displacement operator.
+</i>
+
+<p>
+The elementary functions in <i style="font-weight:bold">Spatial_v2</i> deal
+with four different kinds of coordinate system: Cartesian coordinates for 2-D
+and 3-D points and Euclidean vectors, Pl&uuml;cker coordinates for spatial
+vectors, planar coordinates (a subset of Pl&uuml;cker coordinates) for planar
+vectors, and homogeneous coordinates for points in 3-D space.&nbsp;
+(Homogeneous coordinates appear only in the
+function <a href="index.html#pluho">pluho</a>, which converts between
+Pl&uuml;cker and homogeneous coordinate transforms.)&nbsp; These coordinate
+systems all have one thing in common: they are defined by the location of a
+Cartesian coordinate frame.&nbsp; Specifically, a Cartesian coordinate system
+for vectors (not points) is defined by the <i>orientation</i> of its
+coordinate frame; but Pl&uuml;cker, planar and homogeneous coordinates, as
+well as Cartesian coordinates for points, are all defined by the <i>position
+and orientation</i> of their coordinate frame.&nbsp; Furthermore, the
+relationship between a coordinate system and its frame is 1:1.&nbsp; So, for
+example, the set of all Pl&uuml;cker coordinate systems stands in 1:1
+correspondence with the set of all positions and orientations of a Cartesian
+frame in 3-D space.&nbsp; (Various descriptions of Pl&uuml;cker coordinates
+can be found on the
+<a href="http://royfeatherstone.org/spatial">spatial vectors home page</a>.)
+</p>
+
+<p>
+Given this close connection between frames and coordinate systems, it becomes
+convenient to use the same name to identify both the frame and the coordinate
+systems it defines.&nbsp; For example, a 3-D coordinate frame <b>A</b> defines
+both a 3-D Cartesian coordinate system <b>A</b> and a Pl&uuml;cker coordinate
+system <b>A</b>.&nbsp; Any possibility of ambiguity can be removed simply by
+identifying the type of vector under discussion.&nbsp; For example, in a
+statement like '&#133spatial velocity <b>v</b> expressed in <b>A</b>
+coordinates&#133;' it is clear that '<b>A</b> coordinates' must refer to the
+Pl&uuml;cker coordinate system defined by frame <b>A</b>.
+</p>
+
+<p>
+The purpose of a coordinate vector is to represent some physical quantity or
+phenomenon in a particular coordinate system.&nbsp; For example, if we say
+that a rigid body has a spatial velocity of <b>v</b>, and
+that <b>v<sub>A</sub></b> is the coordinate vector representing <b>v</b>
+in <b>A</b> coordinates, then the symbol <b>v</b> denotes an actual state of
+physical motion, whereas <b>v<sub>A</sub></b> denotes a 6x1 matrix (i.e., a
+column vector) of real numbers.&nbsp; On the one hand, <b>v</b> is unique
+because its value is the actual physical motion of a rigid body, and a rigid
+body can have only one state of motion at any given instant.&nbsp; On the
+other hand, <b>v<sub>A</sub></b> can have infinitely many different values,
+depending on the location of frame <b>A</b>, because it is just a list of six
+numbers that represent the state of motion indirectly via the basis vectors
+of <b>A</b> coordinates.&nbsp; Thus, <b>v</b> is the name of an actual state
+of motion, and <b>v<sub>A</sub></b> is the name of a 6x1 matrix.&nbsp;
+(In <a href="index.html#RBDA">RBDA</a>, <b>v</b> is called an
+<i>abstract vector</i>.)
+</p>
+
+<p>
+Let <b>v<sub>A</sub></b> and <b>v<sub>B</sub></b> be coordinate vectors
+representing the same physical quantity <b>v</b> in <b>A</b> and <b>B</b>
+coordinates, respectively.&nbsp; The <i>coordinate transform</i> from <b>A</b>
+to <b>B</b> coordinates is then defined to be the matrix <b>X</b> that
+satisfies <b>v<sub>B</sub>&nbsp;=&nbsp;X&nbsp;*&nbsp;v<sub>A</sub></b> for
+all <b>v</b>.&nbsp; The value of <b>X</b> depends only on the location of
+frame <b>B</b> relative to frame <b>A</b>, and on the type of vector being
+transformed.&nbsp; The easiest way to describe the relative location
+of <b>B</b> is to state the sequence of rotations and translations that will
+get you from <b>A</b> to <b>B</b>; that is, the sequence
+of <i>self</i>-rotations and <i>self</i>-translations of a coordinate frame
+that is initially coincident with frame <b>A</b>, such that it ends up
+coincident with frame <b>B</b>.&nbsp; Another way to think of it is
+<i>a description of the journey from <b>A</b> to <b>B</b></i>.&nbsp; For
+example, the function <a href="index.html#rotxyz">rotx</a> calculates the
+Pl&uuml;cker coordinate transform from <b>A</b> to <b>B</b> coordinates, in
+which frame <b>B</b> is rotated relative to frame <b>A</b> by a specified
+angle about their common <b>x</b> axis; and the
+function <a href="index.html#xlt">xlt</a> calculates the transform
+from <b>A</b> to <b>B</b> coordinates, in which frame <b>B</b> is translated
+by a specified amount relative to <b>A</b>.&nbsp; Putting the two together,
+the expression <b>rotx(theta)*xlt(r)</b> calculates the coordinate transform
+from <b>A</b> to <b>B</b> coordinates, in which frame <b>B</b> is
+&quot;translated by <b>r</b> and then rotated by <b>theta</b> about its
+local <b>x</b> axis.&quot;&nbsp; Observe that the description of the journey
+follows the mathematical expression from right to left: first <b>r</b>,
+then <b>theta</b>.
+</p>
+
+<h3>Spatial and Planar Coordinate Transform Rules</h3>
+
+<p>
+All Euclidean vectors (of a given dimension) follow the same transformation
+rule, regardless of whether the vectors represent motions or forces.&nbsp;
+However, the same is not true of spatial and planar vectors.&nbsp;
+Let <b>m</b> denote a spatial or planar motion vector (such as a velocity, an
+acceleration or a joint axis); let <b>f</b> denote a spatial or planar force
+vector (such as a force, an impulse or a momentum); and
+let <b>m<sub>A</sub></b>, <b>m<sub>B</sub></b>, <b>f<sub>A</sub></b>
+and <b>f<sub>B</sub></b> be coordinate vectors representing <b>m</b>
+and <b>f</b> in <b>A</b> and <b>B</b> coordinates, respectively.&nbsp;
+If <b>X</b> is the coordinate transform from <b>A</b> to <b>B</b> coordinates
+for motion vectors, and <b>Y</b> is the corresponding transform for force
+vectors, then the two transformation rules
+are <b>m<sub>B</sub>=X*m<sub>A</sub></b>
+and <b>f<sub>B</sub>=Y*f<sub>A</sub></b>, and the relationship
+between <b>X</b> and <b>Y</b> is <b>Y=X<sup>&minus;T</sup></b>,
+where <b>X<sup>&minus;T</sup></b>
+means <b>(X<sup>&minus;1</sup>)<sup>T</sup></b>.
+</p>
+
+<p>
+This difference between the way that motion and force vectors behave has
+consequences for the matrices representing inertia, stiffness, and other such
+quantities.&nbsp; Basically, we find that there are four possible
+transformation rules, depending on whether the matrix represents something
+that maps motion to motion, motion to force, force to motion, or force to
+force.&nbsp; The table below sets out the various formulae.&nbsp; There are
+also consequences for the way the software is organized.&nbsp;
+<i style="font-weight: bold">Spatial_v2</i> adopts the convention that every
+Pl&uuml;cker or planar coordinate transform that is either returned as a
+result, or accepted as an argument, is expected to be a coordinate transform
+for motion vectors.&nbsp; In the table below, <b>X</b> is the transform
+from <b>A</b> to <b>B</b> coordinates for motion vectors.
+
+<center>
+<table>
+<thead>
+  <tr>
+    <th>Type</th>
+    <td></td>
+    <th>Example</th>
+    <td></td>
+    <th colspan="3">Coordinate Transform Rules</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>motion vector</td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td>velocity</td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td><b>m<sub>B</sub> = X*m<sub>A</sub></b></td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td><b>m<sub>A</sub> = X<sup>&minus;1</sup>*m<sub>B</sub></b></td>
+  </tr>
+  <tr>
+    <td>force vector</td>
+    <td></td>
+    <td>force</td>
+    <td></td>
+    <td><b>f<sub>B</sub> = X<sup>&minus;T</sup>*f<sub>A</sub></b></td>
+    <td></td>
+    <td><b>f<sub>A</sub> = X<sup>T</sup>*f<sub>B</sub></b></td>
+  </tr>
+  <tr>
+    <td>motion to force</td>
+    <td></td>
+    <td>inertia</td>
+    <td></td>
+    <td><b>I<sub>B</sub>
+      = X<sup>&minus;T</sup>*I<sub>A</sub>*X<sup>&minus;1</sup></b></td>
+    <td></td>
+    <td><b>I<sub>A</sub> = X<sup>T</sup>*I<sub>B</sub>*X</b></td>
+  </tr>
+  <tr>
+    <td>force to motion</td>
+    <td></td>
+    <td>inverse inertia</td>
+    <td></td>
+    <td><b>&Phi;<sub>B</sub> = X*&Phi;<sub>A</sub>*X<sup>T</sup></b></td>
+    <td></td>
+    <td><b>&Phi;<sub>A</sub>
+      = X<sup>&minus;1</sup>*&Phi;<sub>B</sub>*X<sup>&minus;T</sup></b></td>
+  </tr>
+  <tr>
+    <td>motion to motion</td>
+    <td></td>
+    <td><b>crm(v)</b></td>
+    <td></td>
+    <td><b>M<sub>B</sub> = X*M<sub>A</sub>*X<sup>&minus;1</sup></b></td>
+    <td></td>
+    <td><b>I<sub>A</sub> = X<sup>&minus;1</sup>*M<sub>B</sub>*X</b></td>
+  </tr>
+  <tr>
+    <td>force to force</td>
+    <td></td>
+    <td><b>crf(v)</b></td>
+    <td></td>
+    <td><b>F<sub>B</sub>
+      = X<sup>&minus;T</sup>*F<sub>A</sub>*X<sup>T</sup></b></td>
+    <td></td>
+    <td><b>F<sub>A</sub>
+      = X<sup>T</sup>*F<sub>B</sub>*X<sup>&minus;T</sup></b></td>
+  </tr>
+</tbody>
+</table>
+</center>
+
+<h3>Displacement Operators</h3>
+
+<p>
+When a matrix is used to translate and/or rotate a coordinate system, it is
+called a coordinate transform.&nbsp; When a matrix is used to translate and/or
+rotate a geometrical object (points, lines, vectors, triangles, etc.), it is
+called a <i>displacement operator</i>.&nbsp; Terms like 'rotation operator',
+'rotation matrix' and 'translation matrix' are commonly used when the
+displacement happens to be a rotation about the origin or a pure translation.
+</p>
+
+<p>
+The distinction between these two kinds of matrix is important because they
+are closely related and easily confused (and confusion leads to
+mistakes).&nbsp; To illustrate the difference, let <b>u</b> be a Euclidean
+vector, and let <b>v</b> be the result of rotating <b>u</b> in a certain
+way.&nbsp; (So <b>v</b> has the same magnitude as <b>u</b>, but points in a
+different direction.)&nbsp; Also, let <b>A</b> and <b>B</b> be any two
+coordinate frames such that <b>B</b> is rotated relative to <b>A</b> in the
+same way that <b>v</b> is rotated relative to <b>u</b>.&nbsp; If <b>E</b> is
+the coordinate transform from <b>A</b> to <b>B</b>, and <b>R</b> is the
+displacement operator, then we have <b>u<sub>B</sub>=E*u<sub>A</sub></b>
+and <b>v<sub>A</sub>=R*u<sub>A</sub></b>.&nbsp; So <b>E</b> has left the
+vector alone but rotated the coordinate system, whereas <b>R</b> has left the
+coordinate system alone but rotated the vector.
+</p>
+
+<p>
+In this example, it can easily be shown
+that <b>R=E<sup>&minus;1</sup></b>.&nbsp; However, this is just a special case
+of a more general result, which is that <i>a coordinate transform matrix is
+the inverse of the displacement operator acting on the basis</i>.
+</p>
+
+<p>
+Why do you need to know this?&nbsp; Well, displacement operators are widely
+used in applications such as 3-D graphics and computer-aided design
+(CAD).&nbsp; The 4x4 matrices used in Matlab handle graphics, for example, are
+displacement operators, and so are the matrices in the Open-GL graphics
+library.&nbsp; If you want to interface
+<i style="font-weight: bold">Spatial_v2</i> with other software packages then
+you need to know whether those other packages expect coordinate transforms or
+displacement operators.
+</p>
+
+<p>
+At this point, you might be wondering why
+<i style="font-weight: bold">Spatial_v2</i> uses coordinate transforms when
+displacement operators are so widely used.&nbsp; The answer lies in the
+application.&nbsp; In 3-D graphics, or CAD, the idea is to create geometrical
+objects; and typically one does this by creating an object in a standard
+location, and then moving it from where it was created to where it is supposed
+to be.&nbsp; Displacement operators are the natural tool for this kind of
+work.&nbsp; In dynamics, on the other hand, all the bodies and joints already
+exist, and are already in their correct positions; and the task is to perform
+calculations local to each body and combine the results with those from other
+bodies.&nbsp; For this kind of work, it is convenient to assign a coordinate
+frame to each body, and employ coordinate transforms to move data around from
+one coordinate system to another.
+</p>
+
+<hr>
+<small>
+Page last modified:&nbsp; June 2012<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>

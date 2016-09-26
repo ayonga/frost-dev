@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+    span.red { color: rgb(102,0,0) }
+    th { color: rgb(0,0,102); font-weight: bold; font-size: larger }
+    td { vertical-align: top }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>Simulink Ground Contact Model</title>
+</head>
+
+<body>
+
+<h2>The Simulink Ground-Contact Model</h2>
+
+<p>
+To support some degree of physical interaction between a rigid-body system and
+its environment, <b><i>Spatial_v2</i></b> provides a Simulink block to
+calculate the forces acting on an identified set of points due to contact with
+a compliant ground plane.&nbsp; This block is based around the
+function <a href="index.html#gcontact">gcontact</a>.&nbsp; Three other
+functions support the use of this
+block: <a href="index.html#gcPosVel">gcPosVel</a>, which calculates the
+positions and velocities of the identified set of
+points; <a href="index.html#Fpt">Fpt</a>, which converts linear forces acting
+at specified points into equivalent spatial or planar forces;
+and <a href="index.html#gcFD">gcFD</a>, which converts the resulting matrix of
+spatial or planar forces into the format required in the <b>f_ext</b> argument
+of the forward-dynamics functions.&nbsp; The complete ground-contact model can
+be found in <a href="index.html#simulink">Simulink tutorial example 7</a>,
+from where it can be copied and adapted.
+</p>
+
+<p>
+The model works in both 2-D and 3-D Euclidean spaces, its behaviour being
+essentially the same in both cases.&nbsp; In 2-D space, the ground plane is
+defined to be the x axis; the y axis points up; and each point is identified
+by its x and y coordinates.&nbsp; In 3-D space, the ground plane is defined to
+be the x-y plane; the z axis points up; and each point is identified by its x,
+y and z coordinates.&nbsp; You use the 2-D ground-contact model with any
+system model based on planar arithmetic; and you use the 3-D ground-contact
+model with any system model based on spatial arithmetic.
+</p>
+
+<h3>How the Model Works</h3>
+
+<ol>
+<li>Every point has a given position and velocity, and the purpose of the
+  ground model is to calculate the forces acting on the points.</li>
+<li>Each point is considered in isolation.&nbsp; The force acting on any one
+  point depends only on the motion of that one point.</li>
+<li>The ground is modelled as a <i>massless, nonlinear spring-damper
+  system</i>, with compliance in both the normal and tangent directions.&nbsp;
+  The normal compliance gives rise to a normal force, whereas the tangential
+  compliance gives rise to a tangential force that is subject to an upper
+  limit determined by the <i>friction cone</i>.</li>
+<li>Any point that is above the ground plane is not in contact with it, and
+  experiences no forces.</li>
+<li>Any point that is below the ground plane may or may not be in contact with
+  it, depending on its velocity.&nbsp; If such a point is travelling upwards
+  faster than the natural recovery rate of the ground then it experiences no
+  ground-reaction force and is deemed not to be in contact with the
+  ground.</li>
+<li>For this reason, each point is classified as being either in contact or
+  not in contact according to the forces acting on it: a point is in contact
+  if it experiences a nonzero force, otherwise it is not in contact.</li>
+<li>Each in-contact point can be further classified according to whether it
+  is <i>sticking</i> (due to friction) or not sticking
+  (i.e., <i>slipping</i>).&nbsp; Thus, every point is always in exactly one
+  of the following three states at any given instant: sticking, slipping, or
+  not in contact.</li>
+<li>The sticking status of an in-contact point is determined as follows.&nbsp;
+  First, the normal component of ground reaction force is calculated; then the
+  tangent component is calculated on the assumption that the point is
+  sticking.&nbsp; The result is then tested against the friction cone.&nbsp;
+  If the calculated tangent force falls outside the friction cone then it is
+  truncated to the surface of the friction cone and the point is classified as
+  slipping.&nbsp; Otherwise, the point is sticking.</li>
+<li>Simulink's <i>zero-crossing detection</i> facility is used to detect the
+  precise moment when any point changes its state.</li>
+</ol>
+
+The compliant ground model resembles the one described in Section 11.8
+of <a href="index.html#RBDA">RBDA</a>, except that the model used here is
+nonlinear.&nbsp; More particularly, the compliant ground model is closely
+based on the model described
+in <a href="http://royfeatherstone.org/skippy/index.html#publications">Azad
+&amp; Featherstone (2010)</a>, except that the model used here is for points
+rather than spheres.
+
+<h3>How to Use it</h3>
+
+<p>
+<b>Step 1:&nbsp; <i>Identify the set of contact points.</i>&nbsp;</b>
+You must first identify the set of points in your model that will experience
+forces if they come into contact with the ground.&nbsp; We shall call
+them <i>ground-contact points</i>.&nbsp; The number and distribution of
+ground-contact points will depend on circumstances.&nbsp; For example, if you
+want to study bipedal walking in a humanoid with rectangular feet, then eight
+points will probably be enough: one at each corner of each foot.&nbsp; On the
+other hand, if you want to investigate the unrestricted rolling behaviour of a
+polyhedral approximation to a disc (as in Simulink tutorial example 7), then
+every vertex of the polyhedron must be included in the set.&nbsp; Each
+ground-contact point is characterized by two quantities: the <i>body
+number</i> of the body to which it belongs, and its <i>coordinates</i> in the
+local coordinate system of that body (x and y coordinates if the system model
+uses planar arithmetic, otherwise x, y and z coordinates).
+</p>
+
+<p>
+<b>Step 2:&nbsp; <i>Add them to your model.</i>&nbsp;</b>
+Add a new field, called <b>gc</b>, to your <a href="sysmodel.html">system
+model data structure</a>.&nbsp;  This field is a data structure containing
+fields called <b>body</b> and <b>point</b>, such that <b>body(i)</b> is the
+body number of the body to which ground-contact point number <b>i</b> belongs,
+and <b>point(:,i)</b> contains the coordinates of point <b>i</b>.&nbsp; Points
+can be listed in any order.
+</p>
+
+<p>
+<b>Step 3:&nbsp; <i>Copy and adapt <a href="index.html#simulink">Simulink
+tutorial example 7</a> (from spatial_v2/simulink).</i>&nbsp;</b>
+This involves several sub-steps, depending on your circumstances.
+<ol>
+<li>Replace references to <a href="index.html#rollingdisc">rollingdisc</a>
+  with references to your own model.&nbsp; Remember to do this also in the
+  Simulink model workspace initialization m-code (which is where important
+  model-wide parameters like <b>npt</b> are defined).&nbsp; You will probably
+  also want to change the names of some blocks.</li>
+<li>If your model is planar, then there are several dimensions in the 'ground'
+  subsystem that will need to be altered.&nbsp; There is some guidance on what
+  to do in some of the documentation blocks.</li>
+<li>If your model is not a floating-base system, or if it is but you don't
+  want to use <a href="index.html#FDfb">FDfb</a>, or if you do want to
+  use <a href="index.html#FDfb">FDfb</a> but your model consists of more than
+  one body, then you will have to make changes to the way the dynamics is
+  calculated in the 'disc'
+  subsystem.&nbsp; <a href="index.html#simulink">Example 2</a> shows how to
+  calculate the dynamics using <a href="index.html#FDab">FDab</a>,
+  and <a href="index.html#simulink">Example 5</a> shows how to
+  use <a href="index.html#FDfb">FDfb</a> when there is more than one body in
+  the system.</li>
+<li>Change the stiffness, damping and friction coefficients in the 'Ground'
+  block to values appropriate for your experiment.&nbsp; Bear in mind that
+  these numbers describe the total compliance between the bodies in your
+  system and the ground.&nbsp; For example, if your ground is made of
+  concrete, but your robot has soft rubber feet, then the stiffness
+  coefficient must be chosen to model the compliance in the feet.&nbsp;
+  Another thing to bear in mind is that if several points are making contact
+  with the ground simultaneously then they act like a set of springs in
+  parallel, so their collective contact stiffness is greater than that of any
+  one individual point.&nbsp; Here are a few formulae that might help:
+  <ul>
+  <li>If you want a compression of <b>d</b> metres to result in a force
+    of <b>F</b> Newtons, then the stiffness coefficient
+    is <b>K=F/d<sup>1.5</sup></b>.</li>
+  <li><b>D/K</b> is the time constant of the unloaded ground&mdash;it recovers
+    from a lost contact at a rate of <b>exp(Kt/D)</b>.&nbsp; The larger you
+    make <b>K/D</b>, the bouncier your contacts will be, but Simulink will
+    have to take smaller integration time steps.</li>
+  <li>A safe (non-slip) floor has a friction coefficient of about 0.5.</li>
+  </ul>
+</ol>
+</p>
+
+<hr>
+<small>
+Page last modified:&nbsp; June 2012<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>

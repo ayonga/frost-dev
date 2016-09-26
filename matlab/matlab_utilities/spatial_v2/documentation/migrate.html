@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style>
+    body { background-color: rgb(204,204,204) }
+    h2, h3 { color: rgb(0,0,102) }
+    hr { width: 100% }
+    b { color: rgb(102,0,0) }
+    i { color: rgb(60,40,0) }
+    strong { color: rgb(0,0,102) }
+    th { color: rgb(0,0,102); font-weight: bold }
+    td { vertical-align: top }
+    td.column { background: rgb(200,190,170) }
+  </style>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <meta name="Author" content="Roy Featherstone">
+  <title>Migrating from Spatial_v1 to Spatial_v2</title>
+</head>
+
+<body>
+
+<h2>Migrating from Spatial_v1 to Spatial_v2</h2>
+
+<p>
+<b><i>Spatial_v2</i></b> is not backward-compatible
+with <b><i>spatial_v1</i></b>.&nbsp; Therefore, if you want to port code
+from one to the other then a certain amount of editing is required.&nbsp; A
+detailed list of changes appears below; but first, here are the main
+differences between the two versions:
+<ol>
+<li>planar-vector functions have been folded into their spatial-vector
+  counterparts, and</li>
+<li>animation is now done within Matlab</li>
+</ol>
+In <b><i>spatial_v1</i></b>, there were separate functions for spatial and
+planar arithmetic.&nbsp; For example, <b>crfp</b> was the planar version
+of <b>crf</b>, and <b>IDp</b> was the planar version of <b>ID</b>.&nbsp;
+In <b><i>spatial_v2</i></b>, the planar functions no longer exist, and the
+spatial functions now implement both spatial and planar arithmetic.&nbsp;
+Also, the planar version of the system-model data structure no longer exists,
+and a single data structure now caters for both types of arithmetic.
+</p>
+
+<p>
+The old animation facility relied on a separate program,
+called <i>SceneViewer</i>, which was part of an old graphics package
+called <i>OpenInventor</i>.&nbsp; A function called <i>drawmodel</i> would
+create a text file containing drawing instructions expressed in
+OpenInventor's language, and run SceneViewer to display
+them.&nbsp; <b><i>Spatial_v2</i></b> comes with a new animator,
+called <a href="index.html#showmotion">showmotion</a>, that uses Matlab's
+handle graphics to display animations directly, thereby eliminating the
+dependence on an external graphics program.&nbsp; There have also been several
+changes to the format of drawing instructions.
+</p>
+
+<p>
+Three more changes worth noting are that (1) non-default gravity must now be
+specified as a field in the system-model data structure, rather than as an
+argument to the dynamics functions; (2) external forces are now expressed in
+absolute coordinates (=fixed-base coordinates), rather than link coordinates;
+and (3) the floating-base functions now use a quaternion, rather than a
+spatial coordinate transform, to represent the orientation of the floating
+base.
+</p>
+
+<h3>Changes to Functions and Data Structures</h3>
+
+<p>
+The table below sets out the changes you will have to make in order to port
+your code from <b><i>spatial_v1</i></b>
+to <b><i>spatial_v2</i></b>.&nbsp; <strong>Note:</strong>&nbsp; where a
+function is marked as 'no change', this does not mean that the function itself
+has not changed; rather, it means that you do not have to make any changes to
+your code.
+</p>
+
+<table style="width: 100%" border="0" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td class=column style="width: 49%">
+
+<table style="text-align: left" border="0" cellspacing="0" cellpadding="1">
+<tbody>
+<tr>
+  <th colspan="2">Spatial Vector Arithmetic</th>
+</tr>
+<tr>
+  <td><b>crf</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>crm</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>mcI</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>Xrotx</b></td>
+  <td>name changed to <b>rotx</b></td>
+</tr>
+<tr>
+  <td><b>Xroty</b></td>
+  <td>name changed to <b>roty</b></td>
+</tr>
+<tr>
+  <td><b>Xrotz</b></td>
+  <td>name changed to <b>rotz</b></td>
+</tr>
+<tr>
+  <td><b>XtoV</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>Xtrans</b></td>
+  <td>name changed to <b>xlt</b></td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Dynamics Functions</th>
+</tr>
+<tr>
+  <td><b>fbKin</b></td>
+  <td>replaced by <b>fbkin</b> which takes different arguments</td>
+</tr>
+<tr>
+  <td><b>FDab</b></td>
+  <td>no gravity argument; <b>f_ext</b> now in absolute coordinates</td>
+</tr>
+<tr>
+  <td><b>FDcrb</b></td>
+  <td>no gravity argument; <b>f_ext</b> now in absolute coordinates</td>
+</tr>
+<tr>
+  <td><b>FDf</b></td>
+  <td>name changed to <b>FDfb</b>; return value <b>afb</b> replaced
+    with <b>xdfb</b>; arguments <b>Xfb</b> and <b>vfb</b> replaced
+    with <b>xfb</b>; no gravity argument; <b>f_ext</b> now in absolute
+    coordinates</td>
+</tr>
+<tr>
+  <td><b>HandC</b></td>
+  <td>no gravity argument; <b>f_ext</b> now in absolute coordinates</td>
+</tr>
+<tr>
+  <td><b>HD</b></td>
+  <td>no gravity argument; <b>f_ext</b> now in absolute coordinates</td>
+</tr>
+<tr>
+  <td><b>ID</b></td>
+  <td>no gravity argument; <b>f_ext</b> now in absolute coordinates</td>
+</tr>
+<tr>
+  <td><b>IDf</b></td>
+  <td>name changed to <b>IDfb</b>; return value <b>afb</b> replaced
+    with <b>xdfb</b>; arguments <b>Xfb</b> and <b>vfb</b> replaced
+    with <b>xfb</b>; no gravity argument; <b>f_ext</b> now in absolute
+    coordinates</td>
+</tr>
+<tr>
+  <td><b>jcalc</b></td>
+  <td><b>pitch</b> argument replaced with joint type descriptor</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Model Constructors</th>
+</tr>
+<tr>
+  <td><b>autoTree</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>floatbase</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>planar2</b></td>
+  <td>withdrawn.&nbsp; Use <b>planar(2)</b> for an equivalent model using
+    planar arithmetic, or <b>autoTree(2)</b> for a model using spatial
+    arithmetic but having slightly different inertias</td>
+</tr>
+<tr>
+  <td><b>planar3</b></td>
+  <td>withdrawn.&nbsp; Use <b>planar(3)</b> for an equivalent model using
+    planar arithmetic, or <b>autoTree(3)</b> for a model using spatial
+    arithmetic but having slightly different inertias</td>
+</tr>
+<tr>
+  <td><b>planarN</b></td>
+  <td>withdrawn.&nbsp; Use <b>planar(n)</b> for an equivalent model using
+    planar arithmetic, or <b>autoTree(n)</b> for a model using spatial
+    arithmetic but having slightly different inertias</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Planar Vector Arithmetic</th>
+</tr>
+<tr>
+  <td><b>crfp</b></td>
+  <td>use <b>crf</b> instead</td>
+</tr>
+<tr>
+  <td><b>crmp</b></td>
+  <td>use <b>crm</b> instead</td>
+</tr>
+<tr>
+  <td><b>mcIp</b></td>
+  <td>use <b>mcI</b> instead</td>
+</tr>
+<tr>
+  <td><b>Xpln</b></td>
+  <td>name changed to <b>plnr</b></td>
+</tr>
+<tr>
+  <td><b>XtoVp</b></td>
+  <td>use <b>XtoV</b> instead</td>
+</tr>
+
+</tbody>
+</table>
+
+</td>
+
+<td style="width: 2%">&nbsp;</td>
+
+<td class=column style="width: 49%">
+
+<table style="text-align: left" border="0" cellspacing="0" cellpadding="1">
+<tbody>
+<tr>
+  <th colspan="2">Planar Vector Dynamics Functions</th>
+</tr>
+<tr>
+  <td><b>FDabp</b></td>
+  <td>use <b>FDab</b> instead, but note that arguments differ</td>
+</tr>
+<tr>
+  <td><b>FDcrbp</b></td>
+  <td>use <b>FDcrb</b> instead, but note that arguments differ</td>
+</tr>
+<tr>
+  <td><b>HandCp</b></td>
+  <td>use <b>HandC</b> instead, but note that arguments differ</td>
+</tr>
+<tr>
+  <td><b>IDp</b></td>
+  <td>use <b>ID</b> instead, but note that arguments differ</td>
+</tr>
+<tr>
+  <td><b>jcalcp</b></td>
+  <td>use <b>jcalc</b> instead, but note that arguments differ</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Planar Vector Model Constructors</th>
+</tr>
+<tr>
+  <td><b>autoTreep</b></td>
+  <td>withdrawn</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Graphics</th>
+</tr>
+<tr>
+  <td><b>drawmodel</b></td>
+  <td>replaced by <b>showmotion</b></td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Examples (demos)</th>
+</tr>
+<tr>
+  <td><b>planar2ctrl.mdl</b>&nbsp;</td>
+  <td>replaced by <b>example1.mdl</b></td>
+</tr>
+<tr>
+  <td><b>test_FD</b></td>
+  <td>withdrawn</td>
+</tr>
+<tr>
+  <td><b>test_HD</b></td>
+  <td>withdrawn</td>
+</tr>
+<tr>
+  <td><b>test_fb1</b></td>
+  <td>withdrawn</td>
+</tr>
+<tr>
+  <td><b>test_fb2</b></td>
+  <td>withdrawn</td>
+</tr>
+<tr>
+  <td><b>test_p</b></td>
+  <td>withdrawn</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Branch Induced Sparsity</th>
+</tr>
+<tr>
+  <td><b>expandLambda</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>LTDL</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>LTL</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>mpyH</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>mpyL</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>mpyLt</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>mpyLi</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>mpyLit</b></td>
+  <td>no change</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">System Model Data Structure</th>
+</tr>
+<tr>
+  <td><b>NB</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>parent</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>pitch</b></td>
+  <td>replaced by <b>jtype</b></td>
+</tr>
+<tr>
+  <td><b>Xtree</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>I</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>appearance</b></td>
+  <td>many changes &mdash; see below</td>
+</tr>
+<tr>
+  <td>[gravity]</td>
+  <td>non-default gravity is now specified in the system model instead of as
+    an argument to the dynamics functions</td>
+</tr>
+
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+  <th colspan="2">Planar System Model Data Structure</th>
+</tr>
+<tr>
+  <td><b>NB</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>parent</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>jcode</b></td>
+  <td>replaced by <b>jtype</b></td>
+</tr>
+<tr>
+  <td><b>Xtree</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td><b>I</b></td>
+  <td>no change</td>
+</tr>
+<tr>
+  <td>[gravity]</td>
+  <td>non-default gravity is now specified in the system model instead of as
+    an argument to the dynamics functions</td>
+</tr>
+
+</tbody>
+</table>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Changes to Appearance Field</h3>
+
+<ul>
+  <li>the drawing instructions that used to appear in <b>appearance{1}</b> now
+    appear in <b>appearance.base</b></li>
+  <li>the drawing instructions that used to appear in <b>appearance{i+1}</b>
+  now appear in <b>appearance.body{i}</b></li>
+</ul>
+
+<h3>Changes to Drawing Instructions</h3>
+
+<ul>
+  <li><b>{'box',A}</b> becomes <b>'box',B</b>, where <b>B=A'</b></li>
+  <li><b>{'cyl',c,r,h,'X/Y/Z'}</b> becomes <b>'cyl',[p1;p2],r</b>,
+    where <b>p1</b> and <b>p2</b> are row vectors containing the coordinates
+    of the centres of the two end faces of the cylinder</li>
+  <li><b>{'vertex',V}</b> becomes <b>'vertices',V</b></li>
+  <li><b>{'line',L}</b> becomes <b>'line',L</b></li>
+  <li><b>{'face',F1,F2,...}</b> can be replaced by <b>'triangles',T</b>, where
+    <b>T</b> is an n&times;3 matrix of vertex numbers such that each row
+    of <b>T</b> defines one triangle</li>
+</ul>
+
+<hr>
+<small>
+Page last modified:&nbsp; June 2012<br>
+Author:&nbsp; <a href="http://royfeatherstone.org">Roy Featherstone</a>
+</small>
+</body>
+</html>
