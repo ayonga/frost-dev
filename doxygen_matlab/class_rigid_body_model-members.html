@@ -16,6 +16,12 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script src="/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/docs/config/MathJax/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
         <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
@@ -102,9 +108,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="entry"><a class="el" href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">name</a></td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">nDof</a></td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a></td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_rigid_body_model.html#ac2df1cf9505dd69087c7ea396032f0a4">RigidBodyModel</a>(config_filename, options)</td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">SetModelName</a>(char name)</td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_rigid_body_model.html#acb26ab298966666402ea55e947232ab2">type</a></td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a">parseModel</a>(struct robot, options)</td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b">RigidBodyModel</a>(char config_filename,struct options)</td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">SetModelName</a>(char name)</td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_rigid_body_model.html#acb26ab298966666402ea55e947232ab2">type</a></td><td class="entry"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -114,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 27 2016 14:21:29 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 27 2016 16:45:12 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

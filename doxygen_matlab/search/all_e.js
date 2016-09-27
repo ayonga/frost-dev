@@ -2,6 +2,7 @@ var searchData=
 [
   ['parse_5furdf',['parse_urdf',['../parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258',1,'parse_urdf.m']]],
   ['parse_5furdf_2em',['parse_urdf.m',['../parse__urdf_8m.html',1,'']]],
+  ['parsemodel',['parseModel',['../class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a',1,'RigidBodyModel']]],
   ['patchline',['patchline',['../patchline_8m.html#af86cd36e575a62a4d499b869338f6b77',1,'patchline.m']]],
   ['patchline_2em',['patchline.m',['../patchline_8m.html',1,'']]],
   ['permute',['permute',['../classhandle.html#a6dc9f59313af54f392d8e273d71ace7b',1,'handle']]],

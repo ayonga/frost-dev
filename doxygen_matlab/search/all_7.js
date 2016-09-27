@@ -9,5 +9,7 @@ var searchData=
   ['horzcat_5ffields',['horzcat_fields',['../horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0',1,'horzcat_fields.m']]],
   ['horzcat_5ffields_2em',['horzcat_fields.m',['../horzcat__fields_8m.html',1,'']]],
   ['horzcat_5ffields_5fdomains',['horzcat_fields_domains',['../horzcat__fields__domains_8m.html#a930bb33692ce2bede234feed4cf71eba',1,'horzcat_fields_domains.m']]],
-  ['horzcat_5ffields_5fdomains_2em',['horzcat_fields_domains.m',['../horzcat__fields__domains_8m.html',1,'']]]
+  ['horzcat_5ffields_5fdomains_2em',['horzcat_fields_domains.m',['../horzcat__fields__domains_8m.html',1,'']]],
+  ['hybriddynamicalsystem',['HybridDynamicalSystem',['../class_hybrid_dynamical_system.html',1,'']]],
+  ['hybriddynamicalsystem_2em',['HybridDynamicalSystem.m',['../_hybrid_dynamical_system_8m.html',1,'']]]
 ];

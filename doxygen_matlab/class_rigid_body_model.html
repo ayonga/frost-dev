@@ -16,6 +16,12 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script src="/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/docs/config/MathJax/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
         <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
@@ -98,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_rigid_body_model.html" title="RigidBodyModel: A class with basic model descriptions and functionalities of the rigid body robotic s...">RigidBodyModel</a>: A class with basic model descriptions and functionalities of the rigid body robotic system.  
+<p><a class="el" href="class_rigid_body_model.html" title="RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy...">RigidBodyModel</a> A class with basic model descriptions and functionalities of the rigid body robotic system.  
  <a href="class_rigid_body_model.html#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for RigidBodyModel:</div>
@@ -110,13 +116,17 @@ Collaboration diagram for RigidBodyModel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac2df1cf9505dd69087c7ea396032f0a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#ac2df1cf9505dd69087c7ea396032f0a4">RigidBodyModel</a> (config_filename, <a class="el" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>)</td></tr>
-<tr class="memdesc:ac2df1cf9505dd69087c7ea396032f0a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#ac2df1cf9505dd69087c7ea396032f0a4">More...</a><br/></td></tr>
-<tr class="separator:ac2df1cf9505dd69087c7ea396032f0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4fa7a287c41ad78c2c7aa452fa9b7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b">RigidBodyModel</a> (<a class="el" href="classchar.html">char</a> config_filename,<a class="el" href="classstruct.html">struct</a> <a class="el" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>)</td></tr>
+<tr class="memdesc:a4f4fa7a287c41ad78c2c7aa452fa9b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#a4f4fa7a287c41ad78c2c7aa452fa9b7b">More...</a><br/></td></tr>
+<tr class="separator:a4f4fa7a287c41ad78c2c7aa452fa9b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57547310d878883d507f3de6baad57f3"><td class="memItemLeft" align="right" valign="top">function 
   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">SetModelName</a> (<a class="el" href="classchar.html">char</a> <a class="el" href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">name</a>)</td></tr>
 <tr class="memdesc:a57547310d878883d507f3de6baad57f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the name of the model.  <a href="#a57547310d878883d507f3de6baad57f3">More...</a><br/></td></tr>
 <tr class="separator:a57547310d878883d507f3de6baad57f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d9e0f1b45cae69aad5be31512dcb3a"><td class="memItemLeft" align="right" valign="top">function 
+  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a">parseModel</a> (<a class="el" href="classstruct.html">struct</a> robot, <a class="el" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>)</td></tr>
+<tr class="memdesc:a33d9e0f1b45cae69aad5be31512dcb3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the robot struct from URDF file into rigid body model.  <a href="#a33d9e0f1b45cae69aad5be31512dcb3a">More...</a><br/></td></tr>
+<tr class="separator:a33d9e0f1b45cae69aad5be31512dcb3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -138,12 +148,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a539d3795727949d40b3585ed9224cabc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">nDof</a></td></tr>
 <tr class="memdesc:a539d3795727949d40b3585ed9224cabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total degrees of freedom of the model.  <a href="#a539d3795727949d40b3585ed9224cabc">More...</a><br/></td></tr>
 <tr class="separator:a539d3795727949d40b3585ed9224cabc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09263995191d177b046302801dd0cdb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a></td></tr>
-<tr class="memdesc:a09263995191d177b046302801dd0cdb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extra options of the model.  <a href="#a09263995191d177b046302801dd0cdb9">More...</a><br/></td></tr>
+<tr class="memitem:a09263995191d177b046302801dd0cdb9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a></td></tr>
+<tr class="memdesc:a09263995191d177b046302801dd0cdb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom options of the rigid body model.  <a href="#a09263995191d177b046302801dd0cdb9">More...</a><br/></td></tr>
 <tr class="separator:a09263995191d177b046302801dd0cdb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_rigid_body_model.html" title="RigidBodyModel: A class with basic model descriptions and functionalities of the rigid body robotic s...">RigidBodyModel</a>: A class with basic model descriptions and functionalities of the rigid body robotic system. </p>
+<div class="textblock"><p><a class="el" href="class_rigid_body_model.html" title="RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy...">RigidBodyModel</a> A class with basic model descriptions and functionalities of the rigid body robotic system. </p>
 <dl class="section user"><dt>References</dt><dd>The descriptions of rigid body model is based on but not limited to the following resrouces<ul>
 <li>Richard Murray, Zexiang Li, and Shankar Sastry. "A Mathematical Introduction to Robotic
  Manipulation". 1994, CRC Press. <a href="http://www.cds.caltech.edu/~murray/mlswiki">http://www.cds.caltech.edu/~murray/mlswiki</a>.</li>
@@ -158,20 +168,20 @@ Public Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00017">17</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac2df1cf9505dd69087c7ea396032f0a4"></a>
+<a class="anchor" id="a4f4fa7a287c41ad78c2c7aa452fa9b7b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">RigidBodyModel.RigidBodyModel </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
           <td class="paramname"><em>config_filename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
           <td class="paramname"><em>options</em>&#160;</td>
         </tr>
         <tr>
@@ -191,25 +201,92 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Required fields of options:</dt><dd></dd></dl>
+<dl class="section user"><dt>Required fields of options:</dt><dd><ul>
+<li><code>config_path&#160;&mdash;&#160;</code> the full path of the model configuration file</li>
+</ul>
+<ul>
+<li><code>config_type&#160;&mdash;&#160;</code> the type of the model configuration file</li>
+</ul>
+</dd></dl>
+<dl class="section user"><dt>Optional fields of options:</dt><dd><ul>
+<li><code>use_floating&#160;&mdash;&#160;</code> specify whether use the floating base coordinates </li>
+</ul>
+</dd></dl>
+<dl class="section user"><dt>Default:</dt><dd>true </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>implement the URDF parser function </dd></dl>
 
-<p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00169">169</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00177">177</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
 
-<p>References <a class="el" href="parse__urdf_8m_source.html#l00017">parse_urdf()</a>, and <a class="el" href="_rigid_body_model_8m_source.html#l00219">SetModelName()</a>.</p>
+<p>References <a class="el" href="_rigid_body_model_8m_source.html#l00149">options</a>, <a class="el" href="parse__urdf_8m_source.html#l00017">parse_urdf()</a>, <a class="el" href="_rigid_body_model_8m_source.html#l00251">parseModel()</a>, and <a class="el" href="_rigid_body_model_8m_source.html#l00236">SetModelName()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_rigid_body_model_ac2df1cf9505dd69087c7ea396032f0a4_cgraph.png" border="0" usemap="#class_rigid_body_model_ac2df1cf9505dd69087c7ea396032f0a4_cgraph" alt=""/></div>
-<map name="class_rigid_body_model_ac2df1cf9505dd69087c7ea396032f0a4_cgraph" id="class_rigid_body_model_ac2df1cf9505dd69087c7ea396032f0a4_cgraph">
-<area shape="rect" id="node2" href="parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258" title="This function parse the ROS URDF file into a matlab struct. " alt="" coords="307,5,389,32"/><area shape="rect" id="node3" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3" title="Set the name of the model. " alt="" coords="241,56,455,83"/></map>
+<div class="center"><img src="class_rigid_body_model_a4f4fa7a287c41ad78c2c7aa452fa9b7b_cgraph.png" border="0" usemap="#class_rigid_body_model_a4f4fa7a287c41ad78c2c7aa452fa9b7b_cgraph" alt=""/></div>
+<map name="class_rigid_body_model_a4f4fa7a287c41ad78c2c7aa452fa9b7b_cgraph" id="class_rigid_body_model_a4f4fa7a287c41ad78c2c7aa452fa9b7b_cgraph">
+<area shape="rect" id="node2" href="parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258" title="This function parse the ROS URDF file into a matlab struct. " alt="" coords="307,5,389,32"/><area shape="rect" id="node3" href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a" title="Parse the robot struct from URDF file into rigid body model. " alt="" coords="252,56,444,83"/><area shape="rect" id="node4" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3" title="Set the name of the model. " alt="" coords="241,107,455,133"/></map>
 </div>
 </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a33d9e0f1b45cae69aad5be31512dcb3a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = RigidBodyModel.parseModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
+          <td class="paramname"><em>robot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>options</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse the robot struct from URDF file into rigid body model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">robot</td><td>the URDF robot model </td></tr>
+    <tr><td class="paramname">options</td><td>a struct that specifies custom options of the model</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">obj</td><td>the object of this class</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of robot:</dt><dd></dd></dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00251">251</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00177">RigidBodyModel()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_rigid_body_model_a33d9e0f1b45cae69aad5be31512dcb3a_icgraph.png" border="0" usemap="#class_rigid_body_model_a33d9e0f1b45cae69aad5be31512dcb3a_icgraph" alt=""/></div>
+<map name="class_rigid_body_model_a33d9e0f1b45cae69aad5be31512dcb3a_icgraph" id="class_rigid_body_model_a33d9e0f1b45cae69aad5be31512dcb3a_icgraph">
+<area shape="rect" id="node2" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b" title="The class constructor function. " alt="" coords="246,5,431,46"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a57547310d878883d507f3de6baad57f3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -239,18 +316,18 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00219">219</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00236">236</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
 
 <p>References <a class="el" href="_rigid_body_model_8m_source.html#l00059">name</a>.</p>
 
-<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00169">RigidBodyModel()</a>.</p>
+<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00177">RigidBodyModel()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_body_model_a57547310d878883d507f3de6baad57f3_icgraph.png" border="0" usemap="#class_rigid_body_model_a57547310d878883d507f3de6baad57f3_icgraph" alt=""/></div>
 <map name="class_rigid_body_model_a57547310d878883d507f3de6baad57f3_icgraph" id="class_rigid_body_model_a57547310d878883d507f3de6baad57f3_icgraph">
-<area shape="rect" id="node2" href="class_rigid_body_model.html#ac2df1cf9505dd69087c7ea396032f0a4" title="The class constructor function. " alt="" coords="270,5,455,46"/></map>
+<area shape="rect" id="node2" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b" title="The class constructor function. " alt="" coords="270,5,455,46"/></map>
 </div>
 </p>
 
@@ -335,7 +412,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00059">59</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00219">SetModelName()</a>.</p>
+<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00236">SetModelName()</a>.</p>
 
 </div>
 </div>
@@ -369,13 +446,21 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Extra options of the model. </p>
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">struct</span>(<span class="stringliteral">&quot;   \</span></div>
+<div class="line"><span class="stringliteral">            &#39;config_path&#39;,[],   \</span></div>
+<div class="line"><span class="stringliteral">            &#39;config_type&#39;,[],   \</span></div>
+<div class="line"><span class="stringliteral">            &#39;use_floating&#39;, true   \</span></div>
+<div class="line"><span class="stringliteral">            &quot;</span>)</div>
+</div><!-- fragment -->
+<p>Custom options of the rigid body model. </p>
 <dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
 <dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> <br/>
+<b>Default:</b> struct(" \ 'config_path',[], \ 'config_type',[], \ 'use_floating', true \ ") </dd></dl>
 
 <p>Definition at line <a class="el" href="_rigid_body_model_8m_source.html#l00149">149</a> of file <a class="el" href="_rigid_body_model_8m_source.html">RigidBodyModel.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00177">RigidBodyModel()</a>.</p>
 
 </div>
 </div>
@@ -417,7 +502,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 27 2016 14:21:29 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 27 2016 16:45:12 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

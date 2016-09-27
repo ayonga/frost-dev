@@ -1,1 +1,1 @@
-warning: failed to open layout file 'DoxygenLayout.xml' for reading!
+error: Project logo '/home/ayonga/Dropbox/research/dzopt/direct_hzd_optimization/docs/images/amberlab_logo.png' specified by PROJECT_LOGO does not exist!
