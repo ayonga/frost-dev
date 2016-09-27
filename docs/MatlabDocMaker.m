@@ -142,7 +142,7 @@ classdef MatlabDocMaker
             
             % error('Please replace this by returning your project name as string.');
             % Example:
-            name = 'Direct HZD Optimization';
+            name = 'AMBER Suite';
         end
     end
     
@@ -167,6 +167,15 @@ classdef MatlabDocMaker
             % Return values:
             % dir: The project source directory @type char
             dir = MatlabDocMaker.getPref('srcdir');
+        end
+        
+        function dir = getExcludeDirectory
+            % Returns the directory which should be excluded from the
+            % the applications source files 
+            %
+            % Return values:
+            % dir: The project exclude directory @type char
+            dir = MatlabDocMaker.getPref('excludedir');
         end
         
         function dir = getConfigDirectory
@@ -393,6 +402,7 @@ classdef MatlabDocMaker
             
             %% Prepare placeholders in the Doxyfile template
             m = {'_OutputDir_' strrep(outdir,'\','\\'); ...
+                 '_ExcludeDir_' strrep(MatlabDocMaker.getExcludeDirectory,'\','\\');...
                  '_SourceDir_' strrep(MatlabDocMaker.getSourceDirectory,'\','\\');...
                  '_ConfDir_' strrep(cdir,'\','\\');...
                  '_ProjectName_' MatlabDocMaker.getProjectName; ...
@@ -549,6 +559,16 @@ classdef MatlabDocMaker
             
             MatlabDocMaker.setPref('srcdir',srcdir);
             
+            
+            % Exclude directory
+            excludedir = MatlabDocMaker.getPref('excludedir','');
+            % word = 'keep';
+            if isempty(excludedir) || exist(excludedir,'dir') ~= 7
+                excludedir = fullfile(fileparts(pwd),'matlab/third');
+                % word = 'set';
+            end
+            MatlabDocMaker.setPref('excludedir',excludedir);
+            
             % Config directory
             confdir = MatlabDocMaker.getPref('confdir','');
             % word = 'keep';
@@ -594,7 +614,8 @@ classdef MatlabDocMaker
             % end
             
             MatlabDocMaker.setPref('proj_ver','1.0');
-            MatlabDocMaker.setPref('proj_desc','Directly Collocated Hybrid Zero Dynamics Virtual Constraints Optimization');
+            MatlabDocMaker.setPref('proj_desc','Modeling, Planning, and Control Design Suite for Bipedal Locomotion by AMBER Lab');
+            %             MatlabDocMaker.setPref('proj_desc','Directly Collocated Hybrid Zero Dynamics Virtual Constraints Optimization');
             MatlabDocMaker.setProjectLogo(fullfile(pwd,'images','amberlab_logo.png'));
             
             %% Check for necessary and recommended tools
