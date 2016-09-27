@@ -1,5 +1,5 @@
 classdef RigidBodyModel
-    % RigidBodyModel: A class with basic model descriptions and functionalities
+    % RigidBodyModel A class with basic model descriptions and functionalities
     % of the rigid body robotic system.
     % 
     % References:
@@ -82,10 +82,23 @@ classdef RigidBodyModel
         nDof
         
         
-        % Extra options of the model
+        % Custom options of the rigid body model
+        %
+        % Required fields of options:
+        %  config_path: the full path of the model configuration file @type
+        %  char
+        %  config_type: the type of the model configuration file @type char
+        % 
+        % Optional fields of options:
+        %  use_floating: specify whether use the floating base coordinates
+        %  @type logical
         %
         % @type struct 
-        options
+        options = struct(...
+            'config_path',[],...
+            'config_type',[],...
+            'use_floating', true...
+            );
         
         
         
@@ -104,8 +117,9 @@ classdef RigidBodyModel
             %
             % Parameters:
             % config_filename: the full path of the model configuration
-            % file.
+            % file. @type char
             % options: a struct that specifies custom options of the model
+            % @type struct
             %
             % Return values:
             % obj: an object of this class
@@ -146,11 +160,27 @@ classdef RigidBodyModel
             % Set the name of the model
             %
             % Parameters:
-            % name: the model name @type char
+            %  name: the model name @type char
             %
             % Return values:
-            % obj: the object of this class
+            %  obj:   the object of this class
+            
             obj.name = name;
+        end
+        
+        function obj = parseModel(obj, robot, options)
+            % Parse the robot struct from URDF file into rigid body model
+            %
+            % Parameters:
+            %  robot: the URDF robot model @type struct
+            %  options: a struct that specifies custom options of the model
+            % 
+            % Return values:
+            %  obj:   the object of this class
+            obj.joints = robot.joints;
+            obj.links  = robot.links;
+            
+            
         end
     end
     
