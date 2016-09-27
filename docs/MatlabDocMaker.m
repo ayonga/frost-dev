@@ -616,7 +616,7 @@ classdef MatlabDocMaker
             MatlabDocMaker.setPref('proj_ver','1.0');
             MatlabDocMaker.setPref('proj_desc','Modeling, Planning, and Control Design Suite for Bipedal Locomotion by AMBER Lab');
             %             MatlabDocMaker.setPref('proj_desc','Directly Collocated Hybrid Zero Dynamics Virtual Constraints Optimization');
-            MatlabDocMaker.setProjectLogo(fullfile(pwd,'images','amberlab_logo.png'));
+            MatlabDocMaker.setProjectLogo(fullfile(pwd,'source','images','amberlab_logo.png'));
             
             %% Check for necessary and recommended tools
             hasall = true;
