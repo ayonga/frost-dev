@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['getconfigdirectory',['getConfigDirectory',['../class_matlab_doc_maker.html#a11a2a8ec616df969a911b325e39b0b4f',1,'MatlabDocMaker']]],
-  ['getoutputdirectory',['getOutputDirectory',['../class_matlab_doc_maker.html#a1957c12ff4fb6a9d8e1b009961a5f499',1,'MatlabDocMaker']]],
-  ['getprojectdescription',['getProjectDescription',['../class_matlab_doc_maker.html#af63bb7f2a5008a7b786d2b83b4f72b1b',1,'MatlabDocMaker']]],
-  ['getprojectlogo',['getProjectLogo',['../class_matlab_doc_maker.html#a6767085b13dc2600cb6beda7f7d6acd9',1,'MatlabDocMaker']]],
-  ['getprojectname',['getProjectName',['../class_matlab_doc_maker.html#a9f84ff8d3f39824b54626862780b342c',1,'MatlabDocMaker']]],
-  ['getprojectversion',['getProjectVersion',['../class_matlab_doc_maker.html#afce5384fb7c395546431b7a6c4e1f790',1,'MatlabDocMaker']]],
-  ['getsourcedirectory',['getSourceDirectory',['../class_matlab_doc_maker.html#a1481c6e95be338b758ec97b8090ee7c9',1,'MatlabDocMaker']]]
+  ['fieldnames',['fieldnames',['../classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141',1,'handle']]],
+  ['fields',['fields',['../classhandle.html#ad9c0557345e68bd933889c28b2a9484b',1,'handle']]],
+  ['findobj',['findobj',['../classhandle.html#a000398ac90dd973b4618c739e6fd64a9',1,'handle']]],
+  ['findprop',['findprop',['../classhandle.html#ab4b410e2df940296c9d2563898c951fe',1,'handle']]],
+  ['function_5fhandle',['function_handle',['../classfunction__handle.html',1,'']]]
 ];

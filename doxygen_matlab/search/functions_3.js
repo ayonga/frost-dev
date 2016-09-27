@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['setprojectdescription',['setProjectDescription',['../class_matlab_doc_maker.html#a88037a33f6ed26b8b3e60e1cbfd5dfd6',1,'MatlabDocMaker']]],
-  ['setprojectlogo',['setProjectLogo',['../class_matlab_doc_maker.html#a6e84afe2189a851665133b6e7c412d4c',1,'MatlabDocMaker']]],
-  ['setprojectversion',['setProjectVersion',['../class_matlab_doc_maker.html#a532ff6bc4beaeff5c3d2f12305bbaa5d',1,'MatlabDocMaker']]],
-  ['setup',['setup',['../class_matlab_doc_maker.html#a434c176c2421dd18a40003919b19f4f2',1,'MatlabDocMaker']]]
+  ['d2bezier',['d2bezier',['../d2bezier_8m.html#aff18123ee7603261f74e62f3582efbe6',1,'d2bezier.m']]],
+  ['d2cwf_5ftime',['d2cwf_time',['../d2cwf__time_8m.html#aaade051e3b745c82b0e76897a156fdd6',1,'d2cwf_time.m']]],
+  ['dbezier',['dbezier',['../dbezier_8m.html#afef401454ecc857cc5b1d1587daac077',1,'dbezier.m']]],
+  ['dcwf_5ftime',['dcwf_time',['../dcwf__time_8m.html#a25c7d85295a3825d18dc23bb9a7277cd',1,'dcwf_time.m']]],
+  ['diff_5fcoeff',['diff_coeff',['../diff__coeff_8m.html#a6e6e916ce234b81f187c7bdc1a5de9ec',1,'diff_coeff.m']]],
+  ['display_5fsystem_5finfo',['display_system_info',['../display__system__info_8m.html#a0caed4f08ebf7827954c6beef7998456',1,'display_system_info.m']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['latexextras_5ftemplate',['LATEXEXTRAS_TEMPLATE',['../class_matlab_doc_maker.html#a5fd9647b943b91d54acbfce17d0d7416',1,'MatlabDocMaker']]]
+  ['isvalid',['isvalid',['../classhandle.html#a72617e83dc9643b61ed8af63e5058ccf',1,'handle']]]
 ];

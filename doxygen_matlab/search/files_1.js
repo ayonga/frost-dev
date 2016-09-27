@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['developers_2ec',['developers.c',['../developers_8c.html',1,'']]]
+  ['bezier_2em',['bezier.m',['../bezier_8m.html',1,'']]],
+  ['blank_5fstruct_2em',['blank_struct.m',['../blank__struct_8m.html',1,'']]]
 ];

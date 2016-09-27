@@ -5,5 +5,6 @@ var dir_cc003da16e2403633cf5c60a1adc2bda =
       [ "sparsematrix", "classsparsematrix.html", null ],
       [ "handle", "classhandle.html", "classhandle" ]
     ] ],
-    [ "developers.c", "developers_8c.html", null ]
+    [ "developers.c", "developers_8c.html", null ],
+    [ "doxygen.m", "doxygen_8m.html", null ]
 ];

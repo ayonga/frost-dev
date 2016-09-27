@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['fieldnames',['fieldnames',['../classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141',1,'handle']]],
-  ['fields',['fields',['../classhandle.html#ad9c0557345e68bd933889c28b2a9484b',1,'handle']]],
-  ['findobj',['findobj',['../classhandle.html#a000398ac90dd973b4618c739e6fd64a9',1,'handle']]],
-  ['findprop',['findprop',['../classhandle.html#ab4b410e2df940296c9d2563898c951fe',1,'handle']]],
-  ['function_5fhandle',['function_handle',['../classfunction__handle.html',1,'']]]
+  ['eq',['eq',['../classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86',1,'handle']]],
+  ['even_5fsample',['even_sample',['../even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6',1,'even_sample.m']]],
+  ['even_5fsample_2em',['even_sample.m',['../even__sample_8m.html',1,'']]],
+  ['even_5fsample_5ffields',['even_sample_fields',['../even__sample__fields_8m.html#ad6489f72b1cf7b95a79a312b3486f8e3',1,'even_sample_fields.m']]],
+  ['even_5fsample_5ffields_2em',['even_sample_fields.m',['../even__sample__fields_8m.html',1,'']]],
+  ['extract_5fstruct_5fslice',['extract_struct_slice',['../extract__struct__slice_8m.html#a90450e44c59f069c2f0ffd4b8dc745e2',1,'extract_struct_slice.m']]],
+  ['extract_5fstruct_5fslice_2em',['extract_struct_slice.m',['../extract__struct__slice_8m.html',1,'']]]
 ];

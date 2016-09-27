@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_matlab_doc_maker.html" title="MatlabDocMaker: Automated documentation creation using doxygen and mtoc++ from within MatLab..." alt="" coords="5,5,125,32"/>
+<area shape="rect" id="node1" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node2" href="$classsparsematrix.html" title="A matlab sparse matrix. " alt="" coords="113,5,210,32"/>
 </map>
