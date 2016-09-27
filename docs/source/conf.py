@@ -125,19 +125,24 @@ todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
-
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = ['_themes']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinxdoc'
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = { 
+	'logo_name': True,
+	'github_user': 'ayonga',
+	'github_repo': 'direct_hzd_optimization',
+	'github_button': True,
+	'travis_button': True,
+}
 
-# Add any paths that contain custom themes here, relative to this directory.
-# html_theme_path = []
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
@@ -173,7 +178,7 @@ html_static_path = ['_static']
 # bottom, using the given strftime format.
 # The empty string is equivalent to '%b %d, %Y'.
 #
-# html_last_updated_fmt = None
+html_last_updated_fmt = '%b %d, %Y'
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
@@ -205,7 +210,7 @@ html_sidebars = {
 
 # If true, links to the reST sources are added to the pages.
 #
-# html_show_sourcelink = True
+html_show_sourcelink = False
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
 #
