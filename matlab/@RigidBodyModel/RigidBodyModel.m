@@ -212,13 +212,13 @@ classdef RigidBodyModel
             % load the model from the configuration file
             switch config_type
                 case '.yaml'
-                    urdf = cell_to_matrix_scan(yaml_read_file(full_file_path));
+                    model = cell_to_matrix_scan(yaml_read_file(full_file_path));
                 case '.urdf'
-                    urdf = parse_urdf(full_file_path);
+                    model = parse_urdf(full_file_path);
             end
             
             
-            obj = parseModel(obj, urdf.robot);
+            obj = parseModel(obj, model);
             
             
         end
