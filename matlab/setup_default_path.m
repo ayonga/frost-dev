@@ -15,5 +15,5 @@ addpath_matlab_utilities('general', ...
 % Add third party packages/libraries path
 addpath([cur, 'third/']);
 addpath_thirdparty_packages('GetFullPath', 'date',...
-    'sparse2', 'strings', 'yaml');
+    'sparse2', 'spatial_v2', 'strings', 'yaml');
 end

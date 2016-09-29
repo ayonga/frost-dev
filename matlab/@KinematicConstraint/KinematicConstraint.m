@@ -1,5 +1,5 @@
-classdef DynamicalSystem
-    % DynamicalSystem defines a general continuous dynamical system
+classdef KinematicConstraint
+    % KinematicConstraint defines a kinematic constraint of the robot model
     % 
     %
     % @author Ayonga Hereid @date 2016-09-26
@@ -28,13 +28,7 @@ classdef DynamicalSystem
     methods (Access = public)
     end
         
-    %% Protected methods
-    properties (SetAccess=protected, GetAccess=public)
-    end
-    
-    %% Private methods
-    properties (Access=private)
-    end
+   
     
 end
 

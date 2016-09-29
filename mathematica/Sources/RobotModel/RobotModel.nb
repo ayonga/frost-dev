@@ -1,1 +1,275 @@
-Notebook[{}]
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8383,        267]
+NotebookOptionsPosition[      7442,        231]
+NotebookOutlinePosition[      7783,        246]
+CellTagsIndexPosition[      7740,        243]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Initialization", "Section",
+ CellChangeTimes->{{3.683470644020011*^9, 3.68347064648353*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<URDFParser`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<SnakeYaml`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"YamlInit", "[", "]"}]}], "Input",
+ CellChangeTimes->{{3.6838187983060827`*^9, 3.683818824368541*^9}, {
+  3.683842477904746*^9, 3.683842480264675*^9}, {3.6839067382856483`*^9, 
+  3.683906761361754*^9}, {3.6839071279493628`*^9, 3.68390712999968*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<RobotModel`\>\"", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.683470647473692*^9, 3.683470660476201*^9}, {
+   3.6835535297170467`*^9, 3.6835535380907717`*^9}, {3.683673538296907*^9, 
+   3.683673542489224*^9}, {3.683814560579185*^9, 3.6838145616417217`*^9}, 
+   3.683815816419771*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"YamlWriteFile", "[", 
+  RowBox[{"robot", ",", "\"\<robot.yaml\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.6839067742543173`*^9, 3.683906783827973*^9}, {
+  3.683906839325232*^9, 3.683906842412949*^9}, {3.683907145099392*^9, 
+  3.683907173000568*^9}, {3.683907837901428*^9, 3.683907839395485*^9}, {
+  3.683907920122673*^9, 3.6839079426825533`*^9}}],
+
+Cell[BoxData["\<\"robot.yaml\"\>"], "Output",
+ CellChangeTimes->{
+  3.683906784849243*^9, 3.6839068431088037`*^9, {3.683907133718891*^9, 
+   3.683907173837145*^9}, 3.683907378480529*^9, {3.6839077483183813`*^9, 
+   3.68390776376528*^9}, {3.6839078406249228`*^9, 3.683907943615333*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"robot", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"<|", 
+     RowBox[{"\"\<robot\>\"", "\[Rule]", 
+      RowBox[{"<|", 
+       RowBox[{
+        RowBox[{"\"\<joints\>\"", "\[Rule]", "joints"}], ",", 
+        RowBox[{"\"\<links\>\"", "->", "links"}]}], "|>"}]}], "|>"}], "}"}]}],
+   ";"}]], "Input",
+ CellChangeTimes->{{3.683907787958159*^9, 3.683907892371595*^9}, 
+   3.6839079350833073`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"urdfFile", " ", "=", " ", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<atlas_simple_contact_noback.urdf\>\""}], "}"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{3.683816071771426*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"links", ",", "joints"}], "}"}], "  ", "=", " ", 
+   RowBox[{"LoadURDF", "[", "urdfFile", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lpos", " ", "=", " ", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"#", "[", "\"\<name\>\"", "]"}], ",", 
+        RowBox[{
+         RowBox[{"#", "[", "\"\<origin\>\"", "]"}], "[", "\"\<xyz\>\"", 
+         "]"}]}], "}"}], "&"}], ",", "links"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"jpos", " ", "=", " ", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"#", "[", "\"\<child\>\"", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "}"}], "&"}], ",", 
+     "joints"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.683830936901031*^9, 3.683830946835312*^9}, {
+  3.6838318938500147`*^9, 3.6838318948657913`*^9}, {3.6838319610897923`*^9, 
+  3.6838319907293777`*^9}, {3.6838320307290707`*^9, 3.683832039631711*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"links", "[", 
+  RowBox[{"[", 
+   RowBox[{"1", ",", "2"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6839063349501543`*^9, 3.68390633538453*^9}, {
+  3.683907244458289*^9, 3.6839072451612043`*^9}, {3.683907289632258*^9, 
+  3.683907305319701*^9}}],
+
+Cell[BoxData["2.05`"], "Output",
+ CellChangeTimes->{
+  3.683906335768018*^9, 3.6839072454598*^9, {3.683907292024087*^9, 
+   3.683907305665616*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"InitializeModel", "[", "urdfFile", "]"}]], "Input",
+ CellChangeTimes->{{3.683844293692182*^9, 3.683844298215671*^9}, 
+   3.683849649919957*^9, {3.683849888846736*^9, 3.683849890356859*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"kinTree", " ", "=", " ", 
+   RowBox[{"GetKinematicTree", "[", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6838500710274763`*^9, 3.683850079229965*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"index", "  ", "=", " ", 
+  RowBox[{"Join", "[", 
+   RowBox[{
+    RowBox[{"Range", "[", "6", "]"}], ",", 
+    RowBox[{
+     RowBox[{"Flatten", "[", 
+      RowBox[{"kinTree", "[", 
+       RowBox[{"[", 
+        RowBox[{"2", ";;", "3"}], "]"}], "]"}], "]"}], "+", "6"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.683850141190427*^9, 3.683850182133409*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "14", ",", "12",
+    ",", "13", ",", "15", ",", "11", ",", "10", ",", "20", ",", "18", ",", 
+   "19", ",", "21", ",", "17", ",", "16"}], "}"}]], "Output",
+ CellChangeTimes->{3.6838501359922132`*^9, 3.683850183272636*^9, 
+  3.683850891766389*^9, 3.683851643539719*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"qb0subs", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SubscriptBox["qb", "i"], "[", "t", "]"}], "\[Rule]", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "6"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"q0subs", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SubscriptBox["q", "i"], "[", "t", "]"}], "\[Rule]", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "15"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"qe0subs", " ", "=", " ", 
+   RowBox[{"Join", "[", 
+    RowBox[{"qb0subs", ",", "q0subs"}], "]"}]}], ";"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dqb0subs", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"D", "[", 
+       RowBox[{
+        RowBox[{
+         SubscriptBox["qb", "i"], "[", "t", "]"}], ",", "t"}], "]"}], 
+      "\[Rule]", "0.1"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "6"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dq0subs", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"D", "[", 
+       RowBox[{
+        RowBox[{
+         SubscriptBox["q", "i"], "[", "t", "]"}], ",", "t"}], "]"}], 
+      "\[Rule]", "0.1"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "15"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dqe0subs", " ", "=", " ", 
+   RowBox[{"Join", "[", 
+    RowBox[{"dqb0subs", ",", "dq0subs"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.683844476546818*^9, 3.6838445285931273`*^9}, {
+  3.683851377382668*^9, 3.683851379713533*^9}}]
+}, Open  ]]
+},
+WindowSize->{927, 1028},
+WindowMargins->{{Automatic, -10}, {Automatic, -10}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (February 25, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 98, 1, 65, "Section"],
+Cell[681, 25, 464, 10, 77, "Input"],
+Cell[1148, 37, 336, 6, 32, "Input"],
+Cell[CellGroupData[{
+Cell[1509, 47, 373, 6, 32, "Input"],
+Cell[1885, 55, 285, 4, 32, "Output"]
+}, Open  ]],
+Cell[2185, 62, 429, 12, 32, "Input"],
+Cell[2617, 76, 309, 9, 32, "Input"],
+Cell[2929, 87, 1107, 31, 77, "Input"],
+Cell[CellGroupData[{
+Cell[4061, 122, 272, 6, 32, "Input"],
+Cell[4336, 130, 147, 3, 32, "Output"]
+}, Open  ]],
+Cell[4498, 136, 213, 3, 32, "Input"],
+Cell[4714, 141, 190, 4, 32, "Input"],
+Cell[CellGroupData[{
+Cell[4929, 149, 381, 11, 32, "Input"],
+Cell[5313, 162, 369, 7, 32, "Output"]
+}, Open  ]],
+Cell[5697, 172, 729, 23, 77, "Input"],
+Cell[6429, 197, 997, 31, 77, "Input"]
+}, Open  ]]
+}
+]
+*)
+

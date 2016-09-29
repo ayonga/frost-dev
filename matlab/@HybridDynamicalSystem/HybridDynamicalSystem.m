@@ -29,18 +29,55 @@ classdef HybridDynamicalSystem
     
     %% Protected properties
     properties (SetAccess=protected, GetAccess=public)
+        % The directed graph describes the structure of hybrid system model
+        %
+        % @type DirectedGraph       
+        gamma
+        
+        % The continuous domain 
+        %
+        % @todo The current implementation is migrated from the old
+        % 'domain' class, in which all elements (including continuous and
+        % associated discrete events) are included in one class object.
+        % Next step, separate them into multiple different class
+        % definition.
+        % 
+        % @type HybridDomain
+        domains
+        
+                
+        % The model configuration of the rigid body system
+        %
+        % @type RigidBodyModel
+        model
     end
     
     %% Public methods
     methods (Access = public)
+        function obj = HybridDynamicalSystem(varargin)
+            % the default calss constructor
+            %
+            % Parameters:
+            % varargin: Optional arguments.
+            %  
+            %
+            % Return values:
+            % obj: the class object
+            
+            
+        end
+        
+        
+            
+        
     end
         
     %% Protected methods
-    properties (SetAccess=protected, GetAccess=public)
+    methods (Access=protected)
     end
     
     %% Private methods
-    properties (Access=private)
+    methods (Access=private)
     end
     
 end
