@@ -141,7 +141,7 @@ classdef HybridDomain
             parse(p,varargin{:});
             new_contact = p.Results;
             
-            % updates to the obtact contact property
+            % updates to the object contact property
             n_constr = lenght(obj.contactPoints);
             obj.contactPoints(n_constr+1) = new_contact;
         end
@@ -161,7 +161,8 @@ classdef HybridDomain
             parse(p,varargin{:});
             new_contact = p.Results;
             new_contact.type = 'joint';
-            % updates to the obtact contact property
+            
+            
             n_constr = lenght(obj.jointConstrs);
             obj.jointConstrs(n_constr+1) = new_contact;
         end
@@ -171,6 +172,8 @@ classdef HybridDomain
             %
             %
             %
+            
+            %| @todo make position constraints more general
             
             % parse the input arguments
             p = inputParser;
@@ -182,10 +185,12 @@ classdef HybridDomain
             new_contact = p.Results;
             new_contact.type = 'position';
             
-            % updates to the obtact contact property
             n_constr = lenght(obj.jointConstrs);
             obj.jointConstrs(n_constr+1) = new_contact;
         end
+        
+        
+        
     end
         
     
