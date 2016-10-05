@@ -71,12 +71,12 @@ classdef RigidBodyModel
         % options.use_floating_base = true.
         % 
         % @type double @default = 0
-        nDof
+        nDof = 0;
         
         % The dimension of the floating base coordinates
         % 
         % @type double @default = 0
-        nBase
+        nBase = 0;
         
         % The indexing vector of extended full coordiantes
         % 
@@ -111,17 +111,21 @@ classdef RigidBodyModel
         % Custom options of the rigid body model
         %
         % Required fields of options:
-        %  use_floating_base: specify whether use the floating base coordinates
+        %  use_base_joint: specify whether to include base coordinates
         %  @type logical @default true
-        %  floating_base_type: Specifies the type of the rigid body model. 
-        %  The supported model types are 
-        % - 'spatial' (6-dimensional floating base)
-        % - 'planar'  (3-dimensional floating base)
+        %  base_joint_type: Specifies the type of the rigid body model. 
+        %  The supported base joint types are 
+        % - 'floating' (6-dimensional floating base)
+        % - 'planar'  (3-dimensional planar base)
+        %
+        % For more definition regarding the supported joint type, please
+        % see the URDF joint description at
+        % http://wiki.ros.org/urdf/XML/joint
         %
         % @type struct 
         options = struct(...
-            'use_floating_base', true, ...
-            'floating_base_type', 'spatial'...
+            'use_base_joint', true, ...
+            'base_joint_type', 'floating'...
             );
         
         % A model parameter structure constructed based on the requirement
@@ -167,18 +171,20 @@ classdef RigidBodyModel
         %
         % @type struct
         sva
+        
+        
+        
     end
     
     %% Public methods
     methods
         
         
-        function obj = RigidBodyModel(config_filename, options)
+        function obj = RigidBodyModel(urdf_filename, varargin)
             % The class constructor function
             %
-            % @note To construct a rigid body model, a model configuration file
-            % must be specified. This file could be .urdf file or .yaml
-            % file based on the definition of options.file_type
+            % @note To construct a rigid body model, a model URDF file
+            % must be specified. 
             %
             % Parameters:
             % config_filename: the full path of the model configuration
@@ -189,59 +195,43 @@ classdef RigidBodyModel
             % Return values:
             % obj: an object of this class
             
-            % parse input options if applicable
-            if nargin > 2
-                obj.options = struct_overlay(obj.options,options);
-            end
+            % parse the input options
+            p = inputParser;
+            addParameter(p, 'use_base_joint', true, @islogical);     
+            addParameter(p, 'base_joint_type', 'floating', ...
+                (@(x) ischar(x) && (strcmp('floating',x) || strcmp('planar',x))));     
+            parse(p, varargin{:});
+            % assign the object options
+            obj.options = struct_overlay(obj.options, p.Results);
+            
+            
             
             % extract the absolute full file path of the input file
-            full_file_path = GetFullPath(config_filename);
+            full_urdf_file_path = GetFullPath(urdf_filename);
             
             % check if the file exists
-            assert(exist(full_file_path,'file')==2,...
-                'Could not find the input configuration file: \n %s\n', full_file_path);
+            assert(exist(full_urdf_file_path,'file')==2,...
+                'Could not find the input configuration file: \n %s\n', ...
+                full_urdf_file_path);
             
             
-            % assign the model name the same as the model config file name
-            [~, model_file_name, config_type] = fileparts(full_file_path);
-            obj = setModelName(obj, model_file_name);
-            
-                        
-            %| @todo implement the URDF parser function 
-            
-            % load the model from the configuration file
-            switch config_type
-                case '.yaml'
-                    model = cell_to_matrix_scan(yaml_read_file(full_file_path));
-                case '.urdf'
-                    model = parse_urdf(full_file_path);
-            end
+            % parse the URDF file into model
+            model = parseURDF(obj, full_urdf_file_path);
             
             
-            obj = parseModel(obj, model);
+            % configure the rigid body model based on parsed urdf model
+            obj   = parseModel(obj, model, obj.options);
             
             
         end
         
-        function obj = setModelName(obj, name)
-            % Set the name of the model
-            %
-            % Parameters:
-            %  name: the model name @type char
-            %
-            % Return values:
-            %  obj:   the object of this class
-            
-            obj.name = name;
-        end
+       
         
         
     end
     
     %% Private methods
     
-    
-    %% Protected methods
     
 end
 

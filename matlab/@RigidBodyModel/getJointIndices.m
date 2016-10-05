@@ -1,4 +1,4 @@
-function indices = getJointIndices(obj, joint_names)
+function indices = getJointIndices(obj, joint_names, with_base)
     % Returns the indices of joints specified by the name string
     %
     % Parameters:
@@ -8,6 +8,10 @@ function indices = getJointIndices(obj, joint_names)
     %  indices: position indices of joints in the obj.joints
     % 
     % @see getLinkIndices, joints
+    
+    if nargin < 3
+        with_base = false;
+    end
     
     all_joint_name = {obj.joints.name};
     
@@ -33,5 +37,9 @@ function indices = getJointIndices(obj, joint_names)
         indices = str_index(all_joint_name,joint_name);
     else
         error('please provide correct information (Joint Name)');
+    end
+    
+    if with_base
+        indices = obj.nBase + indices;
     end
 end

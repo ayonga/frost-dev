@@ -9,12 +9,12 @@ function sva = configureSVA(obj)
     % Number of bodies
     sva.NB = obj.nDof;
     % model type
-    type = obj.options.floating_base_type;
+    type = obj.options.base_joint_type;
     % Precollocation
     blankc = cell(sva.NB, 1);
     blankVec = zeros(sva.NB, 1);
     switch type
-        case 'spatial'
+        case 'floating'
             blankMat = zeros(6, 6, sva.NB);
             sva.gravity = [0, 0, -9.81];
             jtype = {'Px', 'Py', 'Pz', 'Rx', 'Ry', 'Rz'};
@@ -87,15 +87,15 @@ function sva = configureSVA(obj)
                     elseif full_index == 3
                         index = 2; %'pz'
                     end
-                elseif strcmp(type, 'spatial')
+                elseif strcmp(type, 'floating')
                     index = full_index;
                 end
-            case 'revolute'
+            case {'revolute', 'continuous'}
                 sva.isRevolute(i+obj.nBase) = true;
                 full_index = find(joint.axis);
                 if strcmp(type,'planar')
                     index = 3; %'r'
-                elseif strcmp(type, 'spatial')
+                elseif strcmp(type, 'floating')
                     index = full_index + 3;
                 end
             case 'fixed'
@@ -103,7 +103,7 @@ function sva = configureSVA(obj)
                 full_index = find(joint.axis);
                 if strcmp(type,'planar')
                     index = 3; %'r'
-                elseif strcmp(type, 'spatial')
+                elseif strcmp(type, 'floating')
                     index = full_index + 3;
                 end
             otherwise

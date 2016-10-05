@@ -1,4 +1,4 @@
-function obj = parseModel(obj, robot)
+function obj = parseModel(obj, model, options)
     % Parse the robot struct from URDF file into rigid body model
     %
     % Parameters:
@@ -8,28 +8,37 @@ function obj = parseModel(obj, robot)
     % Return values:
     %  obj:   the object of this class
     
-    % check the required elements in urdf.robot
-    assert(isfield(robot,'joints'),...
+    % check the required elements in robot
+    assert(isfield(model,'name'),...
+        'The name field is missing from the robot.');
+    assert(isfield(model,'joints'),...
         'The joints field is missing from the robot.');
-    assert(isfield(robot,'links'),...
+    assert(isfield(model,'links'),...
         'The links field is missing from the robot.');
     
-    assert(~isempty(robot.joints),...
+    assert(~isempty(model.joints),...
         'The joints field is empty');
-    assert(~isempty(robot.links),...
+    assert(~isempty(model.links),...
         'The links field is empty');
    
-    obj.joints = robot.joints;
-    obj.links  = robot.links;
+    obj.name   = model.name;
+    obj.joints = model.joints;
+    obj.links  = model.links;
     
-    options = obj.options;
+    
 
-    if options.use_floating_base
-        switch options.floating_base_type
-            case 'spatial'
+    if options.use_base_joint
+        switch options.base_joint_type
+            case 'floating'
                 obj.nBase = 6;
             case 'planar'
                 obj.nBase = 3;
+            case 'fixed'
+                obj.nBase = 0;
+            case {'revolute', 'prismatic', 'continuous'}
+                obj.nBase = 1;
+            otherwise
+                error('Unsupported joint type');
         end
     end;
 

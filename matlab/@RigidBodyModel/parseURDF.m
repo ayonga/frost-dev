@@ -1,4 +1,4 @@
-function model = parse_urdf(urdf_file, options)
+function model = parseURDF(obj, urdf_file)
 % This function parse the ROS URDF file into a matlab struct
 %
 % @todo This function need to be implemented soon 
@@ -92,6 +92,7 @@ end
     
 
 model = struct();
+model.name   = xml_robot.getAttribute('name');
 model.joints = joints;
 model.links  = links;
 
