@@ -5,12 +5,26 @@
 BeginPackage["RobotModel`",{"Screws`","RobotLinks`","ExtraUtils`","URDFParser`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
+NumOfParams::usage = "NumOfParams[type] returns the number of parameters of function of the given type.";
+DesiredFunction::usage = "DesiredFunction[type] returns the expression of the desired function of the given type.";
 
+ComputeContact::usage = "ComputeContact[contact] computes the contact point contraints.";
+ComputePosConstraint::usage = "ComputePosConstraint[constr] computes the position based holonomic constraints.";
+ComputeJointConstraint::usage = "ComputeJointConstraint[constr] computes the joint based holonomic constraints.";
+
+ComputeRD1Outputs::usage = "ComputeRD1Outputs[output] computes the pre-defined library of relative degree 1 outputs.";
+ComputeRD2Outputs::usage = "ComputeRD2Outputs[output] computes the pre-defined library of relative degree 2 outputs.";
+ComputePhaseVars::usage = "ComputePhaseVars[output] computes the pre-defined library of phase variables.";
+
+GetRD1Output::usage = "GetRD1Output[] returns the expression of the relative degree 1 output and its first order Jacobian.";
+GetRD2Output::usage = "GetRD2Output[] returns the expression of the relative degree 2 output and its first and second order Jacobian.";
+GetPhaseVar::usage = "GetPhaseVart[] returns the expression of the phase variable and its first order Jacobian.";
+GetHolConstr::usage = "GetHolConstr[] returns the expression of the holonomic constraints and its first and second order Jacobian.";
 
 InitializeModel::usage = 
 	"InitializeModel[file] initializes the 3D robot model from an URDF file.
 	 InitializeModel[file, type] initializes a model from an URDF file, with a specified \
-model type (either spatial or planar). "
+model type (either floating or planar). "
 
 GetModelType::usage = 
 	"GetModelType[] returns the type of the robot model.";
@@ -30,8 +44,8 @@ ComputeComPosition::usage =
 	"ComputeComPosition[] returns the position vectors of the \
 center of mass of the robot."
 
-ComputeComVelocity::usage = 
-	"ComputeComVelocity[] returns the velocity vectors of the \
+ComputeComJacobian::usage = 
+	"ComputeComJacobian[] returns the velocity vectors of the \
 center of mass of the robot."
 
 ComputeForwardKinematics::usage = 
@@ -62,10 +76,14 @@ ComputeEulerAngles::usage =
 	"ComputeEulerAngles[{link1,offset1},...,{link$n,offset$n}] computes \
 the rotation (Euler) angles of links with respect to the world frame.";
 
-GetLinkIndex::usage = 
-	"GetLinkIndex[name] returns the position index of the linkName in the list of rigid links."; 
 GetJointIndex::usage = 
 	"GetJointIndex[name] returns the position index of the jointName in the list of joints.";
+(*
+GetLinkIndex::usage = 
+	"GetLinkIndex[name] returns the position index of the linkName in the list of rigid links."; 
+
+GetJointSymbol::usage = 
+	"GetJointSymbol[name} returns the joint symbol of the given joints";
 
 GetInertia::usage = 
 	"GetInertia[link] returns the inertia of a link.";
@@ -81,9 +99,11 @@ coordinate system.";
 GetRotationMatrix::usage = 
 	"GetRotationMatrix[joint] returns the relative rotation matrix of the child joint coordinates \
 with respect to the parent joint coordinates.";
-	
+*)
 
-	
+
+
+
 
 
 GetKinematicTree::usage = 
@@ -95,10 +115,9 @@ GetBaseLink::usage =
 	"GetBaseLink[] returns the base link of the multi-body system.";
 	
 
-	
-
-	
-
+GetStateSubs::usage = "Return the substitutation rule for system states.";	
+GetZeroStateSubs::usage = "Returns the system states to all zero substitutation rule.";	
+GetnDof::usage = "Returns the degrees of freedom";
 	
 
 RobotModel::init = "The robot model has not been initiliazed. Please run InitializeModel[file] \
@@ -131,7 +150,10 @@ grav = RationalizeEx[9.81]; (* the gravity constant*)
    are required to be initialized when a robot model is loaded (in the form 
    of URDF file) to perform other functionalities.
  *)
- 
+
+GetStateSubs[]:=Join[
+	(($Qe[[#+1,1]]-> HoldForm@Global`x[[#]]&)/@(Range[$nDof]-1)),
+	(($dQe[[#+1-$nDof,1]]-> HoldForm@Global`x[[#]]&)/@($nDof+Range[$nDof]-1))];
  
 (* assume the model is 3D spatial model by default *)
 $modelType = None; 
@@ -160,14 +182,20 @@ $bChains = None;
 $jChains = None;
 $chainIndices = None;
 $pIndices = None;
+$dofName = None;
+$baseDofs = {};
 (* ::Section:: *)
 (* Functions *)
+
+
+
+
 
 InitializeModel::notFound = "Fild not found.";	
 InitializeModel::loaderr = "Cannot successfully load the URDF model.";
 (* If the model type is not specified, we assume that the model 
 is a "spatial" model by default. *)	
-InitializeModel[file_,type_:"spatial"] :=
+InitializeModel[file_,type_:"floating"] :=
 	Block[{i},
 		SetModelType[type];
 		
@@ -192,12 +220,12 @@ InitializeModel[file_,type_:"spatial"] :=
 		$Qb  = Vec[Table[Subscript[Global`qb,i][Global`t],{i,1,$nBase}]];		
 		$Q  = Vec[Table[Subscript[Global`q,i][Global`t],{i,1,$nJoint}]];		
 		$Qe  = Join[$Qb, $Q];
-		$qe0subs = Table[$Qe[[i]]->0,{i,$nDof}];
+		$qe0subs = Table[$Qe[[i,1]]->0,{i,$nDof}];
 		(* construct the base and joint velocities symbol *)
 		$dQb = D[$Qb,Global`t];
 		$dQ =  D[$Q,Global`t];
 		$dQe = Join[$dQb, $dQ];	
-		$dqe0subs = Table[$dQe[[i]]->0,{i,$nDof}];
+		$dqe0subs = Table[$dQe[[i,1]]->0,{i,$nDof}];
 		
 		(* get the indices of parent joints of rigid links. *)
 		$pIndices = GetParentJointIndices[];
@@ -211,19 +239,29 @@ InitializeModel[file_,type_:"spatial"] :=
 		(* compute kinematic chains (twist pairs) of each coordinates *)
 		{$bChains,$jChains} = GetKinematicChains[];	
 		
+		$dofName = Join[$baseDofs,
+			Map[#["name"] &, $robotJoints]];
+		
 		Return[Null];
 	];
 
+GetZeroStateSubs[]:= {$qe0subs,$dqe0subs};
+GetnDof[]:={$nDof};
+
 SetModelType::usage = 
 	"SetModelType[type] sets the type of the robot model. \
-The type can be either planar or spatial.";
-SetModelType::wrongType = "The model type can be only planar or spatial: `1`";
+The type can be either planar or floating.";
+SetModelType::wrongType = "The model type can be only planar or floating: `1`";
 SetModelType::undefined = "The model type is not defined.";
 SetModelType[type_]:= 
 	Block[{},
-		If[StringMatchQ[type,"planar"] || StringMatchQ[type,"spatial"],
+		If[StringMatchQ[type,"planar"] || StringMatchQ[type,"floating"],
 			$modelType = type;
-			$nBase = Switch[$modelType,"spatial",6,"planar",3];			
+			$nBase = Switch[type,"floating",6,"planar",3];
+			$baseDofs = Switch[type,
+				"floating",{"BasePosX","BasePosY","BasePosZ","BaseRoll","BasePitch","BaseYaw"},
+				"planar",{"BasePosX","BasePosZ","BasePitch"}
+			];		
 			, 
 			Message[SetModelType::wrongType, type];
 		];		
@@ -252,6 +290,16 @@ GetLinkIndex[name_?StringQ] :=
 (**)
 
 
+GetJointSymbol[name_?StringQ] :=
+	Block[{indices},
+		(* check if the robot model is successfully initialized *)
+		If[EmptyQ[$robotJoints] || SameQ[$robotJoints,None],
+			Message[RobotModel::init];
+			Abort[];
+		];
+		indices = PositionIndex[$dofName];
+		Return[$Qe[[First@indices[name]]]];
+	];
 
 
 GetJointIndex[name_?StringQ] :=
@@ -261,8 +309,8 @@ GetJointIndex[name_?StringQ] :=
 			Message[RobotModel::init];
 			Abort[];
 		];
-		indices = GetFieldIndices[$robotJoints,"name"];
-		Return[indices[name]];
+		indices = PositionIndex[$dofName];
+		Return[First@indices[name]];
 	];
 	
 	
@@ -356,7 +404,7 @@ ComputeComPosition[] :=
 		Return[pcom];
 	];
 	
-ComputeComVelocity[] :=
+ComputeComJacobian[] :=
 	Block[{links, linkPos, masses, pcom, Jcom, vcom, dJcom},
 		
 		pcom = ComputeComPosition[];
@@ -364,9 +412,8 @@ ComputeComVelocity[] :=
 		(* compute the jacobian of center of mass positions *)
 		Jcom = D[Flatten[pcom], {Flatten[$Qe],1}];
 		
-		vcom = Jcom.$dQe;
 		
-		Return[vcom];
+		Return[Jcom];
 	];
 
 ComputeBodyJacobians[args__] :=
@@ -463,6 +510,7 @@ ComputeRigidPositions[args__] :=
 		
 		Return[pos];
 	];
+
 
 ComputeSpatialPositions[args__] :=
 	Block[{pos, gst},
@@ -815,7 +863,7 @@ GetParentJointIndices[] :=
 	
 FloatingBaseTwists::usage = 
 	"FloatingBaseTwists[ModelType] returns the twists of floating base coordinates.";
-FloatingBaseTwists["spatial"] :=
+FloatingBaseTwists["floating"] :=
 	Block[{qb, xi},
 		(* spatial floating base contains full 6-dimension axes. *)
 		qb = {
@@ -920,15 +968,180 @@ ComputeTwists[] :=
 	];
 
 
+$definedPositions = {};
+ComputeContact[contacts_] :=
+	Block[{clist,cpos,cJac, name, syms, i, j},
+		clist = Map[{First[#["link"]], RationalizeEx[#["offset"]]} &,contacts];
+		cpos = ComputeSpatialPositions[Sequence@@clist];
+		cJac = ComputeSpatialJacobians[Sequence@@clist];
+		Table[
+		  name = contacts[[j]]["name"];
+		  syms=StringJoin[name,#]&/@{"PosX","PosY","PosZ","Roll","Pitch","Yaw"};
+		  Table[
+				$h[syms[[i]]]=cpos[[j,i]];
+				$Jh[syms[[i]]]=cJac[[j,i,;;]];
+				$dJh[syms[[i]]]=Flatten@Jac[$Jh[syms[[i]]],{Global`t}];
+				,
+				{i,6}
+			];
+		  ,
+		  {j,Length[contacts]}
+		];
+		
+		$definedPositions=DeleteDuplicates@Join[$definedPositions,
+			Flatten[
+				Table[
+					StringJoin[name,#]&/@{"PosX","PosY","PosZ"},
+					{name,(#["name"])&/@contacts}
+				]
+			]
+		];
+	];
+
+ComputeJointConstraint[constr_] :=
+	Block[{name,vars,expr,subs,varsym,i,pos},
+		Table[
+			name=pos["name"];
+			vars=pos["vars"];
+        	varsym = Table[ToExpression["var"<>ToString[i]],{i,Length[pos["vars"]]}];
+			expr=ToExpression[pos["expr"]];
+			subs=GetVarSubs["joint",vars];
+			$h[name]=expr/.subs;
+			$Jh[name]=Flatten@Jac[{$h[name]},{$Qe}];
+			$dJh[name]=Flatten@Jac[{$Jh[name]},{Global`t}];
+		,
+		{pos,constr}
+		];
+		$definedPositions=DeleteDuplicates@Join[$definedPositions,
+			Flatten[Map[(#["name"])&,constr]]];
+	];
+
+ComputePosConstraint[constr_] :=
+	Block[{name,vars,expr,subs,varsym,i,pos},
+		Table[
+			name=pos["name"];
+			vars=pos["vars"];
+        	varsym = Table[ToExpression["var"<>ToString[i]],{i,Length[pos["vars"]]}];
+			expr=ToExpression[pos["expr"]];
+			subs=GetVarSubs["position",vars];
+			$h[name]=expr/.subs;
+			$Jh[name]=Flatten@Jac[expr,varsym].Table[$Jh[vars[[i]]],{i,Length[vars]}];
+			$dJh[name]=Flatten@Jac[$Jh[name],{Global`t}];
+		,
+		{pos,constr}
+		];
+		$definedPositions=DeleteDuplicates@Join[$definedPositions,
+			Flatten[Map[(#["name"])&,constr]]];
+	];
 
 
 
 
+GetRD1Output[name_?StringQ] := {$ya1[name],$Dya1[name]};
+GetRD2Output[name_?StringQ] := {$ya2[name],$Dya2[name],$DLfya2[name]};
+GetPhaseVar[name_?StringQ] := {$p[name],$Jp[name],$dp[name],$Jdp[name]};
+GetHolConstr[name_?StringQ] := {$h[name],$Jh[name],$dJh[name]};
+
+
+ComputeRD1Outputs[outputRD1_] :=
+	Block[{name, output},
+		Table[
+			name=output["name"];
+			$ya1[name]=Flatten@GetRD1Output[output];
+			$Dya1[name]=Flatten@Jac[$ya1[name],Join[$Qe,$dQe]];
+			,
+			{output,outputRD1}
+		];
+	];
+
+ComputeRD2Outputs[outputRD2_] :=
+	Block[{name, output},
+		Table[
+			name=output["name"];
+			$ya2[name]=Flatten@GetRD2Output[output];
+			$Dya2[name]=Flatten@Jac[$ya2[name],Join[$Qe,$dQe]];
+			$DLfya2[name]=Flatten@Jac[$Dya2[name].(D[Join[$Qe,$dQe],Global`t]),Join[$Qe,$dQe]];
+			,
+			{output,outputRD2}
+		];
+	];
+
+ComputePhaseVars[phaseVars_] :=
+	Block[{name, output},
+		Table[
+			name=output["name"];
+			$p[name]=GetRD2Output[output];
+			$dp[name]=D[$p[name],Global`t];
+			$Jp[name]=Flatten@Jac[$p[name],Join[$Qe,$dQe]];
+			$Jdp[name]=Flatten@Jac[$dp[name],Join[$Qe,$dQe]];
+			(*Subscript[dJ\[Delta]p, name]=D[Subscript[J\[Delta]p, name],t];*)
+			,
+			{output,phaseVars}
+		];
+	];
+
+GetVarSubs["position",vars_]:=
+	Block[{i},		
+		Table[
+			Assert[MemberQ[$definedPositions,vars[[i]]]];
+			ToExpression["var"<>ToString[i]]-> $h[vars[[i]]]
+			,
+			{i,Length[vars]}
+		]
+	];
+GetVarSubs["joint",vars_]:=
+	Block[{i},
+		Table[
+			Assert[MemberQ[$dofName,vars[[i]]]];
+			ToExpression["var"<>ToString[i]]-> GetJointSymbol[vars[[i]]]
+			,
+			{i,Length[vars]}
+		]
+	];
+GetRD2Output[output_?AssociationQ]:=
+	Block[
+		{expr,subs},
+		expr=ToExpression[output["expr"]];
+		subs=GetVarSubs[output["type"],output["vars"]];
+		If[output["linearize"],
+			(D[expr/.subs,{Flatten[$Qe],1}]/.$qe0subs).$Qe,
+			{expr/.subs}
+		]
+	];
+GetRD1Output[output_?AssociationQ]:=
+	Block[
+		{expr,subs},
+		expr=ToExpression[output["expr"]];
+		subs=GetVarSubs[output["type"],output["vars"]];
+		If[output["linearize"],
+			(D[expr/.subs,{Flatten[$Qe],1}]/.$qe0subs).$dQe,
+			{D[expr/.subs,Global`t]}
+		]
+	];
+
+
+NumOfParams::badargs="Undefined Function Type";
+NumOfParams["Constant"]:=1;
+NumOfParams["CWF"]:=5;
+NumOfParams["ECWF"]:=7;
+
+NumOfParams["Bezier4thOrder"]:=5;
+NumOfParams["Bezier5thOrder"]:=6;
+NumOfParams["Bezier6thOrder"]:=7;
+NumOfParams["MinJerk"]:=3;
+NumOfParams[type_?StringQ]:=(Message[DesiredFunction::badargs];$Failed);
 
 
 
+(*Define desired functions here*)
+DesiredFunction::badargs="Undefined Function Type";
+DesiredFunction["Constant"]:={Global`a[1]};
 
-
+DesiredFunction["Bezier4thOrder"]:={Sum[Global`a[j+1]*Binomial[4,j]*Global`tau^j*(1-Global`tau)^(4-j),{j,0,4}]};
+DesiredFunction["Bezier5thOrder"]:={Sum[Global`a[j+1]*Binomial[5,j]*Global`tau^j*(1-Global`tau)^(5-j),{j,0,5}]};
+DesiredFunction["Bezier6thOrder"]:={Sum[Global`a[j+1]*Binomial[6,j]*Global`tau^j*(1-Global`tau)^(6-j),{j,0,6}]};
+DesiredFunction["MinJerk"]:={Global`a[2]+(Global`a[1]-Global`a[2])*(10*(Global`tau/Global`a[3])^3-15*(Global`tau/Global`a[3])^4+6*(Global`tau/Global`a[3])^5)};
+DesiredFunction[type_?StringQ]:=(Message[DesiredFunction::badargs];$Failed);
 
 
 	
