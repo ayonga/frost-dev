@@ -58,12 +58,17 @@ delim  and formats each arg with format";
 
 Str2Num::usage = "Str2Num[s] Convert a string s into a number";
 
+Jac::usage="Jac[h,x] Computes the Jacobian of a quantity with respect to the given coordinates."
 
 GetFieldIndices::usage = 
 	"GetFieldIndices[list, field] returns field position indices of element in the list based.";
 
 Begin["`Private`"]
 (* Implementation of the package *)
+
+Jac[h_,x_]:=D[Flatten[h],{Flatten[x]}];
+
+
 
 Str2Num[s_String]:=Read[StringToStream[s],Number];
 Str2Num[sl_?ListQ]:=Map[Read[StringToStream[#],Number]&,Flatten@sl];
