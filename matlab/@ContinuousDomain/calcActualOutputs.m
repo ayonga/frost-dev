@@ -2,16 +2,10 @@ function [y_a1, y_a2, Dy_a1, Dy_a2, DLfy_a2] = calcActualOutputs(obj, x, model)
     % calcActualOutputs- Calculate the actual outputs of the domain
     %   
     % 
-    % Input: 
-    %    * domain - domain
-    %    * x  -  system states
-    %
-    % Output:
-    %     y_a1, y_a2, Dy_a1, Dy_a2, DLfy_a2
-    %
-    % Copyright 2014-2015 Texas A&M University AMBER Lab
-    % Author: Ayonga Hereid <ayonga@tamu.edu>
-
+    % Parameters: 
+    %  x:  system states
+    %  model: the rigid body model
+    
     
     
     

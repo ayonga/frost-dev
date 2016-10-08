@@ -28,7 +28,7 @@ function obj = setParameters(obj, varargin)
                 % if input structure contains fields specified in parameter
                 % struct, then update that field
                 params.(param_names{i}) = new_params.(param_names{i});
-                fprintf('%s: The parameter (%s) is updated.\n',obj.domainName, param_names{i});
+                fprintf('%s: The parameter (%s) is updated.\n',obj.name, param_names{i});
                 
                 if strcmpi(param_names{i},'p')
                     % if parameter p is updated, then update p_range based

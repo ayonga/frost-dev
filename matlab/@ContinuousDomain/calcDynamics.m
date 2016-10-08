@@ -1,6 +1,6 @@
 function [dx, u, Fe] = calcDynamics(obj, t, x, model, ref)
         % This function computes the continuousd dynamics of the dynmical
-        % system \f$\dot{x} = f(x,t)%$\f.
+        % system.
         %
         % Parameters:
         %  t: the time instant @type double

@@ -52,7 +52,7 @@ classdef HybridDynamicalSystem
         % @type HybridDomain array
         domains
         
-        
+        guards
         
         % The the rigid body model
         %
@@ -79,6 +79,7 @@ classdef HybridDynamicalSystem
         %
         % @type struct
         options = struct(...
+            'controllerType','IO',...
             'simOpts',[],...
             'odeOpts',[]);
         
@@ -86,6 +87,11 @@ classdef HybridDynamicalSystem
         %
         % @type char @default []
         configDirPrefix
+        
+        % stores the configuration of the system
+        %
+        % @type struct
+        sysConfig
     end
     
     %% Public methods
@@ -121,8 +127,54 @@ classdef HybridDynamicalSystem
             
             
             obj.configDirPrefix = config_path;
+            obj.options.controllerType = 'IO';
             obj.options.simOpts = simOpts;
             obj.options.odeOpts = odeOpts;
+            
+            obj.sysConfig.name = name;
+        end
+        
+        function obj = setParams(obj, param_config)
+            % set the parameters for the continous domain behaviors
+            % (trajectory)
+            
+            
+            param_config_file = fullfile(obj.configDirPrefix,'config','parameters',...
+                obj.name, strcat(param_config,'.yaml'));
+            
+            % extract the absolute full file path of the input file
+            full_file_path = GetFullPath(param_config_file);
+            
+            % check if the file exists
+            assert(exist(full_file_path,'file')==2,...
+                'Could not find the input configuration file: \n %s\n', full_file_path);
+            
+            paramConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));
+            
+            if isfield(paramConfig,'gait_metrics')
+                fprintf(yaml_dump(paramConfig.gait_metrics));
+            end
+            if isfield(paramConfig(1),'domain')
+                param_domain_names = horzcat({paramConfig.domain.name});
+            else
+                param_domain_names = horzcat({paramConfig.name});
+            end
+            
+            
+            for i=1:numel(obj.domains)
+                
+                
+                param_index = strcmp(param_domain_names, obj.domains(i).name);
+                if isfield(paramConfig(1),'domain')
+                    param_domain = paramConfig.domain(param_index);
+                else
+                    param_domain = paramConfig(param_index);
+                end
+                obj.domains(i)  = setParameters(obj.domains(i), param_domain);
+                
+                
+                
+            end
         end
         
         
@@ -133,8 +185,7 @@ classdef HybridDynamicalSystem
             %  vertices: the list of vertices @type cell
             %  edges: the source-target vertex pairs @type
             %  varargin: optional input arguments.
-            %    edges: the pair list of edges @type cell @default []
-            %    options: the graph options @type struct
+            %    graphOptions: the graph options @type struct @default []
             
             
             % set the direct graph using the name
@@ -157,6 +208,7 @@ classdef HybridDynamicalSystem
                 
                 new_domains{i} = configureDomain(new_domains{i}, obj.model, domain_config_file);
                 
+                new_domains{i} = setupController(new_domains{i}, obj.options.controllerType);
                 
                 
             end
@@ -165,11 +217,11 @@ classdef HybridDynamicalSystem
             
             
             nEdge = numel(edges);
-            new_edges = cell(1,nEdge);
+            new_gurads = cell(1,nEdge);
             for i=1:nEdge
                 guard_name = edges(i).guard;
                 % instantiated the hybrid domain first
-                new_edges{i} = DiscreteDynamics(guard_name);
+                new_gurads{i} = DiscreteDynamics(guard_name);
                 
                 % the domain configuration file full path name
                 dmap_config_file = fullfile(obj.configDirPrefix,'config','domain',...
@@ -184,12 +236,16 @@ classdef HybridDynamicalSystem
                 
                 dMapConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));
                 
-                new_edges{i} = setOptions(new_edges{i}, dMapConfig.resetMap);
-                new_edges{i} = setGuard(new_edges{i}, dMapConfig.guard);
+                new_gurads{i} = setOptions(new_gurads{i}, dMapConfig.resetMap);
+                new_gurads{i} = setGuard(new_gurads{i}, dMapConfig.guard);
                 
                 
                 
             end
+            obj.guards = [new_gurads{:}];
+            
+            obj.sysConfig.gamma.vertices = vertices;
+            obj.sysConfig.gamma.edges = edges;
         end
         
         
@@ -240,6 +296,9 @@ classdef HybridDynamicalSystem
                 'The configuration file could not be found.\n');
             
             obj.model = RigidBodyModel(config_file, model_options);
+            
+            obj.sysConfig.model.file = strcat(file_name,file_ext);
+            obj.sysConfig.model.options = obj.model.options;
         end
         
        
@@ -271,6 +330,16 @@ classdef HybridDynamicalSystem
             domain = obj.domains(domain_index);
         
         
+        end
+        
+        function exportSysConfig(obj)
+            % Exports the system configuration into a YAML file
+            
+            export_name = fullfile(obj.configDirPrefix,'config','system',...
+                strcat(obj.name,'.yaml'));
+            
+            yaml_write_file(export_name,obj.sysConfig);
+            
         end
     end
     

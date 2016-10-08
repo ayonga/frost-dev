@@ -31,7 +31,14 @@ function sva = configureSVA(obj)
     sva.axis  = blankVec;
     sva.isRevolute = blankVec;
     
+    parent_indices = getLinkIndices(obj,{obj.joints.parent});
+    child_indices = getLinkIndices(obj,{obj.joints.child});
     
+    % find the base link, which should be the link that is the parent link
+    % of some joints but is the child link to no joint. In other words, the
+    % indices that occurs in 'parent_indices' but not occurs in
+    % 'child_indices'.
+    base_link_index = unique(parent_indices(~ismember(parent_indices,child_indices)));
     % configure floating base coordiantes as stacked joints with zero
     % mass/inertia/length
     for i=1:obj.nBase
@@ -44,17 +51,30 @@ function sva = configureSVA(obj)
             sva.axis(i) = i-3;
         end
         % Assign other configuration
-        sva.Xtree(:,:,i) = plux(eye(3), zeros(1,3));
-        sva.I(:,:,i) = mcI(0, zeros(1,3), zeros(3));
         sva.jtype{i} = jtype{i};
+        sva.Xtree(:,:,i) = plux(eye(3), zeros(1,3));
+        if i < 6
+            sva.I(:,:,i) = mcI(0, zeros(1,3), zeros(3));
+        else
+            
+            base_link = obj.links(base_link_index);
+            l_xyz = base_link.origin.xyz;
+            l_rpy = base_link.origin.rpy;
+            R = eye(3);
+            for j=3:1
+                R = R*rotation_matrix(j,l_rpy(j));
+            end
+            inertia = transpose(R)*base_link.inertia*R;
+            sva.I(:,:,i) =  mcI(base_link.mass, l_xyz, inertia);
+        end
+        
     end
     
     %| @todo how to model 'fixed' joints in SVA?
     %| @todo verify the correctness of the SVA model.
     
     
-    parent_indices = getLinkIndices(obj,{obj.joints.parent});
-    child_indices = getLinkIndices(obj,{obj.joints.child});
+    
     
     %| @todo implement configure SVA
     for i = 1:numel(obj.joints)
@@ -65,7 +85,7 @@ function sva = configureSVA(obj)
             j_rpy = zeros(3,1);
         else
             j_xyz = obj.joints(lambda).origin.xyz;
-            j_rpy = obj.joints(lambda).origin.xyz;
+            j_rpy = obj.joints(lambda).origin.rpy;
         end
         sva.parent(i+obj.nBase) = lambda + obj.nBase;
         E = eye(3);

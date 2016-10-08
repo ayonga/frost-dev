@@ -7,7 +7,7 @@ function obj = simulate(obj, new_options)
        obj.options.simOpts = struct_overlay(obj.options.simOpts,new_options);
     end
     
-    ncycle = obj.options.simOpts;
+    ncycle = obj.options.simOpts.ncycle;
     
     if(isempty(obj.options.simOpts.startingVertex))
         v0 = obj.gamma.vertices{1};
@@ -26,13 +26,15 @@ function obj = simulate(obj, new_options)
     calcs = cell(ncycle,1);
     v = v0;
     
+    model = obj.model;
+    
     for k=1:ncycle
         domain_flag = 'first';        
-        while v ~= v0 && ~strcmp(domain_flag,'first')
+        while ~strcmp(v,v0) || strcmp(domain_flag,'first')
             domain_flag = [];
             cur_domain = obj.domains(strcmp(obj.gamma.vertices,v));  
-            e = getEdgeBySource(v);
-            cur_guard = obj.guards(strcmp(obj.gamma.edges,e));   
+            e = getEdgeBySource(obj.gamma,v);
+            cur_guard = obj.guards(strcmp({obj.gamma.edges.name},e));   
             
             ref = Recorder();
             

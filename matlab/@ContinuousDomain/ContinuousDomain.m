@@ -89,7 +89,7 @@ classdef ContinuousDomain
         holConstrJacDot 
         
         
-        controllers
+        controller
         
         %% virtual constraints (i.e., outputs)
         outputs
@@ -218,6 +218,15 @@ classdef ContinuousDomain
             %             end
         end
         
+        function obj = setupController(obj,type)
+            % setup the feedback controller for the continuous domain
+            %
+            % Parameters:
+            %  type: controller type @type char
+            obj.controller = FeedbackController(type);
+        end
+        
+       
         
         function obj = addContactPoint(obj,varargin)
             % Add a contact point to the domain

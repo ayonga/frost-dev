@@ -59,8 +59,7 @@ classdef DirectedGraph
             %  vertices: the list of vertices @type cell
             %  edges: the source-target vertex pairs @type
             %  varargin: optional input arguments.
-            %    edges: the pair list of edges @type cell @default []
-            %    options: the graph options @type struct
+            %    options: the graph options @type struct @default []
             %
             % Return values:
             %  obj: the instantiated object
