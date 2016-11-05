@@ -198,7 +198,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
 				  statement=ConvertToCForm[seq];
                   (* Get the non zero elements of the output arguments and assign them one by one. Zero elements are by default set to zero.*)
                   If[OptionValue[ExportFull],
-                    NonZeroIndices = argoutDims[[i,1]],
+                    NonZeroIndices = Range@argoutDims[[i,1]],
                     NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False]
                   ];
                   result=Table["p_"<>ToString@funcLists[[i]]<>"["<>ToString[j-1]<>"]="<>ToString[CForm@final[[1,j]]],{j,NonZeroIndices}];
@@ -207,7 +207,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
 				  statement={"NULL"};
                   final={N[oexpr/.csubs,15]};
                   If[OptionValue[ExportFull],
-                    NonZeroIndices = argoutDims[[i,1]],
+                    NonZeroIndices = Range@argoutDims[[i,1]],
                     NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False];
                   ];
                   If[ExtraUtils`EmptyQ[NonZeroIndices],
