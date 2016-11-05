@@ -3,7 +3,7 @@ classdef TrajectoryOptimization < NonlinearProgram
     % programing problem --- trajectory optimization problem.
     % 
     %
-    % @author Ayonga Hereid @date 2016-09-26
+    % @author Ayonga Hereid @date 2016-10-26
     % 
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -18,19 +18,25 @@ classdef TrajectoryOptimization < NonlinearProgram
     end
     
     %% Constant properties
-    properties (Constant)
+    properties (Access = protected)
+        
+        
     end
     
     %% Protected properties
     properties (SetAccess=protected, GetAccess=public)
+        
+        
     end
     
     %% Public methods
     methods (Access = public)
-    end
         
-    %% Protected methods
-    properties (SetAccess=protected, GetAccess=public)
+        function obj = TrajectoryOptimization()
+            % The constructor function
+            
+            obj = obj@NonlinearProgram();
+        end
     end
     
     %% Private methods

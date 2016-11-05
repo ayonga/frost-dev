@@ -1,6 +1,6 @@
-classdef Amber
-    % This is an abstract class that provides a few basic elements for
-    % other subclasses 
+classdef AmberObject
+    % AmberObject is a base class for objects that have 'name' (ID) and
+    % 'options'.
     %
     %
     % @author Ayonga Hereid @date 2016-09-26
@@ -38,9 +38,9 @@ classdef Amber
             %
             % Parameters:
             %  name: the name of the object @type char
-            
-            obj.name = name;
-            
+            if nargin > 0
+                obj.name = name;
+            end
         end
         
         function obj = setOptions(obj, varargin)
@@ -54,17 +54,24 @@ classdef Amber
             %  new_options: newly parsed options from the inputs @type
             %  struct
             
-            optionList = fields(obj.options);
-            
-            p = inputParser;
-            for i = 1:numel(optionList)
-                new_param = optionList{i};
-                addParameter(p, new_param, obj.options.(new_param));
+            % if use cell pairs ({'field','value', ...})
+            if nargin == 2 && iscell(varargin{1})
+                input_cell_arg = varargin{1};
+                opts_in = struct(input_cell_arg{:});
+            else % if use input pairs ('field','value',....)   
+                warning('Unmatched options will be ignored.\n');
+                optionList = fields(obj.options);                
+                p = inputParser;
+                for i = 1:numel(optionList)
+                    new_param = optionList{i};
+                    addParameter(p, new_param, obj.options.(new_param));
+                end
+                parse(p,varargin{:});
+                opts_in = p.Results;
             end
-            parse(p,varargin{:});
-            inputs = p.Results;
             
-            obj.options = struct_overlay(obj.options,inputs);
+            
+            obj.options = struct_overlay(obj.options,opts_in,{'AllowNew',true});
         end
             
         

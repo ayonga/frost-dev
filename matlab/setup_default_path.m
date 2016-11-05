@@ -16,4 +16,7 @@ addpath_matlab_utilities('general', ...
 addpath([cur, 'third/']);
 addpath_thirdparty_packages('GetFullPath', 'date',...
     'sparse2', 'spatial_v2', 'strings', 'yaml');
+
+addpath([cur, 'nlp/']);
+addpath([cur, 'system/']);
 end
