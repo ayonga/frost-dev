@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['handle',['handle',['../classhandle.html',1,'']]],
-  ['hybriddynamicalsystem',['HybridDynamicalSystem',['../class_hybrid_dynamical_system.html',1,'']]]
+  ['feedbackcontroller',['FeedbackController',['../class_feedback_controller.html',1,'']]],
+  ['function_5fhandle',['function_handle',['../classfunction__handle.html',1,'']]]
 ];

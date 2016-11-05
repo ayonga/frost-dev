@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['rigidbodymodel',['RigidBodyModel',['../class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b',1,'RigidBodyModel']]],
-  ['ros_5fresolve_5flocal_5furl',['ros_resolve_local_url',['../ros__resolve__local__url_8m.html#a43be119b0a7ac18617160db22de27c74',1,'ros_resolve_local_url.m']]],
-  ['rospack_5ffind',['rospack_find',['../rospack__find_8m.html#af827a59ca85ffa6f46d998a9aeb5b857',1,'rospack_find.m']]]
+  ['patchline',['patchline',['../patchline_8m.html#af86cd36e575a62a4d499b869338f6b77',1,'patchline.m']]],
+  ['plot_5fcompare',['plot_compare',['../plot__compare_8m.html#adac63d18feb66d9a6db0b596895f92c7',1,'plot_compare.m']]],
+  ['plot_5fformat',['plot_format',['../plot__format_8m.html#aa8a7c483ff4483b0f588f17be0c3baab',1,'plot_format.m']]],
+  ['plot_5fsave',['plot_save',['../plot__save_8m.html#a66203d12164d70995555f253147c1472',1,'plot_save.m']]],
+  ['pushrecord',['pushRecord',['../class_recorder.html#a057e3fdb3bed05424e915257643d25e7',1,'Recorder']]]
 ];

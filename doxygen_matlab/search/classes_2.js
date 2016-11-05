@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['function_5fhandle',['function_handle',['../classfunction__handle.html',1,'']]]
+  ['directedgraph',['DirectedGraph',['../class_directed_graph.html',1,'']]],
+  ['discretedynamics',['DiscreteDynamics',['../class_discrete_dynamics.html',1,'']]],
+  ['double',['double',['../classdouble.html',1,'']]]
 ];

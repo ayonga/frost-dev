@@ -93,10 +93,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt><a class="anchor" id="_todo000002"></a>Member <a class="el" href="parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258">parse_urdf</a>  (<a class="el" href="classchar.html" title="A MatLab character array. ">char</a> urdf_file)</dt>
-<dd>This function need to be implemented soon  </dd>
-<dt><a class="anchor" id="_todo000001"></a>Member <a class="el" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b">RigidBodyModel.RigidBodyModel</a>  (<a class="el" href="classchar.html" title="A MatLab character array. ">char</a> config_filename,<a class="el" href="classstruct.html" title="A MatLab struct. ">struct</a> options)</dt>
-<dd>implement the URDF parser function </dd>
+<dt><a class="anchor" id="_todo000005"></a>Member <a class="el" href="class_continuous_domain.html#a64c069d2fb1a3503e573d2a782ecc05d">ContinuousDomain.addPositionConstraints</a>  (varargin)</dt>
+<dd>make position constraints more general  </dd>
+<dt><a class="anchor" id="_todo000006"></a>Member <a class="el" href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">HybridDynamicalSystem.domains</a>  </dt>
+<dd>The current implementation is migrated from the old <code>domain</code> class, in which all elements (including continuous and associated discrete events) are included in one class object. Next step, separate them into multiple different classes definition. </dd>
+<dt><a class="anchor" id="_todo000001"></a>Member <a class="el" href="class_nonlinear_program.html#a5e2efd9932db857b3e4556b6331a7de6">NonlinearProgram.genConstrIndices</a>  (<a class="el" href="classchar.html" title="A MatLab character array. ">char</a> solver)</dt>
+<dd><p class="startdd">implement indexing function for fmincon </p>
+<p class="enddd">implement indexing function for snopt  </p>
+</dd>
+<dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="class_nonlinear_program.html#aaac6ecde978bc137dcbc68c196fe110d">NonlinearProgram.getConstrInfos</a>  (<a class="el" href="classchar.html" title="A MatLab character array. ">char</a> solver)</dt>
+<dd><p class="startdd">implement indexing function for fmincon </p>
+<p class="enddd">implement indexing function for snopt </p>
+</dd>
 </dl>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -107,7 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 27 2016 16:51:02 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

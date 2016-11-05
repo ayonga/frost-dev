@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['ref_2em',['Ref.m',['../general_2_ref_8m.html',1,'']]],
-  ['ref_2em',['Ref.m',['../sim_2_ref_8m.html',1,'']]],
-  ['rigidbodymodel_2em',['RigidBodyModel.m',['../_rigid_body_model_8m.html',1,'']]],
-  ['ros_5fresolve_5flocal_5furl_2em',['ros_resolve_local_url.m',['../ros__resolve__local__url_8m.html',1,'']]],
-  ['rospack_5ffind_2em',['rospack_find.m',['../rospack__find_8m.html',1,'']]]
+  ['parsemodel_2em',['parseModel.m',['../parse_model_8m.html',1,'']]],
+  ['parseurdf_2em',['parseURDF.m',['../parse_u_r_d_f_8m.html',1,'']]],
+  ['patchline_2em',['patchline.m',['../patchline_8m.html',1,'']]],
+  ['plot_5fcompare_2em',['plot_compare.m',['../plot__compare_8m.html',1,'']]],
+  ['plot_5fformat_2em',['plot_format.m',['../plot__format_8m.html',1,'']]],
+  ['plot_5fsave_2em',['plot_save.m',['../plot__save_8m.html',1,'']]]
 ];

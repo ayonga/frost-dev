@@ -1,0 +1,10 @@
+<map id="system/@RigidBodyModel/RigidBodyModel.m" name="system/@RigidBodyModel/RigidBodyModel.m">
+<area shape="rect" id="node2" href="$calc_natural_dynamics_8m.html" title="system/@RigidBodyModel\l/calcNaturalDynamics.m" alt="" coords="5,97,184,138"/>
+<area shape="rect" id="node3" href="$configure_indices_8m.html" title="system/@RigidBodyModel\l/configureIndices.m" alt="" coords="208,97,387,138"/>
+<area shape="rect" id="node4" href="$configure_s_v_a_8m.html" title="system/@RigidBodyModel\l/configureSVA.m" alt="" coords="411,97,589,138"/>
+<area shape="rect" id="node5" href="$get_joint_indices_8m.html" title="system/@RigidBodyModel\l/getJointIndices.m" alt="" coords="613,97,792,138"/>
+<area shape="rect" id="node6" href="$get_link_indices_8m.html" title="system/@RigidBodyModel\l/getLinkIndices.m" alt="" coords="816,97,995,138"/>
+<area shape="rect" id="node7" href="$get_total_mass_8m.html" title="system/@RigidBodyModel\l/getTotalMass.m" alt="" coords="1019,97,1197,138"/>
+<area shape="rect" id="node8" href="$parse_model_8m.html" title="system/@RigidBodyModel\l/parseModel.m" alt="" coords="1221,97,1400,138"/>
+<area shape="rect" id="node9" href="$parse_u_r_d_f_8m.html" title="system/@RigidBodyModel\l/parseURDF.m" alt="" coords="1424,97,1603,138"/>
+</map>

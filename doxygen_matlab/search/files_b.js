@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['quad_5fheightdecay_2em',['quad_heightDecay.m',['../quad__height_decay_8m.html',1,'']]]
+  ['optimize_2em',['optimize.m',['../optimize_8m.html',1,'']]],
+  ['outputfcn_2em',['outputfcn.m',['../outputfcn_8m.html',1,'']]]
 ];

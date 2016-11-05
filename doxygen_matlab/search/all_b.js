@@ -11,6 +11,7 @@ var searchData=
   ['min_5fabs_5fnonzero_2em',['min_abs_nonzero.m',['../min__abs__nonzero_8m.html',1,'']]],
   ['min_5fjerk',['min_jerk',['../min__jerk_8m.html#a8277b6f73437e7e7fbc9e4b891211616',1,'min_jerk.m']]],
   ['min_5fjerk_2em',['min_jerk.m',['../min__jerk_8m.html',1,'']]],
+  ['model',['model',['../class_hybrid_dynamical_system.html#a2ed96813cb2eba845f2efc46f146e8d8',1,'HybridDynamicalSystem']]],
   ['mtoc_5fsubst_5fbezier_5fm_5ftsbus_5fcotm_5fsingleterm_5fbezier',['mtoc_subst_bezier_m_tsbus_cotm_singleterm_bezier',['../bezier_8m.html#a02d72454dd31a480aa2f38039712682d',1,'bezier.m']]],
   ['mtoc_5fsubst_5fdisplay_5fsystem_5finfo_5fm_5ftsbus_5fcotm_5fchomp',['mtoc_subst_display_system_info_m_tsbus_cotm_chomp',['../display__system__info_8m.html#a6debecb8fd7c83a8d7b8471e4ce037da',1,'display_system_info.m']]],
   ['mtoc_5fsubst_5fdisplay_5fsystem_5finfo_5fm_5ftsbus_5fcotm_5fmemsize_5fusing_5fmemory_5ffcn',['mtoc_subst_display_system_info_m_tsbus_cotm_memsize_using_memory_fcn',['../display__system__info_8m.html#a838176b27c00fd128a7a6587309e820a',1,'display_system_info.m']]],

@@ -4,10 +4,16 @@ var searchData=
   ['implode_2em',['implode.m',['../implode_8m.html',1,'']]],
   ['indent',['indent',['../indent_8m.html#a4a4327f26e876fa79ba905add69473ce',1,'indent.m']]],
   ['indent_2em',['indent.m',['../indent_8m.html',1,'']]],
+  ['indexinstep',['indexInStep',['../class_continuous_domain.html#a2a6212813d5854401c141bce3acee3da',1,'ContinuousDomain']]],
+  ['info',['info',['../class_solver_application.html#ab5b6b27d213b4ddf570b83dcd2ab97a0',1,'SolverApplication']]],
+  ['initialize',['initialize',['../class_ipopt_application.html#aabb586b0acf0e00936e6336349c379ae',1,'IpoptApplication::initialize()'],['../class_solver_application.html#a67c99da1b3c85d7ba5f50b3c744fb7ee',1,'SolverApplication::initialize()']]],
   ['integer',['integer',['../classinteger.html',1,'']]],
   ['integration_5fcheck',['integration_check',['../integration__check_8m.html#afda1b49f668a3be88bb7acc9f8deca83',1,'integration_check.m']]],
   ['integration_5fcheck_2em',['integration_check.m',['../integration__check_8m.html',1,'']]],
   ['integration_5fcheck_5fcontiguous',['integration_check_contiguous',['../integration__check__contiguous_8m.html#abdc6df5a7d2496c9689292688acdfb6c',1,'integration_check_contiguous.m']]],
   ['integration_5fcheck_5fcontiguous_2em',['integration_check_contiguous.m',['../integration__check__contiguous_8m.html',1,'']]],
+  ['ipoptapplication',['IpoptApplication',['../class_ipopt_application.html',1,'IpoptApplication'],['../class_ipopt_application.html#afd722316c4fe0966f1075b79845a2719',1,'IpoptApplication::IpoptApplication()']]],
+  ['ipoptapplication_2em',['IpoptApplication.m',['../_ipopt_application_8m.html',1,'']]],
+  ['is_5flinear',['is_linear',['../class_nlp_fcn.html#ac9d37c89ad54e89e31ab77f9a17d676b',1,'NlpFcn']]],
   ['isvalid',['isvalid',['../classhandle.html#a72617e83dc9643b61ed8af63e5058ccf',1,'handle']]]
 ];

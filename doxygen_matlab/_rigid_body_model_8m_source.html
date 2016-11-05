@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.6"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: @RigidBodyModel/RigidBodyModel.m Source File</title>
+        <title>AMBER Suite: system/@RigidBodyModel/RigidBodyModel.m Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f775f3930f6e82639c5ba05ab59fc2ce.html">@RigidBodyModel</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_448ef8bf4e3a4b5692e46b302d72f3ba.html">system</a></li><li class="navelem"><a class="el" href="dir_d485d406511d88429ee50f972d628fce.html">@RigidBodyModel</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -132,86 +132,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">   59</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">name</a>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#acb26ab298966666402ea55e947232ab2">   71</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_rigid_body_model.html#acb26ab298966666402ea55e947232ab2">type</a> = <span class="stringliteral">&quot;spatial&quot;</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a7e2b2b1676403d53fb40e8904b581a96">   88</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a7e2b2b1676403d53fb40e8904b581a96">links</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a590d7f9fe722fb3511ec80a9571bfb8d">  103</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a590d7f9fe722fb3511ec80a9571bfb8d">joints</a>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a59650bc93bd0bac9f459539102825979">  118</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a59650bc93bd0bac9f459539102825979">actuators</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">  133</a></span>&#160;        <a class="code" href="classdouble.html">double</a> <a class="code" href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">nDof</a>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">  149</a></span>&#160;        <a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a> = <span class="keyword">struct</span>(<span class="stringliteral">&quot;   \</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="stringliteral">            &#39;config_path&#39;,[],   \</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="stringliteral">            &#39;config_type&#39;,[],   \</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="stringliteral">            &#39;use_floating&#39;, true   \</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="stringliteral">            &quot;</span>);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="comment">/* % Public methods */</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
-<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b">  177</a></span>&#160;        <a class="code" href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b">RigidBodyModel</a>(<span class="keywordtype">char</span> config_filename,<span class="keyword">struct</span> <a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>) {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="comment">/*  extract the absolute full file path of the input file */</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            full_file_path = GetFullPath(config_filename);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            [<a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>.config_path, file_name, ext] = fileparts(full_file_path);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="keywordflow">if</span>(~exist(full_file_path,<span class="stringliteral">&quot; file &quot;</span>))</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                error(<span class="stringliteral">&quot; Could not find the input configuration file. &quot;</span>);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            end</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            obj = <a class="code" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">SetModelName</a>(obj, file_name);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="comment">/*  the file extension represents the type of the configuration</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">             * file */</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>.config_type= ext;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <span class="comment">/*  load the model from the configuration file */</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">switch</span> <a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>.config_type</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                <span class="keywordflow">case</span> <span class="stringliteral">&quot; .yaml &quot;</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    urdf = cell_to_matrix_scan(yaml_read_file(full_file_path));</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                <span class="keywordflow">case</span> <span class="stringliteral">&quot; .urdf &quot;</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    urdf = <a class="code" href="parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258">parse_urdf</a>(full_file_path);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            end</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            obj = <a class="code" href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a">parseModel</a>(obj, urdf.robot);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="comment">/* </span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">            obj.options = options; */</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
-<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">  236</a></span>&#160;        function obj = <a class="code" href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">SetModelName</a>(<span class="keywordtype">char</span> <a class="code" href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">name</a>) {</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            obj.name= <a class="code" href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">name</a>;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        }</div>
-<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a">  251</a></span>&#160;        function obj = <a class="code" href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a">parseModel</a>(<span class="keyword">struct</span> robot,<a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a>) {</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            obj.joints= robot.joints;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            obj.links= robot.links;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="comment">/* % Private methods */</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="comment">/* % Protected methods */</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a7e2b2b1676403d53fb40e8904b581a96">   72</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a7e2b2b1676403d53fb40e8904b581a96">links</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a590d7f9fe722fb3511ec80a9571bfb8d">   87</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a590d7f9fe722fb3511ec80a9571bfb8d">joints</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a59650bc93bd0bac9f459539102825979">  102</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a59650bc93bd0bac9f459539102825979">actuators</a>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">  117</a></span>&#160;        <a class="code" href="classdouble.html">double</a> <a class="code" href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">nDof</a> = 0;</div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a98ef8e96cec4a92a5afba293c8f62910">  133</a></span>&#160;        <a class="code" href="classdouble.html">double</a> <a class="code" href="class_rigid_body_model.html#a98ef8e96cec4a92a5afba293c8f62910">nBase</a> = 0;</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a4b2b2d63c3861396813f507cf1097d7f">  146</a></span>&#160;        <a class="code" href="classrowvec.html">rowvec</a> <a class="code" href="class_rigid_body_model.html#a4b2b2d63c3861396813f507cf1097d7f">qeIndices</a>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a13d71ffea401d32d30e212fe86cf5f86">  158</a></span>&#160;        <a class="code" href="classrowvec.html">rowvec</a> <a class="code" href="class_rigid_body_model.html#a13d71ffea401d32d30e212fe86cf5f86">dqeIndices</a>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a41015096587612e2bbb4d361b79c85a1">  170</a></span>&#160;        <a class="code" href="classrowvec.html">rowvec</a> <a class="code" href="class_rigid_body_model.html#a41015096587612e2bbb4d361b79c85a1">qIndices</a>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a37cf911e913cce21931d97069e6b998b">  182</a></span>&#160;        <a class="code" href="classrowvec.html">rowvec</a> <a class="code" href="class_rigid_body_model.html#a37cf911e913cce21931d97069e6b998b">dqIndices</a>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a98d67b9daa1cf832feb75f550b2bab45">  194</a></span>&#160;        <a class="code" href="classrowvec.html">rowvec</a> <a class="code" href="class_rigid_body_model.html#a98d67b9daa1cf832feb75f550b2bab45">qbIndices</a>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#ad4641e8798997106064e5bd8c3bc977f">  206</a></span>&#160;        <a class="code" href="classrowvec.html">rowvec</a> <a class="code" href="class_rigid_body_model.html#ad4641e8798997106064e5bd8c3bc977f">dqbIndices</a>;</div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">  218</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">options</a> = <span class="keyword">struct</span>(<span class="stringliteral">&quot;   \</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="stringliteral">            &#39;use_base_joint&#39;, true,    \</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="stringliteral">            &#39;base_joint_type&#39;, &#39;floating&#39;   \</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="stringliteral">            &quot;</span>);</div>
+<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#a5cb884b99a04604480e7f391daf20dfe">  242</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_rigid_body_model.html#a5cb884b99a04604480e7f391daf20dfe">sva</a>;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="comment">/* % Public methods */</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="class_rigid_body_model.html#aa9b0cb0eab7f11b996c457e922f82100">  264</a></span>&#160;        <a class="code" href="class_rigid_body_model.html#aa9b0cb0eab7f11b996c457e922f82100">RigidBodyModel</a>(urdf_filename,<a class="code" href="classvarargin.html">varargin</a>) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <span class="comment">/*  parse the input options */</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            addParameter(p, <span class="stringliteral">&#39;use_base_joint&#39;</span>, <span class="keyword">true</span>, @islogical);     </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            addParameter(p, <span class="stringliteral">&#39;base_joint_type&#39;</span>, <span class="stringliteral">&#39;floating&#39;</span>, ...</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                (@(x) ischar(x) &amp;&amp; (strcmp(<span class="stringliteral">&quot; floating &quot;</span>,x) || strcmp(<span class="stringliteral">&quot; planar &quot;</span>,x))));     </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            parse(p, varargin[:]);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="comment">/*  assign the object options */</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            obj.options= <a class="code" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0">struct_overlay</a>(obj.options, p.Results);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="comment">/*  extract the absolute full file path of the input file */</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            full_urdf_file_path = GetFullPath(urdf_filename);</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
-<div class="ttc" id="class_rigid_body_model_html_acb26ab298966666402ea55e947232ab2"><div class="ttname"><a href="class_rigid_body_model.html#acb26ab298966666402ea55e947232ab2">RigidBodyModel.type</a></div><div class="ttdeci">char type</div><div class="ttdoc">Specifies the type of the rigid body model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00071">RigidBodyModel.m:71</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html_a4f4fa7a287c41ad78c2c7aa452fa9b7b"><div class="ttname"><a href="class_rigid_body_model.html#a4f4fa7a287c41ad78c2c7aa452fa9b7b">RigidBodyModel.RigidBodyModel</a></div><div class="ttdeci">RigidBodyModel(char config_filename,struct options)</div><div class="ttdoc">The class constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00177">RigidBodyModel.m:177</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html_a33d9e0f1b45cae69aad5be31512dcb3a"><div class="ttname"><a href="class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a">RigidBodyModel.parseModel</a></div><div class="ttdeci">function   obj  = parseModel(struct robot, options)</div><div class="ttdoc">Parse the robot struct from URDF file into rigid body model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00251">RigidBodyModel.m:251</a></div></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="comment">/*  check if the file exists */</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            assert(exist(full_urdf_file_path,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                <span class="stringliteral">&quot; Could not find the input configuration file: \n %s\n &quot;</span>, ...</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                full_urdf_file_path);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="comment">/*  parse the URDF file into model */</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            model = parseURDF(obj, full_urdf_file_path);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            <span class="comment">/*  configure the rigid body model based on parsed urdf model */</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            obj   = parseModel(obj, model, obj.options);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="comment">/* % Private methods */</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;};</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
+<div class="ttc" id="class_rigid_body_model_html_a98d67b9daa1cf832feb75f550b2bab45"><div class="ttname"><a href="class_rigid_body_model.html#a98d67b9daa1cf832feb75f550b2bab45">RigidBodyModel.qbIndices</a></div><div class="ttdeci">rowvec qbIndices</div><div class="ttdoc">The indexing vector of floating base coordiantes. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00194">RigidBodyModel.m:194</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a4b2b2d63c3861396813f507cf1097d7f"><div class="ttname"><a href="class_rigid_body_model.html#a4b2b2d63c3861396813f507cf1097d7f">RigidBodyModel.qeIndices</a></div><div class="ttdeci">rowvec qeIndices</div><div class="ttdoc">The indexing vector of extended full coordiantes. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00146">RigidBodyModel.m:146</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a13d71ffea401d32d30e212fe86cf5f86"><div class="ttname"><a href="class_rigid_body_model.html#a13d71ffea401d32d30e212fe86cf5f86">RigidBodyModel.dqeIndices</a></div><div class="ttdeci">rowvec dqeIndices</div><div class="ttdoc">The indexing vector of extended full coordiantes. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00158">RigidBodyModel.m:158</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a5cb884b99a04604480e7f391daf20dfe"><div class="ttname"><a href="class_rigid_body_model.html#a5cb884b99a04604480e7f391daf20dfe">RigidBodyModel.sva</a></div><div class="ttdeci">struct sva</div><div class="ttdoc">A model parameter structure constructed based on the requirement of the Spatial Vector Algebra (sva) ...</div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00242">RigidBodyModel.m:242</a></div></div>
 <div class="ttc" id="classdouble_html"><div class="ttname"><a href="classdouble.html">double</a></div><div class="ttdoc">A double value. </div></div>
-<div class="ttc" id="class_rigid_body_model_html_a09263995191d177b046302801dd0cdb9"><div class="ttname"><a href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">RigidBodyModel.options</a></div><div class="ttdeci">options</div><div class="ttdoc">Custom options of the rigid body model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00149">RigidBodyModel.m:149</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html_a590d7f9fe722fb3511ec80a9571bfb8d"><div class="ttname"><a href="class_rigid_body_model.html#a590d7f9fe722fb3511ec80a9571bfb8d">RigidBodyModel.joints</a></div><div class="ttdeci">struct joints</div><div class="ttdoc">Represents the list of rigid joints. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00103">RigidBodyModel.m:103</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html_a57547310d878883d507f3de6baad57f3"><div class="ttname"><a href="class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3">RigidBodyModel.SetModelName</a></div><div class="ttdeci">function   obj  = SetModelName(char name)</div><div class="ttdoc">Set the name of the model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00236">RigidBodyModel.m:236</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html_a7e2b2b1676403d53fb40e8904b581a96"><div class="ttname"><a href="class_rigid_body_model.html#a7e2b2b1676403d53fb40e8904b581a96">RigidBodyModel.links</a></div><div class="ttdeci">struct links</div><div class="ttdoc">Represents the list of rigid body links. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00088">RigidBodyModel.m:88</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a09263995191d177b046302801dd0cdb9"><div class="ttname"><a href="class_rigid_body_model.html#a09263995191d177b046302801dd0cdb9">RigidBodyModel.options</a></div><div class="ttdeci">struct options</div><div class="ttdoc">Custom options of the rigid body model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00218">RigidBodyModel.m:218</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a590d7f9fe722fb3511ec80a9571bfb8d"><div class="ttname"><a href="class_rigid_body_model.html#a590d7f9fe722fb3511ec80a9571bfb8d">RigidBodyModel.joints</a></div><div class="ttdeci">struct joints</div><div class="ttdoc">Represents the list of rigid joints. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00087">RigidBodyModel.m:87</a></div></div>
+<div class="ttc" id="classvarargin_html"><div class="ttname"><a href="classvarargin.html">varargin</a></div><div class="ttdoc">A variable number of input arguments. </div></div>
+<div class="ttc" id="struct__overlay_8m_html_a269d22bd975b0b74d8c6c135eb6edcf0"><div class="ttname"><a href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0">struct_overlay</a></div><div class="ttdeci">function   opts  = struct_overlay(opts_default, opts_in, options)</div><div class="ttdef"><b>Definition:</b> <a href="struct__overlay_8m_source.html#l00017">struct_overlay.m:17</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a7e2b2b1676403d53fb40e8904b581a96"><div class="ttname"><a href="class_rigid_body_model.html#a7e2b2b1676403d53fb40e8904b581a96">RigidBodyModel.links</a></div><div class="ttdeci">struct links</div><div class="ttdoc">Represents the list of rigid body links. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00072">RigidBodyModel.m:72</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a98ef8e96cec4a92a5afba293c8f62910"><div class="ttname"><a href="class_rigid_body_model.html#a98ef8e96cec4a92a5afba293c8f62910">RigidBodyModel.nBase</a></div><div class="ttdeci">double nBase</div><div class="ttdoc">The dimension of the floating base coordinates. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00133">RigidBodyModel.m:133</a></div></div>
 <div class="ttc" id="class_rigid_body_model_html"><div class="ttname"><a href="class_rigid_body_model.html">RigidBodyModel</a></div><div class="ttdoc">RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy...</div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00017">RigidBodyModel.m:17</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a37cf911e913cce21931d97069e6b998b"><div class="ttname"><a href="class_rigid_body_model.html#a37cf911e913cce21931d97069e6b998b">RigidBodyModel.dqIndices</a></div><div class="ttdeci">rowvec dqIndices</div><div class="ttdoc">The indexing vector of joint coordinate velocities. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00182">RigidBodyModel.m:182</a></div></div>
 <div class="ttc" id="class_rigid_body_model_html_a3483dd3c48db9cd0215c1c24da8ed3a0"><div class="ttname"><a href="class_rigid_body_model.html#a3483dd3c48db9cd0215c1c24da8ed3a0">RigidBodyModel.name</a></div><div class="ttdeci">char name</div><div class="ttdoc">The unique name of the rigid body model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00059">RigidBodyModel.m:59</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html_a59650bc93bd0bac9f459539102825979"><div class="ttname"><a href="class_rigid_body_model.html#a59650bc93bd0bac9f459539102825979">RigidBodyModel.actuators</a></div><div class="ttdeci">struct actuators</div><div class="ttdoc">Represents the list of joint actuators. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00118">RigidBodyModel.m:118</a></div></div>
-<div class="ttc" id="parse__urdf_8m_html_a66a78622acec0a5bc4e9eb39e5897258"><div class="ttname"><a href="parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258">parse_urdf</a></div><div class="ttdeci">function struct robot  = parse_urdf(char urdf_file)</div><div class="ttdoc">This function parse the ROS URDF file into a matlab struct. </div><div class="ttdef"><b>Definition:</b> <a href="parse__urdf_8m_source.html#l00017">parse_urdf.m:17</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a59650bc93bd0bac9f459539102825979"><div class="ttname"><a href="class_rigid_body_model.html#a59650bc93bd0bac9f459539102825979">RigidBodyModel.actuators</a></div><div class="ttdeci">struct actuators</div><div class="ttdoc">Represents the list of joint actuators. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00102">RigidBodyModel.m:102</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_aa9b0cb0eab7f11b996c457e922f82100"><div class="ttname"><a href="class_rigid_body_model.html#aa9b0cb0eab7f11b996c457e922f82100">RigidBodyModel.RigidBodyModel</a></div><div class="ttdeci">RigidBodyModel(urdf_filename, varargin)</div><div class="ttdoc">The class constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00264">RigidBodyModel.m:264</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a41015096587612e2bbb4d361b79c85a1"><div class="ttname"><a href="class_rigid_body_model.html#a41015096587612e2bbb4d361b79c85a1">RigidBodyModel.qIndices</a></div><div class="ttdeci">rowvec qIndices</div><div class="ttdoc">The indexing vector of joint coordiantes. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00170">RigidBodyModel.m:170</a></div></div>
+<div class="ttc" id="classrowvec_html"><div class="ttname"><a href="classrowvec.html">rowvec</a></div><div class="ttdoc">A matlab row vector. </div></div>
 <div class="ttc" id="classstruct_html"><div class="ttname"><a href="classstruct.html">struct</a></div><div class="ttdoc">A MatLab struct. </div></div>
 <div class="ttc" id="classchar_html"><div class="ttname"><a href="classchar.html">char</a></div><div class="ttdoc">A MatLab character array. </div></div>
-<div class="ttc" id="class_rigid_body_model_html_a539d3795727949d40b3585ed9224cabc"><div class="ttname"><a href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">RigidBodyModel.nDof</a></div><div class="ttdeci">double nDof</div><div class="ttdoc">The total degrees of freedom of the model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00133">RigidBodyModel.m:133</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_ad4641e8798997106064e5bd8c3bc977f"><div class="ttname"><a href="class_rigid_body_model.html#ad4641e8798997106064e5bd8c3bc977f">RigidBodyModel.dqbIndices</a></div><div class="ttdeci">rowvec dqbIndices</div><div class="ttdoc">The indexing vector of floating base coordinate velocities. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00206">RigidBodyModel.m:206</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html_a539d3795727949d40b3585ed9224cabc"><div class="ttname"><a href="class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc">RigidBodyModel.nDof</a></div><div class="ttdeci">double nDof</div><div class="ttdoc">The total degrees of freedom of the model. </div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00117">RigidBodyModel.m:117</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -221,7 +223,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 27 2016 16:51:02 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

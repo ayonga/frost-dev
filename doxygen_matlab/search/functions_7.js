@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['implode',['implode',['../implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64',1,'implode.m']]],
-  ['indent',['indent',['../indent_8m.html#a4a4327f26e876fa79ba905add69473ce',1,'indent.m']]],
-  ['integration_5fcheck',['integration_check',['../integration__check_8m.html#afda1b49f668a3be88bb7acc9f8deca83',1,'integration_check.m']]],
-  ['integration_5fcheck_5fcontiguous',['integration_check_contiguous',['../integration__check__contiguous_8m.html#abdc6df5a7d2496c9689292688acdfb6c',1,'integration_check_contiguous.m']]]
+  ['hline',['hline',['../hline_8m.html#a938c11cd202783bc1d04fa02006deb2b',1,'hline.m']]],
+  ['horzcat_5fdomains',['horzcat_domains',['../horzcat__domains_8m.html#aeecc3217b9a25532930cca125a449dab',1,'horzcat_domains.m']]],
+  ['horzcat_5ffields',['horzcat_fields',['../horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0',1,'horzcat_fields.m']]],
+  ['horzcat_5ffields_5fdomains',['horzcat_fields_domains',['../horzcat__fields__domains_8m.html#a930bb33692ce2bede234feed4cf71eba',1,'horzcat_fields_domains.m']]],
+  ['hybriddynamicalsystem',['HybridDynamicalSystem',['../class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5',1,'HybridDynamicalSystem']]]
 ];

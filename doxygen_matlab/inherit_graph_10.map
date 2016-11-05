@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_rigid_body_model.html" title="RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy..." alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node1" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="6,31,66,57"/>
+<area shape="rect" id="node2" href="$class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="115,5,189,32"/>
+<area shape="rect" id="node3" href="$class_ref.html" title="Ref" alt="" coords="131,56,173,83"/>
 </map>

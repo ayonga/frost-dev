@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['permute',['permute',['../classhandle.html#a6dc9f59313af54f392d8e273d71ace7b',1,'handle']]]
+  ['model',['model',['../class_hybrid_dynamical_system.html#a2ed96813cb2eba845f2efc46f146e8d8',1,'HybridDynamicalSystem']]]
 ];

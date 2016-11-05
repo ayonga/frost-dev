@@ -2,4 +2,5 @@
 <area shape="rect" id="node2" href="$classdouble.html" title="A double value. " alt="" coords="5,5,64,32"/>
 <area shape="rect" id="node3" href="$classstruct.html" title="A MatLab struct. " alt="" coords="89,5,143,32"/>
 <area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="178,5,224,32"/>
+<area shape="rect" id="node5" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="249,5,313,32"/>
 </map>

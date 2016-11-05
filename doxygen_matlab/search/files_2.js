@@ -1,10 +1,22 @@
 var searchData=
 [
+  ['calcactualoutputs_2em',['calcActualOutputs.m',['../calc_actual_outputs_8m.html',1,'']]],
+  ['calcclfmultilagrange_2em',['calcClfMultiLagrange.m',['../calc_clf_multi_lagrange_8m.html',1,'']]],
+  ['calcdesiredoutputs_2em',['calcDesiredOutputs.m',['../calc_desired_outputs_8m.html',1,'']]],
+  ['calcdynamics_2em',['calcDynamics.m',['../calc_dynamics_8m.html',1,'']]],
+  ['calcnaturaldynamics_2em',['calcNaturalDynamics.m',['../calc_natural_dynamics_8m.html',1,'']]],
+  ['calcresetmap_2em',['calcResetMap.m',['../calc_reset_map_8m.html',1,'']]],
+  ['calctorques_2em',['calcTorques.m',['../calc_torques_8m.html',1,'']]],
   ['cell2str_2em',['cell2str.m',['../cell2str_8m.html',1,'']]],
   ['cellexpand_2em',['cellexpand.m',['../cellexpand_8m.html',1,'']]],
   ['check_5ferror_2em',['check_error.m',['../check__error_8m.html',1,'']]],
+  ['checkguard_2em',['checkGuard.m',['../check_guard_8m.html',1,'']]],
   ['class_5fsubstitutes_2ec',['class_substitutes.c',['../class__substitutes_8c.html',1,'']]],
+  ['configureclf_2em',['configureCLF.m',['../configure_c_l_f_8m.html',1,'']]],
+  ['configureindices_2em',['configureIndices.m',['../configure_indices_8m.html',1,'']]],
+  ['configuresva_2em',['configureSVA.m',['../configure_s_v_a_8m.html',1,'']]],
   ['contiguous_5findices_2em',['contiguous_indices.m',['../contiguous__indices_8m.html',1,'']]],
+  ['continuousdomain_2em',['ContinuousDomain.m',['../_continuous_domain_8m.html',1,'']]],
   ['convertsym2function_2em',['convertSym2Function.m',['../convert_sym2_function_8m.html',1,'']]],
   ['cwf_5ftime_2em',['cwf_time.m',['../cwf__time_8m.html',1,'']]]
 ];
