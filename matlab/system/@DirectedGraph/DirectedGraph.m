@@ -39,8 +39,8 @@ classdef DirectedGraph
         % The class option
         %
         % Required fields of options:
-        %  isPeriodic: indicates whether the graph is periodic or not @type
-        %  logical @defaul true
+        %  isPeriodic: indicates whether the graph is periodic or aperiodic
+        %  @type logical
         %
         % @type struct
         options = struct(...
@@ -57,12 +57,13 @@ classdef DirectedGraph
             %
             % Parameters:
             %  vertices: the list of vertices @type cell
-            %  edges: the source-target vertex pairs @type
-            %  varargin: optional input arguments.
-            %    options: the graph options @type struct @default []
+            %  edges: the source-target vertex pairs @type cell
+            %  options: the graph options @type struct @default []
             %
             % Return values:
             %  obj: the instantiated object
+            %
+            %
             
             % check input arguments
             assert(iscell(vertices) && iscell(edges),...
@@ -129,6 +130,7 @@ classdef DirectedGraph
             %
             % Return values:
             %  edge: the name of corresponding edges @type cell
+            %
             
             % find the rows whose 'source' is the 'source_vertex'
             rows = strcmp({obj.edges.source},source_vertex);

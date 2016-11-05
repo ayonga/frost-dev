@@ -1,5 +1,5 @@
 function [dx, u, Fe] = calcDynamics(obj, t, x, model, ref)
-        % This function computes the continuousd dynamics of the dynmical
+        % This function computes the continuous dynamics of the dynmical
         % system.
         %
         % Parameters:
