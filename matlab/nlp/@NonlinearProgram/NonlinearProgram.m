@@ -209,6 +209,7 @@ classdef NonlinearProgram
             %  cl: the lower bound
             %  cu: the upper bound
             %  extra: (optional) extra input argument for functions
+            %
             %  @see NlpConstr NlpFcn
             
             

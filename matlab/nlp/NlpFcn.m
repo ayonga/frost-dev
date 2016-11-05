@@ -146,8 +146,8 @@ classdef NlpFcn
             % dimension: the dimension of the function @type integer
             % varargin: variable input argument. In detail
             %  extra: a list of extra constant arguments. @type rowvec
-            %  hessian: indicates whether Hessian functions are provided or
-            %  not @logical
+            %  withHessian: a param-value pair indicates whether Hessian
+            %  functions are provided or not @logical
             %
             % @attention The 'extra' argument must be constant.
             
