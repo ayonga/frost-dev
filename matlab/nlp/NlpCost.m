@@ -1,4 +1,4 @@
-classdef NlpCost < NlpFcn
+classdef NlpCost < NlpFunction
     % This class provides a data structure for a cost function based on the
     % NlpFcn class.
     %
@@ -18,7 +18,7 @@ classdef NlpCost < NlpFcn
             %
             % @note the dimension should be always '1'.
             
-            obj = obj@NlpFcn(name, 1, varargin{:});
+            obj = obj@NlpFunction(name, 1, varargin{:});
             
         end
         

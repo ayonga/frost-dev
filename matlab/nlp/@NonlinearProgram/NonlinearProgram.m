@@ -22,33 +22,6 @@ classdef NonlinearProgram
         % @type char
         name
         
-        % The structure array contains all information regarding NLP
-        % optimization variables
-        %
-        % @type NlpVar
-        optVars
-        
-        % A data structure that stores the indexing of optimization
-        % variables
-        %
-        % @type struct
-        optVarIndices
-        
-        % Contains the information of registered cost functions in the form
-        % of structure array
-        %
-        % @type NlpCost
-        costArray
-        
-        % Contains the information of registered constraints in the form of
-        % structure array
-        %
-        % @type NlpConstr
-        constrArray
-        
-        
-        
-        
         % The class option
         %
         % Required fileds of options:
@@ -57,11 +30,39 @@ classdef NonlinearProgram
         % 
         % @type struct
         options 
+        
+        
+        % The structure array contains all information regarding NLP
+        % optimization variables
+        %
+        % @type NlpVariable
+        varArray
+        
+        % A data structure that stores the indexing of optimization
+        % variables
+        %
+        % @type struct
+        varIndex
+        
+        % A cell data stores registered objective functions
+        %
+        % @type cell
+        costArray
+        
+        % A cell data stores registered constraints functions
+        %
+        % @type cell
+        constrArray
+        
+        
+        
+        
+        
     end
     
     properties (Access = protected)
         
-        % The initial guess of the decision variables
+        % The initial guess of the optimization variables
         %
         % @type colvec
         z0
@@ -88,6 +89,14 @@ classdef NonlinearProgram
             obj.options = struct();
             obj.options.withHessian = p.Results.withHessian;
             
+            
+            
+            % initialize the type of the variables
+            obj.varIndex = struct();
+            obj.costArray  = cell(0);
+            obj.constrArray = cell(0);
+            
+            
         end
         
     end
@@ -103,19 +112,7 @@ classdef NonlinearProgram
         
         [obj] = addConstraint(obj, name, deps, dimension, cl, cu, extra);
         
-        [dimOptVar, lb, ub] = getVarInfos(obj);
-        
-        [obj] = genCostIndices(obj);
-        
-        [costArray, costInfos] = getCostInfos(obj);
-        
-        [obj] = genConstrIndices(obj, solver);
-        
-        [obj] = genConstrIndicesIpopt(obj);
-        
-        [constrArray, constrInfos] = getConstrInfos(obj, solver);
-        
-        [constrArray, constrInfos] = getConstrInfosIpopt(obj);
+        [nVar, lowerbound, upperbound] = getVarInfo(obj);
         
         [z0] = getStartingPoint(obj, varargin);
         

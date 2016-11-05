@@ -1,4 +1,4 @@
-classdef NlpConstr < NlpFcn
+classdef NlpConstraint < NlpFunction
     % This class provides a data structure for a optimization constraints
     % based on the NlpFcn class. 
     %
@@ -32,12 +32,12 @@ classdef NlpConstr < NlpFcn
     
     methods
     
-        function obj = NlpConstr(name, dimension, cl, cu, varargin)
+        function obj = NlpConstraint(name, dimension, cl, cu, varargin)
             % The class constructor function
             %
             % @note the dimension should be always '1'.
             
-            obj = obj@NlpFcn(name, dimension, varargin{:});
+            obj = obj@NlpFunction(name, dimension, varargin{:});
             
             % constraints boundaries
             if isscalar(cl)

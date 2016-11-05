@@ -24,4 +24,6 @@ nlp = setInitialGuess(nlp,[ 2.5 0.5 2 -1 0.5 ]);
 
 solver = IpoptApplication(nlp);
 
+solver = initialize(solver);
+
 solver = solver.optimize

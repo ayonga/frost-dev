@@ -8,10 +8,10 @@ function [obj] = addCost(obj, name, deps, extra)
     %  extra: (optional) extra constant input argument for
     %  functions
     %
-    %  @see NlpFcn
+    %  @see NlpCost NlpFunction
     
     % opt variables have to be registered before adding constraints
-    assert(~isempty(obj.optVarIndices),...
+    assert(~isempty(obj.varIndex),...
         'NonlinearProgram:incorrectProcedure',...
         ['Cost function can be registered only after generated variables indices.\n',...
         'Please run genVarIndices first.\n']);
@@ -29,19 +29,14 @@ function [obj] = addCost(obj, name, deps, extra)
     for i = 1:nDeps
         var    = deps{i};
         depIndices = [depIndices,...
-            obj.optVarIndices.(var)];
+            obj.varIndex.(var)];
     end
     
     new_cost = setDependentIndices(...
         new_cost, depIndices);
     
     
-    if isempty(obj.costArray)
-        obj.costArray = new_cost;
-    else
-        % specifies the next entry point
-        next_entry = numel(obj.costArray) + 1;
-        
-        obj.costArray(next_entry) = new_cost;
-    end
+    % insert to the end of the cell array
+    obj.costArray{end+1} = new_cost;
+    
 end

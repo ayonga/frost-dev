@@ -1,4 +1,4 @@
-classdef NlpVar
+classdef NlpVariable
     % This class provides a data structure for NLP optimization variables.
     %
     % 
@@ -41,7 +41,7 @@ classdef NlpVar
     
     
     methods
-        function obj = NlpVar(name, dimension, lb, ub)
+        function obj = NlpVariable(name, dimension, lb, ub)
             % The class constructor function
             %
             % Parameters:

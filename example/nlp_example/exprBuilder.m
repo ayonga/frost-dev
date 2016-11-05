@@ -52,7 +52,7 @@ ExportWithHessian["cost1",{f1},{X}];
 ExportWithHessian["cost2",{f2},{X}];
 
 
-ExportWithGradient["cost3",{f3},{Y}]
+ExportWithHessian["cost3",{f3},{Y}]
 
 
 (* ::Section:: *)
@@ -66,3 +66,8 @@ c3 = x[2] - y[2];
 
 
 
+
+
+ExportWithHessian["constr1",{c1},{X}]
+ExportWithHessian["constr2",{c2},{X,Y}]
+ExportWithHessian["constr3",{c3},{X,Y}]

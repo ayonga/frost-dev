@@ -1,4 +1,4 @@
-classdef NlpFcn
+classdef NlpFunction
     % This class provides a data structure for a optimization function.
     % This function could be either a constraint or a objective function of
     % the problem.
@@ -138,7 +138,7 @@ classdef NlpFcn
     
         
     methods
-        function obj = NlpFcn(name, dimension, varargin)
+        function obj = NlpFunction(name, dimension, varargin)
             % The class constructor function.
             %
             % Parameters:
@@ -234,6 +234,8 @@ classdef NlpFcn
                         'The Hessian matrix is symmetric matrix, so only lower triangular entries are needed.\n');
                 end
                 obj.nnzHess = size(obj.hess_struct,1);
+            else
+                obj.nnzHess = 0;
             end
             
         end

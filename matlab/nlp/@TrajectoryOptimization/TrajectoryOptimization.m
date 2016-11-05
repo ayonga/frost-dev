@@ -17,7 +17,7 @@ classdef TrajectoryOptimization < NonlinearProgram
     properties (Access = public)
     end
     
-    %% Constant properties
+    %% Protected properties
     properties (Access = protected)
         
         
@@ -32,15 +32,14 @@ classdef TrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = TrajectoryOptimization()
+        function obj = TrajectoryOptimization(name, varargin)
             % The constructor function
             
-            obj = obj@NonlinearProgram();
+            obj = obj@NonlinearProgram(name, varargin{:});
         end
-    end
-    
-    %% Private methods
-    properties (Access=private)
+        
+        
+        
     end
     
 end

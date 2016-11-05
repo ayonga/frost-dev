@@ -48,8 +48,6 @@ classdef (Abstract) SolverApplication
         reOptimizeNLP(obj)
         
         
-        getInfo(obj)
-        % Returns the information of the NLP solver
     end
    
     methods
@@ -66,9 +64,6 @@ classdef (Abstract) SolverApplication
         end
         
         
-        function obj = setOptions(obj)
-            
-        end
     end
     
 end

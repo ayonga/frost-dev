@@ -4,14 +4,14 @@ function obj = genVarIndices(obj)
     
     index0 = 0;
     
-    for i=1:length(obj.optVars)
-        var = obj.optVars(i);
+    for i=1:length(obj.varArray)
+        var = obj.varArray(i);
         
-        obj.optVarIndices.(var.name) = ...
+        obj.varIndex.(var.name) = ...
             index0 + cumsum(ones(1,var.dimension));
         
         % updates offset
-        index0 = obj.optVarIndices.(var.name)(end);
+        index0 = index0 + var.dimension;
     end
     
     

@@ -13,10 +13,84 @@ classdef IpoptApplication < SolverApplication
     % http://www.opensource.org/licenses/bsd-license.php
     
    
-    %% Protected properties
-    properties (SetAccess=protected, GetAccess=public)
+    %% Private properties
+    properties (Access=public)
         
-       
+        % The dimension of the NLP decision (optimization) variables
+        % 
+        % @type integer
+        dimVariable
+        
+        % The lower limits of the optimization variables
+        %
+        % @type colvec
+        lb
+        
+        % The upper limits of the optimization variables
+        %
+        % @type colvec
+        ub
+        
+        % Contains the information of registered cost functions in the form
+        % of NlpCost array
+        %
+        % @type NlpCost
+        costArray
+        
+        % Contains the information of registered constraints in the form of
+        % NlpConstraint array
+        %
+        % @type NlpConstraint
+        constrArray
+        
+        % The number of nonzero entries in the objective gradient vector
+        % 
+        % @type integer
+        nnzGrad
+        
+        % Row and column indices of the  nonzero entries in the sparse
+        % Gradient vector 
+        %
+        % @type matrix
+        gradNonzeroIndex
+        
+        % The dimension of constraints 
+        %
+        % @type integer
+        dimConstraint
+        
+        % The lower bound of constraints 
+        %
+        % @type colvec
+        cl
+        
+        % The upper bound of constraints 
+        % 
+        % @type colvec
+        cu
+        
+        % The number of nonzero entries in the constraint Jacobian matrix
+        %
+        % @type integer
+        nnzJac
+        
+        % Row and column indices of the  nonzero entries in the sparse
+        % Jacobian matrix 
+        %
+        % @type matrix
+        jacNonzeroIndex
+        
+        % The number of nonzero entries in the cost portion of the Hessian
+        %
+        % @type integer
+        nnzHess
+        
+        % Row and column indices of the nonzero entries in the sparse
+        % Hessian matrix 
+        %
+        % @type matrix
+        hessNonzeroIndex
+        
         
     end
     
@@ -45,7 +119,7 @@ classdef IpoptApplication < SolverApplication
             solver_opts.ipopt.mu_strategy      = 'adaptive';
             solver_opts.ipopt.max_iter         = 1000;
             solver_opts.ipopt.tol              = 1e-7;
-            solver_opts.ipopt.hessian_approximation = 'limited-memory';
+            solver_opts.ipopt.hessian_approximation = 'exact';
             solver_opts.ipopt.limited_memory_update_type = 'bfgs';  % {bfgs}, sr1
             solver_opts.ipopt.limited_memory_max_history = 10;  % {6}
             solver_opts.ipopt.linear_solver = 'ma57';
@@ -63,9 +137,7 @@ classdef IpoptApplication < SolverApplication
         end
         
         
-        function obj = initialize(obj)
-            
-        end
+        
         
         
         
@@ -87,9 +159,22 @@ classdef IpoptApplication < SolverApplication
         
     end
         
+    % function definitions
     methods
         
-        obj = optimize(obj)
+        [obj] = initialize(obj);
+        
+        [obj] = optimize(obj);
+        
+        
+        [costArray] = indexCostArray(obj);        
+        
+        
+        [constrArray] = indexConstraintArray(obj);
+        
+        
+        
+        
     end
     
 end

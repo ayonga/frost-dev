@@ -12,14 +12,14 @@ function [obj] = addVariable(obj, name, dimension, varargin)
     %   nlp = addVariable(nlp, 'name', 10, 0, 1)
     %
     
-    if isempty(obj.optVars)
-        obj.optVars = NlpVar(name, dimension, varargin{:});
+    if isempty(obj.varArray)
+        obj.varArray = NlpVariable(name, dimension, varargin{:});
     else
         % specifies the next entry point
-        next_entry = numel(obj.optVars) + 1;
+        next_entry = numel(obj.varArray) + 1;
         
         % construct the optimization varibale information
-        obj.optVars(next_entry) = NlpVar(name, dimension, varargin{:});
+        obj.varArray(next_entry) = NlpVariable(name, dimension, varargin{:});
     end
     
 end

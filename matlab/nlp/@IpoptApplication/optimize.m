@@ -2,44 +2,36 @@ function obj = optimize(obj)
     % This function runs the solver's optimization routine for the
     % NLP
     %
+    % Be sure the run the initialization procedure before run this
+    % function.
     
     x0 = getStartingPoint(obj.nlp);
     
     opts = obj.options;
-    
-    
-    [dimOptVar, lb, ub] = getVarInfos(obj.nlp);
-    [costArray, costInfos] ...
-        = getCostInfos(obj.nlp);
-    [constrArray, constrInfos] ...
-        = getConstrInfos(obj.nlp, 'ipopt');
-    
-    
-    opts.lb = lb;
-    opts.ub = ub;
-    opts.cl = constrInfos.cl;
-    opts.cu = constrInfos.cu;
+    opts.lb = obj.lb;
+    opts.ub = obj.ub;
+    opts.cl = obj.cl;
+    opts.cu = obj.cu;
     
     funcs = struct();
-    funcs.objective         = @(x)IpoptObjective(x, costArray);
-    funcs.constraints       = @(x)IpoptConstraints(x, constrArray, constrInfos.dimConstr);
-    funcs.gradient          = @(x)IpoptGradient(x, costArray, dimOptVar, costInfos.nnzGrad, ...
-        costInfos.gradSparseIndices);
-    funcs.jacobian          = @(x)IpoptJacobian(x, constrArray, constrInfos.dimConstr, dimOptVar, ...
-        constrInfos.nnzJac, constrInfos.jacSparseIndices);
-    funcs.jacobianstructure = @()IpoptJacobianStructure(constrInfos.dimConstr, dimOptVar, ...
-        constrInfos.nnzJac, constrInfos.jacSparseIndices);
+    funcs.objective         = @(x)IpoptObjective(x, obj.costArray);
+    funcs.constraints       = @(x)IpoptConstraints(x, obj.constrArray, obj.dimConstraint);
+    funcs.gradient          = @(x)IpoptGradient(x, obj.costArray, obj.dimVariable, obj.nnzGrad, ...
+        obj.gradNonzeroIndex);
+    funcs.jacobian          = @(x)IpoptJacobian(x, obj.constrArray, obj.dimConstraint, obj.dimVariable, ...
+        obj.nnzJac, obj.jacNonzeroIndex);
+    funcs.jacobianstructure = @()IpoptJacobianStructure(obj.dimConstraint, obj.dimVariable, ...
+        obj.nnzJac, obj.jacNonzeroIndex);
     
     if strcmpi(opts.ipopt.hessian_approximation, 'exact')
         assert(obj.nlp.options.withHessian,...
             ['The NLP has no user definied Hessian function associated.\n',...
             'Please do not enable exact hessian option']);
         funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
-            costArray, constrArray, dimOptVar, costInfos.nnzCostHess, costInfos.costHessSparseIndices,...
-            constrInfos.nnzConstrHess, constrInfos.constrHessSparseIndices);
-        funcs.hessianstructure  = @()IpoptHessianStructure(dimOptVar, ...
-            costInfos.nnzCostHess, costInfos.costHessSparseIndices,...
-            constrInfos.nnzConstrHess, constrInfos.constrHessSparseIndices);
+            obj.costArray, obj.constrArray, obj.dimVariable, ...
+            obj.nnzHess, obj.hessNonzeroIndex);
+        funcs.hessianstructure  = @()IpoptHessianStructure(obj.dimVariable, ...
+            obj.nnzHess, obj.hessNonzeroIndex);
     end
     
     
@@ -66,13 +58,13 @@ function obj = optimize(obj)
     
     
     %% constraints
-    function [C] = IpoptConstraints(x, constrArray, dimConstr)
+    function [C] = IpoptConstraints(x, constrArray, dimConstraint)
         % nonlinear constraints of the optimization problem
         
         nConstr = numel(constrArray);
         
         % preallocation
-        C   = zeros(dimConstr,1);
+        C   = zeros(dimConstraint,1);
         for i = 1:nConstr
             constr = constrArray(i);
             var = x(constr.deps); % dependent variables
@@ -86,7 +78,7 @@ function obj = optimize(obj)
     %%
     
     %% Objective gradient function
-    function [J] = IpoptGradient(x, costArray, dimOptVar, nnzGrad, gradSparseIndices)
+    function [J] = IpoptGradient(x, costArray, dimVariable, nnzGrad, gradNonzeroIndex)
         % Gradient of the objective function of the optimization problem
         
         
@@ -105,14 +97,14 @@ function obj = optimize(obj)
             
         end
         
-        J = sparse2(gradSparseIndices(:,1),gradSparseIndices(:,2),...
-            J_val, 1, dimOptVar, nnzGrad);
+        J = sparse2(gradNonzeroIndex(:,1),gradNonzeroIndex(:,2),...
+            J_val, 1, dimVariable, nnzGrad);
         
     end
     %%
     
     %% constraints Jacobian
-    function [J] = IpoptJacobian(x, constrArray, dimConstr, dimOptVar, nnzJac, jacSparseIndices)
+    function [J] = IpoptJacobian(x, constrArray, dimConstraint, dimVariable, nnzJac, jacNonzeroIndex)
         % jacobian matrix nonlinear constraints of the optimization problem
         
         nConstr = numel(constrArray);
@@ -129,30 +121,29 @@ function obj = optimize(obj)
             
         end
         
-        J = sparse2(jacSparseIndices(:,1), jacSparseIndices(:,2),...
-             J_val, dimConstr, dimOptVar, nnzJac);
+        J = sparse2(jacNonzeroIndex(:,1), jacNonzeroIndex(:,2),...
+             J_val, dimConstraint, dimVariable, nnzJac);
         
     end
     %%
     
     %% constraints Jacobian structure
-    function [J] = IpoptJacobianStructure(dimConstr, dimOptVar, nnzJac, jacSparseIndices)
+    function [J] = IpoptJacobianStructure(dimConstraint, dimVariable, nnzJac, jacNonzeroIndex)
         % jacobian structure of constraints of the optimization problem
         
         
         % preallocation
         J_val   = ones(nnzJac,1);
         
-        J = sparse2(jacSparseIndices(:,1), jacSparseIndices(:,2),...
-             J_val, dimConstr, dimOptVar, nnzJac);
+        J = sparse2(jacNonzeroIndex(:,1), jacNonzeroIndex(:,2),...
+             J_val, dimConstraint, dimVariable, nnzJac);
         
     end
     %%
     
     %% Hessian
     function [H_ret] = IpoptHessian(x, sigma, lambda, ...
-            costArray, constrArray, dimOptVar, nnzCostHess, costHessSparseIndices,...
-            nnzConstrHess, constrHessSparseIndices)
+            costArray, constrArray, dimVariable, nnzHess, hessNonzeroIndex)
         % compute hessian matrix of the optimization problem
         
         
@@ -160,8 +151,7 @@ function obj = optimize(obj)
         nConstr   = numel(constrArray);
         nCost     = numel(costArray);
         % preallocation
-        H_cost_val   = zeros(nnzCostHess,1);
-        H_constr_val   = zeros(nnzConstrHess,1);
+        H_val   = zeros(nnzHess,1);
         
         
         
@@ -170,12 +160,12 @@ function obj = optimize(obj)
             if ~cost.is_linear
                 var      = x(cost.deps); % dependent variables
                 % calculate constraints value
-                H_cost_val(cost.h_index) = cost.hess(var,sigma);
+                H_val(cost.h_index) = cost.hess(var,sigma);
             end
-            
+            nnzCostHess = cost.h_index(end);
         end
-        H_cost = sparse2(costHessSparseIndices(:,1),costHessSparseIndices(:,2),...
-            H_cost_val, dimOptVar, dimOptVar, nnzCostHess);
+        
+        
         
         for i = 1:nConstr
             constr   = constrArray(i);
@@ -183,34 +173,30 @@ function obj = optimize(obj)
                 var      = x(constr.deps); % dependent variables
                 lambda_i = lambda(constr.c_index);
                 % calculate constraints value
-                H_constr_val(constr.h_index) = constr.hess(var,lambda_i);
+                H_val(constr.h_index + nnzCostHess) = constr.hess(var,lambda_i);
             end
             
         end
+          
         
-        H_constr = sparse2(constrHessSparseIndices(:,1),constrHessSparseIndices(:,2),...
-            H_constr_val, dimOptVar, dimOptVar, nnzConstrHess);
-        
-        
-        H_ret = H_cost + H_constr;
+        H_ret = sparse2(hessNonzeroIndex(:,1),hessNonzeroIndex(:,2),...
+            H_val, dimVariable, dimVariable, nnzHess);
     end
     %%
     
     %%
-    function [H_ret] = IpoptHessianStructure(dimOptVar, nnzCostHess, costHessSparseIndices,...
-            nnzConstrHess, constrHessSparseIndices)
+    function [H_ret] = IpoptHessianStructure(dimVariable, nnzHess, hessNonzeroIndex)
         % hessian structure of the optimization problem
         
         %     nConstr = numel(constrArray);
         %     nzmaxConstr = numel(jacRows);
         
         % preallocation
-        H_val   = ones(nnzCostHess + nnzConstrHess,1);
+        H_val   = ones(nnzHess,1);
         
         
-        hess_struct = [costHessSparseIndices;constrHessSparseIndices];
-        H_ret = sparse2(hess_struct(:,1), hess_struct(:,2), H_val,...
-            dimOptVar, dimOptVar, nnzCostHess + nnzConstrHess);
+        H_ret = sparse2(hessNonzeroIndex(:,1), hessNonzeroIndex(:,2), H_val,...
+            dimVariable, dimVariable, nnzHess);
         
     end
     %%
