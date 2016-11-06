@@ -7,11 +7,12 @@ function obj = optimize(obj)
     
     x0 = getStartingPoint(obj.nlp);
     
-    opts = obj.options;
+    opts = struct;
     opts.lb = obj.lb;
     opts.ub = obj.ub;
     opts.cl = obj.cl;
     opts.cu = obj.cu;
+    opts.ipopt = obj.options;
     
     funcs = struct();
     funcs.objective         = @(x)IpoptObjective(x, obj.costArray);

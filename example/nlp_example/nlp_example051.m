@@ -22,7 +22,13 @@ nlp = addConstraint(nlp,'constr3',{'x','y'},1,0,0);
 
 nlp = setInitialGuess(nlp,[ 2.5 0.5 2 -1 0.5 ]);
 
-solver = IpoptApplication(nlp);
+
+extraOpts.fixed_variable_treatment = 'RELAX_BOUNDS';
+extraOpts.point_perturbation_radius = 0;
+extraOpts.derivative_test = 'second-order';
+extraOpts.derivative_test_perturbation = 1e-8;
+
+solver = IpoptApplication(nlp, extraOpts);
 
 solver = initialize(solver);
 

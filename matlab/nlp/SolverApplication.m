@@ -39,13 +39,14 @@ classdef (Abstract) SolverApplication
     end
     
     methods (Abstract)
-        initialize(obj)
+        initialize(obj);
+        % An abstract method that initialize the solver to be ready to
+        % solve the given NLP problem
+        
+        optimize(obj);
+        % An abstract method that run the NLP problem
         
         
-        optimize(obj)
-        % An abstract method that run the NLP optimization
-        
-        reOptimizeNLP(obj)
         
         
     end

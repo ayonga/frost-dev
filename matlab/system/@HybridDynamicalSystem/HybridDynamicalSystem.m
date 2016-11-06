@@ -43,7 +43,7 @@ classdef HybridDynamicalSystem
         
         % The continuous domains
         %
-        % @todo The current implementation is migrated from the old
+        % @attention The current implementation is migrated from the old
         % 'domain' class, in which all elements (including continuous and
         % associated discrete events) are included in one class object.
         % Next step, separate them into multiple different classes

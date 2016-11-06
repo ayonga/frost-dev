@@ -116,15 +116,15 @@ classdef IpoptApplication < SolverApplication
            
             % ipopt options
             solver_opts = struct();
-            solver_opts.ipopt.mu_strategy      = 'adaptive';
-            solver_opts.ipopt.max_iter         = 1000;
-            solver_opts.ipopt.tol              = 1e-7;
-            solver_opts.ipopt.hessian_approximation = 'exact';
-            solver_opts.ipopt.limited_memory_update_type = 'bfgs';  % {bfgs}, sr1
-            solver_opts.ipopt.limited_memory_max_history = 10;  % {6}
-            solver_opts.ipopt.linear_solver = 'ma57';
-            solver_opts.ipopt.ma57_automatic_scaling = 'yes';
-            solver_opts.ipopt.linear_scaling_on_demand = 'no';
+            solver_opts.mu_strategy      = 'adaptive';
+            solver_opts.max_iter         = 1000;
+            solver_opts.tol              = 1e-7;
+            solver_opts.hessian_approximation = 'exact';
+            solver_opts.limited_memory_update_type = 'bfgs';  % {bfgs}, sr1
+            solver_opts.limited_memory_max_history = 10;  % {6}
+            solver_opts.linear_solver = 'ma57';
+            solver_opts.ma57_automatic_scaling = 'yes';
+            solver_opts.linear_scaling_on_demand = 'no';
             
             if nargin > 1
                 solver_opts = struct_overlay(solver_opts,opts_in,{'AllowNew',true});
@@ -141,18 +141,7 @@ classdef IpoptApplication < SolverApplication
         
         
         
-        function obj = reOptimizeNLP(obj)
-            
-        end
         
-        function obj = setOptions(obj, varargin)
-            
-        end
-        
-        function info = getInfo(obj)
-            
-            info = obj.info;
-        end
         
         
             
