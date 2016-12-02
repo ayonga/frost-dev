@@ -21,13 +21,18 @@ else
     nBase = 6;
 end
 
+% hacky way to sort the kinematic tree
+[~,tv] = treelayout(model.parent);
+[~,kin_tree] = sort(tv,'descend');
+
 S = zeros(nBase, 1, model.NB);
 Xup = zeros(nBase, nBase, model.NB);
 v = zeros(nBase, 1, model.NB);
 avp = zeros(nBase, 1, model.NB);
 fvp = zeros(nBase, 1, model.NB);
 
-for i = 1:model.NB
+% for i = 1:model.NB
+for i = kin_tree
   [ XJ, S(:,:,i) ] = jcalc( model.jtype{i}, q(i) );
   vJ = S(:,:,i)*qd(i);
   Xup(:,:,i) = XJ * model.Xtree(:,:,i);
@@ -45,7 +50,10 @@ if nargin == 4
   fvp = apply_external_forces( model.parent, Xup, fvp, f_ext );
 end
 
-for i = model.NB:-1:1
+
+
+% for i = model.NB:-1:1
+for i = flip(kin_tree)
   C(i,1) = transpose(S(:,:,i)) * fvp(:,:,i);
   if model.parent(i) ~= 0
     fvp(:,:,model.parent(i)) = fvp(:,:,model.parent(i)) + ...
@@ -55,7 +63,8 @@ end
 
 IC = model.I;				% composite inertia calculation
 
-for i = model.NB:-1:1
+% for i = model.NB:-1:1
+for i = flip(kin_tree)
   if model.parent(i) ~= 0
     IC(:,:,model.parent(i)) = IC(:,:,model.parent(i)) + ...
         transpose(Xup(:,:,i))*IC(:,:,i)*Xup(:,:,i);
@@ -71,7 +80,8 @@ end
 H = zeros(model.NB);
 
 
-for i = 1:model.NB
+% for i = 1:model.NB
+for i = kin_tree
   fh = IC(:,:,i) * S(:,:,i);
   H(i,i) = transpose(S(:,:,i)) * fh;
   j = i;
