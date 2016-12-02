@@ -16,122 +16,126 @@ classdef IpoptApplication < SolverApplication
     %% Private properties
     properties (Access=public)
         
-        % The dimension of the NLP decision (optimization) variables
+        
+        % A structure contains the information of objective functions
+        %
+        % Required fields for objective:
+        %  num_funcs: the number of sub-functions @type integer        
+        %  funcs: a cell array contains the name of sub-functions @type
+        %  char        
+        %  jac_funcs: a cell array contains the name of the first-order
+        %  derivative of sub-functions @type char
+        %  nnz_jac: the total number of non-zeros in the entire Jacobian
+        %  matrix @type integer
+        %  dep_indices: a cell array contains a vector of the indices of all
+        %  dependent variables @type colvec
+        %  auxdata: a cell array of auxdata for each sub-functions @type
+        %  cell
+        %  nz_jac_rows: a vector of the row indices of non-zeros in the
+        %  entire first-order derivative (Gradient) @type colvec
+        %  nz_jac_cols: a vector of the column indices of non-zeros in the
+        %  entire first-order derivative (Gradient) @type colvec        
+        %  nz_jac_indices: a cell array contains a vector of the indices of
+        %  the non-zeros of the Jacobian @type colvec
+        %
+        % Optional Fields for objective:
+        %  hess_funcs: a cell array contains the name of the second-order
+        %  derivative of sub-functions @type char 
+        %  nnz_hess: the total number of non-zeros in the entire Hessian
+        %  matrix @type integer
+        %  nz_hess_rows: a vector of the row indices of non-zeros in the
+        %  entire second-order derivative (Hessian) @type colvec
+        %  nz_jac_cols: a vector of the column indices of non-zeros in the
+        %  entire second-order derivative (Hessian) @type colvec        
+        %  nz_hess_indices: a cell array contains a vector of the indices of
+        %  the non-zeros of the Hessian @type colvec
+        %  
+        % @type struct
+        objective
+        
+        % A sturcture contains the information of constraints
+        %
+        % Required fields for objective:
+        %  num_funcs: the number of sub-functions @type integer        
+        %  funcs: a cell array contains the name of sub-functions @type
+        %  char
+        %  constrIndices: a cell array contains a vector of the indices of
+        %  the constraint among the entire NLP constraints @type colvec
+        %  jac_funcs: a cell array contains the name of the first-order
+        %  derivative of sub-functions @type char
+        %  nnz_jac: the total number of non-zeros in the entire Jacobian
+        %  matrix @type integer
+        %  dep_indices: a cell array contains a vector of the indices of all
+        %  dependent variables @type colvec
+        %  auxdata: a cell array of auxdata for each sub-functions @type
+        %  cell
+        %  nz_jac_rows: a vector of the row indices of non-zeros in the
+        %  entire first-order derivative (Gradient) @type colvec
+        %  nz_jac_cols: a vector of the column indices of non-zeros in the
+        %  entire first-order derivative (Gradient) @type colvec        
+        %  nz_jac_indices: a cell array contains a vector of the indices of
+        %  the non-zeros of the Jacobian @type colvec
+        %
+        % Optional Fields for objective:
+        %  hess_funcs: a cell array contains the name of the second-order
+        %  derivative of sub-functions @type char 
+        %  nnz_hess: the total number of non-zeros in the entire Hessian
+        %  matrix @type integer
+        %  nz_hess_rows: a vector of the row indices of non-zeros in the
+        %  entire second-order derivative (Hessian) @type colvec
+        %  nz_jac_cols: a vector of the column indices of non-zeros in the
+        %  entire second-order derivative (Hessian) @type colvec        
+        %  nz_hess_indices: a cell array contains a vector of the indices of
+        %  the non-zeros of the Hessian @type colvec
         % 
-        % @type integer
-        dimVariable
+        % @type struct
+        constraint
         
-        % The lower limits of the optimization variables
-        %
-        % @type colvec
-        lb
-        
-        % The upper limits of the optimization variables
-        %
-        % @type colvec
-        ub
-        
-        % Contains the information of registered cost functions in the form
-        % of NlpCost array
-        %
-        % @type NlpCost
-        costArray
-        
-        % Contains the information of registered constraints in the form of
-        % NlpConstraint array
-        %
-        % @type NlpConstraint
-        constrArray
-        
-        % The number of nonzero entries in the objective gradient vector
-        % 
-        % @type integer
-        nnzGrad
-        
-        % Row and column indices of the  nonzero entries in the sparse
-        % Gradient vector 
-        %
-        % @type matrix
-        gradNonzeroIndex
-        
-        % The dimension of constraints 
-        %
-        % @type integer
-        dimConstraint
-        
-        % The lower bound of constraints 
-        %
-        % @type colvec
-        cl
-        
-        % The upper bound of constraints 
-        % 
-        % @type colvec
-        cu
-        
-        % The number of nonzero entries in the constraint Jacobian matrix
-        %
-        % @type integer
-        nnzJac
-        
-        % Row and column indices of the  nonzero entries in the sparse
-        % Jacobian matrix 
-        %
-        % @type matrix
-        jacNonzeroIndex
-        
-        % The number of nonzero entries in the cost portion of the Hessian
-        %
-        % @type integer
-        nnzHess
-        
-        % Row and column indices of the nonzero entries in the sparse
-        % Hessian matrix 
-        %
-        % @type matrix
-        hessNonzeroIndex
         
         
     end
     
-    %% Public properties
-    properties (Access = public)
-        % It stores the most recent solution
-        %
-        % @type colvec
-        sol
-        
-        
-    end
     
     %% Public methods
     methods (Access = public)
         
-        function obj = IpoptApplication(nlp, opts_in)
+        function obj = IpoptApplication(nlp, new_opts)
             % The default constructor function
             %
             % Parameters:
             %  nlp: the NLP problem object to be solved
             %  opts_in: the solver options
+            
+            
+            obj = obj@SolverApplication();
            
             % ipopt options
-            solver_opts = struct();
-            solver_opts.mu_strategy      = 'adaptive';
-            solver_opts.max_iter         = 1000;
-            solver_opts.tol              = 1e-7;
-            solver_opts.hessian_approximation = 'exact';
-            solver_opts.limited_memory_update_type = 'bfgs';  % {bfgs}, sr1
-            solver_opts.limited_memory_max_history = 10;  % {6}
-            solver_opts.linear_solver = 'ma57';
-            solver_opts.ma57_automatic_scaling = 'yes';
-            solver_opts.linear_scaling_on_demand = 'no';
+            options = struct();
+            options.initialguess = 'typical';
             
-            if nargin > 1
-                solver_opts = struct_overlay(solver_opts,opts_in,{'AllowNew',true});
+            % default IPOPT options
+            options.ipopt.mu_strategy      = 'adaptive';
+            options.ipopt.max_iter         = 1000;
+            options.ipopt.tol              = 1e-7;
+            options.ipopt.linear_solver    = 'ma57';
+            options.ipopt.ma57_automatic_scaling = 'yes';
+            options.ipopt.linear_scaling_on_demand = 'no';
+            
+            if nlp.options.derivative_level == 2 
+                % user-defined Hessian function is provide
+                options.ipopt.hessian_approximation = 'exact';
+            else
+                options.ipopt.hessian_approximation = 'limited-memory';
+                options.ipopt.limited_memory_update_type = 'bfgs';  % {bfgs}, sr1
+                options.ipopt.limited_memory_max_history = 10;  % {6}
             end
             
-            obj = obj@SolverApplication(nlp, solver_opts);
+            if nargin > 1
+                options.ipopt = struct_overlay(options.ipopt,new_opts,{'AllowNew',true});
+            end
             
+            obj.options = options;
+            obj = initialize(obj, nlp);
             
             
         end
@@ -151,15 +155,9 @@ classdef IpoptApplication < SolverApplication
     % function definitions
     methods
         
-        [obj] = initialize(obj);
+        [obj] = initialize(obj, nlp);
         
-        [obj] = optimize(obj);
-        
-        
-        [costArray] = indexCostArray(obj);        
-        
-        
-        [constrArray] = indexConstraintArray(obj);
+        [sol, info] = optimize(obj, nlp);
         
         
         

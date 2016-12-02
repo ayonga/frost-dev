@@ -1,4 +1,4 @@
-classdef NonlinearProgram
+classdef NonlinearProgram < handle
     % NonlinearProgram defines an abstract class for general nonlinear
     % programing problems
     % 
@@ -17,16 +17,14 @@ classdef NonlinearProgram
     %% Protected properties
     properties (SetAccess=protected, GetAccess=public)
         
-        % The name identification
-        %
-        % @type char
-        name
         
         % The class option
         %
         % Required fileds of options:
-        %  withHessian: indicates whether the user-defined Hessian function
-        %  is provided. @type logical @default false
+        %  derivative_level: the user-defined derivative order (0, 1 or 2)
+        %  to be used by a NLP solver. @type integer @default 1
+        %  derivative_type:  
+        %  
         % 
         % @type struct
         options 
@@ -36,65 +34,56 @@ classdef NonlinearProgram
         % optimization variables
         %
         % @type NlpVariable
-        varArray
+        var_array
         
-        % A data structure that stores the indexing of optimization
-        % variables
-        %
-        % @type struct
-        varIndex
-        
-        % A cell data stores registered objective functions
+                
+        % A cell data stores objective functions
         %
         % @type cell
-        costArray
+        objective_array
         
-        % A cell data stores registered constraints functions
+        % A cell data stores all constraints functions
         %
         % @type cell
-        constrArray
-        
-        
+        constr_array
         
         
         
     end
     
-    properties (Access = protected)
-        
-        % The initial guess of the optimization variables
-        %
-        % @type colvec
-        z0
-       
-        
+    properties 
+        % The solution of the NLP problem
+        sol
     end
+    
     
     %% Public methods
     methods
         
-        function obj = NonlinearProgram(name, varargin)
+        function obj = NonlinearProgram(opts)
             % The default class constructor function
             %
+            % Parameters: 
+            %  opts: non-default configuration options. It will overwrite
+            %        the default options @type struct
             
-            p = inputParser;
-            p.addRequired('name',@ischar);
-            p.addParameter('withHessian',false,@islogical);
             
             
-            p.parse(name, varargin{:});
-            
-            obj.name = p.Results.name;
-            
+            % default options
             obj.options = struct();
-            obj.options.withHessian = p.Results.withHessian;
+            obj.options.derivative_level = 1;
+            obj.options.derivative_type = 'analytic';
             
-            
+            % if non-default options are specified, overwrite the default
+            % options.
+            if nargin ~= 0
+                obj.options = struct_overlay(obj.options,opts);
+            end
             
             % initialize the type of the variables
-            obj.varIndex = struct();
-            obj.costArray  = cell(0);
-            obj.constrArray = cell(0);
+            obj.var_array = NlpVariable.empty();
+            obj.objective_array  = NlpFunction.empty();
+            obj.constr_array = NlpFunction.empty();
             
             
         end
@@ -104,19 +93,17 @@ classdef NonlinearProgram
     %% Function definitions
     methods
         
-        [obj] = addVariable(obj, name, dimension, varargin);
+        [obj] = addVariable(obj, varargin);
         
         [obj] = genVarIndices(obj);
         
-        [obj] = addCost(obj, name, deps, extra);
+        [obj] = addObjective(obj, funcs);
         
-        [obj] = addConstraint(obj, name, deps, dimension, cl, cu, extra);
+        [obj] = addConstraint(obj, funcs);
         
         [nVar, lowerbound, upperbound] = getVarInfo(obj);
         
-        [z0] = getStartingPoint(obj, varargin);
-        
-        [obj] = setInitialGuess(obj, z0);
+        [x0] = getInitialGuess(obj, method);
         
         
         

@@ -22,45 +22,27 @@ classdef (Abstract) SolverApplication
     %% Protected properties
     properties (SetAccess=protected, GetAccess=public)
         
-        % The nonlinear programming problem object to be solved
-        % 
-        % @type NonlinearProgram        
-        nlp
-        
-        % Solver options
+        % A structure for NLP solver options
         %
         % @type struct
         options
         
-        % The info data of the most recent solution from the NLP solver
-        %
-        % @type struct
-        info
     end
     
     methods (Abstract)
-        initialize(obj);
+        
         % An abstract method that initialize the solver to be ready to
         % solve the given NLP problem
+        initialize(obj, nlp);
         
-        optimize(obj);
+        
         % An abstract method that run the NLP problem
-        
-        
-        
-        
+        optimize(obj, nlp);
     end
    
     methods
-        function obj = SolverApplication(nlp, options)
-            % The default constructor function
-            %
-            % Parameters:
-            %  nlp: the NLP problem object to be solved
-            %  options: the solver options
-            
-            obj.nlp = nlp;
-            obj.options = options;
+        function obj = SolverApplication()
+            % The default constructor function            
             
         end
         
