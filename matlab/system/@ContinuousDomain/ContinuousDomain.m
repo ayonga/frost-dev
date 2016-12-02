@@ -1,6 +1,11 @@
 classdef ContinuousDomain
-    % HybridDomain defines an admissible domain in the hybrid system model
+    % ContinuousDomain defines an admissible continuous domain (or phase)
+    % in the hybrid system model. The admissibility conditions are
+    % determined by the constraints defined on the domain.
     % 
+    % Contraints are typically given as kinematic constraints, such as
+    % holonomic constraints and unilateral constraints, of the rigid body
+    % model.
     %
     % @author Ayonga Hereid @date 2016-09-26
     % 
@@ -12,99 +17,61 @@ classdef ContinuousDomain
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    %% Public properties
-    properties (Access = public)
-    end
-    
     
     %% Protected properties
-    properties (SetAccess=protected, GetAccess=public)
+    properties (SetAccess=private, GetAccess=public)
+        
+        %% basic properties
+        
         % This is the name of the object that gives the object an universal
         % identification
         %
         % @type char @default ''
         name
         
-        % The class option
+        
+        %% holonomic constraints
+        
+        % a cell array of holonomic constraints given as objects of
+        % Kinematics classes
+        %
+        % @type cell
+        hol_constr
+        
+        % a cell string of holonomic constraint names defined on the domain
+        %
+        % @type cellstr
+        hol_constr_name
+        
+        % the number of holonomic constraints
+        %
+        % @type integer
+        n_hol_constr
+        
+        % a structure of function names defined for the domain. Each field
+        % of 'funcs' specifies the name of a function that used for a
+        % certain computation of the domain.
+        %
+        % Required fields of funcs:
+        %   hol_constr_func: a string of the function that computes the
+        %   value of holonomic constraints @type char
+        %   hol_constr_jac: a string of the function that computes the
+        %   jacobian of holonomic constraints @type char
+        %   hol_constr_jacdot: a string of the function that computes time derivatives of the
+        %   jacobian matrix of holonomic constraints @type char
+        %
+        % @type struct
+        funcs
+        
+       
+        
+        % Specific options for the domain
         %
         % @type struct
         options
         
-        % domain index in a step
-        indexInStep
-        numDomainsInStep
         
         
-        % kinematic constraints
-        
-        
-        
-        
-        
-        % the dimension of holonomic constraints
-        %
-        % @type integer
-        dim_hol_constrs
-        
-        % a function that computes the value of holonomic constraints
-        %
-        % @type function_handle
-        hol_constr_func 
-        
-        % afunction that computes the jacobian of holonomic constraints
-        %
-        % @type function_handle
-        hol_constr_jac  
-        
-        % a function that computes time derivatives of the jacobian matrix
-        % of holonomic constraints
-        %
-        % @type function_handle
-        hol_constr_jacdot 
-        
-        
-        controller
-        
-        %% virtual constraints (i.e., outputs)
-        outputs
-        nOutputs
-        
-        nParamRD1
-        nParamRD2
-        nParamPhaseVar
-        
-        
-        ya1 % relative degree one output - actual
-        ya2  % relative degree two outputs - actual
-        yd1  % relative degree one output - desired
-        yd2  % relative degree two outputs - desired
-        
-        % First order jacobian of outputs
-        Dya1  % 1st Jacobian of relative degree one output - actual
-        Dya2  % 1st Jacobian of relative degree two outputs - actual
-        
-        % Second order jacobian of outputs
-        DLfya2 % 2nd Jacobian of relative degree two outputs - actual
-        
-        dyd1 % 1st derivative of desired degree one output w.r.t tau
-        dyd2 % 1st derivative of desired degree two outputs w.r.t tau
-        ddyd2 % 2nd derivative of desired degree two outputs w.r.t tau
-       
-        deltaphip   % Linearized hip position function handle
-        Jdeltaphip % Jacobian of linearized hip position
-        
-        tau   % phase variable tau
-        dtau  % time derivative of tau
-        Jtau  % jacobian of tau w.r.t to system states x
-        Jdtau % jacobian of dtau w.r.t to system states x
-        
-        nAct
-        qaIndices
-        dqaIndices
-        
-        
-        %% domain parameters
-        params
     end
     
     %% Public methods
@@ -114,172 +81,142 @@ classdef ContinuousDomain
             % the default calss constructor
             %
             % Parameters:
-            % name: the name of the hybrid domain @type char
+            % name: the name of the domain @type char
             %
             % Return values:
             % obj: the class object
             
-            % call the superclass constructor
-            obj.name = name;
+            if nargin > 0
+                if ischar(name)
+                    obj.name = name;
+                else
+                    warning('The domain name must be a string.');
+                end
+            end
             
-            % initialize the default options
-            obj.options = struct(...
-                'use_clamped_outputs', false);
             
+            obj.hol_constr = {};
+            obj.hol_constr_name = {};
+            obj.funcs = struct();
+            obj.funcs.hol_constr_func = '';
+            obj.funcs.hol_constr_jac = '';
+            obj.funcs.hol_constr_jacdot = '';
         end
         
-        function obj = configureDomain(obj, model, config_file)
-            % Configure the hybrid domain model from a configuration file
+        
+        function obj = addHolnomicConstraint(obj, constr_list)
+            % Adds holonomic constraints for the domain
             %
             % Parameters:
-            %  model: the dynamical model @type RigidBodyModel
-            %  config_file: the full file path of the configuration file
-            %  @type char
-            %  
-            % Return values
-            %  obj: configured hybrid domain object
+            %  constr_list: a cell array of new holonomic constraints @type
+            %  cell
             
+            % validate holonomic constraints
             
+            if any(cellfun(@(x) ~isa(x,'Kinematics'),constr_list))
+                error('ContinuousDomain:invalidConstr', ...
+                    'There exist non-Kinematics objects in the list.');
+            end
             
-            % extract the absolute full file path of the input file
-            full_file_path = GetFullPath(config_file);
+            obj.hol_constr = horzcat(obj.hol_constr, constr_list);
             
-            % check if the file exists
-            assert(exist(full_file_path,'file')==2,...
-                'Could not find the input configuration file: \n %s\n', full_file_path);
+            new_constr_name = cellfun(@(x) {x.name},constr_list,'UniformOutput',false);
             
-            domainConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));
-            
-            % Domain name
-            obj.name  = domainConfig.name;
-            
-            %% domain index in a step
-            obj.indexInStep      = domainConfig.indexInStep;
-            obj.numDomainsInStep = domainConfig.numDomainsInStep;
-            
-            
-            %% configure holonomic constraints
-            obj = setHolonomicConstraints(obj, domainConfig.constraints);
-            
-            
-            %% configure outputs
-            obj = setOuputStructure(obj, domainConfig.outputs, model);
-            
-            
-            % parse the input arguments
-            %             p = inputParser;
-            %             addRequired(p, 'name',@ischar);
-            %             addOptional(p, 'contact_positions', [], @isstruct);
-            %             addOptional(p, 'joint_kin_constrs', [], @isstruct);
-            %             addOptional(p, 'pos_kin_constrs', [], @isstruct);
-            %             parse(p,varargin{:});
-            %             inputs = p.Results;
-            %
-            %             % assign the domain name
-            %             obj.name = inputs.name;
-            %
-            %             % if the contacts are given
-            %             if ~isempty(inputs.contact_positions)
-            %                 obj.contact_positions = inputs.contact_positions;
-            %             end
-            %
-            %             % if the additional consraints are given
-            %             if ~isempty(inputs.joint_kin_constrs)
-            %                 obj.joint_kin_constrs = input.joint_kin_constrs;
-            %             end
-            %             if ~isempty(inputs.pos_kin_constrs)
-            %                 obj.pos_kin_constrs = input.pos_kin_constrs;
-            %             end
+            obj.hol_constr_name = horzcat(obj.hol_constr_name, new_constr_name);
         end
         
-        function obj = setupController(obj,type)
-            % setup the feedback controller for the continuous domain
+        function obj = removeHolonomicConstraint(obj, constr_list)
+            % Removes holonomic constraints from the defined holonomic
+            % constraints of the domain
             %
             % Parameters:
-            %  type: controller type @type char
-            obj.controller = FeedbackController(type);
+            %  constr_list: a cell array of holonomic constraints to be
+            %  removed @type cell
+            
+            if any(cellfun(@(x) ~isa(x,'Kinematics'),constr_list))
+                error('ContinuousDomain:invalidConstr', ...
+                    'There exist non-Kinematics objects in the list.');
+            end
+            
+            remove_constr_name = cellfun(@(x) {x.name},constr_list,'UniformOutput',false);
+            
+            indices_c = str_indices(remove_constr_name,obj.hol_constr_name,'UniformOutput',false);
+            
+            not_found_indidces = find(cellfun('isempty',indices_c), 1);
+            
+            if isempty(not_found_indidces)
+                warning('the constraints do not exists.');
+                for k = 1:length(not_found_indidces)
+                    disp('%s, ',obj.hol_constr_name{not_found_indidces(k)});
+                end
+            end
+            indices = [indices_c{:}];
+            
+            for i = indices
+                obj.hol_constr{i} = {};
+                obj.hol_constr_name{i} = {};
+            end
+            
+            obj.hol_constr = horzcat(obj.hol_constr{:});
+            
+            obj.hol_constr_name = horzcat(obj.hol_constr_name{:});
         end
         
-       
-        
-        function obj = addContactPoint(obj,varargin)
-            % Add a contact point to the domain
-            %
-            %
-            %
+        function obj = compileFunction(obj)
             
-            % parse the input arguments
-            p = inputParser;
-            addRequired(p, 'name',@ischar);
-            addRequired(p, 'plink',@ischar);
-            addOptional(p, 'offset', zeros(1,3), ...
-                @(x)(length(x)==3 && isnumeric(x)));
-            addOptional(p, 'constraints', [], ...
-                @(x)(isinteger(x) && ...
-                x >= 0 && x <= 6 ));
-            parse(p,varargin{:});
-            new_contact = p.Results;
             
-            % updates to the object contact property
-            n_constr = length(obj.contact_positions);
-            obj.contact_positions(n_constr+1) = new_contact;
         end
         
-        function obj = addJointConstraints(obj,varargin)
-            % Add a contact point to the domain
+        
+        
+        
+        function obj = setFunctionName(obj, props, values)
+            % Set the name of functions for the domain.
             %
+            % The usage is similar to set/get function of
+            % matlab.mixin.SetGet class, except this function does not
+            % support array objects. In addition, it has input argument
+            % validations specific to the current class.
             %
+            % Parameters:
+            %  props: a string or cellstr of function name properties @type
+            %  cellstr
+            %  values: values of the properties @type cellstr
             %
+            % See also: matlab.mixin.SetGet
             
-            % parse the input arguments
-            p = inputParser;
-            addRequired(p, 'name',@ischar);         
-            addRequired(p, 'vars',@ischar);
-            addOptional(p, 'expr',{'var1'},@ischar);
+            valid_props = fields(obj.funcs);
             
-            parse(p,varargin{:});
-            new_contact = p.Results;
-            new_contact.type = 'joint';
+            if ischar(props)
+                v_prop = validatestring(props,valid_props);
+                if ischar(values)                    
+                    obj.(v_prop) = values;
+                elseif iscell(values)
+                    obj.(v_prop) = values{1};
+                else
+                    error('The value must be a string or cell string.');
+                end
+            elseif iscell(props)
+                for i = 1:length(props)
+                    v_prop = validatestring(props,valid_props);
+                    if ischar(values{i})
+                        obj.(v_prop) = values{1};
+                    else
+                        error('The value must be a string or cell string.');
+                    end
+                end
+            else
+                error(['The props must be a string or cell strings that match one of these strings:\n',...
+                    '%s,\t'],valid_props);
+            end
             
-            
-            n_constr = lenght(obj.joint_kin_constrs);
-            obj.joint_kin_constrs(n_constr+1) = new_contact;
         end
         
-        function obj = addPositionConstraints(obj,varargin)
-            % Add a contact point to the domain
-            %
-            %
-            %
-            
-            %| @todo make position constraints more general
-            
-            % parse the input arguments
-            p = inputParser;
-            addRequired(p, 'name',@ischar);         
-            addRequired(p, 'vars',@ischar);
-            addOptional(p, 'expr',{'var1'},@ischar);
-            
-            parse(p,varargin{:});
-            new_contact = p.Results;
-            new_contact.type = 'position';
-            
-            n_constr = lenght(obj.joint_kin_constrs);
-            obj.joint_kin_constrs(n_constr+1) = new_contact;
-        end
         
-        function x0 = getInitialStates(obj)
-           % return the initial states of the domain
-           %
-           % @note To call this function, first need to assign the params
-           % structure
-           %
-           % Return values:
-           % x0: the initial states of the domain
-           
-           x0 = obj.params.x_plus;
-          
-        end
+        
+        
+        
+        
         
     end
         
