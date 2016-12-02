@@ -49,11 +49,11 @@ classdef (Abstract) Kinematics < handle
         %
         % The actual symbol variable in Mathematica uses the name string as
         % a subscript, i.e., it assigns the symbolic expression of the
-        % kinematic constraint to a variable name 'h[name]'. Similarly,
-        % it uses Jh[name] and dJh[name] for the Jacobian and time
-        % derivative of the Jacobian. You could print the symbolic
-        % expressions in matlab by calling math(obj.symbol) or
-        % math_eval(obj.symbol)
+        % kinematic constraint to a variable name 'h["name"]' to prevent
+        % potential naming conflicts. Similarly, it uses Jh["name"] and
+        % dJh["name"] for the Jacobian and time derivative of the Jacobian.
+        % You could print the symbolic expressions in matlab by calling
+        % math(obj.symbol) or math_eval(obj.symbol)
         %
         % See also: symbol, jac_symbol, jacdot_symbol
         %
@@ -88,7 +88,7 @@ classdef (Abstract) Kinematics < handle
             
             if nargin > 0
                 if ~isempty(name)
-                    obj = setName(name);
+                    obj = setName(obj, name);
                 end
             end
             
@@ -283,16 +283,16 @@ classdef (Abstract) Kinematics < handle
     methods
         function symbol = get.symbol(obj)
             % The Get function of the property 'symbol'
-            symbol = ['h[',obj.name,']'];
+            symbol = ['h["',obj.name,'"]'];
         end
         function jac_symbol = get.jac_symbol(obj)
             % The Get function of the property 'jac_symbol'
-            jac_symbol = ['Jh[',obj.name,']'];
+            jac_symbol = ['Jh["',obj.name,'"]'];
         end
         
         function jacdot_symbol = get.jacdot_symbol(obj)
             % The Get function of the property 'jacdot_symbol'
-            jacdot_symbol = ['dJh[',obj.name,']'];
+            jacdot_symbol = ['dJh["',obj.name,'"]'];
         end
     end % get methods
     

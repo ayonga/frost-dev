@@ -75,7 +75,7 @@ classdef KinematicExpr < Kinematics
             
             
             % extract variable names
-            var_names = cellfun(@(kin){kin.name},kins);
+            var_names = cellfun(@(kin){kin.name},kins,'UniformOutput',false);
             % validate if symbolic variables in the expressions are members
             % of the dependent variables
             ret = eval_math(['CheckSymbols[',expr,',ToExpression[',cell2tensor(var_names),']]']);
@@ -84,7 +84,7 @@ classdef KinematicExpr < Kinematics
                 err_msg = ['Mathematica detected symbolic variables that are not defined.\n',...
                     'Following symbolic variables are detected by Mathematica: \n %s'];
                 
-                det_var = eval_mat('FindSymbols[',expr,']');
+                det_var = eval_math(['FindSymbols[',expr,']']);
                 
                 error('Kinematics:invalidExpr',err_msg, det_var);
             end
@@ -125,19 +125,38 @@ classdef KinematicExpr < Kinematics
                 
                 % clear variables
                 eval_math('Clear[expr, vars, Jhmat, Jhexp];');
+                
+                
+                
+                var_names = cellfun(@(kin){kin.name},obj.kins);
+                % validate if symbolic variables in the expressions are members
+                % of the dependent variables
+                ret = eval_math(['CheckSymbols[',obj.expr,',ToExpression[',cell2tensor(var_names),']]']);
+                
+                if ~strcmp(ret, 'True')
+                    err_msg = ['Mathematica detected symbolic variables that are not defined.\n',...
+                        'Following symbolic variables are detected by Mathematica: \n %s'];
+                    
+                    det_var = eval_mat('FindSymbols[',obj.expr,']');
+                    
+                    error('Kinematics:invalidExpr',err_msg, det_var);
+                else
+                    % find symbolic varaibles in the expression
+                    eval_math('vars = FindSymbols[expr];');
+                end
+                
+                
                 % assign expressions to a Mathmatica expression 'expr'
                 eval_math(['expr=',obj.expr]);
-                % find symbolic varaibles in the expression
-                eval_math('vars = FindSymbols[expr];');
                 % compute compound expression and replace symbolic
                 % variables with actual expressions
-                eval_math([obj.symbol,'=expr/.Table[v -> h[v], {v, vars}];']);
+                eval_math([obj.symbol,'=expr/.Table[v -> h[ToString[v]], {v, vars}];']);
                 
                 % construct Jacobian matrix of dependent variables
-                eval_math('Jhmat = Table[Flatten@Jh[v], {v, vars}];');
+                eval_math('Jhmat = Table[Flatten@Jh[ToString[v]], {v, vars}];');
                 % compute partial derivatives and replace the symbolic
                 % variables with the actual expressions
-                eval_math('Jhexp = D[Flatten[{expr}], {Flatten[vars], 1}]/. Table[v -> First@h[v], {v, vars}];');
+                eval_math('Jhexp = D[Flatten[{expr}], {Flatten[vars], 1}]/. Table[v -> First@h[ToString[v]], {v, vars}];');
                 
                 
                 if obj.linear
