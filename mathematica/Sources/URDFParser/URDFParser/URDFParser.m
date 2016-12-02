@@ -2,7 +2,7 @@
 
 (* Created by the Wolfram Workbench Sep 19, 2016 *)
 
-BeginPackage["URDFParser`"]
+BeginPackage["URDFParser`",{"ExtraUtils`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
 
@@ -21,7 +21,6 @@ of the robot, then return as an associated structure.";
 
 Begin["`Private`"]
 (* Implementation of the package *)
-
 (* ::Section:: *)
 (* Public Expressions *)
 LoadURDF::failed = "Cannot import the URDF file, please check the syntax of the file.";
@@ -110,8 +109,7 @@ ConvertXMLJoints[XMLJoints_] := Map[JointTransform[#]&,Join[XMLJoints]];
 ConvertXMLLinks[XMLLinks_] := Map[LinkTransform[#]&,Join[XMLLinks]];
 	
 	
-Str2Num[s_String]:=Read[StringToStream[s],Number];
-Str2Num[sl_?ListQ]:=Map[Read[StringToStream[#],Number]&,Flatten@sl];
+
 
 
 

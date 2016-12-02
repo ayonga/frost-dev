@@ -27,17 +27,21 @@ ParallelFullSimplify::usage =
 	"ParallelFullSimplify[A_?MatrixQ] fully simplifies a matrix in parallel.
 	ParallelFullSimplify[V_?VectorQ] fully simplifies a vector in parallel.";
 
-
+FindSymbols::usage = "FindSymbols[expr] returns all non-special symbol \
+	characters in the expression.";
+	
+CheckSymbols::usage ="CheckSymbols[expr, list] checks if all symbols found \
+	in the expressions are member of the list. Return False if Not.";
 
 Vec::usage = "Vec[x] turns an arbitrary list x into a vector";
 
 ToExpressionEx::usage = "ToExpressionEx[expr] loosely converts any string types in an 0- \ 
 to n-dimensional list to an expression.";
 
-RationalizeEx::usage = "RationalizeEx[expr] loosely rationalizes any expression to an arbitrary precision";
+(*RationalizeEx::usage = "RationalizeEx[expr] loosely rationalizes any expression to an arbitrary precision";
 
 RationalizeAny::usage = "RationalizeAny[value] converts `value` to an expression and use RationalizeEx";
-
+*)
 BlockDiagonalMatrix::usage = 
 	"BlockDiagonalMatrix[b:{__?MatrixQ}] creates block diagonal matrx.";
 
@@ -56,7 +60,8 @@ StringImplode::usage =
 	"StringImplode[list, delim = '', format = '``'] joins list of strings with \
 delim  and formats each arg with format";
 
-Str2Num::usage = "Str2Num[s] Convert a string s into a number";
+Str2Num::usage = 
+    "Str2Num[str] converts a string or a list of strings into real numbers.";
 
 Jac::usage="Jac[h,x] Computes the Jacobian of a quantity with respect to the given coordinates."
 
@@ -66,12 +71,22 @@ GetFieldIndices::usage =
 Begin["`Private`"]
 (* Implementation of the package *)
 
+FindSymbols[expr_]:= DeleteDuplicates[DeleteCases[Cases[expr, _Symbol, Infinity], _?NumericQ]];
+
+CheckSymbols[expr_, list_?ListQ]:=
+	Block[{syms},
+		syms = FindSymbols[expr];
+		
+		Return[AllTrue[Map[MemberQ[list, #] &, syms],TrueQ]];
+	];
+
 Jac[h_,x_]:=D[Flatten[h],{Flatten[x]}];
 
 
-
-Str2Num[s_String]:=Read[StringToStream[s],Number];
-Str2Num[sl_?ListQ]:=Map[Read[StringToStream[#],Number]&,Flatten@sl];
+Str2Num[s_String]:=RationalizeEx[Read[StringToStream[s],Number]];
+Str2Num[sl_?ListQ]:=Map[Str2Num[#]&,Flatten@sl];
+(*Str2Num[s_String]:=Read[StringToStream[s],Number];
+Str2Num[sl_?ListQ]:=Map[Read[StringToStream[#],Number]&,Flatten@sl];*)
 
 EmptyQ[x_List]:=ListQ[x]&&Length[Flatten[x]]==0;
 
@@ -102,7 +117,8 @@ ParallelFullSimplify[A_]:=FullSimplify[A];
 
 
 (* For eliminating those pesky small numbers in rotation matrices *)
-CRound[expr_, n_:-5] := If[NumberQ[expr], Round[expr, 10^n], expr];
+CRound[expr_?NumberQ, n_:-5] := Round[expr, 10^n];
+CRound[expr_, n_:-5] := expr;
 CRoundEx[expr_, n_:-5] := Map[CRound[#, n]&, expr, {-1}];
 
 

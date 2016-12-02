@@ -8,9 +8,9 @@ BeginPackage["RobotModel`",{"Screws`","RobotLinks`","ExtraUtils`","URDFParser`"}
 NumOfParams::usage = "NumOfParams[type] returns the number of parameters of function of the given type.";
 DesiredFunction::usage = "DesiredFunction[type] returns the expression of the desired function of the given type.";
 
-ComputeContact::usage = "ComputeContact[contact] computes the contact point contraints.";
+(*ComputeContact::usage = "ComputeContact[contact] computes the contact point contraints.";
 ComputePosConstraint::usage = "ComputePosConstraint[constr] computes the position based holonomic constraints.";
-ComputeJointConstraint::usage = "ComputeJointConstraint[constr] computes the joint based holonomic constraints.";
+ComputeJointConstraint::usage = "ComputeJointConstraint[constr] computes the joint based holonomic constraints.";*)
 
 ComputeRD1Outputs::usage = "ComputeRD1Outputs[output] computes the pre-defined library of relative degree 1 outputs.";
 ComputeRD2Outputs::usage = "ComputeRD2Outputs[output] computes the pre-defined library of relative degree 2 outputs.";
@@ -26,10 +26,11 @@ InitializeModel::usage =
 	 InitializeModel[file, type] initializes a model from an URDF file, with a specified \
 model type (either floating or planar). "
 
-GetModelType::usage = 
-	"GetModelType[] returns the type of the robot model.";
+GetFlag::usage = "GetFlag[flag] returns the status of the flag.";
 	
-	
+GetQe::usage = "GetQe[] returns the list of extend coordinates: Qe.";
+GetQeDot::usage = "GetQeDot[] returns the list of velocity of extend coordinates: QeDot.";	
+
 GravityVector::usage = 
 	"GravityVector[] computes the gravity vector of the robot model."
 	
@@ -44,9 +45,9 @@ ComputeComPosition::usage =
 	"ComputeComPosition[] returns the position vectors of the \
 center of mass of the robot."
 
-ComputeComJacobian::usage = 
+(*ComputeComJacobian::usage = 
 	"ComputeComJacobian[] returns the velocity vectors of the \
-center of mass of the robot."
+center of mass of the robot."*)
 
 ComputeForwardKinematics::usage = 
 	"ComputeForwardKinematics[{link1,offset1},...,{link$n,offset$n}] \
@@ -58,9 +59,13 @@ ComputeBodyJacobians::usage =
 Compute the body jacobian of the point that is rigidly attached to the link with a given offset."; 
 
 
-ComputeRigidPositions::usage = 
-	"ComputeRigidPositions[{link1,offset1},...,{link$n,offset$n}] computes \
-the rigid positions specified by the links and relative offset vectors";
+ComputeCartesianPositions::usage = 
+	"ComputeCartesianPositions[{link1,offset1},...,{link$n,offset$n}] computes \
+the Cartesian positions specified by the links and relative offset vectors";
+
+ComputeKinJacobians::usage=
+	"ComputeKinJacobians[pos] computes the Jacobian of the input expression pos w.r.t. qe. \
+In other words, it equals \[PartialD]pos/\[PartialD]qe.";
 
 ComputeSpatialPositions::usage = 
 	"ComputeSpatialPositions[{link1,offset1},...,{link$n,offset$n}] computes \
@@ -68,7 +73,7 @@ the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Eu
 angles specified by the links and relative offset vectors";
 
 ComputeSpatialJacobians::usage = 
-	"ComputeSpatialPositions[{link1,offset1},...,{link$n,offset$n}] computes \
+	"ComputeSpatialJacobians[{link1,offset1},...,{link$n,offset$n}] computes Jacobian of\
 the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Euler \
 angles specified by the links and relative offset vectors";
 
@@ -76,8 +81,14 @@ ComputeEulerAngles::usage =
 	"ComputeEulerAngles[{link1,offset1},...,{link$n,offset$n}] computes \
 the rotation (Euler) angles of links with respect to the world frame.";
 
-GetJointIndex::usage = 
-	"GetJointIndex[name] returns the position index of the jointName in the list of joints.";
+ComputeRotationalJacobians::usage = 
+	"ComputeRotationalJacobians[{link1,offset1},...,{link$n,offset$n}] computes \
+the rotational Jacobian of the links with respoect to the world frame.";
+
+(*GetJointIndex::usage = 
+	"GetJointIndex[name] returns the position index of the jointName in the list of joints.";*)
+	
+ComputeJointConstraint::usage = "ComputeJointConstraint[dofIndex] computes the joint based holonomic constraints.";
 (*
 GetLinkIndex::usage = 
 	"GetLinkIndex[name] returns the position index of the linkName in the list of rigid links."; 
@@ -136,7 +147,7 @@ Z3=ConstantArray[0,{3,3}];
 I4=IdentityMatrix[4];
 (* SE(3) *)
 E4=RPToHomogeneous[I3,{0,0,0}];
-grav = RationalizeEx[9.81]; (* the gravity constant*)
+grav = 9.81; (* the gravity constant*)
 
 
 
@@ -152,11 +163,11 @@ grav = RationalizeEx[9.81]; (* the gravity constant*)
  *)
 
 GetStateSubs[]:=Join[
-	(($Qe[[#+1,1]]-> HoldForm@Global`x[[#]]&)/@(Range[$nDof]-1)),
-	(($dQe[[#+1-$nDof,1]]-> HoldForm@Global`x[[#]]&)/@($nDof+Range[$nDof]-1))];
+	(($Qe[[#+1,1]]-> HoldForm@Global`q[[#]]&)/@(Range[$nDof]-1)),
+	(($dQe[[#+1,1]]-> HoldForm@Global`dq[[#]]&)/@(Range[$nDof]-1))];
  
 (* assume the model is 3D spatial model by default *)
-$modelType = None; 
+(*$modelType = None; *)
 $nBase  = None;   (* number of base coordinates*)
 $nDof   = None;   (* total degrees of freedom*)
 $nJoint = None;   (* number of joints*)
@@ -184,27 +195,31 @@ $chainIndices = None;
 $pIndices = None;
 $dofName = None;
 $baseDofs = {};
+$ModelInitialized = False;
 (* ::Section:: *)
 (* Functions *)
 
+GetFlag["$ModelInitialized"]:=TrueQ[$ModelInitialized];
+(*GetFlag[flag_]:=Evaluate[TrueQ@flag];*)
 
 
-
-
-InitializeModel::notFound = "Fild not found.";	
+InitializeModel::notfound = "Fild not found.";	
 InitializeModel::loaderr = "Cannot successfully load the URDF model.";
 (* If the model type is not specified, we assume that the model 
 is a "spatial" model by default. *)	
-InitializeModel[file_,type_:"floating"] :=
+InitializeModel[file_,baseAxes_:{"Px","Py","Pz","Rx","Ry","Rz"}] :=
 	Block[{i},
-		SetModelType[type];
-		
+		(*If[!EmptyQ[baseAxes],
+			Print["Setting floating base coordinates of the model ..."];		
+		];*)
+		SetBaseDoF[baseAxes];
 		(* check if the file exists *)
 		If[!FileExistsQ[file], 
-			Message[InitializeModel::notFound];
+			Message[InitializeModel::notfound];
 			Abort[];
 		];
 		(* load the robot URDF file to extract the links and joints information *)
+		(*Print["Loading the robot URDf file ..."];*)
 		{$robotLinks, $robotJoints} = LoadURDF[file];
 		(* check if the URDF model is successfully loaded *)
 		If[EmptyQ[$robotLinks] || EmptyQ[$robotJoints],
@@ -231,53 +246,56 @@ InitializeModel[file_,type_:"floating"] :=
 		$pIndices = GetParentJointIndices[];
 		
 		(* compute homogeneous transformation of zero configuration *)
+		(*Print["Computing homogenous transformations of the multi-body system ..."];*)
 		$gst0 = ComputeHomogeneousTransforms[];
 		
 		(* get the kinematic chains (joint indices) of each joint *)
 		$chainIndices = GetChainIndices[];		
 		
 		(* compute kinematic chains (twist pairs) of each coordinates *)
-		{$bChains,$jChains} = GetKinematicChains[];	
+		{$bChains,$jChains} = GetKinematicChains[baseAxes];	
 		
 		$dofName = Join[$baseDofs,
 			Map[#["name"] &, $robotJoints]];
-		
+		(*Print["The initialization process of the robot model is completed."];*)
+		$ModelInitialized = True;
 		Return[Null];
 	];
 
 GetZeroStateSubs[]:= {$qe0subs,$dqe0subs};
 GetnDof[]:={$nDof};
-
-SetModelType::usage = 
+GetQe[]:=$Qe;
+GetQeDot[]:=$dQe;
+(*SetModelType::usage = 
 	"SetModelType[type] sets the type of the robot model. \
 The type can be either planar or floating.";
 SetModelType::wrongType = "The model type can be only planar or floating: `1`";
-SetModelType::undefined = "The model type is not defined.";
-SetModelType[type_]:= 
+SetModelType::undefined = "The model type is not defined.";*)
+SetBaseDoF[axes_]:= 
 	Block[{},
-		If[StringMatchQ[type,"planar"] || StringMatchQ[type,"floating"],
-			$modelType = type;
-			$nBase = Switch[type,"floating",6,"planar",3];
-			$baseDofs = Switch[type,
-				"floating",{"BasePosX","BasePosY","BasePosZ","BaseRoll","BasePitch","BaseYaw"},
-				"planar",{"BasePosX","BasePosZ","BasePitch"}
-			];		
-			, 
-			Message[SetModelType::wrongType, type];
-		];		
+		$baseDofs = Map[Switch[#, "Px","BasePosX", 
+				   "Py","BasePosY", 
+				   "Pz","BasePosZ", 
+				   "Rx","BaseRoll", 
+				   "Ry", "BasePitch", 
+				   "Rz", "BaseYaw", 
+				   "px", "BasePosX", 
+				   "py", "BasePosZ", 
+				   "r", "BasePitch"] &, axes];
+	    $nBase = Length[axes];
 	];
 	
-GetModelType[] :=	
+(*GetModelType[] :=	
 	Block[{},
 		If[SameQ[$modelType,None],
 			Message[SetModelType::undefined];
 			,
 			Return[$modelType];
 		];
-	];	
+	];	*)
 	
 
-GetLinkIndex[name_?StringQ] :=
+(*GetLinkIndex[name_?StringQ] :=
 	Block[{indices},
 		(* check if the robot model is successfully initialized *)
 		If[EmptyQ[$robotLinks] || SameQ[$robotLinks,None],
@@ -286,11 +304,11 @@ GetLinkIndex[name_?StringQ] :=
 		];
 		indices = GetFieldIndices[$robotLinks,"name"];
 		Return[indices[name]];
-	];
-(**)
+	];*)
 
 
-GetJointSymbol[name_?StringQ] :=
+
+(*GetJointSymbol[name_?StringQ] :=
 	Block[{indices},
 		(* check if the robot model is successfully initialized *)
 		If[EmptyQ[$robotJoints] || SameQ[$robotJoints,None],
@@ -299,10 +317,10 @@ GetJointSymbol[name_?StringQ] :=
 		];
 		indices = PositionIndex[$dofName];
 		Return[$Qe[[First@indices[name]]]];
-	];
+	];*)
 
 
-GetJointIndex[name_?StringQ] :=
+(*GetJointIndex[name_?StringQ] :=
 	Block[{indices},
 		(* check if the robot model is successfully initialized *)
 		If[EmptyQ[$robotJoints] || SameQ[$robotJoints,None],
@@ -311,7 +329,7 @@ GetJointIndex[name_?StringQ] :=
 		];
 		indices = PositionIndex[$dofName];
 		Return[First@indices[name]];
-	];
+	];*)
 	
 	
 PotentialEnergy[] :=
@@ -320,7 +338,7 @@ PotentialEnergy[] :=
 		links = Map[{#["name"], GetPosition[#]} &, $robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeRigidPositions[Sequence@@links];
+		linkPos = ComputeCartesianPositions[Sequence@@links];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, $robotLinks];
@@ -394,27 +412,27 @@ ComputeComPosition[] :=
 		links = Map[{#["name"], GetPosition[#]} &, $robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeRigidPositions[Sequence@@links];
+		linkPos = ComputeCartesianPositions[Sequence@@links];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, $robotLinks];
 		
-		pcom = Transpose[{Sum[Times[masses[[i]], linkPos[[i]]], {i, 1, Length[links]}]}/Total[masses]];		
+		pcom = {Sum[Times[masses[[i]], linkPos[[i]]], {i, 1, Length[links]}]}/Total[masses];		
 		
 		Return[pcom];
 	];
 	
-ComputeComJacobian[] :=
-	Block[{links, linkPos, masses, pcom, Jcom, vcom, dJcom},
+(*ComputeComJacobian[pcom_] :=
+	Block[{links, linkPos, masses, Jcom, vcom, dJcom},
 		
-		pcom = ComputeComPosition[];
+		(*pcom = ComputeComPosition[];*)
 		
 		(* compute the jacobian of center of mass positions *)
 		Jcom = D[Flatten[pcom], {Flatten[$Qe],1}];
 		
 		
 		Return[Jcom];
-	];
+	];*)
 
 ComputeBodyJacobians[args__] :=
 	Block[{gs0,i,np,Jz,Je,curIndices,linkName,offset,jIndex,
@@ -433,8 +451,8 @@ ComputeBodyJacobians[args__] :=
 		Table[		
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			linkName = argList[[i,1]];  
-			(* the relative RationalizeEx[argList[[i,2]]] of the point from the origin of the link (in the link coordinates). *)
-			offset   = RationalizeEx[argList[[i,2]]];
+			(* the relative argList[[i,2]] of the point from the origin of the link (in the link coordinates). *)
+			offset   = argList[[i,2]];
 			
 			(* take the index of parent joint of the rigid link *)
 			jIndex   = First@$pIndices[linkName];
@@ -468,19 +486,6 @@ ComputeBodyJacobians[args__] :=
 	
 	
 
-ComputeEulerAngles[args__] :=
-	Block[{gst, rot},
-		
-		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args];
-		
-		(* compute rigid euler angles *)
-		rot = Map[ToEulerAngles[#]&,gst];
-		
-		Return[rot];
-		
-	];
-
 ToEulerAngles[gst_] :=
 	Block[{R, R0, Rw, yaw, roll, pitch},
 		(* compute rigid orientation*)
@@ -496,49 +501,29 @@ ToEulerAngles[gst_] :=
 		
 		Return[{roll,pitch,yaw}];
 	];
-
-
-
-ComputeRigidPositions[args__] :=
-	Block[{pos, gst},
-		
-		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args];
-		
-		(* compute rigid positions *)
-		pos = Map[RigidPosition[#]&,gst];
-		
-		Return[pos];
-	];
-
-
-ComputeSpatialPositions[args__] :=
-	Block[{pos, gst},
-		
-		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args];
-		
-		(* compute rigid positions *)
-		pos = Map[Join[RigidPosition[#],ToEulerAngles[#]]&,gst];
-		
-		Return[pos];
-	];
 	
-ComputeSpatialJacobians[args__] :=
-	Block[{pos, argList = {args}, np, i, Je1, Je2, 
+ComputeEulerAngles[args__] :=
+	Block[{gst, rot},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		
+		(* compute rigid euler angles *)
+		rot = Map[ToEulerAngles[#]&,gst];
+		
+		Return[rot];
+		
+	];
+
+ComputeRotationalJacobians[args__] :=
+	Block[{pos, argList = {args}, np, i, Je, 
 		linkName, offset, jIndex, Jz, gs0, curIndices},
 		(* check if the robot model is successfully initialized *)
 		If[EmptyQ[$robotJoints] || SameQ[$robotJoints,None],
 			Message[RobotModel::init];
 			Abort[];
 		];		
-		
-		(* compute the position portion of spatial Jacobian directly by 
-		taking the partial derivates of the rigid positions*)
-		pos = ComputeRigidPositions[args];
-		
-		Je1 = Map[D[Flatten[#],{Flatten[$Qe],1}]&, pos];
-		
+				
 		
 		(* extract the number of points to be calculated *)
 		np = Length[argList];
@@ -548,7 +533,7 @@ ComputeSpatialJacobians[args__] :=
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			linkName = argList[[i,1]];  
 			(* the relative offset of the point from the origin of the link (in the link coordinates). *)
-			offset   = RationalizeEx[argList[[i,2]]];
+			offset   = Flatten@argList[[i,2]];
 			
 			(* take the index of parent joint of the rigid link *)
 			jIndex   = First@$pIndices[linkName];
@@ -573,11 +558,68 @@ ComputeSpatialJacobians[args__] :=
 				Jz[[;;,curIndices]]=SpatialJacobian[Sequence@@$bChains, Sequence@@$jChains[[jIndex]], gs0];
 			];
 					
-			Je2[i] = Jz[[4;;6,;;]]; (* take only the orientation portions of spatial jacobian*)
+			Je[i] = Jz[[4;;6,;;]]; (* take only the orientation portions of spatial jacobian*)
 			,
 			{i,np}
 		];
-		Return[Table[Join[Je1[[i]],Je2[i]],{i,1,np}]];	
+		Return[Table[Je[i],{i,1,np}]];	
+	];
+
+
+
+
+
+ComputeCartesianPositions[args__] :=
+	Block[{pos, gst},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		
+		(* compute rigid positions *)
+		pos = Map[RigidPosition[#]&,gst];
+		
+		Return[pos];
+	];
+
+ComputeKinJacobians[pos_] :=
+	Block[{Jac},
+		
+		Jac = Map[D[Flatten[#],{Flatten[$Qe],1}]&, pos];
+		
+		Return[Jac];
+	];
+
+ComputeSpatialPositions[args__] :=
+	Block[{pos, gst},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		
+		(* compute rigid positions *)
+		pos = Map[Join[RigidPosition[#],ToEulerAngles[#]]&,gst];
+		
+		Return[pos];
+	];
+	
+ComputeSpatialJacobians[args__] :=
+	Block[{pos, Je1, Je2, i, np = Length[{args}]},
+		(* check if the robot model is successfully initialized *)
+		If[EmptyQ[$robotJoints] || SameQ[$robotJoints,None],
+			Message[RobotModel::init];
+			Abort[];
+		];		
+		
+		(* compute the position portion of spatial Jacobian directly by 
+		taking the partial derivates of the rigid positions*)
+		pos = ComputeCartesianPositions[args];
+		
+		Je1 =ComputeKinJacobians[pos];
+		
+		
+		Je2 = ComputeRotationalJacobians[args];
+		
+		Return[Join[Je1,Je2,2]];
+		(*Return[Table[Join[Je1[[i]],Je2[[i]]],{i,1,np}]];*)	
 	];	
 	
 ComputeForwardKinematics[args__] :=
@@ -599,7 +641,7 @@ ComputeForwardKinematics[args__] :=
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			linkName = argList[[i,1]];  
 			(* the relative offset of the point from the origin of the link (in the link coordinates). *)
-			offset   = RationalizeEx[argList[[i,2]]];
+			offset   = Flatten@argList[[i,2]];
 			
 			(* take the index of parent joint of the link *)
 			jIndex   = First@$pIndices[linkName];
@@ -764,8 +806,12 @@ GetRelativeTwist[joint_?AssociationQ]:=
 			(* xi : (q = 0, w = axis, v (handled by function) *)
 			xi = RevoluteTwist[{0, 0, 0}, axis];
 			,
+			"continuous",
+			(* xi : (q = 0, w = axis, v (handled by function) *)
+			xi = RevoluteTwist[{0, 0, 0}, axis];
+			,
 			"fixed",
-			xi = {0,0,0,0,0,0};
+			xi = RevoluteTwist[{0, 0, 0}, axis];
 			,
 			_, (* none *)
 			xi = Null;
@@ -777,31 +823,41 @@ GetRelativeTwist[joint_?AssociationQ]:=
 
 GetInertia[link_?AssociationQ]:=
 	Block[{roll,pitch,yaw,Ic,R},
-		{roll,pitch,yaw}=RationalizeEx[link["origin"]["rpy"]];
-		Ic = RationalizeEx[link["inertia"]];
+		If[KeyExistsQ[link["origin"],"rpy"],
+			{roll,pitch,yaw}=link["origin"]["rpy"];
+			(* From the definition of URDF link:
+			Represents the rotation around fixed axis: first roll around x, then pitch 
+			around y and finally yaw around z. All angles are specified in radians. *)
+			R = RotZ[yaw].RotY[pitch].RotX[roll];
+			,
+			R = IdentityMatrix[3];
+		];
+		Ic = link["inertia"];
 		
-		(* From the definition of URDF link:
-		Represents the rotation around fixed axis: first roll around x, then pitch 
-		around y and finally yaw around z. All angles are specified in radians. *)
-		R = RotZ[yaw].RotY[pitch].RotX[roll];
+		
 		(* compute inertia in the joint coordiate, and return *)
 		Return[Transpose[R].Ic.R];
 	];
 
 
-GetMass[link_?AssociationQ]:= RationalizeEx[link["mass"]];
+GetMass[link_?AssociationQ]:= link["mass"];
 
 
-GetPosition[arg_?AssociationQ] := RationalizeEx[arg["origin"]["xyz"]];
+GetPosition[arg_?AssociationQ] := arg["origin"]["xyz"];
 
 
 GetRotationMatrix[joint_?AssociationQ]:=
-	Block[{roll,pitch,yaw,R},
-		{roll,pitch,yaw} = RationalizeEx[joint["origin"]["rpy"]];
-		(* From the definition of URDF joint:
-		Represents the rotation around fixed axis: first roll around x, then pitch 
-		around y and finally yaw around z. All angles are specified in radians. *)
-		R = RotZ[yaw].RotY[pitch].RotX[roll];
+	Block[{roll,pitch,yaw,R},		
+		If[KeyExistsQ[joint["origin"],"rpy"],
+			{roll,pitch,yaw} = joint["origin"]["rpy"];
+			(* From the definition of URDF joint:
+			Represents the rotation around fixed axis: first roll around x, then pitch 
+			around y and finally yaw around z. All angles are specified in radians. *)
+			R = RotZ[yaw].RotY[pitch].RotX[roll];
+			,
+			R = IdentityMatrix[3];
+		];
+		
 		Return[R];
 	];
 	
@@ -830,9 +886,9 @@ ComputeHomogeneousTransforms[] :=
 				EL = GetRotationMatrix[joint];
 				rL = GetPosition[joint];
 				If[j==1,
-					gst0[branch[[j]]] = gst0[0].RPToHomogeneous[EL\[Transpose], rL];
+					gst0[branch[[j]]] = gst0[0].RPToHomogeneous[EL, rL];
 					,
-					gst0[branch[[j]]] = gst0[branch[[j-1]]].RPToHomogeneous[EL\[Transpose], rL];
+					gst0[branch[[j]]] = gst0[branch[[j-1]]].RPToHomogeneous[EL, rL];
 				];
 				,
 				{j,1,Length[branch]}
@@ -862,30 +918,23 @@ GetParentJointIndices[] :=
 	];
 	
 FloatingBaseTwists::usage = 
-	"FloatingBaseTwists[ModelType] returns the twists of floating base coordinates.";
-FloatingBaseTwists["floating"] :=
+	"FloatingBaseTwists[axes] returns the twists of floating base coordinates.";
+FloatingBaseTwists[axes_] :=
 	Block[{qb, xi},
 		(* spatial floating base contains full 6-dimension axes. *)
-		qb = {
-		 <|"type"->"prismatic","axis"->{1,0,0}|>, (*rx*)
-		 <|"type"->"prismatic","axis"->{0,1,0}|>, (*ry*)
-		 <|"type"->"prismatic","axis"->{0,0,1}|>, (*rz*)
-		 <|"type"->"revolute","axis"->{1,0,0}|>,  (*roll*) 
-		 <|"type"->"revolute","axis"->{0,1,0}|>,  (*pitch*)
-		 <|"type"->"revolute","axis"->{0,0,1}|>}; (*yaw*)
+		qb = Map[Switch[#, "Px", <|"type" -> "prismatic", "axis" -> {1, 0, 0}|>, 
+						   "Py", <|"type" -> "prismatic", "axis" -> {0, 1, 0}|>, 
+						   "Pz", <|"type" -> "prismatic", "axis" -> {0, 0, 1}|>, 
+						   "Rx", <|"type" -> "revolute", "axis" -> {1, 0, 0}|>, 
+						   "Ry", <|"type" -> "revolute", "axis" -> {0, 1, 0}|>, 
+						   "Rz", <|"type" -> "revolute", "axis" -> {0, 0, 1}|>, 
+						   "px", <|"type" -> "prismatic", "axis" -> {1, 0, 0}|>, 
+						   "py", <|"type" -> "prismatic", "axis" -> {0, 0, 1}|>, 
+						   "r", <|"type" -> "revolute", "axis" -> {0, 1, 0}|>] &, axes];
 		xi = Map[GetRelativeTwist[#]&,qb];
 		Return[xi];
 	];
-FloatingBaseTwists["planar"] :=
-	Block[{qb, xi},
-		(* planar floating base contains 3-dimension axes (rx, rz, and pitch) *)
-		qb = {
-		 <|"type"->"prismatic","axis"->{1,0,0}|>, (*rx*)
-		 <|"type"->"prismatic","axis"->{0,0,1}|>, (*rz*)
-		 <|"type"->"revolute","axis"->{0,1,0}|>}; (*pitch*)
-		xi = Map[GetRelativeTwist[#]&,qb];
-		Return[xi];
-	];
+
 
 GetChainIndices::usage = "GetChainIndices[] returns the chain indices of each joint.";
 GetChainIndices[] :=
@@ -906,12 +955,12 @@ GetChainIndices[] :=
 	];
 	
 GetKinematicChains::usage = 
-	"GetKinematicChains[]	Return the kinematic chains from the base to each joint.";
-GetKinematicChains[] :=
+	"GetKinematicChains[baseAxes]	Return the kinematic chains from the base to each joint.";
+GetKinematicChains[baseAxes_] :=
 	Block[{xi, xib, basechain, chains, i, j},
 		
 		(* compute twist for base coordinates  *)
-		xib = FloatingBaseTwists[$modelType];
+		xib = FloatingBaseTwists[baseAxes];
 		(* floating base kinematic chain (twist paris) *)
 		basechain = 
 			Table[
@@ -967,11 +1016,15 @@ ComputeTwists[] :=
 		Return[xi];
 	];
 
+ComputeJointConstraint[dofIndex_] :=
+	Block[{},
+		Return[$Qe[[dofIndex]]];
+	];
 
-$definedPositions = {};
+(*$definedPositions = {};
 ComputeContact[contacts_] :=
 	Block[{clist,cpos,cJac, name, syms, i, j},
-		clist = Map[{First[#["link"]], RationalizeEx[#["offset"]]} &,contacts];
+		clist = Map[{First[#["link"]], Flatten@(#["offset"])} &,contacts];
 		cpos = ComputeSpatialPositions[Sequence@@clist];
 		cJac = ComputeSpatialJacobians[Sequence@@clist];
 		Table[
@@ -1033,7 +1086,7 @@ ComputePosConstraint[constr_] :=
 		$definedPositions=DeleteDuplicates@Join[$definedPositions,
 			Flatten[Map[(#["name"])&,constr]]];
 	];
-
+*)
 
 
 
@@ -1146,9 +1199,10 @@ DesiredFunction[type_?StringQ]:=(Message[DesiredFunction::badargs];$Failed);
 
 	
 (* Basic rotation matrices *)
-RotX[q_]:={{1,0,0},{0,Cos[q],-Sin[q]},{0,Sin[q],Cos[q]}};
-RotY[q_]:={{Cos[q],0,Sin[q]},{0,1,0},{-Sin[q],0,Cos[q]}};
-RotZ[q_]:={{Cos[q],-Sin[q],0},{Sin[q],Cos[q],0},{0,0,1}};	
+
+RotX[q_]:=CRoundEx[N@{{1,0,0},{0,Cos[q],-Sin[q]},{0,Sin[q],Cos[q]}}];
+RotY[q_]:=CRoundEx[N@{{Cos[q],0,Sin[q]},{0,1,0},{-Sin[q],0,Cos[q]}}];
+RotZ[q_]:=CRoundEx[N@{{Cos[q],-Sin[q],0},{Sin[q],Cos[q],0},{0,0,1}}];	
 	
 	
 End[]

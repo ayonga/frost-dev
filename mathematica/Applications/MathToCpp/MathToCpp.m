@@ -198,7 +198,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
 				  statement=ConvertToCForm[seq];
                   (* Get the non zero elements of the output arguments and assign them one by one. Zero elements are by default set to zero.*)
                   If[OptionValue[ExportFull],
-                    NonZeroIndices = Range@argoutDims[[i,1]],
+                    NonZeroIndices = Range@(argoutDims[[i,1]]*argoutDims[[i,2]]),
                     NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False]
                   ];
                   result=Table["p_"<>ToString@funcLists[[i]]<>"["<>ToString[j-1]<>"]="<>ToString[CForm@final[[1,j]]],{j,NonZeroIndices}];
@@ -207,7 +207,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
 				  statement={"NULL"};
                   final={N[oexpr/.csubs,15]};
                   If[OptionValue[ExportFull],
-                    NonZeroIndices = Range@argoutDims[[i,1]],
+                    NonZeroIndices = Range@(argoutDims[[i,1]]*argoutDims[[i,2]]),
                     NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False];
                   ];
                   If[ExtraUtils`EmptyQ[NonZeroIndices],
@@ -237,7 +237,9 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
                  "namespace"->OptionValue[Namespace],
                  "behavior"->OptionValue[Behavior]|>;
 		FileTemplateApply[tpl,assoc,cFile];
-		FileTemplateApply[hdr,assoc,hFile];
+		If[OptionValue[ExportHeaderFile],
+			FileTemplateApply[hdr,assoc,hFile];
+		];
 	];
 Options[CseWriteCpp]={ExportDirectory->".",
                       ArgumentLists->{},
@@ -245,9 +247,10 @@ Options[CseWriteCpp]={ExportDirectory->".",
                       SubstitutionRules->{},
                       TemplateFile->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.cc"}],
                       TemplateHeader->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.hh"}],
-                      Namespace->"symbolic_expression",
+                      Namespace->"symbolic",
                       Behavior->"basic",
-                      ExportFull->False};
+                      ExportHeaderFile->False,
+                      ExportFull->True};
                       
                       
 SyntaxInformation[ExportWithGradient]={"ArgumentsPattern"->{_,_,_}};

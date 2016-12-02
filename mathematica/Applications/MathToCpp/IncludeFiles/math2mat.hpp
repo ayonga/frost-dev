@@ -8,7 +8,7 @@
 
 #include <stdexcept>
 
-#include "mdefs.hpp"
+
 #include "Eigen/Dense"
 
 using namespace Eigen;
