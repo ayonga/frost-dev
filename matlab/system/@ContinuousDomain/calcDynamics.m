@@ -11,16 +11,16 @@ function [dx, u, Fe] = calcDynamics(obj, t, x, model, ref)
         
         
         % Extract states to angles and velocities
-        qe  = x(model.qeIndices);
-        dqe = x(model.dqeIndices);
+        qe  = x(model.qe_indices);
+        dqe = x(model.dqe_indices);
         
         % compute naturual dynamics
         [De, He] = calcNaturalDynamics(model,x);
         
         
         % Calculate holonomic constraints jacobians
-        Je    = obj.holConstrJac(x);
-        Jedot = obj.holConstrJacDot(x);
+        Je    = obj.hol_constr_jac(x);
+        Jedot = obj.hol_constr_jacdot(x);
         Be    = obj.actuatorMap(x);
         
         XiInv = Je * (De \ transpose(Je));
@@ -75,11 +75,11 @@ function [dx, u, Fe] = calcDynamics(obj, t, x, model, ref)
             
             calc.qe   = qe;
             calc.dqe  = dqe;
-            calc.ddqe = dx(model.dqeIndices);
+            calc.ddqe = dx(model.dqe_indices);
             calc.u    = u;
             calc.uq   = Be * u;
             calc.Fe   = Fe;
-            calc.hd   = obj.holConstrFunc(x);
+            calc.hd   = obj.hol_constr_func(x);
             calc.tau  = tau;
             calc.dtau = dtau;
             

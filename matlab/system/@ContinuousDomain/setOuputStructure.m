@@ -68,12 +68,12 @@ function obj = setOuputStructure(obj, outputs, model)
     assert(obj.nAct == nOutputRD1 + obj.nOutputs, ...
         'The number of actuated joints is not equal to number of outputs');
     obj.qaIndices = getJointIndices(model, outputs.actuatedJoints, true);
-    obj.dqaIndices = obj.qaIndices + model.nDof;
+    obj.dqaIndices = obj.qaIndices + model.n_dofs;
     
     
     % set zero dynamics indices
     %     obj.qzIndices = getJointIndices(model,outputs.zeroDynamics);
-    %     obj.dqzIndices = obj.qzIndices + model.nDof;
+    %     obj.dqzIndices = obj.qzIndices + model.n_dofs;
     %     obj.nZero = numel(obj.qzIndices);
     
     

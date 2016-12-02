@@ -30,33 +30,33 @@ classdef DiscreteDynamics
         
         % the direction of the guard
         %
-        % Possible value of guardDir:
+        % Possible value of guard_direction:
         %   - +1: if guard function cross zero from negative to positive
         %   - -1: if guard function cross zero from positive to negative
         %
         % @type integer @default -1        
-        guardDir = -1;
+        guard_direction = -1;
         
         
         % the threshold profile of the guard condition, normally zero
         %
         % @type double @default 0
-        guardProfile = 0;
+        guard_profile = 0;
         
         % the type of guard condition
         %
         % @type char
-        guardType  
+        guard_type  
         
         % the function handle to the function that computes the guard value
         %
         % @type function_handle
-        guardFunc
+        guard_func
         
         % the function handle to the function that computes the jacobian of guard
         %
         % @type function_handle
-        guardJac
+        guard_jac
         
         % the reset map options
         %
@@ -112,11 +112,11 @@ classdef DiscreteDynamics
             %  guard: guard configurations @type struct
             
             
-            obj.guardDir = guard.direction;
-            obj.guardProfile = guard.value;
-            obj.guardType = guard.type;
+            obj.guard_direction = guard.direction;
+            obj.guard_profile = guard.value;
+            obj.guard_type = guard.type;
             
-            if strcmp(obj.guardType,'kinematics')
+            if strcmp(obj.guard_type,'kinematics')
                 % then there should be associated mex file exists
                 
                 % check existance of mex files
@@ -127,13 +127,13 @@ classdef DiscreteDynamics
                 %             'The MEX file could not be found: %s\n',...
                 %             strcat('Jguard_',obj.name)); % 3 - Mex-file
                 
-                obj.guardFunc = str2func(strcat('guard_',guard.name));
-                obj.guardJac = str2func(strcat('Jguard_',guard.name));
+                obj.guard_func = str2func(strcat('guard_',guard.name));
+                obj.guard_jac = str2func(strcat('Jguard_',guard.name));
             end
         end
             
         
-        function obj = set.guardProfile(obj, value)
+        function obj = set.guard_profile(obj, value)
             % set a new threshold profile for the guard condition
             %
             % @note the guard profile could be either a number or a mesh
@@ -146,14 +146,14 @@ classdef DiscreteDynamics
             
             
             fprintf('updating the guard threshold.\n');
-            obj.guardProfile = value;
+            obj.guard_profile = value;
             
             
             
         end
         
         
-        function obj = set.guardDir(obj, newDir)
+        function obj = set.guard_direction(obj, newDir)
             % set the direction of the guard evaluation
             %
             % Parameters:
@@ -162,7 +162,7 @@ classdef DiscreteDynamics
             % argument check
             narginchk(2,2);
             
-            obj.guardDir = newDir;
+            obj.guard_direction = newDir;
             fprintf('New guard direction: %d\n', newDir);
             
             
@@ -170,7 +170,7 @@ classdef DiscreteDynamics
             
         end
         
-        function obj = set.guardType(obj, type)
+        function obj = set.guard_type(obj, type)
             % set the type of the guard condition
             %
             % Parameters:
@@ -179,7 +179,7 @@ classdef DiscreteDynamics
             % argument check
             narginchk(2,2);
             
-            obj.guardType = type;
+            obj.guard_type = type;
             fprintf('New guard direction: %s\n', type);
             
         end

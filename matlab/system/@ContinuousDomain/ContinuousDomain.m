@@ -34,59 +34,33 @@ classdef ContinuousDomain
         indexInStep
         numDomainsInStep
         
-        % A struct array of contact points constraints
-        %
-        % Required fields of contactPoints:
-        %  name: the name of the contact point @type char
-        %  plink: the name of the rigid link on which the point is attached
-        %  to @type char
-        %  offset: the 3-dimensional offset in the body joint coordinates
-        %  that is rigidly attached to parent link @type colvec
-        %  constraints: the constraints imposed on the contact point. It
-        %  should be a list of indices of some or all of available constraints
-        %  given below
-        %  - 1: the position along the X direction in the world frame
-        %  - 2: the position along the Y direction in the world frame
-        %  - 3: the position along the Z direction in the world frame
-        %  - 4: the Euler rotation angle along the X direction in the world frame
-        %  - 5: the Euler rotation angle along the Y direction in the world frame
-        %  - 6: the Euler rotation angle along the Z direction in the world frame
-        %
-        % @type struct
-        contactPoints
         
-        % A struct array of additional kinematic constraints associated
-        % with joints
-        %
-        % @type struct
-        jointConstraints
+        % kinematic constraints
         
-        % A struct array of additional kinematic constraints associated
-        % with kinematic positions
-        %
-        % @type struct
-        posConstraints
+        
+        
+        
         
         % the dimension of holonomic constraints
         %
         % @type integer
-        dimHolConstr
+        dim_hol_constrs
         
         % a function that computes the value of holonomic constraints
         %
         % @type function_handle
-        holConstrFunc 
+        hol_constr_func 
         
         % afunction that computes the jacobian of holonomic constraints
         %
         % @type function_handle
-        holConstrJac  
+        hol_constr_jac  
         
         % a function that computes time derivatives of the jacobian matrix
         % of holonomic constraints
         %
         % @type function_handle
-        holConstrJacDot 
+        hol_constr_jacdot 
         
         
         controller
@@ -195,9 +169,9 @@ classdef ContinuousDomain
             % parse the input arguments
             %             p = inputParser;
             %             addRequired(p, 'name',@ischar);
-            %             addOptional(p, 'contactPoints', [], @isstruct);
-            %             addOptional(p, 'jointConstraints', [], @isstruct);
-            %             addOptional(p, 'posConstraints', [], @isstruct);
+            %             addOptional(p, 'contact_positions', [], @isstruct);
+            %             addOptional(p, 'joint_kin_constrs', [], @isstruct);
+            %             addOptional(p, 'pos_kin_constrs', [], @isstruct);
             %             parse(p,varargin{:});
             %             inputs = p.Results;
             %
@@ -205,16 +179,16 @@ classdef ContinuousDomain
             %             obj.name = inputs.name;
             %
             %             % if the contacts are given
-            %             if ~isempty(inputs.contactPoints)
-            %                 obj.contactPoints = inputs.contactPoints;
+            %             if ~isempty(inputs.contact_positions)
+            %                 obj.contact_positions = inputs.contact_positions;
             %             end
             %
             %             % if the additional consraints are given
-            %             if ~isempty(inputs.jointConstraints)
-            %                 obj.jointConstraints = input.jointConstraints;
+            %             if ~isempty(inputs.joint_kin_constrs)
+            %                 obj.joint_kin_constrs = input.joint_kin_constrs;
             %             end
-            %             if ~isempty(inputs.posConstraints)
-            %                 obj.posConstraints = input.posConstraints;
+            %             if ~isempty(inputs.pos_kin_constrs)
+            %                 obj.pos_kin_constrs = input.pos_kin_constrs;
             %             end
         end
         
@@ -247,8 +221,8 @@ classdef ContinuousDomain
             new_contact = p.Results;
             
             % updates to the object contact property
-            n_constr = length(obj.contactPoints);
-            obj.contactPoints(n_constr+1) = new_contact;
+            n_constr = length(obj.contact_positions);
+            obj.contact_positions(n_constr+1) = new_contact;
         end
         
         function obj = addJointConstraints(obj,varargin)
@@ -268,8 +242,8 @@ classdef ContinuousDomain
             new_contact.type = 'joint';
             
             
-            n_constr = lenght(obj.jointConstraints);
-            obj.jointConstraints(n_constr+1) = new_contact;
+            n_constr = lenght(obj.joint_kin_constrs);
+            obj.joint_kin_constrs(n_constr+1) = new_contact;
         end
         
         function obj = addPositionConstraints(obj,varargin)
@@ -290,8 +264,8 @@ classdef ContinuousDomain
             new_contact = p.Results;
             new_contact.type = 'position';
             
-            n_constr = lenght(obj.jointConstraints);
-            obj.jointConstraints(n_constr+1) = new_contact;
+            n_constr = lenght(obj.joint_kin_constrs);
+            obj.joint_kin_constrs(n_constr+1) = new_contact;
         end
         
         function x0 = getInitialStates(obj)

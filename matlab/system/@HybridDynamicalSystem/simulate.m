@@ -4,15 +4,15 @@ function obj = simulate(obj, new_options)
     %
     
     if nargin > 1
-       obj.options.simOpts = struct_overlay(obj.options.simOpts,new_options);
+       obj.options.sim_options = struct_overlay(obj.options.sim_options,new_options);
     end
     
-    ncycle = obj.options.simOpts.ncycle;
+    num_cycle = obj.options.sim_options.num_cycle;
     
-    if(isempty(obj.options.simOpts.startingVertex))
+    if(isempty(obj.options.sim_options.first_vertex))
         v0 = obj.gamma.vertices{1};
     else
-        v0 = obj.options.simOpts.startingVertex;
+        v0 = obj.options.sim_options.first_vertex;
         assert(any(strcmp(obj.gamma.vertices,v0)),...
             'The vertex %s does not exist in the graph.',v0);
     end
@@ -23,12 +23,12 @@ function obj = simulate(obj, new_options)
     t0 = 0;
     
     % trajectory recorders
-    calcs = cell(ncycle,1);
+    calcs = cell(num_cycle,1);
     v = v0;
     
     model = obj.model;
     
-    for k=1:ncycle
+    for k=1:num_cycle
         domain_flag = 'first';        
         while ~strcmp(v,v0) || strcmp(domain_flag,'first')
             domain_flag = [];
@@ -38,7 +38,7 @@ function obj = simulate(obj, new_options)
             
             ref = Recorder();
             
-            odeopts = odeset(obj.options.odeOpts,...
+            odeopts = odeset(obj.options.ode_options,...
                 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,ref), ...
                 'Events', @(t, x) checkGuard(cur_guard, t, x, cur_domain, model));          
             

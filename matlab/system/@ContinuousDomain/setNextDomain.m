@@ -14,7 +14,7 @@ function obj = setNextDomain(obj, next_domain)
         if obj.nImpConstr == 0 
             %             obj.impConstrName = next_domain.holConstrName;
             %             obj.nImpConstr    = next_domain.nHolConstr;
-            obj.impConstrJac  = next_domain.holConstrJac;
+            obj.impConstrJac  = next_domain.hol_constr_jac;
         end
     end
     

@@ -21,8 +21,8 @@ function [y_a1, y_a2, Dy_a1, Dy_a2, DLfy_a2] = calcActualOutputs(obj, x, model)
             % associated with time 't' and 'dt' (which is 1)
             
             Dy_a1_temp = obj.Dya1(x);
-            Dy_a1 = [0,Dy_a1_temp(model.qeIndices),...
-                0,Dy_a1_temp(model.dqeIndices)];
+            Dy_a1 = [0,Dy_a1_temp(model.qe_indices),...
+                0,Dy_a1_temp(model.dqe_indices)];
             
         else
             % otherwise (state-based), then keep the original form
@@ -47,12 +47,12 @@ function [y_a1, y_a2, Dy_a1, Dy_a2, DLfy_a2] = calcActualOutputs(obj, x, model)
             % associated with time 't' and 'dt' (which is 1)
             
             Dy_a2_temp = obj.Dya2(x);
-            Dy_a2 = [zeros(nOutputsRD2,1),Dy_a2_temp(:,model.qeIndices),...
-                zeros(nOutputsRD2,1),Dy_a2_temp(:,model.dqeIndices)];
+            Dy_a2 = [zeros(nOutputsRD2,1),Dy_a2_temp(:,model.qe_indices),...
+                zeros(nOutputsRD2,1),Dy_a2_temp(:,model.dqe_indices)];
             
             DLfy_a2_temp = obj.DLfya2(x);
-            DLfy_a2 = [zeros(nOutputsRD2,1),DLfy_a2_temp(:,model.qeIndices),...
-                zeros(nOutputsRD2,1),DLfy_a2_temp(:,model.dqeIndices)];
+            DLfy_a2 = [zeros(nOutputsRD2,1),DLfy_a2_temp(:,model.qe_indices),...
+                zeros(nOutputsRD2,1),DLfy_a2_temp(:,model.dqe_indices)];
             
     else
         % otherwise (state-based), then keep the original form

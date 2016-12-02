@@ -49,7 +49,7 @@ classdef HybridDynamicalSystem
         % Next step, separate them into multiple different classes
         % definition.
         %
-        % @type HybridDomain array
+        % @type ContinuousDomain
         domains
         
         guards
@@ -69,29 +69,28 @@ classdef HybridDynamicalSystem
         % The class option
         %
         % Required fields of options:
-        %  simOpts: the simulation options @type struct
-        %  odeOpts: the default options for ODE solvers
+        %  sim_options: the simulation options @type struct
+        %  ode_options: the default options for ODE solvers
         %
-        % Required fields of simOpts:
-        %  ncycle: the number of cyclic motion of the periodic directed
+        % Required fields of sim_options:
+        %  num_cycle: the number of cyclic motion of the periodic directed
         %          cycle @type integer @default 1
-        %  startingVertex: the starting vertex in the graph
+        %  first_vertex: the starting vertex in the graph
         %
         % @type struct
         options = struct(...
-            'controllerType','IO',...
-            'simOpts',[],...
-            'odeOpts',[]);
+            'sim_options',[],...
+            'ode_options',[]);
         
         % the directory of configuration files
         %
         % @type char @default []
-        configDirPrefix
+        config_dir_prefix
         
         % stores the configuration of the system
         %
         % @type struct
-        sysConfig
+        sys_config
     end
     
     %% Public methods
@@ -100,11 +99,11 @@ classdef HybridDynamicalSystem
             % the default calss constructor
             %
             % Required fields of options:
-            %  simOpts: the simulation options @type struct     
-            %  odeOpts: the default options for ODE solvers
+            %  sim_options: the simulation options @type struct     
+            %  ode_options: the default options for ODE solvers
             %
-            % Required fields of simOpts:
-            %  ncycle: the number of cyclic motion of the periodic directed
+            % Required fields of sim_options:
+            %  num_cycle: the number of cyclic motion of the periodic directed
             %          cycle @type integer @default 1
             %
             % Parameters:
@@ -117,21 +116,20 @@ classdef HybridDynamicalSystem
             obj.name = name;
             
             % load default options 
-            simOpts = struct();
-            simOpts.ncycle = 1;
-            simOpts.startingVertex = [];
+            sim_options = struct();
+            sim_options.num_cycle = 1;
+            sim_options.first_vertex = [];
             
-            odeOpts = odeset('MaxStep', 1e-2, ...
+            ode_options = odeset('MaxStep', 1e-2, ...
                 'RelTol',1e-6,...
                 'AbsTol',1e-6);
             
             
-            obj.configDirPrefix = config_path;
-            obj.options.controllerType = 'IO';
-            obj.options.simOpts = simOpts;
-            obj.options.odeOpts = odeOpts;
+            obj.config_dir_prefix = config_path;
+            obj.options.sim_options = sim_options; 
+            obj.options.ode_options = ode_options;
             
-            obj.sysConfig.name = name;
+            obj.sys_config.name = name;
         end
         
         function obj = setParams(obj, param_config)
@@ -139,7 +137,7 @@ classdef HybridDynamicalSystem
             % (trajectory)
             
             
-            param_config_file = fullfile(obj.configDirPrefix,'config','parameters',...
+            param_config_file = fullfile(obj.config_dir_prefix,'config','parameters',...
                 obj.name, strcat(param_config,'.yaml'));
             
             % extract the absolute full file path of the input file
@@ -200,7 +198,7 @@ classdef HybridDynamicalSystem
                 new_domains{i} = ContinuousDomain(domain_name);
                 
                 % the domain configuration file full path name
-                domain_config_file = fullfile(obj.configDirPrefix,'config','domain',...
+                domain_config_file = fullfile(obj.config_dir_prefix,'config','domain',...
                     strcat(domain_name,'.yaml'));
                 
                 assert(~isempty(obj.model),['The dynamical model has not been configured. \n',...
@@ -224,7 +222,7 @@ classdef HybridDynamicalSystem
                 new_gurads{i} = DiscreteDynamics(guard_name);
                 
                 % the domain configuration file full path name
-                dmap_config_file = fullfile(obj.configDirPrefix,'config','domain',...
+                dmap_config_file = fullfile(obj.config_dir_prefix,'config','domain',...
                     strcat(guard_name,'.yaml'));
                 
                 % extract the absolute full file path of the input file
@@ -244,8 +242,8 @@ classdef HybridDynamicalSystem
             end
             obj.guards = [new_gurads{:}];
             
-            obj.sysConfig.gamma.vertices = vertices;
-            obj.sysConfig.gamma.edges = edges;
+            obj.sys_config.gamma.vertices = vertices;
+            obj.sys_config.gamma.edges = edges;
         end
         
         
@@ -280,7 +278,7 @@ classdef HybridDynamicalSystem
             [~,file_name,file_ext] = fileparts(urdf_file);
             
             
-            assert(~isempty(obj.configDirPrefix),...
+            assert(~isempty(obj.config_dir_prefix),...
                 'Please set the configuration files path prefix first.\n');
              
             if isempty(file_ext)
@@ -288,7 +286,7 @@ classdef HybridDynamicalSystem
             end
             
             
-            config_file = fullfile(obj.configDirPrefix,'config','model',...
+            config_file = fullfile(obj.config_dir_prefix,'config','model',...
                 strcat(file_name,file_ext));
     
             % check if the file exists
@@ -297,8 +295,8 @@ classdef HybridDynamicalSystem
             
             obj.model = RigidBodyModel(config_file, model_options);
             
-            obj.sysConfig.model.file = strcat(file_name,file_ext);
-            obj.sysConfig.model.options = obj.model.options;
+            obj.sys_config.model.file = strcat(file_name,file_ext);
+            obj.sys_config.model.options = obj.model.options;
         end
         
        
@@ -335,16 +333,16 @@ classdef HybridDynamicalSystem
         function exportSysConfig(obj)
             % Exports the system configuration into a YAML file
             
-            export_name = fullfile(obj.configDirPrefix,'config','system',...
+            export_name = fullfile(obj.config_dir_prefix,'config','system',...
                 strcat(obj.name,'.yaml'));
             
-            yaml_write_file(export_name,obj.sysConfig);
+            yaml_write_file(export_name,obj.sys_config);
             
         end
     end
     
     methods
-        function obj = set.configDirPrefix(obj, configDir)
+        function obj = set.config_dir_prefix(obj, configDir)
             % Set the full path to the directory that contains all
             % configuration files
             %
@@ -357,7 +355,7 @@ classdef HybridDynamicalSystem
                 '%s \n',...
                 'Please provide the correct directory path.'], configDir);
             
-            obj.configDirPrefix = configDir;
+            obj.config_dir_prefix = configDir;
         end
     end
     

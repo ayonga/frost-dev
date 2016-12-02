@@ -6,7 +6,7 @@ function obj = setHolonomicConstraints(obj, constraints)
     narginchk(2,2);
     
     %     obj.holConstrName  = constraints;
-    obj.dimHolConstr   = numel(constraints);
+    obj.dim_hol_constrs   = numel(constraints);
     
     
     % check existance of mex files
@@ -20,9 +20,9 @@ function obj = setHolonomicConstraints(obj, constraints)
 %         'The MEX file could not be found: %s\n',...
 %         strcat('dJhol_',obj.name)); % 3 - Mex-file
     
-    obj.holConstrFunc = str2func(strcat('hol_',obj.name));
-    obj.holConstrJac = str2func(strcat('Jhol_',obj.name));
-    obj.holConstrJacDot = str2func(strcat('dJhol_',obj.name));
+    obj.hol_constr_func = str2func(strcat('hol_',obj.name));
+    obj.hol_constr_jac = str2func(strcat('Jhol_',obj.name));
+    obj.hol_constr_jacdot = str2func(strcat('dJhol_',obj.name));
     
            
 

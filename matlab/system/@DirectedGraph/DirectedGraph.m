@@ -39,12 +39,12 @@ classdef DirectedGraph
         % The class option
         %
         % Required fields of options:
-        %  isPeriodic: indicates whether the graph is periodic or aperiodic
+        %  is_periodic: indicates whether the graph is periodic or aperiodic
         %  @type logical
         %
         % @type struct
         options = struct(...
-            'isPeriodic',true);
+            'is_periodic',true);
     end
     
     %% Public methods
@@ -82,7 +82,7 @@ classdef DirectedGraph
             % unidirectional.
             if isempty(edges)
                 
-                if obj.options.isPeriodic
+                if obj.options.is_periodic
                     source = vertices;
                     target = [vertices(2:end),vertices(1)];
                 else                    
@@ -98,7 +98,7 @@ classdef DirectedGraph
                 edge_name = edges{1};
                 source = edges{2};
                 target = edges{3};
-                if obj.options.isPeriodic
+                if obj.options.is_periodic
                     assert(numel(source) == numel(target),...
                         'The periodic graph requires the number of target and source vertices are equal.');
                     assert(strcmp(source{1},target{end}),...
@@ -231,6 +231,11 @@ classdef DirectedGraph
                 source = [];
                 warning('There is no source vertex exists for %s\n',target_vertex);
             end
+        end
+        
+        function N = getNumberOfVertices(obj)
+           
+            N = numel(obj.vertices);
         end
     end
         
