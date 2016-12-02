@@ -11,20 +11,20 @@ function indices = getLinkIndices(obj, link_names)
     all_link_name = {obj.links.name};
     
     if iscell(link_names)
-        nl = numel(link_names);
         
-        indices = zeros(nl,1);
+        indices_c = str_indices(link_names,all_link_name,'UniformOutput',false);
         
-        for k=1:nl
-            l_index = str_index(all_link_name,link_names{k});
-            if isempty(l_index)
-                warning('the link %s not exists.', link_names{k});
-                indices(k) = NaN;
-            else
-                indices(k) = l_index;
-            end
-            
+        links_not_found = find(cellfun('isempty',indices_c), 1);
+        
+        if isempty(links_not_found)
+           warning('the following links not exists.');
+           for k = 1:length(links_not_found)
+               disp('%s, ',link_names{links_not_found(k)});
+               indices_c(links_not_found(k)) = NaN;
+           end
         end
+        indices = [indices_c{:}];
+        
     elseif ischar(link_names)
         % specified only one joint
         indices = str_index(all_link_name,link_names);
