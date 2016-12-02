@@ -19,14 +19,14 @@ function status = check_var_exist(var)
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    func = @(x) math(['ValueQ[',x,']']);
+    valueQ = @(x) math(['ValueQ[',x,']']);
     
     if iscell(var)
         
-        ret = cellfun(func,var,'UniformOutput',false);
+        ret = cellfun(valueQ,var,'UniformOutput',false);
         
     else
-        ret = func(var);
+        ret = valueQ(var);
     end
     
     status = all(strcmp('True',ret));

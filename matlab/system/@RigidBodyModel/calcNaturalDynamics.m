@@ -15,9 +15,9 @@ function [De, He] = calcNaturalDynamics(obj, x)
     if obj.options.use_sva
         [De, He] = HandC(obj.sva, qe, dqe);
     else
-        De = De_mat(x); % inertia matrix
-        Ce = Ce_mat(x); % coriolis matrix
-        Ge = Ge_vec(x); % gravity vector
+        De = De_mat(qe); % inertia matrix
+        Ce = Ce_mat(qe, dqe); % coriolis matrix
+        Ge = Ge_vec(qe); % gravity vector
         He = Ce*dqe + Ge;
     end
     
