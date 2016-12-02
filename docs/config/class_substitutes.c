@@ -44,6 +44,12 @@
  * @brief A MatLab cell array or matrix
  *
  * This class is an artificially created class in doxygen to allow more precise type declarations
+ * and represents string-like types.
+ *
+ * @class cellstr
+ * @brief A MatLab cell array of strings
+ *
+ * This class is an artificially created class in doxygen to allow more precise type declarations
  *
  * @class struct
  * @brief A MatLab struct
