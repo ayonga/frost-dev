@@ -6,8 +6,7 @@ function indices = getLinkIndices(obj, link_names)
     %
     % Return values:
     %  indices: position indices of joints in the obj.joints
-    % 
-    % @see getJointIndices, links
+    
     
     all_link_name = {obj.links.name};
     
@@ -16,13 +15,13 @@ function indices = getLinkIndices(obj, link_names)
         
         indices = zeros(nl,1);
         
-        for i=1:nl
-            index = str_index(all_link_name,link_names{i});
-            if isempty(index)
-                warning('the link %s not exists.', link_names{i});
-                indices(i) = NaN;
+        for k=1:nl
+            l_index = str_index(all_link_name,link_names{k});
+            if isempty(l_index)
+                warning('the link %s not exists.', link_names{k});
+                indices(k) = NaN;
             else
-                indices(i) = index;
+                indices(k) = l_index;
             end
             
         end

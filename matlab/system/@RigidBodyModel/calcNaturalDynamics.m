@@ -9,8 +9,8 @@ function [De, He] = calcNaturalDynamics(obj, x)
     %  He: the corilios and gravity term @type colvec
     
     % Extract states to angles and velocities
-    qe  = x(model.qeIndices);
-    dqe = x(model.dqeIndices);
+    qe  = x(model.qe_indices);
+    dqe = x(model.dqe_indices);
         
     if obj.options.use_sva
         [De, He] = HandC(obj.sva, qe, dqe);
