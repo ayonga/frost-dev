@@ -1,8 +1,8 @@
-classdef (Abstract) Kinematics < handle
+classdef Kinematics < handle
     % Defines a scalar kinematic function of a rigid body model
     % 
     %
-    % @author Ayonga Hereid @date 2016-09-23
+    % @author ayonga @date 2016-09-23
     % 
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -61,11 +61,15 @@ classdef (Abstract) Kinematics < handle
         name
         
         
-        % A flag whether linearize the output or not. The actual output
-        % will be the linearization of the functioni at q = 0.
+        % A set of options for the kinematic functions.
+        %
+        % Required fields of options:
+        % linearize: A flag whether linearize the output or not. The actual output
+        % will be the linearization of the functioni at q = 0. @type 
+        % logical
         %
         % @type true
-        linear
+        options
         
         
         
@@ -75,22 +79,29 @@ classdef (Abstract) Kinematics < handle
     
     methods
         
-        function obj = Kinematics(name)
+        function obj = Kinematics(name, varargin)
             % The constructor function
             %
-            % Parameters:
-            %  name: a string symbol that will be used to represent this
-            %  constraints in Mathematica @type char 
-            
+            % Parameters: 
+            %   name: a string symbol that will be used to represent this 
+            %   constraints in Mathematica @type char                    
+            %   varargin: Class options. 
+            %   linearize: indicates whether linearize the original
+            %   expressoin @type logical @default false
                         
-            % default settings        
-            obj.linear = false;
-            
             if nargin > 0
-                if ~isempty(name)
-                    obj = setName(obj, name);
-                end
+                obj = setName(obj, name);
+                obj.options = struct();
+            else
+                return;
             end
+            
+            % parse options
+            p = inputParser;
+            p.addParameter('linearize', false, @islogical);
+            
+            parse(p, varargin{:});
+            obj.options.linearize = p.Results.linearize;
             
         end
         
@@ -101,10 +112,10 @@ classdef (Abstract) Kinematics < handle
             %  name: a string symbol that will be used to represent this
             %  constraints in Mathematica @type char 
             
+            % check type
+            assert(ischar(name), 'The name must be a string.');
             
-            % validate name string
-            assert(ischar(name),'Kinematics:invalidNameStr','The name must be a string!');
-            
+            % validate name string            
             assert(isempty(regexp(name, '_', 'once'))&&isempty(regexp(name, '\W', 'once')),...
                 'Kinematics:invalidNameStr', ...
                 'Invalid name string, can NOT contain ''_'' or other special characters.');
@@ -114,27 +125,27 @@ classdef (Abstract) Kinematics < handle
         end
         
         
-        function obj = linearize(obj, linear, model)
+        function obj = linearize(obj, linearize)
             % Sets whether to linearize the function or not
             %
             % Parameters:
-            %  linear: linearize the function if it is true, otherwise
-            %  if false. @type logical
+            %  linearize: linearize the function if it is true @type 
+            %  logical
+            %
            
-            if islogical(linear)
-                obj.linear = linear;
-                
-                % if symbol expressions alreay exist, re-compile them
-                if check_var_exist({obj.symbol,obj.jac_symbol,obj.jacdot_symbol})
-                    compile(obj, model, true);
-                end
-                    
-            else
-                warning('invalid input.');
+            
+            % if symbol expressions alreay exist, re-compile them
+            if check_var_exist({obj.symbol,obj.jac_symbol,obj.jacdot_symbol}) ...
+                    && (linearize ~= obj.options.linearize)
+                warning(['The symbolic expressions already exist in Mathematica Kernal.'...,
+                    'Compile the expressions again with re_load option before use.']);
             end
+            obj.options.linearize = linearize;
+            
+            
         end
         
-        function status = compile(obj, model, re_load)
+        function status = compileExpression(obj, model, re_load)
             % This function computes the symbolic expression of the
             % kinematics constraints in Mathematica.
             %
@@ -163,7 +174,7 @@ classdef (Abstract) Kinematics < handle
                 kin_cmd_str = getKinMathCommand(obj);
                 jac_cmd_str = getJacMathCommand(obj);
                 jacdot_cmd_str = getJacDotMathCommand(obj);
-                if obj.linear
+                if obj.options.linearize
                     
                     % first obtain the symbolic expression for the
                     % kinematic function
@@ -192,7 +203,7 @@ classdef (Abstract) Kinematics < handle
         end
         
         
-        function print(obj, file)
+        function printExpression(obj, file)
             % This function prints out the symbolic expression from the
             % Mathematica to Matlab screen. 
             %

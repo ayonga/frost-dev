@@ -46,53 +46,49 @@ classdef KinematicExpr < Kinematics
             
             
             
-            obj = obj@Kinematics(name);
+            obj = obj@Kinematics(name, varargin{:});
             
+            if nargin > 1
             
-            p = inputParser();
-            p.addParameter('linear', obj.linear, @islogical);
-            parse(p, varargin{:});
-            obj.linear = p.Results.linear;
-            
-            % validate dependent arguments
-            check_object = @(x) ~isa(x,'Kinematics');
-            
-            if any(cellfun(check_object,kins))
-                error('Kinematics:invalidObject', ...
-                    'There exist non-Kinematics objects in the dependent variable list.');
-            end
-            
-            obj.kins = kins;
-            % validate symbolic expressions
-            if isempty(regexp(expr, '_', 'once'))
-                obj.expr = expr;
-            else
-                err_msg = 'The expression CANNOT contain ''_''.\n %s';
+                % validate dependent arguments
+                check_object = @(x) ~isa(x,'Kinematics');
                 
-                error('Kinematics:invalidExpr', err_msg, expr);
-            end
-            
-            
-            
-            % extract variable names
-            var_names = cellfun(@(kin){kin.name},kins,'UniformOutput',false);
-            % validate if symbolic variables in the expressions are members
-            % of the dependent variables
-            ret = eval_math(['CheckSymbols[',expr,',ToExpression[',cell2tensor(var_names),']]']);
-            
-            if ~strcmp(ret, 'True')
-                err_msg = ['Mathematica detected symbolic variables that are not defined.\n',...
-                    'Following symbolic variables are detected by Mathematica: \n %s'];
+                if any(cellfun(check_object,kins))
+                    error('Kinematics:invalidObject', ...
+                        'There exist non-Kinematics objects in the dependent variable list.');
+                end
                 
-                det_var = eval_math(['FindSymbols[',expr,']']);
+                obj.kins = kins;
+                % validate symbolic expressions
+                if isempty(regexp(expr, '_', 'once'))
+                    obj.expr = expr;
+                else
+                    err_msg = 'The expression CANNOT contain ''_''.\n %s';
+                    
+                    error('Kinematics:invalidExpr', err_msg, expr);
+                end
                 
-                error('Kinematics:invalidExpr',err_msg, det_var);
+                
+                
+                % extract variable names
+                var_names = cellfun(@(kin){kin.name},kins,'UniformOutput',false);
+                % validate if symbolic variables in the expressions are members
+                % of the dependent variables
+                ret = eval_math(['CheckSymbols[',expr,',ToExpression[',cell2tensor(var_names),']]']);
+                
+                if ~strcmp(ret, 'True')
+                    err_msg = ['Mathematica detected symbolic variables that are not defined.\n',...
+                        'Following symbolic variables are detected by Mathematica: \n %s'];
+                    
+                    det_var = eval_math(['FindSymbols[',expr,']']);
+                    
+                    error('Kinematics:invalidExpr',err_msg, det_var);
+                end
             end
-               
         end
         
         
-        function status = compile(obj, model, re_load)
+        function status = compileExpression(obj, model, re_load)
             % This function computes the symbolic expression of the
             % kinematics constraints in Mathematica.
             %
@@ -159,7 +155,7 @@ classdef KinematicExpr < Kinematics
                 eval_math('Jhexp = D[Flatten[{expr}], {Flatten[vars], 1}]/. Table[v -> First@h[ToString[v]], {v, vars}];');
                 
                 
-                if obj.linear
+                if obj.options.linearize
                     % get the substitution rule for q = 0
                     eval_math('{qe0subs,dqe0subs} = GetZeroStateSubs[];')
                     % use chain rules to construct the final Jacobian matrix

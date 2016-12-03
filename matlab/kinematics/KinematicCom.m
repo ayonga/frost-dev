@@ -31,24 +31,17 @@ classdef KinematicCom < Kinematics
             %  axis: one of the (x,y,z) axis @type char
             %  linear: indicates whether linearize the original
             %  expressoin @type logical
+            %  varargin: superclass options @type varargin
             
             
-            obj = obj@Kinematics(name);
+            obj = obj@Kinematics(name, varargin{:});
             
-            valid_axis = {'x','y','z'};
-            
-            p = inputParser();            
-            p.addRequired('axis', @(x) any(validatestring(axis,valid_axis)));
-            p.addParameter('linear', obj.linear, @islogical);
-            parse(p, axis, varargin{:});
-            
-            
-            obj.axis   = find(strcmpi(p.Results.axis, valid_axis));
-            obj.linear = p.Results.linear;
-            
-            
-            
-            
+            if nargin > 1
+                % set direction axis
+                valid_axis = {'x','y','z'};
+                axis = validatestring(axis,valid_axis);
+                obj.axis = find(strcmpi(axis, valid_axis));
+            end
         end
         
         

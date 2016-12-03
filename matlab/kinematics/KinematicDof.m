@@ -26,23 +26,25 @@ classdef KinematicDof < Kinematics
     
     methods
         
-        function obj = KinematicDof(model, name, dof_name)
+        function obj = KinematicDof(name, model, dof_name, varargin)
             % The constructor function
             %
             % Parameters:
             %  name: a string that will be used to represent this
             %  constraints in Mathematica @type char           
-            %  dof_name: the dof name @type char
+            %  model: the rigid body model @type RigidBodyModel
+            %  dof_name: the name of the coordinate @type char
             
-            obj = obj@Kinematics(name);
+            obj = obj@Kinematics(name, varargin{:});
             
             
-            
-            obj.dof_index = getDofIndices(model, dof_name);
-            
-            assert(~isempty(obj.dof_index),'KinematicDof:invalidDoF',...
-                'The input DoF name not found: %s',dof_name);
-            
+            if nargin > 1
+                
+                obj.dof_index = getDofIndices(model, dof_name);
+                
+                assert(~isnan(obj.dof_index),'KinematicDof:invalidDoF',...
+                    'The input DoF name is not found: %s',dof_name);
+            end
             
             % check if DoF names contains invalid characters
             

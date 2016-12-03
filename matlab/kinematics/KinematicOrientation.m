@@ -37,37 +37,33 @@ classdef KinematicOrientation < Kinematics
             %  model: the rigid body model @type RigidBodyModel
             %  parent: the name of the parent link on which this fixed
             %  position is rigidly attached @type char             
-            %  axis: one of the (x,y,z) axis @type char          
-            %  linear: indicates whether linearize the original
-            %  expressoin @type logical
+            %  axis: one of the (x,y,z) axis @type char   
+            %  varargin: superclass options @type varargin
             
             
-            obj = obj@Kinematics(name);
+            obj = obj@Kinematics(name, varargin{:});
             
             
             
-            if isa(model,'RigidBodyModel')
-                valid_links = {model.links.name};
-            else
-                error('Kinematics:invalidType',...
-                    'The model has to be an object of RigidBodyModel class.');
+            if nargin > 1
+                % check valid model object
+                if isa(model,'RigidBodyModel')
+                    valid_links = {model.links.name};
+                else
+                    error('Kinematics:invalidType',...
+                        'The model has to be an object of RigidBodyModel class.');
+                end
+                
+                % assign the parent link name (case insensitive)
+                obj.parent  = validatestring(parent,valid_links);    
+                
+                
+                % set direction axis
+                valid_axis = {'x','y','z'};
+                axis = validatestring(axis,valid_axis);
+                obj.axis = find(strcmpi(axis, valid_axis));
+            
             end
-            
-            
-            valid_axis = {'x','y','z'};
-            
-            % parse inputs
-            
-            p = inputParser();
-            p.addRequired('parent', @(x) any(validatestring(x,valid_links)));
-            p.addRequired('axis', @(x) any(validatestring(axis,valid_axis)));
-            p.addParameter('linear', obj.linear, @islogical);
-            
-            parse(p, parent, axis, varargin{:});
-            
-            obj.parent = p.Results.parent;
-            obj.axis   = find(strcmpi(p.Results.axis, valid_axis));
-            obj.linear = p.Results.linear;
             
             
         end

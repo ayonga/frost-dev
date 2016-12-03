@@ -3,7 +3,7 @@ classdef KinematicPosition < Kinematics
     % point on a rigid link
     % 
     %
-    % @author Ayonga Hereid @date 2016-09-23
+    % @author ayonga @date 2016-09-23
     % 
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -34,7 +34,7 @@ classdef KinematicPosition < Kinematics
     
     methods
         
-        function obj = KinematicPosition(name, model, parent, axis, varargin)
+        function obj = KinematicPosition(name, model, parent, offset, axis, varargin)
             % The constructor function
             %
             % Parameters:            
@@ -42,44 +42,45 @@ classdef KinematicPosition < Kinematics
             %  constraints in Mathematica @type char        
             %  model: the rigid body model @type RigidBodyModel
             %  parent: the name of the parent link on which this fixed
-            %  position is rigidly attached @type char              
-            %  axis: one of the (x,y,z) axis @type char
+            %  position is rigidly attached @type char                     %  
             %  offset: an offset of from the origin of the parent link
             %  frame @type rowvec @default [0,0,0]
-            %  linear: indicates whether linearize the original
-            %  expressoin @type logical
-            
-            if nargin == 0
-                name = [];
-            end
-            obj = obj@Kinematics(name);
+            %  axis: one of the (x,y,z) axis @type char
+            %  varargin: superclass options @type varargin
+            %
+            % See also: Kinematics
             
             
-            if nargin > 2
-                
+            obj = obj@Kinematics(name, varargin{:});
+            
+            
+            if nargin > 1
+                % check valid model object
                 if isa(model,'RigidBodyModel')
                     valid_links = {model.links.name};
                 else
                     error('Kinematics:invalidType',...
                         'The model has to be an object of RigidBodyModel class.');
                 end
-                % parse inputs
+                
+                % assign the parent link name (case insensitive)
+                obj.parent  = validatestring(parent,valid_links);    
+                
+                % set point offset
+                if isnumeric(offset) && length(offset)==3
+                    if size(offset,1) > 1 % column vector
+                        % convert to row vector
+                        obj.offset = offset';
+                    else
+                        obj.offset = offset;
+                    end                        
+                end
+               
+                
+                % set direction axis
                 valid_axis = {'x','y','z'};
-                default_offset = [0,0,0];
-                
-                p = inputParser();
-                p.addRequired('parent', @(x) any(validatestring(x,valid_links)));
-                p.addRequired('axis', @(x) any(validatestring(axis,valid_axis)));
-                p.addOptional('offset', default_offset, @(x) validateattributes(x,{'numeric'},{'size',[1,3]}));
-                p.addParameter('linear', obj.linear, @islogical);
-                
-                parse(p, parent, axis, varargin{:});
-                
-                obj.parent = p.Results.parent;
-                obj.axis   = find(strcmpi(p.Results.axis, valid_axis));
-                obj.offset = p.Results.offset;
-                obj.linear = p.Results.linear;
-            
+                axis = validatestring(axis,valid_axis);
+                obj.axis = find(strcmpi(axis, valid_axis));
             end
            
             
