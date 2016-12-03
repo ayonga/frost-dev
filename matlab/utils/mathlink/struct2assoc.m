@@ -2,7 +2,7 @@ function [str] = struct2assoc(s, varargin)
     % Converts a Matlab structure into a string that describes an
     % expression for Mathematica association
     %
-    % @author ayonga
+    % @author ayonga @date 2016-11-23
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.

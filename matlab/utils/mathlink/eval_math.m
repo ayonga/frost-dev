@@ -2,6 +2,8 @@ function ret = eval_math(expr)
     % A wrapper function that calls the mathlink function to evaluate the
     % expression specified by 'expr'. 
     %
+    % @author ayonga @date 2016-11-23
+    %
     % Parameters:
     %  expr: a string of Mathematica expression @type char
     %

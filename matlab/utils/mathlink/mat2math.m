@@ -2,7 +2,7 @@ function expr = mat2math(A, varargin)
     % Converts a 2-D matrix to a string that will be read as a matrix
     % (tensor) in Mathematica
     %
-    % @author ayonga
+    % @author ayonga @date 2016-11-23
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.

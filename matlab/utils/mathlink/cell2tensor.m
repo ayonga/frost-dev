@@ -1,7 +1,7 @@
 function [expr] = cell2tensor(X, varargin)
     % Convert a cell array to a Mathematica tensor
     %
-    % @author ayonga
+    % @author ayonga @date 2016-11-23
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.

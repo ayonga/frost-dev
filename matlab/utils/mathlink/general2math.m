@@ -1,7 +1,7 @@
 function [expr] = general2math(x, varargin)
     % Convert a general expression to a Mathematica expression
     %
-    % @author ayonga @date 2016-09-23
+    % @author ayonga @date 2016-11-23
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -24,7 +24,7 @@ function [expr] = general2math(x, varargin)
             expr = mat2math(x, varargin{:});
         end
     elseif ischar(x)
-        expr = str2math(x, varargin{:});
+        expr = str2mathstr(x, varargin{:});
     elseif islogical(x)
         if x
             expr = 'True';

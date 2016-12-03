@@ -30,7 +30,11 @@ function [status] = build_mex(build_dir, src_files, varargin)
         return;
     end
     
-    num_files = numel(src_files);
+    if ischar(src_files)
+        % convert to a cell
+        src_files = {src_files};
+    end
+    num_files = length(src_files);
     
     % parpool(4)
     tic
@@ -40,7 +44,7 @@ function [status] = build_mex(build_dir, src_files, varargin)
         
         src_file = dir(src_file_full_path);
         if isempty(src_file)
-            disp(['i = ', num2str(i), ', File not found: ', src_files{i}]);
+            fprintf('File not found: %s\n', src_files{i});
             continue;
         end
         
@@ -52,13 +56,13 @@ function [status] = build_mex(build_dir, src_files, varargin)
             
             % abort build process if the MEX file is newer than the source file
             if mexDate > srcData
-                disp(['i = ', num2str(i), ', Already Compiled: ', src_files{i}]);
+                fprintf('This file has been already compiled: %s\n', src_files{i});
                 continue;
             end
        
         end
         
-        disp(['i = ', num2str(i), ', Start compiling: ', src_files{i}]);
+        fprintf('Compiling: %s\n', src_files{i});
         
         mex(...
             '-g', ...
@@ -67,7 +71,7 @@ function [status] = build_mex(build_dir, src_files, varargin)
             src_file_full_path ...
             );
         
-        disp(['i = ', num2str(i), ', Done compiling: ', src_files{i}]);
+        %         disp(['%s.mex  ', src_files{i}]);
     end
     toc
     
