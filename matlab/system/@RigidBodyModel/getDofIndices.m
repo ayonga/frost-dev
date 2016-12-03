@@ -32,6 +32,10 @@ function indices = getDofIndices(obj, dof_names)
     elseif ischar(dof_names)
         % specified only one joint
         indices = str_index(all_dof_names,dof_names);
+        if isempty(indices)
+            warning('the joint %s not exists.', dof_names);
+            indices = NaN;
+        end
     else
         error('please provide correct information (Joint Name)');
     end

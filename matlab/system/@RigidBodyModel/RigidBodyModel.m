@@ -221,17 +221,11 @@ classdef RigidBodyModel < handle
             % Return values:
             % obj: an object of this class
             %
-            % Required fields of base_dofs:
-            %  type: Specifies the type of the rigid body model. @type char
-            %  @default 'floating'
-            %  lower: the lower limits of each base joints @type rowvec
-            %  @default -inf
-            %  upper: the upper limits of each base joints @type rowvec
-            %  @default inf
-            %  velocity: the velocity limits of each base joints @type
-            %  rowvec @default inf
-            %
             % Optional fields of base_dofs:
+            %  type: Specifies the type of the rigid body model. @type char
+            %  lower: the lower limits of each base joints @type rowvec
+            %  upper: the upper limits of each base joints @type rowvec
+            %  velocity: the velocity limits of each base joints @type
             %  axis: axes of each base joints. If not specified, then use
             %  default axes for each type. @type char
             %
@@ -435,6 +429,12 @@ classdef RigidBodyModel < handle
         
         
         
+    end
+    
+    
+    %% methods defined in seperate files
+    methods
+        obj = compileDynamics(obj);
     end
     
     %% Private methods

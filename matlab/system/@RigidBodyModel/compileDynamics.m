@@ -49,9 +49,9 @@ function obj = compileDynamics(obj)
     
     
     
-    %| @todo Actuator inertia! To include the actuators inertia in the
-    %De matrix, use syntax
-    %  @@code math('De=InertiaMatrix[',cell2tensor(motor_inertia),'];'); @@endcode
+    %| @note Actuator inertia! To include the actuators inertia in the
+    %De matrix, use syntax:
+    %  @verbatim math('De=InertiaMatrix[',cell2tensor(motor_inertia),'];'); @endverbatim
     %
     %| @note The @verbatim 'motor_inertia' @endverbatim is a 2-D cell
     %array of name/value pairs. The length must be the same as the

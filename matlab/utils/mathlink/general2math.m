@@ -1,7 +1,7 @@
 function [expr] = general2math(x, varargin)
     % Convert a general expression to a Mathematica expression
     %
-    % @author Ayonga Hereid <ayonga27@gmail.com>
+    % @author ayonga @date 2016-09-23
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
