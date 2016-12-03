@@ -71,7 +71,11 @@ GetFieldIndices::usage =
 Begin["`Private`"]
 (* Implementation of the package *)
 
-FindSymbols[expr_]:= DeleteDuplicates[DeleteCases[Cases[expr, _Symbol, Infinity], _?NumericQ]];
+FindSymbols[expr_]:= 
+	Block[{syms},
+		syms = DeleteDuplicates[DeleteCases[Cases[expr, _Symbol, Infinity], _?NumericQ]];
+		Return[Flatten[syms]];
+	];
 
 CheckSymbols[expr_, list_?ListQ]:=
 	Block[{syms},
