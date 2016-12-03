@@ -7,7 +7,7 @@ function status = checkFlag(obj, flag)
     % Return values:
     %  status: returns the flag status. @type logical
     
-    ret = math(['GetFlag[',str2math(flag),']']);
+    ret = math(['GetFlag[',str2mathstr(flag),']']);
     
     if strcmp(flag,ret)
         warning('The flag not found: %s',flag);

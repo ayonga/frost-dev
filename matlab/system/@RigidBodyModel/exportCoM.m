@@ -30,49 +30,100 @@ function status = exportCoM(obj, export_path, do_build)
         return;
     end
     
-    %     fprintf('Exporting expressions of rigid body dynamics might take very long time to finish!\n');
-    %     y = input ('Hit enter to continue (or "n" to quit): ', 's');
-    %
-    %     if (isempty (y))
-    %         y = 'y' ;
-    %     end
-    %     do_export = (y (1) ~= 'n') ;
+    flag = '$ModelInitialized';
     
-    %     if ~ do_export
-    %         fprintf('Aborting ...\n');
-    %         status = false;
-    %         return;
-    %     else
-    if ~obj.status.initialized
+    
+    if ~checkFlag(obj, flag)
         fprintf('The robot model has NOT been initialized in Mathematica.\n');
         fprintf('Please call initialize(robot) first\n');
         fprintf('Aborting ...\n');
-        status = false;
         return;
-    else
-        math('Needs["MathToCpp`"];');
+    end
+    
+    if ~ check_var_exist({'pcom','Jcom','dJcom'})
+        fprintf('The robot dynamics has not been compiled in Mathematica.\n');
+        fprintf('Please call compileDynamics(robot) first\n');
+        fprintf('Aborting ...\n');
+        obj.status.exported_dynamics = false;
+        return;
+    end
+    
+    
+    eval_math('Needs["MathToCpp`"];');
+    
+    
+    % necessary settings
+    eval_math(['SetOptions[CseWriteCpp,',...
+        'ExportDirectory->',str2mathstr(export_path),',',...
+        'Namespace->',str2mathstr(obj.name),',',...
+        'SubstitutionRules->GetStateSubs[]];']);
+    eval_math('nDof=First@GetnDof[]');
+    
+    assert(obj.n_dofs == math('math2matlab','{{nDof}}'), ...
+        'The total number of DoF does not match.');
+    
+    
+    if exist(fullfile(export_path,'pe_com_vec.cc'),'file')
+        fprintf('''pe_com_vec.cc'' already exists in %s \n', export_path);
+        fprintf('Do you wish to overwrite the existing file?  ');
+        clear y;
+        y = input ('Hit enter to continue (or "n" to quit): ', 's');
         
-        
-        % necessary settings
-        math(['SetOptions[CseWriteCpp,',...
-            'ExportDirectory->',str2math(export_path),',',...
-            'Namespace->',str2math(obj.name),',',...
-            'SubstitutionRules->GetStateSubs[]];']);
-        math('nDof=First@GetnDof[]');
-        
-        assert(obj.n_dofs == math('math2matlab','{{nDof}}'), ...
-            'The total number of DoF does not match.');
-        % export compiled symbolic functions
-        
-        math('CseWriteCpp["pe_com_vec",{pcom},ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]');
-        
-        math('CseWriteCpp["Je_com_mat",{Jcom},ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]');
-        
-        math('CseWriteCpp["dJe_com_mat",{dJcom},ArgumentLists->{q,dq},ArgumentDimensions->{{nDof,1},{nDof,1}}]');
-        
-        if do_build
-            build_mex(export_path,{'pe_com_vec','Je_com_mat','dJe_com_mat'});
+        if (isempty (y))
+            y = 'y' ;
         end
-        status = true;
+        
+        if ~ (y (1) ~= 'n')
+            fprintf('Aborting ...');
+        else
+            eval_math('CseWriteCpp["pe_com_vec",{pcom},ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]');
+        end
+    else
+        eval_math('CseWriteCpp["pe_com_vec",{pcom},ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]');
+    end
+    % export compiled symbolic functions
+    if exist(fullfile(export_path,'Je_com_mat.cc'),'file')
+        fprintf('''Je_com_mat.cc'' already exists in %s \n', export_path);
+        fprintf('Do you wish to overwrite the existing file?  ');
+        clear y;
+        y = input ('Hit enter to continue (or "n" to quit): ', 's');
+        
+        if (isempty (y))
+            y = 'y' ;
+        end
+        
+        if ~ (y (1) ~= 'n')
+            fprintf('Aborting ...');
+        else
+            eval_math('CseWriteCpp["Je_com_mat",{Jcom},ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]');
+        end
+    else
+        eval_math('CseWriteCpp["Je_com_mat",{Jcom},ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]');
+    end
+    
+    
+     % export compiled symbolic functions
+    if exist(fullfile(export_path,'dJe_com_mat.cc'),'file')
+        fprintf('''dJe_com_mat.cc'' already exists in %s \n', export_path);
+        fprintf('Do you wish to overwrite the existing file?  ');
+        clear y;
+        y = input ('Hit enter to continue (or "n" to quit): ', 's');
+        
+        if (isempty (y))
+            y = 'y' ;
+        end
+        
+        if ~ (y (1) ~= 'n')
+            fprintf('Aborting ...');
+        else
+            eval_math('CseWriteCpp["dJe_com_mat",{dJcom},ArgumentLists->{q,dq},ArgumentDimensions->{{nDof,1},{nDof,1}}]');
+        end
+    else
+        eval_math('CseWriteCpp["dJe_com_mat",{dJcom},ArgumentLists->{q,dq},ArgumentDimensions->{{nDof,1},{nDof,1}}]');
+    end
+    
+    
+    if do_build
+        build_mex(export_path,{'pe_com_vec','Je_com_mat','dJe_com_mat'});
     end
 end

@@ -16,8 +16,8 @@ function indices = getLinkIndices(obj, link_names)
         
         links_not_found = find(cellfun('isempty',indices_c), 1);
         
-        if isempty(links_not_found)
-           warning('the following links not exists.');
+        if ~isempty(links_not_found)
+           warning('the following link(s) not exist.');
            for k = 1:length(links_not_found)
                disp('%s, ',link_names{links_not_found(k)});
                indices_c(links_not_found(k)) = NaN;
@@ -28,6 +28,12 @@ function indices = getLinkIndices(obj, link_names)
     elseif ischar(link_names)
         % specified only one joint
         indices = str_index(all_link_name,link_names);
+        if ~isempty(indices)
+           warning('the following link not exists.');
+           disp('%s, ',link_names);
+           indices = NaN;
+           
+        end
     else
         error('please provide correct information (Link Name)');
     end

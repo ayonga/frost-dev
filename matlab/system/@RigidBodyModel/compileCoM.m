@@ -11,15 +11,24 @@ function obj = compileCoM(obj)
     %         y = 'y' ;
     %     end
     %     do_compile = (y (1) ~= 'n') ;
-    do_compile = true;
     
-    if do_compile
-        tic
-        
-        math('pcom=ComputeComPosition[];');
-        math('Jcom=ComputeKinJacobians[pcom];');
-        math('dJcom=D[Jcom,t];');
-        
-        toc
+    
+    flag = '$ModelInitialized';
+    
+    
+    if ~checkFlag(obj, flag)
+        fprintf('The robot model has NOT been initialized in Mathematica.\n');
+        fprintf('Please call initialize(robot) first\n');
+        fprintf('Aborting ...\n');
+        return;
     end
+    
+    
+    tic
+    
+    math('pcom=ComputeComPosition[];');
+    math('Jcom=ComputeKinJacobians[pcom];');
+    math('dJcom=D[Jcom,t];');
+    
+    toc
 end

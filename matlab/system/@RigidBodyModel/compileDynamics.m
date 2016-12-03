@@ -59,18 +59,18 @@ function obj = compileDynamics(obj)
     %{{name1,value1},{name2,value2},...,{nameN,valueN}}.
     disp('Compiling De_mat ...');
     tic
-    math('De=InertiaMatrix[];');
+    eval_math('De=InertiaMatrix[];');
     toc
     
     
     disp('Compiling Ce_mat ...');
     tic
-    math('Ce=InertiaToCoriolis[De];');
+    eval_math('Ce=InertiaToCoriolis[De];');
     toc
     
     disp('Compiling Ge_vec ...');
     tic
-    math('Ge=GravityVector[];');
+    eval_math('Ge=GravityVector[];');
     toc
     
     
