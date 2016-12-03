@@ -69,38 +69,38 @@ classdef KinematicOrientation < Kinematics
         end
         
         
-        function obj = setLinkFrame(obj, model, parent)
-            % Sets the fixed positionn
-            %
-            % Parameters:
-            %  model: the rigid body model @type RigidBodyModel
-            %  parent: the name of the parent link on which this fixed
-            %  position is rigidly attached @type char
-            
-            if ~isa(model,'RigidBodyModel')
-                error('Kinematics:invalidType',...
-                    'The model has to be an object of RigidBodyModel class.');
-            end
-            
-            valid_links = {model.links.name};
-            if any(validatestring(parent,valid_links))
-                obj.parent = parent;
-            end
-            
-        end
-        
-        
-        function obj = setDirection(obj, axis)
-            % Set the direction of the orientation
-            %
-            % Parameters:
-            %  axis: one of the (x,y,z) axis @type char
-            
-            valid_axis = {'x','y','z'};
-            if any(validatestring(axis,valid_axis))
-                obj.axis = axis;
-            end
-        end
+        % function obj = setLinkFrame(obj, model, parent)
+        %     % Sets the fixed positionn
+        %     %
+        %     % Parameters:
+        %     %  model: the rigid body model @type RigidBodyModel
+        %     %  parent: the name of the parent link on which this fixed
+        %     %  position is rigidly attached @type char
+        %
+        %     if ~isa(model,'RigidBodyModel')
+        %         error('Kinematics:invalidType',...
+        %             'The model has to be an object of RigidBodyModel class.');
+        %     end
+        %
+        %     valid_links = {model.links.name};
+        %     if any(validatestring(parent,valid_links))
+        %         obj.parent = parent;
+        %     end
+        %
+        % end
+        %
+        %
+        % function obj = setDirection(obj, axis)
+        %     % Set the direction of the orientation
+        %     %
+        %     % Parameters:
+        %     %  axis: one of the (x,y,z) axis @type char
+        %
+        %     valid_axis = {'x','y','z'};
+        %     if any(validatestring(axis,valid_axis))
+        %         obj.axis = axis;
+        %     end
+        % end
         
     end % methods
     
