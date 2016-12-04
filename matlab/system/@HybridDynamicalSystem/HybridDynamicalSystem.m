@@ -49,7 +49,7 @@ classdef HybridDynamicalSystem
         % Next step, separate them into multiple different classes
         % definition.
         %
-        % @type ContinuousDomain
+        % @type Domain
         domains
         
         guards
@@ -195,7 +195,7 @@ classdef HybridDynamicalSystem
             for i=1:nVertex
                 domain_name = vertices(i).domain;
                 % instantiated the hybrid domain first
-                new_domains{i} = ContinuousDomain(domain_name);
+                new_domains{i} = Domain(domain_name);
                 
                 % the domain configuration file full path name
                 domain_config_file = fullfile(obj.config_dir_prefix,'config','domain',...

@@ -27,9 +27,15 @@ classdef KinematicPosition < Kinematics
         
         % The (x,y,z)-axis index of the position
         %
-        % @type integer
+        % @type char
         axis
+        
+        % The indices of the degrees of freedom
+        %
+        % @type integer        
+        c_index
     end % properties
+    
     
     
     methods
@@ -53,6 +59,8 @@ classdef KinematicPosition < Kinematics
             
             obj = obj@Kinematics(name, varargin{:});
             
+            % the dimension is always 1
+            obj.dimension = 1;
             
             if nargin > 1
                 % check valid model object
@@ -79,8 +87,9 @@ classdef KinematicPosition < Kinematics
                 
                 % set direction axis
                 valid_axis = {'x','y','z'};
-                axis = validatestring(axis,valid_axis);
-                obj.axis = find(strcmpi(axis, valid_axis));
+                obj.axis = validatestring(axis,valid_axis);
+                
+                obj.c_index = find(strcmpi(obj.axis, valid_axis));
             end
            
             
@@ -100,12 +109,20 @@ classdef KinematicPosition < Kinematics
             % create a cell as the input argument
             arg = {obj.parent,obj.offset};
             % command for rigid position
-            cmd = ['{ComputeCartesianPositions[',cell2tensor(arg),'][[1,',num2str(obj.axis),']]}'];
+            cmd = ['{ComputeSpatialPositions[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
         end
         
-        % use default function
-        % function cmd = getJacMathCommand(obj)
-        % end
+        % overload the Jacobian compilation command
+        function cmd = getJacMathCommand(obj)
+            % This function returns the Mathematica command to compile the
+            % symbolic expression for the kinematic constraint's Jacobian.
+            
+            % create a cell as the input argument
+            arg = {obj.parent,obj.offset};
+            % class specific command for computing rotational spatial
+            % Jacobian of an position
+            cmd = ['{ComputeSpatialJacobians[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
+        end
         
         % use default function
         % function cmd = getJacDotMathCommand(obj)

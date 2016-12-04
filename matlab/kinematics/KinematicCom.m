@@ -36,6 +36,10 @@ classdef KinematicCom < Kinematics
             
             obj = obj@Kinematics(name, varargin{:});
             
+            % the dimension is always 1
+            obj.dimension = 1;
+            
+            
             if nargin > 1
                 % set direction axis
                 valid_axis = {'x','y','z'};

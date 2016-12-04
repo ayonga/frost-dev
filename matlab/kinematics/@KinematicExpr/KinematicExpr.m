@@ -48,6 +48,10 @@ classdef KinematicExpr < Kinematics
             
             obj = obj@Kinematics(name, varargin{:});
             
+            % the dimension is always 1
+            obj.dimension = 1;
+            
+            
             if nargin > 1
             
                 % validate dependent arguments
@@ -56,6 +60,13 @@ classdef KinematicExpr < Kinematics
                 if any(cellfun(check_object,kins))
                     error('Kinematics:invalidObject', ...
                         'There exist non-Kinematics objects in the dependent variable list.');
+                end
+                
+                check_dimension = @(x) (x.dimension ~= 1);
+                if any(cellfun(check_dimension,kins))
+                    error('Kinematics:wrongDimension', ...
+                        ['The dependent kinematic variable must be a scalar function.',...
+                        'Use KinematicPosition or KinematicOrientation for positional variable instead.']);
                 end
                 
                 obj.kins = kins;

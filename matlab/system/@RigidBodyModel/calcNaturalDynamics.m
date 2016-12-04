@@ -1,16 +1,15 @@
-function [De, He] = calcNaturalDynamics(obj, x)
+function [De, He] = calcNaturalDynamics(obj, qe, dqe)
     % This function compute the natural unconstrained dynamics of the rigid
     % body model.
     %
     % Parameters:
-    %  x: the system states @type colvec
+    %  qe: the coordinate configuration @type colvec
+    %  dqe: the coordinate velocity @type colvec
     % Return values:
     %  De: the inertia matrix @type matrix
     %  He: the corilios and gravity term @type colvec
     
-    % Extract states to angles and velocities
-    qe  = x(obj.qe_indices);
-    dqe = x(obj.dqe_indices);
+    
         
 %     if obj.options.use_sva
 %         [De, He] = HandC(obj.sva, qe, dqe);

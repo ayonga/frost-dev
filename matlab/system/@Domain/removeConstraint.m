@@ -7,7 +7,7 @@ function obj = removeConstraint(obj, constr_list)
     %  removed @type cell
     
     if any(cellfun(@(x) ~isa(x,'Kinematics'),constr_list))
-        error('ContinuousDomain:invalidConstr', ...
+        error('Domain:invalidConstr', ...
             'There exist non-Kinematics objects in the list.');
     end
     

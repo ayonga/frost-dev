@@ -1,5 +1,5 @@
-classdef ContinuousDomain < handle
-    % ContinuousDomain defines an admissible continuous domain (or phase)
+classdef Domain < handle
+    % Domain defines an admissible continuous domain (or phase)
     % in the hybrid system model. The admissibility conditions are
     % determined by the constraints defined on the domain.
     % 
@@ -29,6 +29,10 @@ classdef ContinuousDomain < handle
         % @type char @default ''
         name
         
+        % Specific options for the domain
+        %
+        % @type struct
+        options
         
         %% holonomic constraints
         
@@ -66,11 +70,12 @@ classdef ContinuousDomain < handle
         funcs
         
        
+        %% actuation
         
-        % Specific options for the domain
+        % a map for robot actuation on the current domain
         %
-        % @type struct
-        options
+        % @type matrix
+        actuator_map
         
         
         
@@ -81,14 +86,13 @@ classdef ContinuousDomain < handle
     %% Public methods
     methods
         
-        function obj = ContinuousDomain(name)
-            % the default calss constructor
+        function obj = Domain(name, varargin)
+            % the calss constructor for Domain class
             %
             % Parameters:
             % name: the name of the domain @type char
+            % varargin: the class options 
             %
-            % Return values:
-            % obj: the class object
             
             if nargin > 0
                 if ischar(name)
@@ -109,6 +113,54 @@ classdef ContinuousDomain < handle
             
             % default options
             obj.options = struct(); 
+            
+        end
+        
+        
+        function obj = addPointContact(obj, pos, varargin)
+            % Add a kinematic point contact
+            % 
+            % We use the terminology from Matt Mason's (CMU) lecture note. 
+            % see 
+            % http://www.cs.rpi.edu/~trink/Courses/RobotManipulation/lectures/lecture11.pdf
+            %
+            % A point contact with friction has 3 rotational degrees of
+            % freedom. A point contact without friction has 
+            %
+            % Parameters:
+            % pos: the contact point position of type struct
+            % varargin: optional conditions. In detail
+            % with_friction: true if there are frictions at the contact 
+            % @type logicial @default true
+            
+            % parse variable input options
+            p = inputParser;
+            p.addParameter('with_friction', true, @islogical);            
+            parse(p,varargin{:});
+            
+            with_friction = p.Results.with_friction;
+            
+            
+            
+            
+        end
+        
+        function obj = addLineContact(obj, pos, varargin)
+            % Add a kinematic line contact
+            % 
+            % We use the terminology from Matt Mason's (CMU) lecture note. 
+            % see 
+            % http://www.cs.rpi.edu/~trink/Courses/RobotManipulation/lectures/lecture11.pdf
+            
+            
+        end
+        
+        function obj = addPlanarContact(obj, pos, varargin)
+            % Add a kinematic planar contact
+            % 
+            % We use the terminology from Matt Mason's (CMU) lecture note. 
+            % see 
+            % http://www.cs.rpi.edu/~trink/Courses/RobotManipulation/lectures/lecture11.pdf
         end
         
         
@@ -117,7 +169,7 @@ classdef ContinuousDomain < handle
     %% Methods defined seperate files
     methods
         
-        obj = setFunctionName(obj, fields, values);
+        obj = setAcutation(obj, model, actuated_joints);
         
         obj = addConstraint(obj, constr_list);
         

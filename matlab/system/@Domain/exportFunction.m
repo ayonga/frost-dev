@@ -18,6 +18,10 @@ function obj = exportFunction(obj, export_path, do_build, field_names)
         return;
     end
     
+    if nargin < 3
+        do_build = true;
+    end
+    
     if nargin < 4
         %  If fields are not specified explicitly, set it to all
         %  fields of 'funcs'

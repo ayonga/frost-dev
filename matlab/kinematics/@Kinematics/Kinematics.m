@@ -1,5 +1,5 @@
 classdef Kinematics < handle
-    % Defines a scalar kinematic function of a rigid body model
+    % Defines a kinematic function of a rigid body model
     % 
     %
     % @author ayonga @date 2016-09-23
@@ -60,6 +60,11 @@ classdef Kinematics < handle
         % @type char
         name
         
+        
+        % The dimensiona of the kinematic function
+        %
+        % @type integer
+        dimension
         
         % A set of options for the kinematic functions.
         %

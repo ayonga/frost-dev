@@ -339,15 +339,16 @@ classdef RigidBodyModel < handle
                         'The planar type of model could not use floating type of base coordinates.\n');
                 end
                 
-                if ~isfield(base_dofs, 'axis')
-                    base_dofs.axis = defaultAxes(base_dofs.type);
-                elseif isempty(base_dofs.axis)
-                    base_dofs.axis = defaultAxes(base_dofs.type);
-                else
-                    fprintf('Non-default axes specified, it could cause unexpected issues.\n');
-                    fprintf('Use it with extreme care!\n');
-                    %                     base_dofs.axis = defaultAxes(base_dofs.type);
-                end
+                base_dofs.axis = defaultAxes(base_dofs.type);
+%                 if ~isfield(base_dofs, 'axis')
+%                     base_dofs.axis = defaultAxes(base_dofs.type);
+%                 elseif isempty(base_dofs.axis)
+%                     base_dofs.axis = defaultAxes(base_dofs.type);
+%                 else
+%                     warning('Non-default axes specified, it could cause unexpected issues.\n');
+%                     warning('Changing it to the default axis!\n');
+%                     base_dofs.axis = defaultAxes(base_dofs.type);
+%                 end
                 
                 obj.n_base_dofs = numel(base_dofs.axis);
                 

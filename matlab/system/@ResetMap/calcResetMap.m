@@ -21,7 +21,7 @@ function [x_post,ImpF] = calcResetMap(obj, model, tar_domain, x_pre)
     % compute the impact map if the domain transition involves a rigid impact
     if obj.options.apply_rigid_impact
         % jacobian of impact constraints
-        Je  = tar_domain.hol_constr_jac(x_pre);
+        Je  = feval(tar_domain.funcs.hol_constr,qe_pre);
         
         % inertia matrix
         De = calcNaturalDynamics(model,x);

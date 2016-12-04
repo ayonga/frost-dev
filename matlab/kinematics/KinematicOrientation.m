@@ -19,11 +19,21 @@ classdef KinematicOrientation < Kinematics
         % @type char
         parent
         
-        % The (x,y,z)-axis index of the position
+        % The (x,y,z)-axis of the rotation
         %
-        % @type integer
+        % @type char
         axis
+        
+        
+        % The indices of the degrees of freedom
+        %
+        % @type rowvec
+        
+        c_index
     end % properties
+    
+    
+    
     
     
     methods
@@ -43,6 +53,8 @@ classdef KinematicOrientation < Kinematics
             
             obj = obj@Kinematics(name, varargin{:});
             
+            % the dimension is always 1
+            obj.dimension = 1;
             
             
             if nargin > 1
@@ -60,47 +72,15 @@ classdef KinematicOrientation < Kinematics
                 
                 % set direction axis
                 valid_axis = {'x','y','z'};
-                axis = validatestring(axis,valid_axis);
-                obj.axis = find(strcmpi(axis, valid_axis));
-            
+                obj.axis = validatestring(axis,valid_axis);
+                obj.c_index = 3 + find(strcmpi(obj.axis, valid_axis));
             end
             
             
         end
         
         
-        % function obj = setLinkFrame(obj, model, parent)
-        %     % Sets the fixed positionn
-        %     %
-        %     % Parameters:
-        %     %  model: the rigid body model @type RigidBodyModel
-        %     %  parent: the name of the parent link on which this fixed
-        %     %  position is rigidly attached @type char
-        %
-        %     if ~isa(model,'RigidBodyModel')
-        %         error('Kinematics:invalidType',...
-        %             'The model has to be an object of RigidBodyModel class.');
-        %     end
-        %
-        %     valid_links = {model.links.name};
-        %     if any(validatestring(parent,valid_links))
-        %         obj.parent = parent;
-        %     end
-        %
-        % end
-        %
-        %
-        % function obj = setDirection(obj, axis)
-        %     % Set the direction of the orientation
-        %     %
-        %     % Parameters:
-        %     %  axis: one of the (x,y,z) axis @type char
-        %
-        %     valid_axis = {'x','y','z'};
-        %     if any(validatestring(axis,valid_axis))
-        %         obj.axis = axis;
-        %     end
-        % end
+        
         
     end % methods
     
@@ -114,7 +94,7 @@ classdef KinematicOrientation < Kinematics
             % create a cell as the input argument, use zero offsets
             arg = {obj.parent,[0,0,0]};
             % class specific command for computing orientation based kinematic constraint
-            cmd = ['{ComputeEulerAngles[',cell2tensor(arg),'][[1,',num2str(obj.axis),']]}'];
+            cmd = ['{ComputeSpatialPositions[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
         end
         
         % overload the Jacobian compilation command
@@ -125,7 +105,7 @@ classdef KinematicOrientation < Kinematics
             % create a cell as the input argument, use zero offsets
             arg = {obj.parent,[0,0,0]};
             % class specific command for computing rotational spatial Jacobian of an orientation
-            cmd = ['{ComputeRotationalJacobians[',cell2tensor(arg),'][[1,',num2str(obj.axis),']]}'];
+            cmd = ['{ComputeSpatialJacobians[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
         end
         
         % use default function

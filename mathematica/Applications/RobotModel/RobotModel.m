@@ -59,9 +59,7 @@ ComputeBodyJacobians::usage =
 Compute the body jacobian of the point that is rigidly attached to the link with a given offset."; 
 
 
-ComputeCartesianPositions::usage = 
-	"ComputeCartesianPositions[{link1,offset1},...,{link$n,offset$n}] computes \
-the Cartesian positions specified by the links and relative offset vectors";
+
 
 ComputeKinJacobians::usage=
 	"ComputeKinJacobians[pos] computes the Jacobian of the input expression pos w.r.t. qe. \
@@ -77,13 +75,8 @@ ComputeSpatialJacobians::usage =
 the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Euler \
 angles specified by the links and relative offset vectors";
 
-ComputeEulerAngles::usage = 
-	"ComputeEulerAngles[{link1,offset1},...,{link$n,offset$n}] computes \
-the rotation (Euler) angles of links with respect to the world frame.";
 
-ComputeRotationalJacobians::usage = 
-	"ComputeRotationalJacobians[{link1,offset1},...,{link$n,offset$n}] computes \
-the rotational Jacobian of the links with respoect to the world frame.";
+
 
 (*GetJointIndex::usage = 
 	"GetJointIndex[name] returns the position index of the jointName in the list of joints.";*)
@@ -452,7 +445,7 @@ ComputeBodyJacobians[args__] :=
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			linkName = argList[[i,1]];  
 			(* the relative argList[[i,2]] of the point from the origin of the link (in the link coordinates). *)
-			offset   = argList[[i,2]];
+			offset   = Flatten@argList[[i,2]];
 			
 			(* take the index of parent joint of the rigid link *)
 			jIndex   = First@$pIndices[linkName];
@@ -502,20 +495,29 @@ ToEulerAngles[gst_] :=
 		Return[{roll,pitch,yaw}];
 	];
 	
-ComputeEulerAngles[args__] :=
-	Block[{gst, rot},
+
+
+ComputeKinJacobians[pos_] :=
+	Block[{Jac},
+		
+		Jac = Map[D[Flatten[#],{Flatten[$Qe],1}]&, pos];
+		
+		Return[Jac];
+	];
+
+ComputeSpatialPositions[args__] :=
+	Block[{pos, gst},
 		
 		(* first compute the forward kinematics *)
 		gst = ComputeForwardKinematics[args];
 		
-		(* compute rigid euler angles *)
-		rot = Map[ToEulerAngles[#]&,gst];
+		(* compute rigid positions *)
+		pos = Map[Join[RigidPosition[#],ToEulerAngles[#]]&,gst];
 		
-		Return[rot];
-		
+		Return[pos];
 	];
-
-ComputeRotationalJacobians[args__] :=
+	
+ComputeSpatialJacobians[args__] :=
 	Block[{pos, argList = {args}, np, i, Je, 
 		linkName, offset, jIndex, Jz, gs0, curIndices},
 		(* check if the robot model is successfully initialized *)
@@ -523,7 +525,6 @@ ComputeRotationalJacobians[args__] :=
 			Message[RobotModel::init];
 			Abort[];
 		];		
-				
 		
 		(* extract the number of points to be calculated *)
 		np = Length[argList];
@@ -548,78 +549,21 @@ ComputeRotationalJacobians[args__] :=
 			If[jIndex == 0, (* the link is the base link *)
 				(* assign the dependent coordinate indices *)
 				curIndices = Range[$nBase];
-				(* compute body jacobian *)
+				(* compute spatial jacobian *)
 				Jz[[;;,curIndices]]=SpatialJacobian[Sequence@@$bChains, gs0];
 				, 
 				(* otherwise *)
 				(* assign the dependent coordinate indices *)
 				curIndices = Join[Range[$nBase],$nBase+$chainIndices[[jIndex]]];		
-				(* compute body jacobian *)		
+				(* compute spatial jacobian *)		
 				Jz[[;;,curIndices]]=SpatialJacobian[Sequence@@$bChains, Sequence@@$jChains[[jIndex]], gs0];
 			];
 					
-			Je[i] = Jz[[4;;6,;;]]; (* take only the orientation portions of spatial jacobian*)
+			Je[i] = Jz; (* take only the orientation portions of spatial jacobian*)
 			,
 			{i,np}
 		];
 		Return[Table[Je[i],{i,1,np}]];	
-	];
-
-
-
-
-
-ComputeCartesianPositions[args__] :=
-	Block[{pos, gst},
-		
-		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args];
-		
-		(* compute rigid positions *)
-		pos = Map[RigidPosition[#]&,gst];
-		
-		Return[pos];
-	];
-
-ComputeKinJacobians[pos_] :=
-	Block[{Jac},
-		
-		Jac = Map[D[Flatten[#],{Flatten[$Qe],1}]&, pos];
-		
-		Return[Jac];
-	];
-
-ComputeSpatialPositions[args__] :=
-	Block[{pos, gst},
-		
-		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args];
-		
-		(* compute rigid positions *)
-		pos = Map[Join[RigidPosition[#],ToEulerAngles[#]]&,gst];
-		
-		Return[pos];
-	];
-	
-ComputeSpatialJacobians[args__] :=
-	Block[{pos, Je1, Je2, i, np = Length[{args}]},
-		(* check if the robot model is successfully initialized *)
-		If[EmptyQ[$robotJoints] || SameQ[$robotJoints,None],
-			Message[RobotModel::init];
-			Abort[];
-		];		
-		
-		(* compute the position portion of spatial Jacobian directly by 
-		taking the partial derivates of the rigid positions*)
-		pos = ComputeCartesianPositions[args];
-		
-		Je1 =ComputeKinJacobians[pos];
-		
-		
-		Je2 = ComputeRotationalJacobians[args];
-		
-		Return[Join[Je1,Je2,2]];
-		(*Return[Table[Join[Je1[[i]],Je2[[i]]],{i,1,np}]];*)	
 	];	
 	
 ComputeForwardKinematics[args__] :=
