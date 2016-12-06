@@ -331,7 +331,7 @@ PotentialEnergy[] :=
 		links = Map[{#["name"], GetPosition[#]} &, $robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeCartesianPositions[Sequence@@links];
+		linkPos = ComputeRigidPositions[Sequence@@links];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, $robotLinks];
@@ -405,7 +405,7 @@ ComputeComPosition[] :=
 		links = Map[{#["name"], GetPosition[#]} &, $robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeCartesianPositions[Sequence@@links];
+		linkPos = ComputeRigidPositions[Sequence@@links];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, $robotLinks];
@@ -503,6 +503,18 @@ ComputeKinJacobians[pos_] :=
 		Jac = Map[D[Flatten[#],{Flatten[$Qe],1}]&, pos];
 		
 		Return[Jac];
+	];
+	
+ComputeRigidPositions[args__] :=
+	Block[{pos, gst},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		
+		(* compute rigid positions *)
+		pos = Map[RigidPosition[#]&,gst];
+		
+		Return[pos];
 	];
 
 ComputeSpatialPositions[args__] :=
