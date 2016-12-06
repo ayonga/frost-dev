@@ -18,6 +18,7 @@ classdef Domain < handle
     % http://www.opensource.org/licenses/bsd-license.php
     
     
+    
     %% Protected properties
     properties (SetAccess=private, GetAccess=public)
         
@@ -27,12 +28,12 @@ classdef Domain < handle
         % identification
         %
         % @type char @default ''
-        name
+        Name
         
         % Specific options for the domain
         %
         % @type struct
-        options
+        Options
         
         %% holonomic constraints
         
@@ -40,18 +41,13 @@ classdef Domain < handle
         % Kinematics classes
         %
         % @type cell
-        hol_constr
+        HolonomicConstraints
         
-        % a cell string of holonomic constraint names defined on the domain
+        %% unilateral constraints 
+        % forces, distance
         %
-        % @type cellstr
-        hol_constr_names
-        
-        % the number of holonomic constraints
-        %
-        % @type integer
-        n_hol_constr
-        
+        % @type table
+        UnilateralConditions
         
         
         % a structure of function names defined for the domain. Each field
@@ -67,7 +63,7 @@ classdef Domain < handle
         %   jacobian matrix of holonomic constraints @type char
         %
         % @type struct
-        funcs
+        Funcs
         
        
         %% actuation
@@ -75,7 +71,7 @@ classdef Domain < handle
         % a map for robot actuation on the current domain
         %
         % @type matrix
-        actuator_map
+        ActuationMap
         
         
         
@@ -94,74 +90,29 @@ classdef Domain < handle
             % varargin: the class options 
             %
             
-            if nargin > 0
-                if ischar(name)
-                    obj.name = name;
-                else
-                    warning('The domain name must be a string.');
-                end
+            
+            if ischar(name)
+                obj.Name = name;
+                % default names for functions
+                obj.Funcs = struct();
+                obj.Funcs.Kin = ['h_',obj.Name];
+                obj.Funcs.Jac = ['Jh_',obj.Name];
+                obj.Funcs.JacDot = ['dJh_',obj.Name];
+            else
+                error('The domain name must be a string.');
             end
             
             
-            obj.hol_constr = {};
             
-            % default names for functions            
-            obj.funcs = struct();
-            obj.funcs.hol_constr = ['hol_',obj.name];
-            obj.funcs.jac_hol_constr = ['jac_hol_',obj.name];
-            obj.funcs.jacdot_hol_constr = ['jacdot_hol_',obj.name];
-            
+            obj.HolonomicConstraints = {};
             % default options
-            obj.options = struct(); 
+            obj.Options = struct(); 
             
+            %             obj.options = set_options(obj.options, varargin{:});
         end
         
         
-        function obj = addPointContact(obj, pos, varargin)
-            % Add a kinematic point contact
-            % 
-            % We use the terminology from Matt Mason's (CMU) lecture note. 
-            % see 
-            % http://www.cs.rpi.edu/~trink/Courses/RobotManipulation/lectures/lecture11.pdf
-            %
-            % A point contact with friction has 3 rotational degrees of
-            % freedom. A point contact without friction has 
-            %
-            % Parameters:
-            % pos: the contact point position of type struct
-            % varargin: optional conditions. In detail
-            % with_friction: true if there are frictions at the contact 
-            % @type logicial @default true
-            
-            % parse variable input options
-            p = inputParser;
-            p.addParameter('with_friction', true, @islogical);            
-            parse(p,varargin{:});
-            
-            with_friction = p.Results.with_friction;
-            
-            
-            
-            
-        end
         
-        function obj = addLineContact(obj, pos, varargin)
-            % Add a kinematic line contact
-            % 
-            % We use the terminology from Matt Mason's (CMU) lecture note. 
-            % see 
-            % http://www.cs.rpi.edu/~trink/Courses/RobotManipulation/lectures/lecture11.pdf
-            
-            
-        end
-        
-        function obj = addPlanarContact(obj, pos, varargin)
-            % Add a kinematic planar contact
-            % 
-            % We use the terminology from Matt Mason's (CMU) lecture note. 
-            % see 
-            % http://www.cs.rpi.edu/~trink/Courses/RobotManipulation/lectures/lecture11.pdf
-        end
         
         
     end % public methods
@@ -171,20 +122,26 @@ classdef Domain < handle
         
         obj = setAcutation(obj, model, actuated_joints);
         
-        obj = addConstraint(obj, constr_list);
         
-        obj = removeConstraint(obj, constr_list);
+        obj = addHolonomicConstraint(obj, constr_list);
+        
+        obj = addUnilateralConstraint(obj, constr_list);
         
         obj = compileFunction(obj, model, field_names, varargin);
                 
         obj = exportFunction(obj, export_path, do_build, field_names);
         
-        [hol, Jhol, dJhol] = calcHolonomicConstraint(obj, q, dq);
+        
     end
     
     
     properties (Dependent)
        
+        % the total dimension of holonomic constraints
+        %
+        % @type integer
+        dim_hol_constr
+        
         % A actual symbol that represents the symbolic expression of the
         % kinematic constraint in Mathematica.
         %
@@ -204,7 +161,12 @@ classdef Domain < handle
         hol_jacdot_symbol
     end % dependent properties
     
+    
     methods
+        function dim = get.dim_hol_constr(obj)
+            % the Get function of property ''dim_hol_constr''
+            dim = sum(cellfun(@(x)x.dimension,obj.hol_constr));
+        end
         function symbol = get.hol_symbol(obj)
             % The Get function of the property 'hol_symbol'
             symbol = ['$h["',obj.funcs.hol_constr,'"]'];

@@ -1,19 +1,20 @@
-function [Fe] = calcConstraintForces(obj, model, qe, dqe, u, De, He)
+function [Fe] = calcConstraintForces(obj, varargin)
     % Calculates the constraints forces exert on the kinematic constraints
     % of the rigid body model.
     %
     % Use one of the following two syntax:
     % @verbitam
-    % Fe = calcConstraintForces(obj, model, qe, dqe)
+    % Fe = calcConstraintForces(obj, model, qe, dqe, u)
     % @endverbatim
     % or 
     % @verbitam
-    % Fe = calcConstraintForces(obj, model, qe, dqe, De, He)
+    % Fe = calcConstraintForces(obj, De, He, Je, Jedot, Be, dqe, u)
     % @endverbatim    
     % The latter option save time if the natural dynamics 
     % has been already computed and input as argumets.
     %
     % Parameters:
+    %  varargin: variable input arguments. They could be
     %  model: a rigid body model of type RigidBodyModel
     %  qe: the coordinate configuration `q` @type colvec
     %  dqe: the coordinate velocity `\dot{q}` @type colvec
@@ -27,22 +28,30 @@ function [Fe] = calcConstraintForces(obj, model, qe, dqe, u, De, He)
     % Return values:
     %  Fe: the external constraint forces `Fe(q,\dot{q},u)` @type colvec
     
-    % compute naturual dynamics
     
-    if nargin < 6
-        [De, He] = calcNaturalDynamics(model, qe, dqe);
+    
+    switch nargin
+        case 5 % the first case
+            [model,qe,dqe,u] = deal(varargin{:});
+            % compute naturual dynamics
+            [De, He] = calcNaturalDynamics(model, qe, dqe);
+            
+            % Calculate holonomic constraints
+            Je    = feval(obj.funcs.hol_constr, qe);
+            Jedot = feval(obj.funcs.jac_hol_constr, {qe,dqe});
+            
+            
+            Be    = obj.actuator_map;
+        case 8
+            
+            [De, He, Je, Jedot, Be, dqe, u] = deal(varargin{:});
+            
+            
+            
+            
     end
     
-    % Calculate holonomic constraints
-    Je    = feval(obj.funcs.hol_constr, qe);
-    Jedot = feval(obj.funcs.jac_hol_constr, {qe,dqe});
-    
-    
-    Be    = obj.actuator_map;
-    
     XiInv = Je * (De \ transpose(Je));
-    
-    
     % Calculate constrained forces
     Fe = -XiInv \ (Jedot * dqe + Je * (De \ (Be * u - He)));
 end

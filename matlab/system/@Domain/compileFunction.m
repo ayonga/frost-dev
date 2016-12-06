@@ -1,4 +1,4 @@
-function obj = compileFunction(obj, model, field_names, varargin)
+function obj = compileFunction(obj, model, varargin)
     % Compiles the symbolic expression of functions related to the
     % class in Mathematica
     %
@@ -11,30 +11,21 @@ function obj = compileFunction(obj, model, field_names, varargin)
     %
     % See also: Kinematics.compileExpression
     
-    if nargin < 3
-        %  If fields are not specified explicitly, set it to all
-        %  fields of 'funcs'
-        field_names = fields(obj.funcs);
-    end
     
-    if isempty(field_names) 
-        % if the field name is empty, set it all fields of ''funcs''
-        field_names = fields(obj.funcs);
-    end
-    
-    if ischar(field_names)
-        % if given as a string of single function, then converts to
-        % a cell first.
-        field_names = {field_names};
-    end
-    
-    n_field = length(field_names);
     
     
     
     % first compile all kinematics constraints defined for the
     % domain to create symbolic expressions
-    cellfun(@(x)compileExpression(x, model, varargin{:}), obj.hol_constr);
+    cellfun(@(x)compileExpression(x, model, varargin{:}), obj.HolonomicConstraints);
+    
+    
+    % get the symbol list for the kinematic functions
+    symbols = cellfun(@(x) x.symbol,obj.HolonomicConstraints,'UniformOutput',false);
+    
+    % Stack all kinematic constraints into a vector
+    eval_math([obj.hol_symbol,'=Join[Sequence@@',...
+        cell2tensor(symbols,'ConvertString',false),'];']);
     
     for i=1:n_field
         field = field_names{i};
@@ -45,8 +36,8 @@ function obj = compileFunction(obj, model, field_names, varargin)
                 symbols = cellfun(@(x) x.symbol,obj.hol_constr,'UniformOutput',false);
                 
                 % Stack all kinematic constraints into a vector
-                eval_math([obj.hol_symbol,'=Table[expr[[1]], {expr, ',...
-                    cell2tensor(symbols,'ConvertString',false),'}];']);
+                eval_math([obj.hol_symbol,'=Join[Sequence@@',...
+                    cell2tensor(symbols,'ConvertString',false),'];']);
                 
                 % % check the size of the symbolic expression
                 % hol_constr_size = math('math2matlab',['Dimensions[',obj.hol_symbol,']']);
@@ -62,8 +53,8 @@ function obj = compileFunction(obj, model, field_names, varargin)
                     obj.hol_constr,'UniformOutput',false);
                 
                 % Stack all kinematic constraints into a vector
-                eval_math([obj.hol_jac_symbol,'=Table[expr[[1,;;]], {expr, ',...
-                    cell2tensor(jac_symbols,'ConvertString',false),'}];']);
+                eval_math([obj.hol_jac_symbol,'=Join[Sequence@@',...
+                    cell2tensor(jac_symbols,'ConvertString',false),'];']);
             case 'jacdot_hol_constr'
                 % get the symbol list for time derivative of the
                 % Jacobian of kinematic functions
@@ -71,8 +62,8 @@ function obj = compileFunction(obj, model, field_names, varargin)
                     obj.hol_constr,'UniformOutput',false);
                 
                 % Stack all kinematic constraints into a vector
-                eval_math([obj.hol_jacdot_symbol,'=Table[expr[[1,;;]], {expr, ',...
-                    cell2tensor(jacdot_symbols,'ConvertString',false),'}];']);
+                eval_math([obj.hol_jacdot_symbol,'=Join[Sequence@@',...
+                    cell2tensor(jacdot_symbols,'ConvertString',false),'];']);
             otherwise
                 warning(['The ''field_names'' must be a string or cell strings',...
                     'that match one of these strings:\n',...
