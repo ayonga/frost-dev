@@ -41,10 +41,9 @@ function status = exportCoM(obj, export_path, do_build)
     end
     
     if ~ check_var_exist({'pcom','Jcom','dJcom'})
-        fprintf('The robot dynamics has not been compiled in Mathematica.\n');
-        fprintf('Please call compileDynamics(robot) first\n');
+        fprintf('The ceter of mass has not been compiled in Mathematica.\n');
+        fprintf('Please call compileCoM(robot) first\n');
         fprintf('Aborting ...\n');
-        obj.status.exported_dynamics = false;
         return;
     end
     

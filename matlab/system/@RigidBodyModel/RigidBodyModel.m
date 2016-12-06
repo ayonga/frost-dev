@@ -1,4 +1,4 @@
-classdef RigidBodyModel < handle
+classdef RigidBodyModel
     % A class with basic model descriptions and functionalities
     % of the multi-link rigid-body robot platform.
     %
