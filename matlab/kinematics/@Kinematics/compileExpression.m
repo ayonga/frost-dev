@@ -21,33 +21,33 @@ function status = compileExpression(obj, model, re_load)
         return;
     end
     
-    if ~ check_var_exist({obj.symbol,obj.jac_symbol,obj.jacdot_symbol}) || re_load
+    if ~ check_var_exist(struct2cell(obj.Symbols)) || re_load
         % compile symbolic expressions
         
         kin_cmd_str = getKinMathCommand(obj);
         jac_cmd_str = getJacMathCommand(obj);
         jacdot_cmd_str = getJacDotMathCommand(obj);
-        if obj.options.linearize
+        if obj.Options.Linearize
             
             % first obtain the symbolic expression for the
             % kinematic function
-            eval_math([obj.symbol,'=',kin_cmd_str,';']);
+            eval_math([obj.Symbols.Kin,'=',kin_cmd_str,';']);
             
             % get the substitution rule for q = 0
             eval_math('{qe0subs,dqe0subs} = GetZeroStateSubs[];');
             
             % compute the Jacobian at q = 0
-            eval_math([obj.jac_symbol,'=',jac_cmd_str,'/.qe0subs;']);
+            eval_math([obj.Symbols.Jac,'=',jac_cmd_str,'/.qe0subs;']);
             
             % re-compute the linear function
             eval_math('Qe = GetQe[];');
-            eval_math([obj.symbol,'=Flatten[',obj.jac_symbol,'.Qe];']);
+            eval_math([obj.Symbols.Kin,'=Flatten[',obj.Symbols.Jac,'.Qe];']);
             
-            eval_math([obj.jacdot_symbol,'=',jacdot_cmd_str,';']);
+            eval_math([obj.Symbols.JacDot,'=',jacdot_cmd_str,';']);
         else
-            eval_math([obj.symbol,'=',kin_cmd_str,';']);
-            eval_math([obj.jac_symbol,'=',jac_cmd_str,';']);
-            eval_math([obj.jacdot_symbol,'=',jacdot_cmd_str,';']);
+            eval_math([obj.Symbols.Kin,'=',kin_cmd_str,';']);
+            eval_math([obj.Symbols.Jac,'=',jac_cmd_str,';']);
+            eval_math([obj.Symbols.JacDot,'=',jacdot_cmd_str,';']);
         end
         
         

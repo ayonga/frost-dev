@@ -17,23 +17,23 @@ classdef KinematicPosition < Kinematics
         % The name of the rigid link on which the point is attached to
         %
         % @type char
-        parent
+        Parent
         
         % The 3-dimensional offset of the point in the body joint
         % coordinates that is rigidly attached to parent link
         %
         % @type rowvec
-        offset
+        Offset
         
         % The (x,y,z)-axis index of the position
         %
         % @type char
-        axis
+        Axis
         
         % The indices of the degrees of freedom
         %
         % @type integer        
-        c_index
+        cIndex
     end % properties
     
     
@@ -48,7 +48,7 @@ classdef KinematicPosition < Kinematics
             %  constraints in Mathematica @type char        
             %  model: the rigid body model @type RigidBodyModel
             %  parent: the name of the parent link on which this fixed
-            %  position is rigidly attached @type char                     %  
+            %  position is rigidly attached @type char                      
             %  offset: an offset of from the origin of the parent link
             %  frame @type rowvec @default [0,0,0]
             %  axis: one of the (x,y,z) axis @type char
@@ -60,7 +60,7 @@ classdef KinematicPosition < Kinematics
             obj = obj@Kinematics(name, varargin{:});
             
             % the dimension is always 1
-            obj.dimension = 1;
+            obj.Dimension = 1;
             
             if nargin > 1
                 % check valid model object
@@ -72,24 +72,24 @@ classdef KinematicPosition < Kinematics
                 end
                 
                 % assign the parent link name (case insensitive)
-                obj.parent  = validatestring(parent,valid_links);    
+                obj.Parent  = validatestring(parent,valid_links);    
                 
-                % set point offset
-                if isnumeric(offset) && length(offset)==3
-                    if size(offset,1) > 1 % column vector
-                        % convert to row vector
-                        obj.offset = offset';
-                    else
-                        obj.offset = offset;
-                    end                        
+                assert(isnumeric(offset) && length(offset)==3,...
+                    'The offset must be a 3-Dimensional vector.');
+                
+                if size(offset,1) > 1 % column vector
+                    % convert to row vector
+                    obj.Offset = offset';
+                else
+                    obj.Offset = offset;
                 end
                
                 
                 % set direction axis
                 valid_axis = {'x','y','z'};
-                obj.axis = validatestring(axis,valid_axis);
+                obj.Axis = validatestring(axis,valid_axis);
                 
-                obj.c_index = find(strcmpi(obj.axis, valid_axis));
+                obj.cIndex = find(strcmpi(obj.Axis, valid_axis));
             end
            
             
@@ -107,9 +107,9 @@ classdef KinematicPosition < Kinematics
             % symbolic expression for the kinematic constraint.
             
             % create a cell as the input argument
-            arg = {obj.parent,obj.offset};
+            arg = {obj.Parent,obj.Offset};
             % command for rigid position
-            cmd = ['{ComputeSpatialPositions[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
+            cmd = ['ComputeSpatialPositions[',cell2tensor(arg),'][[1,{',num2str(obj.cIndex),'}]]'];
         end
         
         % overload the Jacobian compilation command
@@ -118,10 +118,10 @@ classdef KinematicPosition < Kinematics
             % symbolic expression for the kinematic constraint's Jacobian.
             
             % create a cell as the input argument
-            arg = {obj.parent,obj.offset};
+            arg = {obj.Parent,obj.Offset};
             % class specific command for computing rotational spatial
             % Jacobian of an position
-            cmd = ['{ComputeSpatialJacobians[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
+            cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,{',num2str(obj.cIndex),'}]]'];
         end
         
         % use default function

@@ -17,32 +17,32 @@ classdef KinematicContact < Kinematics
         % attached to
         %
         % @type char
-        parent
+        Parent
         
         % The 3-dimensional offset of the contact point in the body
         % coordinate frame that is rigidly attached to parent link
         %
         % @type rowvec
-        offset
+        Offset
         
-        % The reference frame.
-        %
-        % It could be either ''body'' or ''spatial'', depends on in which
-        % reference frame the contact constraint is defined. If use
-        % ''body'' reference frame, then the contact constraint will be
-        % computed as the ''body'' coordinates of the parent link,
-        % otherwise if use ''spatial'' reference frame, it computes the
-        % contact in the world (inertial) frame.
-        %
-        % The reference frame only affects the way to compute the Jacobian
-        % of the contact constraint, and consequently will affects the
-        % direction of constraint wrenches. The position and the
-        % orientation (given as Euler angles of the parent link frame) of
-        % the contact point will always be represented in the world
-        % (inertial) frame.
-        %
-        % @type char
-        reference_frame
+        % % The reference frame.
+        % %
+        % % It could be either ''body'' or ''spatial'', depends on in which
+        % % reference frame the contact constraint is defined. If use
+        % % ''body'' reference frame, then the contact constraint will be
+        % % computed as the ''body'' coordinates of the parent link,
+        % % otherwise if use ''spatial'' reference frame, it computes the
+        % % contact in the world (inertial) frame.
+        % %
+        % % The reference frame only affects the way to compute the Jacobian
+        % % of the contact constraint, and consequently will affects the
+        % % direction of constraint wrenches. The position and the
+        % % orientation (given as Euler angles of the parent link frame) of
+        % % the contact point will always be represented in the world
+        % % (inertial) frame.
+        % %
+        % % @type char
+        % reference_frame
         
         % The normal axis of the contact given in the reference frame.
         %
@@ -54,11 +54,11 @@ classdef KinematicContact < Kinematics
         % See also: KinematicPointContactWithoutFriction.reference_frame
         %
         % @type char
-        normal_axis
+        NormalAxis
         
         
-        % The tangential axis of the contact given in the reference frame,
-        % if the contact type is Line contacts
+        % The tangent axis of the contact given in the reference frame
+        % for Line contact
         %
         % It must be along one of the (x,y,z) axes. If the actual normal
         % axis is none of the three Cartesian axes, it would be better to
@@ -68,7 +68,7 @@ classdef KinematicContact < Kinematics
         % See also: KinematicPointContactWithoutFriction.reference_frame
         %
         % @type char
-        tangential_axis
+        TangentAxis
         
         
         % The contact type
@@ -81,79 +81,28 @@ classdef KinematicContact < Kinematics
         % translational degrees of freedom along the plane normal to the normal_axis.
         %
         % @type char
-        contact_type
+        ContactType
         
         % The indices of constrained degrees of freedom
         %
         % @type rowvec
         
-        c_indices
+        cIndex
     end % properties
     
    
-    
-    methods
-        function c_indices = getDofIndices(obj, model)
-            % The Get function for ''c_indices'' property
-            %
-            
-            % all potential degrees of freedom
-            dof_indices = [1, 2, 3, 4, 5, 6];
-            
-            % if the model is planar, then remove translation dof along y-axis
-            % (2) and rotation along x-axis(4) and z-axis(6).
-            if strcmp(model.type, 'planar')
-                dof_indices([2,4,6]) = 0;
-            end
-            
-            % remove the normal axis translation
-            dof_indices(strcmp(obj.normal_axis,{'x','y','z'})) = 0;
-                
-            % if the contact is with friction, remove all three
-            % translantional degrees of freedom
-            if regexp(obj.contact_type,'\w*WithFriction$')
-                dof_indices(1:3) = 0;
-            end
-                
-            % if the contact is a line contact with friction, keep only the
-            % tangential axis
-            if strcmp(obj.contact_type,'LineContactWithFriction')
-                rot_indices = dof_indices(4:6);
-                rot_indices(~strcmp(obj.tangential_axis,{'x','y','z'})) = 0;
-                dof_indices(4:6) = rot_indices;
-            end
-            % if the contact is a line contact without friction, keep both
-            % the normal axis and tangential axis
-            if strcmp(obj.contact_type,'LineContactWithoutFriction')
-                rot_indices = dof_indices(4:6);
-                rot_indices(~(strcmp(obj.tangential_axis,{'x','y','z'}) + ...
-                   strcmp(obj.normal_axis,{'x','y','z'}))) = 0;
-                dof_indices(4:6) = rot_indices;
-            end
-            
-            % if the contact is a planar contact with friction, remove all three
-            % rotational degrees of freedom
-            if strcmp(obj.contact_type,'PlanarContactWithFriction')
-                dof_indices(4:6) = 0;
-            end
-            
-            % if the contact is a planar contact without friction, keep
-            % only the rotation along the normal force
-            if strcmp(obj.contact_type,'PlanarContactWithoutFriction')
-                rot_indices = dof_indices(4:6);
-                rot_indices(~strcmp(obj.normal_axis,{'x','y','z'})) = 0;
-                dof_indices(4:6) = rot_indices;
-            end
-            
-            % keep all zero indcies
-            c_indices = find(~dof_indices);
-        end
+    %% methods defined in separate files
+    methods (Access = protected)
+        indices = getConstrainedDofs(obj, model);
     end
     
+    methods
+        condition = getWrenchConstraintTable(obj, model, varargin);
+    end
                     
     methods
         
-        function obj = KinematicContact(name, model, parent, offset, normal_axis, reference, type, tangential_axis, varargin)
+        function obj = KinematicContact(name, model, parent, offset, normal_axis, type, tangent_axis, varargin)
             % The constructor function
             %
             % Parameters:            
@@ -166,7 +115,7 @@ classdef KinematicContact < Kinematics
             %  frame @type rowvec @default [0,0,0]
             %  normal_axis: one of the (x,y,z) axis that gives the normal direction @type char
             %  type: the contact type
-            %  tangential_axis: the tangential axis if it is a line contact
+            %  tangent_axis: the tangent axis if it is a line contact
             %  varargin: superclass options @type varargin
             %
             % See also: Kinematics
@@ -174,9 +123,9 @@ classdef KinematicContact < Kinematics
             
             obj = obj@Kinematics(name, varargin{:});
             
-            if obj.options.linearize
+            if obj.Options.Linearize
                 warning('Do not linearize kinematic contact contraints.')
-                obj.linearize = false;
+                obj.Options.Linearize = false;
             end
             
             if nargin > 1
@@ -189,28 +138,29 @@ classdef KinematicContact < Kinematics
                 end
                 
                 % assign the parent link name (case insensitive)
-                obj.parent  = validatestring(parent,valid_links);    
+                obj.Parent  = validatestring(parent,valid_links);    
                 
                 % set point offset
-                if isnumeric(offset) && length(offset)==3
-                    if size(offset,1) > 1 % column vector
-                        % convert to row vector
-                        obj.offset = offset';
-                    else
-                        obj.offset = offset;
-                    end                        
+                assert(isnumeric(offset) && length(offset)==3,...
+                    'The offset must be a 3-Dimensional vector.');
+                
+                if size(offset,1) > 1 % column vector
+                    % convert to row vector
+                    obj.Offset = offset';
+                else
+                    obj.Offset = offset;
                 end
-               
+                
                 
                 % set normal direction axis
                 valid_axis = {'x','y','z'};
-                obj.normal_axis = validatestring(normal_axis,valid_axis);
+                obj.NormalAxis = validatestring(normal_axis,valid_axis);
                 
                 
                 
                 
-                valid_refs = {'body','spatial'};
-                obj.reference_frame = validatestring(reference,valid_refs);
+                % valid_refs = {'body','spatial'};
+                % obj.reference_frame = validatestring(reference,valid_refs);
                 
                 
                 valid_types = {'PointContactWithFriction',...
@@ -220,16 +170,16 @@ classdef KinematicContact < Kinematics
                     'PlanarContactWithFriction',...
                     'PlanarContactWithoutFriction'};
                 
-                obj.contact_type = validatestring(type,valid_types);
+                obj.ContactType = validatestring(type,valid_types);
                 
                 % if it is a line contact
-                if regexp(obj.contact_type,'^LineContact\w*')
-                    obj.tangential_axis = validatestring(tangential_axis,valid_axis);
+                if regexp(obj.ContactType,'^LineContact\w*')
+                    obj.TangentAxis = validatestring(tangent_axis,valid_axis);
                 end
                 
-                obj.c_indices = getDofIndices(obj, model);
+                obj.cIndex = getConstrainedDofs(obj, model);
                 
-                obj.dimension = length(obj.c_indices);
+                obj.Dimension = length(obj.cIndex);
             end
            
             
@@ -247,9 +197,9 @@ classdef KinematicContact < Kinematics
             % symbolic expression for the kinematic constraint.
             
             % create a cell as the input argument
-            arg = {obj.parent,obj.offset};
+            arg = {obj.Parent,obj.Offset};
             % command for rigid position
-            cmd = ['ComputeSpatialPositions[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.c_indices),']]]'];
+            cmd = ['ComputeSpatialPositions[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.cIndex),']]]'];
         end
         
         function cmd = getJacMathCommand(obj)
@@ -257,14 +207,15 @@ classdef KinematicContact < Kinematics
             % symbolic expression for the Jacobian of kinematic constraint.
             
             % create a cell as the input argument
-            arg = {obj.parent,obj.offset};
+            arg = {obj.Parent,obj.Offset};
             % command for Jacobian
-            switch obj.reference_frame
-                case 'body'
-                    cmd = ['ComputeBodyJacobians[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.c_indices),']]]'];
-                case 'spatial'
-                    cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.c_indices),']]]'];
-            end
+            cmd = ['ComputeBodyJacobians[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.cIndex),']]]'];
+            % switch obj.reference_frame
+            %     case 'body'
+            %         cmd = ['ComputeBodyJacobians[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.cIndex),']]]'];
+            %     case 'spatial'
+            %         cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,Flatten[',mat2math(obj.cIndex),']]]'];
+            % end
         end
         
         % use default function

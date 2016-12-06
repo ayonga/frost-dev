@@ -18,7 +18,7 @@ classdef KinematicDof < Kinematics
         % the index of dof in the list of model.dofs
         %
         % @type cellstr
-        dof_index
+        DofIndex
         
         
     end % properties
@@ -38,13 +38,13 @@ classdef KinematicDof < Kinematics
             obj = obj@Kinematics(name, varargin{:});
             
             % the dimension is always 1
-            obj.dimension = 1;
+            obj.Dimension = 1;
             
             if nargin > 1
                 
-                obj.dof_index = getDofIndices(model, dof_name);
+                obj.DofIndex = getDofIndices(model, dof_name);
                 
-                assert(~isnan(obj.dof_index),'KinematicDof:invalidDoF',...
+                assert(~isnan(obj.DofIndex),'KinematicDof:invalidDoF',...
                     'The input DoF name is not found: %s',dof_name);
             end
             
@@ -78,7 +78,7 @@ classdef KinematicDof < Kinematics
             % symbolic expression for the kinematic constraint.
             
             % command for joint dofs
-            cmd = ['ComputeJointConstraint[',num2str(obj.dof_index),']'];
+            cmd = ['ComputeJointConstraint[',num2str(obj.DofIndex),']'];
         end
         
         % use default function

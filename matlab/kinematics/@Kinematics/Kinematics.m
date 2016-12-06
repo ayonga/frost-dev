@@ -1,4 +1,4 @@
-classdef Kinematics < handle
+classdef Kinematics
     % Defines a kinematic function of a rigid body model
     % 
     %
@@ -11,28 +11,6 @@ classdef Kinematics < handle
     % modification, are permitted only in compliance with the BSD 3-Clause 
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
-    
-    
-    properties (Dependent)
-       
-        % A actual symbol that represents the symbolic expression of the
-        % kinematic constraint in Mathematica.
-        %
-        % @type char
-        symbol
-        
-        % A symbol that represents the symbolic expression of the Jacobian
-        % the kinematic constraint in Mathematica. 
-        %
-        % @type char
-        jac_symbol
-        
-        % A symbol that represents the symbolic expressions of the time
-        % derivative of the kinematic constraint's Jacobian in Mathematica.
-        %
-        % @type char
-        jacdot_symbol
-    end
     
     
     
@@ -58,13 +36,13 @@ classdef Kinematics < handle
         % See also: symbol, jac_symbol, jacdot_symbol
         %
         % @type char
-        name
+        Name
         
         
         % The dimensiona of the kinematic function
         %
         % @type integer
-        dimension
+        Dimension
         
         % A set of options for the kinematic functions.
         %
@@ -74,9 +52,19 @@ classdef Kinematics < handle
         % logical
         %
         % @type true
-        options
+        Options
         
-        
+        % A actual symbol that represents the symbolic expression of the
+        % kinematic constraint in Mathematica.
+        %
+        % Required fields of Symbols:
+        % Kin: the kinematic function @type char
+        % Jac: the Jacobian of the function `\partial{Kin}/\partial{q}` 
+        % @type char
+        % JacDot: the time derivative of Jacobian @type char
+        %
+        % @type struct
+        Symbols
         
         
     end % properties
@@ -106,16 +94,21 @@ classdef Kinematics < handle
                 'Kinematics:invalidNameStr', ...
                 'Invalid name string, can NOT contain ''_'' or other special characters.');
             
-            obj.name = name;
+            obj.Name = name;
             
+            % create symbolic variables name
+            obj.Symbols = struct(...
+                'Kin',['$h["',obj.Name,'"]'],...
+                'Jac',['$Jh["',obj.name,'"]'],...
+                'JacDot',['$dJh["',obj.name,'"]']);
             
             % parse options
             p = inputParser;
-            p.addParameter('linearize', false, @islogical);
+            p.addParameter('Linearize', false, @islogical);
             
             parse(p, varargin{:});
-            obj.options = struct();
-            obj.options.linearize = p.Results.linearize;
+            obj.Options = struct();
+            obj.Options.Linearize = p.Results.Linearize;
             
         end
         
@@ -170,20 +163,5 @@ classdef Kinematics < handle
     end % private methods
     
     
-    methods
-        function symbol = get.symbol(obj)
-            % The Get function of the property 'symbol'
-            symbol = ['$h["',obj.name,'"]'];
-        end
-        function jac_symbol = get.jac_symbol(obj)
-            % The Get function of the property 'jac_symbol'
-            jac_symbol = ['$Jh["',obj.name,'"]'];
-        end
-        
-        function jacdot_symbol = get.jacdot_symbol(obj)
-            % The Get function of the property 'jacdot_symbol'
-            jacdot_symbol = ['$dJh["',obj.name,'"]'];
-        end
-    end % get methods
     
 end % classdef

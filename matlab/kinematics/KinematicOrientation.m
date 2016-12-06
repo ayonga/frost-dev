@@ -17,19 +17,19 @@ classdef KinematicOrientation < Kinematics
         % The parent link name of the body frame
         %
         % @type char
-        parent
+        Parent
         
         % The (x,y,z)-axis of the rotation
         %
         % @type char
-        axis
+        Axis
         
         
         % The indices of the degrees of freedom
         %
         % @type rowvec
+        cIndex
         
-        c_index
     end % properties
     
     
@@ -54,7 +54,7 @@ classdef KinematicOrientation < Kinematics
             obj = obj@Kinematics(name, varargin{:});
             
             % the dimension is always 1
-            obj.dimension = 1;
+            obj.Dimension = 1;
             
             
             if nargin > 1
@@ -67,13 +67,13 @@ classdef KinematicOrientation < Kinematics
                 end
                 
                 % assign the parent link name (case insensitive)
-                obj.parent  = validatestring(parent,valid_links);    
+                obj.Parent  = validatestring(parent,valid_links);    
                 
                 
                 % set direction axis
                 valid_axis = {'x','y','z'};
-                obj.axis = validatestring(axis,valid_axis);
-                obj.c_index = 3 + find(strcmpi(obj.axis, valid_axis));
+                obj.Axis = validatestring(axis,valid_axis);
+                obj.cIndex = 3 + find(strcmpi(obj.Axis, valid_axis));
             end
             
             
@@ -92,9 +92,9 @@ classdef KinematicOrientation < Kinematics
             % symbolic expression for the kinematic constraint.
             
             % create a cell as the input argument, use zero offsets
-            arg = {obj.parent,[0,0,0]};
+            arg = {obj.Parent,[0,0,0]};
             % class specific command for computing orientation based kinematic constraint
-            cmd = ['{ComputeSpatialPositions[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
+            cmd = ['ComputeSpatialPositions[',cell2tensor(arg),'][[1,{',num2str(obj.cIndex),'}]]'];
         end
         
         % overload the Jacobian compilation command
@@ -103,9 +103,9 @@ classdef KinematicOrientation < Kinematics
             % symbolic expression for the kinematic constraint's Jacobian.
             
             % create a cell as the input argument, use zero offsets
-            arg = {obj.parent,[0,0,0]};
+            arg = {obj.Parent,[0,0,0]};
             % class specific command for computing rotational spatial Jacobian of an orientation
-            cmd = ['{ComputeSpatialJacobians[',cell2tensor(arg),'][[1,',num2str(obj.c_index),']]}'];
+            cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,{',num2str(obj.cIndex),'}]]'];
         end
         
         % use default function

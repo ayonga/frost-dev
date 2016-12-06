@@ -5,15 +5,15 @@ function printExpression(obj, file)
     % @todo better implementation ...
     
     if nargin < 2 % print to screen
-        if check_var_exist({obj.symbol,obj.jac_symbol,obj.jacdot_symbol})
-            fprintf('%s: \n',obj.symbol);
-            math(obj.symbol)
+        if check_var_exist({obj.Symbols.Kin,obj.Symbols.Jac,obj.Symbols.JacDot})
+            fprintf('%s: \n',obj.Symbols.Kin);
+            math(obj.Symbols.Kin)
             
-            fprintf('%s: \n',obj.jac_symbol);
-            math(obj.jac_symbol)
+            fprintf('%s: \n',obj.Symbols.Jac);
+            math(obj.Symbols.Jac)
             
-            fprintf('%s: \n',obj.jacdot_symbol);
-            math(obj.jacdot_symbol)
+            fprintf('%s: \n',obj.Symbols.JacDot);
+            math(obj.Symbols.JacDot)
         else
             warning('The symbolic expressions do not exist.');
         end
@@ -21,24 +21,24 @@ function printExpression(obj, file)
     else % print to a file
         
         
-        if check_var_exist({obj.symbol,obj.jac_symbol,obj.jacdot_symbol})
+        if check_var_exist({obj.Symbols.Kin,obj.Symbols.Jac,obj.Symbols.JacDot})
             
             f = fopen(file, 'w+');
             
-            kin = math(['InputForm[',obj.symbol,']']);
-            fprintf(f,'%s: \n',obj.symbol);
+            kin = math(['InputForm[',obj.Symbols.Kin,']']);
+            fprintf(f,'%s: \n',obj.Symbols.Kin);
             fprintf(f,kin);
             fprintf(f,'\n \n \n');
             
             
-            jac = math(['InputForm[',obj.jac_symbol,']']);
-            fprintf(f,'%s: \n',obj.jac_symbol);
+            jac = math(['InputForm[',obj.Symbols.Jac,']']);
+            fprintf(f,'%s: \n',obj.Symbols.Jac);
             fprintf(f,jac);
             fprintf(f,'\n \n \n');
             
             
-            jdot = math(['InputForm[',obj.jacdot_symbol,']']);
-            fprintf(f,'%s: \n',obj.jacdot_symbol);
+            jdot = math(['InputForm[',obj.Symbols.JacDot,']']);
+            fprintf(f,'%s: \n',obj.Symbols.JacDot);
             fprintf(f,jdot);
             fprintf(f,'\n \n \n');
             

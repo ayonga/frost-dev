@@ -24,22 +24,22 @@ function status = compileExpression(obj, model, re_load)
         return;
     end
     
-    if ~ check_var_exist({obj.symbol,obj.jac_symbol,obj.jacdot_symbol}) || re_load
+    if ~ check_var_exist(struct2cell(obj.Symbols)) || re_load
         
         % first compile dependent kinematics constraints
-        cellfun(@(x) compileExpression(x, model), obj.kins);
+        cellfun(@(x) compileExpression(x, model), obj.Dependents);
         
         
         
         
-        var_names = cellfun(@(kin){kin.name},obj.kins);
+        var_names = cellfun(@(kin){kin.name},obj.Dependents);
         
         % find symbolic varaibles in the expression
-        vars = eval_math(['FindSymbols[',obj.expr,']']);
+        vars = eval_math(['FindSymbols[',obj.Expression,']']);
         
         % validate if symbolic variables in the expressions are members
         % of the dependent variables
-        ret = eval_math(['CheckSymbols[',obj.expr,',Flatten[',cell2tensor(var_names,'ConvertString',false),']]']);
+        ret = eval_math(['CheckSymbols[',obj.Expression,',Flatten[',cell2tensor(var_names,'ConvertString',false),']]']);
         
         if ~strcmp(ret, 'True')
             err_msg = ['Mathematica detected symbolic variables that are not defined.\n',...
@@ -51,13 +51,13 @@ function status = compileExpression(obj, model, re_load)
         
         % compute compound expression and replace symbolic
         % variables with actual expressions
-        eval_math([obj.symbol,'=',obj.expr,'/.Table[v -> $h[ToString[v]], {v, ',vars,'}];']);
+        eval_math([obj.symbol,'=',obj.Expression,'/.Table[v -> $h[ToString[v]], {v, ',vars,'}];']);
         
         % construct a block Mathematica code to compute Jacobian
         % using chain rule
         blk_cmd_str = [obj.jac_symbol,'=Block[{Jh,dexpr},'...
             'Jh = Table[Flatten@$Jh[ToString[v]], {v, ',vars,'}];',...
-            'dexpr = D[Flatten[{',obj.expr,'}], {',vars,', 1}]/. Table[v -> First@$h[ToString[v]], {v, ',vars,'}];'...
+            'dexpr = D[Flatten[{',obj.Expression,'}], {',vars,', 1}]/. Table[v -> First@$h[ToString[v]], {v, ',vars,'}];'...
             'dexpr.Jh];'];
         eval_math(blk_cmd_str);
         % % construct Jacobian matrix of dependent variables

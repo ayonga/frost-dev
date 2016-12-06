@@ -16,7 +16,7 @@ classdef KinematicCom < Kinematics
         % The (x,y,z)-axis index of the position
         %
         % @type integer
-        axis
+        Axis
     end % properties
     
     
@@ -37,14 +37,14 @@ classdef KinematicCom < Kinematics
             obj = obj@Kinematics(name, varargin{:});
             
             % the dimension is always 1
-            obj.dimension = 1;
+            obj.Dimension = 1;
             
             
             if nargin > 1
                 % set direction axis
                 valid_axis = {'x','y','z'};
                 axis = validatestring(axis,valid_axis);
-                obj.axis = find(strcmpi(axis, valid_axis));
+                obj.Axis = find(strcmpi(axis, valid_axis));
             end
         end
         
@@ -59,7 +59,7 @@ classdef KinematicCom < Kinematics
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
-            cmd = ['{ComputeComPosition[][[1,',num2str(obj.axis),']]}'];
+            cmd = ['ComputeComPosition[][[1,{',num2str(obj.Axis),'}]]'];
         end
         
         % use default function

@@ -18,13 +18,13 @@ classdef KinematicExpr < Kinematics
         % A string representation of the symbolic expressions
         %
         % @type char
-        expr
+        Expression
         
         % A array of Kinematic constraints objects that are dependent
         % variables of the kinematic epxression 
         %
         % @type Kinematics
-        kins
+        Dependents
         
         
     end % properties
@@ -39,7 +39,7 @@ classdef KinematicExpr < Kinematics
             %  name: a string name that will be used to represent this
             %  constraints in Mathematica @type char        
             %  kins: a cell of Kinematics object array @type Kinematics
-            %  expr:A string representation of the symbolic expressions
+            %  expr: A string representation of the symbolic expressions
             %  @type char
             %  linear: indicates whether linearize the original
             %  expressoin @type logical
@@ -49,7 +49,7 @@ classdef KinematicExpr < Kinematics
             obj = obj@Kinematics(name, varargin{:});
             
             % the dimension is always 1
-            obj.dimension = 1;
+            obj.Dimension = 1;
             
             
             if nargin > 1
@@ -69,10 +69,10 @@ classdef KinematicExpr < Kinematics
                         'Use KinematicPosition or KinematicOrientation for positional variable instead.']);
                 end
                 
-                obj.kins = kins;
+                obj.Dependents = kins;
                 % validate symbolic expressions
                 if isempty(regexp(expr, '_', 'once'))
-                    obj.expr = expr;
+                    obj.Expression = expr;
                 else
                     err_msg = 'The expression CANNOT contain ''_''.\n %s';
                     
