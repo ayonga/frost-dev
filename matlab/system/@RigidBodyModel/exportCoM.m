@@ -18,6 +18,7 @@ function status = exportCoM(obj, export_path, do_build)
     %     %  dynamics of the system.
     %     %  @type cell
     
+    status = false;
     if nargin < 3
         do_build = true;
     end
@@ -26,7 +27,6 @@ function status = exportCoM(obj, export_path, do_build)
         fprintf('The path to export functions does not exist: %s\n', export_path);
         fprintf('Please ensure to create the folder, and call this function again.\n');
         fprintf('Aborting ...\n');
-        status = false;
         return;
     end
     
@@ -54,11 +54,11 @@ function status = exportCoM(obj, export_path, do_build)
     % necessary settings
     eval_math(['SetOptions[CseWriteCpp,',...
         'ExportDirectory->',str2mathstr(export_path),',',...
-        'Namespace->',str2mathstr(obj.name),',',...
+        'Namespace->',str2mathstr(obj.Name),',',...
         'SubstitutionRules->GetStateSubs[]];']);
     eval_math('nDof=First@GetnDof[]');
     
-    assert(obj.n_dofs == math('math2matlab','{{nDof}}'), ...
+    assert(obj.nDof == math('math2matlab','{{nDof}}'), ...
         'The total number of DoF does not match.');
     
     
@@ -125,4 +125,6 @@ function status = exportCoM(obj, export_path, do_build)
     if do_build
         build_mex(export_path,{'pe_com_vec','Je_com_mat','dJe_com_mat'});
     end
+    
+    status = true;
 end

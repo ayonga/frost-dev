@@ -1,4 +1,4 @@
-function obj = exportDynamics(obj, export_path, do_build)
+function status = exportDynamics(obj, export_path, do_build)
     % This function exports the symbolic expressions of natural
     % dynamics of the rigid body model into C++ function files.
     %
@@ -8,6 +8,8 @@ function obj = exportDynamics(obj, export_path, do_build)
     %  do_build: determine whether build the mex files. @type logical
     %  @default true
     %
+    % Return values:
+    % status: indicator of successful export/built process @type logical
     %
     % @attention initialize(obj) must be called before run this function.
     
@@ -15,6 +17,9 @@ function obj = exportDynamics(obj, export_path, do_build)
     %     %  If not specified, then export all functions related to the natural
     %     %  dynamics of the system.
     %     %  @type cell
+    
+    
+    status = false;
     
     if nargin < 3
         do_build = true;
@@ -24,25 +29,23 @@ function obj = exportDynamics(obj, export_path, do_build)
     
     
     if ~checkFlag(obj, flag)
-        fprintf('The robot model has NOT been initialized in Mathematica.\n');
-        fprintf('Please call initialize(robot) first\n');
-        fprintf('Aborting ...\n');
+        warning('The robot model has NOT been initialized in Mathematica.\n');
+        warning('Please call initialize(robot) first\n');
+        warning('Aborting ...\n');
         return;
     end
     
     if ~ check_var_exist({'De','Ce','Ge'})
-        fprintf('The robot dynamics has not been compiled in Mathematica.\n');
-        fprintf('Please call compileDynamics(robot) first\n');
-        fprintf('Aborting ...\n');
-        obj.status.exported_dynamics = false;
+        warning('The robot dynamics has not been compiled in Mathematica.\n');
+        warning('Please call compileDynamics(robot) first\n');
+        warning('Aborting ...\n');
         return;
     end
     
     if ~(exist(export_path,'dir'))
-        fprintf('The path to export functions does not exist: %s\n', export_path);
-        fprintf('Please ensure to create the folder, and call this function again.\n');
-        fprintf('Aborting ...\n');
-        obj.status.exported_dynamics = false;
+        warning('The path to export functions does not exist: %s\n', export_path);
+        warning('Please ensure to create the folder, and call this function again.\n');
+        warning('Aborting ...\n');
         return;
     end
     
@@ -67,11 +70,11 @@ function obj = exportDynamics(obj, export_path, do_build)
     % necessary settings
     eval_math(['SetOptions[CseWriteCpp,',...
         'ExportDirectory->',str2mathstr(export_path),',',...
-        'Namespace->',str2mathstr(obj.name),',',...
+        'Namespace->',str2mathstr(obj.Name),',',...
         'SubstitutionRules->GetStateSubs[]];']);
     eval_math('nDof=First@GetnDof[]');
     
-    assert(obj.n_dofs == math('math2matlab','{{nDof}}'), ...
+    assert(obj.nDof == math('math2matlab','{{nDof}}'), ...
         'The total number of DoF does not match.');
     % export compiled symbolic functions
     if exist(fullfile(export_path,'De_mat.cc'),'file')
@@ -155,6 +158,6 @@ function obj = exportDynamics(obj, export_path, do_build)
         build_mex(export_path,{'De_mat','Ge_vec','Ce_mat'});
     end
     
-    
+    status = true;
     
 end

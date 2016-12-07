@@ -10,7 +10,7 @@ function indices = getDofIndices(obj, dof_names)
     % @see getLinkIndices, joints
     
     
-    all_dof_names = {obj.dofs.name};
+    all_dof_names = {obj.Dof.name};
     
     
     

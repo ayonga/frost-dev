@@ -43,7 +43,7 @@ function obj = initialize(obj, reload)
     %     end
     
     
-    eval_math(['InitializeModel[',str2mathstr(obj.config_file),',',cell2tensor(obj.base_dof_axes),'];']);
+    eval_math(['InitializeModel[',str2mathstr(obj.ConfigFile),',',cell2tensor(obj.BaseDof.axis),'];']);
     
    
 end

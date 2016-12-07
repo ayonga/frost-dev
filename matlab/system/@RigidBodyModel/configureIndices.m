@@ -3,22 +3,22 @@ function obj = configureIndices(obj)
     %
     % 
 
-    obj.qe_indices  = cumsum(ones(obj.n_dofs,1));
-    obj.dqe_indices = obj.qe_indices + obj.n_dofs;
+    obj.qeIndices  = cumsum(ones(obj.nDof,1));
+    obj.dqeIndices = obj.qeIndices + obj.nDof;
 
-    if obj.n_base_dofs ~= 0
+    if obj.nBaseDof ~= 0
         % indices of floating base coordinates
-        obj.qb_indices  = cumsum(ones(obj.n_base_dofs,1));
-        obj.dqb_indices = obj.qb_indices + obj.n_dofs;
+        obj.qbIndices  = cumsum(ones(obj.nBaseDof,1));
+        obj.dqbIndices = obj.qbIndices + obj.nDof;
         % Indices of body coordinates
-        obj.q_indices   = obj.qe_indices(obj.n_base_dofs+1:obj.n_dofs);
-        obj.dq_indices  = obj.q_indices + obj.n_dofs;
+        obj.qIndices   = obj.qeIndices(obj.nBaseDof+1:obj.nDof);
+        obj.dqIndices  = obj.qIndices + obj.nDof;
     else
-        obj.qb_indices  = [];
-        obj.dqb_indices = [];
+        obj.qbIndices  = [];
+        obj.dqbIndices = [];
         
-        obj.q_indices   = obj.qe_indices;
-        obj.dq_indices  = obj.dqe_indices;
+        obj.qIndices   = obj.qeIndices;
+        obj.dqIndices  = obj.dqeIndices;
     end
     
    

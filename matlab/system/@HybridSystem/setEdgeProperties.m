@@ -1,9 +1,9 @@
-function obj = setVertexProperties(obj, vertex, varargin)
-% Sets the values of vertex properties
+function obj = setEdgeProperties(obj, s, t, varargin)
+% Sets the values of edge properties
 %
 % Parameters:
-%  vertex: the names of the vertices to be configured. It must be a cell string or a
-%  character array.
+%  s,t: the name pairs of the source vertics and target vertices to be added. 
+%  They must be a cell string or a character array.
 %  @type cellstr
 %  PropName: a character vector specifiy the name of a vertex property 
 %  for the added vertices. It must be given as a ''Name''-''Value'' pairs.
@@ -22,14 +22,14 @@ function obj = setVertexProperties(obj, vertex, varargin)
 % and missing properties will be added with their default values.
 
 
-% check if the specified vertices exist in the graph
-vert = findnode(obj.Gamma, vertex);
-if any(find(~vert))
-    error('The following vertices are NOT found in the graph: %s\n',...
-        implode(vertex(~vert),', '));
+% check if the specified edges exist in the graph
+edge = findedge(obj.Gamma, s, t);
+if any(find(~edge))
+    error('The following edges are NOT found in the graph: %s\n',...
+        implode(vertex(~edge),', '));
 end
 
-nNode = numel(vert);
+nEdge = numel(edge);
 
 if ~ischar(varargin{1})
     error(['The thrid argument is expected to be a character vector.\n',...
@@ -44,12 +44,12 @@ if ~iscolumn(props)
     props = props';
 end
 
-assert(length(props)==nNode,...
+assert(length(props)==nEdge,...
     'The number of property values ''%d'' must match the number of nodes ''%d''.\n',...
-    length(props), nNode);
+    length(props), nEdge);
 propNames = fieldnames(props);
 
-valid_props = obj.VertexProperties;
+valid_props = obj.EdgeProperties;
 % first check if these fields are valid property names
 check_flags = cellfun(@(x)any(strcmp(x, valid_props.Name)), propNames);
 if ~ all(check_flags)
@@ -74,11 +74,11 @@ for i=1:numel(propNames)
         valid_props.Type{prop_pos(i)},valid_props.Attribute{prop_pos(i)});
     % if the value is not numeric or a cell, convert it to cell to
     % prevent future concatenation goes wrong
-    for j=1:nNode
-        if iscell(obj.Gamma.Nodes.(propNames{i})(j))
-            obj.Gamma.Nodes.(propNames{i}){j} = props(j).(propNames{i});
+    for j=1:nEdge
+        if iscell(obj.Gamma.Edges.(propNames{i})(j))
+            obj.Gamma.Edges.(propNames{i}){j} = props(j).(propNames{i});
         else
-            obj.Gamma.Nodes.(propNames{i})(j) = props(j).(propNames{i});
+            obj.Gamma.Edges.(propNames{i})(j) = props(j).(propNames{i});
         end
     end
     

@@ -15,9 +15,9 @@ function obj = setAcutation(obj, model, actuated_joints)
     
     actuated_indices = getDofIndices(model, actuated_joints);
     
-    Be = eye(model.n_dofs);
+    Be = eye(model.nDof);
     
-    obj.actuator_map = Be(:, actuated_indices);
+    obj.ActuationMap = Be(:, actuated_indices);
     
     
     

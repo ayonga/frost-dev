@@ -227,7 +227,7 @@ classdef KinematicContact < Kinematics
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
-            valid_links = {model.links.name};
+            valid_links = {model.Links.name};
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             
@@ -246,7 +246,7 @@ classdef KinematicContact < Kinematics
             % This function returns he Mathematica command to compile the
             % symbolic expression for the Jacobian of kinematic constraint.
             
-            valid_links = {model.links.name};
+            valid_links = {model.Links.name};
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             
@@ -487,6 +487,6 @@ classdef KinematicContact < Kinematics
     
     %% methods defined in separate files
     methods (Access = public)
-        condition = getWrenchConstraintTable(obj, model, varargin);
+        [names, constraints] = getWrenchConstraint(obj, model, varargin);
     end
 end % classdef

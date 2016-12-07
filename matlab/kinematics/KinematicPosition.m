@@ -25,7 +25,8 @@ classdef KinematicPosition < Kinematics
         % @type rowvec
         Offset
         
-        % The (x,y,z)-axis index of the position
+        % The (x,y,z)-axis index of the position. This axis should be the
+        % axis in the world (inertial) frame, not the body coordinates.
         %
         % @type char
         Axis
@@ -48,8 +49,7 @@ classdef KinematicPosition < Kinematics
             if nargin == 0
                 return;
             end
-            % the dimension is always 1
-            obj.Dimension = 1;
+            
             objStruct = struct(varargin{:});
             
             if isfield(objStruct, 'Axis')                
@@ -127,7 +127,7 @@ classdef KinematicPosition < Kinematics
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
-            valid_links = {model.links.name};
+            valid_links = {model.Links.name};
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             
@@ -143,11 +143,11 @@ classdef KinematicPosition < Kinematics
         end
         
         % overload the Jacobian compilation command
-        function cmd = getJacMathCommand(obj)
+        function cmd = getJacMathCommand(obj, model)
             % This function returns the Mathematica command to compile the
             % symbolic expression for the kinematic constraint's Jacobian.
              
-            valid_links = {model.links.name};
+            valid_links = {model.Links.name};
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             

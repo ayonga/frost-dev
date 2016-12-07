@@ -36,8 +36,6 @@ classdef KinematicDof < Kinematics
             if nargin == 0
                 return;
             end
-            % the dimension is always 1
-            obj.Dimension = 1;
             objStruct = struct(varargin{:});
             
             if isfield(objStruct, 'DofName')                
@@ -49,7 +47,7 @@ classdef KinematicDof < Kinematics
         function obj = set.DofName(obj, dof)
             
             assert(ischar(dof),'The ''DofName'' should be a valid string.');
-            obj.ParentLink = dof;
+            obj.DofName = dof;
         end
         
     end % methods
@@ -63,7 +61,7 @@ classdef KinematicDof < Kinematics
             
             dof_index = getDofIndices(model, obj.DofName);
                 
-            assert(~isnan(obj.DofIndex),'KinematicDof:invalidDoF',...
+            assert(~isnan(dof_index),'KinematicDof:invalidDoF',...
                 'The input DoF name is not found: %s',obj.DofName);
 
             % command for joint dofs

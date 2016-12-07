@@ -35,11 +35,11 @@ function [vfc, gfc] = calcVectorFields(obj, model, qe, dqe, De, He)
     end
     
     % Calculate holonomic constraints
-    Je    = feval(obj.funcs.hol_constr, qe);
-    Jedot = feval(obj.funcs.jac_hol_constr, {qe,dqe});
+    Je    = feval(obj.Funcs.Jac, qe);
+    Jedot = feval(obj.Funcs.JacDot, qe, dqe);
     
-    
-    Be    = obj.actuator_map;
+    Ie    = eye(model.nDof);
+    Be    = obj.ActuationMap;
     
     XiInv = Je * (De \ transpose(Je));
     

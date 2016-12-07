@@ -80,14 +80,14 @@ classdef HybridSystem
     
 
     
-    properties (Dependent)
-        % A structure array describes the name, type, attributes, and
+    properties (Dependent, Hidden)
+        % A structure describes the name, type, attributes, and
         % default value of each properties of the vertex
         %
         % @type struct
         VertexProperties
         
-        % A structure array describes the name, type, attributes, and
+        % A structure describes the name, type, attributes, and
         % default value of each properties of the edge
         %
         % @type struct
@@ -95,19 +95,27 @@ classdef HybridSystem
     end
     methods
         function VertexProperties = get.VertexProperties(obj)
-            VertexProperties = struct(...
-                'Name', {'Domain','Control','Param'},...
-                'Type',{'Domain','Controller','double'},...
-                'Attribute',{{},{},{'size',[1,2]}},...
-                'DefaultValue', {{},{},[NaN, NaN]});
+            % Get function of ''VertexProperties''
+            %
+            % See also: validateattributes
+            
+            VertexProperties = struct();
+            VertexProperties.Name =  {'Domain','Control','Param'};
+            VertexProperties.Type = {{'Domain'},{'Controller'},{'struct'}};
+            VertexProperties.Attribute = {{},{},{}};
+            VertexProperties.DefaultValue =  {{[]},{[]},{[]}};
         end
         
         function EdgeProperties = get.EdgeProperties(obj)
-            EdgeProperties = struct(...
-                'Name', {'Guard'},...
-                'Type',{'Guard'},...
-                'Attribute',{{}},...
-                'DefaultValue', {{}});
+            % Get function of ''EdgeProperties''            
+            %
+            % See also: validateattributes
+            
+            EdgeProperties = struct();
+            EdgeProperties.Name =  {'Weights', 'Guard'};
+            EdgeProperties.Type = {{'numeric'}, {'Guard'}};
+            EdgeProperties.Attribute = {{'row'},{}};
+            EdgeProperties.DefaultValue = {NaN,{[]}};
         end
     end
     
@@ -138,8 +146,8 @@ classdef HybridSystem
             %             dummy_node = cell2table([{'dummy'},empty_props(:)'],'VariableNames',[{'Name'},obj.VertexProperties.Name]);
             %             obj.Gamma = addnode(obj.Gamma,dummy_node);
             %             obj.Gamma = rmnode(obj.Gamma,'dummy');
-            obj = addVertex(obj,'Name',{'dummy'});
-            obj = addEdge(obj,'Source',{'dummy'},'Target',{'dummy'});
+            obj = addVertex(obj,'dummy');
+%             obj = addEdge(obj,'Source',{'dummy'},'Target',{'dummy'});
             obj = removeVertex(obj,'dummy');
             
         end
@@ -169,20 +177,19 @@ classdef HybridSystem
     
     %% Private methods
     methods (Static, Access=private)
-        function status = validatePropAttribute(value, prop)
+        function validatePropAttribute(value, type, attribute)
             
-            
-            if isnumeric(value)
+            if iscell(value)
+                cellfun(@(x)validateattributes(x,type,attribute), value);
+            elseif isnumeric(value)
+                % if a property is a numeric value, it must be a row vector
                 for i=1:size(value,1)
-                    validateattributes(value(i,:),{prop.Type},prop.Attribute);
+                    validateattributes(value(i,:),type,attribute);
                 end
-            elseif iscell(value) && iscolumn(value)
-                cellfun(@(x)validateattributes(x,{prop.Type},prop.Attribute), value);
             else
-                error('The input argument must be a (column) cell array of objects.');      
+                error('The input argument must be a cell array of objects.');
             end
             
-            status = true;
         end
     end
     

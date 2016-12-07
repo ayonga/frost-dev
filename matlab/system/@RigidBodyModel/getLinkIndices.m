@@ -8,7 +8,7 @@ function indices = getLinkIndices(obj, link_names)
     %  indices: position indices of joints in the obj.joints
     
     
-    all_link_name = {obj.links.name};
+    all_link_name = {obj.Links.name};
     
     if iscell(link_names)
         

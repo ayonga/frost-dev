@@ -1,4 +1,4 @@
-classdef Guard < handle
+classdef Guard
     % Guard defines properties and functions related to a guard condition
     % of the hybrid system model.
     % 

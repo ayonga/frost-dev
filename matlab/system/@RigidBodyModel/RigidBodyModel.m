@@ -38,17 +38,17 @@ classdef RigidBodyModel
         % The unique name of the rigid body model
         %
         % @type char
-        name
+        Name
         
         % The type of the model, it could be either 'planar' or 'spatial'.
         %
         % @type char
-        type
+        Type
         
         % The full path of the model configuration file
         %
         % @type char
-        config_file
+        ConfigFile
         
         % Represents the list of rigid body links
         %
@@ -56,12 +56,13 @@ classdef RigidBodyModel
         % specified in the URDF file.
         %
         % @type struct
-        links
+        Links
         
-        % The axes list of base coordinates
+        % The structur contains the configuration of the base coordinates,
+        % which normally does not conver in the URDF file.
         %
         % @type cell
-        base_dof_axes
+        BaseDof
         
         %
         %         % Represents the list of rigid joints
@@ -89,7 +90,7 @@ classdef RigidBodyModel
         % freedom, including base coordinates
         %
         % @type struct
-        dofs
+        Dof
         
         % The total degrees of freedom of the model
         %
@@ -97,42 +98,42 @@ classdef RigidBodyModel
         % options.use_floating_base = true.
         %
         % @type double
-        n_dofs
+        nDof
         
         % The dimension of the floating base coordinates
         %
         % @type double
-        n_base_dofs
+        nBaseDof
         
         % The indexing vector of extended full coordiantes
         %
         % @type rowvec
-        qe_indices
+        qeIndices
         
         % The indexing vector of extended full coordiantes
         %
         % @type rowvec
-        dqe_indices
+        dqeIndices
         
         % The indexing vector of joint coordiantes
         %
         % @type rowvec
-        q_indices
+        qIndices
         
         % The indexing vector of joint coordinate velocities
         %
         % @type rowvec
-        dq_indices
+        dqIndices
         
         % The indexing vector of floating base coordiantes
         %
         % @type rowvec
-        qb_indices
+        qbIndices
         
         % The indexing vector of floating base coordinate velocities
         %
         % @type rowvec
-        dqb_indices
+        dqbIndices
         
         
         
@@ -178,25 +179,9 @@ classdef RigidBodyModel
         % type: model type @type char
         %
         % @type struct
-        sva
+        SVA
         
         
-        % A structured data keeps track of the symbolic expression
-        % calculation status of the model in Mathematica.
-        %
-        % Required fields of status:
-        %  initialized: indicates whether the model is initialized in
-        %  Mathematica kernel @type logical
-        %  compiled_dynamics: indicates whether the symbolic expressions
-        %  for model dynamics are evaluated @type logical
-        %  compiled_kinematics: indicates whether the symbolic expressions
-        %  for model kinematics are evaluated @type logical
-        %  exported_dynamics: indicates whether the symbolic expressions
-        %  for model dynamics are exported as C++ source files @type
-        %  logical
-        %
-        % @type struct
-        status
     end
     
     %% Public methods
@@ -210,7 +195,7 @@ classdef RigidBodyModel
             % must be specified.
             %
             % Parameters:
-            % config_filename: the full path of the model configuration
+            % config_file: the full path of the model configuration
             % file. @type char
             % base_dofs: the base coordinates configuration of the model @type
             % struct                        
@@ -278,21 +263,21 @@ classdef RigidBodyModel
             
             
             % extract the absolute full file path of the input file
-            obj.config_file = GetFullPath(config_file);
+            obj.ConfigFile = GetFullPath(config_file);
             
             % check if the file exists
-            assert(exist(obj.config_file,'file')==2,...
+            assert(exist(obj.ConfigFile,'file')==2,...
                 'Could not find the model configuration file: %s\n', ...
-                obj.config_file);
+                obj.ConfigFile);
             
             
             
             
             if nargin < 2
                 fprintf('The model type is not specified. Setting it to the default type ...\n');
-                obj.type = 'spatial';
+                obj.Type = 'spatial';
             else
-                obj.type = model_type;
+                obj.Type = model_type;
             end
             
             
@@ -301,7 +286,7 @@ classdef RigidBodyModel
                 % the base joint is not specified, use default
                 fprintf('The floating base coordinates are not configured. Setting it to the default configuration ...\n');
                 base_dofs = struct();
-                switch obj.type
+                switch obj.Type
                     case 'spatial'
                         base_dofs.type = 'floating';
                     case 'planar'
@@ -310,31 +295,31 @@ classdef RigidBodyModel
                 
                 base_dofs.axis = defaultAxes(base_dofs.type);
                 
-                obj.n_base_dofs = numel(base_dofs.axis);               
+                obj.nBaseDof = numel(base_dofs.axis);               
                 
-                base_dofs.lower = -inf(1,obj.n_base_dofs);
-                base_dofs.upper = inf(1,obj.n_base_dofs);
-                base_dofs.velocity = inf(1,obj.n_base_dofs);
-                base_dofs.effort = zeros(1,obj.n_base_dofs);
+                base_dofs.lower = -inf(1,obj.nBaseDof);
+                base_dofs.upper = inf(1,obj.nBaseDof);
+                base_dofs.velocity = inf(1,obj.nBaseDof);
+                base_dofs.effort = zeros(1,obj.nBaseDof);
             else
                 
                 
                 if ~isfield(base_dofs, 'type')
-                    switch obj.type
+                    switch obj.Type
                         case 'spatial'
                             base_dofs.type = 'floating';
                         case 'planar'
                             base_dofs.type = 'planar';
                     end
                 elseif isempty(base_dofs.type)
-                    switch obj.type
+                    switch obj.Type
                         case 'spatial'
                             base_dofs.type = 'floating';
                         case 'planar'
                             base_dofs.type = 'planar';
                     end
                 else
-                    assert(~(strcmp(obj.type,'planar') && strcmp(base_dofs.type,'floating')),...
+                    assert(~(strcmp(obj.Type,'planar') && strcmp(base_dofs.type,'floating')),...
                         'RigidBodyModel:confictedConfiguration',...
                         'The planar type of model could not use floating type of base coordinates.\n');
                 end
@@ -350,55 +335,50 @@ classdef RigidBodyModel
 %                     base_dofs.axis = defaultAxes(base_dofs.type);
 %                 end
                 
-                obj.n_base_dofs = numel(base_dofs.axis);
+                obj.nBaseDof = numel(base_dofs.axis);
                 
                 if ~isfield(base_dofs, 'lower')
-                    base_dofs.lower = -inf(1,obj.n_base_dofs);
+                    base_dofs.lower = -inf(1,obj.nBaseDof);
                 elseif isempty(base_dofs.lower)
-                    base_dofs.lower = -inf(1,obj.n_base_dofs);
+                    base_dofs.lower = -inf(1,obj.nBaseDof);
                 end
                 
                 if ~isfield(base_dofs, 'upper')
-                    base_dofs.upper = inf(1,obj.n_base_dofs);
+                    base_dofs.upper = inf(1,obj.nBaseDof);
                 elseif isempty(base_dofs.upper)
-                    base_dofs.upper = inf(1,obj.n_base_dofs);
+                    base_dofs.upper = inf(1,obj.nBaseDof);
                 end
                 
                 if ~isfield(base_dofs, 'velocity')
-                    base_dofs.velocity = inf(1,obj.n_base_dofs);
+                    base_dofs.velocity = inf(1,obj.nBaseDof);
                 elseif isempty(base_dofs.velocity)
-                    base_dofs.velocity = inf(1,obj.n_base_dofs);
+                    base_dofs.velocity = inf(1,obj.nBaseDof);
                 end
                 
                 if ~isfield(base_dofs, 'effort')
-                    base_dofs.effort = zeros(1,obj.n_base_dofs);
+                    base_dofs.effort = zeros(1,obj.nBaseDof);
                 elseif isempty(base_dofs.effort)
-                    base_dofs.effort = zeros(1,obj.n_base_dofs);
+                    base_dofs.effort = zeros(1,obj.nBaseDof);
                 end
             end
-            obj.base_dof_axes = base_dofs.axis;
+            obj.BaseDof = base_dofs;
             
             % load model from the URDF file
-            model = loadModelFromURDF(obj);
+            model = loadURDF(obj.ConfigFile);
             
             
-            obj.name = model.name;
-            obj.links = model.links;
-            obj.n_dofs = obj.n_base_dofs + numel(model.joints);
+            obj.Name = model.name;
+            obj.Links = model.links;
+            obj.nDof = obj.nBaseDof + numel(model.joints);
             % Setup indices for fast operator
             obj = configureIndices(obj);
             
-            obj.sva = configureSVA(obj,model, base_dofs);
+            obj.SVA = configureSVA(obj,model, base_dofs);
             
             
-            obj.dofs = configureDoFs(obj,model, base_dofs);
+            obj.Dof = configureDoFs(obj,model, base_dofs);
             
             
-            % initialize status
-            obj.status.initialized         = false;
-            obj.status.compiled_dynamics   = false;
-            obj.status.compiled_kinematics = false;
-            obj.status.exported_dynamics   = false;
             
             
             function axes = defaultAxes(type)
@@ -435,7 +415,19 @@ classdef RigidBodyModel
     
     %% methods defined in seperate files
     methods
+        obj = initialize(obj, reload);
+        mass = getTotalMass(obj);
+        indices = getLinkIndices(obj, link_names);
+        indices = getDofIndices(obj, dof_names);
+        status = exportDynamics(obj, export_path, do_build);
+        status = exportCoM(obj, export_path, do_build);
+        sva = configureSVA(obj, model, base_dofs);
+        obj = configureIndices(obj);
+        dofs = configureDoFs(obj, model, base_dofs);
         obj = compileDynamics(obj);
+        obj = compileCoM(obj);
+        status = checkFlag(obj, flag);
+        [De, He] = calcNaturalDynamics(obj, qe, dqe, useSVA);
     end
     
     %% Private methods

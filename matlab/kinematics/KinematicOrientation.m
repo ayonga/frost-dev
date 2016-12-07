@@ -45,8 +45,7 @@ classdef KinematicOrientation < Kinematics
             if nargin == 0
                 return;
             end
-            % the dimension is always 1
-            obj.Dimension = 1;
+            
             objStruct = struct(varargin{:});
             
             if isfield(objStruct, 'Axis')                
@@ -106,7 +105,7 @@ classdef KinematicOrientation < Kinematics
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
-            valid_links = {model.links.name};
+            valid_links = {model.Links.name};
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             
@@ -125,7 +124,7 @@ classdef KinematicOrientation < Kinematics
             % This function returns the Mathematica command to compile the
             % symbolic expression for the kinematic constraint's Jacobian.
             
-            valid_links = {model.links.name};
+            valid_links = {model.Links.name};
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             

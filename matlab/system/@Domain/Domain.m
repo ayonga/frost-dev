@@ -1,4 +1,4 @@
-classdef Domain < handle
+classdef Domain
     % Domain defines an admissible continuous domain (or phase)
     % in the hybrid system model. The admissibility conditions are
     % determined by the constraints defined on the domain.
@@ -41,25 +41,27 @@ classdef Domain < handle
         % Kinematics classes
         %
         % @type cell
-        HolonomicConstraints
+        HolonomicConstr
+        
         
         %% unilateral constraints 
         % forces, distance
         %
-        % @type table
-        UnilateralConditions
+        % @type struct
+        UnilateralConstr
+        
         
         
         % a structure of function names defined for the domain. Each field
-        % of 'funcs' specifies the name of a function that used for a
+        % of ''Funcs'' specifies the name of a function that used for a
         % certain computation of the domain.
         %
         % Required fields of funcs:
-        %   hol_constr: a string of the function that computes the
+        %   Kin: a string of the function that computes the
         %   value of holonomic constraints @type char
-        %   jac_hol_constr: a string of the function that computes the
+        %   Jac: a string of the function that computes the
         %   jacobian of holonomic constraints @type char
-        %   jacdot_hol_constr: a string of the function that computes time derivatives of the
+        %   JacDot: a string of the function that computes time derivatives of the
         %   jacobian matrix of holonomic constraints @type char
         %
         % @type struct
@@ -104,7 +106,9 @@ classdef Domain < handle
             
             
             
-            obj.HolonomicConstraints = {};
+            obj.HolonomicConstr = {};
+            obj.UnilateralConstr = cell2table(cell(0,6),'VariableNames',...
+                {'Name','Type','WrenchCondition','WrenchIndices','KinObject','KinFunction'});
             % default options
             obj.Options = struct(); 
             
@@ -135,51 +139,49 @@ classdef Domain < handle
     end
     
     
-    properties (Dependent)
+    properties (Dependent, Hidden)
        
-        % the total dimension of holonomic constraints
+        % The total dimension of the holonomic constraints defined on the
+        % domain
         %
-        % @type integer
-        dim_hol_constr
+        % @type integer @default 0
+        DimensionHolonomic
         
-        % A actual symbol that represents the symbolic expression of the
-        % kinematic constraint in Mathematica.
-        %
-        % @type char
-        hol_symbol
+     
         
-        % A symbol that represents the symbolic expression of the Jacobian
-        % the kinematic constraint in Mathematica. 
+        % A symbol that represents the symbolic expressions of
+        % the holonomic constraints in Mathematica. 
         %
+        % Required fields of Symbols:
+        % Kin: the holonomic constraints @type char
+        % Jac: the Jacobian of the constraints `\partial{Kin}/\partial{q}`
         % @type char
-        hol_jac_symbol
+        % JacDot: the time derivative of Jacobian @type char
+        %
+        % @type struct
+        HolSymbols
         
-        % A symbol that represents the symbolic expressions of the time
-        % derivative of the kinematic constraint's Jacobian in Mathematica.
-        %
-        % @type char
-        hol_jacdot_symbol
+        
     end % dependent properties
     
     
     methods
-        function dim = get.dim_hol_constr(obj)
-            % the Get function of property ''dim_hol_constr''
-            dim = sum(cellfun(@(x)x.dimension,obj.hol_constr));
-        end
-        function symbol = get.hol_symbol(obj)
-            % The Get function of the property 'hol_symbol'
-            symbol = ['$h["',obj.funcs.hol_constr,'"]'];
-        end
-        function symbol = get.hol_jac_symbol(obj)
-            % The Get function of the property 'hol_jac_symbol'
-            symbol = ['$Jh["',obj.funcs.jac_hol_constr,'"]'];
+        function dim = get.DimensionHolonomic(obj)
+            
+            dim = sum(cellfun(@(x)getDimension(x),obj.HolonomicConstr));
         end
         
-        function symbol = get.hol_jacdot_symbol(obj)
-            % The Get function of the property 'hol_jacdot_symbol'
-            symbol = ['$dJh["',obj.funcs.jacdot_hol_constr,'"]'];
+        function HolSymbols = get.HolSymbols(obj)
+            
+            assert(~isempty(obj.Name),'The ''Name'' of the object is empty');
+            
+            HolSymbols = struct(...
+                'Kin',['$h["',obj.Name,'"]'],...
+                'Jac',['$Jh["',obj.Name,'"]'],...
+                'JacDot',['$dJh["',obj.Name,'"]']);
         end
+        
+     
     end % get methods
     
 end % classdef

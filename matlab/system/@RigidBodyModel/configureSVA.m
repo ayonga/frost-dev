@@ -16,9 +16,10 @@ function sva = configureSVA(obj, model, base_dofs)
     
     sva = struct();
     % Number of bodies
-    sva.NB = obj.n_dofs;
+    sva.NB = obj.nDof;
+    n_base_dofs = obj.nBaseDof;
     % model type
-    type = obj.type;
+    type = obj.Type;
     % Precollocation
     blankc = cell(sva.NB, 1);
     blankVec = zeros(sva.NB, 1);
@@ -50,7 +51,7 @@ function sva = configureSVA(obj, model, base_dofs)
     base_link_index = unique(parent_indices(~ismember(parent_indices,child_indices)));
     % configure floating base coordiantes as stacked joints with zero
     % mass/inertia/length
-    for i=1:obj.n_base_dofs
+    for i=1:n_base_dofs
         sva.parent(i) = i-1;
         sva.jtype{i} = base_dofs.axis{i};
         switch sva.jtype{i}
@@ -79,7 +80,7 @@ function sva = configureSVA(obj, model, base_dofs)
         else
             sva.Xtree(:,:,i) = plnr(0, zeros(1,2));
         end
-        if i < obj.n_base_dofs
+        if i < n_base_dofs
             if strcmp(type,'spatial')
                 sva.I(:,:,i) = mcI(0, zeros(1,3), zeros(3));
             else
@@ -116,7 +117,7 @@ function sva = configureSVA(obj, model, base_dofs)
         if isempty(lambda)
             lambda = 0;            
         end
-        sva.parent(i+obj.n_base_dofs) = lambda + obj.n_base_dofs;
+        sva.parent(i+n_base_dofs) = lambda + n_base_dofs;
         
         j_xyz = joint.origin.xyz;
         j_rpy = joint.origin.rpy;
@@ -127,9 +128,9 @@ function sva = configureSVA(obj, model, base_dofs)
             end
             %| @note why we need to transpose the matrix 'E'? Is it because
             %ROS (URDF) uses fixed axis transformation?
-            sva.Xtree(:,:,i+obj.n_base_dofs) = plux(E', j_xyz);
+            sva.Xtree(:,:,i+n_base_dofs) = plux(E', j_xyz);
         else
-            sva.Xtree(:,:,i+obj.n_base_dofs) = plnr(j_rpy(2), j_xyz([1,3]));
+            sva.Xtree(:,:,i+n_base_dofs) = plnr(j_rpy(2), j_xyz([1,3]));
         end
         
         
@@ -138,7 +139,7 @@ function sva = configureSVA(obj, model, base_dofs)
         % Specify axis type, and assign prefix
         switch joint.type
             case 'prismatic'
-                sva.isRevolute(i+obj.n_base_dofs) = false;
+                sva.isRevolute(i+n_base_dofs) = false;
                 full_index = find(joint.axis);
                 if strcmp(type, 'spatial')
                     index = full_index;
@@ -150,7 +151,7 @@ function sva = configureSVA(obj, model, base_dofs)
                     end
                 end
             case {'revolute', 'continuous'}
-                sva.isRevolute(i+obj.n_base_dofs) = true;
+                sva.isRevolute(i+n_base_dofs) = true;
                 full_index = find(joint.axis);
                 if strcmp(type, 'spatial')
                     index = full_index + 3;
@@ -158,7 +159,7 @@ function sva = configureSVA(obj, model, base_dofs)
                     index = 3; %'r'
                 end
             case 'fixed'
-                sva.isRevolute(i+obj.n_base_dofs) = true;
+                sva.isRevolute(i+n_base_dofs) = true;
                 full_index = find(joint.axis);
                 if strcmp(type, 'spatial')
                     index = full_index + 3;
@@ -174,13 +175,13 @@ function sva = configureSVA(obj, model, base_dofs)
         % Specify whether it is positive or negative axis
         axis_value = joint.axis(full_index);
         if axis_value < 0
-            sva.jtype{i+obj.n_base_dofs} = ['-', jtype{index}];
+            sva.jtype{i+n_base_dofs} = ['-', jtype{index}];
             axis = -full_index;
         else
-            sva.jtype{i+obj.n_base_dofs} = jtype{index};
+            sva.jtype{i+n_base_dofs} = jtype{index};
             axis = full_index;
         end
-        sva.axis(i+obj.n_base_dofs) = axis;
+        sva.axis(i+n_base_dofs) = axis;
         
         
         child_link = model.links(child_indices(i));
@@ -192,9 +193,9 @@ function sva = configureSVA(obj, model, base_dofs)
         end
         inertia = transpose(R)*child_link.inertia*R;        
         if strcmp(type,'spatial')
-            sva.I(:,:,i+obj.n_base_dofs) =  mcI(child_link.mass, l_xyz, inertia);
+            sva.I(:,:,i+n_base_dofs) =  mcI(child_link.mass, l_xyz, inertia);
         else
-            sva.I(:,:,i+obj.n_base_dofs) =  mcI(child_link.mass, l_xyz([1,3]), inertia(2,2));
+            sva.I(:,:,i+n_base_dofs) =  mcI(child_link.mass, l_xyz([1,3]), inertia(2,2));
         end
     end
     

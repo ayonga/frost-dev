@@ -1,4 +1,4 @@
-function urdf_model = loadModelFromURDF(obj)
+function urdf_model = loadURDF(urdf_file)
     % This function parse the ROS URDF file
     %
     % @note At this moment, this parser only support the 'link' and 'joint'
@@ -8,7 +8,7 @@ function urdf_model = loadModelFromURDF(obj)
     % urdf_model: the parsed model structure
     
     
-    urdf = xmlread(obj.config_file);
+    urdf = xmlread(urdf_file);
     
     xml_robot = urdf.getElementsByTagName('robot').item(0);
     assert(~isempty(xml_robot),['The provided URDF file does not contains ',...

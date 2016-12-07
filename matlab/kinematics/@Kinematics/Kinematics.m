@@ -98,7 +98,7 @@ classdef (Abstract) Kinematics
         
         function dim = getDimension(obj)
             % Returns the dimension of the kinematic function. 
-            % By default, we assume the dimension of a kinematic functioni
+            % By default, we assume the dimension of a kinematic function
             % is 1, unless this method is overloaded by subclasses
             
             dim = 1;
@@ -116,8 +116,20 @@ classdef (Abstract) Kinematics
     end
     
     
+    %% private properties
+    properties (Hidden, GetAccess = protected)
+        
+        % A flag for whether the ''Linearize'' option is changed
+        %
+        % @type logical
+        LinearizeFlagChanged
+        
+    end
+    
+    
     %% dependent properties
-    properties (Hidden, Access = protected)
+    properties (Dependent, Hidden)
+        
         % A actual symbol that represents the symbolic expression of the
         % kinematic constraint in Mathematica.
         %
@@ -129,19 +141,20 @@ classdef (Abstract) Kinematics
         %
         % @type struct
         Symbols
-        
-        % A flag for whether the ''Linearize'' option is changed
-        %
-        % @type logical
-        LinearizeFlagChanged
-        
     end
-    
     
     %% get/set methods
     methods
         
-        
+        function Symbols = get.Symbols(obj)
+            
+            assert(~isempty(obj.Name),'The ''Name'' of the object is empty');
+            
+            Symbols = struct(...
+                'Kin',['$h["',obj.Name,'"]'],...
+                'Jac',['$Jh["',obj.Name,'"]'],...
+                'JacDot',['$dJh["',obj.Name,'"]']); 
+        end
         
         function obj = set.Linearize(obj, flag)
             % if symbol expressions alreay exist, re-compile them
@@ -171,16 +184,13 @@ classdef (Abstract) Kinematics
             
             obj.Name = name;
             
-            obj.Symbols = struct(...
-                'Kin',['$h["',name,'"]'],...
-                'Jac',['$Jh["',name,'"]'],...
-                'JacDot',['$dJh["',name,'"]']); %#ok<MCSUP>
+            
         end
     end
     
     methods (Access = protected)
         
-        function cmd = getKinMathCommand(obj, model)
+        function cmd = getKinMathCommand(obj, model) %#ok<INUSD>
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             %
@@ -190,7 +200,7 @@ classdef (Abstract) Kinematics
         end
         
         
-        function cmd = getJacMathCommand(obj, model)
+        function cmd = getJacMathCommand(obj, model) %#ok<INUSD>
             % This function returns the Mathematica command to compile the
             % symbolic expression for the kinematic constraint's Jacobian.
             

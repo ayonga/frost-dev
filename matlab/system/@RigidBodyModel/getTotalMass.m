@@ -3,5 +3,5 @@ function mass = getTotalMass(obj)
     %
     % Return values:
     % mass: the total mass of the robot @type double
-    mass = sum([obj.links.mass]);
+    mass = sum([obj.Links.mass]);
 end

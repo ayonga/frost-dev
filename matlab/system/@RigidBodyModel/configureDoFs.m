@@ -9,10 +9,10 @@ function dofs = configureDoFs(obj, model, base_dofs)
     
     
     
-    dofs(obj.n_base_dofs) = struct();
+    dofs(obj.nBaseDof) = struct();
 
-    if obj.n_base_dofs ~= 0        
-        for i = 1:obj.n_base_dofs
+    if obj.nBaseDof ~= 0        
+        for i = 1:obj.nBaseDof
             switch base_dofs.axis{i}
                 case {'Px','px'}
                     dofs(i).name = 'BasePosX';

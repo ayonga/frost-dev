@@ -32,8 +32,7 @@ classdef KinematicCom < Kinematics
             if nargin == 0
                 return;
             end
-            % the dimension is always 1
-            obj.Dimension = 1;
+            
             objStruct = struct(varargin{:});
             
             if isfield(objStruct, 'Axis')                
