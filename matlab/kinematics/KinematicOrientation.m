@@ -13,11 +13,11 @@ classdef KinematicOrientation < Kinematics
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties (SetAccess=protected, GetAccess=public)
+    properties
         % The parent link name of the body frame
         %
         % @type char
-        Parent
+        ParentLink
         
         % The (x,y,z)-axis of the rotation
         %
@@ -25,10 +25,7 @@ classdef KinematicOrientation < Kinematics
         Axis
         
         
-        % The indices of the degrees of freedom
-        %
-        % @type rowvec
-        cIndex
+        
         
     end % properties
     
@@ -38,43 +35,29 @@ classdef KinematicOrientation < Kinematics
     
     methods
         
-        function obj = KinematicOrientation(name, model, parent, axis, varargin)
+        function obj = KinematicOrientation(varargin)
             % The constructor function
             %
-            % Parameters:            
-            %  name: a string symbol that will be used to represent this
-            %  constraints in Mathematica @type char        
-            %  model: the rigid body model @type RigidBodyModel
-            %  parent: the name of the parent link on which this fixed
-            %  position is rigidly attached @type char             
-            %  axis: one of the (x,y,z) axis @type char   
-            %  varargin: superclass options @type varargin
+            % @copydetails Kinematics::Kinematics()
             
             
-            obj = obj@Kinematics(name, varargin{:});
-            
+            obj = obj@Kinematics(varargin{:});
+            if nargin == 0
+                return;
+            end
             % the dimension is always 1
             obj.Dimension = 1;
+            objStruct = struct(varargin{:});
             
-            
-            if nargin > 1
-                % check valid model object
-                if isa(model,'RigidBodyModel')
-                    valid_links = {model.links.name};
-                else
-                    error('Kinematics:invalidType',...
-                        'The model has to be an object of RigidBodyModel class.');
-                end
-                
-                % assign the parent link name (case insensitive)
-                obj.Parent  = validatestring(parent,valid_links);    
-                
-                
-                % set direction axis
-                valid_axis = {'x','y','z'};
-                obj.Axis = validatestring(axis,valid_axis);
-                obj.cIndex = 3 + find(strcmpi(obj.Axis, valid_axis));
+            if isfield(objStruct, 'Axis')                
+                obj.Axis = objStruct.Axis;
             end
+            
+            if isfield(objStruct, 'ParentLink')
+                obj.ParentLink = objStruct.ParentLink;
+            end
+            
+            
             
             
         end
@@ -84,28 +67,76 @@ classdef KinematicOrientation < Kinematics
         
     end % methods
     
+    properties (Dependent, Hidden)
+        % The index of the axis
+        %
+        % @type integer
+        pIndex
+    end
+    
+    %% set/get methods
+    methods
+        function pIndex = get.pIndex(obj)
+            
+            if ~isempty(obj.Axis)
+                error('The ''Axis'' of the orientation NOT assigned.');
+            end
+            pIndex = 3 + find(strcmpi(obj.Axis, {'x','y','z'}));
+        end
+        
+        function obj = set.ParentLink(obj, parent)
+            
+            assert(ischar(parent),'The ''ParentLink'' should be a valid string.');
+            obj.ParentLink = parent;
+        end
+        
+        function obj = set.Axis(obj, axis)
+            
+            
+            % set direction axis
+            valid_axes = {'x','y','z'};
+            obj.Axis = validatestring(axis,valid_axes);
+        end
+        
+    end
     
     methods (Access = protected)
         
-        function cmd = getKinMathCommand(obj)
+        function cmd = getKinMathCommand(obj, model)
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
+            valid_links = {model.links.name};
+            % validate parent link name (case insensitive)
+            parent  = validatestring(obj.ParentLink,valid_links);
+            
+            if isempty(obj.Offset)
+                error('The ''Offset'' of the position NOT assigned.');
+            end
+            
             % create a cell as the input argument, use zero offsets
-            arg = {obj.Parent,[0,0,0]};
+            arg = {parent,[0,0,0]};
             % class specific command for computing orientation based kinematic constraint
-            cmd = ['ComputeSpatialPositions[',cell2tensor(arg),'][[1,{',num2str(obj.cIndex),'}]]'];
+            cmd = ['ComputeSpatialPositions[',cell2tensor(arg),'][[1,{',num2str(obj.pIndex),'}]]'];
         end
         
         % overload the Jacobian compilation command
-        function cmd = getJacMathCommand(obj)
+        function cmd = getJacMathCommand(obj, model)
             % This function returns the Mathematica command to compile the
             % symbolic expression for the kinematic constraint's Jacobian.
             
+            valid_links = {model.links.name};
+            % validate parent link name (case insensitive)
+            parent  = validatestring(obj.ParentLink,valid_links);
+            
+            if isempty(obj.Offset)
+                error('The ''Offset'' of the position NOT assigned.');
+            end
+            
             % create a cell as the input argument, use zero offsets
-            arg = {obj.Parent,[0,0,0]};
+            arg = {parent,[0,0,0]};
             % class specific command for computing rotational spatial Jacobian of an orientation
-            cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,{',num2str(obj.cIndex),'}]]'];
+            cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,{',num2str(obj.pIndex),'}]]'];
         end
         
         % use default function

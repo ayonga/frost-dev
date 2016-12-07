@@ -12,7 +12,7 @@ classdef KinematicCom < Kinematics
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties (SetAccess=protected, GetAccess=public)
+    properties 
         % The (x,y,z)-axis index of the position
         %
         % @type integer
@@ -22,44 +22,58 @@ classdef KinematicCom < Kinematics
     
     methods
         
-        function obj = KinematicCom(name, axis, varargin)
+        function obj = KinematicCom(varargin)
             % The constructor function
             %
-            % Parameters:
-            %  name: a string symbol that will be used to represent this
-            %  constraints in Mathematica @type char        
-            %  axis: one of the (x,y,z) axis @type char
-            %  linear: indicates whether linearize the original
-            %  expressoin @type logical
-            %  varargin: superclass options @type varargin
+            % @copydetails Kinematics::Kinematics()
             
             
-            obj = obj@Kinematics(name, varargin{:});
-            
+            obj = obj@Kinematics(varargin{:});
+            if nargin == 0
+                return;
+            end
             % the dimension is always 1
             obj.Dimension = 1;
+            objStruct = struct(varargin{:});
             
-            
-            if nargin > 1
-                % set direction axis
-                valid_axis = {'x','y','z'};
-                axis = validatestring(axis,valid_axis);
-                obj.Axis = find(strcmpi(axis, valid_axis));
+            if isfield(objStruct, 'Axis')                
+                obj.Axis = objStruct.Axis;
             end
         end
         
-        
+        function obj = set.Axis(obj, axis)
+            
+            % set direction axis
+            valid_axes = {'x','y','z'};
+            obj.Axis = validatestring(axis,valid_axes);
+        end
         
     end % methods
     
+    properties (Dependent, Hidden)
+        % The index of the axis
+        %
+        % @type integer
+        pIndex
+    end
+    
+    methods
+        function pIndex = get.pIndex(obj)
+            
+            if ~isempty(obj.Axis)
+                error('The ''Axis'' of the orientation NOT assigned.');
+            end
+            pIndex = 3 + find(strcmpi(obj.Axis, {'x','y','z'}));
+        end
+    end
     
     methods (Access = protected)
         
-        function cmd = getKinMathCommand(obj)
+        function cmd = getKinMathCommand(obj, model)
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
-            cmd = ['ComputeComPosition[][[1,{',num2str(obj.Axis),'}]]'];
+            cmd = ['ComputeComPosition[][[1,{',num2str(obj.pIndex),'}]]'];
         end
         
         % use default function

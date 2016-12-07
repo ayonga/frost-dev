@@ -13,12 +13,12 @@ classdef KinematicDof < Kinematics
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties (SetAccess=protected, GetAccess=public)
+    properties 
         
         % the index of dof in the list of model.dofs
         %
-        % @type cellstr
-        DofIndex
+        % @type char
+        DofName
         
         
     end % properties
@@ -26,59 +26,48 @@ classdef KinematicDof < Kinematics
     
     methods
         
-        function obj = KinematicDof(name, model, dof_name, varargin)
+        function obj = KinematicDof(varargin)            
             % The constructor function
             %
-            % Parameters:
-            %  name: a string that will be used to represent this
-            %  constraints in Mathematica @type char           
-            %  model: the rigid body model @type RigidBodyModel
-            %  dof_name: the name of the coordinate @type char
+            % @copydetails Kinematics::Kinematics()
             
-            obj = obj@Kinematics(name, varargin{:});
             
+            obj = obj@Kinematics(varargin{:});
+            if nargin == 0
+                return;
+            end
             % the dimension is always 1
             obj.Dimension = 1;
+            objStruct = struct(varargin{:});
             
-            if nargin > 1
-                
-                obj.DofIndex = getDofIndices(model, dof_name);
-                
-                assert(~isnan(obj.DofIndex),'KinematicDof:invalidDoF',...
-                    'The input DoF name is not found: %s',dof_name);
+            if isfield(objStruct, 'DofName')                
+                obj.DofName = objStruct.DofName;
             end
-            
-            % check if DoF names contains invalid characters
-            
-            % if (~isempty(regexp(dofs_name, '_', 'once')) || ~isempty(regexp(dofs_name, '\W', 'once')))
-            %     err_msg = ['The DoF (joint) name can NOT contain ''_'' or special characters.\n',...
-            %         '%s type of constraints cannot be established for the current model.\n',...
-            %         'To use it this class definition, please change the joint names in the URDF file, \n',...
-            %         'such that names does not contains underscores or other special characters.\n',...
-            %         'Here is the list of current joint names: \n %s'];
-            %
-            %     error('Kinematics:invalidSymbol', err_msg, class(obj), implode(dofs_name,','));
-            % end
-            
-            
-            
-            
         end
         
         
-        
+        function obj = set.DofName(obj, dof)
+            
+            assert(ischar(dof),'The ''DofName'' should be a valid string.');
+            obj.ParentLink = dof;
+        end
         
     end % methods
     
     
     methods (Access = protected)
         
-        function cmd = getKinMathCommand(obj)
-            % This function returns he Mathematica command to compile the
+        function cmd = getKinMathCommand(obj, model)
+            % This function returns the Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             
+            dof_index = getDofIndices(model, obj.DofName);
+                
+            assert(~isnan(obj.DofIndex),'KinematicDof:invalidDoF',...
+                'The input DoF name is not found: %s',obj.DofName);
+
             % command for joint dofs
-            cmd = ['ComputeJointConstraint[',num2str(obj.DofIndex),']'];
+            cmd = ['ComputeJointConstraint[',num2str(dof_index),']'];
         end
         
         % use default function

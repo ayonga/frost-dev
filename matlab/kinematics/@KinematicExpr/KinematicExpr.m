@@ -32,82 +32,70 @@ classdef KinematicExpr < Kinematics
     
     methods
         
-        function obj = KinematicExpr(name, kins, expr, varargin)
+        function obj = KinematicExpr(varargin)
             % The constructor function
             %
-            % Parameters:
-            %  name: a string name that will be used to represent this
-            %  constraints in Mathematica @type char        
-            %  kins: a cell of Kinematics object array @type Kinematics
-            %  expr: A string representation of the symbolic expressions
-            %  @type char
-            %  linear: indicates whether linearize the original
-            %  expressoin @type logical
+            % @copydetails Kinematics::Kinematics()
+            %
+            % See also: Kinematics
             
             
             
-            obj = obj@Kinematics(name, varargin{:});
-            
+            obj = obj@Kinematics(varargin{:});
+            if nargin == 0
+                return;
+            end
             % the dimension is always 1
             obj.Dimension = 1;
+            objStruct = struct(varargin{:});
             
+            if isfield(objStruct, 'Expression')
+                obj.Expression = objStruct.Expression;
+            end
             
-            if nargin > 1
-            
-                % validate dependent arguments
-                check_object = @(x) ~isa(x,'Kinematics');
-                
-                if any(cellfun(check_object,kins))
-                    error('Kinematics:invalidObject', ...
-                        'There exist non-Kinematics objects in the dependent variable list.');
-                end
-                
-                check_dimension = @(x) (x.dimension ~= 1);
-                if any(cellfun(check_dimension,kins))
-                    error('Kinematics:wrongDimension', ...
-                        ['The dependent kinematic variable must be a scalar function.',...
-                        'Use KinematicPosition or KinematicOrientation for positional variable instead.']);
-                end
-                
-                obj.Dependents = kins;
-                % validate symbolic expressions
-                if isempty(regexp(expr, '_', 'once'))
-                    obj.Expression = expr;
-                else
-                    err_msg = 'The expression CANNOT contain ''_''.\n %s';
-                    
-                    error('Kinematics:invalidExpr', err_msg, expr);
-                end
-                
-                
-                
-                % extract variable names
-                var_names = cellfun(@(kin){kin.name},kins,'UniformOutput',false);
-                % validate if symbolic variables in the expressions are members
-                % of the dependent variables
-                ret = eval_math(['CheckSymbols[',expr,',Flatten[',cell2tensor(var_names,'ConvertString',false),']]']);
-                
-                if ~strcmp(ret, 'True')
-                    err_msg = ['Mathematica detected symbolic variables that are not defined.\n',...
-                        'Following symbolic variables are detected by Mathematica: \n %s'];
-                    
-                    det_var = eval_math(['FindSymbols[',expr,']']);
-                    
-                    error('Kinematics:invalidExpr',err_msg, det_var);
-                end
+            if isfield(objStruct, 'Dependents')
+                obj.Dependents = objStruct.Dependents;
             end
         end
         
         
+        function obj = set.Expression(obj, expr)
+            
+            % validate symbolic expressions
+            if isempty(regexp(expr, '_', 'once'))
+                obj.Expression = expr;
+            else
+                err_msg = 'The expression CANNOT contain ''_''.\n %s';                
+                error('Kinematics:invalidExpr', err_msg, expr);
+            end
+            
+        end
         
+        function obj = set.Dependents(obj, deps)
+            
+            % validate dependent arguments
+            check_object = @(x) ~isa(x,'Kinematics');
+            
+            if any(cellfun(check_object,deps))
+                error('Kinematics:invalidObject', ...
+                    'There exist non-Kinematics objects in the dependent variable list.');
+            end
+            
+            check_dimension = @(x) (getDimension(x) ~= 1);
+            if any(cellfun(check_dimension,deps))
+                error('Kinematics:wrongDimension', ...
+                    ['The dependent kinematic variable must be a scalar function.',...
+                    'Use KinematicPosition or KinematicOrientation for positional variables instead.']);
+            end
+            
+            obj.Dependents = deps;
+        end
         
     end % methods
     
     %% Methods defined in separte files
     methods
         status = compileExpression(obj, model, re_load);
-        
-        
     end
     
     

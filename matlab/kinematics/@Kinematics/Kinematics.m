@@ -1,4 +1,4 @@
-classdef Kinematics
+classdef (Abstract) Kinematics
     % Defines a kinematic function of a rigid body model
     % 
     %
@@ -12,10 +12,11 @@ classdef Kinematics
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    
-    
-    properties (SetAccess=protected, GetAccess=public)
+  
         
+    
+    
+    properties
         
         % An unique name string that determines the symbolic expressions of
         % the kinematic constraint in Mathematica.
@@ -39,76 +40,55 @@ classdef Kinematics
         Name
         
         
-        % The dimensiona of the kinematic function
+        % A flag whether linearize the output or not. The actual output
+        % will be the linearization of the functioni at q = 0.
         %
-        % @type integer
-        Dimension
-        
-        % A set of options for the kinematic functions.
-        %
-        % Required fields of options:
-        % linearize: A flag whether linearize the output or not. The actual output
-        % will be the linearization of the functioni at q = 0. @type 
-        % logical
-        %
-        % @type true
-        Options
-        
-        % A actual symbol that represents the symbolic expression of the
-        % kinematic constraint in Mathematica.
-        %
-        % Required fields of Symbols:
-        % Kin: the kinematic function @type char
-        % Jac: the Jacobian of the function `\partial{Kin}/\partial{q}` 
-        % @type char
-        % JacDot: the time derivative of Jacobian @type char
-        %
-        % @type struct
-        Symbols
-        
+        % @type logical
+        Linearize
         
     end % properties
     
     
     methods
         
-        function obj = Kinematics(name, varargin)
+        function obj = Kinematics(varargin)
             % The constructor function
             %
             % Parameters: 
-            %   name: a string symbol that will be used to represent this 
-            %   constraints in Mathematica @type char                    
-            %   varargin: Class options. 
-            %   linearize: indicates whether linearize the original
-            %   expressoin @type logical @default false
-                        
-            if nargin == 0
+            %   varargin: it could be a struct has the same fields as this
+            %   class or name-value pair arguments. The syntax would be
+            %   similar to construct a struct in Matlab. Use either
+            %   @verbatim kin = Kinematics('Prop1', Value1,'Prop2',Value2,...); @endverbatim
+            %   or 
+            %   @verbatim kin = Kinematics(KinStruct); @endverbatim
+            %
+            % See also: struct
+            
+            if nargin < 1
                 return;
             end
+                        
             
-            % check type
-            assert(ischar(name), 'The name must be a string.');
             
-            % validate name string            
-            assert(isempty(regexp(name, '_', 'once'))&&isempty(regexp(name, '\W', 'once')),...
-                'Kinematics:invalidNameStr', ...
-                'Invalid name string, can NOT contain ''_'' or other special characters.');
+            objStruct = struct(varargin{:});
+            % check name type
+            if isfield(objStruct, 'Name')
+                obj.Name = objStruct.Name;
+            else
+                if ~isstruct(varargin{1})
+                    error('The ''Name'' must be specified in the argument list.');
+                else
+                    error('The input structure must have a ''Name'' field');
+                end
+            end
             
-            obj.Name = name;
             
-            % create symbolic variables name
-            obj.Symbols = struct(...
-                'Kin',['$h["',obj.Name,'"]'],...
-                'Jac',['$Jh["',obj.name,'"]'],...
-                'JacDot',['$dJh["',obj.name,'"]']);
             
-            % parse options
-            p = inputParser;
-            p.addParameter('Linearize', false, @islogical);
-            
-            parse(p, varargin{:});
-            obj.Options = struct();
-            obj.Options.Linearize = p.Results.Linearize;
+            if isfield(objStruct, 'Linearize')
+                obj.Linearize = objStruct.Linearize;
+            else
+                obj.Linearize = false;
+            end
             
         end
         
@@ -116,25 +96,91 @@ classdef Kinematics
         
         
         
-        
+        function dim = getDimension(obj)
+            % Returns the dimension of the kinematic function. 
+            % By default, we assume the dimension of a kinematic functioni
+            % is 1, unless this method is overloaded by subclasses
+            
+            dim = 1;
+        end
+       
         
         
     end % methods
     
     %% Methods defined in separte files
     methods
-        status = compileExpression(obj, model, re_load);
-        
+        status = compileExpression(obj, model, re_load);        
         
         printExpression(obj, file);
-        
-        obj = linearize(obj, linearize);
     end
     
     
+    %% dependent properties
+    properties (Hidden, Access = protected)
+        % A actual symbol that represents the symbolic expression of the
+        % kinematic constraint in Mathematica.
+        %
+        % Required fields of Symbols:
+        % Kin: the kinematic function @type char
+        % Jac: the Jacobian of the function `\partial{Kin}/\partial{q}`
+        % @type char
+        % JacDot: the time derivative of Jacobian @type char
+        %
+        % @type struct
+        Symbols
+        
+        % A flag for whether the ''Linearize'' option is changed
+        %
+        % @type logical
+        LinearizeFlagChanged
+        
+    end
+    
+    
+    %% get/set methods
+    methods
+        
+        
+        
+        function obj = set.Linearize(obj, flag)
+            % if symbol expressions alreay exist, re-compile them
+            
+            if isempty(obj.Linearize)
+                obj.Linearize = flag;
+            else
+                if obj.Linearize ~= flag
+                    obj.LinearizeFlagChanged = true; %#ok<MCSUP>
+                end
+                
+                obj.Linearize = flag;
+            end
+            
+        end
+        
+        
+        function obj = set.Name(obj, name)
+            % Set function for ''Name'' property
+            %
+            assert(ischar(name), 'The name must be a string.');
+            
+            % validate name string
+            assert(isempty(regexp(name, '_', 'once'))&&isempty(regexp(name, '\W', 'once')),...
+                'Kinematics:invalidNameStr', ...
+                'Invalid name string, can NOT contain ''_'' or other special characters.');
+            
+            obj.Name = name;
+            
+            obj.Symbols = struct(...
+                'Kin',['$h["',name,'"]'],...
+                'Jac',['$Jh["',name,'"]'],...
+                'JacDot',['$dJh["',name,'"]']); %#ok<MCSUP>
+        end
+    end
+    
     methods (Access = protected)
         
-        function cmd = getKinMathCommand(obj)
+        function cmd = getKinMathCommand(obj, model)
             % This function returns he Mathematica command to compile the
             % symbolic expression for the kinematic constraint.
             %
@@ -144,11 +190,11 @@ classdef Kinematics
         end
         
         
-        function cmd = getJacMathCommand(obj)
+        function cmd = getJacMathCommand(obj, model)
             % This function returns the Mathematica command to compile the
             % symbolic expression for the kinematic constraint's Jacobian.
             
-            cmd    = ['ComputeKinJacobians[',obj.symbol,']'];
+            cmd    = ['ComputeKinJacobians[',obj.Symbols.Kin,']'];
         end
         
         function cmd = getJacDotMathCommand(obj)
@@ -156,7 +202,7 @@ classdef Kinematics
             % symbolic expressions for the time derivative of the kinematic
             % constraint's Jacobian.
             
-            cmd    = ['D[',obj.jac_symbol,',t]'];
+            cmd    = ['D[',obj.Symbols.Jac,',t]'];
         end
         
         

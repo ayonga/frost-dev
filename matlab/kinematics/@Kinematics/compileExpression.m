@@ -12,11 +12,16 @@ function status = compileExpression(obj, model, re_load)
     
     status = true;
     
+    % check valid model object
+    if ~isa(model,'RigidBodyModel')
+        error('Kinematics:invalidType',...
+            'The model has to be an object of RigidBodyModel class.');
+    end
     
     if ~ checkFlag(model, '$ModelInitialized')
         warning(['''%s'' has NOT been initialized in Mathematica.\n',...
             'Please call initialize(model) first\n',...
-            'Aborting ...\n'], model.name);
+            'Aborting ...\n'], model.Name);
         status = false;
         return;
     end
@@ -24,10 +29,10 @@ function status = compileExpression(obj, model, re_load)
     if ~ check_var_exist(struct2cell(obj.Symbols)) || re_load
         % compile symbolic expressions
         
-        kin_cmd_str = getKinMathCommand(obj);
-        jac_cmd_str = getJacMathCommand(obj);
+        kin_cmd_str = getKinMathCommand(obj, model);
+        jac_cmd_str = getJacMathCommand(obj, model);
         jacdot_cmd_str = getJacDotMathCommand(obj);
-        if obj.Options.Linearize
+        if obj.Linearize
             
             % first obtain the symbolic expression for the
             % kinematic function

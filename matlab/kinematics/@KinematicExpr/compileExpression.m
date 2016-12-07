@@ -15,24 +15,47 @@ function status = compileExpression(obj, model, re_load)
     
     status = true;
     
+    % check valid model object
+    if ~isa(model,'RigidBodyModel')
+        error('Kinematics:invalidType',...
+            'The model has to be an object of RigidBodyModel class.');
+    end
     
     if ~ checkFlag(model, '$ModelInitialized')
         warning(['''%s'' has NOT been initialized in Mathematica.\n',...
             'Please call initialize(model) first\n',...
-            'Aborting ...\n'], model.name);
+            'Aborting ...\n'], model.Name);
         status = false;
         return;
     end
+    
+    
+    % validate the expression and dependence
+    % extract variable names
+    var_names = cellfun(@(kin){kin.Name},obj.Dependents,'UniformOutput',false);
+    % validate if symbolic variables in the expressions are members
+    % of the dependent variables
+    if isempty(obj.Expression)
+        error('The kinematic ''Expression'' is not assigned.');
+    end
+    ret = eval_math(['CheckSymbols[',obj.Expression,',Flatten[',cell2tensor(var_names,'ConvertString',false),']]']);
+    
+    if ~strcmp(ret, 'True')
+        err_msg = ['Mathematica detected symbolic variables that are not defined as ''Dependents''.\n',...
+            'Following symbolic variables are detected by Mathematica: \n %s'];
+        
+        det_var = eval_math(['FindSymbols[',obj.Expression,']']);
+        
+        error('Kinematics:invalidExpr',err_msg, det_var);
+    end
+    %%
     
     if ~ check_var_exist(struct2cell(obj.Symbols)) || re_load
         
         % first compile dependent kinematics constraints
         cellfun(@(x) compileExpression(x, model), obj.Dependents);
         
-        
-        
-        
-        var_names = cellfun(@(kin){kin.name},obj.Dependents);
+        var_names = cellfun(@(kin){kin.Name},obj.Dependents);
         
         % find symbolic varaibles in the expression
         vars = eval_math(['FindSymbols[',obj.Expression,']']);
@@ -51,11 +74,11 @@ function status = compileExpression(obj, model, re_load)
         
         % compute compound expression and replace symbolic
         % variables with actual expressions
-        eval_math([obj.symbol,'=',obj.Expression,'/.Table[v -> $h[ToString[v]], {v, ',vars,'}];']);
+        eval_math([obj.Symbols.Kin,'=',obj.Expression,'/.Table[v -> $h[ToString[v]], {v, ',vars,'}];']);
         
         % construct a block Mathematica code to compute Jacobian
         % using chain rule
-        blk_cmd_str = [obj.jac_symbol,'=Block[{Jh,dexpr},'...
+        blk_cmd_str = [obj.Symbols.Jac,'=Block[{Jh,dexpr},'...
             'Jh = Table[Flatten@$Jh[ToString[v]], {v, ',vars,'}];',...
             'dexpr = D[Flatten[{',obj.Expression,'}], {',vars,', 1}]/. Table[v -> First@$h[ToString[v]], {v, ',vars,'}];'...
             'dexpr.Jh];'];
@@ -67,19 +90,19 @@ function status = compileExpression(obj, model, re_load)
         % eval_math('Jhexp = D[Flatten[{expr}], {Flatten[vars], 1}]/. Table[v -> First@h[ToString[v]], {v, vars}];');
         
         
-        if obj.options.linearize
+        if obj.Linearize
             % get the substitution rule for q = 0
             eval_math('{qe0subs,dqe0subs} = GetZeroStateSubs[];');
             % use chain rules to construct the final Jacobian matrix
-            eval_math([obj.jac_symbol,'=',obj.jac_symbol,'/.qe0subs;']);
+            eval_math([obj.Symbols.Jac,'=',obj.Symbols.Jac,'/.qe0subs;']);
             % re-compute the linear function
             eval_math('Qe = GetQe[];');
-            eval_math([obj.symbol,'=Flatten[',obj.jac_symbol,'.Qe];']);
+            eval_math([obj.Symbols.Kin,'=Flatten[',obj.Symbols.Jac,'.Qe];']);
         end
         
         % compute time derivatives of the Jacobian matrix
         jacdot_cmd_str = getJacDotMathCommand(obj);
-        eval_math([obj.jacdot_symbol,'=',jacdot_cmd_str,';']);
+        eval_math([obj.Symbols.JacDot,'=',jacdot_cmd_str,';']);
         
         status = true;
     end
