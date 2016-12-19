@@ -44,6 +44,7 @@ switch type
                 'Jac',['Jh_',new_cond.Name{1}],...
                 'JacDot',['dJh_',new_cond.Name{1}])};
             new_cond.KinObject = kins(i);
+            new_cond.Properties.RowNames = new_cond.Name;
             % add to the existing unilateral condition table
             obj.UnilateralConstr = [obj.UnilateralConstr;new_cond];
         end

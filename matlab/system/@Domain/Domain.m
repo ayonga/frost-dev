@@ -139,15 +139,16 @@ classdef Domain
     end
     
     
-    properties (Dependent, Hidden)
+    properties (Dependent)
        
         % The total dimension of the holonomic constraints defined on the
         % domain
         %
         % @type integer @default 0
         DimensionHolonomic
-        
-     
+    end
+    
+    properties (Dependent, Hidden)
         
         % A symbol that represents the symbolic expressions of
         % the holonomic constraints in Mathematica. 

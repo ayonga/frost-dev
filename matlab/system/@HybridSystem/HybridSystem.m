@@ -25,7 +25,7 @@ classdef HybridSystem
     
    
     
-    properties (GetAccess = public, SetAccess = public)
+    properties (GetAccess = public, SetAccess = protected)
         % The directed graph that describes the hybrid dynamical system
         % structure
         %
@@ -47,7 +47,7 @@ classdef HybridSystem
         
         
         
-        % The the rigid body model of the hybrid system
+        % The rigid body model of the hybrid system
         %
         % @type RigidBodyModel
         Model
@@ -95,9 +95,6 @@ classdef HybridSystem
     end
     methods
         function VertexProperties = get.VertexProperties(obj)
-            % Get function of ''VertexProperties''
-            %
-            % See also: validateattributes
             
             VertexProperties = struct();
             VertexProperties.Name =  {'Domain','Control','Param'};
@@ -107,9 +104,6 @@ classdef HybridSystem
         end
         
         function EdgeProperties = get.EdgeProperties(obj)
-            % Get function of ''EdgeProperties''            
-            %
-            % See also: validateattributes
             
             EdgeProperties = struct();
             EdgeProperties.Name =  {'Weights', 'Guard'};
@@ -173,6 +167,10 @@ classdef HybridSystem
         obj = rmVertex(obj, varargin);
         
         obj = rmEdge(obj, varargin);
+        
+        obj = setEdgeProperties(obj, s, t, varargin);
+        
+        obj = setVertexProperties(obj, vertex, varargin);
     end
     
     %% Private methods

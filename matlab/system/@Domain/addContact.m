@@ -20,9 +20,6 @@ n_contact = numel(contacts);
 
 for i=1:n_contact
     
-    % first add to the holonomic constraints array
-    obj.HolonomicConstr(end+1) = contacts(i);
-    
     % generate indices for associated constraint forces
     dim_c = getDimension(contacts{i});
     c_index = obj.DimensionHolonomic + cumsum(ones(1,dim_c));
@@ -41,12 +38,20 @@ for i=1:n_contact
     new_cond.WrenchCondition = constraints;
     new_cond.WrenchIndices(:) = {c_index};    
     new_cond.Type(:) = {'Force'};
+    new_cond.Properties.RowNames = new_cond.Name;
     
     % add to the existing unilateral condition table
     obj.UnilateralConstr = [obj.UnilateralConstr;new_cond];
     
     
+    
+    
 end
+
+%|@note add holonomic constraints after the unilateral constraints
+
+% add to the holonomic constraints array
+obj.HolonomicConstr(end+1:end+n_contact) = contacts;
 
 
 end
