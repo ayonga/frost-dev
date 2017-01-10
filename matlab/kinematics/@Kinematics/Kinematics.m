@@ -110,7 +110,9 @@ classdef (Abstract) Kinematics
     
     %% Methods defined in separte files
     methods
-        status = compileExpression(obj, model, re_load);        
+        status = compile(obj, model, re_load);        
+        
+        status = export(obj, export_path, do_build)
         
         printExpression(obj, file);
     end
@@ -128,7 +130,7 @@ classdef (Abstract) Kinematics
     
     
     %% dependent properties
-    properties (Dependent, Hidden)
+    properties (Dependent)
         
         % A actual symbol that represents the symbolic expression of the
         % kinematic constraint in Mathematica.
@@ -141,6 +143,23 @@ classdef (Abstract) Kinematics
         %
         % @type struct
         Symbols
+        
+        
+        % File names of the kinematic functions. 
+        %
+        % Each field of ''Funcs'' specifies the name of a function that
+        % used for a certain computation of the domain.
+        %
+        % Required fields of Funcs:
+        %   Kin: a string of the function that computes the
+        %   value of holonomic constraints @type char
+        %   Jac: a string of the function that computes the
+        %   jacobian of holonomic constraints @type char
+        %   JacDot: a string of the function that computes time derivatives of the
+        %   jacobian matrix of holonomic constraints @type char
+        %
+        % @type struct
+        Funcs
     end
     
     %% get/set methods
@@ -154,6 +173,16 @@ classdef (Abstract) Kinematics
                 'Kin',['$h["',obj.Name,'"]'],...
                 'Jac',['$Jh["',obj.Name,'"]'],...
                 'JacDot',['$dJh["',obj.Name,'"]']); 
+        end
+        
+        function Symbols = get.Funcs(obj)
+            
+            assert(~isempty(obj.Name),'The ''Name'' of the object is empty');
+            
+            Symbols = struct(...
+                'Kin',['h_',obj.Name],...
+                'Jac',['Jh_',obj.Name],...
+                'JacDot',['dJh_',obj.Name]); 
         end
         
         function obj = set.Linearize(obj, flag)

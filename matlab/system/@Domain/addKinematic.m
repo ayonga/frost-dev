@@ -3,7 +3,7 @@ function obj = addKinematic(obj, kins, type)
 %
 % Parameters:
 %  kins: a cell array of kinematic constraints @type Kinematic
-%  type: indicates whether it is 'honomonic' or unilateral @type char
+%  type: indicates whether it is 'honomonic' or 'unilateral' @type char
 
 
 % validate input argument
@@ -25,8 +25,8 @@ switch type
 
 
             
-        % add to the holonomic constraints array
-        obj.HolonomicConstr(end+1:end+n_kin) = kins;
+        % add to the holonomic constraints group
+        obj.HolonomicConstr = addKinematic(obj.HolonomicConstr, kins);
        
     case 'unilateral'
         

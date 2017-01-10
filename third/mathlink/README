@@ -1,0 +1,308 @@
+Mathematica Symbolic Toolbox for MATLAB - Version 2.0 (12 October 2004)
+------------------------------------------------------------------------ 
+Using the MathLink communication standard supplied with Mathematica and the MEX
+facility of MATLAB we write a toolbox that provides MATLAB users with all of the
+symbolic and high-precision numeric capabilities of Mathematica. In addition,
+since MathLink can pass native MATLAB matrices (and not just strings) between
+Mathematica and MATLAB it is quick and easy to construct matrices in either
+system and pass them to the other. You can freely mix Mathematica code and
+MATLAB code without the bother of writing M-files to convert matrices into
+strings and back. The Mathematica Symbolic Toolbox for MATLAB is implemented as
+a single MEX-file and we have included the source code.
+
+Two important points:
+
+1) The Mathematica Symbolic Toolbox for MATLAB works with newer (MLVERSION in
+    mathlink.h >= 3) versions of Mathematica (I have not tested the new version
+    on the Macintosh). This version has been tested to work with Mathematica 4.2/5.0
+    and Matlab 7.0. Instuctions for mex'ing this file are given below.
+   
+2) Since MathLink connects programs on different computers just as easily as it
+   connects programs on the same computer, you can harness the power of more
+   than one computer. Simply run MATLAB on one computer, Mathematica on another;
+   the Mathematica Symbolic Toolbox for MATLAB transparently connects the
+   two. This capability is also especially helpful in schools and industrial
+   sites where MATLAB and Mathematica might be licensed for different machines.
+   
+Functions provided in the Mathematica Symbolic Toolbox for MATLAB
+-----------------------------------------------------------------
+
+math('string')          : 'string' is sent to Mathematica and evaluated; the
+                        : result is returned as a string.
+                        :
+                        : <Optional for Macintosh users>
+                        : Mathematica will automatically be started if you
+                        : make an alias of the "Mathematica Kernel" icon, call
+                        : the alias "MathKernel", and place the alias in the
+                        : same folder as MATLAB itself. If you don't make the
+                        : alias, the MathLink library will pose a dialog box
+                        : and ask you to find a Mathematica Kernel.
+
+math('matlab2math', 'mname', mat)       : The MATLAB matrix mat is assigned
+                                        : to the Mathematica symbol denoted
+                                        : by the string 'mname'. The result
+                                        : returned to MATLAB is 'mname'. Note 
+                                        : that scalaras become 2-D matrices 
+                                        : in Mathematica.
+
+math('math2matlab', 'expr')     : The matrix resulting from the evaluation
+                                : of 'expr' by Mathematica is returned. If
+                                : 'expr' doesn't yield a matrix, this function
+                                : returns a MATLAB string containing '$Failed'.
+                                : To retrieve a scalar from Mathematica, enclose 
+                                : it in curly braces, e.g.
+                                : >> a=math('math2matlab','{{scalar}}');
+
+math('quit') or math('exit')    : These close the link and shut down Mathematica.
+
+
+All of the above automatically open a MathLink connection with default arguments
+if one hasn't already been opened. If the user wishes to open the connection
+with particular arguments, the full form of the linkopen command is:
+
+math('linkopen', 'linkname', 'linkmode', 'linkprotocol', 'swapEOL')
+        : The first argument must be the string 'linkopen'.
+        : The second argument must be the name of the link 
+        :    defined as usual for Mathematica's LinkOpen or the MathLink
+        :    library's MLOpen(). Again, for simplicity, math('linkopen') uses
+        :    the default arguments. LinkOpen and MLOpen() are described
+        :    in the MathLink Reference Guide that ships with Mathematica.
+        : The third argument is either 'Launch', 'Connect', or 'Listen'.
+        : The fourth argument is either 'SharedMemory' (default), 'FileMap', 
+        :    'TCP', or 'TCPIP' on Windows, and 'Pipes' on Unix. Refer to the
+        :    documentation on MathLink for more information on these protocols.
+        : If the fifth argument is 'swapEOL' then carriage-return and
+        :    linefeed will be swapped; this is useful when connecting
+        :    MATLAB and Mathematica processes residing on computers with
+        :    different notions of end-of-line (for example, MATLAB on a Mac
+        :    with Mathematica on a Sun SPARC). If the fifth argument is
+        :    anything else, line termination will be unchanged.
+
+In addition to the behavior above, any Mathematica warning or error messages
+as well as the output from Mathematica's Print[] function will appear in the
+MATLAB command window.
+
+
+Here's an example of a session with MATLAB and Mathematica. This commands in 
+this session are contained in testscript.m
+
+-----------------MATLAB Transcript Begins--------------
+>> math('$Version')
+Mathematica Kernel loading...
+
+ans =
+
+5.0 for Linux (November 18, 2003)
+
+>> math('N[EulerGamma,40]')
+
+ans =
+
+0.5772156649015328606065120900824024310422
+
+>> math('Integrate[Log[x]^(3/2),x]')  
+
+ans =
+
+3 Sqrt[Pi] Erfi[Sqrt[Log[x]]]                 -3 x
+----------------------------- + Sqrt[Log[x]] (---- + x Log[x])
+              4                                2
+
+>> math('InputForm[Integrate[Log[x]^(3/2),x]]')
+
+ans =
+
+(3*Sqrt[Pi]*Erfi[Sqrt[Log[x]]])/4 + Sqrt[Log[x]]*((-3*x)/2 + x*Log[x])
+
+>> math(['Integrate[',ans,',x]'])              
+
+ans =
+
+3 Sqrt[Pi] x Erfi[Sqrt[Log[x]]]
+------------------------------- - 
+               4
+ 
+           Pi
+    3 Sqrt[--] Erfi[Sqrt[2] Sqrt[Log[x]]]
+           2
+>   ------------------------------------- + 
+                     16
+ 
+                      2    2
+                  -9 x    x  Log[x]
+>   Sqrt[Log[x]] (----- + ---------)
+                    8         2
+
+>> math('matlab2math', 'hilbert',hilb(20))
+
+ans =
+
+hilbert
+
+>> math('{Dimensions[hilbert],Det[hilbert]}')
+
+ans =
+
+                     -196
+{{20, 20}, 5.76706 10    }
+
+>> math('exactHilbert = Table[1/(i+j-1),{i,20},{j,20}];')
+
+ans =
+
+Null
+
+>> math('Det[exactHilbert]')
+
+ans =
+
+1 / 23774547167685345090916442434276164401754198377534864930331853312\
+ 
+>    3441975931064458518758576681657377344056575986726555897176563841\
+ 
+>    9710793303386582324149811241023554489166154717809635257797836800\
+ 
+>    000000000000000000000000000000000
+
+>> math('N[Det[exactHilbert], 40]')
+
+ans =
+
+                                            -226
+4.206178956624722655882045573396941339798 10
+
+>> math('invHilbert = Inverse[hilbert];')
+Inverse::luc: Warning: Result for Inverse of badly conditioned matrix {<<20>> }
+     may contain significant numerical errors.
+
+ans =
+
+Null
+
+>> math('math2matlab', 'invHilbert');
+
+>> diag(hilbert)
+
+ans =
+          113.178979337215
+          325661.692155659
+         -103113004.666097
+         -61985228341.3854
+         -3303972916153.63
+          27656719467887.7
+      2.12400714758352e+15
+      1.66251137580989e+16
+       2.4451092374039e+16
+     -2.55178056593037e+16
+     -7.34103689965472e+16
+     -1.24259060820449e+17
+     -7.21783088243212e+16
+     -4.00789665685201e+16
+     -1.12656435360884e+17
+     -3.10672585960735e+17
+      -4.1792814378581e+16
+     -3.06781915060056e+17
+     -1.48686172057182e+17
+     -7.66963557697005e+15
+
+>> math('quit')
+Mathematica Kernel quitting per your request...
+>> 
+-----------------MATLAB Transcript Ends--------------
+
+
+Where to get the Mathematica Symbolic Toolbox for MATLAB
+--------------------------------------------------------
+(1) http://library.wolfram.com/infocenter/MathSource/    
+
+
+What's included in this archive
+-------------------------------
+README - this file
+math.c - source code suitable for MATLAB 7.0 MEX facility
+testscript.m - MATLAB test script which runs the examples above
+math.zip - tar'ed, gzip'ed file containing the files above
+
+
+How to build the Mathematica Symbolic Toolbox for MATLAB
+--------------------------------------------------------
+First of all, you need access to a licensed copy of Mathematica. The
+standard Mathematica distribution includes the MathLink header and library
+files.
+
+NOTE 1: You need the MathLink header and library files for the machine on
+which you are running MATLAB (since you are building a MEX-file to work
+with that version of MATLAB). If you don't have the appropriate MathLink files,
+send email to support@wri.com with your Mathematica license number and the
+machine for which you want them.
+
+NOTE: As of version 1.2, math.c properly compiles with non-ANSI compilers, 
+particularly the default Sun C compiler. My apologies for previously forgetting 
+users stuck with such old-style C compilers. Version 2.0 has not been tested with
+non-ANSI compilers.
+
+ANOTHER NOTE: Depending on your version of mathematica, you may have to comment/ 
+uncomment sections of math.c dealing with arguments passed to the mathematica 
+engine. See comments and code surrounding argc and argv in math.c starting 
+around line 200.
+
+
+Macintosh:
+-----------
+1)  Set argv[2] in math.c to point to your MathKernel, e.g.,
+argv[2] = "'/Applications/Mathematica5.2/Mathematica 5.2.app/Contents/MacOS/MathKernel' -mathlink"
+or
+argv[2] = "/Applications/Mathematica.app/Contents/MacOS/MathKernel -mathlink"
+
+Then follow the directions for *NIX installation.
+(Tested on R14SP2 and MMA5.2 by GJE. Thanks!)
+
+
+*NIX:
+-----------
+0) Make a directory to hold the toolbox. In this directory, untar the file:
+        tar zxvf math.tar.gz
+   You might want to put this directory on MATLAB's path using addpath in your
+   startup.m
+
+1) Find out where libML.a and mathlink.h are installed on your system. Note that the 
+   library may be called something slightly different than "ML" like "ML64i3" or
+   something similar
+
+2) Properly install the MEX tools for MATLAB. 
+   The default settings in mexopts.sh should be sufficient.
+   then:
+
+   mex -Iinclude_path -Llibrary_path -lML math.c
+
+   (where include_path is the path to mathlink.h and library_path
+    is the path to libML.a)
+
+3) make sure the Mathematica executable "math" is on your Matlab path. 
+
+4) the library path needs to be on your LD_LIBRARY_PATH in unix (DYLD_LIBRARY_PATH 
+   in MACOSX). This can usually be added (in a tcsh shell) with something like:
+        setenv LD_LIBRARY_PATH "${LD_LIBRARY_PATH}:/library_path"
+
+5) try testscript in the directory with the math.mex file in it. If it works, 
+   put the mex file somewhere on matlab's path.
+
+    
+Windows:
+--------
+1) see README_windows and (same but more detail) README_windows2.doc (in math_windows.zip)
+   Unzip math.zip into its own directory for a precompiled math.dll and instructions.
+
+Questions ?
+-----------
+
+1) If you have suggestions about how to make this
+   free Mathematica Symbolic Toolbox for MATLAB better, send email to:
+
+   barrowes@alum.mit.edu
+
+
+
+
+---- Benjamin E. Barrowes ----
+

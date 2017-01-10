@@ -106,10 +106,10 @@ classdef HybridSystem
         function EdgeProperties = get.EdgeProperties(obj)
             
             EdgeProperties = struct();
-            EdgeProperties.Name =  {'Weights', 'Guard'};
-            EdgeProperties.Type = {{'numeric'}, {'Guard'}};
-            EdgeProperties.Attribute = {{'row'},{}};
-            EdgeProperties.DefaultValue = {NaN,{[]}};
+            EdgeProperties.Name =  {'Guard', 'Direction', 'Weights'};
+            EdgeProperties.Type = {{'char'}, {'numeric'}, {'numeric'}};
+            EdgeProperties.Attribute = {{'scalartext'},{'<=',1,'>=',-1,'integer'},{'scalar'}};
+            EdgeProperties.DefaultValue = {'',1,NaN};
         end
     end
     
@@ -142,7 +142,7 @@ classdef HybridSystem
             %             obj.Gamma = rmnode(obj.Gamma,'dummy');
             obj = addVertex(obj,'dummy');
 %             obj = addEdge(obj,'Source',{'dummy'},'Target',{'dummy'});
-            obj = removeVertex(obj,'dummy');
+            obj = rmVertex(obj,'dummy');
             
         end
         

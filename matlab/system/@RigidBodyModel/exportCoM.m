@@ -24,9 +24,9 @@ function status = exportCoM(obj, export_path, do_build)
     end
     
     if ~(exist(export_path,'dir'))
-        fprintf('The path to export functions does not exist: %s\n', export_path);
-        fprintf('Please ensure to create the folder, and call this function again.\n');
-        fprintf('Aborting ...\n');
+        warning(['The path to export functions does not exist: %s\n',...
+            'Please ensure to create the folder, and call this function again.\n',...
+            'Aborting ...\n'], export_path);
         return;
     end
     
@@ -34,16 +34,14 @@ function status = exportCoM(obj, export_path, do_build)
     
     
     if ~checkFlag(obj, flag)
-        fprintf('The robot model has NOT been initialized in Mathematica.\n');
-        fprintf('Please call initialize(robot) first\n');
-        fprintf('Aborting ...\n');
+        warning(['The robot model has NOT been initialized in Mathematica.\n',...
+            'Please call initialize(robot) first. Aborting ...\n']);
         return;
     end
     
     if ~ check_var_exist({'pcom','Jcom','dJcom'})
-        fprintf('The ceter of mass has not been compiled in Mathematica.\n');
-        fprintf('Please call compileCoM(robot) first\n');
-        fprintf('Aborting ...\n');
+        warning(['The center of mass position has NOT been compiled in Mathematica.\n',...
+            'Please call compileCoM(robot) first. Aborting ...\n']);
         return;
     end
     

@@ -1,4 +1,4 @@
-function status = exportKinematics(obj, export_path, do_build)
+function status = export(obj, export_path, do_build)
     % Export the symbolic expression of functions to C/C++ source
     % files and build them as MEX files.
     %
@@ -17,10 +17,10 @@ function status = exportKinematics(obj, export_path, do_build)
     
     status = false;
     
-    if ~(exist(export_path,'dir'))
-        warning('The path to export functions does not exist: %s\n', export_path);
-        warning('Please ensure to create the folder, and call this function again.\n');
-        warning('Aborting ...\n');
+     if ~(exist(export_path,'dir'))
+        warning(['The path to export functions does not exist: %s\n',...
+            'Please ensure to create the folder, and call this function again.\n',...
+            'Aborting ...\n'], export_path);
         return;
     end
     
@@ -30,9 +30,9 @@ function status = exportKinematics(obj, export_path, do_build)
     hol_symbols = obj.HolSymbols;
     
     if ~ check_var_exist(struct2cell(hol_symbols))
-        warning('The robot dynamics has not been compiled in Mathematica.\n');
-        warning('Please call compileKinematics(domain, model) first\n');
-        warning('Aborting ...\n');
+        warning(['The robot dynamics has not been compiled in Mathematica.\n',...
+            'Please call %s first\n',...
+            'Aborting ...\n'],'compileKinematics(domain, model)');
         return;
     end
     
@@ -50,32 +50,32 @@ function status = exportKinematics(obj, export_path, do_build)
     
     
     hol_constr_size = math('math2matlab',['Dimensions[',hol_symbols.Kin,']']);
-    assert(obj.DimensionHolonomic == hol_constr_size, ...
+    assert(obj.HolonomicDimension == hol_constr_size, ...
         'Domain:invalidsize',...
         ['The dimension of the holonomic constraint expression is %d.\',...
-        'It should be %d.'],hol_constr_size,obj.DimensionHolonomic);
+        'It should be %d.'],hol_constr_size,obj.HolonomicDimension);
     
     
      % if exists, export the function
-     eval_math(['CseWriteCpp[',str2mathstr(obj.Funcs.Kin),',{',hol_symbols.Kin,'},',...
+     eval_math(['CseWriteCpp[',str2mathstr(obj.HolFuncs.Kin),',{',hol_symbols.Kin,'},',...
          'ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]']);
      
-     fprintf('File  %s.cc has been exported to %s\n', obj.Funcs.Kin, export_path);
+     fprintf('File  %s.cc has been exported to %s\n', obj.HolFuncs.Kin, export_path);
      
      
-     eval_math(['CseWriteCpp[',str2mathstr(obj.Funcs.Jac),',{',hol_symbols.Jac,'},',...
+     eval_math(['CseWriteCpp[',str2mathstr(obj.HolFuncs.Jac),',{',hol_symbols.Jac,'},',...
          'ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]']);
      
-     fprintf('File  %s.cc has been exported to %s\n', obj.Funcs.Jac, export_path);
+     fprintf('File  %s.cc has been exported to %s\n', obj.HolFuncs.Jac, export_path);
      
      
-     eval_math(['CseWriteCpp[',str2mathstr(obj.Funcs.JacDot),',{',hol_symbols.JacDot,'},',...
+     eval_math(['CseWriteCpp[',str2mathstr(obj.HolFuncs.JacDot),',{',hol_symbols.JacDot,'},',...
          'ArgumentLists->{q,dq},ArgumentDimensions->{{nDof,1},{nDof,1}}]']);
      
-     fprintf('File  %s.cc has been exported to %s\n', obj.Funcs.JacDot,export_path);
+     fprintf('File  %s.cc has been exported to %s\n', obj.HolFuncs.JacDot,export_path);
      % build mex file
      if do_build
-         build_mex(export_path,struct2cell(obj.Funcs));
+         build_mex(export_path,struct2cell(obj.HolFuncs));
      end
     
     

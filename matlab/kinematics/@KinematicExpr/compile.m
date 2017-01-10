@@ -1,4 +1,4 @@
-function status = compileExpression(obj, model, re_load)
+function status = compile(obj, model, re_load)
     % This function computes the symbolic expression of the
     % kinematics constraints in Mathematica.
     %
@@ -49,11 +49,11 @@ function status = compileExpression(obj, model, re_load)
         error('Kinematics:invalidExpr',err_msg, det_var);
     end
     %%
-    
-    if ~ check_var_exist(struct2cell(obj.Symbols)) || re_load
+    symbols = obj.Symbols;
+    if ~ check_var_exist(struct2cell(symbols)) || re_load
         
         % first compile dependent kinematics constraints
-        cellfun(@(x) compileExpression(x, model), obj.Dependents);
+        cellfun(@(x) compile(x, model, re_load), obj.Dependents);
         
         var_names = cellfun(@(kin){kin.Name},obj.Dependents);
         
@@ -74,11 +74,11 @@ function status = compileExpression(obj, model, re_load)
         
         % compute compound expression and replace symbolic
         % variables with actual expressions
-        eval_math([obj.Symbols.Kin,'=',obj.Expression,'/.Table[v -> $h[ToString[v]], {v, ',vars,'}];']);
+        eval_math([symbols.Kin,'=',obj.Expression,'/.Table[v -> $h[ToString[v]], {v, ',vars,'}];']);
         
         % construct a block Mathematica code to compute Jacobian
         % using chain rule
-        blk_cmd_str = [obj.Symbols.Jac,'=Block[{Jh,dexpr},'...
+        blk_cmd_str = [symbols.Jac,'=Block[{Jh,dexpr},'...
             'Jh = Table[Flatten@$Jh[ToString[v]], {v, ',vars,'}];',...
             'dexpr = D[Flatten[{',obj.Expression,'}], {',vars,', 1}]/. Table[v -> First@$h[ToString[v]], {v, ',vars,'}];'...
             'dexpr.Jh];'];
@@ -94,15 +94,15 @@ function status = compileExpression(obj, model, re_load)
             % get the substitution rule for q = 0
             eval_math('{qe0subs,dqe0subs} = GetZeroStateSubs[];');
             % use chain rules to construct the final Jacobian matrix
-            eval_math([obj.Symbols.Jac,'=',obj.Symbols.Jac,'/.qe0subs;']);
+            eval_math([symbols.Jac,'=',symbols.Jac,'/.qe0subs;']);
             % re-compute the linear function
             eval_math('Qe = GetQe[];');
-            eval_math([obj.Symbols.Kin,'=Flatten[',obj.Symbols.Jac,'.Qe];']);
+            eval_math([symbols.Kin,'=Flatten[',symbols.Jac,'.Qe];']);
         end
         
         % compute time derivatives of the Jacobian matrix
         jacdot_cmd_str = getJacDotMathCommand(obj);
-        eval_math([obj.Symbols.JacDot,'=',jacdot_cmd_str,';']);
+        eval_math([symbols.JacDot,'=',jacdot_cmd_str,';']);
         
         status = true;
     end

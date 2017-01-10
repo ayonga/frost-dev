@@ -94,7 +94,7 @@ classdef KinematicExpr < Kinematics
     
     %% Methods defined in separte files
     methods
-        status = compileExpression(obj, model, re_load);
+        status = compile(obj, model, re_load);
     end
     
     

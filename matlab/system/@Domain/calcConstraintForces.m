@@ -37,8 +37,8 @@ function [Fe] = calcConstraintForces(obj, varargin)
             [De, He] = calcNaturalDynamics(model, qe, dqe);
             
             % Calculate holonomic constraints
-            Je    = feval(obj.Funcs.Jac, qe);
-            Jedot = feval(obj.Funcs.JacDot, qe, dqe);
+            Je    = feval(obj.HolFuncs.Jac, qe);
+            Jedot = feval(obj.HolFuncs.JacDot, qe, dqe);
             
             
             Be    = obj.ActuationMap;

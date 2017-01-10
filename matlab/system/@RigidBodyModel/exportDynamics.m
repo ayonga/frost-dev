@@ -29,23 +29,21 @@ function status = exportDynamics(obj, export_path, do_build)
     
     
     if ~checkFlag(obj, flag)
-        warning('The robot model has NOT been initialized in Mathematica.\n');
-        warning('Please call initialize(robot) first\n');
-        warning('Aborting ...\n');
+        warning(['The robot model has NOT been initialized in Mathematica.\n',...
+            'Please call initialize(robot) first. Aborting ...\n']);
         return;
     end
     
     if ~ check_var_exist({'De','Ce','Ge'})
-        warning('The robot dynamics has not been compiled in Mathematica.\n');
-        warning('Please call compileDynamics(robot) first\n');
-        warning('Aborting ...\n');
+        warning(['The robot dynamics has NOT been compiled in Mathematica.\n',...
+            'Please call compileDynamics(robot) first. Aborting ...\n']);
         return;
     end
     
     if ~(exist(export_path,'dir'))
-        warning('The path to export functions does not exist: %s\n', export_path);
-        warning('Please ensure to create the folder, and call this function again.\n');
-        warning('Aborting ...\n');
+        warning(['The path to export functions does not exist: %s\n',...
+            'Please ensure to create the folder, and call this function again.\n',...
+            'Aborting ...\n'], export_path);
         return;
     end
     

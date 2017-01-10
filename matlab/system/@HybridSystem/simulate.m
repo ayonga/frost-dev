@@ -1,32 +1,13 @@
-function obj = simulate(obj, new_options)
+function obj = simulate(obj)
     % Run the simulation of the hybrid dynamical system
     %
     %
     
-    if nargin > 1
-       obj.options.sim_options = struct_overlay(obj.options.sim_options,new_options);
-    end
-    
-    num_cycle = obj.options.sim_options.num_cycle;
-    
-    if(isempty(obj.options.sim_options.first_vertex))
-        v0 = obj.gamma.vertices{1};
-    else
-        v0 = obj.options.sim_options.first_vertex;
-        assert(any(strcmp(obj.gamma.vertices,v0)),...
-            'The vertex %s does not exist in the graph.',v0);
-    end
+   
     
     
-    domain0 = obj.domains(strcmp(obj.gamma.vertices,v0));   
-    x0 = getInitialStates(domain0);
-    t0 = 0;
     
-    % trajectory recorders
-    calcs = cell(num_cycle,1);
-    v = v0;
     
-    model = obj.model;
     
     for k=1:num_cycle
         domain_flag = 'first';        

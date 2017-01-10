@@ -2,7 +2,7 @@ function obj = setEdgeProperties(obj, s, t, varargin)
 % Sets the values of edge properties
 %
 % Parameters:
-%  s,t: the name pairs of the source vertics and target vertices to be added. 
+%  s,t: the name pairs of the source vertics and target vertices of the edge to be added. 
 %  They must be a cell string or a character array.
 %  @type cellstr
 %  PropName: a character vector specifiy the name of a vertex property 
@@ -25,8 +25,10 @@ function obj = setEdgeProperties(obj, s, t, varargin)
 % check if the specified edges exist in the graph
 edge = findedge(obj.Gamma, s, t);
 if any(find(~edge))
-    error('The following edges are NOT found in the graph: %s\n',...
-        implode(vertex(~edge),', '));
+    error(['The following edges are NOT found in the graph:\n',...
+        'source vertices: %s \n'...
+        'target vertices: %s \n'],...
+        implode(s(~edge),', '),implode(t(~edge),', '));
 end
 
 nEdge = numel(edge);
@@ -42,6 +44,14 @@ props = struct(varargin{:});
 % if not a column array, convert to column array
 if ~iscolumn(props)
     props = props';
+end
+
+if length(props) == 1 && nEdge > 1 
+    % if the property value is a scalar, but the number of edges is greater
+    % than one, create a structure array to replicate the property value
+    for i=2:nEdge
+        props(i) = props(1);
+    end
 end
 
 assert(length(props)==nEdge,...
@@ -64,7 +74,7 @@ propNames = fieldnames(props);
 
 prop_pos = cellfun(@(x)find(strcmp(x, valid_props.Name)), propNames);
 
-% go through all vertex properties to check if the value of a certain
+% go through all edge properties to check if the value of a certain
 % property is given
 for i=1:numel(propNames)
     
@@ -72,9 +82,20 @@ for i=1:numel(propNames)
     % value
     HybridSystem.validatePropAttribute({props.(propNames{i})},...
         valid_props.Type{prop_pos(i)},valid_props.Attribute{prop_pos(i)});
+    
+    
+    
     % if the value is not numeric or a cell, convert it to cell to
     % prevent future concatenation goes wrong
-    for j=1:nEdge
+    for j=edge'
+        % check if the guard condition contains in the source domain's
+        % unilateral constraints
+        if strcmp(propNames{i},'Guard')
+            src_vert = findnode(obj.Gamma, s{j});
+            src_domain = obj.Gamma.Nodes.Domain{src_vert};
+            validatestring(props(j).(propNames{i}), src_domain.UnilateralConstr.Name);
+        end
+        
         if iscell(obj.Gamma.Edges.(propNames{i})(j))
             obj.Gamma.Edges.(propNames{i}){j} = props(j).(propNames{i});
         else

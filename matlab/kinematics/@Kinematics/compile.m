@@ -1,4 +1,4 @@
-function status = compileExpression(obj, model, re_load)
+function status = compile(obj, model, re_load)
     % This function computes the symbolic expression of the
     % kinematics constraints in Mathematica.
     %
@@ -25,8 +25,8 @@ function status = compileExpression(obj, model, re_load)
         status = false;
         return;
     end
-    
-    if ~ check_var_exist(struct2cell(obj.Symbols)) || re_load
+    symbols = obj.Symbols;
+    if ~ check_var_exist(struct2cell(symbols)) || re_load
         % compile symbolic expressions
         
         kin_cmd_str = getKinMathCommand(obj, model);
@@ -36,23 +36,23 @@ function status = compileExpression(obj, model, re_load)
             
             % first obtain the symbolic expression for the
             % kinematic function
-            eval_math([obj.Symbols.Kin,'=',kin_cmd_str,';']);
+            eval_math([symbols.Kin,'=',kin_cmd_str,';']);
             
             % get the substitution rule for q = 0
             eval_math('{qe0subs,dqe0subs} = GetZeroStateSubs[];');
             
             % compute the Jacobian at q = 0
-            eval_math([obj.Symbols.Jac,'=',jac_cmd_str,'/.qe0subs;']);
+            eval_math([symbols.Jac,'=',jac_cmd_str,'/.qe0subs;']);
             
             % re-compute the linear function
             eval_math('Qe = GetQe[];');
-            eval_math([obj.Symbols.Kin,'=Flatten[',obj.Symbols.Jac,'.Qe];']);
+            eval_math([symbols.Kin,'=Flatten[',symbols.Jac,'.Qe];']);
             
-            eval_math([obj.Symbols.JacDot,'=',jacdot_cmd_str,';']);
+            eval_math([symbols.JacDot,'=',jacdot_cmd_str,';']);
         else
-            eval_math([obj.Symbols.Kin,'=',kin_cmd_str,';']);
-            eval_math([obj.Symbols.Jac,'=',jac_cmd_str,';']);
-            eval_math([obj.Symbols.JacDot,'=',jacdot_cmd_str,';']);
+            eval_math([symbols.Kin,'=',kin_cmd_str,';']);
+            eval_math([symbols.Jac,'=',jac_cmd_str,';']);
+            eval_math([symbols.JacDot,'=',jacdot_cmd_str,';']);
         end
         
         

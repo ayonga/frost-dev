@@ -8,6 +8,8 @@ function mathematica_setup()
     
     math('$Version')
     
+    math('SetOptions[ToString, PageWidth->Infinity];');
+    
     math(['$Path=DeleteDuplicates[Append[$Path,"',math_app_path,'"]];']);
     
     math('Needs["ExtraUtils`"]');
