@@ -1,89 +1,35 @@
 function obj = setParameters(obj, varargin)
-    % setController - set the controller for the domain
+    % Sets the parameter value of the desired outputs
     %
-    % Copyright 2014 Texas A&M University AMBER Lab
-    % Author: Ayonga Hereid <ayonga@tamu.edu>
-    
-    %% list all fields in parameter struct
-    param_names = {'p','a','v','p_range','p0','pdot0','x_minus','x_plus'};
-    
-    %% use local variables for faster evaluation
-    params = obj.params;
-    
-    %% Check the object parameter struct, if it is empty struct
-    %  then create a struct with above fields, set values to be empty.
-    if isempty(params)
-        params = struct();
-        num_params = numel(param_names);
-        for i=1:num_params
-            params.(param_names{i}) = [];
-        end
-    end
-    
-    %% if input is a structure contains parameters
-    if nargin == 2 && isstruct(varargin{1})
-        new_params = varargin{1};
-        for i=1:num_params
-            if isfield(new_params,param_names{i})
-                % if input structure contains fields specified in parameter
-                % struct, then update that field
-                params.(param_names{i}) = new_params.(param_names{i});
-                fprintf('%s: The parameter (%s) is updated.\n',obj.name, param_names{i});
-                
-                if strcmpi(param_names{i},'p')
-                    % if parameter p is updated, then update p_range based
-                    % on domain index
-                    p = params.p;
-                   
-                   %%% hack -wma
-%                    if obj.numDomainsInStep == 1
-%                         if obj.indexInStep == obj.numDomainsInStep
-%                             % if the domain is the last domain in one step
-%                             params.p_range = [p(obj.indexInStep+1); p(1)];
-%                         else
-%                             params.p_range = p(obj.indexInStep + 1 : ...
-%                                                obj.indexInStep + 2);
-%                         end
-%                    else
-                       params.p_range = [p(2); p(1)];
-%                    end
-                   
-                        
-                end
-            end
-        end
-    else
-        %% otherwise, the parameters should be feeded in pairs of
-        %  {name,value}
-        assert(mod(nargin-1,2)==0, 'wrong number of arguments.\n');
-        
-        for i = 1 : 2:nargin-1
-            name = varargin{i};
-            assert(ischar(name),'argument should be a string');                
-            
-            if isfield(params,name)
-                val  = varargin{i+1};
-                params.(name) = val;
-                fprintf('%s: The parameter (%s) is updated.\n',obj.domainName, name);
-            else
-                warning('The field is not defined in parameter struct');
-            end
-            
-            if strcmpi(name,'p')
-                % if parameter p is updated, then update p_range based
-                % on domain index
-                p = params.p;
-                if obj.indexInStep == obj.numDomainsInStep
-                    % if the domain is the last domain in one step
-                    params.p_range = [p(obj.indexInStep+1);p(1)];
-                else
-                    params.p_range = p(obj.indexInStep+1:obj.indexInStep+2);
-                end
-                
-            end
-        end
-    end
-            
-    obj.params = params;
+    % Parameters:
+    % varargin: name-value pairs of parameter sets. For instance,
+    % ('a', a_mat). It could be also given as a structured data
+    % with each field contains a set of parameters.
 
+    params = struct(varargin{:});
+
+    if isfield(params, 'p')
+        assert(all(size(obj.Parameters.p)==size(params.p)),...
+            ['The size of (p) is incorrect. \n',...
+            'Expected size is: (%d, %d).'], size(obj.Parameters.p,1), size(obj.Parameters.p,2));
+        obj.Parameters.p = params.p;
+        fprintf('%s: The parameter (%s) is updated.\n',obj.Name, 'p');
+    end
+
+    if isfield(params, 'v')
+        assert(all(size(obj.Parameters.v)==size(params.v)),...
+            ['The size of (v) is incorrect. \n',...
+            'Expected size is: (%d, %d).'], size(obj.Parameters.v,1), size(obj.Parameters.v,2));
+        obj.Parameters.v = params.v;
+        fprintf('%s: The parameter (%s) is updated.\n',obj.Name, 'v');
+    end
+
+
+    if isfield(params, 'a')
+        assert(all(size(obj.Parameters.a)==size(params.a)),...
+            ['The size of (a) is incorrect. \n',...
+            'Expected size is: (%d, %d).'], size(obj.Parameters.a,1), size(obj.Parameters.a,2));
+        obj.Parameters.a = params.a;
+        fprintf('%s: The parameter (%s) is updated.\n',obj.Name, 'a');
+    end
 end

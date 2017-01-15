@@ -6,7 +6,7 @@ function obj = setAcutation(obj, model, actuated_joints)
     % Parameters:
     % model: a rigid body model of type RigidBodyModel
     % actuated_joints: a list of actuated joints @type cellstr
-    %
+    
     
     
     if nargin < 3

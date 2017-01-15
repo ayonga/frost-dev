@@ -34,17 +34,16 @@ classdef Domain
         
         %% holonomic constraints
         
-        % a cell array of holonomic constraints given as objects of
-        % Kinematics classes
+        % A group of holonomic kinematic constraints
         %
         % @type KinematicGroup
         HolonomicConstr
         
         
         %% unilateral constraints 
-        % forces, distance
+        % A table of all unilateral constraints
         %
-        % @type KinematicGroup
+        % @type table
         UnilateralConstr
         
         
@@ -77,18 +76,17 @@ classdef Domain
             
             
             if ischar(name)
-                obj.Name = name;
-                
+                obj.Name = name;                
             else
                 error('The domain name must be a string.');
             end
             
             
             
-            obj.HolonomicConstr = KinematicGroup('Name',['hol',name]);
-            obj.UnilateralConstr = KinematicGroup('Name',['uni',name]);
-%             obj.UnilateralConstr = cell2table(cell(0,6),'VariableNames',...
-%                 {'Name','Type','WrenchCondition','WrenchIndices','KinObject','KinFunction'});
+            obj.HolonomicConstr  = KinematicGroup('Name', name, 'Prefix', 'hol');
+            
+            obj.UnilateralConstr = cell2table(cell(0,5),'VariableNames',...
+                {'Name','Type','WrenchCondition','KinObject','KinName'});
             
         end
         
@@ -98,22 +96,35 @@ classdef Domain
         
     end % public methods
         
-    %% Methods defined seperate files
+    
+    
+    
+    %% methods defined in external files
     methods
+        obj = addContact(obj, contacts);
+        
+        obj = addHolonomicConstraint(obj, kins);
+        
+        obj = addUnilateralConstraint(obj, kins);
+        
+        obj = removeContact(obj, contacts);
+        
+        obj = removeHolonomicConstraint(obj, kins);
+        
+        obj = removeUnilateralConstraint(obj, kins);
         
         obj = setAcutation(obj, model, actuated_joints);
-        
-        
-      
         
         obj = compile(obj, model, varargin);
                 
         obj = export(obj, export_path, do_build);
         
+        [Fe] = calcConstraintForces(obj, varargin);
+                
+        value = calcUnilateralCondition(obj, cond, model, qe, dqe, u);
         
-    end
-    
-    
+        [vfc, gfc] = calcVectorFields(obj, model, qe, dqe, De, He);
+    end 
     
     
     

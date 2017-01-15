@@ -1,87 +1,78 @@
-function [y_d1, y_d2, Dy_d1, Dy_d2, DLfy_d2, phip, tau, dtau, dy_d2_tau] = ...
-    calcDesiredOutputs(obj, t, x, model)
-    % calcActualOutputs- Calculate the actual outputs of the domain
+function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
+    % Calculates the desired outputs of the domain
     %   
     % 
-    % Input: 
-    %    * domain - domain
-    %    * x  -  system states
-    %
-    % Output:
-    %    * y_d1, y_d2, Dy_d1, Dy_d2, DLfy_d2
-    %
-    % Copyright 2014-2015 Texas A&M University AMBER Lab
-    % Author: Ayonga Hereid <ayonga@tamu.edu>
+    % Parameters: 
+    %  t: time @type double
+    %  qe: joint configuration @type colvec
+    %  dqe: joint velocities @type colvec
     
+    y_des = struct('yd1', [], ...
+        'Dyd1', [], ...
+        'yd2', [], ...
+        'Dyd2', [], ...
+        'DLfyd2', []);
     
-    
-    % Get parameters for easy access
-    params = obj.params;
-    v = params.v;
-    a = params.a(:);
-    p = params.p;
-    p_range = params.p_range;
+    extra = struct('tau', [], ...
+        'dtau', []);
     
     %% phase variables
-    if strcmpi(obj.outputs.type,'State-Based')
-        % if state-based outputs, use MEX functions to compute
-        % compute phase variable first
-        tau   = obj.tau(x,p);   % phase variable
-        dtau  = obj.dtau(x,p);  % time derivative of phase variable
-        Jtau  = obj.Jtau(x,p);  % Jacobian of 'tau' w.r.t 'x'
-        Jdtau = obj.Jdtau(x,p); % Jacobian of 'dtau' w.r.t 'x'
-        
-        % compute
-        phip = obj.deltaphip(x);
-        if obj.options.use_clamped_outputs
-            
-            if phip < p_range(1)
-                phip_new = p_range(1);
-                dtau = 0;
-            elseif phip > p_range(2)
-                phip_new = p_range(2);
-                dtau = 0;
+    switch obj.PhaseVariable.Type
+        case 'StateBased'
+            % if state-based outputs, use MEX functions to compute
+            % compute phase variable first
+            p = obj.Parameters.p;
+            pvar = obj.PhaseVariable.Var;
+            if isempty(p)
+                tau = feval(pvar.Funcs.Kin, qe);
+                tau_jac  = feval(pvar.Funcs.Jac, qe);
+                tau_jacdot  = feval(pvar.Funcs.JacDot, qe, dqe);
+            else
+                tau = feval(pvar.Funcs.Kin, qe, p);
+                tau_jac  = feval(pvar.Funcs.Jac, qe, p);
+                tau_jacdot  = feval(pvar.Funcs.JacDot, qe, dqe, p);
             end
+            dtau  = tau_jac*dqe;
             
-            % compute tau using clamped phip value
-            tau = (phip_new - p(2))/(p(1) - p(2));
-        end
- 
-        
-        
-    else
-        % if time-based outputs
-        tau   = t;
-        dtau  = 1;
-        Jtau  = [1, zeros(1,model.n_dofs), ...
-            0, zeros(1,model.n_dofs)];
-        Jdtau = [0, zeros(1,model.n_dofs), ...
-            1, zeros(1,model.n_dofs)];
-        phip = [];
+            
+            Jtau  = [tau_jac, zeros(size(tau_jac))];
+            dJtau = [tau_jacdot, tau_jac];
+            
+        case 'TimeBased'            
+            % if the desired outputs are time based, then assume time t as
+            % a part of system state vector, and correspondingly add rows
+            % associated with time 't' and 'dt' (which is 1)
+            ndof = length(qe);
+            tau   = t;
+            dtau  = 1;
+            Jtau  = [1, zeros(1, ndof), ...
+                0, zeros(1,ndof)];
+            dJtau = [0, zeros(1,ndof), ...
+                1, zeros(1,ndof)];
     end
     
+    extra.tau = tau;
+    extra.dtau = dtau;
     %% compute desired outputs
     % compute relative degree one output
-    if ~isempty(obj.yd1)
-        y_d1  = obj.yd1(tau,v);
-        dy_d1 = obj.dyd1(tau,v);
+    if ~isempty(obj.ActVelocityOutput)
+        v = obj.Parameters.v;
+        y_des.yd1  = feval(obj.DesVelocityOutput.Funcs.y, tau, v);
+        dy_d1      = feval(obj.DesVelocityOutput.Funcs.dy, tau, v);
         % chain rule
-        Dy_d1 = dy_d1*Jtau;
-    else
-        y_d1  = [];
-        Dy_d1 = [];
+        y_des.Dyd1 = dy_d1*Jtau;
     end
     
     % compute relative degree two outputs
-    y_d2   = obj.yd2(tau,a);
-    
-    dy_d2  = obj.dyd2(tau,a);
-    ddy_d2 = obj.ddyd2(tau,a);
+    a = obj.Parameters.a(:);
+    y_des.yd2  = feval(obj.DesPositionOutput.Funcs.y, tau, a);
+    dy_d2      = feval(obj.DesPositionOutput.Funcs.dy, tau, a);
+    ddy_d2     = feval(obj.DesPositionOutput.Funcs.ddy, tau, a);
+ 
     
     % chain rule to compute jacobian
-    Dy_d2   = dy_d2*Jtau;
-    DLfy_d2 = ddy_d2*dtau*Jtau + dy_d2*Jdtau;
+    y_des.Dyd2   = dy_d2*Jtau;
+    y_des.DLfyd2 = ddy_d2*dtau*Jtau + dy_d2*dJtau;
         
-    % velocity of desired outputs
-    dy_d2_tau = dy_d2*dtau;
+    
 end

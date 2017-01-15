@@ -19,20 +19,20 @@ function obj = compile(obj, model, varargin)
     
     
     
-    kin_objects = {obj.UnilateralConstr.KinGroupTable.KinObj};
-    for i=1:length(kin_objects)
-        if ~isa(kin_objects{i},'KinematicContact')
-            % compile all non-contact type kinematic constraints
-            compile(kin_objects{i}, model, varargin{:});
-        end
-    end
+    %     kin_objects = {obj.UnilateralConstr.KinGroupTable.KinObj};
+    %     for i=1:length(kin_objects)
+    %         if ~isa(kin_objects{i},'KinematicContact')
+    %             % compile all non-contact type kinematic constraints
+    %             compile(kin_objects{i}, model, varargin{:});
+    %         end
+    %     end
     
     
     
     % kinematic type of unilateral constraints
-    kin_unilateral = obj.UnilateralConstr{strcmp('Kinematic',obj.UnilateralConstr.Type),'KinObject'};
-    if ~isempty(kin_unilateral)        
-        cellfun(@(x)compileExpression(x, model, varargin{:}), kin_unilateral);
+    kin_objects = obj.UnilateralConstr{strcmp('Kinematic',obj.UnilateralConstr.Type),'KinObject'};
+    if ~isempty(kin_objects)        
+        cellfun(@(x)compile(x, model, varargin{:}), kin_objects);
     end
     
 end

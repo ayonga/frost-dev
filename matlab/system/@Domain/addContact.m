@@ -20,40 +20,41 @@ end
 obj.HolonomicConstr = addKinematic(obj.HolonomicConstr, contacts);
 
 % add to the unilateral constraints group
-obj.UnilateralConstr = addKinematic(obj.UnilateralConstr, contacts);
 
-% % register associated unilateral constraints
-% n_contact = numel(contacts);
-% 
-% for i=1:n_contact
-%     
-%     % generate indices for associated constraint forces
-%     c_index = getIndex(obj.HolonomicConstr, contacts{i});
-%     
-%     % get the unilateral wrench constraints of the contact
-%     [names, constraints] = getWrenchConstraint(contacts{i});
-%     n_constr = numel(names);
-%     
-%     % create an empty table first
-%     nvars = size(obj.UnilateralConstr, 2);
-%     new_cond = cell2table(cell(n_constr,nvars),'VariableNames',...
-%         obj.UnilateralConstr.Properties.VariableNames);
-%     
-%     % set appropriate variables
-%     new_cond.Name = names;
-%     new_cond.WrenchCondition = constraints;
-%     new_cond.WrenchIndices(:) = {c_index};    
-%     new_cond.Type(:) = {'Force'};
-%     new_cond.Properties.RowNames = new_cond.Name;
-%     
-%     % add to the existing unilateral condition table
-%     obj.UnilateralConstr = [obj.UnilateralConstr;new_cond];
-%     
-% 
-%     
-%     
-%     
-% end
+% register associated unilateral constraints
+n_contact = numel(contacts);
+
+for i=1:n_contact
+    
+    %     % generate indices for associated constraint forces
+    %     c_index = getIndex(obj.HolonomicConstr, contacts{i});
+    
+    % get the unilateral wrench constraints of the contact
+    [names, constraints] = getWrenchConstraint(contacts{i});
+    n_constr = numel(names);
+    
+    % create an empty table first
+    nvars = size(obj.UnilateralConstr, 2);
+    new_cond = cell2table(cell(n_constr,nvars),'VariableNames',...
+        obj.UnilateralConstr.Properties.VariableNames);
+    
+    % set appropriate variables
+    new_cond.Name = names;
+    new_cond.WrenchCondition = constraints;
+    %     new_cond.WrenchIndices(:) = {c_index};
+    new_cond.Type(:) = {'Force'};
+    new_cond.KinObject(:) = contacts(i);
+    new_cond.KinName(:) = {contacts{i}.Name};
+    new_cond.Properties.RowNames = new_cond.Name;
+    
+    % add to the existing unilateral condition table
+    obj.UnilateralConstr = [obj.UnilateralConstr;new_cond];
+    
+
+    
+    
+    
+end
 
 
 

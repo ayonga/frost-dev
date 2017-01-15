@@ -1,7 +1,7 @@
 classdef VirtualConstrDomain < Domain
     % Defines a subclass of continuous domain with virtual constraints.
     %
-    % @author Ayonga Hereid @date 2016-09-26
+    % @author ayonga @date 2016-09-26
     % 
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -11,28 +11,58 @@ classdef VirtualConstrDomain < Domain
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties
+    properties (SetAccess=private, GetAccess=public)
+        
         
         % The parameterized time variable (phase variable)
         %
-        % @type 
-        Tau
+        % Required fields of PhaseVariable:
+        % Type: the type of the parameterized time variable @type char
+        % Var: the kinematic object if it is a state-based phase variable
+        % @type Kinematics
+        % Param: the scaling parameters of the state-based phase variable
+        % @type colvec
+        % 
+        % @type struct
+        PhaseVariable
         
-        % The position-modulating outputs of the domain
+        % The desired position-modulating outputs of the domain
+        % 
+        % @type struct 
+        DesPositionOutput
+        
+        % The desired velocity-modulating outputs of the domain
+        % 
+        % @type struct
+        DesVelocityOutput
+        
+        % The actual position-modulating outputs of the domain
         %
         % The position-modulating outputs are (vector) relative degree two
         % by definition.
         % 
-        % @type 
-        PositionOutput
+        % @type KinematicGroup 
+        ActPositionOutput
         
-        % The velocity-modulating output of the domain
+        % The actual velocity-modulating output of the domain
         %
         % The velocity-modulating outputs are relative degree one
         % by definition.
         % 
-        % @type
-        VelocityOutput
+        % @type Kinematics
+        ActVelocityOutput
+        
+        % The parameter set of the domain
+        %
+        % Optional fields of Parameters:
+        % p: the scaling parameters of the phase variable @type double
+        % v: the parameters of the desired velocity output @type double
+        % a: the parameters of the desired position outputs @type matrix
+        %
+        % @type struct
+        Parameters
+        
+        
     end % properties
     
     
@@ -41,42 +71,55 @@ classdef VirtualConstrDomain < Domain
             % The class constructor function
             
             
-            obj = obj@Domain(name,varargin);
+            obj = obj@Domain(name,varargin{:});
             
+            % initialize the default (TimeBased) phase variable 
+            obj.PhaseVariable = struct(...
+                'Type', 'TimeBased',...
+                'Var', []);
+            
+            obj.Parameters = struct(...
+                'p',[],...
+                'v',[],...
+                'a',[]);
         end
         
         
-        function obj = setPhaseVariable(obj, var, par)
-            % Sets the parameterized time variable (phase variable)
-            %
-            % Parameters:
-            % kin: the kinematic function for the phase variable 
-            % @type Kinemtics
-            
-            obj.Tau = var;
-        end
-         
-        function obj = addVelocityOutput(obj, act, des)
-            % Adds a velocity-modulating output of the domain
-            %
-            % Parameters:
-            % kin: the kinematic function for the position-modulating
-            % output @type Kinemtics
-            
-            obj.PositionOutput = struct;
-            obj.PositionOutput.actual
-            obj.PositionOutput.desired
-        end
         
-        function obj = addPositionOutput(obj, act, des)
-            % Adds position-modulating outputs of the domain
-            %
-            % Parameters:
-            % kin: the kinematic function for the velocity-modulating
-            % output @type Kinemtics
-            
-            
-        end
         
     end % methods
+    
+    %% methods defined in external files
+    methods
+        obj = setPhaseVariable(obj, type, var);
+        
+        obj = setVelocityOutput(obj, act, des);
+        
+        obj = addPositionOutput(obj, act, des);
+        
+        obj = removePositionOutput(obj, act);
+        
+        obj = changeDesiredOutputType(obj, varargin);
+        
+        obj = setParameters(obj, varargin);
+        
+        
+        
+        y_act = calcActualOutputs(obj, qe, dqe);
+        
+        [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe);
+        
+        obj = compile(obj, model, varargin);
+        
+        status = export(obj, export_path, do_build);
+        
+        [indices] = getPositionOutputIndex(obj, output_name);
+    end
+    
+    %% static methods
+    methods (Static)
+        [expr, n_param] = getDesOutputExpr(type);
+        
+       
+    end % static methods
 end % classdef
