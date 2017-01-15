@@ -364,7 +364,7 @@ classdef RigidBodyModel
             obj.BaseDof = base_dofs;
             
             % load model from the URDF file
-            model = loadURDF(obj.ConfigFile);
+            model = ros_load_urdf(obj.ConfigFile);
             
             
             obj.Name = model.name;

@@ -1,4 +1,4 @@
-function urdf_model = loadURDF(urdf_file)
+function urdf_model = ros_load_urdf(urdf_file)
     % This function parse the ROS URDF file
     %
     % @note At this moment, this parser only support the 'link' and 'joint'
