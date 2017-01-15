@@ -7,18 +7,11 @@ function index = getIndex(obj, kin)
 
 
 
-    if ischar(kin)
-        ind = find(strcmp(kin, {obj.KinGroupTable.Name}));
-    elseif isa(kin,'Kinematics')
-        ind = find(strcmp(kin.Name, {obj.KinGroupTable.Name}));
-    end
-
-    if isempty(ind)
-        warning('The kinematic object: %s cannot be found in the group.\nSkipping...\n',...
-            kin.Name);
+    pos = getPosition(obj, kin);
+    if isempty(pos)
         index = [];
     else
-        index = obj.KinGroupTable(ind);
+        index = obj.KinGroupTable(pos).Index;
     end
 
 end

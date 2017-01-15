@@ -88,7 +88,9 @@ classdef KinematicGroup < Kinematics
         
         obj = updateIndex(obj);
                 
-        index = getIndex(obj, kin)
+        index = getIndex(obj, kin);
+        
+        pos = getPosition(obj, kin);
     end
     
     

@@ -19,7 +19,7 @@ function obj = removeKinematic(obj, kin)
             ind = find(strcmp(kin{i}, {obj.KinGroupTable.Name}));
             if isempty(ind)
                 warning('The kinematic object: %s cannot be found in the group.\nSkipping...\n',...
-                    kin{i}.Name);
+                    kin{i});
                 continue;
             end
             obj.KinGroupTable(ind) = [];
