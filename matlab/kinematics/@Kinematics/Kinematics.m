@@ -23,8 +23,8 @@ classdef (Abstract) Kinematics
         %
         % It has to be an unique string so as to prevent potential naming
         % conflicts in Mathematica. A valid name must begin with a letter,
-        % and must consists only of letters and numbers. So, e.g.
-        % underscores other special characters are not allowed. 
+        % and must consists only of letters and numbers. So special
+        % characters, e.g. underscores, are not allowed.
         %
         % The actual symbol variable in Mathematica uses the name string as
         % a subscript, i.e., it assigns the symbolic expression of the
@@ -40,11 +40,22 @@ classdef (Abstract) Kinematics
         Name
         
         
+        
         % A flag whether linearize the output or not. The actual output
         % will be the linearization of the functioni at q = 0.
         %
         % @type logical
         Linearize
+        
+        % A prefix for the function to be exported
+        %
+        % @type char @default 'h'
+        Prefix 
+        
+        % A suffix for the function to be exported
+        %
+        % @type char @default ''
+        Suffix
         
     end % properties
     
@@ -82,7 +93,17 @@ classdef (Abstract) Kinematics
                 end
             end
             
+            if isfield(objStruct, 'Prefix')
+                obj.Prefix = objStruct.Prefix;
+            else
+                obj.Prefix = 'h';
+            end
             
+            if isfield(objStruct, 'Suffix')
+                obj.Suffix = objStruct.Suffix;
+            else
+                obj.Suffix = [];
+            end
             
             if isfield(objStruct, 'Linearize')
                 obj.Linearize = objStruct.Linearize;
@@ -114,12 +135,12 @@ classdef (Abstract) Kinematics
         
         status = export(obj, export_path, do_build)
         
-        printExpression(obj, file);
+        print(obj, file);
     end
     
     
     %% private properties
-    properties (Hidden, GetAccess = protected)
+    properties (Hidden, Access = protected)
         
         % A flag for whether the ''Linearize'' option is changed
         %
@@ -170,19 +191,26 @@ classdef (Abstract) Kinematics
             assert(~isempty(obj.Name),'The ''Name'' of the object is empty');
             
             Symbols = struct(...
-                'Kin',['$h["',obj.Name,'"]'],...
-                'Jac',['$Jh["',obj.Name,'"]'],...
-                'JacDot',['$dJh["',obj.Name,'"]']); 
+                'Kin',['$',obj.Prefix,'["',obj.Name,'"]'],...
+                'Jac',['$J',obj.Prefix,'["',obj.Name,'"]'],...
+                'JacDot',['$dJ',obj.Prefix,'["',obj.Name,'"]']); 
         end
         
-        function Symbols = get.Funcs(obj)
+        function Funcs = get.Funcs(obj)
             
             assert(~isempty(obj.Name),'The ''Name'' of the object is empty');
             
-            Symbols = struct(...
-                'Kin',['h_',obj.Name],...
-                'Jac',['Jh_',obj.Name],...
-                'JacDot',['dJh_',obj.Name]); 
+            if isempty(obj.Suffix)            
+                Funcs = struct(...
+                    'Kin',[obj.Prefix,'_',obj.Name],...
+                    'Jac',['J',obj.Prefix,'_',obj.Name],...
+                    'JacDot',['dJ',obj.Prefix,'_',obj.Name]);
+            else
+                Funcs = struct(...
+                    'Kin',[obj.Prefix,'_',obj.Name,'_',obj.Suffix],...
+                    'Jac',['J',obj.Prefix,'_',obj.Name,'_',obj.Suffix],...
+                    'JacDot',['dJ',obj.Prefix,'_',obj.Name,'_',obj.Suffix]);
+            end
         end
         
         function obj = set.Linearize(obj, flag)
@@ -202,8 +230,7 @@ classdef (Abstract) Kinematics
         
         
         function obj = set.Name(obj, name)
-            % Set function for ''Name'' property
-            %
+            
             assert(ischar(name), 'The name must be a string.');
             
             % validate name string
@@ -214,6 +241,31 @@ classdef (Abstract) Kinematics
             obj.Name = name;
             
             
+        end
+        
+        function obj = set.Prefix(obj, prefix)
+            
+            assert(ischar(prefix), 'The prefix must be a string.');
+            
+            % validate name string
+            assert(isempty(regexp(prefix, '\W', 'once')),...
+                'Kinematics:invalidNameStr', ...
+                'Invalid name string, can NOT contain special characters.');
+            
+            obj.Prefix = prefix;
+        end
+        
+        function obj = set.Suffix(obj, suffix)
+            
+            if ~isempty(suffix)
+                assert(ischar(suffix), 'The suffix must be a string.');
+                
+                % validate name string
+                assert(isempty(regexp(suffix, '\W', 'once')),...
+                    'Kinematics:invalidNameStr', ...
+                    'Invalid name string, can NOT contain special characters.');
+            end
+            obj.Suffix = suffix;
         end
     end
     

@@ -13,19 +13,33 @@ classdef KinematicExpr < Kinematics
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties (SetAccess=protected, GetAccess=public)
+    properties
         
         % A string representation of the symbolic expressions
         %
         % @type char
         Expression
         
-        % A array of Kinematic constraints objects that are dependent
-        % variables of the kinematic epxression 
+        % An array of Kinematic constraints objects that are dependent
+        % variables of the kinematic expression 
         %
         % @type Kinematics
         Dependents
         
+        % An array of parameters of the kinematic expression
+        % 
+        % To use extra parameterized argument in the expression, the
+        % following rules must be applied (assuming ''p'' is the name of
+        % the parameter):
+        %  - must consider it as an 1-D vector.        
+        %  - each element should be written in the form of ''p[i]'' in the
+        %  expression.        
+        %  - the indexing must start from 1 instead of zero.
+        %  - if the parameter is a scalar, write it as ''p[1]'' instead of
+        %  ''p''.
+        %
+        % @type struct
+        Parameters
         
     end % properties
     
@@ -54,6 +68,12 @@ classdef KinematicExpr < Kinematics
             
             if isfield(objStruct, 'Dependents')
                 obj.Dependents = objStruct.Dependents;
+            end
+            
+            if isfield(objStruct, 'Parameters')
+                obj.Parameters = objStruct.Parameters;
+            else
+                obj.Parameters = [];
             end
         end
         
@@ -88,6 +108,23 @@ classdef KinematicExpr < Kinematics
             end
             
             obj.Dependents = deps;
+        end
+        
+        function obj = set.Parameters(obj, params)
+            
+            if ~isempty(params)
+                assert(isstruct(params), 'The parameter argument must be given as a struct');
+                
+                if ~isfield(params, 'Name')
+                    error('The parameters struct must contain the "Name" field.');
+                end
+                
+                if ~isfield(params, 'Dimension')
+                    error('The parameters struct must contain the "Dimension" field.');
+                end
+            end
+            
+            obj.Parameters = params;
         end
         
     end % methods

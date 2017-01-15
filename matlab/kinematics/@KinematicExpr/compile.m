@@ -28,25 +28,35 @@ function status = compile(obj, model, re_load)
         status = false;
         return;
     end
-    
-    
-    % validate the expression and dependence
-    % extract variable names
-    var_names = cellfun(@(kin){kin.Name},obj.Dependents,'UniformOutput',false);
-    % validate if symbolic variables in the expressions are members
-    % of the dependent variables
     if isempty(obj.Expression)
         error('The kinematic ''Expression'' is not assigned.');
     end
-    ret = eval_math(['CheckSymbols[',obj.Expression,',Flatten[',cell2tensor(var_names,'ConvertString',false),']]']);
     
-    if ~strcmp(ret, 'True')
-        err_msg = ['Mathematica detected symbolic variables that are not defined as ''Dependents''.\n',...
-            'Following symbolic variables are detected by Mathematica: \n %s'];
-        
-        det_var = eval_math(['FindSymbols[',obj.Expression,']']);
-        
-        error('Kinematics:invalidExpr',err_msg, det_var);
+    %     % validate the expression and dependence
+    %     % extract variable names
+    %     var_names = cellfun(@(kin){kin.Name},obj.Dependents,'UniformOutput',false);
+    %     % validate if symbolic variables in the expressions are members
+    %     % of the dependent variables
+    
+    %     ret = eval_math(['CheckSymbols[',obj.Expression,',Flatten[',cell2tensor(var_names,'ConvertString',false),']]']);
+    %
+    %     if ~strcmp(ret, 'True')
+    %         err_msg = ['Mathematica detected symbolic variables that are not defined as ''Dependents''.\n',...
+    %             'Following symbolic variables are detected by Mathematica: \n %s'];
+    %
+    %         det_var = eval_math(['FindSymbols[',obj.Expression,']']);
+    %
+    %         error('Kinematics:invalidExpr',err_msg, det_var);
+    %     end
+    
+    % check if the parameters symbol has been already defined as an
+    % expression in Mathematica, if TRUE, then the parameter name cannot be
+    % used and must clear the existing definition before continue.
+    if ~isempty(obj.Parameters)
+        ret = eval_math(['ValueQ[',obj.Parameters.Name,']']);
+        if strcmp(ret, 'True')
+            eval_math(['Clear',obj.Parameters.Name,']']);
+        end
     end
     %%
     symbols = obj.Symbols;
@@ -54,9 +64,9 @@ function status = compile(obj, model, re_load)
         
         % first compile dependent kinematics constraints
         cellfun(@(x) compile(x, model, re_load), obj.Dependents);
-        
-        var_names = cellfun(@(kin){kin.Name},obj.Dependents);
-        
+        % extract the name of dependent variables
+        var_names = cellfun(@(kin){kin.Name},obj.Dependents,'UniformOutput',false);
+       
         % find symbolic varaibles in the expression
         vars = eval_math(['FindSymbols[',obj.Expression,']']);
         

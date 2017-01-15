@@ -30,7 +30,7 @@ function status = export(obj, export_path, do_build)
     funcs   = obj.Funcs;
     
     if ~ check_var_exist(struct2cell(symbols))
-        warning(['The robot dynamics has not been compiled in Mathematica.\n',...
+        warning(['The kinematic expression has not been compiled in Mathematica.\n',...
             'Please call %s first\n',...
             'Aborting ...\n'],'compileKinematics(domain, model)');
         return;
@@ -57,27 +57,27 @@ function status = export(obj, export_path, do_build)
         'It should be %d.'],sym_expr_dim,kin_dim);
     
     
-     % if exists, export the function
-     eval_math(['CseWriteCpp[',str2mathstr(funcs.Kin),',{',symbols.Kin,'},',...
-         'ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]']);
-     
-     fprintf('File  %s.cc has been exported to %s\n', funcs.Kin, export_path);
-     
-     
-     eval_math(['CseWriteCpp[',str2mathstr(funcs.Jac),',{',symbols.Jac,'},',...
-         'ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]']);
-     
-     fprintf('File  %s.cc has been exported to %s\n', funcs.Jac, export_path);
-     
-     
-     eval_math(['CseWriteCpp[',str2mathstr(funcs.JacDot),',{',symbols.JacDot,'},',...
-         'ArgumentLists->{q,dq},ArgumentDimensions->{{nDof,1},{nDof,1}}]']);
-     
-     fprintf('File  %s.cc has been exported to %s\n', funcs.JacDot,export_path);
-     % build mex file
-     if do_build
-         build_mex(export_path,struct2cell(funcs));
-     end
+    % if exists, export the function
+    eval_math(['CseWriteCpp[',str2mathstr(funcs.Kin),',{',symbols.Kin,'},',...
+        'ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]']);
+    
+    fprintf('File  %s.cc has been exported to %s\n', funcs.Kin, export_path);
+    
+    
+    eval_math(['CseWriteCpp[',str2mathstr(funcs.Jac),',{',symbols.Jac,'},',...
+        'ArgumentLists->{q},ArgumentDimensions->{{nDof,1}}]']);
+    
+    fprintf('File  %s.cc has been exported to %s\n', funcs.Jac, export_path);
+    
+    
+    eval_math(['CseWriteCpp[',str2mathstr(funcs.JacDot),',{',symbols.JacDot,'},',...
+        'ArgumentLists->{q,dq},ArgumentDimensions->{{nDof,1},{nDof,1}}]']);
+    
+    fprintf('File  %s.cc has been exported to %s\n', funcs.JacDot,export_path);
+    % build mex file
+    if do_build
+        build_mex(export_path,struct2cell(funcs));
+    end
     
     
    
