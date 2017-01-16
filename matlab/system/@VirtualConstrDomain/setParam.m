@@ -1,4 +1,4 @@
-function obj = setParameters(obj, varargin)
+function obj = setParam(obj, varargin)
     % Sets the parameter value of the desired outputs
     %
     % Parameters:
@@ -9,27 +9,27 @@ function obj = setParameters(obj, varargin)
     params = struct(varargin{:});
 
     if isfield(params, 'p')
-        assert(all(size(obj.Parameters.p)==size(params.p)),...
+        assert(all(size(obj.Param.p)==size(params.p)),...
             ['The size of (p) is incorrect. \n',...
-            'Expected size is: (%d, %d).'], size(obj.Parameters.p,1), size(obj.Parameters.p,2));
-        obj.Parameters.p = params.p;
+            'Expected size is: (%d, %d).'], size(obj.Param.p,1), size(obj.Param.p,2));
+        obj.Param.p = params.p;
         fprintf('%s: The parameter (%s) is updated.\n',obj.Name, 'p');
     end
 
     if isfield(params, 'v')
-        assert(all(size(obj.Parameters.v)==size(params.v)),...
+        assert(all(size(obj.Param.v)==size(params.v)),...
             ['The size of (v) is incorrect. \n',...
-            'Expected size is: (%d, %d).'], size(obj.Parameters.v,1), size(obj.Parameters.v,2));
-        obj.Parameters.v = params.v;
+            'Expected size is: (%d, %d).'], size(obj.Param.v,1), size(obj.Param.v,2));
+        obj.Param.v = params.v;
         fprintf('%s: The parameter (%s) is updated.\n',obj.Name, 'v');
     end
 
 
     if isfield(params, 'a')
-        assert(all(size(obj.Parameters.a)==size(params.a)),...
+        assert(all(size(obj.Param.a)==size(params.a)),...
             ['The size of (a) is incorrect. \n',...
-            'Expected size is: (%d, %d).'], size(obj.Parameters.a,1), size(obj.Parameters.a,2));
-        obj.Parameters.a = params.a;
+            'Expected size is: (%d, %d).'], size(obj.Param.a,1), size(obj.Param.a,2));
+        obj.Param.a = params.a;
         fprintf('%s: The parameter (%s) is updated.\n',obj.Name, 'a');
     end
 end

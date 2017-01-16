@@ -54,13 +54,13 @@ classdef VirtualConstrDomain < Domain
         
         % The parameter set of the domain
         %
-        % Optional fields of Parameters:
+        % Optional fields of Param:
         % p: the scaling parameters of the phase variable @type double
         % v: the parameters of the desired velocity output @type double
         % a: the parameters of the desired position outputs @type matrix
         %
         % @type struct
-        Parameters
+        Param
         
         
     end % properties
@@ -78,7 +78,7 @@ classdef VirtualConstrDomain < Domain
                 'Type', 'TimeBased',...
                 'Var', []);
             
-            obj.Parameters = struct(...
+            obj.Param = struct(...
                 'p',[],...
                 'v',[],...
                 'a',[]);
@@ -101,7 +101,7 @@ classdef VirtualConstrDomain < Domain
         
         obj = changeDesiredOutputType(obj, varargin);
         
-        obj = setParameters(obj, varargin);
+        obj = setParam(obj, varargin);
         
         
         

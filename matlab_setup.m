@@ -10,7 +10,7 @@ addpath(fullfile(cur, 'matlab/utils'));
 addpath(fullfile(cur, 'matlab/nlp'));
 addpath(fullfile(cur, 'matlab/system'));
 addpath(fullfile(cur, 'matlab/kinematics'));
-
+addpath(fullfile(cur, 'matlab/control'));
 % Add useful custom functions path
 addpath_matlab_utilities('general', 'mex',...
     'graphics', 'cwf', 'polynomial', 'sys', 'mathlink',...

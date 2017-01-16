@@ -10,7 +10,7 @@ function obj = changeDesiredOutputType(obj, varargin)
         obj.DesVelocityOutput.Type = des.VelocityOutput;
 
         n_param = obj.getDesOutputExpr(des.VelocityOutput);
-        obj.Parameters.v = nan(1,n_param);
+        obj.Param.v = nan(1,n_param);
         warning(['The desired velocity output type has been changed, ',...
             'and the corresponding parameters are set to NaN.']);
     end
@@ -20,7 +20,7 @@ function obj = changeDesiredOutputType(obj, varargin)
 
         n_param = obj.getDesOutputExpr(des.PositionOutput);
         n_output = getDimension(obj.ActPositionOutput);
-        obj.Parameters.a = nan(n_output,n_param);
+        obj.Param.a = nan(n_output,n_param);
         warning(['The desired position output type has been changed, ',...
             'and the corresponding parameters are set to NaN.']);
     end

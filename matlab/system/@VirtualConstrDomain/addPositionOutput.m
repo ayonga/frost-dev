@@ -50,6 +50,6 @@ function obj = addPositionOutput(obj, act, des)
      % setup the desired output parameter structure
      [~,n_param] = obj.getDesOutputExpr(des);
      n_output = getDimension(obj.ActPositionOutput);
-     obj.Parameters.a = nan(n_output,n_param);
+     obj.Param.a = nan(n_output,n_param);
 
 end

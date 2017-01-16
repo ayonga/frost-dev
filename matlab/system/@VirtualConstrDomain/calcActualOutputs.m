@@ -5,7 +5,19 @@ function y_act = calcActualOutputs(obj, qe, dqe)
     % Parameters: 
     %  qe:  joint configuration @type colvec
     %  dqe: joint velocities @type colvec
-    
+    %
+    % Return values:
+    %  y_act: the actual outputs @type struct
+    % 
+    % Required fields of y_act:
+    % ya1: the actual velocity (RD1) output @type double
+    % Dya1: the first order partial derivatives of ya1 w.r.t 
+    % to system states @type rowvec
+    % ya2: the actual position (RD2) outputs @type colvec
+    % Dya2: the first order partial derivatives of ya2 w.r.t 
+    % to system states @type matrix
+    % DLfya2: the second order partial derivatives of ya2 w.r.t 
+    % to system states @type matrix
     
     % initialize the actual output structure
     y_act = struct('ya1', [], ...

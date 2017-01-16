@@ -6,6 +6,21 @@ function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
     %  t: time @type double
     %  qe: joint configuration @type colvec
     %  dqe: joint velocities @type colvec
+    % 
+    % Return values:
+    %  y_act: the actual outputs @type struct
+    %  extra: extra computated data @type struct
+    % 
+    % Required fields of y_des:
+    % yd1: the desired velocity (RD1) output @type double
+    % Dyd1: the first order partial derivatives of yd1 w.r.t 
+    % to system states @type rowvec
+    % yd2: the desired position (RD2) outputs @type colvec
+    % Dyd2: the first order partial derivatives of yd2 w.r.t 
+    % to system states @type matrix
+    % DLfyd2: the second order partial derivatives of yd2 w.r.t 
+    % to system states @type matrix
+    
     
     y_des = struct('yd1', [], ...
         'Dyd1', [], ...
@@ -21,7 +36,7 @@ function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
         case 'StateBased'
             % if state-based outputs, use MEX functions to compute
             % compute phase variable first
-            p = obj.Parameters.p;
+            p = obj.Param.p;
             pvar = obj.PhaseVariable.Var;
             if isempty(p)
                 tau = feval(pvar.Funcs.Kin, qe);
@@ -56,7 +71,7 @@ function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
     %% compute desired outputs
     % compute relative degree one output
     if ~isempty(obj.ActVelocityOutput)
-        v = obj.Parameters.v;
+        v = obj.Param.v;
         y_des.yd1  = feval(obj.DesVelocityOutput.Funcs.y, tau, v);
         dy_d1      = feval(obj.DesVelocityOutput.Funcs.dy, tau, v);
         % chain rule
@@ -64,7 +79,7 @@ function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
     end
     
     % compute relative degree two outputs
-    a = obj.Parameters.a(:);
+    a = obj.Param.a(:);
     y_des.yd2  = feval(obj.DesPositionOutput.Funcs.y, tau, a);
     dy_d2      = feval(obj.DesPositionOutput.Funcs.dy, tau, a);
     ddy_d2     = feval(obj.DesPositionOutput.Funcs.ddy, tau, a);

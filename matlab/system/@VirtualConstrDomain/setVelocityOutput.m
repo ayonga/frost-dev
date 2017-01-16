@@ -35,7 +35,7 @@ function obj = setVelocityOutput(obj, act, des)
         % set parameter structure for velocity output
         [~,n_param] = obj.getDesOutputExpr(des);
 
-        obj.Parameters.v = nan(1,n_param);
+        obj.Param.v = nan(1,n_param);
     end
 
 end

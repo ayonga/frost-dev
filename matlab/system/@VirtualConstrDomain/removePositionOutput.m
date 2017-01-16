@@ -13,6 +13,6 @@ function obj = removePositionOutput(obj, act)
     else                
         [~,n_param] = obj.getDesOutputExpr(obj.DesPositionOutput.Type);
         n_output = getDimension(obj.ActPositionOutput);
-        obj.Parameters.a = nan(n_output, n_param);
+        obj.Param.a = nan(n_output, n_param);
     end
 end
