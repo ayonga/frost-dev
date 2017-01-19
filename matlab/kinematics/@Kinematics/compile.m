@@ -43,7 +43,6 @@ function status = compile(obj, model, re_load)
             
             % compute the Jacobian at q = 0
             eval_math([symbols.Jac,'=',jac_cmd_str,'/.qe0subs;']);
-            
             % re-compute the linear function
             eval_math('Qe = GetQe[];');
             eval_math([symbols.Kin,'=Flatten[',symbols.Jac,'.Qe];']);

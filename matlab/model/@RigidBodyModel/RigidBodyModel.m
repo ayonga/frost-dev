@@ -58,6 +58,16 @@ classdef RigidBodyModel
         % @type struct
         Links
         
+        
+        % Represents the list of rigid body joints
+        %
+        % The link structure contains the elements of 'joint'
+        % specified in the URDF file.
+        %
+        % @type struct
+        Joints
+        
+        
         % The structur contains the configuration of the base coordinates,
         % which normally does not conver in the URDF file.
         %
@@ -369,6 +379,7 @@ classdef RigidBodyModel
             
             obj.Name = model.name;
             obj.Links = model.links;
+            obj.Joints = model.joints;
             obj.nDof = obj.nBaseDof + numel(model.joints);
             % Setup indices for fast operator
             obj = configureIndices(obj);

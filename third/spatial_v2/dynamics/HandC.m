@@ -52,14 +52,7 @@ end
 
 
 
-% for i = model.NB:-1:1
-for i = flip(kin_tree)
-  C(i,1) = transpose(S(:,:,i)) * fvp(:,:,i);
-  if model.parent(i) ~= 0
-    fvp(:,:,model.parent(i)) = fvp(:,:,model.parent(i)) + ...
-        transpose(Xup(:,:,i))*fvp(:,:,i);
-  end
-end
+
 
 IC = model.I;				% composite inertia calculation
 
@@ -91,4 +84,15 @@ for i = kin_tree
     H(i,j) = transpose(S(:,:,j)) * fh;
     H(j,i) = H(i,j);
   end
+end
+
+if nargout > 1
+    % for i = model.NB:-1:1
+    for i = flip(kin_tree)
+        C(i,1) = transpose(S(:,:,i)) * fvp(:,:,i);
+        if model.parent(i) ~= 0
+            fvp(:,:,model.parent(i)) = fvp(:,:,model.parent(i)) + ...
+                transpose(Xup(:,:,i))*fvp(:,:,i);
+        end
+    end
 end

@@ -124,6 +124,8 @@ classdef Domain
         value = calcUnilateralCondition(obj, cond, model, qe, dqe, u);
         
         [vfc, gfc] = calcVectorFields(obj, model, qe, dqe, De, He);
+        
+        [x_post] = updateStates(obj, model, x_pre, delta);
     end 
     
     

@@ -1,38 +1,22 @@
-function [u, extra] = calcControl(obj, vfc, gfc, y_act, y_des)
+function [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain)
     % Computes the PD control law for output space directly
     %
     % Parameters:
+    % t: the time instant @type double
+    % qe: the joint configuration @type colvec
+    % dqe: the joint velocities @type colvec
     % vfc: the vector field f(x) @type colvec
     % gfc: the vector field g(x) @type colvec
-    % y_act: the actual outputs @type struct
-    % y_des: the desired outputs @type struct
+    % domain: the continuous domain @type Domain
     %
     % Return values:
     % u: the computed torque @type colvec
     % extra: additional computed data @type struct
-    %
-    % 
-    % Required fields of y_act:
-    % ya1: the actual velocity (RD1) output @type double
-    % Dya1: the first order partial derivatives of ya1 w.r.t
-    % to system states @type rowvec
-    % ya2: the actual position (RD2) outputs @type colvec
-    % Dya2: the first order partial derivatives of ya2 w.r.t
-    % to system states @type matrix
-    % DLfya2: the second order partial derivatives of ya2 w.r.t
-    % to system states @type matrix
-    % 
-    % Required fields of y_des:
-    % yd1: the desired velocity (RD1) output @type double
-    % Dyd1: the first order partial derivatives of yd1 w.r.t
-    % to system states @type rowvec
-    % yd2: the desired position (RD2) outputs @type colvec
-    % Dyd2: the first order partial derivatives of yd2 w.r.t
-    % to system states @type matrix
-    % DLfyd2: the second order partial derivatives of yd2 w.r.t
-    % to system states @type matrix
-
-
+    % compute actual and desired outputs
+    y_act = calcActualOutputs(domain, qe, dqe);
+    y_des = calcDesiredOutputs(domain, t, qe, dqe);
+    
+    
     y1    = y_act.ya1 - y_des.yd1;
     Dy1   = y_act.Dya1 - y_des.Dyd1;
 
@@ -82,6 +66,18 @@ function [u, extra] = calcControl(obj, vfc, gfc, y_act, y_des)
         extra.y1 = y1;
         extra.y2 = y2;        
         extra.Lfy2 = Lfy2;
+        
+        extra.ya1 = y_act.ya1;
+        extra.yd1 = y_des.yd1;
+        
+        extra.ya2 = y_act.ya2;
+        extra.yd2 = y_des.yd2;
+        
+        extra.ya2dot = y_act.Dya2 * vfc;
+        extra.yd2dot = y_des.Dyd2 * vfc;
+        
+        extra.tau = y_des.tau;
+        extra.dtau = y_des.dtau;
     end
 
 end

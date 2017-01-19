@@ -25,16 +25,6 @@ classdef HybridSystem
     
    
     
-    properties (GetAccess = public, SetAccess = protected)
-        % The directed graph that describes the hybrid dynamical system
-        % structure
-        %
-        % @type digraph
-        Gamma
-    
-    end
-    
-    
     %% public properties
     properties (GetAccess = public, SetAccess = protected)
         % This is the name of the object that gives the object an universal
@@ -43,9 +33,11 @@ classdef HybridSystem
         % @type char @default ''
         Name
         
-        
-        
-        
+        % The directed graph that describes the hybrid dynamical system
+        % structure
+        %
+        % @type digraph
+        Gamma
         
         % The rigid body model of the hybrid system
         %
@@ -59,21 +51,7 @@ classdef HybridSystem
         
                
         
-        % The class option
-        %
-        % Required fields of options:
-        %  sim_options: the simulation options @type struct
-        %  ode_options: the default options for ODE solvers
-        %
-        % Required fields of sim_options:
-        %  num_cycle: the number of cyclic motion of the periodic directed
-        %          cycle @type integer @default 1
-        %  first_vertex: the starting vertex in the graph
-        %
-        % @type struct
-        Options = struct(...
-            'sim_options',[],...
-            'ode_options',[]);
+        
         
     end
     
@@ -106,25 +84,17 @@ classdef HybridSystem
         function EdgeProperties = get.EdgeProperties(obj)
             
             EdgeProperties = struct();
-            EdgeProperties.Name =  {'Guard', 'Direction', 'Weights'};
-            EdgeProperties.Type = {{'char'}, {'numeric'}, {'numeric'}};
-            EdgeProperties.Attribute = {{'scalartext'},{'<=',1,'>=',-1,'integer'},{'scalar'}};
-            EdgeProperties.DefaultValue = {'',1,NaN};
+            EdgeProperties.Name =  {'Guard', 'Weights'};
+            EdgeProperties.Type = {{'Guard'}, {'numeric'}};
+            EdgeProperties.Attribute = {{}, {'scalar'}};
+            EdgeProperties.DefaultValue = {{[]}, NaN};
         end
     end
     
     %% Public methods
     methods (Access = public)
-        function obj = HybridSystem(varargin)
+        function obj = HybridSystem(name, model)
             % the default calss constructor
-            %
-            % Required fields of options:
-            %  sim_options: the simulation options @type struct     
-            %  ode_options: the default options for ODE solvers
-            %
-            % Required fields of sim_options:
-            %  num_cycle: the number of cyclic motion of the periodic directed
-            %          cycle @type integer @default 1
             %
             % Parameters:
             % varargin: variable class construction arguments.
@@ -132,16 +102,17 @@ classdef HybridSystem
             % Return values:
             % obj: the class object
             
+            assert(ischar(name), 'The object name must be a string.');
+            obj.Name = name;
+            
+            assert(isa(model, 'RigidBodyModel'), ...
+                'The model must be an object of ''RigidBodyModel''.');
+            obj.Model = model;
             
             % initialize an empty directed graph with specified properties           
             obj.Gamma = digraph;
             % add a dummy node and remove it to initialize the properties
-            %             empty_props = cell(numel(obj.VertexProperties.Name),1);
-            %             dummy_node = cell2table([{'dummy'},empty_props(:)'],'VariableNames',[{'Name'},obj.VertexProperties.Name]);
-            %             obj.Gamma = addnode(obj.Gamma,dummy_node);
-            %             obj.Gamma = rmnode(obj.Gamma,'dummy');
             obj = addVertex(obj,'dummy');
-%             obj = addEdge(obj,'Source',{'dummy'},'Target',{'dummy'});
             obj = rmVertex(obj,'dummy');
             
         end
@@ -171,6 +142,12 @@ classdef HybridSystem
         obj = setEdgeProperties(obj, s, t, varargin);
         
         obj = setVertexProperties(obj, vertex, varargin);
+        
+        [dx, extra] = calcDynamics(obj, t, x, cur_node);
+        
+        [value, isterminal, direction] = checkGuard(obj, t, x, cur_node, assoc_edges);
+        
+        obj = simulate(obj, options);
     end
     
     %% Private methods

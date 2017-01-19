@@ -143,25 +143,25 @@ classdef KinematicPosition < Kinematics
         end
         
         % overload the Jacobian compilation command
-        function cmd = getJacMathCommand(obj, model)
-            % This function returns the Mathematica command to compile the
-            % symbolic expression for the kinematic constraint's Jacobian.
-             
-            valid_links = {model.Links.name};
-            % validate parent link name (case insensitive)
-            parent  = validatestring(obj.ParentLink,valid_links);
-            
-            
-            if isempty(obj.Offset)
-                error('The ''Offset'' of the position NOT assigned.');
-            end
-            
-            % create a cell as the input argument
-            arg = {parent,obj.Offset};
-            % class specific command for computing rotational spatial
-            % Jacobian of an position
-            cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,{',num2str(obj.pIndex),'}]]'];
-        end
+        % function cmd = getJacMathCommand(obj, model)
+        %     % This function returns the Mathematica command to compile the
+        %     % symbolic expression for the kinematic constraint's Jacobian.
+        %
+        %     valid_links = {model.Links.name};
+        %     % validate parent link name (case insensitive)
+        %     parent  = validatestring(obj.ParentLink,valid_links);
+        %
+        %
+        %     if isempty(obj.Offset)
+        %         error('The ''Offset'' of the position NOT assigned.');
+        %     end
+        %
+        %     % create a cell as the input argument
+        %     arg = {parent,obj.Offset};
+        %     % class specific command for computing rotational spatial
+        %     % Jacobian of an position
+        %     cmd = ['ComputeSpatialJacobians[',cell2tensor(arg),'][[1,{',num2str(obj.pIndex),'}]]'];
+        % end
         
         % use default function
         % function cmd = getJacDotMathCommand(obj)

@@ -17,12 +17,18 @@ function [De, He] = calcNaturalDynamics(obj, qe, dqe, useSVA)
     end
         
     if useSVA
-        [De, He] = HandC(obj.SVA, qe, dqe);
+        if nargout > 1
+            [De, He] = HandC(obj.SVA, qe, dqe);
+        else
+            De = HandC(obj.SVA, qe, dqe);
+        end
     else
         De = De_mat(qe); % inertia matrix
-        Ce = Ce_mat(qe, dqe); % coriolis matrix
-        Ge = Ge_vec(qe); % gravity vector
-        He = Ce*dqe + Ge;
+        if nargout > 1
+            Ce = Ce_mat(qe, dqe); % coriolis matrix
+            Ge = Ge_vec(qe); % gravity vector
+            He = Ce*dqe + Ge;
+        end
     end
     
     

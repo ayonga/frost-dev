@@ -93,7 +93,7 @@ for i=1:numel(propNames)
         if strcmp(propNames{i},'Guard')
             src_vert = findnode(obj.Gamma, s{j});
             src_domain = obj.Gamma.Nodes.Domain{src_vert};
-            validatestring(props(j).(propNames{i}), src_domain.UnilateralConstr.Name);
+            validatestring(props(j).(propNames{i}).Condition, src_domain.UnilateralConstr.Name);
         end
         
         if iscell(obj.Gamma.Edges.(propNames{i})(j))

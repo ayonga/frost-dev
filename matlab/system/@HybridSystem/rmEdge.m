@@ -15,10 +15,10 @@ function obj = rmEdge(obj, s, t)
 
 
 
-    assert(iscellstr(s) || ischar(s),...
-        'Only character vector and cell array of character vector (cellstr) types are supported.');
-    assert(iscellstr(t) || ischar(t),...
-        'Only character vector and cell array of character vector (cellstr) types are supported.');
+    assert(iscellstr(s) || ischar(s) || isnumeric(s),...
+        'Only character vector or numeric data types are supported.');
+    assert(iscellstr(t) || ischar(t) || isnumeric(t),...
+        'Only character vector or numeric data types are supported.');
 
     % remove node using
     obj.Gamma = rmedge(obj.Gamma, s, t);

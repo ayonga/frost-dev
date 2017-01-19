@@ -105,6 +105,7 @@ function status = compile(obj, model, re_load)
             eval_math('{qe0subs,dqe0subs} = GetZeroStateSubs[];');
             % use chain rules to construct the final Jacobian matrix
             eval_math([symbols.Jac,'=',symbols.Jac,'/.qe0subs;']);
+            % eval_math([symbols.Jac,'=ComputeKinJacobians[',symbols.Kin,']/.qe0subs;']);
             % re-compute the linear function
             eval_math('Qe = GetQe[];');
             eval_math([symbols.Kin,'=Flatten[',symbols.Jac,'.Qe];']);

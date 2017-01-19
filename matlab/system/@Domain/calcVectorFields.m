@@ -38,7 +38,7 @@ function [vfc, gfc] = calcVectorFields(obj, model, qe, dqe, De, He)
     Je    = feval(obj.HolonomicConstr.Funcs.Jac, qe);
     Jedot = feval(obj.HolonomicConstr.Funcs.JacDot, qe, dqe);
     
-    Ie    = eye(model.nDof);
+    Ie    = eye(length(qe));
     Be    = obj.ActuationMap;
     
     XiInv = Je * (De \ transpose(Je));

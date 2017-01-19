@@ -1,4 +1,4 @@
-function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
+function [y_des] = calcDesiredOutputs(obj, t, qe, dqe)
     % Calculates the desired outputs of the domain
     %   
     % 
@@ -20,16 +20,18 @@ function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
     % to system states @type matrix
     % DLfyd2: the second order partial derivatives of yd2 w.r.t 
     % to system states @type matrix
+    % tau: the phase variable @type double
+    % dtau: the time derivative of the phase variable @type double
     
     
     y_des = struct('yd1', [], ...
         'Dyd1', [], ...
         'yd2', [], ...
         'Dyd2', [], ...
-        'DLfyd2', []);
-    
-    extra = struct('tau', [], ...
+        'DLfyd2', [], ...
+        'tau', [], ...
         'dtau', []);
+    
     
     %% phase variables
     switch obj.PhaseVariable.Type
@@ -66,8 +68,8 @@ function [y_des, extra] = calcDesiredOutputs(obj, t, qe, dqe)
                 1, zeros(1,ndof)];
     end
     
-    extra.tau = tau;
-    extra.dtau = dtau;
+    y_des.tau = tau;
+    y_des.dtau = dtau;
     %% compute desired outputs
     % compute relative degree one output
     if ~isempty(obj.ActVelocityOutput)

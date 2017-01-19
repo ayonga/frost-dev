@@ -41,7 +41,7 @@ classdef JointPD < Controller
     methods
         obj = setParam(obj, varargin);
         
-        [u, extra] = calcControl(obj, qa, dqa, qd, dqd, Be)
+        [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain);
     end
     
 end

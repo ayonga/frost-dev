@@ -24,7 +24,7 @@ function obj = setPhaseVariable(obj, type, var)
         % parameters, then initialize the scaling parameter set
         if isa(var, 'KinematicExpr')
             if ~isempty(var.Parameters)
-                obj.Param.p = nan(1,var.Param.Dimension);
+                obj.Param.p = nan(1,var.Parameters.Dimension);
             else
                 obj.Param.p = [];
             end

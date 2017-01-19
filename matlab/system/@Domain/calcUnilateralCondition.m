@@ -7,7 +7,7 @@ function value = calcUnilateralCondition(obj, cond, model, qe, dqe, u)
     % @endverbatim 
     %
     % Parameters:
-    %  cond: the unilateral condition name to be calculated @type char
+    %  cond: the list of unilaternal constraints @type cell
     %  model: a rigid body model @type RigidBodyModel
     %  qe: the coordinate configuration `q` @type colvec
     %  dqe: the coordinate velocity `\dot{q}` @type colvec
@@ -17,24 +17,33 @@ function value = calcUnilateralCondition(obj, cond, model, qe, dqe, u)
     % Return values:
     %  value: the value of the unilateral condition
     
-    % check valid condition
-    assert(ischar(cond), 'The unilateral condition must be a string');
     
     % extract the information of the specific condition from the table
-    uni_cond = obj.UnilateralConstr(cond,:);
+    uni_con = obj.UnilateralConstr(cond,:);
     
-    switch uni_cond.Type{1}
-        case 'Force'            
-            % first compute the constraint wrenches
-            Fe = calcConstraintForces(obj, model, qe, dqe, u);
-            % get the wrench indices associated with the specific
-            % unilateral condition
-            f_ind = getIndex(obj.HolonomicConstr, uni_cond.KinName{1});
-            % compute the unilateral condition
-            value = uni_cond.WrenchCondition{1}*Fe(f_ind);
-        case 'Kinematic'
-            % call the (exported) kinematic function to compute the
-            % unilateral condition
-            value = feval(uni_cond.KinObject{1}.Funcs.Kin,qe);
+    n_cond = height(uni_con);
+    value = nan(1,n_cond);
+    
+    if any(strcmp('Force', uni_con.Type))
+        % if any of the unilaternal condition regards force, first compute
+        % the constraints wrench
+        Fe = calcConstraintForces(obj, model, qe, dqe, u);
+    end
+    
+    for i=1:n_cond
+        temp_con = uni_con(i,:);
+        switch temp_con.Type{1}
+            case 'Force'                
+                % get the wrench indices associated with the specific
+                % unilateral condition
+                f_ind = getIndex(obj.HolonomicConstr, temp_con.KinName{1});
+                % compute the unilateral condition
+                value(i) = temp_con.WrenchCondition{1}*Fe(f_ind);
+            case 'Kinematic'
+                % call the (exported) kinematic function to compute the
+                % unilateral condition
+                value(i) = feval(temp_con.KinObject{1}.Funcs.Kin,qe);
+        end
+    
     end
 end

@@ -77,7 +77,7 @@ classdef KinematicOrientation < Kinematics
     methods
         function pIndex = get.pIndex(obj)
             
-            if ~isempty(obj.Axis)
+            if isempty(obj.Axis)
                 error('The ''Axis'' of the orientation NOT assigned.');
             end
             pIndex = 3 + find(strcmpi(obj.Axis, {'x','y','z'}));
@@ -109,9 +109,7 @@ classdef KinematicOrientation < Kinematics
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             
-            if isempty(obj.Offset)
-                error('The ''Offset'' of the position NOT assigned.');
-            end
+            
             
             % create a cell as the input argument, use zero offsets
             arg = {parent,[0,0,0]};
@@ -128,9 +126,6 @@ classdef KinematicOrientation < Kinematics
             % validate parent link name (case insensitive)
             parent  = validatestring(obj.ParentLink,valid_links);
             
-            if isempty(obj.Offset)
-                error('The ''Offset'' of the position NOT assigned.');
-            end
             
             % create a cell as the input argument, use zero offsets
             arg = {parent,[0,0,0]};

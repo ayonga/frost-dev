@@ -1,28 +1,31 @@
-function [u, extra] = calcControl(obj, qa, dqa, qd, dqd, Be)
+function [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain)
     % Computes the PD feedback control law on joint space
     %
     % Parameters:
-    % qa: the actual joint configuration @type colvec
-    % dqa: the actual joint velocities @type colvec
-    % qd: the desired joint configuration @type colvec
-    % dqd: the desired joint velocities @type colvec
-    % Be: the torque distribution matrix @type matrix
+    % t: the time instant @type double
+    % qe: the joint configuration @type colvec
+    % dqe: the joint velocities @type colvec
+    % vfc: the vector field f(x) @type colvec
+    % gfc: the vector field g(x) @type colvec
+    % domain: the continuous domain @type Domain
     %
     % Return values:
     % u: the computed torque @type colvec
     % extra: additional computed data @type struct
     
 
+    [qd, dqd] = calcDesiredStates(domain, t, qe, dqe);
+    
     % compute error terms
     qerr = qa - qd;
     dqerr = dqa - dqd;
 
     % feedback controller
-    u = Be*(- obj.Params.kp*qerr - obj.Params.kd*dqerr);
+    u = - obj.Params.kp*qerr - obj.Params.kd*dqerr;
 
     if narargout > 1
         extra = struct;
-        extra.qerr = qerr;
+        extra.qerr  = qerr;
         extra.dqerr = dqerr;
     end
 

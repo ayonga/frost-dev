@@ -8,7 +8,7 @@ function [Fe] = calcConstraintForces(obj, varargin)
     % @endverbatim
     % or 
     % @verbitam
-    % Fe = calcConstraintForces(obj, De, He, Je, Jedot, Be, dqe, u)
+    % Fe = calcConstraintForces(obj, model, qe, dqe, u, De, He)
     % @endverbatim    
     % The latter option save time if the natural dynamics 
     % has been already computed and input as argumets.
@@ -32,7 +32,7 @@ function [Fe] = calcConstraintForces(obj, varargin)
     
     switch nargin
         case 5 % the first case
-            [model,qe,dqe,u] = deal(varargin{:});
+            [model, qe, dqe, u] = deal(varargin{:});
             % compute naturual dynamics
             [De, He] = calcNaturalDynamics(model, qe, dqe);
             
@@ -42,11 +42,16 @@ function [Fe] = calcConstraintForces(obj, varargin)
             
             
             Be    = obj.ActuationMap;
-        case 8
+        case 7
             
-            [De, He, Je, Jedot, Be, dqe, u] = deal(varargin{:});
+            [model, qe, dqe, u, De, He] = deal(varargin{:});
+            
+            % Calculate holonomic constraints
+            Je    = feval(obj.HolonomicConstr.Funcs.Jac, qe);
+            Jedot = feval(obj.HolonomicConstr.Funcs.JacDot, qe, dqe);
             
             
+            Be    = obj.ActuationMap;
             
             
     end
