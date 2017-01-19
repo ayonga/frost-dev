@@ -8,15 +8,15 @@ function [nVar, lowerbound, upperbound] = getVarInfo(obj)
     %  lowerbound: the lower limits @type colvec
     %  upperbound: the upper limits @type colvec
     
-    assert(~isempty(obj.var_array),...
+    assert(~isempty(obj.VariableArray),...
         'NonlinearProgram:emptyVarArray',...
         ['No variable has been definied.\n',...
         'Please define NLP variables first.\n']);
     
     
     
-    nVar = sum([obj.var_array(:).dimension]);     
-    lowerbound = vertcat(obj.var_array(:).lb);
-    upperbound = vertcat(obj.var_array(:).ub);
+    nVar = sum([obj.VariableArray(:).Dimension]);     
+    lowerbound = vertcat(obj.VariableArray(:).LowerBound);
+    upperbound = vertcat(obj.VariableArray(:).UpperBound);
     
 end

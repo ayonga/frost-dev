@@ -15,20 +15,20 @@ function [x0] = getInitialGuess(obj, method)
     
     switch method
         case 'typical' %
-            x0 = vertcat(obj.var_array.x0);            
+            x0 = vertcat(obj.VariableArray.InitialValue);            
         case 'random'
             % get the upper/lower boundary values
-            lb_tmp = vertcat(obj.var_array.lb);  
-            ub_tmp = vertcat(obj.var_array.ub);  
+            lb_tmp = vertcat(obj.VariableArray.LowerBound);  
+            ub_tmp = vertcat(obj.VariableArray.UpperBound);  
             
             % replace infinity with very high numbers
             lb_tmp(lb_tmp==-inf) = -1e5;
             ub_tmp(ub_tmp==inf)  = 1e5;
             
             % generate uniformally distrubuted random values
-            obj.x0 = (ub_tmp - lb_tmp).*rand(size(ub_tmp,1)) - lb_tmp;
+            x0 = (ub_tmp - lb_tmp).*rand(size(ub_tmp,1)) - lb_tmp;
         case 'previous'
-            x0 = obj.sol;
+            x0 = obj.Sol;
         otherwise
             error('NonlinearProgram:getInitialGuessUndefinedMethod',...
                 '%s is not defined as a method to generate the initial guess.\n',...

@@ -27,25 +27,25 @@ classdef NonlinearProgram < handle
         %  
         % 
         % @type struct
-        options 
+        Options 
         
         
         % The structure array contains all information regarding NLP
         % optimization variables
         %
         % @type NlpVariable
-        var_array
+        VariableArray
         
                 
         % A cell data stores objective functions
         %
         % @type cell
-        objective_array
+        CostArray
         
         % A cell data stores all constraints functions
         %
         % @type cell
-        constr_array
+        ConstrArray
         
         
         
@@ -53,7 +53,7 @@ classdef NonlinearProgram < handle
     
     properties 
         % The solution of the NLP problem
-        sol
+        Sol
     end
     
     
@@ -70,20 +70,20 @@ classdef NonlinearProgram < handle
             
             
             % default options
-            obj.options = struct();
-            obj.options.derivative_level = 1;
-            obj.options.derivative_type = 'analytic';
+            obj.Options = struct();
+            obj.Options.DerivativeLevel = 1;
+            obj.Options.DerivativeType = 'analytic';
             
             % if non-default options are specified, overwrite the default
             % options.
             if nargin ~= 0
-                obj.options = struct_overlay(obj.options,opts);
+                obj.Options = struct_overlay(obj.Options,opts);
             end
             
             % initialize the type of the variables
-            obj.var_array = NlpVariable.empty();
-            obj.objective_array  = NlpFunction.empty();
-            obj.constr_array = NlpFunction.empty();
+            obj.VariableArray = NlpVariable.empty();
+            obj.CostArray  = NlpFunction.empty();
+            obj.ConstrArray = NlpFunction.empty();
             
             
         end

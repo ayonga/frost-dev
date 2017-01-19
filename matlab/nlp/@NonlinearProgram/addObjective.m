@@ -7,6 +7,8 @@ function [obj] = addObjective(obj, funcs)
     %
     %  @see NlpFunction
     
-    obj.objective_array = appendTo(obj.objective_array, funcs);
+    
+    
+    obj.CostArray = appendTo(obj.CostArray, funcs);
     
 end

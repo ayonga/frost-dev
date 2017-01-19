@@ -7,6 +7,6 @@ function [obj] = addConstraint(obj, funcs)
     %
     %  @see NlpFunction
     
-    obj.constr_array = appendTo(obj.constr_array, funcs);
+    obj.ConstrArray = appendTo(obj.ConstrArray, funcs);
     
 end

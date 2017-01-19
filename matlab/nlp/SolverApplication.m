@@ -25,7 +25,7 @@ classdef (Abstract) SolverApplication
         % A structure for NLP solver options
         %
         % @type struct
-        options
+        Options
         
     end
     
@@ -44,6 +44,7 @@ classdef (Abstract) SolverApplication
         function obj = SolverApplication()
             % The default constructor function            
             
+            obj.Options = struct;
         end
         
         

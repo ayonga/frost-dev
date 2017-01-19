@@ -7,7 +7,7 @@ function [obj] = addVariable(obj, vars)
     %
     
     
-    obj.var_array = appendTo(obj.var_array, vars);
+    obj.VariableArray = appendTo(obj.VariableArray, vars);
     
     
 end

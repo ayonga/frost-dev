@@ -10,34 +10,34 @@ function [sol, info] = optimize(obj, nlp)
     [dimVars, lb, ub] = getVarInfo(nlp);
     
     % get the initial guess 
-    x0 = getInitialGuess(nlp, obj.options.initialguess);
+    x0 = getInitialGuess(nlp, obj.Options.initialguess);
     
     opts = struct;
     opts.lb = lb;
     opts.ub = ub;
-    opts.cl = obj.constraint.cl;
-    opts.cu = obj.constraint.cu;
-    opts.ipopt = obj.options.ipopt;
+    opts.cl = obj.Constraint.LowerBound;
+    opts.cu = obj.Constraint.UpperBound;
+    opts.ipopt = obj.Options.ipopt;
     
-    funcs = struct();
-    funcs.objective         = @(x)IpoptObjective(x, obj.objective);
-    funcs.constraints       = @(x)IpoptConstraints(x, obj.constraint);
-    funcs.gradient          = @(x)IpoptGradient(x, obj.objective, dimVars);
-    funcs.jacobian          = @(x)IpoptJacobian(x, obj.constraint, dimVars);
-    funcs.jacobianstructure = @()IpoptJacobianStructure(obj.constraint, dimVars);
+    Funcs = struct();
+    Funcs.objective         = @(x)IpoptObjective(x, obj.Objective);
+    Funcs.constraints       = @(x)IpoptConstraints(x, obj.Constraint);
+    Funcs.gradient          = @(x)IpoptGradient(x, obj.Objective, dimVars);
+    Funcs.jacobian          = @(x)IpoptJacobian(x, obj.Constraint, dimVars);
+    Funcs.jacobianstructure = @()IpoptJacobianStructure(obj.Constraint, dimVars);
     
     if strcmpi(opts.ipopt.hessian_approximation, 'exact')
         
-        funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
-            obj.objective, obj.constraint, dimVars);
-        funcs.hessianstructure  = @()IpoptHessianStructure(obj.objective, ...
-            obj.constraint, dimVars);
+        Funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
+            obj.Objective, obj.Constraint, dimVars);
+        Funcs.hessianstructure  = @()IpoptHessianStructure(obj.Objective, ...
+            obj.Constraint, dimVars);
     else
         
     end
     
     
-    [sol, info] = ipopt(x0, funcs, opts);
+    [sol, info] = ipopt(x0, Funcs, opts);
     
     
     
@@ -51,14 +51,14 @@ function [sol, info] = optimize(obj, nlp)
         %  of all subfunction of the objective.
         
         f = 0;
-        for i = 1:objective.num_funcs
-            var = x(objective.dep_indices{i}); % dependent variables
+        for i = 1:objective.numFuncs
+            var = x(objective.DepIndices{i}); % dependent variables
             
             % calculate cost value
-            if isempty(objective.auxdata{i})
-                f = f + feval(objective.funcs{i}, var);
+            if isempty(objective.AuxData{i})
+                f = f + feval(objective.Funcs{i}, var);
             else
-                f = f + feval(objective.funcs{i}, var, objective.auxdata{i});
+                f = f + feval(objective.Funcs{i}, var, objective.AuxData{i});
             end
             
         end
@@ -76,15 +76,15 @@ function [sol, info] = optimize(obj, nlp)
         
         
         % preallocation
-        C   = zeros(constraint.dimension,1);
-        for i = 1:constraint.num_funcs
-            var = x(constraint.dep_indices{i}); % dependent variables
+        C   = zeros(constraint.Dimension,1);
+        for i = 1:constraint.numFuncs
+            var = x(constraint.DepIndices{i}); % dependent variables
             
             % calculate constraints
-            if isempty(constraint.auxdata{i})
-                C(constraint.constrIndices{i}) = feval(constraint.funcs{i}, var);
+            if isempty(constraint.AuxData{i})
+                C(constraint.FuncIndices{i}) = feval(constraint.Funcs{i}, var);
             else
-                C(constraint.constrIndices{i})  = feval(constraint.funcs{i}, var, constraint.auxdata{i});
+                C(constraint.FuncIndices{i})  = feval(constraint.Funcs{i}, var, constraint.AuxData{i});
             end
         end
         
@@ -104,22 +104,22 @@ function [sol, info] = optimize(obj, nlp)
         
         
         % preallocation
-        J_val   = zeros(objective.nnz_jac,1);
-        for i = 1:objective.num_funcs
-            var = x(objective.dep_indices{i});% dependent variables
+        J_val   = zeros(objective.nnzJac,1);
+        for i = 1:objective.numFuncs
+            var = x(objective.DepIndices{i});% dependent variables
             
             % calculate gradient
-            if isempty(objective.auxdata{i})
-                J_val(objective.nz_jac_indices{i}) = feval(objective.jac_funcs{i}, var);
+            if isempty(objective.AuxData{i})
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var);
             else
-                J_val(objective.nz_jac_indices{i}) = feval(objective.jac_funcs{i}, var, objective.auxdata{i});
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var, objective.AuxData{i});
             end
             
         end
         
         % construct the sparse jacobian matrix
-        J = sparse2(objective.nz_jac_rows, objective.nz_jac_cols,...
-            J_val, 1, dimVars, objective.nnz_jac);
+        J = sparse2(objective.nzJacRows, objective.nzJacCols,...
+            J_val, 1, dimVars, objective.nnzJac);
         
     end
     %%
@@ -135,22 +135,22 @@ function [sol, info] = optimize(obj, nlp)
         %  dimVars: the dimension of the NLP variables
         
         % preallocation
-        J_val   = zeros(constraint.nnz_jac,1);
-        for i = 1:constraint.num_funcs
-            var = x(constraint.dep_indices{i});% dependent variables
+        J_val   = zeros(constraint.nnzJac,1);
+        for i = 1:constraint.numFuncs
+            var = x(constraint.DepIndices{i});% dependent variables
             
             % calculate Jacobian
-            if isempty(constraint.auxdata{i})
-                J_val(constraint.nz_jac_indices{i}) = feval(constraint.jac_funcs{i}, var);
+            if isempty(constraint.AuxData{i})
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var);
             else
-                J_val(constraint.nz_jac_indices{i}) = feval(constraint.jac_funcs{i}, var, constraint.auxdata{i});
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var, constraint.AuxData{i});
             end
             
         end
         
         % construct the sparse jacobian matrix
-        J = sparse2(constraint.nz_jac_rows, constraint.nz_jac_cols,...
-            J_val, constraint.dimension, dimVars, constraint.nnz_jac);
+        J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+            J_val, constraint.Dimension, dimVars, constraint.nnzJac);
         
     end
     %%
@@ -167,9 +167,9 @@ function [sol, info] = optimize(obj, nlp)
         %  dimVars: the dimension of the NLP variables
         
         
-        J = sparse2(constraint.nz_jac_rows, constraint.nz_jac_cols,...
-            ones(constraint.nnz_jac,1), constraint.dimension, ...
-            dimVars, constraint.nnz_jac);
+        J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+            ones(constraint.nnzJac,1), constraint.Dimension, ...
+            dimVars, constraint.nnzJac);
         
     end
     %%
@@ -190,43 +190,43 @@ function [sol, info] = optimize(obj, nlp)
         
         
         % preallocation
-        hes_objective   = zeros(objective.nnz_hess,1);
+        hes_objective   = zeros(objective.nnzHess,1);
         
         % compute the Hessian for objective function
-        for i = 1:objective.num_funcs
-            var = x(objective.dep_indices{i});% dependent variables
+        for i = 1:objective.numFuncs
+            var = x(objective.DepIndices{i});% dependent variables
             
-            if ~isempty(objective.nz_hess_indices{i})
+            if ~isempty(objective.nzHessIndices{i})
                 % if the function is a linear function, then the Hessian of
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
-                if isempty(objective.auxdata{i})
-                    hes_objective(objective.nz_hess_indices{i}) = feval(objective.hess_funcs{i}, var, sigma);
+                if isempty(objective.AuxData{i})
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma);
                 else
-                    hes_objective(objective.nz_hess_indices{i}) = feval(objective.hess_funcs{i}, var, sigma, objective.auxdata{i});
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma, objective.AuxData{i});
                 end
             end
             
         end
         
-        H_objective = sparse2(objective.nz_hess_rows,objective.nz_hess_rows,...
-            hes_objective, dimVars, dimVars, objective.nnz_hess);
+        H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+            hes_objective, dimVars, dimVars, objective.nnzHess);
         
         % preallocation
-        hes_constr   = zeros(constraint.nnz_hess,1);
+        hes_constr   = zeros(constraint.nnzHess,1);
         % compute the Hessian for constraints
-        for i = 1:constraint.num_funcs
-            var = x(constraint.dep_indices{i});% dependent variables
-            lambda_i = lambda(constraint.constrIndices{i});
+        for i = 1:constraint.numFuncs
+            var = x(constraint.DepIndices{i});% dependent variables
+            lambda_i = lambda(constraint.FuncIndices{i});
             
-            if ~isempty(constraint.nz_hess_indices{i})
+            if ~isempty(constraint.nzHessIndices{i})
                 % if the function is a linear function, then the Hessian of
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
-                if isempty(constraint.auxdata{i})
-                    hes_constr(constraint.nz_hess_indices{i}) = feval(constraint.hess_funcs{i}, var, lambda_i);
+                if isempty(constraint.AuxData{i})
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i);
                 else
-                    hes_constr(constraint.nz_hess_indices{i}) = feval(constraint.hess_funcs{i}, var, lambda_i, constraint.auxdata{i});
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i, constraint.AuxData{i});
                 end
             end
             
@@ -234,8 +234,8 @@ function [sol, info] = optimize(obj, nlp)
         
           
         
-        H_constr = sparse2(constraint.nz_hess_rows,constraint.nz_hess_rows,...
-            hes_constr, dimVars, dimVars, constraint.nnz_hess);
+        H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+            hes_constr, dimVars, dimVars, constraint.nnzHess);
         
         
         H_ret = H_objective + H_constr;
@@ -256,12 +256,12 @@ function [sol, info] = optimize(obj, nlp)
         %  dimVars: the dimension of the NLP variables
         
         
-        H_objective = sparse2(objective.nz_hess_rows,objective.nz_hess_rows,...
-            ones(objective.nnz_hess,1), dimVars, dimVars, objective.nnz_hess);
+        H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+            ones(objective.nnzHess,1), dimVars, dimVars, objective.nnzHess);
         
         
-        H_constr = sparse2(constraint.nz_hess_rows,constraint.nz_hess_rows,...
-            ones(constraint.nnz_hess,1), dimVars, dimVars, constraint.nnz_hess);
+        H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+            ones(constraint.nnzHess,1), dimVars, dimVars, constraint.nnzHess);
         
         
         H_ret = H_objective + H_constr;

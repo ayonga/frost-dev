@@ -18,78 +18,14 @@ classdef IpoptApplication < SolverApplication
         
         
         % A structure contains the information of objective functions
-        %
-        % Required fields for objective:
-        %  num_funcs: the number of sub-functions @type integer        
-        %  funcs: a cell array contains the name of sub-functions @type
-        %  char        
-        %  jac_funcs: a cell array contains the name of the first-order
-        %  derivative of sub-functions @type char
-        %  nnz_jac: the total number of non-zeros in the entire Jacobian
-        %  matrix @type integer
-        %  dep_indices: a cell array contains a vector of the indices of all
-        %  dependent variables @type colvec
-        %  auxdata: a cell array of auxdata for each sub-functions @type
-        %  cell
-        %  nz_jac_rows: a vector of the row indices of non-zeros in the
-        %  entire first-order derivative (Gradient) @type colvec
-        %  nz_jac_cols: a vector of the column indices of non-zeros in the
-        %  entire first-order derivative (Gradient) @type colvec        
-        %  nz_jac_indices: a cell array contains a vector of the indices of
-        %  the non-zeros of the Jacobian @type colvec
-        %
-        % Optional Fields for objective:
-        %  hess_funcs: a cell array contains the name of the second-order
-        %  derivative of sub-functions @type char 
-        %  nnz_hess: the total number of non-zeros in the entire Hessian
-        %  matrix @type integer
-        %  nz_hess_rows: a vector of the row indices of non-zeros in the
-        %  entire second-order derivative (Hessian) @type colvec
-        %  nz_jac_cols: a vector of the column indices of non-zeros in the
-        %  entire second-order derivative (Hessian) @type colvec        
-        %  nz_hess_indices: a cell array contains a vector of the indices of
-        %  the non-zeros of the Hessian @type colvec
         %  
         % @type struct
-        objective
+        Objective
         
         % A sturcture contains the information of constraints
         %
-        % Required fields for objective:
-        %  num_funcs: the number of sub-functions @type integer        
-        %  funcs: a cell array contains the name of sub-functions @type
-        %  char
-        %  constrIndices: a cell array contains a vector of the indices of
-        %  the constraint among the entire NLP constraints @type colvec
-        %  jac_funcs: a cell array contains the name of the first-order
-        %  derivative of sub-functions @type char
-        %  nnz_jac: the total number of non-zeros in the entire Jacobian
-        %  matrix @type integer
-        %  dep_indices: a cell array contains a vector of the indices of all
-        %  dependent variables @type colvec
-        %  auxdata: a cell array of auxdata for each sub-functions @type
-        %  cell
-        %  nz_jac_rows: a vector of the row indices of non-zeros in the
-        %  entire first-order derivative (Gradient) @type colvec
-        %  nz_jac_cols: a vector of the column indices of non-zeros in the
-        %  entire first-order derivative (Gradient) @type colvec        
-        %  nz_jac_indices: a cell array contains a vector of the indices of
-        %  the non-zeros of the Jacobian @type colvec
-        %
-        % Optional Fields for objective:
-        %  hess_funcs: a cell array contains the name of the second-order
-        %  derivative of sub-functions @type char 
-        %  nnz_hess: the total number of non-zeros in the entire Hessian
-        %  matrix @type integer
-        %  nz_hess_rows: a vector of the row indices of non-zeros in the
-        %  entire second-order derivative (Hessian) @type colvec
-        %  nz_jac_cols: a vector of the column indices of non-zeros in the
-        %  entire second-order derivative (Hessian) @type colvec        
-        %  nz_hess_indices: a cell array contains a vector of the indices of
-        %  the non-zeros of the Hessian @type colvec
-        % 
         % @type struct
-        constraint
+        Constraint
         
         
         
@@ -110,7 +46,6 @@ classdef IpoptApplication < SolverApplication
             obj = obj@SolverApplication();
            
             % ipopt options
-            options = struct();
             options.initialguess = 'typical';
             
             % default IPOPT options
@@ -121,7 +56,7 @@ classdef IpoptApplication < SolverApplication
             options.ipopt.ma57_automatic_scaling = 'yes';
             options.ipopt.linear_scaling_on_demand = 'no';
             
-            if nlp.options.derivative_level == 2 
+            if nlp.Options.DerivativeLevel == 2 
                 % user-defined Hessian function is provide
                 options.ipopt.hessian_approximation = 'exact';
             else
@@ -134,7 +69,7 @@ classdef IpoptApplication < SolverApplication
                 options.ipopt = struct_overlay(options.ipopt,new_opts,{'AllowNew',true});
             end
             
-            obj.options = options;
+            obj.Options = options;
             obj = initialize(obj, nlp);
             
             
