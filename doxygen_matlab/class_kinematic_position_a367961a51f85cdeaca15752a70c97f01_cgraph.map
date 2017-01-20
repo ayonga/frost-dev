@@ -1,8 +1,0 @@
-<map id="KinematicPosition::getJacMathCommand" name="KinematicPosition::getJacMathCommand">
-<area shape="rect" id="node2" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="205,107,291,133"/>
-<area shape="rect" id="node3" href="$general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="339,107,439,133"/>
-<area shape="rect" id="node5" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="635,107,701,133"/>
-<area shape="rect" id="node4" href="$mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="497,5,577,32"/>
-<area shape="rect" id="node6" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="493,56,581,83"/>
-<area shape="rect" id="node7" href="$struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="489,107,586,133"/>
-</map>

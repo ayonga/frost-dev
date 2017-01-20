@@ -1,8 +1,0 @@
-<map id="HybridDomain" name="HybridDomain">
-<area shape="rect" id="node2" href="$class_amber.html" title="This is an abstract class that provides a few basic elements for other subclasses. " alt="" coords="131,112,191,139"/>
-<area shape="rect" id="node3" href="$classstruct.html" title="A MatLab struct. " alt="" coords="13,5,67,32"/>
-<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="182,5,228,32"/>
-<area shape="rect" id="node5" href="$classfunction__handle.html" title="A MatLab function handle. " alt="" coords="333,112,445,139"/>
-<area shape="rect" id="node6" href="$classdouble.html" title="A double value. " alt="" coords="470,112,529,139"/>
-<area shape="rect" id="node7" href="$classinteger.html" title="An integer value. " alt="" coords="561,112,623,139"/>
-</map>

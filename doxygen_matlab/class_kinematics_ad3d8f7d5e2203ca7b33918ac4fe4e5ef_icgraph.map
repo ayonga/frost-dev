@@ -1,7 +1,0 @@
-<map id="Kinematics::Kinematics" name="Kinematics::Kinematics">
-<area shape="rect" id="node2" href="$class_kinematic_com.html#a129f061f87c1a752391b0ede24e8291f" title="The constructor function. " alt="" coords="213,5,416,32"/>
-<area shape="rect" id="node3" href="$class_kinematic_dof.html#a3cfc67ac11abb85aa6f2b74a95b6c98a" title="The constructor function. " alt="" coords="221,56,409,83"/>
-<area shape="rect" id="node4" href="$class_kinematic_expr.html#a7dfea456fff7badc1baab71058c878ac" title="The constructor function. " alt="" coords="215,107,415,133"/>
-<area shape="rect" id="node5" href="$class_kinematic_orientation.html#aa06bb7a680db780687eae9ec078281ff" title="The constructor function. " alt="" coords="239,158,390,199"/>
-<area shape="rect" id="node6" href="$class_kinematic_position.html#a82ef4868954a6bfa75e53da3d60e8a1a" title="The constructor function. " alt="" coords="247,223,382,265"/>
-</map>

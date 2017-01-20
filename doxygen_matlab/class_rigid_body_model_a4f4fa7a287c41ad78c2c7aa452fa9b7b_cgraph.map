@@ -1,5 +1,0 @@
-<map id="RigidBodyModel::RigidBodyModel" name="RigidBodyModel::RigidBodyModel">
-<area shape="rect" id="node2" href="$parse__urdf_8m.html#a66a78622acec0a5bc4e9eb39e5897258" title="This function parse the ROS URDF file into a matlab struct. " alt="" coords="307,5,389,32"/>
-<area shape="rect" id="node3" href="$class_rigid_body_model.html#a33d9e0f1b45cae69aad5be31512dcb3a" title="Parse the robot struct from URDF file into rigid body model. " alt="" coords="252,56,444,83"/>
-<area shape="rect" id="node4" href="$class_rigid_body_model.html#a57547310d878883d507f3de6baad57f3" title="Set the name of the model. " alt="" coords="241,107,455,133"/>
-</map>

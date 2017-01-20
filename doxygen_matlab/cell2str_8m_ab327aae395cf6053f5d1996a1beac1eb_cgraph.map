@@ -1,7 +1,0 @@
-<map id="cell2str" name="cell2str">
-<area shape="rect" id="node2" href="$general2str_8m.html#aba75b596ec32cd4cbcddfb5be00f0506" title="general2str " alt="" coords="118,56,205,83"/>
-<area shape="rect" id="node4" href="$indent_8m.html#a4a4327f26e876fa79ba905add69473ce" title="Using sprintf for sprintf: http://www.mathworks.com/matlabcentral/newsreader/view_thread/249016. " alt="" coords="379,56,437,83"/>
-<area shape="rect" id="node6" href="$implode_8m.html#ab63ef5bcd5237272dfd7b57c25f602b2" title="implode " alt="" coords="128,157,195,184"/>
-<area shape="rect" id="node3" href="$struct2str_8m.html#a128f4b18c15718e60346946acba9edc0" title="struct2str " alt="" coords="253,5,331,32"/>
-<area shape="rect" id="node5" href="$array2str_8m.html#a1f80fc66ce28b0eb0e84a67a78e7c132" title="array2str " alt="" coords="255,56,329,83"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="system/@HZDDomain/HZDDomain.m" name="system/@HZDDomain/HZDDomain.m">
-<area shape="rect" id="node2" href="$calc_actual_outputs_8m.html" title="system/@HZDDomain/calcActual\lOutputs.m" alt="" coords="5,81,227,122"/>
-<area shape="rect" id="node3" href="$calc_desired_outputs_8m.html" title="system/@HZDDomain/calcDesired\lOutputs.m" alt="" coords="251,81,480,122"/>
-<area shape="rect" id="node4" href="$get_output_indices_8m.html" title="system/@HZDDomain/getOutput\lIndices.m" alt="" coords="505,81,721,122"/>
-<area shape="rect" id="node5" href="$set_ouput_structure_8m.html" title="system/@HZDDomain/setOuput\lStructure.m" alt="" coords="747,81,960,122"/>
-<area shape="rect" id="node6" href="$set_parameters_8m.html" title="system/@HZDDomain/setParameters.m" alt="" coords="985,88,1244,115"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="BipedModel" name="BipedModel">
-<area shape="rect" id="node2" href="$class_rigid_body_model.html" title="RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy..." alt="" coords="57,139,173,165"/>
-<area shape="rect" id="node3" href="$classdouble.html" title="A double value. " alt="" coords="5,5,64,32"/>
-<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="89,5,143,32"/>
-<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="178,5,224,32"/>
-</map>

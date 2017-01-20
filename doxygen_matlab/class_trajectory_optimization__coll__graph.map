@@ -1,9 +1,0 @@
-<map id="TrajectoryOptimization" name="TrajectoryOptimization">
-<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="145,213,271,240"/>
-<area shape="rect" id="node3" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,109,48,136"/>
-<area shape="rect" id="node4" href="$classcolvec.html" title="A matlab column vector. " alt="" coords="91,5,151,32"/>
-<area shape="rect" id="node7" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="163,109,252,136"/>
-<area shape="rect" id="node5" href="$classstruct.html" title="A MatLab struct. " alt="" coords="422,109,476,136"/>
-<area shape="rect" id="node6" href="$classchar.html" title="A MatLab character array. " alt="" coords="307,5,353,32"/>
-<area shape="rect" id="node8" href="$classinteger.html" title="An integer value. " alt="" coords="177,5,239,32"/>
-</map>
