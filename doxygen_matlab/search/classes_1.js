@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['cell',['cell',['../classcell.html',1,'']]],
-  ['char',['char',['../classchar.html',1,'']]],
-  ['colvec',['colvec',['../classcolvec.html',1,'']]],
-  ['continuousdomain',['ContinuousDomain',['../class_continuous_domain.html',1,'']]]
+  ['digraph',['digraph',['../classdigraph.html',1,'']]],
+  ['domain',['Domain',['../class_domain.html',1,'']]],
+  ['double',['double',['../classdouble.html',1,'']]]
 ];

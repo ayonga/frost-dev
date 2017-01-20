@@ -52,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -84,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,10 +107,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="entry"><a class="el" href="class_directed_graph.html#a3fa5ba4328e1194e9c9999b994696eaf">edges</a></td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_directed_graph.html#a04445bce06f862a8a5ac2dc42ad2677d">getEdgeBySource</a>(char source_vertex)</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_directed_graph.html#af40ae4035a517cd7edd80d0bb342e145">getEdgeByTarget</a>(char target_vertex)</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_directed_graph.html#a3faa490cf0b20146a85fec2cbdc09f32">getSource</a>(target_vertex)</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_directed_graph.html#ae37d94e544669199e5320ad39b1d5e7e">getTarget</a>(source_vertex)</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_directed_graph.html#a6e26ff7a79027be1fe330136c8d615ca">options</a></td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">vertices</a></td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_directed_graph.html#a5493ccaf99b3d9220be164ba276df444">getNumberOfVertices</a>()</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_directed_graph.html#a3faa490cf0b20146a85fec2cbdc09f32">getSource</a>(target_vertex)</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_directed_graph.html#ae37d94e544669199e5320ad39b1d5e7e">getTarget</a>(source_vertex)</td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_directed_graph.html#a6e26ff7a79027be1fe330136c8d615ca">options</a></td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">vertices</a></td><td class="entry"><a class="el" href="class_directed_graph.html">DirectedGraph</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -119,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 22:27:26 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

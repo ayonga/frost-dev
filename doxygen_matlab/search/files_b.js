@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['optimize_2em',['optimize.m',['../optimize_8m.html',1,'']]],
-  ['outputfcn_2em',['outputfcn.m',['../outputfcn_8m.html',1,'']]]
+  ['nlpfunction_2em',['NlpFunction.m',['../_nlp_function_8m.html',1,'']]],
+  ['nlpvariable_2em',['NlpVariable.m',['../_nlp_variable_8m.html',1,'']]],
+  ['nonlinearprogram_2em',['NonlinearProgram.m',['../_nonlinear_program_8m.html',1,'']]]
 ];

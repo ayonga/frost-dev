@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logical',['logical',['../classlogical.html',1,'']]]
+  ['jointpd',['JointPD',['../class_joint_p_d.html',1,'']]]
 ];

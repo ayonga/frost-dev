@@ -1,9 +1,24 @@
 var searchData=
 [
-  ['qaindices',['qaIndices',['../class_continuous_domain.html#a4b64c9a2199b457543862a3b7af4004e',1,'ContinuousDomain']]],
-  ['qbindices',['qbIndices',['../class_rigid_body_model.html#a98d67b9daa1cf832feb75f550b2bab45',1,'RigidBodyModel']]],
-  ['qeindices',['qeIndices',['../class_rigid_body_model.html#a4b2b2d63c3861396813f507cf1097d7f',1,'RigidBodyModel']]],
-  ['qindices',['qIndices',['../class_rigid_body_model.html#a41015096587612e2bbb4d361b79c85a1',1,'RigidBodyModel']]],
-  ['quad_5fheightdecay',['quad_heightDecay',['../quad__height_decay_8m.html#aa01df60bc67ad8997d7f39b292613bef',1,'quad_heightDecay.m']]],
-  ['quad_5fheightdecay_2em',['quad_heightDecay.m',['../quad__height_decay_8m.html',1,'']]]
+  ['param',['Param',['../class_controller.html#a4f8dcb168f555e179b9af142ce7fc0aa',1,'Controller::Param()'],['../class_virtual_constr_domain.html#acb503289ed3f5a96f90d12abaacfa564',1,'VirtualConstrDomain::Param()']]],
+  ['parameters',['Parameters',['../class_kinematic_expr.html#a761bfb5d4c5b890b502a7e14d70a6d90',1,'KinematicExpr']]],
+  ['params',['Params',['../class_hybrid_trajectory_optimization.html#a2cefba968e87e06e81d90830d1a5e6b0',1,'HybridTrajectoryOptimization']]],
+  ['parentlink',['ParentLink',['../class_kinematic_contact.html#a08fb18a3b144c049d2b4fcf821a68985',1,'KinematicContact::ParentLink()'],['../class_kinematic_orientation.html#a681f4f8947611037b5c9111e17e8f1a6',1,'KinematicOrientation::ParentLink()']]],
+  ['patchline',['patchline',['../patchline_8m.html#af86cd36e575a62a4d499b869338f6b77',1,'patchline.m']]],
+  ['patchline_2em',['patchline.m',['../patchline_8m.html',1,'']]],
+  ['permute',['permute',['../classhandle.html#a6dc9f59313af54f392d8e273d71ace7b',1,'handle']]],
+  ['phase',['Phase',['../class_hybrid_trajectory_optimization.html#a336757d8e561b6ad3737234ce80f5304',1,'HybridTrajectoryOptimization']]],
+  ['phasevariable',['PhaseVariable',['../class_virtual_constr_domain.html#a0fb27a3787f4a6cf3d789647b5f53fdc',1,'VirtualConstrDomain']]],
+  ['pindex',['pIndex',['../class_kinematic_com.html#af41f9d1f8d6cf87d7c2216da2701cfce',1,'KinematicCom::pIndex()'],['../class_kinematic_orientation.html#ad4085bdf0c8f47e04bf522fff3702e63',1,'KinematicOrientation::pIndex()']]],
+  ['plant',['Plant',['../class_hybrid_trajectory_optimization.html#a25858708d505562b5fcc432aef8545bd',1,'HybridTrajectoryOptimization']]],
+  ['plot_5fcompare',['plot_compare',['../plot__compare_8m.html#adac63d18feb66d9a6db0b596895f92c7',1,'plot_compare.m']]],
+  ['plot_5fcompare_2em',['plot_compare.m',['../plot__compare_8m.html',1,'']]],
+  ['plot_5fformat',['plot_format',['../plot__format_8m.html#aa8a7c483ff4483b0f588f17be0c3baab',1,'plot_format.m']]],
+  ['plot_5fformat_2em',['plot_format.m',['../plot__format_8m.html',1,'']]],
+  ['plot_5fsave',['plot_save',['../plot__save_8m.html#a66203d12164d70995555f253147c1472',1,'plot_save.m']]],
+  ['plot_5fsave_2em',['plot_save.m',['../plot__save_8m.html',1,'']]],
+  ['prefix',['Prefix',['../class_kinematics.html#ae8704a6181978550824af478114854f6',1,'Kinematics']]],
+  ['print',['print',['../class_kinematics.html#aabf9883c6301589c35e7a20147158eea',1,'Kinematics']]],
+  ['print_2em',['print.m',['../print_8m.html',1,'']]],
+  ['pushrecord',['pushRecord',['../class_recorder.html#a057e3fdb3bed05424e915257643d25e7',1,'Recorder']]]
 ];

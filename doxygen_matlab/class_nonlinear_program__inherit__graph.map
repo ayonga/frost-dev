@@ -1,4 +1,4 @@
 <map id="NonlinearProgram" name="NonlinearProgram">
-<area shape="rect" id="node2" href="$class_trajectory_optimization.html" title="TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimiz..." alt="" coords="23,80,176,107"/>
-<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization inherits from the general TrajectoryOptimization class to define traject..." alt="" coords="5,155,195,181"/>
+<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="5,155,196,181"/>
+<area shape="rect" id="node2" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="71,5,131,32"/>
 </map>

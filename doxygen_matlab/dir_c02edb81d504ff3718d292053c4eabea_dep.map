@@ -1,7 +1,6 @@
 <map id="nlp" name="nlp">
-<area shape="rect" id="node2" href="dir_d3e68e044fbc3278c344699d251cad90.html" title="@HybridTrajectoryOptimization" alt="" coords="536,27,741,75"/>
-<area shape="rect" id="node3" href="dir_d9255bc03d24ebad8084f79685d7eb2f.html" title="@IpoptApplication" alt="" coords="382,27,511,75"/>
-<area shape="rect" id="node4" href="dir_00d9364eeeee95835738c2cd4d098638.html" title="@NonlinearProgram" alt="" coords="218,27,357,75"/>
-<area shape="rect" id="node5" href="dir_d51ab24587dc4d6935f37fd9707b0656.html" title="@TrajectoryOptimization" alt="" coords="27,27,193,75"/>
-<area shape="rect" id="clust1" href="dir_c02edb81d504ff3718d292053c4eabea.html" alt="" coords="16,16,848,85"/>
+<area shape="rect" id="node2" href="dir_d3e68e044fbc3278c344699d251cad90.html" title="@HybridTrajectoryOptimization" alt="" coords="345,27,551,75"/>
+<area shape="rect" id="node3" href="dir_d9255bc03d24ebad8084f79685d7eb2f.html" title="@IpoptApplication" alt="" coords="191,27,320,75"/>
+<area shape="rect" id="node4" href="dir_00d9364eeeee95835738c2cd4d098638.html" title="@NonlinearProgram" alt="" coords="27,27,167,75"/>
+<area shape="rect" id="clust1" href="dir_c02edb81d504ff3718d292053c4eabea.html" alt="" coords="16,16,657,85"/>
 </map>

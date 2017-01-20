@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['solverapplication',['SolverApplication',['../class_solver_application.html',1,'']]],
-  ['sparsematrix',['sparsematrix',['../classsparsematrix.html',1,'']]],
-  ['struct',['struct',['../classstruct.html',1,'']]]
+  ['nlpfunction',['NlpFunction',['../class_nlp_function.html',1,'']]],
+  ['nlpvariable',['NlpVariable',['../class_nlp_variable.html',1,'']]],
+  ['nonlinearprogram',['NonlinearProgram',['../class_nonlinear_program.html',1,'']]]
 ];

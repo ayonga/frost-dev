@@ -52,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -84,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,9 +116,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_amber_object.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_amber_object.html">AmberObject</a> {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">   39</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">name</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">   40</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">name</a>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_amber_object.html#a8445174a5f47d8a123e8458916bcd218">   54</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_amber_object.html#a8445174a5f47d8a123e8458916bcd218">options</a>;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
@@ -151,7 +152,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="ttc" id="class_amber_object_html_af210816a9bab3aa632f4ca6bd7f47e79"><div class="ttname"><a href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">AmberObject.name</a></div><div class="ttdeci">char name</div><div class="ttdoc">This is the name of the object that gives the object an universal identification. ...</div><div class="ttdef"><b>Definition:</b> <a href="_amber_object_8m_source.html#l00039">AmberObject.m:39</a></div></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="ttc" id="class_amber_object_html_af210816a9bab3aa632f4ca6bd7f47e79"><div class="ttname"><a href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">AmberObject.name</a></div><div class="ttdeci">char name</div><div class="ttdoc">This is the name of the object that gives the object an universal identification. ...</div><div class="ttdef"><b>Definition:</b> <a href="_amber_object_8m_source.html#l00040">AmberObject.m:40</a></div></div>
 <div class="ttc" id="classvarargin_html"><div class="ttname"><a href="classvarargin.html">varargin</a></div><div class="ttdoc">A variable number of input arguments. </div></div>
 <div class="ttc" id="class_amber_object_html"><div class="ttname"><a href="class_amber_object.html">AmberObject</a></div><div class="ttdoc">AmberObject is a base class for objects that have name (ID) and options. </div><div class="ttdef"><b>Definition:</b> <a href="_amber_object_8m_source.html#l00017">AmberObject.m:17</a></div></div>
 <div class="ttc" id="struct__overlay_8m_html_a269d22bd975b0b74d8c6c135eb6edcf0"><div class="ttname"><a href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0">struct_overlay</a></div><div class="ttdeci">function   opts  = struct_overlay(opts_default, opts_in, options)</div><div class="ttdef"><b>Definition:</b> <a href="struct__overlay_8m_source.html#l00017">struct_overlay.m:17</a></div></div>
@@ -169,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:36 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 22:27:04 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

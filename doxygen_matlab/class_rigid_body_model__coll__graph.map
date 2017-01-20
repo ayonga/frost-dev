@@ -1,6 +1,7 @@
 <map id="RigidBodyModel" name="RigidBodyModel">
-<area shape="rect" id="node2" href="$classdouble.html" title="A double value. " alt="" coords="5,5,64,32"/>
-<area shape="rect" id="node3" href="$classstruct.html" title="A MatLab struct. " alt="" coords="89,5,143,32"/>
-<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="178,5,224,32"/>
-<area shape="rect" id="node5" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="249,5,313,32"/>
+<area shape="rect" id="node2" href="$classdouble.html" title="A double value. " alt="" coords="5,5,65,32"/>
+<area shape="rect" id="node3" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="103,5,146,32"/>
+<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="181,5,236,32"/>
+<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="260,5,307,32"/>
+<area shape="rect" id="node6" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="341,5,405,32"/>
 </map>

@@ -1,4 +1,3 @@
 <map id="TrajectoryOptimization" name="TrajectoryOptimization">
-<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization inherits from the general TrajectoryOptimization class to define traject..." alt="" coords="5,155,195,181"/>
-<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="37,5,163,32"/>
+<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="18,5,144,32"/>
 </map>

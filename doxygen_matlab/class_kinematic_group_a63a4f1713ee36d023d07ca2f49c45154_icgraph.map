@@ -1,0 +1,5 @@
+<map id="KinematicGroup::removeKinematic" name="KinematicGroup::removeKinematic">
+<area shape="rect" id="node2" href="$class_kinematic_group.html#a30032f1030a7e5cf51b546a12ea3fb72" title="Returns the dimension of the kinematic function. " alt="" coords="277,31,480,57"/>
+<area shape="rect" id="node3" href="$class_kinematic_group.html#a10c265b7ba7104aa4c6e5793f65a0f0e" title="Generates indices for the kinematic objects in the group. " alt="" coords="528,5,723,32"/>
+<area shape="rect" id="node4" href="$class_kinematic_group.html#a699391380d9fa14bc972a0f3bc909603" title="add kinematic objects to the group " alt="" coords="771,31,973,57"/>
+</map>

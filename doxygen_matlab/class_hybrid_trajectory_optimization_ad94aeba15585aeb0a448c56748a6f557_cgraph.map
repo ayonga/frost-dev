@@ -1,0 +1,13 @@
+<map id="HybridTrajectoryOptimization::HybridTrajectoryOptimization" name="HybridTrajectoryOptimization::HybridTrajectoryOptimization">
+<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#ac1455270d7ca728ccd465b9be97e7a4b" title="HybridTrajectoryOptimization\l::addStateVariable" alt="" coords="252,5,443,47"/>
+<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#a0100df0a65728db41bb7219902309ff9" title="HybridTrajectoryOptimization\l::addTimeVariable" alt="" coords="252,71,443,112"/>
+<area shape="rect" id="node4" href="$class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="253,243,442,284"/>
+<area shape="rect" id="node5" href="$struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="546,109,650,135"/>
+<area shape="rect" id="node7" href="$class_nonlinear_program.html#afb45fe7636d2a6d8055a15d30726518a" title="This method registers the information of an optimization variable. " alt="" coords="497,159,699,186"/>
+<area shape="rect" id="node8" href="$class_nonlinear_program.html#a797b04e2fc6ef3d9011dcabfec0978bf" title="Generates indices for NLP variables. " alt="" coords="511,211,685,252"/>
+<area shape="rect" id="node9" href="$class_nonlinear_program.html#a4419d20a1047bd24b64f96f31dd6b36b" title="This method registers the information of a NLP function as a cost function. " alt="" coords="493,277,703,303"/>
+<area shape="rect" id="node10" href="$class_nonlinear_program.html#a549304f4674df2dae8d72ac8e17bb7d1" title="This method registers the information of a NLP function as a constraint. " alt="" coords="491,327,705,354"/>
+<area shape="rect" id="node11" href="$class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="501,378,695,405"/>
+<area shape="rect" id="node12" href="$class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="507,429,689,471"/>
+<area shape="rect" id="node6" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="753,109,820,135"/>
+</map>

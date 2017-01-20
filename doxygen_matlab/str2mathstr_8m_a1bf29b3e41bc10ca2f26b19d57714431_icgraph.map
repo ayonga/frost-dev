@@ -1,0 +1,20 @@
+<map id="str2mathstr" name="str2mathstr">
+<area shape="rect" id="node2" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="147,5,278,32"/>
+<area shape="rect" id="node5" href="$class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="141,67,284,109"/>
+<area shape="rect" id="node7" href="$general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="163,155,263,181"/>
+<area shape="rect" id="node3" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="332,5,507,32"/>
+<area shape="rect" id="node4" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="777,20,977,47"/>
+<area shape="rect" id="node6" href="$class_virtual_constr_domain.html#a5df2ff25fa9541a911d9db3395caefd0" title="The class constructor function. " alt="" coords="344,67,495,109"/>
+<area shape="rect" id="node8" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="377,155,462,181"/>
+<area shape="rect" id="node19" href="$struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="371,205,468,232"/>
+<area shape="rect" id="node9" href="$class_kinematic_group.html#ae184dc007b8ef5160fbc97b4aa1246c2" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="557,96,725,123"/>
+<area shape="rect" id="node14" href="$class_kinematic_expr.html#a2e680261ff1bf2005eabd1d7cdf6bff5" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="561,45,721,72"/>
+<area shape="rect" id="node15" href="$class_kinematic_orientation.html#a568a63093c329f175bd0ca5f01c6bf46" title="overload the Jacobian compilation command This function returns the Mathematica command to compile th..." alt="" coords="562,147,721,189"/>
+<area shape="rect" id="node16" href="$class_kinematic_contact.html#aa747df38de9cecb96c9b7118ed795e1f" title="This function returns he Mathematica command to compile the symbolic expression for the Jacobian of k..." alt="" coords="555,213,728,254"/>
+<area shape="rect" id="node17" href="$class_kinematic_orientation.html#af295e2259e8c0e65fa9956ffc06328a8" title="This function returns he Mathematica command to compile the symbolic expression for the kinematic con..." alt="" coords="563,278,719,319"/>
+<area shape="rect" id="node18" href="$class_kinematic_contact.html#afffb4a2fe1c478edcd51aa40ad57d1b5" title="This function returns he Mathematica command to compile the symbolic expression for the kinematic con..." alt="" coords="556,343,727,385"/>
+<area shape="rect" id="node10" href="$class_kinematic_group.html#a30032f1030a7e5cf51b546a12ea3fb72" title="Returns the dimension of the kinematic function. " alt="" coords="776,96,979,123"/>
+<area shape="rect" id="node11" href="$class_kinematic_group.html#a10c265b7ba7104aa4c6e5793f65a0f0e" title="Generates indices for the kinematic objects in the group. " alt="" coords="1027,96,1221,123"/>
+<area shape="rect" id="node12" href="$class_kinematic_group.html#a699391380d9fa14bc972a0f3bc909603" title="add kinematic objects to the group " alt="" coords="1280,59,1483,85"/>
+<area shape="rect" id="node13" href="$class_kinematic_group.html#a63a4f1713ee36d023d07ca2f49c45154" title="remove kinematic objects from the group " alt="" coords="1269,135,1493,161"/>
+</map>

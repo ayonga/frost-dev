@@ -246,29 +246,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            end</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div>
-<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="class_nlp_fcn.html#a1c83fc8a228d9cd6d34bcb5f3b92ea53">  347</a></span>&#160;        function obj = <a class="code" href="class_nlp_fcn.html#a1c83fc8a228d9cd6d34bcb5f3b92ea53">setDependentIndices</a>(depIndices) {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            obj.deps= depIndices;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        }</div>
-<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="class_nlp_fcn.html#a64f35eaeab1c4b664e9e41069610ef1c">  362</a></span>&#160;        function obj = <a class="code" href="class_nlp_fcn.html#a64f35eaeab1c4b664e9e41069610ef1c">setJacIndices</a>(<a class="code" href="classinteger.html">integer</a> jIndex0) {</div>
+<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="class_nlp_fcn.html#a1c83fc8a228d9cd6d34bcb5f3b92ea53">  346</a></span>&#160;        function obj = <a class="code" href="class_nlp_fcn.html#a1c83fc8a228d9cd6d34bcb5f3b92ea53">setDependentIndices</a>(depIndices) {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            obj.deps= depIndices;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
+<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="class_nlp_fcn.html#a64f35eaeab1c4b664e9e41069610ef1c">  361</a></span>&#160;        function obj = <a class="code" href="class_nlp_fcn.html#a64f35eaeab1c4b664e9e41069610ef1c">setJacIndices</a>(<a class="code" href="classinteger.html">integer</a> jIndex0) {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            obj.j_index= jIndex0 + cumsum(ones(obj.nnzJac,1));</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            obj.j_index= jIndex0 + cumsum(ones(obj.nnzJac,1));</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        }</div>
-<div class="line"><a name="l00381"></a><span class="lineno"><a class="line" href="class_nlp_fcn.html#a5083d0378427d084ab1c8bea6cdaab12">  381</a></span>&#160;        function obj = <a class="code" href="class_nlp_fcn.html#a5083d0378427d084ab1c8bea6cdaab12">setHessIndices</a>(<a class="code" href="classinteger.html">integer</a> hIndex0) {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        }</div>
+<div class="line"><a name="l00380"></a><span class="lineno"><a class="line" href="class_nlp_fcn.html#a5083d0378427d084ab1c8bea6cdaab12">  380</a></span>&#160;        function obj = <a class="code" href="class_nlp_fcn.html#a5083d0378427d084ab1c8bea6cdaab12">setHessIndices</a>(<a class="code" href="classinteger.html">integer</a> hIndex0) {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            obj.h_index= hIndex0 + cumsum(ones(obj.nnzHess,1));</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            obj.h_index= hIndex0 + cumsum(ones(obj.nnzHess,1));</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        }</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;};</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        }</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;};</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
 <div class="ttc" id="class_nlp_fcn_html_a38fcab334903bc5e68fdd06e779f9c24"><div class="ttname"><a href="class_nlp_fcn.html#a38fcab334903bc5e68fdd06e779f9c24">NlpFcn.h_index</a></div><div class="ttdeci">colvec h_index</div><div class="ttdoc">Stores the indices of the non-zero elements in the Hessian matrix of the Lagrangian. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00115">NlpFcn.m:115</a></div></div>
-<div class="ttc" id="class_nlp_fcn_html_a64f35eaeab1c4b664e9e41069610ef1c"><div class="ttname"><a href="class_nlp_fcn.html#a64f35eaeab1c4b664e9e41069610ef1c">NlpFcn.setJacIndices</a></div><div class="ttdeci">function   obj  = setJacIndices(integer jIndex0)</div><div class="ttdoc">It sets the indexing of the non-zero entries in the Jacobian matrix. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00362">NlpFcn.m:362</a></div></div>
+<div class="ttc" id="class_nlp_fcn_html_a64f35eaeab1c4b664e9e41069610ef1c"><div class="ttname"><a href="class_nlp_fcn.html#a64f35eaeab1c4b664e9e41069610ef1c">NlpFcn.setJacIndices</a></div><div class="ttdeci">function   obj  = setJacIndices(integer jIndex0)</div><div class="ttdoc">It sets the indexing of the non-zero entries in the Jacobian matrix. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00361">NlpFcn.m:361</a></div></div>
 <div class="ttc" id="class_nlp_fcn_html_ac9d37c89ad54e89e31ab77f9a17d676b"><div class="ttname"><a href="class_nlp_fcn.html#ac9d37c89ad54e89e31ab77f9a17d676b">NlpFcn.is_linear</a></div><div class="ttdeci">logical is_linear</div><div class="ttdoc">This property specifies whether the function is the linear function of dependent variables. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00037">NlpFcn.m:37</a></div></div>
 <div class="ttc" id="class_nlp_fcn_html_a35347f48d020ef49167f9498d44a6a42"><div class="ttname"><a href="class_nlp_fcn.html#a35347f48d020ef49167f9498d44a6a42">NlpFcn.hess_struct</a></div><div class="ttdeci">struct hess_struct</div><div class="ttdoc">A two-vector structure that specifies the non-zero structure of the second order Hessian of the Lagra...</div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00185">NlpFcn.m:185</a></div></div>
 <div class="ttc" id="class_nlp_fcn_html_a97d88ea31b87491ff27d9c0285e6002e"><div class="ttname"><a href="class_nlp_fcn.html#a97d88ea31b87491ff27d9c0285e6002e">NlpFcn.nnzHess</a></div><div class="ttdeci">integer nnzHess</div><div class="ttdoc">The number of nonzero entries in the constraints portion of the Hessian. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00212">NlpFcn.m:212</a></div></div>
@@ -284,9 +284,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_nlp_fcn_html"><div class="ttname"><a href="class_nlp_fcn.html">NlpFcn</a></div><div class="ttdoc">This class provides a data structure for a optimization function. This function could be either a con...</div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00017">NlpFcn.m:17</a></div></div>
 <div class="ttc" id="class_nlp_fcn_html_a09dc3147ef334fa3e7a499fe8f087dc3"><div class="ttname"><a href="class_nlp_fcn.html#a09dc3147ef334fa3e7a499fe8f087dc3">NlpFcn.deps</a></div><div class="ttdeci">colvec deps</div><div class="ttdoc">Stores the indexing information of the dependent variables. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00096">NlpFcn.m:96</a></div></div>
 <div class="ttc" id="class_nlp_fcn_html_aee8f8b5ef05ef92073f8cc1ceeb21e40"><div class="ttname"><a href="class_nlp_fcn.html#aee8f8b5ef05ef92073f8cc1ceeb21e40">NlpFcn.hess</a></div><div class="ttdeci">function_handle hess</div><div class="ttdoc">A function handle points to the actual function that computes the Hessian matrix of the function...</div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00171">NlpFcn.m:171</a></div></div>
-<div class="ttc" id="class_nlp_fcn_html_a5083d0378427d084ab1c8bea6cdaab12"><div class="ttname"><a href="class_nlp_fcn.html#a5083d0378427d084ab1c8bea6cdaab12">NlpFcn.setHessIndices</a></div><div class="ttdeci">function   obj  = setHessIndices(integer hIndex0)</div><div class="ttdoc">It sets the indexing of the non-zero entries in the Hessian matrix. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00381">NlpFcn.m:381</a></div></div>
+<div class="ttc" id="class_nlp_fcn_html_a5083d0378427d084ab1c8bea6cdaab12"><div class="ttname"><a href="class_nlp_fcn.html#a5083d0378427d084ab1c8bea6cdaab12">NlpFcn.setHessIndices</a></div><div class="ttdeci">function   obj  = setHessIndices(integer hIndex0)</div><div class="ttdoc">It sets the indexing of the non-zero entries in the Hessian matrix. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00380">NlpFcn.m:380</a></div></div>
 <div class="ttc" id="classstruct_html"><div class="ttname"><a href="classstruct.html">struct</a></div><div class="ttdoc">A MatLab struct. </div></div>
-<div class="ttc" id="class_nlp_fcn_html_a1c83fc8a228d9cd6d34bcb5f3b92ea53"><div class="ttname"><a href="class_nlp_fcn.html#a1c83fc8a228d9cd6d34bcb5f3b92ea53">NlpFcn.setDependentIndices</a></div><div class="ttdeci">function   obj  = setDependentIndices(depIndices)</div><div class="ttdoc">It sets the indexing information of the dependent variables. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00347">NlpFcn.m:347</a></div></div>
+<div class="ttc" id="class_nlp_fcn_html_a1c83fc8a228d9cd6d34bcb5f3b92ea53"><div class="ttname"><a href="class_nlp_fcn.html#a1c83fc8a228d9cd6d34bcb5f3b92ea53">NlpFcn.setDependentIndices</a></div><div class="ttdeci">function   obj  = setDependentIndices(depIndices)</div><div class="ttdoc">It sets the indexing information of the dependent variables. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00346">NlpFcn.m:346</a></div></div>
 <div class="ttc" id="classchar_html"><div class="ttname"><a href="classchar.html">char</a></div><div class="ttdoc">A MatLab character array. </div></div>
 <div class="ttc" id="class_nlp_fcn_html_a1413a24c524fc16eab78db71cbabb5d9"><div class="ttname"><a href="class_nlp_fcn.html#a1413a24c524fc16eab78db71cbabb5d9">NlpFcn.j_index</a></div><div class="ttdeci">colvec j_index</div><div class="ttdoc">Stores the indices of the non-zero elements in the first-order jacobian. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00105">NlpFcn.m:105</a></div></div>
 <div class="ttc" id="class_nlp_fcn_html_a6a5e8af43abf94983ba9b0e66114128b"><div class="ttname"><a href="class_nlp_fcn.html#a6a5e8af43abf94983ba9b0e66114128b">NlpFcn.jac_struct</a></div><div class="ttdeci">struct jac_struct</div><div class="ttdoc">A two-vector structure that specifies the non-zero structure of the first order Jacobian of the funct...</div><div class="ttdef"><b>Definition:</b> <a href="_nlp_fcn_8m_source.html#l00153">NlpFcn.m:153</a></div></div>
@@ -301,7 +301,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 5 2016 11:36:25 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

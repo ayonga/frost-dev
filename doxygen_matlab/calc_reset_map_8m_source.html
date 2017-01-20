@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.6"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: system/@DiscreteDynamics/calcResetMap.m Source File</title>
+        <title>AMBER Suite: system/@ResetMap/calcResetMap.m Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -52,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -83,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_448ef8bf4e3a4b5692e46b302d72f3ba.html">system</a></li><li class="navelem"><a class="el" href="dir_aae9ed024c18b0f3ec98eb79fedc1403.html">@DiscreteDynamics</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_448ef8bf4e3a4b5692e46b302d72f3ba.html">system</a></li><li class="navelem"><a class="el" href="dir_cd85378d6c03d0a0505738f6ec3f13ee.html">@ResetMap</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -102,7 +103,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">calcResetMap.m</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="calc_reset_map_8m.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_discrete_dynamics_8m.html">DiscreteDynamics.m</a>&quot;</span></div>
+<a href="calc_reset_map_8m.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_reset_map_8m.html">ResetMap.m</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">/* (Autoinserted by mtoc++)</span></div>
@@ -119,19 +120,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * However, the line numbers most likely do not correspond to the line numbers in the original MATLAB source files.</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;function [x_post , ImpF ] = DiscreteDynamics.calcResetMap(model,tar_domain,x_pre) {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;function [x_post , ImpF ] = ResetMap.calcResetMap(model,tar_domain,x_pre) {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">/*  x_pre -&gt; [qe_pre; dqe_pre] */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    qe_pre    = x_pre(model.qeIndices);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    dqe_pre   = x_pre(model.dqeIndices);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    qe_pre    = x_pre(model.qe_indices);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    dqe_pre   = x_pre(model.dqe_indices);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">/*  compute the impact map if the domain transition involves a rigid impact */</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span> obj.options.apply_rigid_impact</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="comment">/*  jacobian of impact constraints */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        Je  = tar_domain.holConstrJac(x_pre);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        Je  = feval(tar_domain.funcs.hol_constr,qe_pre);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">/*  inertia matrix */</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        De = calcNaturalDynamics(model,x);</div>
@@ -139,7 +140,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="comment">/*  Compute Dynamically Consistent Contact Null-Space from Lagrange</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">         * Multiplier Formulation</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">         *         DbarInv = Je * (De \ transpose(Je));</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">         *         I = eye(obj.nDof);</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">         *         I = eye(obj.n_dofs);</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">         *         Jbar = De \ transpose(transpose(DbarInv) \ Je );</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">         *         Nbar = I - Jbar * Je; */</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
@@ -150,8 +151,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        b = [De*dqe_pre; zeros(nImpConstr,1)];</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        y = A\b;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        ImpF = y((model.nDof+1):end);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        dqe_pre = y(model.qeIndices);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        ImpF = y((model.n_dofs+1):end);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        dqe_pre = y(model.qe_indices);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">else</span></div>
@@ -172,7 +173,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;end</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="ttc" id="_discrete_dynamics_8m_html"><div class="ttname"><a href="_discrete_dynamics_8m.html">DiscreteDynamics.m</a></div></div>
+<div class="ttc" id="_reset_map_8m_html"><div class="ttname"><a href="_reset_map_8m.html">ResetMap.m</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -182,7 +183,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 22:27:26 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

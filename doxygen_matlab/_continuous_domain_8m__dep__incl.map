@@ -1,10 +1,6 @@
 <map id="system/@ContinuousDomain/ContinuousDomain.m" name="system/@ContinuousDomain/ContinuousDomain.m">
-<area shape="rect" id="node2" href="$calc_actual_outputs_8m.html" title="system/@ContinuousDomain\l/calcActualOutputs.m" alt="" coords="5,97,200,138"/>
-<area shape="rect" id="node3" href="$calc_desired_outputs_8m.html" title="system/@ContinuousDomain\l/calcDesiredOutputs.m" alt="" coords="224,97,419,138"/>
-<area shape="rect" id="node4" href="$calc_dynamics_8m.html" title="system/@ContinuousDomain\l/calcDynamics.m" alt="" coords="443,97,637,138"/>
-<area shape="rect" id="node5" href="$get_output_indices_8m.html" title="system/@ContinuousDomain\l/getOutputIndices.m" alt="" coords="661,97,856,138"/>
-<area shape="rect" id="node6" href="$set_holonomic_constraints_8m.html" title="system/@ContinuousDomain\l/setHolonomicConstraints.m" alt="" coords="880,97,1075,138"/>
-<area shape="rect" id="node7" href="$set_next_domain_8m.html" title="system/@ContinuousDomain\l/setNextDomain.m" alt="" coords="1099,97,1293,138"/>
-<area shape="rect" id="node8" href="$set_ouput_structure_8m.html" title="system/@ContinuousDomain\l/setOuputStructure.m" alt="" coords="1317,97,1512,138"/>
-<area shape="rect" id="node9" href="$set_parameters_8m.html" title="system/@ContinuousDomain\l/setParameters.m" alt="" coords="1536,97,1731,138"/>
+<area shape="rect" id="node2" href="$calc_dynamics_8m.html" title="system/@ContinuousDomain\l/calcDynamics.m" alt="" coords="5,97,200,138"/>
+<area shape="rect" id="node3" href="$get_output_indices_8m.html" title="system/@ContinuousDomain\l/getOutputIndices.m" alt="" coords="224,97,419,138"/>
+<area shape="rect" id="node4" href="$set_holonomic_constraints_8m.html" title="system/@ContinuousDomain\l/setHolonomicConstraints.m" alt="" coords="443,97,637,138"/>
+<area shape="rect" id="node5" href="$set_next_domain_8m.html" title="system/@ContinuousDomain\l/setNextDomain.m" alt="" coords="661,97,856,138"/>
 </map>

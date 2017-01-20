@@ -1,0 +1,6 @@
+<map id="Domain::addContact" name="Domain::addContact">
+<area shape="rect" id="node2" href="$class_domain.html#a0f9613e1c71b5575611c06c906e1e8e7" title="the calss constructor for Domain class " alt="" coords="196,71,316,98"/>
+<area shape="rect" id="node3" href="$class_virtual_constr_domain.html#a76454f5b422703193383d9f10c70cc41" title="Compiles the symbolic expression of kinematic functions related to the domain in Mathematica. " alt="" coords="364,5,507,47"/>
+<area shape="rect" id="node4" href="$class_virtual_constr_domain.html#a5df2ff25fa9541a911d9db3395caefd0" title="The class constructor function. " alt="" coords="555,64,705,105"/>
+<area shape="rect" id="node5" href="$class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="364,123,507,164"/>
+</map>

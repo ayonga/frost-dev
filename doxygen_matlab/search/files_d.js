@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['quad_5fheightdecay_2em',['quad_heightDecay.m',['../quad__height_decay_8m.html',1,'']]]
+  ['patchline_2em',['patchline.m',['../patchline_8m.html',1,'']]],
+  ['plot_5fcompare_2em',['plot_compare.m',['../plot__compare_8m.html',1,'']]],
+  ['plot_5fformat_2em',['plot_format.m',['../plot__format_8m.html',1,'']]],
+  ['plot_5fsave_2em',['plot_save.m',['../plot__save_8m.html',1,'']]],
+  ['print_2em',['print.m',['../print_8m.html',1,'']]]
 ];

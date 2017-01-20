@@ -1,0 +1,20 @@
+<map id="KinematicExpr::KinematicExpr" name="KinematicExpr::KinematicExpr">
+<area shape="rect" id="node2" href="$class_kinematic_expr.html#a2e680261ff1bf2005eabd1d7cdf6bff5" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="476,143,636,170"/>
+<area shape="rect" id="node12" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="253,244,428,271"/>
+<area shape="rect" id="node19" href="$class_kinematics.html#a39cc7efab36e33ab422caf70bf203f4e" title="The constructor function. " alt="" coords="261,295,421,322"/>
+<area shape="rect" id="node3" href="$eval__math_8m.html#ab9ca4e85d311f184ac7d73db1fae5380" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="754,143,837,170"/>
+<area shape="rect" id="node4" href="$check__var__exist_8m.html#a973f5aa7f2c07e713fbd8debe9314e30" title="A wrapper function that checks if a variable has been assigned to a value in Mathematica. " alt="" coords="737,295,854,322"/>
+<area shape="rect" id="node5" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="753,26,838,52"/>
+<area shape="rect" id="node11" href="$class_kinematics.html#ae66455e55b64885bfa29ff4b9e035c9d" title="The function returns the Mathematica command to compile the symbolic expressions for the time derivat..." alt="" coords="703,77,887,118"/>
+<area shape="rect" id="node6" href="$general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="955,51,1055,78"/>
+<area shape="rect" id="node8" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1248,26,1315,52"/>
+<area shape="rect" id="node7" href="$mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1111,26,1191,52"/>
+<area shape="rect" id="node9" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1107,236,1195,263"/>
+<area shape="rect" id="node10" href="$struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1103,76,1200,103"/>
+<area shape="rect" id="node13" href="$class_kinematics.html#ae01f9dcfc641416879f0948ef68034b6" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="486,194,626,220"/>
+<area shape="rect" id="node16" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="491,295,621,322"/>
+<area shape="rect" id="node18" href="$class_kinematics.html#aabf9883c6301589c35e7a20147158eea" title="This function prints out the symbolic expression from the Mathematica to Matlab screen. " alt="" coords="496,244,616,271"/>
+<area shape="rect" id="node14" href="$class_kinematics.html#a342f371ce41796c4bfe2145c226da864" title="This function returns he Mathematica command to compile the symbolic expression for the kinematic con..." alt="" coords="685,194,906,220"/>
+<area shape="rect" id="node15" href="$class_kinematics.html#af0fadcb7f14e4a326f38be97e6bf18a3" title="This function returns the Mathematica command to compile the symbolic expression for the kinematic co..." alt="" coords="684,244,907,271"/>
+<area shape="rect" id="node17" href="$build__mex_8m.html#ada8bdd985ae258aebcb23f7b92cce307" title="Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14..." alt="" coords="755,396,836,423"/>
+</map>

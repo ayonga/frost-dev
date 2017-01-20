@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['patchline',['patchline',['../patchline_8m.html#af86cd36e575a62a4d499b869338f6b77',1,'patchline.m']]],
-  ['plot_5fcompare',['plot_compare',['../plot__compare_8m.html#adac63d18feb66d9a6db0b596895f92c7',1,'plot_compare.m']]],
-  ['plot_5fformat',['plot_format',['../plot__format_8m.html#aa8a7c483ff4483b0f588f17be0c3baab',1,'plot_format.m']]],
-  ['plot_5fsave',['plot_save',['../plot__save_8m.html#a66203d12164d70995555f253147c1472',1,'plot_save.m']]],
-  ['pushrecord',['pushRecord',['../class_recorder.html#a057e3fdb3bed05424e915257643d25e7',1,'Recorder']]]
+  ['optimize',['optimize',['../class_ipopt_application.html#ae65864db1da1078c025a2de86aab9c1d',1,'IpoptApplication::optimize()'],['../class_solver_application.html#a39af87e72476463f231e1c654790cbd1',1,'SolverApplication::optimize()']]],
+  ['outputfcn',['outputfcn',['../outputfcn_8m.html#a492c7d2f30ec4dc269db4ac57f24f14e',1,'outputfcn.m']]],
+  ['outputpd',['OutputPD',['../class_output_p_d.html#aba475d8d0b58158c29de11fd3e4e27d4',1,'OutputPD']]]
 ];

@@ -1,8 +1,10 @@
 <map id="system" name="system">
-<area shape="rect" id="node2" href="dir_b612d9e8e66f987545d6b5da808e792b.html" title="@ContinuousDomain" alt="" coords="699,27,845,75"/>
-<area shape="rect" id="node3" href="dir_297eff57d8a97385f7609e1def2ebf0b.html" title="@DirectedGraph" alt="" coords="555,27,675,75"/>
-<area shape="rect" id="node4" href="dir_aae9ed024c18b0f3ec98eb79fedc1403.html" title="@DiscreteDynamics" alt="" coords="387,27,531,75"/>
-<area shape="rect" id="node5" href="dir_6cd67914738fcbdc838a5ece93e56b0b.html" title="@HybridDynamicalSystem" alt="" coords="181,27,363,75"/>
-<area shape="rect" id="node6" href="dir_d485d406511d88429ee50f972d628fce.html" title="@RigidBodyModel" alt="" coords="27,27,156,75"/>
-<area shape="rect" id="clust1" href="dir_448ef8bf4e3a4b5692e46b302d72f3ba.html" alt="" coords="16,16,952,85"/>
+<area shape="rect" id="node2" href="dir_297eff57d8a97385f7609e1def2ebf0b.html" title="@DirectedGraph" alt="" coords="781,27,901,75"/>
+<area shape="rect" id="node3" href="dir_bf80112ac25eab87153a2597d8cca88e.html" title="@Domain" alt="" coords="675,27,756,75"/>
+<area shape="rect" id="node4" href="dir_e8bf45956cdc8b6a76b10b284a953cfc.html" title="@Guard" alt="" coords="579,27,651,75"/>
+<area shape="rect" id="node5" href="dir_71ac8bf331dfb0d0b2cf3a6c27181b6e.html" title="@HybridSystem" alt="" coords="435,27,553,75"/>
+<area shape="rect" id="node6" href="dir_acd2aa48295154c0a4fc335c5fe84a3b.html" title="@HZDDomain" alt="" coords="301,27,411,75"/>
+<area shape="rect" id="node7" href="dir_cd85378d6c03d0a0505738f6ec3f13ee.html" title="@ResetMap" alt="" coords="181,27,277,75"/>
+<area shape="rect" id="node8" href="dir_d485d406511d88429ee50f972d628fce.html" title="@RigidBodyModel" alt="" coords="27,27,156,75"/>
+<area shape="rect" id="clust1" href="dir_448ef8bf4e3a4b5692e46b302d72f3ba.html" alt="" coords="16,16,1008,85"/>
 </map>

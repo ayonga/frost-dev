@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['ya1',['ya1',['../class_continuous_domain.html#a95bb07fea96acfdce55d5d3cdd935423',1,'ContinuousDomain']]],
-  ['ya2',['ya2',['../class_continuous_domain.html#aa643a712948cf81316889b0301c74dec',1,'ContinuousDomain']]],
-  ['yd1',['yd1',['../class_continuous_domain.html#a687828df7833459f364a3d7f0a5a0322',1,'ContinuousDomain']]],
-  ['yd2',['yd2',['../class_continuous_domain.html#a14dab9f7b88b1078369ba235bfd2c547',1,'ContinuousDomain']]]
+  ['unilateralconstr',['UnilateralConstr',['../class_domain.html#aa65fa11164c0d05b9c775388bfbfa76b',1,'Domain']]],
+  ['upperbound',['UpperBound',['../class_nlp_function.html#a9be8e9e86c15782451bcaf1855012bb0',1,'NlpFunction::UpperBound()'],['../class_nlp_variable.html#a8c0ef3d36e3158f032b6698f7bf5cbfc',1,'NlpVariable::UpperBound()']]]
 ];

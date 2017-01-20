@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['ub',['ub',['../class_nlp_var.html#a3e25fe316b4dd9baeee55ef6e607a9f8',1,'NlpVar']]],
-  ['untitled',['untitled',['../untitled_8m.html#a8facd58b2fb45b7506ec39abdfa3e94b',1,'untitled.m']]],
-  ['untitled_2em',['untitled.m',['../untitled_8m.html',1,'']]],
-  ['updatelastrecord',['updateLastRecord',['../class_recorder.html#a3d57e8e50ddbaba20aeab3ad16672a36',1,'Recorder']]]
+  ['table',['table',['../classtable.html',1,'']]],
+  ['tangentaxis',['TangentAxis',['../class_kinematic_contact.html#acdc449c0b3164e875a743c5ce5047256',1,'KinematicContact']]],
+  ['time',['Time',['../class_hybrid_trajectory_optimization.html#a50436811855c14ad0733bbb43b358906',1,'HybridTrajectoryOptimization']]],
+  ['todo_20list',['Todo List',['../todo.html',1,'']]],
+  ['transpose',['transpose',['../classhandle.html#acd9b55f206750374c4dfca508cfff084',1,'handle']]],
+  ['type',['Type',['../class_rigid_body_model.html#a235e6211dec1271d013a3bae6de668aa',1,'RigidBodyModel::Type()'],['../class_nlp_function.html#a75a7006fd514037a6f887df0de6e3dcd',1,'NlpFunction::Type()']]]
 ];

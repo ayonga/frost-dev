@@ -1,0 +1,5 @@
+<map id="@Controller/Controller.m" name="@Controller/Controller.m">
+<area shape="rect" id="node2" href="$calc_clf_multi_lagrange_8m.html" title="@Controller/calcClfMulti\lLagrange.m" alt="" coords="5,81,169,122"/>
+<area shape="rect" id="node3" href="$calc_torques_8m.html" title="@Controller/calcTorques.m" alt="" coords="195,88,377,115"/>
+<area shape="rect" id="node4" href="$configure_c_l_f_8m.html" title="@Controller/configureCLF.m" alt="" coords="403,88,592,115"/>
+</map>

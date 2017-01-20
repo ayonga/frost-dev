@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['maxabs_2em',['maxabs.m',['../maxabs_8m.html',1,'']]],
-  ['min_5fabs_5fdiff_5fnonzero_2em',['min_abs_diff_nonzero.m',['../min__abs__diff__nonzero_8m.html',1,'']]],
-  ['min_5fabs_5fdiff_5fnonzero_5fpermute_2em',['min_abs_diff_nonzero_permute.m',['../min__abs__diff__nonzero__permute_8m.html',1,'']]],
-  ['min_5fabs_5fnonzero_2em',['min_abs_nonzero.m',['../min__abs__nonzero_8m.html',1,'']]],
-  ['min_5fjerk_2em',['min_jerk.m',['../min__jerk_8m.html',1,'']]]
+  ['kinematiccom_2em',['KinematicCom.m',['../_kinematic_com_8m.html',1,'']]],
+  ['kinematiccontact_2em',['KinematicContact.m',['../_kinematic_contact_8m.html',1,'']]],
+  ['kinematicdof_2em',['KinematicDof.m',['../_kinematic_dof_8m.html',1,'']]],
+  ['kinematicexpr_2em',['KinematicExpr.m',['../_kinematic_expr_8m.html',1,'']]],
+  ['kinematicgroup_2em',['KinematicGroup.m',['../_kinematic_group_8m.html',1,'']]],
+  ['kinematicorientation_2em',['KinematicOrientation.m',['../_kinematic_orientation_8m.html',1,'']]],
+  ['kinematicposition_2em',['KinematicPosition.m',['../_kinematic_position_8m.html',1,'']]],
+  ['kinematics_2em',['Kinematics.m',['../_kinematics_8m.html',1,'']]]
 ];

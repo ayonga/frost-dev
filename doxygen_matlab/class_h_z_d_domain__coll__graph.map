@@ -1,0 +1,10 @@
+<map id="HZDDomain" name="HZDDomain">
+<area shape="rect" id="node2" href="$class_domain.html" title="Domain defines an admissible continuous domain (or phase) in the hybrid system model. The admissibility conditions are determined by the constraints defined on the domain. " alt="" coords="365,139,432,165"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node4" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="89,5,147,32"/>
+<area shape="rect" id="node5" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="213,5,256,32"/>
+<area shape="rect" id="node6" href="$classstruct.html" title="A MatLab struct. " alt="" coords="371,5,425,32"/>
+<area shape="rect" id="node7" href="$classchar.html" title="A MatLab character array. " alt="" coords="455,5,501,32"/>
+<area shape="rect" id="node8" href="$classtable.html" title="A MatLab table. " alt="" coords="593,5,644,32"/>
+<area shape="rect" id="node9" href="$classinteger.html" title="An integer value. " alt="" coords="740,5,801,32"/>
+</map>

@@ -132,249 +132,247 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">   53</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#accddf57649d7f7440042db68878b06ca">   63</a></span>&#160;        .DirectGraph <a class="code" href="class_hybrid_dynamical_system.html#accddf57649d7f7440042db68878b06ca">gamma</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">   73</a></span>&#160;        .HybridDomain <a class="code" href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">domains</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">   73</a></span>&#160;        <a class="code" href="class_continuous_domain.html">ContinuousDomain</a> <a class="code" href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">domains</a>;</div>
 <div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a1283342e8b345f85a9142895007f3601">   88</a></span>&#160;        <a class="code" href="class_hybrid_dynamical_system.html#a1283342e8b345f85a9142895007f3601">guards</a>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
 <div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a2ed96813cb2eba845f2efc46f146e8d8">   90</a></span>&#160;        <a class="code" href="class_rigid_body_model.html">RigidBodyModel</a> <a class="code" href="class_hybrid_dynamical_system.html#a2ed96813cb2eba845f2efc46f146e8d8">model</a>;</div>
 <div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a138b216f05abe262c4aa1b71990a2443">   99</a></span>&#160;        <a class="code" href="classcell.html">cell</a> <a class="code" href="class_hybrid_dynamical_system.html#a138b216f05abe262c4aa1b71990a2443">traj</a>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a5e8ffcae5e2b50312b99452b7f0ab7d9">  110</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_hybrid_dynamical_system.html#a5e8ffcae5e2b50312b99452b7f0ab7d9">options</a> = <span class="keyword">struct</span>(<span class="stringliteral">&quot;   \</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="stringliteral">            &#39;controllerType&#39;,&#39;IO&#39;,   \</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="stringliteral">            &#39;simOpts&#39;,[],   \</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="stringliteral">            &#39;odeOpts&#39;,[]&quot;</span>);</div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#afc8d52785c1acd448b32aed98a8c731b">  127</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_hybrid_dynamical_system.html#afc8d52785c1acd448b32aed98a8c731b">configDirPrefix</a>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a95c6a17dffbaa24218dbd221ccaad096">  136</a></span>&#160;            <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_hybrid_dynamical_system.html#a95c6a17dffbaa24218dbd221ccaad096">sysConfig</a>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="comment">/* % Public methods */</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="stringliteral">            &#39;sim_options&#39;,[],   \</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="stringliteral">            &#39;ode_options&#39;,[]&quot;</span>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a9fce92ee872601503a6299ceee5ecd25">  125</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_hybrid_dynamical_system.html#a9fce92ee872601503a6299ceee5ecd25">config_dir_prefix</a>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#ac1255ffc156f12af765e69f1506e5567">  134</a></span>&#160;            <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_hybrid_dynamical_system.html#ac1255ffc156f12af765e69f1506e5567">sys_config</a>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="comment">/* % Public methods */</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5">  146</a></span>&#160;        <a class="code" href="class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5">HybridDynamicalSystem</a>(<span class="keywordtype">char</span> <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>,config_path) {</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5">  148</a></span>&#160;        <a class="code" href="class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5">HybridDynamicalSystem</a>(<span class="keywordtype">char</span> <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>,config_path) {</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <span class="comment">/*  call the superclass constructor */</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            obj.name= <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="comment">/*  load default options  */</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            simOpts = <span class="keyword">struct</span>();</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            simOpts.ncycle= 1;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            simOpts.startingVertex= [];</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            odeOpts = odeset(<span class="stringliteral">&quot; MaxStep &quot;</span>, 1e-2, ...</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="stringliteral">&quot; RelTol &quot;</span>,1e-6,...</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                <span class="stringliteral">&quot; AbsTol &quot;</span>,1e-6);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            obj.configDirPrefix= config_path;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            obj.options.controllerType= <span class="stringliteral">&quot; IO &quot;</span>;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            obj.options.simOpts= simOpts;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            obj.options.odeOpts= odeOpts;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            obj.sysConfig.name= <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        }</div>
-<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a5945067d1c0724f72758ba9e05760253">  191</a></span>&#160;        function obj = <a class="code" href="class_hybrid_dynamical_system.html#a5945067d1c0724f72758ba9e05760253">setParams</a>(param_config) {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="comment">/*  call the superclass constructor */</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            obj.name= <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="comment">/*  load default options  */</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            sim_options = <span class="keyword">struct</span>();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            sim_options.num_cycle= 1;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            sim_options.first_vertex= [];</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            ode_options = odeset(<span class="stringliteral">&quot; MaxStep &quot;</span>, 1e-2, ...</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                <span class="stringliteral">&quot; RelTol &quot;</span>,1e-6,...</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="stringliteral">&quot; AbsTol &quot;</span>,1e-6);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            obj.config_dir_prefix= config_path;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            obj.options.sim_options= sim_options; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            obj.options.ode_options= ode_options;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            obj.sys_config.name= <a class="code" href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">name</a>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        }</div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a5945067d1c0724f72758ba9e05760253">  188</a></span>&#160;        function obj = <a class="code" href="class_hybrid_dynamical_system.html#a5945067d1c0724f72758ba9e05760253">setParams</a>(param_config) {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            param_config_file = fullfile(obj.config_dir_prefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; parameters &quot;</span>,...</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                obj.name, strcat(param_config,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            param_config_file = fullfile(obj.configDirPrefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; parameters &quot;</span>,...</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                obj.name, strcat(param_config,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            <span class="comment">/*  extract the absolute full file path of the input file */</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            full_file_path = GetFullPath(param_config_file);</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="comment">/*  extract the absolute full file path of the input file */</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            full_file_path = GetFullPath(param_config_file);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="comment">/*  check if the file exists */</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            assert(exist(full_file_path,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                <span class="stringliteral">&quot; Could not find the input configuration file: \n %s\n &quot;</span>, full_file_path);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            paramConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordflow">if</span> isfield(paramConfig,<span class="stringliteral">&quot; gait_metrics &quot;</span>)</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                fprintf(yaml_dump(paramConfig.gait_metrics));</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            end</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordflow">if</span> isfield(paramConfig(1),<span class="stringliteral">&quot; domain &quot;</span>)</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                param_domain_names = horzcat([paramConfig.domain.name]);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                param_domain_names = horzcat([paramConfig.name]);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            end</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="comment">/*  check if the file exists */</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            assert(exist(full_file_path,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                <span class="stringliteral">&quot; Could not find the input configuration file: \n %s\n &quot;</span>, full_file_path);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            paramConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">if</span> isfield(paramConfig,<span class="stringliteral">&quot; gait_metrics &quot;</span>)</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                fprintf(yaml_dump(paramConfig.gait_metrics));</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            end</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordflow">if</span> isfield(paramConfig(1),<span class="stringliteral">&quot; domain &quot;</span>)</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                param_domain_names = horzcat([paramConfig.domain.name]);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                param_domain_names = horzcat([paramConfig.name]);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            end</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordflow">for</span> i=1:numel(obj.domains)</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keywordflow">for</span> i=1:numel(obj.domains)</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                param_index = strcmp(param_domain_names, obj.domains(i).name);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                <span class="keywordflow">if</span> isfield(paramConfig(1),<span class="stringliteral">&quot; domain &quot;</span>)</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    param_domain = paramConfig.domain(param_index);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    param_domain = paramConfig(param_index);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                end</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                obj.domains(i)  = setParameters(obj.domains(i), param_domain);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            end</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        }</div>
-<div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a68996673bde987614ca8f0ca7c751252">  241</a></span>&#160;        function obj = <a class="code" href="class_hybrid_dynamical_system.html#a68996673bde987614ca8f0ca7c751252">setGraph</a>(<a class="code" href="classcell.html">cell</a> vertices,edges,<span class="keyword">struct</span> graphOptions) {</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="comment">/*  set the direct graph using the name */</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            obj.gamma= <a class="code" href="class_directed_graph.html">DirectedGraph</a>([vertices.name], ...</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                [[edges.name],[edges.source],[edges.target]], graphOptions);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            nVertex = numel(vertices);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            new_domains = <a class="code" href="classcell.html">cell</a>(1,nVertex);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">for</span> i=1:nVertex</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                domain_name = vertices(i).domain;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                <span class="comment">/*  instantiated the hybrid domain first */</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                new_domains[i] = <a class="code" href="class_continuous_domain.html">ContinuousDomain</a>(domain_name);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                <span class="comment">/*  the domain configuration file full path name */</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                domain_config_file = fullfile(obj.configDirPrefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; domain &quot;</span>,...</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                    strcat(domain_name,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                param_index = strcmp(param_domain_names, obj.domains(i).name);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                <span class="keywordflow">if</span> isfield(paramConfig(1),<span class="stringliteral">&quot; domain &quot;</span>)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                    param_domain = paramConfig.domain(param_index);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                    param_domain = paramConfig(param_index);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                end</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                obj.domains(i)  = setParameters(obj.domains(i), param_domain);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            end</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        }</div>
+<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a68996673bde987614ca8f0ca7c751252">  238</a></span>&#160;        function obj = <a class="code" href="class_hybrid_dynamical_system.html#a68996673bde987614ca8f0ca7c751252">setGraph</a>(<a class="code" href="classcell.html">cell</a> vertices,edges,<span class="keyword">struct</span> graphOptions) {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="comment">/*  set the direct graph using the name */</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            obj.gamma= <a class="code" href="class_directed_graph.html">DirectedGraph</a>([vertices.name], ...</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                [[edges.name],[edges.source],[edges.target]], graphOptions);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            nVertex = numel(vertices);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            new_domains = <a class="code" href="classcell.html">cell</a>(1,nVertex);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <span class="keywordflow">for</span> i=1:nVertex</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                domain_name = vertices(i).domain;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                <span class="comment">/*  instantiated the hybrid domain first */</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                new_domains[i] = <a class="code" href="class_continuous_domain.html">ContinuousDomain</a>(domain_name);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                <span class="comment">/*  the domain configuration file full path name */</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                domain_config_file = fullfile(obj.config_dir_prefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; domain &quot;</span>,...</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    strcat(domain_name,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                assert(~isempty(obj.model),[<span class="stringliteral">&quot; The dynamical model has not been configured. \n &quot;</span>,...</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                    <span class="stringliteral">&quot; Please setup the dynamical model before the domain configuration. &quot;</span>]);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                assert(~isempty(obj.model),[<span class="stringliteral">&quot; The dynamical model has not been configured. \n &quot;</span>,...</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                    <span class="stringliteral">&quot; Please setup the dynamical model before the domain configuration. &quot;</span>]);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                new_domains[i] = configureDomain(new_domains[i], obj.model, domain_config_file);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                new_domains[i] = configureDomain(new_domains[i], obj.model, domain_config_file);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                new_domains[i] = setupController(new_domains[i], obj.options.controllerType);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                new_domains[i] = setupController(new_domains[i], obj.options.controllerType);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            end</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            end</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            obj.domains= [new_domains[:]];</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            obj.domains= [new_domains[:]];</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            nEdge = numel(edges);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            new_gurads = <a class="code" href="classcell.html">cell</a>(1,nEdge);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">for</span> i=1:nEdge</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                guard_name = edges(i).guard;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                <span class="comment">/*  instantiated the hybrid domain first */</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                new_gurads[i] = <a class="code" href="class_discrete_dynamics.html">DiscreteDynamics</a>(guard_name);</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                <span class="comment">/*  the domain configuration file full path name */</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                dmap_config_file = fullfile(obj.configDirPrefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; domain &quot;</span>,...</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                    strcat(guard_name,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            nEdge = numel(edges);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            new_gurads = <a class="code" href="classcell.html">cell</a>(1,nEdge);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">for</span> i=1:nEdge</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                guard_name = edges(i).guard;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                <span class="comment">/*  instantiated the hybrid domain first */</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                new_gurads[i] = <a class="code" href="class_discrete_dynamics.html">DiscreteDynamics</a>(guard_name);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                <span class="comment">/*  the domain configuration file full path name */</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                dmap_config_file = fullfile(obj.config_dir_prefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; domain &quot;</span>,...</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                    strcat(guard_name,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                <span class="comment">/*  extract the absolute full file path of the input file */</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                full_file_path = GetFullPath(dmap_config_file);</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                <span class="comment">/*  extract the absolute full file path of the input file */</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                full_file_path = GetFullPath(dmap_config_file);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                <span class="comment">/*  check if the file exists */</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                assert(exist(full_file_path,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    <span class="stringliteral">&quot; Could not find the input configuration file: \n %s\n &quot;</span>, full_file_path);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                dMapConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                <span class="comment">/*  check if the file exists */</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                assert(exist(full_file_path,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                    <span class="stringliteral">&quot; Could not find the input configuration file: \n %s\n &quot;</span>, full_file_path);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                dMapConfig = cell_to_matrix_scan(yaml_read_file(full_file_path));</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                new_gurads[i] = setOptions(new_gurads[i], dMapConfig.resetMap);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                new_gurads[i] = setGuard(new_gurads[i], dMapConfig.guard);</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                new_gurads[i] = setOptions(new_gurads[i], dMapConfig.resetMap);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                new_gurads[i] = setGuard(new_gurads[i], dMapConfig.guard);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            end</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            obj.guards= [new_gurads[:]];</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            end</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            obj.guards= [new_gurads[:]];</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            obj.sysConfig.gamma.vertices= vertices;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            obj.sysConfig.gamma.edges= edges;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        }</div>
-<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a86f5712bb5b672b5fe1f19fc06cca021">  331</a></span>&#160;        function obj = <a class="code" href="class_hybrid_dynamical_system.html#a86f5712bb5b672b5fe1f19fc06cca021">setModel</a>(urdf_file,model_options) {</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">if</span> nargin &lt; 3</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                model_options = [];</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            end</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            obj.sys_config.gamma.vertices= vertices;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            obj.sys_config.gamma.edges= edges;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        }</div>
+<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a86f5712bb5b672b5fe1f19fc06cca021">  328</a></span>&#160;        function obj = <a class="code" href="class_hybrid_dynamical_system.html#a86f5712bb5b672b5fe1f19fc06cca021">setModel</a>(urdf_file,model_options) {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            <span class="keywordflow">if</span> nargin &lt; 3</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                model_options = [];</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            end</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            [~,file_name,file_ext] = fileparts(urdf_file);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            [~,file_name,file_ext] = fileparts(urdf_file);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            assert(~isempty(obj.config_dir_prefix),...</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                <span class="stringliteral">&quot; Please set the configuration files path prefix first.\n &quot;</span>);</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            assert(~isempty(obj.configDirPrefix),...</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                <span class="stringliteral">&quot; Please set the configuration files path prefix first.\n &quot;</span>);</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordflow">if</span> isempty(file_ext)</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                file_ext = <span class="stringliteral">&quot; .urdf &quot;</span>;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            end</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            <span class="keywordflow">if</span> isempty(file_ext)</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                file_ext = <span class="stringliteral">&quot; .urdf &quot;</span>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            end</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            config_file = fullfile(obj.config_dir_prefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; model &quot;</span>,...</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                strcat(file_name,file_ext));</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            config_file = fullfile(obj.configDirPrefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; model &quot;</span>,...</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                strcat(file_name,file_ext));</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <span class="comment">/*  check if the file exists */</span></div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            assert(exist(config_file,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                <span class="stringliteral">&quot; The configuration file could not be found.\n &quot;</span>);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            obj.model= <a class="code" href="class_rigid_body_model.html">RigidBodyModel</a>(config_file, model_options);</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            obj.sysConfig.model.file= strcat(file_name,file_ext);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            obj.sysConfig.model.options= obj.model.options;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
-<div class="line"><a name="l00374"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a384f5a9fe540a2e8f504f8d623070ffe">  374</a></span>&#160;        function HybridDomaindomain = <a class="code" href="class_hybrid_dynamical_system.html#a384f5a9fe540a2e8f504f8d623070ffe">getDomainByVertex</a>(<span class="keywordtype">char</span> vertex) {</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            <span class="comment">/*  check if graph has been configured a priori */</span></div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            assert(~isempty(obj.gamma),... </div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                <span class="stringliteral">&quot; The graph is empty, please configure the graph first.\n &quot;</span>);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            <span class="comment">/*  check if the domains have been configured a priori */</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            assert(~isempty(obj.domains),...</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                <span class="stringliteral">&quot; The domain is empty, please configure the graph first.\n &quot;</span>);</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <span class="comment">/*  check if the given vertex name exists in the graph */</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            assert(any(strcmp(obj.vertices,vertex)),...</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                <span class="stringliteral">&quot; The vertex %s does not exist in the graph.\n &quot;</span>,vertex);</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            domain_index = strcmp(obj.gamma.vertices,vertex);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            <span class="comment">/*  check if the file exists */</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            assert(exist(config_file,<span class="stringliteral">&quot; file &quot;</span>)==2,...</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                <span class="stringliteral">&quot; The configuration file could not be found.\n &quot;</span>);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            obj.model= <a class="code" href="class_rigid_body_model.html">RigidBodyModel</a>(config_file, model_options);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            obj.sys_config.model.file= strcat(file_name,file_ext);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            obj.sys_config.model.options= obj.model.options;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        }</div>
+<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a384f5a9fe540a2e8f504f8d623070ffe">  371</a></span>&#160;        function HybridDomaindomain = <a class="code" href="class_hybrid_dynamical_system.html#a384f5a9fe540a2e8f504f8d623070ffe">getDomainByVertex</a>(<span class="keywordtype">char</span> vertex) {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            <span class="comment">/*  check if graph has been configured a priori */</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            assert(~isempty(obj.gamma),... </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                <span class="stringliteral">&quot; The graph is empty, please configure the graph first.\n &quot;</span>);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            <span class="comment">/*  check if the domains have been configured a priori */</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            assert(~isempty(obj.domains),...</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                <span class="stringliteral">&quot; The domain is empty, please configure the graph first.\n &quot;</span>);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            <span class="comment">/*  check if the given vertex name exists in the graph */</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            assert(any(strcmp(obj.vertices,vertex)),...</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                <span class="stringliteral">&quot; The vertex %s does not exist in the graph.\n &quot;</span>,vertex);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            domain_index = strcmp(obj.gamma.vertices,vertex);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            domain = obj.domains(domain_index);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            domain = obj.domains(domain_index);</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        }</div>
-<div class="line"><a name="l00406"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6">  406</a></span>&#160;        function  <a class="code" href="class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6">exportSysConfig</a>() {</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        }</div>
+<div class="line"><a name="l00403"></a><span class="lineno"><a class="line" href="class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6">  403</a></span>&#160;        function  <a class="code" href="class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6">exportSysConfig</a>() {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            export_name = fullfile(obj.config_dir_prefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; system &quot;</span>,...</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                strcat(obj.name,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            export_name = fullfile(obj.configDirPrefix,<span class="stringliteral">&quot; config &quot;</span>,<span class="stringliteral">&quot; system &quot;</span>,...</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                strcat(obj.name,<span class="stringliteral">&quot; .yaml &quot;</span>));</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            yaml_write_file(export_name,obj.sysConfig);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        }</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        </div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.configDirPrefix&#39;</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_hybrid_dynamical_system.html#afc8d52785c1acd448b32aed98a8c731b">configDirPrefix</a>(<span class="keywordtype">char</span> configDir) {</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            <span class="comment">/*  check if the directory exist */</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            assert(exist(configDir, <span class="stringliteral">&quot; dir &quot;</span>) == 7,...</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                [<span class="stringliteral">&quot; The provided directory does not exist: \n &quot;</span>,...</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                <span class="stringliteral">&quot; %s \n &quot;</span>,...</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                <span class="stringliteral">&quot; Please provide the correct directory path. &quot;</span>], configDir);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            yaml_write_file(export_name,obj.sys_config);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        }</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.config_dir_prefix&#39;</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_hybrid_dynamical_system.html#a9fce92ee872601503a6299ceee5ecd25">config_dir_prefix</a>(<span class="keywordtype">char</span> configDir) {</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            <span class="comment">/*  check if the directory exist */</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            assert(exist(configDir, <span class="stringliteral">&quot; dir &quot;</span>) == 7,...</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                [<span class="stringliteral">&quot; The provided directory does not exist: \n &quot;</span>,...</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                <span class="stringliteral">&quot; %s \n &quot;</span>,...</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                <span class="stringliteral">&quot; Please provide the correct directory path. &quot;</span>], configDir);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            obj.config_dir_prefix= configDir;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        }</div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;            obj.configDirPrefix= configDir;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        }</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        <span class="comment">/* % Private methods */</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;};</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        <span class="comment">/* % Private methods */</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;};</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;</div>
 <div class="ttc" id="class_directed_graph_html"><div class="ttname"><a href="class_directed_graph.html">DirectedGraph</a></div><div class="ttdoc">DirectedGraph defines a simple direct graph class. </div><div class="ttdef"><b>Definition:</b> <a href="_directed_graph_8m_source.html#l00017">DirectedGraph.m:17</a></div></div>
 <div class="ttc" id="classcell_html"><div class="ttname"><a href="classcell.html">cell</a></div><div class="ttdoc">A MatLab cell array or matrix. </div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html_ac2e63cd7d03689cbc4e7fb48de47e4f4"><div class="ttname"><a href="class_hybrid_dynamical_system.html#ac2e63cd7d03689cbc4e7fb48de47e4f4">HybridDynamicalSystem.name</a></div><div class="ttdeci">char name</div><div class="ttdoc">This is the name of the object that gives the object an universal identification. ...</div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00053">HybridDynamicalSystem.m:53</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a587ebab853d24561e517f48e54244fd6"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6">HybridDynamicalSystem.exportSysConfig</a></div><div class="ttdeci">function  exportSysConfig()</div><div class="ttdoc">Exports the system configuration into a YAML file. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00406">HybridDynamicalSystem.m:406</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a95c6a17dffbaa24218dbd221ccaad096"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a95c6a17dffbaa24218dbd221ccaad096">HybridDynamicalSystem.sysConfig</a></div><div class="ttdeci">struct sysConfig</div><div class="ttdoc">stores the configuration of the system </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00136">HybridDynamicalSystem.m:136</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a68996673bde987614ca8f0ca7c751252"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a68996673bde987614ca8f0ca7c751252">HybridDynamicalSystem.setGraph</a></div><div class="ttdeci">function   obj  = setGraph(cell vertices, edges,struct graphOptions)</div><div class="ttdoc">Configure the direct graph of the hybrid system model. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00241">HybridDynamicalSystem.m:241</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_afc8d52785c1acd448b32aed98a8c731b"><div class="ttname"><a href="class_hybrid_dynamical_system.html#afc8d52785c1acd448b32aed98a8c731b">HybridDynamicalSystem.configDirPrefix</a></div><div class="ttdeci">char configDirPrefix</div><div class="ttdoc">the directory of configuration files </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00127">HybridDynamicalSystem.m:127</a></div></div>
-<div class="ttc" id="class_continuous_domain_html"><div class="ttname"><a href="class_continuous_domain.html">ContinuousDomain</a></div><div class="ttdoc">HybridDomain defines an admissible domain in the hybrid system model. </div><div class="ttdef"><b>Definition:</b> <a href="_continuous_domain_8m_source.html#l00017">ContinuousDomain.m:17</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a384f5a9fe540a2e8f504f8d623070ffe"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a384f5a9fe540a2e8f504f8d623070ffe">HybridDynamicalSystem.getDomainByVertex</a></div><div class="ttdeci">function HybridDomain domain  = getDomainByVertex(char vertex)</div><div class="ttdoc">Return the domain object associated with the vertex. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00374">HybridDynamicalSystem.m:374</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a587ebab853d24561e517f48e54244fd6"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6">HybridDynamicalSystem.exportSysConfig</a></div><div class="ttdeci">function  exportSysConfig()</div><div class="ttdoc">Exports the system configuration into a YAML file. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00403">HybridDynamicalSystem.m:403</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_ac1255ffc156f12af765e69f1506e5567"><div class="ttname"><a href="class_hybrid_dynamical_system.html#ac1255ffc156f12af765e69f1506e5567">HybridDynamicalSystem.sys_config</a></div><div class="ttdeci">struct sys_config</div><div class="ttdoc">stores the configuration of the system </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00134">HybridDynamicalSystem.m:134</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a9fce92ee872601503a6299ceee5ecd25"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a9fce92ee872601503a6299ceee5ecd25">HybridDynamicalSystem.config_dir_prefix</a></div><div class="ttdeci">char config_dir_prefix</div><div class="ttdoc">the directory of configuration files </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00125">HybridDynamicalSystem.m:125</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a68996673bde987614ca8f0ca7c751252"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a68996673bde987614ca8f0ca7c751252">HybridDynamicalSystem.setGraph</a></div><div class="ttdeci">function   obj  = setGraph(cell vertices, edges,struct graphOptions)</div><div class="ttdoc">Configure the direct graph of the hybrid system model. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00238">HybridDynamicalSystem.m:238</a></div></div>
+<div class="ttc" id="class_continuous_domain_html"><div class="ttname"><a href="class_continuous_domain.html">ContinuousDomain</a></div><div class="ttdoc">ContinuousDomain defines an admissible continuous domain (or phase) in the hybrid system model...</div><div class="ttdef"><b>Definition:</b> <a href="_continuous_domain_8m_source.html#l00017">ContinuousDomain.m:17</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a384f5a9fe540a2e8f504f8d623070ffe"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a384f5a9fe540a2e8f504f8d623070ffe">HybridDynamicalSystem.getDomainByVertex</a></div><div class="ttdeci">function HybridDomain domain  = getDomainByVertex(char vertex)</div><div class="ttdoc">Return the domain object associated with the vertex. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00371">HybridDynamicalSystem.m:371</a></div></div>
 <div class="ttc" id="class_discrete_dynamics_html"><div class="ttname"><a href="class_discrete_dynamics.html">DiscreteDynamics</a></div><div class="ttdoc">DiscreteDynamics defines properties and functions related to a discrete transition of the hybrid dyna...</div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00017">DiscreteDynamics.m:17</a></div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html_a1283342e8b345f85a9142895007f3601"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a1283342e8b345f85a9142895007f3601">HybridDynamicalSystem.guards</a></div><div class="ttdeci">guards</div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00088">HybridDynamicalSystem.m:88</a></div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html"><div class="ttname"><a href="class_hybrid_dynamical_system.html">HybridDynamicalSystem</a></div><div class="ttdoc">HybridDynamicalSystem defines a hybrid dynamical system that has both continuous and discrete dynamic...</div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00017">HybridDynamicalSystem.m:17</a></div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html_accddf57649d7f7440042db68878b06ca"><div class="ttname"><a href="class_hybrid_dynamical_system.html#accddf57649d7f7440042db68878b06ca">HybridDynamicalSystem.gamma</a></div><div class="ttdeci">DirectGraph gamma</div><div class="ttdoc">The directed graph that describes the hybrid dynamical system structure. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00063">HybridDynamicalSystem.m:63</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a9ab441370b74ef833884676a58a6d3a5"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5">HybridDynamicalSystem.HybridDynamicalSystem</a></div><div class="ttdeci">HybridDynamicalSystem(char name, config_path)</div><div class="ttdoc">the default calss constructor </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00148">HybridDynamicalSystem.m:148</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a5945067d1c0724f72758ba9e05760253"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a5945067d1c0724f72758ba9e05760253">HybridDynamicalSystem.setParams</a></div><div class="ttdeci">function   obj  = setParams(param_config)</div><div class="ttdoc">set the parameters for the continous domain behaviors (trajectory) </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00191">HybridDynamicalSystem.m:191</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a9ab441370b74ef833884676a58a6d3a5"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a9ab441370b74ef833884676a58a6d3a5">HybridDynamicalSystem.HybridDynamicalSystem</a></div><div class="ttdeci">HybridDynamicalSystem(char name, config_path)</div><div class="ttdoc">the default calss constructor </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00146">HybridDynamicalSystem.m:146</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a5945067d1c0724f72758ba9e05760253"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a5945067d1c0724f72758ba9e05760253">HybridDynamicalSystem.setParams</a></div><div class="ttdeci">function   obj  = setParams(param_config)</div><div class="ttdoc">set the parameters for the continous domain behaviors (trajectory) </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00188">HybridDynamicalSystem.m:188</a></div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html_a138b216f05abe262c4aa1b71990a2443"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a138b216f05abe262c4aa1b71990a2443">HybridDynamicalSystem.traj</a></div><div class="ttdeci">cell traj</div><div class="ttdoc">The hybrid flows (trajectory) recorder. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00099">HybridDynamicalSystem.m:99</a></div></div>
-<div class="ttc" id="class_rigid_body_model_html"><div class="ttname"><a href="class_rigid_body_model.html">RigidBodyModel</a></div><div class="ttdoc">RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy...</div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00017">RigidBodyModel.m:17</a></div></div>
+<div class="ttc" id="class_rigid_body_model_html"><div class="ttname"><a href="class_rigid_body_model.html">RigidBodyModel</a></div><div class="ttdoc">A class with basic model descriptions and functionalities of the multi-link rigid-body robot platform...</div><div class="ttdef"><b>Definition:</b> <a href="_rigid_body_model_8m_source.html#l00017">RigidBodyModel.m:17</a></div></div>
 <div class="ttc" id="classstruct_html"><div class="ttname"><a href="classstruct.html">struct</a></div><div class="ttdoc">A MatLab struct. </div></div>
 <div class="ttc" id="classchar_html"><div class="ttname"><a href="classchar.html">char</a></div><div class="ttdoc">A MatLab character array. </div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html_a5e8ffcae5e2b50312b99452b7f0ab7d9"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a5e8ffcae5e2b50312b99452b7f0ab7d9">HybridDynamicalSystem.options</a></div><div class="ttdeci">struct options</div><div class="ttdoc">The class option. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00110">HybridDynamicalSystem.m:110</a></div></div>
 <div class="ttc" id="class_hybrid_dynamical_system_html_a2ed96813cb2eba845f2efc46f146e8d8"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a2ed96813cb2eba845f2efc46f146e8d8">HybridDynamicalSystem.model</a></div><div class="ttdeci">RigidBodyModel model</div><div class="ttdoc">The the rigid body model. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00090">HybridDynamicalSystem.m:90</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_af0a2f12a727f02b4ec2757d791b466ce"><div class="ttname"><a href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">HybridDynamicalSystem.domains</a></div><div class="ttdeci">HybridDomain domains</div><div class="ttdoc">The continuous domains. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00073">HybridDynamicalSystem.m:73</a></div></div>
-<div class="ttc" id="class_hybrid_dynamical_system_html_a86f5712bb5b672b5fe1f19fc06cca021"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a86f5712bb5b672b5fe1f19fc06cca021">HybridDynamicalSystem.setModel</a></div><div class="ttdeci">function   obj  = setModel(urdf_file, model_options)</div><div class="ttdoc">configure the dynamical system model </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00331">HybridDynamicalSystem.m:331</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_af0a2f12a727f02b4ec2757d791b466ce"><div class="ttname"><a href="class_hybrid_dynamical_system.html#af0a2f12a727f02b4ec2757d791b466ce">HybridDynamicalSystem.domains</a></div><div class="ttdeci">ContinuousDomain domains</div><div class="ttdoc">The continuous domains. </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00073">HybridDynamicalSystem.m:73</a></div></div>
+<div class="ttc" id="class_hybrid_dynamical_system_html_a86f5712bb5b672b5fe1f19fc06cca021"><div class="ttname"><a href="class_hybrid_dynamical_system.html#a86f5712bb5b672b5fe1f19fc06cca021">HybridDynamicalSystem.setModel</a></div><div class="ttdeci">function   obj  = setModel(urdf_file, model_options)</div><div class="ttdoc">configure the dynamical system model </div><div class="ttdef"><b>Definition:</b> <a href="_hybrid_dynamical_system_8m_source.html#l00328">HybridDynamicalSystem.m:328</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -384,7 +382,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2016 18:37:30 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

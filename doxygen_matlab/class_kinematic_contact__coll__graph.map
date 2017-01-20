@@ -1,0 +1,9 @@
+<map id="KinematicContact" name="KinematicContact">
+<area shape="rect" id="node2" href="$class_kinematics.html" title="Defines a kinematic function of a rigid body model. " alt="" coords="182,147,269,174"/>
+<area shape="rect" id="node3" href="$classlogical.html" title="A boolean value. " alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="171,5,226,32"/>
+<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="291,5,338,32"/>
+<area shape="rect" id="node6" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="445,147,488,174"/>
+<area shape="rect" id="node7" href="$classdouble.html" title="A double value. " alt="" coords="521,147,581,174"/>
+<area shape="rect" id="node8" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="648,147,712,174"/>
+</map>

@@ -1,5 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_nlp_fcn.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="5,31,69,57"/>
-<area shape="rect" id="node2" href="$class_nlp_constr.html" title="This class provides a data structure for a optimization constraints based on the NlpFcn class..." alt="" coords="118,5,199,32"/>
-<area shape="rect" id="node3" href="$class_nlp_cost.html" title="This class provides a data structure for a cost function based on the NlpFcn class. " alt="" coords="123,56,194,83"/>
+<area shape="rect" id="node1" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node2" href="$classsparsematrix.html" title="A matlab sparse matrix. " alt="" coords="113,5,210,32"/>
 </map>

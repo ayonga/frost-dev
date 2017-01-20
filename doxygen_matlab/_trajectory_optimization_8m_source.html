@@ -124,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">/* % Constant properties */</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">/* % Protected properties */</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
@@ -140,23 +140,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_trajectory_optimization.html#a1459e86041c97ed22034381e17cd060c">   57</a></span>&#160;        <a class="code" href="class_trajectory_optimization.html#a1459e86041c97ed22034381e17cd060c">TrajectoryOptimization</a>() {</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_trajectory_optimization.html#abd74250b4c35a853f04c7e1b80289d3f">   57</a></span>&#160;        <a class="code" href="class_trajectory_optimization.html#abd74250b4c35a853f04c7e1b80289d3f">TrajectoryOptimization</a>(<a class="code" href="class_nonlinear_program.html#a711439d4eccaa5d13f56e1d17435face">name</a>,<a class="code" href="classvarargin.html">varargin</a>) {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            obj = obj@<a class="code" href="class_nonlinear_program.html#adcf0ed06efccf4849383f1b61fc5e074">NonlinearProgram</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            obj = obj@<a class="code" href="class_nonlinear_program.html#adcf0ed06efccf4849383f1b61fc5e074">NonlinearProgram</a>(name, varargin[:]);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">/* % Private methods */</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="ttc" id="class_nonlinear_program_html_adcf0ed06efccf4849383f1b61fc5e074"><div class="ttname"><a href="class_nonlinear_program.html#adcf0ed06efccf4849383f1b61fc5e074">NonlinearProgram.NonlinearProgram</a></div><div class="ttdeci">NonlinearProgram(name, varargin)</div><div class="ttdoc">The default class constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_nonlinear_program_8m_source.html#l00153">NonlinearProgram.m:153</a></div></div>
-<div class="ttc" id="class_trajectory_optimization_html_a1459e86041c97ed22034381e17cd060c"><div class="ttname"><a href="class_trajectory_optimization.html#a1459e86041c97ed22034381e17cd060c">TrajectoryOptimization.TrajectoryOptimization</a></div><div class="ttdeci">TrajectoryOptimization()</div><div class="ttdoc">The constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_trajectory_optimization_8m_source.html#l00057">TrajectoryOptimization.m:57</a></div></div>
+<div class="ttc" id="class_nonlinear_program_html_adcf0ed06efccf4849383f1b61fc5e074"><div class="ttname"><a href="class_nonlinear_program.html#adcf0ed06efccf4849383f1b61fc5e074">NonlinearProgram.NonlinearProgram</a></div><div class="ttdeci">NonlinearProgram(name, varargin)</div><div class="ttdoc">The default class constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_nonlinear_program_8m_source.html#l00143">NonlinearProgram.m:143</a></div></div>
 <div class="ttc" id="class_nonlinear_program_html"><div class="ttname"><a href="class_nonlinear_program.html">NonlinearProgram</a></div><div class="ttdoc">NonlinearProgram defines an abstract class for general nonlinear programing problems. </div><div class="ttdef"><b>Definition:</b> <a href="_nonlinear_program_8m_source.html#l00017">NonlinearProgram.m:17</a></div></div>
 <div class="ttc" id="class_trajectory_optimization_html"><div class="ttname"><a href="class_trajectory_optimization.html">TrajectoryOptimization</a></div><div class="ttdoc">TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimiz...</div><div class="ttdef"><b>Definition:</b> <a href="_trajectory_optimization_8m_source.html#l00017">TrajectoryOptimization.m:17</a></div></div>
+<div class="ttc" id="class_trajectory_optimization_html_abd74250b4c35a853f04c7e1b80289d3f"><div class="ttname"><a href="class_trajectory_optimization.html#abd74250b4c35a853f04c7e1b80289d3f">TrajectoryOptimization.TrajectoryOptimization</a></div><div class="ttdeci">TrajectoryOptimization(name, varargin)</div><div class="ttdoc">The constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_trajectory_optimization_8m_source.html#l00057">TrajectoryOptimization.m:57</a></div></div>
+<div class="ttc" id="classvarargin_html"><div class="ttname"><a href="classvarargin.html">varargin</a></div><div class="ttdoc">A variable number of input arguments. </div></div>
+<div class="ttc" id="class_nonlinear_program_html_a711439d4eccaa5d13f56e1d17435face"><div class="ttname"><a href="class_nonlinear_program.html#a711439d4eccaa5d13f56e1d17435face">NonlinearProgram.name</a></div><div class="ttdeci">char name</div><div class="ttdoc">The name identification. </div><div class="ttdef"><b>Definition:</b> <a href="_nonlinear_program_8m_source.html#l00041">NonlinearProgram.m:41</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -166,7 +163,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 5 2016 22:32:33 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

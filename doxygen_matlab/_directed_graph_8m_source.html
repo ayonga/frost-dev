@@ -52,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -83,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -137,7 +138,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_directed_graph.html#a3fa5ba4328e1194e9c9999b994696eaf">   50</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_directed_graph.html#a3fa5ba4328e1194e9c9999b994696eaf">edges</a>;</div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">   62</a></span>&#160;        <a class="code" href="classcell.html">cell</a> <a class="code" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">vertices</a>;</div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_directed_graph.html#a6e26ff7a79027be1fe330136c8d615ca">   74</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_directed_graph.html#a6e26ff7a79027be1fe330136c8d615ca">options</a> = <span class="keyword">struct</span>(<span class="stringliteral">&quot;   \</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">            &#39;isPeriodic&#39;,true&quot;</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">            &#39;is_periodic&#39;,true&quot;</span>);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="comment">/* % Public methods */</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
@@ -159,7 +160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">if</span> isempty(edges)</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                <span class="keywordflow">if</span> obj.options.isPeriodic</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                <span class="keywordflow">if</span> obj.options.is_periodic</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    source = <a class="code" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">vertices</a>;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    target = [<a class="code" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">vertices</a>(2:end),<a class="code" href="class_directed_graph.html#a06f4f4030fd04fc7999d7e00d122bd88">vertices</a>(1)];</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordflow">else</span>                    </div>
@@ -175,7 +176,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                edge_name = edges[1];</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                source = edges[2];</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                target = edges[3];</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keywordflow">if</span> obj.options.isPeriodic</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keywordflow">if</span> obj.options.is_periodic</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    assert(numel(source) == numel(target),...</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                        <span class="stringliteral">&quot; The periodic graph requires the number of target and source vertices are equal. &quot;</span>);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    assert(strcmp(source[1],target[end]),...</div>
@@ -251,18 +252,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                warning(<span class="stringliteral">&quot; There is no source vertex exists for %s\n &quot;</span>,target_vertex);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            end</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">/* % Private methods */</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;};</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
+<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="class_directed_graph.html#a5493ccaf99b3d9220be164ba276df444">  270</a></span>&#160;        function N = <a class="code" href="class_directed_graph.html#a5493ccaf99b3d9220be164ba276df444">getNumberOfVertices</a>() {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;           </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            N = numel(obj.vertices);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="comment">/* % Private methods */</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;};</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
 <div class="ttc" id="class_directed_graph_html"><div class="ttname"><a href="class_directed_graph.html">DirectedGraph</a></div><div class="ttdoc">DirectedGraph defines a simple direct graph class. </div><div class="ttdef"><b>Definition:</b> <a href="_directed_graph_8m_source.html#l00017">DirectedGraph.m:17</a></div></div>
 <div class="ttc" id="class_directed_graph_html_af40ae4035a517cd7edd80d0bb342e145"><div class="ttname"><a href="class_directed_graph.html#af40ae4035a517cd7edd80d0bb342e145">DirectedGraph.getEdgeByTarget</a></div><div class="ttdeci">function cell edge  = getEdgeByTarget(char target_vertex)</div><div class="ttdoc">Get the name of edges whose target is the same as the target_vertex </div><div class="ttdef"><b>Definition:</b> <a href="_directed_graph_8m_source.html#l00194">DirectedGraph.m:194</a></div></div>
 <div class="ttc" id="classcell_html"><div class="ttname"><a href="classcell.html">cell</a></div><div class="ttdoc">A MatLab cell array or matrix. </div></div>
+<div class="ttc" id="class_directed_graph_html_a5493ccaf99b3d9220be164ba276df444"><div class="ttname"><a href="class_directed_graph.html#a5493ccaf99b3d9220be164ba276df444">DirectedGraph.getNumberOfVertices</a></div><div class="ttdeci">function   N  = getNumberOfVertices()</div><div class="ttdef"><b>Definition:</b> <a href="_directed_graph_8m_source.html#l00270">DirectedGraph.m:270</a></div></div>
 <div class="ttc" id="class_directed_graph_html_a6e26ff7a79027be1fe330136c8d615ca"><div class="ttname"><a href="class_directed_graph.html#a6e26ff7a79027be1fe330136c8d615ca">DirectedGraph.options</a></div><div class="ttdeci">struct options</div><div class="ttdoc">The class option. </div><div class="ttdef"><b>Definition:</b> <a href="_directed_graph_8m_source.html#l00074">DirectedGraph.m:74</a></div></div>
 <div class="ttc" id="class_directed_graph_html_a04445bce06f862a8a5ac2dc42ad2677d"><div class="ttname"><a href="class_directed_graph.html#a04445bce06f862a8a5ac2dc42ad2677d">DirectedGraph.getEdgeBySource</a></div><div class="ttdeci">function cell edge  = getEdgeBySource(char source_vertex)</div><div class="ttdoc">Get the name of edges whose source is the same as the source_vertex </div><div class="ttdef"><b>Definition:</b> <a href="_directed_graph_8m_source.html#l00169">DirectedGraph.m:169</a></div></div>
 <div class="ttc" id="struct__overlay_8m_html_a269d22bd975b0b74d8c6c135eb6edcf0"><div class="ttname"><a href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0">struct_overlay</a></div><div class="ttdeci">function   opts  = struct_overlay(opts_default, opts_in, options)</div><div class="ttdef"><b>Definition:</b> <a href="struct__overlay_8m_source.html#l00017">struct_overlay.m:17</a></div></div>
@@ -281,7 +290,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 22:27:25 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

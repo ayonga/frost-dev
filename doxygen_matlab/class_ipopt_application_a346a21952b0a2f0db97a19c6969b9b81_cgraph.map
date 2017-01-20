@@ -1,0 +1,4 @@
+<map id="IpoptApplication::initialize" name="IpoptApplication::initialize">
+<area shape="rect" id="node2" href="$class_ipopt_application.html#a57bdcf472dc4d576fbb0929b3076252f" title="This function converts the cell array of registered constraints of the NLP into a NlpConstraint objec..." alt="" coords="225,5,439,46"/>
+<area shape="rect" id="node3" href="$class_ipopt_application.html#a2ad933a516ee2c3822d0bc0f58ff8442" title="This function converts the cell array of registered cost functions of the NLP into a NlpCost object a..." alt="" coords="241,70,423,111"/>
+</map>

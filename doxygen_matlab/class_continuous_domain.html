@@ -104,14 +104,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>HybridDomain defines an admissible domain in the hybrid system model.  
+<p><a class="el" href="class_continuous_domain.html" title="ContinuousDomain defines an admissible continuous domain (or phase) in the hybrid system model...">ContinuousDomain</a> defines an admissible continuous domain (or phase) in the hybrid system model. The admissibility conditions are determined by the constraints defined on the domain.  
  <a href="class_continuous_domain.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for ContinuousDomain:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_continuous_domain__inherit__graph.png" border="0" usemap="#_continuous_domain_inherit__map" alt="Inheritance graph"/></div>
+<map name="_continuous_domain_inherit__map" id="_continuous_domain_inherit__map">
+<area shape="rect" id="node2" href="class_h_z_d_domain.html" title="HZDDomain defines an admissible continuous domain (or phase) in the hybrid system model with Hybrid Z..." alt="" coords="25,80,119,107"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for ContinuousDomain:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_continuous_domain__coll__graph.png" border="0" usemap="#_continuous_domain_coll__map" alt="Collaboration graph"/></div>
 <map name="_continuous_domain_coll__map" id="_continuous_domain_coll__map">
-<area shape="rect" id="node2" href="classfunction__handle.html" title="A MatLab function handle. " alt="" coords="5,5,117,32"/><area shape="rect" id="node3" href="classstruct.html" title="A MatLab struct. " alt="" coords="163,5,217,32"/><area shape="rect" id="node4" href="classchar.html" title="A MatLab character array. " alt="" coords="290,5,336,32"/><area shape="rect" id="node5" href="classinteger.html" title="An integer value. " alt="" coords="361,5,423,32"/></map>
+<area shape="rect" id="node2" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,5,48,32"/><area shape="rect" id="node3" href="classstruct.html" title="A MatLab struct. " alt="" coords="95,5,149,32"/><area shape="rect" id="node4" href="classchar.html" title="A MatLab character array. " alt="" coords="175,5,221,32"/><area shape="rect" id="node5" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="246,5,303,32"/><area shape="rect" id="node6" href="classinteger.html" title="An integer value. " alt="" coords="375,5,436,32"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -119,138 +126,51 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a741984b21056032e211a7163c11b1d80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a741984b21056032e211a7163c11b1d80">ContinuousDomain</a> (<a class="el" href="classchar.html">char</a> <a class="el" href="class_continuous_domain.html#a82f47ea265d343d3d53a9ae82570db2d">name</a>)</td></tr>
 <tr class="memdesc:a741984b21056032e211a7163c11b1d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">the default calss constructor  <a href="#a741984b21056032e211a7163c11b1d80">More...</a><br/></td></tr>
 <tr class="separator:a741984b21056032e211a7163c11b1d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52bbd1a8ac6d115c7dd217115e9c7117"><td class="memItemLeft" align="right" valign="top">function 
-  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a52bbd1a8ac6d115c7dd217115e9c7117">configureDomain</a> (<a class="el" href="class_rigid_body_model.html">RigidBodyModel</a> model,<a class="el" href="classchar.html">char</a> config_file)</td></tr>
-<tr class="memdesc:a52bbd1a8ac6d115c7dd217115e9c7117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the hybrid domain model from a configuration file.  <a href="#a52bbd1a8ac6d115c7dd217115e9c7117">More...</a><br/></td></tr>
-<tr class="separator:a52bbd1a8ac6d115c7dd217115e9c7117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a860f6f6ad703cae3feb2425a7e4db7c4"><td class="memItemLeft" align="right" valign="top">function 
-  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a860f6f6ad703cae3feb2425a7e4db7c4">setupController</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
-<tr class="memdesc:a860f6f6ad703cae3feb2425a7e4db7c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the feedback controller for the continuous domain  <a href="#a860f6f6ad703cae3feb2425a7e4db7c4">More...</a><br/></td></tr>
-<tr class="separator:a860f6f6ad703cae3feb2425a7e4db7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e05e6918e069be233daa7deb02de885"><td class="memItemLeft" align="right" valign="top">function 
-  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a6e05e6918e069be233daa7deb02de885">addContactPoint</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a6e05e6918e069be233daa7deb02de885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a contact point to the domain.  <a href="#a6e05e6918e069be233daa7deb02de885">More...</a><br/></td></tr>
-<tr class="separator:a6e05e6918e069be233daa7deb02de885"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19726adc23fea4439cd7280a43e912ee"><td class="memItemLeft" align="right" valign="top">function 
-  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a19726adc23fea4439cd7280a43e912ee">addJointConstraints</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a19726adc23fea4439cd7280a43e912ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a contact point to the domain.  <a href="#a19726adc23fea4439cd7280a43e912ee">More...</a><br/></td></tr>
-<tr class="separator:a19726adc23fea4439cd7280a43e912ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64c069d2fb1a3503e573d2a782ecc05d"><td class="memItemLeft" align="right" valign="top">function 
-  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a64c069d2fb1a3503e573d2a782ecc05d">addPositionConstraints</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a64c069d2fb1a3503e573d2a782ecc05d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a contact point to the domain.  <a href="#a64c069d2fb1a3503e573d2a782ecc05d">More...</a><br/></td></tr>
-<tr class="separator:a64c069d2fb1a3503e573d2a782ecc05d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62804a7bea35de9f4d9112b0b36b372a"><td class="memItemLeft" align="right" valign="top">function 
-  x0  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a62804a7bea35de9f4d9112b0b36b372a">getInitialStates</a> ()</td></tr>
-<tr class="memdesc:a62804a7bea35de9f4d9112b0b36b372a"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the initial states of the domain  <a href="#a62804a7bea35de9f4d9112b0b36b372a">More...</a><br/></td></tr>
-<tr class="separator:a62804a7bea35de9f4d9112b0b36b372a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa9b497da73fbe41e274751d4759c65"><td class="memItemLeft" align="right" valign="top">function 
+  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#abaa9b497da73fbe41e274751d4759c65">addHolnomicConstraint</a> (<a class="el" href="classcell.html">cell</a> constr_list)</td></tr>
+<tr class="memdesc:abaa9b497da73fbe41e274751d4759c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds holonomic constraints for the domain.  <a href="#abaa9b497da73fbe41e274751d4759c65">More...</a><br/></td></tr>
+<tr class="separator:abaa9b497da73fbe41e274751d4759c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b052c6892cd31860bed280e75c17c4"><td class="memItemLeft" align="right" valign="top">function 
+  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a24b052c6892cd31860bed280e75c17c4">removeHolonomicConstraint</a> (<a class="el" href="classcell.html">cell</a> constr_list)</td></tr>
+<tr class="memdesc:a24b052c6892cd31860bed280e75c17c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes holonomic constraints from the defined holonomic constraints of the domain.  <a href="#a24b052c6892cd31860bed280e75c17c4">More...</a><br/></td></tr>
+<tr class="separator:a24b052c6892cd31860bed280e75c17c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad08104244341432a662b148736280e11"><td class="memItemLeft" align="right" valign="top">function 
+  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ad08104244341432a662b148736280e11">compileFunction</a> (model, field_names)</td></tr>
+<tr class="memdesc:ad08104244341432a662b148736280e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compiles the symbolic expression of functions related to the class in Mathematica.  <a href="#ad08104244341432a662b148736280e11">More...</a><br/></td></tr>
+<tr class="separator:ad08104244341432a662b148736280e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9f24ea78396959c85a997384fe816d"><td class="memItemLeft" align="right" valign="top">function 
+  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#aeb9f24ea78396959c85a997384fe816d">exportFunction</a> (fields)</td></tr>
+<tr class="memdesc:aeb9f24ea78396959c85a997384fe816d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Export the symbolic expression of functions to C/C++ source files and build them as MEX files.  <a href="#aeb9f24ea78396959c85a997384fe816d">More...</a><br/></td></tr>
+<tr class="separator:aeb9f24ea78396959c85a997384fe816d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5dccd3127c2fe5426faa9f719d6d8fd"><td class="memItemLeft" align="right" valign="top">function 
+  obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ab5dccd3127c2fe5426faa9f719d6d8fd">setFunctionName</a> (<a class="el" href="classcellstr.html">cellstr</a> fields,<a class="el" href="classcellstr.html">cellstr</a> values)</td></tr>
+<tr class="memdesc:ab5dccd3127c2fe5426faa9f719d6d8fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the name of functions for the domain.  <a href="#ab5dccd3127c2fe5426faa9f719d6d8fd">More...</a><br/></td></tr>
+<tr class="separator:ab5dccd3127c2fe5426faa9f719d6d8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a82f47ea265d343d3d53a9ae82570db2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a82f47ea265d343d3d53a9ae82570db2d">name</a></td></tr>
-<tr class="memdesc:a82f47ea265d343d3d53a9ae82570db2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the name of the object that gives the object an universal identification.  <a href="#a82f47ea265d343d3d53a9ae82570db2d">More...</a><br/></td></tr>
+<tr class="memdesc:a82f47ea265d343d3d53a9ae82570db2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">% basic properties This is the name of the object that gives the object an universal identification  <a href="#a82f47ea265d343d3d53a9ae82570db2d">More...</a><br/></td></tr>
 <tr class="separator:a82f47ea265d343d3d53a9ae82570db2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a463560160ec75bf0991613585d252cbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a463560160ec75bf0991613585d252cbf">hol_constr</a></td></tr>
+<tr class="memdesc:a463560160ec75bf0991613585d252cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">% holonomic constraints a cell array of holonomic constraints given as objects of <a class="el" href="class_kinematics.html" title="Defines a scalar kinematic function of a rigid body model. ">Kinematics</a> classes  <a href="#a463560160ec75bf0991613585d252cbf">More...</a><br/></td></tr>
+<tr class="separator:a463560160ec75bf0991613585d252cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2073c794663151829dedb1c3874ffc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ad2073c794663151829dedb1c3874ffc0">hol_constr_name</a></td></tr>
+<tr class="memdesc:ad2073c794663151829dedb1c3874ffc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">a cell string of holonomic constraint names defined on the domain  <a href="#ad2073c794663151829dedb1c3874ffc0">More...</a><br/></td></tr>
+<tr class="separator:ad2073c794663151829dedb1c3874ffc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee9f9da3a75d7ac42efda4f59eca2a25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classinteger.html">integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#aee9f9da3a75d7ac42efda4f59eca2a25">n_hol_constr</a></td></tr>
+<tr class="memdesc:aee9f9da3a75d7ac42efda4f59eca2a25"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of holonomic constraints  <a href="#aee9f9da3a75d7ac42efda4f59eca2a25">More...</a><br/></td></tr>
+<tr class="separator:aee9f9da3a75d7ac42efda4f59eca2a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5dd29ceefed0480c4958ad4eb0500f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ac5dd29ceefed0480c4958ad4eb0500f7">funcs</a></td></tr>
+<tr class="memdesc:ac5dd29ceefed0480c4958ad4eb0500f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">a structure of function names defined for the domain. Each field of <code>funcs</code> specifies the name of a function that used for a certain computation of the domain.  <a href="#ac5dd29ceefed0480c4958ad4eb0500f7">More...</a><br/></td></tr>
+<tr class="separator:ac5dd29ceefed0480c4958ad4eb0500f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3231c729cc824e025c3f70ac9e47daf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a3231c729cc824e025c3f70ac9e47daf6">options</a></td></tr>
-<tr class="memdesc:a3231c729cc824e025c3f70ac9e47daf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class option.  <a href="#a3231c729cc824e025c3f70ac9e47daf6">More...</a><br/></td></tr>
+<tr class="memdesc:a3231c729cc824e025c3f70ac9e47daf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific options for the domain.  <a href="#a3231c729cc824e025c3f70ac9e47daf6">More...</a><br/></td></tr>
 <tr class="separator:a3231c729cc824e025c3f70ac9e47daf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a6212813d5854401c141bce3acee3da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a2a6212813d5854401c141bce3acee3da">indexInStep</a></td></tr>
-<tr class="memdesc:a2a6212813d5854401c141bce3acee3da"><td class="mdescLeft">&#160;</td><td class="mdescRight">domain index in a step  <a href="#a2a6212813d5854401c141bce3acee3da">More...</a><br/></td></tr>
-<tr class="separator:a2a6212813d5854401c141bce3acee3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0adb90150fd35d0ca2a0a406d59df0fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a0adb90150fd35d0ca2a0a406d59df0fa">numDomainsInStep</a></td></tr>
-<tr class="separator:a0adb90150fd35d0ca2a0a406d59df0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1260cd55d95acb4748be260fae3cd90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ae1260cd55d95acb4748be260fae3cd90">contactPoints</a></td></tr>
-<tr class="memdesc:ae1260cd55d95acb4748be260fae3cd90"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct array of contact points constraints.  <a href="#ae1260cd55d95acb4748be260fae3cd90">More...</a><br/></td></tr>
-<tr class="separator:ae1260cd55d95acb4748be260fae3cd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd1459049f48a2d6a765a1b1effdab82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#acd1459049f48a2d6a765a1b1effdab82">jointConstraints</a></td></tr>
-<tr class="memdesc:acd1459049f48a2d6a765a1b1effdab82"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct array of additional kinematic constraints associated with joints.  <a href="#acd1459049f48a2d6a765a1b1effdab82">More...</a><br/></td></tr>
-<tr class="separator:acd1459049f48a2d6a765a1b1effdab82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d08e21754f80788d17ab10d9d6bcc1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a4d08e21754f80788d17ab10d9d6bcc1b">posConstraints</a></td></tr>
-<tr class="memdesc:a4d08e21754f80788d17ab10d9d6bcc1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct array of additional kinematic constraints associated with kinematic positions.  <a href="#a4d08e21754f80788d17ab10d9d6bcc1b">More...</a><br/></td></tr>
-<tr class="separator:a4d08e21754f80788d17ab10d9d6bcc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb9ad4c449e37e703601cf5bc57f1b10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classinteger.html">integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#adb9ad4c449e37e703601cf5bc57f1b10">dimHolConstr</a></td></tr>
-<tr class="memdesc:adb9ad4c449e37e703601cf5bc57f1b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">the dimension of holonomic constraints  <a href="#adb9ad4c449e37e703601cf5bc57f1b10">More...</a><br/></td></tr>
-<tr class="separator:adb9ad4c449e37e703601cf5bc57f1b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af64512975cf8e29f1517ba6dd9de79ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#af64512975cf8e29f1517ba6dd9de79ea">holConstrFunc</a></td></tr>
-<tr class="memdesc:af64512975cf8e29f1517ba6dd9de79ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">a function that computes the value of holonomic constraints  <a href="#af64512975cf8e29f1517ba6dd9de79ea">More...</a><br/></td></tr>
-<tr class="separator:af64512975cf8e29f1517ba6dd9de79ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1776b6ee9e6880524fead34b148be3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ab1776b6ee9e6880524fead34b148be3b">holConstrJac</a></td></tr>
-<tr class="memdesc:ab1776b6ee9e6880524fead34b148be3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">afunction that computes the jacobian of holonomic constraints  <a href="#ab1776b6ee9e6880524fead34b148be3b">More...</a><br/></td></tr>
-<tr class="separator:ab1776b6ee9e6880524fead34b148be3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3655dfb17a9fb2b4c2c6bb178a5b4a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ac3655dfb17a9fb2b4c2c6bb178a5b4a4">holConstrJacDot</a></td></tr>
-<tr class="memdesc:ac3655dfb17a9fb2b4c2c6bb178a5b4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">a function that computes time derivatives of the jacobian matrix of holonomic constraints  <a href="#ac3655dfb17a9fb2b4c2c6bb178a5b4a4">More...</a><br/></td></tr>
-<tr class="separator:ac3655dfb17a9fb2b4c2c6bb178a5b4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90f0a5cb9d6115ec6f6dc68887176a2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a90f0a5cb9d6115ec6f6dc68887176a2f">controller</a></td></tr>
-<tr class="separator:a90f0a5cb9d6115ec6f6dc68887176a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4f87602edcc444f9b3c1e7d8946b162"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ad4f87602edcc444f9b3c1e7d8946b162">outputs</a></td></tr>
-<tr class="memdesc:ad4f87602edcc444f9b3c1e7d8946b162"><td class="mdescLeft">&#160;</td><td class="mdescRight">% virtual constraints (i.e., outputs)  <a href="#ad4f87602edcc444f9b3c1e7d8946b162">More...</a><br/></td></tr>
-<tr class="separator:ad4f87602edcc444f9b3c1e7d8946b162"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c932d8a0e244681fff94e6a0621dbca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a9c932d8a0e244681fff94e6a0621dbca">nOutputs</a></td></tr>
-<tr class="separator:a9c932d8a0e244681fff94e6a0621dbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae676270e825dda676dd11c98b287bf5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ae676270e825dda676dd11c98b287bf5f">nParamRD1</a></td></tr>
-<tr class="separator:ae676270e825dda676dd11c98b287bf5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63651399672bfd82bc84708c62ec4c0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a63651399672bfd82bc84708c62ec4c0e">nParamRD2</a></td></tr>
-<tr class="separator:a63651399672bfd82bc84708c62ec4c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad51751de7b7b149605728bb197671c89"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ad51751de7b7b149605728bb197671c89">nParamPhaseVar</a></td></tr>
-<tr class="separator:ad51751de7b7b149605728bb197671c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95bb07fea96acfdce55d5d3cdd935423"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a95bb07fea96acfdce55d5d3cdd935423">ya1</a></td></tr>
-<tr class="memdesc:a95bb07fea96acfdce55d5d3cdd935423"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative degree one output - actual  <a href="#a95bb07fea96acfdce55d5d3cdd935423">More...</a><br/></td></tr>
-<tr class="separator:a95bb07fea96acfdce55d5d3cdd935423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa643a712948cf81316889b0301c74dec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#aa643a712948cf81316889b0301c74dec">ya2</a></td></tr>
-<tr class="memdesc:aa643a712948cf81316889b0301c74dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative degree two outputs - actual  <a href="#aa643a712948cf81316889b0301c74dec">More...</a><br/></td></tr>
-<tr class="separator:aa643a712948cf81316889b0301c74dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a687828df7833459f364a3d7f0a5a0322"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a687828df7833459f364a3d7f0a5a0322">yd1</a></td></tr>
-<tr class="memdesc:a687828df7833459f364a3d7f0a5a0322"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative degree one output - desired  <a href="#a687828df7833459f364a3d7f0a5a0322">More...</a><br/></td></tr>
-<tr class="separator:a687828df7833459f364a3d7f0a5a0322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14dab9f7b88b1078369ba235bfd2c547"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a14dab9f7b88b1078369ba235bfd2c547">yd2</a></td></tr>
-<tr class="memdesc:a14dab9f7b88b1078369ba235bfd2c547"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative degree two outputs - desired  <a href="#a14dab9f7b88b1078369ba235bfd2c547">More...</a><br/></td></tr>
-<tr class="separator:a14dab9f7b88b1078369ba235bfd2c547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af94b7e467a0d0eb41562fe43c1dfe3bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#af94b7e467a0d0eb41562fe43c1dfe3bb">Dya1</a></td></tr>
-<tr class="memdesc:af94b7e467a0d0eb41562fe43c1dfe3bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">First order jacobian of outputs 1st Jacobian of relative degree one output - actual.  <a href="#af94b7e467a0d0eb41562fe43c1dfe3bb">More...</a><br/></td></tr>
-<tr class="separator:af94b7e467a0d0eb41562fe43c1dfe3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83056daeb6cd9e1339dbb07f4f7a11a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a83056daeb6cd9e1339dbb07f4f7a11a1">Dya2</a></td></tr>
-<tr class="memdesc:a83056daeb6cd9e1339dbb07f4f7a11a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">1st Jacobian of relative degree two outputs - actual  <a href="#a83056daeb6cd9e1339dbb07f4f7a11a1">More...</a><br/></td></tr>
-<tr class="separator:a83056daeb6cd9e1339dbb07f4f7a11a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab334db03cd6adb0a8bce2803ee0b0bf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ab334db03cd6adb0a8bce2803ee0b0bf3">DLfya2</a></td></tr>
-<tr class="memdesc:ab334db03cd6adb0a8bce2803ee0b0bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second order jacobian of outputs 2nd Jacobian of relative degree two outputs - actual.  <a href="#ab334db03cd6adb0a8bce2803ee0b0bf3">More...</a><br/></td></tr>
-<tr class="separator:ab334db03cd6adb0a8bce2803ee0b0bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9919fb75dde4a56097d9298852b8020b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a9919fb75dde4a56097d9298852b8020b">dyd1</a></td></tr>
-<tr class="memdesc:a9919fb75dde4a56097d9298852b8020b"><td class="mdescLeft">&#160;</td><td class="mdescRight">1st derivative of desired degree one output w.r.t tau  <a href="#a9919fb75dde4a56097d9298852b8020b">More...</a><br/></td></tr>
-<tr class="separator:a9919fb75dde4a56097d9298852b8020b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59e6b3f0977d6b8e6326d63ba6780689"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a59e6b3f0977d6b8e6326d63ba6780689">dyd2</a></td></tr>
-<tr class="memdesc:a59e6b3f0977d6b8e6326d63ba6780689"><td class="mdescLeft">&#160;</td><td class="mdescRight">1st derivative of desired degree two outputs w.r.t tau  <a href="#a59e6b3f0977d6b8e6326d63ba6780689">More...</a><br/></td></tr>
-<tr class="separator:a59e6b3f0977d6b8e6326d63ba6780689"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3a743f481166f9f2d792570e1bfd4b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#ad3a743f481166f9f2d792570e1bfd4b1">ddyd2</a></td></tr>
-<tr class="memdesc:ad3a743f481166f9f2d792570e1bfd4b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd derivative of desired degree two outputs w.r.t tau  <a href="#ad3a743f481166f9f2d792570e1bfd4b1">More...</a><br/></td></tr>
-<tr class="separator:ad3a743f481166f9f2d792570e1bfd4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa785135b8a29b1b8472a3d84419ca9bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#aa785135b8a29b1b8472a3d84419ca9bf">deltaphip</a></td></tr>
-<tr class="memdesc:aa785135b8a29b1b8472a3d84419ca9bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linearized hip position function handle.  <a href="#aa785135b8a29b1b8472a3d84419ca9bf">More...</a><br/></td></tr>
-<tr class="separator:aa785135b8a29b1b8472a3d84419ca9bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21ad7e2baa6dcb85d7c6aaf074ada294"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a21ad7e2baa6dcb85d7c6aaf074ada294">Jdeltaphip</a></td></tr>
-<tr class="memdesc:a21ad7e2baa6dcb85d7c6aaf074ada294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Jacobian of linearized hip position.  <a href="#a21ad7e2baa6dcb85d7c6aaf074ada294">More...</a><br/></td></tr>
-<tr class="separator:a21ad7e2baa6dcb85d7c6aaf074ada294"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a318c724d0110652d86f7166886cf334b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a318c724d0110652d86f7166886cf334b">tau</a></td></tr>
-<tr class="memdesc:a318c724d0110652d86f7166886cf334b"><td class="mdescLeft">&#160;</td><td class="mdescRight">phase variable tau  <a href="#a318c724d0110652d86f7166886cf334b">More...</a><br/></td></tr>
-<tr class="separator:a318c724d0110652d86f7166886cf334b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18afed7ba30fcf906f0d2d9fdeff74af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a18afed7ba30fcf906f0d2d9fdeff74af">dtau</a></td></tr>
-<tr class="memdesc:a18afed7ba30fcf906f0d2d9fdeff74af"><td class="mdescLeft">&#160;</td><td class="mdescRight">time derivative of tau  <a href="#a18afed7ba30fcf906f0d2d9fdeff74af">More...</a><br/></td></tr>
-<tr class="separator:a18afed7ba30fcf906f0d2d9fdeff74af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40dc0b722e0d0286113536cb46accd53"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a40dc0b722e0d0286113536cb46accd53">Jtau</a></td></tr>
-<tr class="memdesc:a40dc0b722e0d0286113536cb46accd53"><td class="mdescLeft">&#160;</td><td class="mdescRight">jacobian of tau w.r.t to system states x  <a href="#a40dc0b722e0d0286113536cb46accd53">More...</a><br/></td></tr>
-<tr class="separator:a40dc0b722e0d0286113536cb46accd53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a84474eb5f2edf4e40fbf1f0f7fb75e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a7a84474eb5f2edf4e40fbf1f0f7fb75e">Jdtau</a></td></tr>
-<tr class="memdesc:a7a84474eb5f2edf4e40fbf1f0f7fb75e"><td class="mdescLeft">&#160;</td><td class="mdescRight">jacobian of dtau w.r.t to system states x  <a href="#a7a84474eb5f2edf4e40fbf1f0f7fb75e">More...</a><br/></td></tr>
-<tr class="separator:a7a84474eb5f2edf4e40fbf1f0f7fb75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60977c7b3c0ada9567bf194a6658cd62"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a60977c7b3c0ada9567bf194a6658cd62">nAct</a></td></tr>
-<tr class="separator:a60977c7b3c0ada9567bf194a6658cd62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b64c9a2199b457543862a3b7af4004e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a4b64c9a2199b457543862a3b7af4004e">qaIndices</a></td></tr>
-<tr class="separator:a4b64c9a2199b457543862a3b7af4004e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fb288bb2df7316f253d33cf1adec844"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a7fb288bb2df7316f253d33cf1adec844">dqaIndices</a></td></tr>
-<tr class="separator:a7fb288bb2df7316f253d33cf1adec844"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b4b167875d00f2d212f632e93578390"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_continuous_domain.html#a8b4b167875d00f2d212f632e93578390">params</a></td></tr>
-<tr class="memdesc:a8b4b167875d00f2d212f632e93578390"><td class="mdescLeft">&#160;</td><td class="mdescRight">% domain parameters  <a href="#a8b4b167875d00f2d212f632e93578390">More...</a><br/></td></tr>
-<tr class="separator:a8b4b167875d00f2d212f632e93578390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>HybridDomain defines an admissible domain in the hybrid system model. </p>
+<div class="textblock"><p><a class="el" href="class_continuous_domain.html" title="ContinuousDomain defines an admissible continuous domain (or phase) in the hybrid system model...">ContinuousDomain</a> defines an admissible continuous domain (or phase) in the hybrid system model. The admissibility conditions are determined by the constraints defined on the domain. </p>
+<p>Contraints are typically given as kinematic constraints, such as holonomic constraints and unilateral constraints, of the rigid body model.</p>
 <dl class="section author"><dt>Author</dt><dd>Ayonga Hereid </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016-09-26</dd></dl>
 <p>Copyright (c) 2016, AMBER Lab All right reserved.</p>
@@ -275,149 +195,66 @@ Public Attributes</h2></td></tr>
 <p>the default calss constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>the name of the hybrid domain</td></tr>
+    <tr><td class="paramname">name</td><td>the name of the domain</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Required fields of contactPoints:</dt><dd><ul>
-<li><code>name&#160;&mdash;&#160;</code> the name of the contact point </li>
-<li><code>plink&#160;&mdash;&#160;</code> the name of the rigid link on which the point is attached to </li>
-<li><code>offset&#160;&mdash;&#160;</code> the 3-dimensional offset in the body joint coordinates that is rigidly attached to parent link </li>
-<li><code>constraints&#160;&mdash;&#160;</code> the constraints imposed on the contact point. It should be a list of indices of some or all of available constraints given below<ul>
-<li>1: the position along the X direction in the world frame</li>
-<li>2: the position along the Y direction in the world frame</li>
-<li>3: the position along the Z direction in the world frame</li>
-<li>4: the Euler rotation angle along the X direction in the world frame</li>
-<li>5: the Euler rotation angle along the Y direction in the world frame</li>
-<li>6: the Euler rotation angle along the Z direction in the world frame </li>
-</ul>
-</li>
+<dl class="section user"><dt>Required fields of funcs:</dt><dd><ul>
+<li><code>hol_constr_func&#160;&mdash;&#160;</code> a string of the function that computes the value of holonomic constraints </li>
+<li><code>hol_constr_jac&#160;&mdash;&#160;</code> a string of the function that computes the jacobian of holonomic constraints </li>
+<li><code>hol_constr_jacdot&#160;&mdash;&#160;</code> a string of the function that computes time derivatives of the jacobian matrix of holonomic constraints </li>
 </ul>
 </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00356">356</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00135">135</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
-<p>References <a class="el" href="_continuous_domain_8m_source.html#l00043">name</a>.</p>
+<p>References <a class="el" href="_continuous_domain_8m_source.html#l00046">name</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a6e05e6918e069be233daa7deb02de885"></a>
+<a class="anchor" id="abaa9b497da73fbe41e274751d4759c65"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function   obj  = ContinuousDomain.addContactPoint </td>
+          <td class="memname">function   obj  = ContinuousDomain.addHolnomicConstraint </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classcell.html">cell</a>&#160;</td>
+          <td class="paramname"><em>constr_list</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Add a contact point to the domain. </p>
+<p>Adds holonomic constraints for the domain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">varargin@code</td><td>addContactPoint ( name, plink, [ offset [, constraints ] ] )  <em>Required Parameters for varargin:</em><ul>
-<li><span class="paramname"> name</span> name</li>
-<li><span class="paramname"> plink</span> plink</li>
-</ul>
-<em>Optional Parameters for varargin:</em><ul>
-<li><span class="paramname"> offset</span> offset ( <b>Default:</b> <code>zeros(1,3</code> )</li>
-<li><span class="paramname"> constraints</span> constraints ( <b>Default:</b> <code>[]</code> )</li>
-</ul>
-</td></tr>
+    <tr><td class="paramname">constr_list</td><td>a cell array of new holonomic constraints</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00476">476</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00170">170</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a19726adc23fea4439cd7280a43e912ee"></a>
+<a class="anchor" id="ad08104244341432a662b148736280e11"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function   obj  = ContinuousDomain.addJointConstraints </td>
+          <td class="memname">function   obj  = ContinuousDomain.compileFunction </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>varargin</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a contact point to the domain. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">varargin@code</td><td>addJointConstraints ( name, vars, [ expr ] )  <em>Required Parameters for varargin:</em><ul>
-<li><span class="paramname"> name</span> name</li>
-<li><span class="paramname"> vars</span> vars</li>
-</ul>
-<em>Optional Parameters for varargin:</em><ul>
-<li><span class="paramname"> expr</span> expr ( <b>Default:</b> <code>{<code>var1</code>}</code> )</li>
-</ul>
-</td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00517">517</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a64c069d2fb1a3503e573d2a782ecc05d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function   obj  = ContinuousDomain.addPositionConstraints </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>varargin</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a contact point to the domain. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">varargin@code</td><td>addPositionConstraints ( name, vars, [ expr ] )  <em>Required Parameters for varargin:</em><ul>
-<li><span class="paramname"> name</span> name</li>
-<li><span class="paramname"> vars</span> vars</li>
-</ul>
-<em>Optional Parameters for varargin:</em><ul>
-<li><span class="paramname"> expr</span> expr ( <b>Default:</b> <code>{<code>var1</code>}</code> )</li>
-</ul>
-</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>make position constraints more general </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00554">554</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a52bbd1a8ac6d115c7dd217115e9c7117"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function   obj  = ContinuousDomain.configureDomain </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a>&#160;</td>
           <td class="paramname"><em>model</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
-          <td class="paramname"><em>config_file</em>&#160;</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>field_names</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -427,456 +264,189 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Configure the hybrid domain model from a configuration file. </p>
-<p>Return values obj: configured hybrid domain object</p>
+<p>Compiles the symbolic expression of functions related to the class in Mathematica. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">model</td><td>the dynamical model </td></tr>
-    <tr><td class="paramname">config_file</td><td>the full file path of the configuration file</td></tr>
+    <tr><td class="paramname">fields</td><td>specifies particular fields in the <code>funcs</code> property that need to be compiled. If not specified explicitly, then compile all functions. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00390">390</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00240">240</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a62804a7bea35de9f4d9112b0b36b372a"></a>
+<a class="anchor" id="aeb9f24ea78396959c85a997384fe816d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function   x0  = ContinuousDomain.getInitialStates </td>
+          <td class="memname">function   obj  = ContinuousDomain.exportFunction </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>fields</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>return the initial states of the domain </p>
-<dl class="section note"><dt>Note</dt><dd>To call this function, first need to assign the params structure</dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">x0</td><td>the initial states of the domain </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Export the symbolic expression of functions to C/C++ source files and build them as MEX files. </p>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00592">592</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00288">288</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a860f6f6ad703cae3feb2425a7e4db7c4"></a>
+<a class="anchor" id="a24b052c6892cd31860bed280e75c17c4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function   obj  = ContinuousDomain.setupController </td>
+          <td class="memname">function   obj  = ContinuousDomain.removeHolonomicConstraint </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classcell.html">cell</a>&#160;</td>
+          <td class="paramname"><em>constr_list</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>setup the feedback controller for the continuous domain </p>
+<p>Removes holonomic constraints from the defined holonomic constraints of the domain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>controller type</td></tr>
+    <tr><td class="paramname">constr_list</td><td>a cell array of holonomic constraints to be removed</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00460">460</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00197">197</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+
+<p>References <a class="el" href="str__indices_8m_source.html#l00017">str_indices()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_continuous_domain_a24b052c6892cd31860bed280e75c17c4_cgraph.png" border="0" usemap="#class_continuous_domain_a24b052c6892cd31860bed280e75c17c4_cgraph" alt=""/></div>
+<map name="class_continuous_domain_a24b052c6892cd31860bed280e75c17c4_cgraph" id="class_continuous_domain_a24b052c6892cd31860bed280e75c17c4_cgraph">
+<area shape="rect" id="node2" href="str__indices_8m.html#aa2be2e9d82b17da59dd163530f21eeaa" title="str_indices" alt="" coords="237,12,323,39"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ab5dccd3127c2fe5426faa9f719d6d8fd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDomain.setFunctionName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>fields</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the name of functions for the domain. </p>
+<p>The usage is similar to set/get function of matlab.mixin.SetGet class, except this function does not support array objects. In addition, it has input argument validations specific to the current class.</p>
+<dl class="section see"><dt>See Also</dt><dd>matlab.mixin.SetGet</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fields</td><td>a string or cellstr of function name fields</td></tr>
+    <tr><td class="paramname">values</td><td>values of the field </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00303">303</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ae1260cd55d95acb4748be260fae3cd90"></a>
+<a class="anchor" id="ac5dd29ceefed0480c4958ad4eb0500f7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ContinuousDomain.contactPoints</td>
+          <td class="memname">ContinuousDomain.funcs</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>A struct array of contact points constraints. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<p>a structure of function names defined for the domain. Each field of <code>funcs</code> specifies the name of a function that used for a certain computation of the domain. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00079">79</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00100">100</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a90f0a5cb9d6115ec6f6dc68887176a2f"></a>
+<a class="anchor" id="a463560160ec75bf0991613585d252cbf"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ContinuousDomain.controller</td>
+          <td class="memname">ContinuousDomain.hol_constr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00167">167</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad3a743f481166f9f2d792570e1bfd4b1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.ddyd2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>2nd derivative of desired degree two outputs w.r.t tau </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<p>% holonomic constraints a cell array of holonomic constraints given as objects of <a class="el" href="class_kinematics.html" title="Defines a scalar kinematic function of a rigid body model. ">Kinematics</a> classes </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00271">271</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00062">62</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa785135b8a29b1b8472a3d84419ca9bf"></a>
+<a class="anchor" id="ad2073c794663151829dedb1c3874ffc0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ContinuousDomain.deltaphip</td>
+          <td class="memname">ContinuousDomain.hol_constr_name</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Linearized hip position function handle. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<p>a cell string of holonomic constraint names defined on the domain </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00281">281</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00076">76</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="adb9ad4c449e37e703601cf5bc57f1b10"></a>
+<a class="anchor" id="aee9f9da3a75d7ac42efda4f59eca2a25"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ContinuousDomain.dimHolConstr</td>
+          <td class="memname">ContinuousDomain.n_hol_constr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>the dimension of holonomic constraints </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<p>the number of holonomic constraints </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00117">117</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab334db03cd6adb0a8bce2803ee0b0bf3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.DLfya2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Second order jacobian of outputs 2nd Jacobian of relative degree two outputs - actual. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00242">242</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7fb288bb2df7316f253d33cf1adec844"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.dqaIndices</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00339">339</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a18afed7ba30fcf906f0d2d9fdeff74af"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.dtau</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>time derivative of tau </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00309">309</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af94b7e467a0d0eb41562fe43c1dfe3bb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.Dya1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>First order jacobian of outputs 1st Jacobian of relative degree one output - actual. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00222">222</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a83056daeb6cd9e1339dbb07f4f7a11a1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.Dya2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>1st Jacobian of relative degree two outputs - actual </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00232">232</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9919fb75dde4a56097d9298852b8020b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.dyd1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>1st derivative of desired degree one output w.r.t tau </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00253">253</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a59e6b3f0977d6b8e6326d63ba6780689"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.dyd2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>1st derivative of desired degree two outputs w.r.t tau </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00262">262</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af64512975cf8e29f1517ba6dd9de79ea"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.holConstrFunc</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>a function that computes the value of holonomic constraints </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00129">129</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab1776b6ee9e6880524fead34b148be3b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.holConstrJac</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>afunction that computes the jacobian of holonomic constraints </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00141">141</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac3655dfb17a9fb2b4c2c6bb178a5b4a4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.holConstrJacDot</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>a function that computes time derivatives of the jacobian matrix of holonomic constraints </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00153">153</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2a6212813d5854401c141bce3acee3da"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.indexInStep</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>domain index in a step </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00068">68</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a21ad7e2baa6dcb85d7c6aaf074ada294"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.Jdeltaphip</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Jacobian of linearized hip position. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00290">290</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7a84474eb5f2edf4e40fbf1f0f7fb75e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.Jdtau</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>jacobian of dtau w.r.t to system states x </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00327">327</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acd1459049f48a2d6a765a1b1effdab82"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.jointConstraints</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A struct array of additional kinematic constraints associated with joints. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00091">91</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a40dc0b722e0d0286113536cb46accd53"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.Jtau</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>jacobian of tau w.r.t to system states x </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00318">318</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a60977c7b3c0ada9567bf194a6658cd62"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.nAct</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00337">337</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00088">88</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
@@ -890,85 +460,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This is the name of the object that gives the object an universal identification. </p>
+<p>% basic properties This is the name of the object that gives the object an universal identification </p>
 <p><b>Default:</b> '</p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00043">43</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00046">46</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_continuous_domain_8m_source.html#l00356">ContinuousDomain()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9c932d8a0e244681fff94e6a0621dbca"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.nOutputs</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00178">178</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad51751de7b7b149605728bb197671c89"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.nParamPhaseVar</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00182">182</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae676270e825dda676dd11c98b287bf5f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.nParamRD1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00180">180</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a63651399672bfd82bc84708c62ec4c0e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.nParamRD2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00181">181</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0adb90150fd35d0ca2a0a406d59df0fa"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.numDomainsInStep</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00077">77</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Referenced by <a class="el" href="_continuous_domain_8m_source.html#l00135">ContinuousDomain()</a>.</p>
 
 </div>
 </div>
@@ -982,178 +482,12 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The class option. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<p>Specific options for the domain. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00056">56</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad4f87602edcc444f9b3c1e7d8946b162"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.outputs</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>% virtual constraints (i.e., outputs) </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00169">169</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8b4b167875d00f2d212f632e93578390"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.params</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>% domain parameters </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00342">342</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4d08e21754f80788d17ab10d9d6bcc1b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.posConstraints</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A struct array of additional kinematic constraints associated with kinematic positions. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00104">104</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4b64c9a2199b457543862a3b7af4004e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.qaIndices</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00338">338</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a318c724d0110652d86f7166886cf334b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.tau</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>phase variable tau </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00300">300</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a95bb07fea96acfdce55d5d3cdd935423"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.ya1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>relative degree one output - actual </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00185">185</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa643a712948cf81316889b0301c74dec"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.ya2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>relative degree two outputs - actual </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00194">194</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a687828df7833459f364a3d7f0a5a0322"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.yd1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>relative degree one output - desired </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00203">203</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a14dab9f7b88b1078369ba235bfd2c547"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ContinuousDomain.yd2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>relative degree two outputs - desired </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00212">212</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
+<p>Definition at line <a class="el" href="_continuous_domain_8m_source.html#l00116">116</a> of file <a class="el" href="_continuous_domain_8m_source.html">ContinuousDomain.m</a>.</p>
 
 </div>
 </div>
@@ -1169,7 +503,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2016 18:37:30 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

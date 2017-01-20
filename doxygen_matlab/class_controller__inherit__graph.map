@@ -1,0 +1,6 @@
+<map id="Controller" name="Controller">
+<area shape="rect" id="node2" href="$class_c_l_f_q_p.html" title="This class defines a class of Control Lyapunov Functions (CLFs) that use quadratic programming (QP) ..." alt="" coords="5,80,72,107"/>
+<area shape="rect" id="node3" href="$class_i_o_feedback.html" title="This class defines the classic input&#45;output feedback linearization controller. " alt="" coords="96,80,189,107"/>
+<area shape="rect" id="node4" href="$class_joint_p_d.html" title="This class defines a PD feedback control on the joint space. " alt="" coords="213,80,283,107"/>
+<area shape="rect" id="node5" href="$class_output_p_d.html" title="This class defines the PD controller for system outputs. " alt="" coords="307,80,387,107"/>
+</map>

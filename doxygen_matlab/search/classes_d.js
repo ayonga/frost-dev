@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['varargin',['varargin',['../classvarargin.html',1,'']]],
-  ['varargout',['varargout',['../classvarargout.html',1,'']]]
+  ['solverapplication',['SolverApplication',['../class_solver_application.html',1,'']]],
+  ['sparsematrix',['sparsematrix',['../classsparsematrix.html',1,'']]],
+  ['struct',['struct',['../classstruct.html',1,'']]]
 ];

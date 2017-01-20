@@ -1,7 +1,5 @@
 <map id="struct_overlay" name="struct_overlay">
-<area shape="rect" id="node2" href="$class_directed_graph.html#add8f3a2e53eec9867730a6c0a5b49ebb" title="The class constructor function that configure the structure of the directed graph. " alt="" coords="166,5,365,32"/>
-<area shape="rect" id="node3" href="$class_ipopt_application.html#afd722316c4fe0966f1075b79845a2719" title="The default constructor function. " alt="" coords="157,56,373,83"/>
-<area shape="rect" id="node4" href="$class_rigid_body_model.html#aa9b0cb0eab7f11b996c457e922f82100" title="The class constructor function. " alt="" coords="173,107,358,149"/>
-<area shape="rect" id="node5" href="$class_amber_object.html#aa32ffcad9d50da498e15f048fd347023" title="parse input options and set the corresponding option values in the object option fields ..." alt="" coords="181,173,350,200"/>
-<area shape="rect" id="node6" href="$class_discrete_dynamics.html#aa6cfa5ee67d12647e93bd7c9481ce316" title="setup the reset map options " alt="" coords="165,224,366,251"/>
+<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="421,22,620,64"/>
+<area shape="rect" id="node3" href="$class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="157,26,373,52"/>
+<area shape="rect" id="node4" href="$class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="171,77,360,118"/>
 </map>

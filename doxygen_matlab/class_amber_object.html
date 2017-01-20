@@ -52,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -84,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -127,7 +128,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:af210816a9bab3aa632f4ca6bd7f47e79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">name</a> = &quot;&quot;</td></tr>
+<tr class="memitem:af210816a9bab3aa632f4ca6bd7f47e79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_amber_object.html#af210816a9bab3aa632f4ca6bd7f47e79">name</a></td></tr>
 <tr class="memdesc:af210816a9bab3aa632f4ca6bd7f47e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the name of the object that gives the object an universal identification.  <a href="#af210816a9bab3aa632f4ca6bd7f47e79">More...</a><br/></td></tr>
 <tr class="separator:af210816a9bab3aa632f4ca6bd7f47e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8445174a5f47d8a123e8458916bcd218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_amber_object.html#a8445174a5f47d8a123e8458916bcd218">options</a></td></tr>
@@ -136,7 +137,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_amber_object.html" title="AmberObject is a base class for objects that have name (ID) and options. ">AmberObject</a> is a base class for objects that have <code>name</code> (ID) and <code>options</code>. </p>
-<dl class="section author"><dt>Author</dt><dd>Ayonga Hereid </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>ayonga </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016-09-26</dd></dl>
 <p>Copyright (c) 2016, AMBER Lab All right reserved.</p>
 <p>Redistribution and use in source and binary forms, with or without modification, are permitted only in compliance with the BSD 3-Clause license, see <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a> </p>
@@ -167,7 +168,7 @@ Public Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_amber_object_8m_source.html#l00072">72</a> of file <a class="el" href="_amber_object_8m_source.html">AmberObject.m</a>.</p>
 
-<p>References <a class="el" href="_amber_object_8m_source.html#l00039">name</a>.</p>
+<p>References <a class="el" href="_amber_object_8m_source.html#l00040">name</a>.</p>
 
 </div>
 </div>
@@ -221,7 +222,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">AmberObject.name = &quot;&quot;</td>
+          <td class="memname">AmberObject.name</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -232,7 +233,7 @@ Here is the call graph for this function:</div>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_amber_object_8m_source.html#l00039">39</a> of file <a class="el" href="_amber_object_8m_source.html">AmberObject.m</a>.</p>
+<p>Definition at line <a class="el" href="_amber_object_8m_source.html#l00040">40</a> of file <a class="el" href="_amber_object_8m_source.html">AmberObject.m</a>.</p>
 
 <p>Referenced by <a class="el" href="_amber_object_8m_source.html#l00072">Amber()</a>.</p>
 
@@ -269,7 +270,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 22:27:26 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

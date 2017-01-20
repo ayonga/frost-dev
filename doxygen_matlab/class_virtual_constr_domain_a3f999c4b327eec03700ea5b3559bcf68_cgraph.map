@@ -1,0 +1,19 @@
+<map id="VirtualConstrDomain::export" name="VirtualConstrDomain::export">
+<area shape="rect" id="node2" href="$build__mex_8m.html#ada8bdd985ae258aebcb23f7b92cce307" title="Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14..." alt="" coords="215,259,297,285"/>
+<area shape="rect" id="node3" href="$class_domain.html#a0f9613e1c71b5575611c06c906e1e8e7" title="the calss constructor for Domain class " alt="" coords="196,309,316,336"/>
+<area shape="rect" id="node17" href="$eval__math_8m.html#ab9ca4e85d311f184ac7d73db1fae5380" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="215,360,297,387"/>
+<area shape="rect" id="node18" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="212,411,300,437"/>
+<area shape="rect" id="node4" href="$class_domain.html#a4ddee579760dbd405fd3db19f00c2db6" title="Adds a contact constraint for the domain. " alt="" coords="413,5,555,32"/>
+<area shape="rect" id="node5" href="$class_domain.html#a943d31487e8d6d488ae01bcc3935667f" title="Adds holonomic kinematic constraints other than contact constraints to the domain. " alt="" coords="375,56,593,83"/>
+<area shape="rect" id="node6" href="$class_domain.html#a0e73b3b8af1eaa7f12a7d9106e9bc3c0" title="Adds unilateral kinematic constraints other than contact constraints to the domain. " alt="" coords="379,107,589,133"/>
+<area shape="rect" id="node7" href="$class_domain.html#a382ea5ba14bf3c91afe873d71c4302fe" title="Calculates the constraints forces exert on the kinematic constraints of the rigid body model..." alt="" coords="652,183,851,209"/>
+<area shape="rect" id="node8" href="$class_domain.html#a8a7c59b286cf2e14e32bfeab92b28434" title="Calculates the unilateral condition specified by &#39;cond&#39;. " alt="" coords="379,208,589,235"/>
+<area shape="rect" id="node9" href="$class_domain.html#a073f95f4bcdc2c9560fa6417dfa86b4a" title="Calculates the vector fields of the affine control system &#160;for the constrained dynamics. " alt="" coords="398,259,570,285"/>
+<area shape="rect" id="node10" href="$class_domain.html#a7ee9a63d7e7f17d4855a83cfdeda0933" title="Compiles the symbolic expression of kinematic functions related to the domain in Mathematica. " alt="" coords="424,309,544,336"/>
+<area shape="rect" id="node11" href="$class_domain.html#a1e904df655f73e93913f58f56a71896e" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="429,360,539,387"/>
+<area shape="rect" id="node12" href="$class_domain.html#ac7c78ee39a5f2f9e6e3f27f8757811d4" title="Removes holonomic kinematic constraints other than contact constraints from the domain. " alt="" coords="402,411,566,437"/>
+<area shape="rect" id="node13" href="$class_domain.html#a9c424b6bbce0f08d703df1369100b690" title="Removes holonomic kinematic constraints other than contact constraints from the domain. " alt="" coords="364,461,604,488"/>
+<area shape="rect" id="node14" href="$class_domain.html#a76aec80e77b247ceb568f437b634b47f" title="Removes unilateral kinematic constraints other than contact constraints from the domain. " alt="" coords="397,513,571,554"/>
+<area shape="rect" id="node15" href="$class_domain.html#abc0ce36d6037aae19743053f144ad883" title="Sets the actuation map for the current domain. " alt="" coords="410,579,558,605"/>
+<area shape="rect" id="node16" href="$class_domain.html#adf62976660a2c55ae3fa997934372e83" title="Updates the system states using the reset map associated with the discontinuous transition to the cur..." alt="" coords="408,629,560,656"/>
+</map>

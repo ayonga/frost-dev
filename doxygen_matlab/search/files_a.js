@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['nlpconstr_2em',['NlpConstr.m',['../_nlp_constr_8m.html',1,'']]],
-  ['nlpcost_2em',['NlpCost.m',['../_nlp_cost_8m.html',1,'']]],
-  ['nlpfcn_2em',['NlpFcn.m',['../_nlp_fcn_8m.html',1,'']]],
-  ['nlpvar_2em',['NlpVar.m',['../_nlp_var_8m.html',1,'']]],
-  ['nonlinearprogram_2em',['NonlinearProgram.m',['../_nonlinear_program_8m.html',1,'']]]
+  ['mat2math_2em',['mat2math.m',['../mat2math_8m.html',1,'']]],
+  ['maxabs_2em',['maxabs.m',['../maxabs_8m.html',1,'']]],
+  ['min_5fabs_5fdiff_5fnonzero_2em',['min_abs_diff_nonzero.m',['../min__abs__diff__nonzero_8m.html',1,'']]],
+  ['min_5fabs_5fdiff_5fnonzero_5fpermute_2em',['min_abs_diff_nonzero_permute.m',['../min__abs__diff__nonzero__permute_8m.html',1,'']]],
+  ['min_5fabs_5fnonzero_2em',['min_abs_nonzero.m',['../min__abs__nonzero_8m.html',1,'']]],
+  ['min_5fjerk_2em',['min_jerk.m',['../min__jerk_8m.html',1,'']]]
 ];

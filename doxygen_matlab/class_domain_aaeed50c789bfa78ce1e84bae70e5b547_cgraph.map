@@ -1,0 +1,6 @@
+<map id="Domain::exportFunction" name="Domain::exportFunction">
+<area shape="rect" id="node2" href="$build__mex_8m.html#ada8bdd985ae258aebcb23f7b92cce307" title="Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14..." alt="" coords="234,5,315,32"/>
+<area shape="rect" id="node3" href="$check__var__exist_8m.html#a973f5aa7f2c07e713fbd8debe9314e30" title="A wrapper function that checks if a variable has been assigned to a value in Mathematica. " alt="" coords="216,56,333,83"/>
+<area shape="rect" id="node4" href="$eval__math_8m.html#ab9ca4e85d311f184ac7d73db1fae5380" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="233,107,316,133"/>
+<area shape="rect" id="node5" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="231,157,319,184"/>
+</map>

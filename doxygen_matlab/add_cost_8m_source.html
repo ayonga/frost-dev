@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.6"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: @NonlinearProgram/addCost.m Source File</title>
+        <title>AMBER Suite: nlp/@NonlinearProgram/addCost.m Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_000ff795d6663f0ef3affcfe76567cf2.html">@NonlinearProgram</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_c02edb81d504ff3718d292053c4eabea.html">nlp</a></li><li class="navelem"><a class="el" href="dir_00d9364eeeee95835738c2cd4d098638.html">@NonlinearProgram</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -119,106 +119,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * However, the line numbers most likely do not correspond to the line numbers in the original MATLAB source files.</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;function obj = NonlinearProgram.addCost(name,deps,extra) {</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_nonlinear_program.html#a342bbc5849b45c6ba31ba0ff337270b1">   18</a></span>&#160;function obj = <a class="code" href="class_nonlinear_program.html#a342bbc5849b45c6ba31ba0ff337270b1">NonlinearProgram.addCost</a>(<span class="keywordtype">char</span> name,<a class="code" href="classcell.html">cell</a> deps,extra) {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">/*  check correct procedue */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">/*  opt variables have to be registered before adding constraints */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">if</span> isempty(fieldnames(obj.optVarIndices))</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        error(&quot; optDirectDomain:incorrectProcedure &quot;,...</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            &quot; Constraints can be registered only after generated <a class="code" href="class_nonlinear_program.html#a9cae2bee74ce01d616ee459b348641aa">optVars</a> Indices &quot;);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    end</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">/*  function handle of constraints */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    if nargin == 5</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        s = mat2str(extra);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">/*              s = &#39;,&#39;;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">         *             for i = 1:numel(extra_argins)</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">         *                 s = strcat(s,int2str(extra_argins(i)));</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">         *                 if i==numel(extra_argins)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">         *                     s = strcat(s,&#39;)&#39;);</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">         *                 else</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">         *                     s = strcat(s,&#39;,&#39;);</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">         *                 end</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">         *             end */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        f_handle = str2func(strcat(&quot; @(x)f_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (x, &quot;,s,&quot; ) &quot;));</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        J_handle = str2func(strcat(&quot; @(x)J_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (x, &quot;,s,&quot; ) &quot;));</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        Js_handle = str2func(strcat(&quot; @()Js_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (0) &quot;));</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        H_handle = str2func(strcat(&quot; @(x,sigma)H_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (x,sigma, &quot;,s,&quot; ) &quot;));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        Hs_handle = str2func(strcat(&quot; @()Hs_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (0) &quot;));</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    else</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        f_handle = str2func(strcat(&quot; @(x)f_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (x) &quot;));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        J_handle = str2func(strcat(&quot; @(x)J_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (x) &quot;));</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        Js_handle = str2func(strcat(&quot; @()Js_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (0) &quot;));</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        H_handle = str2func(strcat(&quot; @(x,sigma)H_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (x,sigma) &quot;));</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        Hs_handle = str2func(strcat(&quot; @()Hs_ &quot;,name,&quot; _ &quot;,obj.domainName,&quot; (0) &quot;));</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    end</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/*  determine dependence variables indices */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    nDeps = size(deps,1);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    depIndices = [];</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    for i = 1:nDeps</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        dep    = deps[i];</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        var    = dep[1];</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        nodes  = dep[2];</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        if isempty(dep[3])</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            domain = obj;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        else</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            domain = dep[3];</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        end</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        for j = nodes</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            depIndices = [depIndices;...</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                domain.optVarIndices.(var)(j,:)^t];</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        end</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    end</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    jac_struct = Js_handle();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    jac_nnz = size(jac_struct,1);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    hess_struct = Hs_handle();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    hess_nnz = size(hess_struct,1);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    for i=1:hess_nnz</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        if hess_struct(i,1) &lt; hess_struct(i,2)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            keyboard</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        end</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    end</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    if isempty(hess_struct)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        is_linear = true;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    else</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        is_linear = false;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    end</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">/*  generate entry structure for sparse jacobian matrix */</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    cost = <a class="code" href="classstruct.html">struct</a>(&quot; is_linear &quot;,is_linear,...</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        &quot; deps &quot;, depIndices,...</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        &quot; j_index &quot;, cumsum(ones(jac_nnz,1)),... <span class="comment">/*  jacobian index */</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        &quot; h_index &quot;, cumsum(ones(hess_nnz,1)), ... <span class="comment">/*  hessian index */</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        &quot; f &quot;, f_handle,...</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        &quot; jac &quot;, J_handle,...</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        &quot; jac_struct &quot;,Js_handle,...</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        &quot; hess &quot;,H_handle,...</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        &quot; hess_struct &quot;,Hs_handle);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    obj.costInfos= cost;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;end</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
-<div class="ttc" id="class_nonlinear_program_html_a9cae2bee74ce01d616ee459b348641aa"><div class="ttname"><a href="class_nonlinear_program.html#a9cae2bee74ce01d616ee459b348641aa">NonlinearProgram.optVars</a></div><div class="ttdeci">cell optVars</div><div class="ttdoc">The structure array contains all information regarding NLP optimization variables. </div><div class="ttdef"><b>Definition:</b> <a href="_nonlinear_program_8m_source.html#l00063">NonlinearProgram.m:63</a></div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">/*  opt variables have to be registered before adding constraints */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    assert(~isempty(obj.varIndex),...</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="stringliteral">&quot; NonlinearProgram:incorrectProcedure &quot;</span>,...</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        [<span class="stringliteral">&quot; Cost function can be registered only after generated variables indices.\n &quot;</span>,...</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="stringliteral">&quot; Please run genVarIndices first.\n &quot;</span>]);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span> nargin &lt; 4 <span class="comment">/*  no extra argument is provided */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        extra = [];</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    end</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">/*  construct the optimization varibale information */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    new_cost  = <a class="code" href="class_nlp_cost.html">NlpCost</a>(name, extra, ...</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="stringliteral">&quot; withHessian &quot;</span>, obj.options.withHessian);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    nDeps = numel(deps);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    depIndices = [];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">for</span> i = 1:nDeps</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        var    = deps[i];</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        depIndices = [depIndices,...</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            obj.varIndex.(var)];</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    end</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    new_cost = setDependentIndices(...</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        new_cost, depIndices);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">/*  insert to the end of the cell array */</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    obj.costArray[end+1] = new_cost;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;end</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="ttc" id="class_nlp_cost_html"><div class="ttname"><a href="class_nlp_cost.html">NlpCost</a></div><div class="ttdoc">This class provides a data structure for a cost function based on the NlpFcn class. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_cost_8m_source.html#l00017">NlpCost.m:17</a></div></div>
+<div class="ttc" id="classcell_html"><div class="ttname"><a href="classcell.html">cell</a></div><div class="ttdoc">A MatLab cell array or matrix. </div></div>
+<div class="ttc" id="class_nonlinear_program_html_a342bbc5849b45c6ba31ba0ff337270b1"><div class="ttname"><a href="class_nonlinear_program.html#a342bbc5849b45c6ba31ba0ff337270b1">NonlinearProgram.addCost</a></div><div class="ttdeci">function   obj  = addCost(char name,cell deps, extra)</div><div class="ttdoc">This method registers the information of a NLP function as a cost function. </div><div class="ttdef"><b>Definition:</b> <a href="add_cost_8m_source.html#l00018">addCost.m:18</a></div></div>
 <div class="ttc" id="_nonlinear_program_8m_html"><div class="ttname"><a href="_nonlinear_program_8m.html">NonlinearProgram.m</a></div></div>
-<div class="ttc" id="classstruct_html"><div class="ttname"><a href="classstruct.html">struct</a></div><div class="ttdoc">A MatLab struct. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -228,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 3 2016 17:47:04 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 5 2016 22:32:32 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

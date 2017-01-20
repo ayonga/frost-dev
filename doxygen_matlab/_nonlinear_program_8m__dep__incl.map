@@ -1,8 +1,8 @@
-<map id="@NonlinearProgram/NonlinearProgram.m" name="@NonlinearProgram/NonlinearProgram.m">
-<area shape="rect" id="node2" href="$add_constraint_8m.html" title="@NonlinearProgram/addConstraint.m" alt="" coords="5,104,245,131"/>
-<area shape="rect" id="node3" href="$add_cost_8m.html" title="@NonlinearProgram/addCost.m" alt="" coords="269,104,477,131"/>
-<area shape="rect" id="node4" href="$add_variable_8m.html" title="@NonlinearProgram/addVariable.m" alt="" coords="501,104,728,131"/>
-<area shape="rect" id="node5" href="$config_constr_structure_8m.html" title="@NonlinearProgram/config\lConstrStructure.m" alt="" coords="752,97,931,138"/>
-<area shape="rect" id="node6" href="$config_objective_structure_8m.html" title="@NonlinearProgram/config\lObjectiveStructure.m" alt="" coords="955,97,1133,138"/>
-<area shape="rect" id="node7" href="$gen_var_indices_8m.html" title="@NonlinearProgram/genVar\lIndices.m" alt="" coords="1158,97,1343,138"/>
+<map id="nlp/@NonlinearProgram/NonlinearProgram.m" name="nlp/@NonlinearProgram/NonlinearProgram.m">
+<area shape="rect" id="node2" href="$add_constraint_8m.html" title="nlp/@NonlinearProgram\l/addConstraint.m" alt="" coords="5,95,167,136"/>
+<area shape="rect" id="node3" href="$add_objective_8m.html" title="nlp/@NonlinearProgram\l/addObjective.m" alt="" coords="191,95,352,136"/>
+<area shape="rect" id="node4" href="$add_variable_8m.html" title="nlp/@NonlinearProgram\l/addVariable.m" alt="" coords="376,95,537,136"/>
+<area shape="rect" id="node5" href="$gen_var_indices_8m.html" title="nlp/@NonlinearProgram\l/genVarIndices.m" alt="" coords="561,95,723,136"/>
+<area shape="rect" id="node6" href="$get_initial_guess_8m.html" title="nlp/@NonlinearProgram\l/getInitialGuess.m" alt="" coords="747,95,908,136"/>
+<area shape="rect" id="node7" href="$get_var_info_8m.html" title="nlp/@NonlinearProgram\l/getVarInfo.m" alt="" coords="932,95,1093,136"/>
 </map>

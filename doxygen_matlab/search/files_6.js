@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['general2str_2em',['general2str.m',['../general2str_8m.html',1,'']]],
-  ['getfieldd_2em',['getfieldd.m',['../getfieldd_8m.html',1,'']]],
-  ['getjointindices_2em',['getJointIndices.m',['../get_joint_indices_8m.html',1,'']]],
-  ['getlinkindices_2em',['getLinkIndices.m',['../get_link_indices_8m.html',1,'']]],
-  ['getoutputindices_2em',['getOutputIndices.m',['../get_output_indices_8m.html',1,'']]],
-  ['gettotalmass_2em',['getTotalMass.m',['../get_total_mass_8m.html',1,'']]]
+  ['hline_2em',['hline.m',['../hline_8m.html',1,'']]],
+  ['horzcat_5fdomains_2em',['horzcat_domains.m',['../horzcat__domains_8m.html',1,'']]],
+  ['horzcat_5ffields_2em',['horzcat_fields.m',['../horzcat__fields_8m.html',1,'']]],
+  ['horzcat_5ffields_5fdomains_2em',['horzcat_fields_domains.m',['../horzcat__fields__domains_8m.html',1,'']]],
+  ['hybridsystem_2em',['HybridSystem.m',['../_hybrid_system_8m.html',1,'']]],
+  ['hybridtrajectoryoptimization_2em',['HybridTrajectoryOptimization.m',['../_hybrid_trajectory_optimization_8m.html',1,'']]]
 ];

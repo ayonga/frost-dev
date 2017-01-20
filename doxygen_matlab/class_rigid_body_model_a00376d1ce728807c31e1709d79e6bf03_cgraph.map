@@ -1,0 +1,4 @@
+<map id="RigidBodyModel::RigidBodyModel" name="RigidBodyModel::RigidBodyModel">
+<area shape="rect" id="node2" href="$class_rigid_body_model.html#aeb6759a6a227bdaaa52e14b87c56bd41" title="This function compute the natural unconstrained dynamics of the rigid body model. ..." alt="" coords="239,5,429,47"/>
+<area shape="rect" id="node3" href="$ros__load__urdf_8m.html#a3c04367518e23f6fb71788853a767edd" title="This function parse the ROS URDF file. " alt="" coords="284,71,384,98"/>
+</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['model',['model',['../class_hybrid_dynamical_system.html#a2ed96813cb2eba845f2efc46f146e8d8',1,'HybridDynamicalSystem']]]
+  ['kingrouptable',['KinGroupTable',['../class_kinematic_group.html#a59639f12a2767463d0b687023416707f',1,'KinematicGroup']]]
 ];

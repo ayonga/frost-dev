@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    narginchk(2,2);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">/*      obj.holConstrName  = constraints; */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    obj.dimHolConstr= numel(constraints);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    obj.dim_hol_constrs= numel(constraints);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">/*  check existance of mex files</span></div>
@@ -139,9 +139,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *         &#39;The MEX file could not be found: %s\n&#39;,...</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> *         strcat(&#39;dJhol_&#39;,obj.name)); % 3 - Mex-file */</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    obj.holConstrFunc= str2func(strcat(<span class="stringliteral">&quot; hol_ &quot;</span>,obj.name));</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    obj.holConstrJac= str2func(strcat(<span class="stringliteral">&quot; Jhol_ &quot;</span>,obj.name));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    obj.holConstrJacDot= str2func(strcat(<span class="stringliteral">&quot; dJhol_ &quot;</span>,obj.name));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    obj.hol_constr_func= str2func(strcat(<span class="stringliteral">&quot; hol_ &quot;</span>,obj.name));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    obj.hol_constr_jac= str2func(strcat(<span class="stringliteral">&quot; Jhol_ &quot;</span>,obj.name));</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    obj.hol_constr_jacdot= str2func(strcat(<span class="stringliteral">&quot; dJhol_ &quot;</span>,obj.name));</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
@@ -158,7 +158,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2016 18:37:30 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

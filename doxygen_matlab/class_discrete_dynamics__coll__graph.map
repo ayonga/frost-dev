@@ -1,7 +1,7 @@
 <map id="DiscreteDynamics" name="DiscreteDynamics">
 <area shape="rect" id="node2" href="$classfunction__handle.html" title="A MatLab function handle. " alt="" coords="5,5,117,32"/>
 <area shape="rect" id="node3" href="$classdouble.html" title="A double value. " alt="" coords="142,5,201,32"/>
-<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="249,5,303,32"/>
-<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="330,5,376,32"/>
-<area shape="rect" id="node6" href="$classinteger.html" title="An integer value. " alt="" coords="419,5,480,32"/>
+<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="254,5,308,32"/>
+<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="335,5,381,32"/>
+<area shape="rect" id="node6" href="$classinteger.html" title="An integer value. " alt="" coords="428,5,489,32"/>
 </map>

@@ -1,0 +1,8 @@
+<map id="kinematics/@KinematicGroup/KinematicGroup.m" name="kinematics/@KinematicGroup/KinematicGroup.m">
+<area shape="rect" id="node2" href="$add_kinematic_8m.html" title="kinematics/@KinematicGroup\l/addKinematic.m" alt="" coords="5,95,201,136"/>
+<area shape="rect" id="node3" href="$kinematics_2_0D_kinematic_group_2compile_8m.html" title="kinematics/@KinematicGroup\l/compile.m" alt="" coords="225,95,421,136"/>
+<area shape="rect" id="node4" href="$get_index_8m.html" title="kinematics/@KinematicGroup\l/getIndex.m" alt="" coords="445,95,641,136"/>
+<area shape="rect" id="node5" href="$get_position_8m.html" title="kinematics/@KinematicGroup\l/getPosition.m" alt="" coords="665,95,861,136"/>
+<area shape="rect" id="node6" href="$remove_kinematic_8m.html" title="kinematics/@KinematicGroup\l/removeKinematic.m" alt="" coords="885,95,1081,136"/>
+<area shape="rect" id="node7" href="$update_index_8m.html" title="kinematics/@KinematicGroup\l/updateIndex.m" alt="" coords="1105,95,1301,136"/>
+</map>

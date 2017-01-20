@@ -1,12 +1,21 @@
 var searchData=
 [
-  ['edges',['edges',['../class_directed_graph.html#a3fa5ba4328e1194e9c9999b994696eaf',1,'DirectedGraph']]],
+  ['edgeproperties',['EdgeProperties',['../class_hybrid_system.html#a585ddfbe131ec481eab5b19c49880e7d',1,'HybridSystem']]],
   ['eq',['eq',['../classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86',1,'handle']]],
+  ['eval_5fmath',['eval_math',['../eval__math_8m.html#ab9ca4e85d311f184ac7d73db1fae5380',1,'eval_math.m']]],
+  ['eval_5fmath_2em',['eval_math.m',['../eval__math_8m.html',1,'']]],
   ['even_5fsample',['even_sample',['../even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6',1,'even_sample.m']]],
   ['even_5fsample_2em',['even_sample.m',['../even__sample_8m.html',1,'']]],
   ['even_5fsample_5ffields',['even_sample_fields',['../even__sample__fields_8m.html#ad6489f72b1cf7b95a79a312b3486f8e3',1,'even_sample_fields.m']]],
   ['even_5fsample_5ffields_2em',['even_sample_fields.m',['../even__sample__fields_8m.html',1,'']]],
-  ['exportsysconfig',['exportSysConfig',['../class_hybrid_dynamical_system.html#a587ebab853d24561e517f48e54244fd6',1,'HybridDynamicalSystem']]],
+  ['export',['export',['../class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091',1,'Kinematics::export()'],['../class_domain.html#a1e904df655f73e93913f58f56a71896e',1,'Domain::export()'],['../class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68',1,'VirtualConstrDomain::export()']]],
+  ['export_2em',['export.m',['../system_2_0D_virtual_constr_domain_2export_8m.html',1,'']]],
+  ['export_2em',['export.m',['../kinematics_2_0D_kinematics_2export_8m.html',1,'']]],
+  ['export_2em',['export.m',['../system_2_0D_domain_2export_8m.html',1,'']]],
+  ['export_2em',['export.m',['../kinematics_2_0D_kinematic_expr_2export_8m.html',1,'']]],
+  ['exportcom_2em',['exportCoM.m',['../export_co_m_8m.html',1,'']]],
+  ['exportdynamics_2em',['exportDynamics.m',['../export_dynamics_8m.html',1,'']]],
+  ['expression',['Expression',['../class_kinematic_expr.html#a7243cdb7b40019630eacd50099dfa701',1,'KinematicExpr']]],
   ['extract_5fstruct_5fslice',['extract_struct_slice',['../extract__struct__slice_8m.html#a90450e44c59f069c2f0ffd4b8dc745e2',1,'extract_struct_slice.m']]],
   ['extract_5fstruct_5fslice_2em',['extract_struct_slice.m',['../extract__struct__slice_8m.html',1,'']]]
 ];

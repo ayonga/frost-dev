@@ -52,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -84,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -131,6 +132,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3faa490cf0b20146a85fec2cbdc09f32"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="classchar.html">char</a> source  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_directed_graph.html#a3faa490cf0b20146a85fec2cbdc09f32">getSource</a> (target_vertex)</td></tr>
 <tr class="memdesc:a3faa490cf0b20146a85fec2cbdc09f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of source vertex of the given target vertex.  <a href="#a3faa490cf0b20146a85fec2cbdc09f32">More...</a><br/></td></tr>
 <tr class="separator:a3faa490cf0b20146a85fec2cbdc09f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5493ccaf99b3d9220be164ba276df444"><td class="memItemLeft" align="right" valign="top">function 
+  N  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_directed_graph.html#a5493ccaf99b3d9220be164ba276df444">getNumberOfVertices</a> ()</td></tr>
+<tr class="separator:a5493ccaf99b3d9220be164ba276df444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -193,7 +197,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section user"><dt>Required fields of options:</dt><dd><ul>
-<li><code>isPeriodic&#160;&mdash;&#160;</code> indicates whether the graph is periodic or aperiodic </li>
+<li><code>is_periodic&#160;&mdash;&#160;</code> indicates whether the graph is periodic or aperiodic </li>
 </ul>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If the edges are not provided, we assume the graph is unidirectional. </dd></dl>
@@ -275,6 +279,23 @@ Here is the call graph for this function:</div>
 </dl>
 
 <p>Definition at line <a class="el" href="_directed_graph_8m_source.html#l00194">194</a> of file <a class="el" href="_directed_graph_8m_source.html">DirectedGraph.m</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5493ccaf99b3d9220be164ba276df444"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function N = DirectedGraph.getNumberOfVertices </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_directed_graph_8m_source.html#l00270">270</a> of file <a class="el" href="_directed_graph_8m_source.html">DirectedGraph.m</a>.</p>
 
 </div>
 </div>
@@ -372,14 +393,14 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">struct</span>(<span class="stringliteral">&quot;   \</span></div>
-<div class="line"><span class="stringliteral">            &#39;isPeriodic&#39;,true&quot;</span>)</div>
+<div class="line"><span class="stringliteral">            &#39;is_periodic&#39;,true&quot;</span>)</div>
 </div><!-- fragment -->
 <p>The class option. </p>
 <dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> <br/>
 <b>Default:</b> struct("   \
-        'isPeriodic',true") </dd></dl>
+        'is_periodic',true") </dd></dl>
 
 <p>Definition at line <a class="el" href="_directed_graph_8m_source.html#l00074">74</a> of file <a class="el" href="_directed_graph_8m_source.html">DirectedGraph.m</a>.</p>
 
@@ -420,7 +441,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 22:27:26 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

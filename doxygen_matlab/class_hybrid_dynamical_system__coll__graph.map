@@ -1,8 +1,12 @@
 <map id="HybridDynamicalSystem" name="HybridDynamicalSystem">
-<area shape="rect" id="node2" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,169,48,196"/>
-<area shape="rect" id="node3" href="$classstruct.html" title="A MatLab struct. " alt="" coords="90,5,144,32"/>
-<area shape="rect" id="node5" href="$class_rigid_body_model.html" title="RigidBodyModel A class with basic model descriptions and functionalities of the rigid body robotic sy..." alt="" coords="180,169,296,196"/>
-<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="370,5,416,32"/>
-<area shape="rect" id="node6" href="$classdouble.html" title="A double value. " alt="" coords="190,5,249,32"/>
-<area shape="rect" id="node7" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="275,5,339,32"/>
+<area shape="rect" id="node2" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="6,5,49,32"/>
+<area shape="rect" id="node3" href="$class_continuous_domain.html" title="ContinuousDomain defines an admissible continuous domain (or phase) in the hybrid system model..." alt="" coords="222,169,355,196"/>
+<area shape="rect" id="node8" href="$class_rigid_body_model.html" title="A class with basic model descriptions and functionalities of the multi&#45;link rigid&#45;body robot platform..." alt="" coords="826,169,942,196"/>
+<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="407,5,461,32"/>
+<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="708,5,754,32"/>
+<area shape="rect" id="node6" href="$classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="95,5,151,32"/>
+<area shape="rect" id="node7" href="$classinteger.html" title="An integer value. " alt="" coords="227,5,289,32"/>
+<area shape="rect" id="node9" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="811,5,870,32"/>
+<area shape="rect" id="node10" href="$classdouble.html" title="A double value. " alt="" coords="895,5,954,32"/>
+<area shape="rect" id="node11" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="991,5,1055,32"/>
 </map>

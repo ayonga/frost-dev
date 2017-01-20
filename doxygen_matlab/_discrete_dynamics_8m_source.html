@@ -128,11 +128,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#ae4eccba58cf0574bdc9f3b65ddceeee6">   44</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_discrete_dynamics.html#ae4eccba58cf0574bdc9f3b65ddceeee6">name</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#a7c0fe61d2abfd2426f5576b3e81374b0">   59</a></span>&#160;        <a class="code" href="classinteger.html">integer</a> <a class="code" href="class_discrete_dynamics.html#a7c0fe61d2abfd2426f5576b3e81374b0">guardDir</a> = -1;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#aeb815859d55031f1377044f3206d9ce1">   77</a></span>&#160;        <a class="code" href="classdouble.html">double</a> <a class="code" href="class_discrete_dynamics.html#aeb815859d55031f1377044f3206d9ce1">guardProfile</a> = 0;</div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#aa269374683022f820e5c028efb43027d">   90</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_discrete_dynamics.html#aa269374683022f820e5c028efb43027d">guardType</a>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#a34114eee6e5897fd38ee311d9e74930e">  102</a></span>&#160;        <a class="code" href="classfunction__handle.html">function_handle</a> <a class="code" href="class_discrete_dynamics.html#a34114eee6e5897fd38ee311d9e74930e">guardFunc</a>;</div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#a02bc74b25f36b18e3b40ccb60825269d">  114</a></span>&#160;        <a class="code" href="classfunction__handle.html">function_handle</a> <a class="code" href="class_discrete_dynamics.html#a02bc74b25f36b18e3b40ccb60825269d">guardJac</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#ad14bade4888ccb97ca753e798d9c812e">   59</a></span>&#160;        <a class="code" href="classinteger.html">integer</a> <a class="code" href="class_discrete_dynamics.html#ad14bade4888ccb97ca753e798d9c812e">guard_direction</a> = -1;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#ae9477090b69ec0c96a746c94d169f124">   77</a></span>&#160;        <a class="code" href="classdouble.html">double</a> <a class="code" href="class_discrete_dynamics.html#ae9477090b69ec0c96a746c94d169f124">guard_profile</a> = 0;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#a939c26bdfa284fa02ecfdb76ef3e1789">   90</a></span>&#160;        <a class="code" href="classchar.html">char</a> <a class="code" href="class_discrete_dynamics.html#a939c26bdfa284fa02ecfdb76ef3e1789">guard_type</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#af7796ea7cac089b83c72cf601bb3f813">  102</a></span>&#160;        <a class="code" href="classfunction__handle.html">function_handle</a> <a class="code" href="class_discrete_dynamics.html#af7796ea7cac089b83c72cf601bb3f813">guard_func</a>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#afabe751883dc1db1507baf80d1722ec1">  114</a></span>&#160;        <a class="code" href="classfunction__handle.html">function_handle</a> <a class="code" href="class_discrete_dynamics.html#afabe751883dc1db1507baf80d1722ec1">guard_jac</a>;</div>
 <div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#a8853119eac5895dff8e8060ec8bdd238">  126</a></span>&#160;        <a class="code" href="classstruct.html">struct</a> <a class="code" href="class_discrete_dynamics.html#a8853119eac5895dff8e8060ec8bdd238">options</a>;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="comment">/* % Public methods */</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">public</span>:</div>
@@ -156,11 +156,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="class_discrete_dynamics.html#a90ab44185329c4a1b90af263011a68b6">  186</a></span>&#160;        function obj = <a class="code" href="class_discrete_dynamics.html#a90ab44185329c4a1b90af263011a68b6">setGuard</a>(<span class="keyword">struct</span> guard) {</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            obj.guardDir= guard.direction;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            obj.guardProfile= guard.value;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            obj.guardType= guard.type;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            obj.guard_direction= guard.direction;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            obj.guard_profile= guard.value;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            obj.guard_type= guard.type;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">if</span> strcmp(obj.guardType,<span class="stringliteral">&quot; kinematics &quot;</span>)</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">if</span> strcmp(obj.guard_type,<span class="stringliteral">&quot; kinematics &quot;</span>)</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="comment">/*  then there should be associated mex file exists */</span></div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="comment">/*  check existance of mex files</span></div>
@@ -171,19 +171,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">                 *             &#39;The MEX file could not be found: %s\n&#39;,...</span></div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">                 *             strcat(&#39;Jguard_&#39;,obj.name)); % 3 - Mex-file */</span></div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                obj.guardFunc= str2func(strcat(<span class="stringliteral">&quot; guard_ &quot;</span>,guard.name));</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                obj.guardJac= str2func(strcat(<span class="stringliteral">&quot; Jguard_ &quot;</span>,guard.name));</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                obj.guard_func= str2func(strcat(<span class="stringliteral">&quot; guard_ &quot;</span>,guard.name));</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                obj.guard_jac= str2func(strcat(<span class="stringliteral">&quot; Jguard_ &quot;</span>,guard.name));</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            end</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.guardProfile&#39;</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_discrete_dynamics.html#aeb815859d55031f1377044f3206d9ce1">guardProfile</a>(value) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.guard_profile&#39;</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_discrete_dynamics.html#ae9477090b69ec0c96a746c94d169f124">guard_profile</a>(value) {</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="comment">/*  argument check */</span></div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            narginchk(2,2);</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            fprintf(<span class="stringliteral">&quot; updating the guard threshold.\n &quot;</span>);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            obj.guardProfile= value;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            obj.guard_profile= value;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
@@ -191,13 +191,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.guardDir&#39;</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_discrete_dynamics.html#a7c0fe61d2abfd2426f5576b3e81374b0">guardDir</a>(<a class="code" href="classinteger.html">integer</a> newDir) {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.guard_direction&#39;</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_discrete_dynamics.html#ad14bade4888ccb97ca753e798d9c812e">guard_direction</a>(<a class="code" href="classinteger.html">integer</a> newDir) {</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="comment">/*  argument check */</span></div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            narginchk(2,2);</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            obj.guardDir= newDir;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            obj.guard_direction= newDir;</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            fprintf(<span class="stringliteral">&quot; New guard direction: %d\n &quot;</span>, newDir);</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
@@ -207,13 +207,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.guardType&#39;</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_discrete_dynamics.html#aa269374683022f820e5c028efb43027d">guardType</a>(type) {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">#if 0 //mtoc++: &#39;set.guard_type&#39;</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor"></span>function obj = <a class="code" href="class_discrete_dynamics.html#a939c26bdfa284fa02ecfdb76ef3e1789">guard_type</a>(type) {</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="comment">/*  argument check */</span></div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            narginchk(2,2);</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            obj.guardType= type;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            obj.guard_type= type;</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            fprintf(<span class="stringliteral">&quot; New guard direction: %s\n &quot;</span>, type);</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        }</div>
@@ -225,22 +225,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
 <div class="ttc" id="class_discrete_dynamics_html_a66a04613e12e97a92054405b06cb73e9"><div class="ttname"><a href="class_discrete_dynamics.html#a66a04613e12e97a92054405b06cb73e9">DiscreteDynamics.DiscreteDynamics</a></div><div class="ttdeci">DiscreteDynamics(char name)</div><div class="ttdoc">the default calss constructor </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00152">DiscreteDynamics.m:152</a></div></div>
+<div class="ttc" id="class_discrete_dynamics_html_a939c26bdfa284fa02ecfdb76ef3e1789"><div class="ttname"><a href="class_discrete_dynamics.html#a939c26bdfa284fa02ecfdb76ef3e1789">DiscreteDynamics.guard_type</a></div><div class="ttdeci">char guard_type</div><div class="ttdoc">the type of guard condition </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00090">DiscreteDynamics.m:90</a></div></div>
 <div class="ttc" id="class_discrete_dynamics_html_ae4eccba58cf0574bdc9f3b65ddceeee6"><div class="ttname"><a href="class_discrete_dynamics.html#ae4eccba58cf0574bdc9f3b65ddceeee6">DiscreteDynamics.name</a></div><div class="ttdeci">char name</div><div class="ttdoc">This is the name of the object that gives the object an universal identification. ...</div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00044">DiscreteDynamics.m:44</a></div></div>
 <div class="ttc" id="class_discrete_dynamics_html_a8853119eac5895dff8e8060ec8bdd238"><div class="ttname"><a href="class_discrete_dynamics.html#a8853119eac5895dff8e8060ec8bdd238">DiscreteDynamics.options</a></div><div class="ttdeci">struct options</div><div class="ttdoc">the reset map options </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00126">DiscreteDynamics.m:126</a></div></div>
 <div class="ttc" id="classdouble_html"><div class="ttname"><a href="classdouble.html">double</a></div><div class="ttdoc">A double value. </div></div>
-<div class="ttc" id="class_discrete_dynamics_html_a34114eee6e5897fd38ee311d9e74930e"><div class="ttname"><a href="class_discrete_dynamics.html#a34114eee6e5897fd38ee311d9e74930e">DiscreteDynamics.guardFunc</a></div><div class="ttdeci">function_handle guardFunc</div><div class="ttdoc">the function handle to the function that computes the guard value </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00102">DiscreteDynamics.m:102</a></div></div>
 <div class="ttc" id="classinteger_html"><div class="ttname"><a href="classinteger.html">integer</a></div><div class="ttdoc">An integer value. </div></div>
-<div class="ttc" id="class_discrete_dynamics_html_aa269374683022f820e5c028efb43027d"><div class="ttname"><a href="class_discrete_dynamics.html#aa269374683022f820e5c028efb43027d">DiscreteDynamics.guardType</a></div><div class="ttdeci">char guardType</div><div class="ttdoc">the type of guard condition </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00090">DiscreteDynamics.m:90</a></div></div>
 <div class="ttc" id="classfunction__handle_html"><div class="ttname"><a href="classfunction__handle.html">function_handle</a></div><div class="ttdoc">A MatLab function handle. </div></div>
 <div class="ttc" id="class_discrete_dynamics_html"><div class="ttname"><a href="class_discrete_dynamics.html">DiscreteDynamics</a></div><div class="ttdoc">DiscreteDynamics defines properties and functions related to a discrete transition of the hybrid dyna...</div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00017">DiscreteDynamics.m:17</a></div></div>
-<div class="ttc" id="class_discrete_dynamics_html_a02bc74b25f36b18e3b40ccb60825269d"><div class="ttname"><a href="class_discrete_dynamics.html#a02bc74b25f36b18e3b40ccb60825269d">DiscreteDynamics.guardJac</a></div><div class="ttdeci">function_handle guardJac</div><div class="ttdoc">the function handle to the function that computes the jacobian of guard </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00114">DiscreteDynamics.m:114</a></div></div>
 <div class="ttc" id="class_discrete_dynamics_html_aa6cfa5ee67d12647e93bd7c9481ce316"><div class="ttname"><a href="class_discrete_dynamics.html#aa6cfa5ee67d12647e93bd7c9481ce316">DiscreteDynamics.setOptions</a></div><div class="ttdeci">function   obj  = setOptions(struct dmap_options)</div><div class="ttdoc">setup the reset map options </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00170">DiscreteDynamics.m:170</a></div></div>
+<div class="ttc" id="class_discrete_dynamics_html_ae9477090b69ec0c96a746c94d169f124"><div class="ttname"><a href="class_discrete_dynamics.html#ae9477090b69ec0c96a746c94d169f124">DiscreteDynamics.guard_profile</a></div><div class="ttdeci">double guard_profile</div><div class="ttdoc">the threshold profile of the guard condition, normally zero </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00077">DiscreteDynamics.m:77</a></div></div>
 <div class="ttc" id="struct__overlay_8m_html_a269d22bd975b0b74d8c6c135eb6edcf0"><div class="ttname"><a href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0">struct_overlay</a></div><div class="ttdeci">function   opts  = struct_overlay(opts_default, opts_in, options)</div><div class="ttdef"><b>Definition:</b> <a href="struct__overlay_8m_source.html#l00017">struct_overlay.m:17</a></div></div>
+<div class="ttc" id="class_discrete_dynamics_html_ad14bade4888ccb97ca753e798d9c812e"><div class="ttname"><a href="class_discrete_dynamics.html#ad14bade4888ccb97ca753e798d9c812e">DiscreteDynamics.guard_direction</a></div><div class="ttdeci">integer guard_direction</div><div class="ttdoc">the direction of the guard </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00059">DiscreteDynamics.m:59</a></div></div>
 <div class="ttc" id="class_discrete_dynamics_html_a90ab44185329c4a1b90af263011a68b6"><div class="ttname"><a href="class_discrete_dynamics.html#a90ab44185329c4a1b90af263011a68b6">DiscreteDynamics.setGuard</a></div><div class="ttdeci">function   obj  = setGuard(struct guard)</div><div class="ttdoc">setup the discrete transition guard configurations </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00186">DiscreteDynamics.m:186</a></div></div>
-<div class="ttc" id="class_discrete_dynamics_html_aeb815859d55031f1377044f3206d9ce1"><div class="ttname"><a href="class_discrete_dynamics.html#aeb815859d55031f1377044f3206d9ce1">DiscreteDynamics.guardProfile</a></div><div class="ttdeci">double guardProfile</div><div class="ttdoc">the threshold profile of the guard condition, normally zero </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00077">DiscreteDynamics.m:77</a></div></div>
+<div class="ttc" id="class_discrete_dynamics_html_afabe751883dc1db1507baf80d1722ec1"><div class="ttname"><a href="class_discrete_dynamics.html#afabe751883dc1db1507baf80d1722ec1">DiscreteDynamics.guard_jac</a></div><div class="ttdeci">function_handle guard_jac</div><div class="ttdoc">the function handle to the function that computes the jacobian of guard </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00114">DiscreteDynamics.m:114</a></div></div>
 <div class="ttc" id="classstruct_html"><div class="ttname"><a href="classstruct.html">struct</a></div><div class="ttdoc">A MatLab struct. </div></div>
 <div class="ttc" id="classchar_html"><div class="ttname"><a href="classchar.html">char</a></div><div class="ttdoc">A MatLab character array. </div></div>
-<div class="ttc" id="class_discrete_dynamics_html_a7c0fe61d2abfd2426f5576b3e81374b0"><div class="ttname"><a href="class_discrete_dynamics.html#a7c0fe61d2abfd2426f5576b3e81374b0">DiscreteDynamics.guardDir</a></div><div class="ttdeci">integer guardDir</div><div class="ttdoc">the direction of the guard </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00059">DiscreteDynamics.m:59</a></div></div>
+<div class="ttc" id="class_discrete_dynamics_html_af7796ea7cac089b83c72cf601bb3f813"><div class="ttname"><a href="class_discrete_dynamics.html#af7796ea7cac089b83c72cf601bb3f813">DiscreteDynamics.guard_func</a></div><div class="ttdeci">function_handle guard_func</div><div class="ttdoc">the function handle to the function that computes the guard value </div><div class="ttdef"><b>Definition:</b> <a href="_discrete_dynamics_8m_source.html#l00102">DiscreteDynamics.m:102</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -250,7 +250,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 5 2016 11:05:37 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 2 2016 18:37:30 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
