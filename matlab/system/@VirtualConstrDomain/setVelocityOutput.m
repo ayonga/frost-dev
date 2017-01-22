@@ -22,7 +22,12 @@ function obj = setVelocityOutput(obj, act, des)
         obj.ActVelocityOutput.Prefix = 'ya1';
         obj.ActVelocityOutput.Name = obj.Name;
 
-        % setup desired output                
+        % setup desired output      
+        % set parameter structure for velocity output
+        [~,n_param] = obj.getDesOutputExpr(des);
+
+        obj.Param.v = nan(1,n_param);
+        
         obj.DesVelocityOutput = struct;
         obj.DesVelocityOutput.Type = des;
         obj.DesVelocityOutput.Symbols = struct(...
@@ -31,11 +36,8 @@ function obj = setVelocityOutput(obj, act, des)
         obj.DesVelocityOutput.Funcs = struct(...
             'y',['yd1_',obj.Name,],...
             'dy',['dyd1_',obj.Name]);
-
-        % set parameter structure for velocity output
-        [~,n_param] = obj.getDesOutputExpr(des);
-
-        obj.Param.v = nan(1,n_param);
+        obj.DesVelocityOutput.NumParam = n_param;
+        
     end
 
 end

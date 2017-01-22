@@ -28,7 +28,11 @@ function obj = addPositionOutput(obj, act, des)
     end
 
     obj.ActPositionOutput = addKinematic(obj.ActPositionOutput, act);
-
+    % setup the desired output parameter structure
+    [~,n_param] = obj.getDesOutputExpr(des);
+    n_output = getDimension(obj.ActPositionOutput);
+    obj.Param.a = nan(n_output,n_param);
+    
     if ~isempty(obj.DesPositionOutput)
         assert(strcmp(obj.DesPositionOutput, des), ...
             'The input desired output type does not match the current desired output type.');
@@ -36,6 +40,7 @@ function obj = addPositionOutput(obj, act, des)
         % setup the desired output structure
         obj.DesPositionOutput = struct;
         obj.DesPositionOutput.Type = des;
+        obj.DesPositionOutput.NumParam = n_param;
         obj.DesPositionOutput.Symbols = struct(...
             'y',['$yd2["',obj.Name,'"]'],...
             'dy',['$dyd2["',obj.Name,'"]'],...
@@ -47,9 +52,6 @@ function obj = addPositionOutput(obj, act, des)
 
     end
 
-     % setup the desired output parameter structure
-     [~,n_param] = obj.getDesOutputExpr(des);
-     n_output = getDimension(obj.ActPositionOutput);
-     obj.Param.a = nan(n_output,n_param);
+     
 
 end

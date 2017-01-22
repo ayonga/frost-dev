@@ -75,10 +75,10 @@ classdef HybridSystem
         function VertexProperties = get.VertexProperties(obj)
             
             VertexProperties = struct();
-            VertexProperties.Name =  {'Domain','Control','Param'};
-            VertexProperties.Type = {{'Domain'},{'Controller'},{'struct'}};
-            VertexProperties.Attribute = {{},{},{}};
-            VertexProperties.DefaultValue =  {{[]},{[]},{[]}};
+            VertexProperties.Name =  {'Domain','Control','Param','IsTerminal'};
+            VertexProperties.Type = {{'Domain'},{'Controller'},{'struct'},{'logical'}};
+            VertexProperties.Attribute = {{},{},{},{}};
+            VertexProperties.DefaultValue =  {{[]},{[]},{[]},false};
         end
         
         function EdgeProperties = get.EdgeProperties(obj)

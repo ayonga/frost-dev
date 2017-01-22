@@ -26,6 +26,8 @@ function obj = simulate(obj, options)
         % if a subgraph is specified to be simulated, then extract this
         % subgraph.
         sim_graph = subgraph(obj.Gamma, options.subgraph);
+        
+        
     else
         % otherwise use the original whole graph for simulation
         sim_graph = obj.Gamma;
@@ -42,24 +44,36 @@ function obj = simulate(obj, options)
     
     if isfield(options, 'terminal')
         if isfield(options, 'numcycle')
-            error('It is not allowed to specify the terminal domain and the number of cycle at the same time.');
+            warning('It is not allowed to specify the terminal domain and the number of cycle at the same time.');
         end
         t_domain_idx = findnode(sim_graph, options.terminal);
         assert(t_domain_idx~=0, ...
             'Unbale to find the specified end domain in the system graph.');
+        if ~sim_graph.Nodes.IsTerminal(t_domain_idx)
+            warning(['The specified terminal domain %s is not a terminal node of the system. \n',...
+                'Setting %s to a terminal node: '], sim_graph.Nodes.Name{t_domain_idx}, ...
+                sim_graph.Nodes.Name{t_domain_idx});
+            sim_graph.Nodes.IsTerminal(t_domain_idx) = true;
+        end
     else
         if isfield(options, 'numcycle')
             if isdag(sim_graph)
-                warning('The simulated graph is acyclic. It is not allowed to specify the number of cycles.');
-                
+                error('The simulated graph is acyclic. It is not allowed to specify the number of cycles.');                
             end
             numcycle = options.numcycle;
         else
             numcycle = 1;
         end
-        t_domain_idx = [];
+        t_domain_idx = find(sim_graph.Nodes.IsTerminal);
     end
     
+    
+    if isdag(sim_graph) % acyclic graph
+        if ~any(sim_graph.Nodes.IsTerminal)
+            % there is no terminal domain exists in a acyclic graph
+            error('The specified subgraph is acyclic but there is no terminal node in the graph.');
+        end
+    end
     
     if isfield(options, 'x0')
         x0 = options.x0;
@@ -68,8 +82,8 @@ function obj = simulate(obj, options)
     end
             
     
-    
-    
+    % clear previous results
+    obj.Flow = [];
     
     cur_node_idx = s_domain_idx;
     t0 = 0;
@@ -77,6 +91,19 @@ function obj = simulate(obj, options)
     while (true)
         idx = idx + 1;
         
+        
+        if isempty(cur_node_idx)
+            % if 'cur_node_idx' is empty, then there is no successor node
+            % in the graph, terminate the simulation loop
+            break;
+        end
+        
+        if ~isempty(t_domain_idx) 
+            if cur_node_idx == t_domain_idx
+                % if 'cur_node_idx' reaches the terminal node, terminate the simulation
+                break;
+            end
+        end
         
         % find successors and associated edges
         successor_nodes = successors(sim_graph, cur_node_idx);
@@ -126,17 +153,8 @@ function obj = simulate(obj, options)
             cur_node_idx = triggered_edge.EndNodes(2);
         end
         
-        if ~isempty(t_domain_idx) 
-            if cur_node_idx == t_domain_idx
-                % if 'cur_node_idx' reaches the terminal node, terminate the simulation
-                break;
-            end
-        end
-        if isempty(cur_node_idx)
-            % if 'cur_node_idx' is empty, then there is no successor node
-            % in the graph, terminate the simulation loop
-            break;
-        end
+        
+        
         
         cur_node = sim_graph.Nodes(cur_node_idx, :);
         % if the next node is the starting node of the graph, it indicates

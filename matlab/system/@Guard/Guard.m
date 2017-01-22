@@ -63,13 +63,14 @@ classdef Guard
             if isfield(argin, 'Direction')
                 obj.Direction = argin.Direction;
             else
-                obj.Direction = 1;
+                obj.Direction = -1;
             end
             
             if isfield(argin, 'DeltaOpts')
                 obj.DeltaOpts = argin.DeltaOpts;
             else
-                obj.DeltaOpts = struct;
+                obj.DeltaOpts = struct('ApplyImpact', false, ...
+                    'CoordinateRelabelMatrix', []);
             end
         end
         
