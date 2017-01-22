@@ -4,7 +4,6 @@ function [obj] = addVariable(obj, vars)
     %
     % Parameters:
     %  vars: new NLP variables @type NlpVariable 
-    %
     
     
     obj.VariableArray = appendTo(obj.VariableArray, vars);

@@ -56,6 +56,7 @@ classdef NlpVariable < handle
         %
         % @type colvec
         Indices
+        
     end
     
     
@@ -77,6 +78,8 @@ classdef NlpVariable < handle
                 return;
             end
             
+            % update property values using the input arguments
+            % load default values if not specified explicitly
             
             argin = struct(varargin{:});
             % check name type
@@ -139,5 +142,7 @@ classdef NlpVariable < handle
         obj = setName(obj, name);
         
         obj = setDimension(obj, dim);
+        
+        obj = updateProp(obj, varargin);
     end
 end

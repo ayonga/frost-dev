@@ -3,9 +3,9 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     % programing problem --- trajectory optimization problem for a hybrid
     % dynamical system.
     % 
-    % @see NonlinearProgram, HybridDynamicalSystem
+    % @see NonlinearProgram, HybridSystem
     %
-    % @author Ayonga Hereid @date 2016-10-26
+    % @author ayonga @date 2016-10-26
     % 
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -20,21 +20,19 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     end
     
     %% Protected properties
-    properties (Access = protected)
+    properties (SetAccess = protected)
         
-        phase
         
-        meshes
         
-        plant
+        % The discrete phases of the hybrid trajectory optimization
+        %
+        % @type cell
+        Phase
         
-        time
-        
-        states
-        
-        controls
-        
-        params
+        % The rigid body model of the robot
+        %
+        % @type RigidBodyModel
+        Model
     end
     
     %% Protected properties
@@ -46,63 +44,65 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = HybridTrajectoryOptimization(plant, options)
+        function obj = HybridTrajectoryOptimization(varargin)
             % The constructor function
-                        
-            obj = obj@NonlinearProgram();
-            
-            % check the type of the plant
-            assert(isa(plant, 'HybridDynamicalSystem'),...
-                'HybridTrajectoryOptimization:invalidPlant',...
-                'The plant must be an object of HybridDynamicalSystem catagory.\n');
-            
-            obj.plant = plant;
-            
-            obj.options.collocation_method = 'Hermite-Simpson';
-            obj.options.distribute_params = true;
-            
-            % overwrite non-default options
-            if nargin > 1
-                obj.options = struct_overlay(obj.options, options);
-            end
-            
-            % load default meshes (10 collocation nodes) if not specified
-            % explicitly
-            if ~isfield(obj.options, 'meshes')
-                obj.options.meshes = 10*ones(1, obj.num_phases);
-            end
-            
-            
-            addTimeVariable();
-            addStateVariable();
-            addControlVariable();
-            addParameter();
-            
-            addDynamicsConstraint();
-            addCollocationConstraint();
-            addPatchConstraint();
-            addTerminalConstraint();
-            
-            addRunningCost();
-            addTerminalCost();
-        end
-        
-        
-        function obj = addTimeVariable(obj)
             %
+            % Parameters:
+            % plant: the hybrid system plant @type HybridSystem
+            % options: user-defined options for the problem @type struct
             
+            
+            
+            % default options
+            default_opts.CollocationScheme = 'HermiteSimpson';
+            default_opts.DistributeParamWeights = false;
+            default_opts.NodeDistributionScheme = 'Uniform';
+            default_opts.EnableVirtualConstraint = true;
+            default_opts.UseTimeBasedOutput = true;
+            
+                        
+            % call superclass constructor
+            obj = obj@NonlinearProgram(default_opts);           
+            
+            % if non-default options are specified, overwrite the default
+            % options.
+            obj.Options = setOption(obj, varargin{:});
             
             
         end
         
-        function obj = addStateVariable(obj, plant)
-            
-            
-        end
-    
         
         
+%         DynamicsConstraints
+%         CollocationConstraints
+%         DomainConstraints
+%         GuardConstraints
+%         JumpConstraints
+%         PathConstraints
+%         TerminalConstraints
+        
+        
+        
+        
+        
+       
     end
     
+    %% methods defined in external files
+    methods
+        vars = createVariableArray(obj, nodes, varargin);
+        
+        obj = addAuxilaryVariable(obj, phase, nodes, varargin);
+        
+        obj = addControlVariable(obj, phase, model);
+        
+        obj = addGuardVariable(obj, phase, lb, ub, x0);
+        
+        obj = addParamVariable(obj, phase, lb, ub, x0);
+        
+        obj = addStateVariable(obj, phase, model);
+        
+        obj = addTimeVariable(obj, phase, lb, ub, x0);
+    end
 end
 

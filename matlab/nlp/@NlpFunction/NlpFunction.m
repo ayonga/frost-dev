@@ -67,6 +67,16 @@ classdef NlpFunction < handle
         % @type colvec
         nnzHessIndices
         
+        
+        % The name of the function that computes the NLP function
+        %
+        % Typically, this function is generated as a MEX function by
+        % Mathematica symbolic engine. It can be also written as a matlab
+        % function by the user.
+        %
+        % @type char
+        Func
+        
         % The name of the function that computes the Jacobian of the
         % function
         %
@@ -163,8 +173,7 @@ classdef NlpFunction < handle
             % varargin: variable nama-value pair input arguments, in detail:
             %  Name: the name of the function. @type char        
             %  Type: the type of the function. @type char
-            %  AuxData: a row vector of constant arguments of the function.
-            %  @type rowvec
+            
             % 
             % @attention The 'auxdata' argument must be an 1-dimensional
             % vector of constants.
@@ -207,10 +216,12 @@ classdef NlpFunction < handle
             end
             
             
-            if isfield(argin, 'AuxData')
-                obj = setAuxdata(obj, argin.AuxData);
+            if isfield(argin, 'Dimension')
+                obj = setDimension(obj, argin.Dimension);
+            else 
+                % by default, we consider all functions are scalar
+                obj = setDimension(obj, 1);
             end
-                
             
                 
                 
@@ -239,9 +250,10 @@ classdef NlpFunction < handle
         
         obj = setDependent(obj, depvars);
         
-        obj = setBoundaryValue(obj, cl, cu);
+        obj = setBoundary(obj, cl, cu);
         
         obj = appendTo(obj, funcs);
         
+        obj = updateProp(obj, varargin);
     end
 end

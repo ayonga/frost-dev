@@ -1,6 +1,9 @@
 function output_struct = array2struct(obj, varargin)
-    % Converts an array of NLPFunction objects into a struct of array with
-    % some specified modification.
+    % Converts an array of NLPFunction objects into a struct of arrays with
+    % some specified modification for fast computation in the NLP solver.
+    % Typically a struct of array is more computationally efficent than
+    % arrays of struct, and a struct is more computationally efficent than
+    % a class object.
     %
     % Parameters:
     %  varargin: name-value pairs of options
@@ -61,7 +64,8 @@ function output_struct = array2struct(obj, varargin)
     
     
     % convert the array of objects into a structure of arrays
-    output_struct.Funcs = {obj(:).Name};
+    output_struct.Names = {obj(:).Name};
+    output_struct.Funcs = {obj(:).Func};
     output_struct.DepIndices = {obj(:).DepIndices};
     output_struct.AuxData = {obj(:).AuxData};
     output_struct.JacFuncs = {obj(:).JacFunc};    

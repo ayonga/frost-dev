@@ -21,28 +21,28 @@ classdef NonlinearProgram < handle
         % The class option
         %
         % Required fileds of options:
-        %  derivative_level: the user-defined derivative order (0, 1 or 2)
+        %  DerivativeLevel: the user-defined derivative order (0, 1 or 2)
         %  to be used by a NLP solver. @type integer @default 1
-        %  derivative_type:  
+        %  DerivativeType:  
         %  
         % 
         % @type struct
         Options 
         
         
-        % The structure array contains all information regarding NLP
+        % The cell array contains all information regarding NLP
         % optimization variables
         %
-        % @type NlpVariable
+        % @type cell
         VariableArray
         
                 
-        % A cell data stores objective functions
+        % A cell array data stores objective functions
         %
         % @type cell
         CostArray
         
-        % A cell data stores all constraints functions
+        % A cell array data stores all constraints functions
         %
         % @type cell
         ConstrArray
@@ -60,11 +60,11 @@ classdef NonlinearProgram < handle
     %% Public methods
     methods
         
-        function obj = NonlinearProgram(opts)
+        function obj = NonlinearProgram(varargin)
             % The default class constructor function
             %
             % Parameters: 
-            %  opts: non-default configuration options. It will overwrite
+            %  varargin: non-default configuration options. It will overwrite
             %        the default options @type struct
             
             
@@ -72,13 +72,11 @@ classdef NonlinearProgram < handle
             % default options
             obj.Options = struct();
             obj.Options.DerivativeLevel = 1;
-            obj.Options.DerivativeType = 'analytic';
+            obj.Options.DerivativeType = 'Analytic';
             
             % if non-default options are specified, overwrite the default
             % options.
-            if nargin ~= 0
-                obj.Options = struct_overlay(obj.Options,opts);
-            end
+            obj.Options = setOption(obj, varargin{:});
             
             % initialize the type of the variables
             obj.VariableArray = NlpVariable.empty();
@@ -95,7 +93,7 @@ classdef NonlinearProgram < handle
         
         [obj] = addVariable(obj, varargin);
         
-        [obj] = genVarIndices(obj);
+        [obj] = updateVarIndices(obj);
         
         [obj] = addObjective(obj, funcs);
         

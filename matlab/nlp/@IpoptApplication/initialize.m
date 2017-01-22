@@ -17,6 +17,8 @@ function obj = initialize(obj, nlp)
         ['The order of user-defined derivative functions',... 
         'must be equal or greater than 1.\n']);
     
+    nlp = initializ(nlp);
+    
     
     obj.Objective = array2struct(nlp.CostArray, 'Type', 'sum', 'DerivativeLevel', nlp.Options.DerivativeLevel);
     
