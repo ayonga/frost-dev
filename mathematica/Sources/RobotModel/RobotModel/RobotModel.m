@@ -5,21 +5,6 @@
 BeginPackage["RobotModel`",{"Screws`","RobotLinks`","ExtraUtils`","URDFParser`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
-NumOfParams::usage = "NumOfParams[type] returns the number of parameters of function of the given type.";
-DesiredFunction::usage = "DesiredFunction[type] returns the expression of the desired function of the given type.";
-
-(*ComputeContact::usage = "ComputeContact[contact] computes the contact point contraints.";
-ComputePosConstraint::usage = "ComputePosConstraint[constr] computes the position based holonomic constraints.";
-ComputeJointConstraint::usage = "ComputeJointConstraint[constr] computes the joint based holonomic constraints.";*)
-
-ComputeRD1Outputs::usage = "ComputeRD1Outputs[output] computes the pre-defined library of relative degree 1 outputs.";
-ComputeRD2Outputs::usage = "ComputeRD2Outputs[output] computes the pre-defined library of relative degree 2 outputs.";
-ComputePhaseVars::usage = "ComputePhaseVars[output] computes the pre-defined library of phase variables.";
-
-GetRD1Output::usage = "GetRD1Output[] returns the expression of the relative degree 1 output and its first order Jacobian.";
-GetRD2Output::usage = "GetRD2Output[] returns the expression of the relative degree 2 output and its first and second order Jacobian.";
-GetPhaseVar::usage = "GetPhaseVart[] returns the expression of the phase variable and its first order Jacobian.";
-GetHolConstr::usage = "GetHolConstr[] returns the expression of the holonomic constraints and its first and second order Jacobian.";
 
 InitializeModel::usage = 
 	"InitializeModel[file] initializes the 3D robot model from an URDF file.
@@ -353,6 +338,11 @@ GravityVector[] :=
 	];
 
 InertiaToCoriolis[De_] := InertiaToCoriolis[De,Flatten[$Qe],Flatten[$dQe]];
+InertiaToCoriolis[] := 
+	Block[{De},
+		De = InertiaMatrix[];
+		InertiaToCoriolis[De,Flatten[$Qe],Flatten[$dQe]];
+	];
 (* The contributions of motor inertia to the robot dynamics are not addressed
 in the URDF model definition. To include the motor inertia in the dynamics 
 please include the motor inertia information when call InertiaMatrix[] function.
@@ -977,183 +967,11 @@ ComputeJointConstraint[dofIndex_] :=
 		Return[$Qe[[dofIndex]]];
 	];
 
-(*$definedPositions = {};
-ComputeContact[contacts_] :=
-	Block[{clist,cpos,cJac, name, syms, i, j},
-		clist = Map[{First[#["link"]], Flatten@(#["offset"])} &,contacts];
-		cpos = ComputeSpatialPositions[Sequence@@clist];
-		cJac = ComputeSpatialJacobians[Sequence@@clist];
-		Table[
-		  name = contacts[[j]]["name"];
-		  syms=StringJoin[name,#]&/@{"PosX","PosY","PosZ","Roll","Pitch","Yaw"};
-		  Table[
-				$h[syms[[i]]]=cpos[[j,i]];
-				$Jh[syms[[i]]]=cJac[[j,i,;;]];
-				$dJh[syms[[i]]]=Flatten@Jac[$Jh[syms[[i]]],{Global`t}];
-				,
-				{i,6}
-			];
-		  ,
-		  {j,Length[contacts]}
-		];
-		
-		$definedPositions=DeleteDuplicates@Join[$definedPositions,
-			Flatten[
-				Table[
-					StringJoin[name,#]&/@{"PosX","PosY","PosZ"},
-					{name,(#["name"])&/@contacts}
-				]
-			]
-		];
-	];
-
-ComputeJointConstraint[constr_] :=
-	Block[{name,vars,expr,subs,varsym,i,pos},
-		Table[
-			name=pos["name"];
-			vars=pos["vars"];
-        	varsym = Table[ToExpression["var"<>ToString[i]],{i,Length[pos["vars"]]}];
-			expr=ToExpression[pos["expr"]];
-			subs=GetVarSubs["joint",vars];
-			$h[name]=expr/.subs;
-			$Jh[name]=Flatten@Jac[{$h[name]},{$Qe}];
-			$dJh[name]=Flatten@Jac[{$Jh[name]},{Global`t}];
-		,
-		{pos,constr}
-		];
-		$definedPositions=DeleteDuplicates@Join[$definedPositions,
-			Flatten[Map[(#["name"])&,constr]]];
-	];
-
-ComputePosConstraint[constr_] :=
-	Block[{name,vars,expr,subs,varsym,i,pos},
-		Table[
-			name=pos["name"];
-			vars=pos["vars"];
-        	varsym = Table[ToExpression["var"<>ToString[i]],{i,Length[pos["vars"]]}];
-			expr=ToExpression[pos["expr"]];
-			subs=GetVarSubs["position",vars];
-			$h[name]=expr/.subs;
-			$Jh[name]=Flatten@Jac[expr,varsym].Table[$Jh[vars[[i]]],{i,Length[vars]}];
-			$dJh[name]=Flatten@Jac[$Jh[name],{Global`t}];
-		,
-		{pos,constr}
-		];
-		$definedPositions=DeleteDuplicates@Join[$definedPositions,
-			Flatten[Map[(#["name"])&,constr]]];
-	];
-*)
 
 
 
-GetRD1Output[name_?StringQ] := {$ya1[name],$Dya1[name]};
-GetRD2Output[name_?StringQ] := {$ya2[name],$Dya2[name],$DLfya2[name]};
-GetPhaseVar[name_?StringQ] := {$p[name],$Jp[name],$dp[name],$Jdp[name]};
-GetHolConstr[name_?StringQ] := {$h[name],$Jh[name],$dJh[name]};
 
 
-ComputeRD1Outputs[outputRD1_] :=
-	Block[{name, output},
-		Table[
-			name=output["name"];
-			$ya1[name]=Flatten@GetRD1Output[output];
-			$Dya1[name]=Flatten@Jac[$ya1[name],Join[$Qe,$dQe]];
-			,
-			{output,outputRD1}
-		];
-	];
-
-ComputeRD2Outputs[outputRD2_] :=
-	Block[{name, output},
-		Table[
-			name=output["name"];
-			$ya2[name]=Flatten@GetRD2Output[output];
-			$Dya2[name]=Flatten@Jac[$ya2[name],Join[$Qe,$dQe]];
-			$DLfya2[name]=Flatten@Jac[$Dya2[name].(D[Join[$Qe,$dQe],Global`t]),Join[$Qe,$dQe]];
-			,
-			{output,outputRD2}
-		];
-	];
-
-ComputePhaseVars[phaseVars_] :=
-	Block[{name, output},
-		Table[
-			name=output["name"];
-			$p[name]=GetRD2Output[output];
-			$dp[name]=D[$p[name],Global`t];
-			$Jp[name]=Flatten@Jac[$p[name],Join[$Qe,$dQe]];
-			$Jdp[name]=Flatten@Jac[$dp[name],Join[$Qe,$dQe]];
-			(*Subscript[dJ\[Delta]p, name]=D[Subscript[J\[Delta]p, name],t];*)
-			,
-			{output,phaseVars}
-		];
-	];
-
-GetVarSubs["position",vars_]:=
-	Block[{i},		
-		Table[
-			Assert[MemberQ[$definedPositions,vars[[i]]]];
-			ToExpression["var"<>ToString[i]]-> $h[vars[[i]]]
-			,
-			{i,Length[vars]}
-		]
-	];
-GetVarSubs["joint",vars_]:=
-	Block[{i},
-		Table[
-			Assert[MemberQ[$dofName,vars[[i]]]];
-			ToExpression["var"<>ToString[i]]-> GetJointSymbol[vars[[i]]]
-			,
-			{i,Length[vars]}
-		]
-	];
-GetRD2Output[output_?AssociationQ]:=
-	Block[
-		{expr,subs},
-		expr=ToExpression[output["expr"]];
-		subs=GetVarSubs[output["type"],output["vars"]];
-		If[output["linearize"],
-			(D[expr/.subs,{Flatten[$Qe],1}]/.$qe0subs).$Qe,
-			{expr/.subs}
-		]
-	];
-GetRD1Output[output_?AssociationQ]:=
-	Block[
-		{expr,subs},
-		expr=ToExpression[output["expr"]];
-		subs=GetVarSubs[output["type"],output["vars"]];
-		If[output["linearize"],
-			(D[expr/.subs,{Flatten[$Qe],1}]/.$qe0subs).$dQe,
-			{D[expr/.subs,Global`t]}
-		]
-	];
-
-
-NumOfParams::badargs="Undefined Function Type";
-NumOfParams["Constant"]:=1;
-NumOfParams["CWF"]:=5;
-NumOfParams["ECWF"]:=7;
-
-NumOfParams["Bezier4thOrder"]:=5;
-NumOfParams["Bezier5thOrder"]:=6;
-NumOfParams["Bezier6thOrder"]:=7;
-NumOfParams["MinJerk"]:=3;
-NumOfParams[type_?StringQ]:=(Message[DesiredFunction::badargs];$Failed);
-
-
-
-(*Define desired functions here*)
-DesiredFunction::badargs="Undefined Function Type";
-DesiredFunction["Constant"]:={Global`a[1]};
-
-DesiredFunction["Bezier4thOrder"]:={Sum[Global`a[j+1]*Binomial[4,j]*Global`tau^j*(1-Global`tau)^(4-j),{j,0,4}]};
-DesiredFunction["Bezier5thOrder"]:={Sum[Global`a[j+1]*Binomial[5,j]*Global`tau^j*(1-Global`tau)^(5-j),{j,0,5}]};
-DesiredFunction["Bezier6thOrder"]:={Sum[Global`a[j+1]*Binomial[6,j]*Global`tau^j*(1-Global`tau)^(6-j),{j,0,6}]};
-DesiredFunction["MinJerk"]:={Global`a[2]+(Global`a[1]-Global`a[2])*(10*(Global`tau/Global`a[3])^3-15*(Global`tau/Global`a[3])^4+6*(Global`tau/Global`a[3])^5)};
-DesiredFunction[type_?StringQ]:=(Message[DesiredFunction::badargs];$Failed);
-
-
-	
 (* Basic rotation matrices *)
 
 RotX[q_]:=CRoundEx[N@{{1,0,0},{0,Cos[q],-Sin[q]},{0,Sin[q],Cos[q]}}];
