@@ -50,16 +50,17 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     if isa(domain.PhaseVariable.Var, 'KinematicExpr')
         if ~isempty(domain.PhaseVariable.Var.Parameters)
             n_p = domain.PhaseVariable.Var.Parameters.Dimension;
-            
+            p  = cell(1,num_node);
             % create an array of ''p'' NlpVariable objects
-            p = create_object_array('NlpVariable', num_node, nodeList, ...
-                'Name', 'p', 'Dimension', n_p, ...
-                'lb', lb.p, 'ub', ub.p, 'x0', x0.p);
-            
+            for i=nodeList
+                p{i} = NlpVariable( ...
+                    'Name', 'p', 'Dimension', n_p, ...
+                    'lb', lb.p, 'ub', ub.p, 'x0', x0.p);
+            end
             % add to the decision variable table
             obj.Phase{phase}.OptVarTable = [...
                 obj.Phase{phase}.OptVarTable;...
-                array2table(p,'VariableNames',col_names,'RowNames',{'p'})];
+                cell2table(p,'VariableNames',col_names,'RowNames',{'p'})];
         end
     end
     
@@ -67,27 +68,33 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     if ~isempty(domain.DesVelocityOutput)
         
         n_v = domain.DesVelocityOutput.NumParam;
-        
+        v = cell(1,num_node);
         % create an array of ''v'' NlpVariable objects
-        v = create_object_array('NlpVariable', num_node, nodeList, ...
-            'Name', 'v', 'Dimension', n_v, ...
-            'lb', lb.v, 'ub', ub.v, 'x0', x0.v);
-        
+        for i=nodeList
+            v{i} = NlpVariable( ...
+                'Name', 'v', 'Dimension', n_v, ...
+                'lb', lb.v, 'ub', ub.v, 'x0', x0.v);
+        end
         obj.Phase{phase}.OptVarTable = [...
             obj.Phase{phase}.OptVarTable;...
-            array2table(v,'VariableNames',col_names,'RowNames',{'v'})];
+            cell2table(v,'VariableNames',col_names,'RowNames',{'v'})];
     end
     
     %% position outputs (a)
     
     n_pos_outputs = getDimension(domain.ActPositionOutput);
     n_a = n_pos_outputs*domain.DesPositionOutput.NumParam*n_pos_outputs;
-    a = create_object_array('NlpVariable', num_node, nodeList, ...
-        'Name', 'a', 'Dimension', n_a,...
-        'lb', lb.a, 'ub', ub.a, 'x0', x0.a);
+    
+    a = cell(1,num_node);
+    for i=nodeList
+        a{i} = NlpVariable(...
+            'Name', 'a', 'Dimension', n_a,...
+            'lb', lb.a, 'ub', ub.a, 'x0', x0.a);
+    end
+    
     obj.Phase{phase}.OptVarTable = [...
         obj.Phase{phase}.OptVarTable;...
-        array2table(a,'VariableNames',col_names,'RowNames',{'a'})];
+        cell2table(a,'VariableNames',col_names,'RowNames',{'a'})];
     
 
 

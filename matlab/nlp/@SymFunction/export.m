@@ -32,16 +32,22 @@ function status = export(obj, export_path, do_build, derivative_level)
     end
     
     
+    if ~isempty(obj.PreCommands)
+        eval_math(obj.PreCommands);
+    end
     
     if isempty(obj.Expression)
         error('The kinematic ''Expression'' is not assigned.');
     end
-    eval_math([obj.Symbols,'=',obj.Expression,';']);
-    
-    
-    
     
     eval_math('Needs["MathToCpp`"];');
+    symbol = obj.Symbol;
+    eval_math([symbol,'=',obj.Expression,';']);
+    
+    
+    
+    
+    
     
     
     
@@ -50,30 +56,25 @@ function status = export(obj, export_path, do_build, derivative_level)
         'ExportDirectory->',str2mathstr(export_path),'];']);
     
     if derivative_level == 1
-        if isempty(obj.AuxData)
-            eval_math(['ExportWithGradient[',str2mathstr(obj.Name),',',obj.Symbols,',{',...
-                obj.DepSymbols{:},'}];']);
+        if isempty(obj.ParSymbols)
+            eval_math(['ExportWithGradient[',str2mathstr(obj.Name),',',symbol,',{',...
+                implode(obj.DepSymbols, ', '),'}];']);
         else
-            eval_math(['ExportWithGradient[',str2mathstr(obj.Name),',',obj.Symbols,',',...
-                obj.DepSymbols{:},'},{',obj.ParSymbols,'}];']);
+            eval_math(['ExportWithGradient[',str2mathstr(obj.Name),',',symbol,',',...
+                implode(obj.DepSymbols, ', '),'},{',implode(obj.ParSymbols, ', '),'}];']);
         end
         
-        funcs = {['f_', obj.Name]
-            ['J_', obj.Name]
-            ['Js_', obj.Name]};
+        funcs = {obj.Funcs.Func, obj.Funcs.Jac, obj.Funcs.JacStruct};
     elseif derivative_level == 2
-        if isempty(obj.AuxData)
-            eval_math(['ExportWithHessian[',str2mathstr(obj.Name),',',obj.Symbols,',{',...
-                obj.DepSymbols{:},'}];']);
+        if isempty(obj.ParSymbols)
+            eval_math(['ExportWithHessian[',str2mathstr(obj.Name),',',symbol,',{',...
+                implode(obj.DepSymbols, ', '),'}];']);
         else
-            eval_math(['ExportWithHessian[',str2mathstr(obj.Name),',',obj.Symbols,',',...
-                obj.DepSymbols{:},'},{',obj.ParSymbols,'}];']);
+            eval_math(['ExportWithHessian[',str2mathstr(obj.Name),',',symbol,',',...
+                implode(obj.DepSymbols, ', '),'},{',implode(obj.ParSymbols, ', '),'}];']);
         end
-        funcs = {['f_', obj.Name]
-            ['J_', obj.Name]
-            ['Js_', obj.Name]
-            ['H_', obj.Name]
-            ['Hs_', obj.Name]};
+        funcs = {obj.Funcs.Func, obj.Funcs.Jac, obj.Funcs.JacStruct, ...
+            obj.Funcs.Hess, obj.Funcs.HessStruct};
     end
     
     

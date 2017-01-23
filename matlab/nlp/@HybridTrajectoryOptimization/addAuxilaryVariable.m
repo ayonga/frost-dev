@@ -19,14 +19,15 @@ function obj = addAuxilaryVariable(obj, phase, nodes, varargin)
     
     
     
-    
-    var = create_object_array('NlpVariable', num_node, nodes, ...
-        varargin{:});
-    
+    var = cell(1,num_node);
+    for i=nodes
+        var{i} = NlpVariable(...
+            varargin{:});
+    end
     % add to the decision variable table
     obj.Phase{phase}.OptVarTable = [...
         obj.Phase{phase}.OptVarTable;...
-        array2table(var,'VariableNames',col_names,'RowNames',{var(nodes(1)).Name})];
+        cell2table(var,'VariableNames',col_names,'RowNames',{var(nodes(1)).Name})];
     
 
 

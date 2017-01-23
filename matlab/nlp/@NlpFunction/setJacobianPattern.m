@@ -19,7 +19,7 @@ function obj = setJacobianPattern(obj, jac_sp, sp_form)
         sp_form = 'MatrixForm';
     end
 
-    dimDeps = sum([obj.DepVariables.Dimension]);
+    dimDeps = sum(cellfun(@(x)x.Dimension, obj.DepVariables));
 
     switch sp_form
         case 'MatrixForm'

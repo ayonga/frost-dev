@@ -21,7 +21,7 @@ classdef NlpFunction < handle
     end
     
     
-    properties (SetAccess = protected, GetAccess = public)
+    properties (SetAccess = protected, GetAccess = protected)
         
         % This property specifies whether the function is the linear
         % function of dependent variables
@@ -34,21 +34,13 @@ classdef NlpFunction < handle
         % @type char
         Name
         
-        % It gives a quick access to the dimension of the function output
-        % without actually evaluating the function
-        %
-        % @type integer
-        Dimension
         
         % An array of dependent NLP variables
         %
         % @type NlpVariable
         DepVariables
                 
-        % Stores the indices of all dependent variables in a vector
-        %
-        % @type colvec
-        DepIndices
+        
         
         % Stores the indices of the function
         %
@@ -68,35 +60,46 @@ classdef NlpFunction < handle
         nnzHessIndices
         
         
-        % The name of the function that computes the NLP function
+        % File names of the external functions that computes the
+        % function/Jacobian/Hessian of the object.
         %
-        % Typically, this function is generated as a MEX function by
-        % Mathematica symbolic engine. It can be also written as a matlab
-        % function by the user.
+        % Each field of ''Funcs'' specifies the name of a function that
+        % used for a certain computation of the function.
         %
-        % @type char
-        Func
+        % Required fields of Funcs:
+        %   Func: a string of the function that computes the
+        %   function value @type char
+        %   Jac: a string of the function that computes the
+        %   function Jacobian @type char
+        %   JacStruct: a string of the function that computes the
+        %   sparsity structure of function Jacobian @type char
+        %   Hess: a string of the function that computes the 
+        %   function Hessian @type char
+        %   HessStruct: a string of the function that computes the
+        %   sparsity structure of function Hessian @type char
+        % @type struct
+        Funcs
         
-        % The name of the function that computes the Jacobian of the
-        % function
-        %
-        % Typically, this function is generated as a MEX function by
-        % Mathematica symbolic engine. It can be also written as a matlab
-        % function by the user.
-        %
-        % @type char
-        JacFunc
+        % % The name of the function that computes the Jacobian of the
+        % % function
+        % %
+        % % Typically, this function is generated as a MEX function by
+        % % Mathematica symbolic engine. It can be also written as a matlab
+        % % function by the user.
+        % %
+        % % @type char
+        % JacFunc
         
         
-        % The name of the function that computes the Jacobian of the
-        % function
-        %
-        % Typically, this function is generated as a MEX function by
-        % Mathematica symbolic engine. It can be also written as a matlab
-        % function by the user.
-        %
-        % @type char
-        HessFunc
+        % % The name of the function that computes the Jacobian of the
+        % % function
+        % %
+        % % Typically, this function is generated as a MEX function by
+        % % Mathematica symbolic engine. It can be also written as a matlab
+        % % function by the user.
+        % %
+        % % @type char
+        % HessFunc
         
         % A two-vector structure that specifies the non-zero structure of
         % the first order Jacobian of the function with respect to the
@@ -152,6 +155,11 @@ classdef NlpFunction < handle
         % @type matrix
         AuxData
         
+        
+        
+    end
+    
+    properties (SetAccess = protected, GetAccess = public)
         % The lower boundary values of the function
         %
         % @type colvec
@@ -162,9 +170,15 @@ classdef NlpFunction < handle
         % @type colvec
         UpperBound
         
+        
+        % It gives a quick access to the dimension of the function output
+        % without actually evaluating the function
+        %
+        % @type integer
+        Dimension
     end
     
-        
+    
     methods
         function obj = NlpFunction(varargin)
             % The class constructor function.
@@ -223,13 +237,47 @@ classdef NlpFunction < handle
                 obj = setDimension(obj, 1);
             end
             
-                
+            if isfield(argin, 'lb')
+                obj =  setBoundary(obj, argin.lb, []);
+            else
+                obj =  setBoundary(obj, -inf, []);
+            end
+            
+            if isfield(argin, 'ub')
+                obj =  setBoundary(obj, [], argin.ub);
+            else
+                obj =  setBoundary(obj, [], inf);
+            end
                 
         end
         
-        
+        function deps = getDepObject(obj)
+            % Returns the object of the dependent function
+            %
+            % For most of the function object, the dependent object is
+            % itself.
+            %
+            % Return values: 
+            % deps: the dependent objects 
+            
+            deps = obj;
+            
+        end
 
+        function indices = getDepIndices(obj)
+            % Returns the indices of the dependent variables
+            %
+            % Return values:
+            % indices: the indices of dependent variables @type colvec
+            indices = vertcat(cellfun(@(x)x.Indices, obj.DepVariables, ...
+                'UniformOutput', false));
+        end
     end
+    
+    
+    
+    
+    
     
     %% methods defined in external files
     methods
@@ -248,12 +296,14 @@ classdef NlpFunction < handle
         
         obj = setHessianFunction(obj, func_name);
         
-        obj = setDependent(obj, depvars);
+        obj = setDependentVariable(obj, depvars);
         
         obj = setBoundary(obj, cl, cu);
         
         obj = appendTo(obj, funcs);
         
         obj = updateProp(obj, varargin);
+        
+        
     end
 end

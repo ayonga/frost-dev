@@ -37,15 +37,16 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
     % h - the constant value of the holonomic kinematic constraints
     if ~isempty(domain.HolonomicConstr)
         n_hol_constr = getDimension(domain.HolonomicConstr);
+        h = cell(1,num_node);
         % defined at the first node
-        h = create_object_array('NlpVariable', num_node, 1, ...
+        h{1} = NlpVariable(...
             'Name', 'h', 'Dimension', n_hol_constr, ...
             'lb', lb.h,  'ub', ub.h, 'x0', x0.h);
         
         % add to the table
         obj.Phase{phase}.OptVarTable = [...
             obj.Phase{phase}.OptVarTable;...
-            array2table(h,'VariableNames',col_names,'RowNames',{'h'})];
+            cell2table(h,'VariableNames',col_names,'RowNames',{'h'})];
     end
     
     % Fi - impact wrenches if the discrete transition involves a rigid
@@ -56,16 +57,16 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
         % of the holonomic constraints of the next domain.
         next_domain  = obj.Phase{phase+1}.Domain;
         n_hol_constr = getDimension(next_domain.HolonomicConstr);
-        
+        Fi = cell(1,num_node);
         % defined at the last node
-        Fi = create_object_array('NlpVariable', num_node, num_node, ...
+        Fi{num_node} = NlpVariable(...
             'Name', 'impF', 'Dimension', n_hol_constr, ...
             'lb', lb.Fi,  'ub', ub.Fi, 'x0', x0.Fi);
         
         % add to the table
         obj.Phase{phase}.OptVarTable = [...
             obj.Phase{phase}.OptVarTable;...
-            array2table(Fi,'VariableNames',col_names,'RowNames',{'Fi'})];
+            cell2table(Fi,'VariableNames',col_names,'RowNames',{'Fi'})];
     end
     
 

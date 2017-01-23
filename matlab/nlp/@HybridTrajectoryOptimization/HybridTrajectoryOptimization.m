@@ -21,7 +21,27 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     
     %% Protected properties
     properties (SetAccess = protected)
-        
+        % A structure of which each sub-field provides the interface to
+        % external functions for NLP constraints or cost function.
+        %
+        % @note Typically, we will use SymFunction to construct such an object
+        % for a function. However, users could also employ other class or
+        % structure for their own custom functions. One requirement of such
+        % an object is that it must have a field called ''Funcs'' to
+        % provides the external function name (or function handles). 
+        %
+        % @note To add a new function object, create a new field in this
+        % variable.        
+        % 
+        % @see SymFunction
+        %
+        % Required fields of FuncObjects:
+        % Model: model specific functions @type struct
+        % Phase: phase specific functions, each cell contains function for
+        % a particular phase @type cell
+        %
+        % @type struct        
+        FuncObjects
         
         
         % The discrete phases of the hybrid trajectory optimization
@@ -33,6 +53,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         %
         % @type RigidBodyModel
         Model
+        
     end
     
     %% Protected properties
@@ -59,7 +80,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             default_opts.NodeDistributionScheme = 'Uniform';
             default_opts.EnableVirtualConstraint = true;
             default_opts.UseTimeBasedOutput = true;
-            
+            default_opts.DefaultNumberOfGrids = 10;
                         
             % call superclass constructor
             obj = obj@NonlinearProgram(default_opts);           
@@ -68,7 +89,12 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             % options.
             obj.Options = setOption(obj, varargin{:});
             
+                        
+            obj.Phase = cell(0);
             
+            obj.FuncObjects = struct;
+            obj.FuncObjects.Model = struct;
+            obj.FuncObjects.Phase = cell(0);
         end
         
         
@@ -90,7 +116,6 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     
     %% methods defined in external files
     methods
-        vars = createVariableArray(obj, nodes, varargin);
         
         obj = addAuxilaryVariable(obj, phase, nodes, varargin);
         
@@ -103,6 +128,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         obj = addStateVariable(obj, phase, model);
         
         obj = addTimeVariable(obj, phase, lb, ub, x0);
+        
+        obj = configureNLP(obj, plant, options);
     end
 end
 

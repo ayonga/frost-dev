@@ -37,15 +37,18 @@ function obj = addTimeVariable(obj, phase, lb, ub, x0)
         nodeList = 1;
     end
     
-    % create an array of time NlpVariable objects
-    t = create_object_array('NlpVariable', num_node, nodeList, ...
-        'Name', 't', 'Dimension', 1, ...
-        'lb', lb, 'ub', ub, 'x0', x0);
+    
+    % create a cell array of time NlpVariable objects
+    t = cell(1, num_node);
+    for i=nodeList
+        t{i} = NlpVariable('Name', 't', 'Dimension', 1, ...
+            'lb', lb, 'ub', ub, 'x0', x0);
+    end
     
     
     obj.Phase{phase}.OptVarTable = [...
         obj.Phase{phase}.OptVarTable;...
-        array2table(t,'VariableNames',col_names,'RowNames',{'t'})];
+        cell2table(t,'VariableNames',col_names,'RowNames',{'t'})];
 
 
 end

@@ -17,13 +17,13 @@ function obj = initialize(obj, nlp)
         ['The order of user-defined derivative functions',... 
         'must be equal or greater than 1.\n']);
     
-    nlp = initializ(nlp);
+    nlp = updateVarIndices(nlp);
     
     
-    obj.Objective = array2struct(nlp.CostArray, 'Type', 'sum', 'DerivativeLevel', nlp.Options.DerivativeLevel);
+    obj.Objective = array2struct(obj, nlp.CostArray, nlp.Options.DerivativeLevel);
     
    
-    obj.Constraint = array2struct(nlp.ConstrArray, 'Type', 'list', 'DerivativeLevel', nlp.Options.DerivativeLevel);
+    obj.Constraint = array2struct(obj, nlp.ConstrArray, nlp.Options.DerivativeLevel);
     
     
     

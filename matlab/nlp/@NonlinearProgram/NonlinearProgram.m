@@ -72,16 +72,15 @@ classdef NonlinearProgram < handle
             % default options
             obj.Options = struct();
             obj.Options.DerivativeLevel = 1;
-            obj.Options.DerivativeType = 'Analytic';
             
             % if non-default options are specified, overwrite the default
             % options.
             obj.Options = setOption(obj, varargin{:});
             
             % initialize the type of the variables
-            obj.VariableArray = NlpVariable.empty();
-            obj.CostArray  = NlpFunction.empty();
-            obj.ConstrArray = NlpFunction.empty();
+            obj.VariableArray = cell(0);
+            obj.CostArray  = cell(0);
+            obj.ConstrArray = cell(0);
             
             
         end

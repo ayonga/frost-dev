@@ -20,7 +20,7 @@ function obj = initialize(obj, reload)
             eval_math('Needs["RobotModel`"];');
         end
     catch
-        disp('Unable to find the Mathematica package!');
+        warning('Unable to find the Mathematica package!');
         disp('Trying run the mathematica_setup() function to initialize the Path environment.');
         mathematica_setup();
         eval_math('Get["RobotModel`"];');
@@ -29,7 +29,7 @@ function obj = initialize(obj, reload)
     flag = '$ModelInitialized';
     
     if checkFlag(obj, flag)
-        disp('The model has been initialized in Mathematica.');
+        warning('The model has been initialized in Mathematica.');
         disp('Skipping this operation ...');
         return;
     end
