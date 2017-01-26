@@ -13,7 +13,7 @@ function [sol, info] = optimize(obj, x0)
     if nargin < 2
         x0 = getInitialGuess(nlp, obj.Options.initialguess);
         
-        x0 = rand(size(x0));
+%         x0 = rand(size(x0));
     end
     
     opts = struct;

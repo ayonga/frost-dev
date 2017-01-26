@@ -61,10 +61,10 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         % @type digraph
         Gamma
         
-        % The name of the hybrid system to be optimized
+        % The hybrid system to be optimized
         %
-        % @type char
-        PlantName
+        % @type HybridSystem
+        Plant
     end
     
     %% Protected properties
@@ -87,11 +87,11 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             
             % default options
             default_opts.CollocationScheme = 'HermiteSimpson';
-            default_opts.DistributeParamWeights = false;
+            default_opts.DistributeParamWeights = true;
             default_opts.NodeDistributionScheme = 'Uniform';
             default_opts.EnableVirtualConstraint = true;
             default_opts.UseTimeBasedOutput = false;
-            default_opts.DefaultNumberOfGrids = 2;
+            default_opts.DefaultNumberOfGrids = 10;
             default_opts.ZeroVelocityOutputError = false;
             % call superclass constructor
             obj = obj@NonlinearProgram(default_opts);           
@@ -105,9 +105,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                 'HybridTrajectoryOptimization:invalidPlant',...
                 'The plant must be an object of HybridSystem catagory.\n');
             
-            obj.PlantName = plant.Name;
+            obj.Plant = plant;
             obj.Model = plant.Model;
-            obj.Gamma = plant.Gamma;
                         
             obj.Phase = cell(0);
             

@@ -35,11 +35,11 @@ function obj = configureNLP(obj, options)
         
         obj = addDynamicsConstraint(obj, i);
         
-%         obj = addJumpConstraint(obj, i);
+        obj = addJumpConstraint(obj, i);
 
-%         obj = addOutputConstraint(obj, i);
+        obj = addOutputConstraint(obj, i);
         
-%         obj = addParamConstraint(obj, i);
+        obj = addParamConstraint(obj, i);
         
         %% cost function
         obj = addRunningCost(obj, i, obj.Funcs.Phase{i}.power);

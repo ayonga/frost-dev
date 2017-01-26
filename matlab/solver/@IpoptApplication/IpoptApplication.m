@@ -49,7 +49,7 @@ classdef IpoptApplication < SolverApplication
             obj = obj@SolverApplication();
            
             % ipopt options
-            options.initialguess = 'random';
+            options.initialguess = 'typical';
             
             % default IPOPT options
             options.ipopt.mu_strategy      = 'adaptive';
@@ -61,7 +61,7 @@ classdef IpoptApplication < SolverApplication
             % options.ipopt.recalc_y = 'yes';
             % options.ipopt.recalc_y_feas_tol = 1e-3;
             % options.ipopt.bound_relax_factor = 1e-3;
-            options.ipopt.fixed_variable_treatment = 'RELAX_BOUNDS';
+            % options.ipopt.fixed_variable_treatment = 'RELAX_BOUNDS';
             options.ipopt.derivative_test = 'first-order';
             options.ipopt.point_perturbation_radius = 0;
             options.ipopt.derivative_test_perturbation = 1e-8;

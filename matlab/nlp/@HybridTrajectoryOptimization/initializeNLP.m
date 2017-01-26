@@ -24,7 +24,9 @@ function obj = initializeNLP(obj, options)
     if isfield(options, 'SubGraph')
         % if a SubGraph is specified to be simulated, then extract this
         % SubGraph.
-        obj.Gamma = subgraph(obj.Gamma, options.SubGraph);
+        obj.Gamma = subgraph(obj.Plant.Gamma, options.SubGraph);
+    else
+        obj.Gamma = obj.Plant.Gamma;
     end
     
     opt_graph = obj.Gamma;

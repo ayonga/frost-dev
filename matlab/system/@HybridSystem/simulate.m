@@ -121,7 +121,7 @@ function obj = simulate(obj, options)
         
         
         
-        sol = ode113(@(t, x) calcDynamics(obj, t, x, cur_node), ...
+        sol = ode45(@(t, x) calcDynamics(obj, t, x, cur_node), ...
             [t0, t0+3], x0, odeopts);
         
         
@@ -129,14 +129,27 @@ function obj = simulate(obj, options)
         obj.Flow{idx} = struct;
         obj.Flow{idx}.node_idx = cur_node_idx;
         
-        n_sample = length(sol.x);
-        calcs = cell(1,n_sample);
-        for i=1:n_sample
-            [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), cur_node);
-            value = checkGuard(obj, sol.x(i), sol.y(:,i), cur_node, assoc_edges);
-            extra.guard_value = value;
-            calcs{i} = extra;
+        if ~isfield(options, 'n_sample')
+            n_sample = length(sol.x);
+            calcs = cell(1,n_sample);
+            for i=1:n_sample
+                [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), cur_node);
+                value = checkGuard(obj, sol.x(i), sol.y(:,i), cur_node, assoc_edges);
+                extra.guard_value = value;
+                calcs{i} = extra;
+            end
+        else
+            n_sample = options.n_sample;
+            t_domain = sol.x(end)-sol.x(1);
+            [tspan,xsample] = even_sample(sol.x,sol.y,n_sample/t_domain);
+            for i=1:n_sample+1
+                [~,extra] = calcDynamics(obj,  tspan(i), xsample(:,i), cur_node);
+                value = checkGuard(obj, tspan(i), xsample(:,i), cur_node, assoc_edges);
+                extra.guard_value = value;
+                calcs{i} = extra;
+            end
         end
+        
         obj.Flow{idx}.calcs = calcs;
         
         % Compute reset map at the guard
