@@ -41,9 +41,11 @@ function obj = compileSymFunction(obj, field, phase, export_path)
                 % compile domain
                 compile(obj.Phase{phase_idx(i)}.Domain, model, true);
                 
-                if obj.Phase{phase_idx(i)}.Guard.DeltaOpts.ApplyImpact
-                    next_domain = obj.Gamma.Nodes.Domain{obj.Phase{phase_idx(i)}.NextVertex};
-                    compile(next_domain.HolonomicConstr, model, true);
+                if ~isempty(obj.Phase{phase_idx(i)}.Guard)
+                    if obj.Phase{phase_idx(i)}.Guard.DeltaOpts.ApplyImpact
+                        next_domain = obj.Gamma.Nodes.Domain{obj.Phase{phase_idx(i)}.NextVertex};
+                        compile(next_domain.HolonomicConstr, model, true);
+                    end
                 end
                 
                 % get fields

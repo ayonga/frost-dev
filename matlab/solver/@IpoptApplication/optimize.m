@@ -86,9 +86,9 @@ function [sol, info] = optimize(obj, x0)
             
             % calculate constraints
             if isempty(constraint.AuxData{i})
-                C(constraint.FuncIndices{i}) = feval(constraint.Funcs{i}, var);
+                C(constraint.FuncIndices{i}) = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var);
             else
-                C(constraint.FuncIndices{i})  = feval(constraint.Funcs{i}, var, constraint.AuxData{i});
+                C(constraint.FuncIndices{i})  = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var, constraint.AuxData{i});
             end
         end
         

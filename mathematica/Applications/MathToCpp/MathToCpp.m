@@ -205,7 +205,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
                   ,
 				  vars={"_NotUsed"};
 				  statement={"NULL"};
-                  final={N[oexpr/.csubs,15]};
+                  final={oexpr/.csubs};
                   If[OptionValue[ExportFull],
                     NonZeroIndices = Range@(argoutDims[[i,1]]*argoutDims[[i,2]]),
                     NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False];
