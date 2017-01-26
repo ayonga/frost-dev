@@ -12,10 +12,12 @@ Welcome to FROST's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   installation
    introduction
+   installation
    tutorial
-   Matlab Documentation <doxygen_matlab/index.html#://>
-
+   Matlab <doxygen_matlab/index.html#://>
+   mathematica
+   developers
+	   
 
 
