@@ -1,32 +1,33 @@
-addpath('export');
-addpath('param');
-addpath('urdf');
+
 % run options
-compile_expr = true;
-export_expr  = true;
-build_expr   = true;
+compile_expr = false;
+export_expr  = false;
+build_expr   = false;
 cur = fileparts(mfilename('fullpath'));
+addpath([cur, '/export']);
+addpath([cur, '/param']);
+addpath([cur, '/urdf']);
 export_path = fullfile(cur, 'export');
-atlas = Atlas('urdf/atlas_simple_contact_noback.urdf');
+atlas = Atlas([cur,'/urdf/atlas_simple_contact_noback.urdf']);
 
 if compile_expr
     re_load = true;
     initialize(atlas, re_load);
     
     % compile dynamics
-    atlas = compileDynamics(atlas);
+%     atlas = compileDynamics(atlas);
     atlas = compileCoM(atlas);
     
     if export_expr
-        exportDynamics(atlas, export_path, build_expr);
+%         exportDynamics(atlas, export_path, build_expr);
         exportCoM(atlas, export_path, build_expr);        
     end
 end
 
 RightStance = VirtualConstrDomain('RightSSFlatWalking');
-RightStance = addContact(RightStance,{atlas.Contacts.RightFoot});
+RightStance = addContact(RightStance,{atlas.Contacts.RightSole});
 RightStance = addHolonomicConstraint(RightStance, atlas.FixedDofs);
-RightStance = addUnilateralConstraint(RightStance, atlas.Kins.LeftFootPosZ);
+RightStance = addUnilateralConstraint(RightStance, atlas.Kins.LeftSolePosZ);
 
 act_joints = atlas.Joints(strcmp('revolute',{atlas.Joints.type}));
 RightStance = setAcutation(RightStance, atlas, {act_joints.name});
@@ -83,7 +84,7 @@ if compile_expr
 end
 
 io_control  = IOFeedback('IO');
-param_config_file = 'param/params_2016-07-01T13-17-04-00.yaml';
+param_config_file = [cur,'/param/params_2016-07-01T13-17-04-00.yaml'];
 old_params = cell_to_matrix_scan(yaml_read_file(param_config_file));
 params = cell(1,2);
 for i=1:2
@@ -146,4 +147,4 @@ for i=1:atlas.nDof
 end
 %%
 opts.x0 = [q0;dq0];
-simulate(AtlasFlatWalking, opts);
+AtlasFlatWalking = simulate(AtlasFlatWalking, opts);

@@ -2,43 +2,469 @@ classdef Atlas < RigidBodyModel
     %ATLAS Model
     
     properties
+        % All possible contact points
+        %
+        % @type struct
         Contacts
         
+        % Fixed joints specified in URDF file as ''fixed''.
+        % 
+        % Fixed joints will be enforced via holonomic constraints 
+        %
+        % @type struct
         FixedDofs
         
-        Kins
+        
+        % All kinematic functions will be used in the formulation of
+        % virtual constraints. 
+        %
+        % @type struct
+        KinObjects
         
     end
     
     methods
+        
+        
+        function obj = AtlasContactPoints(obj)
+            % define all possible contact points
+            
+            % potential contact points
+            contacts = struct();
+            
+            lt = 0.1728;
+            lh = 0.082;
+            wf = 0.1524;
+            hf = -0.07645;
+            
+            % friction coefficient
+            mu = 0.5;
+            
+            %% left sole (a point on the foot plane below the ankle)
+            contacts.LeftSole = KinematicContact('Name','LeftSole');
+            contacts.LeftSole.ParentLink = 'l_foot';
+            contacts.LeftSole.Offset = [0.0, 0, hf];
+            contacts.LeftSole.NormalAxis = 'z';
+            contacts.LeftSole.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftSole.ModelType = obj.Type;
+            contacts.LeftSole.Mu = mu;
+            contacts.LeftSole.Geometry = {'x',[wf/2,wf/2];
+                'y',[lt,lh]};
+            %% right sole (a point on the foot plane below the ankle)
+            contacts.RightSole = KinematicContact('Name','RightSole');
+            contacts.RightSole.ParentLink = 'r_foot';
+            contacts.RightSole.Offset = [0.0, 0, hf];
+            contacts.RightSole.NormalAxis = 'z';
+            contacts.RightSole.ContactType = 'PlanarContactWithFriction';
+            contacts.RightSole.ModelType = obj.Type;
+            contacts.RightSole.Mu = 0.5;
+            contacts.RightSole.Geometry = {'x',[wf/2,wf/2];
+                'y',[lt,lh]};
+            %% left toe
+            contacts.LeftToe = KinematicContact('Name','LeftToe');
+            contacts.LeftToe.ParentLink = 'l_foot';
+            contacts.LeftToe.Offset = [lt, 0, hf];
+            contacts.LeftToe.NormalAxis = 'z';
+            contacts.LeftToe.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftToe.ModelType = obj.Type;
+            contacts.LeftToe.Mu = mu;
+            contacts.LeftToe.Geometry = {'x',[wf/2,wf/2];
+                'y',[0,lt+lh]};
+            %% right toe
+            contacts.RightToe = KinematicContact('Name','RightToe');
+            contacts.RightToe.ParentLink = 'r_foot';
+            contacts.RightToe.Offset = [lt, 0, hf];
+            contacts.RightToe.NormalAxis = 'z';
+            contacts.RightToe.ContactType = 'PlanarContactWithFriction';
+            contacts.RightToe.ModelType = obj.Type;
+            contacts.RightToe.Mu = 0.5;
+            contacts.RightToe.Geometry = {'x',[wf/2,wf/2];
+                'y',[0,lt+lh]};
+            %% left heel
+            contacts.LeftHeel = KinematicContact('Name','LeftHeel');
+            contacts.LeftHeel.ParentLink = 'l_foot';
+            contacts.LeftHeel.Offset = [-lh, 0, hf];
+            contacts.LeftHeel.NormalAxis = 'z';
+            contacts.LeftHeel.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftHeel.ModelType = obj.Type;
+            contacts.LeftHeel.Mu = mu;
+            contacts.LeftHeel.Geometry = {'x',[wf/2,wf/2];
+                'y',[lt+lh,0]};
+            %% right heel
+            contacts.RightHeel = KinematicContact('Name','RightHeel');
+            contacts.RightHeel.ParentLink = 'r_foot';
+            contacts.RightHeel.Offset = [-lh, 0, hf];
+            contacts.RightHeel.NormalAxis = 'z';
+            contacts.RightHeel.ContactType = 'PlanarContactWithFriction';
+            contacts.RightHeel.ModelType = obj.Type;
+            contacts.RightHeel.Mu = 0.5;
+            contacts.RightHeel.Geometry = {'x',[wf/2,wf/2];
+                'y',[lt+lh, 0]};
+            
+            %% left sole (a point on the foot plane below the ankle)
+            contacts.LeftSoleInside = KinematicContact('Name','LeftSoleInside');
+            contacts.LeftSoleInside.ParentLink = 'l_foot';
+            contacts.LeftSoleInside.Offset = [0.0, -wf/2, hf];
+            contacts.LeftSoleInside.NormalAxis = 'z';
+            contacts.LeftSoleInside.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftSoleInside.ModelType = obj.Type;
+            contacts.LeftSoleInside.Mu = mu;
+            contacts.LeftSoleInside.Geometry = {'x',[0,wf];
+                'y',[lt,lh]};
+            %% right sole (a point on the foot plane below the ankle)
+            contacts.RightSoleInside = KinematicContact('Name','RightSoleInside');
+            contacts.RightSoleInside.ParentLink = 'r_foot';
+            contacts.RightSoleInside.Offset = [0.0, wf/2, hf];
+            contacts.RightSoleInside.NormalAxis = 'z';
+            contacts.RightSoleInside.ContactType = 'PlanarContactWithFriction';
+            contacts.RightSoleInside.ModelType = obj.Type;
+            contacts.RightSoleInside.Mu = 0.5;
+            contacts.RightSoleInside.Geometry = {'x',[wf,0];
+                'y',[lt,lh]};
+            %% left toe
+            contacts.LeftToeInside = KinematicContact('Name','LeftToeInside');
+            contacts.LeftToeInside.ParentLink = 'l_foot';
+            contacts.LeftToeInside.Offset = [lt, -wf/2, hf];
+            contacts.LeftToeInside.NormalAxis = 'z';
+            contacts.LeftToeInside.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftToeInside.ModelType = obj.Type;
+            contacts.LeftToeInside.Mu = mu;
+            contacts.LeftToeInside.Geometry = {'x',[0,wf];
+                'y',[0,lt+lh]};
+            %% right toe
+            contacts.RightToeInside = KinematicContact('Name','RightToeInside');
+            contacts.RightToeInside.ParentLink = 'r_foot';
+            contacts.RightToeInside.Offset = [lt, wf/2, hf];
+            contacts.RightToeInside.NormalAxis = 'z';
+            contacts.RightToeInside.ContactType = 'PlanarContactWithFriction';
+            contacts.RightToeInside.ModelType = obj.Type;
+            contacts.RightToeInside.Mu = 0.5;
+            contacts.RightToeInside.Geometry = {'x',[wf,0];
+                'y',[0,lt+lh]};
+            %% left heel
+            contacts.LeftHeelInside = KinematicContact('Name','LeftHeelInside');
+            contacts.LeftHeelInside.ParentLink = 'l_foot';
+            contacts.LeftHeelInside.Offset = [-lh, -wf/2, hf];
+            contacts.LeftHeelInside.NormalAxis = 'z';
+            contacts.LeftHeelInside.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftHeelInside.ModelType = obj.Type;
+            contacts.LeftHeelInside.Mu = mu;
+            contacts.LeftHeelInside.Geometry = {'x',[0,wf];
+                'y',[lt+lh,0]};
+            %% right heel
+            contacts.RightHeelInside = KinematicContact('Name','RightHeelInside');
+            contacts.RightHeelInside.ParentLink = 'r_foot';
+            contacts.RightHeelInside.Offset = [-lh, wf/2, hf];
+            contacts.RightHeelInside.NormalAxis = 'z';
+            contacts.RightHeelInside.ContactType = 'PlanarContactWithFriction';
+            contacts.RightHeelInside.ModelType = obj.Type;
+            contacts.RightHeelInside.Mu = 0.5;
+            contacts.RightHeelInside.Geometry = {'x',[wf,0];
+                'y',[lt+lh, 0]};
+            
+            
+            %% left sole (a point on the foot plane below the ankle)
+            contacts.LeftSoleOutside = KinematicContact('Name','LeftSoleOutside');
+            contacts.LeftSoleOutside.ParentLink = 'l_foot';
+            contacts.LeftSoleOutside.Offset = [0.0, wf/2, hf];
+            contacts.LeftSoleOutside.NormalAxis = 'z';
+            contacts.LeftSoleOutside.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftSoleOutside.ModelType = obj.Type;
+            contacts.LeftSoleOutside.Mu = mu;
+            contacts.LeftSoleOutside.Geometry = {'x',[wf,0];
+                'y',[lt,lh]};
+            %% right sole (a point on the foot plane below the ankle)
+            contacts.RightSoleOutside = KinematicContact('Name','RightSoleOutside');
+            contacts.RightSoleOutside.ParentLink = 'r_foot';
+            contacts.RightSoleOutside.Offset = [0.0, -wf/2, hf];
+            contacts.RightSoleOutside.NormalAxis = 'z';
+            contacts.RightSoleOutside.ContactType = 'PlanarContactWithFriction';
+            contacts.RightSoleOutside.ModelType = obj.Type;
+            contacts.RightSoleOutside.Mu = 0.5;
+            contacts.RightSoleOutside.Geometry = {'x',[0,wf];
+                'y',[lt,lh]};
+            %% left toe
+            contacts.LeftToeOutside = KinematicContact('Name','LeftToeOutside');
+            contacts.LeftToeOutside.ParentLink = 'l_foot';
+            contacts.LeftToeOutside.Offset = [lt, wf/2, hf];
+            contacts.LeftToeOutside.NormalAxis = 'z';
+            contacts.LeftToeOutside.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftToeOutside.ModelType = obj.Type;
+            contacts.LeftToeOutside.Mu = mu;
+            contacts.LeftToeOutside.Geometry = {'x',[wf,0];
+                'y',[0,lt+lh]};
+            %% right toe
+            contacts.RightToeOutside = KinematicContact('Name','RightToeOutside');
+            contacts.RightToeOutside.ParentLink = 'r_foot';
+            contacts.RightToeOutside.Offset = [lt, -wf/2, hf];
+            contacts.RightToeOutside.NormalAxis = 'z';
+            contacts.RightToeOutside.ContactType = 'PlanarContactWithFriction';
+            contacts.RightToeOutside.ModelType = obj.Type;
+            contacts.RightToeOutside.Mu = 0.5;
+            contacts.RightToeOutside.Geometry = {'x',[0,wf];
+                'y',[0,lt+lh]};
+            %% left heel
+            contacts.LeftHeelOutside = KinematicContact('Name','LeftHeelOutside');
+            contacts.LeftHeelOutside.ParentLink = 'l_foot';
+            contacts.LeftHeelOutside.Offset = [-lh, wf/2, hf];
+            contacts.LeftHeelOutside.NormalAxis = 'z';
+            contacts.LeftHeelOutside.ContactType = 'PlanarContactWithFriction';
+            contacts.LeftHeelOutside.ModelType = obj.Type;
+            contacts.LeftHeelOutside.Mu = mu;
+            contacts.LeftHeelOutside.Geometry = {'x',[wf,0];
+                'y',[lt+lh,0]};
+            %% right heel
+            contacts.RightHeelOutside = KinematicContact('Name','RightHeelOutside');
+            contacts.RightHeelOutside.ParentLink = 'r_foot';
+            contacts.RightHeelOutside.Offset = [-lh, -wf/2, hf];
+            contacts.RightHeelOutside.NormalAxis = 'z';
+            contacts.RightHeelOutside.ContactType = 'PlanarContactWithFriction';
+            contacts.RightHeelOutside.ModelType = obj.Type;
+            contacts.RightHeelOutside.Mu = 0.5;
+            contacts.RightHeelOutside.Geometry = {'x',[0,wf];
+                'y',[lt+lh, 0]};
+            
+            
+            
+            
+            
+            
+            obj.Contacts = contacts;
+        end
+        
+        
+        function obj = PositionKinemticFunction(obj)
+            
+            if isempty(obj.KinObjects)
+                obj.KinObjects = struct;
+            end
+            
+            % create 3 kinematic position (x,y,z) objects for each contact
+            % point
+            contacts = obj.Contacts;
+            points = fields(contacts);
+            
+            for i=1:length(points)
+                contact_point = points{i};
+                
+                obj.KinObjects.([contact_point,'PosX']) = ...
+                    KinematicPosition('Name', [contacts.(contact_point).Name,'PosX'],...
+                    'ParentLink',contacts.(contact_point).ParentLink,...
+                    'Axis','x',...
+                    'Offset',contacts.(contact_point).Offset);
+                
+                obj.KinObjects.([contact_point,'PosY']) = ...
+                    KinematicPosition('Name', [contacts.(contact_point).Name,'PosY'],...
+                    'ParentLink',contacts.(contact_point).ParentLink,...
+                    'Axis','y',...
+                    'Offset',contacts.(contact_point).Offset);
+                
+                obj.KinObjects.([contact_point,'PosZ']) = ...
+                    KinematicPosition('Name', [contacts.(contact_point).Name,'PosZ'],...
+                    'ParentLink',contacts.(contact_point).ParentLink,...
+                    'Axis','z',...
+                    'Offset',contacts.(contact_point).Offset);
+            end
+            %% Other Positions
+            % Hip position 
+            obj.KinObjects.LeftHipPosX = KinematicPosition('Name', 'LeftHipPosX',...
+                'ParentLink','l_uleg',...
+                'Axis','x',...
+                'Offset',[0,0,0]);
+            obj.KinObjects.RightHipPosX = KinematicPosition('Name', 'RightHipPosX',...
+                'ParentLink','r_uleg',...
+                'Axis','x',...
+                'Offset',[0,0,0]);
+            
+            obj.KinObjects.LeftHipPosZ = KinematicPosition('Name', 'LeftHipPosZ',...
+                'ParentLink','l_uleg',...
+                'Axis','z',...
+                'Offset',[0,0,0]);
+            obj.KinObjects.RightHipPosZ = KinematicPosition('Name', 'RightHipPosZ',...
+                'ParentLink','r_uleg',...
+                'Axis','z',...
+                'Offset',[0,0,0]);
+            
+            % Ankle positions
+            obj.KinObjects.LeftAnklePosX = KinematicPosition('Name', 'LeftAnklePosX',...
+                'ParentLink','l_talus',...
+                'Axis','x',...
+                'Offset',[0,0,0]);
+            obj.KinObjects.RightAnklePosX = KinematicPosition('Name', 'RightAnklePosX',...
+                'ParentLink','r_talus',...
+                'Axis','x',...
+                'Offset',[0,0,0]);
+            
+            obj.KinObjects.LeftAnklePosZ = KinematicPosition('Name', 'LeftAnklePosZ',...
+                'ParentLink','l_talus',...
+                'Axis','z',...
+                'Offset',[0,0,0]);
+            obj.KinObjects.RightAnklePosZ = KinematicPosition('Name', 'RightAnklePosZ',...
+                'ParentLink','r_talus',...
+                'Axis','z',...
+                'Offset',[0,0,0]);
+            % 
+            
+        end
+        
+        function obj = JointKinemticFunction(obj)
+            % construct potentially useful kinematic object of the robot
+            
+            if isempty(obj.KinObjects)
+                obj.KinObjects = struct;
+            end
+            
+            %% DoFs
+            % Make joints as a KinematicDof object
+            obj.KinObjects.LeftAnkleRoll = KinematicDof('Name','LeftAnkleRoll',...
+                'DofName','l_leg_akx');
+            obj.KinObjects.RightAnkleRoll = KinematicDof('Name','RightAnkleRoll',...
+                'DofName','r_leg_akx');
+            
+            obj.KinObjects.LeftHipRoll = KinematicDof('Name','LeftHipRoll',...
+                'DofName','l_leg_hpx');
+            obj.KinObjects.RightHipRoll = KinematicDof('Name','RightHipRoll',...
+                'DofName','r_leg_hpx');
+            
+            obj.KinObjects.LeftAnklePitch = KinematicDof('Name','LeftAnklePitch',...
+                'DofName','l_leg_aky');
+            obj.KinObjects.RightAnklePitch = KinematicDof('Name','RightAnklePitch',...
+                'DofName','r_leg_aky');
+            
+            obj.KinObjects.LeftKneePitch = KinematicDof('Name','LeftKneePitch',...
+                'DofName','l_leg_kny');
+            obj.KinObjects.RightKneePitch = KinematicDof('Name','RightKneePitch',...
+                'DofName','r_leg_kny');
+            
+            obj.KinObjects.LeftHipPitch = KinematicDof('Name','LeftHipPitch',...
+                'DofName','l_leg_hpy');
+            obj.KinObjects.RightHipPitch = KinematicDof('Name','RightHipPitch',...
+                'DofName','r_leg_hpy');
+            
+            obj.KinObjects.LeftHipYaw = KinematicDof('Name','LeftHipYaw',...
+                'DofName','l_leg_hpz');
+            obj.KinObjects.RightHipYaw = KinematicDof('Name','RightHipYaw',...
+                'DofName','r_leg_hpz');
+            
+            
+            
+        end
+        
+        function obj = CompositeKinematicFunction(obj)
+            % Kinematic functions composed of multiple kinematic functions
+            
+            if isempty(obj.KinObjects)
+                obj.KinObjects = struct;
+            end
+            
+            %% velocity outputs
+            obj.KinObjects.LeftDeltaPhip = KinematicExpr('Name', 'LeftDeltaPhip',...
+                'Linearize', true,...
+                'Dependents', {{obj.KinObjects.LeftHipPosX, obj.KinObjects.LeftSolePosX}},...
+                'Expression', 'LeftHipPosX - LeftSolePosX');
+            obj.KinObjects.RightDeltaPhip = KinematicExpr('Name', 'RightDeltaPhip',...
+                'Linearize', true,...
+                'Dependents', {{obj.KinObjects.RightHipPosX, obj.KinObjects.RightSolePosX}},...
+                'Expression', 'RightHipPosX - RightSolePosX');
+            
+            obj.KinObjects.LeftToeDeltaPhip = KinematicExpr('Name', 'LeftToeDeltaPhip',...
+                'Linearize', true,...
+                'Dependents', {{obj.KinObjects.LeftHipPosX, obj.KinObjects.LeftToePosX}},...
+                'Expression', 'LeftHipPosX - LeftToePosX');
+            obj.KinObjects.RightToeDeltaPhip = KinematicExpr('Name', 'RightToeDeltaPhip',...
+                'Linearize', true,...
+                'Dependents', {{obj.KinObjects.RightHipPosX, obj.KinObjects.RightToePosX}},...
+                'Expression', 'RightHipPosX - RightToePosX');
+            
+            
+            %% phase variables
+            obj.KinObjects.RightTau = KinematicExpr('Name', 'RightTau');
+            obj.KinObjects.RightTau.Dependents = {obj.KinObjects.RightDeltaPhip};
+            obj.KinObjects.RightTau.Expression = '(RightDeltaPhip - p[2])/(p[1] - p[2])';
+            obj.KinObjects.RightTau.Parameters = struct('Name','p','Dimension',2);
+            
+            obj.KinObjects.LeftTau = KinematicExpr('Name', 'LeftTau');
+            obj.KinObjects.LeftTau.Dependents = {obj.KinObjects.LeftDeltaPhip};
+            obj.KinObjects.LeftTau.Expression = '(LeftDeltaPhip - p[2])/(p[1] - p[2])';
+            obj.KinObjects.LeftTau.Parameters = struct('Name','p','Dimension',2);
+            
+            obj.KinObjects.RightToeTau = KinematicExpr('Name', 'RightToeTau');
+            obj.KinObjects.RightToeTau.Dependents = {obj.KinObjects.RightToeDeltaPhip};
+            obj.KinObjects.RightToeTau.Expression = '(RightToeDeltaPhip - p[2])/(p[1] - p[2])';
+            obj.KinObjects.RightToeTau.Parameters = struct('Name','p','Dimension',2);
+            
+            obj.KinObjects.LeftToeTau = KinematicExpr('Name', 'LeftToeTau');
+            obj.KinObjects.LeftToeTau.Dependents = {obj.KinObjects.LeftToeDeltaPhip};
+            obj.KinObjects.LeftToeTau.Expression = '(LeftToeDeltaPhip - p[2])/(p[1] - p[2])';
+            obj.KinObjects.LeftToeTau.Parameters = struct('Name','p','Dimension',2);
+            
+            %% position outputs
+            
+            
+            obj.KinObjects.LeftTorsoPitch = KinematicExpr('Name','LeftTorsoPitch',...
+                'Dependents',{{obj.KinObjects.LeftAnklePitch, obj.KinObjects.LeftKneePitch, obj.KinObjects.LeftHipPitch}},...
+                'Expression','- LeftAnklePitch - LeftKneePitch - LeftHipPitch');
+            obj.KinObjects.RightTorsoPitch = KinematicExpr('Name','RightTorsoPitch',...
+                'Dependents',{{obj.KinObjects.RightAnklePitch, obj.KinObjects.RightKneePitch, obj.KinObjects.RightHipPitch}},...
+                'Expression','- RightAnklePitch - RightKneePitch - RightHipPitch');
+            
+            obj.KinObjects.LeftTorsoRoll = KinematicExpr('Name','LeftTorsoRoll',...
+                'Dependents',{{obj.KinObjects.LeftAnkleRoll, obj.KinObjects.LeftHipRoll}},...
+                'Expression','- LeftAnkleRoll - LeftHipRoll');
+            obj.KinObjects.RightTorsoRoll = KinematicExpr('Name','RightTorsoRoll',...
+                'Dependents',{{obj.KinObjects.RightAnkleRoll, obj.KinObjects.RightHipRoll}},...
+                'Expression','- RightAnkleRoll - RightHipRoll');
+            
+            
+   
+            obj.KinObjects.RightLinNSlope = KinematicExpr('Name', 'RightLinNSlope',...
+                'Linearize', true,...
+                'Dependents',{{obj.KinObjects.RightAnklePosX, obj.KinObjects.RightHipPosX, ...
+                obj.KinObjects.RightAnklePosZ, obj.KinObjects.RightHipPosZ}},...
+                'Expression','(RightAnklePosX - RightHipPosX) / (RightAnklePosZ - RightHipPosZ)');
+            
+            obj.KinObjects.LeftLinNSlope = KinematicExpr('Name', 'LeftLinNSlope',...
+                'Linearize', true,...
+                'Dependents',{{obj.KinObjects.LeftAnklePosX, obj.KinObjects.LeftHipPosX, ...
+                obj.KinObjects.LeftAnklePosZ, obj.KinObjects.LeftHipPosZ}},...
+                'Expression','(LeftAnklePosX - LeftHipPosX) / (LeftAnklePosZ - LeftHipPosZ)');
+    
+            obj.KinObjects.RightLegRoll = KinematicExpr('Name','RightLegRoll',...
+                'Dependents',{{obj.KinObjects.LeftHipRoll, obj.KinObjects.RightHipRoll}},...
+                'Expression','LeftHipRoll - RightHipRoll');
+            obj.KinObjects.LeftLegRoll = KinematicExpr('Name','LeftLegRoll',...
+                'Dependents',{{obj.KinObjects.RightHipRoll, obj.KinObjects.LeftHipRoll}},...
+                'Expression','RightHipRoll - LeftHipRoll');
+            
+            
+            %% Foot orientations
+            obj.KinObjects.RightFootRoll = KinematicExpr('Name','RightFootRoll',...
+                'Dependents',{{obj.KinObjects.RightSoleInsidePosZ, obj.KinObjects.RightSoleOutsidePosZ}},...
+                'Expression','RightSoleInsidePosZ - RightSoleOutsidePosZ');
+            obj.KinObjects.RightFootPitch = KinematicExpr('Name','RightFootPitch',...
+                'Dependents',{{obj.KinObjects.RightHeelPosZ, obj.KinObjects.RightToePosZ}},...
+                'Expression','RightHeelPosZ - RightToePosZ');
+            obj.KinObjects.RightFootYaw = KinematicExpr('Name','RightFootYaw',...
+                'Dependents',{{obj.KinObjects.RightHeelPosY, obj.KinObjects.RightToePosY}},...
+                'Expression','RightHeelPosY - RightToePosY');
+            
+            obj.KinObjects.LeftFootRoll = KinematicExpr('Name','LeftFootRoll',...
+                'Dependents',{{obj.KinObjects.LeftSoleInsidePosZ, obj.KinObjects.LeftSoleOutsidePosZ}},...
+                'Expression','LeftSoleInsidePosZ - LeftSoleOutsidePosZ');
+            obj.KinObjects.LeftFootPitch = KinematicExpr('Name','LeftFootPitch',...
+                'Dependents',{{obj.KinObjects.LeftHeelPosZ, obj.KinObjects.LeftToePosZ}},...
+                'Expression','LeftHeelPosZ - LeftToePosZ');
+            obj.KinObjects.LeftFootYaw = KinematicExpr('Name','LeftFootYaw',...
+                'Dependents',{{obj.KinObjects.LeftHeelPosY, obj.KinObjects.LeftToePosY}},...
+                'Expression','LeftHeelPosY - LeftToePosY');
+        end
         
         function obj = Atlas(urdf)
             
             
             obj = obj@RigidBodyModel(urdf);
             
-            % potential contact points
-            obj.Contacts = struct();
-            
-            obj.Contacts.LeftFoot = KinematicContact('Name','LeftFoot');
-            obj.Contacts.LeftFoot.ParentLink = 'l_foot';
-            obj.Contacts.LeftFoot.Offset = [0.0, 0, -0.07645];
-            obj.Contacts.LeftFoot.NormalAxis = 'z';
-            obj.Contacts.LeftFoot.ContactType = 'PlanarContactWithFriction';
-            obj.Contacts.LeftFoot.ModelType = obj.Type;
-            obj.Contacts.LeftFoot.Mu = 0.5;
-            obj.Contacts.LeftFoot.Geometry = {'x',[0.0625,0.0625];
-                'y',[0.178,0.082]};
-            
-            obj.Contacts.RightFoot = KinematicContact('Name','RightFoot');
-            obj.Contacts.RightFoot.ParentLink = 'r_foot';
-            obj.Contacts.RightFoot.Offset = [0.0, 0, -0.07645];
-            obj.Contacts.RightFoot.NormalAxis = 'z';
-            obj.Contacts.RightFoot.ContactType = 'PlanarContactWithFriction';
-            obj.Contacts.RightFoot.ModelType = obj.Type;
-            obj.Contacts.RightFoot.Mu = 0.5;
-            obj.Contacts.RightFoot.Geometry = {'x',[0.0625,0.0625];
-                'y',[0.178,0.082]};
+            obj = AtlasContactPoints(obj);
             
             fixed_joints = obj.Joints(strcmp('fixed',{obj.Joints.type}));
             obj.FixedDofs = cell(1, numel(fixed_joints));
@@ -47,219 +473,23 @@ classdef Atlas < RigidBodyModel
                     'DofName',fixed_joints(i).name);                
             end
             
-            % kinematic position
-            Kins = struct();
             
-            LeftHipPosX = KinematicPosition('Name', 'LeftHipPosX',...
-                'ParentLink','l_uleg',...
-                'Axis','x',...
-                'Offset',[0,0,0]);
-            RightHipPosX = KinematicPosition('Name', 'RightHipPosX',...
-                'ParentLink','r_uleg',...
-                'Axis','x',...
-                'Offset',[0,0,0]);
+            obj = JointKinemticFunction(obj);
             
-            LeftHipPosZ = KinematicPosition('Name', 'LeftHipPosZ',...
-                'ParentLink','l_uleg',...
-                'Axis','z',...
-                'Offset',[0,0,0]);
-            RightHipPosZ = KinematicPosition('Name', 'RightHipPosZ',...
-                'ParentLink','r_uleg',...
-                'Axis','z',...
-                'Offset',[0,0,0]);
+            obj = PositionKinemticFunction(obj);
+            
+            obj = CompositeKinematicFunction(obj);
             
             
-            LeftAnklePosX = KinematicPosition('Name', 'LeftAnklePosX',...
-                'ParentLink','l_talus',...
-                'Axis','x',...
-                'Offset',[0,0,0]);
-            RightAnklePosX = KinematicPosition('Name', 'RightAnklePosX',...
-                'ParentLink','r_talus',...
-                'Axis','x',...
-                'Offset',[0,0,0]);
             
-            LeftAnklePosZ = KinematicPosition('Name', 'LeftAnklePosZ',...
-                'ParentLink','l_talus',...
-                'Axis','z',...
-                'Offset',[0,0,0]);
-            RightAnklePosZ = KinematicPosition('Name', 'RightAnklePosZ',...
-                'ParentLink','r_talus',...
-                'Axis','z',...
-                'Offset',[0,0,0]);
             
-            LeftFootPosX = KinematicPosition('Name', 'LeftFootPosX',...
-                'ParentLink','l_foot',...
-                'Axis','x',...
-                'Offset',[0.0, 0, -0.07645]);
-            RightFootPosX = KinematicPosition('Name', 'RightFootPosX',...
-                'ParentLink','r_foot',...
-                'Axis','x',...
-                'Offset',[0.0, 0, -0.07645]);
             
-            Kins.LeftFootPosZ = KinematicPosition('Name', 'LeftFootPosZ',...
-                'ParentLink','l_foot',...
-                'Axis','z',...
-                'Offset',[0.0, 0, -0.07645]);
-            Kins.RightFootPosZ = KinematicPosition('Name', 'RightFootPosZ',...
-                'ParentLink','r_foot',...
-                'Axis','z',...
-                'Offset',[0.0, 0, -0.07645]);
             
-            LeftHeelPosZ = KinematicPosition('Name', 'LeftHeelPosZ',...
-                'ParentLink','l_foot',...
-                'Axis','z',...
-                'Offset',[-0.04626, 0, -0.07645]);
-            RightHeelPosZ = KinematicPosition('Name', 'RightHeelPosZ',...
-                'ParentLink','r_foot',...
-                'Axis','z',...
-                'Offset',[-0.04626, 0, -0.07645]);
-            LeftToePosZ = KinematicPosition('Name', 'LeftToePosZ',...
-                'ParentLink','l_foot',...
-                'Axis','z',...
-                'Offset',[0.1728, 0, -0.07645]);
-            RightToePosZ = KinematicPosition('Name', 'RightToePosZ',...
-                'ParentLink','r_foot',...
-                'Axis','z',...
-                'Offset',[0.1728, 0, -0.07645]);
-            RightSoleInsidePosZ = KinematicPosition('Name', 'RightSoleInsidePosZ',...
-                'ParentLink','r_foot',...
-                'Axis','z',...
-                'Offset',[0, 0.075, -0.07645]);
-            RightSoleOutsidePosZ = KinematicPosition('Name', 'RightSoleOutsidePosZ',...
-                'ParentLink','r_foot',...
-                'Axis','z',...
-                'Offset',[0, -0.075, -0.07645]);
-            LeftSoleOutsidePosZ = KinematicPosition('Name', 'LeftSoleOutsidePosZ',...
-                'ParentLink','l_foot',...
-                'Axis','z',...
-                'Offset',[0, 0.075, -0.07645]);
-            LeftSoleInsidePosZ = KinematicPosition('Name', 'LeftSoleInsidePosZ',...
-                'ParentLink','l_foot',...
-                'Axis','z',...
-                'Offset',[0, -0.075, -0.07645]);
             
-            LeftHeelPosY = KinematicPosition('Name', 'LeftHeelPosY',...
-                'ParentLink','l_foot',...
-                'Axis','y',...
-                'Offset',[-0.04626, 0, -0.07645]);
-            RightHeelPosY = KinematicPosition('Name', 'RightHeelPosY',...
-                'ParentLink','r_foot',...
-                'Axis','y',...
-                'Offset',[-0.04626, 0, -0.07645]);
-            LeftToePosY = KinematicPosition('Name', 'LeftToePosY',...
-                'ParentLink','l_foot',...
-                'Axis','y',...
-                'Offset',[0.1728, 0, -0.07645]);
-            RightToePosY = KinematicPosition('Name', 'RightToePosY',...
-                'ParentLink','r_foot',...
-                'Axis','y',...
-                'Offset',[0.1728, 0, -0.07645]);
             
-            % velocity outputs
-            Kins.LeftDeltaPhip = KinematicExpr('Name', 'LeftDeltaPhip',...
-                'Linearize', true,...
-                'Dependents', {{LeftHipPosX, LeftFootPosX}},...
-                'Expression', 'LeftHipPosX - LeftFootPosX');
-            Kins.RightDeltaPhip = KinematicExpr('Name', 'RightDeltaPhip',...
-                'Linearize', true,...
-                'Dependents', {{RightHipPosX, RightFootPosX}},...
-                'Expression', 'RightHipPosX - RightFootPosX');
-            
-            % phase variables
-            Kins.RightTau = KinematicExpr('Name', 'RightTau');
-            Kins.RightTau.Dependents = {Kins.RightDeltaPhip};
-            Kins.RightTau.Expression = '(RightDeltaPhip - p[2])/(p[1] - p[2])';
-            Kins.RightTau.Parameters = struct('Name','p','Dimension',2);
-            
-            Kins.LeftTau = KinematicExpr('Name', 'LeftTau');
-            Kins.LeftTau.Dependents = {Kins.LeftDeltaPhip};
-            Kins.LeftTau.Expression = '(LeftDeltaPhip - p[2])/(p[1] - p[2])';
-            Kins.LeftTau.Parameters = struct('Name','p','Dimension',2);
-            
-            % position outputs
-            Kins.LeftAnkleRoll = KinematicDof('Name','LeftAnkleRoll',...
-                'DofName','l_leg_akx');
-            Kins.RightAnkleRoll = KinematicDof('Name','RightAnkleRoll',...
-                'DofName','r_leg_akx');
-            
-            Kins.LeftHipRoll = KinematicDof('Name','LeftHipRoll',...
-                'DofName','l_leg_hpx');
-            Kins.RightHipRoll = KinematicDof('Name','RightHipRoll',...
-                'DofName','r_leg_hpx');
-            
-            Kins.LeftAnklePitch = KinematicDof('Name','LeftAnklePitch',...
-                'DofName','l_leg_aky');
-            Kins.RightAnklePitch = KinematicDof('Name','RightAnklePitch',...
-                'DofName','r_leg_aky');
-            
-            Kins.LeftKneePitch = KinematicDof('Name','LeftKneePitch',...
-                'DofName','l_leg_kny');
-            Kins.RightKneePitch = KinematicDof('Name','RightKneePitch',...
-                'DofName','r_leg_kny');
-            
-            Kins.LeftHipPitch = KinematicDof('Name','LeftHipPitch',...
-                'DofName','l_leg_hpy');
-            Kins.RightHipPitch = KinematicDof('Name','RightHipPitch',...
-                'DofName','r_leg_hpy');
-            
-            Kins.LeftTorsoPitch = KinematicExpr('Name','LeftTorsoPitch',...
-                'Dependents',{{Kins.LeftAnklePitch, Kins.LeftKneePitch, Kins.LeftHipPitch}},...
-                'Expression','- LeftAnklePitch - LeftKneePitch - LeftHipPitch');
-            Kins.RightTorsoPitch = KinematicExpr('Name','RightTorsoPitch',...
-                'Dependents',{{Kins.RightAnklePitch, Kins.RightKneePitch, Kins.RightHipPitch}},...
-                'Expression','- RightAnklePitch - RightKneePitch - RightHipPitch');
-            
-            Kins.LeftTorsoRoll = KinematicExpr('Name','LeftTorsoRoll',...
-                'Dependents',{{Kins.LeftAnkleRoll, Kins.LeftHipRoll}},...
-                'Expression','- LeftAnkleRoll - LeftHipRoll');
-            Kins.RightTorsoRoll = KinematicExpr('Name','RightTorsoRoll',...
-                'Dependents',{{Kins.RightAnkleRoll, Kins.RightHipRoll}},...
-                'Expression','- RightAnkleRoll - RightHipRoll');
-            
-            Kins.LeftHipYaw = KinematicDof('Name','LeftHipYaw',...
-                'DofName','l_leg_hpz');
-            Kins.RightHipYaw = KinematicDof('Name','RightHipYaw',...
-                'DofName','r_leg_hpz');
-   
-            Kins.RightLinNSlope = KinematicExpr('Name', 'RightLinNSlope',...
-                'Linearize', true,...
-                'Dependents',{{RightAnklePosX, RightHipPosX, RightAnklePosZ, RightHipPosZ}},...
-                'Expression','(RightAnklePosX - RightHipPosX) / (RightAnklePosZ - RightHipPosZ)');
-            
-            Kins.LeftLinNSlope = KinematicExpr('Name', 'LeftLinNSlope',...
-                'Linearize', true,...
-                'Dependents',{{LeftAnklePosX, LeftHipPosX, LeftAnklePosZ, LeftHipPosZ}},...
-                'Expression','(LeftAnklePosX - LeftHipPosX) / (LeftAnklePosZ - LeftHipPosZ)');
-    
-            Kins.RightLegRoll = KinematicExpr('Name','RightLegRoll',...
-                'Dependents',{{Kins.LeftHipRoll, Kins.RightHipRoll}},...
-                'Expression','LeftHipRoll - RightHipRoll');
-            Kins.LeftLegRoll = KinematicExpr('Name','LeftLegRoll',...
-                'Dependents',{{Kins.RightHipRoll, Kins.LeftHipRoll}},...
-                'Expression','RightHipRoll - LeftHipRoll');
-            
-            Kins.RightFootRoll = KinematicExpr('Name','RightFootRoll',...
-                'Dependents',{{RightSoleInsidePosZ, RightSoleOutsidePosZ}},...
-                'Expression','RightSoleInsidePosZ - RightSoleOutsidePosZ');
-            Kins.RightFootPitch = KinematicExpr('Name','RightFootPitch',...
-                'Dependents',{{RightHeelPosZ, RightToePosZ}},...
-                'Expression','RightHeelPosZ - RightToePosZ');
-            Kins.RightFootYaw = KinematicExpr('Name','RightFootYaw',...
-                'Dependents',{{RightHeelPosY, RightToePosY}},...
-                'Expression','RightHeelPosY - RightToePosY');
-            
-            Kins.LeftFootRoll = KinematicExpr('Name','LeftFootRoll',...
-                'Dependents',{{LeftSoleInsidePosZ, LeftSoleOutsidePosZ}},...
-                'Expression','LeftSoleInsidePosZ - LeftSoleOutsidePosZ');
-            Kins.LeftFootPitch = KinematicExpr('Name','LeftFootPitch',...
-                'Dependents',{{LeftHeelPosZ, LeftToePosZ}},...
-                'Expression','LeftHeelPosZ - LeftToePosZ');
-            Kins.LeftFootYaw = KinematicExpr('Name','LeftFootYaw',...
-                'Dependents',{{LeftHeelPosY, LeftToePosY}},...
-                'Expression','LeftHeelPosY - LeftToePosY');
-            
-            obj.Kins = Kins;
         end
+        
+        
     end
     
 end
