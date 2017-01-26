@@ -34,8 +34,8 @@ classdef NlpFunctionSum < NlpFunction
             end
             
             argin = struct(varargin{:});
-            if isfield(argin, 'Dependents')
-                obj.Dependents = setDependents(obj, argin.Dependents);
+            if isfield(argin, 'DependentFuncs')
+                obj = setDependentFunction(obj, argin.DependentFuncs);
             end
         end
        
@@ -82,9 +82,9 @@ classdef NlpFunctionSum < NlpFunction
             % Return values: 
             % deps: the dependent objects 
             
-            deps = vertcat(cellfun(@(x)getDepObject(x), obj.Dependents,...
-                'UniformOutput', false));
-            
+            deps = cellfun(@(x)getDepObject(x), obj.Dependents,...
+                'UniformOutput', false);
+            deps = vertcat(deps{:});
         end
         
     end

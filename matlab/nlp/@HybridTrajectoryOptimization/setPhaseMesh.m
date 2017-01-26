@@ -6,15 +6,7 @@ function obj = setPhaseMesh(obj, phase, n_grid)
     % n_grid: the number of grids for the phase 
     % @type double
 
-    if isnumeric(phase)
-        phase_idx = phase;
-    elseif iscellstr(phase)
-        phase_idx = findnode(obj.Plant.Gamma, phase);
-    elseif ischar(phase)
-        phase_idx = findnode(obj.Plant.Gamma, phase);
-    elseif isempty(phase)
-        phase_idx = 1:length(obj.Phase);
-    end
+    phase_idx = getPhaseIndex(obj, phase);
 
     if isscalar(n_grid)
         n_grid = n_grid*ones(1,length(phase_idx));

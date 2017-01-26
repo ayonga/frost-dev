@@ -153,12 +153,7 @@ classdef SymFunction
         function obj = setPreCommands(obj, cmd)
             
             % validate symbolic expressions
-            if isempty(regexp(cmd, '_', 'once'))
-                obj.PreCommands = cmd;
-            else
-                err_msg = 'The command CANNOT contain ''_''.\n';                
-                error('SymNlpFunction:invalidExpr', err_msg);
-            end
+            obj.PreCommands = cmd;
             
         end
         
@@ -221,7 +216,7 @@ classdef SymFunction
             Funcs = struct(...
                 'Func',['f_',obj.Name],...
                 'Jac',['J_',obj.Name],...
-                'JacStruct',['J_',obj.Name],...
+                'JacStruct',['Js_',obj.Name],...
                 'Hess',['H_',obj.Name],...
                 'HessStruct',['Hs_',obj.Name]);
         end

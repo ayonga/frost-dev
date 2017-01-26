@@ -1,33 +1,38 @@
-function obj = addControlVariable(obj, phase, model)
+function obj = addControlVariable(obj, phase)
     % Adds control variables as the NLP decision variables to the problem
     %
     % Parameters:
     % phase: the index of the phase (domain) @type integer    
     % model: the rigid body model of the robot @type RigidBodyModel
     
-    num_node = obj.Phase{phase}.NumNode;
-    col_names = obj.Phase{phase}.OptVarTable.Properties.VariableNames;
-    domain = obj.Phase{phase}.Domain;
-    
+    phase_idx = getPhaseIndex(obj, phase);
+    phase_info = obj.Phase{phase_idx};
+
+
+    n_node = phase_info.NumNode;
+    col_names = phase_info.OptVarTable.Properties.VariableNames;
+
+    domain = phase_info.Domain;
+    model = obj.Model;
     % state variables are defined at all collocation nodes
-    nodeList = 1:1:num_node;
+    node_list = 1:1:n_node;
     
     
     %% actuator torque (u)
     u_dim = size(domain.ActuationMap, 2);
     u_lb = -domain.ActuationMap'*[model.Dof.effort]';
     u_ub = domain.ActuationMap'*[model.Dof.effort]';
-    u = cell(1,num_node);
-    for i=nodeList
-        u{i} = NlpVariable(...
+    u = repmat({{}},1, n_node);
+    for i=node_list
+        u{i} = {NlpVariable(...
             'Name', 'u', 'Dimension', u_dim, ...
             'lb', u_lb, ...
-            'ub', u_ub);
+            'ub', u_ub)};
     end
     % add to the decision variable table
-    obj.Phase{phase}.OptVarTable = [...
-        obj.Phase{phase}.OptVarTable;...
-        cell2table(u,'VariableNames',col_names,'RowNames',{'u'})];
+    obj.Phase{phase_idx}.OptVarTable = [...
+        obj.Phase{phase_idx}.OptVarTable;...
+        cell2table(u,'VariableNames',col_names,'RowNames',{'U'})];
     
     
     %% constraint wrenches (Fe)
@@ -37,16 +42,16 @@ function obj = addControlVariable(obj, phase, model)
         min_force = -1e5;
         max_force = 1e5;
         
-        Fe = cell(1,num_node);
-        for i=nodeList
-            Fe{i} = NlpVariable(...
+        Fe = repmat({{}},1, n_node);
+        for i=node_list
+            Fe{i} = {NlpVariable(...
                 'Name', 'Fe', 'Dimension', n_hol_constr, ...
                 'lb', min_force, ...
-                'ub', max_force);
+                'ub', max_force)};
         end
         % add to the decision variable table
-        obj.Phase{phase}.OptVarTable = [...
-            obj.Phase{phase}.OptVarTable;...
+        obj.Phase{phase_idx}.OptVarTable = [...
+            obj.Phase{phase_idx}.OptVarTable;...
             cell2table(Fe,'VariableNames',col_names,'RowNames',{'Fe'})];
         
         

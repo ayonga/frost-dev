@@ -1,22 +1,26 @@
-function [sol, info] = optimize(obj, nlp)
+function [sol, info] = optimize(obj, x0)
     % This function runs the solver's optimization routine for the
     % NLP
     %
     % Be sure the run the initialization procedure before run this
     % function.
     
-    
+    nlp = obj.Nlp;
     % get the information of NLP variables 
     [dimVars, lb, ub] = getVarInfo(nlp);
     
     % get the initial guess 
-    x0 = getInitialGuess(nlp, obj.Options.initialguess);
+    if nargin < 2
+        x0 = getInitialGuess(nlp, obj.Options.initialguess);
+        
+        x0 = rand(size(x0));
+    end
     
     opts = struct;
     opts.lb = lb;
     opts.ub = ub;
-    opts.cl = obj.Constraint.LowerBound;
-    opts.cu = obj.Constraint.UpperBound;
+    opts.cl = vertcat(obj.Constraint.LowerBound{:});
+    opts.cu = vertcat(obj.Constraint.UpperBound{:});
     opts.ipopt = obj.Options.ipopt;
     
     Funcs = struct();

@@ -1,8 +1,11 @@
-function [obj] = updateVarIndices(obj)
-    % Generates indinces of each NLP variable 
+function [obj] = update(obj)
+    % Updates the NLP problems before load it to NLP solver
     %
 
     
+    
+    
+    % update variable indices
     index_offset = 0;
     
     num_vars = numel(obj.VariableArray);

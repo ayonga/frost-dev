@@ -19,12 +19,15 @@ function [obj] = regVariable(obj, vars)
         obj.VariableArray = [obj.VariableArray; arrayfun(@(x){x}, vars(:))];
     elseif istable(vars)
         
+        % convert table content to cell array
         tmp = table2cell(vars);
+        % remove empty cells from the cell array
+        tmp_new = tmp(~cellfun('isempty',tmp));
         
-        assert(all(cellfun(@(x)isa(x,'NlpVariable'), tmp(:))), ...
+        assert(all(cellfun(@(x)isa(x,'NlpVariable'), tmp_new(:))), ...
             'Each variable must be an object of ''NlpVariable'' class or inherited subclasses');
         
-        obj.VariableArray = [obj.VariableArray; tmp(:)];
+        obj.VariableArray = [obj.VariableArray; tmp_new(:)];
         
     else
         error('Unsupported variable type found: %s\n', class(vars));

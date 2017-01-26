@@ -1,4 +1,4 @@
-classdef NonlinearProgram < handle
+classdef NonlinearProgram
     % NonlinearProgram defines an abstract class for general nonlinear
     % programing problems
     % 
@@ -72,7 +72,7 @@ classdef NonlinearProgram < handle
             % default options
             obj.Options = struct();
             obj.Options.DerivativeLevel = 1;
-            
+            obj.Options.EqualityBoundRelaxFactor = 1e-5;
             % if non-default options are specified, overwrite the default
             % options.
             obj.Options = setOption(obj, varargin{:});
@@ -90,13 +90,13 @@ classdef NonlinearProgram < handle
     %% Function definitions
     methods
         
-        [obj] = addVariable(obj, varargin);
+        [obj] = regVariable(obj, varargin);
         
-        [obj] = updateVarIndices(obj);
+        [obj] = update(obj);
         
-        [obj] = addObjective(obj, funcs);
+        [obj] = regObjective(obj, funcs);
         
-        [obj] = addConstraint(obj, funcs);
+        [obj] = regConstraint(obj, funcs);
         
         [nVar, lowerbound, upperbound] = getVarInfo(obj);
         

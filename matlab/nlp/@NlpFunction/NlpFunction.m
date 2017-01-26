@@ -21,7 +21,7 @@ classdef NlpFunction < handle
     end
     
     
-    properties (SetAccess = protected, GetAccess = protected)
+    properties (SetAccess = protected, GetAccess = public)
         
         % This property specifies whether the function is the linear
         % function of dependent variables
@@ -248,7 +248,18 @@ classdef NlpFunction < handle
             else
                 obj =  setBoundary(obj, [], inf);
             end
+            
+            if isfield(argin, 'DepVariables')
+                obj = setDependentVariable(obj, argin.DepVariables);
+            end
+            
+            if isfield(argin, 'Funcs')
+                obj = setFuncs(obj, argin.Funcs);
+            end
                 
+            if isfield(argin, 'AuxData') && ~isempty(argin.AuxData)
+                obj = setAuxdata(obj, argin.AuxData);
+            end
         end
         
         function deps = getDepObject(obj)
@@ -260,7 +271,7 @@ classdef NlpFunction < handle
             % Return values: 
             % deps: the dependent objects 
             
-            deps = obj;
+            deps = {obj};
             
         end
 

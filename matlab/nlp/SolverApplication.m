@@ -12,15 +12,9 @@ classdef (Abstract) SolverApplication
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    %% Public properties
-    properties (Access = public)
-        
-        
-    end
     
     
-    %% Protected properties
-    properties (SetAccess=protected, GetAccess=public)
+    properties 
         
         % A structure for NLP solver options
         %

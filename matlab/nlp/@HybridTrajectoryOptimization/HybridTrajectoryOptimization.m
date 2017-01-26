@@ -35,13 +35,14 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         % 
         % @see SymFunction
         %
-        % Required fields of FuncObjects:
+        % Required fields of Funcs:
         % Model: model specific functions @type struct
-        % Phase: phase specific functions, each cell contains function for
+        % Phase: phase specific functions, each cell contains functions for
         % a particular phase @type cell
+        % Generic: generic functions @type struct
         %
         % @type struct        
-        FuncObjects
+        Funcs
         
         
         % The discrete phases of the hybrid trajectory optimization
@@ -49,11 +50,21 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         % @type cell
         Phase
         
-        % The rigid body model of the robot
+        
+        % The rigid body model of interest
         %
         % @type RigidBodyModel
         Model
         
+        % The directed graph of the hybrid sytem model to be optimized
+        %
+        % @type digraph
+        Gamma
+        
+        % The name of the hybrid system to be optimized
+        %
+        % @type char
+        PlantName
     end
     
     %% Protected properties
@@ -65,7 +76,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = HybridTrajectoryOptimization(varargin)
+        function obj = HybridTrajectoryOptimization(plant, varargin)
             % The constructor function
             %
             % Parameters:
@@ -79,9 +90,9 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             default_opts.DistributeParamWeights = false;
             default_opts.NodeDistributionScheme = 'Uniform';
             default_opts.EnableVirtualConstraint = true;
-            default_opts.UseTimeBasedOutput = true;
-            default_opts.DefaultNumberOfGrids = 10;
-                        
+            default_opts.UseTimeBasedOutput = false;
+            default_opts.DefaultNumberOfGrids = 2;
+            default_opts.ZeroVelocityOutputError = false;
             % call superclass constructor
             obj = obj@NonlinearProgram(default_opts);           
             
@@ -89,23 +100,24 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             % options.
             obj.Options = setOption(obj, varargin{:});
             
+            % check the type of the plant
+            assert(isa(plant, 'HybridSystem'),...
+                'HybridTrajectoryOptimization:invalidPlant',...
+                'The plant must be an object of HybridSystem catagory.\n');
+            
+            obj.PlantName = plant.Name;
+            obj.Model = plant.Model;
+            obj.Gamma = plant.Gamma;
                         
             obj.Phase = cell(0);
             
-            obj.FuncObjects = struct;
-            obj.FuncObjects.Model = struct;
-            obj.FuncObjects.Phase = cell(0);
+            obj.Funcs = struct;
+            obj.Funcs.Model = struct;
+            obj.Funcs.Phase = cell(0);
+            obj.Funcs.Generic = struct;
         end
         
         
-        
-%         DynamicsConstraints
-%         CollocationConstraints
-%         DomainConstraints
-%         GuardConstraints
-%         JumpConstraints
-%         PathConstraints
-%         TerminalConstraints
         
         
         
@@ -116,20 +128,47 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     
     %% methods defined in external files
     methods
+        obj = initializeNLP(obj, options);
         
         obj = addAuxilaryVariable(obj, phase, nodes, varargin);
         
-        obj = addControlVariable(obj, phase, model);
+        obj = addControlVariable(obj, phase);
         
         obj = addGuardVariable(obj, phase, lb, ub, x0);
         
         obj = addParamVariable(obj, phase, lb, ub, x0);
         
-        obj = addStateVariable(obj, phase, model);
+        obj = addStateVariable(obj, phase);
         
         obj = addTimeVariable(obj, phase, lb, ub, x0);
         
-        obj = configureNLP(obj, plant, options);
+        obj = configureNLP(obj, options);
+        
+        obj = genericSymFunctions(obj);
+        
+        obj = setPhaseMesh(obj, phase, n_grid);
+        
+        obj = compileSymFunction(obj, field, phase, export_path);
+        
+        obj = addCollocationConstraint(obj, phase);
+        
+        obj = addDomainConstraint(obj, phase);
+        
+        obj = addDynamicsConstraint(obj, phase);
+        
+        obj = addJumpConstraint(obj, phase);
+
+        obj = addOutputConstraint(obj, phase)
+        
+        obj = addParamConstraint(obj, phase);
+        
+        obj = addAuxilaryConstraint(obj, phase, nodes, deps, varargin);
+        
+        obj = addRunningCost(obj, phase, func);
+        
+        obj = addTerminalCost(obj, phase, name, func, deps, nodes, auxdata)
+        
+        phase_idx = getPhaseIndex(obj, phase);
     end
 end
 

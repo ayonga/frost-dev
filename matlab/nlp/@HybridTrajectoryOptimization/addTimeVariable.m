@@ -17,38 +17,35 @@ function obj = addTimeVariable(obj, phase, lb, ub, x0)
         x0 = 0.5; 
     end
     
-    num_node = obj.Phase{phase}.NumNode;
-    col_names = obj.Phase{phase}.OptVarTable.Properties.VariableNames;
+    phase_idx = getPhaseIndex(obj, phase);
+    phase_info = obj.Phase{phase_idx};
+
+
+    n_node = phase_info.NumNode;
+    col_names = phase_info.OptVarTable.Properties.VariableNames;
     
     
     if obj.Options.DistributeParamWeights
         % state variables are defined at all cardinal nodes if
         % distributes the weightes
-        switch obj.Options.CollocationScheme
-            case 'HermiteSimpson'
-                nodeList = 1:2:num_node;
-            case 'Trapzoidal'
-                nodeList = 1:1:num_node;
-            case 'PseudoSpectral'
-                nodeList = 1:1:num_node;
-        end
+        node_list = 1:1:n_node;
     else
         % otherwise only define at the first node
-        nodeList = 1;
+        node_list = 1;
     end
     
     
     % create a cell array of time NlpVariable objects
-    t = cell(1, num_node);
-    for i=nodeList
-        t{i} = NlpVariable('Name', 't', 'Dimension', 1, ...
-            'lb', lb, 'ub', ub, 'x0', x0);
+    t = repmat({{}},1, n_node);
+    for i=node_list
+        t{i} = {NlpVariable('Name', 't', 'Dimension', 1, ...
+            'lb', lb, 'ub', ub, 'x0', x0)};
     end
     
     
-    obj.Phase{phase}.OptVarTable = [...
-        obj.Phase{phase}.OptVarTable;...
-        cell2table(t,'VariableNames',col_names,'RowNames',{'t'})];
+    obj.Phase{phase_idx}.OptVarTable = [...
+        obj.Phase{phase_idx}.OptVarTable;...
+        cell2table(t,'VariableNames',col_names,'RowNames',{'T'})];
 
 
 end

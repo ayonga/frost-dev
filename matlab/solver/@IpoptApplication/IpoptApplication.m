@@ -28,7 +28,10 @@ classdef IpoptApplication < SolverApplication
         Constraint
         
         
-        
+        % The nonlinear programming object
+        %
+        % @type NonlinearProgram
+        Nlp
     end
     
     
@@ -46,16 +49,25 @@ classdef IpoptApplication < SolverApplication
             obj = obj@SolverApplication();
            
             % ipopt options
-            options.initialguess = 'typical';
+            options.initialguess = 'random';
             
             % default IPOPT options
             options.ipopt.mu_strategy      = 'adaptive';
             options.ipopt.max_iter         = 1000;
-            options.ipopt.tol              = 1e-7;
+            options.ipopt.tol              = 1e-3;
             options.ipopt.linear_solver    = 'ma57';
             options.ipopt.ma57_automatic_scaling = 'yes';
             options.ipopt.linear_scaling_on_demand = 'no';
-            
+            % options.ipopt.recalc_y = 'yes';
+            % options.ipopt.recalc_y_feas_tol = 1e-3;
+            % options.ipopt.bound_relax_factor = 1e-3;
+            options.ipopt.fixed_variable_treatment = 'RELAX_BOUNDS';
+            options.ipopt.derivative_test = 'first-order';
+            options.ipopt.point_perturbation_radius = 0;
+            options.ipopt.derivative_test_perturbation = 1e-8;
+            % options.ipopt.derivative_test_print_all = 'yes';
+
+
             if nlp.Options.DerivativeLevel == 2 
                 % user-defined Hessian function is provide
                 options.ipopt.hessian_approximation = 'exact';
@@ -70,7 +82,8 @@ classdef IpoptApplication < SolverApplication
             end
             
             obj.Options = options;
-            obj = initialize(obj, nlp);
+            obj.Nlp = nlp;
+            obj = initialize(obj);
             
             
         end
@@ -90,9 +103,9 @@ classdef IpoptApplication < SolverApplication
     % function definitions
     methods
         
-        [obj] = initialize(obj, nlp);
+        [obj] = initialize(obj);
         
-        [sol, info] = optimize(obj, nlp);
+        [sol, info] = optimize(obj, x0);
         
         
         

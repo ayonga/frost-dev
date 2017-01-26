@@ -4,7 +4,7 @@ function obj = addAuxilaryVariable(obj, phase, nodes, varargin)
     %
     % Parameters:
     % phase: the index of the phase (domain) @type integer
-    % nodelist: the node list of the variable @type rowvec
+    % nodes: the node list of the variable @type rowvec
     % varargin: variable input arguments for property values non-empty
     % NlpVariables @copydoc NlpVariable.updateProp
     % 
@@ -14,20 +14,24 @@ function obj = addAuxilaryVariable(obj, phase, nodes, varargin)
     
     
     
-    num_node = obj.Phase{phase}.NumNode;
-    col_names = obj.Phase{phase}.OptVarTable.Properties.VariableNames;
+    phase_idx = getPhaseIndex(obj, phase);
+    phase_info = obj.Phase{phase_idx};
+
+
+    n_node = phase_info.NumNode;
+    col_names = phase_info.OptVarTable.Properties.VariableNames;
     
     
     
-    var = cell(1,num_node);
+    var = repmat({{}},1, n_node);
     for i=nodes
-        var{i} = NlpVariable(...
-            varargin{:});
+        var{i} = {NlpVariable(...
+            varargin{:})};
     end
     % add to the decision variable table
-    obj.Phase{phase}.OptVarTable = [...
-        obj.Phase{phase}.OptVarTable;...
-        cell2table(var,'VariableNames',col_names,'RowNames',{var(nodes(1)).Name})];
+    obj.Phase{phase_idx}.OptVarTable = [...
+        obj.Phase{phase_idx}.OptVarTable;...
+        cell2table(var,'VariableNames',col_names,'RowNames',{var{nodes(1)}{1}.Name})];
     
 
 

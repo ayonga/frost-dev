@@ -30,9 +30,14 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     end
     
     
-    num_node = obj.Phase{phase}.NumNode;
-    col_names = obj.Phase{phase}.OptVarTable.Properties.VariableNames;
-    domain = obj.Phase{phase}.Domain;
+    phase_idx = getPhaseIndex(obj, phase);
+    phase_info = obj.Phase{phase_idx};
+
+
+    n_node = phase_info.NumNode;
+    col_names = phase_info.OptVarTable.Properties.VariableNames;
+
+    domain = phase_info.Domain;
     
     
     
@@ -40,27 +45,27 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     if obj.Options.DistributeParamWeights
         % state variables are defined at all collocation nodes if
         % distributes the weightes
-        nodeList = 1:num_node;
+        node_list = 1:n_node;
     else
         % otherwise only define at the first node
-        nodeList = 1;
+        node_list = 1;
     end
     
     %% Phase variable parameters (p)
     if isa(domain.PhaseVariable.Var, 'KinematicExpr')
         if ~isempty(domain.PhaseVariable.Var.Parameters)
             n_p = domain.PhaseVariable.Var.Parameters.Dimension;
-            p  = cell(1,num_node);
+            p  = repmat({{}},1, n_node);
             % create an array of ''p'' NlpVariable objects
-            for i=nodeList
-                p{i} = NlpVariable( ...
+            for i=node_list
+                p{i} = {NlpVariable( ...
                     'Name', 'p', 'Dimension', n_p, ...
-                    'lb', lb.p, 'ub', ub.p, 'x0', x0.p);
+                    'lb', lb.p, 'ub', ub.p, 'x0', x0.p)};
             end
             % add to the decision variable table
-            obj.Phase{phase}.OptVarTable = [...
-                obj.Phase{phase}.OptVarTable;...
-                cell2table(p,'VariableNames',col_names,'RowNames',{'p'})];
+            obj.Phase{phase_idx}.OptVarTable = [...
+                obj.Phase{phase_idx}.OptVarTable;...
+                cell2table(p,'VariableNames',col_names,'RowNames',{'P'})];
         end
     end
     
@@ -68,33 +73,33 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     if ~isempty(domain.DesVelocityOutput)
         
         n_v = domain.DesVelocityOutput.NumParam;
-        v = cell(1,num_node);
+        v = repmat({{}},1, n_node);
         % create an array of ''v'' NlpVariable objects
-        for i=nodeList
-            v{i} = NlpVariable( ...
+        for i=node_list
+            v{i} = {NlpVariable( ...
                 'Name', 'v', 'Dimension', n_v, ...
-                'lb', lb.v, 'ub', ub.v, 'x0', x0.v);
+                'lb', lb.v, 'ub', ub.v, 'x0', x0.v)};
         end
-        obj.Phase{phase}.OptVarTable = [...
-            obj.Phase{phase}.OptVarTable;...
-            cell2table(v,'VariableNames',col_names,'RowNames',{'v'})];
+        obj.Phase{phase_idx}.OptVarTable = [...
+            obj.Phase{phase_idx}.OptVarTable;...
+            cell2table(v,'VariableNames',col_names,'RowNames',{'V'})];
     end
     
     %% position outputs (a)
     
     n_pos_outputs = getDimension(domain.ActPositionOutput);
-    n_a = n_pos_outputs*domain.DesPositionOutput.NumParam*n_pos_outputs;
+    n_a = n_pos_outputs*domain.DesPositionOutput.NumParam;
     
-    a = cell(1,num_node);
-    for i=nodeList
-        a{i} = NlpVariable(...
+    a = repmat({{}},1, n_node);
+    for i=node_list
+        a{i} = {NlpVariable(...
             'Name', 'a', 'Dimension', n_a,...
-            'lb', lb.a, 'ub', ub.a, 'x0', x0.a);
+            'lb', lb.a, 'ub', ub.a, 'x0', x0.a)};
     end
     
-    obj.Phase{phase}.OptVarTable = [...
-        obj.Phase{phase}.OptVarTable;...
-        cell2table(a,'VariableNames',col_names,'RowNames',{'a'})];
+    obj.Phase{phase_idx}.OptVarTable = [...
+        obj.Phase{phase_idx}.OptVarTable;...
+        cell2table(a,'VariableNames',col_names,'RowNames',{'A'})];
     
 
 

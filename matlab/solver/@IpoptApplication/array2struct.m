@@ -1,4 +1,4 @@
-function func_struct = array2struct(obj, func_array, derivative_level)
+function func_struct = array2struct(obj, func_array, type, derivative_level)
     % Converts an array of NLPFunction objects into a struct of arrays with
     % some specified modification for fast computation in the NLP solver.
     % Typically a struct of array is more computationally efficent than
@@ -7,6 +7,8 @@ function func_struct = array2struct(obj, func_array, derivative_level)
     %
     % Parameters:
     %  func_array: an array of NLP functions @type cell
+    %  type: indicates whether ''stack'' the array or ''sum'' the array
+    %  @type char
     %  derivative_level: the derivative level to be used @type double
     %
     % Return values:
@@ -51,7 +53,10 @@ function func_struct = array2struct(obj, func_array, derivative_level)
     %  nzHessIndices: a cell array contains a vector of the indices of
     %  the non-zeros of the Hessian @type colvec
     
-    if nargin < 3
+    if nargin <3
+        type = 'stack';
+    end
+    if nargin < 4
         derivative_level = 1;
     end
     
@@ -59,19 +64,40 @@ function func_struct = array2struct(obj, func_array, derivative_level)
     num_obj = numel(func_array);
     func_index_offset = 0;
     % update the function indices for each NlpFunctions
-    for i=1:num_obj
-        % set the indices of constraints
-        func_indics = func_index_offset + ...
-            cumsum(ones(1,func_array(i).Dimension));
-        func_index_offset = func_indics(end);
-        func_array(i) = setFuncIndices(func_array(i), func_indics);       
-        
+    switch type
+        case 'stack'
+            % typically used for constraints
+            for i=1:num_obj
+                % set the indices of constraints
+                func_indics = func_index_offset + ...
+                    cumsum(ones(1,func_array{i}.Dimension));
+                func_index_offset = func_indics(end);
+                func_array{i} = setFuncIndices(func_array{i}, func_indics);
+                
+            end
+        case 'sum'
+            % Typically used for object functions
+            dim = func_array{1}.Dimension;
+            for i=1:num_obj
+                % set the indices of constraints
+                func_indics = cumsum(ones(1,dim));
+                func_array{i} = setFuncIndices(func_array{i}, func_indics);
+                
+            end
+        otherwise
+            error('Unsupported type');
     end
     
     % construct a new cell array of the dependent objects
-    deps_array = cellfun(@(x)getDepObject(x), func_array, 'UniformOutput', false);
-    
-    
+    deps_array_cell = cellfun(@(x)getDepObject(x), func_array, 'UniformOutput', false);
+    deps_array = vertcat(deps_array_cell{:});
+    n_deps = length(deps_array);
+    for i=1:n_deps
+        if isempty(deps_array{i}.JacPattern)
+            js = feval(deps_array{i}.Funcs.JacStruct,0);
+            deps_array{i} = setJacobianPattern(deps_array{i},js,'IndexForm');
+        end
+    end
     % initialize the output structure based on the deps_array.
     func_struct = struct;
     
@@ -84,13 +110,13 @@ function func_struct = array2struct(obj, func_array, derivative_level)
     func_struct.Names = cellfun(@(x) x.Name, deps_array, 'UniformOutput', false);
     func_struct.Funcs = cellfun(@(x) x.Funcs.Func, deps_array, 'UniformOutput', false);
     func_struct.JacFuncs = cellfun(@(x) x.Funcs.Jac, deps_array, 'UniformOutput', false);  
-    func_struct.DepIndices = cellfun(@(x) getDepIndices(x), deps_array, 'UniformOutput', false);
+    dep_indices = cellfun(@(x) getDepIndices(x), deps_array, 'UniformOutput', false);
+    func_struct.DepIndices = cellfun(@(x)(vertcat(x{:})),dep_indices,'UniformOutput',false);
     func_struct.AuxData = cellfun(@(x) x.AuxData, deps_array, 'UniformOutput', false);
     func_struct.FuncIndices = cellfun(@(x) x.FuncIndices, deps_array, 'UniformOutput', false);
     % preallocate
-    func_struct.nzJacRows = ones(func_struct.nnzJac,1);
-    func_struct.nzJacCols = ones(func_struct.nnzJac,1);
-    func_struct.FuncIndices = cell(func_struct.numFuncs,1);
+    func_struct.nzJacRows = zeros(func_struct.nnzJac,1);
+    func_struct.nzJacCols = zeros(func_struct.nnzJac,1);
     func_struct.nzJacIndices = cell(func_struct.numFuncs,1);
     
     % if user-defined Hessian functions are provided
@@ -120,14 +146,8 @@ function func_struct = array2struct(obj, func_array, derivative_level)
         
         % get the sparsity pattern (i.e., the indices of non-zero elements)
         % of the Jacobian of the current function
-        if isempty(deps_array{i}.JacPattern)
-            js = feval(deps_array{i}.Funcs.JacStruct,0);
-            deps_array{i} = setJacobianPattern(deps_array{i},js,'IndexForm');
-            jac_pattern = deps_array{i}.JacPattern;
-        else
-            jac_pattern = deps_array{i}.JacPattern;
-        end
-        
+       
+        jac_pattern = deps_array{i}.JacPattern;
         % retrieve the indices of dependent variables 
         dep_indices = func_struct.DepIndices{i};
         func_indics = func_struct.FuncIndices{i};

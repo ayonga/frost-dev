@@ -24,12 +24,16 @@ function [obj] = regConstraint(obj, funcs)
         obj.ConstrArray = [obj.ConstrArray; arrayfun(@(x){x}, funcs(:))];
     elseif istable(funcs)
         
+        % convert table content to cell array
         tmp = table2cell(funcs);
+        % remove empty cells from the cell array
+        tmp_new = tmp(~cellfun('isempty',tmp));
         
-        assert(all(cellfun(@(x)isa(x,'NlpFunction'), tmp(:))), ...
+        
+        assert(all(cellfun(@(x)isa(x,'NlpFunction'), tmp_new(:))), ...
             'Each variable must be an object of ''NlpFunction'' class or inherited subclasses');
         
-        obj.ConstrArray = [obj.ConstrArray; tmp(:)];
+        obj.ConstrArray = [obj.ConstrArray; tmp_new(:)];
         
     else
         error('Unsupported variable type found: %s\n', class(funcs));
