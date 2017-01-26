@@ -142,7 +142,7 @@ classdef MatlabDocMaker
             
             % error('Please replace this by returning your project name as string.');
             % Example:
-            name = 'AMBER Suite';
+            name = 'FROST';
         end
     end
     
@@ -591,7 +591,7 @@ classdef MatlabDocMaker
             outdir = MatlabDocMaker.getPref('outdir','');
             % word = 'keep';
             if isempty(outdir) || exist(outdir,'dir') ~= 7
-                outdir = fullfile(fileparts(fileparts(pwd)),'direct_hzd_optimization_docs','html','doxygen_matlab');
+                outdir = fullfile(fileparts(fileparts(pwd)),'frost_docs','html','doxygen_matlab');
                 % word = 'set';
             end
             % str = sprintf('Do you want to %s %s as your documentation output directory?\n(Y)es/(N)o?: ',word,strrep(outdir,'\','\\'));
@@ -613,8 +613,8 @@ classdef MatlabDocMaker
             %     MatlabDocMaker.setProjectLogo;
             % end
             
-            MatlabDocMaker.setPref('proj_ver','1.0');
-            MatlabDocMaker.setPref('proj_desc','Modeling, Planning, and Control Design Suite for Bipedal Locomotion by AMBER Lab');
+            MatlabDocMaker.setPref('proj_ver','1.0 beta');
+            MatlabDocMaker.setPref('proj_desc','Fast Robot Simulation and Optimization Toolkit for Dynamic Bipedal Locomotion by AMBER Lab');
             %             MatlabDocMaker.setPref('proj_desc','Directly Collocated Hybrid Zero Dynamics Virtual Constraints Optimization');
             MatlabDocMaker.setProjectLogo(fullfile(pwd,'source','images','amberlab_logo.png'));
             

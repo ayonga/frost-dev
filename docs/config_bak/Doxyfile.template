@@ -370,7 +370,7 @@ TYPEDEF_HIDES_STRUCT   = NO
 # 2^(16+SYMBOL_CACHE_SIZE). The valid range is 0..9, the default is 0,
 # corresponding to a cache size of 2^16 = 65536 symbols
 
-SYMBOL_CACHE_SIZE      = 0
+#SYMBOL_CACHE_SIZE      = 0
 
 # Similar to the SYMBOL_CACHE_SIZE the size of the symbol lookup cache can be
 # set using LOOKUP_CACHE_SIZE. This cache is used to resolve symbols given
@@ -616,7 +616,8 @@ FILE_VERSION_FILTER    =
 # You can optionally specify a file name after the option, if omitted
 # DoxygenLayout.xml will be used as the name of the layout file.
 
-LAYOUT_FILE            =
+LAYOUT_FILE            = 
+#"_ConfDir_/DoxygenLayout.xml"
 
 #---------------------------------------------------------------------------
 # configuration options related to warning and progress messages
@@ -685,7 +686,7 @@ RECURSIVE              = YES
 # excluded from the INPUT source files. This way you can easily exclude a
 # subdirectory from a directory tree whose root is specified with the INPUT tag.
 
-EXCLUDE                =
+EXCLUDE                = "_ExcludeDir_"
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -860,13 +861,13 @@ HTML_FILE_EXTENSION    = .html
 # that header. Note that the header is subject to change so you typically
 # have to redo this when upgrading to a newer version of doxygen or when changing the value of configuration settings such as GENERATE_TREEVIEW!
 
-HTML_HEADER            =
+HTML_HEADER            = "_ConfDir_/header.html"
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard footer.
 
-HTML_FOOTER            =
+HTML_FOOTER            = "_ConfDir_/footer.html"
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading
 # style sheet that is used by each HTML page. It can be used to
@@ -875,7 +876,7 @@ HTML_FOOTER            =
 # the style sheet file to the HTML output directory, so don't put your own
 # stylesheet in the HTML output directory as well, or it will be erased!
 
-HTML_STYLESHEET        =
+HTML_EXTRA_STYLESHEET        = "_ConfDir_/customdoxygen.css"
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -884,7 +885,7 @@ HTML_STYLESHEET        =
 # files. In the HTML_STYLESHEET file, use the file name only. Also note that
 # the files will be copied as-is; there are no commands or markers available.
 
-HTML_EXTRA_FILES       =
+HTML_EXTRA_FILES       = "_ConfDir_/doxy-boot.js"
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output.
 # Doxygen will adjust the colors in the stylesheet and background images
@@ -1097,7 +1098,7 @@ ENUM_VALUES_PER_LINE   = 4
 # JavaScript, DHTML, CSS and frames is required (i.e. any modern browser).
 # Windows users are probably better off using the HTML help feature.
 
-GENERATE_TREEVIEW      = ALL
+GENERATE_TREEVIEW      = 
 
 # If the treeview is enabled (see GENERATE_TREEVIEW) then this tag can be
 # used to set the initial width (in pixels) of the frame in which the tree
@@ -1133,7 +1134,7 @@ FORMULA_TRANSPARENT    = YES
 # output. When enabled you also need to install MathJax separately and
 # configure the path to it using the MATHJAX_RELPATH option.
 
-USE_MATHJAX            = NO
+USE_MATHJAX            = YES
 
 # When MathJax is enabled you need to specify the location relative to the
 # HTML output directory using the MATHJAX_RELPATH option. The destination
@@ -1144,7 +1145,7 @@ USE_MATHJAX            = NO
 # MathJax, but it is strongly recommended to install a local copy of MathJax
 # before deployment.
 
-MATHJAX_RELPATH        = http://www.mathjax.org/mathjax
+MATHJAX_RELPATH        = http://cdn.mathjax.org/mathjax/latest
 
 # When the SEARCHENGINE tag is enabled doxygen will generate a search box
 # for the HTML output. The underlying search engine uses javascript
@@ -1548,7 +1549,7 @@ DOT_NUM_THREADS        = 0
 # DOTFONTPATH environment variable or by setting DOT_FONTPATH to the directory
 # containing the font.
 
-DOT_FONTNAME           = FreeSans
+# DOT_FONTNAME           = FreeSans
 
 # The DOT_FONTSIZE tag can be used to set the size of the font of dot graphs.
 # The default size is 10pt.

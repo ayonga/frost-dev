@@ -1,4 +1,6 @@
-/*! \mainpage AMBER Suite Matlab Code Documentation
+(* ::Package:: *)
+
+/*! \mainpage FROST Matlab Documentation
  *
  * \section intro_sec Introduction
  *
