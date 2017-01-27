@@ -223,7 +223,7 @@ classdef MatlabDocMaker
             % version: The project version @type char @default []
             %
             % See also: setProjectVersion
-            version = MatlabDocMaker.getPref('proj_ver', 'beta');
+            version = MatlabDocMaker.getPref('proj_ver', '1.0');
         end
         
         function setProjectVersion(value)
@@ -613,10 +613,10 @@ classdef MatlabDocMaker
             %     MatlabDocMaker.setProjectLogo;
             % end
             
-            MatlabDocMaker.setPref('proj_ver','1.0 beta');
-            MatlabDocMaker.setPref('proj_desc','Fast Robot Simulation and Optimization Toolkit for Dynamic Bipedal Locomotion by AMBER Lab');
+            MatlabDocMaker.setPref('proj_ver','1.0');
+            MatlabDocMaker.setPref('proj_desc','Fast Robot Simulation and Optimization Toolkit for Dynamic Walking Robots by AMBER Lab');
             %             MatlabDocMaker.setPref('proj_desc','Directly Collocated Hybrid Zero Dynamics Virtual Constraints Optimization');
-            MatlabDocMaker.setProjectLogo(fullfile(pwd,'source','images','amberlab_logo.png'));
+            MatlabDocMaker.setProjectLogo(fullfile(pwd,'source','images','logo_long.png'));
             
             %% Check for necessary and recommended tools
             hasall = true;

@@ -30,7 +30,7 @@ repository.
 
   .. code-block:: bash
      
-     sudo apt-get install ragel cmake build-essential doxygen
+     sudo apt-get install ragel cmake build-essential doxygen graphviz, libtiff-dev
   ..
 
 
@@ -67,4 +67,20 @@ repository.
 
        sudo make install
     ..
+
+Troubleshooting
+======================================
+
+
+- missing `GLIBCXX_3.4.*'.
+  It could be caused by the mismatch between the system libstdc++ and Matlab libstdc++. Change the symbolic link in $matlabroot/sys/os/glnxa64:
+  
+    .. code:: bash
+
+       sudo mv libstdc++.so.6 libstdc++.so.6.bak
+       sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21  ./libstdc++.so.6
+    ..
+	
+
+
 	      

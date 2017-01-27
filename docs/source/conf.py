@@ -16,11 +16,11 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
 
-
+import sphinx_bootstrap_theme
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -62,7 +62,7 @@ author = u'AMBER Lab'
 # built documents.
 #
 # The short X.Y version.
-version = u'2.0'
+version = u'1.0'
 # The full version, including alpha/beta/rc tags.
 release = u'beta'
 
@@ -91,25 +91,95 @@ html_theme_path = ['_themes']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-
+html_theme = 'bootstrap'
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = { 
-	'logo_name': True,
-	'github_user': 'ayonga',
-	'github_repo': 'frost-dev',
-	'github_button': True,
-	'travis_button': True,
+#html_theme_options = { 
+#	'logo_name': True,
+#	'github_user': 'ayonga',
+#	'github_repo': 'frost-dev',
+#	'github_button': True,
+#	'travis_button': True,
+#}
+
+# Theme options are theme-specific and customize the look and feel of a
+# theme further.
+html_theme_options = {
+    # Navigation bar title. (Default: ``project`` value)
+    #'navbar_title': "FROST",
+
+    # Tab name for entire site. (Default: "Site")
+    'navbar_site_name': "Contents",
+
+    # A list of tuples containing pages or urls to link to.
+    # Valid tuples should be in the following forms:
+    #    (name, page)                 # a link to a page
+    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+    #    (name, "http://example.com", True) # arbitrary absolute url
+    # Note the "1" or "True" value above as the third argument to indicate
+    # an arbitrary url.
+    'navbar_links': [
+        ("Introduction", "introduction"),
+        ("Installation", "installation"),
+	("Tutorial", "tutorial"),
+	("Matlab", "doxygen_matlab/index.html",1),
+	("Mathematica", "mathematica"),
+	("Developer", "developers"),
+    ],
+
+    # Render the next and previous page links in navbar. (Default: true)
+    'navbar_sidebarrel': False,
+
+    # Render the current pages TOC in the navbar. (Default: true)
+    'navbar_pagenav': False,
+
+    # Tab name for the current pages TOC. (Default: "Page")
+    #'navbar_pagenav_name': "Page",
+
+    # Global TOC depth for "site" navbar tab. (Default: 1)
+    # Switching to -1 shows all levels.
+    'globaltoc_depth': 2,
+
+    # Include hidden TOCs in Site navbar?
+    #
+    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
+    # non-hidden ``toctree`` directives in the same page, or else the build
+    # will break.
+    #
+    # Values: "true" (default) or "false"
+    'globaltoc_includehidden': "true",
+
+    # HTML navbar class (Default: "navbar") to attach to <div> element.
+    # For black navbar, do "navbar navbar-inverse"
+    #'navbar_class': "navbar navbar-inverse",
+
+    # Fix navigation bar to top of page?
+    # Values: "true" (default) or "false"
+    'navbar_fixed_top': "true",
+
+    # Location of link to source.
+    # Options are "nav" (default), "footer" or anything else to exclude.
+    'source_link_position': "nav",
+
+    # Bootswatch (http://bootswatch.com/) theme.
+    #
+    # Options are nothing (default) or the name of a valid theme
+    # such as "amelia" or "cosmo".
+    #'bootswatch_theme': "cosmo",
+
+    # Choose Bootstrap version.
+    # Values: "3" (default) or "2" (in quotes)
+    'bootstrap_version': "3",
 }
 
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-html_title = u'FROST: Fast Robot Simulation and Optimization Toolkit v2.0-beta'
+html_title = u'FROST: Fast Robot Simulation and Optimization Toolkit v1.0-beta'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -117,7 +187,7 @@ html_short_title = 'FROST'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'images/amberlab_logo.png'
+html_logo = 'images/logo_square.png'
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
