@@ -1,0 +1,199 @@
+<!-- HTML header for doxygen 1.8.8-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- For Mobile Devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+        <meta name="generator" content="Doxygen 1.8.11"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <title>FROST: nlp/@HybridTrajectoryOptimization/addOutputConstraint.m File Reference</title>
+        <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
+        <script type="text/javascript" src="dynsections.js"></script>
+        <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="doxy-boot.js"></script>
+    </head>
+    <body>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
+        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+            <div class="content" id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
+                            <div style="margin-bottom: 15px;">
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c02edb81d504ff3718d292053c4eabea.html">nlp</a></li><li class="navelem"><a class="el" href="dir_d3e68e044fbc3278c344699d251cad90.html">@HybridTrajectoryOptimization</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">addOutputConstraint.m File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="_hybrid_trajectory_optimization_8m_source.html">HybridTrajectoryOptimization.m</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for addOutputConstraint.m:</div>
+<div class="dyncontent">
+<div class="center"><img src="add_output_constraint_8m__incl.png" border="0" usemap="#nlp_2_0D_hybrid_trajectory_optimization_2add_output_constraint_8m" alt=""/></div>
+<map name="nlp_2_0D_hybrid_trajectory_optimization_2add_output_constraint_8m" id="nlp_2_0D_hybrid_trajectory_optimization_2add_output_constraint_8m">
+<area shape="rect" id="node2" href="_hybrid_trajectory_optimization_8m.html" title="HybridTrajectoryOptimization.m" alt="" coords="15,95,222,121"/>
+</map>
+</div>
+</div>
+<p><a href="add_output_constraint_8m_source.html">Go to the source code of this file.</a></p>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
+<!-- start footer part -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

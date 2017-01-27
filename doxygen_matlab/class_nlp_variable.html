@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.11"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: NlpVariable Class Reference</title>
+        <title>FROST: NlpVariable Class Reference</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -24,20 +24,88 @@
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand">AMBER Suite 1.0</a>
-                </div>
-            </div>
-        </nav>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
         <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
             <div class="content" id="content">
                 <div class="container">
@@ -132,12 +200,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab2603831293cf002816c769afe079df7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7">NlpVariable</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:ab2603831293cf002816c769afe079df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#ab2603831293cf002816c769afe079df7">More...</a><br /></td></tr>
 <tr class="separator:ab2603831293cf002816c769afe079df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1953d10d296bf0cc61ef963a3daae427"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="class_nlp_variable.html">NlpVariable</a> obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a1953d10d296bf0cc61ef963a3daae427">genIndices</a> (<a class="el" href="classinteger.html">integer</a> index_offset)</td></tr>
-<tr class="memdesc:a1953d10d296bf0cc61ef963a3daae427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates indinces of each variable if the input is an array of <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> objects.  <a href="#a1953d10d296bf0cc61ef963a3daae427">More...</a><br /></td></tr>
-<tr class="separator:a1953d10d296bf0cc61ef963a3daae427"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61352ffcd0ab286b12269b5ca368329e"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="class_nlp_variable.html">NlpVariable</a> obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a61352ffcd0ab286b12269b5ca368329e">appendTo</a> (<a class="el" href="class_nlp_variable.html">NlpVariable</a> vars)</td></tr>
-<tr class="memdesc:a61352ffcd0ab286b12269b5ca368329e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends the new <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> <code>vars</code> to the existing <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> array.  <a href="#a61352ffcd0ab286b12269b5ca368329e">More...</a><br /></td></tr>
-<tr class="separator:a61352ffcd0ab286b12269b5ca368329e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06d3f96daba1e2269d28089a93cde5a0"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a06d3f96daba1e2269d28089a93cde5a0">genIndices</a> (index_offset)</td></tr>
+<tr class="separator:a06d3f96daba1e2269d28089a93cde5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d3f4ca578e79d0fcd941d018977c073"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a7d3f4ca578e79d0fcd941d018977c073">appendTo</a> (vars)</td></tr>
+<tr class="separator:a7d3f4ca578e79d0fcd941d018977c073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5c10eb8025d60a0d2c31169e749332e"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e">setBoundary</a> (<a class="el" href="classcolvec.html">colvec</a> lowerbound,<a class="el" href="classcolvec.html">colvec</a> upperbound)</td></tr>
 <tr class="memdesc:ac5c10eb8025d60a0d2c31169e749332e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the lower/upper boundary value for a NLP variable.  <a href="#ac5c10eb8025d60a0d2c31169e749332e">More...</a><br /></td></tr>
 <tr class="separator:ac5c10eb8025d60a0d2c31169e749332e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +216,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aabb59bb3b7043d91cdc676f2f3b86113"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113">setDimension</a> (<a class="el" href="classdouble.html">double</a> dim)</td></tr>
 <tr class="memdesc:aabb59bb3b7043d91cdc676f2f3b86113"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the dimension of the NLP variable vector.  <a href="#aabb59bb3b7043d91cdc676f2f3b86113">More...</a><br /></td></tr>
 <tr class="separator:aabb59bb3b7043d91cdc676f2f3b86113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d548587682699ed5230c6971c05a1c1"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1">updateProp</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a7d548587682699ed5230c6971c05a1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the properties of the class object based on the input name-value pair arguments.  <a href="#a7d548587682699ed5230c6971c05a1c1">More...</a><br /></td></tr>
+<tr class="separator:a7d548587682699ed5230c6971c05a1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -254,21 +323,22 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_nlp_variable_8m_source.html#l00127">127</a> of file <a class="el" href="_nlp_variable_8m_source.html">NlpVariable.m</a>.</p>
+<p>Definition at line <a class="el" href="_nlp_variable_8m_source.html#l00128">128</a> of file <a class="el" href="_nlp_variable_8m_source.html">NlpVariable.m</a>.</p>
 
-<p>References <a class="el" href="_0D_nlp_variable_2append_to_8m_source.html#l00018">appendTo()</a>, <a class="el" href="gen_indices_8m_source.html#l00018">genIndices()</a>, <a class="el" href="set_boundary_8m_source.html#l00018">setBoundary()</a>, <a class="el" href="set_dimension_8m_source.html#l00018">setDimension()</a>, <a class="el" href="set_initial_value_8m_source.html#l00018">setInitialValue()</a>, and <a class="el" href="_0D_nlp_variable_2set_name_8m_source.html#l00018">setName()</a>.</p>
+<p>References <a class="el" href="class_nlp_variable.html#a7d3f4ca578e79d0fcd941d018977c073">appendTo()</a>, <a class="el" href="class_nlp_variable.html#a06d3f96daba1e2269d28089a93cde5a0">genIndices()</a>, <a class="el" href="_0D_nlp_variable_2set_boundary_8m_source.html#l00018">setBoundary()</a>, <a class="el" href="_0D_nlp_variable_2set_dimension_8m_source.html#l00018">setDimension()</a>, <a class="el" href="set_initial_value_8m_source.html#l00018">setInitialValue()</a>, <a class="el" href="_0D_nlp_variable_2set_name_8m_source.html#l00018">setName()</a>, and <a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html#l00018">updateProp()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nlp_variable_ab2603831293cf002816c769afe079df7_cgraph.png" border="0" usemap="#class_nlp_variable_ab2603831293cf002816c769afe079df7_cgraph" alt=""/></div>
 <map name="class_nlp_variable_ab2603831293cf002816c769afe079df7_cgraph" id="class_nlp_variable_ab2603831293cf002816c769afe079df7_cgraph">
-<area shape="rect" id="node2" href="class_nlp_variable.html#a61352ffcd0ab286b12269b5ca368329e" title="Appends the new NlpVariable vars to the existing NlpVariable array. " alt="" coords="229,5,384,32"/>
-<area shape="rect" id="node3" href="class_nlp_variable.html#a1953d10d296bf0cc61ef963a3daae427" title="Generates indinces of each variable if the input is an array of NlpVariable objects. " alt="" coords="227,56,387,83"/>
-<area shape="rect" id="node4" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="221,107,392,133"/>
-<area shape="rect" id="node5" href="class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113" title="Sets the dimension of the NLP variable vector. " alt="" coords="218,157,395,184"/>
-<area shape="rect" id="node6" href="class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="217,208,396,235"/>
-<area shape="rect" id="node7" href="class_nlp_variable.html#a8b76127038b4009cadc002a600b7685f" title="Specifies the name of the NLP variable. " alt="" coords="231,259,382,285"/>
+<area shape="rect" id="node2" href="class_nlp_variable.html#a7d3f4ca578e79d0fcd941d018977c073" title="NlpVariable.appendTo" alt="" coords="221,5,376,32"/>
+<area shape="rect" id="node3" href="class_nlp_variable.html#a06d3f96daba1e2269d28089a93cde5a0" title="NlpVariable.genIndices" alt="" coords="219,56,379,83"/>
+<area shape="rect" id="node4" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="432,120,603,147"/>
+<area shape="rect" id="node5" href="class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113" title="Sets the dimension of the NLP variable vector. " alt="" coords="429,196,606,223"/>
+<area shape="rect" id="node6" href="class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="428,247,607,273"/>
+<area shape="rect" id="node7" href="class_nlp_variable.html#a8b76127038b4009cadc002a600b7685f" title="Specifies the name of the NLP variable. " alt="" coords="223,309,374,336"/>
+<area shape="rect" id="node8" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="217,208,380,235"/>
 </map>
 </div>
 </p>
@@ -276,38 +346,27 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a61352ffcd0ab286b12269b5ca368329e"></a>
+<a class="anchor" id="a7d3f4ca578e79d0fcd941d018977c073"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function <a class="el" href="class_nlp_variable.html">NlpVariable</a> obj  = NlpVariable.appendTo </td>
+          <td class="memname">function obj = NlpVariable.appendTo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_nlp_variable.html">NlpVariable</a>&#160;</td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>vars</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Appends the new <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> <code>vars</code> to the existing <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vars</td><td>a new NlpVariables to be appended to </td></tr>
-    <tr><td class="paramname">obj</td><td>an array of <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> objects </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_0D_nlp_variable_2append_to_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nlp_variable_2append_to_8m_source.html">appendTo.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00127">NlpVariable()</a>.</p>
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nlp_variable_a61352ffcd0ab286b12269b5ca368329e_icgraph.png" border="0" usemap="#class_nlp_variable_a61352ffcd0ab286b12269b5ca368329e_icgraph" alt=""/></div>
-<map name="class_nlp_variable_a61352ffcd0ab286b12269b5ca368329e_icgraph" id="class_nlp_variable_a61352ffcd0ab286b12269b5ca368329e_icgraph">
+<div class="center"><img src="class_nlp_variable_a7d3f4ca578e79d0fcd941d018977c073_icgraph.png" border="0" usemap="#class_nlp_variable_a7d3f4ca578e79d0fcd941d018977c073_icgraph" alt=""/></div>
+<map name="class_nlp_variable_a7d3f4ca578e79d0fcd941d018977c073_icgraph" id="class_nlp_variable_a7d3f4ca578e79d0fcd941d018977c073_icgraph">
 <area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="208,5,372,32"/>
 </map>
 </div>
@@ -315,40 +374,27 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a1953d10d296bf0cc61ef963a3daae427"></a>
+<a class="anchor" id="a06d3f96daba1e2269d28089a93cde5a0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function <a class="el" href="class_nlp_variable.html">NlpVariable</a> obj  = NlpVariable.genIndices </td>
+          <td class="memname">function obj = NlpVariable.genIndices </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classinteger.html">integer</a>&#160;</td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>index_offset</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generates indinces of each variable if the input is an array of <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> objects. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index_offset</td><td>the offset of the starting index of the variable array indices </td></tr>
-    <tr><td class="paramname">obj</td><td>an array of <a class="el" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. ">NlpVariable</a> objects </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="gen_indices_8m_source.html#l00018">18</a> of file <a class="el" href="gen_indices_8m_source.html">genIndices.m</a>.</p>
-
-<p>References <a class="el" href="_nlp_variable_8m_source.html#l00050">Dimension</a>.</p>
-
-<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00127">NlpVariable()</a>.</p>
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nlp_variable_a1953d10d296bf0cc61ef963a3daae427_icgraph.png" border="0" usemap="#class_nlp_variable_a1953d10d296bf0cc61ef963a3daae427_icgraph" alt=""/></div>
-<map name="class_nlp_variable_a1953d10d296bf0cc61ef963a3daae427_icgraph" id="class_nlp_variable_a1953d10d296bf0cc61ef963a3daae427_icgraph">
+<div class="center"><img src="class_nlp_variable_a06d3f96daba1e2269d28089a93cde5a0_icgraph.png" border="0" usemap="#class_nlp_variable_a06d3f96daba1e2269d28089a93cde5a0_icgraph" alt=""/></div>
+<map name="class_nlp_variable_a06d3f96daba1e2269d28089a93cde5a0_icgraph" id="class_nlp_variable_a06d3f96daba1e2269d28089a93cde5a0_icgraph">
 <area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="213,5,377,32"/>
 </map>
 </div>
@@ -395,18 +441,19 @@ Ignore a particular boundary if it is given as empty</dd></dl>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="set_boundary_8m_source.html#l00018">18</a> of file <a class="el" href="set_boundary_8m_source.html">setBoundary.m</a>.</p>
+<p>Definition at line <a class="el" href="_0D_nlp_variable_2set_boundary_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nlp_variable_2set_boundary_8m_source.html">setBoundary.m</a>.</p>
 
 <p>References <a class="el" href="class__substitutes_8c_source.html#l00193">handle.transpose</a>.</p>
 
-<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00127">NlpVariable()</a>.</p>
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>, and <a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html#l00018">updateProp()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nlp_variable_ac5c10eb8025d60a0d2c31169e749332e_icgraph.png" border="0" usemap="#class_nlp_variable_ac5c10eb8025d60a0d2c31169e749332e_icgraph" alt=""/></div>
 <map name="class_nlp_variable_ac5c10eb8025d60a0d2c31169e749332e_icgraph" id="class_nlp_variable_ac5c10eb8025d60a0d2c31169e749332e_icgraph">
-<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="224,5,388,32"/>
+<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="435,5,599,32"/>
+<area shape="rect" id="node3" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="224,31,387,57"/>
 </map>
 </div>
 </p>
@@ -436,16 +483,17 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="set_dimension_8m_source.html#l00018">18</a> of file <a class="el" href="set_dimension_8m_source.html">setDimension.m</a>.</p>
+<p>Definition at line <a class="el" href="_0D_nlp_variable_2set_dimension_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nlp_variable_2set_dimension_8m_source.html">setDimension.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00127">NlpVariable()</a>.</p>
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>, and <a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html#l00018">updateProp()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nlp_variable_aabb59bb3b7043d91cdc676f2f3b86113_icgraph.png" border="0" usemap="#class_nlp_variable_aabb59bb3b7043d91cdc676f2f3b86113_icgraph" alt=""/></div>
 <map name="class_nlp_variable_aabb59bb3b7043d91cdc676f2f3b86113_icgraph" id="class_nlp_variable_aabb59bb3b7043d91cdc676f2f3b86113_icgraph">
-<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="231,5,395,32"/>
+<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="441,5,605,32"/>
+<area shape="rect" id="node3" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="231,31,393,57"/>
 </map>
 </div>
 </p>
@@ -480,14 +528,15 @@ Here is the caller graph for this function:</div>
 
 <p>References <a class="el" href="class__substitutes_8c_source.html#l00193">handle.transpose</a>.</p>
 
-<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00127">NlpVariable()</a>.</p>
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>, and <a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html#l00018">updateProp()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph.png" border="0" usemap="#class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph" alt=""/></div>
 <map name="class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph" id="class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph">
-<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="232,5,396,32"/>
+<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="443,5,607,32"/>
+<area shape="rect" id="node3" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="232,31,395,57"/>
 </map>
 </div>
 </p>
@@ -519,7 +568,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_0D_nlp_variable_2set_name_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nlp_variable_2set_name_8m_source.html">setName.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00127">NlpVariable()</a>.</p>
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -527,6 +576,64 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_nlp_variable_a8b76127038b4009cadc002a600b7685f_icgraph.png" border="0" usemap="#class_nlp_variable_a8b76127038b4009cadc002a600b7685f_icgraph" alt=""/></div>
 <map name="class_nlp_variable_a8b76127038b4009cadc002a600b7685f_icgraph" id="class_nlp_variable_a8b76127038b4009cadc002a600b7685f_icgraph">
 <area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="204,5,368,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a7d548587682699ed5230c6971c05a1c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NlpVariable.updateProp </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function updates the properties of the class object based on the input name-value pair arguments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">varargin</td><td>variable nama-value pair input arguments, in detail: <div class="fragment"><div class="line"><a class="code" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1">updateProp</a> ( <a class="code" href="class_nlp_variable.html#aab13fd686522e1367721b16bd2c1d193">Dimension</a>, lb, ub, x0 ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> Dimension</span> dimension of the variable</li>
+<li><span class="paramname"> lb</span> lower limit</li>
+<li><span class="paramname"> ub</span> upper limit</li>
+<li><span class="paramname"> x0</span> a typical value of the variable</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html">updateProp.m</a>.</p>
+
+<p>References <a class="el" href="_0D_nlp_variable_2set_boundary_8m_source.html#l00018">setBoundary()</a>, <a class="el" href="_0D_nlp_variable_2set_dimension_8m_source.html#l00018">setDimension()</a>, and <a class="el" href="set_initial_value_8m_source.html#l00018">setInitialValue()</a>.</p>
+
+<p>Referenced by <a class="el" href="_nlp_variable_8m_source.html#l00128">NlpVariable()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph.png" border="0" usemap="#class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph" alt=""/></div>
+<map name="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph" id="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph">
+<area shape="rect" id="node2" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="220,5,391,32"/>
+<area shape="rect" id="node3" href="class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113" title="Sets the dimension of the NLP variable vector. " alt="" coords="217,56,394,83"/>
+<area shape="rect" id="node4" href="class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="216,107,395,133"/>
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_icgraph.png" border="0" usemap="#class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_icgraph" alt=""/></div>
+<map name="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_icgraph" id="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_icgraph">
+<area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="216,5,380,32"/>
 </map>
 </div>
 </p>
@@ -551,8 +658,6 @@ Here is the caller graph for this function:</div>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="_nlp_variable_8m_source.html#l00050">50</a> of file <a class="el" href="_nlp_variable_8m_source.html">NlpVariable.m</a>.</p>
-
-<p>Referenced by <a class="el" href="gen_indices_8m_source.html#l00018">genIndices()</a>.</p>
 
 </div>
 </div>
@@ -654,12 +759,11 @@ Here is the caller graph for this function:</div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nlp/@NlpVariable/<a class="el" href="_nlp_variable_8m_source.html">NlpVariable.m</a></li>
-<li>nlp/@NlpVariable/<a class="el" href="_0D_nlp_variable_2append_to_8m_source.html">appendTo.m</a></li>
-<li>nlp/@NlpVariable/<a class="el" href="gen_indices_8m_source.html">genIndices.m</a></li>
-<li>nlp/@NlpVariable/<a class="el" href="set_boundary_8m_source.html">setBoundary.m</a></li>
-<li>nlp/@NlpVariable/<a class="el" href="set_dimension_8m_source.html">setDimension.m</a></li>
+<li>nlp/@NlpVariable/<a class="el" href="_0D_nlp_variable_2set_boundary_8m_source.html">setBoundary.m</a></li>
+<li>nlp/@NlpVariable/<a class="el" href="_0D_nlp_variable_2set_dimension_8m_source.html">setDimension.m</a></li>
 <li>nlp/@NlpVariable/<a class="el" href="set_initial_value_8m_source.html">setInitialValue.m</a></li>
 <li>nlp/@NlpVariable/<a class="el" href="_0D_nlp_variable_2set_name_8m_source.html">setName.m</a></li>
+<li>nlp/@NlpVariable/<a class="el" href="_0D_nlp_variable_2update_prop_8m_source.html">updateProp.m</a></li>
 </ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -670,7 +774,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 19 2017 20:59:41 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

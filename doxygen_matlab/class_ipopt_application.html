@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.11"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: IpoptApplication Class Reference</title>
+        <title>FROST: IpoptApplication Class Reference</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -24,20 +24,88 @@
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand">AMBER Suite 1.0</a>
-                </div>
-            </div>
-        </nav>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
         <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
             <div class="content" id="content">
                 <div class="container">
@@ -120,8 +188,10 @@ Collaboration diagram for IpoptApplication:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_ipopt_application__coll__graph.png" border="0" usemap="#_ipopt_application_coll__map" alt="Collaboration graph"/></div>
 <map name="_ipopt_application_coll__map" id="_ipopt_application_coll__map">
-<area shape="rect" id="node2" href="class_solver_application.html" title="SolverApplication defines an abstract interface class for NLP solvers. " alt="" coords="104,96,227,123"/>
-<area shape="rect" id="node3" href="classstruct.html" title="A MatLab struct. " alt="" coords="38,5,93,32"/>
+<area shape="rect" id="node2" href="class_solver_application.html" title="SolverApplication defines an abstract interface class for NLP solvers. " alt="" coords="86,125,208,152"/>
+<area shape="rect" id="node3" href="classstruct.html" title="A MatLab struct. " alt="" coords="114,5,169,32"/>
+<area shape="rect" id="node4" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="233,125,360,152"/>
+<area shape="rect" id="node5" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="280,5,323,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -130,12 +200,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7d393893452826d96862060d53176b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#aa7d393893452826d96862060d53176b1">IpoptApplication</a> (nlp, new_opts)</td></tr>
 <tr class="memdesc:aa7d393893452826d96862060d53176b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor function.  <a href="#aa7d393893452826d96862060d53176b1">More...</a><br /></td></tr>
 <tr class="separator:aa7d393893452826d96862060d53176b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab19798eee0003085204f64167466f03"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#aab19798eee0003085204f64167466f03">initialize</a> (<a class="el" href="class_nonlinear_program.html">NonlinearProgram</a> nlp)</td></tr>
-<tr class="memdesc:aab19798eee0003085204f64167466f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initialize the specific NLP application based on the nonlinear programming problem (specified by <code>nlp</code>).  <a href="#aab19798eee0003085204f64167466f03">More...</a><br /></td></tr>
-<tr class="separator:aab19798eee0003085204f64167466f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae65864db1da1078c025a2de86aab9c1d"><td class="memItemLeft" align="right" valign="top">function [   sol ,   info  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#ae65864db1da1078c025a2de86aab9c1d">optimize</a> (nlp)</td></tr>
-<tr class="memdesc:ae65864db1da1078c025a2de86aab9c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function runs the solver's optimization routine for the NLP.  <a href="#ae65864db1da1078c025a2de86aab9c1d">More...</a><br /></td></tr>
-<tr class="separator:ae65864db1da1078c025a2de86aab9c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a346a21952b0a2f0db97a19c6969b9b81"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#a346a21952b0a2f0db97a19c6969b9b81">initialize</a> ()</td></tr>
+<tr class="memdesc:a346a21952b0a2f0db97a19c6969b9b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initialize the specific NLP application based on the nonlinear programming problem (specified by <code>nlp</code>).  <a href="#a346a21952b0a2f0db97a19c6969b9b81">More...</a><br /></td></tr>
+<tr class="separator:a346a21952b0a2f0db97a19c6969b9b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c3b92e45f866dce14ae1e0bce2fdee8"><td class="memItemLeft" align="right" valign="top">function [   sol ,   info  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#a8c3b92e45f866dce14ae1e0bce2fdee8">optimize</a> (x0)</td></tr>
+<tr class="memdesc:a8c3b92e45f866dce14ae1e0bce2fdee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function runs the solver's optimization routine for the NLP.  <a href="#a8c3b92e45f866dce14ae1e0bce2fdee8">More...</a><br /></td></tr>
+<tr class="separator:a8c3b92e45f866dce14ae1e0bce2fdee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_solver_application"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_solver_application')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_solver_application.html">SolverApplication</a></td></tr>
 <tr class="memitem:a03f3930eee3c81a542204b159bc967bc inherit pub_methods_class_solver_application"><td class="memItemLeft" align="right" valign="top">virtual function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solver_application.html#a03f3930eee3c81a542204b159bc967bc">initialize</a> (nlp)</td></tr>
 <tr class="memdesc:a03f3930eee3c81a542204b159bc967bc inherit pub_methods_class_solver_application"><td class="mdescLeft">&#160;</td><td class="mdescRight">An abstract method that initialize the solver to be ready to solve the given NLP problem.  <a href="#a03f3930eee3c81a542204b159bc967bc">More...</a><br /></td></tr>
@@ -152,6 +222,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a159f313a724a855954b74f4dfc8917ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#a159f313a724a855954b74f4dfc8917ab">Constraint</a></td></tr>
 <tr class="memdesc:a159f313a724a855954b74f4dfc8917ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A sturcture contains the information of constraints.  <a href="#a159f313a724a855954b74f4dfc8917ab">More...</a><br /></td></tr>
 <tr class="separator:a159f313a724a855954b74f4dfc8917ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328bc58c58e1a53112eea84bbeeddec3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nonlinear_program.html">NonlinearProgram</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ipopt_application.html#a328bc58c58e1a53112eea84bbeeddec3">Nlp</a></td></tr>
+<tr class="memdesc:a328bc58c58e1a53112eea84bbeeddec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The nonlinear programming object.  <a href="#a328bc58c58e1a53112eea84bbeeddec3">More...</a><br /></td></tr>
+<tr class="separator:a328bc58c58e1a53112eea84bbeeddec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_solver_application"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_solver_application')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_solver_application.html">SolverApplication</a></td></tr>
 <tr class="memitem:acb36329b5191b76f96d1aea9fb6a2a7c inherit pub_attribs_class_solver_application"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solver_application.html#acb36329b5191b76f96d1aea9fb6a2a7c">Options</a></td></tr>
 <tr class="memdesc:acb36329b5191b76f96d1aea9fb6a2a7c inherit pub_attribs_class_solver_application"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure for NLP solver options.  <a href="#acb36329b5191b76f96d1aea9fb6a2a7c">More...</a><br /></td></tr>
@@ -200,17 +273,17 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section user"><dt>Required fields of nlp:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_ipopt_application_8m_source.html#l00068">68</a> of file <a class="el" href="_ipopt_application_8m_source.html">IpoptApplication.m</a>.</p>
+<p>Definition at line <a class="el" href="_ipopt_application_8m_source.html#l00075">75</a> of file <a class="el" href="_ipopt_application_8m_source.html">IpoptApplication.m</a>.</p>
 
-<p>References <a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html#l00018">initialize()</a>, <a class="el" href="optimize_8m_source.html#l00018">optimize()</a>, <a class="el" href="_solver_application_8m_source.html#l00083">SolverApplication.SolverApplication()</a>, and <a class="el" href="struct__overlay_8m_source.html#l00017">struct_overlay()</a>.</p>
+<p>References <a class="el" href="solver_2_0D_ipopt_application_2initialize_8m_source.html#l00018">initialize()</a>, <a class="el" href="optimize_8m_source.html#l00018">optimize()</a>, <a class="el" href="_solver_application_8m_source.html#l00074">SolverApplication.SolverApplication()</a>, and <a class="el" href="struct__overlay_8m_source.html#l00017">struct_overlay()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_ipopt_application_aa7d393893452826d96862060d53176b1_cgraph.png" border="0" usemap="#class_ipopt_application_aa7d393893452826d96862060d53176b1_cgraph" alt=""/></div>
 <map name="class_ipopt_application_aa7d393893452826d96862060d53176b1_cgraph" id="class_ipopt_application_aa7d393893452826d96862060d53176b1_cgraph">
-<area shape="rect" id="node2" href="class_ipopt_application.html#aab19798eee0003085204f64167466f03" title="This function initialize the specific NLP application based on the nonlinear programming problem (spe..." alt="" coords="270,5,441,32"/>
-<area shape="rect" id="node3" href="class_ipopt_application.html#ae65864db1da1078c025a2de86aab9c1d" title="This function runs the solver&#39;s optimization routine for the NLP. " alt="" coords="269,56,441,83"/>
+<area shape="rect" id="node2" href="class_ipopt_application.html#a346a21952b0a2f0db97a19c6969b9b81" title="This function initialize the specific NLP application based on the nonlinear programming problem (spe..." alt="" coords="270,5,441,32"/>
+<area shape="rect" id="node3" href="class_ipopt_application.html#a8c3b92e45f866dce14ae1e0bce2fdee8" title="This function runs the solver&#39;s optimization routine for the NLP. " alt="" coords="269,56,441,83"/>
 <area shape="rect" id="node4" href="class_solver_application.html#a16749b878628078ed46758a9074b781c" title="The default constructor function. " alt="" coords="290,107,421,149"/>
 <area shape="rect" id="node5" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="303,173,407,200"/>
 <area shape="rect" id="node6" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="489,173,556,200"/>
@@ -221,15 +294,14 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aab19798eee0003085204f64167466f03"></a>
+<a class="anchor" id="a346a21952b0a2f0db97a19c6969b9b81"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">function   obj  = IpoptApplication.initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_nonlinear_program.html">NonlinearProgram</a>&#160;</td>
-          <td class="paramname"><em>nlp</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -238,26 +310,17 @@ Here is the call graph for this function:</div>
 <p>This function initialize the specific NLP application based on the nonlinear programming problem (specified by <code>nlp</code>). </p>
 <p>The initialization including group different types of constraints, index objective functions and constraints arrays, etc.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. ">NonlinearProgram</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nlp</td><td>The NLP problem to be solved</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Required fields of nlp:</dt><dd></dd></dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html#l00018">18</a> of file <a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html">initialize.m</a>.</p>
+<p>Definition at line <a class="el" href="solver_2_0D_ipopt_application_2initialize_8m_source.html#l00018">18</a> of file <a class="el" href="solver_2_0D_ipopt_application_2initialize_8m_source.html">initialize.m</a>.</p>
 
-<p>References <a class="el" href="_nonlinear_program_8m_source.html#l00088">NonlinearProgram.ConstrArray</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00076">NonlinearProgram.CostArray</a>, and <a class="el" href="_nonlinear_program_8m_source.html#l00043">NonlinearProgram.Options</a>.</p>
-
-<p>Referenced by <a class="el" href="_ipopt_application_8m_source.html#l00068">IpoptApplication()</a>.</p>
+<p>Referenced by <a class="el" href="_ipopt_application_8m_source.html#l00075">IpoptApplication()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_ipopt_application_aab19798eee0003085204f64167466f03_icgraph.png" border="0" usemap="#class_ipopt_application_aab19798eee0003085204f64167466f03_icgraph" alt=""/></div>
-<map name="class_ipopt_application_aab19798eee0003085204f64167466f03_icgraph" id="class_ipopt_application_aab19798eee0003085204f64167466f03_icgraph">
+<div class="center"><img src="class_ipopt_application_a346a21952b0a2f0db97a19c6969b9b81_icgraph.png" border="0" usemap="#class_ipopt_application_a346a21952b0a2f0db97a19c6969b9b81_icgraph" alt=""/></div>
+<map name="class_ipopt_application_a346a21952b0a2f0db97a19c6969b9b81_icgraph" id="class_ipopt_application_a346a21952b0a2f0db97a19c6969b9b81_icgraph">
 <area shape="rect" id="node2" href="class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="224,5,440,32"/>
 </map>
 </div>
@@ -265,7 +328,7 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="ae65864db1da1078c025a2de86aab9c1d"></a>
+<a class="anchor" id="a8c3b92e45f866dce14ae1e0bce2fdee8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -276,7 +339,7 @@ Here is the caller graph for this function:</div>
           <td class="memname">function [   sol ,   info  ] = IpoptApplication.optimize </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>nlp</em></td><td>)</td>
+          <td class="paramname"><em>x0</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -294,13 +357,13 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="optimize_8m_source.html#l00018">18</a> of file <a class="el" href="optimize_8m_source.html">optimize.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_ipopt_application_8m_source.html#l00068">IpoptApplication()</a>.</p>
+<p>Referenced by <a class="el" href="_ipopt_application_8m_source.html#l00075">IpoptApplication()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_ipopt_application_ae65864db1da1078c025a2de86aab9c1d_icgraph.png" border="0" usemap="#class_ipopt_application_ae65864db1da1078c025a2de86aab9c1d_icgraph" alt=""/></div>
-<map name="class_ipopt_application_ae65864db1da1078c025a2de86aab9c1d_icgraph" id="class_ipopt_application_ae65864db1da1078c025a2de86aab9c1d_icgraph">
+<div class="center"><img src="class_ipopt_application_a8c3b92e45f866dce14ae1e0bce2fdee8_icgraph.png" border="0" usemap="#class_ipopt_application_a8c3b92e45f866dce14ae1e0bce2fdee8_icgraph" alt=""/></div>
+<map name="class_ipopt_application_a8c3b92e45f866dce14ae1e0bce2fdee8_icgraph" id="class_ipopt_application_a8c3b92e45f866dce14ae1e0bce2fdee8_icgraph">
 <area shape="rect" id="node2" href="class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="225,5,441,32"/>
 </map>
 </div>
@@ -325,6 +388,22 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a328bc58c58e1a53112eea84bbeeddec3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IpoptApplication.Nlp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The nonlinear programming object. </p>
+
+<p>Definition at line <a class="el" href="_ipopt_application_8m_source.html#l00061">61</a> of file <a class="el" href="_ipopt_application_8m_source.html">IpoptApplication.m</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a180ce7b6b7bf4a20e427070cdd23e8c3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -342,9 +421,9 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>nlp/@IpoptApplication/<a class="el" href="_ipopt_application_8m_source.html">IpoptApplication.m</a></li>
-<li>nlp/@IpoptApplication/<a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html">initialize.m</a></li>
-<li>nlp/@IpoptApplication/<a class="el" href="optimize_8m_source.html">optimize.m</a></li>
+<li>solver/@IpoptApplication/<a class="el" href="_ipopt_application_8m_source.html">IpoptApplication.m</a></li>
+<li>solver/@IpoptApplication/<a class="el" href="solver_2_0D_ipopt_application_2initialize_8m_source.html">initialize.m</a></li>
+<li>solver/@IpoptApplication/<a class="el" href="optimize_8m_source.html">optimize.m</a></li>
 </ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -355,7 +434,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 19 2017 20:59:41 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

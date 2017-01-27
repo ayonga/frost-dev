@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['function_5fhandle',['function_handle',['../classfunction__handle.html',1,'']]]
+  ['digraph',['digraph',['../classdigraph.html',1,'']]],
+  ['domain',['Domain',['../class_domain.html',1,'']]],
+  ['double',['double',['../classdouble.html',1,'']]]
 ];

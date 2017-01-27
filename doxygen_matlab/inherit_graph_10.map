@@ -1,9 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,107,65,133"/>
-<area shape="rect" id="node2" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="131,5,223,32"/>
-<area shape="rect" id="node3" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="132,56,221,83"/>
-<area shape="rect" id="node4" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="113,107,240,133"/>
-<area shape="rect" id="node6" href="$class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="139,157,214,184"/>
-<area shape="rect" id="node7" href="$class_ref.html" title="Ref" alt="" coords="155,208,198,235"/>
-<area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="288,107,479,133"/>
+<area shape="rect" id="node2" href="$classarray.html" title="ARRAY Summary of this class goes here Detailed explanation goes here. " alt="" coords="134,5,185,32"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="113,56,205,83"/>
+<area shape="rect" id="node5" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="115,107,204,133"/>
+<area shape="rect" id="node6" href="$class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="122,157,197,184"/>
+<area shape="rect" id="node7" href="$class_ref.html" title="Ref" alt="" coords="138,208,181,235"/>
+<area shape="rect" id="node4" href="$class_nlp_function_sum.html" title="This class provides a particular NLP function that is the sum of multiple NlpFunction objects..." alt="" coords="253,56,372,83"/>
 </map>

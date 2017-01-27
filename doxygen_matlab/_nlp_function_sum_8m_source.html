@@ -1,0 +1,198 @@
+<!-- HTML header for doxygen 1.8.8-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- For Mobile Devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+        <meta name="generator" content="Doxygen 1.8.11"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <title>FROST: nlp/NlpFunctionSum.m Source File</title>
+        <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
+        <script type="text/javascript" src="dynsections.js"></script>
+        <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="doxy-boot.js"></script>
+    </head>
+    <body>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
+        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+            <div class="content" id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
+                            <div style="margin-bottom: 15px;">
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c02edb81d504ff3718d292053c4eabea.html">nlp</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">NlpFunctionSum.m</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_nlp_function_sum_8m.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/* (Autoinserted by mtoc++)</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * This source code has been filtered by the mtoc++ executable,</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * which generates code that can be processed by the doxygen documentation tool.</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * On the other hand, it can neither be interpreted by MATLAB, nor can it be compiled with a C++ compiler.</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * Except for the comments, the function bodies of your M-file functions are untouched.</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Consequently, the FILTER_SOURCE_FILES doxygen switch (default in our Doxyfile.template) will produce</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * attached source files that are highly readable by humans.</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * Additionally, links in the doxygen generated documentation to the source code of functions and class members refer to</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * the correct locations in the source code browser.</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * However, the line numbers most likely do not correspond to the line numbers in the original MATLAB source files.</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_nlp_function_sum.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_nlp_function_sum.html">NlpFunctionSum</a></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  :<span class="keyword">public</span> <a class="code" href="class_nlp_function.html">NlpFunction</a> {</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div><div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_nlp_function_sum.html#a7c39aa66d9582372f239c08eddcf25e7">   37</a></span>&#160;            <a class="code" href="class_nlp_function.html">NlpFunction</a> <a class="code" href="class_nlp_function_sum.html#a7c39aa66d9582372f239c08eddcf25e7">Dependents</a>;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div><div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b">   49</a></span>&#160;        <a class="code" href="class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b">NlpFunctionSum</a>(<a class="code" href="classvarargin.html">varargin</a>) {</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="comment">/*  call superclass constructor */</span></div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            obj = obj@<a class="code" href="class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef">NlpFunction</a>(varargin[:]);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> nargin == 0</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordflow">return</span>;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            end</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            argin = <span class="keyword">struct</span>(varargin[:]);</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">if</span> isfield(argin, <span class="stringliteral">&quot; DependentFuncs &quot;</span>)</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                obj = <a class="code" href="class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d">setDependentFunction</a>(obj, argin.DependentFuncs);</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            end</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div><div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d">   73</a></span>&#160;        function obj = <a class="code" href="class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d">setDependentFunction</a>(<a class="code" href="class_nlp_function.html">NlpFunction</a> deps) {</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">if</span> ~iscell(deps)</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                deps = [deps];</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            end</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="comment">/*  validate dependent arguments */</span></div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            check_object = @(x) ~isa(x,<span class="stringliteral">&quot; NlpFunction &quot;</span>);</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">if</span> any(cellfun(check_object,deps))</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                error(<span class="stringliteral">&quot; NlpFunctionSum:invalidObject &quot;</span>, ...</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="stringliteral">&quot; There exist non-NlpFunction objects in the dependent functions list. &quot;</span>);</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            end</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            obj.Dependents= deps(:);</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div><div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="class_nlp_function_sum.html#aab1e370b3ad4962c9d9193303aa2d501">  101</a></span>&#160;        function obj = <a class="code" href="class_nlp_function_sum.html#aab1e370b3ad4962c9d9193303aa2d501">setFuncIndices</a>(<a class="code" href="classinteger.html">integer</a> index) {</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            assert(length(index) == obj.Dimension, ...</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="stringliteral">&quot; The length of the variable indices must be equal to the dimension of the NlpVariable object. &quot;</span>);</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            obj.Dependents= cellfun(@(x) <a class="code" href="class_nlp_function_sum.html#aab1e370b3ad4962c9d9193303aa2d501">setFuncIndices</a>(x, index), ...</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                obj.Dependents, <span class="stringliteral">&quot; UniformOutput &quot;</span>, <span class="keyword">false</span>);</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            obj.FuncIndices= index;</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div><div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc">  122</a></span>&#160;        function deps = <a class="code" href="class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc">getDepObject</a>() {</div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            deps = cellfun(@(x)<a class="code" href="class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc">getDepObject</a>(x), obj.Dependents,...</div><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="stringliteral">&quot; UniformOutput &quot;</span>, <span class="keyword">false</span>);</div><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            deps = vertcat(deps[:]);</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div><div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;};</div><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div><div class="ttc" id="class_nlp_function_sum_html_aab1e370b3ad4962c9d9193303aa2d501"><div class="ttname"><a href="class_nlp_function_sum.html#aab1e370b3ad4962c9d9193303aa2d501">NlpFunctionSum.setFuncIndices</a></div><div class="ttdeci">function   obj  = setFuncIndices(integer index)</div><div class="ttdoc">Sets indices of the Nlp Function. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_sum_8m_source.html#l00101">NlpFunctionSum.m:101</a></div></div>
+<div class="ttc" id="class_nlp_function_sum_html"><div class="ttname"><a href="class_nlp_function_sum.html">NlpFunctionSum</a></div><div class="ttdoc">This class provides a particular NLP function that is the sum of multiple NlpFunction objects...</div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_sum_8m_source.html#l00017">NlpFunctionSum.m:17</a></div></div>
+<div class="ttc" id="class_nlp_function_sum_html_ad85b08193a9a6113e4821ec51a9faffc"><div class="ttname"><a href="class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc">NlpFunctionSum.getDepObject</a></div><div class="ttdeci">function   deps  = getDepObject()</div><div class="ttdoc">Returns the object of the dependent function. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_sum_8m_source.html#l00122">NlpFunctionSum.m:122</a></div></div>
+<div class="ttc" id="class_nlp_function_sum_html_a7c39aa66d9582372f239c08eddcf25e7"><div class="ttname"><a href="class_nlp_function_sum.html#a7c39aa66d9582372f239c08eddcf25e7">NlpFunctionSum.Dependents</a></div><div class="ttdeci">NlpFunction Dependents</div><div class="ttdoc">The dependent functions. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_sum_8m_source.html#l00037">NlpFunctionSum.m:37</a></div></div>
+<div class="ttc" id="classinteger_html"><div class="ttname"><a href="classinteger.html">integer</a></div><div class="ttdoc">An integer value. </div></div>
+<div class="ttc" id="class_nlp_function_html"><div class="ttname"><a href="class_nlp_function.html">NlpFunction</a></div><div class="ttdoc">This class provides a data structure for a optimization function. This function could be either a con...</div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_8m_source.html#l00017">NlpFunction.m:17</a></div></div>
+<div class="ttc" id="class_nlp_function_sum_html_a20726c6ae84f759c898e7e1776b49b2b"><div class="ttname"><a href="class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b">NlpFunctionSum.NlpFunctionSum</a></div><div class="ttdeci">NlpFunctionSum(varargin)</div><div class="ttdoc">The class constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_sum_8m_source.html#l00049">NlpFunctionSum.m:49</a></div></div>
+<div class="ttc" id="classvarargin_html"><div class="ttname"><a href="classvarargin.html">varargin</a></div><div class="ttdoc">A variable number of input arguments. </div></div>
+<div class="ttc" id="class_nlp_function_sum_html_a8b1162ff461e66e3c5ad988a89310d7d"><div class="ttname"><a href="class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d">NlpFunctionSum.setDependentFunction</a></div><div class="ttdeci">function   obj  = setDependentFunction(NlpFunction deps)</div><div class="ttdoc">Sets dependent objects of the Nlp Function. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_sum_8m_source.html#l00073">NlpFunctionSum.m:73</a></div></div>
+<div class="ttc" id="class_nlp_function_html_ac87aece2735ef77e11cace072cff3cef"><div class="ttname"><a href="class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef">NlpFunction.NlpFunction</a></div><div class="ttdeci">NlpFunction(varargin)</div><div class="ttdoc">The class constructor function. </div><div class="ttdef"><b>Definition:</b> <a href="_nlp_function_8m_source.html#l00292">NlpFunction.m:292</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
+<!-- start footer part -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Thu Jan 26 2017 21:36:42 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

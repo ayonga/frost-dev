@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.11"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: NonlinearProgram Class Reference</title>
+        <title>FROST: NonlinearProgram Class Reference</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -24,20 +24,88 @@
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand">AMBER Suite 1.0</a>
-                </div>
-            </div>
-        </nav>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
         <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
             <div class="content" id="content">
                 <div class="container">
@@ -112,8 +180,7 @@ Inheritance diagram for NonlinearProgram:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nonlinear_program__inherit__graph.png" border="0" usemap="#_nonlinear_program_inherit__map" alt="Inheritance graph"/></div>
 <map name="_nonlinear_program_inherit__map" id="_nonlinear_program_inherit__map">
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="5,155,196,181"/>
-<area shape="rect" id="node2" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="71,5,131,32"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="5,80,196,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -121,33 +188,28 @@ Collaboration diagram for NonlinearProgram:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nonlinear_program__coll__graph.png" border="0" usemap="#_nonlinear_program_coll__map" alt="Collaboration graph"/></div>
 <map name="_nonlinear_program_coll__map" id="_nonlinear_program_coll__map">
-<area shape="rect" id="node2" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
-<area shape="rect" id="node5" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="73,139,163,165"/>
-<area shape="rect" id="node3" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="198,139,241,165"/>
-<area shape="rect" id="node4" href="classstruct.html" title="A MatLab struct. " alt="" coords="293,139,348,165"/>
-<area shape="rect" id="node6" href="classcolvec.html" title="A matlab column vector. " alt="" coords="89,5,149,32"/>
-<area shape="rect" id="node7" href="classchar.html" title="A MatLab character array. " alt="" coords="203,5,249,32"/>
-<area shape="rect" id="node8" href="classinteger.html" title="An integer value. " alt="" coords="274,5,335,32"/>
+<area shape="rect" id="node2" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,5,48,32"/>
+<area shape="rect" id="node3" href="classstruct.html" title="A MatLab struct. " alt="" coords="113,5,167,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad75f778104b0ccfe1eb91115ca2fb691"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691">NonlinearProgram</a> (<a class="el" href="classstruct.html">struct</a> opts)</td></tr>
-<tr class="memdesc:ad75f778104b0ccfe1eb91115ca2fb691"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default class constructor function.  <a href="#ad75f778104b0ccfe1eb91115ca2fb691">More...</a><br /></td></tr>
-<tr class="separator:ad75f778104b0ccfe1eb91115ca2fb691"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb45fe7636d2a6d8055a15d30726518a"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#afb45fe7636d2a6d8055a15d30726518a">addVariable</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:afb45fe7636d2a6d8055a15d30726518a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#afb45fe7636d2a6d8055a15d30726518a">More...</a><br /></td></tr>
-<tr class="separator:afb45fe7636d2a6d8055a15d30726518a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a797b04e2fc6ef3d9011dcabfec0978bf"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a797b04e2fc6ef3d9011dcabfec0978bf">genVarIndices</a> ()</td></tr>
-<tr class="memdesc:a797b04e2fc6ef3d9011dcabfec0978bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates indices for NLP variables.  <a href="#a797b04e2fc6ef3d9011dcabfec0978bf">More...</a><br /></td></tr>
-<tr class="separator:a797b04e2fc6ef3d9011dcabfec0978bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4419d20a1047bd24b64f96f31dd6b36b"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a4419d20a1047bd24b64f96f31dd6b36b">addObjective</a> (<a class="el" href="class_nlp_function.html">NlpFunction</a> funcs)</td></tr>
-<tr class="memdesc:a4419d20a1047bd24b64f96f31dd6b36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of a NLP function as a cost function.  <a href="#a4419d20a1047bd24b64f96f31dd6b36b">More...</a><br /></td></tr>
-<tr class="separator:a4419d20a1047bd24b64f96f31dd6b36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a549304f4674df2dae8d72ac8e17bb7d1"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a549304f4674df2dae8d72ac8e17bb7d1">addConstraint</a> (<a class="el" href="class_nlp_function.html">NlpFunction</a> funcs)</td></tr>
-<tr class="memdesc:a549304f4674df2dae8d72ac8e17bb7d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of a NLP function as a constraint.  <a href="#a549304f4674df2dae8d72ac8e17bb7d1">More...</a><br /></td></tr>
-<tr class="separator:a549304f4674df2dae8d72ac8e17bb7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5207750db02c9af45b8dbc9245a6bd35"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35">NonlinearProgram</a> (<a class="el" href="classstruct.html">struct</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a5207750db02c9af45b8dbc9245a6bd35"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default class constructor function.  <a href="#a5207750db02c9af45b8dbc9245a6bd35">More...</a><br /></td></tr>
+<tr class="separator:a5207750db02c9af45b8dbc9245a6bd35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616e92e5a58bd04f9cbd6768b7773749"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749">regVariable</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a616e92e5a58bd04f9cbd6768b7773749"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#a616e92e5a58bd04f9cbd6768b7773749">More...</a><br /></td></tr>
+<tr class="separator:a616e92e5a58bd04f9cbd6768b7773749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68afb570d51f6afcb91aa233885ba1ad"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad">update</a> ()</td></tr>
+<tr class="memdesc:a68afb570d51f6afcb91aa233885ba1ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the NLP problems before load it to NLP solver.  <a href="#a68afb570d51f6afcb91aa233885ba1ad">More...</a><br /></td></tr>
+<tr class="separator:a68afb570d51f6afcb91aa233885ba1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac69a4a0d696fffa572396d5c58a1e5a5"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5">regObjective</a> (<a class="el" href="class_nlp_function.html">NlpFunction</a> funcs)</td></tr>
+<tr class="memdesc:ac69a4a0d696fffa572396d5c58a1e5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of a NLP function as a cost function.  <a href="#ac69a4a0d696fffa572396d5c58a1e5a5">More...</a><br /></td></tr>
+<tr class="separator:ac69a4a0d696fffa572396d5c58a1e5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7c158b15629514ce37fc2aa14439ee"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee">regConstraint</a> (<a class="el" href="class_nlp_function.html">NlpFunction</a> funcs)</td></tr>
+<tr class="memdesc:a8b7c158b15629514ce37fc2aa14439ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of a NLP function as a constraint.  <a href="#a8b7c158b15629514ce37fc2aa14439ee">More...</a><br /></td></tr>
+<tr class="separator:a8b7c158b15629514ce37fc2aa14439ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18934c38a77bf78db80fc54e101b5765"><td class="memItemLeft" align="right" valign="top">function [   nVar ,   lowerbound ,   upperbound  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765">getVarInfo</a> ()</td></tr>
 <tr class="memdesc:a18934c38a77bf78db80fc54e101b5765"><td class="mdescLeft">&#160;</td><td class="mdescRight">The function returns the dimension, upper/lower limits of NLP variables.  <a href="#a18934c38a77bf78db80fc54e101b5765">More...</a><br /></td></tr>
 <tr class="separator:a18934c38a77bf78db80fc54e101b5765"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,64 +222,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a320eca30d9ad4f580106ed8916d6bc72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a320eca30d9ad4f580106ed8916d6bc72">Options</a></td></tr>
 <tr class="memdesc:a320eca30d9ad4f580106ed8916d6bc72"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class option.  <a href="#a320eca30d9ad4f580106ed8916d6bc72">More...</a><br /></td></tr>
 <tr class="separator:a320eca30d9ad4f580106ed8916d6bc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb7d60573c5a0a829d86880156fc4e37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nlp_variable.html">NlpVariable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#abb7d60573c5a0a829d86880156fc4e37">VariableArray</a></td></tr>
-<tr class="memdesc:abb7d60573c5a0a829d86880156fc4e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">The structure array contains all information regarding NLP optimization variables.  <a href="#abb7d60573c5a0a829d86880156fc4e37">More...</a><br /></td></tr>
+<tr class="memitem:abb7d60573c5a0a829d86880156fc4e37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#abb7d60573c5a0a829d86880156fc4e37">VariableArray</a></td></tr>
+<tr class="memdesc:abb7d60573c5a0a829d86880156fc4e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">The cell array contains all information regarding NLP optimization variables.  <a href="#abb7d60573c5a0a829d86880156fc4e37">More...</a><br /></td></tr>
 <tr class="separator:abb7d60573c5a0a829d86880156fc4e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e6eda26d002cf14d44926ecc081bb0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a7e6eda26d002cf14d44926ecc081bb0b">CostArray</a></td></tr>
-<tr class="memdesc:a7e6eda26d002cf14d44926ecc081bb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A cell data stores objective functions.  <a href="#a7e6eda26d002cf14d44926ecc081bb0b">More...</a><br /></td></tr>
+<tr class="memdesc:a7e6eda26d002cf14d44926ecc081bb0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A cell array data stores objective functions.  <a href="#a7e6eda26d002cf14d44926ecc081bb0b">More...</a><br /></td></tr>
 <tr class="separator:a7e6eda26d002cf14d44926ecc081bb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe8d4bc2dcd3a634c41c7e8a6f5d1e32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#abe8d4bc2dcd3a634c41c7e8a6f5d1e32">ConstrArray</a></td></tr>
-<tr class="memdesc:abe8d4bc2dcd3a634c41c7e8a6f5d1e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">A cell data stores all constraints functions.  <a href="#abe8d4bc2dcd3a634c41c7e8a6f5d1e32">More...</a><br /></td></tr>
+<tr class="memdesc:abe8d4bc2dcd3a634c41c7e8a6f5d1e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">A cell array data stores all constraints functions.  <a href="#abe8d4bc2dcd3a634c41c7e8a6f5d1e32">More...</a><br /></td></tr>
 <tr class="separator:abe8d4bc2dcd3a634c41c7e8a6f5d1e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ba5b5dc6d3bc3aaa72f2973ae0974b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a6ba5b5dc6d3bc3aaa72f2973ae0974b8">Sol</a></td></tr>
 <tr class="memdesc:a6ba5b5dc6d3bc3aaa72f2973ae0974b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The solution of the NLP problem.  <a href="#a6ba5b5dc6d3bc3aaa72f2973ae0974b8">More...</a><br /></td></tr>
 <tr class="separator:a6ba5b5dc6d3bc3aaa72f2973ae0974b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
-<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
-<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
-<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
-<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
-<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
-<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
-<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
-<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
-<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
-<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
-<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
-<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
-<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
-<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
-<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
-<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
-<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
-<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
-<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
-<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
-<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
-<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
-<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
-<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
-<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
-<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
-<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
-<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
-<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
-<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
-<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. ">NonlinearProgram</a> defines an abstract class for general nonlinear programing problems. </p>
@@ -228,7 +244,7 @@ Public Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00017">17</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad75f778104b0ccfe1eb91115ca2fb691"></a>
+<a class="anchor" id="a5207750db02c9af45b8dbc9245a6bd35"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -236,7 +252,7 @@ Public Attributes</h2></td></tr>
           <td class="memname">NonlinearProgram.NonlinearProgram </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
-          <td class="paramname"><em>opts</em></td><td>)</td>
+          <td class="paramname"><em>varargin</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -245,30 +261,28 @@ Public Attributes</h2></td></tr>
 <p>The default class constructor function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">opts</td><td>non-default configuration options. It will overwrite the default options </td></tr>
+    <tr><td class="paramname">varargin</td><td>non-default configuration options. It will overwrite the default options </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00117">117</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
+<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00116">116</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
-<p>References <a class="el" href="add_constraint_8m_source.html#l00018">addConstraint()</a>, <a class="el" href="add_objective_8m_source.html#l00018">addObjective()</a>, <a class="el" href="add_variable_8m_source.html#l00018">addVariable()</a>, <a class="el" href="gen_var_indices_8m_source.html#l00018">genVarIndices()</a>, <a class="el" href="get_initial_guess_8m_source.html#l00018">getInitialGuess()</a>, <a class="el" href="get_var_info_8m_source.html#l00018">getVarInfo()</a>, and <a class="el" href="struct__overlay_8m_source.html#l00017">struct_overlay()</a>.</p>
+<p>References <a class="el" href="get_initial_guess_8m_source.html#l00018">getInitialGuess()</a>, <a class="el" href="get_var_info_8m_source.html#l00018">getVarInfo()</a>, <a class="el" href="reg_constraint_8m_source.html#l00018">regConstraint()</a>, <a class="el" href="reg_objective_8m_source.html#l00018">regObjective()</a>, <a class="el" href="reg_variable_8m_source.html#l00018">regVariable()</a>, and <a class="el" href="_0D_nonlinear_program_2update_8m_source.html#l00018">update()</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00071">HybridTrajectoryOptimization.HybridTrajectoryOptimization()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00130">HybridTrajectoryOptimization.HybridTrajectoryOptimization()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_cgraph.png" border="0" usemap="#class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_cgraph" alt=""/></div>
-<map name="class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_cgraph" id="class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_cgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#a549304f4674df2dae8d72ac8e17bb7d1" title="This method registers the information of a NLP function as a constraint. " alt="" coords="243,5,457,32"/>
-<area shape="rect" id="node3" href="class_nonlinear_program.html#a4419d20a1047bd24b64f96f31dd6b36b" title="This method registers the information of a NLP function as a cost function. " alt="" coords="245,56,455,83"/>
-<area shape="rect" id="node4" href="class_nonlinear_program.html#afb45fe7636d2a6d8055a15d30726518a" title="This method registers the information of an optimization variable. " alt="" coords="249,107,451,133"/>
-<area shape="rect" id="node5" href="class_nonlinear_program.html#a797b04e2fc6ef3d9011dcabfec0978bf" title="Generates indices for NLP variables. " alt="" coords="263,158,437,199"/>
-<area shape="rect" id="node6" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="259,223,441,265"/>
-<area shape="rect" id="node7" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="253,289,447,316"/>
-<area shape="rect" id="node8" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="298,340,402,367"/>
-<area shape="rect" id="node9" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="505,340,572,367"/>
+<div class="center"><img src="class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_cgraph.png" border="0" usemap="#class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_cgraph" alt=""/></div>
+<map name="class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_cgraph" id="class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_cgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="257,5,440,47"/>
+<area shape="rect" id="node3" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="251,71,446,98"/>
+<area shape="rect" id="node4" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="243,122,455,149"/>
+<area shape="rect" id="node5" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="245,173,452,199"/>
+<area shape="rect" id="node6" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="249,223,448,250"/>
+<area shape="rect" id="node7" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="262,274,435,301"/>
 </map>
 </div>
 </p>
@@ -276,9 +290,9 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_icgraph.png" border="0" usemap="#class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_icgraph" alt=""/></div>
-<map name="class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_icgraph" id="class_nonlinear_program_ad75f778104b0ccfe1eb91115ca2fb691_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="243,5,441,47"/>
+<div class="center"><img src="class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_icgraph.png" border="0" usemap="#class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_icgraph" id="class_nonlinear_program_a5207750db02c9af45b8dbc9245a6bd35_icgraph">
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="243,5,441,47"/>
 </map>
 </div>
 </p>
@@ -286,161 +300,6 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a549304f4674df2dae8d72ac8e17bb7d1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function   obj  = NonlinearProgram.addConstraint </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_nlp_function.html">NlpFunction</a>&#160;</td>
-          <td class="paramname"><em>funcs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This method registers the information of a NLP function as a constraint. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">funcs</td><td>a list of contraint functions</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
-
-<p>Definition at line <a class="el" href="add_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="add_constraint_8m_source.html">addConstraint.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00117">NonlinearProgram()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_a549304f4674df2dae8d72ac8e17bb7d1_icgraph.png" border="0" usemap="#class_nonlinear_program_a549304f4674df2dae8d72ac8e17bb7d1_icgraph" alt=""/></div>
-<map name="class_nonlinear_program_a549304f4674df2dae8d72ac8e17bb7d1_icgraph" id="class_nonlinear_program_a549304f4674df2dae8d72ac8e17bb7d1_icgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="268,5,457,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="505,5,704,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a4419d20a1047bd24b64f96f31dd6b36b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function   obj  = NonlinearProgram.addObjective </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_nlp_function.html">NlpFunction</a>&#160;</td>
-          <td class="paramname"><em>funcs</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This method registers the information of a NLP function as a cost function. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">funcs</td><td>a list of objective functions</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
-
-<p>Definition at line <a class="el" href="add_objective_8m_source.html#l00018">18</a> of file <a class="el" href="add_objective_8m_source.html">addObjective.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00117">NonlinearProgram()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_a4419d20a1047bd24b64f96f31dd6b36b_icgraph.png" border="0" usemap="#class_nonlinear_program_a4419d20a1047bd24b64f96f31dd6b36b_icgraph" alt=""/></div>
-<map name="class_nonlinear_program_a4419d20a1047bd24b64f96f31dd6b36b_icgraph" id="class_nonlinear_program_a4419d20a1047bd24b64f96f31dd6b36b_icgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="264,5,453,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="501,5,700,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="afb45fe7636d2a6d8055a15d30726518a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function   obj  = NonlinearProgram.addVariable </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>varargin</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This method registers the information of an optimization variable. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vars</td><td>new NLP variables</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
-
-<p>Definition at line <a class="el" href="add_variable_8m_source.html#l00018">18</a> of file <a class="el" href="add_variable_8m_source.html">addVariable.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00117">NonlinearProgram()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_afb45fe7636d2a6d8055a15d30726518a_icgraph.png" border="0" usemap="#class_nonlinear_program_afb45fe7636d2a6d8055a15d30726518a_icgraph" alt=""/></div>
-<map name="class_nonlinear_program_afb45fe7636d2a6d8055a15d30726518a_icgraph" id="class_nonlinear_program_afb45fe7636d2a6d8055a15d30726518a_icgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="256,5,445,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="493,5,692,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a797b04e2fc6ef3d9011dcabfec0978bf"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function   obj  = NonlinearProgram.genVarIndices </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generates indices for NLP variables. </p>
-<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
-
-<p>Definition at line <a class="el" href="gen_var_indices_8m_source.html#l00018">18</a> of file <a class="el" href="gen_var_indices_8m_source.html">genVarIndices.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00117">NonlinearProgram()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_a797b04e2fc6ef3d9011dcabfec0978bf_icgraph.png" border="0" usemap="#class_nonlinear_program_a797b04e2fc6ef3d9011dcabfec0978bf_icgraph" alt=""/></div>
-<map name="class_nonlinear_program_a797b04e2fc6ef3d9011dcabfec0978bf_icgraph" id="class_nonlinear_program_a797b04e2fc6ef3d9011dcabfec0978bf_icgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="228,5,417,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="465,5,664,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
 <a class="anchor" id="a6b55533176c1ff3f6dcb545eb01347d2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -466,15 +325,15 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="get_initial_guess_8m_source.html#l00018">18</a> of file <a class="el" href="get_initial_guess_8m_source.html">getInitialGuess.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00117">NonlinearProgram()</a>.</p>
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00116">NonlinearProgram()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph.png" border="0" usemap="#class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph" id="class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="236,5,425,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="473,5,672,47"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="236,5,425,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="473,5,672,47"/>
 </map>
 </div>
 </p>
@@ -506,15 +365,172 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="get_var_info_8m_source.html#l00018">18</a> of file <a class="el" href="get_var_info_8m_source.html">getVarInfo.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00117">NonlinearProgram()</a>.</p>
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00116">NonlinearProgram()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph.png" border="0" usemap="#class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph" id="class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#ad75f778104b0ccfe1eb91115ca2fb691" title="The default class constructor function. " alt="" coords="248,5,437,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557" title="The constructor function. " alt="" coords="485,5,684,47"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="248,5,437,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="485,5,684,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b7c158b15629514ce37fc2aa14439ee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NonlinearProgram.regConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_nlp_function.html">NlpFunction</a>&#160;</td>
+          <td class="paramname"><em>funcs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method registers the information of a NLP function as a constraint. </p>
+<dl class="section note"><dt>Note</dt><dd>We always assume 'funcs' to be a 2-D array or table consists of cell or objects. It also covers 1-D array or scalar variables.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">funcs</td><td>a list of contraint functions new NLP variables</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="reg_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="reg_constraint_8m_source.html">regConstraint.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00116">NonlinearProgram()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nonlinear_program_a8b7c158b15629514ce37fc2aa14439ee_icgraph.png" border="0" usemap="#class_nonlinear_program_a8b7c158b15629514ce37fc2aa14439ee_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_a8b7c158b15629514ce37fc2aa14439ee_icgraph" id="class_nonlinear_program_a8b7c158b15629514ce37fc2aa14439ee_icgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="265,5,455,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="503,5,701,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ac69a4a0d696fffa572396d5c58a1e5a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NonlinearProgram.regObjective </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_nlp_function.html">NlpFunction</a>&#160;</td>
+          <td class="paramname"><em>funcs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method registers the information of a NLP function as a cost function. </p>
+<dl class="section note"><dt>Note</dt><dd>We always assume 'funcs' to be a 2-D array or table consists of cell or objects. It also covers 1-D array or scalar variables.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">funcs</td><td>a list of objective functions new NLP variables</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="reg_objective_8m_source.html#l00018">18</a> of file <a class="el" href="reg_objective_8m_source.html">regObjective.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00116">NonlinearProgram()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nonlinear_program_ac69a4a0d696fffa572396d5c58a1e5a5_icgraph.png" border="0" usemap="#class_nonlinear_program_ac69a4a0d696fffa572396d5c58a1e5a5_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_ac69a4a0d696fffa572396d5c58a1e5a5_icgraph" id="class_nonlinear_program_ac69a4a0d696fffa572396d5c58a1e5a5_icgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="260,5,449,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="497,5,696,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a616e92e5a58bd04f9cbd6768b7773749"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NonlinearProgram.regVariable </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method registers the information of an optimization variable. </p>
+<dl class="section note"><dt>Note</dt><dd>We always assume 'vars' to be a 2-D array or table consists of cell or objects. It also covers 1-D array or scalar variables.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vars</td><td>new NLP variables</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="reg_variable_8m_source.html#l00018">18</a> of file <a class="el" href="reg_variable_8m_source.html">regVariable.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00116">NonlinearProgram()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph.png" border="0" usemap="#class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph" id="class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="252,5,441,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="489,5,688,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a68afb570d51f6afcb91aa233885ba1ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NonlinearProgram.update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the NLP problems before load it to NLP solver. </p>
+
+<p>Definition at line <a class="el" href="_0D_nonlinear_program_2update_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nonlinear_program_2update_8m_source.html">update.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00116">NonlinearProgram()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph.png" border="0" usemap="#class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph" id="class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="227,5,416,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="464,5,663,47"/>
 </map>
 </div>
 </p>
@@ -532,14 +548,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>A cell data stores all constraints functions. </p>
+<p>A cell array data stores all constraints functions. </p>
 <dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00088">88</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
-
-<p>Referenced by <a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html#l00018">IpoptApplication.initialize()</a>.</p>
+<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00087">87</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
 </div>
 </div>
@@ -553,14 +567,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>A cell data stores objective functions. </p>
+<p>A cell array data stores objective functions. </p>
 <dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00076">76</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
-
-<p>Referenced by <a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html#l00018">IpoptApplication.initialize()</a>.</p>
+<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00075">75</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
 </div>
 </div>
@@ -580,9 +592,7 @@ Here is the caller graph for this function:</div>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00043">43</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
-
-<p>Referenced by <a class="el" href="nlp_2_0D_ipopt_application_2initialize_8m_source.html#l00018">IpoptApplication.initialize()</a>.</p>
+<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00042">42</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
 </div>
 </div>
@@ -598,7 +608,7 @@ Here is the caller graph for this function:</div>
 
 <p>The solution of the NLP problem. </p>
 
-<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00105">105</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
+<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00104">104</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
 </div>
 </div>
@@ -612,23 +622,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>The structure array contains all information regarding NLP optimization variables. </p>
+<p>The cell array contains all information regarding NLP optimization variables. </p>
 <dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00062">62</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
+<p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00061">61</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nlp/@NonlinearProgram/<a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a></li>
-<li>nlp/@NonlinearProgram/<a class="el" href="add_constraint_8m_source.html">addConstraint.m</a></li>
-<li>nlp/@NonlinearProgram/<a class="el" href="add_objective_8m_source.html">addObjective.m</a></li>
-<li>nlp/@NonlinearProgram/<a class="el" href="add_variable_8m_source.html">addVariable.m</a></li>
-<li>nlp/@NonlinearProgram/<a class="el" href="gen_var_indices_8m_source.html">genVarIndices.m</a></li>
 <li>nlp/@NonlinearProgram/<a class="el" href="get_initial_guess_8m_source.html">getInitialGuess.m</a></li>
 <li>nlp/@NonlinearProgram/<a class="el" href="get_var_info_8m_source.html">getVarInfo.m</a></li>
+<li>nlp/@NonlinearProgram/<a class="el" href="reg_constraint_8m_source.html">regConstraint.m</a></li>
+<li>nlp/@NonlinearProgram/<a class="el" href="reg_objective_8m_source.html">regObjective.m</a></li>
+<li>nlp/@NonlinearProgram/<a class="el" href="reg_variable_8m_source.html">regVariable.m</a></li>
+<li>nlp/@NonlinearProgram/<a class="el" href="_0D_nonlinear_program_2update_8m_source.html">update.m</a></li>
 </ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -639,7 +649,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 19 2017 20:59:41 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

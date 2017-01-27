@@ -1,4 +1,3 @@
 <map id="NlpFunction::setJacobianPattern" name="NlpFunction::setJacobianPattern">
-<area shape="rect" id="node2" href="$class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="453,13,624,39"/>
-<area shape="rect" id="node3" href="$class_nlp_function.html#a1a44c78bc5fd9f0a78d3f950abd87ada" title="This function sets the dependent variables of the function. " alt="" coords="224,38,405,65"/>
+<area shape="rect" id="node2" href="$class_nlp_function.html#a2ce9413b3ef885f931c181235a369846" title="Returns the indices of the dependent variables. " alt="" coords="224,13,408,39"/>
 </map>

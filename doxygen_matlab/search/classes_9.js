@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['matrix',['matrix',['../classmatrix.html',1,'']]]
+  ['logical',['logical',['../classlogical.html',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['integer',['integer',['../classinteger.html',1,'']]],
-  ['iofeedback',['IOFeedback',['../class_i_o_feedback.html',1,'']]],
-  ['ipoptapplication',['IpoptApplication',['../class_ipopt_application.html',1,'']]]
+  ['handle',['handle',['../classhandle.html',1,'']]],
+  ['hybridsystem',['HybridSystem',['../class_hybrid_system.html',1,'']]],
+  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html',1,'']]]
 ];

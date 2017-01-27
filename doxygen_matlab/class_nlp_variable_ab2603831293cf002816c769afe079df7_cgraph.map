@@ -1,8 +1,9 @@
 <map id="NlpVariable::NlpVariable" name="NlpVariable::NlpVariable">
-<area shape="rect" id="node2" href="$class_nlp_variable.html#a61352ffcd0ab286b12269b5ca368329e" title="Appends the new NlpVariable vars to the existing NlpVariable array. " alt="" coords="229,5,384,32"/>
-<area shape="rect" id="node3" href="$class_nlp_variable.html#a1953d10d296bf0cc61ef963a3daae427" title="Generates indinces of each variable if the input is an array of NlpVariable objects. " alt="" coords="227,56,387,83"/>
-<area shape="rect" id="node4" href="$class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="221,107,392,133"/>
-<area shape="rect" id="node5" href="$class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113" title="Sets the dimension of the NLP variable vector. " alt="" coords="218,157,395,184"/>
-<area shape="rect" id="node6" href="$class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="217,208,396,235"/>
-<area shape="rect" id="node7" href="$class_nlp_variable.html#a8b76127038b4009cadc002a600b7685f" title="Specifies the name of the NLP variable. " alt="" coords="231,259,382,285"/>
+<area shape="rect" id="node2" href="$class_nlp_variable.html#a7d3f4ca578e79d0fcd941d018977c073" title="NlpVariable::appendTo" alt="" coords="221,5,376,32"/>
+<area shape="rect" id="node3" href="$class_nlp_variable.html#a06d3f96daba1e2269d28089a93cde5a0" title="NlpVariable::genIndices" alt="" coords="219,56,379,83"/>
+<area shape="rect" id="node4" href="$class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="432,120,603,147"/>
+<area shape="rect" id="node5" href="$class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113" title="Sets the dimension of the NLP variable vector. " alt="" coords="429,196,606,223"/>
+<area shape="rect" id="node6" href="$class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="428,247,607,273"/>
+<area shape="rect" id="node7" href="$class_nlp_variable.html#a8b76127038b4009cadc002a600b7685f" title="Specifies the name of the NLP variable. " alt="" coords="223,309,374,336"/>
+<area shape="rect" id="node8" href="$class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="217,208,380,235"/>
 </map>

@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.11"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: Class Hierarchy</title>
+        <title>FROST: Class Hierarchy</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -24,20 +24,88 @@
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand">AMBER Suite 1.0</a>
-                </div>
-            </div>
-        </nav>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
         <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
             <div class="content" id="content">
                 <div class="container">
@@ -161,12 +229,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td><img src="inherit_graph_10.png" border="0" alt="" usemap="#handle"/>
 <map name="handle" id="handle">
 <area shape="rect" id="node1" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,107,65,133"/>
-<area shape="rect" id="node2" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="131,5,223,32"/>
-<area shape="rect" id="node3" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="132,56,221,83"/>
-<area shape="rect" id="node4" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="113,107,240,133"/>
-<area shape="rect" id="node6" href="class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="139,157,214,184"/>
-<area shape="rect" id="node7" href="class_ref.html" title="Ref" alt="" coords="155,208,198,235"/>
-<area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="288,107,479,133"/>
+<area shape="rect" id="node2" href="classarray.html" title="ARRAY Summary of this class goes here Detailed explanation goes here. " alt="" coords="134,5,185,32"/>
+<area shape="rect" id="node3" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="113,56,205,83"/>
+<area shape="rect" id="node5" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="115,107,204,133"/>
+<area shape="rect" id="node6" href="class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="122,157,197,184"/>
+<area shape="rect" id="node7" href="class_ref.html" title="Ref" alt="" coords="138,208,181,235"/>
+<area shape="rect" id="node4" href="class_nlp_function_sum.html" title="This class provides a particular NLP function that is the sum of multiple NlpFunction objects..." alt="" coords="253,56,372,83"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_11.png" border="0" alt="" usemap="#_hybrid_system"/>
@@ -201,38 +269,49 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <area shape="rect" id="node2" href="classsparsematrix.html" title="A matlab sparse matrix. " alt="" coords="112,5,209,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" alt="" usemap="#_rigid_body_model"/>
+<tr><td><img src="inherit_graph_16.png" border="0" alt="" usemap="#_nonlinear_program"/>
+<map name="_nonlinear_program" id="_nonlinear_program">
+<area shape="rect" id="node1" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="180,5,371,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_17.png" border="0" alt="" usemap="#_rigid_body_model"/>
 <map name="_rigid_body_model" id="_rigid_body_model">
 <area shape="rect" id="node1" href="class_rigid_body_model.html" title="A class with basic model descriptions and functionalities of the multi&#45;link rigid&#45;body robot platform..." alt="" coords="5,5,123,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" alt="" usemap="#rowvec"/>
+<tr><td><img src="inherit_graph_18.png" border="0" alt="" usemap="#rowvec"/>
 <map name="rowvec" id="rowvec">
 <area shape="rect" id="node1" href="classrowvec.html" title="A matlab row vector. " alt="" coords="5,5,69,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_18.png" border="0" alt="" usemap="#_solver_application"/>
+<tr><td><img src="inherit_graph_19.png" border="0" alt="" usemap="#_solver_application"/>
 <map name="_solver_application" id="_solver_application">
 <area shape="rect" id="node1" href="class_solver_application.html" title="SolverApplication defines an abstract interface class for NLP solvers. " alt="" coords="5,5,128,32"/>
 <area shape="rect" id="node2" href="class_ipopt_application.html" title="IpoptApplication defines an interface application class for IPOPT solvers. " alt="" coords="176,5,291,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_19.png" border="0" alt="" usemap="#struct"/>
+<tr><td><img src="inherit_graph_20.png" border="0" alt="" usemap="#struct"/>
 <map name="struct" id="struct">
 <area shape="rect" id="node1" href="classstruct.html" title="A MatLab struct. " alt="" coords="5,5,60,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_20.png" border="0" alt="" usemap="#table"/>
+<tr><td><img src="inherit_graph_21.png" border="0" alt="" usemap="#_sym_function"/>
+<map name="_sym_function" id="_sym_function">
+<area shape="rect" id="node1" href="class_sym_function.html" title="This class provides an interface to a symbolic expression (or function) represented in Mathematica ke..." alt="" coords="5,5,104,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_22.png" border="0" alt="" usemap="#table"/>
 <map name="table" id="table">
 <area shape="rect" id="node1" href="classtable.html" title="A MatLab table. " alt="" coords="5,5,56,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_21.png" border="0" alt="" usemap="#varargin"/>
+<tr><td><img src="inherit_graph_23.png" border="0" alt="" usemap="#varargin"/>
 <map name="varargin" id="varargin">
 <area shape="rect" id="node1" href="classvarargin.html" title="A variable number of input arguments. " alt="" coords="5,5,73,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_22.png" border="0" alt="" usemap="#varargout"/>
+<tr><td><img src="inherit_graph_24.png" border="0" alt="" usemap="#varargout"/>
 <map name="varargout" id="varargout">
 <area shape="rect" id="node1" href="classvarargout.html" title="A variable number of output arguments. " alt="" coords="5,5,81,32"/>
 </map>
@@ -247,7 +326,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 19 2017 20:59:41 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

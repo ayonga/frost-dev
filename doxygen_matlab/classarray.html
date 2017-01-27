@@ -1,0 +1,306 @@
+<!-- HTML header for doxygen 1.8.8-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- For Mobile Devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+        <meta name="generator" content="Doxygen 1.8.11"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <title>FROST: array Class Reference</title>
+        <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
+        <script type="text/javascript" src="dynsections.js"></script>
+        <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="doxy-boot.js"></script>
+    </head>
+    <body>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
+        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+            <div class="content" id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
+                            <div style="margin-bottom: 15px;">
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="classarray-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">array Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>ARRAY Summary of this class goes here Detailed explanation goes here.  
+ <a href="classarray.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for array:</div>
+<div class="dyncontent">
+<div class="center"><img src="classarray__inherit__graph.png" border="0" usemap="#array_inherit__map" alt="Inheritance graph"/></div>
+<map name="array_inherit__map" id="array_inherit__map">
+<area shape="rect" id="node2" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for array:</div>
+<div class="dyncontent">
+<div class="center"><img src="classarray__coll__graph.png" border="0" usemap="#array_coll__map" alt="Collaboration graph"/></div>
+<map name="array_coll__map" id="array_coll__map">
+<area shape="rect" id="node2" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a30706bf7072f4b4b89c7fbd9c82a9034"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarray.html#a30706bf7072f4b4b89c7fbd9c82a9034">array</a> (name)</td></tr>
+<tr class="separator:a30706bf7072f4b4b89c7fbd9c82a9034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a7ab0e6f4fcfceadb779cc2bf15cae180"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarray.html#a7ab0e6f4fcfceadb779cc2bf15cae180">Name</a></td></tr>
+<tr class="separator:a7ab0e6f4fcfceadb779cc2bf15cae180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
+<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
+<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
+<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
+<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
+<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
+<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
+<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
+<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
+<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
+<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
+<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
+<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
+<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
+<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
+<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
+<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
+<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
+<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
+<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
+<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
+<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
+<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
+<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
+<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
+<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
+<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
+<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
+<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
+<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
+<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
+<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ARRAY Summary of this class goes here Detailed explanation goes here. </p>
+
+<p>Definition at line <a class="el" href="array_8m_source.html#l00017">17</a> of file <a class="el" href="array_8m_source.html">array.m</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a30706bf7072f4b4b89c7fbd9c82a9034"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array.array </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="array_8m_source.html#l00032">32</a> of file <a class="el" href="array_8m_source.html">array.m</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a7ab0e6f4fcfceadb779cc2bf15cae180"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array.Name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="array_8m_source.html#l00028">28</a> of file <a class="el" href="array_8m_source.html">array.m</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="array_8m_source.html">array.m</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
+<!-- start footer part -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

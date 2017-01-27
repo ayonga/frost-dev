@@ -1,0 +1,11 @@
+<map id="NlpFunctionSum" name="NlpFunctionSum">
+<area shape="rect" id="node2" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="282,275,374,301"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="314,5,374,32"/>
+<area shape="rect" id="node9" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="423,162,513,189"/>
+<area shape="rect" id="node4" href="$classlogical.html" title="A boolean value. " alt="" coords="128,162,187,189"/>
+<area shape="rect" id="node5" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="211,162,269,189"/>
+<area shape="rect" id="node6" href="$classcolvec.html" title="A matlab column vector. " alt="" coords="41,5,101,32"/>
+<area shape="rect" id="node7" href="$classstruct.html" title="A MatLab struct. " alt="" coords="345,162,399,189"/>
+<area shape="rect" id="node8" href="$classchar.html" title="A MatLab character array. " alt="" coords="617,5,663,32"/>
+<area shape="rect" id="node10" href="$classinteger.html" title="An integer value. " alt="" coords="485,5,547,32"/>
+</map>

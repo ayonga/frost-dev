@@ -1,8 +1,8 @@
 <map id="handle" name="handle">
-<area shape="rect" id="node2" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="5,80,97,107"/>
-<area shape="rect" id="node3" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="121,80,211,107"/>
-<area shape="rect" id="node4" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="235,80,361,107"/>
-<area shape="rect" id="node6" href="$class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="386,80,461,107"/>
-<area shape="rect" id="node7" href="$class_ref.html" title="Ref" alt="" coords="485,80,527,107"/>
-<area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="203,155,393,181"/>
+<area shape="rect" id="node2" href="$classarray.html" title="ARRAY Summary of this class goes here Detailed explanation goes here. " alt="" coords="5,80,56,107"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="81,80,173,107"/>
+<area shape="rect" id="node5" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="197,80,286,107"/>
+<area shape="rect" id="node6" href="$class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="311,80,385,107"/>
+<area shape="rect" id="node7" href="$class_ref.html" title="Ref" alt="" coords="409,80,452,107"/>
+<area shape="rect" id="node4" href="$class_nlp_function_sum.html" title="This class provides a particular NLP function that is the sum of multiple NlpFunction objects..." alt="" coords="67,155,186,181"/>
 </map>

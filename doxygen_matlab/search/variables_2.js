@@ -8,6 +8,5 @@ var searchData=
   ['constrarray',['ConstrArray',['../class_nonlinear_program.html#abe8d4bc2dcd3a634c41c7e8a6f5d1e32',1,'NonlinearProgram']]],
   ['constrindices',['ConstrIndices',['../class_kinematic_contact.html#a97929a4aa3bc72cfd44da6274b4fe430',1,'KinematicContact']]],
   ['contacttype',['ContactType',['../class_kinematic_contact.html#a3f052f6438ffd22e18354a83b0b38909',1,'KinematicContact']]],
-  ['controls',['Controls',['../class_hybrid_trajectory_optimization.html#a991f1a6ed04f6b88287ff16ece65fd57',1,'HybridTrajectoryOptimization']]],
   ['costarray',['CostArray',['../class_nonlinear_program.html#a7e6eda26d002cf14d44926ecc081bb0b',1,'NonlinearProgram']]]
 ];

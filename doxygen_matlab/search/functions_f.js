@@ -1,6 +1,9 @@
 var searchData=
 [
   ['recorder',['Recorder',['../class_recorder.html#af0b4f40e7c67f16b0ffff13712149d78',1,'Recorder']]],
+  ['regconstraint',['regConstraint',['../class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee',1,'NonlinearProgram']]],
+  ['regobjective',['regObjective',['../class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5',1,'NonlinearProgram']]],
+  ['regvariable',['regVariable',['../class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749',1,'NonlinearProgram']]],
   ['removecontact',['removeContact',['../class_domain.html#ac7c78ee39a5f2f9e6e3f27f8757811d4',1,'Domain']]],
   ['removeholonomicconstraint',['removeHolonomicConstraint',['../class_domain.html#a9c424b6bbce0f08d703df1369100b690',1,'Domain']]],
   ['removekinematic',['removeKinematic',['../class_kinematic_group.html#a63a4f1713ee36d023d07ca2f49c45154',1,'KinematicGroup']]],

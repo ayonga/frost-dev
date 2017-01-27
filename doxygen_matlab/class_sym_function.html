@@ -1,0 +1,722 @@
+<!-- HTML header for doxygen 1.8.8-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- For Mobile Devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+        <meta name="generator" content="Doxygen 1.8.11"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <title>FROST: SymFunction Class Reference</title>
+        <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
+        <script type="text/javascript" src="dynsections.js"></script>
+        <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="doxy-boot.js"></script>
+    </head>
+    <body>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
+        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+            <div class="content" id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
+                            <div style="margin-bottom: 15px;">
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="class_sym_function-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">SymFunction Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This class provides an interface to a symbolic expression (or function) represented in Mathematica kernal.  
+ <a href="class_sym_function.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for SymFunction:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function__coll__graph.png" border="0" usemap="#_sym_function_coll__map" alt="Collaboration graph"/></div>
+<map name="_sym_function_coll__map" id="_sym_function_coll__map">
+<area shape="rect" id="node2" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,5,48,32"/>
+<area shape="rect" id="node3" href="classchar.html" title="A MatLab character array. " alt="" coords="114,5,161,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1b5cdd8c6fb7399850b4dee2a533074a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a">SymFunction</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a1b5cdd8c6fb7399850b4dee2a533074a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#a1b5cdd8c6fb7399850b4dee2a533074a">More...</a><br /></td></tr>
+<tr class="separator:a1b5cdd8c6fb7399850b4dee2a533074a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ef01e5f39fd7da3d71a503036609b8"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#ae5ef01e5f39fd7da3d71a503036609b8">setName</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:ae5ef01e5f39fd7da3d71a503036609b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the name of the NLP function.  <a href="#ae5ef01e5f39fd7da3d71a503036609b8">More...</a><br /></td></tr>
+<tr class="separator:ae5ef01e5f39fd7da3d71a503036609b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad507060c2ffe4a0f6e3a49e8c85129f3"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#ad507060c2ffe4a0f6e3a49e8c85129f3">setExpression</a> (expr)</td></tr>
+<tr class="separator:ad507060c2ffe4a0f6e3a49e8c85129f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af090ce88251a86ecbd459fb4f35988f7"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#af090ce88251a86ecbd459fb4f35988f7">setDepSymbols</a> (symbols)</td></tr>
+<tr class="separator:af090ce88251a86ecbd459fb4f35988f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a717c36cb9fb9a1742c9a37384b5a0d0f"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a717c36cb9fb9a1742c9a37384b5a0d0f">setParSymbols</a> (symbols)</td></tr>
+<tr class="separator:a717c36cb9fb9a1742c9a37384b5a0d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc901e30f18e83e8820124adc1f1e9d8"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#acc901e30f18e83e8820124adc1f1e9d8">setPreCommands</a> (cmd)</td></tr>
+<tr class="separator:acc901e30f18e83e8820124adc1f1e9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af661d1c167d03bae315e6fec5aad5b62"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#af661d1c167d03bae315e6fec5aad5b62">setDescription</a> (str)</td></tr>
+<tr class="separator:af661d1c167d03bae315e6fec5aad5b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac82178b370a58decbdf84a22c991fbe"><td class="memItemLeft" align="right" valign="top">function   status  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#aac82178b370a58decbdf84a22c991fbe">export</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classlogical.html">logical</a> do_build,<a class="el" href="classdouble.html">double</a> derivative_level)</td></tr>
+<tr class="memdesc:aac82178b370a58decbdf84a22c991fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Export the symbolic expression of functions to C/C++ source files and build them as MEX files.  <a href="#aac82178b370a58decbdf84a22c991fbe">More...</a><br /></td></tr>
+<tr class="separator:aac82178b370a58decbdf84a22c991fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a842e064ae0c7151df657651467ea6917"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a842e064ae0c7151df657651467ea6917">Name</a></td></tr>
+<tr class="memdesc:a842e064ae0c7151df657651467ea6917"><td class="mdescLeft">&#160;</td><td class="mdescRight">An identification of the object.  <a href="#a842e064ae0c7151df657651467ea6917">More...</a><br /></td></tr>
+<tr class="separator:a842e064ae0c7151df657651467ea6917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bc0633588929db98817bf38c477469e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a1bc0633588929db98817bf38c477469e">Expression</a></td></tr>
+<tr class="memdesc:a1bc0633588929db98817bf38c477469e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The symbolic expression of the function in Mathematica.  <a href="#a1bc0633588929db98817bf38c477469e">More...</a><br /></td></tr>
+<tr class="separator:a1bc0633588929db98817bf38c477469e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abed1acfcec84907199327de8e048040a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#abed1acfcec84907199327de8e048040a">DepSymbols</a></td></tr>
+<tr class="memdesc:abed1acfcec84907199327de8e048040a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The symbolic name of the dependent variables in Mathematica.  <a href="#abed1acfcec84907199327de8e048040a">More...</a><br /></td></tr>
+<tr class="separator:abed1acfcec84907199327de8e048040a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45dab5ad54ba8f75453d7b141124b8e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a45dab5ad54ba8f75453d7b141124b8e6">ParSymbols</a></td></tr>
+<tr class="memdesc:a45dab5ad54ba8f75453d7b141124b8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The symbolic name of the auxilary parameters in Mathematica.  <a href="#a45dab5ad54ba8f75453d7b141124b8e6">More...</a><br /></td></tr>
+<tr class="separator:a45dab5ad54ba8f75453d7b141124b8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3072587e76e4037069da3002495ddb41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a3072587e76e4037069da3002495ddb41">PreCommands</a></td></tr>
+<tr class="memdesc:a3072587e76e4037069da3002495ddb41"><td class="mdescLeft">&#160;</td><td class="mdescRight">The symbolic commands must be evaluated prior to exporting the symbolic NlpFunctions.  <a href="#a3072587e76e4037069da3002495ddb41">More...</a><br /></td></tr>
+<tr class="separator:a3072587e76e4037069da3002495ddb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acced049c755512184fae35e1db857818"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#acced049c755512184fae35e1db857818">Description</a></td></tr>
+<tr class="memdesc:acced049c755512184fae35e1db857818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Description of the function.  <a href="#acced049c755512184fae35e1db857818">More...</a><br /></td></tr>
+<tr class="separator:acced049c755512184fae35e1db857818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d0775e838a1f15406e14e015eb88fa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a6d0775e838a1f15406e14e015eb88fa0">Symbol</a></td></tr>
+<tr class="memdesc:a6d0775e838a1f15406e14e015eb88fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A actual symbol that represents the symbolic expressions in Mathematica.  <a href="#a6d0775e838a1f15406e14e015eb88fa0">More...</a><br /></td></tr>
+<tr class="separator:a6d0775e838a1f15406e14e015eb88fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfe6ca25385916cdec2faaf14d1bb9f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sym_function.html#a7cfe6ca25385916cdec2faaf14d1bb9f">Funcs</a></td></tr>
+<tr class="memdesc:a7cfe6ca25385916cdec2faaf14d1bb9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">File names of the functions.  <a href="#a7cfe6ca25385916cdec2faaf14d1bb9f">More...</a><br /></td></tr>
+<tr class="separator:a7cfe6ca25385916cdec2faaf14d1bb9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provides an interface to a symbolic expression (or function) represented in Mathematica kernal. </p>
+<p>Copyright (c) 2016, AMBER Lab All right reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted only in compliance with the BSD 3-Clause license, see <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a> </p>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00017">17</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1b5cdd8c6fb7399850b4dee2a533074a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.SymFunction </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The class constructor function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">varargin</td><td>variable nama-value pair input arguments, in detail: <div class="fragment"><div class="line"><a class="code" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a">SymFunction</a> ( <a class="code" href="class_sym_function.html#a842e064ae0c7151df657651467ea6917">Name</a>, <a class="code" href="class_sym_function.html#a1bc0633588929db98817bf38c477469e">Expression</a>, <a class="code" href="class_sym_function.html#abed1acfcec84907199327de8e048040a">DepSymbols</a>, <a class="code" href="class_sym_function.html#a45dab5ad54ba8f75453d7b141124b8e6">ParSymbols</a>, <a class="code" href="class_sym_function.html#a3072587e76e4037069da3002495ddb41">PreCommands</a> ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> Name</span> the name of the function.</li>
+<li><span class="paramname"> Expression</span> the symbolic expression of the function</li>
+<li><span class="paramname"> DepSymbols</span> the symbolic representation of variables in the expression</li>
+<li><span class="paramname"> ParSymbols</span> the symbolic representation of constants in the expression</li>
+<li><span class="paramname"> PreCommands</span> a list of commands requires to be executed prior to the expression</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00113">113</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>References <a class="el" href="_sym_function_8m_source.html#l00205">setDepSymbols()</a>, <a class="el" href="_sym_function_8m_source.html#l00192">setExpression()</a>, <a class="el" href="_sym_function_8m_source.html#l00167">setName()</a>, <a class="el" href="_sym_function_8m_source.html#l00218">setParSymbols()</a>, and <a class="el" href="_sym_function_8m_source.html#l00231">setPreCommands()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_a1b5cdd8c6fb7399850b4dee2a533074a_cgraph.png" border="0" usemap="#class_sym_function_a1b5cdd8c6fb7399850b4dee2a533074a_cgraph" alt=""/></div>
+<map name="class_sym_function_a1b5cdd8c6fb7399850b4dee2a533074a_cgraph" id="class_sym_function_a1b5cdd8c6fb7399850b4dee2a533074a_cgraph">
+<area shape="rect" id="node2" href="class_sym_function.html#af090ce88251a86ecbd459fb4f35988f7" title="SymFunction.setDepSymbols" alt="" coords="243,5,443,32"/>
+<area shape="rect" id="node3" href="class_sym_function.html#ad507060c2ffe4a0f6e3a49e8c85129f3" title="SymFunction.setExpression" alt="" coords="248,56,439,83"/>
+<area shape="rect" id="node4" href="class_sym_function.html#ae5ef01e5f39fd7da3d71a503036609b8" title="Specifies the name of the NLP function. " alt="" coords="263,107,423,133"/>
+<area shape="rect" id="node5" href="class_sym_function.html#a717c36cb9fb9a1742c9a37384b5a0d0f" title="SymFunction.setParSymbols" alt="" coords="245,157,441,184"/>
+<area shape="rect" id="node6" href="class_sym_function.html#acc901e30f18e83e8820124adc1f1e9d8" title="SymFunction.setPreCommands" alt="" coords="237,208,449,235"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aac82178b370a58decbdf84a22c991fbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function <a class="el" href="classlogical.html">logical</a> status  = SymFunction.export </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classlogical.html">logical</a>&#160;</td>
+          <td class="paramname"><em>do_build</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classdouble.html">double</a>&#160;</td>
+          <td class="paramname"><em>derivative_level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Export the symbolic expression of functions to C/C++ source files and build them as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the complete directory path where the compiled symbolic function will be exported to </td></tr>
+    <tr><td class="paramname">do_build</td><td>determine whether build the mex files. <b>Default:</b> true </td></tr>
+    <tr><td class="paramname">derivative_level</td><td>determines the level of derivatives to be exported (1, 2)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">status</td><td>indicator of successful export/built process </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="nlp_2_0D_sym_function_2export_8m_source.html#l00018">18</a> of file <a class="el" href="nlp_2_0D_sym_function_2export_8m_source.html">export.m</a>.</p>
+
+<p>References <a class="el" href="build__mex_8m_source.html#l00017">build_mex()</a>, <a class="el" href="eval__math_8m_source.html#l00017">eval_math()</a>, <a class="el" href="implode_8m_source.html#l00017">implode()</a>, and <a class="el" href="str2mathstr_8m_source.html#l00017">str2mathstr()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_aac82178b370a58decbdf84a22c991fbe_cgraph.png" border="0" usemap="#class_sym_function_aac82178b370a58decbdf84a22c991fbe_cgraph" alt=""/></div>
+<map name="class_sym_function_aac82178b370a58decbdf84a22c991fbe_cgraph" id="class_sym_function_aac82178b370a58decbdf84a22c991fbe_cgraph">
+<area shape="rect" id="node2" href="build__mex_8m.html#ada8bdd985ae258aebcb23f7b92cce307" title="Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14..." alt="" coords="199,5,281,32"/>
+<area shape="rect" id="node3" href="eval__math_8m.html#ab9ca4e85d311f184ac7d73db1fae5380" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="199,56,281,83"/>
+<area shape="rect" id="node4" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="207,107,273,133"/>
+<area shape="rect" id="node5" href="str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="196,157,284,184"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af090ce88251a86ecbd459fb4f35988f7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function obj = SymFunction.setDepSymbols </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>symbols</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00205">205</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_sym_function_8m_source.html#l00113">SymFunction()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_af090ce88251a86ecbd459fb4f35988f7_icgraph.png" border="0" usemap="#class_sym_function_af090ce88251a86ecbd459fb4f35988f7_icgraph" alt=""/></div>
+<map name="class_sym_function_af090ce88251a86ecbd459fb4f35988f7_icgraph" id="class_sym_function_af090ce88251a86ecbd459fb4f35988f7_icgraph">
+<area shape="rect" id="node2" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a" title="The class constructor function. " alt="" coords="253,5,437,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af661d1c167d03bae315e6fec5aad5b62"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function obj = SymFunction.setDescription </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00239">239</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad507060c2ffe4a0f6e3a49e8c85129f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function obj = SymFunction.setExpression </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>expr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00192">192</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_sym_function_8m_source.html#l00113">SymFunction()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_ad507060c2ffe4a0f6e3a49e8c85129f3_icgraph.png" border="0" usemap="#class_sym_function_ad507060c2ffe4a0f6e3a49e8c85129f3_icgraph" alt=""/></div>
+<map name="class_sym_function_ad507060c2ffe4a0f6e3a49e8c85129f3_icgraph" id="class_sym_function_ad507060c2ffe4a0f6e3a49e8c85129f3_icgraph">
+<area shape="rect" id="node2" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a" title="The class constructor function. " alt="" coords="244,5,428,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5ef01e5f39fd7da3d71a503036609b8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = SymFunction.setName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Specifies the name of the NLP function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name character</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00167">167</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_sym_function_8m_source.html#l00113">SymFunction()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_ae5ef01e5f39fd7da3d71a503036609b8_icgraph.png" border="0" usemap="#class_sym_function_ae5ef01e5f39fd7da3d71a503036609b8_icgraph" alt=""/></div>
+<map name="class_sym_function_ae5ef01e5f39fd7da3d71a503036609b8_icgraph" id="class_sym_function_ae5ef01e5f39fd7da3d71a503036609b8_icgraph">
+<area shape="rect" id="node2" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a" title="The class constructor function. " alt="" coords="213,5,397,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a717c36cb9fb9a1742c9a37384b5a0d0f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function obj = SymFunction.setParSymbols </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>symbols</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00218">218</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_sym_function_8m_source.html#l00113">SymFunction()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_a717c36cb9fb9a1742c9a37384b5a0d0f_icgraph.png" border="0" usemap="#class_sym_function_a717c36cb9fb9a1742c9a37384b5a0d0f_icgraph" alt=""/></div>
+<map name="class_sym_function_a717c36cb9fb9a1742c9a37384b5a0d0f_icgraph" id="class_sym_function_a717c36cb9fb9a1742c9a37384b5a0d0f_icgraph">
+<area shape="rect" id="node2" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a" title="The class constructor function. " alt="" coords="249,5,433,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="acc901e30f18e83e8820124adc1f1e9d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function obj = SymFunction.setPreCommands </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00231">231</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_sym_function_8m_source.html#l00113">SymFunction()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_sym_function_acc901e30f18e83e8820124adc1f1e9d8_icgraph.png" border="0" usemap="#class_sym_function_acc901e30f18e83e8820124adc1f1e9d8_icgraph" alt=""/></div>
+<map name="class_sym_function_acc901e30f18e83e8820124adc1f1e9d8_icgraph" id="class_sym_function_acc901e30f18e83e8820124adc1f1e9d8_icgraph">
+<area shape="rect" id="node2" href="class_sym_function.html#a1b5cdd8c6fb7399850b4dee2a533074a" title="The class constructor function. " alt="" coords="265,5,449,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="abed1acfcec84907199327de8e048040a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.DepSymbols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The symbolic name of the dependent variables in Mathematica. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00059">59</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="add_running_cost_8m_source.html#l00018">HybridTrajectoryOptimization.addRunningCost()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acced049c755512184fae35e1db857818"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.Description</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Description of the function. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00096">96</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="add_running_cost_8m_source.html#l00018">HybridTrajectoryOptimization.addRunningCost()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1bc0633588929db98817bf38c477469e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.Expression</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The symbolic expression of the function in Mathematica. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00047">47</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="add_running_cost_8m_source.html#l00018">HybridTrajectoryOptimization.addRunningCost()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7cfe6ca25385916cdec2faaf14d1bb9f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.Funcs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>File names of the functions. </p>
+<p>Each field of 'Funcs' specifies the name of a function that used for a certain computation of the function.</p>
+<dl class="section note"><dt>Note</dt><dd>This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a></dd>
+<dd>
+[readonly] </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00271">271</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a842e064ae0c7151df657651467ea6917"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.Name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An identification of the object. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00035">35</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="add_running_cost_8m_source.html#l00018">HybridTrajectoryOptimization.addRunningCost()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a45dab5ad54ba8f75453d7b141124b8e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.ParSymbols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The symbolic name of the auxilary parameters in Mathematica. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00071">71</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3072587e76e4037069da3002495ddb41"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.PreCommands</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The symbolic commands must be evaluated prior to exporting the symbolic NlpFunctions. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00083">83</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+<p>Referenced by <a class="el" href="add_running_cost_8m_source.html#l00018">HybridTrajectoryOptimization.addRunningCost()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6d0775e838a1f15406e14e015eb88fa0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SymFunction.Symbol</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A actual symbol that represents the symbolic expressions in Mathematica. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a></dd>
+<dd>
+[readonly] </dd></dl>
+
+<p>Definition at line <a class="el" href="_sym_function_8m_source.html#l00257">257</a> of file <a class="el" href="_sym_function_8m_source.html">SymFunction.m</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>nlp/@SymFunction/<a class="el" href="_sym_function_8m_source.html">SymFunction.m</a></li>
+<li>nlp/@SymFunction/<a class="el" href="nlp_2_0D_sym_function_2export_8m_source.html">export.m</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
+<!-- start footer part -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

@@ -2,7 +2,6 @@ var searchData=
 [
   ['h',['h',['../class_ref.html#a8ec1d9d32ecbda23ca63c89a822cd21f',1,'Ref']]],
   ['handle',['handle',['../classhandle.html',1,'']]],
-  ['hessfunc',['HessFunc',['../class_nlp_function.html#aa031e2212b04f1472c92927f1f5ae728',1,'NlpFunction']]],
   ['hesspattern',['HessPattern',['../class_nlp_function.html#a853b8637b7f6e45f7a747c78151a8e99',1,'NlpFunction']]],
   ['hline',['hline',['../hline_8m.html#a938c11cd202783bc1d04fa02006deb2b',1,'hline.m']]],
   ['hline_2em',['hline.m',['../hline_8m.html',1,'']]],
@@ -15,6 +14,6 @@ var searchData=
   ['horzcat_5ffields_5fdomains_2em',['horzcat_fields_domains.m',['../horzcat__fields__domains_8m.html',1,'']]],
   ['hybridsystem',['HybridSystem',['../class_hybrid_system.html',1,'HybridSystem'],['../class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728',1,'HybridSystem::HybridSystem()']]],
   ['hybridsystem_2em',['HybridSystem.m',['../_hybrid_system_8m.html',1,'']]],
-  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html',1,'HybridTrajectoryOptimization'],['../class_hybrid_trajectory_optimization.html#ad94aeba15585aeb0a448c56748a6f557',1,'HybridTrajectoryOptimization::HybridTrajectoryOptimization()']]],
+  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html',1,'HybridTrajectoryOptimization'],['../class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9',1,'HybridTrajectoryOptimization::HybridTrajectoryOptimization()']]],
   ['hybridtrajectoryoptimization_2em',['HybridTrajectoryOptimization.m',['../_hybrid_trajectory_optimization_8m.html',1,'']]]
 ];

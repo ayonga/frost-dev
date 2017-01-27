@@ -2,9 +2,10 @@ var searchData=
 [
   ['delete',['delete',['../classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6',1,'handle']]],
   ['deltaopts',['DeltaOpts',['../class_guard.html#a5523f5fcdf5746c50980ae0c8cc290eb',1,'Guard']]],
-  ['dependents',['Dependents',['../class_kinematic_expr.html#ac78ae64da03d65d1d3e91d484fd8752b',1,'KinematicExpr']]],
-  ['depindices',['DepIndices',['../class_nlp_function.html#ad14fd671df4523ff9927c4bb85ed816c',1,'NlpFunction']]],
+  ['dependents',['Dependents',['../class_kinematic_expr.html#ac78ae64da03d65d1d3e91d484fd8752b',1,'KinematicExpr::Dependents()'],['../class_nlp_function_sum.html#a7c39aa66d9582372f239c08eddcf25e7',1,'NlpFunctionSum::Dependents()']]],
+  ['depsymbols',['DepSymbols',['../class_sym_function.html#abed1acfcec84907199327de8e048040a',1,'SymFunction']]],
   ['depvariables',['DepVariables',['../class_nlp_function.html#ab895f29adeda9d2dc8115f8cf5f24a02',1,'NlpFunction']]],
+  ['description',['Description',['../class_sym_function.html#acced049c755512184fae35e1db857818',1,'SymFunction']]],
   ['despositionoutput',['DesPositionOutput',['../class_virtual_constr_domain.html#a6923d9efe9d315bb9f336dd996abb5a9',1,'VirtualConstrDomain']]],
   ['desvelocityoutput',['DesVelocityOutput',['../class_virtual_constr_domain.html#a5def3ff38ec23281053eb4779cd47529',1,'VirtualConstrDomain']]],
   ['dimension',['Dimension',['../class_nlp_function.html#ad2249aa79202f4714f27bd654cfbf48b',1,'NlpFunction::Dimension()'],['../class_nlp_variable.html#aab13fd686522e1367721b16bd2c1d193',1,'NlpVariable::Dimension()']]],

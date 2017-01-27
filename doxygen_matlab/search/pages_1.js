@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['contributed_20developers',['Contributed Developers',['../developers.html',1,'']]]
+  ['frost_20matlab_20code_20documentation',['FROST Matlab Code Documentation',['../index.html',1,'']]]
 ];

@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.11"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>AMBER Suite: Todo List</title>
+        <title>FROST: Todo List</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -24,20 +24,88 @@
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand">AMBER Suite 1.0</a>
-                </div>
-            </div>
-        </nav>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
         <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
             <div class="content" id="content">
                 <div class="container">
@@ -98,14 +166,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <dd>implement the CLF-QP controller </dd>
 <dt><a class="anchor" id="_todo000008"></a>Member <a class="el" href="class_domain.html#abc0ce36d6037aae19743053f144ad883">Domain.setAcutation</a>  (<a class="el" href="class_rigid_body_model.html" title="A class with basic model descriptions and functionalities of the multi-link rigid-body robot platform...">RigidBodyModel</a> model,<a class="el" href="classcellstr.html" title="A MatLab cell array of strings. ">cellstr</a> actuated_joints)</dt>
 <dd>better implementation ... </dd>
+<dt><a class="anchor" id="_todo000006"></a>Member <a class="el" href="class_hybrid_trajectory_optimization.html#a426eb3d1b106ad2f2b997bc0640b514a">HybridTrajectoryOptimization.addCollocationConstraint</a>  (phase)</dt>
+<dd>implement pseudospectral method  </dd>
+<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="class_hybrid_trajectory_optimization.html#a57a453b81ef9ae27b5e04243fccea9ec">HybridTrajectoryOptimization.addRunningCost</a>  (<a class="el" href="classinteger.html" title="An integer value. ">integer</a> phase,<a class="el" href="class_sym_function.html" title="This class provides an interface to a symbolic expression (or function) represented in Mathematica ke...">SymFunction</a> func)</dt>
+<dd>complete the implementation  </dd>
 <dt><a class="anchor" id="_todo000002"></a>Member <a class="el" href="class_kinematic_contact.html#aba7e26cc51b2ee1ba153714da10214b1">KinematicContact.getWrenchConstraint</a>  (model, varargin)</dt>
 <dd>This function not has been heavily tested yet. Plase use it after testing the particular cases you use. </dd>
 <dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="class_kinematics.html#aabf9883c6301589c35e7a20147158eea">Kinematics.print</a>  (file)</dt>
-<dd>better implementation ... </dd>
-<dt><a class="anchor" id="_todo000006"></a>Member <a class="el" href="class_nlp_function.html#a533489bc63ba78b04baa9589d418725c">NlpFunction.setHessianFunction</a>  (func_name)</dt>
-<dd>check if it is valid?  </dd>
-<dt><a class="anchor" id="_todo000007"></a>Member <a class="el" href="class_nlp_function.html#af762d80d504dbe41a5f0b69c36d667ef">NlpFunction.setJacobianFunction</a>  (func_name)</dt>
-<dd>check if it is valid? </dd>
+<dd>better implementation ...</dd>
 </dl>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -116,7 +184,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 19 2017 20:59:41 for AMBER Suite by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

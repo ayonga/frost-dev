@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['solverapplication',['SolverApplication',['../class_solver_application.html',1,'']]],
-  ['sparsematrix',['sparsematrix',['../classsparsematrix.html',1,'']]],
-  ['struct',['struct',['../classstruct.html',1,'']]]
+  ['recorder',['Recorder',['../class_recorder.html',1,'']]],
+  ['ref',['Ref',['../class_ref.html',1,'']]],
+  ['rigidbodymodel',['RigidBodyModel',['../class_rigid_body_model.html',1,'']]],
+  ['rowvec',['rowvec',['../classrowvec.html',1,'']]]
 ];

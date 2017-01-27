@@ -1,0 +1,5 @@
+<map id="NlpFunction::updateProp" name="NlpFunction::updateProp">
+<area shape="rect" id="node2" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="223,5,390,32"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="220,56,393,83"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="233,107,380,133"/>
+</map>

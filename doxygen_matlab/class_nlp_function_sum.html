@@ -1,0 +1,536 @@
+<!-- HTML header for doxygen 1.8.8-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- For Mobile Devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+        <meta name="generator" content="Doxygen 1.8.11"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <title>FROST: NlpFunctionSum Class Reference</title>
+        <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
+        <script type="text/javascript" src="dynsections.js"></script>
+        <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+        <link href="doxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="doxy-boot.js"></script>
+    </head>
+    <body>
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="../introduction.html">Introduction</a></li>
+                <li><a href="../installation.html">Installation</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="index.html">Matlab</a></li>
+                <li><a href="../mathematica.html">Mathematica</a></li>
+                <li><a href="../developers.html">Developer</a></li>
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#suitsparse">SuitSparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#d-atlas">3D ATLAS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mathematica.html">Mathematica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#extrautils">ExtraUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#mathtocpp">MathToCpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#robotmodel">RobotModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#screws">Screws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#snakeyaml">SnakeYaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematica.html#urdfparser">URDFParser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">For Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#install-mtoc">Install mtoc++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              <li class="hidden-sm"></li>
+          </ul>
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+    </div>
+  </div>
+        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+            <div class="content" id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
+                            <div style="margin-bottom: 15px;">
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="class_nlp_function_sum-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">NlpFunctionSum Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This class provides a particular NLP function that is the sum of multiple <a class="el" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a> objects. For instance, the cost function, etc.  
+ <a href="class_nlp_function_sum.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for NlpFunctionSum:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nlp_function_sum__inherit__graph.png" border="0" usemap="#_nlp_function_sum_inherit__map" alt="Inheritance graph"/></div>
+<map name="_nlp_function_sum_inherit__map" id="_nlp_function_sum_inherit__map">
+<area shape="rect" id="node2" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="19,80,111,107"/>
+<area shape="rect" id="node3" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="35,5,95,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for NlpFunctionSum:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nlp_function_sum__coll__graph.png" border="0" usemap="#_nlp_function_sum_coll__map" alt="Collaboration graph"/></div>
+<map name="_nlp_function_sum_coll__map" id="_nlp_function_sum_coll__map">
+<area shape="rect" id="node2" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="282,275,374,301"/>
+<area shape="rect" id="node3" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="314,5,374,32"/>
+<area shape="rect" id="node9" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="423,162,513,189"/>
+<area shape="rect" id="node4" href="classlogical.html" title="A boolean value. " alt="" coords="128,162,187,189"/>
+<area shape="rect" id="node5" href="classmatrix.html" title="A matlab matrix. " alt="" coords="211,162,269,189"/>
+<area shape="rect" id="node6" href="classcolvec.html" title="A matlab column vector. " alt="" coords="41,5,101,32"/>
+<area shape="rect" id="node7" href="classstruct.html" title="A MatLab struct. " alt="" coords="345,162,399,189"/>
+<area shape="rect" id="node8" href="classchar.html" title="A MatLab character array. " alt="" coords="617,5,663,32"/>
+<area shape="rect" id="node10" href="classinteger.html" title="An integer value. " alt="" coords="485,5,547,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a20726c6ae84f759c898e7e1776b49b2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b">NlpFunctionSum</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a20726c6ae84f759c898e7e1776b49b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#a20726c6ae84f759c898e7e1776b49b2b">More...</a><br /></td></tr>
+<tr class="separator:a20726c6ae84f759c898e7e1776b49b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1162ff461e66e3c5ad988a89310d7d"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d">setDependentFunction</a> (<a class="el" href="class_nlp_function.html">NlpFunction</a> deps)</td></tr>
+<tr class="memdesc:a8b1162ff461e66e3c5ad988a89310d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets dependent objects of the Nlp Function.  <a href="#a8b1162ff461e66e3c5ad988a89310d7d">More...</a><br /></td></tr>
+<tr class="separator:a8b1162ff461e66e3c5ad988a89310d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1e370b3ad4962c9d9193303aa2d501"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function_sum.html#aab1e370b3ad4962c9d9193303aa2d501">setFuncIndices</a> (<a class="el" href="classinteger.html">integer</a> index)</td></tr>
+<tr class="memdesc:aab1e370b3ad4962c9d9193303aa2d501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets indices of the Nlp Function.  <a href="#aab1e370b3ad4962c9d9193303aa2d501">More...</a><br /></td></tr>
+<tr class="separator:aab1e370b3ad4962c9d9193303aa2d501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad85b08193a9a6113e4821ec51a9faffc"><td class="memItemLeft" align="right" valign="top">function   deps  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc">getDepObject</a> ()</td></tr>
+<tr class="memdesc:ad85b08193a9a6113e4821ec51a9faffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the object of the dependent function.  <a href="#ad85b08193a9a6113e4821ec51a9faffc">More...</a><br /></td></tr>
+<tr class="separator:ad85b08193a9a6113e4821ec51a9faffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_nlp_function"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_nlp_function')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_nlp_function.html">NlpFunction</a></td></tr>
+<tr class="memitem:ac87aece2735ef77e11cace072cff3cef inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef">NlpFunction</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ac87aece2735ef77e11cace072cff3cef inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#ac87aece2735ef77e11cace072cff3cef">More...</a><br /></td></tr>
+<tr class="separator:ac87aece2735ef77e11cace072cff3cef inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d5f7f9456fb488ba39440d20f01ff44 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   deps  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a8d5f7f9456fb488ba39440d20f01ff44">getDepObject</a> ()</td></tr>
+<tr class="memdesc:a8d5f7f9456fb488ba39440d20f01ff44 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the object of the dependent function.  <a href="#a8d5f7f9456fb488ba39440d20f01ff44">More...</a><br /></td></tr>
+<tr class="separator:a8d5f7f9456fb488ba39440d20f01ff44 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce9413b3ef885f931c181235a369846 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="classcolvec.html">colvec</a> indices  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a2ce9413b3ef885f931c181235a369846">getDepIndices</a> ()</td></tr>
+<tr class="memdesc:a2ce9413b3ef885f931c181235a369846 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the indices of the dependent variables.  <a href="#a2ce9413b3ef885f931c181235a369846">More...</a><br /></td></tr>
+<tr class="separator:a2ce9413b3ef885f931c181235a369846 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc5721b2a58e773a009e4c95018c3ec inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec">setName</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a7bc5721b2a58e773a009e4c95018c3ec inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the name of the NLP function.  <a href="#a7bc5721b2a58e773a009e4c95018c3ec">More...</a><br /></td></tr>
+<tr class="separator:a7bc5721b2a58e773a009e4c95018c3ec inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac92cca6af8e65de66c99c1b99b80573c inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c">setType</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
+<tr class="memdesc:ac92cca6af8e65de66c99c1b99b80573c inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type (either LINEAR or NONLINEAR) of the NLP function.  <a href="#ac92cca6af8e65de66c99c1b99b80573c">More...</a><br /></td></tr>
+<tr class="separator:ac92cca6af8e65de66c99c1b99b80573c inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee989318a7b4c7fe31b55d8891c23b66 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66">setAuxdata</a> (<a class="el" href="classrowvec.html">rowvec</a> auxdata)</td></tr>
+<tr class="memdesc:aee989318a7b4c7fe31b55d8891c23b66 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector of numeric values.  <a href="#aee989318a7b4c7fe31b55d8891c23b66">More...</a><br /></td></tr>
+<tr class="separator:aee989318a7b4c7fe31b55d8891c23b66 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24828001e2b8c949100fe7b48690faf4 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a24828001e2b8c949100fe7b48690faf4">setJacobianPattern</a> (<a class="el" href="classmatrix.html">matrix</a> jac_sp,<a class="el" href="classchar.html">char</a> sp_form)</td></tr>
+<tr class="memdesc:a24828001e2b8c949100fe7b48690faf4 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function configure the sparsity pattern of the Jacobian of the function.  <a href="#a24828001e2b8c949100fe7b48690faf4">More...</a><br /></td></tr>
+<tr class="separator:a24828001e2b8c949100fe7b48690faf4 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8caf8546a496fb01ce9ae793cdef0bf1 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a8caf8546a496fb01ce9ae793cdef0bf1">setJacobianFunction</a> (func_name)</td></tr>
+<tr class="separator:a8caf8546a496fb01ce9ae793cdef0bf1 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59916f159c37257aa2d9b1286c09cf98 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a59916f159c37257aa2d9b1286c09cf98">setHessianPattern</a> (<a class="el" href="classcell.html">cell</a> hes_sp,<a class="el" href="classchar.html">char</a> sp_form)</td></tr>
+<tr class="memdesc:a59916f159c37257aa2d9b1286c09cf98 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function configure the sparsity pattern of the Hessian of the function.  <a href="#a59916f159c37257aa2d9b1286c09cf98">More...</a><br /></td></tr>
+<tr class="separator:a59916f159c37257aa2d9b1286c09cf98 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9440da02068aaffbedca8ccd4387d39d inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a9440da02068aaffbedca8ccd4387d39d">setHessianFunction</a> (func_name)</td></tr>
+<tr class="separator:a9440da02068aaffbedca8ccd4387d39d inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4d8b11ffc76edf50d0eec0c9276ad5 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5">setDependentVariable</a> (NlpVariables depvars)</td></tr>
+<tr class="memdesc:a3f4d8b11ffc76edf50d0eec0c9276ad5 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the dependent variables of the function.  <a href="#a3f4d8b11ffc76edf50d0eec0c9276ad5">More...</a><br /></td></tr>
+<tr class="separator:a3f4d8b11ffc76edf50d0eec0c9276ad5 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c6989ec09f968874fcb9602d707523 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a72c6989ec09f968874fcb9602d707523">setBoundary</a> (cl, cu)</td></tr>
+<tr class="memdesc:a72c6989ec09f968874fcb9602d707523 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the upper/lower boundary values of the function if they exist  <a href="#a72c6989ec09f968874fcb9602d707523">More...</a><br /></td></tr>
+<tr class="separator:a72c6989ec09f968874fcb9602d707523 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe37a4aed63dcc6f8c411e810ac4a3dc inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#abe37a4aed63dcc6f8c411e810ac4a3dc">appendTo</a> (funcs)</td></tr>
+<tr class="separator:abe37a4aed63dcc6f8c411e810ac4a3dc inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad3c0aeb91b8dadfba314e334e077b4 inherit pub_methods_class_nlp_function"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4">updateProp</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a0ad3c0aeb91b8dadfba314e334e077b4 inherit pub_methods_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the properties of the class object based on the input name-value pair arguments.  <a href="#a0ad3c0aeb91b8dadfba314e334e077b4">More...</a><br /></td></tr>
+<tr class="separator:a0ad3c0aeb91b8dadfba314e334e077b4 inherit pub_methods_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a7c39aa66d9582372f239c08eddcf25e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nlp_function.html">NlpFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function_sum.html#a7c39aa66d9582372f239c08eddcf25e7">Dependents</a></td></tr>
+<tr class="memdesc:a7c39aa66d9582372f239c08eddcf25e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The dependent functions.  <a href="#a7c39aa66d9582372f239c08eddcf25e7">More...</a><br /></td></tr>
+<tr class="separator:a7c39aa66d9582372f239c08eddcf25e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_class_nlp_function"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_nlp_function')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_nlp_function.html">NlpFunction</a></td></tr>
+<tr class="memitem:a75a7006fd514037a6f887df0de6e3dcd inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlogical.html">logical</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a75a7006fd514037a6f887df0de6e3dcd">Type</a></td></tr>
+<tr class="memdesc:a75a7006fd514037a6f887df0de6e3dcd inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">This property specifies whether the function is the linear function of dependent variables.  <a href="#a75a7006fd514037a6f887df0de6e3dcd">More...</a><br /></td></tr>
+<tr class="separator:a75a7006fd514037a6f887df0de6e3dcd inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47d4c2d101d678316ff60268bacb876f inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a47d4c2d101d678316ff60268bacb876f">Name</a></td></tr>
+<tr class="memdesc:a47d4c2d101d678316ff60268bacb876f inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">An identification of the object.  <a href="#a47d4c2d101d678316ff60268bacb876f">More...</a><br /></td></tr>
+<tr class="separator:a47d4c2d101d678316ff60268bacb876f inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab895f29adeda9d2dc8115f8cf5f24a02 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_nlp_variable.html">NlpVariable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#ab895f29adeda9d2dc8115f8cf5f24a02">DepVariables</a></td></tr>
+<tr class="memdesc:ab895f29adeda9d2dc8115f8cf5f24a02 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">An array of dependent NLP variables.  <a href="#ab895f29adeda9d2dc8115f8cf5f24a02">More...</a><br /></td></tr>
+<tr class="separator:ab895f29adeda9d2dc8115f8cf5f24a02 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92bf49b7ee892d87d1ae1c633dbde5e2 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcolvec.html">colvec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a92bf49b7ee892d87d1ae1c633dbde5e2">FuncIndices</a></td></tr>
+<tr class="memdesc:a92bf49b7ee892d87d1ae1c633dbde5e2 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the indices of the function.  <a href="#a92bf49b7ee892d87d1ae1c633dbde5e2">More...</a><br /></td></tr>
+<tr class="separator:a92bf49b7ee892d87d1ae1c633dbde5e2 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a467add9c23648324079fba093c1dc1 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcolvec.html">colvec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a0a467add9c23648324079fba093c1dc1">nnzJacIndices</a></td></tr>
+<tr class="memdesc:a0a467add9c23648324079fba093c1dc1 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the indices of the non-zero elements in the first-order jacobian.  <a href="#a0a467add9c23648324079fba093c1dc1">More...</a><br /></td></tr>
+<tr class="separator:a0a467add9c23648324079fba093c1dc1 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f0811c20472eec58284c844e7c46bf inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcolvec.html">colvec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a08f0811c20472eec58284c844e7c46bf">nnzHessIndices</a></td></tr>
+<tr class="memdesc:a08f0811c20472eec58284c844e7c46bf inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the indices of the non-zero elements in the Hessian matrix of the Lagrangian.  <a href="#a08f0811c20472eec58284c844e7c46bf">More...</a><br /></td></tr>
+<tr class="separator:a08f0811c20472eec58284c844e7c46bf inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ed8a7b4d87e93d0b6f97479922e1a5 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#ad6ed8a7b4d87e93d0b6f97479922e1a5">Funcs</a></td></tr>
+<tr class="memdesc:ad6ed8a7b4d87e93d0b6f97479922e1a5 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">File names of the external functions that computes the function/Jacobian/Hessian of the object.  <a href="#ad6ed8a7b4d87e93d0b6f97479922e1a5">More...</a><br /></td></tr>
+<tr class="separator:ad6ed8a7b4d87e93d0b6f97479922e1a5 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a7064ba7107ee76beb5f98b876be5f3 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a3a7064ba7107ee76beb5f98b876be5f3">JacPattern</a></td></tr>
+<tr class="memdesc:a3a7064ba7107ee76beb5f98b876be5f3 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">% The name of the function that computes the Jacobian of the % function % % Typically, this function is generated as a MEX function by % Mathematica symbolic engine. It can be also written as a matlab % function by the user. % % JacFunc % The name of the function that computes the Jacobian of the % function % % Typically, this function is generated as a MEX function by % Mathematica symbolic engine. It can be also written as a matlab % function by the user. % % HessFunc A two-vector structure that specifies the non-zero structure of the first order Jacobian of the function with respect to the dependent variables. The first vector determines the row indices of the all non-zero elements in the Jacobian matrix, and the second vector determines the colomn indices of the all non-zero elements in the Jacobian matrix. For the gradient of the cost function, the first vector should consists of all <code>1</code>s.  <a href="#a3a7064ba7107ee76beb5f98b876be5f3">More...</a><br /></td></tr>
+<tr class="separator:a3a7064ba7107ee76beb5f98b876be5f3 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853b8637b7f6e45f7a747c78151a8e99 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a853b8637b7f6e45f7a747c78151a8e99">HessPattern</a></td></tr>
+<tr class="memdesc:a853b8637b7f6e45f7a747c78151a8e99 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">A two-vector structure that specifies the non-zero structure of the second order Hessian of the Lagrangian function with respect to the dependent variables. The first vector determines the row indices of the all non-zero elements in the Hessian matrix, and the second vector determines the colomn indices of the all non-zero elements in the Hessian matrix.  <a href="#a853b8637b7f6e45f7a747c78151a8e99">More...</a><br /></td></tr>
+<tr class="separator:a853b8637b7f6e45f7a747c78151a8e99 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8d1064abe409ee2a5f6d77b40839bd inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classinteger.html">integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a9e8d1064abe409ee2a5f6d77b40839bd">nnzJac</a></td></tr>
+<tr class="memdesc:a9e8d1064abe409ee2a5f6d77b40839bd inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of nonzero entries in the Jacobian matrix.  <a href="#a9e8d1064abe409ee2a5f6d77b40839bd">More...</a><br /></td></tr>
+<tr class="separator:a9e8d1064abe409ee2a5f6d77b40839bd inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b094daabc3be0053703dbefb4032e01 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classinteger.html">integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a5b094daabc3be0053703dbefb4032e01">nnzHess</a></td></tr>
+<tr class="memdesc:a5b094daabc3be0053703dbefb4032e01 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of nonzero entries in the Hessian matrix.  <a href="#a5b094daabc3be0053703dbefb4032e01">More...</a><br /></td></tr>
+<tr class="separator:a5b094daabc3be0053703dbefb4032e01 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f484e9d612f7117d131d0cb36d03cda inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmatrix.html">matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a6f484e9d612f7117d131d0cb36d03cda">AuxData</a></td></tr>
+<tr class="memdesc:a6f484e9d612f7117d131d0cb36d03cda inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant array of auxiliary data that will be used to construct the function handles.  <a href="#a6f484e9d612f7117d131d0cb36d03cda">More...</a><br /></td></tr>
+<tr class="separator:a6f484e9d612f7117d131d0cb36d03cda inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d6b43b5939f73f3773ce820b5878509 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcolvec.html">colvec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a5d6b43b5939f73f3773ce820b5878509">LowerBound</a></td></tr>
+<tr class="memdesc:a5d6b43b5939f73f3773ce820b5878509 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">The lower boundary values of the function.  <a href="#a5d6b43b5939f73f3773ce820b5878509">More...</a><br /></td></tr>
+<tr class="separator:a5d6b43b5939f73f3773ce820b5878509 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be8e9e86c15782451bcaf1855012bb0 inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcolvec.html">colvec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a9be8e9e86c15782451bcaf1855012bb0">UpperBound</a></td></tr>
+<tr class="memdesc:a9be8e9e86c15782451bcaf1855012bb0 inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">The upper boundary values of the function.  <a href="#a9be8e9e86c15782451bcaf1855012bb0">More...</a><br /></td></tr>
+<tr class="separator:a9be8e9e86c15782451bcaf1855012bb0 inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2249aa79202f4714f27bd654cfbf48b inherit pub_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classinteger.html">integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#ad2249aa79202f4714f27bd654cfbf48b">Dimension</a></td></tr>
+<tr class="memdesc:ad2249aa79202f4714f27bd654cfbf48b inherit pub_attribs_class_nlp_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">It gives a quick access to the dimension of the function output without actually evaluating the function.  <a href="#ad2249aa79202f4714f27bd654cfbf48b">More...</a><br /></td></tr>
+<tr class="separator:ad2249aa79202f4714f27bd654cfbf48b inherit pub_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
+<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
+<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
+<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
+<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
+<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
+<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
+<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
+<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
+<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
+<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
+<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
+<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
+<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
+<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
+<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
+<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
+<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
+<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
+<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
+<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
+<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
+<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
+<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
+<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
+<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
+<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
+<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
+<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
+<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
+<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
+<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_attribs_class_nlp_function"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_class_nlp_function')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="class_nlp_function.html">NlpFunction</a></td></tr>
+<tr class="memitem:af2766bf8bb0a9a6a49a40542d8d91a3f inherit pub_static_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top">static const &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#af2766bf8bb0a9a6a49a40542d8d91a3f">LINEAR</a> = true</td></tr>
+<tr class="separator:af2766bf8bb0a9a6a49a40542d8d91a3f inherit pub_static_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e889d334d7c4845b149c4b8b58a553 inherit pub_static_attribs_class_nlp_function"><td class="memItemLeft" align="right" valign="top">static const &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_function.html#a51e889d334d7c4845b149c4b8b58a553">NONLINEAR</a> = false</td></tr>
+<tr class="separator:a51e889d334d7c4845b149c4b8b58a553 inherit pub_static_attribs_class_nlp_function"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provides a particular NLP function that is the sum of multiple <a class="el" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a> objects. For instance, the cost function, etc. </p>
+<p>Copyright (c) 2016, AMBER Lab All right reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted only in compliance with the BSD 3-Clause license, see <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a> </p>
+
+<p>Definition at line <a class="el" href="_nlp_function_sum_8m_source.html#l00017">17</a> of file <a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a20726c6ae84f759c898e7e1776b49b2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NlpFunctionSum.NlpFunctionSum </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The class constructor function. </p>
+
+<p>Definition at line <a class="el" href="_nlp_function_sum_8m_source.html#l00049">49</a> of file <a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a>.</p>
+
+<p>References <a class="el" href="_nlp_function_8m_source.html#l00292">NlpFunction.NlpFunction()</a>, and <a class="el" href="_nlp_function_sum_8m_source.html#l00073">setDependentFunction()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nlp_function_sum_a20726c6ae84f759c898e7e1776b49b2b_cgraph.png" border="0" usemap="#class_nlp_function_sum_a20726c6ae84f759c898e7e1776b49b2b_cgraph" alt=""/></div>
+<map name="class_nlp_function_sum_a20726c6ae84f759c898e7e1776b49b2b_cgraph" id="class_nlp_function_sum_a20726c6ae84f759c898e7e1776b49b2b_cgraph">
+<area shape="rect" id="node2" href="class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="296,115,467,141"/>
+<area shape="rect" id="node8" href="class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d" title="Sets dependent objects of the Nlp Function. " alt="" coords="277,166,485,207"/>
+<area shape="rect" id="node3" href="class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="541,5,707,32"/>
+<area shape="rect" id="node4" href="class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="537,56,711,83"/>
+<area shape="rect" id="node5" href="class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="533,107,715,149"/>
+<area shape="rect" id="node6" href="class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="547,173,701,200"/>
+<area shape="rect" id="node7" href="class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="551,224,697,251"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad85b08193a9a6113e4821ec51a9faffc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   deps  = NlpFunctionSum.getDepObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the object of the dependent function. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">deps</td><td>the dependent objects </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_nlp_function_sum_8m_source.html#l00122">122</a> of file <a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b1162ff461e66e3c5ad988a89310d7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NlpFunctionSum.setDependentFunction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_nlp_function.html">NlpFunction</a>&#160;</td>
+          <td class="paramname"><em>deps</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets dependent objects of the Nlp Function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deps</td><td>dependent objects</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="_nlp_function_sum_8m_source.html#l00073">73</a> of file <a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nlp_function_sum_8m_source.html#l00049">NlpFunctionSum()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nlp_function_sum_a8b1162ff461e66e3c5ad988a89310d7d_icgraph.png" border="0" usemap="#class_nlp_function_sum_a8b1162ff461e66e3c5ad988a89310d7d_icgraph" alt=""/></div>
+<map name="class_nlp_function_sum_a8b1162ff461e66e3c5ad988a89310d7d_icgraph" id="class_nlp_function_sum_a8b1162ff461e66e3c5ad988a89310d7d_icgraph">
+<area shape="rect" id="node2" href="class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b" title="The class constructor function. " alt="" coords="261,13,485,39"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aab1e370b3ad4962c9d9193303aa2d501"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = NlpFunctionSum.setFuncIndices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classinteger.html">integer</a>&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets indices of the Nlp Function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>the indices of the function</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="_nlp_function_sum_8m_source.html#l00101">101</a> of file <a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a7c39aa66d9582372f239c08eddcf25e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NlpFunctionSum.Dependents</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The dependent functions. </p>
+
+<p>Definition at line <a class="el" href="_nlp_function_sum_8m_source.html#l00037">37</a> of file <a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>nlp/<a class="el" href="_nlp_function_sum_8m_source.html">NlpFunctionSum.m</a></li>
+</ul>
+</div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
+<!-- start footer part -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Thu Jan 26 2017 21:36:43 for FROST by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

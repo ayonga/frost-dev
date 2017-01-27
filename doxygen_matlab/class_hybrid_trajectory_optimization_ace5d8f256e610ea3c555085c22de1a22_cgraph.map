@@ -1,0 +1,15 @@
+<map id="HybridTrajectoryOptimization::configureNLP" name="HybridTrajectoryOptimization::configureNLP">
+<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#a426eb3d1b106ad2f2b997bc0640b514a" title="Add direct collocation equations as a set of equality constraints % Parameters: phase: the index of t..." alt="" coords="244,5,435,47"/>
+<area shape="rect" id="node4" href="$class_hybrid_trajectory_optimization.html#a4f0ce089ec07b4bf35014a9b9dbfc139" title="Adds control variables as the NLP decision variables to the problem. " alt="" coords="244,71,435,112"/>
+<area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html#a2c184f1a6f6de468e31411b55dcda0d0" title="Add generic domain&#45;admissibility constraints. " alt="" coords="244,136,435,177"/>
+<area shape="rect" id="node6" href="$class_hybrid_trajectory_optimization.html#a510e0a6a4874d9cba68c019cd2518224" title="Add system dynamics equations as a set of equality constraints. " alt="" coords="244,201,435,243"/>
+<area shape="rect" id="node7" href="$class_hybrid_trajectory_optimization.html#a8783817899bdb45051bba0a40779b490" title="Adds defect variables associated with discrete transition at the guard as the NLP decision variables ..." alt="" coords="244,267,435,308"/>
+<area shape="rect" id="node8" href="$class_hybrid_trajectory_optimization.html#a809d5df6efdeca652030a779eb977296" title="Add generic switching surface constraints, including guard condition and reset map constraints..." alt="" coords="244,332,435,373"/>
+<area shape="rect" id="node9" href="$class_hybrid_trajectory_optimization.html#a32fbcfff37a06f9b79a014a3acba28a1" title="Add output dynamics associated with domain virtual constraints as a set of equality constraints..." alt="" coords="244,397,435,439"/>
+<area shape="rect" id="node10" href="$class_hybrid_trajectory_optimization.html#ad410bce6238c697b613a8fcd7527e145" title="Add parameter consistency constraints within the phase. " alt="" coords="244,463,435,504"/>
+<area shape="rect" id="node11" href="$class_hybrid_trajectory_optimization.html#ab7072a258c8d33b56fe93c957e8283e0" title="Adds virtual constraint parameters as the NLP decision variables to the problem. " alt="" coords="244,528,435,569"/>
+<area shape="rect" id="node12" href="$class_hybrid_trajectory_optimization.html#a57a453b81ef9ae27b5e04243fccea9ec" title="Add a running cost to the problem. " alt="" coords="244,593,435,635"/>
+<area shape="rect" id="node13" href="$class_hybrid_trajectory_optimization.html#ae7fbdaf9c3438e51a78c52e096de89d2" title="Adds state variables as the NLP decision variables to the problem. " alt="" coords="244,659,435,700"/>
+<area shape="rect" id="node14" href="$class_hybrid_trajectory_optimization.html#aaae99c29e45cfa45030ed19c6ca72b06" title="Adds time as the NLP decision variables to the problem. " alt="" coords="244,724,435,765"/>
+<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#a6311465a46c46dfe0655577bc395ccfb" title="Returns the index of a particular phase specified by input argument &#39;phase&#39;. " alt="" coords="483,365,673,407"/>
+</map>

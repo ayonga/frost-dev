@@ -18,8 +18,11 @@ var searchData=
   ['checkguard',['checkGuard',['../class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c',1,'HybridSystem']]],
   ['clfqp',['CLFQP',['../class_c_l_f_q_p.html#acaf74de7d601d1a15685cd8ba406326a',1,'CLFQP']]],
   ['compile',['compile',['../class_kinematic_expr.html#a2e680261ff1bf2005eabd1d7cdf6bff5',1,'KinematicExpr::compile()'],['../class_kinematic_group.html#ae184dc007b8ef5160fbc97b4aa1246c2',1,'KinematicGroup::compile()'],['../class_kinematics.html#ae01f9dcfc641416879f0948ef68034b6',1,'Kinematics::compile()'],['../class_domain.html#a7ee9a63d7e7f17d4855a83cfdeda0933',1,'Domain::compile()'],['../class_virtual_constr_domain.html#a76454f5b422703193383d9f10c70cc41',1,'VirtualConstrDomain::compile()']]],
+  ['compilesymfunction',['compileSymFunction',['../class_hybrid_trajectory_optimization.html#adf2fbfded16f50337a6e7851167d9e27',1,'HybridTrajectoryOptimization']]],
+  ['configurenlp',['configureNLP',['../class_hybrid_trajectory_optimization.html#ace5d8f256e610ea3c555085c22de1a22',1,'HybridTrajectoryOptimization']]],
   ['contiguous_5findices',['contiguous_indices',['../contiguous__indices_8m.html#ad9afac85893b32a1e1d80786f881a2ce',1,'contiguous_indices.m']]],
   ['controller',['Controller',['../class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427',1,'Controller']]],
   ['convertsym2function',['convertSym2Function',['../convert_sym2_function_8m.html#a324a56c6ff4097fc978f8082d97a65bf',1,'convertSym2Function.m']]],
+  ['create_5fobject_5farray',['create_object_array',['../create__object__array_8m.html#acce88811f2e9ca3738028dcd57c37eb3',1,'create_object_array.m']]],
   ['cwf_5ftime',['cwf_time',['../cwf__time_8m.html#a29a28c7de34d9851cefc5bb4e9ff4d7d',1,'cwf_time.m']]]
 ];
