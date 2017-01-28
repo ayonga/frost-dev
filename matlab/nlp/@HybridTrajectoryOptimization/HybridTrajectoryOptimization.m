@@ -64,7 +64,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         % The hybrid system to be optimized
         %
         % @type HybridSystem
-        Plant
+        % Plant
     end
     
     %% Protected properties
@@ -87,12 +87,14 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             
             % default options
             default_opts.CollocationScheme = 'HermiteSimpson';
-            default_opts.DistributeParamWeights = true;
+            default_opts.DistributeParamWeights = false;
             default_opts.NodeDistributionScheme = 'Uniform';
             default_opts.EnableVirtualConstraint = true;
             default_opts.UseTimeBasedOutput = false;
             default_opts.DefaultNumberOfGrids = 10;
             default_opts.ZeroVelocityOutputError = false;
+            default_opts.UseSameParameters = true;
+            default_opts.EnforceForceConstraint = false;
             % call superclass constructor
             obj = obj@NonlinearProgram(default_opts);           
             
@@ -105,14 +107,15 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                 'HybridTrajectoryOptimization:invalidPlant',...
                 'The plant must be an object of HybridSystem catagory.\n');
             
-            obj.Plant = plant;
+            obj.Gamma = plant.Gamma;
             obj.Model = plant.Model;
                         
-            obj.Phase = cell(0);
+            n_vertex = height(plant.Gamma.Nodes);
+            obj.Phase = cell(n_vertex,1);
             
             obj.Funcs = struct;
             obj.Funcs.Model = struct;
-            obj.Funcs.Phase = cell(0);
+            obj.Funcs.Phase = cell(n_vertex, 1);
             obj.Funcs.Generic = struct;
         end
         
@@ -145,7 +148,6 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         
         obj = genericSymFunctions(obj);
         
-        obj = setPhaseMesh(obj, phase, n_grid);
         
         obj = compileSymFunction(obj, field, phase, export_path);
         
@@ -168,6 +170,10 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         obj = addTerminalCost(obj, phase, name, func, deps, nodes, auxdata)
         
         phase_idx = getPhaseIndex(obj, phase);
+        
+        [yc, cl, cu] = checkConstraints(obj, x);
+        
+        [xc, lb, ub] = checkVariables(obj, x);
     end
 end
 

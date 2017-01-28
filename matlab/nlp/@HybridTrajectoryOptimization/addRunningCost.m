@@ -4,9 +4,8 @@ function obj = addRunningCost(obj, phase, func)
     % Parameters:
     % phase: the index of the phase (domain) @type integer
     % func: a symbolic function to be integrated @type SymFunction
-    
-    
-    %| @todo complete the implementation
+    %
+    % @todo complete the implementation for other schemes
     
     assert(isa(func,'SymFunction'),...
         'Currently, the function to be integrated only support the form of ''SymFunction''.');

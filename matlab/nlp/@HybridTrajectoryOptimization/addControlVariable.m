@@ -12,7 +12,7 @@ function obj = addControlVariable(obj, phase)
     n_node = phase_info.NumNode;
     col_names = phase_info.OptVarTable.Properties.VariableNames;
 
-    domain = phase_info.Domain;
+    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
     model = obj.Model;
     % state variables are defined at all collocation nodes
     node_list = 1:1:n_node;
@@ -20,8 +20,8 @@ function obj = addControlVariable(obj, phase)
     
     %% actuator torque (u)
     u_dim = size(domain.ActuationMap, 2);
-    u_lb = -domain.ActuationMap'*[model.Dof.effort]';
-    u_ub = domain.ActuationMap'*[model.Dof.effort]';
+    u_lb = domain.ActuationMap'*[model.Dof.minEffort]';
+    u_ub = domain.ActuationMap'*[model.Dof.maxEffort]';
     u = repmat({{}},1, n_node);
     for i=node_list
         u{i} = {NlpVariable(...
@@ -39,8 +39,8 @@ function obj = addControlVariable(obj, phase)
     if ~isempty(domain.HolonomicConstr)
         n_hol_constr = getDimension(domain.HolonomicConstr);
         
-        min_force = -1e5;
-        max_force = 1e5;
+        min_force = -1e4;
+        max_force = 1e4;
         
         Fe = repmat({{}},1, n_node);
         for i=node_list

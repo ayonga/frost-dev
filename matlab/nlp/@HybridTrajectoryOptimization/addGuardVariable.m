@@ -1,4 +1,4 @@
-function obj = addGuardVariable(obj, phase, lb, ub, x0)
+function obj = addGuardVariable(obj, phase, hbar_props, impf_props)
     % Adds defect variables associated with discrete transition at the
     % guard as the NLP decision variables to the problem. It includes the
     % constant vector of holonomic constraints, instantaneous impact force,
@@ -7,6 +7,15 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
     % Parameters:
     % phase: the index of the phase (domain) @type integer
     % model: the rigid body model of the robot @type RigidBodyModel
+    % hbar_props: properties of parameter ''hbar'' @type struct
+    % impf_props: properties of parameter ''impF'' @type struct
+    %
+    % Required fields of hbar_props:
+    % lb: the lower bound of the parameters @type struct
+    % ub: the upper bound of the parameters @type struct
+    % x0: the typical initial value of the parameters @type struct
+    %
+    % Required fields of impf_pros:
     % lb: the lower bound of the parameters @type struct
     % ub: the upper bound of the parameters @type struct
     % x0: the typical initial value of the parameters @type struct
@@ -14,19 +23,13 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
     
     % use default values if not given explicitly
     if nargin < 3
-        lb = struct('h',0,...
-            'Fi', -1e5);        
+        hbar_props = struct('lb',0,'ub',0,'x0',0);       
     end
     
     if nargin < 4
-        ub = struct('h',0,...
-            'Fi', 1e5);
+        impf_props = struct('lb',-10000,'ub',10000,'x0',0);
     end
     
-    if nargin < 4
-        x0 = struct('h',0,...
-            'Fi', 0);
-    end
     
     
     phase_idx = getPhaseIndex(obj, phase);
@@ -36,27 +39,17 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
     n_node = phase_info.NumNode;
     col_names = phase_info.OptVarTable.Properties.VariableNames;
 
-    domain = phase_info.Domain;
-    guard = phase_info.Guard;
+    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
+    edge_idx = findedge(obj.Gamma, phase_info.CurrentVertex, phase_info.NextVertex);
+    guard  = obj.Gamma.Edges.Guard{edge_idx};
     
     % h - the constant value of the holonomic kinematic constraints
     if ~isempty(domain.HolonomicConstr)
         n_hol_constr = getDimension(domain.HolonomicConstr);
         h = repmat({{}},1, n_node);
-        if obj.Options.DistributeParamWeights
-            % variables are defined at all collocation nodes if
-            % distributes the weightes
-            node_list = 1:n_node;
-        else
-            % otherwise only define at the first node
-            node_list = 1;
-        end
-        
-        for i=node_list
-            h{i} = {NlpVariable(...
-                'Name', 'h', 'Dimension', n_hol_constr, ...
-                'lb', lb.h,  'ub', ub.h, 'x0', x0.h)};
-        end
+        hbar_props.Name = 'h';
+        hbar_props.Dimension = n_hol_constr;
+        h{1} = {NlpVariable(hbar_props)};
         % add to the table
         obj.Phase{phase_idx}.OptVarTable = [...
             obj.Phase{phase_idx}.OptVarTable;...
@@ -65,7 +58,7 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
     
     % Fi - impact wrenches if the discrete transition involves a rigid
     % impact
-    if ~isempty(guard) && guard.DeltaOpts.ApplyImpact
+    if ~isempty(guard) && guard.ResetMap.RigidImpact
         
         % the dimension of the impact wrenches equals to the the dimension
         % of the holonomic constraints of the next domain.
@@ -73,9 +66,9 @@ function obj = addGuardVariable(obj, phase, lb, ub, x0)
         n_hol_constr = getDimension(next_domain.HolonomicConstr);
         Fi = repmat({{}},1, n_node);
         % defined at the last node
-        Fi{n_node} = {NlpVariable(...
-            'Name', 'impF', 'Dimension', n_hol_constr, ...
-            'lb', lb.Fi,  'ub', ub.Fi, 'x0', x0.Fi)};
+        impf_props.Name = 'impF';
+        impf_props.Dimension = n_hol_constr;
+        Fi{n_node} = {NlpVariable(impf_props)};
         
         % add to the table
         obj.Phase{phase_idx}.OptVarTable = [...

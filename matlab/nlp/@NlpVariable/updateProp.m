@@ -13,10 +13,6 @@ function obj = updateProp(obj, varargin)
     
     
     
-    % set the dimension to be 1 by default
-    if isfield(argin, 'Dimension')
-        obj = setDimension(obj, argin.Dimension);
-    end
     
     % set boundary values
     if isfield(argin, 'lb')

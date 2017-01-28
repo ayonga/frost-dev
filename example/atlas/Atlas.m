@@ -461,8 +461,15 @@ classdef Atlas < RigidBodyModel
         
         function obj = Atlas(urdf)
             
+            BaseDof = struct;
+            BaseDof.type = 'floating';
+            BaseDof.lower = [-0.6, -0.2, 0.7, -0.05, -0.5, -0.05];
+            BaseDof.upper =  [0.3, 0.2, 0.9, 0.05, 0.5, 0.05];
+            BaseDof.minVelocity =  [0.2, -0.1, -0.5, -0.5, -0.5, -0.5];
+            BaseDof.maxVelocity =  [1, 0.1, 0.5, 0.5, 0.5, 0.5];
             
-            obj = obj@RigidBodyModel(urdf);
+            
+            obj = obj@RigidBodyModel(urdf,BaseDof,'spatial');
             
             obj = AtlasContactPoints(obj);
             

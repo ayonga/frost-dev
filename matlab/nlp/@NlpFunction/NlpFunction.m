@@ -224,29 +224,10 @@ classdef NlpFunction < handle
             
             if isfield(argin, 'Type')
                 obj = setType(obj, argin.Type);
-            else 
-                % by default, we consider all functions to be non-linear
-                obj = setType(obj, 'Nonlinear');
-            end
-            
+            end            
             
             if isfield(argin, 'Dimension')
                 obj = setDimension(obj, argin.Dimension);
-            else 
-                % by default, we consider all functions are scalar
-                obj = setDimension(obj, 1);
-            end
-            
-            if isfield(argin, 'lb')
-                obj =  setBoundary(obj, argin.lb, []);
-            else
-                obj =  setBoundary(obj, -inf, []);
-            end
-            
-            if isfield(argin, 'ub')
-                obj =  setBoundary(obj, [], argin.ub);
-            else
-                obj =  setBoundary(obj, [], inf);
             end
             
             if isfield(argin, 'DepVariables')
@@ -256,10 +237,13 @@ classdef NlpFunction < handle
             if isfield(argin, 'Funcs')
                 obj = setFuncs(obj, argin.Funcs);
             end
-                
+            
             if isfield(argin, 'AuxData') && ~isempty(argin.AuxData)
                 obj = setAuxdata(obj, argin.AuxData);
             end
+            
+            % update additional properties
+            obj = updateProp(obj, varargin{:});
         end
         
         function deps = getDepObject(obj)

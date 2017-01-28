@@ -43,6 +43,9 @@ function [dx, extra] = calcDynamics(obj, t, x, cur_node)
         extra.u    = u;        
         extra.ue   = cur_domain.ActuationMap*u;
         extra.Fe   = calcConstraintForces(cur_domain, model, qe, dqe, u, De, He);
+        extra.Je    = feval(cur_domain.HolonomicConstr.Funcs.Jac, qe);
+        extra.Jedot = feval(cur_domain.HolonomicConstr.Funcs.JacDot, qe, dqe);
+        extra.h     = feval(cur_domain.HolonomicConstr.Funcs.Kin, qe);
         % extra.domain = cur_domain;
         % extra.control = cur_control;
     end

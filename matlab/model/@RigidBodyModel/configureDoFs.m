@@ -46,7 +46,7 @@ function dofs = configureDoFs(obj, model, base_dofs)
             dofs(i).minVel = base_dofs.minVelocity(i);
             dofs(i).maxVel = base_dofs.maxVelocity(i);
             dofs(i).minAcc = -100;
-            dofs(i).maxAcc = -100;
+            dofs(i).maxAcc = 100;
         end
         
     end
@@ -62,7 +62,7 @@ function dofs = configureDoFs(obj, model, base_dofs)
         dofs(i+obj.nBaseDof).minVel = -model.joints(i).velocity;
         dofs(i+obj.nBaseDof).maxVel = model.joints(i).velocity;
         dofs(i+obj.nBaseDof).minAcc = -1000;
-        dofs(i+obj.nBaseDof).maxAcc = -1000;
+        dofs(i+obj.nBaseDof).maxAcc = 1000;
         
     end
     

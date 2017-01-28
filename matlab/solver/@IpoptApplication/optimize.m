@@ -36,7 +36,6 @@ function [sol, info] = optimize(obj, x0)
             obj.Objective, obj.Constraint, dimVars);
         Funcs.hessianstructure  = @()IpoptHessianStructure(obj.Objective, ...
             obj.Constraint, dimVars);
-    else
         
     end
     

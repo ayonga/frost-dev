@@ -33,7 +33,7 @@ function obj = setResetMap(obj, model, rigid_impact, relabel_matrix, reset_point
             model.nDof);
         
         % set coordinate relabel matrix
-        obj.ResetMap.RelabelMatrix = relabel_matrx;
+        obj.ResetMap.RelabelMatrix = relabel_matrix;
     end
     
     if nargin > 4
@@ -42,15 +42,15 @@ function obj = setResetMap(obj, model, rigid_impact, relabel_matrix, reset_point
             reset_point.ModelType = model.Type;
             reset_point.ContactType = 'PointContactWithFriction';
             reset_point.Name = obj.Name;
-            reset_point.Prefix = 'reset';
+            reset_point.Prefix = 'p';
             obj.ResetMap.ResetPoint = KinematicContact(reset_point);
             
         elseif isa(reset_point, 'KinematicContact')
             reset_point.ModelType = model.Type;
             reset_point.ContactType = 'PointContactWithFriction';
             obj.ResetMap.ResetPoint = reset_point;
-            obj.ResetMap.Name = obj.Name;
-            obj.ResetMap.Prefix = 'reset';
+            obj.ResetMap.ResetPoint.Name = obj.Name;
+            obj.ResetMap.ResetPoint.Prefix = 'p';
             
         end
     end

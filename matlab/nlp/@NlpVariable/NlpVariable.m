@@ -131,9 +131,7 @@ classdef NlpVariable < handle
     
     %% methods defined in external files
     methods
-        obj = genIndices(obj, index_offset);
-        
-        obj = appendTo(obj, vars);
+        obj = setIndices(obj, index);
         
         obj = setBoundary(obj, lowerbound, upperbound);
         

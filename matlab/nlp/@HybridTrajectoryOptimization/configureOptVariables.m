@@ -19,11 +19,15 @@ function obj = configureOptVariables(obj)
         % control variables
         obj = addControlVariable(obj, i);
         
-        % parameter variables
-        obj = addParamVariable(obj, i);
+        if obj.Options.EnableVirtualConstraint
+            % parameter variables
+            obj = addParamVariable(obj, i);
+        end
         
-        % guard variables
-        obj = addGuardVariable(obj, i);
+        if ~obj.Phase{i}.IsTerminal
+            % guard variables
+            obj = addGuardVariable(obj, i);
+        end
     end
     
 end

@@ -16,12 +16,8 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
     qe_pre  = x_pre(model.qeIndices);
     dqe_pre = x_pre(model.dqeIndices); 
     
-    if isempty(obj.ResetMap.ResetPoint)
-        
-        % the joint configuration remains the same
-        qe_post = qe_pre;
-    else
-        reset_pos = feval(obj.ResetMap.ResetPoint, qe_pre);
+    if ~isempty(obj.ResetMap.ResetPoint)
+        reset_pos = feval(obj.ResetMap.ResetPoint.Funcs.Kin, qe_pre);
         
         switch model.Type
             case 'planar'
@@ -29,6 +25,7 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
             case 'spatial'
                 qe_pre(1:3) = qe_pre(1:3) - reset_pos;
         end
+        
     end
     
     
@@ -42,7 +39,8 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
    
     
     
-    
+    % the joint configuration remains the same
+    qe_post = qe_pre;
     % compute the impact map if the domain transition involves a rigid impact
     if obj.ResetMap.RigidImpact
         % jacobian of impact constraints
@@ -73,7 +71,7 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
     end
     
     
-
+    
     x_post = [qe_post; dqe_post];
  
 end

@@ -11,18 +11,10 @@ classdef Atlas3DMultiWalkingOpt < HybridTrajectoryOptimization
             model = plant.Model;
             
             
-            minBaseDofPos = [-0.6, -0.2, 0.7, -0.05, -0.5, -0.05];
-            maxBaseDofPos =  [0.3, 0.2, 0.9, 0.05, 0.5, 0.05];
-            minBaseDofVel =  [0.2, -0.1, -0.5, -0.5, -0.5, -0.5];
-            maxBaseDofVel =  [1, 0.1, 0.5, 0.5, 0.5, 0.5];
-            for i=1:6
-                model.Dof(i).lower = minBaseDofPos(i);
-                model.Dof(i).upper = maxBaseDofPos(i);
-                model.Dof(i).minVelocity = minBaseDofVel(i);
-                model.Dof(i).maxVelocity = maxBaseDofVel(i);
-            end
+            
             
             left_toe_strike_relabel = LeftToeStrikeRelabel(model);
+            plant = rmEdge(plant, 'RightHeelStrike', 'RightToeStrike');
             plant = addEdge(plant, 'RightHeelStrike', 'RightToeStrike', 'Guard', left_toe_strike_relabel);
             plant = rmVertex(plant, {'LeftToeStrike', 'LeftToeLift', 'LeftHeelStrike'});
             
@@ -32,64 +24,61 @@ classdef Atlas3DMultiWalkingOpt < HybridTrajectoryOptimization
             
             
             
+            
+            
+            for k=1:3
+                calcs = plant.Flow{k}.calcs;
+                param = plant.Gamma.Nodes.Param{k};
+                n_node = obj.Phase{k}.NumNode;
+                hbar = feval(obj.Gamma.Nodes.Domain{k}.HolonomicConstr.Funcs.Kin,calcs{1}.qe);
+                
+                obj = updateVariableProp(obj, 'T', k, 'first', 'x0', calcs{end}.t);
+                for i=1:n_node
+                    obj = updateVariableProp(obj, 'Qe', k, i, 'x0',calcs{i}.qe);
+                    obj = updateVariableProp(obj, 'dQe', k, i, 'x0',calcs{i}.dqe);
+                    obj = updateVariableProp(obj, 'ddQe', k, i, 'x0',calcs{i}.ddqe);
+                    obj = updateVariableProp(obj, 'U', k, i, 'x0',calcs{i}.u);
+                    obj = updateVariableProp(obj, 'Fe', k, i, 'x0',calcs{i}.Fe);
+                end
+                obj = updateVariableProp(obj, 'P', k, 'first', 'x0',param.p(:));
+                obj = updateVariableProp(obj, 'V', k, 'first', 'x0',param.v(:));
+                a = param.a';
+                obj = updateVariableProp(obj, 'A', k, 'first', 'x0',a(:));
+                obj = updateVariableProp(obj, 'H', k, 'first', 'x0',hbar);
+                
+                obj = updateVariableProp(obj, 'P', k, 'first','lb',[0.1, -0.4], 'ub', [0.4, -0.1]);
+                obj = updateVariableProp(obj, 'V', k, 'first','lb',0.5, 'ub', 0.9);
+                
+                minStepLength= 0.35;
+                maxStepLength= 0.5;
+                minStepWidth = 0.17;
+                maxStepWidth = 0.25;
+                lt = 0.1728;
+                lh = 0.082;
+                switch k
+                    case 1 %
+                        obj = updateVariableProp(obj, 'H', k, 'first','lb',[0,0,0,0,0,0,-maxStepLength,minStepWidth,0,0,0,0,0,0]);
+                        obj = updateVariableProp(obj, 'H', k, 'first','ub',[0,0,0,0,0,0,-minStepLength,maxStepWidth,0,0,0,0,0,0]);
+                    case 2
+                        obj = updateVariableProp(obj, 'H', k, 'first','lb',[0,0,0,0,0,0,0,0,0]);
+                        obj = updateVariableProp(obj, 'H', k, 'first','ub',[0,0,0,0,0,0,0,0,0]);
+                    case 3
+                        obj = updateVariableProp(obj, 'H', k, 'first','lb',[0,0,0,0,0,minStepLength-(lt+lh),minStepWidth,0,0,0,0,0,0]);
+                        obj = updateVariableProp(obj, 'H', k, 'first','ub',[0,0,0,0,0,maxStepLength-(lt+lh),maxStepWidth,0,0,0,0,0,0]);
+                end
+                
+                
+                
+                
+            end
+            
             obj = configureConstraints(obj);
-            
-            
-            
-            
             for i=1:3
                 obj = addRunningCost(obj, i, obj.Funcs.Phase{i}.power);
             end
         end
         
-        function obj = configureOptVariables(obj)
-            % This function configures the structure of the optimization variable
-            % by adding (registering) them to the optimization variable table.
-            %
-            % A particular project might inherit the class and overload this
-            % function to achieve custom configuration of the optimization
-            % variables
-            
-            obj = configureOptVariables@HybridTrajectoryOptimization(obj);
-            
-%             for k=1:3
-%                 calcs = obj.Plant.Flow{k}.calcs;
-%                 phase = obj.Phase{k}.OptVarTable;
-%                 param = obj.Plant.Gamma.Nodes.Param{k};
-%                 n_node = obj.Phase{k}.NumNode;
-%                 t = table2cell(phase('T',:));
-%                 q = table2cell(phase('Qe',:));
-%                 dq = table2cell(phase('dQe',:));
-%                 ddq = table2cell(phase('ddQe',:));
-%                 u = table2cell(phase('U',:));
-%                 Fe = table2cell(phase('Fe',:));
-%                 v = table2cell(phase('V',:));
-%                 p = table2cell(phase('P',:));
-%                 a = table2cell(phase('A',:));
-%                 h = table2cell(phase('H',:));
-%                 hbar = feval(obj.Gamma.Nodes.Domain{k}.HolonomicConstr.Funcs.Kin,calcs{1}.qe);
-%                 for i=1:n_node
-%                     updateProp(t{i},'x0',calcs{end}.t);
-%                     updateProp(q{i},'x0',calcs{i}.qe);
-%                     updateProp(dq{i},'x0',calcs{i}.dqe);
-%                     updateProp(ddq{i},'x0',calcs{i}.ddqe);
-%                     updateProp(u{i},'x0',calcs{i}.u);
-%                     updateProp(Fe{i},'x0',calcs{i}.Fe);
-%                     updateProp(p{i},'x0',param.p(:));
-%                     updateProp(v{i},'x0',param.v(:));
-%                     updateProp(a{i},'x0',param.a(:));
-%                     updateProp(h{i},'x0',hbar);
-%                     
-%                     updateProp(p{i},'lb',[0.1, -0.4], 'ub', [0.4, -0.1]);
-%                     updateProp(v{i},'lb',0.5, 'ub', 0.9);
-%                     updateProp(h{i},'lb',hbar);
-%                     updateProp(h{i},'ub',hbar);
-%                 end
-%                 
-%             end
-            
-            
-        end
+        
     end
     
     

@@ -33,27 +33,32 @@ function obj = compileSymFunction(obj, field, phase, export_path)
             end
         case 'Phase'
             
-            phase_idx = getPhaseIndex(obj, phase);
             
             
             
-            for i=1:length(phase_idx)
+            
+            for i=1:length(phase)
+                phase_idx = getPhaseIndex(obj, phase(i));
                 % compile domain
-                compile(obj.Phase{phase_idx(i)}.Domain, model, true);
+                domain = obj.Gamma.Nodes.Domain{obj.Phase{phase_idx}.CurrentVertex};
+                compile(domain, model, true);
                 
-                if ~isempty(obj.Phase{phase_idx(i)}.Guard)
-                    if obj.Phase{phase_idx(i)}.Guard.DeltaOpts.ApplyImpact
-                        next_domain = obj.Gamma.Nodes.Domain{obj.Phase{phase_idx(i)}.NextVertex};
+                if ~obj.Phase{phase_idx}.IsTerminal
+                    edge_idx = findedge(obj.Gamma, obj.Phase{phase_idx}.CurrentVertex, obj.Phase{phase_idx}.NextVertex);
+                    guard  = obj.Gamma.Edges.Guard{edge_idx};
+                    compile(guard, model, true);
+                    if guard.ResetMap.RigidImpact
+                        next_domain = obj.Gamma.Nodes.Domain{obj.Phase{phase_idx}.NextVertex};
                         compile(next_domain.HolonomicConstr, model, true);
                     end
                 end
                 
                 % get fields
-                phase_funcs = fields(obj.Funcs.Phase{phase_idx(i)});
+                phase_funcs = fields(obj.Funcs.Phase{phase_idx});
                 
                 % export each fields
                 for j=1:numel(phase_funcs)
-                    export(obj.Funcs.Phase{phase_idx(i)}.(phase_funcs{j}), export_path, do_build, derivative_level);
+                    export(obj.Funcs.Phase{phase_idx}.(phase_funcs{j}), export_path, do_build, derivative_level);
                 end
             end
         case 'Generic'

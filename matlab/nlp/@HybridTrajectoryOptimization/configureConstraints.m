@@ -10,11 +10,13 @@ function obj = configureConstraints(obj)
     
     
     for i=1:n_phase
-        obj = addCollocationConstraint(obj, i);
-        
-        obj = addDomainConstraint(obj, i);
         
         obj = addDynamicsConstraint(obj, i);
+        
+        
+        obj = addDomainConstraint(obj, i);
+            
+        obj = addCollocationConstraint(obj, i);
         
         obj = addJumpConstraint(obj, i);
 

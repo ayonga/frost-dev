@@ -19,6 +19,12 @@ function obj = addCollocationConstraint(obj, phase)
     
     err_bound = obj.Options.EqualityBoundRelaxFactor;
     
+    % always create a cell array with the length of ''num_node'' as
+    % place holder
+    intPos = repmat({{}},1, n_node);
+    intVel = repmat({{}},1, n_node);
+    t_cont = repmat({{}},1, n_node);
+            
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson' % Hermite-Simpson Scheme
             % collocation constraints are enforced at all interior nodes
@@ -26,13 +32,16 @@ function obj = addCollocationConstraint(obj, phase)
             
             % always create a cell array with the length of ''num_node'' as
             % place holder
-            intPos = repmat({{}},1, n_node);
-            intVel = repmat({{}},1, n_node);
             midPos = repmat({{}},1, n_node);
-            midVel = repmat({{}},1, n_node);
+            midVel = repmat({{}},1, n_node); 
             for i=node_list
                 if obj.Options.DistributeParamWeights
                     node_param = i;
+                    t_cont{i} = {NlpFunction('Name','tCont',...
+                        'Dimension',1, 'Type', 'linear',...
+                        'lb',0,'ub',0,...
+                        'DepVariables', {{var_table{'T',i}{1},var_table{'T',i+1}{1}}},...
+                        'Funcs', obj.Funcs.Generic.tCont.Funcs)};
                 else
                     node_param = 1;
                 end
@@ -91,18 +100,26 @@ function obj = addCollocationConstraint(obj, phase)
                 cell2table(intVel,'RowNames',{'intVel'},'VariableNames',col_names);...
                 cell2table(midPos,'RowNames',{'midPos'},'VariableNames',col_names);...
                 cell2table(midVel,'RowNames',{'midVel'},'VariableNames',col_names)];
+            
+            if obj.Options.DistributeParamWeights
+                obj.Phase{phase_idx}.ConstrTable = [...
+                    obj.Phase{phase_idx}.ConstrTable;...
+                    cell2table(t_cont,'RowNames',{'tCont'},'VariableNames',col_names)];
+            end
         case 'Trapzoidal'
             % collocation constraints are enforced at interior nodes except
             % the last node
             node_list = 1:1:n_node-1;
             
-            % always create a cell array with the length of ''num_node'' as
-            % place holder
-            intPos = repmat({{}},1, n_node);
-            intVel = repmat({{}},1, n_node);
+            
             for i=node_list
                 if obj.Options.DistributeParamWeights
                     node_param = i;
+                    t_cont{i} = {NlpFunction('Name','tCont',...
+                        'Dimension',1, 'Type', 'linear',...
+                        'lb',0,'ub',0,...
+                        'DepVariables', {{var_table{'T',i}{1},var_table{'T',i+1}{1}}},...
+                        'Funcs', obj.Funcs.Generic.tCont.Funcs)};
                 else
                     node_param = 1;
                 end
@@ -134,9 +151,14 @@ function obj = addCollocationConstraint(obj, phase)
             
             % add to the constraints table
             obj.Phase{phase_idx}.ConstrTable = [...
-                obj.Phase{phase_idx}.ConstrTable;...
-                cell2table(intPos,'RowNames',{'intPos'},'VariableNames',col_names);...
-                cell2table(intVel,'RowNames',{'intVel'},'VariableNames',col_names)];
+                    obj.Phase{phase_idx}.ConstrTable;...
+                    cell2table(intPos,'RowNames',{'intPos'},'VariableNames',col_names);...
+                    cell2table(intVel,'RowNames',{'intVel'},'VariableNames',col_names)];
+            if obj.Options.DistributeParamWeights
+                obj.Phase{phase_idx}.ConstrTable = [...
+                    obj.Phase{phase_idx}.ConstrTable;...
+                    cell2table(t_cont,'RowNames',{'tCont'},'VariableNames',col_names)];
+            end
         case 'PseudoSpectral'
             node_list = 1:1:n_node;
             %| @todo implement pseudospectral method

@@ -10,17 +10,17 @@ function pos = getPosition(obj, kin)
     if ischar(kin)
         pos = find(strcmp(kin, {obj.KinGroupTable.Name}));
         
-        if isempty(pos)
-            error('The kinematic object: %s cannot be found in the group.\n',...
-                kin);
-        end
+        %         if isempty(pos)
+        %             error('The kinematic object: %s cannot be found in the group.\n',...
+        %                 kin);
+        %         end
     elseif isa(kin,'Kinematics')
         pos = find(strcmp(kin.Name, {obj.KinGroupTable.Name}));
         
-        if isempty(pos)
-            error('The kinematic object: %s cannot be found in the group.\n',...
-                kin.Name);
-        end
+        %         if isempty(pos)
+        %             error('The kinematic object: %s cannot be found in the group.\n',...
+        %                 kin.Name);
+        %         end
     end
 
 

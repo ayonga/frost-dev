@@ -81,10 +81,10 @@ function [y_des] = calcDesiredOutputs(obj, t, qe, dqe)
     end
     
     % compute relative degree two outputs
-    a = obj.Param.a(:);
-    y_des.yd2  = feval(obj.DesPositionOutput.Funcs.y, tau, a);
-    dy_d2      = feval(obj.DesPositionOutput.Funcs.dy, tau, a);
-    ddy_d2     = feval(obj.DesPositionOutput.Funcs.ddy, tau, a);
+    a = obj.Param.a';
+    y_des.yd2  = feval(obj.DesPositionOutput.Funcs.y, tau, a(:));
+    dy_d2      = feval(obj.DesPositionOutput.Funcs.dy, tau, a(:));
+    ddy_d2     = feval(obj.DesPositionOutput.Funcs.ddy, tau, a(:));
  
     
     % chain rule to compute jacobian

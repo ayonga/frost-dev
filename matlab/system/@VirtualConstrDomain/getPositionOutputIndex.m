@@ -6,7 +6,9 @@ function [indices] = getPositionOutputIndex(obj, output_name)
     % output_name: an array of output names @type cell
     
     if iscell(output_name) 
-        indices = cellfun(@(x)getPosition(obj.ActPositionOutput, x), output_name);
+        indices = cellfun(@(x)getPosition(obj.ActPositionOutput, x), output_name,...
+            'UniformOutput',false);
+        indices = horzcat(indices{:});
     elseif ischar(output_name)
         % specified only one output
         indices = getPosition(obj.ActPositionOutput, output_name);

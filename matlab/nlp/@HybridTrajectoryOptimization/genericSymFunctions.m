@@ -141,8 +141,7 @@ function obj = genericSymFunctions(obj)
     
     for i = 1:num_phase
         phase = obj.Phase{i};
-        domain = phase.Domain;
-        guard = phase.Guard;
+        domain = obj.Gamma.Nodes.Domain{phase.CurrentVertex};
         
         %% control dynamics: -B*u-J'(q)*Fe
         control = SymFunction('Name', ['controlDynamics_',domain.Name]);
@@ -198,17 +197,18 @@ function obj = genericSymFunctions(obj)
             phase_funcs.holAcc = holAcc;
         end
         %% guard condition: H(q,dq,Fe) = 0
-        if ~isempty(guard)
+        if ~phase.IsTerminal
+            edge_idx = findedge(obj.Gamma, phase.CurrentVertex, phase.NextVertex);
+            guard  = obj.Gamma.Edges.Guard{edge_idx};
             guard_cond = domain.UnilateralConstr(guard.Condition,:);
             guard_func = SymFunction('Name', ['guard_',domain.Name]);
-            guard_func = setPreCommands(guard_func, ...
-                ['Qe = GetQe[];',...
-                'Fe = Vec[Table[f[i],{i,',num2str(getDimension(domain.HolonomicConstr)),'}]];',...
-                ]);
+            
             
             
             switch guard_cond.Type{1}
                 case 'Kinematic'
+                    guard_func = setPreCommands(guard_func, ...
+                        ['Qe = GetQe[];']);
                     guard_func = setExpression(guard_func, ...
                         [guard_cond.KinObject{1}.Symbols.Kin,'-threshold']);
                     guard_func = setDepSymbols(guard_func, {'Qe'});
@@ -216,7 +216,9 @@ function obj = genericSymFunctions(obj)
                     guard_func = setDescription(guard_func, 'Kinematic based guard condition H(q) >= 0');
                     phase_funcs.guard_func = guard_func;
                 case 'Force'
-                    
+                    guard_func = setPreCommands(guard_func, ...
+                        ['Fe = Vec[Table[f[i],{i,',num2str(getDimension(domain.HolonomicConstr)),'}]];',...
+                        ]);
                     f_ind = getIndex(domain.HolonomicConstr, guard_cond.KinName{1});
                     guard_func = setExpression(guard_func, ...
                         ['(First@',mat2math(guard_cond.WrenchCondition{1}),').',...
@@ -227,15 +229,32 @@ function obj = genericSymFunctions(obj)
             end
             
             qResetMap = SymFunction('Name', ['qResetMap_',domain.Name]);
-            qResetMap = setPreCommands(qResetMap,...
-                ['Qe = GetQe[]; ',... % states on node i
-                'Qn=Qe/.Subscript[x_,y_]:>Subscript[x,{y,n}]; ']);  % states on the next node
-            if isempty(guard.DeltaOpts.CoordinateRelabelMatrix)
+            if isempty(guard.ResetMap.RelabelMatrix)
                 R = eye(model.nDof);
             else
-                R =  guard.DeltaOpts.CoordinateRelabelMatrix;
+                R = guard.ResetMap.RelabelMatrix;
             end
-            qResetMap = setExpression(qResetMap,['Qe-',mat2math(R),'.Qn']);
+            if ~isempty(guard.ResetMap.ResetPoint)
+                switch model.Type
+                    case 'spatial' 
+                        n_pos = 3;
+                    case 'planar' 
+                        n_pos = 2;
+                end
+                qResetMap = setPreCommands(qResetMap,...
+                    ['Qe = GetQe[]; ',... % states on node i
+                    'Qn=Qe/.Subscript[x_,y_]:>Subscript[x,{y,n}];',...
+                    'resetPos = Vec[ConstantArray[0,{',num2str(model.nDof),'}]];',...
+                    'resetPos[[1;;',num2str(n_pos),']] = Transpose@{Flatten@',guard.ResetMap.ResetPoint.Symbols.Kin,'};']);  % states on the next node
+            else
+                qResetMap = setPreCommands(qResetMap,...
+                    ['Qe = GetQe[]; ',... % states on node i
+                    'resetPos = Vec[ConstantArray[0,{',num2str(model.nDof),'}]];',...
+                    'Qn=Qe/.Subscript[x_,y_]:>Subscript[x,{y,n}]; ']);  % states on the next node
+            end
+            
+            
+            qResetMap = setExpression(qResetMap,[mat2math(R),'.(Qe-resetPos)-Qn']);
             qResetMap = setDepSymbols(qResetMap,{'Qe','Qn'});
             qResetMap = setDescription(qResetMap, 'Reset map (joint).');
             phase_funcs.qResetMap = qResetMap;
@@ -243,20 +262,20 @@ function obj = genericSymFunctions(obj)
             
             dqResetMap = SymFunction('Name', ['dqResetMap_',domain.Name]);
             
-            if guard.DeltaOpts.ApplyImpact
+            if guard.ResetMap.RigidImpact
                 next_domain = obj.Gamma.Nodes.Domain{obj.Phase{i}.NextVertex};
                 dqResetMap = setPreCommands(dqResetMap,...
-                    ['De = InertiaMatrix[]; Qe = GetQe[]; dQe = D[Qe,t];',... % states on node i
-                    'Qn=Qe/.Subscript[x_,y_]:>Subscript[x,{y,n}]; dQn = D[Qn,t];',...
+                    ['De = InertiaMatrix[]; Qn = GetQe[]; dQn = D[Qe,t];',... % states on node i
+                    'Qe=Qn/.Subscript[x_,y_]:>Subscript[x,{y,n}]; dQe = D[Qe,t];',...
                     'Fi = Vec[Table[fi[i],{i,',num2str(getDimension(next_domain.HolonomicConstr)),'}]];']);
                 dqResetMap = setExpression(dqResetMap,...
-                    ['De.(',mat2math(R),'.dQn-dQe)-Transpose[',next_domain.HolonomicConstr.Symbols.Jac,'].Fi']);
-                dqResetMap = setDepSymbols(dqResetMap,{'Qe','dQe','Fi','dQn'});
+                    ['De.(dQn-',mat2math(R),'.dQe)-Transpose[',next_domain.HolonomicConstr.Symbols.Jac,'].Fi']);
+                dqResetMap = setDepSymbols(dqResetMap,{'dQe','Fi','Qn','dQn'});
             else
                 dqResetMap = setPreCommands(dqResetMap,...
                     ['Qe = GetQe[]; dQe = D[Qe,t];',... % states on node i
                     'Qn=Qe/.Subscript[x_,y_]:>Subscript[x,{y,n}]; dQn = D[Qn,t];']);
-                dqResetMap = setExpression(dqResetMap,['dQe-',mat2math(R),'.dQn']);
+                dqResetMap = setExpression(dqResetMap,[mat2math(R),'.dQe-dQn']);
                 dqResetMap = setDepSymbols(dqResetMap,{'dQe','dQn'});
             end
             
@@ -393,6 +412,48 @@ function obj = genericSymFunctions(obj)
         hCont = setDepSymbols(hCont,{'H','Hn'});
         hCont = setDescription(hCont,'Parameter consistency: holonomic constraints - hbar');
         phase_funcs.hCont = hCont;
+        
+        if ~phase.IsTerminal
+            
+            cur_num_param = domain.DesPositionOutput.NumParam*length(domain.ActPositionOutput.KinGroupTable);
+            
+            next_domain = obj.Gamma.Nodes.Domain{obj.Phase{i}.NextVertex};
+            next_num_param = next_domain.DesPositionOutput.NumParam*length(next_domain.ActPositionOutput.KinGroupTable);
+            aPhaseCont = SymFunction('Name',['aPhaseCont_',domain.Name]);
+            aPhaseCont = setPreCommands(aPhaseCont,...
+                ['A = Vec[Table[a[i],{i,',num2str(cur_num_param),'}]];',...
+                'An = Vec[Table[an[i],{i,',num2str(next_num_param),'}]];']);
+            
+            cur_same_output_indices = getPositionOutputIndex(domain,{next_domain.ActPositionOutput.KinGroupTable.Name});
+            next_same_output_indices = getPositionOutputIndex(next_domain,{domain.ActPositionOutput.KinGroupTable.Name});
+            
+            cur_param_indices = (cur_same_output_indices - 1)*domain.DesPositionOutput.NumParam + ...
+                cumsum(ones(domain.DesPositionOutput.NumParam,1));
+            next_param_indices = (next_same_output_indices - 1)*next_domain.DesPositionOutput.NumParam + ...
+                cumsum(ones(next_domain.DesPositionOutput.NumParam,1));
+            aPhaseCont = setExpression(aPhaseCont,['A[[Flatten[',mat2math(cur_param_indices(:)),']]]-',...
+                'An[[Flatten[',mat2math(next_param_indices(:)),']]]']);
+            aPhaseCont = setDepSymbols(aPhaseCont,{'A','An'});
+            aPhaseCont = setDescription(aPhaseCont,'Parameter consistency between two domains: position output - a');
+            phase_funcs.aPhaseCont = aPhaseCont;
+            
+            
+%             hPhaseCont = SymFunction('Name',['hPhaseCont_',domain.Name]);
+%             hPhaseCont = setPreCommands(hPhaseCont,...
+%                 ['H = Vec[Table[h[i],{i,',num2str(getDimension(domain.HolonomicConstr)),'}]];',...
+%                 'Hn = Vec[Table[hn[i],{i,',num2str(getDimension(next_domain.HolonomicConstr)),'}]];']);
+%             cur_same_constr_indices = getHolonomicConstrIndex(domain,{next_domain.HolonomicConstr.KinGroupTable.Name});
+%             next_same_constr_indices = getHolonomicConstrIndex(next_domain,{domain.HolonomicConstr.KinGroupTable.Name});
+%             
+%             hPhaseCont = setExpression(hPhaseCont,['H[[Flatten[',mat2math(cur_same_constr_indices(:)),']]]-',...
+%                 'Hn[[Flatten[',mat2math(next_same_constr_indices(:)),']]]']);
+%             
+%             hPhaseCont = setDepSymbols(hPhaseCont,{'H','Hn'});
+%             hPhaseCont = setDescription(hPhaseCont,'Parameter consistency between two domains: holonomic constraints - hbar');
+%             phase_funcs.hPhaseCont = hPhaseCont;
+        end
+        
+        
         %% ZMP (unilateral constraints on forces)
         force_cond_table = domain.UnilateralConstr(strcmp(domain.UnilateralConstr.Type,'Force'),:);
         

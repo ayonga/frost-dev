@@ -14,29 +14,30 @@ function obj = addDomainConstraint(obj, phase)
     var_table= phase_info.OptVarTable;
     col_names = phase_info.ConstrTable.Properties.VariableNames;
     
-    domain = phase_info.Domain;
+    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
     
     force_constr = repmat({{}},1, n_node);
     kin_constr   = repmat({{}},1, n_node);
     
-    err_bound = obj.Options.EqualityBoundRelaxFactor;
+    % err_bound = obj.Options.EqualityBoundRelaxFactor;
     
     % domain admissible constraints are enforced at all nodes
     node_list = 1:n_node;
     for i=node_list
         
         force_cond_table = domain.UnilateralConstr(strcmp(domain.UnilateralConstr.Type,'Force'),:);
-        
-%         if ~isempty(force_cond_table)      
-%             n_cond = sum(cellfun(@(x)size(x,1),force_cond_table.WrenchCondition));
-%             % v(Fe) > 0
-%             force_constr{i} = {NlpFunction('Name','zmp',...
-%                 'Dimension',n_cond, 'Type', 'linear',...
-%                 'lb',0,'ub',inf, 'DepVariables', {{var_table{'Fe',i}{1}}},...
-%                 'Funcs', phase_funcs.zmp.Funcs)};
-%             
-%             
-%         end
+        if obj.Options.EnforceForceConstraint
+            if ~isempty(force_cond_table)
+                n_cond = sum(cellfun(@(x)size(x,1),force_cond_table.WrenchCondition));
+                % v(Fe) > 0
+                force_constr{i} = {NlpFunction('Name','zmp',...
+                    'Dimension',n_cond, 'Type', 'linear',...
+                    'lb',0,'ub',inf, 'DepVariables', {{var_table{'Fe',i}{1}}},...
+                    'Funcs', phase_funcs.zmp.Funcs)};
+                
+                
+            end
+        end
         
         
         kin_cond_table = domain.UnilateralConstr(strcmp(domain.UnilateralConstr.Type,'Kinematic'),:);

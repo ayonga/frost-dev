@@ -1,32 +1,40 @@
-function obj = addParamVariable(obj, phase, lb, ub, x0)
+function obj = addParamVariable(obj, phase, a_props, v_props, p_props)
     % Adds virtual constraint parameters as the NLP decision variables to
     % the problem
     %
     % Parameters:
     % phase: the index of the phase (domain) @type integer
     % model: the rigid body model of the robot @type RigidBodyModel
+    % a_props: properties of parameter ''a'' @type struct
+    % v_props: properties of parameter ''v'' @type struct
+    % p_props: properties of parameter ''v'' @type struct
+    %
+    % Required fields of a_props:
+    % lb: the lower bound of the parameters @type struct
+    % ub: the upper bound of the parameters @type struct
+    % x0: the typical initial value of the parameters @type struct
+    %
+    % Required fields of v_props:
+    % lb: the lower bound of the parameters @type struct
+    % ub: the upper bound of the parameters @type struct
+    % x0: the typical initial value of the parameters @type struct
+    %
+    % Required fields of p_props:
     % lb: the lower bound of the parameters @type struct
     % ub: the upper bound of the parameters @type struct
     % x0: the typical initial value of the parameters @type struct
     
-    
     % use default values if not given explicitly
     if nargin < 3
-        lb = struct('p',0,...
-            'v', 0.0, ...
-            'a', -100);        
+        a_props = struct('lb',-100,'ub',100,'x0',1);       
     end
     
     if nargin < 4
-        ub = struct('p',1,...
-            'v', 1.0, ...
-            'a', 100);
+        v_props = struct('lb',0,'ub',1,'x0',0.1);
     end
     
-    if nargin < 4
-        x0 = struct('p',0.5,...
-            'v', 0.5, ...
-            'a', 1);
+    if nargin < 5
+        p_props = struct('lb',-1,'ub',1,'x0',0.2);
     end
     
     
@@ -37,7 +45,7 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     n_node = phase_info.NumNode;
     col_names = phase_info.OptVarTable.Properties.VariableNames;
 
-    domain = phase_info.Domain;
+    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
     
     
     
@@ -57,10 +65,10 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
             n_p = domain.PhaseVariable.Var.Parameters.Dimension;
             p  = repmat({{}},1, n_node);
             % create an array of ''p'' NlpVariable objects
+            p_props.Name = 'p';
+            p_props.Dimension = n_p;
             for i=node_list
-                p{i} = {NlpVariable( ...
-                    'Name', 'p', 'Dimension', n_p, ...
-                    'lb', lb.p, 'ub', ub.p, 'x0', x0.p)};
+                p{i} = {NlpVariable(p_props)};
             end
             % add to the decision variable table
             obj.Phase{phase_idx}.OptVarTable = [...
@@ -75,10 +83,10 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
         n_v = domain.DesVelocityOutput.NumParam;
         v = repmat({{}},1, n_node);
         % create an array of ''v'' NlpVariable objects
+        v_props.Name = 'v';
+        v_props.Dimension = n_v;
         for i=node_list
-            v{i} = {NlpVariable( ...
-                'Name', 'v', 'Dimension', n_v, ...
-                'lb', lb.v, 'ub', ub.v, 'x0', x0.v)};
+            v{i} = {NlpVariable(v_props)};
         end
         obj.Phase{phase_idx}.OptVarTable = [...
             obj.Phase{phase_idx}.OptVarTable;...
@@ -91,10 +99,10 @@ function obj = addParamVariable(obj, phase, lb, ub, x0)
     n_a = n_pos_outputs*domain.DesPositionOutput.NumParam;
     
     a = repmat({{}},1, n_node);
+    a_props.Name = 'a';
+    a_props.Dimension = n_a;
     for i=node_list
-        a{i} = {NlpVariable(...
-            'Name', 'a', 'Dimension', n_a,...
-            'lb', lb.a, 'ub', ub.a, 'x0', x0.a)};
+        a{i} = {NlpVariable(a_props)};
     end
     
     obj.Phase{phase_idx}.OptVarTable = [...

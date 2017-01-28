@@ -1,11 +1,7 @@
 % run options
-compile_expr = false;
-export_expr  = false;
-build_expr   = false;
+
 cur = fileparts(mfilename('fullpath'));
-addpath([cur, '/export']);
-addpath([cur, '/param']);
-addpath([cur, '/urdf']);
+addpath(genpath(cur));
 export_path = fullfile(cur, 'export');
 atlas = Atlas([cur,'/urdf/atlas_simple_contact_noback.urdf']);
 
@@ -13,26 +9,21 @@ atlas_multiwalk = Atlas3DMultWalking(atlas);
 
 % atlas_multiwalk = compile(atlas_multiwalk, atlas, export_path);
 
+old_param_file = [cur,'/param/params_2016-07-24T00-48-04-00.yaml'];
+
+atlas_multiwalk = loadParam(atlas_multiwalk, old_param_file, atlas);
+
+atlas_multiwalk = simulate(atlas_multiwalk);
 
 %% add a new edge (left toe strike)
-atlas_multiwalk_opt = atlas_multiwalk;
+atlas_multiwalk_opt = Atlas3DMultiWalkingOpt(atlas_multiwalk);
 
-left_toe_strike_relabel = LeftToeStrikeRelabel(atlas);
-atlas_multiwalk_opt = addEdge(atlas_multiwalk_opt, 'RightHeelStrike', 'RightToeStrike', 'Guard', left_toe_strike_relabel);
-atlas_multiwalk_opt = rmVertex(atlas_multiwalk_opt, {'LeftToeStrike', 'LeftToeLift', 'LeftHeelStrike'});
+atlas_multiwalk_opt = update(atlas_multiwalk_opt);
 
-
-nlp_atlas_multi = HybridTrajectoryOptimization(atlas_multiwalk_opt);
-nlp_atlas_multi = initializeNLP(nlp_atlas_multi);
-nlp_atlas_multi = configureOptVariables(nlp_atlas_multi);
-nlp_atlas_multi = configureConstraints(nlp_atlas_multi);
-
-for i=1:3
-    nlp_atlas_multi = addRunningCost(nlp_atlas_multi, i, nlp_atlas_multi.Funcs.Phase{i}.power);
-end
-compileSymFunction(nlp_atlas_multi, 'Phase', [1,2,3], export_path);
-
-
-solver = IpoptApplication(nlp_atlas_multi);
-
+% for i=1:3
+%     compileSymFunction(atlas_multiwalk_opt, 'Phase', i, export_path);
+% end
+% 
+solver = IpoptApplication(atlas_multiwalk_opt);
+% 
 [sol, info] = optimize(solver);

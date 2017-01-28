@@ -20,8 +20,6 @@ function obj = setDependentVariable(obj, depvars)
         'Each cell must consists of a single or an array of NlpVariable objects.\n');
 
 
-    % catcate cell array into a single-dimensional NlpVariable
-    % array
     obj.DepVariables = depvars;
 
 

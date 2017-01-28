@@ -18,13 +18,14 @@ function obj = addOutputConstraint(obj, phase)
     phase_idx = getPhaseIndex(obj, phase);
     phase_info = obj.Phase{phase_idx};
     phase_funcs = obj.Funcs.Phase{phase_idx};
+    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
     
-    if ~isempty(phase_info.Domain.ActVelocityOutput)
-        n_vel_output = getDimension(phase_info.Domain.ActVelocityOutput);
+    if ~isempty(domain.ActVelocityOutput)
+        n_vel_output = getDimension(domain.ActVelocityOutput);
     else
         n_vel_output = 0;
     end
-    n_pos_output = length(phase_info.Domain.ActPositionOutput.KinGroupTable);
+    n_pos_output = length(domain.ActPositionOutput.KinGroupTable);
     % local variable for fast access
     n_node = phase_info.NumNode;
     var_table= phase_info.OptVarTable;

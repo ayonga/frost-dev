@@ -1,4 +1,4 @@
-classdef NonlinearProgram
+classdef NonlinearProgram < handle
     % NonlinearProgram defines an abstract class for general nonlinear
     % programing problems
     % 
