@@ -8,7 +8,7 @@ classdef RightToeStrike < Guard
     
     methods
         
-        function obj = RightToeStrike()
+        function obj = RightToeStrike(model)
             % construct the right toe strike event of the ATLAS
             % multi-contact walking
             
@@ -16,14 +16,12 @@ classdef RightToeStrike < Guard
             
             pos2neg = -1;
             
-            resetmap_options = struct(...
-                'ApplyImpact', true,...
-                'CoordinateRelabelMatrix', []);
             
             obj = obj@Guard('RightToeStrike',...
                 'Condition', 'RightToePosZ',...
-                'Direction', pos2neg,...
-                'DeltaOpts', resetmap_options);
+                'Direction', pos2neg);
+            
+            obj = setResetMap(obj, model, true);
         end
     end
     

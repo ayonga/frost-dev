@@ -35,10 +35,20 @@ classdef Guard
         % @type integer
         Direction
         
-        % The option of the reset map associated with the switching surface
+        %% Reset map
+        % A reset map of system states associated with the guard 
+        %
+        % The reset map will be applied to the target continuous domain
+        % prior to the beginning of the domain
+        %
+        % Required fields of ResetMap:
+        %  RigidImpact: indicates whether it goes through a rigid impact
+        %  @type logical
+        %  RelabelMatrix: the coordinate relabel matrix @type matrix
+        %  ResetPoint: a point to be reset to the origin (0,0,0) @type KinematicContact 
         %
         % @type struct
-        DeltaOpts
+        ResetMap
         
         
         
@@ -55,23 +65,21 @@ classdef Guard
             argin = struct(varargin{:});
             
             if isfield(argin, 'Condition')
-                obj.Condition = argin.Condition;
+                obj = setCondition(obj, argin.Condition);
             else
                 obj.Condition = [];
             end
                 
             if isfield(argin, 'Direction')
-                obj.Direction = argin.Direction;
+                obj = setDirection(obj, argin.Direction);
             else
                 obj.Direction = -1;
             end
             
-            if isfield(argin, 'DeltaOpts')
-                obj.DeltaOpts = argin.DeltaOpts;
-            else
-                obj.DeltaOpts = struct('ApplyImpact', false, ...
-                    'CoordinateRelabelMatrix', []);
-            end
+            obj.ResetMap = struct(...
+                'RigidImpact', false,...
+                'RelabelMatrix', [],...
+                'ResetPoint',[]);
         end
         
         
@@ -90,7 +98,7 @@ classdef Guard
     
         end
         
-        function obj = set.Condition(obj, cond)
+        function obj = setCondition(obj, cond)
             
             if ~isempty(cond)
                 assert(ischar(cond), 'The guard condition must be a string.');
@@ -98,30 +106,23 @@ classdef Guard
             obj.Condition = cond;
         end
         
-        function obj = set.Direction(obj, direction)
+        function obj = setDirection(obj, direction)
            
             assert(direction==1 || direction ==0 || direction == -1, ...
                 'The direction must be one of (1,0,-1).');
             obj.Direction = direction;
         end
         
-        function obj = set.DeltaOpts(obj, delta)
-           
-            assert(isstruct(delta),...
-                'The reset map options must be a struct.');
-            obj.DeltaOpts = struct('ApplyImpact', false,...
-                'CoordinateRelabelMatrix', []);
-            if isfield(delta, 'ApplyImpact')
-                obj.DeltaOpts.ApplyImpact = delta.ApplyImpact;
-            end
-            if isfield(delta, 'CoordinateRelabelMatrix')
-                obj.DeltaOpts.CoordinateRelabelMatrix = delta.CoordinateRelabelMatrix;
-            end
-            
-        end
+        
         
     end % methods
     
-    
+    methods
+       
+        
+        obj = setResetMap(obj, model, rigid_impact, relabel_matrix, reset_point);
+        
+        [x_post] = calcResetMap(obj, model, x_pre, target);
+    end
     
 end % classdef

@@ -8,7 +8,7 @@ classdef LeftToeStrike < Guard
     
     methods
         
-        function obj = LeftToeStrike()
+        function obj = LeftToeStrike(model)
             % construct the left toe strike event of the ATLAS
             % multi-contact walking
             
@@ -16,14 +16,12 @@ classdef LeftToeStrike < Guard
             
             pos2neg = -1;
             
-            resetmap_options = struct(...
-                'ApplyImpact', true,...
-                'CoordinateRelabelMatrix', []);
             
             obj = obj@Guard('LeftToeStrike',...
                 'Condition', 'LeftToePosZ',...
-                'Direction', pos2neg,...
-                'DeltaOpts', resetmap_options);
+                'Direction', pos2neg);
+            
+            obj = setResetMap(obj, model, true);
         end
     end
     

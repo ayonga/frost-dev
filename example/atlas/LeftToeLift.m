@@ -8,7 +8,7 @@ classdef LeftToeLift < Guard
     
     methods
         
-        function obj = LeftToeLift()
+        function obj = LeftToeLift(model)
             % construct the left toe lift event of the ATLAS
             % multi-contact walking
             
@@ -16,14 +16,12 @@ classdef LeftToeLift < Guard
             
             pos2neg = -1;
             
-            resetmap_options = struct(...
-                'ApplyImpact', false,...
-                'CoordinateRelabelMatrix', []);
             
             obj = obj@Guard('LeftToeLift',...
                 'Condition', 'LeftToe_normal_force',...
-                'Direction', pos2neg,...
-                'DeltaOpts', resetmap_options);
+                'Direction', pos2neg);
+            
+            
         end
     end
     

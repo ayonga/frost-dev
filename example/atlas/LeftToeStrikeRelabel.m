@@ -56,19 +56,17 @@ classdef LeftToeStrikeRelabel < Guard
             
             relabel_mat = relabel(swappingIndices,:);
             
-            relabel_mat(1,1) = 0;
-            relabel_mat(2,2) = 0;
+            reset_point = model.Contacts.LeftToe;
             
             pos2neg = -1;
             
-            resetmap_options = struct(...
-                'ApplyImpact', true,...
-                'CoordinateRelabelMatrix', relabel_mat);
             
             obj = obj@Guard('LeftToeStrike',...
                 'Condition', 'LeftToePosZ',...
-                'Direction', pos2neg,...
-                'DeltaOpts', resetmap_options);
+                'Direction', pos2neg);
+            
+            obj = setResetMap(obj, model, true,...
+                relabel_mat, reset_point);
         end
     end
     

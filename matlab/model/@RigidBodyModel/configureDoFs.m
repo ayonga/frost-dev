@@ -9,7 +9,7 @@ function dofs = configureDoFs(obj, model, base_dofs)
     
     
     
-    dofs(obj.nBaseDof) = struct();
+    dofs(obj.nDof) = struct();
 
     if obj.nBaseDof ~= 0        
         for i = 1:obj.nBaseDof
@@ -39,17 +39,36 @@ function dofs = configureDoFs(obj, model, base_dofs)
                     dofs(i).type = 'revolute';
                     dofs(i).axis = [0,0,1];
             end
-            dofs(i).effort = base_dofs.effort(i);
-            dofs(i).lower = base_dofs.lower(i);
-            dofs(i).upper = base_dofs.upper(i);
-            dofs(i).velocity = base_dofs.velocity(i);
+            dofs(i).minEffort = 0;
+            dofs(i).maxEffort = 0;
+            dofs(i).minPos = base_dofs.lower(i);
+            dofs(i).maxPos = base_dofs.upper(i);
+            dofs(i).minVel = base_dofs.minVelocity(i);
+            dofs(i).maxVel = base_dofs.maxVelocity(i);
+            dofs(i).minAcc = -100;
+            dofs(i).maxAcc = -100;
         end
         
     end
     
-    body_dofs = rmfield(model.joints,{'origin','parent','child'});
+    for i=1:(obj.nDof - obj.nBaseDof)
+        dofs(i+obj.nBaseDof).name = model.joints(i).name;
+        dofs(i+obj.nBaseDof).type = model.joints(i).type;
+        dofs(i+obj.nBaseDof).axis = model.joints(i).axis;
+        dofs(i+obj.nBaseDof).minEffort = -model.joints(i).effort;
+        dofs(i+obj.nBaseDof).maxEffort = model.joints(i).effort;
+        dofs(i+obj.nBaseDof).minPos = model.joints(i).lower;
+        dofs(i+obj.nBaseDof).maxPos = model.joints(i).upper;
+        dofs(i+obj.nBaseDof).minVel = -model.joints(i).velocity;
+        dofs(i+obj.nBaseDof).maxVel = model.joints(i).velocity;
+        dofs(i+obj.nBaseDof).minAcc = -1000;
+        dofs(i+obj.nBaseDof).maxAcc = -1000;
+        
+    end
+    
+    % body_dofs = rmfield(model.joints,{'origin','parent','child'});
     
     
-    dofs = [dofs,body_dofs];
+    % dofs = [dofs,body_dofs];
 
 end

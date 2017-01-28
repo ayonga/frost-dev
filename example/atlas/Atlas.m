@@ -466,7 +466,7 @@ classdef Atlas < RigidBodyModel
             
             obj = AtlasContactPoints(obj);
             
-            fixed_joints = obj.Joints(strcmp('fixed',{obj.Joints.type}));
+            fixed_joints = obj.Dof(strcmp('fixed',{obj.Dof.type}));
             obj.FixedDofs = cell(1, numel(fixed_joints));
             for i=1:numel(fixed_joints)
                 obj.FixedDofs{i} = KinematicDof('Name',regexprep(fixed_joints(i).name,'_',''),...

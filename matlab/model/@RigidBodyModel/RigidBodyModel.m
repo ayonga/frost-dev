@@ -26,6 +26,7 @@ classdef RigidBodyModel
     
     %% Public properties
     properties (Access = public)
+       
     end
     
     %% Constant properties
@@ -58,6 +59,11 @@ classdef RigidBodyModel
         % @type struct
         Links
         
+        % A structure describes the configuration of the total degrees of
+        % freedom, including base coordinates
+        %
+        % @type struct
+        Dof
         
         % Represents the list of rigid body joints
         %
@@ -65,42 +71,16 @@ classdef RigidBodyModel
         % specified in the URDF file.
         %
         % @type struct
-        Joints
+        % Joints
         
         
         % The structur contains the configuration of the base coordinates,
         % which normally does not conver in the URDF file.
         %
-        % @type cell
-        BaseDof
-        
-        %
-        %         % Represents the list of rigid joints
-        %         %
-        %         % The joint structure contains the elements of 'joint'
-        %         % specified in the URDF file.
-        %         %
-        %         % @type struct
-        %         joints
-        %
-        %         % Represents the list of joint actuators
-        %         %
-        %         % The actuator structure contains the information of
-        %         % joint actuators
-        %         %
-        %         % @type struct
-        %         actuators
-        %
-        %         % A structure specifies the base joints of the rigid body model
-        %         %
-        %         % @type struct
-        %         base_dofs
-        
-        % A structure describes the configuration of the total degrees of
-        % freedom, including base coordinates
-        %
         % @type struct
-        Dof
+        BaseDof
+               
+        
         
         % The total degrees of freedom of the model
         %
@@ -284,7 +264,7 @@ classdef RigidBodyModel
             
             
             if nargin < 2
-                fprintf('The model type is not specified. Setting it to the default type ...\n');
+                fprintf('The model type is not specified. Setting it to the default type: ''spatial'' ...\n');
                 obj.Type = 'spatial';
             else
                 obj.Type = model_type;
@@ -307,10 +287,10 @@ classdef RigidBodyModel
                 
                 obj.nBaseDof = numel(base_dofs.axis);               
                 
-                base_dofs.lower = -inf(1,obj.nBaseDof);
-                base_dofs.upper = inf(1,obj.nBaseDof);
-                base_dofs.velocity = inf(1,obj.nBaseDof);
-                base_dofs.effort = zeros(1,obj.nBaseDof);
+                base_dofs.lower = -pi * ones(1,obj.nBaseDof);
+                base_dofs.upper = pi * ones(1,obj.nBaseDof);
+                base_dofs.minVelocity = ones(1,obj.nBaseDof);
+                base_dofs.maxVelocity = ones(1,obj.nBaseDof);
             else
                 
                 
@@ -348,28 +328,29 @@ classdef RigidBodyModel
                 obj.nBaseDof = numel(base_dofs.axis);
                 
                 if ~isfield(base_dofs, 'lower')
-                    base_dofs.lower = -inf(1,obj.nBaseDof);
+                    base_dofs.lower = -pi * ones(1,obj.nBaseDof);
                 elseif isempty(base_dofs.lower)
-                    base_dofs.lower = -inf(1,obj.nBaseDof);
+                    base_dofs.lower = -pi * ones(1,obj.nBaseDof);
                 end
                 
                 if ~isfield(base_dofs, 'upper')
-                    base_dofs.upper = inf(1,obj.nBaseDof);
+                    base_dofs.upper = pi*ones(1,obj.nBaseDof);
                 elseif isempty(base_dofs.upper)
-                    base_dofs.upper = inf(1,obj.nBaseDof);
+                    base_dofs.upper = pi*ones(1,obj.nBaseDof);
                 end
                 
-                if ~isfield(base_dofs, 'velocity')
-                    base_dofs.velocity = inf(1,obj.nBaseDof);
-                elseif isempty(base_dofs.velocity)
-                    base_dofs.velocity = inf(1,obj.nBaseDof);
+                if ~isfield(base_dofs, 'minVelocity')
+                    base_dofs.minVelocity = -ones(1,obj.nBaseDof);
+                elseif isempty(base_dofs.minVelocity)
+                    base_dofs.minVelocity = -ones(1,obj.nBaseDof);
                 end
                 
-                if ~isfield(base_dofs, 'effort')
-                    base_dofs.effort = zeros(1,obj.nBaseDof);
-                elseif isempty(base_dofs.effort)
-                    base_dofs.effort = zeros(1,obj.nBaseDof);
+                if ~isfield(base_dofs, 'maxVelocity')
+                    base_dofs.maxVelocity = ones(1,obj.nBaseDof);
+                elseif isempty(base_dofs.maxVelocity)
+                    base_dofs.maxVelocity = ones(1,obj.nBaseDof);
                 end
+                
             end
             obj.BaseDof = base_dofs;
             
@@ -379,7 +360,6 @@ classdef RigidBodyModel
             
             obj.Name = model.name;
             obj.Links = model.links;
-            obj.Joints = model.joints;
             obj.nDof = obj.nBaseDof + numel(model.joints);
             % Setup indices for fast operator
             obj = configureIndices(obj);

@@ -8,7 +8,7 @@ classdef RightHeelStrike < Guard
     
     methods
         
-        function obj = RightHeelStrike()
+        function obj = RightHeelStrike(model)
             % construct the right heel strike event of the ATLAS
             % multi-contact walking
             
@@ -16,14 +16,12 @@ classdef RightHeelStrike < Guard
             
             pos2neg = -1;
             
-            resetmap_options = struct(...
-                'ApplyImpact', true,...
-                'CoordinateRelabelMatrix', []);
             
             obj = obj@Guard('RightHeelStrike',...
                 'Condition', 'RightHeelPosZ',...
-                'Direction', pos2neg,...
-                'DeltaOpts', resetmap_options);
+                'Direction', pos2neg);
+            
+            obj = setResetMap(obj, model, true);
         end
     end
     

@@ -29,12 +29,12 @@ classdef Atlas3DMultWalking < HybridSystem
             left_hs_domain = LeftHS3DMultiWalking(model);
             
             % guard objects
-            left_toe_lift = LeftToeLift();
-            left_heel_strike = LeftHeelStrike();
-            left_toe_strike = LeftToeStrike();
-            right_toe_lift = RightToeLift();
-            right_heel_strike = RightHeelStrike();
-            right_toe_strike = RightToeStrike();
+            left_toe_lift = LeftToeLift(model);
+            left_heel_strike = LeftHeelStrike(model);
+            left_toe_strike = LeftToeStrike(model);
+            right_toe_lift = RightToeLift(model);
+            right_heel_strike = RightHeelStrike(model);
+            right_toe_strike = RightToeStrike(model);
             
             % control object
             io_control  = IOFeedback('IO');
@@ -78,7 +78,7 @@ classdef Atlas3DMultWalking < HybridSystem
             
             % simulation options
             obj.sim_opts = struct;
-            obj.sim_opts.numcycle = 1;
+            obj.sim_opts.numcycle = 4;
             obj.sim_opts.n_sample = 20;
         end
         
@@ -141,6 +141,12 @@ classdef Atlas3DMultWalking < HybridSystem
             for i=1:numel(domains)
                 compile(domains{i}, model, true);
                 export(domains{i}, export_path, true);
+            end
+            
+            guards = obj.Gamma.Edges.Guard;
+            for i=1:numel(guards)
+                compile(guards{i}, model, true);
+                export(guards{i}, export_path, true);
             end
             
         end

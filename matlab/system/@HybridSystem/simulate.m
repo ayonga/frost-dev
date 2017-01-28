@@ -169,7 +169,6 @@ function obj = simulate(obj, options)
         
         
         
-        cur_node = sim_graph.Nodes(cur_node_idx, :);
         % if the next node is the starting node of the graph, it indicates
         % that one full cycle is completed.
         if cur_node_idx == s_domain_idx
@@ -182,7 +181,8 @@ function obj = simulate(obj, options)
         end
         
         % update states and time
-        x0 = updateStates(cur_node.Domain{1}, obj.Model, x_f, triggered_guard.DeltaOpts);
+        target_domain = sim_graph.Nodes.Domain{cur_node_idx};
+        x0 = calcResetMap(triggered_guard, obj.Model, x_f, target_domain);
         t0 = t_f;
         
     end

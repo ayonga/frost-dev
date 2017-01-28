@@ -1,4 +1,4 @@
-function [x_post] = updateStates(obj, model, x_pre, delta)
+function [x_post] = calcResetMap(obj, model, x_pre, target)
     % Updates the system states using the reset map associated with the
     % discontinuous transition to the current domain to get the initial
     % states of the current domain.
@@ -8,21 +8,45 @@ function [x_post] = updateStates(obj, model, x_pre, delta)
     %    model: the robot model of type RigitBodyModel
     %    qe_pre: pre-guard joint configuration @type colvec
     %    dqe_pre: pre-guard velocities @type colvec
-    %    delta: the reset map option @type struct
+    %    target: the target domain @type Domain
     %
     % Return values:
-    %    qe_post: post-guard joint configuration @type colvec
-    %    dqe_post: post-guard velocities @type colvec
+    %    x_post: post reset map states @type colvec
     
     qe_pre  = x_pre(model.qeIndices);
     dqe_pre = x_pre(model.dqeIndices); 
-    % the joint configuration remains the same
-    qe_post = qe_pre;
+    
+    if isempty(obj.ResetMap.ResetPoint)
+        
+        % the joint configuration remains the same
+        qe_post = qe_pre;
+    else
+        reset_pos = feval(obj.ResetMap.ResetPoint, qe_pre);
+        
+        switch model.Type
+            case 'planar'
+                qe_pre(1:2) = qe_pre(1:2) - reset_pos;
+            case 'spatial'
+                qe_pre(1:3) = qe_pre(1:3) - reset_pos;
+        end
+    end
+    
+    
+    
+    % if swapping the stance/non-stance foot, multiply with
+    % 'ResetMap.CoordinateRelabelMatrix'
+    if ~isempty(obj.ResetMap.RelabelMatrix)
+        qe_pre  = obj.ResetMap.RelabelMatrix * qe_pre;
+        dqe_pre = obj.ResetMap.RelabelMatrix * dqe_pre;
+    end
+   
+    
+    
     
     % compute the impact map if the domain transition involves a rigid impact
-    if delta.ApplyImpact
+    if obj.ResetMap.RigidImpact
         % jacobian of impact constraints
-        Je = feval(obj.HolonomicConstr.Funcs.Jac, qe_pre);
+        Je = feval(target.HolonomicConstr.Funcs.Jac, qe_pre);
         
         % inertia matrix
         De = calcNaturalDynamics(model, qe_pre, dqe_pre);
@@ -48,12 +72,7 @@ function [x_post] = updateStates(obj, model, x_pre, delta)
         
     end
     
-    % if swapping the stance/non-stance foot, multiply with
-    % 'delta.CoordinateRelabelMatrix'
-    if ~isempty(delta.CoordinateRelabelMatrix)
-        qe_post  = delta.CoordinateRelabelMatrix * qe_post;
-        dqe_post = delta.CoordinateRelabelMatrix * dqe_post;
-    end
+    
 
     x_post = [qe_post; dqe_post];
  
