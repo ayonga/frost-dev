@@ -29,7 +29,11 @@ classdef KinematicGroup < Kinematics
         % @type struct
         KinGroupTable
         
-        
+        % A particular option indicates whether to allow the same kinematic
+        % objects are added more than once into the group
+        %
+        % @type logical
+        AllDuplicate
     end % properties
     
     
@@ -49,7 +53,7 @@ classdef KinematicGroup < Kinematics
                 return;
             end
             
-            
+            argin = struct(varargin{:});
             
             % initialize the fields 
             obj.KinGroupTable = struct('Name',[],'KinObj',[],'Index',[]);
@@ -60,6 +64,11 @@ classdef KinematicGroup < Kinematics
             % if isfield(objStruct, 'KinGroupTable')
             %     obj.KinGroupTable = objStruct.KinGroupTable;
             % end
+            if isfield(argin, 'AllowDuplicate')
+                obj.AllDuplicate = argin.AllowDuplicate;
+            else
+                obj.AllDuplicate = false;
+            end
         end
         
         

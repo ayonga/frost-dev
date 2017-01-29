@@ -23,11 +23,13 @@ function obj = addKinematic(obj, kin)
     num_kin = length(obj.KinGroupTable);
 
     for i=1:numel(kin)
-
-        if any(strcmp(kin{i}.Name,{obj.KinGroupTable.Name}))
-            warning('The kinematic object: %s already exists in the group.\nSkipping...\n',...
-                kin{i}.Name);
-            continue;
+        
+        if ~obj.AllDuplicate
+            if any(strcmp(kin{i}.Name,{obj.KinGroupTable.Name}))
+                warning('The kinematic object: %s already exists in the group.\nSkipping...\n',...
+                    kin{i}.Name);
+                continue;
+            end
         end
 
         % record the name and kinematic object

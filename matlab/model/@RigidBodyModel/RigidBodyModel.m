@@ -171,7 +171,10 @@ classdef RigidBodyModel
         % @type struct
         SVA
         
-        
+        % Animation Line objects
+        %
+        % @type struct
+        LineObjects
     end
     
     %% Public methods
@@ -419,6 +422,8 @@ classdef RigidBodyModel
         obj = compileCoM(obj);
         status = checkFlag(obj, flag);
         [De, He] = calcNaturalDynamics(obj, qe, dqe, useSVA);
+        
+        obj = exportLineFunctions(obj, varargin);
     end
     
     %% Private methods
