@@ -1,11 +1,10 @@
-function obj = addAuxilaryConstraint(obj, phase, nodes, deps, varargin)
+function obj = addAuxilaryConstraint(obj, phase, nodes, varargin)
     % Add auxilary user-defined constraints constraints
     %
     %
     % Parameters:
     % phase: the index of the phase (domain) @type integer
     % nodes: the node list of the variable @type rowvec
-    % deps: a cell array dependent variables @type cell
     % varargin: variable input arguments for property values non-empty
     % NlpFunction other than the DepVariables
     % 
@@ -25,6 +24,27 @@ function obj = addAuxilaryConstraint(obj, phase, nodes, deps, varargin)
     
     
     constr = repmat({{}},1, n_node);
+    
+    if ischar(nodes)
+        switch nodes
+            case 'first'
+                nodes = 1;
+            case 'last'
+                nodes = n_node;
+            case 'all'
+                nodes = 1:nodes;
+            case 'cardinal'
+                nodes = 1:2:n_node;
+            case 'interior'
+                nodes = 2:2:n_node-1;
+        end
+    else
+        if ~isnumeric(nodes)
+            error(['The node must be specified as a list or following supported characters:\n',...
+                '%s'],implode({'first','last','all','cardinal','interior'},','));
+        end
+    end
+    
     for i=nodes
         constr{i} = {NlpFcnction(...
             varargin{:},'DepVariables',{deps{i}})};
