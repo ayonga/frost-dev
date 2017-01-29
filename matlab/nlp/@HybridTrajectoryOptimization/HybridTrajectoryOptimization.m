@@ -174,6 +174,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         [yc, cl, cu] = checkConstraints(obj, x);
         
         [xc, lb, ub] = checkVariables(obj, x);
+        
+        [calcs, params] = exportSolution(obj, sol);
     end
 end
 

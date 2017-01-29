@@ -175,7 +175,53 @@ classdef Atlas3DMultiWalkingOpt < HybridTrajectoryOptimization
                 obj.Phase{2}.ConstrTable.Properties.VariableNames)];
             
             
-                
+            %% Heel clearance
+            
+            %             var_table = obj.Phase{1}.OptVarTable;
+            %             n_node = obj.Phase{1}.NumNode;
+            %             heelClearance = repmat({{}},1, n_node);
+            %             for j=1:n_node
+            %                 heelClearance{j} = {NlpFunction(...
+            %                     'Name','heelClearance', 'Dimension', 1, 'Type', 'linear',...
+            %                     'lb',0.02,'ub',0,'DepVariables',...
+            %                     {{var_table{'Qe',j}{1}}},...
+            %                     'Funcs', obj.Funcs.Phase{1}.heelClearance.Funcs)};
+            %             end
+            %             obj.Phase{1}.ConstrTable = [...
+            %                 obj.Phase{1}.ConstrTable;...
+            %                 cell2table(heelClearance,'RowNames',{'heelClearance'},'VariableNames',...
+            %                 obj.Phase{1}.ConstrTable.Properties.VariableNames)];
+            
+            var_table = obj.Phase{2}.OptVarTable;
+            n_node = obj.Phase{2}.NumNode;
+            heelClearance = repmat({{}},1, n_node);
+            toeClearance = repmat({{}},1, n_node);
+            heelClearance{1} = {NlpFunction(...
+                'Name','heelClearance', 'Dimension', 1, 'Type', 'linear',...
+                'lb',0.02,'ub',1,'DepVariables',...
+                {{var_table{'Qe',1}{1}}},...
+                'Funcs', obj.Funcs.Phase{2}.heelClearance.Funcs)};
+            heelClearance{round(n_node/2)} = {NlpFunction(...
+                'Name','heelClearance', 'Dimension', 1, 'Type', 'linear',...
+                'lb',0.02,'ub',1,'DepVariables',...
+                {{var_table{'Qe',round(n_node/2)}{1}}},...
+                'Funcs', obj.Funcs.Phase{2}.heelClearance.Funcs)};
+            toeClearance{round(n_node/2)} = {NlpFunction(...
+                'Name','toeClearance', 'Dimension', 1, 'Type', 'linear',...
+                'lb',0.02,'ub',1,'DepVariables',...
+                {{var_table{'Qe',round(n_node/2)}{1}}},...
+                'Funcs', obj.Funcs.Phase{2}.toeClearance.Funcs)};
+            toeClearance{n_node} = {NlpFunction(...
+                'Name','toeClearance', 'Dimension', 1, 'Type', 'linear',...
+                'lb',0.02,'ub',1,'DepVariables',...
+                {{var_table{'Qe',n_node}{1}}},...
+                'Funcs', obj.Funcs.Phase{2}.toeClearance.Funcs)};
+            obj.Phase{2}.ConstrTable = [...
+                obj.Phase{2}.ConstrTable;...
+                cell2table(heelClearance,'RowNames',{'heelClearance'},'VariableNames',...
+                obj.Phase{2}.ConstrTable.Properties.VariableNames);
+                cell2table(toeClearance,'RowNames',{'toeClearance'},'VariableNames',...
+                obj.Phase{2}.ConstrTable.Properties.VariableNames)];    
             %% Add cost function
             for i=1:3
                 obj = addRunningCost(obj, i, obj.Funcs.Phase{i}.power);
@@ -262,25 +308,44 @@ classdef Atlas3DMultiWalkingOpt < HybridTrajectoryOptimization
             obj.Funcs.Phase{2}.legRollBoundary = legRollBoundary;
             
             
+            %% heel clearance
+            heelClearance = SymFunction('Name', ['heelClearance_sca']);
+            heelClearance = setPreCommands(heelClearance, ...
+                ['Qe = GetQe[]; ']);
+            heelClearance = setExpression(heelClearance,...
+                model.KinObjects.LeftHeelPosZ.Symbols.Kin);
+            heelClearance = setDepSymbols(heelClearance,{'Qe'});
+            heelClearance = setDescription(heelClearance,'heel clearance');
+            obj.Funcs.Phase{2}.heelClearance = heelClearance;
             
+            
+            %% toe clearance
+            toeClearance = SymFunction('Name', ['toeClearance_sca']);
+            toeClearance = setPreCommands(toeClearance, ...
+                ['Qe = GetQe[]; ']);
+            toeClearance = setExpression(toeClearance,...
+                model.KinObjects.LeftToePosZ.Symbols.Kin);
+            toeClearance = setDepSymbols(toeClearance,{'Qe'});
+            toeClearance = setDescription(toeClearance,'toe clearance');
+            obj.Funcs.Phase{2}.toeClearance = toeClearance;
         end
         
         
         function obj = loadInitialGuess(obj, plant)
             % load initial guess from a simulated results
             for k = 1:numel(obj.Phase)
-                calcs = plant.Flow{k}.calcs;
+                calcs = plant.Flow{k};
                 param = plant.Gamma.Nodes.Param{k};
                 n_node = obj.Phase{k}.NumNode;
-                hbar = feval(obj.Gamma.Nodes.Domain{k}.HolonomicConstr.Funcs.Kin,calcs{1}.qe);
+                hbar = feval(obj.Gamma.Nodes.Domain{k}.HolonomicConstr.Funcs.Kin,calcs.qe(:,1));
                 
-                obj = updateVariableProp(obj, 'T', k, 'first', 'x0', calcs{end}.t);
+                obj = updateVariableProp(obj, 'T', k, 'first', 'x0', calcs.t(end));
                 for i=1:n_node
-                    obj = updateVariableProp(obj, 'Qe', k, i, 'x0',calcs{i}.qe);
-                    obj = updateVariableProp(obj, 'dQe', k, i, 'x0',calcs{i}.dqe);
-                    obj = updateVariableProp(obj, 'ddQe', k, i, 'x0',calcs{i}.ddqe);
-                    obj = updateVariableProp(obj, 'U', k, i, 'x0',calcs{i}.u);
-                    obj = updateVariableProp(obj, 'Fe', k, i, 'x0',calcs{i}.Fe);
+                    obj = updateVariableProp(obj, 'Qe', k, i, 'x0',calcs.qe(:,i));
+                    obj = updateVariableProp(obj, 'dQe', k, i, 'x0',calcs.dqe(:,i));
+                    obj = updateVariableProp(obj, 'ddQe', k, i, 'x0',calcs.ddqe(:,i));
+                    obj = updateVariableProp(obj, 'U', k, i, 'x0',calcs.u(:,i));
+                    obj = updateVariableProp(obj, 'Fe', k, i, 'x0',calcs.Fe(:,i));
                 end
                 obj = updateVariableProp(obj, 'P', k, 'first', 'x0',param.p(:));
                 obj = updateVariableProp(obj, 'V', k, 'first', 'x0',param.v(:));

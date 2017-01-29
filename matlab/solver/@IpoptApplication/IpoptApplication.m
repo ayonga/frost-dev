@@ -53,7 +53,7 @@ classdef IpoptApplication < SolverApplication
             
             % default IPOPT options
             options.ipopt.mu_strategy      = 'adaptive';
-            options.ipopt.max_iter         = 1000;
+            options.ipopt.max_iter         = 10000;
             options.ipopt.tol              = 1e-3;
             options.ipopt.linear_solver    = 'ma57';
             options.ipopt.ma57_automatic_scaling = 'yes';

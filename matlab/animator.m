@@ -120,7 +120,7 @@ classdef animator
             frameDt = 1 / options.FrameRate;
             n_phase = length(flow);
             for i = 1:n_phase
-                if isempty(flow{i}.calcs)
+                if isempty(flow{i})
                     continue;
                 end
                 
@@ -180,7 +180,8 @@ classdef animator
                 
                 
                 % even sample
-                calcs = horzcat_fields([flow{i}.calcs{:}]);
+                %                 calcs = horzcat_fields([flow{i}.calcs{:}]);
+                calcs = flow{i};
                 if isempty(calcs)
                     continue;
                 end

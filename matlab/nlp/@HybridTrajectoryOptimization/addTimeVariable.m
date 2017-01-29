@@ -8,10 +8,10 @@ function obj = addTimeVariable(obj, phase, lb, ub, x0)
     % x0: the typical initial value of the phase time @type double
     
     if (nargin < 3) 
-        lb = 0; 
+        lb = 0.05; 
     end
     if (nargin < 4) 
-        ub = 1; 
+        ub = 2; 
     end
     if (nargin < 5) 
         x0 = 0.5; 

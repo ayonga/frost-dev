@@ -25,7 +25,7 @@ function obj = addOutputConstraint(obj, phase)
     else
         n_vel_output = 0;
     end
-    n_pos_output = length(domain.ActPositionOutput.KinGroupTable);
+    n_pos_output = getDimension(domain.ActPositionOutput);
     % local variable for fast access
     n_node = phase_info.NumNode;
     var_table= phase_info.OptVarTable;

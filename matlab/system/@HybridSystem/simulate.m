@@ -126,8 +126,8 @@ function obj = simulate(obj, options)
         
         
         % log simulation data
-        obj.Flow{idx} = struct;
-        obj.Flow{idx}.node_idx = cur_node_idx;
+        %         obj.Flow{idx} = struct;
+        
         
         if ~isfield(options, 'n_sample')
             n_sample = length(sol.x);
@@ -150,8 +150,8 @@ function obj = simulate(obj, options)
             end
         end
         
-        obj.Flow{idx}.calcs = calcs;
-        
+        obj.Flow{idx} = horzcat_fields([calcs{:}]);
+        obj.Flow{idx}.node_idx = cur_node_idx;
         % Compute reset map at the guard
         t_f = sol.x(end);
         x_f = sol.y(:,end);
