@@ -285,17 +285,13 @@ classdef NlpFunction < handle
         
         obj = setJacobianPattern(obj, jac_sp, sp_form);
         
-        obj = setJacobianFunction(obj, func_name);
         
         obj = setHessianPattern(obj, hes_sp, sp_form);
         
-        obj = setHessianFunction(obj, func_name);
         
         obj = setDependentVariable(obj, depvars);
         
         obj = setBoundary(obj, cl, cu);
-        
-        obj = appendTo(obj, funcs);
         
         obj = updateProp(obj, varargin);
         

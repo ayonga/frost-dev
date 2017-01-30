@@ -144,7 +144,6 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         
         obj = addTimeVariable(obj, phase, lb, ub, x0);
         
-        obj = configureNLP(obj, options);
         
         obj = genericSymFunctions(obj);
         

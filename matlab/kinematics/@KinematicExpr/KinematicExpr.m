@@ -132,6 +132,8 @@ classdef KinematicExpr < Kinematics
     %% Methods defined in separte files
     methods
         status = compile(obj, model, re_load);
+        
+        status = export(obj, export_path, do_build);
     end
     
     

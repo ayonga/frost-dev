@@ -421,6 +421,7 @@ classdef RigidBodyModel
         obj = compileDynamics(obj);
         obj = compileCoM(obj);
         status = checkFlag(obj, flag);
+        
         [De, He] = calcNaturalDynamics(obj, qe, dqe, useSVA);
         
         obj = exportLineFunctions(obj, varargin);

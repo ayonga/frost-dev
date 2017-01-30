@@ -48,7 +48,7 @@ classdef Controller
     methods (Abstract)
         obj = setParam(obj, varargin);
         
-        [u, extra] = calcControl(obj, qe, dqe, vfc, gfc, domain);
+        [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain);
     end
     
 end

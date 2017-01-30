@@ -6,7 +6,7 @@ function obj = addAuxilaryVariable(obj, phase, nodes, varargin)
     % phase: the index of the phase (domain) @type integer
     % nodes: the node list of the variable @type rowvec
     % varargin: variable input arguments for property values non-empty
-    % NlpVariables @copydoc NlpVariable.updateProp
+    % NlpVariables @copydoc NlpVariable::updateProp
     % 
     % @see NlpVariable
     

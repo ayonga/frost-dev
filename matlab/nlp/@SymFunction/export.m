@@ -9,7 +9,7 @@ function status = export(obj, export_path, do_build, derivative_level)
     %  do_build: determine whether build the mex files.
     %  @type logical  @default true
     %  derivative_level: determines the level of derivatives to be exported
-    %  (1, 2) @type double
+    %  (1, 2) @type double @default 1
     %
     % Return values:
     % status: indicator of successful export/built process @type logical

@@ -39,6 +39,7 @@ classdef CLFQP < Controller
     end
     
     methods
+        [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain);
     end
     
 end

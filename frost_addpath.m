@@ -1,4 +1,4 @@
-function matlab_setup()
+function frost_addpath()
 
 % Add system related functions paths
 cur = fileparts(mfilename('fullpath'));
@@ -24,5 +24,5 @@ addpath_thirdparty_packages('GetFullPath', 'date',...
 
 addpath(fullfile(cur, 'example'));
 
-
+addpath(fullfile(cur, 'docs'));
 end

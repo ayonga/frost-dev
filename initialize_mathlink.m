@@ -1,4 +1,4 @@
-function mathematica_setup()
+function initialize_mathlink()
     % setup Wolfram Mathematica environment
     
     % try
