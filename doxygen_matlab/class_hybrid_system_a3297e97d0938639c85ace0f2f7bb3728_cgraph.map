@@ -1,13 +1,15 @@
 <map id="HybridSystem::HybridSystem" name="HybridSystem::HybridSystem">
-<area shape="rect" id="node2" href="$class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="281,107,445,133"/>
-<area shape="rect" id="node4" href="$class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="549,56,721,83"/>
-<area shape="rect" id="node5" href="$class_hybrid_system.html#ae3cb624d499c8c03c829c71892368ca8" title="This function computes the continuous dynamics of the dynmical system. " alt="" coords="537,208,733,235"/>
-<area shape="rect" id="node6" href="$class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c" title="Detect the guard condition (event trigger) " alt="" coords="544,360,727,387"/>
-<area shape="rect" id="node7" href="$class_hybrid_system.html#a8189d23fc5283519d0ec0453a6af4087" title="Removes a edge or a group of edges from the directed graph object &#39;Gamma&#39;. " alt="" coords="284,208,443,235"/>
-<area shape="rect" id="node8" href="$class_hybrid_system.html#a93a0f7785dfcf19ea8597eb3492a75df" title="Removes a vertex or a group of vertices from the directed graph object &#39;Gamma&#39;. " alt="" coords="280,259,447,285"/>
-<area shape="rect" id="node9" href="$class_hybrid_system.html#aa105ed37143b703f242e3340f6d18f16" title="Sets the values of edge properties. " alt="" coords="525,5,745,32"/>
-<area shape="rect" id="node10" href="$class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f" title="Sets the values of vertex properties. " alt="" coords="249,411,477,437"/>
-<area shape="rect" id="node11" href="$class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="282,309,445,336"/>
-<area shape="rect" id="node3" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="793,81,860,108"/>
-<area shape="rect" id="node12" href="$even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6" title="even_sample" alt="" coords="586,309,685,336"/>
+<area shape="rect" id="node2" href="$class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="281,195,445,221"/>
+<area shape="rect" id="node4" href="$class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="549,347,721,373"/>
+<area shape="rect" id="node5" href="$class_hybrid_system.html#ae3cb624d499c8c03c829c71892368ca8" title="This function computes the continuous dynamics of the dynmical system. " alt="" coords="537,5,733,32"/>
+<area shape="rect" id="node6" href="$class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c" title="Detect the guard condition (event trigger) " alt="" coords="544,157,727,184"/>
+<area shape="rect" id="node7" href="$class_hybrid_system.html#a8189d23fc5283519d0ec0453a6af4087" title="Removes a edge or a group of edges from the directed graph object &#39;Gamma&#39;. " alt="" coords="284,245,443,272"/>
+<area shape="rect" id="node8" href="$class_hybrid_system.html#a93a0f7785dfcf19ea8597eb3492a75df" title="Removes a vertex or a group of vertices from the directed graph object &#39;Gamma&#39;. " alt="" coords="280,296,447,323"/>
+<area shape="rect" id="node9" href="$class_hybrid_system.html#aa105ed37143b703f242e3340f6d18f16" title="Sets the values of edge properties. " alt="" coords="525,397,745,424"/>
+<area shape="rect" id="node10" href="$class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f" title="Sets the values of vertex properties. " alt="" coords="249,448,477,475"/>
+<area shape="rect" id="node11" href="$class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="282,93,445,120"/>
+<area shape="rect" id="node3" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="807,372,873,399"/>
+<area shape="rect" id="node12" href="$even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6" title="even_sample" alt="" coords="586,107,685,133"/>
+<area shape="rect" id="node13" href="$horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0" title="Take a struct array and return one structure with all fields horizcontall concatenated. " alt="" coords="584,56,687,83"/>
+<area shape="rect" id="node14" href="$blank__struct_8m.html#a69e32a3670b645b3840dd133da5e4329" title="STRUCT_BLANK Simple function to copy struture (fields, no data) of given structure For parsing into s..." alt="" coords="793,56,887,83"/>
 </map>

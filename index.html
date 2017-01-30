@@ -9,15 +9,13 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap.min.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     'beta',
+        VERSION:     'alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -34,7 +32,7 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Installation" href="installation.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -58,7 +56,7 @@
   </script>
 
 
-  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+  <div id="navbar" class="navbar navbar-default ">
     <div class="container">
       <div class="navbar-header">
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -75,10 +73,10 @@
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
-                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="#">Home</a></li>
                 <li><a href="installation.html">Installation</a></li>
                 <li><a href="tutorial.html">Tutorial</a></li>
-                <li><a href="doxygen_matlab/index.html">Matlab</a></li>
+                <li><a href="matlab.html">Matlab</a></li>
                 <li><a href="mathematica.html">Mathematica</a></li>
                 <li><a href="developers.html">Developer</a></li>
             
@@ -91,37 +89,13 @@
      href="#">Contents <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Table of Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#suitsparse">SuitSparse</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#d-atlas">3D ATLAS</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference external" href="doxygen_matlab/index.html#://">Matlab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#extrautils">ExtraUtils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#mathtocpp">MathToCpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#robotmodel">RobotModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#screws">Screws</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#snakeyaml">SnakeYaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#urdfparser">URDFParser</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developers.html#install-mtoc">Install mtoc++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developers.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
 </ul>
 </ul>
 </li>
@@ -160,37 +134,13 @@
      href="#">Contents <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Table of Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#suitsparse">SuitSparse</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#d-atlas">3D ATLAS</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference external" href="doxygen_matlab/index.html#://">Matlab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#extrautils">ExtraUtils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#mathtocpp">MathToCpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#robotmodel">RobotModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#screws">Screws</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#snakeyaml">SnakeYaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematica.html#urdfparser">URDFParser</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developers.html#install-mtoc">Install mtoc++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developers.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
 </ul>
 </ul>
 </li><ul>
@@ -210,24 +160,44 @@
       
   <div class="section" id="welcome-to-frost-s-documentation">
 <h1>Welcome to FROST&#8217;s documentation!<a class="headerlink" href="#welcome-to-frost-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>FROST (Fast Robot Simulation and Optimization Toolkit) for MATLAB provides a
+general control development framework for dynamic bipedal walking robots using
+virtual constraints based feedback controllers. The Wolfram Mathematica backend
+enables generation of analytic expression of multi-body system dynamics and
+kinematics symbolically, and then exported as C/C++ source could that could be
+compiled as MEX files under MATLAB to boost the computational speed. FROST also
+features state-of-the-art direct collocation approaches for the full-order
+dynamic gait optimization problems to guarantee fast and reliable convergence.
+Some key features includes:</p>
+<ul class="simple">
+<li>Use Mathematica Kernel as a backend, use &#8216;MathLink&#8217; to send data/commands to Mathematica Kernel from Matlab.</li>
+<li>Dynamic bipedal walking is modelled as a hybrid system that consists of both continuous phases (domains) and discrete transitions (reset maps).</li>
+<li>The domain structure of the hybrid system is described via a Directed Graph (digraph).</li>
+<li>The directed graph could be either cyclic or acyclic.</li>
+<li>The default control law uses the virtual constraints based feedback controllers.</li>
+</ul>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Table of Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#wolfram-mathematica">Wolfram Mathematica</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#mathlink-for-matlab-v2-0">MathLink for Matlab v2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#setup-c-c-compiler-for-matlab">Setup C/C++ Compiler for Matlab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#ipopt-matlabinterface">IPOPT Matlabinterface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#suitsparse">SuitSparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#download-frost">Download FROST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-started">Getting Started</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#d-amber-robot">2D AMBER Robot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#d-atlas">3D ATLAS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="doxygen_matlab/index.html#://">Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="matlab.html#model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab.html#kinematics">Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab.html#hybrid-system">Hybrid System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab.html#control">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab.html#gait-optimization">Gait Optimization</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mathematica.html#extrautils">ExtraUtils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematica.html#mathtocpp">MathToCpp</a></li>
@@ -239,7 +209,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="developers.html#install-mtoc">Install mtoc++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developers.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 </ul>
@@ -259,7 +228,7 @@
     </p>
     <p>
         &copy; Copyright 2017, AMBER Lab.<br/>
-      Last updated on Jan 26, 2017.<br/>
+      Last updated on Jan 30, 2017.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
     </p>
   </div>

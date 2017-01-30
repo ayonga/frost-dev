@@ -14,13 +14,16 @@
 <area shape="rect" id="node14" href="$add_state_variable_8m.html" title="nlp/@HybridTrajectoryOptimization\l/addStateVariable.m" alt="" coords="3013,95,3240,136"/>
 <area shape="rect" id="node15" href="$add_terminal_cost_8m.html" title="nlp/@HybridTrajectoryOptimization\l/addTerminalCost.m" alt="" coords="3264,95,3491,136"/>
 <area shape="rect" id="node16" href="$add_time_variable_8m.html" title="nlp/@HybridTrajectoryOptimization\l/addTimeVariable.m" alt="" coords="3515,95,3741,136"/>
-<area shape="rect" id="node17" href="$compile_sym_function_8m.html" title="nlp/@HybridTrajectoryOptimization\l/compileSymFunction.m" alt="" coords="3765,95,3992,136"/>
-<area shape="rect" id="node18" href="$configure_constraints_8m.html" title="nlp/@HybridTrajectoryOptimization\l/configureConstraints.m" alt="" coords="4016,95,4243,136"/>
-<area shape="rect" id="node19" href="$configure_n_l_p_8m.html" title="nlp/@HybridTrajectoryOptimization\l/configureNLP.m" alt="" coords="4267,95,4493,136"/>
-<area shape="rect" id="node20" href="$configure_opt_variables_8m.html" title="nlp/@HybridTrajectoryOptimization\l/configureOptVariables.m" alt="" coords="4517,95,4744,136"/>
-<area shape="rect" id="node21" href="$generic_sym_functions_8m.html" title="nlp/@HybridTrajectoryOptimization\l/genericSymFunctions.m" alt="" coords="4768,95,4995,136"/>
-<area shape="rect" id="node22" href="$get_phase_index_8m.html" title="nlp/@HybridTrajectoryOptimization\l/getPhaseIndex.m" alt="" coords="5019,95,5245,136"/>
-<area shape="rect" id="node23" href="$initialize_n_l_p_8m.html" title="nlp/@HybridTrajectoryOptimization\l/initializeNLP.m" alt="" coords="5269,95,5496,136"/>
-<area shape="rect" id="node24" href="$set_phase_mesh_8m.html" title="nlp/@HybridTrajectoryOptimization\l/setPhaseMesh.m" alt="" coords="5520,95,5747,136"/>
-<area shape="rect" id="node25" href="$_0D_hybrid_trajectory_optimization_2update_8m.html" title="nlp/@HybridTrajectoryOptimization\l/update.m" alt="" coords="5771,95,5997,136"/>
+<area shape="rect" id="node17" href="$check_constraints_8m.html" title="nlp/@HybridTrajectoryOptimization\l/checkConstraints.m" alt="" coords="3765,95,3992,136"/>
+<area shape="rect" id="node18" href="$check_variables_8m.html" title="nlp/@HybridTrajectoryOptimization\l/checkVariables.m" alt="" coords="4016,95,4243,136"/>
+<area shape="rect" id="node19" href="$compile_sym_function_8m.html" title="nlp/@HybridTrajectoryOptimization\l/compileSymFunction.m" alt="" coords="4267,95,4493,136"/>
+<area shape="rect" id="node20" href="$configure_constraints_8m.html" title="nlp/@HybridTrajectoryOptimization\l/configureConstraints.m" alt="" coords="4517,95,4744,136"/>
+<area shape="rect" id="node21" href="$configure_opt_variables_8m.html" title="nlp/@HybridTrajectoryOptimization\l/configureOptVariables.m" alt="" coords="4768,95,4995,136"/>
+<area shape="rect" id="node22" href="$export_solution_8m.html" title="nlp/@HybridTrajectoryOptimization\l/exportSolution.m" alt="" coords="5019,95,5245,136"/>
+<area shape="rect" id="node23" href="$generic_sym_functions_8m.html" title="nlp/@HybridTrajectoryOptimization\l/genericSymFunctions.m" alt="" coords="5269,95,5496,136"/>
+<area shape="rect" id="node24" href="$get_phase_index_8m.html" title="nlp/@HybridTrajectoryOptimization\l/getPhaseIndex.m" alt="" coords="5520,95,5747,136"/>
+<area shape="rect" id="node25" href="$initialize_n_l_p_8m.html" title="nlp/@HybridTrajectoryOptimization\l/initializeNLP.m" alt="" coords="5771,95,5997,136"/>
+<area shape="rect" id="node26" href="$_0D_hybrid_trajectory_optimization_2update_8m.html" title="nlp/@HybridTrajectoryOptimization\l/update.m" alt="" coords="6021,95,6248,136"/>
+<area shape="rect" id="node27" href="$update_constr_prop_8m.html" title="nlp/@HybridTrajectoryOptimization\l/updateConstrProp.m" alt="" coords="6272,95,6499,136"/>
+<area shape="rect" id="node28" href="$update_variable_prop_8m.html" title="nlp/@HybridTrajectoryOptimization\l/updateVariableProp.m" alt="" coords="6523,95,6749,136"/>
 </map>

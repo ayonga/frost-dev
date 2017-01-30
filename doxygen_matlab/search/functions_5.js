@@ -3,7 +3,6 @@ var searchData=
   ['general2math',['general2math',['../general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e',1,'general2math.m']]],
   ['general2str',['general2str',['../general2str_8m.html#ad9ab1321cead8451ecdbc9d5a8aa930e',1,'general2str.m']]],
   ['genericsymfunctions',['genericSymFunctions',['../class_hybrid_trajectory_optimization.html#ad8512a9b7dda6328cbffd7244f5f0cb0',1,'HybridTrajectoryOptimization']]],
-  ['genindices',['genIndices',['../class_nlp_variable.html#a06d3f96daba1e2269d28089a93cde5a0',1,'NlpVariable']]],
   ['getdepindices',['getDepIndices',['../class_nlp_function.html#a2ce9413b3ef885f931c181235a369846',1,'NlpFunction']]],
   ['getdepobject',['getDepObject',['../class_nlp_function.html#a8d5f7f9456fb488ba39440d20f01ff44',1,'NlpFunction::getDepObject()'],['../class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc',1,'NlpFunctionSum::getDepObject()']]],
   ['getdesoutputexpr',['getDesOutputExpr',['../class_virtual_constr_domain.html#a1aa2644d806040d7151bec7bfe69745e',1,'VirtualConstrDomain']]],

@@ -1,5 +1,6 @@
 <map id="CLFQP::CLFQP" name="CLFQP::CLFQP">
-<area shape="rect" id="node2" href="$class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427" title="The controller class constructor function. " alt="" coords="172,31,315,57"/>
-<area shape="rect" id="node3" href="$class_controller.html#a31125a7d223a21ac9bc918453b8a9c0a" title="Controller::setParam" alt="" coords="367,5,510,32"/>
-<area shape="rect" id="node4" href="$class_controller.html#a7e8d438af8c291ca149a8d0265cb1e80" title="Controller::calcControl" alt="" coords="363,56,515,83"/>
+<area shape="rect" id="node2" href="$class_c_l_f_q_p.html#a9469b9511dacdc3aa0749018a58e98c0" title="Computes the classical input&#45;output feedback linearization control law for virtual constraints..." alt="" coords="173,5,313,32"/>
+<area shape="rect" id="node3" href="$class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427" title="The controller class constructor function. " alt="" coords="172,56,315,83"/>
+<area shape="rect" id="node4" href="$class_controller.html#a31125a7d223a21ac9bc918453b8a9c0a" title="Controller::setParam" alt="" coords="367,31,510,57"/>
+<area shape="rect" id="node5" href="$class_controller.html#ae856efa40de7c6ed98b5af7842fc182b" title="Controller::calcControl" alt="" coords="363,81,515,108"/>
 </map>

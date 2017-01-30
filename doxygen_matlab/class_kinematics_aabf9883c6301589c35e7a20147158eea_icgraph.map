@@ -1,5 +1,6 @@
 <map id="Kinematics::print" name="Kinematics::print">
-<area shape="rect" id="node2" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="173,5,348,32"/>
-<area shape="rect" id="node3" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="431,5,561,32"/>
-<area shape="rect" id="node4" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="396,56,596,83"/>
+<area shape="rect" id="node2" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="173,31,348,57"/>
+<area shape="rect" id="node3" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="406,5,537,32"/>
+<area shape="rect" id="node4" href="$class_kinematic_expr.html#a781b58d9523f2e282d0eb485d57aeed8" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="396,56,547,83"/>
+<area shape="rect" id="node5" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="595,81,795,108"/>
 </map>

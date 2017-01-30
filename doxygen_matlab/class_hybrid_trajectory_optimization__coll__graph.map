@@ -1,11 +1,11 @@
 <map id="HybridTrajectoryOptimization" name="HybridTrajectoryOptimization">
-<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="53,169,180,196"/>
-<area shape="rect" id="node3" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="115,5,158,32"/>
-<area shape="rect" id="node6" href="$class_hybrid_system.html" title="HybridSystem defines a hybrid dynamical system that has both continuous and discrete dynamics..." alt="" coords="402,260,508,287"/>
-<area shape="rect" id="node8" href="$class_rigid_body_model.html" title="A class with basic model descriptions and functionalities of the multi&#45;link rigid&#45;body robot platform..." alt="" coords="658,169,775,196"/>
-<area shape="rect" id="node4" href="$classstruct.html" title="A MatLab struct. " alt="" coords="325,5,380,32"/>
-<area shape="rect" id="node5" href="$classdigraph.html" title="A MatLab digraph. " alt="" coords="336,169,400,196"/>
-<area shape="rect" id="node7" href="$classchar.html" title="A MatLab character array. " alt="" coords="592,5,638,32"/>
-<area shape="rect" id="node9" href="$classdouble.html" title="A double value. " alt="" coords="698,5,758,32"/>
-<area shape="rect" id="node10" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="786,5,850,32"/>
+<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="89,168,215,195"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="121,5,181,32"/>
+<area shape="rect" id="node4" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,5,48,32"/>
+<area shape="rect" id="node5" href="$classstruct.html" title="A MatLab struct. " alt="" coords="237,5,291,32"/>
+<area shape="rect" id="node7" href="$class_rigid_body_model.html" title="A class with basic model descriptions and functionalities of the multi&#45;link rigid&#45;body robot platform..." alt="" coords="339,168,456,195"/>
+<area shape="rect" id="node6" href="$classdigraph.html" title="A MatLab digraph. " alt="" coords="480,168,544,195"/>
+<area shape="rect" id="node8" href="$classdouble.html" title="A double value. " alt="" coords="378,5,438,32"/>
+<area shape="rect" id="node9" href="$classchar.html" title="A MatLab character array. " alt="" coords="474,5,521,32"/>
+<area shape="rect" id="node10" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="556,5,620,32"/>
 </map>

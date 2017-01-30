@@ -1,6 +1,6 @@
 <map id="NlpFunction::setBoundary" name="NlpFunction::setBoundary">
-<area shape="rect" id="node2" href="$class_nlp_function.html#a2ce9413b3ef885f931c181235a369846" title="Returns the indices of the dependent variables. " alt="" coords="465,5,649,32"/>
-<area shape="rect" id="node3" href="$class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="227,81,397,108"/>
-<area shape="rect" id="node5" href="$class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="229,31,395,57"/>
-<area shape="rect" id="node4" href="$class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b" title="The class constructor function. " alt="" coords="445,81,669,108"/>
+<area shape="rect" id="node2" href="$class_nlp_function.html#a2ce9413b3ef885f931c181235a369846" title="Returns the indices of the dependent variables. " alt="" coords="441,5,625,32"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="227,56,393,83"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="448,56,619,83"/>
+<area shape="rect" id="node5" href="$class_nlp_function_sum.html#a20726c6ae84f759c898e7e1776b49b2b" title="The class constructor function. " alt="" coords="673,56,897,83"/>
 </map>

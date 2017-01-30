@@ -1,5 +1,4 @@
 <map id="NlpVariable::updateProp" name="NlpVariable::updateProp">
 <area shape="rect" id="node2" href="$class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="220,5,391,32"/>
-<area shape="rect" id="node3" href="$class_nlp_variable.html#aabb59bb3b7043d91cdc676f2f3b86113" title="Sets the dimension of the NLP variable vector. " alt="" coords="217,56,394,83"/>
-<area shape="rect" id="node4" href="$class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="216,107,395,133"/>
+<area shape="rect" id="node3" href="$class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="216,56,395,83"/>
 </map>

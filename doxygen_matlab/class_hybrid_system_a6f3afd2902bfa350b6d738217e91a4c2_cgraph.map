@@ -2,4 +2,6 @@
 <area shape="rect" id="node2" href="$class_hybrid_system.html#ae3cb624d499c8c03c829c71892368ca8" title="This function computes the continuous dynamics of the dynmical system. " alt="" coords="216,5,412,32"/>
 <area shape="rect" id="node3" href="$class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c" title="Detect the guard condition (event trigger) " alt="" coords="223,56,405,83"/>
 <area shape="rect" id="node4" href="$even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6" title="even_sample" alt="" coords="265,107,363,133"/>
+<area shape="rect" id="node5" href="$horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0" title="Take a struct array and return one structure with all fields horizcontall concatenated. " alt="" coords="263,157,365,184"/>
+<area shape="rect" id="node6" href="$blank__struct_8m.html#a69e32a3670b645b3840dd133da5e4329" title="STRUCT_BLANK Simple function to copy struture (fields, no data) of given structure For parsing into s..." alt="" coords="460,157,553,184"/>
 </map>

@@ -1,8 +1,26 @@
 .. _tutorial
 
 ***************************************
-Tutorial
+Examples
 ***************************************
+
+This page contains a few working examples of using FROST to develop dynamic locomotion of multiple robots.
+
+To run FROST examples, first change directories into the ``frost-dev`` folder and run (in MATLAB):
+
+.. code-block:: matlab
+
+   >> frost_addpath
+..
+
+In addition, run:
+
+.. code-block:: matlab
+
+   >> initialize_mathlink
+..
+
+to initialzie the MathLink enviroments if need to generate symbolic expressions in Mathematica and export to C++ files. 
 
 2D AMBER Robot
 ======================================
@@ -13,16 +31,19 @@ Tutorial
 3D ATLAS
 ======================================
 
-Flat Foot Walking
---------------------------------------
+To run the multi-contact dynamic walking simulation of 3D ATLAS, first change the MATLAB working directory to ``frost-dev/examples/atlas/`` and run:
 
-**Coming Soon...**
+.. code-block:: matlab
 
-Multi-Contact Heel-Toe Walking
---------------------------------------
+   >> main_sim
+..
 
-**Coming Soon...**
+To run the multi-contact dynamic walking optimization of 3D ATLAS:
 
+.. code-block:: matlab
+
+   >> main_opt
+..
 
 
 

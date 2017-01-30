@@ -1,3 +1,5 @@
 <map id="struct_overlay" name="struct_overlay">
-<area shape="rect" id="node2" href="$class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="157,5,373,32"/>
+<area shape="rect" id="node2" href="$classanimator.html#aa6bf3057353515090f8a3ff4b9bd3554" title="The constructor function. " alt="" coords="200,5,331,32"/>
+<area shape="rect" id="node3" href="$class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="157,56,373,83"/>
+<area shape="rect" id="node4" href="$classanimator.html#a16a574a9371f6de46acd7396424aec7e" title="animator::setOption" alt="" coords="197,107,333,133"/>
 </map>

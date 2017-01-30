@@ -1,39 +1,15 @@
-warning: Tag `XML_SCHEMA' at line 1326 of file `/home/ayonga/Dropbox/research/dzopt/frost/docs/config/Doxyfile' has become obsolete.
+warning: Tag `XML_SCHEMA' at line 1325 of file `/home/ayonga/Dropbox/research/dzopt/frost/docs/config/Doxyfile' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-warning: Tag `XML_DTD' at line 1332 of file `/home/ayonga/Dropbox/research/dzopt/frost/docs/config/Doxyfile' has become obsolete.
+warning: Tag `XML_DTD' at line 1331 of file `/home/ayonga/Dropbox/research/dzopt/frost/docs/config/Doxyfile' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function setJacobianFunction!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function setHessianFunction!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function appendTo!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function setJacobianFunction!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function setHessianFunction!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function appendTo!
-mtoc++ warning in nlp/@NlpVariable/NlpVariable.m: Class NlpVariable misses definition of function genIndices!
-mtoc++ warning in nlp/@NlpVariable/NlpVariable.m: Class NlpVariable misses definition of function appendTo!
-mtoc++ warning in nlp/@NlpVariable/NlpVariable.m: Class NlpVariable misses definition of function genIndices!
-mtoc++ warning in nlp/@NlpVariable/NlpVariable.m: Class NlpVariable misses definition of function appendTo!
-mtoc++ warning in nlp/@SymFunction/export.m: Optional parameter 'derivative_level' of method 'export' has no specified default value
-mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative_level' of method 'export' has no specified default value
-mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative_level' of method 'export' has no specified default value
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/@CLFQP/calcClfMultiLagrange.m:18: warning: documented symbol `mlhsSubst< mlhsInnerSubst< matlabtypesubstitute, ret_u >,mlhsInnerSubst< matlabtypesubstitute, extra > > CLFQP::calcClfMultiLagrange' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/@CLFQP/calcTorques.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, u > CLFQP::calcTorques' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/@CLFQP/calcTorques.m:123: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, u > CLFQP::calcTorques' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/@CLFQP/configureCLF.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > CLFQP::configureCLF' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/@CLFQP/configureCLF.m:121: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > CLFQP::configureCLF' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/kinematics/@KinematicExpr/export.m:18: warning: no uniquely matching class member found for 
-  mlhsInnerSubst<::logical, status > KinematicExpr::export(::char export_path,::logical do_build)
-
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/kinematics/@KinematicExpr/export.m:109: warning: no uniquely matching class member found for 
-  mlhsInnerSubst<::logical, status > KinematicExpr::export(::char export_path,::logical do_build)
-
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/checkFlag.m:18: warning: documented symbol `mlhsInnerSubst<::logical, status > RigidBodyModel::checkFlag' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/checkFlag.m:35: warning: documented symbol `mlhsInnerSubst<::logical, status > RigidBodyModel::checkFlag' was not declared or defined.
+mtoc++ warning in control/@CLFQP/CLFQP.m: Class CLFQP misses definition of function calcControl!
+mtoc++ warning in control/@CLFQP/CLFQP.m: Class CLFQP misses definition of function calcControl!
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/compileCoM.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::compileCoM' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/compileCoM.m:50: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::compileCoM' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/compileDynamics.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::compileDynamics' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/compileDynamics.m:96: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::compileDynamics' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/configureDoFs.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, dofs > RigidBodyModel::configureDoFs' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/configureDoFs.m:68: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, dofs > RigidBodyModel::configureDoFs' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/configureDoFs.m:87: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, dofs > RigidBodyModel::configureDoFs' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/configureIndices.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::configureIndices' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/configureIndices.m:45: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::configureIndices' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/configureSVA.m:18: warning: documented symbol `mlhsInnerSubst<::struct, sva > RigidBodyModel::configureSVA' was not declared or defined.
@@ -55,15 +31,19 @@ mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative
   mlhsInnerSubst< matlabtypesubstitute, obj > RigidBodyModel::initialize(::logical reload)
 
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configureConstraints.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::configureConstraints' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configureConstraints.m:39: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::configureConstraints' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configureConstraints.m:41: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::configureConstraints' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configureOptVariables.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::configureOptVariables' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configureOptVariables.m:42: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::configureOptVariables' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configureOptVariables.m:46: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::configureOptVariables' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/update.m:18: warning: no matching class member found for 
   mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::update()
 
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/update.m:61: warning: no matching class member found for 
   mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::update()
 
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/updateConstrProp.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::updateConstrProp' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/updateConstrProp.m:65: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::updateConstrProp' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/updateVariableProp.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::updateVariableProp' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/updateVariableProp.m:65: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > HybridTrajectoryOptimization::updateVariableProp' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/checkFuncs.m:18: warning: documented symbol `mlhsInnerSubst<::struct, val > NlpFunction::checkFuncs' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/checkFuncs.m:82: warning: documented symbol `mlhsInnerSubst<::struct, val > NlpFunction::checkFuncs' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setDimension.m:18: warning: no matching class member found for 
@@ -80,19 +60,29 @@ mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative
 
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setFuncs.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > NlpFunction::setFuncs' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setFuncs.m:35: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > NlpFunction::setFuncs' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/setIndices.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > NlpVariable::setIndices' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/setIndices.m:29: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, obj > NlpVariable::setIndices' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/setOption.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, options > NonlinearProgram::setOption' was not declared or defined.
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/setOption.m:28: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, options > NonlinearProgram::setOption' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/setOption.m:18: warning: no matching class member found for 
+  mlhsInnerSubst< matlabtypesubstitute, options > NonlinearProgram::setOption(matlabtypesubstitute varargin)
+
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/setOption.m:28: warning: no matching class member found for 
+  mlhsInnerSubst< matlabtypesubstitute, options > NonlinearProgram::setOption(matlabtypesubstitute varargin)
+
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/array2struct.m:18: warning: documented symbol `mlhsInnerSubst<::struct, func_struct > IpoptApplication::array2struct' was not declared or defined.
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/array2struct.m:163: warning: documented symbol `mlhsInnerSubst<::struct, func_struct > IpoptApplication::array2struct' was not declared or defined.
-mtoc++ warning in nlp/@SymFunction/export.m: Optional parameter 'derivative_level' of method 'export' has no specified default value
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function setJacobianFunction!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function setHessianFunction!
-mtoc++ warning in nlp/@NlpFunction/NlpFunction.m: Class NlpFunction misses definition of function appendTo!
-mtoc++ warning in nlp/@NlpVariable/NlpVariable.m: Class NlpVariable misses definition of function genIndices!
-mtoc++ warning in nlp/@NlpVariable/NlpVariable.m: Class NlpVariable misses definition of function appendTo!
-mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative_level' of method 'export' has no specified default value
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/getHolonomicConstrIndex.m:18: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, indices > Domain::getHolonomicConstrIndex' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/getHolonomicConstrIndex.m:30: warning: documented symbol `mlhsInnerSubst< matlabtypesubstitute, indices > Domain::getHolonomicConstrIndex' was not declared or defined.
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/compile.m:18: warning: no uniquely matching class member found for 
+  mlhsInnerSubst< matlabtypesubstitute, obj > Guard::compile(::RigidBodyModel model, matlabtypesubstitute varargin)
+
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/compile.m:32: warning: no uniquely matching class member found for 
+  mlhsInnerSubst< matlabtypesubstitute, obj > Guard::compile(::RigidBodyModel model, matlabtypesubstitute varargin)
+
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/export.m:18: warning: no uniquely matching class member found for 
+  mlhsInnerSubst<::logical, status > Guard::export(::char export_path,::logical do_build)
+
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/export.m:34: warning: no uniquely matching class member found for 
+  mlhsInnerSubst<::logical, status > Guard::export(::char export_path,::logical do_build)
+
+mtoc++ warning in control/@CLFQP/CLFQP.m: Class CLFQP misses definition of function calcControl!
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/create_object_array.m:40: warning: @copybrief or @copydoc target 'NlpVariable.updateProp' not found
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/create_object_array.m:40: warning: @copydetails or @copydoc target 'NlpVariable.updateProp' not found
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/create_object_array.m:43: warning: Found unknown command `\tyep'
@@ -120,9 +110,9 @@ mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/removeContact.m:45: warning: argument 'kins' of command @param is not found in the argument list of Domain::removeContact(matlabtypesubstitute contacts)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/Domain.m:162: warning: The following parameters of Domain::removeContact(matlabtypesubstitute contacts) are not documented:
   parameter 'contacts'
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/updateStates.m:67: warning: argument 'qe_pre' of command @param is not found in the argument list of Domain::updateStates(::RigitBodyModel model, matlabtypesubstitute x_pre,::struct delta)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/updateStates.m:67: warning: argument 'dqe_pre' of command @param is not found in the argument list of Domain::updateStates(::RigitBodyModel model, matlabtypesubstitute x_pre,::struct delta)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Domain/Domain.m:180: warning: The following parameters of Domain::updateStates(::RigitBodyModel model, matlabtypesubstitute x_pre,::struct delta) are not documented:
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/calcResetMap.m:85: warning: argument 'qe_pre' of command @param is not found in the argument list of Guard::calcResetMap(::RigitBodyModel model, matlabtypesubstitute x_pre,::Domain target)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/calcResetMap.m:85: warning: argument 'dqe_pre' of command @param is not found in the argument list of Guard::calcResetMap(::RigitBodyModel model, matlabtypesubstitute x_pre,::Domain target)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@Guard/Guard.m:188: warning: The following parameters of Guard::calcResetMap(::RigitBodyModel model, matlabtypesubstitute x_pre,::Domain target) are not documented:
   parameter 'x_pre'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/HybridSystem.m:188: warning: argument 'varargin' of command @param is not found in the argument list of HybridSystem::HybridSystem(matlabtypesubstitute name, matlabtypesubstitute model)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/HybridSystem.m:171: warning: The following parameters of HybridSystem::HybridSystem(matlabtypesubstitute name, matlabtypesubstitute model) are not documented:
@@ -130,7 +120,7 @@ mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative
   parameter 'model'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/addEdge.m:241: warning: End of list marker found without any preceding list items
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/addVertex.m:183: warning: unexpected token in comment block while parsing the argument of command param
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/calcDynamics.m:64: warning: argument 'dx' of command @param is not found in the argument list of HybridSystem::calcDynamics(::double t,::colvec x,::table cur_node)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/calcDynamics.m:67: warning: argument 'dx' of command @param is not found in the argument list of HybridSystem::calcDynamics(::double t,::colvec x,::table cur_node)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/checkGuard.m:57: warning: argument 'cur_domain' of command @param is not found in the argument list of HybridSystem::checkGuard(::double t,::colvec x, matlabtypesubstitute cur_node,::table assoc_edges)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/HybridSystem.m:223: warning: The following parameters of HybridSystem::checkGuard(::double t,::colvec x, matlabtypesubstitute cur_node,::table assoc_edges) are not documented:
   parameter 'cur_node'
@@ -146,33 +136,46 @@ mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative
   parameter 's'
   parameter 't'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/setVertexProperties.m:108: warning: unexpected token in comment block while parsing the argument of command param
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/HybridTrajectoryOptimization.m:166: warning: unexpected token in comment block while parsing the argument of command param
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addAuxilaryVariable.m:48: warning: @copybrief or @copydoc target 'NlpVariable.updateProp' not found
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addAuxilaryVariable.m:48: warning: @copydetails or @copydoc target 'NlpVariable.updateProp' not found
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/HybridTrajectoryOptimization.m:158: warning: unexpected token in comment block while parsing the argument of command param
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/HybridTrajectoryOptimization.m:219: warning: The following parameters of HybridTrajectoryOptimization::addAuxilaryConstraint(::integer phase,::rowvec nodes, matlabtypesubstitute deps, matlabtypesubstitute varargin) are not documented:
+  parameter 'deps'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addControlVariable.m:78: warning: argument 'model' of command @param is not found in the argument list of HybridTrajectoryOptimization::addControlVariable(::integer phase)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addGuardVariable.m:97: warning: argument 'model' of command @param is not found in the argument list of HybridTrajectoryOptimization::addGuardVariable(::integer phase,::struct lb,::struct ub,::struct x0)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addParamVariable.m:117: warning: argument 'model' of command @param is not found in the argument list of HybridTrajectoryOptimization::addParamVariable(::integer phase,::struct lb,::struct ub,::struct x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addGuardVariable.m:81: warning: argument 'hbar_props' of command @param is not found in the argument list of HybridTrajectoryOptimization::addGuardVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addGuardVariable.m:81: warning: argument 'impf_props' of command @param is not found in the argument list of HybridTrajectoryOptimization::addGuardVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addGuardVariable.m:81: warning: argument 'model' of command @param is not found in the argument list of HybridTrajectoryOptimization::addGuardVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/HybridTrajectoryOptimization.m:193: warning: The following parameters of HybridTrajectoryOptimization::addGuardVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0) are not documented:
+  parameter 'lb'
+  parameter 'ub'
+  parameter 'x0'
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addParamVariable.m:110: warning: argument 'a_props' of command @param is not found in the argument list of HybridTrajectoryOptimization::addParamVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addParamVariable.m:110: warning: argument 'v_props' of command @param is not found in the argument list of HybridTrajectoryOptimization::addParamVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addParamVariable.m:110: warning: argument 'p_props' of command @param is not found in the argument list of HybridTrajectoryOptimization::addParamVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addParamVariable.m:110: warning: argument 'model' of command @param is not found in the argument list of HybridTrajectoryOptimization::addParamVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/HybridTrajectoryOptimization.m:195: warning: The following parameters of HybridTrajectoryOptimization::addParamVariable(::integer phase, matlabtypesubstitute lb, matlabtypesubstitute ub, matlabtypesubstitute x0) are not documented:
+  parameter 'lb'
+  parameter 'ub'
+  parameter 'x0'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/IpoptApplication.m:122: warning: argument 'opts_in' of command @param is not found in the argument list of IpoptApplication::IpoptApplication(matlabtypesubstitute nlp, matlabtypesubstitute new_opts)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/IpoptApplication.m:75: warning: The following parameters of IpoptApplication::IpoptApplication(matlabtypesubstitute nlp, matlabtypesubstitute new_opts) are not documented:
   parameter 'new_opts'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setBoundary.m:73: warning: argument 'lowerbound' of command @param is not found in the argument list of NlpFunction::setBoundary(matlabtypesubstitute cl, matlabtypesubstitute cu)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setBoundary.m:73: warning: argument 'upperbound' of command @param is not found in the argument list of NlpFunction::setBoundary(matlabtypesubstitute cl, matlabtypesubstitute cu)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/NlpFunction.m:455: warning: The following parameters of NlpFunction::setBoundary(matlabtypesubstitute cl, matlabtypesubstitute cu) are not documented:
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/NlpFunction.m:437: warning: The following parameters of NlpFunction::setBoundary(matlabtypesubstitute cl, matlabtypesubstitute cu) are not documented:
   parameter 'cl'
   parameter 'cu'
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/updateProp.m:58: warning: End of list marker found without any preceding list items
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/updateProp.m:48: warning: End of list marker found without any preceding list items
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/NlpFunctionSum.m:65: warning: @copybrief or @copydoc target 'NlpFunction.NlpFunction' not found
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/NlpFunctionSum.m:65: warning: @copydetails or @copydoc target 'NlpFunction.NlpFunction' not found
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/setInitialValue.m:48: warning: argument 'x0' of command @param is not found in the argument list of NlpVariable::setInitialValue(matlabtypesubstitute x)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/NlpVariable.m:210: warning: The following parameters of NlpVariable::setInitialValue(matlabtypesubstitute x) are not documented:
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/NlpVariable.m:208: warning: The following parameters of NlpVariable::setInitialValue(matlabtypesubstitute x) are not documented:
   parameter 'x'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/regVariable.m:48: warning: argument 'vars' of command @param is not found in the argument list of NonlinearProgram::regVariable(matlabtypesubstitute varargin)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/NonlinearProgram.m:149: warning: The following parameters of NonlinearProgram::regVariable(matlabtypesubstitute varargin) are not documented:
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/NonlinearProgram.m:150: warning: The following parameters of NonlinearProgram::regVariable(matlabtypesubstitute varargin) are not documented:
   parameter 'varargin'
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/RigidBodyModel.m:464: warning: Illegal command note as part of a title section
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/calcNaturalDynamics.m:48: warning: argument 'De' of command @param is not found in the argument list of RigidBodyModel::calcNaturalDynamics(matlabtypesubstitute reload, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute link_names, matlabtypesubstitute obj, matlabtypesubstitute dof_names, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute flag, matlabtypesubstitute obj,::colvec qe,::colvec dqe,::logical useSVA)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/calcNaturalDynamics.m:48: warning: argument 'He' of command @param is not found in the argument list of RigidBodyModel::calcNaturalDynamics(matlabtypesubstitute reload, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute link_names, matlabtypesubstitute obj, matlabtypesubstitute dof_names, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute flag, matlabtypesubstitute obj,::colvec qe,::colvec dqe,::logical useSVA)
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/RigidBodyModel.m:565: warning: The following parameters of RigidBodyModel::calcNaturalDynamics(matlabtypesubstitute reload, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute link_names, matlabtypesubstitute obj, matlabtypesubstitute dof_names, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute flag, matlabtypesubstitute obj,::colvec qe,::colvec dqe,::logical useSVA) are not documented:
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/RigidBodyModel.m:447: warning: Illegal command note as part of a title section
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/calcNaturalDynamics.m:48: warning: argument 'De' of command @param is not found in the argument list of RigidBodyModel::calcNaturalDynamics(::colvec qe,::colvec dqe,::logical useSVA)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/calcNaturalDynamics.m:48: warning: argument 'He' of command @param is not found in the argument list of RigidBodyModel::calcNaturalDynamics(::colvec qe,::colvec dqe,::logical useSVA)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/model/@RigidBodyModel/RigidBodyModel.m:548: warning: The following parameters of RigidBodyModel::checkFlag(matlabtypesubstitute reload, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute link_names, matlabtypesubstitute obj, matlabtypesubstitute dof_names, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute export_path, matlabtypesubstitute do_build, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute model, matlabtypesubstitute base_dofs, matlabtypesubstitute obj, matlabtypesubstitute obj, matlabtypesubstitute obj,::char flag) are not documented:
   parameter 'reload'
   parameter 'obj'
   parameter 'obj'
@@ -194,7 +197,5 @@ mtoc++ warning in nlp/@SymFunction/SymFunction.m: Optional parameter 'derivative
   parameter 'base_dofs'
   parameter 'obj'
   parameter 'obj'
-  parameter 'obj'
-  parameter 'flag'
   parameter 'obj'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstrDomain/compile.m:66: warning: @copydetails or @copydoc target 'Kinematics::compile(obj, model, re_load)' not found

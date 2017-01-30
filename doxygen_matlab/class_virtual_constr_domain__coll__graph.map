@@ -1,10 +1,10 @@
 <map id="VirtualConstrDomain" name="VirtualConstrDomain">
 <area shape="rect" id="node2" href="$class_domain.html" title="Domain defines an admissible continuous domain (or phase) in the hybrid system model. The admissibility conditions are determined by the kinematic constraints defined on the domain. " alt="" coords="151,335,217,361"/>
 <area shape="rect" id="node3" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="5,229,64,256"/>
-<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="198,5,245,32"/>
-<area shape="rect" id="node7" href="$class_kinematics.html" title="Defines a kinematic function of a rigid body model. " alt="" coords="395,124,482,151"/>
+<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="161,5,207,32"/>
+<area shape="rect" id="node7" href="$class_kinematics.html" title="Defines a kinematic function of a rigid body model. " alt="" coords="382,124,469,151"/>
 <area shape="rect" id="node5" href="$classtable.html" title="A MatLab table. " alt="" coords="177,229,228,256"/>
-<area shape="rect" id="node6" href="$class_kinematic_group.html" title="Defines a group of kinematic constraint that expressed as functions of other kinematic constraints..." alt="" coords="381,229,496,256"/>
-<area shape="rect" id="node8" href="$classlogical.html" title="A boolean value. " alt="" coords="351,5,409,32"/>
-<area shape="rect" id="node9" href="$classstruct.html" title="A MatLab struct. " alt="" coords="593,5,647,32"/>
+<area shape="rect" id="node6" href="$class_kinematic_group.html" title="Defines a group of kinematic constraint that expressed as functions of other kinematic constraints..." alt="" coords="368,229,483,256"/>
+<area shape="rect" id="node8" href="$classlogical.html" title="A boolean value. " alt="" coords="257,5,316,32"/>
+<area shape="rect" id="node9" href="$classstruct.html" title="A MatLab struct. " alt="" coords="526,5,581,32"/>
 </map>

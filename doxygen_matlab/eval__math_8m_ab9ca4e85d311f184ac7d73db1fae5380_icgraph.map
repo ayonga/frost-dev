@@ -1,16 +1,17 @@
 <map id="eval_math" name="eval_math">
-<area shape="rect" id="node2" href="$class_kinematic_group.html#ae184dc007b8ef5160fbc97b4aa1246c2" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="136,43,304,69"/>
-<area shape="rect" id="node7" href="$class_kinematics.html#ae01f9dcfc641416879f0948ef68034b6" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="150,144,290,171"/>
-<area shape="rect" id="node9" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="637,144,768,171"/>
-<area shape="rect" id="node11" href="$class_virtual_constr_domain.html#a76454f5b422703193383d9f10c70cc41" title="Compiles the symbolic expression of kinematic functions related to the domain in Mathematica. " alt="" coords="149,261,291,302"/>
-<area shape="rect" id="node13" href="$class_kinematic_expr.html#a2e680261ff1bf2005eabd1d7cdf6bff5" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="373,311,533,337"/>
-<area shape="rect" id="node14" href="$class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="149,195,291,237"/>
-<area shape="rect" id="node15" href="$class_sym_function.html#aac82178b370a58decbdf84a22c991fbe" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="149,377,291,404"/>
+<area shape="rect" id="node2" href="$class_kinematic_group.html#ae184dc007b8ef5160fbc97b4aa1246c2" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="136,68,304,95"/>
+<area shape="rect" id="node7" href="$class_kinematics.html#ae01f9dcfc641416879f0948ef68034b6" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="150,195,290,221"/>
+<area shape="rect" id="node9" href="$class_kinematic_expr.html#a781b58d9523f2e282d0eb485d57aeed8" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="625,144,775,171"/>
+<area shape="rect" id="node11" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="635,245,765,272"/>
+<area shape="rect" id="node12" href="$class_virtual_constr_domain.html#a76454f5b422703193383d9f10c70cc41" title="Compiles the symbolic expression of kinematic functions related to the domain in Mathematica. " alt="" coords="149,297,291,338"/>
+<area shape="rect" id="node14" href="$class_kinematic_expr.html#a2e680261ff1bf2005eabd1d7cdf6bff5" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="373,411,533,437"/>
+<area shape="rect" id="node15" href="$class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="149,362,291,403"/>
+<area shape="rect" id="node16" href="$class_sym_function.html#aac82178b370a58decbdf84a22c991fbe" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="149,479,291,505"/>
 <area shape="rect" id="node3" href="$class_kinematic_group.html#a30032f1030a7e5cf51b546a12ea3fb72" title="Returns the dimension of the kinematic function. " alt="" coords="352,43,555,69"/>
-<area shape="rect" id="node4" href="$class_kinematic_group.html#a10c265b7ba7104aa4c6e5793f65a0f0e" title="Generates indices for the kinematic objects in the group. " alt="" coords="605,43,800,69"/>
-<area shape="rect" id="node5" href="$class_kinematic_group.html#a699391380d9fa14bc972a0f3bc909603" title="add kinematic objects to the group " alt="" coords="861,81,1064,108"/>
-<area shape="rect" id="node6" href="$class_kinematic_group.html#a63a4f1713ee36d023d07ca2f49c45154" title="remove kinematic objects from the group " alt="" coords="851,5,1075,32"/>
-<area shape="rect" id="node8" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="366,144,541,171"/>
-<area shape="rect" id="node10" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="603,260,803,287"/>
-<area shape="rect" id="node12" href="$class_virtual_constr_domain.html#a5df2ff25fa9541a911d9db3395caefd0" title="The class constructor function. " alt="" coords="378,213,529,254"/>
+<area shape="rect" id="node4" href="$class_kinematic_group.html#a10c265b7ba7104aa4c6e5793f65a0f0e" title="Generates indices for the kinematic objects in the group. " alt="" coords="603,43,797,69"/>
+<area shape="rect" id="node5" href="$class_kinematic_group.html#a699391380d9fa14bc972a0f3bc909603" title="add kinematic objects to the group " alt="" coords="856,5,1059,32"/>
+<area shape="rect" id="node6" href="$class_kinematic_group.html#a63a4f1713ee36d023d07ca2f49c45154" title="remove kinematic objects from the group " alt="" coords="845,81,1069,108"/>
+<area shape="rect" id="node8" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="366,195,541,221"/>
+<area shape="rect" id="node10" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="857,195,1057,221"/>
+<area shape="rect" id="node13" href="$class_virtual_constr_domain.html#a5df2ff25fa9541a911d9db3395caefd0" title="The class constructor function. " alt="" coords="378,329,529,370"/>
 </map>

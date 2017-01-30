@@ -23,7 +23,7 @@ var searchData=
   ['addtimevariable_2em',['addTimeVariable.m',['../add_time_variable_8m.html',1,'']]],
   ['addunilateralconstraint_2em',['addUnilateralConstraint.m',['../add_unilateral_constraint_8m.html',1,'']]],
   ['addvertex_2em',['addVertex.m',['../add_vertex_8m.html',1,'']]],
-  ['array_2em',['array.m',['../array_8m.html',1,'']]],
+  ['animator_2em',['animator.m',['../animator_8m.html',1,'']]],
   ['array2str_2em',['array2str.m',['../array2str_8m.html',1,'']]],
   ['array2struct_2em',['array2struct.m',['../array2struct_8m.html',1,'']]]
 ];

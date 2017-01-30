@@ -8,7 +8,6 @@ var searchData=
   ['phase',['Phase',['../class_hybrid_trajectory_optimization.html#afde5b3c3d5011775a298137360a17cd4',1,'HybridTrajectoryOptimization']]],
   ['phasevariable',['PhaseVariable',['../class_virtual_constr_domain.html#a0fb27a3787f4a6cf3d789647b5f53fdc',1,'VirtualConstrDomain']]],
   ['pindex',['pIndex',['../class_kinematic_com.html#af41f9d1f8d6cf87d7c2216da2701cfce',1,'KinematicCom::pIndex()'],['../class_kinematic_orientation.html#ad4085bdf0c8f47e04bf522fff3702e63',1,'KinematicOrientation::pIndex()']]],
-  ['plant',['Plant',['../class_hybrid_trajectory_optimization.html#ab23b710cecde0f7e455c066c51c61f9a',1,'HybridTrajectoryOptimization']]],
   ['precommands',['PreCommands',['../class_sym_function.html#a3072587e76e4037069da3002495ddb41',1,'SymFunction']]],
   ['prefix',['Prefix',['../class_kinematics.html#ae8704a6181978550824af478114854f6',1,'Kinematics']]]
 ];

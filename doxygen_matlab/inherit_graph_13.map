@@ -1,9 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_kinematics.html" title="Defines a kinematic function of a rigid body model. " alt="" coords="5,132,92,159"/>
-<area shape="rect" id="node2" href="$class_kinematic_com.html" title="Defines the center of positions of a rigid body model. " alt="" coords="157,5,265,32"/>
-<area shape="rect" id="node3" href="$class_kinematic_contact.html" title="Defines a kinematic contact constraint. " alt="" coords="148,56,275,83"/>
-<area shape="rect" id="node4" href="$class_kinematic_dof.html" title="Defines a single degrees of freedom (rigid joints) of the model as kinematic constraints. " alt="" coords="161,107,262,133"/>
-<area shape="rect" id="node5" href="$class_kinematic_expr.html" title="Defines a kinematic constraint that expressed as a function of other kinematic constraints. " alt="" coords="158,157,265,184"/>
-<area shape="rect" id="node6" href="$class_kinematic_group.html" title="Defines a group of kinematic constraint that expressed as functions of other kinematic constraints..." alt="" coords="154,208,269,235"/>
-<area shape="rect" id="node7" href="$class_kinematic_orientation.html" title="Defines three dimensional orientations of a body frame rigidly attached to a link, i.e., it belongs to SO(3). " alt="" coords="140,259,283,285"/>
+<area shape="rect" id="node1" href="$classinteger.html" title="An integer value. " alt="" coords="5,5,67,32"/>
 </map>

@@ -1,4 +1,7 @@
 <map id="RigidBodyModel::RigidBodyModel" name="RigidBodyModel::RigidBodyModel">
-<area shape="rect" id="node2" href="$class_rigid_body_model.html#aeb6759a6a227bdaaa52e14b87c56bd41" title="This function compute the natural unconstrained dynamics of the rigid body model. ..." alt="" coords="239,5,429,47"/>
-<area shape="rect" id="node3" href="$ros__load__urdf_8m.html#a3c04367518e23f6fb71788853a767edd" title="This function parse the ROS URDF file. " alt="" coords="284,71,384,98"/>
+<area shape="rect" id="node2" href="$class_rigid_body_model.html#a647042d4015d5ac9b1311c6569fdac57" title="This function compute the natural unconstrained dynamics of the rigid body model. ..." alt="" coords="239,5,429,47"/>
+<area shape="rect" id="node3" href="$class_rigid_body_model.html#af5f8c8927f8b40cc3535235dfb698771" title="This function checks the flag in Mathematica&#39;s RobotModel package. " alt="" coords="241,71,427,98"/>
+<area shape="rect" id="node5" href="$class_rigid_body_model.html#ab4f3d5e2c1a4a2f09f2e49273ab03001" title="This function compile the symbolic expressions of the animation objects (kinematic) position and firs..." alt="" coords="241,123,427,164"/>
+<area shape="rect" id="node6" href="$ros__load__urdf_8m.html#a3c04367518e23f6fb71788853a767edd" title="This function parse the ROS URDF file. " alt="" coords="284,189,384,215"/>
+<area shape="rect" id="node4" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="477,71,565,98"/>
 </map>

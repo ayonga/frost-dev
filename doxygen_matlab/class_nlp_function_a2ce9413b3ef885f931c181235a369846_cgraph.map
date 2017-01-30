@@ -1,13 +1,10 @@
 <map id="NlpFunction::getDepIndices" name="NlpFunction::getDepIndices">
-<area shape="rect" id="node2" href="$class_nlp_function.html#abe37a4aed63dcc6f8c411e810ac4a3dc" title="NlpFunction::appendTo" alt="" coords="267,5,424,32"/>
-<area shape="rect" id="node3" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="505,69,671,96"/>
-<area shape="rect" id="node4" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="501,145,675,172"/>
-<area shape="rect" id="node5" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="255,259,436,301"/>
-<area shape="rect" id="node6" href="$class_nlp_function.html#a9440da02068aaffbedca8ccd4387d39d" title="NlpFunction::setHessianFunction" alt="" coords="237,325,453,352"/>
-<area shape="rect" id="node7" href="$class_nlp_function.html#a59916f159c37257aa2d9b1286c09cf98" title="This function configure the sparsity pattern of the Hessian of the function. " alt="" coords="241,376,449,403"/>
-<area shape="rect" id="node8" href="$class_nlp_function.html#a8caf8546a496fb01ce9ae793cdef0bf1" title="NlpFunction::setJacobian\lFunction" alt="" coords="260,427,431,469"/>
-<area shape="rect" id="node9" href="$class_nlp_function.html#a24828001e2b8c949100fe7b48690faf4" title="This function configure the sparsity pattern of the Jacobian of the function. " alt="" coords="260,493,431,534"/>
-<area shape="rect" id="node10" href="$class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="269,559,422,585"/>
-<area shape="rect" id="node11" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="515,196,661,223"/>
-<area shape="rect" id="node12" href="$class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="262,157,429,184"/>
+<area shape="rect" id="node2" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="258,5,425,32"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="493,224,667,251"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="251,107,432,149"/>
+<area shape="rect" id="node5" href="$class_nlp_function.html#a59916f159c37257aa2d9b1286c09cf98" title="This function configure the sparsity pattern of the Hessian of the function. " alt="" coords="237,173,445,200"/>
+<area shape="rect" id="node6" href="$class_nlp_function.html#a24828001e2b8c949100fe7b48690faf4" title="This function configure the sparsity pattern of the Jacobian of the function. " alt="" coords="256,225,427,266"/>
+<area shape="rect" id="node7" href="$class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="265,291,418,317"/>
+<area shape="rect" id="node8" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="268,341,415,368"/>
+<area shape="rect" id="node9" href="$class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="258,392,425,419"/>
 </map>

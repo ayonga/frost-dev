@@ -11,5 +11,4 @@
 <area shape="rect" id="node11" href="$class_domain.html#a9c424b6bbce0f08d703df1369100b690" title="Removes holonomic kinematic constraints other than contact constraints from the domain. " alt="" coords="173,461,413,488"/>
 <area shape="rect" id="node12" href="$class_domain.html#a76aec80e77b247ceb568f437b634b47f" title="Removes unilateral kinematic constraints other than contact constraints from the domain. " alt="" coords="207,513,380,554"/>
 <area shape="rect" id="node13" href="$class_domain.html#abc0ce36d6037aae19743053f144ad883" title="Sets the actuation map for the current domain. " alt="" coords="219,579,367,605"/>
-<area shape="rect" id="node14" href="$class_domain.html#adf62976660a2c55ae3fa997934372e83" title="Updates the system states using the reset map associated with the discontinuous transition to the cur..." alt="" coords="217,629,369,656"/>
 </map>

@@ -21,6 +21,7 @@ var searchData=
   ['removepositionoutput_2em',['removePositionOutput.m',['../remove_position_output_8m.html',1,'']]],
   ['removeunilateralconstraint',['removeUnilateralConstraint',['../class_domain.html#a76aec80e77b247ceb568f437b634b47f',1,'Domain']]],
   ['removeunilateralconstraint_2em',['removeUnilateralConstraint.m',['../remove_unilateral_constraint_8m.html',1,'']]],
+  ['resetmap',['ResetMap',['../class_guard.html#a72d9a891bb5c78bab1a457049390f30c',1,'Guard']]],
   ['reshape',['reshape',['../classhandle.html#acef58ae5e52255411835a4fcaf2edd49',1,'handle']]],
   ['rigidbodymodel',['RigidBodyModel',['../class_rigid_body_model.html',1,'RigidBodyModel'],['../class_rigid_body_model.html#a00376d1ce728807c31e1709d79e6bf03',1,'RigidBodyModel::RigidBodyModel()']]],
   ['rigidbodymodel_2em',['RigidBodyModel.m',['../_rigid_body_model_8m.html',1,'']]],

@@ -8,7 +8,7 @@ var searchData=
   ['initialize',['initialize',['../class_solver_application.html#a03f3930eee3c81a542204b159bc967bc',1,'SolverApplication::initialize()'],['../class_ipopt_application.html#a346a21952b0a2f0db97a19c6969b9b81',1,'IpoptApplication::initialize()']]],
   ['initialize_2em',['initialize.m',['../model_2_0D_rigid_body_model_2initialize_8m.html',1,'']]],
   ['initialize_2em',['initialize.m',['../solver_2_0D_ipopt_application_2initialize_8m.html',1,'']]],
-  ['initializenlp',['initializeNLP',['../class_hybrid_trajectory_optimization.html#a70629e1bf41aa5518bccd39982f5f2c4',1,'HybridTrajectoryOptimization']]],
+  ['initializenlp',['initializeNLP',['../class_hybrid_trajectory_optimization.html#a9dc4da3f904b7eeaea449b5b4be679ca',1,'HybridTrajectoryOptimization']]],
   ['initializenlp_2em',['initializeNLP.m',['../initialize_n_l_p_8m.html',1,'']]],
   ['initialvalue',['InitialValue',['../class_nlp_variable.html#a6815402ea363e955302a71ea750d32fa',1,'NlpVariable']]],
   ['integer',['integer',['../classinteger.html',1,'']]],

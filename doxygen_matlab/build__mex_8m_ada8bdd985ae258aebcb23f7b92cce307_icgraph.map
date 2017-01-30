@@ -1,8 +1,9 @@
 <map id="build_mex" name="build_mex">
 <area shape="rect" id="node2" href="$class_kinematics.html#acba68f3e5edb37b6e52537203fb3a091" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="141,5,271,32"/>
-<area shape="rect" id="node5" href="$class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="135,57,277,98"/>
-<area shape="rect" id="node7" href="$class_sym_function.html#aac82178b370a58decbdf84a22c991fbe" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="135,123,277,149"/>
+<area shape="rect" id="node4" href="$class_kinematic_expr.html#a781b58d9523f2e282d0eb485d57aeed8" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="548,56,699,83"/>
+<area shape="rect" id="node6" href="$class_virtual_constr_domain.html#a3f999c4b327eec03700ea5b3559bcf68" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="135,107,277,149"/>
+<area shape="rect" id="node8" href="$class_sym_function.html#aac82178b370a58decbdf84a22c991fbe" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="135,173,277,200"/>
 <area shape="rect" id="node3" href="$class_kinematics.html#a83555866124f52d45f3ba110b8268b49" title="Returns the dimension of the kinematic function. By default, we assume the dimension of a kinematic f..." alt="" coords="325,5,500,32"/>
-<area shape="rect" id="node4" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="548,5,748,32"/>
-<area shape="rect" id="node6" href="$class_virtual_constr_domain.html#a5df2ff25fa9541a911d9db3395caefd0" title="The class constructor function. " alt="" coords="337,57,488,98"/>
+<area shape="rect" id="node5" href="$class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="747,31,947,57"/>
+<area shape="rect" id="node7" href="$class_virtual_constr_domain.html#a5df2ff25fa9541a911d9db3395caefd0" title="The class constructor function. " alt="" coords="337,107,488,149"/>
 </map>

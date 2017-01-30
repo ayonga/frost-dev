@@ -2,6 +2,6 @@
 <area shape="rect" id="node2" href="$class_i_o_feedback.html#aa723a557603dd660dde61c73b0589a74" title="Computes the classical input&#45;output feedback linearization control law for virtual constraints..." alt="" coords="225,5,392,32"/>
 <area shape="rect" id="node3" href="$class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427" title="The controller class constructor function. " alt="" coords="237,56,380,83"/>
 <area shape="rect" id="node6" href="$class_i_o_feedback.html#ac7be0fd2df6fbade6cfe91260360525f" title="Sets the controller parameters. " alt="" coords="230,107,387,133"/>
-<area shape="rect" id="node4" href="$class_controller.html#a7e8d438af8c291ca149a8d0265cb1e80" title="Controller::calcControl" alt="" coords="440,31,592,57"/>
+<area shape="rect" id="node4" href="$class_controller.html#ae856efa40de7c6ed98b5af7842fc182b" title="Controller::calcControl" alt="" coords="440,31,592,57"/>
 <area shape="rect" id="node5" href="$class_controller.html#a31125a7d223a21ac9bc918453b8a9c0a" title="Controller::setParam" alt="" coords="445,81,587,108"/>
 </map>

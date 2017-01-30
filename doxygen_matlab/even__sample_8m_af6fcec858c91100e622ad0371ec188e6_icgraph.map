@@ -1,5 +1,7 @@
 <map id="even_sample" name="even_sample">
 <area shape="rect" id="node2" href="$even__sample__fields_8m.html#ad6489f72b1cf7b95a79a312b3486f8e3" title="even_sample_fields" alt="" coords="165,5,302,32"/>
-<area shape="rect" id="node3" href="$class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="152,56,315,83"/>
-<area shape="rect" id="node4" href="$class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="363,56,559,83"/>
+<area shape="rect" id="node3" href="$classanimator.html#ab1de951f4cffe5c4c759d02f96e39bbb" title="animator::parse" alt="" coords="177,56,289,83"/>
+<area shape="rect" id="node5" href="$class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="152,107,315,133"/>
+<area shape="rect" id="node4" href="$classanimator.html#a19f98f9bb7818a8651039b34628d42b7" title="Run the animation. " alt="" coords="397,56,524,83"/>
+<area shape="rect" id="node6" href="$class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="363,107,559,133"/>
 </map>

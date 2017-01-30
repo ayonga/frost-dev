@@ -1,6 +1,7 @@
 <map id="IpoptApplication" name="IpoptApplication">
 <area shape="rect" id="node2" href="$class_solver_application.html" title="SolverApplication defines an abstract interface class for NLP solvers. " alt="" coords="86,125,208,152"/>
-<area shape="rect" id="node3" href="$classstruct.html" title="A MatLab struct. " alt="" coords="114,5,169,32"/>
+<area shape="rect" id="node3" href="$classstruct.html" title="A MatLab struct. " alt="" coords="120,5,174,32"/>
 <area shape="rect" id="node4" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="233,125,360,152"/>
-<area shape="rect" id="node5" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="280,5,323,32"/>
+<area shape="rect" id="node5" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="266,5,326,32"/>
+<area shape="rect" id="node6" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="351,5,394,32"/>
 </map>

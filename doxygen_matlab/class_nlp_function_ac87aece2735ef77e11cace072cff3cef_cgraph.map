@@ -1,7 +1,8 @@
 <map id="NlpFunction::NlpFunction" name="NlpFunction::NlpFunction">
 <area shape="rect" id="node2" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="231,5,398,32"/>
-<area shape="rect" id="node3" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="228,56,401,83"/>
-<area shape="rect" id="node4" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="224,107,405,149"/>
-<area shape="rect" id="node5" href="$class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="238,173,391,200"/>
-<area shape="rect" id="node6" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="241,224,388,251"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="224,57,405,98"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="238,123,391,149"/>
+<area shape="rect" id="node5" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="241,173,388,200"/>
+<area shape="rect" id="node6" href="$class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="231,224,398,251"/>
+<area shape="rect" id="node7" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="453,224,627,251"/>
 </map>

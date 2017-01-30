@@ -1,9 +1,10 @@
 <map id="NlpFunctionSum::NlpFunctionSum" name="NlpFunctionSum::NlpFunctionSum">
-<area shape="rect" id="node2" href="$class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="296,115,467,141"/>
-<area shape="rect" id="node8" href="$class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d" title="Sets dependent objects of the Nlp Function. " alt="" coords="277,166,485,207"/>
+<area shape="rect" id="node2" href="$class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="296,123,467,149"/>
+<area shape="rect" id="node9" href="$class_nlp_function_sum.html#a8b1162ff461e66e3c5ad988a89310d7d" title="Sets dependent objects of the Nlp Function. " alt="" coords="277,174,485,215"/>
 <area shape="rect" id="node3" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="541,5,707,32"/>
-<area shape="rect" id="node4" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="537,56,711,83"/>
-<area shape="rect" id="node5" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="533,107,715,149"/>
-<area shape="rect" id="node6" href="$class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="547,173,701,200"/>
-<area shape="rect" id="node7" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="551,224,697,251"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="533,57,715,98"/>
+<area shape="rect" id="node5" href="$class_nlp_function.html#a7bc5721b2a58e773a009e4c95018c3ec" title="Specifies the name of the NLP function. " alt="" coords="547,123,701,149"/>
+<area shape="rect" id="node6" href="$class_nlp_function.html#ac92cca6af8e65de66c99c1b99b80573c" title="Sets the type (either LINEAR or NONLINEAR) of the NLP function. " alt="" coords="551,173,697,200"/>
+<area shape="rect" id="node7" href="$class_nlp_function.html#a0ad3c0aeb91b8dadfba314e334e077b4" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="541,224,707,251"/>
+<area shape="rect" id="node8" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="763,224,936,251"/>
 </map>
