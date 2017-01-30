@@ -21,8 +21,8 @@ function obj = initialize(obj, reload)
         end
     catch
         warning('Unable to find the Mathematica package!');
-        disp('Trying run the mathematica_setup() function to initialize the Path environment.');
-        mathematica_setup();
+        disp('Trying run the initialize_mathlink() function to initialize the Path environment.');
+        initialize_mathlink();
         eval_math('Get["RobotModel`"];');
     end
     

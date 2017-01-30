@@ -23,19 +23,21 @@ function [sol, info] = optimize(obj, x0)
     opts.cu = vertcat(obj.Constraint.UpperBound{:});
     opts.ipopt = obj.Options.ipopt;
     
+    
+    
     Funcs = struct();
     Funcs.objective         = @(x)IpoptObjective(x, obj.Objective);
     Funcs.constraints       = @(x)IpoptConstraints(x, obj.Constraint);
-    Funcs.gradient          = @(x)IpoptGradient(x, obj.Objective, dimVars);
-    Funcs.jacobian          = @(x)IpoptJacobian(x, obj.Constraint, dimVars);
-    Funcs.jacobianstructure = @()IpoptJacobianStructure(obj.Constraint, dimVars);
+    Funcs.gradient          = @(x)IpoptGradient(x, obj.Objective, dimVars, obj.Options.UseMexSparse);
+    Funcs.jacobian          = @(x)IpoptJacobian(x, obj.Constraint, dimVars, obj.Options.UseMexSparse);
+    Funcs.jacobianstructure = @()IpoptJacobianStructure(obj.Constraint, dimVars, obj.Options.UseMexSparse);
     
     if strcmpi(opts.ipopt.hessian_approximation, 'exact')
         
         Funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
-            obj.Objective, obj.Constraint, dimVars);
+            obj.Objective, obj.Constraint, dimVars,obj.Options.UseMexSparse);
         Funcs.hessianstructure  = @()IpoptHessianStructure(obj.Objective, ...
-            obj.Constraint, dimVars);
+            obj.Constraint, dimVars,obj.Options.UseMexSparse);
         
     end
     
@@ -95,7 +97,7 @@ function [sol, info] = optimize(obj, x0)
     %%
     
     %% Objective gradient function
-    function [J] = IpoptGradient(x, objective, dimVars)
+    function [J] = IpoptGradient(x, objective, dimVars, use_mex)
         % nested function that commputes the first-order derivatives
         % (gradient) of the objective function of the NLP problem
         %
@@ -103,6 +105,8 @@ function [sol, info] = optimize(obj, x0)
         %  objective: a structure of arrays that contains the information
         %  of all subfunction of the objective.
         %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
         
         
         
@@ -121,14 +125,18 @@ function [sol, info] = optimize(obj, x0)
         end
         
         % construct the sparse jacobian matrix
-        J = sparse2(objective.nzJacRows, objective.nzJacCols,...
-            J_val, 1, dimVars, objective.nnzJac);
-        
+        if use_mex
+            J = sparse2(objective.nzJacRows, objective.nzJacCols,...
+                J_val, 1, dimVars, objective.nnzJac);
+        else
+            J = sparse(objective.nzJacRows, objective.nzJacCols,...
+                J_val, 1, dimVars, objective.nnzJac);
+        end
     end
     %%
     
     %% constraints Jacobian
-    function [J] = IpoptJacobian(x, constraint, dimVars)
+    function [J] = IpoptJacobian(x, constraint, dimVars, use_mex)
         % nested function that commputes the first-order derivatives
         % (Jacobian) of the constraints of the NLP problem
         %
@@ -136,6 +144,8 @@ function [sol, info] = optimize(obj, x0)
         %  constraint: a structure of arrays that contains the information
         %  of all constraints
         %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
         
         % preallocation
         J_val   = zeros(constraint.nnzJac,1);
@@ -152,14 +162,18 @@ function [sol, info] = optimize(obj, x0)
         end
         
         % construct the sparse jacobian matrix
-        J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
-            J_val, constraint.Dimension, dimVars, constraint.nnzJac);
-        
+        if use_mex
+            J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+                J_val, constraint.Dimension, dimVars, constraint.nnzJac);
+        else
+            J = sparse(constraint.nzJacRows, constraint.nzJacCols,...
+                J_val, constraint.Dimension, dimVars, constraint.nnzJac);
+        end
     end
     %%
     
     %% constraints Jacobian structure
-    function [J] = IpoptJacobianStructure(constraint, dimVars)
+    function [J] = IpoptJacobianStructure(constraint, dimVars, use_mex)
         % nested function that commputes the sparsity structure of the
         % first-order derivatives (Jacobian) of the constraints of the NLP
         % problem
@@ -168,18 +182,25 @@ function [sol, info] = optimize(obj, x0)
         %  constraint: a structure of arrays that contains the information
         %  of all constraints
         %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
         
+        if use_mex
+            J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+                ones(constraint.nnzJac,1), constraint.Dimension, ...
+                dimVars, constraint.nnzJac);
+        else
+            J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+                ones(constraint.nnzJac,1), constraint.Dimension, ...
+                dimVars, constraint.nnzJac);
         
-        J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
-            ones(constraint.nnzJac,1), constraint.Dimension, ...
-            dimVars, constraint.nnzJac);
-        
+        end
     end
     %%
     
     %% Hessian
     function [H_ret] = IpoptHessian(x, sigma, lambda, ...
-            objective, constraint, dimVars)
+            objective, constraint, dimVars, use_mex)
         % nested function that commputes the second-order derivatives
         % (Hessian) of the Lagrangian of the NLP problem
         %
@@ -189,6 +210,8 @@ function [sol, info] = optimize(obj, x0)
         %  constraint: a structure of arrays that contains the information
         %  of all constraints
         %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
         
         
         
@@ -211,10 +234,13 @@ function [sol, info] = optimize(obj, x0)
             end
             
         end
-        
-        H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
-            hes_objective, dimVars, dimVars, objective.nnzHess);
-        
+        if use_mex
+            H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+                hes_objective, dimVars, dimVars, objective.nnzHess);
+        else
+            H_objective = sparse(objective.nzHessRows,objective.nzHessRows,...
+                hes_objective, dimVars, dimVars, objective.nnzHess);
+        end
         % preallocation
         hes_constr   = zeros(constraint.nnzHess,1);
         % compute the Hessian for constraints
@@ -236,17 +262,20 @@ function [sol, info] = optimize(obj, x0)
         end
         
           
-        
-        H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
-            hes_constr, dimVars, dimVars, constraint.nnzHess);
-        
+        if use_mex
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+                hes_constr, dimVars, dimVars, constraint.nnzHess);
+        else
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+                hes_constr, dimVars, dimVars, constraint.nnzHess);
+        end
         
         H_ret = H_objective + H_constr;
     end
     %%
     
     %%
-    function [H_ret] = IpoptHessianStructure(objective, constraint, dimVars)
+    function [H_ret] = IpoptHessianStructure(objective, constraint, dimVars, use_mex)
         % nested function that returns the sparsity structure of the
         % second-order derivatives (Hessian) of the Lagrangian of the NLP
         % problem
@@ -257,15 +286,24 @@ function [sol, info] = optimize(obj, x0)
         %  constraint: a structure of arrays that contains the information
         %  of all constraints
         %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
         
-        
-        H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
-            ones(objective.nnzHess,1), dimVars, dimVars, objective.nnzHess);
-        
-        
-        H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
-            ones(constraint.nnzHess,1), dimVars, dimVars, constraint.nnzHess);
-        
+        if use_mex
+            H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+                ones(objective.nnzHess,1), dimVars, dimVars, objective.nnzHess);
+            
+            
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+                ones(constraint.nnzHess,1), dimVars, dimVars, constraint.nnzHess);
+        else
+            H_objective = sparse(objective.nzHessRows,objective.nzHessRows,...
+                ones(objective.nnzHess,1), dimVars, dimVars, objective.nnzHess);
+            
+            
+            H_constr = sparse(constraint.nzHessRows,constraint.nzHessRows,...
+                ones(constraint.nnzHess,1), dimVars, dimVars, constraint.nnzHess);
+        end
         
         H_ret = H_objective + H_constr;
         

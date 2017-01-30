@@ -18,7 +18,7 @@ function [status] = build_mex(build_dir, src_files, varargin)
     
     %| @note Specify ''CC'' to the supported version of compiler to get rid
     %of the annoying warnings.
-    CC = '/usr/bin/gcc-4.9';
+    CC = '/usr/bin/g++-4.9';
     
     % get the default MEX extension of the current OS
     mex_ext = mexext();

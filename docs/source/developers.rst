@@ -54,6 +54,7 @@ repository.
      make
   ..
 - Install mtoc++ on your system.
+
   - Before isntalling mtoc++, you need to copy the license file to a text file, otherwise mtoc++ will reports licensing error.
 
     .. code:: bash
@@ -68,18 +69,6 @@ repository.
        sudo make install
     ..
 
-Troubleshooting
-======================================
-
-
-- missing `GLIBCXX_3.4.*'.
-  It could be caused by the mismatch between the system libstdc++ and Matlab libstdc++. Change the symbolic link in $matlabroot/sys/os/glnxa64:
-  
-    .. code:: bash
-
-       sudo mv libstdc++.so.6 libstdc++.so.6.bak
-       sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21  ./libstdc++.so.6
-    ..
 	
 
 

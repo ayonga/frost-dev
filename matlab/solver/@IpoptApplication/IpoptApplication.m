@@ -81,6 +81,12 @@ classdef IpoptApplication < SolverApplication
                 options.ipopt = struct_overlay(options.ipopt,new_opts,{'AllowNew',true});
             end
             
+            if exist('sparse2',3)
+                options.UseMexSparse = true;
+            else
+                options.UseMexSparse = false;
+            end
+            
             obj.Options = options;
             obj.Nlp = nlp;
             obj = initialize(obj);
