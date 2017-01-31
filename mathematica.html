@@ -146,12 +146,12 @@
 </ul>
 </li><ul>
 <li><a class="reference internal" href="#">Mathematica</a><ul>
-<li><a class="reference internal" href="#extrautils">ExtraUtils</a></li>
 <li><a class="reference internal" href="#mathtocpp">MathToCpp</a></li>
 <li><a class="reference internal" href="#robotmodel">RobotModel</a></li>
+<li><a class="reference internal" href="#urdfparser">URDFParser</a></li>
+<li><a class="reference internal" href="#extrautils">ExtraUtils</a></li>
 <li><a class="reference internal" href="#screws">Screws</a></li>
 <li><a class="reference internal" href="#snakeyaml">SnakeYaml</a></li>
-<li><a class="reference internal" href="#urdfparser">URDFParser</a></li>
 </ul>
 </li>
 </ul>
@@ -170,9 +170,13 @@
   <div class="section" id="mathematica">
 <span id="id1"></span><h1>Mathematica<a class="headerlink" href="#mathematica" title="Permalink to this headline">¶</a></h1>
 <p>This page contains the documentation for Mathematica packages shipped with FROST.</p>
-<div class="section" id="extrautils">
-<h2>ExtraUtils<a class="headerlink" href="#extrautils" title="Permalink to this headline">¶</a></h2>
-<p>Extra utility functions.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">All methematica packages are located in the folder <code class="docutils literal"><span class="pre">frost-dev/mathematica</span></code>. There are two sub-folders: <cite>Source</cite> and <cite>Application</cite>. The <cite>Source</cite> folder contains the source codes of the packages developed in Wolfram Workbench. <cite>Application</cite> contains the deployed packages used by other applications of FROST.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is not recommended to directly modify the <cite>Application</cite> folder, as its content might be over-written by the source code when deploy it from <cite>Source</cite> folder. We suggest to use Wolfram WorkBench to develop the Mathematica package in <cite>Source</cite> folder and deploy it to <cite>Application</cite> folder.</p>
 </div>
 <div class="section" id="mathtocpp">
 <h2>MathToCpp<a class="headerlink" href="#mathtocpp" title="Permalink to this headline">¶</a></h2>
@@ -182,17 +186,27 @@
 <h2>RobotModel<a class="headerlink" href="#robotmodel" title="Permalink to this headline">¶</a></h2>
 <p>Functions to compute kinematics and dynamics of robotic systems.</p>
 </div>
+<div class="section" id="urdfparser">
+<h2>URDFParser<a class="headerlink" href="#urdfparser" title="Permalink to this headline">¶</a></h2>
+<p>A parser package for reading ROS URDF files into Mathematica.</p>
+</div>
+<div class="section" id="extrautils">
+<h2>ExtraUtils<a class="headerlink" href="#extrautils" title="Permalink to this headline">¶</a></h2>
+<p>Extra utility functions used throughout FROST project.</p>
+</div>
 <div class="section" id="screws">
 <h2>Screws<a class="headerlink" href="#screws" title="Permalink to this headline">¶</a></h2>
-<p>A slightly modified version of Screw package originally developed by Richard Murray et al at Caltech.</p>
+<p>A slightly modified version of Screw package originally developed by Richard Murray et al at Caltech <a class="footnote-reference" href="#id3" id="id2">[1]</a>.</p>
 </div>
 <div class="section" id="snakeyaml">
 <h2>SnakeYaml<a class="headerlink" href="#snakeyaml" title="Permalink to this headline">¶</a></h2>
 <p>A parser package for YAML files, developed by Eric Cousineau.</p>
-</div>
-<div class="section" id="urdfparser">
-<h2>URDFParser<a class="headerlink" href="#urdfparser" title="Permalink to this headline">¶</a></h2>
-<p>A parser package for reading ROS URDF files into Mathematica.</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Murray, Richard M., Zexiang Li, S. Shankar Sastry, and S. Shankara Sastry. A mathematical introduction to robotic manipulation. CRC press, 1994.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -209,7 +223,7 @@
     </p>
     <p>
         &copy; Copyright 2017, AMBER Lab.<br/>
-      Last updated on Jan 30, 2017.<br/>
+      Last updated on Jan 31, 2017.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
     </p>
   </div>

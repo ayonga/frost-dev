@@ -145,7 +145,11 @@
 </ul>
 </ul>
 </li><ul>
-<li><a class="reference internal" href="#">Control</a></li>
+<li><a class="reference internal" href="#">Control</a><ul>
+<li><a class="reference internal" href="#controller-superclass">Controller superclass</a></li>
+<li><a class="reference internal" href="#iofeedback-controller-for-virtual-constraints">IOFeedback controller for virtual constraints</a></li>
+</ul>
+</li>
 </ul>
 
 <form action="search.html" method="get">
@@ -162,6 +166,8 @@
   <div class="section" id="control">
 <span id="id1"></span><h1>Control<a class="headerlink" href="#control" title="Permalink to this headline">¶</a></h1>
 <p>We separate the controller objects from the system objects, so that we could develop general control framework for different model and systems using the same interface.</p>
+<div class="section" id="controller-superclass">
+<h2><a class="reference external" href="doxygen_matlab/class_controller.html">Controller</a> superclass<a class="headerlink" href="#controller-superclass" title="Permalink to this headline">¶</a></h2>
 <p>All control classes are inherited from the abstract super-class <a class="reference external" href="doxygen_matlab/class_controller.html">Controller</a>, which provides general interfaces to all controllers.</p>
 <p><a class="reference external" href="doxygen_matlab/class_controller.html">Controller</a> class has two required properties:</p>
 <ul class="simple">
@@ -172,9 +178,35 @@
 <div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">extra</span><span class="p">]</span> <span class="p">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">calcControl</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">dq</span><span class="p">,</span> <span class="n">vfc</span><span class="p">,</span> <span class="n">gfc</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>It takes the following input arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">t</span></code>: the time instant</li>
+<li><code class="docutils literal"><span class="pre">q</span></code>: the coordiante configuration</li>
+<li><code class="docutils literal"><span class="pre">dq</span></code>: the velocities</li>
+<li><code class="docutils literal"><span class="pre">vfc</span></code>: the vector field <span class="math">\(f(x)\)</span> of an affine control system of the form <span class="math">\(\dot{x} = f(x) + g(x) u\)</span></li>
+<li><code class="docutils literal"><span class="pre">gfc</span></code>: the vector field <span class="math">\(g(x)\)</span> of an affine control system of the form <span class="math">\(\dot{x} = f(x) + g(x) u\)</span></li>
+<li><code class="docutils literal"><span class="pre">domain</span></code>: the continuous domain of interest</li>
+</ul>
+<p>and returns:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">u</span></code>: the computed control input to the control system</li>
+<li><code class="docutils literal"><span class="pre">extra</span></code>: (optional) extra computation data</li>
+</ul>
+</div>
+<div class="section" id="iofeedback-controller-for-virtual-constraints">
+<h2><a class="reference external" href="doxygen_matlab/class_io_feedback.html">IOFeedback</a> controller for virtual constraints<a class="headerlink" href="#iofeedback-controller-for-virtual-constraints" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_io_feedback.html">IOFeedback</a> class provides a classic Input-Output Feedback linearization controllers for virtual constraints enabled systems.</p>
+<p>An object of <a class="reference external" href="doxygen_matlab/class_io_feedback.html">IOFeedback</a> class requires two parameters <code class="docutils literal"><span class="pre">kp</span></code> and <code class="docutils literal"><span class="pre">kd</span></code>. For more information on the implementation of this controller, please refer to <a class="footnote-reference" href="#id3" id="id2">[1]</a>.</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">The implementation of these classes can be found in the folder <code class="docutils literal"><span class="pre">frost-dev/matlab/control</span></code>.</p>
+</div>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>A.D. Ames. Human-inspired control of bipedal walking robots. <em>IEEE Transactions on Automatic Control</em>, 59(5):1115–1130, May 2014.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 

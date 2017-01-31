@@ -146,13 +146,27 @@
 </ul>
 </li><ul>
 <li><a class="reference internal" href="#">Nonlinear Optimization</a><ul>
-<li><a class="reference internal" href="#nonlinearprogram">NonlinearProgram</a></li>
-<li><a class="reference internal" href="#nlpvariable">NlpVariable</a></li>
-<li><a class="reference internal" href="#nlpfunction">NlpFunction</a></li>
+<li><a class="reference internal" href="#nonlinearprogram">NonlinearProgram</a><ul>
+<li><a class="reference internal" href="#register-variables-and-functions">Register variables and functions</a></li>
+<li><a class="reference internal" href="#update-variable-incides">Update variable incides</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nlpvariable">NlpVariable</a><ul>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nlpfunction">NlpFunction</a><ul>
+<li><a class="reference internal" href="#id1">Properties</a></li>
+<li><a class="reference internal" href="#id2">Methods</a></li>
 <li><a class="reference internal" href="#symfunction">SymFunction</a></li>
-<li><a class="reference internal" href="#hybridtrajctoryoptimization">HybridTrajctoryOptimization</a></li>
-<li><a class="reference internal" href="#solverapplication">SolverApplication</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hybridtrajectoryoptimization">HybridTrajectoryOptimization</a></li>
+<li><a class="reference internal" href="#solverapplication">SolverApplication</a><ul>
 <li><a class="reference internal" href="#ipoptapplication">IpoptApplication</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,28 +186,173 @@
 <span id="nlp"></span><h1>Nonlinear Optimization<a class="headerlink" href="#nonlinear-optimization" title="Permalink to this headline">¶</a></h1>
 <p>One of the key features of FROST is to provide a scalable fast nonlinear optimization framework for hybrid dynamical system with a particular interest in dynamic locomotion. The <code class="docutils literal"><span class="pre">nlp</span></code> and <code class="docutils literal"><span class="pre">solver</span></code> folder contains multiple class definition that are essential for developing such a fast trajectory optimization problem for legged robots.</p>
 <div class="section" id="nonlinearprogram">
-<h2>NonlinearProgram<a class="headerlink" href="#nonlinearprogram" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a><a class="headerlink" href="#nonlinearprogram" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> class provides an abstract super-class for general nonlinear programming problems. It consists of a general option structure and variable arrays for decision variables, constraints and cost functions which can be parsed by the <a class="reference external" href="doxygen_matlab/class_solver_application.html">SolverApplication</a> objects to the actual NLP solver, such as IPOPT.</p>
+<div class="section" id="register-variables-and-functions">
+<h3>Register variables and functions<a class="headerlink" href="#register-variables-and-functions" title="Permalink to this headline">¶</a></h3>
+<p>Each <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> object contains three cell arrays to store the information of decision variables, constraints, and cost function, respectively. These cell arrays must be 1-D cell arrays, so that we can index the variables and constraints based on their relative location within the corresponding array. In detail,</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">VariableArray</span></code>: a cell array of decision variables, in which each decision variable is an object of class <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a></li>
+<li><code class="docutils literal"><span class="pre">CostArray</span></code>: a cell array of sub-functions of the cost function. The final cost of the problem is the total sum of the all sub-functions.</li>
+<li><code class="docutils literal"><span class="pre">ConstrArray</span></code>: a cell array of constraints (linear and nonlinear), in which each constraint is an object of class <a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a> or inherited sub-classes of <a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a>.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is not recommended to directly modify these three arrays. To add a new variable or constraint, please use the provided function for each of them.</p>
+</div>
+<p>To add a NLP decision variable to the problem, run (assume <code class="docutils literal"><span class="pre">nlp</span></code> is an object of <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a>):</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">nlp</span><span class="p">.</span><span class="n">regVariable</span><span class="p">(</span><span class="n">new_vars</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The new variables can be either given as a 1-D cell array of <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> objects (including single variable) or a table of 2-D cell array of <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a>. An emtry entries in the input argument array will be ignored during the process.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If the input argument is a table (or a 2-D cell array), we convert it to an 1-D array with the order of first column then row.</p>
+</div>
+<p>Similarly, to add a new constraint or a cost sub-function, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">nlp</span><span class="p">.</span><span class="n">regConstraint</span><span class="p">(</span><span class="n">new_constrs</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">nlp</span><span class="p">.</span><span class="n">regObjective</span><span class="p">(</span><span class="n">new_funcs</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>respectively.</p>
+</div>
+<div class="section" id="update-variable-incides">
+<h3>Update variable incides<a class="headerlink" href="#update-variable-incides" title="Permalink to this headline">¶</a></h3>
+<p>Before associate a <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> with a solver application, you should update the problem:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">nlp</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This will generate the indices for all decision variables.</p>
+</div>
 </div>
 <div class="section" id="nlpvariable">
-<h2>NlpVariable<a class="headerlink" href="#nlpvariable" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a><a class="headerlink" href="#nlpvariable" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> provides a structured data type for NLP decision variables. A group of decision variables of a nonlinear programming problem (<a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a>) that have a distinctive identities should be represented as a <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> object.</p>
+<div class="section" id="properties">
+<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> presents following properties of a variable:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Name</span></code>: a string represent the unique ID of the variables.</li>
+<li><code class="docutils literal"><span class="pre">Dimension</span></code>: the dimension of the variable vector.</li>
+<li><code class="docutils literal"><span class="pre">InitialValue</span></code>: you could specify some typical initial values for the variables.</li>
+<li><code class="docutils literal"><span class="pre">LowerBound</span></code>: the lower boundary values of the variables.</li>
+<li><code class="docutils literal"><span class="pre">UpperBound</span></code>: the upper bonndary values of the variables.</li>
+<li><code class="docutils literal"><span class="pre">Indices</span></code>: stores the indices of the variables within the variable array of a <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> problem.</li>
+</ul>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<p>You can create a <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> similar to create a struct data, For instance:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">var</span> <span class="p">=</span> <span class="n">NlpVariable</span><span class="p">(</span><span class="s">&#39;Name&#39;</span><span class="p">,</span> <span class="s">&#39;VarName&#39;</span><span class="p">,</span> <span class="s">&#39;Dimension&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;lb&#39;</span><span class="p">,</span> <span class="o">-</span><span class="nb">inf</span><span class="p">,</span> <span class="s">&#39;ub&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;x0&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where <cite>lb</cite>, <cite>ub</cite>, and <cite>x0</cite> specify the lower, upper bound and initial values of the variable.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If the lower/upper bound or the initial values has different values over all members, then you can specify them by providing a vector data that has the length as the <code class="docutils literal"><span class="pre">Dimension</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All properties are optional when create an object. You can specify them after you have created the object.</p>
+</div>
+<p>To specify or change the <code class="docutils literal"><span class="pre">Name</span></code> or the <code class="docutils literal"><span class="pre">Dimension</span></code> of an object, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">var</span> <span class="p">=</span> <span class="n">var</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#39;NewVarName&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">var</span> <span class="p">=</span> <span class="n">var</span><span class="p">.</span><span class="n">setDimension</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For other properties, you could use the function <code class="docutils literal"><span class="pre">updateProp</span></code>, for example:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">var</span> <span class="p">=</span> <span class="n">var</span><span class="p">.</span><span class="n">updateProp</span><span class="p">(</span><span class="s">&#39;lb&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;ub&#39;</span><span class="p">,</span> <span class="nb">inf</span><span class="p">,</span> <span class="s">&#39;x0&#39;</span><span class="p">,</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">var</span><span class="p">.</span><span class="n">Dimension</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="nlpfunction">
-<h2>NlpFunction<a class="headerlink" href="#nlpfunction" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a><a class="headerlink" href="#nlpfunction" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a> provides a structured data type for a group of NLP functions, which could be either constraints or a cost sub-functions, that share same set of properties.</p>
+<div class="section" id="id1">
+<h3>Properties<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a> presents following properties should be specified by users:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Name</span></code>: a unique name string represent the unique ID of the function.</li>
+<li><code class="docutils literal"><span class="pre">Dimension</span></code>: the dimension of the vector function.</li>
+<li><code class="docutils literal"><span class="pre">LowerBound</span></code>: (optional) the lower boundary values of the function.</li>
+<li><code class="docutils literal"><span class="pre">UpperBound</span></code>: (optional) the upper bonndary values of the function.</li>
+<li><code class="docutils literal"><span class="pre">Type</span></code>: a logical variable indicates whether the function is <cite>Linear</cite> (true) or <cite>Nonlinear</cite> (false).</li>
+<li><code class="docutils literal"><span class="pre">DepVariables</span></code>: a cell array of dependent variables of type <a href="#id9"><span class="problematic" id="id10">NlpVarible_</span></a>.</li>
+<li><code class="docutils literal"><span class="pre">Fucs</span></code>: a struct contains the external function assosiated with the object that computes the function value, Jacobian, and Hessian if available.</li>
+<li><code class="docutils literal"><span class="pre">AuxData</span></code>: (optional) auxilary constant data to be used when call the external functions</li>
+</ul>
+<p>In addition, the following properties will be updated automatically:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">FuncIndices</span></code>: the indices of the functions within its corresponding array of the <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a>.</li>
+<li><code class="docutils literal"><span class="pre">nnzJacIndices</span></code>: stores the indices of non-zero entries of the Jacobian matrix</li>
+<li><code class="docutils literal"><span class="pre">nnzHessIndices</span></code>: stores the indices of non-zero entries of the Hessian matrix</li>
+<li><code class="docutils literal"><span class="pre">JacPattern</span></code>: stores the colomn-row indices of the non-zero entries of the Jacobian matrix</li>
+<li><code class="docutils literal"><span class="pre">HessPattern</span></code>: stores the colomn-row indices of the non-zero entries of the Hessian matrix</li>
+<li><code class="docutils literal"><span class="pre">nnzJac</span></code>: the total number of nonzeros in the Jacobian matrix</li>
+<li><code class="docutils literal"><span class="pre">nnzHess</span></code>: the total number of nonzeros in the Hessian matrix</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Methods<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>You can create a <a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a> similar to create a struct data, For instance:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">func</span> <span class="p">=</span> <span class="n">NlpFunction</span><span class="p">(</span><span class="s">&#39;Name&#39;</span><span class="p">,</span> <span class="s">&#39;FuncName&#39;</span><span class="p">,</span> <span class="s">&#39;Dimension&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;lb&#39;</span><span class="p">,</span> <span class="o">-</span><span class="nb">inf</span><span class="p">,</span> <span class="s">&#39;ub&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;Type&#39;</span><span class="p">,</span> <span class="n">NlpVariable</span><span class="p">.</span><span class="n">NONLINEAR</span><span class="p">,</span> <span class="c">...</span>
+             <span class="s">&#39;DepVariables&#39;</span><span class="p">,</span> <span class="p">{</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="c">...}, &#39;Funcs&#39;, func_struc, &#39;AuxData&#39;, [1,2,3]);</span>
+</pre></div>
+</div>
+<p>Similar to <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> class, you can also specify each property after created the object. For more information, please see <a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a>.</p>
 </div>
 <div class="section" id="symfunction">
-<h2>SymFunction<a class="headerlink" href="#symfunction" title="Permalink to this headline">¶</a></h2>
+<h3><a class="reference internal" href="#symfunction">SymFunction</a><a class="headerlink" href="#symfunction" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#symfunction">SymFunction</a> class provides a interface to the Mathematica Kernel for a function that can represents with symbolic expression. <a class="reference internal" href="#symfunction">SymFunction</a> is very useful for creating arbitray symbolic function and export associated functions to C++ source files from Mathematica. These functions can be used to associate the corresponding <a class="reference external" href="doxygen_matlab/class_nlp_function.html">NlpFunction</a> object.</p>
+<p>To create a <a class="reference internal" href="#symfunction">SymFunction</a> object, you need to specify the following properties on-load or afterward:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Name</span></code>: the name string of the function, it will use as the suffix of exported functions.</li>
+<li><code class="docutils literal"><span class="pre">Expression</span></code>: the symbolic expression of the function in Mathematica.</li>
+<li><code class="docutils literal"><span class="pre">DepSymbols</span></code>: the symbol names of the depedent variables.</li>
+<li><code class="docutils literal"><span class="pre">ParSymbols</span></code>: the symbol names of the constant parameters.</li>
+<li><code class="docutils literal"><span class="pre">PreCommands</span></code>: a series of Mathmatica expressions/commands to be ran before evaluating the <code class="docutils literal"><span class="pre">Expression</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">Description</span></code>: (optional) a descriptive pharse of the function just for reference.</li>
+</ul>
+<p>For more detail of the class definition, please see <a class="reference internal" href="#symfunction">SymFunction</a>.</p>
+<p>Once you completely setup a <a class="reference internal" href="#symfunction">SymFunction</a> object, you can export it as a C++ source code. Run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sym_func</span><span class="p">.</span><span class="n">export</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">do_build</span><span class="p">,</span> <span class="n">derivative_level</span><span class="p">);</span>
+</pre></div>
 </div>
-<div class="section" id="hybridtrajctoryoptimization">
-<h2>HybridTrajctoryOptimization<a class="headerlink" href="#hybridtrajctoryoptimization" title="Permalink to this headline">¶</a></h2>
+<p>The derivative level determines the level of derivative functions to be exported. It could be either 1 or 2.</p>
+</div>
+</div>
+<div class="section" id="hybridtrajectoryoptimization">
+<h2><a class="reference external" href="doxygen_matlab/class_hybrid_trajectory_optimization.html">HybridTrajectoryOptimization</a><a class="headerlink" href="#hybridtrajectoryoptimization" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_hybrid_trajectory_optimization.html">HybridTrajectoryOptimization</a> is an inherited class of <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a>, particularly designed for trajectory optimization problem for hybrid dynamical system, for example the gait generation of legged robots. This class provides many extra features to the general <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> class to enable a fast and reliable trajectory optimization of hybrid dynamical system specifically.</p>
+<p>The overview of this class is coming soon. For more detail, please see the detailed documentation at <a class="reference external" href="doxygen_matlab/class_hybrid_trajectory_optimization.html">HybridTrajectoryOptimization</a>.</p>
 </div>
 <div class="section" id="solverapplication">
-<h2>SolverApplication<a class="headerlink" href="#solverapplication" title="Permalink to this headline">¶</a></h2>
-</div>
+<h2><a class="reference external" href="doxygen_matlab/class_solver_application.html">SolverApplication</a><a class="headerlink" href="#solverapplication" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_solver_application.html">SolverApplication</a> is an abstract superclass that provides a &#8220;bridge&#8221; to the NLP solver (IPOPT, Fmincon, etc) and <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> problem object.</p>
+<p>The intend of having this &#8220;bridge&#8221; is to make a <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> problem to be solver by different solvers without changing the object itself. The <a class="reference external" href="doxygen_matlab/class_solver_application.html">SolverApplication</a> object will parse the problem and convert it to a compatible problem for a specific solver to solve. The conversion also remove many features of original <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> that affect the computation speed, make sure the converted problem is computationally efficient.</p>
+<p>Currently, we only have one sub-class implemention of type <a class="reference external" href="doxygen_matlab/class_solver_application.html">SolverApplication</a>. More are coming soon.</p>
 <div class="section" id="ipoptapplication">
-<h2>IpoptApplication<a class="headerlink" href="#ipoptapplication" title="Permalink to this headline">¶</a></h2>
+<h3><a class="reference external" href="doxygen_matlab/class_ipopt_application.html">IpoptApplication</a><a class="headerlink" href="#ipoptapplication" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="doxygen_matlab/class_ipopt_application.html">IpoptApplication</a> generates a nonlinear optimization problem that can be solved by IPOPT solver from an <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> object.</p>
+<p>To create an application object, construct it with the <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> object as the input argument:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">solver</span> <span class="p">=</span> <span class="n">IpoptApplication</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span> <span class="c">% &#39;options&#39; will overwrite the default ipopt options. It is an optional argument.</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The construction will initialize the solver application on construction. However, anytime you change the origianl <a class="reference external" href="doxygen_matlab/class_nonlinear_program.html">NonlinearProgram</a> object, you should initialize the solver application before run the optimization.</p>
+</div>
+<p>To initialize the solver application, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">solver</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Once you initiazlied the solver application, you can run the following method to run the optimization:</p>
+<p>The <code class="docutils literal"><span class="pre">x0</span></code> is the (optional) initial guess for the problem. If not specified explicitly, the <cite>solver</cite> will use the initial guesses from each of the <a class="reference external" href="doxygen_matlab/class_nlp_variable.html">NlpVariable</a> objectes.</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">The implementation of these classes can be found in the folders <code class="docutils literal"><span class="pre">frost-dev/matlab/nlp</span></code> and <code class="docutils literal"><span class="pre">frost-dev/matlab/solver</span></code>.</p>
+</div>
 </div>
 </div>
 </div>
