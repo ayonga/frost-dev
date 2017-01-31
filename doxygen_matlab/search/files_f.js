@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['recorder_2em',['Recorder.m',['../_recorder_8m.html',1,'']]],
   ['ref_2em',['Ref.m',['../general_2_ref_8m.html',1,'']]],
   ['ref_2em',['Ref.m',['../sim_2_ref_8m.html',1,'']]],
   ['regconstraint_2em',['regConstraint.m',['../reg_constraint_8m.html',1,'']]],

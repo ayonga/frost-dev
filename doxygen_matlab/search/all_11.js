@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['recorder',['Recorder',['../class_recorder.html',1,'Recorder'],['../class_recorder.html#af0b4f40e7c67f16b0ffff13712149d78',1,'Recorder::Recorder()']]],
-  ['recorder_2em',['Recorder.m',['../_recorder_8m.html',1,'']]],
   ['ref',['Ref',['../class_ref.html',1,'']]],
-  ['ref_2em',['Ref.m',['../general_2_ref_8m.html',1,'']]],
   ['ref_2em',['Ref.m',['../sim_2_ref_8m.html',1,'']]],
+  ['ref_2em',['Ref.m',['../general_2_ref_8m.html',1,'']]],
   ['regconstraint',['regConstraint',['../class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee',1,'NonlinearProgram']]],
   ['regconstraint_2em',['regConstraint.m',['../reg_constraint_8m.html',1,'']]],
   ['regobjective',['regObjective',['../class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5',1,'NonlinearProgram']]],

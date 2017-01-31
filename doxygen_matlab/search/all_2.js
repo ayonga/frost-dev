@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['calc',['calc',['../class_recorder.html#ad90845dad282e8ff540d1af7261e358b',1,'Recorder']]],
   ['calcactualoutputs',['calcActualOutputs',['../class_virtual_constr_domain.html#a788d65e91390e89ac4beee1a9eba4e20',1,'VirtualConstrDomain']]],
   ['calcactualoutputs_2em',['calcActualOutputs.m',['../calc_actual_outputs_8m.html',1,'']]],
   ['calcconstraintforces',['calcConstraintForces',['../class_domain.html#a382ea5ba14bf3c91afe873d71c4302fe',1,'Domain']]],
@@ -17,7 +16,6 @@ var searchData=
   ['calcnaturaldynamics_2em',['calcNaturalDynamics.m',['../calc_natural_dynamics_8m.html',1,'']]],
   ['calcresetmap',['calcResetMap',['../class_guard.html#aff202f686b65bc3fe87c6bb61747afbe',1,'Guard']]],
   ['calcresetmap_2em',['calcResetMap.m',['../calc_reset_map_8m.html',1,'']]],
-  ['calcstack',['calcStack',['../class_recorder.html#a8b84600d66fc8600657fa192d4c658ff',1,'Recorder']]],
   ['calcthreshold',['calcThreshold',['../class_guard.html#af98302a676dae9eec7321325a526b0ca',1,'Guard']]],
   ['calctorques_2em',['calcTorques.m',['../calc_torques_8m.html',1,'']]],
   ['calcunilateralcondition',['calcUnilateralCondition',['../class_domain.html#a8a7c59b286cf2e14e32bfeab92b28434',1,'Domain']]],

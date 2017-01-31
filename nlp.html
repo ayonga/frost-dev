@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Nonlinear Optimization &#8212; FROST: Fast Robot Simulation and Optimization Toolkit v1.0-beta</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mathematica" href="mathematica.html" />
+    <link rel="prev" title="Control" href="control.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+  
+  <a href="https://github.com/ayonga/frost-dev"
+     class="visible-desktop hidden-xs"><img
+    id="gh-banner"
+    style="position: absolute; top: 50px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+  <script>
+    // Adjust banner height.
+    $(function () {
+      var navHeight = $(".navbar .container").css("height");
+      $("#gh-banner").css("top", navHeight);
+    });
+  </script>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Home</a></li>
+                <li><a href="installation.html">Installation</a></li>
+                <li><a href="tutorial.html">Tutorial</a></li>
+                <li><a href="matlab.html">Matlab</a></li>
+                <li><a href="mathematica.html">Mathematica</a></li>
+                <li><a href="developers.html">Developer</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="matlab.html">MATLAB Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="matlab.html">MATLAB Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
+</ul>
+</ul>
+</li><ul>
+<li><a class="reference internal" href="#">Nonlinear Optimization</a><ul>
+<li><a class="reference internal" href="#nonlinearprogram">NonlinearProgram</a></li>
+<li><a class="reference internal" href="#nlpvariable">NlpVariable</a></li>
+<li><a class="reference internal" href="#nlpfunction">NlpFunction</a></li>
+<li><a class="reference internal" href="#symfunction">SymFunction</a></li>
+<li><a class="reference internal" href="#hybridtrajctoryoptimization">HybridTrajctoryOptimization</a></li>
+<li><a class="reference internal" href="#solverapplication">SolverApplication</a></li>
+<li><a class="reference internal" href="#ipoptapplication">IpoptApplication</a></li>
+</ul>
+</li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="nonlinear-optimization">
+<span id="nlp"></span><h1>Nonlinear Optimization<a class="headerlink" href="#nonlinear-optimization" title="Permalink to this headline">¶</a></h1>
+<p>One of the key features of FROST is to provide a scalable fast nonlinear optimization framework for hybrid dynamical system with a particular interest in dynamic locomotion. The <code class="docutils literal"><span class="pre">nlp</span></code> and <code class="docutils literal"><span class="pre">solver</span></code> folder contains multiple class definition that are essential for developing such a fast trajectory optimization problem for legged robots.</p>
+<div class="section" id="nonlinearprogram">
+<h2>NonlinearProgram<a class="headerlink" href="#nonlinearprogram" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="nlpvariable">
+<h2>NlpVariable<a class="headerlink" href="#nlpvariable" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="nlpfunction">
+<h2>NlpFunction<a class="headerlink" href="#nlpfunction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="symfunction">
+<h2>SymFunction<a class="headerlink" href="#symfunction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="hybridtrajctoryoptimization">
+<h2>HybridTrajctoryOptimization<a class="headerlink" href="#hybridtrajctoryoptimization" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="solverapplication">
+<h2>SolverApplication<a class="headerlink" href="#solverapplication" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ipoptapplication">
+<h2>IpoptApplication<a class="headerlink" href="#ipoptapplication" title="Permalink to this headline">¶</a></h2>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The implementation of these classes can be found in the folders <code class="docutils literal"><span class="pre">frost-dev/matlab/nlp</span></code> and <code class="docutils literal"><span class="pre">frost-dev/matlab/solver</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, AMBER Lab.<br/>
+      Last updated on Jan 31, 2017.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

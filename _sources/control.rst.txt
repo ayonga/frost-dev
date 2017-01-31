@@ -1,0 +1,34 @@
+.. _control:
+
+*************
+Control
+*************
+
+We separate the controller objects from the system objects, so that we could develop general control framework for different model and systems using the same interface. 
+
+All control classes are inherited from the abstract super-class Controller_, which provides general interfaces to all controllers.
+
+Controller_ class has two required properties:
+
+- Name: the name of the controller
+- Param: the parameter of the controller
+
+In addition, it must provides a function to compute the control input with the syntax:
+
+.. code-block:: matlab
+
+   >> [u, extra] = obj.calcControl(t, q, dq, vfc, gfc, domain)
+..
+
+
+
+
+.. attention:: The implementation of these classes can be found in the folder ``frost-dev/matlab/control``.
+
+
+
+.. _Controller: doxygen_matlab/class_controller.html
+.. _CLFQP: doxygen_matlab/class_c_l_f_q_p.html
+.. _IOFeedback: doxygen_matlab/class_io_feedback.html
+.. _JointPD: doxygen_matlab/class_joint_p_d.html
+.. _OutputPD: doxygen_matlab/class_output_p_d.html

@@ -1,4 +1,4 @@
-.. _developers
+.. _developers:
 
 ***************************************
 For Developers 

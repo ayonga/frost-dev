@@ -2,8 +2,7 @@
 <area shape="rect" id="node2" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="19,80,111,107"/>
 <area shape="rect" id="node4" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="135,80,224,107"/>
 <area shape="rect" id="node5" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="248,80,375,107"/>
-<area shape="rect" id="node7" href="$class_recorder.html" title="This is a simple recorder class that record the data from ODE simulation. " alt="" coords="399,80,474,107"/>
-<area shape="rect" id="node8" href="$class_ref.html" title="Ref" alt="" coords="498,80,541,107"/>
+<area shape="rect" id="node7" href="$class_ref.html" title="Ref" alt="" coords="399,80,442,107"/>
 <area shape="rect" id="node3" href="$class_nlp_function_sum.html" title="This class provides a particular NLP function that is the sum of multiple NlpFunction objects..." alt="" coords="5,155,124,181"/>
 <area shape="rect" id="node6" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="216,155,407,181"/>
 </map>

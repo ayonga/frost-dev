@@ -20,6 +20,5 @@ var searchData=
   ['precommands',['PreCommands',['../class_sym_function.html#a3072587e76e4037069da3002495ddb41',1,'SymFunction']]],
   ['prefix',['Prefix',['../class_kinematics.html#ae8704a6181978550824af478114854f6',1,'Kinematics']]],
   ['print',['print',['../class_kinematics.html#aabf9883c6301589c35e7a20147158eea',1,'Kinematics']]],
-  ['print_2em',['print.m',['../print_8m.html',1,'']]],
-  ['pushrecord',['pushRecord',['../class_recorder.html#a057e3fdb3bed05424e915257643d25e7',1,'Recorder']]]
+  ['print_2em',['print.m',['../print_8m.html',1,'']]]
 ];

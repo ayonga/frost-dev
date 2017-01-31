@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['calc',['calc',['../class_recorder.html#ad90845dad282e8ff540d1af7261e358b',1,'Recorder']]],
-  ['calcstack',['calcStack',['../class_recorder.html#a8b84600d66fc8600657fa192d4c658ff',1,'Recorder']]],
   ['condition',['Condition',['../class_guard.html#a9c8fba365478f24cf3fd6f6d7a83c9a9',1,'Guard']]],
   ['configfile',['ConfigFile',['../class_rigid_body_model.html#a71e02a7e610afd7d998151a3fff28706',1,'RigidBodyModel']]],
   ['constraint',['Constraint',['../class_ipopt_application.html#a159f313a724a855954b74f4dfc8917ab',1,'IpoptApplication']]],

@@ -1,4 +1,4 @@
-.. _mathematica
+.. _mathematica:
 
 ==============================================
 Mathematica

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hybrid System &#8212; FROST: Fast Robot Simulation and Optimization Toolkit v1.0-beta</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/cerulean/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Control" href="control.html" />
+    <link rel="prev" title="Kinematics" href="kinematic.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+  
+  <a href="https://github.com/ayonga/frost-dev"
+     class="visible-desktop hidden-xs"><img
+    id="gh-banner"
+    style="position: absolute; top: 50px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+  <script>
+    // Adjust banner height.
+    $(function () {
+      var navHeight = $(".navbar .container").css("height");
+      $("#gh-banner").css("top", navHeight);
+    });
+  </script>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/logo_square.png"></span>
+          FROST</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Home</a></li>
+                <li><a href="installation.html">Installation</a></li>
+                <li><a href="tutorial.html">Tutorial</a></li>
+                <li><a href="matlab.html">Matlab</a></li>
+                <li><a href="mathematica.html">Mathematica</a></li>
+                <li><a href="developers.html">Developer</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="matlab.html">MATLAB Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="matlab.html">MATLAB Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mathematica.html">Mathematica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">For Developers</a></li>
+</ul>
+</ul>
+</li><ul>
+<li><a class="reference internal" href="#">Hybrid System</a><ul>
+<li><a class="reference internal" href="#hybridsystem">HybridSystem</a><ul>
+<li><a class="reference internal" href="#construct-a-hybrid-system-object">Construct a hybrid system object</a></li>
+<li><a class="reference internal" href="#add-vertex-to-the-graph">Add vertex to the graph</a></li>
+<li><a class="reference internal" href="#remove-vertex-from-the-graph">Remove vertex from the graph</a></li>
+<li><a class="reference internal" href="#add-edges">Add edges</a></li>
+<li><a class="reference internal" href="#remove-edges">Remove edges</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#domain">Domain</a><ul>
+<li><a class="reference internal" href="#add-a-contact-constraint">Add a contact constraint</a></li>
+<li><a class="reference internal" href="#add-an-auxilary-holonomic-constraint">Add an auxilary holonomic constraint</a></li>
+<li><a class="reference internal" href="#add-an-auxilary-unilateral-constraint">Add an auxilary unilateral constraint</a></li>
+<li><a class="reference internal" href="#compile-and-export-symbolic-expressions">Compile and export symbolic expressions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#guard">Guard</a></li>
+<li><a class="reference internal" href="#virtualconstrdomain">VirtualConstrDomain</a><ul>
+<li><a class="reference internal" href="#configure-the-phase-variable">Configure the phase variable</a></li>
+<li><a class="reference internal" href="#configure-the-velocity-modulating-output">Configure the velocity-modulating output</a></li>
+<li><a class="reference internal" href="#configure-position-modulating-outptus">Configure position-modulating outptus</a></li>
+<li><a class="reference internal" href="#id3">Compile and export symbolic expressions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<form action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="hybrid-system">
+<span id="system"></span><h1>Hybrid System<a class="headerlink" href="#hybrid-system" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="doxygen_matlab/class_hybrid_system.html">HybridSystem</a> defines a hybrid dynamical system that has both continuous and discrete dynamics, such as bipedal locomotion. This class provides basic elements and functionalities of a hybrid dynamicsl system. The mathematical definition of the hybrid system is given as</p>
+<div class="math">
+\[\mathscr{HC} = \{\Gamma, \mathcal{D}, U, S, \Delta, FG\}\]</div>
+<p>where,</p>
+<ul class="simple">
+<li><span class="math">\(\Gamma=\{V,E\}\)</span> is a <cite>directed graph</cite> with a set of vertices <span class="math">\(V=\{v_1, v_2, \dots\}\)</span> and a set of edges <span class="math">\(E=\{e_1 = \{v_1 \to v_2\},\dots\}\)</span>;</li>
+<li><span class="math">\(\mathcal{D}\)</span> is a set of admissible <cite>domains</cite> represents the continuous dynamics of the system;</li>
+<li><span class="math">\(U\)</span> is a set of admissble controllers on each domain;</li>
+<li><span class="math">\(S\)</span> is a set of <cite>switching surfaces</cite> or <cite>guards</cite> represents the conditions for discrete transitions;</li>
+<li><span class="math">\(\Delta\)</span> is a set of <cite>reset maps</cite> of the discrete transitions;</li>
+<li><span class="math">\(FG\)</span> is a set of <cite>continuous dynamics</cite> on the domain.</li>
+</ul>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The implementation of these classes can be found in the folder <code class="docutils literal"><span class="pre">frost-dev/matlab/system</span></code>.</p>
+</div>
+<p>To fully describe a hybrid system model, following classes are defined in FROST:</p>
+<div class="section" id="hybridsystem">
+<h2><a class="reference external" href="doxygen_matlab/class_hybrid_system.html">HybridSystem</a><a class="headerlink" href="#hybridsystem" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_hybrid_system.html">HybridSystem</a> is the main class that describes a hybrid system model object. The implementation is heavily based on the Matlab&#8217;s <a class="reference external" href="https://www.mathworks.com/help/matlab/ref/digraph.html">digraph</a> data type, with wrapper functions with additional validation.</p>
+<p>A directed graph consists of two elements:</p>
+<ul class="simple">
+<li>Nodes: represent vertices in the hybrid system model. Each node has the following properties associated:<ul>
+<li><a class="reference external" href="doxygen_matlab/class_domain.html">Domain</a>: a admissible domain configuration object</li>
+<li>Control: a controller object</li>
+<li>Param: the parameters associated with the Control and Domain</li>
+<li>IsTerminal: an indicator of whether the vertex is an terminal node in the graph</li>
+</ul>
+</li>
+<li>Edges: represent edges in the hybrid system model. Each edge has the following properties associated:<ul>
+<li><a class="reference external" href="doxygen_matlab/class_guard.html">Guard</a>: an object of type <a class="reference external" href="doxygen_matlab/class_guard.html">Guard</a>, contains the guard condition and options for reset map associated.</li>
+<li>Weight: a default property for MATLAB&#8217;s <cite>digraph</cite> objects.</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="construct-a-hybrid-system-object">
+<h3>Construct a hybrid system object<a class="headerlink" href="#construct-a-hybrid-system-object" title="Permalink to this headline">¶</a></h3>
+<p>To construct a hybrid system object, you must specify a <code class="docutils literal"><span class="pre">Name</span></code> and associated <a class="reference external" href="doxygen_matlab/class_rigid_body_model.html">RigidBodyModel</a>:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">HybridSystem</span><span class="p">(</span><span class="s">&#39;SystemName&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Once you create a <a class="reference external" href="doxygen_matlab/class_hybrid_system.html">HybridSystem</a> object, you can add vertices/edges to complete the construction.</p>
+</div>
+<div class="section" id="add-vertex-to-the-graph">
+<h3>Add vertex to the graph<a class="headerlink" href="#add-vertex-to-the-graph" title="Permalink to this headline">¶</a></h3>
+<p>There are multiple ways to add a vertex to the directed graph of a hybrid system model:</p>
+<ul class="simple">
+<li>The simplest way to use (<cite>prop</cite>, value) pairs to specify a vertex:</li>
+</ul>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">addVertex</span><span class="p">(</span><span class="s">&#39;VertexName&#39;</span><span class="p">,</span> <span class="s">&#39;Prop1&#39;</span><span class="p">,</span> <span class="n">Value1</span><span class="p">,</span> <span class="c">...);</span>
+</pre></div>
+</div>
+<p>The (&#8216;prop&#8217;, value) pairs are optional when adding a new vertex to the graph. You can modify the vertex property afterward by calling the function:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">setVertexProperties</span><span class="p">(</span><span class="s">&#39;VertexName&#39;</span><span class="p">,</span> <span class="s">&#39;Prop1&#39;</span><span class="p">,</span> <span class="n">Value1</span><span class="p">,</span> <span class="c">...)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You could also use the index of a vertex to replace the <code class="docutils literal"><span class="pre">VertexName</span></code> argument.</p>
+</div>
+<ul class="simple">
+<li>Use <a class="reference external" href="https://www.mathworks.com/help/matlab/tables.html">table</a> to specify a single or a group of vertices:</li>
+</ul>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">addVertex</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">T</span></code> is a <cite>table</cite> argument which must have a variable named <code class="docutils literal"><span class="pre">Names</span></code>. To specify the vertex properties in the input table, make sure to use the same set of variable names as the directed graph <cite>Nodes</cite> table.</p>
+<ul class="simple">
+<li>You can also add arbitrary number of vertices by specifing the number of vertices to be added:</li>
+</ul>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">addVertex</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above command will add 3 empty vertices to the graph named <cite>Node1</cite>, <cite>Node2</cite>, and <cite>Node3</cite>. The properties of these vertices can be specified afterward using the function <code class="docutils literal"><span class="pre">setVertexProperties</span></code>;</p>
+</div>
+<div class="section" id="remove-vertex-from-the-graph">
+<h3>Remove vertex from the graph<a class="headerlink" href="#remove-vertex-from-the-graph" title="Permalink to this headline">¶</a></h3>
+<p>You can also remove a single vertex or a group of vertices from the graph using the <code class="docutils literal"><span class="pre">rmVertex</span></code> function:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">rmVertex</span><span class="p">(</span><span class="n">vertex_names</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><cite>vertex_name</cite> can be a string of the single vertex or a cell array of multiple vertices&#8217; name.</p>
+</div>
+<div class="section" id="add-edges">
+<h3>Add edges<a class="headerlink" href="#add-edges" title="Permalink to this headline">¶</a></h3>
+<p>There are two ways to add edges to the graph: you can either use a <cite>table</cite> or by specifying the source and target domains of the edge.</p>
+<ul class="simple">
+<li>The syntax is very similar to add vertex when using a table:</li>
+</ul>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">addEdge</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The input argument <code class="docutils literal"><span class="pre">T</span></code> must have a variable named <code class="docutils literal"><span class="pre">EndNodes</span></code>, which is a <cite>N x 2</cite> array specifying source and target vertices.</p>
+</div>
+<ul class="simple">
+<li>Edges can be also added by run:</li>
+</ul>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">addEdge</span><span class="p">(</span><span class="n">srcs</span><span class="p">,</span> <span class="n">tars</span><span class="p">,</span> <span class="s">&#39;Prop1&#39;</span><span class="p">,</span> <span class="n">Value1</span><span class="p">,</span> <span class="c">...);</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">srcs</span></code> is a cell array of the name of source vertices, and <code class="docutils literal"><span class="pre">tars</span></code> is a cell array of the name of target vertices. The properties values are optional when first add an edge to the graph. You can specify the edge properties by using the function <code class="docutils literal"><span class="pre">setEdgeProperties</span></code>:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">setEdgeProperties</span><span class="p">(</span><span class="n">srcs</span><span class="p">,</span> <span class="n">tars</span><span class="p">,</span> <span class="s">&#39;Prop1&#39;</span><span class="p">,</span> <span class="n">Value1</span><span class="p">,</span> <span class="c">...);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-edges">
+<h3>Remove edges<a class="headerlink" href="#remove-edges" title="Permalink to this headline">¶</a></h3>
+<p>Edges can be simply removed from the graph by running:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">sys</span> <span class="p">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">rmEdge</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">srcs</span><span class="p">,</span> <span class="n">tars</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="domain">
+<h2><a class="reference external" href="doxygen_matlab/class_domain.html">Domain</a><a class="headerlink" href="#domain" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_domain.html">Domain</a> defines all admissible kinematic constraints of a continuous phase of the hybrid sytem model. There are two different types of constraints to be configured:</p>
+<ul class="simple">
+<li>Holonomic constraints: an object of KinematicGroup that describes the holonomic constraints (such as contacts and fixed kinematic joints) of the domain</li>
+<li>Unilateral constraints: a table of all unilateral constraints, which could be either force based (such as contact wrenches) or kinematics based (such as foot height).</li>
+</ul>
+<p>To create a <a class="reference external" href="doxygen_matlab/class_domain.html">Domain</a> object, run (in MATALB):</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">Domain</span><span class="p">(</span><span class="s">&#39;DomainName&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The kinematic constraints of the domain object can be added as follows.</p>
+<div class="section" id="add-a-contact-constraint">
+<h3>Add a contact constraint<a class="headerlink" href="#add-a-contact-constraint" title="Permalink to this headline">¶</a></h3>
+<p>You can add a contact constraint to a specific domain by first creating a <a class="reference external" href="doxygen_matlab/class_kinematic_contact.html">KinematicContact</a> object, and then:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">addContact</span><span class="p">(</span><span class="n">kin_obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The kinematic of the contact will be formulated as parts of the holonomic constraints of the domain, and the conditions on the contact wrenches (such as friction code, positive normal forces, zero moment point, etc.) will be added to the unilateral constraints of the domain.</p>
+<p>An existing contact can be also removed from the domain:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">removeContact</span><span class="p">(</span><span class="s">&#39;ContactObjName&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You could also use the <a class="reference external" href="doxygen_matlab/class_kinematic_contact.html">KinematicContact</a> object directly as the input argument instead of <code class="docutils literal"><span class="pre">ContactName</span></code> string argument.</p>
+</div>
+</div>
+<div class="section" id="add-an-auxilary-holonomic-constraint">
+<h3>Add an auxilary holonomic constraint<a class="headerlink" href="#add-an-auxilary-holonomic-constraint" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the contact constraints, you can also add other holonomic constraints by directly call the function:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">addHolonomicConstraint</span><span class="p">(</span><span class="n">kin_obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The input argument <code class="docutils literal"><span class="pre">kin_obj</span></code> must be a <a class="reference external" href="doxygen_matlab/class_kinematics.html">Kinematics</a> type of object. For instance, a fixed joint of the robot or the kinematic four-bar loop can be modelled as <em>pure</em> holonomic constraints of the domain.</p>
+<p>To remove an existing holonomic constraint, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">removeHolonomicConstraint</span><span class="p">(</span><span class="n">kin_obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">removeHolonomicConstraint</span><span class="p">(</span><span class="s">&#39;KinObjName&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-an-auxilary-unilateral-constraint">
+<h3>Add an auxilary unilateral constraint<a class="headerlink" href="#add-an-auxilary-unilateral-constraint" title="Permalink to this headline">¶</a></h3>
+<p>Similarly, you can add a <a class="reference external" href="doxygen_matlab/class_kinematics.html">Kinematics</a> based unilateral constraint to the domain by running:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">addUnilateralConstraint</span><span class="p">(</span><span class="n">kin_obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For instance, the height of the swing foot can be formulated as an unilateral constraint.</p>
+<p>To remove an existing unilateral constraint, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">removeHolonomicConstraint</span><span class="p">(</span><span class="n">kin_obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">removeHolonomicConstraint</span><span class="p">(</span><span class="s">&#39;KinObjName&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-and-export-symbolic-expressions">
+<h3>Compile and export symbolic expressions<a class="headerlink" href="#compile-and-export-symbolic-expressions" title="Permalink to this headline">¶</a></h3>
+<p>Though you can compile and export symbolic expressions for a individual <a class="reference external" href="doxygen_matlab/class_kinematics.html">Kinematics</a> object using its own <cite>compile</cite> and <cite>export</cite> functions, you can also compile and export all symbolic expressions related to a specific domain by running:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">re_load</span><span class="p">);</span> <span class="c">% &#39;re_load&#39; is an optinal argument</span>
+<span class="o">&gt;&gt;</span> <span class="n">domain</span><span class="p">.</span><span class="n">export</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">do_build</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="guard">
+<h2><a class="reference external" href="doxygen_matlab/class_guard.html">Guard</a><a class="headerlink" href="#guard" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_guard.html">Guard</a> defines the condition of the switching surface and options for reset map. To create a <a class="reference external" href="doxygen_matlab/class_guard.html">Guard</a> object, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">guard</span> <span class="p">=</span> <span class="n">Guard</span><span class="p">(</span><span class="s">&#39;GuardName&#39;</span><span class="p">,</span> <span class="s">&#39;Prop1&#39;</span><span class="p">,</span> <span class="n">Value1</span><span class="p">,</span> <span class="c">...);</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="doxygen_matlab/class_guard.html">Guard</a> class has three properties:</p>
+<ul class="simple">
+<li>Condition: This is a string that determines the condition of the guard (or the switching surface).</li>
+<li>Direction: This indicates in which direction the guard will be triggered. It could be either <code class="docutils literal"><span class="pre">-1</span></code>, <code class="docutils literal"><span class="pre">0</span></code>, or <code class="docutils literal"><span class="pre">1</span></code>.</li>
+<li>ResetMap: This is a structure variable determines the specific options for computing the reset map. It has the following fields:<ul>
+<li>RigidImpact: <code class="docutils literal"><span class="pre">true</span></code> if the discrete transition involves a rigid impact; <code class="docutils literal"><span class="pre">false</span></code> otherwise.</li>
+<li>RelabelMatrix: This is a square matrix used to relabel the coordiantes of the system. An empty value indicates there is no need to relable the coordinates.</li>
+<li>ResetPoint: This is a physical point on the robot to which you want to reset the origin after the reset map.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The &#8216;Condition&#8217; field must be one of the unilateral constraints name string of the source vertex (domain) of the associated edge.</p>
+</div>
+</div>
+<div class="section" id="virtualconstrdomain">
+<h2><a class="reference external" href="doxygen_matlab/class_virtual_constr_domain.html">VirtualConstrDomain</a><a class="headerlink" href="#virtualconstrdomain" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="doxygen_matlab/class_virtual_constr_domain.html">VirtualConstrDomain</a> is an inherited subclass of <a class="reference external" href="doxygen_matlab/class_domain.html">Domain</a>, which contains extra definitions of virtual constraints for a particular continuous domain. There are three main properties need to be configured:</p>
+<ul class="simple">
+<li>PhaseVariable: the parameterized time variable</li>
+<li>PositionOutputs: a group of desired and actual position-modulating outputs</li>
+<li>VelocityOutput: a scalar velocity-modulating output</li>
+</ul>
+<p>For more details of virtual constraints and hybrid zero dynamics (HZD) control framework, please refer to <a class="footnote-reference" href="#id8" id="id1">[1]</a> <a class="footnote-reference" href="#id9" id="id2">[2]</a>.</p>
+<div class="section" id="configure-the-phase-variable">
+<h3>Configure the phase variable<a class="headerlink" href="#configure-the-phase-variable" title="Permalink to this headline">¶</a></h3>
+<p>To configure the phase variable, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">setPhaseVariable</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">var</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">type</span></code> can be either <code class="docutils literal"><span class="pre">TimeBased</span></code> or <code class="docutils literal"><span class="pre">StateBased</span></code>. If the <code class="docutils literal"><span class="pre">type</span></code> is <code class="docutils literal"><span class="pre">TimeBased</span></code>, then the second argument will be ignored.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the case of <code class="docutils literal"><span class="pre">StateBased</span></code> phase variable, the second argument <code class="docutils literal"><span class="pre">var</span></code> represents a kinematic object that will be used as the state-based phase variable.</p>
+</div>
+</div>
+<div class="section" id="configure-the-velocity-modulating-output">
+<h3>Configure the velocity-modulating output<a class="headerlink" href="#configure-the-velocity-modulating-output" title="Permalink to this headline">¶</a></h3>
+<p>A velocity-modulating output is optional for a domain that uses virtual constraints based controllers. A velocity-modulating output (or virtual constraint) is defined as the difference between the actual and desired output:</p>
+<div class="math">
+\[y_1 = \dot{y}_1^a(q,\dot{q}) - y_1^d(\tau, v)\]</div>
+<p>where <span class="math">\(\tau\)</span> is the phase variable.</p>
+<p>To configure a velocity-modulating output, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">setVelocityOutput</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">act</span></code> (<span class="math">\(y_1^a(q)\)</span>): represents the actual velocity-modulating output, given as a kinamatic object, and</li>
+<li><code class="docutils literal"><span class="pre">des</span></code> (<span class="math">\(y_1^d(\tau, v)\)</span>): represents the desired velocity-modulating output, specified as its function form. Typically, we set the desired output as a <strong>constant</strong>.</li>
+</ul>
+</div>
+<div class="section" id="configure-position-modulating-outptus">
+<h3>Configure position-modulating outptus<a class="headerlink" href="#configure-position-modulating-outptus" title="Permalink to this headline">¶</a></h3>
+<p>Position-modulating outputs define more general virtual constraints for a domain that uses virtual constraints based controllers. For each <a class="reference external" href="doxygen_matlab/class_virtual_constr_domain.html">VirtualConstrDomain</a>, we specify a group of position-modulating outputs to our control objects. Position-modulating outputs are defined as the difference between the actual and desired</p>
+<div class="math">
+\[y_2 = y_2^a(q) - y_2^d(\tau, a)\]</div>
+<p>where <span class="math">\(\tau\)</span> is the phase variable.</p>
+<p>The position-modulating outputs will be initialized as a <a class="reference external" href="doxygen_matlab/class_kinematic_group.html">KinematicGroup</a> object that has zero dependent. To add a new output, run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">addPositionOutput</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">act</span></code> (<span class="math">\(y_2^a(q)\)</span>): represents an actual position-modulating output, given as a kinamatic object, and</li>
+<li><code class="docutils literal"><span class="pre">des</span></code> (<span class="math">\(y_2^d(\tau, a)\)</span>): represents the desired position-modulating output, specified as its function form. Typically, we set the desired output as a <strong>Bezier Polynomial</strong>.</li>
+</ul>
+<p>You can also remove an existing output from the <a class="reference external" href="doxygen_matlab/class_kinematic_group.html">KinematicGroup</a>:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">removePositionOutput</span><span class="p">(</span><span class="n">act</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also change the function form of the existing desired outputs:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span> <span class="p">=</span> <span class="n">domain</span><span class="p">.</span><span class="n">changeDesiredOutputType</span><span class="p">(</span><span class="s">&#39;VelocityOutput&#39;</span><span class="p">,</span> <span class="n">vel_type</span><span class="p">,</span> <span class="s">&#39;PositionOutput&#39;</span><span class="p">,</span> <span class="n">pos_type</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Compile and export symbolic expressions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="doxygen_matlab/class_virtual_constr_domain.html">VirtualConstrDomain</a> overloads the <cite>compile</cite> and <cite>export</cite> methods of its super-class, so that it can compile and export symbolic expressions for the virtual constraint domain simply run:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">domain</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">re_load</span><span class="p">);</span> <span class="c">% &#39;re_load&#39; is an optinal argument</span>
+<span class="o">&gt;&gt;</span> <span class="n">domain</span><span class="p">.</span><span class="n">export</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">do_build</span><span class="p">);</span>
+</pre></div>
+</div>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>A.D. Ames. Human-inspired control of bipedal walking robots. <em>IEEE Transactions on Automatic Control</em>, 59(5):1115–1130, May 2014.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>J.W. Grizzle, C. Chevallereau, R. W. Sinnet, and A. D. Ames. Models, feedback control, and open problems of 3D bipedal robotic walking. <em>Automatica</em>, 50(8):1955 – 1988, 2014.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, AMBER Lab.<br/>
+      Last updated on Jan 31, 2017.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

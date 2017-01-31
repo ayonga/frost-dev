@@ -32,7 +32,7 @@
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Mathematica" href="mathematica.html" />
+    <link rel="next" title="Model" href="model.html" />
     <link rel="prev" title="Examples" href="tutorial.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -57,7 +57,7 @@
   </script>
 
 
-  <div id="navbar" class="navbar navbar-default ">
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -145,14 +145,7 @@
 </ul>
 </ul>
 </li><ul>
-<li><a class="reference internal" href="#">MATLAB Documentation</a><ul>
-<li><a class="reference internal" href="#model">Model</a></li>
-<li><a class="reference internal" href="#kinematics">Kinematics</a></li>
-<li><a class="reference internal" href="#hybrid-system">Hybrid System</a></li>
-<li><a class="reference internal" href="#control">Control</a></li>
-<li><a class="reference internal" href="#gait-optimization">Gait Optimization</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">MATLAB Documentation</a></li>
 </ul>
 
 <form action="search.html" method="get">
@@ -167,61 +160,44 @@
     <div class="col-md-9 content">
       
   <div class="section" id="matlab-documentation">
-<h1>MATLAB Documentation<a class="headerlink" href="#matlab-documentation" title="Permalink to this headline">¶</a></h1>
+<span id="matlab"></span><h1>MATLAB Documentation<a class="headerlink" href="#matlab-documentation" title="Permalink to this headline">¶</a></h1>
 <p>This page contains the high-level entries of the detailed MATLAB code documentation.</p>
 <p>The majority of FROST&#8217;s Matlab code is written as the <em>object oriented programming</em> style. The following classes cover many aspects of dynamic locomotion from modelling, simulation, optimization and control development of legged robots.</p>
-<div class="section" id="model">
-<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>The mechanical system of a legged robot can be modelled as a rigid body model described in the class <a class="reference external" href="doxygen_matlab/class_rigid_body_model.html">RigidBodyModel</a>. To construct a rigid body model object, pass the full path of the ROS <a class="reference external" href="http://wiki.ros.org/urdf">URDF</a> file of the robot as the first input argument:</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">model</span> <span class="p">=</span> <span class="n">RigidBodyModel</span><span class="p">(</span><span class="n">urdf_file_path</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>The class constructor will parse the corresponding <a class="reference external" href="http://wiki.ros.org/urdf">URDF</a> file to obtain the model information of the robot, such as links and joints. The constructor function can also accept the following extra arguments as an auxilary information of the existing <a class="reference external" href="http://wiki.ros.org/urdf">URDF</a> file, such as the type of the model (<cite>spatial</cite> or <cite>planar</cite>) and the floating base coordinates.</p>
-<p>For detailed information of the class, please see <a class="reference external" href="doxygen_matlab/class_rigid_body_model.html">RigidBodyModel</a>.</p>
-<p>The same configuration information, including the path of the <a class="reference external" href="http://wiki.ros.org/urdf">URDF</a> file and auxilary information, is also send to the Mathematica kernal to generate kinematics and dynamics expressions of the robot symbolically, and export as C++ source code. To initialize the robot model in Mathematica, run:</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">model</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>After initialized the robot model in Mathematica, you can compile and export the natural dynamics of the model by running:</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">model</span><span class="p">.</span><span class="n">compileDynamics</span><span class="p">();</span>
-<span class="o">&gt;&gt;</span> <span class="n">model</span><span class="p">.</span><span class="n">exportDynamics</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">do_build</span><span class="p">);</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The implementation of this class can be found in the folder <code class="docutils literal"><span class="pre">frost-dev/matlab/model</span></code>.</p>
-</div>
-</div>
-<div class="section" id="kinematics">
-<h2>Kinematics<a class="headerlink" href="#kinematics" title="Permalink to this headline">¶</a></h2>
-<p>FROST provides multiple class definitions to describe a wide range of kinematic features of a rigid body model. All kinematics classes are inherite from the super class <a class="reference external" href="doxygen_matlab/class_kinematics.html">Kinematics</a>, which provides common interfaces and functionalities for kinematics objects. Based on the information of each <a class="reference external" href="doxygen_matlab/class_kinematics.html">Kinematics</a> object, FROST can generate associated symbolic expression in Mathematica and also can export to a C++ source code. These can be done by running:</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">kin_obj</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">re_load</span><span class="p">);</span> <span class="c">% &#39;re_load&#39; is an optinal argument</span>
-<span class="o">&gt;&gt;</span> <span class="n">kin_obj</span><span class="p">.</span><span class="n">export</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">do_build</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>The following type of kinematic classes are currently implemented in FROST.</p>
-<ul class="simple">
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_contact.html">KinematicContact</a>:</li>
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_orientation.html">KinematicOrientation</a>:</li>
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_position.html">KinematicPosition</a>:</li>
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_dof.html">KinematicDof</a>:</li>
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_com.html">KinematicCom</a>:</li>
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_expr.html">KinematicExpr</a>:</li>
-<li><a class="reference external" href="doxygen_matlab/class_kinematic_group.html">KinematicGroup</a>:</li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model.html#rigid-body-model">Rigid Body Model</a></li>
 </ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The implementation of these classes can be found in the folder <code class="docutils literal"><span class="pre">frost-dev/matlab/kinematics</span></code>.</p>
-</div>
-</div>
-<div class="section" id="hybrid-system">
-<h2>Hybrid System<a class="headerlink" href="#hybrid-system" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="control">
-<h2>Control<a class="headerlink" href="#control" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="gait-optimization">
-<h2>Gait Optimization<a class="headerlink" href="#gait-optimization" title="Permalink to this headline">¶</a></h2>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kinematic.html">Kinematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematiccontact">KinematicContact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematicorientation">KinematicOrientation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematicposition">KinematicPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematiccom">KinematicCom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematicdof">KinematicDof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematicexpr">KinematicExpr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kinematic.html#kinematicgroup">KinematicGroup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">Hybrid System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="system.html#hybridsystem">HybridSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#domain">Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#guard">Guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#virtualconstrdomain">VirtualConstrDomain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nlp.html">Nonlinear Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#nonlinearprogram">NonlinearProgram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#nlpvariable">NlpVariable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#nlpfunction">NlpFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#symfunction">SymFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#hybridtrajctoryoptimization">HybridTrajctoryOptimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#solverapplication">SolverApplication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp.html#ipoptapplication">IpoptApplication</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -238,7 +214,7 @@
     </p>
     <p>
         &copy; Copyright 2017, AMBER Lab.<br/>
-      Last updated on Jan 30, 2017.<br/>
+      Last updated on Jan 31, 2017.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
     </p>
   </div>

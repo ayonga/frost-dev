@@ -155,7 +155,7 @@ mtoc++ warning in control/@CLFQP/CLFQP.m: Class CLFQP misses definition of funct
   parameter 'lb'
   parameter 'ub'
   parameter 'x0'
-/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/IpoptApplication.m:122: warning: argument 'opts_in' of command @param is not found in the argument list of IpoptApplication::IpoptApplication(matlabtypesubstitute nlp, matlabtypesubstitute new_opts)
+/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/IpoptApplication.m:128: warning: argument 'opts_in' of command @param is not found in the argument list of IpoptApplication::IpoptApplication(matlabtypesubstitute nlp, matlabtypesubstitute new_opts)
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/IpoptApplication.m:75: warning: The following parameters of IpoptApplication::IpoptApplication(matlabtypesubstitute nlp, matlabtypesubstitute new_opts) are not documented:
   parameter 'new_opts'
 /home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setBoundary.m:73: warning: argument 'lowerbound' of command @param is not found in the argument list of NlpFunction::setBoundary(matlabtypesubstitute cl, matlabtypesubstitute cu)

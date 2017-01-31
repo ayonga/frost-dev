@@ -1,0 +1,36 @@
+.. _nlp:
+
+*************************
+Nonlinear Optimization
+*************************
+
+One of the key features of FROST is to provide a scalable fast nonlinear optimization framework for hybrid dynamical system with a particular interest in dynamic locomotion. The ``nlp`` and ``solver`` folder contains multiple class definition that are essential for developing such a fast trajectory optimization problem for legged robots.
+
+NonlinearProgram
+==================
+
+
+NlpVariable
+==================
+
+
+NlpFunction
+==================
+
+
+SymFunction
+==================
+
+
+HybridTrajctoryOptimization
+===========================
+
+SolverApplication
+===========================
+
+IpoptApplication
+===========================
+
+
+
+.. attention:: The implementation of these classes can be found in the folders ``frost-dev/matlab/nlp`` and ``frost-dev/matlab/solver``.

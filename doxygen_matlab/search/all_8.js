@@ -5,7 +5,7 @@ var searchData=
   ['indent',['indent',['../indent_8m.html#a4a4327f26e876fa79ba905add69473ce',1,'indent.m']]],
   ['indent_2em',['indent.m',['../indent_8m.html',1,'']]],
   ['indices',['Indices',['../class_nlp_variable.html#af83030c263e2ed2c62b0864aab239a5d',1,'NlpVariable']]],
-  ['initialize',['initialize',['../class_solver_application.html#a03f3930eee3c81a542204b159bc967bc',1,'SolverApplication::initialize()'],['../class_ipopt_application.html#a346a21952b0a2f0db97a19c6969b9b81',1,'IpoptApplication::initialize()']]],
+  ['initialize',['initialize',['../class_ipopt_application.html#a346a21952b0a2f0db97a19c6969b9b81',1,'IpoptApplication::initialize()'],['../class_solver_application.html#a03f3930eee3c81a542204b159bc967bc',1,'SolverApplication::initialize()']]],
   ['initialize_2em',['initialize.m',['../model_2_0D_rigid_body_model_2initialize_8m.html',1,'']]],
   ['initialize_2em',['initialize.m',['../solver_2_0D_ipopt_application_2initialize_8m.html',1,'']]],
   ['initializenlp',['initializeNLP',['../class_hybrid_trajectory_optimization.html#a9dc4da3f904b7eeaea449b5b4be679ca',1,'HybridTrajectoryOptimization']]],
