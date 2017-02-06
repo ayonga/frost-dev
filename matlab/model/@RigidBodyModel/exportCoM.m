@@ -29,6 +29,11 @@ function status = exportCoM(obj, export_path, do_build)
             'Aborting ...\n'], export_path);
         return;
     end
+    % For windows, use ''/' instead of '\'. Otherwise mathematica does
+    % not recognize the path.
+    if ispc
+        export_path = strrep(export_path, '\','/');
+    end
     
     flag = '$ModelInitialized';
     
@@ -47,6 +52,8 @@ function status = exportCoM(obj, export_path, do_build)
     
     
     eval_math('Needs["MathToCpp`"];');
+    
+    
     
     
     % necessary settings

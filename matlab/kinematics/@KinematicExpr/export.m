@@ -18,7 +18,6 @@ function status = export(obj, export_path, do_build)
     end
     
     
-    
     if isempty(obj.Parameters) || obj.Parameters.Dimension==0
         % if the function does not include any parameter, then use the
         % superclass method directly
@@ -32,7 +31,11 @@ function status = export(obj, export_path, do_build)
                 'Aborting ...\n'], export_path);
             return;
         end
-        
+        % For windows, use ''/' instead of '\'. Otherwise mathematica does
+        % not recognize the path.
+        if ispc
+            export_path = strrep(export_path, '\','/');
+        end
         
         
         symbols = obj.Symbols;

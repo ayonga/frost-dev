@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 classdef animator
     % This class defines a simple basic animator objects for multi-body
     % mechanical systems (a.k.a. robots). 
@@ -64,9 +66,6 @@ classdef animator
         function fig_hl = animate(obj, flow, output_file)
             % Run the animation
             
-            if nargin < 3
-                output_file = '/tmp/anim_output.avi';
-            end
             % Before run the animator, first parse the input flow data
             [traj,axis_offset] = parse(obj, flow);
             ground = obj.Ground;
@@ -74,7 +73,16 @@ classdef animator
             line_obj = obj.LineObjects;
             
             
+            
             if options.SaveToFile
+                if nargin > 3 || isempty(output_file)
+                    error('Please specify the path and name of the output file.');
+                end
+                
+                output_dir = fileparts(output_file);
+                if ~exist(output_dir,'dir')
+                    mkdir(output_dir);
+                end
                 writerObj = VideoWriter(output_file);
                 writerObj.FrameRate = options.FrameRate;
                 open(writerObj);
@@ -107,11 +115,11 @@ classdef animator
             anim_line = cell(1,n_line);
             for i=1:n_line
                 anim_line{i} = plot3(traj{1,i}{1}(1,:),traj{1,i}{1}(2,:),traj{1,i}{1}(3,:),...
-                    line_obj(i).Style,...
-                    'Color',line_obj(i).Color,...
-                    'MarkerFaceColor',line_obj(i).Color,...
-                    'MarkerSize',line_obj(i).MarkerSize,...
-                    'LineWidth',line_obj(i).LineWidth);
+                    line_obj (i).Style,...
+                    'Color',line_obj (i).Color,...
+                    'MarkerFaceColor',line_obj (i).Color,...
+                    'MarkerSize',line_obj (i).MarkerSize,...
+                    'LineWidth',line_obj (i).LineWidth);
             end
             
             
@@ -180,7 +188,7 @@ classdef animator
                 
                 
                 % even sample
-                %                 calcs = horzcat_fields([flow{i}.calcs{:}]);
+                %                 calcs = horzcat_fields([flow {i}.calcs{:}]);
                 calcs = flow{i};
                 if isempty(calcs)
                     continue;

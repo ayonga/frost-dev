@@ -7,7 +7,7 @@ function obj = exportLineFunctions(obj, export_path, do_build)
     if nargin < 3
         do_build = true;
     end
-    
+        
     initialize(obj, true);
     
     if ~isempty(obj.LineObjects)

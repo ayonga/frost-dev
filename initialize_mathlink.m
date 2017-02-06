@@ -36,10 +36,15 @@ function initialize_mathlink()
     
     math_app_path = fullfile(cur, 'mathematica','Applications');
     
+    if ispc
+        % For windows, use ''/' instead of '\'. Otherwise mathematica does
+        % not recognize the path.
+        math_app_path = strrep(math_app_path,'\','/');
+    end
     
     math('SetOptions[ToString, PageWidth->Infinity];');
     
-    math(['$Path=DeleteDuplicates[Append[$Path,"',math_app_path,'"]];']);
+    math(['$Path=DeleteDuplicates[Append[$Path,',str2mathstr(math_app_path),']];']);
     
     math('Needs["ExtraUtils`"]');
 end

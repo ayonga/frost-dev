@@ -31,8 +31,12 @@
 *.bin
 
 ## build directories
+*.ii
+*.s
 *.cc
 *.mexa64
+*.mexw64
+&.mexmaci64
 *.o
 *.hh
 ## temp files from adigator

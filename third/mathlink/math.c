@@ -213,12 +213,11 @@ Boolean OpenMathLink( int nlhs, mxArray *plhs[],
    *        very universal :-)
    *        choose MathKernel.exe in dialog
    */ 
-  /*argc = 3;
-  argv[0] = "-linklaunch";
-  argv[1] = "-linkname";
-  argv[2] = "x:\\math\\Mathematica\\6.0\\MathKernel.exe";
-  argv[2] = "runkernel.bat"; */
-
+  //argc = 3;
+  //argv[0] = "-linklaunch";
+  //argv[1] = "-linkname";
+  //argv[2] = "C:\\Program Files\\Wolfram Research\\Mathematica\\11.0\\MathKernel.exe";
+    
   /****************************************************************/
   /* works for mathematica 7.0.0 and matlab R2009b */
   argc = 6;

@@ -42,8 +42,12 @@ function obj = initialize(obj, reload)
     %         return;
     %     end
     
-    
-    eval_math(['InitializeModel[',str2mathstr(obj.ConfigFile),',',cell2tensor(obj.BaseDof.axis),'];']);
+    if ispc
+        config_file = strrep(obj.ConfigFile, '\', '/');
+    else
+        config_file = obj.ConfigFile;
+    end
+    eval_math(['InitializeModel[',str2mathstr(config_file),',',cell2tensor(obj.BaseDof.axis),'];']);
     
    
 end
