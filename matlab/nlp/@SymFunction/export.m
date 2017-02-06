@@ -30,7 +30,11 @@ function status = export(obj, export_path, do_build, derivative_level)
             'Aborting ...\n'], export_path);
         return;
     end
-    
+    % For windows, use ''/' instead of '\'. Otherwise mathematica does
+    % not recognize the path.
+    if ispc
+        export_path = strrep(export_path, '\','/');
+    end
     
     if ~isempty(obj.PreCommands)
         eval_math(obj.PreCommands);

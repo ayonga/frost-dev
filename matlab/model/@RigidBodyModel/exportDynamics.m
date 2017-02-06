@@ -25,6 +25,8 @@ function status = exportDynamics(obj, export_path, do_build)
         do_build = true;
     end
     
+    
+    
     flag = '$ModelInitialized';
     
     
@@ -46,6 +48,12 @@ function status = exportDynamics(obj, export_path, do_build)
             'Aborting ...\n'], export_path);
         return;
     end
+    % For windows, use ''/' instead of '\'. Otherwise mathematica does
+    % not recognize the path.
+    if ispc
+        export_path = strrep(export_path, '\','/');
+    end
+    
     
     fprintf('Exporting expressions of rigid body dynamics might take very long time to finish!\n');
     y = input ('Hit enter to continue (or "n" to quit): ', 's');

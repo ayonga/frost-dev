@@ -14,6 +14,11 @@ function status = export(obj, export_path, do_build)
     if nargin < 3
         do_build = true;
     end
+    % For windows, use ''/' instead of '\'. Otherwise mathematica does
+    % not recognize the path.
+    if ispc
+        export_path = strrep(export_path, '\','/');
+    end
     
     status = false;
     %% kinematic constraints

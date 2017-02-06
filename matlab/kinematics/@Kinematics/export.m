@@ -15,6 +15,8 @@ function status = export(obj, export_path, do_build)
         do_build = true;
     end
     
+    
+    
     status = false;
     
     if ~(exist(export_path,'dir'))
@@ -23,7 +25,11 @@ function status = export(obj, export_path, do_build)
             'Aborting ...\n'], export_path);
         return;
     end
-    
+    % For windows, use ''/' instead of '\'. Otherwise mathematica does
+    % not recognize the path.
+    if ispc
+        export_path = strrep(export_path, '\','/');
+    end
     
     
     symbols = obj.Symbols;
