@@ -52,8 +52,16 @@ InertiaToCoriolis::usage=
   inertia matrix, M, a list of the joint variables, theta, and a list of
   joint velocities, omega";
 
-InertiaToCoriolisSep::usage=
- "InertiaToCoriolisSep[M, theta, omega] computes the separated Coriolis matrix given the \
+InertiaToCoriolisPart1::usage=
+ "InertiaToCoriolisPart1[M, theta, omega] computes the first part of the Coriolis matrix given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of
+  joint velocities, omega";
+InertiaToCoriolisPart2::usage=
+ "InertiaToCoriolisPart2[M, theta, omega] computes the second part of the Coriolis matrix given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of
+  joint velocities, omega";
+InertiaToCoriolisPart3::usage=
+ "InertiaToCoriolisPart3[M, theta, omega] computes the third part of the Coriolis matrix given the \
   inertia matrix, M, a list of the joint variables, theta, and a list of
   joint velocities, omega";
 
@@ -144,7 +152,7 @@ BodyJacobian[args__, gst0_]:=
 
 InertiaToCoriolis[M_, q_, w_] :=
   Module[
-    {Cmat, i, j, k, n = Length[M], bar},
+    {Cmat, i, j, k, n = Length[M]},
 
     (* Brute force calculation *)
     Cmat = Array[0&, {n,n}];
@@ -159,27 +167,54 @@ InertiaToCoriolis[M_, q_, w_] :=
     ];
     Cmat
   ];
-InertiaToCoriolisSep[M_, q_, w_] :=
+InertiaToCoriolisPart1[M_, q_, w_] :=
   Module[
-    {Cmat1,Cmat2,Cmat3, i, j, k, n = Length[M]},
+    {Cmat, i, j, k, n = Length[M]},
 
     (* Brute force calculation *)
-    Cmat1 = Array[0&, {n,n}];
-	Cmat2 = Array[0&, {n,n}];
-	Cmat3 = Array[0&, {n,n}];
+    Cmat = Array[0&, {n,n}];
     For[i = 1, i <= n, ++i,
       For[j = 1, j <= n, ++j,
         For[k = 1, k <= n, ++k,
-          Cmat1[[i,j]] += 1/2 * w[[k]] *
+          Cmat[[i,j]] += 1/2 * w[[k]] *
           (D[M[[i,j]], q[[k]]]);
-          Cmat2[[i,j]] += 1/2 * w[[k]] *
+        ]
+      ]
+    ];
+    Cmat
+  ];	
+InertiaToCoriolisPart2[M_, q_, w_] :=
+  Module[
+    {Cmat, i, j, k, n = Length[M]},
+
+    (* Brute force calculation *)
+    Cmat = Array[0&, {n,n}];
+    For[i = 1, i <= n, ++i,
+      For[j = 1, j <= n, ++j,
+        For[k = 1, k <= n, ++k,
+          Cmat[[i,j]] += 1/2 * w[[k]] *
           (D[M[[i,k]], q[[j]]]);
-          Cmat3[[i,j]] += 1/2 * w[[k]] *
+        ]
+      ]
+    ];
+    Cmat
+  ];	
+  
+InertiaToCoriolisPart3[M_, q_, w_] :=
+  Module[
+    {Cmat, i, j, k, n = Length[M]},
+
+    (* Brute force calculation *)
+    Cmat = Array[0&, {n,n}];
+    For[i = 1, i <= n, ++i,
+      For[j = 1, j <= n, ++j,
+        For[k = 1, k <= n, ++k,
+          Cmat[[i,j]] += 1/2 * w[[k]] *
           (- D[M[[j,k]], q[[i]]]);
         ]
       ]
     ];
-    {Cmat1,Cmat2,Cmat3}
+    Cmat
   ];			
 End[];
 EndPackage[];

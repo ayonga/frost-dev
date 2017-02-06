@@ -16,23 +16,37 @@ function obj = genericSymFunctions(obj)
     % natrual dynamics of the rigid body model
     %% De(q)*ddq
     De_ddq = SymFunction('Name', 'inertia_vec', ...
-        'Expression', 'De.ddQe');
+        'Expression', 'InertiaMatrix[].ddQe');
     De_ddq = setDepSymbols(De_ddq, {'Qe', 'ddQe'});
     De_ddq = setPreCommands(De_ddq, 'Qe = GetQe[]; dQe = D[Qe, t]; ddQe = D[dQe, t];');
     De_ddq = setDescription(De_ddq, 'Inertia matrix times joint acceleration: De(q)*ddq)');
     obj.Funcs.Model.De_ddq = De_ddq;
     
     %% Ce(q,dq)
-    Ce_dq = SymFunction('Name', 'coriolis_vec', ...
-        'Expression', 'Ce.dQe');
-    Ce_dq = setDepSymbols(Ce_dq, {'Qe', 'dQe'});
-    Ce_dq = setPreCommands(Ce_dq, 'Qe = GetQe[]; dQe = D[Qe, t];');
-    Ce_dq = setDescription(Ce_dq, 'Coriolis vector: Ce(q,dq)');
-    obj.Funcs.Model.Ce = Ce_dq;
+    Ce_dq_p1 = SymFunction('Name', 'coriolis_vec_p1', ...
+        'Expression', 'InertiaToCoriolisPart1[De].dQe');
+    Ce_dq_p1 = setDepSymbols(Ce_dq_p1, {'Qe', 'dQe'});
+    Ce_dq_p1 = setPreCommands(Ce_dq_p1, 'Qe = GetQe[]; dQe = D[Qe, t];De = InertiaMatrix[];');
+    Ce_dq_p1 = setDescription(Ce_dq_p1, 'Coriolis vector: Ce(q,dq)');
+    obj.Funcs.Model.Ce_dq_p1 = Ce_dq_p1;
+    
+    Ce_dq_p2 = SymFunction('Name', 'coriolis_vec_p2', ...
+        'Expression', 'InertiaToCoriolisPart2[De].dQe');
+    Ce_dq_p2 = setDepSymbols(Ce_dq_p2, {'Qe', 'dQe'});
+    Ce_dq_p2 = setPreCommands(Ce_dq_p2, 'Qe = GetQe[]; dQe = D[Qe, t];De = InertiaMatrix[];');
+    Ce_dq_p2 = setDescription(Ce_dq_p2, 'Coriolis vector: Ce(q,dq)');
+    obj.Funcs.Model.Ce_dq_p2 = Ce_dq_p2;
+    
+    Ce_dq_p3 = SymFunction('Name', 'coriolis_vec_p3', ...
+        'Expression', 'InertiaToCoriolisPart3[De].dQe');
+    Ce_dq_p3 = setDepSymbols(Ce_dq_p3, {'Qe', 'dQe'});
+    Ce_dq_p3 = setPreCommands(Ce_dq_p3, 'Qe = GetQe[]; dQe = D[Qe, t];De = InertiaMatrix[];');
+    Ce_dq_p3 = setDescription(Ce_dq_p3, 'Coriolis vector: Ce(q,dq)');
+    obj.Funcs.Model.Ce_dq_p3 = Ce_dq_p3;
     
     %% Ge(q)
     Ge = SymFunction('Name', 'gravity_vec', ...
-        'Expression', 'Ge');
+        'Expression', 'GravityVector[]');
     Ge = setDepSymbols(Ge, {'Qe'});
     Ge = setPreCommands(Ge, 'Qe = GetQe[];');
     Ge = setDescription(Ge, 'Gravity vector: G(q)');

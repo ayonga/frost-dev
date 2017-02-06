@@ -26,8 +26,16 @@ InertiaToCoriolis::usage =
 	"InertiaToCoriolis[D] computes the Coriolis matrix given the \
 inertia matrix, D."
 
-InertiaToCoriolisSep::usage = 
-	"InertiaToCoriolisSep[D] computes the Coriolis matrix given the \
+InertiaToCoriolisPart1::usage = 
+	"InertiaToCoriolisPart1[D] computes the first part of the Coriolis matrix given the \
+inertia matrix, D."
+
+InertiaToCoriolisPart2::usage = 
+	"InertiaToCoriolisPart2[D] computes the second part of the Coriolis matrix given the \
+inertia matrix, D."
+
+InertiaToCoriolisPart3::usage = 
+	"InertiaToCoriolisPart3[D] computes the third part of the Coriolis matrix given the \
 inertia matrix, D."
 
 ComputeComPosition::usage = 
@@ -348,12 +356,11 @@ InertiaToCoriolis[] :=
 		InertiaToCoriolis[De,Flatten[$Qe],Flatten[$dQe]];
 	];
 	
-InertiaToCoriolisSep[De_] := InertiaToCoriolisSep[De,Flatten[$Qe],Flatten[$dQe]];
-InertiaToCoriolisSep[] := 
-	Block[{De},
-		De = InertiaMatrix[];
-		InertiaToCoriolisSep[De,Flatten[$Qe],Flatten[$dQe]]
-	];
+InertiaToCoriolisPart1[De_] := InertiaToCoriolisPart1[De,Flatten[$Qe],Flatten[$dQe]];
+InertiaToCoriolisPart2[De_] := InertiaToCoriolisPart2[De,Flatten[$Qe],Flatten[$dQe]];
+InertiaToCoriolisPart3[De_] := InertiaToCoriolisPart3[De,Flatten[$Qe],Flatten[$dQe]];
+
+
 (* The contributions of motor inertia to the robot dynamics are not addressed
 in the URDF model definition. To include the motor inertia in the dynamics 
 please include the motor inertia information when call InertiaMatrix[] function.

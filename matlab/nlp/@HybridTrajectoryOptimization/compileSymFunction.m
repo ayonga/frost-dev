@@ -20,10 +20,7 @@ function obj = compileSymFunction(obj, field, phase, export_path)
     
     switch field
         case 'Model'
-            % compile dynamics and CoM
-            compileDynamics(model);
             
-            compileCoM(model);
             % get fields
             model_funcs = fields(obj.Funcs.Model);
             
