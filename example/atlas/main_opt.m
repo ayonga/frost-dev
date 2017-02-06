@@ -37,11 +37,11 @@ atlas_multiwalk_opt = Atlas3DMultiWalkingOpt(atlas_multiwalk);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% compileSymFunction(atlas_multiwalk_opt, 'Model', [], export_path);
-% compileSymFunction(atlas_multiwalk_opt, 'Generic', [], export_path);
-% for i=1:3
-%     compileSymFunction(atlas_multiwalk_opt, 'Phase', i, export_path);
-% end
+compileSymFunction(atlas_multiwalk_opt, 'Model', [], export_path);
+compileSymFunction(atlas_multiwalk_opt, 'Generic', [], export_path);
+for i=1:3
+    compileSymFunction(atlas_multiwalk_opt, 'Phase', i, export_path);
+end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

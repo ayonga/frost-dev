@@ -1,0 +1,12 @@
+All of the below used MatlabInterface.site file, and had Matlab on the path.
+
+Linux configured with (using GCC 4.8.0 built --with-pic):
+../configure --enable-matlab-ma57 CC=/usr/local/gcc-4.8.0/bin/gcc \
+  CXX=/usr/local/gcc-4.8.0/bin/g++ F77=/usr/local/gcc-4.8.0/bin/gfortran
+
+Mac configured with (using GCC 4.8.3 from homebrew):
+../configure --enable-matlab-ma57 CC=/usr/local/bin/gcc \
+  CXX=/usr/local/bin/g++ --enable-matlab-static
+
+Win32 and Win64 configured with:
+../configure --enable-matlab-ma57

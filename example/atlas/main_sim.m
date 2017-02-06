@@ -21,11 +21,12 @@ atlas = Atlas(urdf_file);
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% atlas.initialize();
 % compileCoM(atlas);
 % compileDynamics(atlas);
-% exportCoM(atlas, export_path, true);
-% exportDynamics(atlas, export_path, true);
-% exportLineFunctions(atlas, export_path)
+exportCoM(atlas, export_path, true);
+exportDynamics(atlas, export_path, true);
+exportLineFunctions(atlas, export_path)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,7 +38,7 @@ atlas_multiwalk = Atlas3DMultWalking(atlas);
 %%%% Compile and export behavior specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% atlas_multiwalk = compile(atlas_multiwalk, atlas, export_path);
+atlas_multiwalk = compile(atlas_multiwalk, atlas, export_path);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
