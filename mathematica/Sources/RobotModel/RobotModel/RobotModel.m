@@ -26,6 +26,10 @@ InertiaToCoriolis::usage =
 	"InertiaToCoriolis[D] computes the Coriolis matrix given the \
 inertia matrix, D."
 
+InertiaToCoriolisSep::usage = 
+	"InertiaToCoriolisSep[D] computes the Coriolis matrix given the \
+inertia matrix, D."
+
 ComputeComPosition::usage = 
 	"ComputeComPosition[] returns the position vectors of the \
 center of mass of the robot."
@@ -342,6 +346,13 @@ InertiaToCoriolis[] :=
 	Block[{De},
 		De = InertiaMatrix[];
 		InertiaToCoriolis[De,Flatten[$Qe],Flatten[$dQe]];
+	];
+	
+InertiaToCoriolisSep[De_] := InertiaToCoriolisSep[De,Flatten[$Qe],Flatten[$dQe]];
+InertiaToCoriolisSep[] := 
+	Block[{De},
+		De = InertiaMatrix[];
+		InertiaToCoriolisSep[De,Flatten[$Qe],Flatten[$dQe]]
 	];
 (* The contributions of motor inertia to the robot dynamics are not addressed
 in the URDF model definition. To include the motor inertia in the dynamics 
