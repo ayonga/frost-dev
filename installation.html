@@ -227,7 +227,24 @@ $ sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so libstdc++.so.6
 </div>
 <div class="section" id="windows">
 <h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
-<p>There are multiple compilers can be used on Windows machines. The following instruction uses MinGW as an example.</p>
+<p>There are multiple compilers can be used on Windows machines. The following instruction uses MinGW as an example, as it comes at no extra cost.</p>
+<ol class="arabic simple">
+<li>Install via MATLAB Add-Ons manager:</li>
+</ol>
+<p>On newer version of MATLAB, you can install MinGW support for MATLAB directly from the Add-Ons manager. Simply search for MinGW, and click <cite>install</cite>.</p>
+<ol class="arabic simple" start="2">
+<li>Directly install from TDM-GCC:</li>
+</ol>
+<p>If installing MinGW compiler via Add-On manager fails, you can also manually install the compiler from the official <a class="reference external" href="http://tdm-gcc.tdragon.net/about">TDM-GCC</a> website.</p>
+<ul class="simple">
+<li>Go to the <a class="reference external" href="http://tdm-gcc.tdragon.net/download">download</a> page <a class="reference external" href="http://tdm-gcc.tdragon.net/download">here</a>, and download the version that works on your Windows PC. Please download the 64-bit version if possible.</li>
+<li>After finished downloading, simply run the executable binary to install TDM-GCC compiler.</li>
+<li>After the installation, you will need to add the system enviroment variable <code class="docutils literal"><span class="pre">MW_MINGW64_LOC</span></code> and specify it to the directory where you installed, for example <cite>C:TDM-GCC-64</cite>.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not have <code class="docutils literal"><span class="pre">space</span></code> in the installation path of TDM-GCC compiler. Highly recommend to use the default path, for example <cite>C:TDM-GCC-64</cite>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="mathlink">
@@ -250,7 +267,16 @@ This package can be downloaded directly from the MATLAB Add-Ons manager or can b
 </div>
 <div class="section" id="id2">
 <h4>Windows<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<p>Comming soon ...</p>
+<p>Setting up the library path on Windows PC sometimes very complicated, and not always work. Therefore, we copied the all required the static/dynamic library files to the folder where the mathlink source file resides.</p>
+<p>We also includes a pre-compiled MEX binary on Windows machine. To use the pre-compiled binary, you must include the path to Wolfram Mathematica kernal executables to your system path.</p>
+<p>To include the Wolfram path, edit your PATH variable (user) on your system enviroment variables manager. The path to be added should looks like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>C:Program Files<span class="se">\W</span>olfram Research<span class="se">\M</span>athematica<span class="se">\1</span><span class="m">1</span>.0<span class="se">\</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When you first time call <cite>math</cite> function from Matlab, there will appear a new console window of the Mathematica kernel. Do not close this window, as it will close the running kernel.</p>
+</div>
 </div>
 <div class="section" id="test">
 <h4>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h4>
@@ -270,11 +296,8 @@ This package can be downloaded directly from the MATLAB Add-Ons manager or can b
 </div>
 <div class="section" id="ipopt">
 <h3>IPOPT<a class="headerlink" href="#ipopt" title="Permalink to this headline">¶</a></h3>
-<p>We use <a class="reference external" href="https://projects.coin-or.org/Ipopt/">IPOPT</a> as the default solver for nonlinear constrained optimization problems. To use <a class="reference external" href="https://projects.coin-or.org/Ipopt/">IPOPT</a> from MATLAB, it is sufficient to directly use the precompiled mex files for IPOPT Matlabinterface from <a class="reference external" href="http://www.coin-or.org/download/binary/Ipopt/">www.coin-or.org</a>. The most recent version of Linux machine as of writing this document is 3.11.8. Simply download the archived file of the most recent version, and extract it to the MATLAB <code class="docutils literal"><span class="pre">path</span></code>. Then add the path to your Matlab search path by inserting the following line in the <code class="docutils literal"><span class="pre">~/matlab/startup.m</span></code> script. For instance,</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="n">addpath</span><span class="p">(</span><span class="s">&#39;~/matlab/ipopt/&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal"><span class="pre">~/matlab/ipopt/</span></code> is the directory where you extract the archived file.</p>
+<p>We use <a class="reference external" href="https://projects.coin-or.org/Ipopt/">IPOPT</a> as the default solver for nonlinear constrained optimization problems. To use <a class="reference external" href="https://projects.coin-or.org/Ipopt/">IPOPT</a> from MATLAB, it is sufficient to directly use the precompiled mex files for IPOPT Matlabinterface from <a class="reference external" href="http://www.coin-or.org/download/binary/Ipopt/">www.coin-or.org</a>. The most recent version of IPOPT as of writing this document is 3.11.8.</p>
+<p>Note that, we have included the latest pre-compiled binaries downloaded from the above link in FROST package. Therefore, you do not need to download IPOPT, unless if you prefer to use other version of IPOPT.</p>
 </div>
 <div class="section" id="suitsparse">
 <h3>SuitSparse<a class="headerlink" href="#suitsparse" title="Permalink to this headline">¶</a></h3>
@@ -282,13 +305,8 @@ This package can be downloaded directly from the MATLAB Add-Ons manager or can b
 required package to run FROST. However, the <strong>sparse2</strong> function comes with the
 SuitSparse can be used as the replancement of Matlab&#8217;s <strong>sparse</strong> function. The
 former provides up to 2~3 times faster computation speed when compared to the
-latter. To install SuitSparse, please download the latest version of SuitSparse
-to your Matlab <cite>PATH</cite>, and run</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">SuitSparse_install</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>from Matlab. Press <cite>n</cite> when the installer prompts to run the demo, which would
-skip the long demo of the package. Hit Enter if you are interested in the demo.</p>
+latter.</p>
+<p>We have also the latest pre-compiled binaries for Win64 and Linux-64 systemsin the FROST package. Therefore, there is no need to install and compile it by your own.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">FROST will automatically detects if <strong>sparse2</strong> function exists in its
@@ -311,7 +329,7 @@ path. If true, it will use <strong>sparse2</strong>.</p>
     </p>
     <p>
         &copy; Copyright 2017, AMBER Lab.<br/>
-      Last updated on Jan 30, 2017.<br/>
+      Last updated on Feb 06, 2017.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
     </p>
   </div>
