@@ -5,9 +5,9 @@ function frost_addpath()
 % Add system related functions paths
 cur = fileparts(mfilename('fullpath'));
 
+addpath(fullfile(cur, 'mathematica'));
 
-
-% addpath(genpath(fullfile(cur, 'matlab')));
+addpath(genpath(fullfile(cur, 'matlab')));
 addpath(fullfile(cur, 'matlab','nlp'));
 addpath(fullfile(cur, 'matlab','solver'));
 addpath(fullfile(cur, 'matlab','system'));

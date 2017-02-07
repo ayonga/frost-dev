@@ -38,7 +38,7 @@ function [status] = build_mex(build_dir, src_files, varargin)
     num_files = length(src_files);
     
     % parpool(4)
-    tic
+    
     for i = 1 : num_files
         
         src_file_full_path = fullfile(build_dir,[src_files{i},'.cc']);
@@ -64,7 +64,7 @@ function [status] = build_mex(build_dir, src_files, varargin)
         end
         
         fprintf('Compiling: %s\n', src_files{i});
-        
+        tic
         mex(...
             '-g', ...
             '-outdir', build_dir, ...
@@ -72,10 +72,10 @@ function [status] = build_mex(build_dir, src_files, varargin)
             varargin{:}, ...
             src_file_full_path ...
             );
-        
+        toc
         %         disp(['%s.mex  ', src_files{i}]);
     end
-    toc
+    
     
     %     delete('*.pdb');
     %     delete('*.lib');

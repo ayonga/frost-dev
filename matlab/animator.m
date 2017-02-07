@@ -1,5 +1,3 @@
-(* ::Package:: *)
-
 classdef animator
     % This class defines a simple basic animator objects for multi-body
     % mechanical systems (a.k.a. robots). 
@@ -75,8 +73,10 @@ classdef animator
             
             
             if options.SaveToFile
-                if nargin > 3 || isempty(output_file)
-                    error('Please specify the path and name of the output file.');
+                if nargin > 2 
+                    if isempty(output_file)
+                        error('Please specify the path and name of the output file.');
+                    end
                 end
                 
                 output_dir = fileparts(output_file);

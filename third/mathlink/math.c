@@ -223,7 +223,7 @@ Boolean OpenMathLink( int nlhs, mxArray *plhs[],
   argc = 6;
   argv[0] = "MathLinkMex";
   argv[1] = "-linkname";      
-  argv[2] = "math -mathlink";
+  argv[2] = "MathKernel -mathlink";
   /* MAC, set argv[2] to point to your MathKernel, e.g.,
      argv[2] = "/Applications/Mathematica.app/Contents/MacOS/MathKernel -mathlink";        
   */
