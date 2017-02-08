@@ -10,15 +10,15 @@ function obj = compileDynamics(obj)
     
     if ~checkFlag(obj, flag)
         fprintf('The robot model has NOT been initialized in Mathematica.\n');
-        fprintf('Please call initialize(robot) first\n');
+        fprintf('Please run: "initialize(%s)" in the command window.\n', obj.Name);
         fprintf('Aborting ...\n');
         return;
-    end
+    end    
     
-    
-    disp('Compiling expressions of rigid body dynamics might take very long time to finish!')
+    disp(['Compiling expressions of rigid body dynamics might take ',...
+          'very long time, be prepared ...']);
     y = input ('Hit enter to continue (or "n" to quit): ', 's');
-    
+     
     if (isempty (y))
         y = 'y' ;
     end
@@ -61,7 +61,6 @@ function obj = compileDynamics(obj)
     tic
     eval_math('De=InertiaMatrix[];');
     toc
-    
     
     disp('Compiling Ce_mat ...');
     tic

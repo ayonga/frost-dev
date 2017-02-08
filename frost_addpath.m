@@ -1,7 +1,5 @@
 function frost_addpath()
 
-
-
 % Add system related functions paths
 cur = fileparts(mfilename('fullpath'));
 
