@@ -23,7 +23,7 @@ addpath(fullfile(cur, 'third'));
 addpath_thirdparty_packages('GetFullPath',...
     'spatial_v2', 'yaml', 'mathlink','ipopt','sparse2');
 
-addpath(fullfile(cur, 'example'));
+% addpath(fullfile(cur, 'example'));
 
 % addpath(fullfile(cur, 'docs'));
 end

@@ -161,6 +161,11 @@ function sva = configureSVA(obj, model, base_dofs)
             case 'fixed'
                 sva.isRevolute(i+n_base_dofs) = true;
                 full_index = find(joint.axis);
+                
+                if isempty(full_index)
+                    full_index = 2;
+                end
+                
                 if strcmp(type, 'spatial')
                     index = full_index + 3;
                 else

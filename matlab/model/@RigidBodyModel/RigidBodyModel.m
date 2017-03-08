@@ -367,7 +367,7 @@ classdef RigidBodyModel
             % Setup indices for fast operator
             obj = configureIndices(obj);
             
-            obj.SVA = configureSVA(obj,model, base_dofs);
+            % obj.SVA = configureSVA(obj,model, base_dofs);
             
             
             obj.Dof = configureDoFs(obj,model, base_dofs);

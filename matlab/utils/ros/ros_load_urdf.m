@@ -67,6 +67,9 @@ function urdf_model = ros_load_urdf(urdf_file)
         xml_joint = xml_joints.item(i);
         
         if xml_joint.hasChildNodes
+            if isempty(char(xml_joint.getAttribute('type')))
+                continue;
+            end
             joints(index).name = char(xml_joint.getAttribute('name'));
             joints(index).type = char(xml_joint.getAttribute('type'));
             
@@ -75,7 +78,7 @@ function urdf_model = ros_load_urdf(urdf_file)
             axis = xml_joint.getElementsByTagName('axis').item(0);
             parent = xml_joint.getElementsByTagName('parent').item(0);
             child = xml_joint.getElementsByTagName('child').item(0);
-            limit = xml_joint.getElementsByTagName('limit').item(0);
+            
             
             joints(index).origin.xyz = str2num(origin.getAttribute('xyz'));
             rpy = str2num(origin.getAttribute('rpy'));
@@ -87,11 +90,19 @@ function urdf_model = ros_load_urdf(urdf_file)
             joints(index).axis = str2num(axis.getAttribute('xyz'));
             joints(index).parent = char(parent.getAttribute('link'));
             joints(index).child  = char(child.getAttribute('link'));
-            joints(index).effort = str2double(limit.getAttribute('effort'));
-            joints(index).lower = str2double(limit.getAttribute('lower'));
-            joints(index).upper = str2double(limit.getAttribute('upper'));
-            joints(index).velocity = str2double(limit.getAttribute('velocity'));
             
+            limit = xml_joint.getElementsByTagName('limit').item(0);
+            if ~isempty(limit)
+                joints(index).effort = str2double(limit.getAttribute('effort'));
+                joints(index).lower = str2double(limit.getAttribute('lower'));
+                joints(index).upper = str2double(limit.getAttribute('upper'));
+                joints(index).velocity = str2double(limit.getAttribute('velocity'));
+            else
+                joints(index).effort = 0;
+                joints(index).lower = 0;
+                joints(index).upper = 0;
+                joints(index).velocity = 0;
+            end
             index = index + 1;
         end
         
