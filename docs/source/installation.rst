@@ -33,18 +33,18 @@ Alternatively, you could download the archived *zip* file directly from this `li
 Getting Started
 ===============
 
-FROST is a collection of MATLAB functions and Mathematica packages. Hence, there is no need to build the source code. However, the Mathematica package will export project-specific symbolic expressions to C++ source codes which need to be compiled as MEX files in MATLAB. This requires to setup a proper MATLAB MEX compiler for C++ before using FROST.
+FROST is a collection of MATLAB functions and Mathematica packages. Hence, there is no need to build the source code. However, the Mathematica package will export project-specific symbolic expressions to C++ source code which needs to be compiled as *.MEX files for MATLAB. This requires a proper MATLAB MEX compiler for C++ before using FROST.
 
 
 Setup Default MEX Compiler
 ------------------------------
-The following instruction provides an example setup for default mex compilers on different platforms. For more information, please refer to the official document on `www.mathworks.com <https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html>`_. 
+The following instruction provides an example setup for the default mex compilers on different platforms. For more information, please refer to the official document on `www.mathworks.com <https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html>`_. 
 
 Linux
 ~~~~~~~~~~
-Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04 LTS and Ubuntu 16.04 LTS) is relatively straightfowrad. However, the default ``g++`` compiler might not be supported by MATLAB, which sometimes causes unnecessary errors. Please visit `https://www.mathworks.com/support/compilers.html <https://www.mathworks.com/support/compilers.html>`_ to find out the supported and compatiable compilers for your installed MATLAB version.
+Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04/16.04 LTS) is relatively straightfowrad. However, the default ``g++`` compiler might not be supported by MATLAB, which sometimes causes unnecessary errors (e.g., g++5.4 is case sensitive). Please visit `https://www.mathworks.com/support/compilers.html <https://www.mathworks.com/support/compilers.html>`_ to find out the supported and compatiable compilers for your MATLAB version.
 
-First, install a suitable version of the `g++` compiler, for instance:
+First, install a suitable version of the `g++` compiler, for instance, we need g++-4.9 for Ubuntu16.04:
 
 .. code-block:: bash
    
@@ -64,11 +64,11 @@ Then change the symbolic link of the standard library in ``$matlabroot/sys/os/gl
 
 Windows
 ~~~~~~~
-There are multiple compilers can be used on Windows machines. The following instruction uses MinGW as an example, as it comes at no extra cost.
+There are multiple compilers can be used on Windows machines. The following instruction uses MinGW as an example on a Windows10 machine (VC++ is supported for Windows7&8).
 
 1. Install via MATLAB Add-Ons manager:
 
-On newer version of MATLAB, you can install MinGW support for MATLAB directly from the Add-Ons manager. Simply search for MinGW, and click `install`.
+On newer version of MATLAB (after MATLAB2015b), you can install MinGW support directly from the Add-Ons manager. Simply search for MinGW, and click `install`.
 
 2. Directly install from TDM-GCC:
 
@@ -80,7 +80,7 @@ If installing MinGW compiler via Add-On manager fails, you can also manually ins
 
 - After the installation, you will need to add the system enviroment variable ``MW_MINGW64_LOC`` and specify it to the directory where you installed, for example `C:\TDM-GCC-64`.
 
-.. warning:: Do not have ``space`` in the installation path of TDM-GCC compiler. Highly recommend to use the default path, for example `C:\TDM-GCC-64`.  
+.. warning:: Do not have ``space`` in the installation path of TDM-GCC compiler. The default path is recommended , for example `C:\TDM-GCC-64`.  
 
 
 
@@ -91,11 +91,11 @@ MathLink
 
 FROST uses MathLink libraries to communicate with the Mathematica kernel from MATLAB. Thanks to the open-souce MATLAB package developed by `Ben Barrowes` called `Mathematica Symbolic Toolbox for MATLAB v2.0
 <https://www.mathworks.com/matlabcentral/fileexchange/6044-mathematica-symbolic-toolbox-for-matlab-version-2-0/>`_.
-This package can be downloaded directly from the MATLAB Add-Ons manager or can be downloaded from the Mathworks file exchange website. 
+This package could be downloaded directly from the MATLAB Add-Ons manager or the Mathworks file exchange website. 
 
-The original package has a certain restriction on the maximum length of the input string, which could cause the evaluation of some FROST functions fail. To remove this restriction, we modified the original code and shipped the modified version together with FROST. We also included pre-compiled MEX binaries for different machines (some yet to come).
+The original package has a certain restriction on the maximum length of the input string, which could cause the evaluation of some FROST functions fail. To remove this restriction, we modified the original code and shipped the modified version together with FROST. We also included pre-compiled MEX binaries, and the compiled .mex file for different machines (some yet to come). Please use the included MathLink instead of downloading it from other resources. 
 
-Because this package uses the MathLink libraries of Mathematica during runtime, you must specifies the path of these libraries to your system path.
+Because this package uses the MathLink libraries of Mathematica during runtime, you must specifies the path of these libraries to your system path. To configure this environment variable:
 
 Ubuntu (or Other Linux distributions)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,7 +128,7 @@ To include the Wolfram path, edit your PATH variable (user) on your system envir
 Test
 ~~~~
 
-To test if MathLink toolbox can sucessfully run, you can call the function ``initialize_mathlink()`` from MATLAB. I.e.,
+To test if MathLink toolbox can sucessfully run, you can go to "frost-dev/third/mathlink/", and call the function ``initialize_mathlink()`` from MATLAB. I.e.,
 
 .. code-block:: matlab
 

@@ -157,6 +157,10 @@ function obj = simulate(obj, options)
         x_f = sol.y(:,end);
         
         triggered_edge  = assoc_edges(sol.ie, :);
+        if isempty(triggered_edge)
+            break;
+        end
+        triggered_guard = triggered_edge.Guard{1};
         
         try
             cur_node_name = triggered_edge.EndNodes{2};
