@@ -1,4 +1,4 @@
-function [x_post] = calcResetMap(obj, model, x_pre, target)
+function [x_post] = calcResetMap(obj, x_pre, edge)
     % Updates the system states using the reset map associated with the
     % discontinuous transition to the current domain to get the initial
     % states of the current domain.
@@ -8,16 +8,29 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
     %    model: the robot model of type RigitBodyModel
     %    qe_pre: pre-guard joint configuration @type colvec
     %    dqe_pre: pre-guard velocities @type colvec
-    %    target: the target domain @type Domain
+    %    edge: the triggered edge @type table
     %
     % Return values:
     %    x_post: post reset map states @type colvec
     
+    guard = edge.Guard{1};
+    model = obj.Model;
+    
+    
+    try
+        target_node_name = edge.EndNodes{2};
+        target_node_idx = findnode(obj.Gamma, target_node_name);
+    catch
+        target_node_idx = edge.EndNodes(2);
+    end
+    
+    target = obj.Gamma.Nodes.Domain{target_node_idx};
+    
     qe_pre  = x_pre(model.qeIndices);
     dqe_pre = x_pre(model.dqeIndices); 
     
-    if ~isempty(obj.ResetMap.ResetPoint)
-        reset_pos = feval(obj.ResetMap.ResetPoint.Funcs.Kin, qe_pre);
+    if ~isempty(guard.ResetMap.ResetPoint)
+        reset_pos = feval(guard.ResetMap.ResetPoint.Funcs.Kin, qe_pre);
         
         switch model.Type
             case 'planar'
@@ -32,9 +45,9 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
     
     % if swapping the stance/non-stance foot, multiply with
     % 'ResetMap.CoordinateRelabelMatrix'
-    if ~isempty(obj.ResetMap.RelabelMatrix)
-        qe_pre  = obj.ResetMap.RelabelMatrix * qe_pre;
-        dqe_pre = obj.ResetMap.RelabelMatrix * dqe_pre;
+    if ~isempty(guard.ResetMap.RelabelMatrix)
+        qe_pre  = guard.ResetMap.RelabelMatrix * qe_pre;
+        dqe_pre = guard.ResetMap.RelabelMatrix * dqe_pre;
     end
    
     
@@ -42,7 +55,7 @@ function [x_post] = calcResetMap(obj, model, x_pre, target)
     % the joint configuration remains the same
     qe_post = qe_pre;
     % compute the impact map if the domain transition involves a rigid impact
-    if obj.ResetMap.RigidImpact
+    if guard.ResetMap.RigidImpact
         % jacobian of impact constraints
         Je = feval(target.HolonomicConstr.Funcs.Jac, qe_pre);
         

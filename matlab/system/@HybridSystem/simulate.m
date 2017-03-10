@@ -184,8 +184,7 @@ function obj = simulate(obj, options)
         end
         
         % update states and time
-        target_domain = sim_graph.Nodes.Domain{cur_node_idx};
-        x0 = calcResetMap(triggered_guard, obj.Model, x_f, target_domain);
+        x0 = calcResetMap(obj,  x_f, triggered_edge);
         t0 = t_f;
         
     end
