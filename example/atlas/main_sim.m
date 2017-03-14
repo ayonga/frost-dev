@@ -21,9 +21,9 @@ atlas = Atlas(urdf_file);
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% atlas.initialize();
-% compileCoM(atlas);
-% compileDynamics(atlas);
+atlas.initialize();
+compileCoM(atlas);
+compileDynamics(atlas);
 exportCoM(atlas, export_path, true);
 exportDynamics(atlas, export_path, true);
 exportLineFunctions(atlas, export_path)

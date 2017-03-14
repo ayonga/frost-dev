@@ -37,8 +37,10 @@ atlas_multiwalk_opt = Atlas3DMultiWalkingOpt(atlas_multiwalk);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+atlas.initialize();
 structfun(@(x)compile(x,atlas),atlas.Contacts);
 structfun(@(x)compile(x,atlas),atlas.KinObjects);
+atlas.initialize();
 compileSymFunction(atlas_multiwalk_opt, 'Model', [], export_path);
 compileSymFunction(atlas_multiwalk_opt, 'Generic', [], export_path);
 for i=1:3
