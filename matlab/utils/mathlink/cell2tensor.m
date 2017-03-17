@@ -17,8 +17,11 @@ function [expr] = cell2tensor(X, varargin)
     raw = cellfun(func, X, 'UniformOutput', false);
     rows = cell(s(1), 1);
     for i = 1:s(1)
-        rows{i} = implode(raw(i, :), ', ');
+        rows{i} = ['{',implode(raw(i, :), ', '),'}'];
     end
-    expr = ['{', rows{:}, '}'];
-    
+%     if s(1) > 1
+        expr = ['{', implode(rows',', '), '}'];
+%     else
+%         expr = rows{:};
+%     end
 end

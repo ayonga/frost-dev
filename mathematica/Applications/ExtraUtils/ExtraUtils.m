@@ -12,9 +12,11 @@ This package provides custom commonly used functions.
 *)
 
 
-BeginPackage["ExtraUtils`",{"GeneralUtilities`","SnakeYaml`"}]
+BeginPackage["ExtraUtils`",{"GeneralUtilities`","SnakeYaml`","ComputerArithmetic`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
+ToMatrixForm::usage="ToMatrixForm[expr] converts expr to Matrix form (two dimensional tensor)."
+ToVectorForm::usage="ToVectorForm[expr] converts expr to Vector form (one dimensional tensor)."
 
 LoadConfig::usage = 
 	"LoadConfig[file] loads configuration YAML file into an association structure."

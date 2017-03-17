@@ -23,8 +23,11 @@ function expr = mat2math(A, varargin)
         rows{i} = strcat('{',strjoin(raw(i, :), ', '),'}');
     end
     
-    expr = ['{',implode(rows',','),'}'];
-    
+%     if s(1) > 1
+        expr = ['{',implode(rows',','),'}'];
+%     else
+%         expr = rows{:};
+%     end
     
     
 end
