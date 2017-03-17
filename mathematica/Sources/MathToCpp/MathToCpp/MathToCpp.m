@@ -8,8 +8,7 @@
 BeginPackage["MathToCpp`",{"ExtraUtils`","Experimental`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
-ToMatrixForm::usage="ToMatrixForm[expr] converts expr to Matrix form (two dimensional tensor)."
-ToVectorForm::usage="ToVectorForm[expr] converts expr to Vector form (one dimensional tensor)."
+
 
 CseWriteCpp::usage="CseWriteCpp[name,expr,options] optimizes expressions using CSE and export the resulting code
 into C++ (mex) file.
@@ -99,17 +98,7 @@ ConvertToCForm::usage="ConvertToCForm[code] Convert CompoundedExpressions into s
 Begin["`Private`"]
 (* Implementation of the package *)
 
-SyntaxInformation[ToVectorForm]={"ArgumentsPattern"->{_}};
-ToVectorForm[expr_?MatrixQ]:=Flatten@(expr\[Transpose]); (*matrix \[Rule] vector*)
-ToVectorForm[expr_?VectorQ]:=expr; (*vector \[Rule] vector*)
-ToVectorForm[expr_/;!ListQ[expr]]:=Flatten@{expr}; (*scaler \[Rule] vector*)
-ToVectorForm[expr_]:=Flatten@expr; (*list \[Rule] vector*)
 
-SyntaxInformation[ToMatrixForm]={"ArgumentsPattern"->{_}};
-ToMatrixForm[expr_?MatrixQ]:=expr; (*matrix \[Rule] matrix*)
-ToMatrixForm[expr_?VectorQ]:=Transpose[{expr}]; (*matrix \[Rule] vector*)
-ToMatrixForm[expr_/;!ListQ[expr]]:={Flatten@{expr}}; (*non-list scaler \[Rule] vector*)
-ToMatrixForm[expr_/;ListQ[expr]]:={Flatten@expr}; (*non-list \[Rule] vector*)
 
 SyntaxInformation[CseOptimizeExpression]={"ArgumentsPattern"->{_,OptionsPattern[]}};
 CseOptimizeExpression[expr_,OptionsPattern[]]:=
@@ -170,7 +159,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
 		hFile = FileNameJoin[{OptionValue[ExportDirectory],name <> ".hh"}];
 
         (* Get dimensions of output arguments *)
-		argoutDims=Join[Dimensions/@(ToMatrixForm/@expr)];
+		argoutDims=Join[Dimensions/@(ExtraUtils`ToMatrixForm/@expr)];
         (* Create a list of strings for output arguments: output1, output2, ..., outputN *)
 		funcLists=StringInsert[ToString/@Range[Length[argoutDims]],"output",1];
 
@@ -181,7 +170,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
 		optStatement=Block[{vexpr,oexpr,seq,vars,code,subcode,final,statement,result,NonZeroIndices,y},
 			Table[
               (* vectorize expression *)
-			  vexpr=ToVectorForm[expr[[i]]];
+			  vexpr=ExtraUtils`ToVectorForm[expr[[i]]];
               (* Simplify and decompose expression *)
 			  oexpr=CseOptimizeExpression[vexpr];
 			  If[ExtraUtils`EmptyQ[oexpr], (* If the expression is empty *)
@@ -278,7 +267,7 @@ Block[
     gradStruct=Boole@Table[!SameQ[gradExpr[[i,j]],0],{i,1,nExpr},{j,1,nVar}];
     (* Extract the nonzero entries of the first order jacobian, and vectorize it*)
     nzGrad=Position[gradStruct,1];
-    gradExprVec=ToVectorForm[Extract[gradExpr,nzGrad]];
+    gradExprVec=ExtraUtils`ToVectorForm[Extract[gradExpr,nzGrad]];
     (* Export the vectorized partial first order jacobian*)
 	CseWriteCpp["J_"<>name,{gradExprVec},ExportFull->True];
 
@@ -316,7 +305,7 @@ Block[
     gradStruct=Boole@Table[!SameQ[gradExpr[[i,j]],0],{i,1,nExpr},{j,1,nVar}];
     (* Extract the nonzero entries of the first order jacobian, and vectorize it*)
     nzGrad=Position[gradStruct,1];
-    gradExprVec=ToVectorForm[Extract[gradExpr,nzGrad]];
+    gradExprVec=ExtraUtils`ToVectorForm[Extract[gradExpr,nzGrad]];
     (* Export the vectorized partial first order jacobian*)
 	CseWriteCpp["J_"<>name,{gradExprVec},ExportFull->True];
     
@@ -357,7 +346,7 @@ Block[
     gradStruct=Boole@Table[!SameQ[gradExpr[[i,j]],0],{i,1,nExpr},{j,1,nVar}];
     (* Extract the nonzero entries of the first order jacobian, and vectorize it*)
     nzGrad=Position[gradStruct,1];
-    gradExprVec=ToVectorForm[Extract[gradExpr,nzGrad]];
+    gradExprVec=ExtraUtils`ToVectorForm[Extract[gradExpr,nzGrad]];
     (* Export the vectorized partial first order jacobian*)
 	CseWriteCpp["J_"<>name,{gradExprVec},ExportFull->True];
 
@@ -412,7 +401,7 @@ Block[
     gradStruct=Boole@Table[!SameQ[gradExpr[[i,j]],0],{i,1,nExpr},{j,1,nVar}];
     (* Extract the nonzero entries of the first order jacobian, and vectorize it*)
     nzGrad=Position[gradStruct,1];
-    gradExprVec=ToVectorForm[Extract[gradExpr,nzGrad]];
+    gradExprVec=ExtraUtils`ToVectorForm[Extract[gradExpr,nzGrad]];
     (* Export the vectorized partial first order jacobian*)
 	CseWriteCpp["J_"<>name,{gradExprVec},ExportFull->True];
     (* Compute the sparsity structure of the second order jacobian(hessian) *)

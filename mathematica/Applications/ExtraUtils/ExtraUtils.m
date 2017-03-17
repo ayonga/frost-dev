@@ -73,6 +73,18 @@ GetFieldIndices::usage =
 Begin["`Private`"]
 (* Implementation of the package *)
 
+SyntaxInformation[ToVectorForm]={"ArgumentsPattern"->{_}};
+ToVectorForm[expr_?MatrixQ]:=Flatten@(expr\[Transpose]); (*matrix \[Rule] vector*)
+ToVectorForm[expr_?VectorQ]:=expr; (*vector \[Rule] vector*)
+ToVectorForm[expr_/;!ListQ[expr]]:=Flatten@{expr}; (*scaler \[Rule] vector*)
+ToVectorForm[expr_]:=Flatten@expr; (*list \[Rule] vector*)
+
+SyntaxInformation[ToMatrixForm]={"ArgumentsPattern"->{_}};
+ToMatrixForm[expr_?MatrixQ]:=expr; (*matrix \[Rule] matrix*)
+ToMatrixForm[expr_?VectorQ]:=Transpose[{expr}]; (*matrix \[Rule] vector*)
+ToMatrixForm[expr_/;!ListQ[expr]]:={Flatten@{expr}}; (*non-list scaler \[Rule] vector*)
+ToMatrixForm[expr_/;ListQ[expr]]:={Flatten@expr}; (*non-list \[Rule] vector*)
+
 FindSymbols[expr_]:= 
 	Block[{syms},
 		syms = DeleteDuplicates[DeleteCases[Cases[expr, _Symbol, Infinity], _?NumericQ]];

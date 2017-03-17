@@ -1,4 +1,15 @@
 classdef SymExpression
+    % A symbolic expression class that works (mostly) similar to ''sym'', but using
+    % Mathematica kernal as the symbolic engine. 
+    %
+    % Copyright (c) 2016-2017, AMBER Lab
+    % All right reserved.
+    %
+    % Redistribution and use in source and binary forms, with or without
+    % modification, are permitted only in compliance with the BSD 3-Clause
+    % license, see
+    % http://www.opensource.org/licenses/bsd-license.php
+    
     
     properties (Access=protected)
         s
@@ -9,7 +20,14 @@ classdef SymExpression
         
         function obj = SymExpression(x, n)
             % The class constructor function
-            
+            %
+            % Parameters:
+            % x: it could be one of the followings:
+            %    - SymExpression: it will copy one SymExpression object to
+            %    antother
+            %    - numeric: create a numeric symbolic expression
+            %    - char: create symbolic variable specified by the char 'x'
+            % n: the dimenion of a 2-D symbolic matrices
             
             switch nargin
                 case 0
@@ -18,10 +36,9 @@ classdef SymExpression
                    
                 case 1
                     switch class(x)
-                        case 'SymExpression'
-                            assert(~check_var_exist(x.s),...
-                                'SymExpression:invaliadSymbol',...
-                                'The given symbol has already been already assigned a value.')
+                        case 'SymVariable'
+                            obj.s = x.s;
+                        case 'SymExpression'                            
                             obj.s = x.s;
                         case 'double'
                             if isscalar(x)
@@ -30,9 +47,13 @@ classdef SymExpression
                                 obj.s = mat2math(x);
                             end
                         case 'char'
+                            assert(isempty(regexp(x, '_', 'once')),...
+                                'SymExpression:invaliadSymbol', ...
+                                'Invalid symbol string, can NOT contain ''_''.');
                             assert(~check_var_exist(x),...
                                 'SymExpression:invaliadSymbol',...
-                                'The given symbol has already been already assigned a value.')
+                                'The given symbol has already been already assigned a value.');
+                            
                             obj.s = x;
                             
                         otherwise
@@ -40,17 +61,26 @@ classdef SymExpression
                                 'Invalid input argument data type.');
                     end
                 case 2
-                    assert(~check_var_exist(x.s),...
-                        'SymExpression:invaliadSymbol',...
-                        'The given symbol has already been already assigned a value.')
+                    
                     assert(ischar(x), ...
                         'SymExpression:invaliadSymbol',...
                         ['The first argument must be a character vector specifying the base name for',...
-                        'vector or matrix elements. It must be a valid variable name.']);
+                        'vector or matrix elements. It must be a valid variable name.']);                    
+                    assert(isempty(regexp(x, '\W', 'once')),...
+                        'SymExpression:invaliadSymbol', ...
+                        'Invalid symbol string, can NOT contain special characters.');                    
+                    assert(isempty(regexp(x, '_', 'once')),...
+                        'SymExpression:invaliadSymbol', ...
+                        'Invalid symbol string, can NOT contain ''_''.');
+                    assert(~check_var_exist(x),...
+                        'SymExpression:invaliadSymbol',...
+                        'The given symbol has already been already assigned a value.');
+                    
                     assert(isnumeric(n),...
                         'SymExpression:invaliadDimension',...
                         'The second argument must be numeric values that specify',...
                         'the dimensions of the generated symbolic vector or matrix');
+                    
                     str = cell(n);
                     [nr, nc] = size(str);
                     for i = 1:nr
@@ -84,7 +114,7 @@ classdef SymExpression
                 return;
             end
             
-            dims = eval_math(['Dimensions[',obj.s,']'],'math2matlab');
+            dims = eval_math(['Dimensions[ToMatlabForm@',obj.s,']'],'math2matlab');
             y = max(dims);
         end
         
@@ -98,7 +128,7 @@ classdef SymExpression
                 return;
             end
             
-            y = eval_math(['Dimensions[',obj.s,']'],'math2matlab');
+            y = eval_math(['Dimensions[ToMatlabForm@',obj.s,']'],'math2matlab');
             
         end
         %---------------   Arithmetic  -----------------
