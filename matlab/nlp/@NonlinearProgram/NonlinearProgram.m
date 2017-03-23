@@ -24,7 +24,8 @@ classdef NonlinearProgram < handle
         %  DerivativeLevel: the user-defined derivative order (0, 1 or 2)
         %  to be used by a NLP solver. @type integer @default 1
         %  DerivativeType:  
-        %  
+        %  EqualityBoundRelaxFactor：a relaxation factor number for equality
+        %  constraints. @type double
         % 
         % @type struct
         Options 
@@ -75,7 +76,7 @@ classdef NonlinearProgram < handle
             obj.Options.EqualityBoundRelaxFactor = 1e-5;
             % if non-default options are specified, overwrite the default
             % options.
-            obj.Options = setOption(obj, varargin{:});
+            obj.setOption(varargin{:});
             
             % initialize the type of the variables
             obj.VariableArray = cell(0);
@@ -102,7 +103,7 @@ classdef NonlinearProgram < handle
         
         [x0] = getInitialGuess(obj, method);
         
-        
+        obj = setOption(obj, varargin);
         
     end
         

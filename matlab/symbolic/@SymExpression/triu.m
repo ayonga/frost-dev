@@ -37,12 +37,12 @@ function Y = triu(X,offset)
     
     % Convert inputs to SymExpression
     X = SymExpression(X);
-    p = SymExpression(offset);
+    offset = SymExpression(offset);
     
     
     % evaluate the operation in Mathematica and return the
     % expression string
-    sstr = eval_math(['UpperTriangularize[' X.s ',' p.s ']']);
+    sstr = eval_math(['UpperTriangularize[' X.s ',' offset.s ']']);
     
     % create a new object with the evaluated string
     Y = SymExpression(sstr);

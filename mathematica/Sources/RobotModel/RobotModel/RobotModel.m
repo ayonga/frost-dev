@@ -388,6 +388,7 @@ InertiaMatrix[motorInertia_:None] :=
 		If[!SameQ[motorInertia, None], (* if motor inertia specified *)
 			If[Length[motorInertia] != $nJoint,
 				Message[InertiaMatrix::inequal, Length[motorInertia],$nJoint];
+				Abort[];
 				,
 				jointIndices = GetFieldIndices[$robotJoints,"name"];
 				Table[

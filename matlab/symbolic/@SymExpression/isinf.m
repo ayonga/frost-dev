@@ -1,4 +1,4 @@
-function y = isinf(x)
+function y = isinf(X)
     % True for infinite elements of symbolic arrays.
     %   ISINF(X) returns an array that contains 1's where the
     %   elements of X are infinite and 0's where they are not.

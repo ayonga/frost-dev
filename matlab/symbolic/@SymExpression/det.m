@@ -6,10 +6,10 @@ function d = det(A)
     %       det([a b;c d]) is a*d-b*c.
 
     % Convert inputs to SymExpression
-    X = SymExpression(A);
+    A = SymExpression(A);
     
     % check if A is a square matrix
-    ret = eval_math(['SquareMatrixQ[' X.s ']']);
+    ret = eval_math(['SquareMatrixQ[' A.s ']']);
     
 
     
@@ -19,7 +19,7 @@ function d = det(A)
     
     % evaluate the operation in Mathematica and return the
     % expression string
-    sstr = eval_math(['Det[' X.s ']']);
+    sstr = eval_math(['Det[' A.s ']']);
     
     % create a new object with the evaluated string
     d = SymExpression(sstr);

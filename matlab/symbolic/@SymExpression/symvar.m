@@ -13,15 +13,31 @@ function y = symvar(S)
     %       symvar(y*(4+3*i) + 6*j) returns
     %        y
 
-
+    % return the input object if it is a SymVariable object
+    %     if isa(S,'SymVariable')
+    %         y = S;
+    %         return;
+    %     end
+    
+    % return the variables if it is a SymFunction
+    %     if isa(S,'SymFunction')
+    %         y = S.vars;
+    %         return;
+    %     end
+    
     % Convert inputs to SymExpression
     S = SymExpression(S);
     
-    str = eval_math(['ToMatrixForm@' S.s ]);
     % evaluate the operation in Mathematica and return the
     % expression string
-    sstr = eval_math(['FindSymbols[' str ']']);
+    svars = eval_math(['FindSymbols[ToMatrixForm[' S.s ']]']);
+    
+    % convert symbolic variables (expression) to strings
+    str = eval(math(['("''" <> ToString[#] <> "''") & /@ ', svars]));
+    
     
     % create a new object with the evaluated string
-    y = SymExpression(sstr);
+    y_c = cellfun(@SymVariable,str,'UniformOutput',false);
+    
+    y = [y_c{:}];
 end

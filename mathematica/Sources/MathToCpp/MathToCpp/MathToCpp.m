@@ -223,8 +223,7 @@ CseWriteCpp[name_String,expr_,OptionsPattern[]]:=
                  "final"-> finals,
                  "lvars"-> lvars,
                  "statements"-> seqs,
-                 "namespace"->OptionValue[Namespace],
-                 "behavior"->OptionValue[Behavior]|>;
+                 "namespace"->OptionValue[Namespace]|>;
 		FileTemplateApply[tpl,assoc,cFile];
 		If[OptionValue[ExportHeaderFile],
 			FileTemplateApply[hdr,assoc,hFile];
@@ -236,9 +235,8 @@ Options[CseWriteCpp]={ExportDirectory->".",
                       SubstitutionRules->{},
                       TemplateFile->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.cc"}],
                       TemplateHeader->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.hh"}],
-                      Namespace->"symbolic",
-                      Behavior->"basic",
-                      ExportHeaderFile->False,
+                      Namespace->"namespace",
+                      ExportHeaderFile->True,
                       ExportFull->True};
                       
                       

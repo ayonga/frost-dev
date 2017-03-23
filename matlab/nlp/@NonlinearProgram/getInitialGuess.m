@@ -27,8 +27,8 @@ function [x0] = getInitialGuess(obj, method)
             ub_tmp = vertcat(ub{:});
             
             % replace infinity with very high numbers
-            lb_tmp(lb_tmp==-inf) = -1e2;
-            ub_tmp(ub_tmp==inf)  = 1e2;
+            lb_tmp(lb_tmp==-inf) = -1e5;
+            ub_tmp(ub_tmp==inf)  = 1e5;
             
             % generate uniformally distrubuted random values
             x0 = (ub_tmp - lb_tmp).*rand(size(ub_tmp,1),1) - lb_tmp;

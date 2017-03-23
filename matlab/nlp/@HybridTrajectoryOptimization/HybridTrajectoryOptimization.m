@@ -100,7 +100,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             
             % if non-default options are specified, overwrite the default
             % options.
-            obj.Options = setOption(obj, varargin{:});
+            obj.setOption(varargin{:});
             
             % check the type of the plant
             assert(isa(plant, 'HybridSystem'),...

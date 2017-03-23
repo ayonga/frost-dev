@@ -41,7 +41,7 @@ function [status] = build_mex(build_dir, src_files, varargin)
     
     for i = 1 : num_files
         
-        src_file_full_path = fullfile(build_dir,[src_files{i},'.cc']);
+        src_file_full_path = fullfile(build_dir,normalize(src_files{i},'.cc'));
         
         src_file = dir(src_file_full_path);
         if isempty(src_file)
@@ -84,8 +84,12 @@ function [status] = build_mex(build_dir, src_files, varargin)
 end
 
 
-
-
+function file = normalize(file,ext)
+    [~,~,x] = fileparts(file);
+    if isempty(x)
+        file = [file ext];
+    end
+end
 
 
 

@@ -57,9 +57,9 @@ function Y = subs(S,old,new)
     if nargin == 2
         assert(isstruct(old),'SymExpression:invalidInputArgs',...
             'The second argument must be a struct if there are two input arguments.');
-        srule = struct2assoc(old,'ConvertString',false);
+        srule = SymExpression(old);
         
-        sstr = eval_math(['ReplaceAll[' S.s ',' srule ']']);
+        sstr = eval_math(['ReplaceAll[' S.s ',' srule.s ']']);
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);
@@ -72,18 +72,20 @@ function Y = subs(S,old,new)
             
             
             rarray = cellfun(@(x,y)[x.s '->' y.s], old_s, new_s ,'UniformOutput',false);
-            srule = ['<| ', ...
+            srule = SymExpression(['<| ', ...
                 implode(rarray,', '), ...
-                ' |>'];
+                ' |>']);
         else
             old_s = SymExpression(old);
             new_s = SymExpression(new);
-            srule = ['<| ', ...
+            srule = SymExpression(['<| ', ...
                 old_s.s, '->', new_s.s, ...
-                ' |>'];
+                ' |>']);
         end
         
-        sstr = eval_math(['ReplaceAll[' S.s ',' srule ']']);
+        
+        
+        sstr = eval_math(['ReplaceAll[' S.s ',' srule.s ']']);
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);

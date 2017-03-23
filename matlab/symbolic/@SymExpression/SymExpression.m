@@ -1,6 +1,5 @@
-classdef SymExpression
-    % A symbolic expression class that works (mostly) similar to ''sym'', but using
-    % Mathematica kernal as the symbolic engine. 
+classdef SymExpression < handle
+    % An object that represents a symbolic expression in Mathematica
     %
     % Copyright (c) 2016-2017, AMBER Lab
     % All right reserved.
@@ -11,14 +10,24 @@ classdef SymExpression
     % http://www.opensource.org/licenses/bsd-license.php
     
     
-    properties (Access=protected)
+    properties (Access=public)
+        % The body (or formula) of the symbolic expression
+        %
+        % @type char
+        f
+    end
+    
+    properties (GetAccess=public, SetAccess=public)
+        % The symbol that represents the symbolic expression
+        %
+        % @type char
         s
     end
     
     
     methods
         
-        function obj = SymExpression(x, n)
+        function obj = SymExpression(x, delayed_set)
             % The class constructor function
             %
             % Parameters:
@@ -26,110 +35,149 @@ classdef SymExpression
             %    - SymExpression: it will copy one SymExpression object to
             %    antother
             %    - numeric: create a numeric symbolic expression
-            %    - char: create symbolic variable specified by the char 'x'
-            % n: the dimenion of a 2-D symbolic matrices
+            %    - char: create symbolic expression specified by 'x'
             
-            switch nargin
-                case 0
-                    % construct empty object
-                    return;
-                   
-                case 1
-                    switch class(x)
-                        case 'SymVariable'
-                            obj.s = x.s;
-                        case 'SymExpression'                            
-                            obj.s = x.s;
-                        case 'double'
-                            if isscalar(x)
-                                obj.s = num2str(x);
-                            else
-                                obj.s = mat2math(x);
-                            end
-                        case 'char'
-                            assert(isempty(regexp(x, '_', 'once')),...
-                                'SymExpression:invaliadSymbol', ...
-                                'Invalid symbol string, can NOT contain ''_''.');
-                            assert(~check_var_exist(x),...
-                                'SymExpression:invaliadSymbol',...
-                                'The given symbol has already been already assigned a value.');
-                            
-                            obj.s = x;
-                            
-                        otherwise
-                            error('SymExpression:invalidInputType',...
-                                'Invalid input argument data type.');
-                    end
-                case 2
-                    
-                    assert(ischar(x), ...
-                        'SymExpression:invaliadSymbol',...
-                        ['The first argument must be a character vector specifying the base name for',...
-                        'vector or matrix elements. It must be a valid variable name.']);                    
-                    assert(isempty(regexp(x, '\W', 'once')),...
-                        'SymExpression:invaliadSymbol', ...
-                        'Invalid symbol string, can NOT contain special characters.');                    
-                    assert(isempty(regexp(x, '_', 'once')),...
-                        'SymExpression:invaliadSymbol', ...
-                        'Invalid symbol string, can NOT contain ''_''.');
-                    assert(~check_var_exist(x),...
-                        'SymExpression:invaliadSymbol',...
-                        'The given symbol has already been already assigned a value.');
-                    
-                    assert(isnumeric(n),...
-                        'SymExpression:invaliadDimension',...
-                        'The second argument must be numeric values that specify',...
-                        'the dimensions of the generated symbolic vector or matrix');
-                    
-                    str = cell(n);
-                    [nr, nc] = size(str);
-                    for i = 1:nr
-                        for j= 1:nc
-                            str{i,j} = strcat('Subscript[', x, ', {',num2str(i),',',num2str(j),'}]');
-                        end
-                    end
-                    obj.s = cell2tensor(str,'ConvertString',false);
-                    
-                   
-                    
-                    
+            if nargin == 0 || isempty(x)
+                % construct empty object
+                return;
             end
+            
+            if nargin < 2
+                delayed_set = true;
+            end
+            
+            
+            if ~isa(x, 'SymExpression')
+                obj.s = eval_math('Unique[symvar$]');
+            else
+                obj.s = x.s;
+            end
+            switch class(x)
+                case 'SymExpression'
+                    obj.f = formula(x);
+                case 'SymVariable'
+                    obj.f = formula(x);
+                case 'SymFunction'
+                    symf = feval(x);
+                    obj.f = formula(symf);
+                case 'double'
+                    if isscalar(x)
+                        obj.f = num2str(x);
+                    else
+                        obj.f = mat2math(x);
+                    end
+                case 'string'
+                    obj.f = str2mathstr(char(x));
+                case 'cell'
+                    obj.f = cell2tensor(x,'ConvertString',false);
+                case 'struct'
+                    obj.f = struct2assoc(x,'ConvertString',false);
+                case 'char'
+                    obj.f = x;
+                otherwise
+                    error('SymExpression:invalidInputType',...
+                        'Invalid input argument data type.');
+            end
+            % if not delayed set, evaluate the formula to obtain the final
+            % expression
+            if ~delayed_set
+                obj.f = eval_math(obj.f);
+            end
+            
+            % set the formula to the symbol
+            eval_math([obj.s ':=' obj.f ';']);
+            
+            
+            
+        end
+        
+        function delete(obj)
+            % object destruction function
+            
+%             eval_math([obj.s '=.;']);
         end
         
         function display(obj, namestr) %#ok<INUSD,DISPLAY>
             % Display the symbolic expression
             
-            eval_math(obj.s)
+            obj.f
         end
         
-        function y = length(obj)
+        function y = argnames(~)
+            % Symbolic function input variables
+            %   ARGNAMES(F) returns a sym array [X1, X2, ... ] of symbolic
+            %   variables for F(X1, X2, ...).
+            y = SymExpression();
+        end
+
+        function x = formula(A)
+            %Symbolic function formula body
+            %   FORMULA(F) returns the definition of symbolic
+            %   function F as a sym object expression.
+            %
+            %   FORMULA is a no-op on a sym.
+            %   See SYMFUN/FORMULA for the nontrivial operation.
+            %
+            %   See also SYMFUN/ARGNAMES, SYMFUN/FORMULA
+            x = A.f;
+        end
+        
+        function y = privToCell(A)
+            y = arrayfun(@(t){SymExpression(eval_math(['First@' t.s]))},A);
+        end
+        
+        function y = length(A)
             % The length of the symbolic vector
             %   LENGTH(X) returns the length of vector X.  It is equivalent
             %   to MAX(SIZE(X)) for non-empty arrays and 0 for empty ones.
             %
-            % @see NUMEL, LENGTH
+            % @see NUMEL, SIZE
             
-            if isempty(obj.s)
-                y = 0;
-                return;
-            end
             
-            dims = eval_math(['Dimensions[ToMatlabForm@',obj.s,']'],'math2matlab');
-            y = max(dims);
+            
+            y = max(size(A));
         end
         
-        function y = size(obj)
+        function y = size(A)
             % The size of the symbolic expression tensor
             %
             % @see NUMEL, LENGTH
             
-            if isempty(obj.s)
+            % Convert inputs to SymExpression
+            A = SymExpression(A);
+            
+            if isempty(A.s)
                 y = [0,0];
                 return;
             end
             
-            y = eval_math(['Dimensions[ToMatlabForm@',obj.s,']'],'math2matlab');
             
+            ret = eval_math(['Dimensions[',A.s,']']);
+            
+            y = cellfun(@(x)x, eval(ret));
+            
+            if isempty(y)
+                y = [1, 1];
+            elseif isscalar(y) && y~=0
+                y = [1, y];
+            elseif y == 0
+                y = [0, 0];                
+            end
+            
+        end
+        
+        function status = isscalar(A)
+            % Check if the symbolic expression is a scalar (non-list)
+            
+            % Convert inputs to SymExpression
+            A = SymExpression(A);
+            
+            % evaluate the operation in Mathematica and return the
+            % expression string
+            
+            ret = eval_math(['ListQ[' A.s ']']);
+            
+            status = all(strcmp('False',ret));
         end
         %---------------   Arithmetic  -----------------
         function B = uminus(A)
@@ -452,24 +500,55 @@ classdef SymExpression
 
         %---------------   Indexing  -----------------
         
-        
-        
-        function [B] = subsref(L,Idx)
-            %SUBSREF Subscripted reference for a sym array.
-            %     B = SUBSREF(A,S) is called for the syntax A(I).  S is a structure array
-            %     with the fields:
+        function C = subsasgn(~,~,~)
+            % Subscripted assignment for a sym array.
+            %     C = SUBSASGN(L,Idx,R) is called for the syntax L(Idx)=R.  Idx is a structure
+            %     array with the fields:
             %         type -- string containing '()' specifying the subscript type.
             %                 Only parenthesis subscripting is allowed.
             %         subs -- Cell array or string containing the actual subscripts.
             %
             %   See also SYM.
             
+            error('Non implemented for SymExpression class.');
+            %             if length(Idx)>1
+            %                 error('SymExpression objects do not allow nested indexing. Assign intermediate values to variables instead.');
+            %             end
+            %             if ~strcmp(Idx.type,'()')
+            %                 error('Invalid indexing assignment.');
+            %             end
+            %             inds = Idx.subs;
+            %             dosubs = false;
+            %             for k=1:length(inds)
+            %
+            %                 if isa(inds{k}, 'symfun') || isempty(inds{k}) || ~isAllVars(inds{k})
+            %                     dosubs = true;
+            %                 end
+            %             end
+            %             if dosubs
+            %                 if isa(L, 'symfun')
+            %                     error(message('symbolic:sym:subscript:InvalidIndexOrFunction'));
+            %                 end
+            %                 C = privsubsasgn(L,R,inds{:});
+            %             else
+            %                 C = symfun(sym(R),[inds{:}]);
+            %             end
+        end
+        
+        function [B] = subsref(L,Idx)
+            % Subscripted reference for a sym array.
+            %     B = SUBSREF(A,S) is called for the syntax A(I).  S is a structure array
+            %     with the fields:
+            %         type -- string containing '()' specifying the subscript type.
+            %                 Only parenthesis subscripting is allowed.
+            %         subs -- Cell array or string containing the actual subscripts.
+            %
+            
+            
             if length(Idx)>1
-                error(message('symbolic:sym:NestedIndex'));
+                error('SymExpression objects do not allow nested indexing. Assign intermediate values to variables instead.');
             end
             
-            % Convert inputs to SymExpression
-            L = SymExpression(L);
             
             switch Idx.type
                 case '.'
@@ -561,6 +640,18 @@ classdef SymExpression
             X = eval_math(['ToMatrixForm[' S.s ']'], 'math2matlab');
             
             
+        end
+        
+        function M = char(A)
+            % Convert scalar or array sym to string.
+            %   CHAR(A) returns a string representation of the symbolic object A
+            %   in MuPAD syntax.
+            
+            
+            % Convert inputs to SymExpression
+            A = SymExpression(A);
+            
+            M = eval_math(A.s);
         end
     end
 end

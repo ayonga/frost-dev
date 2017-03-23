@@ -48,13 +48,13 @@ function Y = diag(A,offset)
     
     % Convert inputs to SymExpression
     A = SymExpression(A);
-    p = SymExpression(offset);
+    offset = SymExpression(offset);
     if isvector(A)
         
         
         % evaluate the operation in Mathematica and return the
         % expression string
-        sstr = eval_math(['DiagonalMatrix[Flatten[' A.s '],' p.s ']']);
+        sstr = eval_math(['DiagonalMatrix[Flatten[' A.s '],' offset.s ']']);
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);
@@ -62,7 +62,7 @@ function Y = diag(A,offset)
         
         % evaluate the operation in Mathematica and return the
         % expression string
-        sstr = eval_math(['Diagonal[' A.s ',' p.s ']']);
+        sstr = eval_math(['Diagonal[' A.s ',' offset.s ']']);
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);

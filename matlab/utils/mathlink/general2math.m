@@ -25,12 +25,16 @@ function [expr] = general2math(x, varargin)
         end
     elseif ischar(x)
         expr = str2mathstr(x, varargin{:});
+    elseif isstring(x)
+        expr = str2mathstr(char(x));
     elseif islogical(x)
         if x
             expr = 'True';
         else
             expr = 'False';
         end
+    elseif isa(x, 'SymExpression')
+        expr = formula(x);
     else
         error('Unsupported type: %s', class(x));
     end

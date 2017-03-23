@@ -1,4 +1,4 @@
-function options = setOption(obj, varargin)
+function obj = setOption(obj, varargin)
     % Sets the object options, and return the complete list of option
     % structure including unchanged default options.
     %

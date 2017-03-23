@@ -31,12 +31,12 @@ function ret = eval_math(expr, flag, val)
             assert(strcmp(flag, 'math2matlab'), ...
                 'The flag must be math2matlab if it has two arguments');
             
-            ret = math('math2matlab', ['InputForm[Check[',expr,',$Failed]]']);
+            ret = math('math2matlab', expr);
         case 3
             assert(strcmp(flag, 'matlab2math'), ...
                 'The flag must be matlab2math if it has three arguments');
             
-            ret = math('matlab2math', ['InputForm[Check[',expr,',$Failed]]'], val);
+            ret = math('matlab2math', expr, val);
     end
     assert((~strcmp(ret, '$Failed'))&&(~strcmp(ret, '$Aborted')),...
         'MathLink:evalerr',...

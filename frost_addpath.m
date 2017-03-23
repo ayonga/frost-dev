@@ -3,7 +3,11 @@ function frost_addpath()
 % Add system related functions paths
 cur = fileparts(mfilename('fullpath'));
 
-addpath(fullfile(cur, 'mathematica'));
+if isempty(cur)
+    cur = pwd;
+end
+
+
 
 addpath(genpath(fullfile(cur, 'matlab')));
 addpath(fullfile(cur, 'matlab','nlp'));
@@ -23,7 +27,10 @@ addpath(fullfile(cur, 'third'));
 addpath_thirdparty_packages('GetFullPath',...
     'spatial_v2', 'yaml', 'mathlink','ipopt','sparse2');
 
-% addpath(fullfile(cur, 'example'));
+addpath(fullfile(cur, 'mathematica'));
+initialize_mathlink();
+
+addpath(fullfile(cur, 'example'));
 
 % addpath(fullfile(cur, 'docs'));
 end

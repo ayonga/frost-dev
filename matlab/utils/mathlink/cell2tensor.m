@@ -19,9 +19,9 @@ function [expr] = cell2tensor(X, varargin)
     for i = 1:s(1)
         rows{i} = ['{',implode(raw(i, :), ', '),'}'];
     end
-%     if s(1) > 1
+    if s(1) > 1
         expr = ['{', implode(rows',', '), '}'];
-%     else
-%         expr = rows{:};
-%     end
+    else
+        expr = rows{:};
+    end
 end
