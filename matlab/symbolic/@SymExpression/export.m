@@ -5,21 +5,33 @@ function h = export(f, varargin)
     %
     % Parameters:
     %  f: the symbolic expression @type SymExpression
-    %  file: the file name @type char
-    %  vars: the variables @type cell
+    %  varargin: variable input parameters @type varargin
+    %   Vars: a list of symbolic variables @type SymVariable
+    %   File: the (full) file name of exported file @type char
+    %   BuildMex: flag whether to MEX the exported file @type logical
+    %
     %
     % Return values:
     % h: a function handle to the exported function @type function_handle
     
     eval_math('Needs["MathToCpp`"];');
 
-    narginchk(1,inf);
+    
 
     % process inputs
     N = getSyms(varargin);
     exprs = {f, varargin{1:N}};    
-    opts = getOptions(varargin(N+1:end));
     
+    ip = inputParser;
+    ip.addParameter('Vars',{},@isVars);
+    ip.addParameter('File','',@isFunc);
+    ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
+    ip.addParameter('Namespace',string('namespace'),@isstring);
+    ip.addParameter('ExportHeaderFile',true,@(x) isequal(x,true) || isequal(x,false));
+    ip.addParameter('ExportFull',true,@(x) isequal(x,true) || isequal(x,false));
+    ip.parse(varargin{N+1:end});
+    
+    opts = ip.Results;
     
     assert(~isempty(opts.File),'The export destination file name must be specified explicitly.');
     assert(~isempty(opts.Vars),'Please specify the symbolic variables explicitly.');
@@ -30,12 +42,8 @@ function h = export(f, varargin)
         args = opts.Vars;
     end
     
-    argnames = cellfun(@(x)x.name, args, 'UniformOutput', false);
-    subs     = cellfun(@(x)x.subsrule, args, 'UniformOutput', false);
-    subs     = flatten(vertcat(subs{:}));
-    argdims  = cellfun(@(x)size(tomatrix(x)), args, 'UniformOutput', false);
-    argdims  = vertcat(argdims{:});
     
+    args = cell2tensor(args, 'ConvertString', false);
     
     
     
@@ -49,7 +57,7 @@ function h = export(f, varargin)
             'Aborting ...\n'], export_path);
         return;
     end
-    % For windows, use ''/' instead of '\'. Otherwise mathematica does
+    % For windows, use '/' instead of '\'. Otherwise mathematica does
     % not recognize the path.
     if ispc
         export_path = strrep(export_path, '\','/');
@@ -58,18 +66,16 @@ function h = export(f, varargin)
     % Mathematica.
     cse_opts = struct();
     cse_opts.ExportDirectory = string(export_path);
-    cse_opts.ArgumentLists  = argnames;
-    cse_opts.ArgumentDimensions = argdims;
-    cse_opts.SubstitutionRules= formula(subs);
     cse_opts.Namespace= opts.Namespace;
-    
+    cse_opts.ExportHeaderFile = opts.ExportHeaderFile;
+    cse_opts.ExportFull = opts.ExportFull;
     % necessary settings
     cse_opts_str =  struct2assoc(cse_opts,'ConvertString',false);
     
     funcs = cell2tensor(cellfun(@(x)tomatrix(x), exprs, 'UniformOutput', false));
     
     
-    eval_math(['CseWriteCpp[',str2mathstr(filename),',',funcs,',Normal@',cse_opts_str,']']);
+    eval_math(['ExportToCpp[' str2mathstr(filename) ',' funcs ',' args ', Normal@',cse_opts_str,']']);
     
     
     
@@ -131,15 +137,6 @@ end
 
 
 function opts = getOptions(args)
-    ip = inputParser;
-    ip.addParameter('Vars',{},@isVars);
-    ip.addParameter('File','',@isFunc);
-    ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('Namespace',string('namespace'),@isstring);
-    ip.addParameter('ExportHeaderFile',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('ExportFull',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.parse(args{:});
     
-    opts = ip.Results;
 end
     

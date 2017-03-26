@@ -10,13 +10,6 @@ classdef SymVariable < SymExpression
     % http://www.opensource.org/licenses/bsd-license.php
     
     
-    properties (Access=public)
-        % The name string of the symbolic variables
-        %
-        % @type SymVariable
-        name
-    end
-    
     
     methods
         
@@ -38,10 +31,8 @@ classdef SymVariable < SymExpression
                 
                 if isequal(class(x),'SymVariable')
                     str = x.f;
-                    x = x.name;
-                elseif isequal(class(x),'SymExpression')
+                elseif isequal(class(x),'SymExpression') %private use only
                     str = x.f;
-                    x = eval_math('Unique[var]');
                 else
                 
                     assert(ischar(x),...
@@ -57,6 +48,10 @@ classdef SymVariable < SymExpression
                     assert(isempty(regexp(x, '_', 'once')),...
                         'SymExpression:invalidSymbol', ...
                         'Invalid symbol string, can NOT contain ''_''.');
+                    
+                    assert(~isempty(regexp(x, '^[a-z]\w*', 'match')),...
+                        'SymExpression:invalidSymbol', ...
+                        'First letter must be lowercase character.');
                     
                     sstr = eval_math(['Symbol[',str2mathstr(x),']']);
                     
@@ -93,8 +88,6 @@ classdef SymVariable < SymExpression
                 end
             end  
             obj = obj@SymExpression(str);
-            % store the name string
-            obj.name = x;
         end
         
         

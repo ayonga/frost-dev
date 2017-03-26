@@ -1,23 +1,32 @@
-function rule = subsrule(obj)
+function rule = subsrule(obj, name)
     % Return the string subsititution rule for the symbolic variable vector
     %
     % Return values:
     % rule: the string subsititution rules @type SymExpression
     
     
-    str_replace = @(x)regexprep(x,'\$','_');
+    assert(isempty(regexp(name, '\W', 'once')),...
+        'SymExpression:invalidSymbol', ...
+        'Invalid symbol name, can NOT contain special characters.');
+    
+    assert(isempty(regexp(name, '_', 'once')),...
+        'SymExpression:invalidSymbol', ...
+        'Invalid symbol name, can NOT contain ''_''.');
     
     if isscalar(obj)
-        rule = SymExpression(['{' obj.f, '->HoldForm@Global`', str_replace(obj.name),'[[0]]}']);
+        str = eval_math(['{' obj.f, '->HoldForm@Global`', name,'[[0]]}'],false);
+        rule = SymExpression(str);
     elseif isvector(obj)
         siz = numel(obj);
         fstr= obj.s;
-        rule = SymExpression(['((' fstr '[[#+1]]-> HoldForm@Global`', str_replace(obj.name) '[[#]]&)/@(Range[', num2str(siz),']-1))'],false);
+        str = eval_math(['((' fstr '[[#+1]]-> HoldForm@Global`', name '[[#]]&)/@(Range[', num2str(siz),']-1))']);
+        rule = SymExpression(str,false);
     elseif ismatrix(obj)
         siz = numel(obj);        
         fsym= flatten(obj);
         fstr = fsym.s;
-        rule = SymExpression(['((' fstr '[[#+1]]-> HoldForm@Global`', str_replace(obj.name) '[[#]]&)/@(Range[', num2str(siz),']-1))'],false);
+        str = eval_math(['((' fstr '[[#+1]]-> HoldForm@Global`', name '[[#]]&)/@(Range[', num2str(siz),']-1))']);
+        rule = SymExpression(str,false);
     else
         error('Unsupported format.');
     end

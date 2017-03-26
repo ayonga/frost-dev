@@ -1,8 +1,6 @@
-classdef SymFunction < handle 
-    % SymFunction is a symbolic variable that represents a symbolic
-    % function in the Mathematica Kernal.
-    %
-    %
+classdef SymFunction < handle
+    % This class provides an interface to a symbolic expression (or
+    % function) represented in Mathematica kernal. 
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -12,138 +10,159 @@ classdef SymFunction < handle
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties (Access = protected)        
-        % An array of dependent variables
+    properties (SetAccess = protected, GetAccess = protected)
+        % An identification name of the function
+        %
+        % @type char
+        name
+        
+        % The symbolic expression of the function in Mathematica
+        %
+        % @type SymExpression
+        expr
+        
+        % The symbolic name of the dependent variables in Mathematica
         %
         % @type SymVariable
         vars
+        
+        % The symbolic name of the auxilary parameters in Mathematica
+        %
+        % @type SymVariable
+        params
+        
+        
+        % The export options
+        %
+        % @struct
+        options
+        
     end
     
-    properties (Access=public)
-        % The body (or formula) of the symbolic expression
+    properties (SetAccess=private, GetAccess=public)
+        % File names of the functions.
         %
-        % @type char
-        f
+        % Each field of ''Funcs'' specifies the name of a function that
+        % used for a certain computation of the function.
+        %
+        % Required fields of funcs:
+        %   Func: a string of the function that computes the
+        %   function value @type char
+        %   Jac: a string of the function that computes the
+        %   function Jacobian @type char
+        %   JacStruct: a string of the function that computes the
+        %   sparsity structure of function Jacobian @type char
+        %   Hess: a string of the function that computes the
+        %   function Hessian @type char
+        %   HessStruct: a string of the function that computes the
+        %   sparsity structure of function Hessian @type char
+        % @type struct
+        funcs
     end
     
-    properties (GetAccess=public, SetAccess=public)
-        % The symbol that represents the symbolic expression
+    
+    methods
+        
+        function obj = SymFunction(name, expr, vars, params)
+            % The class constructor function.
+            %
+            % Parameters:       
+            %  name: the name of the function. @type char   
+            %  expr: the symbolic expression of the function @type
+            %  char
+            %  vars: the symbolic representation of variables in the
+            %  expression @type cell
+            %  params: the symbolic representation of parameters in the
+            %  expression @type cell
+           
+            
+            
+            % validate name string
+            assert(isempty(regexp(name, '\W', 'once')),...
+                'SymFunction:invalidNameStr', ...
+                'Invalid name string, can NOT contain special characters.');
+            assert(ischar(name), 'The name must be a char vector.');
+            obj.name = name;
+            
+            % validate symbolic expression
+            if nargin > 1
+                obj.expr =  SymExpression(expr);
+            end
+            
+            if nargin > 2
+                if ~iscell(vars), vars = {vars}; end
+                assert(all(cellfun(@(x)isa(x,'SymVariable'), vars)),...
+                    'SymFunction:invalidVariables', ...
+                    'The dependent variables must be valid SymVariable objects.');
+                
+                obj.vars = vars;
+            end
+            
+            if nargin > 3
+                if ~iscell(params), params = {params}; end
+                assert(all(cellfun(@(x)isa(x,'SymVariable'), params)),...
+                    'SymFunction:invalidVariables', ...
+                    'The dependent variables must be valid SymVariable objects.');
+                
+                obj.params = params;
+            end
+            
+            
+        end
+        
+        
+        
+        
+    end
+    
+    
+    %% dependent properties
+    properties (Dependent)
+        
+       
+        
+        
+        % File names of the functions. 
         %
-        % @type char
-        s
+        % Each field of ''Funcs'' specifies the name of a function that
+        % used for a certain computation of the function.
+        %
+        % Required fields of Funcs:
+        %   Func: a string of the function that computes the
+        %   function value @type char
+        %   Jac: a string of the function that computes the
+        %   function Jacobian @type char
+        %   JacStruct: a string of the function that computes the
+        %   sparsity structure of function Jacobian @type char
+        %   Hess: a string of the function that computes the 
+        %   function Hessian @type char
+        %   HessStruct: a string of the function that computes the
+        %   sparsity structure of function Hessian @type char
+        % @type struct
+        Funcs
     end
     
     methods
         
-        function obj = SymFunction(x, vars)
-            % The class constructor function.
-            %
-            % Parameters:  
-            % x: the symbolic expression statement @type char
-            % vars: the array of dependent variables @type SymVariable
-           
-            
-            
-            if isnumeric(x) 
-                x = SymExpression(x);
-            elseif ischar(x)
-                x = SymExpression(x);
-            elseif ~isa(x,'SymExpression') 
-                error('First input must be a symbolic expression.');
-            end 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            obj.s = eval_math('Unique[symfun$]');
-            obj.f = x.f;
-            
-            if nargin > 1
-                obj.vars = SymFunction.validateArgNames(vars);
-                
-                cvars = cellfun(@(x)x.f,privToCell(obj.vars),'UniformOutput',false);
-                svars = sprintf('%s_, ',cvars{:});
-                svars(end-1:end)=[];
-                fstr = [obj.s '[' svars ']'];
-            else
-                fstr = [obj.s '[]'];
-            end
-            
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            eval_math([fstr ':=' obj.f ';']);
-        end
         
-        
-        function display(obj, namestr) %#ok<INUSD,DISPLAY>
-            % Display the symbolic expression
+        function Funcs = get.Funcs(obj)
             
-            obj.f
-        end
-        
-        function delete(obj)
-            % object destruction function
-            if ~isempty(obj.vars)
-                
-                cvars = cellfun(@(x)x.s,privToCell(obj.vars),'UniformOutput',false);
-                svars = sprintf('%s_, ',cvars{:});
-                svars(end-1:end)=[];
-                fstr = [obj.s '[' svars ']'];
-            else
-                fstr = [obj.s '[]'];
-            end
-            eval_math([fstr '=.;']);
-        end
-        
-        
-        function y = argnames(x)
-            %ARGNAMES   Symbolic function input variables
-            %   ARGNAMES(F) returns a sym array [X1, X2, ... ] of symbolic
-            %   variables for F(X1, X2, ...).
-            %
-            %   Example
-            %    syms f(x,y)
-            %    argnames(f)    % returns [x, y]
-            %
-            %   See also SYMFUN/FORMULA
-            y = x.vars;
-        end
-
-        
-        
-
-        function varargout = subsindex(varargin)  %#ok<STOUT>
-            error('Indexing values must be positive integers, logicals or symbolic variables.');
-        end
-        
-        function varargout = end(varargin) %#ok<STOUT>
-            error('END is not a valid input for symbolic functions.');
+            assert(~isempty(obj.Name),'The ''Name'' of the object is empty');
+            
+            Funcs = struct(...
+                'Func',['f_',obj.Name],...
+                'Jac',['J_',obj.Name],...
+                'JacStruct',['Js_',obj.Name],...
+                'Hess',['H_',obj.Name],...
+                'HessStruct',['Hs_',obj.Name]);
         end
     end
     
     
-    
-    
     % methods defined in external files
-    methods (Hidden, Static)
+    methods
         
-        function args = validateArgNames(args)
-            %validateArgNames   When creating symfuns make sure the arguments are simple sym object names
-            % do not allow zero arguments
-            if ~isequal(class(args),'SymVariable') || ~builtin('isvector', args) || isempty(args)
-                error('Third input must be a scalar or vector of unique symbolic variables.');
-            end
-            args2 = unique(args);
-            if length(args2) ~= length(args)
-                error('Third input must be a scalar or vector of unique symbolic variables.');
-            end
-            
-        end
+        status = export(obj, export_path, do_build, derivative_level);
         
     end
 end

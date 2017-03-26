@@ -8,7 +8,23 @@
 BeginPackage["MathToCpp`",{"ExtraUtils`","Experimental`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
+ExportToCpp::usage="ExportToCpp[name,expr,vars,options] optimizes expressions using CSE and export the resulting code
+into C++ file.
 
+Inputs:
+name -> A string contains the file name of the exported C++ files (name.cc and name.hh).
+expr -> The expression that planned to be exported, ONLY supports 1-dimensional (scaler, vector) and 2-dimensional list (matrix).
+vars -> The list of symbolic variables in the exported expression.
+varnames -> The variable names represents symbolic variables in C++ code.
+options -> Additional options defined below. They could be defined by SetOptions function outside of the function call.
+
+Options:
+ExportDirectory -> Export directory for file (default: '.')
+TemplateFile -> Absolute path to the template file of C++ source code.
+TemplateHeader -> Absolute path to the template file of C++ header file.
+Namespace(optional) -> Defines a namespace for the exported C++ function (only for standard C++ application, not defined for Matlab's mex function).
+behavior(optional) -> Defines a sub-namespace for the exported C++ function (only for standard C++ application, not defined for Matlab's mex function).
+                       ";
 
 CseWriteCpp::usage="CseWriteCpp[name,expr,options] optimizes expressions using CSE and export the resulting code
 into C++ (mex) file.
@@ -146,7 +162,98 @@ GetFinalExprCpp[code_]:= ReleaseHold[Map[Hold,N[code,15],{2}]/.Hold[CompoundExpr
 SyntaxInformation[ConvertToCForm]={"ArgumentsPattern"->{_}};
 ConvertToCForm[code_]:=StringReplace[ToString[CForm[#]],"Hold("~~ShortestMatch[a___]~~")":>a]&/@code;
 
+SyntaxInformation[ExportToCpp]={"ArgumentsPattern"->{_,_,_,OptionsPattern[]}};
+ExportToCpp[name_String,expr_,vars_, OptionsPattern[]]:=
+	Block[{varname,argin, argins,arginDims,csubs,cFile,hFile,argoutDims,funcLists,tpl,hdr,seqs,finals,lvars,optStatement,assoc},
+		(*Obtain basic information*)
+		cFile = FileNameJoin[{OptionValue[ExportDirectory],name <> ".cc"}];
+		hFile = FileNameJoin[{OptionValue[ExportDirectory],name <> ".hh"}];
 
+		(* Get dimensions of input arguments *)
+		
+		arginDims= Join[Dimensions/@(ExtraUtils`ToMatrixForm/@vars)];
+		argins   = ToExpression/@StringInsert[ToString/@Range[Length[arginDims]],"var",1];
+		csubs=Dispatch@Join[Flatten@Table[argin = ExtraUtils`ToVectorForm[vars[[i]]]; 
+			varname = ToString@argins[[i]];
+  			((argin[[# + 1]] -> ToExpression["HoldForm@(Global`" <> varname <> "[[" <> ToString[#] <>"]])"] &) /@ (Range[Length[argin]] - 1)), {i,Length[arginDims]}]];
+        (* Get dimensions of output arguments *)
+		argoutDims=Join[Dimensions/@(ExtraUtils`ToMatrixForm/@expr)];
+        (* Create a list of strings for output arguments: output1, output2, ..., outputN *)
+		funcLists=StringInsert[ToString/@Range[Length[argoutDims]],"output",1];
+
+        (* Simplify expressions and store results in a list, each expression has three parts:*)
+        (* syms: strings of local variables (intermediate) definition *)
+        (* statement: strings of intermediate code *)
+        (* result: strings of final result code *)
+		optStatement=Block[{vexpr,oexpr,seq,syms,code,subcode,final,statement,result,NonZeroIndices,y},
+			Table[
+              (* vectorize expression *)
+			  vexpr=ExtraUtils`ToVectorForm[expr[[i]]];
+              (* Simplify and decompose expression *)
+			  oexpr=CseOptimizeExpression[vexpr];
+			  If[ExtraUtils`EmptyQ[oexpr], (* If the expression is empty *)
+                syms={"_NotUsed"};
+				statement={"NULL"};
+                result={"NULL"};
+                argoutDims[[i]]={0,0};(*empty matrix*)
+                ,
+                If[ListQ[First[oexpr]],
+				  {syms,code}=ReplaceVariable[First[oexpr],Last[oexpr]];
+				  subcode=code/.csubs;
+				  seq=GetSequenceExprCpp[subcode];
+				  final=GetFinalExprCpp[subcode];
+				  statement=ConvertToCForm[seq];
+                  (* Get the non zero elements of the output arguments and assign them one by one. Zero elements are by default set to zero.*)
+                  If[OptionValue[ExportFull],
+                    NonZeroIndices = Range@(argoutDims[[i,1]]*argoutDims[[i,2]]),
+                    NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False]
+                  ];
+                  result=Table["p_"<>ToString@funcLists[[i]]<>"["<>ToString[j-1]<>"]="<>ToString[CForm@final[[1,j]]],{j,NonZeroIndices}];
+                  ,
+				  syms={"_NotUsed"};
+				  statement={"NULL"};
+                  final={oexpr/.csubs};
+                  If[OptionValue[ExportFull],
+                    NonZeroIndices = Range@(argoutDims[[i,1]]*argoutDims[[i,2]]),
+                    NonZeroIndices = Flatten@Position[Table[SameQ[y,0],{y,Flatten[final]}],False];
+                  ];
+                  If[ExtraUtils`EmptyQ[NonZeroIndices],
+                    result={"NULL"};
+                    ,
+                    result=Table["p_"<>ToString@funcLists[[i]]<>"["<>ToString[j-1]<>"]="<>ToString[CForm@final[[1,j]]],{j,NonZeroIndices}];
+                  ];
+                ];
+              ];
+			    {syms,statement,result}
+			    ,{i,Length[funcLists]}
+			]
+		];
+		lvars=optStatement[[All,1]];
+		seqs=optStatement[[All,2]];
+		finals=optStatement[[All,3]];
+		tpl=FileTemplate[OptionValue[TemplateFile]];
+		hdr=FileTemplate[OptionValue[TemplateHeader]];
+		assoc=<|"name"->name,
+                 "argins"-> argins,
+                 "argouts"-> funcLists,
+                 "arginDims"-> arginDims,
+                 "argoutDims"-> argoutDims,
+                 "final"-> finals,
+                 "lvars"-> lvars,
+                 "statements"-> seqs,
+                 "namespace"->OptionValue[Namespace]|>;
+		FileTemplateApply[tpl,assoc,cFile];
+		If[OptionValue[ExportHeaderFile],
+			FileTemplateApply[hdr,assoc,hFile];
+		];
+		
+	];
+Options[ExportToCpp]={ExportDirectory->".",
+                      TemplateFile->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.cc"}],
+                      TemplateHeader->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.hh"}],
+                      Namespace->"namespace",
+                      ExportHeaderFile->True,
+                      ExportFull->True};
 
 SyntaxInformation[CseWriteCpp]={"ArgumentsPattern"->{_,_,OptionsPattern[]}};
 CseWriteCpp[name_String,expr_,OptionsPattern[]]:=

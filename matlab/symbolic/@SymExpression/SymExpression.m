@@ -10,14 +10,14 @@ classdef SymExpression < handle
     % http://www.opensource.org/licenses/bsd-license.php
     
     
-    properties (Access=public)
+    properties (Access=protected)
         % The body (or formula) of the symbolic expression
         %
         % @type char
         f
     end
     
-    properties (GetAccess=public, SetAccess=public)
+    properties (GetAccess=protected, SetAccess=protected)
         % The symbol that represents the symbolic expression
         %
         % @type char
@@ -91,15 +91,16 @@ classdef SymExpression < handle
             
         end
         
-        function delete(obj)
+        function delete(~)
             % object destruction function
             
-%             eval_math([obj.s '=.;']);
+            %             eval_math([obj.s '=.;']);
         end
         
         function display(obj, namestr) %#ok<INUSD,DISPLAY>
             % Display the symbolic expression
             
+            %             eval_math(['?' obj.s]);
             obj.f
         end
         
