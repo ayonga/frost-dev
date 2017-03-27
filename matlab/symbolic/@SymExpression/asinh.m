@@ -4,9 +4,8 @@ function Y = asinh(X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['ArcSinh[' X.s ']']);
+    % construct the operation string
+    sstr = ['ArcSinh[' X.s ']'];
     
     % create a new object with the evaluated string
     Y = SymExpression(sstr);

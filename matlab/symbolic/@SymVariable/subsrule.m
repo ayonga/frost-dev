@@ -14,16 +14,16 @@ function rule = subsrule(obj, name)
         'Invalid symbol name, can NOT contain ''_''.');
     
     if isscalar(obj)
-        str = eval_math(['{' obj.f, '->HoldForm@Global`', name,'[[0]]}'],false);
+        str = eval_math(['{' obj.s, '->HoldForm@Global`', name,'[[0]]}'],false);
         rule = SymExpression(str);
-    elseif isvector(obj)
+    elseif isvectorform(obj)
         siz = numel(obj);
         fstr= obj.s;
         str = eval_math(['((' fstr '[[#+1]]-> HoldForm@Global`', name '[[#]]&)/@(Range[', num2str(siz),']-1))']);
         rule = SymExpression(str,false);
     elseif ismatrix(obj)
         siz = numel(obj);        
-        fsym= flatten(obj);
+        fsym= tovector(obj);
         fstr = fsym.s;
         str = eval_math(['((' fstr '[[#+1]]-> HoldForm@Global`', name '[[#]]&)/@(Range[', num2str(siz),']-1))']);
         rule = SymExpression(str,false);

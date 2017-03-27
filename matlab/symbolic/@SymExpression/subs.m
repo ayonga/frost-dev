@@ -59,7 +59,7 @@ function Y = subs(S,old,new)
             'The second argument must be a struct if there are two input arguments.');
         srule = SymExpression(old);
         
-        sstr = eval_math(['ReplaceAll[' S.s ',' srule.s ']']);
+        sstr = ['ReplaceAll[' S.s ',' srule.s ']'];
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);
@@ -85,7 +85,7 @@ function Y = subs(S,old,new)
         
         
         
-        sstr = eval_math(['ReplaceAll[' S.s ',' srule.s ']']);
+        sstr = ['ReplaceAll[' S.s ',' srule.s ']'];
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);

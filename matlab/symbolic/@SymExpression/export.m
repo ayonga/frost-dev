@@ -1,4 +1,4 @@
-function h = export(f, varargin)
+function file = export(f, varargin)
     % Export the symbolic expression of functions to C/C++ source
     % files and build them as MEX files.
     %
@@ -26,7 +26,7 @@ function h = export(f, varargin)
     ip.addParameter('Vars',{},@isVars);
     ip.addParameter('File','',@isFunc);
     ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('Namespace',string('namespace'),@isstring);
+    ip.addParameter('Namespace',string('SymExpression'),@isstring);
     ip.addParameter('ExportHeaderFile',true,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('ExportFull',true,@(x) isequal(x,true) || isequal(x,false));
     ip.parse(varargin{N+1:end});
@@ -83,10 +83,9 @@ function h = export(f, varargin)
     % build mex file
     if opts.BuildMex
         build_mex(export_path,filename);
-        h = str2func(filename);
-        addpath(export_path);
+        file = fullfile(export_path,filename,'.cc');       
     else
-        h = [];
+        file = [];
     end
     
     
@@ -116,7 +115,7 @@ end
 % validator for variable parameter
 function t = isVars(x)
     if iscell(x)
-        if ~isvector(x) && ~isempty(x)
+        if ~isvectorform(x) && ~isempty(x)
             error(['The ''Vars'' value must be a one-dimensional cell array of symbolic ',...
                 'variables or an array of symbolic variables.']);
         end

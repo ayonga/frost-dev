@@ -61,7 +61,7 @@ classdef NonlinearProgram < handle
     %% Public methods
     methods
         
-        function obj = NonlinearProgram(varargin)
+        function obj = NonlinearProgram()
             % The default class constructor function
             %
             % Parameters: 
@@ -71,12 +71,7 @@ classdef NonlinearProgram < handle
             
             
             % default options
-            obj.Options = struct();
-            obj.Options.DerivativeLevel = 1;
-            obj.Options.EqualityBoundRelaxFactor = 1e-5;
-            % if non-default options are specified, overwrite the default
-            % options.
-            obj.setOption(varargin{:});
+            obj.Options = struct('DerivativeLevel', 1);
             
             % initialize the type of the variables
             obj.VariableArray = cell(0);

@@ -17,9 +17,8 @@ function d = det(A)
         error(message('symbolic:det:SquareMatrix'));
     end
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['Det[' A.s ']']);
+    % construct the operation string
+    sstr = ['Det[' A.s ']'];
     
     % create a new object with the evaluated string
     d = SymExpression(sstr);

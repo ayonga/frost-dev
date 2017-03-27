@@ -4,9 +4,8 @@ function Y = cosh(X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['Cosh[' X.s ']']);
+    % construct the operation string
+    sstr = ['Cosh[' X.s ']'];
     
     % create a new object with the evaluated string
     Y = SymExpression(sstr);

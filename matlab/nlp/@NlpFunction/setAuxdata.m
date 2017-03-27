@@ -8,7 +8,15 @@ function obj = setAuxdata(obj, auxdata)
     assert(isvector(auxdata) && isnumeric(auxdata), ...
         'The auxilary input argument must be a vector of numeric values.');
     
+    if ~isempty(obj.SymFun)
+        nvar1 = length(obj.SymFun.Params);
+        nvar2 = numel(auxdata);
+        
+        assert(nvar1 == nvar2,...
+            'The dimensions of the constant parameters do not match.');
+    end
+    
     obj.AuxData = auxdata;
     
-
+    
 end

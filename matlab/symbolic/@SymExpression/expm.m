@@ -12,9 +12,8 @@ function Y = expm(X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['MatrixExp[' X.s ']']);
+    % construct the operation string
+    sstr = ['MatrixExp[' X.s ']'];
     
     % create a new object with the evaluated string
     Y = SymExpression(sstr);

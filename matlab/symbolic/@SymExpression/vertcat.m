@@ -12,10 +12,10 @@ function y = vertcat(varargin)
     
     X = cellfun(@(x)SymExpression(x),varargin,'UniformOutput',false);
         %     X = SymExpression(varargin);
-    str = cellfun(@(x)eval_math(['ToMatrixForm@',x.s]),X,'UniformOutput',false);
+    str = cellfun(@(x)x.s,X,'UniformOutput',false);
     % evaluate the operation in Mathematica and return the
     % expression string
-    sstr = eval_math(['Join[' implode(str, ', ') ']']);
+    sstr = ['Join[Sequence@@ToMatrixForm/@' cell2tensor(str,'ConvertString',false) ']'];
     
     % create a new object with the evaluated string
     y = SymExpression(sstr);

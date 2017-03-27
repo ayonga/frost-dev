@@ -5,9 +5,8 @@ function B = tomatrix(A)
     % Convert inputs to SymExpression
     A = SymExpression(A);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['ToMatrixForm[' A.s ']']);
+    % construct the operation string
+    sstr = ['ToMatrixForm[' A.s ']'];
     
     % create a new object with the evaluated string
     B = SymExpression(sstr);

@@ -7,9 +7,8 @@ function Z = atan(Y,X)
     if nargin == 1
         % Convert inputs to SymExpression
         X = SymExpression(X);
-        % evaluate the operation in Mathematica and return the
-        % expression string
-        sstr = eval_math(['ArcTan[' X.s ']']);
+        % construct the operation string
+        sstr = ['ArcTan[' X.s ']'];
         
         % create a new object with the evaluated string
         Z = SymExpression(sstr);
@@ -17,9 +16,8 @@ function Z = atan(Y,X)
         % Convert inputs to SymExpression
         X = SymExpression(X);
         Y = SymExpression(Y);
-        % evaluate the operation in Mathematica and return the
-        % expression string
-        sstr = eval_math(['ArcTan[' X.s ',' Y.s ']']);
+        % construct the operation string
+        sstr = ['ArcTan[' X.s ',' Y.s ']'];
         
         % create a new object with the evaluated string
         Z = SymExpression(sstr);

@@ -43,15 +43,11 @@ classdef SymExpression < handle
             end
             
             if nargin < 2
-                delayed_set = true;
+                delayed_set = false;
             end
             
             
-            if ~isa(x, 'SymExpression')
-                obj.s = eval_math('Unique[symvar$]');
-            else
-                obj.s = x.s;
-            end
+            
             switch class(x)
                 case 'SymExpression'
                     obj.f = formula(x);
@@ -78,14 +74,22 @@ classdef SymExpression < handle
                     error('SymExpression:invalidInputType',...
                         'Invalid input argument data type.');
             end
-            % if not delayed set, evaluate the formula to obtain the final
-            % expression
-            if ~delayed_set
-                obj.f = eval_math(obj.f);
+            
+            if ~isa(x, 'SymExpression')
+                obj.s = eval_math('Unique[symvar$]');
+                if ~delayed_set
+                    % delayed set the formula to the symbol
+                    eval_math([obj.s ':=' obj.f ';']);
+                else
+                    % set the formula to the symbol
+                    eval_math([obj.s '=' obj.f ';']);
+                end
+            else
+                obj.s = x.s;
             end
             
-            % set the formula to the symbol
-            eval_math([obj.s ':=' obj.f ';']);
+            
+            
             
             
             
@@ -100,8 +104,7 @@ classdef SymExpression < handle
         function display(obj, namestr) %#ok<INUSD,DISPLAY>
             % Display the symbolic expression
             
-            %             eval_math(['?' obj.s]);
-            obj.f
+            eval_math([obj.s])
         end
         
         function y = argnames(~)
@@ -187,9 +190,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['- ' A.s]);
+            % construct the operation string
+            sstr = ['- ' A.s];
             
             % create a new object with the evaluated string
             B = SymExpression(sstr);
@@ -201,9 +203,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['+ ' A.s]);
+            % construct the operation string
+            sstr = ['+ ' A.s];
             
             % create a new object with the evaluated string
             B = SymExpression(sstr);
@@ -215,9 +216,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math([A.s '+'  B.s]);
+            % construct the operation string
+            sstr = [A.s '+'  B.s];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end % plus
@@ -228,9 +228,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math([A.s '+' B.s]);
+            % construct the operation string
+            sstr = [A.s '+' B.s];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end % plus
@@ -242,9 +241,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Times[' A.s ',' B.s ']']);
+            % construct the operation string
+            sstr = ['Times[' A.s ',' B.s ']'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
@@ -261,9 +259,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Dot[' A.s ',' B.s ']']);
+            % construct the operation string
+            sstr = ['Dot[' A.s ',' B.s ']'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
@@ -279,9 +276,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             p = SymExpression(p);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['MatrixPower[' A.s ',' p.s ']']);
+            % construct the operation string
+            sstr = ['MatrixPower[' A.s ',' p.s ']'];
             % create a new object with the evaluated string
             B = SymExpression(sstr);
         end
@@ -301,9 +297,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             p = SymExpression(p);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Power[' A.s ',' p.s ']']);
+            % construct the operation string
+            sstr = ['Power[' A.s ',' p.s ']'];
             % create a new object with the evaluated string
             B = SymExpression(sstr);
         end
@@ -317,9 +312,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Divide[' A.s ',' B.s ']']);
+            % construct the operation string
+            sstr = ['Divide[' A.s ',' B.s ']'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
@@ -333,9 +327,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Divide[' B.s ',' A.s ']']);
+            % construct the operation string
+            sstr = ['Divide[' B.s ',' A.s ']'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
@@ -354,9 +347,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Dot[' A.s ', Inverse[' B.s ']]']);
+            % construct the operation string
+            sstr = ['Dot[' A.s ', Inverse[' B.s ']]'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
@@ -374,9 +366,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Dot[Inverse[' A.s '] ,'  B.s ']']);
+            % construct the operation string
+            sstr = ['Dot[Inverse[' A.s '] ,'  B.s ']'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
@@ -394,9 +385,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Transpose[' A.s ']']);
+            % construct the operation string
+            sstr = ['Transpose[' A.s ']'];
             
             % create a new object with the evaluated string
             B = SymExpression(sstr);
@@ -416,9 +406,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['ConjugateTranspose[' A.s ']']);
+            % construct the operation string
+            sstr = ['ConjugateTranspose[' A.s ']'];
             
             % create a new object with the evaluated string
             B = SymExpression(sstr);
@@ -444,9 +433,8 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            sstr = eval_math(['Inverse[' A.s ']']);
+            % construct the operation string
+            sstr = ['Inverse[' A.s ']'];
             
             % create a new object with the evaluated string
             B = SymExpression(sstr);
@@ -560,15 +548,15 @@ classdef SymExpression < handle
                     
                     switch numel(Idx.subs)
                         case 0
-                            sstr = eval_math(['ToVectorForm[' L.s ']']);
+                            sstr = ['ToVectorForm[' L.s ']'];
                         case 1
                             
-                            sstr = eval_math(['ToVectorForm[' L.s ']']);
+                            sstr = ['ToVectorForm[' L.s ']'];
                             % special case shortcut for L(:)
                             if ischar(Idx.subs{1}) && strcmp(Idx.subs{1},':')
-                                sstr = eval_math([sstr,'[[;;]]']);
+                                sstr = [sstr,'[[;;]]'];
                             elseif isnumeric(Idx.subs{1})
-                                sstr = eval_math([sstr,'[[Flatten@',mat2math(Idx.subs{1}),']]']);
+                                sstr = [sstr,'[[Flatten@',mat2math(Idx.subs{1}),']]'];
                             end
                             
                         case 2
@@ -581,7 +569,7 @@ classdef SymExpression < handle
                                 end
                             end
                             
-                            sstr = eval_math([L.s,'[[',ind{1},',',ind{2},']]']);
+                            sstr = [L.s,'[[',ind{1},',',ind{2},']]'];
                         otherwise
                             % No support for indexing using '{}'
                             error('SymExpression:subsref', ...

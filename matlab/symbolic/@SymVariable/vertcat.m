@@ -10,15 +10,11 @@ function y = vertcat(varargin)
     %   See also HORZCAT.
     
     
-    X = cellfun(@(x)SymVariable(x),varargin,'UniformOutput',false);
-        %     X = SymExpression(varargin);
-    str = cellfun(@(x)eval_math(['ToMatrixForm@',x.s]),X,'UniformOutput',false);
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['Join[' implode(str, ', ') ']']);
+    % Call the superclass method
+    str = vertcat@SymExpression(varargin{:});
     
     % create a new object with the evaluated string
-    y = SymVariable(SymExpression(sstr));
+    y = SymVariable(str);
     
     
 

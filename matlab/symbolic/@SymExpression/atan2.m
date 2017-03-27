@@ -4,9 +4,8 @@ function Z = atan2(Y,X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     Y = SymExpression(Y);
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['ArcTan[' X.s ',' Y.s ']']);
+    % construct the operation string
+    sstr = ['ArcTan[' X.s ',' Y.s ']'];
     
     % create a new object with the evaluated string
     Z = SymExpression(sstr);

@@ -20,8 +20,18 @@ function obj = setDependentVariable(obj, depvars)
         'Each cell must consists of a single or an array of NlpVariable objects.\n');
 
 
+    if ~isempty(obj.SymFun)
+        nvar1 = length(obj.SymFun.Vars);
+        nvar2 = sum(cellfun(@(x)x.Dimension, depvars));
+        
+        assert(nvar1 == nvar2,...
+            'The dimensions of the dependent variables do not match.');
+    end
+    
     obj.DepVariables = depvars;
 
+    
+    
 
     % evaluate the function using typical values of dependent
     % variables

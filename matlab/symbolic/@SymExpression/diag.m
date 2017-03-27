@@ -52,17 +52,15 @@ function Y = diag(A,offset)
     if isvector(A)
         
         
-        % evaluate the operation in Mathematica and return the
-        % expression string
-        sstr = eval_math(['DiagonalMatrix[Flatten[' A.s '],' offset.s ']']);
+        % construct the operation string
+        sstr = ['DiagonalMatrix[Flatten[' A.s '],' offset.s ']'];
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);
     else
         
-        % evaluate the operation in Mathematica and return the
-        % expression string
-        sstr = eval_math(['Diagonal[' A.s ',' offset.s ']']);
+        % construct the operation string
+        sstr = ['Diagonal[' A.s ',' offset.s ']'];
         
         % create a new object with the evaluated string
         Y = SymExpression(sstr);

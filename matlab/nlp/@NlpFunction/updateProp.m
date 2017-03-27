@@ -10,19 +10,21 @@ function obj = updateProp(obj, varargin)
     
     argin = struct(varargin{:});
     
-    
-    
-    
     % set boundary values
-    if isfield(argin, 'lb')
-        obj =  setBoundary(obj, argin.lb, []);
-    end
+    if all(isfield(argin, {'ub','lb'}))
+        obj =  setBoundary(obj, argin.lb, obj.ub);
     
-    if isfield(argin, 'ub')
+    elseif isfield(argin, 'lb')
+        obj =  setBoundary(obj, argin.lb, []);
+    
+    
+    elseif isfield(argin, 'ub')
         obj =  setBoundary(obj, [], argin.ub);
     end
     
-
+    if isfield(argin, 'AuxData') && ~isempty(argin.AuxData)
+        obj = setAuxdata(obj, argin.AuxData);
+    end
     
     
     

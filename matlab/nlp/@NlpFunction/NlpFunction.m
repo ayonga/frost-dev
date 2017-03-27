@@ -156,7 +156,11 @@ classdef NlpFunction < handle
         AuxData
         
         
-        
+        % The associated SymNlpFunction object that specifies the symbolic
+        % expression of the NlpFunction
+        %
+        % @type SymNlpFunction
+        SymFun
     end
     
     properties (SetAccess = protected, GetAccess = public)
@@ -238,8 +242,8 @@ classdef NlpFunction < handle
                 obj = setFuncs(obj, argin.Funcs);
             end
             
-            if isfield(argin, 'AuxData') && ~isempty(argin.AuxData)
-                obj = setAuxdata(obj, argin.AuxData);
+            if isfield(argin, 'SymFun')
+                obj = setSymFun(obj, argin.SymFum);
             end
             
             % update additional properties
@@ -294,7 +298,6 @@ classdef NlpFunction < handle
         obj = setBoundary(obj, cl, cu);
         
         obj = updateProp(obj, varargin);
-        
         
     end
 end

@@ -5,9 +5,8 @@ function Y = log2(X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['Log[' X.s ',2]']);
+    % construct the operation string
+    sstr = ['Log[' X.s ',2]'];
     
     % create a new object with the evaluated string
     Y = SymExpression(sstr);

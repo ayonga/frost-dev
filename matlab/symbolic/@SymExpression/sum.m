@@ -15,14 +15,13 @@ function s = sum(A,p)
     % Convert inputs to SymExpression
     A = SymExpression(A);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
+    % construct the operation string
     if p == 1
-        sstr = eval_math(['Total[' A.s ']']);
+        sstr = ['Total[' A.s ']'];
     elseif p == 2
-        sstr = eval_math(['Total[' A.s ',{2}]']);
+        sstr = ['Total[' A.s ',{2}]'];
     elseif p == inf
-        sstr = eval_math(['Total[' A.s ',2]']);
+        sstr = ['Total[' A.s ',Infinity]'];
     else
         error('p must be one of the following: 1, 2, inf');
     end

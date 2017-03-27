@@ -4,9 +4,8 @@ function X = conj(Z)
     
     % Convert inputs to SymExpression
     Z = SymExpression(Z);
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['Conjugate[' Z.s ']']);
+    % construct the operation string
+    sstr = ['Conjugate[' Z.s ']'];
     
     % create a new object with the evaluated string
     X = SymExpression(sstr);

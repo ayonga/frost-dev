@@ -16,9 +16,8 @@ function K = kron(X,Y)
     X = SymExpression(X);
     Y = SymExpression(Y);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['KroneckerProduct[' X.s ',' Y.s ']']);
+    % construct the operation string
+    sstr = ['KroneckerProduct[' X.s ',' Y.s ']'];
     % create a new object with the evaluated string
     K = SymExpression(sstr);
 end

@@ -4,9 +4,11 @@ function y = isvector(X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    ret = eval_math(['Boole@VectorQ[',X.s,']']);
+    [m, n] = size(X);
     
-    y = logical(eval(ret));
+    if m==1 || n==1
+        y = true;
+    else
+        y = false;
+    end
 end

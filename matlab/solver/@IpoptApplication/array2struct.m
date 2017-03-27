@@ -76,7 +76,7 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
                 
             end
         case 'sum'
-            % Typically used for object functions
+            % Typically used for objective functions
             dim = func_array{1}.Dimension;
             for i=1:num_obj
                 % set the indices of constraints

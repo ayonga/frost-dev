@@ -40,9 +40,8 @@ function Y = triu(X,offset)
     offset = SymExpression(offset);
     
     
-    % evaluate the operation in Mathematica and return the
-    % expression string
-    sstr = eval_math(['UpperTriangularize[' X.s ',' offset.s ']']);
+    % construct the operation string
+    sstr = ['UpperTriangularize[' X.s ',' offset.s ']'];
     
     % create a new object with the evaluated string
     Y = SymExpression(sstr);

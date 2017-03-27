@@ -55,13 +55,13 @@ function c = norm(A,p)
     if isempty(A)
         c = SymExpression(0);
     elseif isnumeric(p) && p~=inf
-        sstr = eval_math(['Norm[' A.s ',' num2str(p) ']']);
+        sstr = ['Norm[' A.s ',' num2str(p) ']'];
         c = SymExpression(sstr);
     elseif ischar(p) && strcmp(p,'fro')
-        sstr = eval_math(['Norm[' A.s ',"Frobenius"]']);
+        sstr = ['Norm[' A.s ',"Frobenius"]'];
         c = SymExpression(sstr);
     elseif (ischar(p) && strcmp(p,'inf')) || p == inf
-        sstr = eval_math(['Norm[' A.s ',Infinity]']);
+        sstr = ['Norm[' A.s ',Infinity]'];
         c = SymExpression(sstr);
     else
         error(message('symbolic:sym:norm:InvalidMatrixNorm'));
