@@ -12,7 +12,7 @@ classdef NlpFunctionSum < NlpFunction
     % http://www.opensource.org/licenses/bsd-license.php
     
     properties
-        % The dependent functions
+        % The sub NLP functions
         %
         % @type NlpFunction
         Dependents
@@ -86,6 +86,8 @@ classdef NlpFunctionSum < NlpFunction
                 'UniformOutput', false);
             deps = vertcat(deps{:});
         end
+        
+       
         
     end
     

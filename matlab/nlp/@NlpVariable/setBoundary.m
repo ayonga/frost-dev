@@ -62,5 +62,5 @@ function obj = setBoundary(obj, lowerbound, upperbound)
     end
     
     assert(all(obj.UpperBound >= obj.LowerBound),...
-        'Invalid boundary values. The lowerbound is greater than the upper bound.');
+        'The lowerbound is greater than the upper bound. Variable name: %s\n', obj.Name);
 end

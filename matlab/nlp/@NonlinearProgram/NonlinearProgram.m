@@ -23,29 +23,28 @@ classdef NonlinearProgram < handle
         % Required fileds of options:
         %  DerivativeLevel: the user-defined derivative order (0, 1 or 2)
         %  to be used by a NLP solver. @type integer @default 1
-        %  DerivativeType:  
-        %  EqualityBoundRelaxFactor：a relaxation factor number for equality
+        %  EqualityConstraintBoundary：a relaxation factor number for equality
         %  constraints. @type double
         % 
         % @type struct
         Options 
         
         
-        % The cell array contains all information regarding NLP
+        % An array contains all information regarding NLP
         % optimization variables
         %
-        % @type cell
+        % @type NlpVariable
         VariableArray
         
                 
-        % A cell array data stores objective functions
+        % An array data stores objective functions
         %
-        % @type cell
+        % @type NlpFunction
         CostArray
         
         % A cell array data stores all constraints functions
         %
-        % @type cell
+        % @type NlpFunction
         ConstrArray
         
         
@@ -71,12 +70,10 @@ classdef NonlinearProgram < handle
             
             
             % default options
-            obj.Options = struct('DerivativeLevel', 1);
+            obj.Options = struct('DerivativeLevel', 1, ...
+                'EqualityConstraintBoundary', 0);
             
-            % initialize the type of the variables
-            obj.VariableArray = cell(0);
-            obj.CostArray  = cell(0);
-            obj.ConstrArray = cell(0);
+            
             
             
         end

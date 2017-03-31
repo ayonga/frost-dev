@@ -18,16 +18,7 @@ function obj = setBoundary(obj, lowerbound, upperbound)
 
     
     
-    if nargin < 2
-        lowerbound = -Inf;
-        warning('NlpFunction:checkArgs',...
-            'Lower limit not specified, automatically set to -Inf.');
-    end
-    if nargin < 3
-        upperbound = Inf;
-        warning('NlpFunction:checkArgs',...
-            'Upper limit not specified, automatically set to Inf.');
-    end
+   
         
     
     if ~isempty(lowerbound)
@@ -65,5 +56,5 @@ function obj = setBoundary(obj, lowerbound, upperbound)
     end
     
     assert(all(obj.UpperBound >= obj.LowerBound),...
-        'Invalid boundary values. The lowerbound is greater than the upper bound.');
+        'The lowerbound is greater than the upper bound. NlpFunction name: %s\n', obj.Name);
 end

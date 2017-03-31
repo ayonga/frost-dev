@@ -1,4 +1,4 @@
-classdef NlpFunction < handle
+classdef NlpFunction < matlab.mixin.Heterogeneous & handle
     % This class provides a data structure for a optimization function.
     % This function could be either a constraint or a objective function of
     % the problem.
@@ -15,10 +15,7 @@ classdef NlpFunction < handle
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties(Constant,Hidden)
-        LINEAR = true;
-        NONLINEAR = false;
-    end
+    
     
     
     properties (SetAccess = protected, GetAccess = public)
@@ -73,33 +70,13 @@ classdef NlpFunction < handle
         %   function Jacobian @type char
         %   JacStruct: a string of the function that computes the
         %   sparsity structure of function Jacobian @type char
-        %   Hess: a string of the function that computes the 
+        %   Hess: a string of the function that computes the
         %   function Hessian @type char
         %   HessStruct: a string of the function that computes the
         %   sparsity structure of function Hessian @type char
         % @type struct
         Funcs
         
-        % % The name of the function that computes the Jacobian of the
-        % % function
-        % %
-        % % Typically, this function is generated as a MEX function by
-        % % Mathematica symbolic engine. It can be also written as a matlab
-        % % function by the user.
-        % %
-        % % @type char
-        % JacFunc
-        
-        
-        % % The name of the function that computes the Jacobian of the
-        % % function
-        % %
-        % % Typically, this function is generated as a MEX function by
-        % % Mathematica symbolic engine. It can be also written as a matlab
-        % % function by the user.
-        % %
-        % % @type char
-        % HessFunc
         
         % A two-vector structure that specifies the non-zero structure of
         % the first order Jacobian of the function with respect to the
@@ -156,10 +133,10 @@ classdef NlpFunction < handle
         AuxData
         
         
-        % The associated SymNlpFunction object that specifies the symbolic
+        % The associated SymFunction object that specifies the symbolic
         % expression of the NlpFunction
         %
-        % @type SymNlpFunction
+        % @type SymFunction
         SymFun
     end
     
@@ -178,8 +155,8 @@ classdef NlpFunction < handle
         % It gives a quick access to the dimension of the function output
         % without actually evaluating the function
         %
-        % @type integer
-        Dimension
+        % @type integer @default 0
+        Dimension = 0
     end
     
     
@@ -191,27 +168,19 @@ classdef NlpFunction < handle
             % varargin: variable nama-value pair input arguments, in detail:
             %  Name: the name of the function. @type char        
             %  Type: the type of the function. @type char
-            
+            %
             % 
             % @attention The 'auxdata' argument must be an 1-dimensional
             % vector of constants.
             
-            
-            % parse input arguments
-            %             p = inputParser;
-            %             p.addRequired('name',@ischar);
-            %             p.addOptional('type','Nonlinear', @ischar);
-            %             p.addOptional('auxdata',[],@isnumeric || @iscell);
-            %
-            %             p.parse(varargin{:});
-            %             obj.Name = p.Results.name;
-            %             obj.AuxData = p.Results.auxdata;
-            
+                        
             % MATLAB suggests a class must support the no input argument
             % constructor syntax.
             if nargin == 0
                 return;
             end
+            
+            
             
             
             argin = struct(varargin{:});
@@ -243,11 +212,25 @@ classdef NlpFunction < handle
             end
             
             if isfield(argin, 'SymFun')
-                obj = setSymFun(obj, argin.SymFum);
+                obj = setSymFun(obj, argin.SymFun);
             end
             
-            % update additional properties
-            obj = updateProp(obj, varargin{:});
+            
+            % set boundary values
+            if all(isfield(argin, {'ub','lb'}))
+                obj =  setBoundary(obj, argin.lb, argin.ub);
+            elseif isfield(argin, 'lb')
+                obj =  setBoundary(obj, argin.lb, inf);
+            elseif isfield(argin, 'ub')
+                obj =  setBoundary(obj, -inf, argin.ub);
+            else
+                obj =  setBoundary(obj, -inf, inf);
+            end
+            
+            
+            if isfield(argin, 'AuxData')
+                obj = setAuxdata(obj, argin.AuxData);
+            end
         end
         
         function deps = getDepObject(obj)
@@ -271,6 +254,9 @@ classdef NlpFunction < handle
             indices = vertcat(cellfun(@(x)x.Indices, obj.DepVariables, ...
                 'UniformOutput', false));
         end
+        
+        
+        
     end
     
     
