@@ -4,12 +4,12 @@ function file = export(f, varargin)
     %
     %
     % Parameters:
-    %  f: the symbolic expression @type SymExpression
     %  varargin: variable input parameters @type varargin
     %   Vars: a list of symbolic variables @type SymVariable
     %   File: the (full) file name of exported file @type char
+    %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
-    %
+    %   Namespace: the namespace of the function @type string
     %
     % Return values:
     % h: a function handle to the exported function @type function_handle
@@ -25,16 +25,23 @@ function file = export(f, varargin)
     ip = inputParser;
     ip.addParameter('Vars',{},@isVars);
     ip.addParameter('File','',@isFunc);
+    ip.addParameter('ForceExport',false,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('Namespace',string('SymExpression'),@isstring);
-    ip.addParameter('ExportHeaderFile',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('ExportFull',true,@(x) isequal(x,true) || isequal(x,false));
+    ip.addParameter('Namespace',string('SymExpression'),@(x) isstring(x));
     ip.parse(varargin{N+1:end});
     
     opts = ip.Results;
     
     assert(~isempty(opts.File),'The export destination file name must be specified explicitly.');
     assert(~isempty(opts.Vars),'Please specify the symbolic variables explicitly.');
+    
+    if (exist(opts.File,'file') == 2) && ~opts.ForceExport
+        warning(['The file ''%s'' exists.\n',...
+            'Set ''ForceExport'' to true in the argument list to force the export operation.\n',...
+            'Aborting ...\n'], opts.File);
+        file = opts.File;
+        return;
+    end
     
     if ~iscell(opts.Vars)
         args = {opts.Vars};
@@ -51,11 +58,10 @@ function file = export(f, varargin)
     [rel_path, filename] = fileparts(opts.File);
     export_path = GetFullPath(rel_path);
         
-    if ~(exist(export_path,'dir'))
-        warning(['The path to export functions does not exist: %s\n',...
+    if ~(exist(export_path,'dir')==7)
+        error(['The path to export functions does not exist: %s\n',...
             'Please ensure to create the folder, and call this function again.\n',...
             'Aborting ...\n'], export_path);
-        return;
     end
     % For windows, use '/' instead of '\'. Otherwise mathematica does
     % not recognize the path.
@@ -67,8 +73,6 @@ function file = export(f, varargin)
     cse_opts = struct();
     cse_opts.ExportDirectory = string(export_path);
     cse_opts.Namespace= opts.Namespace;
-    cse_opts.ExportHeaderFile = opts.ExportHeaderFile;
-    cse_opts.ExportFull = opts.ExportFull;
     % necessary settings
     cse_opts_str =  struct2assoc(cse_opts,'ConvertString',false);
     
@@ -115,7 +119,7 @@ end
 % validator for variable parameter
 function t = isVars(x)
     if iscell(x)
-        if ~isvectorform(x) && ~isempty(x)
+        if ~isvector(x) && ~isempty(x)
             error(['The ''Vars'' value must be a one-dimensional cell array of symbolic ',...
                 'variables or an array of symbolic variables.']);
         end
@@ -135,7 +139,5 @@ function t = isVars(x)
 end
 
 
-function opts = getOptions(args)
-    
-end
+
     

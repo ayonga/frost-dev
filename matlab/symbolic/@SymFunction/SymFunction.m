@@ -1,8 +1,7 @@
-classdef SymProgram < handle 
-    % SymProgram is a symbolic operator that represents a symbolic
-    % function in the Mathematica Kernal.
-    %
-    %
+classdef SymFunction < SymExpression
+    % This class wraps a symbolic expression with additional information
+    % for the convenience of compiling and exporting the symbolic
+    % expression to a C/C++ source files.
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
@@ -12,143 +11,139 @@ classdef SymProgram < handle
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties (Access = protected)        
-        % An array of dependent variables
+    properties (SetAccess = protected, GetAccess = public)
+        % An identification name of the function
+        %
+        % @type char
+        Name
+        
+                
+        % The symbolic representation of the dependent variables 
         %
         % @type SymVariable
-        vars
+        Vars
+        
+        % The symbolic representation of the constant parameters 
+        %
+        % @type SymVariable
+        Params
+        
+        
+        
     end
     
-    properties (Access=protected)
-        % The body (or formula) of the symbolic expression
+    
+    properties (SetAccess = protected, GetAccess = public)
+        % The status flags of the SymFunction
         %
-        % @type char
-        f
+        % These flags stores the status of assignment, export and
+        % compilation of the associated symbolic function.
+        %
+        % @type struct
+        Status
     end
     
-    properties (GetAccess=protected, SetAccess=protected)
-        % The symbol that represents the symbolic expression
+    properties (SetAccess=private, GetAccess=public)
+        % File names of the functions.
         %
-        % @type char
-        s
+        % Each field of ''Funcs'' specifies the name of a function that
+        % used for a certain computation of the function.
+        %
+        % Required fields of funcs:
+        %   Func: a string of the function that computes the
+        %   function value @type char
+        %   Jac: a string of the function that computes the
+        %   function Jacobian @type char
+        %   JacStruct: a string of the function that computes the
+        %   sparsity structure of function Jacobian @type char
+        %   Hess: a string of the function that computes the
+        %   function Hessian @type char
+        %   HessStruct: a string of the function that computes the
+        %   sparsity structure of function Hessian @type char
+        % @type struct
+        Funcs
     end
+    
     
     methods
         
-        function obj = SymFunction(x, vars, description)
+        function obj = SymFunction(name, expr, vars, params)
             % The class constructor function.
             %
-            % Parameters:  
-            % x: the symbolic expression statement @type char
-            % vars: the array of dependent variables @type SymVariable
+            % Parameters:       
+            %  name: the name of the function. @type char   
+            %  expr: the symbolic expression of the function 
+            %  @type char
+            %  vars: the symbolic representation of variables in the
+            %  expression @type cell
+            %  params: the symbolic representation of parameters in the
+            %  expression @type cell
            
             
-            
-            if isnumeric(x) 
-                x = SymExpression(x);
-            elseif ischar(x)
-                x = SymExpression(x);
-            elseif ~isa(x,'SymExpression') 
-                error('First input must be a symbolic expression.');
-            end 
+            obj = obj@SymExpression(expr);
             
             
             
+            % validate name string
+            assert(isvarname(name), 'The name must be a char vector.');
+            obj.Name = name;
             
+            obj.Funcs = struct(...
+                'Jac', ['J_' obj.Name],...
+                'JacStruct', ['Js_' obj.Name],...
+                'Hess', ['H_' obj.Name],...
+                'HessStruct', ['Hs_' obj.Name]);
             
-            
-            
-            
-            
-            obj.s = eval_math('Unique[symfun$]');
-            obj.f = x.f;
-            
-            if nargin > 1
-                obj.vars = SymFunction.validateArgNames(vars);
-                
-                cvars = cellfun(@(x)x.f,privToCell(obj.vars),'UniformOutput',false);
-                svars = sprintf('%s_, ',cvars{:});
-                svars(end-1:end)=[];
-                fstr = [obj.s '[' svars ']'];
-            else
-                fstr = [obj.s '[]'];
-            end
-            
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            eval_math([fstr ':=' obj.f ';']);
             
             
             if nargin > 2
-                eval_math([obj.s '::usage=' str2mathstr(description) ';']);
+                if ~iscell(vars), vars = {vars}; end
+                assert(all(cellfun(@(x)isa(x,'SymVariable'), vars)),...
+                    'SymFunction:invalidVariables', ...
+                    'The dependent variables must be valid SymVariable objects.');
+                obj.Vars = vars;
+                % vars = cellfun(@(x)flatten(x), vars,'UniformOutput',false);
+                % obj.Vars = tovector([vars{:}]);
+            else
+                obj.Vars = {};
             end
-        end
-        
-        
-        function display(obj, namestr) %#ok<INUSD,DISPLAY>
-            % Display the symbolic expression
             
-            eval_math(['?' obj.s])
+            if nargin > 3
+                if ~iscell(params), params = {params}; end
+                assert(all(cellfun(@(x)isa(x,'SymVariable'), params)),...
+                    'SymFunction:invalidVariables', ...
+                    'The dependent variables must be valid SymVariable objects.');
+                obj.Params = params;
+                % params = cellfun(@(x)flatten(x), params,'UniformOutput',false);
+                % obj.Params = tovector([params{:}]);
+            else
+                obj.Params = {};
+            end
+            
+            obj.Status = struct();
+            obj.Status.FunctionExported = false;
+            obj.Status.JacobianExported = false;
+            obj.Status.HessianExported  = false;
+            
         end
         
-        function delete(obj) %#ok<INUSD>
-            % object destruction function
-            %             if ~isempty(obj.vars)
-            %
-            %                 cvars = cellfun(@(x)x.s,privToCell(obj.vars),'UniformOutput',false);
-            %                 svars = sprintf('%s_, ',cvars{:});
-            %                 svars(end-1:end)=[];
-            %                 fstr = [obj.s '[' svars ']'];
-            %             else
-            %                 fstr = [obj.s '[]'];
-            %             end
-            %             eval_math([fstr '=.;']);
-        end
         
         
-        function y = argnames(x)
-            %ARGNAMES   Symbolic function input variables
-            %   ARGNAMES(F) returns a sym array [X1, X2, ... ] of symbolic
-            %   variables for F(X1, X2, ...).
-            %
-            %   Example
-            %    syms f(x,y)
-            %    argnames(f)    % returns [x, y]
-            %
-            %   See also SYMFUN/FORMULA
-            y = x.vars;
-        end
-
         
-        
-
-        function varargout = subsindex(varargin)  %#ok<STOUT>
-            error('Indexing values must be positive integers, logicals or symbolic variables.');
-        end
-        
-        function varargout = end(varargin) %#ok<STOUT>
-            error('END is not a valid input for symbolic functions.');
-        end
     end
     
     
+   
+    
+    
+    
+   
     
     
     % methods defined in external files
-    methods (Hidden, Static)
+    methods
         
-        function args = validateArgNames(args)
-            %validateArgNames   When creating symfuns make sure the arguments are simple sym object names
-            % do not allow zero arguments
-            if ~isequal(class(args),'SymVariable') || ~builtin('isvector', args) || isempty(args)
-                error('Third input must be a scalar or vector of unique symbolic variables.');
-            end
-            args2 = unique(args);
-            if length(args2) ~= length(args)
-                error('Third input must be a scalar or vector of unique symbolic variables.');
-            end
-            
-        end
+        export(obj, export_path, derivative_level, do_build, reload);
         
     end
 end

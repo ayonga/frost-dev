@@ -4,9 +4,10 @@ function y = isvector(X)
     % Convert inputs to SymExpression
     X = SymExpression(X);
     
-    [m, n] = size(X);
-    
-    if m==1 || n==1
+    siz = size(X);
+    if numel(siz) == 1
+        y = true;
+    elseif numel(siz)==2 && (siz(1)==1 || siz(2)==1)
         y = true;
     else
         y = false;

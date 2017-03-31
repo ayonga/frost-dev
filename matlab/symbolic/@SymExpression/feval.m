@@ -8,5 +8,9 @@ function y = feval(obj)
     str = eval_math(obj.s);
     
     % return the updated object
-    y = SymExpression(str);
+    try
+        y = eval(str);
+    catch
+        y = str;
+    end
 end

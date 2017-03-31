@@ -54,8 +54,7 @@ classdef SymExpression < handle
                 case 'SymVariable'
                     obj.f = formula(x);
                 case 'SymFunction'
-                    symf = feval(x);
-                    obj.f = formula(symf);
+                    obj.f = formula(x);
                 case 'double'
                     if isscalar(x)
                         obj.f = num2str(x);
@@ -142,7 +141,7 @@ classdef SymExpression < handle
             y = max(size(A));
         end
         
-        function y = size(A)
+        function varargout = size(A)
             % The size of the symbolic expression tensor
             %
             % @see NUMEL, LENGTH
@@ -152,22 +151,31 @@ classdef SymExpression < handle
             
             if isempty(A.s)
                 y = [0,0];
-                return;
+            else
+                ret = eval_math(['Dimensions[',A.s,']']);
+            
+                y = cellfun(@(x)x, eval(ret));
+                
+                if isempty(y)
+                    y = [1, 1];
+                elseif isscalar(y) && y~=0
+                    y = [1, y];
+                elseif y == 0
+                    y = [0, 0];
+                end
             end
             
             
-            ret = eval_math(['Dimensions[',A.s,']']);
             
-            y = cellfun(@(x)x, eval(ret));
             
-            if isempty(y)
-                y = [1, 1];
-            elseif isscalar(y) && y~=0
-                y = [1, y];
-            elseif y == 0
-                y = [0, 0];                
+            if nargout == 0
+                varargout{1} = y;
+            elseif nargout == 1
+                varargout{1} = y;
+            else
+                varargout = num2cell(ones(1,nargout));
+                varargout([1:numel(y)]) = num2cell(y);
             end
-            
         end
         
         function status = isscalar(A)
@@ -229,7 +237,7 @@ classdef SymExpression < handle
             A = SymExpression(A);
             B = SymExpression(B);
             % construct the operation string
-            sstr = [A.s '+' B.s];
+            sstr = [A.s '-' B.s];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end % plus

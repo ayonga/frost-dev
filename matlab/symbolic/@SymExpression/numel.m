@@ -4,13 +4,13 @@ function y = numel(obj)
     %
     %   See also SYM, SIZE.
     
-    
-    if isempty(obj.s)
-        y = 0;
-        return;
-    end
-    
-    y = eval_math(['Dimensions[ToVectorForm@',obj.s,']'],'math2matlab');
+    y = builtin('numel',obj);
+    %     if isempty(obj.s)
+    %         y = 0;
+    %         return;
+    %     end
+    %
+    %     y = eval_math(['Dimensions[ToVectorForm@',obj.s,']'],'math2matlab');
 
     
 end

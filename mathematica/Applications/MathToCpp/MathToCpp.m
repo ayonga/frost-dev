@@ -206,16 +206,12 @@ ExportToCpp[name_String,expr_,vars_, OptionsPattern[]]:=
                  "statements"-> seqs,
                  "namespace"->OptionValue[Namespace]|>;
 		FileTemplateApply[tpl,assoc,cFile];
-		If[OptionValue[ExportHeaderFile],
-			FileTemplateApply[hdr,assoc,hFile];
-		];
-		
+		FileTemplateApply[hdr,assoc,hFile];		
 	];
 Options[ExportToCpp]={ExportDirectory->".",
                       TemplateFile->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.cc"}],
                       TemplateHeader->FileNameJoin[{DirectoryName[$InputFileName],"Template","template.hh"}],
-                      Namespace->"namespace",
-                      ExportHeaderFile->True};
+                      Namespace->"namespace"};
 
 
                       
@@ -300,7 +296,7 @@ Block[
     hessExprVec=Cases[hessExpr, Except[0], {2}];
     ExportToCpp["H_"<>name,{hessExprVec},{fvars,\[CapitalLambda]}];
    
-   	(* Extract the nonzero entris of the second order jacobian, and vectorize it *)
+   	(* Extract the nonzero entries of the second order jacobian, and vectorize it *)
     nzHess=Position[hessExpr, Except[0], {2}, Heads -> False];
     ExportToCpp["Hs_"<>name,{nzHess},{var}];
 ];
@@ -339,7 +335,7 @@ Block[
     hessExprVec=Cases[hessExpr, Except[0], {2}];
     ExportToCpp["H_"<>name,{hessExprVec},{fvars,\[CapitalLambda],fconsts}];
    
-   	(* Extract the nonzero entris of the second order jacobian, and vectorize it *)
+   	(* Extract the nonzero entries of the second order jacobian, and vectorize it *)
     nzHess=Position[hessExpr, Except[0], {2}, Heads -> False];
     ExportToCpp["Hs_"<>name,{nzHess},{var}];
 ];

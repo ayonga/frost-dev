@@ -33,6 +33,8 @@ classdef SymVariable < SymExpression
                     str = x.f;
                 elseif isequal(class(x),'SymExpression') %private use only
                     str = x.f;
+                elseif iscell(x)
+                    str = cell2tensor(x,'ConvertString',false);
                 else
                 
                     assert(ischar(x),...
