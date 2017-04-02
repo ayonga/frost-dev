@@ -1,11 +1,11 @@
-function obj = addConstraint(obj, label, nodes, cstr_array)
-    % Add NLP constraints constraints
+function obj = addCost(obj, label, nodes, cost_array)
+    % Add NLP object functions
     %
     %
     % Parameters:
     % label: the label name (row) of the constraint @type char
     % nodes: the node list of the variable @type rowvec
-    % cstr_array: an array of structures that could be used to construct
+    % cost_array: an array of structures that could be used to construct
     % the NlpFunction object. @type struct
     % 
     % @see NlpFunction
@@ -15,7 +15,7 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
     
     
     
-    cstr_names = obj.ConstrTable.Properties.VariableNames;
+    cstr_names = obj.CostTable.Properties.VariableNames;
     
     
     if ischar(nodes)
@@ -49,28 +49,28 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
     end
     
     
-    assert(length(node_list)==length(cstr_array),...
+    assert(length(node_list)==length(cost_array),...
         'The length of the array (%d) of constraint structures must be the same as the number of nodes (%d) to be imposed.',...
-        length(cstr_array),length(node_list));
+        length(cost_array),length(node_list));
     
     % create empty NlpVariable array
-    if isa(cstr_array,'NlpFunction')
-        constr = repmat(NlpFunction(),obj.NumNode,1);
+    if isa(cost_array,'NlpFunction')
+        costs = repmat(NlpFunction(),obj.NumNode,1);
         for j=1:numel(node_list)
-            constr(node_list(j)) = cstr_array(j);
+            costs(node_list(j)) = cost_array(j);
         end
-    elseif isstruct(cstr_array)
+    elseif isstruct(cost_array)
         
-        constr = repmat(NlpFunction(),obj.NumNode,1);
+        costs = repmat(NlpFunction(),obj.NumNode,1);
         for j=1:numel(node_list)
-            constr(node_list(j)) = NlpFunction(cstr_array(j));
+            costs(node_list(j)) = NlpFunction(cost_array(j));
         end
     end
     
     % add to the decision variable table
     if ismember(label,cstr_names)
-        obj.ConstrTable.(label)(node_list) = constr(node_list);
+        obj.CostTable.(label)(node_list) = costs(node_list);
     else
-        obj.ConstrTable.(label) = constr;
+        obj.CostTable.(label) = costs;
     end
 end

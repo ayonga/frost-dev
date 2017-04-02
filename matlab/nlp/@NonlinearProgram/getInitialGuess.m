@@ -15,16 +15,12 @@ function [x0] = getInitialGuess(obj, method)
     
     switch method
         case 'typical' %
-            x0_tmp = vertcat(cellfun(@(x)x.InitialValue, obj.VariableArray, 'UniformOutput', false));      
+            x0 = vertcat(obj.VariableArray.InitialValue);      
             
-            x0 = vertcat(x0_tmp{:});
         case 'random'
-            % get the upper/lower boundary values
-            lb = vertcat(cellfun(@(x)x.LowerBound, obj.VariableArray, 'UniformOutput', false));  
-            ub = vertcat(cellfun(@(x)x.UpperBound, obj.VariableArray, 'UniformOutput', false));  
-            
-            lb_tmp = vertcat(lb{:});
-            ub_tmp = vertcat(ub{:});
+            % get the upper/lower boundary values            
+            lb_tmp = vertcat(obj.VariableArray.LowerBound); 
+            ub_tmp = vertcat(obj.VariableArray.UpperBound); 
             
             % replace infinity with very high numbers
             lb_tmp(lb_tmp==-inf) = -1e5;

@@ -7,14 +7,24 @@ function [obj] = compileObjective(obj, export_path)
     
     
     
-    derivative_level = obj.Options.DerivativeLevel;
     
-    do_build = true;
+    opts = struct();
+    opts.StackVariable = true;
+    opts.ForceExport = false;
+    opts.BuildMex = true;
+    opts.Namespace = string(obj.Name);
     
+    deps_array_cell = arrayfun(@(x)getSummands(x), obj.CostArray, 'UniformOutput', false);
+    func_array = vertcat(deps_array_cell{:});
+    arrayfun(@(x)export(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
     
+    % first order derivatives (Jacobian)
+    if obj.Options.DerivativeLevel >= 1 
+        arrayfun(@(x)exportJacobian(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
+    end
     
-    func_array = cellfun(@(x)getDepObject(x), obj.CostArray, 'UniformOutput', false);
-    
-    cellfun(@(x)export(x.SymFun, export_path, derivative_level, do_build), ...
-        func_array, 'UniformOutput', false);
+    % second order derivatives (Hessian)
+    if obj.Options.DerivativeLevel >= 2 
+        arrayfun(@(x)exportHessian(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
+    end
 end

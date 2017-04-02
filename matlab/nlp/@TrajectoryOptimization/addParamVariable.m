@@ -54,7 +54,7 @@ function obj = addParamVariable(obj, bounds)
             [p_cstr.Type] = deal('Linear');
             [p_cstr.SymFun] = deal(p_cont);
             for i=1:obj.NumNode-1
-                p_cstr(i).DepVariables = [obj.OptVarTable.(p_name)(i),obj.OptVarTable.(p_name)(i+1)];
+                p_cstr(i).DepVariables = [obj.OptVarTable.(p_name)(i);obj.OptVarTable.(p_name)(i+1)];
             end
             
             % add to the NLP constraints table

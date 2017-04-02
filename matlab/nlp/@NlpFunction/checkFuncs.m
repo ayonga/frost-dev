@@ -13,8 +13,7 @@ function val = checkFuncs(obj, x, derivative_level)
     
     % test function
     if nargin < 2
-        x = vertcat(cellfun(@(x)x.InitialValue, obj.DepVariables, ...
-            'UniformOutput', false));
+        x = vertcat([obj.DepVariables.InitialValue]);
     end
     
     if nargin < 3

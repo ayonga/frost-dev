@@ -1,4 +1,4 @@
-function c = norm(A,p)
+function c = norm(A,p,is_real)
     % norm   Norm of a symbolic matrix or vector
     %
     %  For a symbolic matrix A
@@ -31,6 +31,11 @@ function c = norm(A,p)
     %
     %   See also cond, inv, norm, rank.
   
+    % if all symbolic variables are real 
+    if nargin < 3
+        is_real = true;
+    end
+    
     % Convert inputs to SymExpression
     A = SymExpression(A);
     
@@ -54,17 +59,21 @@ function c = norm(A,p)
     
     if isempty(A)
         c = SymExpression(0);
-    elseif isnumeric(p) && p~=inf
-        sstr = ['Norm[' A.s ',' num2str(p) ']'];
-        c = SymExpression(sstr);
-    elseif ischar(p) && strcmp(p,'fro')
-        sstr = ['Norm[' A.s ',"Frobenius"]'];
-        c = SymExpression(sstr);
-    elseif (ischar(p) && strcmp(p,'inf')) || p == inf
-        sstr = ['Norm[' A.s ',Infinity]'];
-        c = SymExpression(sstr);
     else
-        error(message('symbolic:sym:norm:InvalidMatrixNorm'));
+        if isnumeric(p) && p~=inf
+            sstr = ['Norm[' A.s ',' num2str(p) ']'];            
+        elseif ischar(p) && strcmp(p,'fro')
+            sstr = ['Norm[' A.s ',"Frobenius"]'];
+        elseif (ischar(p) && strcmp(p,'inf')) || p == inf
+            sstr = ['Norm[' A.s ',Infinity]'];
+        else
+            error(message('symbolic:sym:norm:InvalidMatrixNorm'));
+        end
+        
+        if is_real
+            sstr = ['Refine[' sstr ', Element[Flatten@' A.s ', Reals]]'];
+        end
+        c = SymExpression(sstr);
     end
-    
+    % sstr = ['Refine[Norm[' A.s ',' num2str(p) '], Element[Flatten@' A.s ', Reals]]'];
 end

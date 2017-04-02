@@ -44,19 +44,12 @@ classdef NlpFunctionSum < NlpFunction
             %
             % Parameters:
             % deps: dependent objects  @type NlpFunction
-            if ~iscell(deps)
-                deps = {deps};
-            end
             
-            % validate dependent arguments
-            check_object = @(x) ~isa(x,'NlpFunction');
             
-            if any(cellfun(check_object,deps))
+            if ~isa(deps,'NlpFunction')
                 error('NlpFunctionSum:invalidObject', ...
                     'There exist non-NlpFunction objects in the dependent functions list.');
             end
-            
-            
             
             obj.Dependents = deps(:);
         end
@@ -70,25 +63,25 @@ classdef NlpFunctionSum < NlpFunction
             assert(length(index) == obj.Dimension, ...
                 'The length of the variable indices must be equal to the dimension of the NlpVariable object.');
             
-            obj.Dependents = cellfun(@(x) setFuncIndices(x, index), ...
+            obj.Dependents = arrayfun(@(x) setFuncIndices(x, index), ...
                 obj.Dependents, 'UniformOutput', false);
             
             obj.FuncIndices = index;
         end
         
+        
+        
+       
         function deps = getDepObject(obj)
             % Returns the object of the dependent function
             %
             % Return values: 
             % deps: the dependent objects 
             
-            deps = cellfun(@(x)getDepObject(x), obj.Dependents,...
+            deps = arrayfun(@(x)getDepObject(x), obj.Dependents,...
                 'UniformOutput', false);
             deps = vertcat(deps{:});
         end
-        
-       
-        
     end
     
     

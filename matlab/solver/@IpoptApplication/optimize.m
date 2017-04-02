@@ -19,8 +19,8 @@ function [sol, info] = optimize(obj, x0)
     opts = struct;
     opts.lb = lb;
     opts.ub = ub;
-    opts.cl = vertcat(obj.Constraint.LowerBound{:});
-    opts.cu = vertcat(obj.Constraint.UpperBound{:});
+    opts.cl = vertcat(obj.Constraint.LowerBound);
+    opts.cu = vertcat(obj.Constraint.UpperBound);
     opts.ipopt = obj.Options.ipopt;
     
     

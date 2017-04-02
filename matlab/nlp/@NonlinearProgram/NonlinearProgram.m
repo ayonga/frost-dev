@@ -16,7 +16,10 @@ classdef NonlinearProgram < handle
     
     %% Protected properties
     properties (SetAccess=protected, GetAccess=public)
-        
+        % The name of the problem
+        %
+        % @type char
+        Name
         
         % The class option
         %
@@ -60,12 +63,13 @@ classdef NonlinearProgram < handle
     %% Public methods
     methods
         
-        function obj = NonlinearProgram()
+        function obj = NonlinearProgram(name)
             % The default class constructor function
             %
             % Parameters: 
-            %  varargin: non-default configuration options. It will overwrite
-            %        the default options @type struct
+            %  name: the name of the problem
+            
+            obj.Name = name;
             
             
             

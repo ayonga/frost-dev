@@ -37,7 +37,11 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
         % @type NlpVariable
         DepVariables
                 
-        
+        % An array of summand NlpFunctions that are to be summed up to get
+        % the current NLP function
+        %
+        % @type NlpFunction
+        SummandFunctions
         
         % Stores the indices of the function
         %
@@ -231,28 +235,52 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
             if isfield(argin, 'AuxData')
                 obj = setAuxdata(obj, argin.AuxData);
             end
+            
+            if isfield(argin, 'Summand')
+                obj = setSummands(obj, argin.Summand);
+            end
         end
         
-        function deps = getDepObject(obj)
+        function funcs = getSummands(obj)
             % Returns the object of the dependent function
             %
             % For most of the function object, the dependent object is
             % itself.
             %
             % Return values: 
-            % deps: the dependent objects 
+            % funcs: the summand function objects @type NlpFunction
             
-            deps = {obj};
+            if isempty(obj.SummandFunctions)
+                funcs = obj;
+            else
+                funcs = arrayfun(@(x)getSummands(x), obj.SummandFunctions,...
+                    'UniformOutput', false);
+                funcs = vertcat(funcs{:});
+            end
             
         end
 
+        function obj = setSummands(obj, summands)
+            % Sets dependent objects of the Nlp Function
+            %
+            % Parameters:
+            % summands: the summand function objects @type NlpFunction
+            
+            
+            if ~isa(summands,'NlpFunction')
+                error('NlpFunctionSum:invalidObject', ...
+                    'There exist non-NlpFunction objects in the dependent functions list.');
+            end
+            
+            obj.SummandFunctions = summands(:);
+        end
+        
         function indices = getDepIndices(obj)
             % Returns the indices of the dependent variables
             %
             % Return values:
             % indices: the indices of dependent variables @type colvec
-            indices = vertcat(cellfun(@(x)x.Indices, obj.DepVariables, ...
-                'UniformOutput', false));
+            indices = vertcat(obj.DepVariables.Indices);
         end
         
         
@@ -284,6 +312,16 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
         obj = setBoundary(obj, cl, cu);
         
         obj = updateProp(obj, varargin);
+        
+        val = checkFuncs(obj, x, derivative_level);
+        
+        obj = setDimension(obj, dim);
+        
+        obj = setFuncIndices(obj, index);
+        
+        obj = setFuncs(obj, funcs);
+        
+        obj = setSymFun(obj, symfun);
         
     end
 end

@@ -1,79 +1,98 @@
-function obj = addRunningCost(obj, func)
+function obj = addRunningCost(obj, func, deps)
     % Add a running cost to the problem
     %
     % Parameters:
-    % phase: the index of the phase (domain) @type integer
     % func: a symbolic function to be integrated @type SymFunction
-    %
-    % @todo complete the implementation for other schemes
-    
-    assert(isa(func,'SymFunction'),...
-        'The second argument must be a SymFunction.');
-    
-    phase_idx = getPhaseIndex(obj, phase);
-    phase_info = obj.Phase{phase_idx};
-
-
-    n_node = phase_info.NumNode;
-    col_names = phase_info.CostTable.Properties.VariableNames;
-    var_table= phase_info.OptVarTable;
-    cost  = repmat({{}},1, n_node);
+    % deps: a list of dependent variables @type cellstr
     
     
-    cost_terminal = SymFunction('Name',[func.Name,'_terminal'],...
-        'Expression',['((T/(nNode-1))/6)*',func.Expression]);
-    cost_terminal = setDepSymbols(cost_terminal, [{'T'},func.DepSymbols]);
-    cost_terminal = setPreCommands(cost_terminal, func.PreCommands);
-    cost_terminal = setDescription(cost_terminal, [func.Description,'(terminal)']);
-    cost_terminal = setParSymbols(cost_terminal,{'nNode'});
-    obj.Funcs.Phase{phase_idx}.([func.Name,'_terminal']) = cost_terminal;
+    % basic information of NLP decision variables
+    nNode  = obj.NumNode;
+    vars   = obj.OptVarTable;
+    if ~iscell(deps), deps = {deps}; end
     
-    cost_interior = SymFunction('Name',[func.Name,'_interior'],...
-        'Expression',['(2(T/(nNode-1))/3)*',func.Expression]);
-    cost_interior = setDepSymbols(cost_interior, [{'T'},func.DepSymbols]);
-    cost_interior = setPreCommands(cost_interior, func.PreCommands);
-    cost_interior = setDescription(cost_interior, [func.Description,'(interior)']);
-    cost_interior = setParSymbols(cost_interior,{'nNode'});
-    obj.Funcs.Phase{phase_idx}.([func.Name,'_interior']) = cost_interior;
+    siz = size(func);
+    assert(isa(func,'SymFunction') && prod(siz)==1,...
+        'The second argument must be a scalar SymFunction object.'); %#ok<PSIZE>
     
     
-    % nlp function for terminal nodes
-    cost{1} = {NlpFunction('Name',cost_terminal.Name,...
-        'Dimension',1, 'Type', 'nonlinear','DepVariables',...
-        {horzcat({var_table{'T',1}{1}},...
-        cellfun(@(x)var_table{x,1}{1},func.DepSymbols,'UniformOutput',false))},...
-        'AuxData', n_node,...
-        'Funcs', obj.Funcs.Phase{phase_idx}.([func.Name,'_terminal']).Funcs)};
-        
-    if obj.Options.DistributeParamWeights
-        node_time = n_node;
+    
+    T  = SymVariable('ts');
+    N = SymVariable('nNode');
+    
+    
+    
+    
+    
+    cost(nNode) = struct();
+    [cost.Name] = deal(func.Name);
+    [cost.Dimension] = deal(1);
+    [cost.Type] = deal('Nonlinear');
+    
+    
+    if isnan(obj.Options.ConstantTimeHorizon)
+    
+        dep_vars = [{T},func.Vars];
+        dep_params = {N};
+        [cost.AuxData] = deal(nNode);
     else
-        node_time = 1;
+        dep_vars = func.Vars;
+        dep_params = {T,N};
+        [cost.AuxData] = deal([obj.Options.ConstantTimeHorizon, nNode]);
     end
-    cost{n_node} = {NlpFunction('Name',cost_terminal.Name,...
-        'Dimension',1, 'Type', 'nonlinear','DepVariables',...
-        {horzcat({var_table{'T',node_time}{1}},...
-        cellfun(@(x)var_table{x,n_node}{1},func.DepSymbols,'UniformOutput',false))},...
-        'AuxData', n_node,...
-        'Funcs', obj.Funcs.Phase{phase_idx}.([func.Name,'_terminal']).Funcs)};
-    
-    % nlp function for interior nodes
-    for i=2:n_node-1
-        if obj.Options.DistributeParamWeights
-            node_time = i;
-        else
-            node_time = 1;
-        end
-        cost{i} = {NlpFunction('Name',cost_interior.Name,...
-            'Dimension',1, 'Type', 'nonlinear','DepVariables',...
-            {horzcat({var_table{'T',node_time}{1}},...
-            cellfun(@(x)var_table{x,i}{1},func.DepSymbols,'UniformOutput',false))},...
-            'AuxData', n_node,...
-            'Funcs', obj.Funcs.Phase{phase_idx}.([func.Name,'_interior']).Funcs)};
+    switch obj.Options.CollocationScheme
+        case 'HermiteSimpson'
+            cost_terminal = SymFunction([func.Name,'_terminal'],...
+                ((T./(N-1))./6).*func, dep_vars, dep_params);
+            cost_interior = SymFunction([func.Name,'_interior'],...
+                (2.*(T./(N-1))./3).*func, dep_vars, dep_params);
+            
+            % first node
+            cost(1).SymFun = cost_terminal;
+            if isnan(obj.Options.ConstantTimeHorizon)
+                dep_vars = [{vars.T(1)},cellfun(@(x)vars.(x)(1),deps,'UniformOutput',false)];
+            else
+                dep_vars = cellfun(@(x)vars.(x)(1),deps,'UniformOutput',false);
+            end
+            cost(1).DepVariables = vertcat(dep_vars{:});
+            
+            % last node
+            cost(nNode).SymFun = cost_terminal;
+            if isnan(obj.Options.ConstantTimeHorizon)
+                if obj.Options.DistributeTimeVariable
+                    dep_vars = [{vars.T(nNode)},cellfun(@(x)vars.(x)(nNode),deps,'UniformOutput',false)];
+                else
+                    dep_vars = [{vars.T(1)},cellfun(@(x)vars.(x)(nNode),deps,'UniformOutput',false)];
+                end
+            else
+                dep_vars = cellfun(@(x)vars.(x)(nNode),deps,'UniformOutput',false);                
+            end
+            cost(nNode).DepVariables = vertcat(dep_vars{:});
+            
+            
+            % nlp function for interior nodes
+            for i=2:nNode-1
+                if obj.Options.DistributeTimeVariable
+                    node_time = i;
+                else
+                    node_time = 1;
+                end
+                cost(i).SymFun = cost_interior;
+                if isnan(obj.Options.ConstantTimeHorizon)
+                    dep_vars = [{vars.T(node_time)},cellfun(@(x)vars.(x)(i),deps,'UniformOutput',false)];
+                else
+                    dep_vars = cellfun(@(x)vars.(x)(i),deps,'UniformOutput',false);
+                end
+                cost(i).DepVariables = vertcat(dep_vars{:});
+            end
+        case 'Trapzoidal'
+            error('Not yet implemented.')
+            
+        case 'PseudoSpectral'
+            error('Not yet implemented.')
     end
     
-    % add to cost table
-    obj.Phase{phase_idx}.CostTable = [...
-        obj.Phase{phase_idx}.CostTable;...
-        cell2table(cost,'RowNames',{func.Name},'VariableNames',col_names)];
+    
+    
+    obj = addCost(obj,func.Name,'all',cost);
 end

@@ -81,7 +81,7 @@ function obj = addDynamicsConstraint(obj)
             dep_func{j} = NlpFunction(f_cstr{j}(i));
         end
         
-        dynamics(i).DependentFuncs = dep_func;
+        dynamics(i).Summand = vertcat(dep_func{:});
         
         
     end

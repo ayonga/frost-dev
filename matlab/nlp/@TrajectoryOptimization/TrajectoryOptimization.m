@@ -72,10 +72,11 @@ classdef TrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = TrajectoryOptimization(plant, num_grid, varargin)
+        function obj = TrajectoryOptimization(name, plant, num_grid, varargin)
             % The constructor function
             %
             % Parameters:
+            % name: the name of the problem @type char
             % plant: the dynamical system plant @type DynamicalSystem
             % num_grid: the number of grids along the trajectory 
             % @type integer
@@ -84,7 +85,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             
             
             % call superclass constructor
-            obj = obj@NonlinearProgram();
+            obj = obj@NonlinearProgram(name);
             
             % check the type of the plant
             assert(isa(plant, 'DynamicalSystem'),...
@@ -115,7 +116,7 @@ classdef TrajectoryOptimization < NonlinearProgram
                    
             % the default number of grids
             N = TrajectoryOptimization.DefaultNumberOfGrid;
-            if nargin > 1
+            if nargin > 2
                 if ~isempty(num_grid)
                     % if non-default number of grids is specified, use that
                     assert(isscalar(num_grid) && isreal(num_grid) && rem(num_grid,1) == 0 && num_grid > 0,...
@@ -195,23 +196,14 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addCollocationConstraint(obj);
         
-        obj = addDomainConstraint(obj);
-        
-        obj = addDynamicsConstraint(obj);
-        
-        obj = addJumpConstraint(obj);
+        obj = addDynamicsConstraint(obj);  
 
-        obj = addOutputConstraint(obj)
         
-        obj = addParamConstraint(obj);
+        obj = addConstraint(obj, label, nodes, cstr_array);
         
-        obj = addConstraint(obj, label, nodes, varargin);
+        obj = addCost(obj, label, nodes, cost_array);
         
-        obj = addRunningCost(obj, func);
-        
-        obj = addTerminalCost(obj, name, func, deps, nodes, auxdata)
-        
-        phase_idx = getPhaseIndex(obj);
+        obj = addRunningCost(obj, func, deps);
         
         [yc, cl, cu] = checkConstraints(obj, x);
         

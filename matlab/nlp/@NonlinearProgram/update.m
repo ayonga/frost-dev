@@ -11,11 +11,10 @@ function [obj] = update(obj)
     num_vars = numel(obj.VariableArray);
 
     for i = 1:num_vars
-        dim = obj.VariableArray{i}.Dimension;
+        dim = obj.VariableArray(i).Dimension;
         
         % set the index
-        obj.VariableArray{i} = setIndices(obj.VariableArray{i},...
-            index_offset + cumsum(ones(dim, 1)));
+        setIndices(obj.VariableArray(i),index_offset + cumsum(ones(dim, 1)));
 
         % increments (updates) offset
         index_offset = index_offset + dim;

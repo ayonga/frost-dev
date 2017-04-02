@@ -70,18 +70,18 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
             for i=1:num_obj
                 % set the indices of constraints
                 func_indics = func_index_offset + ...
-                    cumsum(ones(1,func_array{i}.Dimension));
+                    cumsum(ones(1,func_array(i).Dimension));
                 func_index_offset = func_indics(end);
-                func_array{i} = setFuncIndices(func_array{i}, func_indics);
+                func_array(i) = setFuncIndices(func_array(i), func_indics);
                 
             end
         case 'sum'
             % Typically used for objective functions
-            dim = func_array{1}.Dimension;
+            dim = func_array(1).Dimension;
             for i=1:num_obj
                 % set the indices of constraints
                 func_indics = cumsum(ones(1,dim));
-                func_array{i} = setFuncIndices(func_array{i}, func_indics);
+                func_array(i) = setFuncIndices(func_array(i), func_indics);
                 
             end
         otherwise
@@ -89,31 +89,31 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     end
     
     % construct a new cell array of the dependent objects
-    deps_array_cell = cellfun(@(x)getDepObject(x), func_array, 'UniformOutput', false);
+    deps_array_cell = arrayfun(@(x)getSummands(x), func_array, 'UniformOutput', false);
     deps_array = vertcat(deps_array_cell{:});
     n_deps = length(deps_array);
     for i=1:n_deps
-        if isempty(deps_array{i}.JacPattern)
-            js = feval(deps_array{i}.Funcs.JacStruct,0);
-            deps_array{i} = setJacobianPattern(deps_array{i},js,'IndexForm');
+        if isempty(deps_array(i).JacPattern)
+            js = feval(deps_array(i).Funcs.JacStruct,0);
+            deps_array(i) = setJacobianPattern(deps_array(i),js,'IndexForm');
         end
     end
     % initialize the output structure based on the deps_array.
     func_struct = struct;
     
     func_struct.numFuncs = length(deps_array);    
-    func_struct.nnzJac = sum(cellfun(@(x) x.nnzJac, deps_array));
+    func_struct.nnzJac = sum([deps_array.nnzJac]);
     
     
     
     % convert the array of objects into a structure of arrays
-    func_struct.Names = cellfun(@(x) x.Name, deps_array, 'UniformOutput', false);
-    func_struct.Funcs = cellfun(@(x) x.Funcs.Func, deps_array, 'UniformOutput', false);
-    func_struct.JacFuncs = cellfun(@(x) x.Funcs.Jac, deps_array, 'UniformOutput', false);  
-    dep_indices = cellfun(@(x) getDepIndices(x), deps_array, 'UniformOutput', false);
-    func_struct.DepIndices = cellfun(@(x)(vertcat(x{:})),dep_indices,'UniformOutput',false);
-    func_struct.AuxData = cellfun(@(x) x.AuxData, deps_array, 'UniformOutput', false);
-    func_struct.FuncIndices = cellfun(@(x) x.FuncIndices, deps_array, 'UniformOutput', false);
+    func_struct.Names = arrayfun(@(x) x.Name, deps_array, 'UniformOutput', false);
+    func_struct.Funcs = arrayfun(@(x) x.Funcs.Func, deps_array, 'UniformOutput', false);
+    func_struct.JacFuncs = arrayfun(@(x) x.Funcs.Jac, deps_array, 'UniformOutput', false);  
+    dep_indices = arrayfun(@(x) getDepIndices(x), deps_array, 'UniformOutput', false);
+    func_struct.DepIndices = cellfun(@(x)(vertcat(x)),dep_indices,'UniformOutput',false);
+    func_struct.AuxData = arrayfun(@(x) x.AuxData, deps_array, 'UniformOutput', false);
+    func_struct.FuncIndices = arrayfun(@(x) x.FuncIndices, deps_array, 'UniformOutput', false);
     % preallocate
     func_struct.nzJacRows = zeros(func_struct.nnzJac,1);
     func_struct.nzJacCols = zeros(func_struct.nnzJac,1);
@@ -121,8 +121,8 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     
     % if user-defined Hessian functions are provided
     if derivative_level == 2         
-        func_struct.HessFuncs =  cellfun(@(x) x.Funcs.Hess, deps_array, 'UniformOutput', false);
-        func_struct.nnzHess = sum(cellfun(@(x) x.nnzHess, deps_array));
+        func_struct.HessFuncs =  arrayfun(@(x) x.Funcs.Hess, deps_array, 'UniformOutput', false);
+        func_struct.nnzHess = sum([deps_array.nnzHess]);
         func_struct.nzHessRows = ones(func_struct.nnzHess,1);
         func_struct.nzHessCols = ones(func_struct.nnzHess,1);
         func_struct.nzHessIndices = cell(func_struct.numFuncs,1);
@@ -140,14 +140,14 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
         
         % set the indices of non-zero Jacobian elements
         jac_index = jac_index_offset + ...
-            cumsum(ones(1,deps_array{i}.nnzJac));
+            cumsum(ones(1,deps_array(i).nnzJac));
         jac_index_offset = jac_index(end);
         func_struct.nzJacIndices{i} = jac_index;
         
         % get the sparsity pattern (i.e., the indices of non-zero elements)
         % of the Jacobian of the current function
        
-        jac_pattern = deps_array{i}.JacPattern;
+        jac_pattern = deps_array(i).JacPattern;
         % retrieve the indices of dependent variables 
         dep_indices = func_struct.DepIndices{i};
         func_indics = func_struct.FuncIndices{i};
@@ -161,21 +161,20 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
         
         if derivative_level == 2 
             % if user-defined Hessian functions are provided
-            func_struct.nnzHess =  sum(cellfun(@(x) x.nnzHess, deps_array));
             hes_index = hes_index_offset + ...
-                cumsum(ones(1,deps_array{i}.nnzHess));
+                cumsum(ones(1,deps_array(i).nnzHess));
             if ~isempty(hes_index)
                 hes_index_offset = hes_index(end);
                 % set the indices of non-zero Hessian elements
                 func_struct.nzHessIndices{i} = hes_index;
                 % get the sparsity pattern (i.e., the indices of non-zero elements)
                 % of the Jacobian of the current function
-                if isempty(deps_array{i}.HessPattern)
-                    hs = feval(deps_array{i}.Funcs.HesStruct,0);
-                    deps_array{i} = setHessianPattern(deps_array{i},hs,'IndexForm');
-                    hess_pattern = deps_array{i}.HessPattern;
+                if isempty(deps_array(i).HessPattern)
+                    hs = feval(deps_array(i).Funcs.HesStruct,0);
+                    deps_array(i) = setHessianPattern(deps_array(i),hs,'IndexForm');
+                    hess_pattern = deps_array(i).HessPattern;
                 else
-                    hess_pattern = deps_array{i}.HessPattern;
+                    hess_pattern = deps_array(i).HessPattern;
                 end
                 
                 func_struct.nzHessRows(hes_index) = dep_indices(hess_pattern.Rows);
@@ -186,11 +185,10 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     
     % Get the dimension and boundary values from the orignial function
     % array (not dependent array)
-    func_struct.Dimension = sum(cellfun(@(x) x.Dimension, func_array));
-    func_struct.LowerBound = vertcat(cellfun(@(x)x.LowerBound, func_array,...
-        'UniformOutput', false));
-    func_struct.UpperBound = vertcat(cellfun(@(x)x.UpperBound, func_array,...
-        'UniformOutput', false));
+    func_struct.Dimension = sum([func_array.Dimension]);
+    func_struct.LowerBound = vertcat(func_array.LowerBound);
+    func_struct.UpperBound = vertcat(func_array.UpperBound);
+    
     
 end
 

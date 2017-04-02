@@ -19,7 +19,7 @@ function obj = setDependentVariable(obj, depvars)
             'The dimensions of the dependent variables do not match.');
     end
     
-    obj.DepVariables = depvars;
+    obj.DepVariables = depvars(:);
 
     
     

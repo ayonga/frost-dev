@@ -5,29 +5,39 @@ function [obj] = regVariable(obj, vars)
     % Parameters:
     %  vars: new NLP variables @type NlpVariable 
     %
-    % @note We always assume ''vars'' to be a 2-D array or table consists
-    % of cell or objects. It also covers 1-D array or scalar variables.
+    % @note We always assume ''vars'' to be a 2-D array of objects or table
+    % consists of array objects. It also covers 1-D array or scalar
+    % variables.
+    
+    
     
     
     if iscell(vars)
-        assert(all(cellfun(@(x)isa(x,'NlpVariable'), vars(:))), ...
-            'Each variable must be an object of ''NlpVariable'' class or inherited subclasses');
+        % validate the class of each objects
+        assert(all(cellfun(@(x)isa(x,'NlpVariable'), vars)), ...
+            'Each variable must be an object of ''NlpVariable'' class');
         
-        obj.VariableArray = [obj.VariableArray; vars(:)];
+        % remove empty (Dimension==0) objects from the the array
+        vars = vars(~cellfun(@(x)x.Dimension==0,vars));
+        % contecate to the variable array
+        obj.VariableArray = [obj.VariableArray; vertcat(vars{:})];
     
     elseif isa(vars, 'NlpVariable')
-        obj.VariableArray = [obj.VariableArray; arrayfun(@(x){x}, vars(:))];
+        
+        % remove empty (Dimension==0) objects from the the array
+        vars = vars(~arrayfun(@(x)x.Dimension==0,vars));
+        
+        % contecate to the variable array
+        obj.VariableArray = [obj.VariableArray; vars(:)];
     elseif istable(vars)
         
-        % convert table content to cell array
-        tmp = table2cell(vars);
-        % remove empty cells from the cell array
-        tmp_new = tmp(~cellfun('isempty',tmp));
+        % convert table content to an array
+        vars = transpose(table2array(vars));
+        % remove empty (Dimension==0) objects from the the array
+        vars = vars(~arrayfun(@(x)x.Dimension==0,vars));
         
-        assert(all(cellfun(@(x)isa(x,'NlpVariable'), tmp_new(:))), ...
-            'Each variable must be an object of ''NlpVariable'' class or inherited subclasses');
-        
-        obj.VariableArray = [obj.VariableArray; tmp_new(:)];
+        % contecate to the variable array
+        obj.VariableArray = [obj.VariableArray; vars(:)];
         
     else
         error('Unsupported variable type found: %s\n', class(vars));

@@ -50,7 +50,7 @@ function obj = addTimeVariable(obj, bounds)
         [t_cstr.Type] = deal('Linear');
         [t_cstr.SymFun] = deal(t_cont);
         for i=1:obj.NumNode-1
-            t_cstr(i).DepVariables = [obj.OptVarTable.T(i),obj.OptVarTable.T(i+1)];
+            t_cstr(i).DepVariables = [obj.OptVarTable.T(i);obj.OptVarTable.T(i+1)];
         end
         
         % add to the NLP constraints table
