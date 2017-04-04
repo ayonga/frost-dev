@@ -26,11 +26,11 @@ function obj = configureVariables(obj, bounds)
     % states as the decision variables
     obj.addStateVariable(bounds.states);
     
-    if ~isempty(obj.Plant.Inputs)
+    if ~isempty(fieldnames(obj.Plant.Inputs))
         obj.addInputVariable(bounds.inputs);
     end
     
-    if ~isempty(obj.Plant.Params)
+    if ~isempty(fieldnames(obj.Plant.Params))
         obj.addParamVariable(bounds.params);
     end
 end

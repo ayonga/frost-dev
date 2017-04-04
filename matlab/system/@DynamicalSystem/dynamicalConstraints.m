@@ -1,5 +1,5 @@
 function ret = dynamicalConstraints(obj)
-    % This function will return the symbolic expression (SynNlpFunction) of
+    % This function will return the symbolic expression (SymFunction) of
     % the system dynamical equation constraints for the dynamical system object.
     %
     % @note We return a group of symbolic vector expressions -M(x)*dx,

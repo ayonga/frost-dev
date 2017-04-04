@@ -10,6 +10,6 @@ function obj = addParam(obj, varargin)
     assert(all(cellfun(@(x)isa(x,'SymVariable'),struct2cell(pars))), ...
         'The parameter fields must be a SymVariable object.');
     
-    obj.Params = pars;
+    obj.Params = struct_overlay(obj.Params,pars,{'AllowNew',true});
     
 end

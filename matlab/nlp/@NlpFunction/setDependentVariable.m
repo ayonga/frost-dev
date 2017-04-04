@@ -12,7 +12,8 @@ function obj = setDependentVariable(obj, depvars)
 
 
     if ~isempty(obj.SymFun)
-        nvar1 = length(obj.SymFun.Vars);
+        vars = cellfun(@(x)flatten(x), obj.SymFun.Vars,'UniformOutput',false);        
+        nvar1 = length([vars{:}]);
         nvar2 = sum([depvars.Dimension]);
         
         assert(nvar1 == nvar2,...

@@ -103,7 +103,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             ip.addParameter('ConstantTimeHorizon',NaN,@(x) isreal(x) && x>=0);
             ip.addParameter('IsPeriodic',false,@(x) isequal(x,true) || isequal(x,false));
             ip.addParameter('DerivativeLevel',1,@(x) x==0 || x==1 || x==2);
-            ip.addParameter('EqualityConstraintBoundary',0,@(x) isreal(x,true) && x >= 0);
+            ip.addParameter('EqualityConstraintBoundary',0,@(x) isreal(x) && x >= 0);
             ip.parse(varargin{:});
             obj.Options = ip.Results;
             % default options
@@ -193,23 +193,32 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         % functions related to NLP constraints
         
+        obj = addConstraint(obj, label, nodes, cstr_array);
         
         obj = addCollocationConstraint(obj);
         
         obj = addDynamicsConstraint(obj);  
 
+        obj = addOutputRD2Constraint(obj,params,ddx);
         
-        obj = addConstraint(obj, label, nodes, cstr_array);
+        obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata);
+        % functions related to NLP cost functions        
         
         obj = addCost(obj, label, nodes, cost_array);
         
-        obj = addRunningCost(obj, func, deps);
+        obj = addRunningCost(obj, func, deps, auxdata);
         
+        obj = addNodeCost(obj, func, deps, node, auxdata);
+        
+        
+        % post-processing functions
         [yc, cl, cu] = checkConstraints(obj, x);
         
         [xc, lb, ub] = checkVariables(obj, x);
         
-        [calcs, params] = exportSolution(obj, sol);
+        [yc] = checkCosts(obj, x);
+        
+        [tspan, states, inputs, params] = exportSolution(obj, sol, t0)
     end
 end
 

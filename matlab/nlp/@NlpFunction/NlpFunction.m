@@ -200,23 +200,33 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
             end
             
             if isfield(argin, 'Type')
-                obj = setType(obj, argin.Type);
+                if ~isempty(argin.Type)
+                    obj = setType(obj, argin.Type);
+                end
             end            
             
             if isfield(argin, 'Dimension')
-                obj = setDimension(obj, argin.Dimension);
+                if ~isempty(argin.Dimension)
+                    obj = setDimension(obj, argin.Dimension);
+                end
             end
             
             if isfield(argin, 'DepVariables')
-                obj = setDependentVariable(obj, argin.DepVariables);
+                if ~isempty(argin.DepVariables)
+                    obj = setDependentVariable(obj, argin.DepVariables);
+                end
             end
             
             if isfield(argin, 'Funcs')
-                obj = setFuncs(obj, argin.Funcs);
+                if ~isempty(argin.Funcs)
+                    obj = setFuncs(obj, argin.Funcs);
+                end
             end
             
             if isfield(argin, 'SymFun')
-                obj = setSymFun(obj, argin.SymFun);
+                if ~isempty(argin.SymFun)
+                    obj = setSymFun(obj, argin.SymFun);
+                end                
             end
             
             
@@ -233,11 +243,15 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
             
             
             if isfield(argin, 'AuxData')
-                obj = setAuxdata(obj, argin.AuxData);
+                if ~isempty(argin.AuxData)
+                    obj = setAuxdata(obj, argin.AuxData);
+                end
             end
             
             if isfield(argin, 'Summand')
-                obj = setSummands(obj, argin.Summand);
+                if ~isempty(argin.Summand)
+                    obj = setSummands(obj, argin.Summand);
+                end
             end
         end
         

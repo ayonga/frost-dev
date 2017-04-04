@@ -40,10 +40,10 @@ function obj = addParamVariable(obj, bounds)
             
             % add an equality constraint between the time variable at
             % neighboring nodes to make sure they are same
-            p   = SymVariable(transpose(flatten(params.(p_name))));
+            p   = flatten(params.(p_name));
             siz = size(p);
             pn  = SymVariable([p_name 'n'],siz);
-            p_cont = SymFunction([p_name 'Cont_' obj.Plant.Name],p-pn,{p,pn});
+            p_cont = SymFunction([p_name 'Cont_' obj.Plant.Name],transpose(p-pn),{p,pn});
             % create an array of constraints structure
             p_cstr = struct();
             p_cstr(obj.NumNode-1) = struct();

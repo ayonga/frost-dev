@@ -9,7 +9,8 @@ function obj = setAuxdata(obj, auxdata)
         'The auxilary input argument must be a vector of numeric values.');
     
     if ~isempty(obj.SymFun)
-        nvar1 = length(obj.SymFun.Params);
+        params = cellfun(@(x)flatten(x), obj.SymFun.Params,'UniformOutput',false);        
+        nvar1 = length([params{:}]);
         nvar2 = numel(auxdata);
         
         assert(nvar1 == nvar2,...

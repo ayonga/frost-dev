@@ -102,7 +102,7 @@ classdef HybridSystem
             % Return values:
             % obj: the class object
             
-            assert(ischar(name), 'The object name must be a string.');
+            assert(ischar(name), 'The object name must be a character vector.');
             obj.Name = name;
             
             assert(isa(model, 'RigidBodyModel'), ...

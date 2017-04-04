@@ -85,7 +85,7 @@ function [H,Hs] = exportHessian(obj, export_path, varargin)
     
     
    
-    
+    obj.Status.HessianExported = true;
     
     
     

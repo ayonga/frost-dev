@@ -15,7 +15,7 @@ function obj = setSymFun(obj, symfun)
         
     
 
-    if ~isempty(obj.Dimension)
+    if ~isempty(obj.Dimension) && obj.Dimension~=0
         assert(obj.Dimension == length(symfun),...
             'The dimension of the symbolic expression (%d) does not match the dimension of the NLP function (%d).\n',obj.Dimension, length(symfun));
     else
@@ -24,8 +24,8 @@ function obj = setSymFun(obj, symfun)
     
     
     if ~isempty(obj.DepVariables)
-        vars = symfun.Vars;
-        nvar1 = length(vertcat(vars{:}));
+        vars = cellfun(@(x)flatten(x), symfun.Vars,'UniformOutput',false);        
+        nvar1 = length([vars{:}]);
         nvar2 = sum([obj.DepVariables.Dimension]);
         
         assert(nvar1 == nvar2,...
@@ -34,8 +34,8 @@ function obj = setSymFun(obj, symfun)
 
     
     if ~isempty(obj.AuxData)
-        params = symfun.Params;
-        nvar1 = length(vertcat(params{:}));
+        params = cellfun(@(x)flatten(x), symfun.Params,'UniformOutput',false);        
+        nvar1 = length([params{:}]);
         nvar2 = numel(obj.AuxData);
         
         assert(nvar1 == nvar2,...

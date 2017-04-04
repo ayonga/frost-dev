@@ -1,10 +1,11 @@
-function obj = addRunningCost(obj, func, deps)
+function obj = addRunningCost(obj, func, deps, auxdata)
     % Add a running cost to the problem
     %
     % Parameters:
     % func: a symbolic function to be integrated @type SymFunction
     % deps: a list of dependent variables @type cellstr
-    
+    % auxdata: auxilary constant data to be feed in the function 
+    % @type double
     
     % basic information of NLP decision variables
     nNode  = obj.NumNode;
@@ -15,7 +16,9 @@ function obj = addRunningCost(obj, func, deps)
     assert(isa(func,'SymFunction') && prod(siz)==1,...
         'The second argument must be a scalar SymFunction object.'); %#ok<PSIZE>
     
-    
+    if nargin < 4
+        auxdata = [];
+    end
     
     T  = SymVariable('ts');
     N = SymVariable('nNode');
@@ -27,25 +30,25 @@ function obj = addRunningCost(obj, func, deps)
     cost(nNode) = struct();
     [cost.Name] = deal(func.Name);
     [cost.Dimension] = deal(1);
-    [cost.Type] = deal('Nonlinear');
+    % [cost.Type] = deal('Nonlinear');
     
     
     if isnan(obj.Options.ConstantTimeHorizon)
     
-        dep_vars = [{T},func.Vars];
-        dep_params = {N};
-        [cost.AuxData] = deal(nNode);
+        s_dep_vars = [{T},func.Vars];
+        s_dep_params = [func.Params,{N}];
+        [cost.AuxData] = deal([auxdata,nNode]);
     else
-        dep_vars = func.Vars;
-        dep_params = {T,N};
-        [cost.AuxData] = deal([obj.Options.ConstantTimeHorizon, nNode]);
+        s_dep_vars = func.Vars;
+        s_dep_params = [func.Params,{T,N}];
+        [cost.AuxData] = deal([auxdata, obj.Options.ConstantTimeHorizon, nNode]);
     end
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson'
             cost_terminal = SymFunction([func.Name,'_terminal'],...
-                ((T./(N-1))./6).*func, dep_vars, dep_params);
+                ((T./(N-1))./6).*func, s_dep_vars, s_dep_params);
             cost_interior = SymFunction([func.Name,'_interior'],...
-                (2.*(T./(N-1))./3).*func, dep_vars, dep_params);
+                (2.*(T./(N-1))./3).*func, s_dep_vars, s_dep_params);
             
             % first node
             cost(1).SymFun = cost_terminal;

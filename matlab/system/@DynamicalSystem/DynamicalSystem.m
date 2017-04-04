@@ -33,7 +33,7 @@ classdef (Abstract) DynamicalSystem < handle
         % @type double
         numControl
         
-        % The number of external inputs
+        % The number of external inputs (disturbances)
         %
         % @type double
         numExternal
@@ -69,8 +69,20 @@ classdef (Abstract) DynamicalSystem < handle
         
         % The parameters of the system
         %
-        % @type Struct
+        % @type struct
         Params
+        
+        
+        % The set of relative degree 1 virtual constraints (output) 
+        %
+        % @type struct
+        RD1Output
+        
+        % The set of (vector) relative degree 2 virtual constraints
+        % (output)
+        %
+        % @type struct
+        RD2Output
         
         
         % A structure that contains the symbolic expression of the
@@ -145,6 +157,10 @@ classdef (Abstract) DynamicalSystem < handle
             obj.States = struct();
             obj.Inputs = struct();
             obj.Params = struct();
+            
+            
+            
+            
             obj.DynamicsEqn = struct();
             obj.ConstraintEqn = struct();
             

@@ -9,29 +9,31 @@ function [yc, cl, cu] = checkConstraints(obj, x)
     
     
     constr_table = obj.ConstrTable;
-    [n_constr, n_node] = size(constr_table);
+    [n_node, n_constr] = size(constr_table);
     yc = cell(n_constr, n_node);
     cl = cell(n_constr, n_node);
     cu = cell(n_constr, n_node);
+    
     for j=1:n_constr
-        for k=1:n_node
-            constr = constr_table{j,k}{1};
-            if ~isempty(constr)
+        constr_name = obj.ConstrTable.Properties.VariableNames{j};
+        constr_array = obj.ConstrTable.(constr_name);
+        for k=1:n_node         
+            constr = constr_array(k);
+            if constr.Dimension ~=0
                 fprintf(f_id, '*************\n');
-                fprintf(f_id, 'Constraint: %s \t', constr_table.Row{j});
+                fprintf(f_id, 'Constraint: %s \t', constr_name);
                 fprintf(f_id, 'Node: %d \n', k);
                 fprintf(f_id, '*************\n');
-                dep_constr = getDepObject(constr);
+                dep_constr = getSummands(constr);
                 cl{j,k} = constr.LowerBound;
                 cu{j,k} = constr.UpperBound;
                 yc_ll = zeros(constr.Dimension,1);
                 for ll = 1:numel(dep_constr)
-                    dep_indices_cell = getDepIndices(dep_constr{ll});
-                    dep_indices = vertcat(dep_indices_cell{:});
-                    if isempty(dep_constr{ll}.AuxData)
-                        yc_ll = yc_ll + feval(dep_constr{ll}.Funcs.Func, x(dep_indices));
+                    dep_indices = getDepIndices(dep_constr(ll));
+                    if isempty(dep_constr(ll).AuxData)
+                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, x(dep_indices));
                     else
-                        yc_ll = yc_ll + feval(dep_constr{ll}.Funcs.Func, x(dep_indices), dep_constr{ll}.AuxData);
+                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, x(dep_indices), dep_constr(ll).AuxData);
                     end
                     
                 end

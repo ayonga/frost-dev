@@ -1,60 +1,69 @@
-function [calcs, params] = exportSolution(obj, sol)
+function [tspan, states, inputs, params] = exportSolution(obj, sol, t0)
     % Analyzes the solution of the NLP problem
     %
     % Parameters:
     % sol: The solution vector of the NLP problem @type colvec
+    % t0: the initial time @type double
+    %
+    % Return values:
+    % tspan: the time span of the trajectory @type rowvec
+    % states: the state trajectories @type struct
+    % inputs: the input variable trajectories @type struct
+    % params: the parameter variables @type struct
     
     
-    n_phase = length(obj.Phase);
-    
-    calcs = cell(n_phase,1);
-    params = cell(n_phase,1);
-   
-    t0 = 0;
-    for j = 1:n_phase
-        cur_phase = obj.Phase{j};
-        var_table = obj.Phase{j}.OptVarTable;
-        cur_domain = obj.Gamma.Nodes.Domain{cur_phase.CurrentVertex};
-        T = sol(var_table{'T',1}{1}.Indices);
-        switch obj.Options.CollocationScheme
-            case 'HermiteSimpson'
-                tspan = t0:T/(cur_phase.NumNode-1):(t0+T);
-                calcs{j}.t = tspan;
-                t0 = t0 + T;
-            case 'Trapezoidal'
-                tspan = t0:T/(cur_phase.NumNode-1):(t0+T);
-                calcs{j}.t = tspan;
-                t0 = t0 + T;
-                
-            otherwise
-                error('Undefined integration scheme.');
-        end
-        B  = cur_domain.ActuationMap;
-        for i=1:cur_phase.NumNode
-            calcs{j}.qe(:,i)  = sol(var_table{'Qe',i}{1}.Indices);
-            calcs{j}.dqe(:,i)  = sol(var_table{'dQe',i}{1}.Indices);
-            calcs{j}.ddqe(:,i) = sol(var_table{'ddQe',i}{1}.Indices);
-            
-            calcs{j}.uq(:,i)   = B*sol(var_table{'U',i}{1}.Indices);
-            calcs{j}.Fe(:,i)  = sol(var_table{'Fe',i}{1}.Indices);
-            
-        end
-        calcs{j}.h  = sol(var_table{'H',1}{1}.Indices);
-        if obj.Options.EnableVirtualConstraint
-            a_vec = sol(var_table{'A',1}{1}.Indices);            
-            n_param = cur_domain.DesPositionOutput.NumParam;
-            n_output = getDimension(cur_domain.ActPositionOutput);
-            a_mat = reshape(a_vec,n_param,n_output);
-            params{j}.a = a_mat';
-            params{j}.p = sol(var_table{'P',1}{1}.Indices);
-            if ~isempty(cur_domain.ActVelocityOutput)
-                params{j}.v = sol(var_table{'V',1}{1}.Indices);
-            end
-        end
-       
-            
-        
+    if nargin < 3
+        t0 = 0;
     end
+    
+    states = struct();
+    inputs = struct();
+    params = struct();
+    
+    vars = obj.OptVarTable;
+    
+    if isnan(obj.Options.ConstantTimeHorizon)
+        T = sol(vars.T(1).Indices);
+    else
+        T = obj.Options.ConstantTimeHorizon;
+    end
+    
+    switch obj.Options.CollocationScheme
+        case 'HermiteSimpson'
+            tspan = t0:T/(obj.NumNode-1):(t0+T);
+        case 'Trapezoidal'
+            tspan = t0:T/(obj.NumNode-1):(t0+T);
+        case 'PseudoSpectral'
+        otherwise
+            error('Undefined integration scheme.');
+    end
+    
+    plant = obj.Plant;
+    state_names = fieldnames(plant.States);
+    for j=1:length(state_names)        
+        name = state_names{j};
+        
+        states.(name) = sol([vars.(name).Indices]);
+    end
+    
+    input_names = fieldnames(plant.Inputs);
+    if ~isempty(input_names)        
+        for j=1:length(input_names)
+            name = input_names{j};            
+            inputs.(name) = sol([vars.(name).Indices]);
+        end
+    end
+    
+    
+    
+    param_names = fieldnames(plant.Params);
+    if ~isempty(param_names)        
+        for j=1:length(param_names)
+            name = param_names{j};            
+            params.(name) = sol([vars.(name)(1).Indices]);
+        end
+    end
+            
     
     
     

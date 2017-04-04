@@ -1,3 +1,4 @@
+
 classdef SymExpression < handle
     % An object that represents a symbolic expression in Mathematica
     %
@@ -259,10 +260,11 @@ classdef SymExpression < handle
             % Symbolic matrix multiplication.
             %   MTIMES(A,B) overloads symbolic A * B.
             
-            if isscalar(B)
+            if isscalar(B) || isscalar(A)
                 X = times(A,B);
                 return;
             end
+            
             
             % Convert inputs to SymExpression
             A = SymExpression(A);
@@ -351,7 +353,10 @@ classdef SymExpression < handle
             %   consistent; a least squares solution is not computed.
             %
             %   See also SYM/MLDIVIDE, SYM/RDIVIDE, SYM/LDIVIDE, SYM/QUOREM.
-            
+            if isscalar(B) || isscalar(A)
+                X = rdivide(A,B);
+                return;
+            end
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
@@ -370,7 +375,10 @@ classdef SymExpression < handle
             %   consistent; a least squares solution is not computed.
             %
             %   See also SYM/MRDIVIDE, SYM/LDIVIDE, SYM/RDIVIDE, SYM/QUOREM.
-            
+            if isscalar(B) || isscalar(A)
+                X = ldivide(A,B);
+                return;
+            end
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);

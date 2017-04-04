@@ -74,7 +74,7 @@ classdef RigidBodyModel
         % Joints
         
         
-        % The structur contains the configuration of the base coordinates,
+        % The structure contains the configuration of the base coordinates,
         % which normally does not conver in the URDF file.
         %
         % @type struct

@@ -9,16 +9,18 @@ function [xc, lb, ub] = checkVariables(obj, x)
     
     
     var_table = obj.OptVarTable;
-    [n_constr, n_node] = size(var_table);
-    xc = cell(n_constr, n_node);
-    lb = cell(n_constr, n_node);
-    ub = cell(n_constr, n_node);
-    for j=1:n_constr
+    [n_node,n_var] = size(var_table);
+    xc = cell(n_var, n_node);
+    lb = cell(n_var, n_node);
+    ub = cell(n_var, n_node);
+    for j=1:n_var
+        var_name = obj.OptVarTable.Properties.VariableNames{j};
+        var_array = obj.OptVarTable.(var_name);
         for k=1:n_node
-            var = var_table{j,k}{1};
+            var = var_array(k);
             if ~isempty(var)
                 fprintf(f_id, '*************\n');
-                fprintf(f_id, 'Variable: %s \t', var_table.Row{j});
+                fprintf(f_id, 'Variable: %s \t', var_name);
                 fprintf(f_id, 'Node: %d \n', k);
                 fprintf(f_id, '*************\n');
                 lb{j,k} = var.LowerBound;

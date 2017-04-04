@@ -15,7 +15,7 @@ function fx = collocationConstraints(obj, options)
             x = obj.States.x;
             dx = obj.States.dx;
             T  = SymVariable('ts');
-            nNode = SymVariable('nNode');
+            N = SymVariable('nNode');
             xn = SymVariable('xn',[obj.numState,1]);
             dxn = SymVariable('dxn',[obj.numState,1]);
             xm = SymVariable('xm',[obj.numState,1]);
@@ -24,12 +24,12 @@ function fx = collocationConstraints(obj, options)
             %% the interior node slope: delta = 0
             if ~isfield(obj.TrajOptFuncs.Collocation, 'hs_int_x')
                 
-                int_x = [xn - x - (T./(nNode-1)).*(dxn + 4.*dxm + dx)./6;
-                    xm - (x+xn)./2 - T.*(dx-dxn)./(8*(nNode-1))];
+                int_x = [xn - x - (T./(N-1)).*(dxn + 4.*dxm + dx)./6;
+                    xm - (x+xn)./2 - T.*(dx-dxn)./(8*(N-1))];
                 if isnan(options.ConstantTimeHorizon)
-                    hs_int_x = SymFunction(['hs_int_x_' obj.Name],int_x,{T,x,dx,xm,dxm,xn,dxn},{nNode});
+                    hs_int_x = SymFunction(['hs_int_x_' obj.Name],int_x,{T,x,dx,xm,dxm,xn,dxn},{N});
                 else
-                    hs_int_x = SymFunction(['hs_int_x_' obj.Name],int_x,{x,dx,xm,dxm,xn,dxn},{T,nNode});
+                    hs_int_x = SymFunction(['hs_int_x_' obj.Name],int_x,{x,dx,xm,dxm,xn,dxn},{T,N});
                 end
                 obj.TrajOptFuncs.Collocation.hs_int_x = hs_int_x;
                 
@@ -45,12 +45,12 @@ function fx = collocationConstraints(obj, options)
                 %% the interior node slope: delta = 0
                 if ~isfield(obj.TrajOptFuncs.Collocation, 'hs_int_dx')
                     
-                    int_dx = [dxn - dx - (T./(nNode-1)).*(ddxn + 4.*ddxm + ddx)./6;
-                        dxm - (dx+dxn)./2 - T.*(ddx-ddxn)./(8*(nNode-1))];
+                    int_dx = [dxn - dx - (T./(N-1)).*(ddxn + 4.*ddxm + ddx)./6;
+                        dxm - (dx+dxn)./2 - T.*(ddx-ddxn)./(8*(N-1))];
                     if isnan(options.ConstantTimeHorizon)
-                        hs_int_dx = SymFunction(['hs_int_dx_' obj.Name],int_dx,{T,dx,ddx,dxm,ddxm,dxn,ddxn},{nNode});
+                        hs_int_dx = SymFunction(['hs_int_dx_' obj.Name],int_dx,{T,dx,ddx,dxm,ddxm,dxn,ddxn},{N});
                     else
-                        hs_int_dx = SymFunction(['hs_int_dx_' obj.Name],int_dx,{dx,ddx,dxm,ddxm,dxn,ddxn},{T,nNode});
+                        hs_int_dx = SymFunction(['hs_int_dx_' obj.Name],int_dx,{dx,ddx,dxm,ddxm,dxn,ddxn},{T,N});
                     end
                     obj.TrajOptFuncs.Collocation.hs_int_dx = hs_int_dx;
                 end

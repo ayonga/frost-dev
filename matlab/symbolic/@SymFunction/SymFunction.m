@@ -97,11 +97,15 @@ classdef SymFunction < SymExpression
             
             
             if nargin > 2
-                if ~iscell(vars), vars = {vars}; end
-                assert(all(cellfun(@(x)isa(x,'SymVariable'), vars)),...
-                    'SymFunction:invalidVariables', ...
-                    'The dependent variables must be valid SymVariable objects.');
-                obj.Vars = vars;
+                if ~isempty(vars)                    
+                    if ~iscell(vars), vars = {vars}; end
+                    assert(all(cellfun(@(x)isa(x,'SymVariable'), vars)),...
+                        'SymFunction:invalidVariables', ...
+                        'The dependent variables must be valid SymVariable objects.');
+                    obj.Vars = vars;
+                else
+                    obj.Vars = {};
+                end
                 % vars = cellfun(@(x)flatten(x), vars,'UniformOutput',false);
                 % obj.Vars = tovector([vars{:}]);
             else
@@ -109,11 +113,15 @@ classdef SymFunction < SymExpression
             end
             
             if nargin > 3
-                if ~iscell(params), params = {params}; end
-                assert(all(cellfun(@(x)isa(x,'SymVariable'), params)),...
-                    'SymFunction:invalidVariables', ...
-                    'The dependent variables must be valid SymVariable objects.');
-                obj.Params = params;
+                if ~isempty(params)
+                    if ~iscell(params), params = {params}; end
+                    assert(all(cellfun(@(x)isa(x,'SymVariable'), params)),...
+                        'SymFunction:invalidVariables', ...
+                        'The dependent variables must be valid SymVariable objects.');
+                    obj.Params = params;
+                else
+                    obj.Params = {};
+                end
                 % params = cellfun(@(x)flatten(x), params,'UniformOutput',false);
                 % obj.Params = tovector([params{:}]);
             else
