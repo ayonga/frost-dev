@@ -210,7 +210,11 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addNodeCost(obj, func, deps, node, auxdata);
         
+        obj = updateCostProp(obj, label, node, varargin);
         
+        obj = updateConstrProp(obj, label, node, varargin);
+        
+        obj = updateVariableProp(obj, label, node, varargin);
         % post-processing functions
         [yc, cl, cu] = checkConstraints(obj, x);
         

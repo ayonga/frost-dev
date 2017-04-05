@@ -11,7 +11,7 @@ function [obj] = compileConstraint(obj, export_path)
     opts.StackVariable = true;
     opts.ForceExport = false;
     opts.BuildMex = true;
-    opts.Namespace = string(obj.Name);
+    opts.Namespace = obj.Name;
     
     
     

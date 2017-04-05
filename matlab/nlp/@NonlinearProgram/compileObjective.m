@@ -12,7 +12,7 @@ function [obj] = compileObjective(obj, export_path)
     opts.StackVariable = true;
     opts.ForceExport = false;
     opts.BuildMex = true;
-    opts.Namespace = string(obj.Name);
+    opts.Namespace = obj.Name;
     
     deps_array_cell = arrayfun(@(x)getSummands(x), obj.CostArray, 'UniformOutput', false);
     func_array = vertcat(deps_array_cell{:});

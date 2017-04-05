@@ -27,7 +27,7 @@ function file = export(f, varargin)
     ip.addParameter('File','',@isFunc);
     ip.addParameter('ForceExport',false,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('Namespace',string('SymExpression'),@(x) isstring(x));
+    ip.addParameter('Namespace','SymExpression',@(x) ischar(x));
     ip.parse(varargin{N+1:end});
     
     opts = ip.Results;
@@ -71,7 +71,7 @@ function file = export(f, varargin)
     % convert to string to keep the original string format when send to
     % Mathematica.
     cse_opts = struct();
-    cse_opts.ExportDirectory = string(export_path);
+    cse_opts.ExportDirectory = str2mathstr(export_path);
     cse_opts.Namespace= opts.Namespace;
     % necessary settings
     cse_opts_str =  struct2assoc(cse_opts,'ConvertString',false);

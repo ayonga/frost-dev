@@ -16,7 +16,7 @@ function f = export(obj, export_path, varargin)
     ip.addParameter('StackVariable',false,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('ForceExport',false,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
-    ip.addParameter('Namespace',string('SymFunction'),@(x) isstring(x));
+    ip.addParameter('Namespace','SymFunction',@(x) ischar(x));
     ip.parse(varargin{:});
     
     opts = ip.Results;
