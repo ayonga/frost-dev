@@ -1,12 +1,13 @@
-function urdf_model = ros_load_urdf(urdf_file)
+function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
     % This function parse the ROS URDF file
     %
     % @note At this moment, this parser only support the 'link' and 'joint'
     % elements in the URDF file. More options are coming soon ...
     %
     % Return values:
-    % urdf_model: the parsed model structure
-    
+    % name: the name of the robot model @type char
+    % links: an array of rigid links structure @type structure
+    % joints an array of rigid joints structure @type structure
     
     urdf = xmlread(urdf_file);
     
@@ -14,11 +15,13 @@ function urdf_model = ros_load_urdf(urdf_file)
     assert(~isempty(xml_robot),['The provided URDF file does not contains ',...
         'the proper robot element. Please provide a valid URDF file.']);
     
-    urdf_model.name   = char(xml_robot.getAttribute('name'));
+    name   = char(xml_robot.getAttribute('name'));
     
     
     % extract rigid links
     xml_links = xml_robot.getElementsByTagName('link');
+    
+    
     
     num_links = xml_links.getLength();
     links = struct();
@@ -59,9 +62,9 @@ function urdf_model = ros_load_urdf(urdf_file)
     
     
     % extract joints
-    xml_joints = xml_robot.getElementsByTagName('joint');
-    joints = struct();
+    xml_joints = xml_robot.getElementsByTagName('joint');    
     num_joints = xml_joints.getLength();
+    joints = struct();
     index = 1;
     for i=0:num_joints-1
         xml_joint = xml_joints.item(i);
@@ -92,16 +95,17 @@ function urdf_model = ros_load_urdf(urdf_file)
             joints(index).child  = char(child.getAttribute('link'));
             
             limit = xml_joint.getElementsByTagName('limit').item(0);
+            joints(index).limit = struct();
             if ~isempty(limit)
-                joints(index).effort = str2double(limit.getAttribute('effort'));
-                joints(index).lower = str2double(limit.getAttribute('lower'));
-                joints(index).upper = str2double(limit.getAttribute('upper'));
-                joints(index).velocity = str2double(limit.getAttribute('velocity'));
+                joints(index).limit.effort = str2double(limit.getAttribute('effort'));
+                joints(index).limit.lower = str2double(limit.getAttribute('lower'));
+                joints(index).limit.upper = str2double(limit.getAttribute('upper'));
+                joints(index).limit.velocity = str2double(limit.getAttribute('velocity'));
             else
-                joints(index).effort = 0;
-                joints(index).lower = 0;
-                joints(index).upper = 0;
-                joints(index).velocity = 0;
+                joints(index).limit.effort = 0;
+                joints(index).limit.lower = 0;
+                joints(index).limit.upper = 0;
+                joints(index).limit.velocity = 0;
             end
             index = index + 1;
         end
@@ -109,10 +113,40 @@ function urdf_model = ros_load_urdf(urdf_file)
     end
     
     
+    % transmissions
+    xml_trans = xml_robot.getElementsByTagName('transmission');
     
+    num_trans = xml_trans.getLength();
+    transmissions = struct();
+    if num_trans~=0
+        index = 1;
+        for i=0:num_trans-1
+            xml_tran = xml_trans.item(i);
+            
+            if xml_tran.hasChildNodes
+                transmissions(index).name = char(xml_tran.getAttribute('name'));
+                if xml_tran.hasAttribute('type')
+                    transmissions(index).type = char(xml_tran.getAttribute('type'));
+                elseif ~isempty(xml_tran.getElementsByTagName('type').item(0))
+                    trans_type = xml_tran.getElementsByTagName('type').item(0);
+                    transmissions(index).type = char(trans_type.getNodeType);
+                end
+                
+                trans_joint = xml_tran.getElementsByTagName('joint').item(0);
+                transmissions(index).joint = char(trans_joint.getAttribute('name'));
+                trans_act = xml_tran.getElementsByTagName('actuator').item(0);
+                if ~isempty(trans_act)
+                    transmissions(index).actuator = char(trans_act.getAttribute('name'));
+                end
+                
+                trans_ratio = xml_tran.getElementsByTagName('mechanicalReduction').item(0);
+                transmissions(index).mechanicalReduction = double(trans_ratio.getNodeType);
+                index = index+1;
+            end
+            
+        end
+    end
     
-    urdf_model.joints = joints;
-    urdf_model.links  = links;
     
     
     
