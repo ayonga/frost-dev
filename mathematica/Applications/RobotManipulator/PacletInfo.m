@@ -1,13 +1,13 @@
 (* Paclet Info File *)
 
-(* created 2016/09/18*)
+(* created 2017/04/02*)
 
 Paclet[
-    Name -> "MathToCpp",
+    Name -> "RobotManipulator",
     Version -> "1.0.0",
     MathematicaVersion -> "10+",
-    Description -> "Convert and export Mathematica expressions into C++ source code files.",
-    Creator -> "Ayonga Hereid (AMBER Lab)",
+    Description -> "Kinematic and kinetic model of rigid robot manipulators",
+    Creator -> "Ayonga Hereid",
     Extensions -> 
         {
             {"Documentation", Language -> "English"}
