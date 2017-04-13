@@ -111,7 +111,7 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     func_struct.Funcs = arrayfun(@(x) x.Funcs.Func, deps_array, 'UniformOutput', false);
     func_struct.JacFuncs = arrayfun(@(x) x.Funcs.Jac, deps_array, 'UniformOutput', false);  
     dep_indices = arrayfun(@(x) getDepIndices(x), deps_array, 'UniformOutput', false);
-    func_struct.DepIndices = cellfun(@(x)(vertcat(x)),dep_indices,'UniformOutput',false);
+    func_struct.DepIndices = dep_indices;%cellfun(@(x)(vertcat(x)),dep_indices,'UniformOutput',false);
     func_struct.AuxData = arrayfun(@(x) x.AuxData, deps_array, 'UniformOutput', false);
     func_struct.FuncIndices = arrayfun(@(x) x.FuncIndices, deps_array, 'UniformOutput', false);
     % preallocate
@@ -149,7 +149,7 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
        
         jac_pattern = deps_array(i).JacPattern;
         % retrieve the indices of dependent variables 
-        dep_indices = func_struct.DepIndices{i};
+        dep_indices = vertcat(func_struct.DepIndices{i}{:});
         func_indics = func_struct.FuncIndices{i};
         
         %| @note The JacPattern gives the indices of non-zero Jacobian

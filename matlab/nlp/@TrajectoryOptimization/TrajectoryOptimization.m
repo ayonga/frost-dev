@@ -72,7 +72,7 @@ classdef TrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = TrajectoryOptimization(name, plant, num_grid, varargin)
+        function obj = TrajectoryOptimization(name, plant, num_grid, bounds, varargin)
             % The constructor function
             %
             % Parameters:
@@ -80,6 +80,8 @@ classdef TrajectoryOptimization < NonlinearProgram
             % plant: the dynamical system plant @type DynamicalSystem
             % num_grid: the number of grids along the trajectory 
             % @type integer
+            % bounds: a structed data stores the boundary information of the
+            % NLP variables @type struct
             % varargin: user-defined options for the problem @type varargin
             
             
@@ -162,9 +164,14 @@ classdef TrajectoryOptimization < NonlinearProgram
                 'RowNames',col_names);
             
             
-
+            % configure NLP decision variables
+            obj = obj.configureVariables(bounds);
             
+            % impose the collocation constraints
+            obj = obj.addCollocationConstraint();
             
+            % impose the system dynamics constraints
+            obj = obj.addDynamicsConstraint();
         end
         
         
@@ -179,7 +186,10 @@ classdef TrajectoryOptimization < NonlinearProgram
     %% methods defined in external files
     methods
         
-        % functions related to NLP variables
+        [obj] = update(obj);
+        
+        %% functions related to NLP variables
+        
         obj = addVariable(obj, label, nodes, varargin);
         
         obj = addInputVariable(obj, bounds);
@@ -190,8 +200,14 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addTimeVariable(obj, bounds);
         
+        obj = updateVariableProp(obj, label, node, varargin);
         
-        % functions related to NLP constraints
+        obj = configureVariables(obj, bounds);
+        
+        
+        %% functions related to NLP constraints
+        
+        fcstr = directCollocation(obj, name, x, dx);
         
         obj = addConstraint(obj, label, nodes, cstr_array);
         
@@ -199,10 +215,12 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addDynamicsConstraint(obj);  
 
-        obj = addOutputRD2Constraint(obj,params,ddx);
-        
         obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata);
-        % functions related to NLP cost functions        
+                
+        obj = updateConstrProp(obj, label, node, varargin);
+        
+        
+        %% functions related to NLP cost functions        
         
         obj = addCost(obj, label, nodes, cost_array);
         
@@ -211,18 +229,17 @@ classdef TrajectoryOptimization < NonlinearProgram
         obj = addNodeCost(obj, func, deps, node, auxdata);
         
         obj = updateCostProp(obj, label, node, varargin);
+                
         
-        obj = updateConstrProp(obj, label, node, varargin);
+        %% post-processing functions
         
-        obj = updateVariableProp(obj, label, node, varargin);
-        % post-processing functions
         [yc, cl, cu] = checkConstraints(obj, x);
         
         [xc, lb, ub] = checkVariables(obj, x);
         
         [yc] = checkCosts(obj, x);
         
-        [tspan, states, inputs, params] = exportSolution(obj, sol, t0)
+        [tspan, states, inputs, params] = exportSolution(obj, sol, t0);
     end
 end
 

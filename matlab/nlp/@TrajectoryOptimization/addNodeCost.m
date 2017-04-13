@@ -35,6 +35,8 @@ function obj = addNodeCost(obj, func, deps, nodes, auxdata)
     
     if nargin < 5
         auxdata = [];
+    else
+        if ~iscell(auxdata), auxdata = {auxdata}; end
     end
     
     

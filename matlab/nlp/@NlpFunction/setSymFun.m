@@ -34,12 +34,17 @@ function obj = setSymFun(obj, symfun)
 
     
     if ~isempty(obj.AuxData)
-        params = cellfun(@(x)flatten(x), symfun.Params,'UniformOutput',false);        
-        nvar1 = length([params{:}]);
-        nvar2 = numel(obj.AuxData);
+        assert(numel(auxdata) == numel(obj.SymFun.Params),...
+            'The number of the constant parameters does not match.');
         
-        assert(nvar1 == nvar2,...
-            'The dimensions of the constant parameters do not match.');
+        nvar1 = cellfun(@(x)length(flatten(x)), obj.SymFun.Params);        
+        nvar2 = cellfun(@(x)numel(x), auxdata); 
+        
+        for i=1:numel(auxdata)
+            
+            assert(nvar1(i) == nvar2(i),...
+                'The dimension of the $d-th parameter does not match.',i);
+        end
     end
     
     

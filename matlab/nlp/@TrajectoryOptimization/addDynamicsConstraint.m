@@ -13,78 +13,96 @@ function obj = addDynamicsConstraint(obj)
     % basic information of NLP decision variables
     nNode  = obj.NumNode;
     vars   = obj.OptVarTable;
-    plant  = obj.Plant;
-    nState = plant.numState;
-    
-    
-    ceq_err_bound = obj.Options.EqualityConstraintBoundary;
-    
-    fx = plant.dynamicalConstraints();
-    
-    funcs = fieldnames(fx);
-    
+    ceq_err_bound = obj.Options.EqualityConstraintBoundary;    
     node_list = 1:1:nNode;
-    f_cstr = cell(numel(funcs),1);
+    plant  = obj.Plant;
+    numState = plant.numState;
     
-    for j=1:numel(funcs)
-        fun = fx.(funcs{j});
-        fx_cstr = struct();
-        fx_cstr(numel(node_list)) = struct(); 
-        [fx_cstr.Dimension] = deal(nState);
-        [fx_cstr.Name] = deal(fun.Name);
-        [fx_cstr.SymFun] = deal(fun);
-        
-        switch funcs{j}
-            case 'mass_matrix'
-                for i=1:numel(node_list)
-                    idx = node_list(i);
-                    if isa(plant,'SecondOrderSystem')
-                        fx_cstr(i).DepVariables = [vars.x(idx);vars.ddx(idx)];
-                    else
-                        fx_cstr(i).DepVariables = [vars.x(idx);vars.dx(idx)];
-                    end
-                end
-            case 'control_input'
-                for i=1:numel(node_list)
-                    idx = node_list(i);
-                    fx_cstr(i).DepVariables = [vars.x(idx);vars.u(idx)];
-                    
-                end
-            case 'external_input'
-                for i=1:numel(node_list)
-                    idx = node_list(i);
-                    fx_cstr(i).DepVariables = [vars.x(idx);vars.f(idx)];
-                    
-                end
-            otherwise
-                for i=1:numel(node_list)
-                    idx = node_list(i);
-                    fx_cstr(i).DepVariables = [vars.x(idx);vars.dx(idx)];
-                    
-                end
+    % M(x)dx or M(x)ddx
+    if isempty(plant.Mmat)
+        if ~isempty(plant.States.ddx)
+            ddx = plant.States.ddx;
+            MmatDx = SymFunction(['MmatDx_' plant.Name],-ddx,{ddx});
+        else
+            dx = plant.States.dx;
+            MmatDx = SymFunction(['MmatDx_' plant.Name],-dx,{dx});
         end
-        
-                
-        f_cstr{j} = fx_cstr;
+    else
+        x = plant.States.x;
+        if ~isempty(plant.States.ddx)
+            ddx = plant.States.ddx;
+            MmatDx = SymFunction(['MmatDx_' plant.Name],-plant.Mmat*ddx,{x,ddx});
+        else
+            dx = plant.States.dx;
+            MmatDx = SymFunction(['MmatDx_' plant.Name],-plant.Mmat*dx,{x,dx});
+        end
+    end    
+    
+    mdx_cstr_fun(nNode) = NlpFunction();   % preallocation
+    if ~isempty(plant.States.ddx)%second order system
+        for i=node_list
+            mdx_cstr_fun(i) = NlpFunction('Name','MmatDx',...
+                'Dimension',numState,'SymFun',MmatDx,...
+                'DepVariables',[vars.x(i);vars.ddx(i)]);
+        end
+    else                         %first order system
+        for i=node_list
+            mdx_cstr_fun(i) = NlpFunction('Name','MmatDx',...
+                'Dimension',numState,'SymFun',MmatDx,...
+                'DepVariables',[vars.x(i);vars.dx(i)]);
+        end
+    end
+    
+    % drift vector fields vf(x)
+    n_vf = numel(plant.Fvec);
+    Fvec_cstr_fun(n_vf,nNode) = NlpFunction(); % preallocation
+    if ~isempty(plant.States.ddx)%second order system
+        for i=node_list
+            for j=1:n_vf
+                Fvec_cstr_fun(j,i) = NlpFunction('Name',plant.Fvec{j}.Name,...
+                    'Dimension',numState,'SymFun',plant.Fvec{j},...
+                    'DepVariables',[vars.x(i);vars.dx(i)]);
+            end
+        end
+    else                         %first order system
+        for i=node_list
+            for j=1:n_vf
+                Fvec_cstr_fun(j,i) = NlpFunction('Name',plant.Fvec{j}.Name,...
+                    'Dimension',numState,'SymFun',plant.Fvec{j},...
+                    'DepVariables',[vars.x(i)]);
+            end
+        end
     end
     
     
-    dynamics(numel(node_list)) = struct(); 
-    [dynamics.Dimension] = deal(nState);
-    [dynamics.Name] = deal(['dynamics_' plant.Name]);
-    [dynamics.lb] = deal(-ceq_err_bound);
-    [dynamics.ub] = deal(ceq_err_bound);
-    [dynamics.Type] = deal('Nonlinear');
-    for i=1:numel(node_list)
-        dep_func = cell(numel(funcs),1);
-        for j=1:numel(funcs)
-            dep_func{j} = NlpFunction(f_cstr{j}(i));
+    % external input vector fields
+    input_names = fieldnames(plant.Inputs);
+    n_inputs = numel(input_names);
+    Gvec_cstr_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    for i=node_list
+        for j=1:n_inputs
+            input = input_names{j};
+            Gvec_cstr_fun(j,i) = NlpFunction('Name',plant.Gvec.(input).Name,...
+                'Dimension',numState,'SymFun',plant.Gvec.(input),...
+                'DepVariables',[vars.x(i);vars.(input)(i)]);
         end
-        
-        dynamics(i).Summand = vertcat(dep_func{:});
-        
-        
     end
-    obj = addConstraint(obj,'dynamics','all',dynamics);
+        
+    % The final dynamic equation constraint is the sum of the above
+    % functions
+    dynamics_cstr_fun(nNode) = NlpFunction();   % preallocation
+    for i=node_list
+        dep_funcs = [mdx_cstr_fun(i); % M(x)dx (or M(x)ddx)
+            Fvec_cstr_fun(:,i); % Fvec(x) or Fvec(x,dx)
+            Gvec_cstr_fun(:,i); % Gvec(x,u)
+        ];
+            
+        dynamics_cstr_fun(i) = NlpFunction('Name','dynamics_equation',...
+            'Dimension',numState,'lb',-ceq_err_bound,'ub',ceq_err_bound,...
+            'Type','Nonlinear','Summand',dep_funcs);
+    end
+    
+    % add dynamical equation constraints
+    obj = addConstraint(obj,'dynamics_equation','all',dynamics_cstr_fun);
     
 end

@@ -3,12 +3,10 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     % particular node. The input argument ''nodes'' will specify at which
     % nodes the function is defined.
     %
-    % @note This function provides a simple type of cost function which
-    % dependends only on variables at some particular node. If multiple
-    % nodes are specified, the final cost function will be the sum of the
-    % function computated at each node.
+    % @note This function provides a simple type of constraints function which
+    % dependends only on variables at same particular node. 
     %
-    % @attention In the case the cost function dependes on variables at
+    % @attention In the case the constraints function dependes on variables at
     % different nodes, please use the basic ''addCost'' method directly.
     %
     % @attention This method can be used to add any terminal constraint by
@@ -18,6 +16,9 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     % func: a symbolic function of the constraint @type SymFunction
     % deps: a list of dependent variables @type cellstr
     % node: an indicator of 'first' or 'last' node @type char
+    % lb: the lower bound of the constraints @type colvec
+    % ub: the upper bound of the constraints @type colvec
+    % type: the type of the constraints (''Linear'' or ''Nonlinear'') @type char
     % auxdata: auxilary constant data to be feed in the function 
     % @type double
     
@@ -28,7 +29,7 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     if ~iscell(deps), deps = {deps}; end
     
     assert(isa(func,'SymFunction') && isvector(func),...
-        'The second argument must be a vector SymFunction object.'); %#ok<PSIZE>
+        'The second argument must be a vector SymFunction object.'); 
     
     if nargin < 7
         type = 'Nonlinear';
@@ -36,6 +37,8 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
 
     if nargin < 8
         auxdata = [];
+    else
+        if ~iscell(auxdata), auxdata = {auxdata}; end
     end
     
     

@@ -8,7 +8,7 @@ function [obj] = compileConstraint(obj, export_path)
     
     
     opts = struct();
-    opts.StackVariable = true;
+    opts.StackVariable = false;
     opts.ForceExport = false;
     opts.BuildMex = true;
     opts.Namespace = obj.Name;

@@ -37,11 +37,11 @@ function obj = addRunningCost(obj, func, deps, auxdata)
     
         s_dep_vars = [{T},func.Vars];
         s_dep_params = [func.Params,{N}];
-        [cost.AuxData] = deal([auxdata,nNode]);
+        [cost.AuxData] = deal([auxdata,{nNode}]);
     else
         s_dep_vars = func.Vars;
         s_dep_params = [func.Params,{T,N}];
-        [cost.AuxData] = deal([auxdata, obj.Options.ConstantTimeHorizon, nNode]);
+        [cost.AuxData] = deal([auxdata, {obj.Options.ConstantTimeHorizon, nNode}]);
     end
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson'

@@ -133,7 +133,7 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
         % A constant array of auxiliary data that will be used to construct
         % the function handles
         %
-        % @type matrix
+        % @type cell
         AuxData
         
         
@@ -294,7 +294,7 @@ classdef NlpFunction < matlab.mixin.Heterogeneous & handle
             %
             % Return values:
             % indices: the indices of dependent variables @type colvec
-            indices = vertcat(obj.DepVariables.Indices);
+            indices = {obj.DepVariables.Indices};
         end
         
         

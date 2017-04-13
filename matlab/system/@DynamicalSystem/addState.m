@@ -13,22 +13,25 @@ function obj = addState(obj, x, dx, ddx)
     
     assert(isa(dx,'SymVariable') && isvector(dx), ...
         '(dx) must be a vector SymVariable object.');
-    obj.States.x = x;
-    obj.States.dx = dx;
     
-    obj.numState = length(obj.States.x);
-    
-    assert(length(obj.States.dx) == obj.numState,...
+    assert(length(dx) == length(x),...
         'The dimension of (dx) is incorrect.');
     
     if nargin > 3
         if ~isempty(ddx)
             assert(isa(ddx,'SymVariable') && isvector(x), ...
                 '(ddx) must be a vector SymVariable object.');
-            obj.States.ddx = ddx;
             
-            assert(length(obj.ddx) == obj.numState,...
-                'The dimension of (dx) is incorrect.');
+            assert(length(ddx) == length(x),...
+                'The dimension of (ddx) is incorrect.');
+            
         end
+    else
+        ddx = [];
     end
+
+    obj.States.x = x;
+    obj.States.dx = dx;
+    obj.States.ddx = ddx;
+    obj.numState = length(obj.States.x);
 end
