@@ -34,7 +34,7 @@ function expr = mat2math(A, varargin)
         if isinf(x)
             s = 'Infinity';
         else
-            s = num2str(x);
+            s = num2str(x,'%.5f');
         end
     end
     

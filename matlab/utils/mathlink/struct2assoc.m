@@ -20,11 +20,11 @@ function [str] = struct2assoc(s, varargin)
         field = fields{i};
         value = s.(field);
         value_str = general2math(value, varargin{:});
-%         if iscell(value)
-%             % Use double-braces to prevent a struct array from being created
-%             value_str = ['{', value_str, '}'];
-%         end
-        field_strs{i} = [field, '->', value_str];
+        %         if iscell(value)
+        %             % Use double-braces to prevent a struct array from being created
+        %             value_str = ['{', value_str, '}'];
+        %         end
+        field_strs{i} = [str2mathstr(field), '->', value_str];
     end
     
     str = ['<| ', ...
