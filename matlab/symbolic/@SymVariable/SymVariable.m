@@ -9,19 +9,26 @@ classdef SymVariable < SymExpression
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
+    properties (Access=protected)
+        % A list of character label of the symbolic variables
+        %
+        % @type cellstr
+        label
+    end
     
     
     methods
         
-        function obj = SymVariable(x, n)
+        function obj = SymVariable(x, n, label)
             % The class constructor function
             %
             % Parameters:
             % x: name or prefix of the variable @type char
             % n: the dimension of th variable @type numeric
-            
+            % label: the label of the variables @type cellstr
+            % 
             % check the number of input arguments
-            narginchk(0,2);
+            narginchk(0,3);
             
             
             
@@ -90,11 +97,100 @@ classdef SymVariable < SymExpression
                 end
             end  
             obj = obj@SymExpression(str);
+            
+            
+            if nargin == 3
+                assert(iscellstr(label) || numel(label)==prod(n),...
+                    'The (label) must be a cellstr array of the same number of elements as the SymVariables.');
+                
+                obj.label = label;
+                
+            end
         end
         
         
         
-        
+        function [B] = subsref(L,Idx)
+            % Subscripted reference for a sym array.
+            %     B = SUBSREF(A,S) is called for the syntax A(I).  S is a structure array
+            %     with the fields:
+            %         type -- string containing '()' specifying the subscript type.
+            %                 Only parenthesis subscripting is allowed.
+            %         subs -- Cell array or string containing the actual subscripts.
+            %
+            
+            
+            % if length(Idx)>1
+            %    error('SymExpression objects do not allow nested indexing. Assign intermediate values to variables instead.');
+            % end
+            
+            
+            switch Idx(1).type
+                case '.'
+                    B = builtin('subsref', L, Idx);
+                  
+                case '()'
+                        
+                    
+                    switch numel(Idx.subs)
+                        case 0
+                            sstr = ['ToVectorForm[' L.s ']'];
+                        case 1
+                            
+                            sstr = ['ToVectorForm[' L.s ']'];
+                            % special case shortcut for L(:)
+                            if ischar(Idx.subs{1}) && strcmp(Idx.subs{1},':')
+                                sstr = [sstr,'[[;;]]'];
+                            elseif isnumeric(Idx.subs{1})
+                                sstr = [sstr,'[[Flatten@',mat2math(Idx.subs{1}),']]'];
+                            elseif ischar(Idx.subs{1})
+                                label_str = Idx.subs{1};
+                                ind = find(cellfun(@(x)~isempty(x),strfind(L.label,label_str)));
+                                sstr = [sstr,'[[Flatten@',mat2math(ind),']]'];
+                            elseif iscellstr(Idx.subs{1})
+                                label_str = Idx.subs{1};
+                                ind = zeros(1,numel(label_str));
+                                for i=1:numel(label_str)
+                                    ind(i) = find(cellfun(@(x)~isempty(x),strfind(L.label,label_str{i})));
+                                end
+                                sstr = [sstr,'[[Flatten@',mat2math(ind),']]'];
+                                
+                            else
+                                error('The index is invalid.');
+                            end
+                            
+                        case 2
+                            ind = cell(1,2);
+                            for i=1:2
+                                if ischar(Idx.subs{i}) && strcmp(Idx.subs{i},':')
+                                    ind{i} = ';;';
+                                elseif isnumeric(Idx.subs{i})
+                                    ind{i} = eval_math(['Flatten@',mat2math(Idx.subs{i})]);
+                                else
+                                    error('The index is invalid.');
+                                end
+                            end
+                            
+                            sstr = [L.s,'[[',ind{1},',',ind{2},']]'];
+                        otherwise
+                            % No support for indexing using '{}'
+                            error('SymExpression:subsref', ...
+                                'Not a supported subscripted reference.');                            
+                    end
+                    % create a new object with the evaluated string
+                    B = SymExpression(sstr);
+                case '{}'
+                    % No support for indexing using '{}'
+                    error('SymExpression:subsref', ...
+                        'Not a supported subscripted reference.');
+                otherwise
+                    error('SymExpression:subsref', ...
+                        'Not a supported subscripted reference.');
+            end
+            
+            
+            
+        end
         
         
         
