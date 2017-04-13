@@ -75,11 +75,23 @@ function Y = subs(S,old,new)
             srule = SymExpression(['<| ', ...
                 implode(rarray,', '), ...
                 ' |>']);
-        else
+        elseif ischar(old)
             old_s = SymExpression(old);
             new_s = SymExpression(new);
             srule = SymExpression(['<| ', ...
                 old_s.s, '->', new_s.s, ...
+                ' |>']);
+        elseif isa(old,'SymExpression')
+            siz_o = size(old);
+            siz_n = size(new);
+            
+            assert(prod(siz_o) == prod(siz_n),...
+                'The sizes of the second and third argument must be the same.');
+            old_s = flatten(SymExpression(old));
+            new_s = flatten(SymExpression(new));
+            rarray = arrayfun(@(x,y)['First@' x.s '->First@' y.s], old_s, new_s ,'UniformOutput',false);
+            srule = SymExpression(['<| ', ...
+                implode(rarray,', '), ...
                 ' |>']);
         end
         
