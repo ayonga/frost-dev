@@ -21,16 +21,16 @@ function f = export(obj, export_path, varargin)
     
     opts = ip.Results;
     
-    if obj.Status.FunctionExported && ~opts.ForceExport
-        f = fullfile(export_path, obj.Name);
-        return;
-    end
+    
 
     if nargin < 2
         export_path = pwd;
     end
     
-    
+    if obj.Status.FunctionExported && ~opts.ForceExport
+        f = fullfile(export_path, obj.Name);
+        return;
+    end
         
     
     

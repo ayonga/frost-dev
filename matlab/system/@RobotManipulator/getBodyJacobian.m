@@ -20,26 +20,29 @@ function [varargout] = getBodyJacobian(obj, varargin)
     
     
     % the number of points (one less than the nargin)
-    n_pos = nargin - 1;
-    
-    valid_link_name = {obj.Links.name};
-    % validate the input arguments
-    for i=1:n_pos
+    n_pos = numel(varargin);
+    if n_pos > 0
+        valid_link_name = {obj.Links.name};
+        % validate the input arguments
+        for i=1:n_pos
+            
+            [link_name, offset] = deal(varargin{i}{:});
+            % validate parent link name (case insensitive)
+            varargin{i}{1} = str2mathstr(validatestring(link_name,valid_link_name));
+            
+            
+            % validate if it is a numeric 3-D vector
+            validateattributes(offset, {'numeric'},{'vector','numel',3});
+            
+        end
         
-        [link_name, offset] = deal(varargin{i}{:});
-        % validate parent link name (case insensitive)
-        varargin{i}{1} = str2mathstr(validatestring(link_name,valid_link_name));
+        jac = eval_math_fun('ComputeBodyJacobians',[varargin, {obj.SymTwists}]);
         
-        
-        % validate if it is a numeric 3-D vector
-        validateattributes(offset, {'numeric'},{'vector','numel',3});
-        
-    end
-    
-    jac = eval_math_fun('ComputeBodyJacobians',[varargin, {obj.SymTwists}]);
-    
-    varargout = cell(1,n_pos);
-    for i=1:n_pos
-        varargout{i} = jac(i,:);
+        varargout = cell(1,n_pos);
+        for i=1:n_pos
+            varargout{i} = jac(i,:);
+        end
+    else
+        varargout = {};
     end
 end

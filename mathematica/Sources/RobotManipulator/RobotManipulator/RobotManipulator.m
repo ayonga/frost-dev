@@ -78,7 +78,15 @@ with respect to the parent joint coordinates.";
 *)
 
 
-
+InertiaToCoriolisPart1::usage=
+ "InertiaToCoriolisPart1[M, theta, omega, col] computes the col-th column of the first part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart2::usage=
+ "InertiaToCoriolisPart2[M, theta, omega, col] computes the col-th column of the second part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart3::usage=
+ "InertiaToCoriolisPart3[M, theta, omega, col] computes the col-th column of the thrid part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
 
 
 
@@ -155,7 +163,7 @@ PotentialEnergy[robotLinks_,robotKinematics_] :=
 		links = Map[{#["name"], GetPosition[#]} &, robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeRigidPositions[Sequence@@links,robotKinematics];
+		linkPos = ComputeCartesianPositions[Sequence@@links,robotKinematics];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, robotLinks];
@@ -179,7 +187,52 @@ GravityVector[q_,robotLinks_,robotKinematics_] :=
 
 
 
-
+InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Array[0&, {n,1}];
+    For[i = 1, i <= n, ++i,
+	    For[k = 1, k <= n, ++k,
+	      Cvec[[i]] += 1/2 * w[[k]] *
+	      (D[M[[i,col]], q[[k]]]);
+	    ]
+    ];
+    Cvec*w[[col]]
+  ];	
+InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Array[0&, {n,1}];
+    For[i = 1, i <= n, ++i,
+        For[k = 1, k <= n, ++k,
+          Cvec[[i]] += 1/2 * w[[k]] *
+          (D[M[[i,k]], q[[col]]]);
+        ]
+    ];
+    Cvec*w[[col]]
+  ];	
+  
+InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Array[0&, {n,1}];
+    For[i = 1, i <= n, ++i,
+        For[k = 1, k <= n, ++k,
+          Cvec[[i]] += 1/2 * w[[k]] *
+          (- D[M[[col,k]], q[[i]]]);
+        ]
+    ];
+    Cvec*w[[col]]
+  ];			
 (* The contributions of motor inertia to the robot dynamics are not addressed
 in the URDF model definition. To include the motor inertia in the dynamics 
 please include the motor inertia information when call InertiaMatrix[] function.
@@ -217,7 +270,7 @@ ComputeComPosition[robotLinks_,robotKinematics_] :=
 		links = Map[{#["name"], GetPosition[#]} &, robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeRigidPositions[Sequence@@links,robotKinematics];
+		linkPos = ComputeCartesianPositions[Sequence@@links,robotKinematics];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, robotLinks];

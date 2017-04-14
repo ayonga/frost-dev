@@ -7,7 +7,7 @@ function obj = setDriftVector(obj, vf)
     
     % validate the inputs vf(x,dx)
     if ~iscell(vf), vf = {vf}; end
-    
+    obj.Fvec = cell(0);
     for i=1:numel(vf)
         assert((length(vf{i})==obj.numState) && isvector(vf{i}),...
             'The %d-th drift vector field should be a (%d x 1) column vector.',i,obj.numState);

@@ -95,7 +95,7 @@ classdef RobotManipulator < DynamicalSystem
     
     
     %% Private properties
-    properties (Access = public, Hidden)
+    properties (Access = protected, Hidden)
         % The stuctured data of the forward kinematics twists
         %
         % @type SymExpression
@@ -255,12 +255,9 @@ classdef RobotManipulator < DynamicalSystem
             % Compute the forward kinematics of the robots
             obj.SymJoints = SymExpression(arrayfun(@struct2assoc,joints,'UniformOutput',false));
             obj.SymLinks = SymExpression(arrayfun(@struct2assoc,links,'UniformOutput',false));
-            Qe = obj.States.x;
-            obj.SymTwists = eval_math_fun('InitializeModel',{obj.SymJoints,Qe});
+            obj.SymTwists = eval_math_fun('InitializeModel',{obj.SymJoints,obj.States.x});
             
-            % set the inertia matrix 
-            De = eval_math_fun('InertiaMatrix',{obj.SymLinks,obj.SymTwists});
-            obj.setMassMatrix(De);
+            obj = setDynamics(obj);
         end
         
         
@@ -284,9 +281,15 @@ classdef RobotManipulator < DynamicalSystem
         
         pos = getComPosition(obj);
         
-        pos = getCartesianPosition(obj, varargin);
+        obj = setDynamics(obj);
         
-        pos = getEulerAngles(obj, varargin);
+        [M,f] = calcDynamics(obj, qe, dqe);
+        
+        obj = compileDynamics(obj, export_path, varargin);
+        
+        [varargout] = getCartesianPosition(obj, varargin);
+        
+        [varargout] = getEulerAngles(obj, varargin);
         
         [varargout] = getBodyJacobian(obj, varargin);
         
