@@ -1,14 +1,6 @@
 function obj = addDynamicsConstraint(obj)
     % Add system dynamics equations as a set of equality constraints   
     %
-    % The full dynamics equations consist of two parts, the
-    % Euler-Langrangian dynamics of the rigid body model and the holonomic
-    % constraints of the system:
-    % \f{eqnarray*}{
-    %  D(q)*\ddot{q} + C(q,\dot{q}) + G(q) - Be*u - J^T(q)*Fe &= 0 \\
-    %  J(q)*\ddot{q} + \dot{J}(q,\dot{q})*\dot{q} &= 0
-    % \f}
-    %
 
     % basic information of NLP decision variables
     nNode  = obj.NumNode;
@@ -19,17 +11,18 @@ function obj = addDynamicsConstraint(obj)
     numState = plant.numState;
     
     % M(x)dx or M(x)ddx
+    x = plant.States.x;
     if isempty(plant.Mmat)
-        if ~isempty(plant.States.ddx)
+        if strcmp(plant.Type,'SecondOrder') 
             ddx = plant.States.ddx;
-            MmatDx = SymFunction(['MmatDx_' plant.Name],-ddx,{ddx});
+            MmatDx = SymFunction(['MmatDx_' plant.Name],-ddx,{x,ddx});
         else
             dx = plant.States.dx;
-            MmatDx = SymFunction(['MmatDx_' plant.Name],-dx,{dx});
+            MmatDx = SymFunction(['MmatDx_' plant.Name],-dx,{x,dx});
         end
     else
-        x = plant.States.x;
-        if ~isempty(plant.States.ddx)
+        
+        if strcmp(plant.Type,'SecondOrder') 
             ddx = plant.States.ddx;
             MmatDx = SymFunction(['MmatDx_' plant.Name],-plant.Mmat*ddx,{x,ddx});
         else
@@ -39,7 +32,7 @@ function obj = addDynamicsConstraint(obj)
     end    
     
     mdx_cstr_fun(nNode) = NlpFunction();   % preallocation
-    if ~isempty(plant.States.ddx)%second order system
+    if strcmp(plant.Type,'SecondOrder') %second order system
         for i=node_list
             mdx_cstr_fun(i) = NlpFunction('Name','MmatDx',...
                 'Dimension',numState,'SymFun',MmatDx,...
@@ -56,35 +49,38 @@ function obj = addDynamicsConstraint(obj)
     % drift vector fields vf(x)
     n_vf = numel(plant.Fvec);
     Fvec_cstr_fun(n_vf,nNode) = NlpFunction(); % preallocation
-    if ~isempty(plant.States.ddx)%second order system
-        for i=node_list
-            for j=1:n_vf
-                Fvec_cstr_fun(j,i) = NlpFunction('Name',plant.Fvec{j}.Name,...
-                    'Dimension',numState,'SymFun',plant.Fvec{j},...
-                    'DepVariables',[vars.x(i);vars.dx(i)]);
+    if n_vf > 0
+        if strcmp(plant.Type,'SecondOrder')%second order system
+            for i=node_list
+                for j=1:n_vf
+                    Fvec_cstr_fun(j,i) = NlpFunction('Name',plant.Fvec{j}.Name,...
+                        'Dimension',numState,'SymFun',plant.Fvec{j},...
+                        'DepVariables',[vars.x(i);vars.dx(i)]);
+                end
             end
-        end
-    else                         %first order system
-        for i=node_list
-            for j=1:n_vf
-                Fvec_cstr_fun(j,i) = NlpFunction('Name',plant.Fvec{j}.Name,...
-                    'Dimension',numState,'SymFun',plant.Fvec{j},...
-                    'DepVariables',[vars.x(i)]);
+        else                         %first order system
+            for i=node_list
+                for j=1:n_vf
+                    Fvec_cstr_fun(j,i) = NlpFunction('Name',plant.Fvec{j}.Name,...
+                        'Dimension',numState,'SymFun',plant.Fvec{j},...
+                        'DepVariables',vars.x(i));
+                end
             end
         end
     end
-    
     
     % external input vector fields
     input_names = fieldnames(plant.Inputs);
     n_inputs = numel(input_names);
     Gvec_cstr_fun(n_inputs,nNode) = NlpFunction(); % preallocation
-    for i=node_list
-        for j=1:n_inputs
-            input = input_names{j};
-            Gvec_cstr_fun(j,i) = NlpFunction('Name',plant.Gvec.(input).Name,...
-                'Dimension',numState,'SymFun',plant.Gvec.(input),...
-                'DepVariables',[vars.x(i);vars.(input)(i)]);
+    if n_inputs > 0
+        for i=node_list
+            for j=1:n_inputs
+                input = input_names{j};
+                Gvec_cstr_fun(j,i) = NlpFunction('Name',plant.Gvec.(input).Name,...
+                    'Dimension',numState,'SymFun',plant.Gvec.(input),...
+                    'DepVariables',[vars.x(i);vars.(input)(i)]);
+            end
         end
     end
         

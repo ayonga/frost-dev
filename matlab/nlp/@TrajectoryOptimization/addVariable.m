@@ -2,16 +2,16 @@ function obj = addVariable(obj, label, nodes, varargin)
     % Adds NLP decision variables 
     %
     % Parameters:
-    % label: the label name (row) of the constraint @type char
+    % label: the label name (column) of the variable @type char
     % nodes: the node list of the variable @type rowvec
     % varargin: variable input arguments for property values non-empty
     % NlpVariables @copydoc NlpVariable::updateProp
     % 
-    % @see NlpVariable
+    % @see NlpVariable, removeVariable
     
     
     
-    varnames = obj.ConstrTable.Properties.VariableNames;
+    varnames = obj.OptVarTable.Properties.VariableNames;
 
     if ismember(label,varnames)
         warning('The NLP variable (%s) already exists.\n Overwriting the existing NLP variable.', label);

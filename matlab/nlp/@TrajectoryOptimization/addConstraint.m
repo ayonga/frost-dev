@@ -3,12 +3,12 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
     %
     %
     % Parameters:
-    % label: the label name (row) of the constraint @type char
+    % label: the label name (column) of the constraints @type char
     % nodes: the node list of the variable @type rowvec
     % cstr_array: an array of structures that could be used to construct
     % the NlpFunction object. @type struct
     % 
-    % @see NlpFunction
+    % @see NlpFunction, removeConstraint
     %
     % @note 
     
@@ -17,6 +17,9 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
     
     cstr_names = obj.ConstrTable.Properties.VariableNames;
     
+    if ismember(label,cstr_names)
+        warning('The NLP constraint (%s) already exist.\n Overwriting the existing constraint.', label);
+    end
     
     if ischar(nodes)
         switch nodes

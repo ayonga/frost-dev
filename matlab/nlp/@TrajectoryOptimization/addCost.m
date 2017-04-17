@@ -3,12 +3,12 @@ function obj = addCost(obj, label, nodes, cost_array)
     %
     %
     % Parameters:
-    % label: the label name (row) of the constraint @type char
+    % label: the label name (column) of the cost @type char
     % nodes: the node list of the variable @type rowvec
     % cost_array: an array of structures that could be used to construct
     % the NlpFunction object. @type struct
     % 
-    % @see NlpFunction
+    % @see NlpFunction, removeCost
     %
     % @note 
     
@@ -16,6 +16,10 @@ function obj = addCost(obj, label, nodes, cost_array)
     
     
     cstr_names = obj.CostTable.Properties.VariableNames;
+    
+    if ismember(label,cstr_names)
+        warning('The NLP cost functions (%s) already exist.\n Overwriting the existing cost function.', label);
+    end
     
     
     if ischar(nodes)
@@ -67,7 +71,7 @@ function obj = addCost(obj, label, nodes, cost_array)
         end
     end
     
-    % add to the decision variable table
+    % add to the cost function table
     if ismember(label,cstr_names)
         obj.CostTable.(label)(node_list) = costs(node_list);
     else

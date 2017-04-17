@@ -338,14 +338,12 @@ ComputeBodyJacobians[args__,robotKinematics_] :=
 	
 	
 
-ToEulerAngles[gst_,q_] :=
+ToEulerAngles[gst_,gst0_] :=
 	Block[{R, R0, Rw, yaw, roll, pitch,q0subs},
 		(* compute rigid orientation*)
 		R = Screws`RigidOrientation[gst];
 		(* compute rigid orientation with initial tool configuration (q = 0) *)
-		
-		q0subs = Join[Sequence @@ Map[Association[#-> 0] &, Flatten@q]];
-		R0 = R/.q0subs;
+		R0 = Screws`RigidOrientation[gst0];
 		(* compute spatial orientation *)
 		Rw = R.Transpose[R0];
 		(* compute Euler angles *)
@@ -372,14 +370,15 @@ ComputeCartesianPositions[args__,robotKinematics_] :=
 		Return[pos];
 	];
 
-ComputeEulerAngles[args__,robotKinematics_,q_] :=
-	Block[{pos, gst},
+ComputeEulerAngles[args__,robotKinematics_] :=
+	Block[{pos, gst, gst0, argList = {args}},
 		
 		(* first compute the forward kinematics *)
 		gst = ComputeForwardKinematics[args,robotKinematics];
-		
+		gst0 = Map[robotKinematics["gst0"][[#]] &, Map[First@robotKinematics["pIndices"][#] &, argList[[;; , 1]]]];
 		(* compute rigid positions *)
-		pos = Map[ToEulerAngles[#,q]&,gst];
+		pos = MapThread[ToEulerAngles,{gst,gst0}];
+		
 		
 		Return[pos];
 	];

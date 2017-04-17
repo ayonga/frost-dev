@@ -17,7 +17,8 @@ function obj = addState(obj, x, dx, ddx)
     assert(length(dx) == length(x),...
         'The dimension of (dx) is incorrect.');
     
-    if nargin > 3
+    
+    if strcmp(obj.Type, 'SecondOrder')
         if ~isempty(ddx)
             assert(isa(ddx,'SymVariable') && isvector(x), ...
                 '(ddx) must be a vector SymVariable object.');
@@ -26,12 +27,11 @@ function obj = addState(obj, x, dx, ddx)
                 'The dimension of (ddx) is incorrect.');
             
         end
-    else
-        ddx = [];
+        
+        obj.States.ddx = ddx;
     end
 
     obj.States.x = x;
     obj.States.dx = dx;
-    obj.States.ddx = ddx;
     obj.numState = length(obj.States.x);
 end

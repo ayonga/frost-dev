@@ -95,7 +95,7 @@ classdef RobotManipulator < DynamicalSystem
     
     
     %% Private properties
-    properties (Access = protected, Hidden)
+    properties (Access = public, Hidden)
         % The stuctured data of the forward kinematics twists
         %
         % @type SymExpression
@@ -192,7 +192,7 @@ classdef RobotManipulator < DynamicalSystem
             
             % construct the object by calling superclass constructor
             % function
-            obj = obj@DynamicalSystem(name);
+            obj = obj@DynamicalSystem(name, 'SecondOrder');
             
             joint2assoc = arrayfun(@struct2assoc,joints,'UniformOutput',false);
             
@@ -257,7 +257,7 @@ classdef RobotManipulator < DynamicalSystem
             obj.SymLinks = SymExpression(arrayfun(@struct2assoc,links,'UniformOutput',false));
             obj.SymTwists = eval_math_fun('InitializeModel',{obj.SymJoints,obj.States.x});
             
-            obj = setDynamics(obj);
+%             obj = setDynamics(obj);
         end
         
         
@@ -285,7 +285,6 @@ classdef RobotManipulator < DynamicalSystem
         
         [M,f] = calcDynamics(obj, qe, dqe);
         
-        obj = compileDynamics(obj, export_path, varargin);
         
         [varargout] = getCartesianPosition(obj, varargin);
         

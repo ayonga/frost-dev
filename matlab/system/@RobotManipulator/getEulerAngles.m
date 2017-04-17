@@ -33,7 +33,7 @@ function [varargout] = getEulerAngles(obj, varargin)
             
         end
         
-        ang = eval_math_fun('ComputeEulerAngles',[links, {obj.SymTwists},{obj.States.x}]);
+        ang = eval_math_fun('ComputeEulerAngles',[links, {obj.SymTwists}]);
         
         varargout = cell(1,n_link);
         for i=1:n_pos

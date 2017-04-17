@@ -170,8 +170,12 @@ classdef TrajectoryOptimization < NonlinearProgram
             % impose the collocation constraints
             obj = obj.addCollocationConstraint();
             
-            % impose the system dynamics constraints
+            % impose the system dynamics equation constraints
             obj = obj.addDynamicsConstraint();
+            
+            % impose the system specific constraints (such as holonomic
+            % constraints and unilateral constraints)
+            obj = obj.addSystemConstraint();
         end
         
         
@@ -191,6 +195,8 @@ classdef TrajectoryOptimization < NonlinearProgram
         %% functions related to NLP variables
         
         obj = addVariable(obj, label, nodes, varargin);
+        
+        obj = removeVariable(obj, label);
         
         obj = addInputVariable(obj, bounds);
                 
@@ -214,11 +220,14 @@ classdef TrajectoryOptimization < NonlinearProgram
         obj = addCollocationConstraint(obj);
         
         obj = addDynamicsConstraint(obj);  
+        
+        obj = addSystemConstraint(obj);
 
         obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata);
                 
         obj = updateConstrProp(obj, label, node, varargin);
         
+        obj = removeConstraint(obj, label);
         
         %% functions related to NLP cost functions        
         
@@ -230,7 +239,7 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = updateCostProp(obj, label, node, varargin);
                 
-        
+        obj = removeCost(obj, label);
         %% post-processing functions
         
         [yc, cl, cu] = checkConstraints(obj, x);

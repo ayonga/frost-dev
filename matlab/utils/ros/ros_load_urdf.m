@@ -117,8 +117,9 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
     xml_trans = xml_robot.getElementsByTagName('transmission');
     
     num_trans = xml_trans.getLength();
-    transmissions = struct();
+    
     if num_trans~=0
+        transmissions = struct();
         index = 1;
         for i=0:num_trans-1
             xml_tran = xml_trans.item(i);
@@ -145,6 +146,8 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             end
             
         end
+    else
+        transmissions = [];
     end
     
     

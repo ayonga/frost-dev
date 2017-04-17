@@ -21,7 +21,7 @@ function ret = eval_math_fun(fun, args, opts, varargin)
     %
     
     
-    assert(isvarname(fun),'The first argument must be a valid function name.');
+%     assert(isvarname(fun),'The first argument must be a valid function name.');
     
     
     

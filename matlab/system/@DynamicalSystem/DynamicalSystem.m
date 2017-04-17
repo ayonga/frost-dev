@@ -36,6 +36,14 @@
         % @type char
         Name
         
+        % The highest order of the state derivatives of the system
+        %
+        % @note The system could be either a 'FirstOrder' system or a
+        % 'SecondOrder' system.
+        %
+        % @type char
+        Type
+        
         % A structure that contains the symbolic representation of state
         % variables
         %
@@ -94,7 +102,16 @@
         
         
         
+        % The holonomic constraints of the dynamical system
+        %
+        % @type struct
+        HolonomicConstraints
         
+        
+        % The unilateral constraints of the dynamical system
+        %
+        % @type struct
+        UnilateralConstraints
         
     end
     
@@ -121,23 +138,48 @@
         % set the group of drift vector fields F(x) or F(x,dx)
         obj = setDriftVector(obj, vf);
         
+        % add holonomic constraints
+        obj = addHolonomicConstraint(obj, name, constr, jac);
+        
+        % remove holonomic constraints
+        obj = removeHolonomicConstraint(obj, name);
+        
+        % add unilateral constraints
+        obj = addUnilateralConstraint(obj, name, constr, deps);
+        
+        % remove unilateral constraints
+        obj = removeUnilateralConstraint(obj, name);
+        
+        % compile symbolic expression related to the systems
+        obj = compile(obj, export_path, varargin);
+        
+        % check if (name) is a valid variable
+        [flag, var_group] = validateVarName(obj, name)
     end
     
     
     methods
-        function obj = DynamicalSystem(name)
+        function obj = DynamicalSystem(name, type)
             % The class construction function
             %
             % Parameters:
+            % name: the name of the system @type char
+            % type: the type of the system @type char
             
             
             
-            assert(ischar(name),...
-                'The name of the system must be a character vector.')
-            
+            assert(isvarname(name),...
+                'The name of the system must be a valid variable name vector.');            
             obj.Name = name;
             
-            obj.States = struct('x',[],'dx',[],'ddx',[]);
+                    
+            obj.Type = DynamicalSystem.validateSystemType(type);
+            
+            if strcmp(obj.Type,'FirstOrder')
+                obj.States = struct('x',[],'dx',[]);
+            elseif strcmp(obj.Type, 'SecondOrder')
+                obj.States = struct('x',[],'dx',[],'ddx',[]);
+            end
             obj.Inputs = struct();
             obj.Params = struct();
             
@@ -145,10 +187,23 @@
             obj.Gvec = struct();
             obj.Fvec = cell(0);
             obj.Mmat = [];
+            
+            obj.HolonomicConstraints = struct();
+            obj.UnilateralConstraints = struct();
         end
         
         
         
+        
+    end
+    
+    methods (Static, Access=private)
+        
+        function v_type = validateSystemType(type)
+            % validate if it is valid system type
+            
+            v_type = validatestring(type,{'FirstOrder','SecondOrder'});
+        end
         
     end
     
