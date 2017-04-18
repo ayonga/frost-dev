@@ -9,6 +9,8 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
     % links: an array of rigid links structure @type structure
     % joints an array of rigid joints structure @type structure
     
+    
+    
     urdf = xmlread(urdf_file);
     
     xml_robot = urdf.getElementsByTagName('robot').item(0);
@@ -30,7 +32,7 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
         xml_link = xml_links.item(i);
         if xml_link.hasChildNodes
             
-            links(index).name = char(xml_link.getAttribute('name'));
+            links(index).Name = char(xml_link.getAttribute('name'));
             inertial = xml_link.getElementsByTagName('inertial').item(0);
             origin = inertial.getElementsByTagName('origin').item(0);
             mass   = inertial.getElementsByTagName('mass').item(0);
@@ -44,15 +46,15 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             iyz = str2double(inertia.getAttribute('iyz'));
             izz = str2double(inertia.getAttribute('izz'));
             
-            links(index).mass = str2double(mass.getAttribute('value'));
-            links(index).origin.xyz = str2num(origin.getAttribute('xyz')); %#ok<*ST2NM>
+            links(index).Mass = str2double(mass.getAttribute('value'));
+            links(index).Offset = str2num(origin.getAttribute('xyz')); %#ok<*ST2NM>
             rpy = str2num(origin.getAttribute('rpy'));
             if isempty(rpy)
-                links(index).origin.rpy = zeros(1,3);
+                links(index).Rotation = zeros(1,3);
             else
-                links(index).origin.rpy = rpy;
+                links(index).Rotation = rpy;
             end
-            links(index).inertia = [ixx,ixy,ixz; ixy,iyy,iyz; ixz, iyz, izz];
+            links(index).Inertia = [ixx,ixy,ixz; ixy,iyy,iyz; ixz, iyz, izz];
             
             index = index + 1;
         end
@@ -73,8 +75,8 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             if isempty(char(xml_joint.getAttribute('type')))
                 continue;
             end
-            joints(index).name = char(xml_joint.getAttribute('name'));
-            joints(index).type = char(xml_joint.getAttribute('type'));
+            joints(index).Name = char(xml_joint.getAttribute('name'));
+            joints(index).Type = char(xml_joint.getAttribute('type'));
             
             
             origin = xml_joint.getElementsByTagName('origin').item(0);
@@ -83,29 +85,29 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             child = xml_joint.getElementsByTagName('child').item(0);
             
             
-            joints(index).origin.xyz = str2num(origin.getAttribute('xyz'));
+            joints(index).Offset = str2num(origin.getAttribute('xyz'));
             rpy = str2num(origin.getAttribute('rpy'));
             if isempty(rpy)
-                joints(index).origin.rpy = zeros(1,3);
+                joints(index).Rotation = zeros(1,3);
             else
-                joints(index).origin.rpy = rpy;
+                joints(index).Rotation = rpy;
             end
-            joints(index).axis = str2num(axis.getAttribute('xyz'));
-            joints(index).parent = char(parent.getAttribute('link'));
-            joints(index).child  = char(child.getAttribute('link'));
+            joints(index).Axis = str2num(axis.getAttribute('xyz'));
+            joints(index).Parent = char(parent.getAttribute('link'));
+            joints(index).Child  = char(child.getAttribute('link'));
             
             limit = xml_joint.getElementsByTagName('limit').item(0);
-            joints(index).limit = struct();
+            joints(index).Limit = struct();
             if ~isempty(limit)
-                joints(index).limit.effort = str2double(limit.getAttribute('effort'));
-                joints(index).limit.lower = str2double(limit.getAttribute('lower'));
-                joints(index).limit.upper = str2double(limit.getAttribute('upper'));
-                joints(index).limit.velocity = str2double(limit.getAttribute('velocity'));
+                joints(index).Limit.effort = str2double(limit.getAttribute('effort'));
+                joints(index).Limit.lower = str2double(limit.getAttribute('lower'));
+                joints(index).Limit.upper = str2double(limit.getAttribute('upper'));
+                joints(index).Limit.velocity = str2double(limit.getAttribute('velocity'));
             else
-                joints(index).limit.effort = 0;
-                joints(index).limit.lower = 0;
-                joints(index).limit.upper = 0;
-                joints(index).limit.velocity = 0;
+                joints(index).Limit.effort = 0;
+                joints(index).Limit.lower = 0;
+                joints(index).Limit.upper = 0;
+                joints(index).Limit.velocity = 0;
             end
             index = index + 1;
         end
@@ -125,23 +127,23 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             xml_tran = xml_trans.item(i);
             
             if xml_tran.hasChildNodes
-                transmissions(index).name = char(xml_tran.getAttribute('name'));
+                transmissions(index).Name = char(xml_tran.getAttribute('name'));
                 if xml_tran.hasAttribute('type')
-                    transmissions(index).type = char(xml_tran.getAttribute('type'));
+                    transmissions(index).Type = char(xml_tran.getAttribute('type'));
                 elseif ~isempty(xml_tran.getElementsByTagName('type').item(0))
                     trans_type = xml_tran.getElementsByTagName('type').item(0);
-                    transmissions(index).type = char(trans_type.getNodeType);
+                    transmissions(index).Type = char(trans_type.getNodeType);
                 end
                 
                 trans_joint = xml_tran.getElementsByTagName('joint').item(0);
-                transmissions(index).joint = char(trans_joint.getAttribute('name'));
+                transmissions(index).Joint = char(trans_joint.getAttribute('name'));
                 trans_act = xml_tran.getElementsByTagName('actuator').item(0);
                 if ~isempty(trans_act)
-                    transmissions(index).actuator = char(trans_act.getAttribute('name'));
+                    transmissions(index).Actuator = char(trans_act.getAttribute('name'));
                 end
                 
                 trans_ratio = xml_tran.getElementsByTagName('mechanicalReduction').item(0);
-                transmissions(index).mechanicalReduction = double(trans_ratio.getNodeType);
+                transmissions(index).MechanicalReduction = double(trans_ratio.getNodeType);
                 index = index+1;
             end
             
