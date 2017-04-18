@@ -11,19 +11,19 @@ InitializeModel::usage =
 model type (either floating or planar). "
 
 PotentialEnergy::usage = 
-	"PotentialEnergy[robotLinks,robotKinematics] compute the potential energy of the mechanical \
+	"PotentialEnergy[robotLinks,robotJoints] compute the potential energy of the mechanical \
 	system due to the gravity forces."
 
 GravityVector::usage = 
-	"GravityVector[q,robotLinks,robotKinematics] computes the gravity vector of the robot model."
+	"GravityVector[q,robotLinks,robotJoints] computes the gravity vector of the robot model."
 	
 InertiaMatrix::usage = 
-	"InertiaMatrix[robotLinks, robotKinematics] computes the inertia matrix of the robot model."	
+	"InertiaMatrix[robotLinks, robotJoints] computes the inertia matrix of the robot model."	
 
 
 
 ComputeComPosition::usage = 
-	"ComputeComPosition[robotLinks, robotKinematics] returns the position vectors of the \
+	"ComputeComPosition[robotLinks,robotJoints] returns the position vectors of the \
 center of mass of the robot."
 
 
@@ -31,23 +31,23 @@ center of mass of the robot."
 
 
 ComputeBodyJacobians::usage =
-	"ComputeBodyJacobians[{link1,offset1},...,{link$n,offset$n},robotKinematics] \
-Compute the body jacobian of the point that is rigidly attached to the link with a given offset."; 
+	"ComputeBodyJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] \
+Compute the body jacobian of the point that is rigidly attached to the frame with a given offset."; 
 
 
 
 
 
 ComputeCartesianPositions::usage = 
-	"ComputeCartesianPositions[{link1,offset1},...,{link$n,offset$n},robotKinematics] computes \
-the 3-dimensional cartesian positions specified by the links and relative offset vectors";
+	"ComputeCartesianPositions[{frame1,offset1, rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
 
 ComputeEulerAngles::usage = 
-	"ComputeEularAngles[{link1,offset1},...,{link$n,offset$n},robotKinematics] computes \
-the 3-dimensional cartesian positions specified by the links and relative offset vectors";
+	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
 
 ComputeSpatialJacobians::usage = 
-	"ComputeSpatialJacobians[{link1,offset1},...,{link$n,offset$n},robotKinematics] computes Jacobian of\
+	"ComputeSpatialJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] computes Jacobian of\
 the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Euler \
 angles specified by the links and relative offset vectors";
 
@@ -89,9 +89,18 @@ InertiaToCoriolisPart3::usage=
   inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
 
 
+ComputeHomogeneousTransforms::usage = 
+	"ComputeHomogeneousTransforms[robotJoints] Compute the homogeneous transformation of \
+each joint from the base by the initial tool configuration."
+
+GetChainIndices::usage = "GetChainIndices[robotJoints] returns the chain indices of each joint.";
 
 GetKinematicTree::usage = 
 	"GetKinematicTree[robotJoints] Return the kinematic tree indices of the multi-body model.";
+GetTwistPairs::usage = 
+	"GetKinematicChains[robotJoints,q]	Return the kinematic chains from the base to each joint.";
+ComputeTwists::usage = 
+	"ComputeTwists[robotJoints]	computes relative twist (in joint frame i) to base frame S.";
 
 GetBaseLink::duplicated = "Duplicated base links: `1` and `2`.";
 GetBaseLink::notfound = " Unable to find the base link of the model.";
@@ -99,7 +108,9 @@ GetBaseLink::notfound = " Unable to find the base link of the model.";
 GetBaseLink::usage = 
 	"GetBaseLink[robotJoints] returns the base link of the multi-body model.";
 	
-
+GetRelativeTwist::undefinedAxisType = "Undefinied joint axis type: `1`.";
+GetRelativeTwist::usage = 
+	"GetRelativeTwist[type, axis] returns the relatvie twist of the joint.";	
 
 (**)
 Begin["`Private`"]
@@ -157,13 +168,13 @@ InitializeModel[robotJoints_,q_] :=
 
 	
 	
-PotentialEnergy[robotLinks_,robotKinematics_] :=
+PotentialEnergy[robotLinks_,robotJoints_] :=
 	Block[{links, linkPos, masses, Ve, i},
 		(* construct pairs of link name and position offset *)
-		links = Map[{#["name"], GetPosition[#]} &, robotLinks];
+		links = Map[{robotJoints[[#["pIndex"]]], GetPosition[#],{0,0,0}} &, robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeCartesianPositions[Sequence@@links,robotKinematics];
+		linkPos = ComputeCartesianPositions[Sequence@@links];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, robotLinks];
@@ -174,10 +185,10 @@ PotentialEnergy[robotLinks_,robotKinematics_] :=
 		Return[Ve];
 	];	
 
-GravityVector[q_,robotLinks_,robotKinematics_] :=
+GravityVector[q_,robotLinks_,robotJoints_] :=
 	Block[{V, ge},
 		(* compute potential energy of the robot *)
-		V = PotentialEnergy[robotLinks,robotKinematics];
+		V = PotentialEnergy[robotLinks,robotJoints];
 		
 		(* take partial derivatives to get the gravity vector *)
 		ge = ExtraUtils`Vec[D[Flatten[V],{Flatten[q],1}]];
@@ -189,7 +200,7 @@ GravityVector[q_,robotLinks_,robotKinematics_] :=
 
 InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
   Module[
-    {Cvec, i, k, n = Length[M],q,w},
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
 	q = Flatten[theta];
 	w = Flatten[omega];
     (* Brute force calculation *)
@@ -197,14 +208,14 @@ InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
     For[i = 1, i <= n, ++i,
 	    For[k = 1, k <= n, ++k,
 	      Cvec[[i]] += 1/2 * w[[k]] *
-	      (D[M[[i,col]], q[[k]]]);
+	      (D[M[[i,j]], q[[k]]]);
 	    ]
     ];
-    Cvec*w[[col]]
+    Cvec*w[[j]]
   ];	
 InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
   Module[
-    {Cvec, i, k, n = Length[M],q,w},
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
 	q = Flatten[theta];
 	w = Flatten[omega];
     (* Brute force calculation *)
@@ -212,15 +223,15 @@ InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
     For[i = 1, i <= n, ++i,
         For[k = 1, k <= n, ++k,
           Cvec[[i]] += 1/2 * w[[k]] *
-          (D[M[[i,k]], q[[col]]]);
+          (D[M[[i,k]], q[[j]]]);
         ]
     ];
-    Cvec*w[[col]]
+    Cvec*w[[j]]
   ];	
   
 InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
   Module[
-    {Cvec, i, k, n = Length[M],q,w},
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
 	q = Flatten[theta];
 	w = Flatten[omega];
     (* Brute force calculation *)
@@ -228,10 +239,10 @@ InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
     For[i = 1, i <= n, ++i,
         For[k = 1, k <= n, ++k,
           Cvec[[i]] += 1/2 * w[[k]] *
-          (- D[M[[col,k]], q[[i]]]);
+          (- D[M[[j,k]], q[[i]]]);
         ]
     ];
-    Cvec*w[[col]]
+    Cvec*w[[j]]
   ];			
 (* The contributions of motor inertia to the robot dynamics are not addressed
 in the URDF model definition. To include the motor inertia in the dynamics 
@@ -239,8 +250,8 @@ please include the motor inertia information when call InertiaMatrix[] function.
 NOTE: the provided motor inertia value should be the reflected inertia value at 
 the joint side = original actuator inertia * gear ratio ^2.
 *)
-InertiaMatrix[robotLinks_, robotKinematics_] :=
-	Block[{MM, link, mass, inertia, links, Je, De},
+InertiaMatrix[robotLinks_, robotJoints_] :=
+	Block[{MM, link, mass, inertia, links, Je, De, i},
 		MM = Table[
 			mass=GetMass[link];
 			inertia=GetInertia[link];
@@ -250,10 +261,10 @@ InertiaMatrix[robotLinks_, robotKinematics_] :=
 		];
 		
 		(* construct pairs of link name and position offset *)
-		links = Map[{#["name"], GetPosition[#]} &, robotLinks];
+		links = Map[{robotJoints[[#["pIndex"]]], GetPosition[#],{0,0,0}} &, robotLinks];
 		
 		(* compute body jacobians of each link CoM position *)
-		Je = ComputeBodyJacobians[Sequence@@links,robotKinematics];
+		Je = ComputeBodyJacobians[Sequence@@links, Length[robotJoints]];
 		
 		De = Sum[Transpose[Je[[i]]].MM[[i]].Je[[i]],{i,1,Length[robotLinks]}];
 		
@@ -263,14 +274,14 @@ InertiaMatrix[robotLinks_, robotKinematics_] :=
 InertiaMatrix::inequal = 
 	"The length of given motor inertia `1` is not equal to the number of joints `2`.";
 
-ComputeComPosition[robotLinks_,robotKinematics_] :=
+ComputeComPosition[robotLinks_,robotJoints_] :=
 	Block[{links, linkPos, masses, pcom, i},
 		
 		(* construct pairs of link name and position offset *)
-		links = Map[{#["name"], GetPosition[#]} &, robotLinks];
+		links = Map[{robotJoints[[#["pIndex"]]], GetPosition[#],{0,0,0}} &, robotLinks];
 		
 		(* center of mass positions of each link*)
-		linkPos = ComputeCartesianPositions[Sequence@@links,robotKinematics];
+		linkPos = ComputeCartesianPositions[Sequence@@links];
 		
 		(* get mass of links *)
 		masses = Map[GetMass[#]&, robotLinks];
@@ -292,49 +303,45 @@ ComputeComPosition[robotLinks_,robotKinematics_] :=
 		Return[Jcom];
 	];*)
 
-ComputeBodyJacobians[args__,robotKinematics_] :=
-	Block[{gs0,i,np,Jz,Je,curIndices,linkName,offset,jIndex,pIndices,gst0,kinTwists,chainIndices,
-		argList = {args}}, (* turn arguments into a real list *)
-		
+ComputeBodyJacobians[args__,nDof_] :=
+	Block[{argList = {args}, np, i, Je, frame,offset,roll,pitch,yaw,R,curIndices,
+		Jz, gs0},
+			
 		
 		(* extract the number of points to be calculated *)
 		np = Length[argList];
 		
-		pIndices  = robotKinematics["pIndices"];
-		gst0      = robotKinematics["gst0"]; 
-		kinTwists = robotKinematics["kinTwists"];
-		chainIndices = robotKinematics["chainIndices"];
 		
 		(* forward homogeneous transformation *)
-		Table[		
+		Je = Table[		
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
-			linkName = argList[[i,1]];  
-			(* the relative argList[[i,2]] of the point from the origin of the link (in the link coordinates). *)
+			frame = argList[[i,1]];  
+			(* the relative offset of the point from the origin of the frame (in the frame coordinates). *)
 			offset   = Flatten@argList[[i,2]];
-			
-			(* take the index of parent joint of the rigid link *)
-			jIndex   = First@pIndices[linkName];
+			(* the relative rotation of the frame in the frame (in the frame coordinates). *)
+			{roll,pitch,yaw} = Rationalize@Flatten@argList[[i,3]];		
+			(* From the definition of URDF joint:
+			Represents the rotation around fixed axis: first roll around x, then pitch 
+			around y and finally yaw around z. All angles are specified in radians. *)
+			R = RotZ[yaw].RotY[pitch].RotX[roll];			
+			(* compute homogeneous transformation from base to the point with initial tool configuration (q=0)*)
+			gs0 = frame["gst0"].Screws`RPToHomogeneous[R, offset];
 			
 			(* initialize the Jacobian with fixed length (ndof) *)
-			Jz    = ConstantArray[0,{6,Length[gst0]}];
-			
-			(* compute homogeneous transformation from base to the point with initial tool configuration (q=0)*)
-			gs0 = gst0[[jIndex]].Screws`RPToHomogeneous[I3, offset];
-			
-			
-			If[jIndex != 0, (* the link is not the base link *)
+			Jz    = ConstantArray[0,{6,IntegerPart@nDof}];
+			If[!ExtraUtils`EmptyQ[frame["twistPairs"]], (* the link is the base link *)		
 				(* assign the dependent coordinate indices *)
-				curIndices = chainIndices[[jIndex]];		
-				(* compute body jacobian *)		
-				Jz[[;;,curIndices]]=RobotLinks`BodyJacobian[Sequence@@kinTwists[[jIndex]], gs0];
+				curIndices = Flatten@{frame["chainIndices"]};
+				(* compute spatial jacobian *)		
+				Jz[[;;,curIndices]]=RobotLinks`BodyJacobian[Sequence@@frame["twistPairs"], gs0];
 			];
 					
-			Je[i] = Jz;
+			Jz
 			,
 			{i,np}
 		];
-		Return[Table[Je[i],{i,1,np}]];	
-	];
+		Return[Je];	
+	];	
 	
 	
 
@@ -358,11 +365,11 @@ ToEulerAngles[gst_,gst0_] :=
 
 
 	
-ComputeCartesianPositions[args__,robotKinematics_] :=
+ComputeCartesianPositions[args__] :=
 	Block[{pos, gst},
 		
 		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args,robotKinematics];
+		gst = ComputeForwardKinematics[args];
 		
 		(* compute rigid positions *)
 		pos = Map[Screws`RigidPosition[#]&,gst];
@@ -370,12 +377,12 @@ ComputeCartesianPositions[args__,robotKinematics_] :=
 		Return[pos];
 	];
 
-ComputeEulerAngles[args__,robotKinematics_] :=
+ComputeEulerAngles[args__] :=
 	Block[{pos, gst, gst0, argList = {args}},
 		
 		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args,robotKinematics];
-		gst0 = Map[robotKinematics["gst0"][[#]] &, Map[First@robotKinematics["pIndices"][#] &, argList[[;; , 1]]]];
+		gst = ComputeForwardKinematics[args];
+		gst0 = Map[#["gst0"] &, argList[[;; , 1]]];
 		(* compute rigid positions *)
 		pos = MapThread[ToEulerAngles,{gst,gst0}];
 		
@@ -383,41 +390,37 @@ ComputeEulerAngles[args__,robotKinematics_] :=
 		Return[pos];
 	];
 	
-ComputeSpatialJacobians[args__,robotKinematics_] :=
-	Block[{pos, argList = {args}, np, i, Je, pIndices,gst0,kinTwists,chainIndices,
-		linkName, offset, jIndex, Jz, gs0, curIndices},
+ComputeSpatialJacobians[args__,nDof_] :=
+	Block[{argList = {args}, np, i, Je, frame,offset,roll,pitch,yaw,R,curIndices,
+		Jz, gs0},
 			
 		
 		(* extract the number of points to be calculated *)
 		np = Length[argList];
 		
-		pIndices  = robotKinematics["pIndices"];
-		gst0      = robotKinematics["gst0"]; 
-		kinTwists = robotKinematics["kinTwists"];
-		chainIndices = robotKinematics["chainIndices"];
 		
 		(* forward homogeneous transformation *)
 		Je = Table[		
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
-			linkName = argList[[i,1]];  
-			(* the relative offset of the point from the origin of the link (in the link coordinates). *)
+			frame = argList[[i,1]];  
+			(* the relative offset of the point from the origin of the frame (in the frame coordinates). *)
 			offset   = Flatten@argList[[i,2]];
-			
-			(* take the index of parent joint of the rigid link *)
-			jIndex   = First@pIndices[linkName];
+			(* the relative rotation of the frame in the frame (in the frame coordinates). *)
+			{roll,pitch,yaw} = Rationalize@Flatten@argList[[i,3]];		
+			(* From the definition of URDF joint:
+			Represents the rotation around fixed axis: first roll around x, then pitch 
+			around y and finally yaw around z. All angles are specified in radians. *)
+			R = RotZ[yaw].RotY[pitch].RotX[roll];			
+			(* compute homogeneous transformation from base to the point with initial tool configuration (q=0)*)
+			gs0 = frame["gst0"].Screws`RPToHomogeneous[R, offset];
 			
 			(* initialize the Jacobian with fixed length (ndof) *)
-			Jz    = ConstantArray[0,{6,Length[gst0]}];
-			
-			(* compute homogeneous transformation from base to the point with initial tool configuration (q=0)*)
-			gs0 = gst0[[jIndex]].Screws`RPToHomogeneous[I3, offset];
-			
-			
-			If[jIndex != 0, (* the link is not the base link *)				
+			Jz    = ConstantArray[0,{6,IntegerPart@nDof}];
+			If[!ExtraUtils`EmptyQ[frame["twistPairs"]], (* the link is the base link *)		
 				(* assign the dependent coordinate indices *)
-				curIndices = chainIndices[[jIndex]];		
+				curIndices = Flatten@{frame["chainIndices"]};
 				(* compute spatial jacobian *)		
-				Jz[[;;,curIndices]]=RobotLinks`SpatialJacobian[Sequence@@kinTwists[[jIndex]], gs0];
+				Jz[[;;,curIndices]]=RobotLinks`SpatialJacobian[Sequence@@frame["twistPairs"], gs0];
 			];
 					
 			Jz
@@ -432,8 +435,8 @@ ComputeForwardKinematics::usage =
 	"ComputeForwardKinematics[{link1,offset1},...,{link$n,offset$n},robotKinematics] \
 Compute the forward homogeneous transformation from the base to the point that is rigidly attached \
 to a link with a given offset."
-ComputeForwardKinematics[args__,robotKinematics_] :=
-	Block[{i,np,gst,gs0,linkName,offset,jIndex,pIndices,gst0,kinTwists,
+ComputeForwardKinematics[args__] :=
+	Block[{i,np,gst,gs0,frame,offset,roll,pitch,yaw,R,gst0,
 		argList = {args}}, (* turn arguments into a real list *)
 		
 		
@@ -441,28 +444,26 @@ ComputeForwardKinematics[args__,robotKinematics_] :=
 		(* extract the number of points to be calculated *)
 		np = Length[argList];
 		
-		pIndices  = robotKinematics["pIndices"];
-		gst0      = robotKinematics["gst0"]; 
-		kinTwists = robotKinematics["kinTwists"];
 		
 		(* forward homogeneous transformation *)
 		Table[		
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
-			linkName = argList[[i,1]];  
-			(* the relative offset of the point from the origin of the link (in the link coordinates). *)
+			frame = argList[[i,1]];  
+			(* the relative offset of the point from the origin of the frame (in the frame coordinates). *)
 			offset   = Flatten@argList[[i,2]];
-			
-			(* take the index of parent joint of the link *)
-			jIndex   = First@pIndices[linkName];
-			
+			(* the relative rotation of the frame in the frame (in the frame coordinates). *)
+			{roll,pitch,yaw} = Rationalize@Flatten@argList[[i,3]];		
+			(* From the definition of URDF joint:
+			Represents the rotation around fixed axis: first roll around x, then pitch 
+			around y and finally yaw around z. All angles are specified in radians. *)
+			R = RotZ[yaw].RotY[pitch].RotX[roll];			
 			(* compute homogeneous transformation from base to the point with initial tool configuration (q=0)*)
-			gs0 = gst0[[jIndex]].Screws`RPToHomogeneous[I3, offset];
-			
+			gs0 = frame["gst0"].Screws`RPToHomogeneous[R, offset];
 			(* compute forward kinematics *)
-			If[jIndex == 0, (* the link is the base link *)
+			If[ExtraUtils`EmptyQ[frame["twistPairs"]], (* the link is the base link *)
 				gst[i]=gs0;
 				,
-				gst[i]=RobotLinks`ForwardKinematics[Sequence@@kinTwists[[jIndex]], gs0];
+				gst[i]=RobotLinks`ForwardKinematics[Sequence@@frame["twistPairs"], gs0];
 			];
 					
 			,
@@ -488,7 +489,7 @@ GetKinematicTree[robotJoints_] :=
 	Block[{childIndex,link,jointIndex,terminals,numBranch,tree,i,j, tIndex}, 
 		
 		(* get the indices of child links *)
-		childIndex = ExtraUtils`GetFieldIndices[robotJoints, "child"];
+		childIndex = ExtraUtils`GetFieldIndices[robotJoints, "Child"];
 		
 		(* get the terminal links of the multi-body system *)
 		terminals = GetTerminalLink[robotJoints];
@@ -507,7 +508,7 @@ GetKinematicTree[robotJoints_] :=
 		(* iteratively get the joint indices of each kinematic branch. *)
 		Table[
 			(* find the parent link of the first joint in the branch. *)
-		  	link=robotJoints[[tIndex[[i]]]]["parent"];
+		  	link=robotJoints[[tIndex[[i]]]]["Parent"];
 		  	
 		  	(* find the parent joint until there is no child joint *)
 		  	While[
@@ -521,7 +522,7 @@ GetKinematicTree[robotJoints_] :=
 			    tree[[i]]=Flatten@AppendTo[tree[[i]],jointIndex];
 			    
 			    (* set the current link to the child link of the joint *)
-		    	link=robotJoints[[jointIndex]][[1]]["parent"];
+		    	link=robotJoints[[jointIndex]][[1]]["Parent"];
 		  ];
 		  ,
 		  {i,1,numBranch}
@@ -536,8 +537,8 @@ GetTerminalLink[robotJoints_] :=
 	Block[{plink, clink, terminallink = None, i, links}, 
 		
 		(* extract the name list of the parent and child links *)
-		plink = Map[ToString@#["parent"] &, robotJoints];
- 		clink = Map[ToString@#["child"] &, robotJoints];
+		plink = Map[ToString@#["Parent"] &, robotJoints];
+ 		clink = Map[ToString@#["Child"] &, robotJoints];
  		
  		(* the terminal (end) link is the child link that is not a parent link of any joint *)
  		links = Table[
@@ -560,8 +561,8 @@ GetBaseLink[robotJoints_] :=
 	Block[{plink, clink, baselink = None, i}, 
 		
 		(* extract the name list of the parent and child links *)
-		plink = Map[ToString@#["parent"] &, robotJoints];
- 		clink = Map[ToString@#["child"] &, robotJoints];
+		plink = Map[ToString@#["Parent"] &, robotJoints];
+ 		clink = Map[ToString@#["Child"] &, robotJoints];
  		
  		(* the base link is the parent link that is not a child link of any joint *)
  		Table[
@@ -589,30 +590,31 @@ GetBaseLink[robotJoints_] :=
  	];
 
 
-GetRelativeTwist::undefinedAxisType = "Undefinied joint axis type: `1`.";
-GetRelativeTwist::usage = 
-	"GetRelativeTwist[joint] returns the relatvie twist of the joint.";	
-GetRelativeTwist[joint_?AssociationQ]:=
+
+(*GetRelativeTwist[joint_?AssociationQ]:=
 	Block[{type,axis,xi},
 		type=joint["type"];
-		axis=Rationalize@Flatten@joint["axis"];	
+		axis=Rationalize@Flatten@joint["axis"];	*)
+GetRelativeTwist[type_, axis_]:=
+	Block[{xi,axisv},
+		axisv=Rationalize@Flatten@axis;
 		(* Relative, DH-style twists, see MLS p. 94 *)
 		(* Note that the twists are in body frame, so q = 0 *)	
 		Switch[type,
 			"prismatic",
 			(* xi : (q = 0, v = axis ) *)
-			xi = RobotLinks`PrismaticTwist[{0, 0, 0}, axis];
+			xi = RobotLinks`PrismaticTwist[{0, 0, 0}, axisv];
 			,
 			"revolute",
 			(* xi : (q = 0, w = axis, v (handled by function) *)
-			xi = RobotLinks`RevoluteTwist[{0, 0, 0}, axis];
+			xi = RobotLinks`RevoluteTwist[{0, 0, 0}, axisv];
 			,
 			"continuous",
 			(* xi : (q = 0, w = axis, v (handled by function) *)
-			xi = RobotLinks`RevoluteTwist[{0, 0, 0}, axis];
+			xi = RobotLinks`RevoluteTwist[{0, 0, 0}, axisv];
 			,
 			"fixed",
-			xi = RobotLinks`RevoluteTwist[{0, 0, 0}, axis];
+			xi = RobotLinks`RevoluteTwist[{0, 0, 0}, axisv];
 			,
 			_, (* none *)
 			xi = Null;
@@ -663,9 +665,7 @@ GetRotationMatrix[joint_?AssociationQ]:=
 	];
 	
 
-ComputeHomogeneousTransforms::usage = 
-	"ComputeHomogeneousTransforms[robotJoints] Compute the homogeneous transformation of \
-each joint from the base by the initial tool configuration."
+
 ComputeHomogeneousTransforms[robotJoints_] :=
 	Block[{kinTree,branch,EL,rL,joint,gst0,i,j},
 		
@@ -703,7 +703,7 @@ ComputeHomogeneousTransforms[robotJoints_] :=
 
 
 
-GetChainIndices::usage = "GetChainIndices[robotJoints] returns the chain indices of each joint.";
+
 GetChainIndices[robotJoints_] :=
 	Block[{kinTree,chainIndices,jList,i,j},
 		
@@ -721,22 +721,21 @@ GetChainIndices[robotJoints_] :=
 		Return[Table[chainIndices[i], {i, Length[robotJoints]}]];		 
 	];
 	
-GetKinematicChains::usage = 
-	"GetKinematicChains[robotJoints,q,gst0,chainIndices]	Return the kinematic chains from the base to each joint.";
-GetKinematicChains[robotJoints_,q_,gst0_,chainIndices_] :=
-	Block[{xi, xib, basechain, chains, i, j,qvec},
+
+GetTwistPairs[robotJoints_,q_] :=
+	Block[{xi, chainIndices, chains, i, j, qvec = ExtraUtils`Vec[q]},
 		
 					
 		(* compute twist for each coordinates (joints) *)
-		xi = ComputeTwists[robotJoints,gst0];
+		xi = ComputeTwists[robotJoints];
 		
-		qvec = ExtraUtils`Vec[q];
 		(* construct twist pairs for each joint chain *)
 		chains = Table[
+			chainIndices=Flatten@{robotJoints[[i]]["chainIndices"]};
 			Table[
-				Join[{Part[xi, chainIndices[[i, j]]]},Part[qvec, chainIndices[[i, j]]]]
+				Join[{Part[xi, chainIndices[[j]]]},Part[qvec, chainIndices[[j]]]]
 				,
-				{j,Length[chainIndices[[i]]]}
+				{j,Length[chainIndices]}
 			]	
 			,
 			{i,Length[robotJoints]}
@@ -746,9 +745,8 @@ GetKinematicChains[robotJoints_,q_,gst0_,chainIndices_] :=
 	];
 	
 
-ComputeTwists::usage = 
-	"ComputeTwists[robotJoints,gst0]	computes relative twist (in joint frame i) to base frame S.";
-ComputeTwists[robotJoints_,gst0_] :=
+
+ComputeTwists[robotJoints_] :=
 	Block[{xi,twist,i},  
 		
 		
@@ -761,7 +759,7 @@ ComputeTwists[robotJoints_,gst0_] :=
 			(* URDF Docs say that joint axis is in joint frame, so we will use the joint's frame in S to transform twist *)
 			(* See http://www.ros.org/wiki/urdf/XML/joint *)
 			
-			Screws`RigidAdjoint[gst0[[i]]].twist
+			Screws`RigidAdjoint[robotJoints[[i]]["gst0"]].twist
 			, 
 			{i, Length[robotJoints]}
 		];
