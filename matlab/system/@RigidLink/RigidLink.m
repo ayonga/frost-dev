@@ -52,11 +52,17 @@ classdef RigidLink < CoordinateFrame
             % validate and assign the link mass
             if isfield(argin, 'Mass')
                 obj = obj.setMass(argin.Mass);
+            else
+                warning('The mass is not defined. Using zero mass.');
+                obj = obj.setMass(0);
             end
             
             % validate and assign the joint inertia 
             if isfield(argin, 'Inertia')
                 obj = obj.setInertia(argin.Inertia);
+            else
+                warning('The inertia matrix is not defined. Using zero inertia matrix.');
+                obj = obj.setInertia(zeros(3));
             end
             
         end

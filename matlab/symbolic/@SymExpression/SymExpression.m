@@ -66,8 +66,16 @@ classdef SymExpression < handle
                     obj.f = formula(x);
                 case 'SymFunction'
                     obj.f = formula(x);
-                case {'double','string','cell','struct','char'}
+                case 'char'
                     obj.f = general2math(x,'ConvertString',false);
+                case 'string'
+                    obj.f = general2math(x,'ConvertString',true);
+                case 'double'
+                    obj.f = general2math(x);
+                case 'cell'
+                    obj.f = general2math(x,'ConvertString',false);
+                case 'struct'
+                    obj.f = general2math(x,'ConvertString',true);
                 otherwise
                     error('SymExpression:invalidInputType',...
                         'Invalid input argument data type.');
@@ -526,7 +534,7 @@ classdef SymExpression < handle
                 error('Invalid indexing assignment.');
             end
             
-            
+            B = SymExpression(R);
             switch numel(Idx.subs)
                 case 0
                     error('An indexing expression on the left side of an assignment must have at least one subscript.');

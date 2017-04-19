@@ -13,7 +13,6 @@ addpath(genpath(fullfile(cur, 'matlab')));
 addpath(fullfile(cur, 'matlab','nlp'));
 addpath(fullfile(cur, 'matlab','solver'));
 addpath(fullfile(cur, 'matlab','system'));
-addpath(fullfile(cur, 'matlab','kinematics'));
 addpath(fullfile(cur, 'matlab','control'));
 % Add useful custom functions path
 addpath(fullfile(cur, 'matlab','utils'));

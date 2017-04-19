@@ -88,11 +88,17 @@ classdef CoordinateFrame < handle
             % validate and assign the offset
             if isfield(argin, 'Offset')
                 obj = obj.setOffset(argin.Offset);
+            else
+                warning('The offset vector is not defined. Using zero offset [0,0,0].');
+                obj = obj.setOffset(zeros(1,3));
             end
             
             % validate and assign the Euler angles
             if isfield(argin, 'Rotation')
                 obj = obj.setRotationMatrix(argin.Rotation);
+            else
+                warning('The rotation angles are not defined. Using zero angles [0,0,0].');
+                obj = obj.setRotationMatrix(zeros(1,3));
             end
         end
         

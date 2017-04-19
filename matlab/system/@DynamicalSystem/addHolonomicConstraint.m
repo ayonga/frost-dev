@@ -95,6 +95,9 @@ function obj = addHolonomicConstraint(obj, name, constr, jac, ddx)
             obj.HolonomicConstraints.(name).dJh = SymFunction(['dJh_' name '_' obj.Name], dJh, {obj.States.x, obj.States.dx});
             ddh = jac*ddx + dJh*obj.States.dx;
             obj.HolonomicConstraints.(name).ddh = SymFunction(['ddh_' name '_' obj.Name], ddh, {obj.States.x, obj.States.dx});
+        else
+            obj.HolonomicConstraints.(name).dJh = [];
+            obj.HolonomicConstraints.(name).ddh = [];
         end
         %% Add constraint wrenchs
         

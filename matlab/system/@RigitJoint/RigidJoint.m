@@ -95,27 +95,43 @@ classdef RigidJoint < CoordinateFrame
             % validate and assign the joint type
             if isfield(argin, 'Type')
                 obj = obj.setType(argin.Type);
+            else
+                error('The joint type is not defined.');
             end
             
             % validate and assign the joint axis 
             if isfield(argin, 'Axis')
                 obj = obj.setAxis(argin.Axis);
+            else
+                error('The joint rotatino axis is not defined.');
             end
             
             
             % validate and assign the child link
             if isfield(argin, 'Child')
                 obj = obj.setChild(argin.Child);
+            else
+                error('The child link is not defined.');
             end
             
             % validate and assign the parent link
             if isfield(argin, 'Parent')
                 obj = obj.setParent(argin.Parent);
+            else
+                error('The parent link is not defined.');
             end
             
             % validate and assign the physical limits
             if isfield(argin, 'Limit')
                 obj = obj.setLimit(argin.Limit);
+            else
+                warning('The joint limits are not defined. Using default values.');
+                default_limit = struct(...
+                    'effort',0,...
+                    'lower',-inf,...
+                    'upper',inf,...
+                    'velocity',inf);
+                obj = obj.setLimit(default_limit);
             end
         end
         

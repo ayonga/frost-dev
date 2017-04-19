@@ -51,7 +51,7 @@ function obj = compile(obj, export_path, varargin)
             constr = h_constrs{i};
             export(obj.HolonomicConstraints.(constr).h,export_path,varargin{:});
             export(obj.HolonomicConstraints.(constr).Jh,export_path,varargin{:});
-            if strcmp(obj.Type, 'SecondOrder')
+            if ~isempty(obj.HolonomicConstraints.(constr).dJh)
                 export(obj.HolonomicConstraints.(constr).dJh,export_path,varargin{:});
             end
         end

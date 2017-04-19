@@ -181,7 +181,6 @@ classdef RobotManipulator < DynamicalSystem
             % Compute the forward kinematics of the robots
             obj = setKinematics(obj, dofs, links);
             
-            %             obj = setDynamics(obj);
         end
         
         
