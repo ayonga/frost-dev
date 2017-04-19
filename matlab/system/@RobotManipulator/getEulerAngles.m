@@ -22,18 +22,23 @@ function [varargout] = getEulerAngles(obj, varargin)
     % the number of points (one less than the nargin)
     n_link = numel(varargin);
     if n_link>0
-        links = cell(1,n_link);
-        valid_link_name = {obj.Links.name};
-        % validate the input arguments
-        for i=1:n_link
+        c_str = cell(1,n_pos);
+        
+        
+        for i=1:n_pos
+            c_str{i}.gst0 = varargin{i}.gst0;
+            frame = varargin{i}.Reference;
+            while isempty(frame.TwistPairs)
+                frame = frame.Reference;
+                if isempty(frame)
+                    error('The coordinate system is not fully defined.');
+                end
+            end
             
-            % validate parent link name (case insensitive)
-            link_name= str2mathstr(validatestring(varargin{i},valid_link_name));
-            links{i} = {link_name,[0,0,0]};
-            
+            c_str{i}.TwistPairs = frame.TwistPairs;
         end
         
-        ang = eval_math_fun('ComputeEulerAngles',[links, {obj.SymTwists}]);
+        ang = eval_math_fun('ComputeEulerAngles',c_str);
         
         varargout = cell(1,n_link);
         for i=1:n_pos

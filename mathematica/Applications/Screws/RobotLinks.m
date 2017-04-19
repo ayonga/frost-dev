@@ -53,6 +53,15 @@ InertiaToCoriolis::usage=
   joint velocities, omega";
 
 
+InertiaToCoriolisPart1::usage=
+ "InertiaToCoriolisPart1[M, theta, omega, col] computes the col-th column of the first part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart2::usage=
+ "InertiaToCoriolisPart2[M, theta, omega, col] computes the col-th column of the second part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart3::usage=
+ "InertiaToCoriolisPart3[M, theta, omega, col] computes the col-th column of the thrid part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
 
 Begin["`Private`"];
 
@@ -157,6 +166,53 @@ InertiaToCoriolis[M_, theta_, omega_] :=
     ];
     Cmat
   ];
+  
+InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Array[0&, {n,1}];
+    For[i = 1, i <= n, ++i,
+	    For[k = 1, k <= n, ++k,
+	      Cvec[[i]] += 1/2 * w[[k]] *
+	      (D[M[[i,j]], q[[k]]]);
+	    ]
+    ];
+    Cvec*w[[j]]
+  ];	
+InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Array[0&, {n,1}];
+    For[i = 1, i <= n, ++i,
+        For[k = 1, k <= n, ++k,
+          Cvec[[i]] += 1/2 * w[[k]] *
+          (D[M[[i,k]], q[[j]]]);
+        ]
+    ];
+    Cvec*w[[j]]
+  ];	
+  
+InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Array[0&, {n,1}];
+    For[i = 1, i <= n, ++i,
+        For[k = 1, k <= n, ++k,
+          Cvec[[i]] += 1/2 * w[[k]] *
+          (- D[M[[j,k]], q[[i]]]);
+        ]
+    ];
+    Cvec*w[[j]]
+  ];	
 
 End[];
 EndPackage[];

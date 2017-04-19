@@ -17,7 +17,7 @@ function [expr] = general2math(x, varargin)
         expr = cell2tensor(x, varargin{:});
     elseif isnumeric(x)
         if isscalar(x)
-            expr = num2str(x,'%.6f');
+            expr = num2mathstr(x,varargin{:});
         elseif isempty(x)
             expr = '{}';
         else

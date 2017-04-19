@@ -10,7 +10,7 @@ function indices = getJointIndices(obj, joint_names)
     % @see getLinkIndices, joints
     
     
-    all_joint_names = {obj.Joints.name};
+    all_joint_names = {obj.Joints.Name};
     
     
     

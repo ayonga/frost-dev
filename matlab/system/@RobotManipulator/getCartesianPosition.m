@@ -23,21 +23,24 @@ function [varargout] = getCartesianPosition(obj, varargin)
     % the number of points (one less than the nargin)
     n_pos = numel(varargin);
     if n_pos > 0
-        valid_link_name = {obj.Links.name};
-        % validate the input arguments
+        
+        c_str = cell(1,n_pos);
+        
+        
         for i=1:n_pos
+            c_str{i}.gst0 = varargin{i}.gst0;
+            frame = varargin{i}.Reference;
+            while isempty(frame.TwistPairs)
+                frame = frame.Reference;   
+                if isempty(frame)
+                    error('The coordinate system is not fully defined.');
+                end
+            end
             
-            [link_name, offset] = deal(varargin{i}{:});
-            % validate parent link name (case insensitive)
-            varargin{i}{1} = str2mathstr(validatestring(link_name,valid_link_name));
-            
-            
-            % validate if it is a numeric 3-D vector
-            validateattributes(offset, {'numeric'},{'vector','numel',3});
-            
+            c_str{i}.TwistPairs = frame.TwistPairs;
         end
         
-        pos = eval_math_fun('ComputeCartesianPositions',[varargin, {obj.SymTwists}]);
+        pos = eval_math_fun('ComputeCartesianPositions',c_str);
         
         varargout = cell(1,n_pos);
         for i=1:n_pos

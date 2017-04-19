@@ -15,7 +15,7 @@ function expr = mat2math(A, varargin)
     s = size(A);
     assert(length(s)==2,'Input matrix must be a 2-D matrix.');
     
-    func = @(x) num2str_m(x);
+    func = @(x) num2mathstr(x, varargin{:});
     raw = arrayfun(func, A, 'UniformOutput', false);
     
     rows = cell(s(1), 1);
@@ -29,14 +29,7 @@ function expr = mat2math(A, varargin)
     %         expr = rows{:};
     %     end
     
-    function s = num2str_m(x)
-        
-        if isinf(x)
-            s = 'Infinity';
-        else
-            s = num2str(x,'%.5f');
-        end
-    end
+    
     
     
 end

@@ -8,7 +8,7 @@ function indices = getLinkIndices(obj, link_names)
     %  indices: position indices of joints in the obj.joints
     
     
-    all_link_name = {obj.Links.name};
+    all_link_name = {obj.Links.Name};
     
     if iscell(link_names)
         
@@ -28,7 +28,7 @@ function indices = getLinkIndices(obj, link_names)
     elseif ischar(link_names)
         % specified only one joint
         indices = str_index(all_link_name,link_names);
-        if ~isempty(indices)
+        if isempty(indices)
            warning('the following link not exists.');
            disp('%s, ',link_names);
            indices = NaN;
