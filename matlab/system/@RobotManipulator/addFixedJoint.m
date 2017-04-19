@@ -5,21 +5,24 @@ function obj = addFixedJoint(obj, fixed_joints)
     % Parameters:
     % joints: the list of fixed joints @type cellstr
     
-    
-    
     if iscellstr(fixed_joints)
-        j_name = fixed_joints;
+        indices = obj.getJointIndices(fixed_joints);
+    elseif isnumeric(fixed_joints)
+        indices = fixed_joints;
     elseif isstruct(fixed_joints)
-        j_name = {fixed_joints.Name};
+        indices = obj.getJointIndices({fixed_joints.Name});
     elseif isa(fixed_joints,'RigidJoint')
-        j_name = {fixed_joints.Name};
+        indices = obj.getJointIndices({fixed_joints.Name});
     else
         error('The list of fixed joints must be given as a cellstr, structure array or RigidJoint object array.');
     end
         
-    constr = obj.States.x(j_name);
+    constr = obj.States.x(indices);
     
-    name = ['fixed' j_name{:}];
+    % the name will looks like something like "fixedq7q8q9" with the numbers
+    % are the indices of the fixed joints
+    suffix = arrayfun(@(x)['q' num2str(x)],indices, 'UniformOutput',false);
+    name = ['fixed' suffix{:}]; 
     obj = addHolonomicConstraint(obj, name, constr);
 end
     

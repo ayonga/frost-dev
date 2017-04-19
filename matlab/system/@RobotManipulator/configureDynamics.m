@@ -1,4 +1,4 @@
-function obj = setDynamics(obj)
+function obj = configureDynamics(obj)
     % Set the symbolic expressions of the dynamics of the rigid body system
     %
     

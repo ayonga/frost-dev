@@ -102,7 +102,7 @@ function obj = addHolonomicConstraint(obj, name, constr, jac, ddx)
         %% Add constraint wrenchs
         
         lambda = SymVariable(name, [n_constr,1]);
-        obj = addInput(obj, name, lambda, obj.HolonomicConstraints.(name).Jh);
+        obj = addInput(obj, name, lambda, transpose(obj.HolonomicConstraints.(name).Jh));
     end
     
     

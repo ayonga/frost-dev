@@ -1,4 +1,4 @@
-function obj = setKinematics(obj, dofs, links)
+function obj = configureKinematics(obj, dofs, links)
     % Compute the forward kinematics of the robots using the coordinate
     % configurations
     %

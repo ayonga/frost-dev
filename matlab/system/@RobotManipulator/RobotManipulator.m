@@ -63,7 +63,7 @@ classdef RobotManipulator < DynamicalSystem
     methods
         
         
-        function obj = RobotManipulator(name, config, base)
+        function obj = RobotManipulator(name, varargin)
             % The class constructor function
             %
             %
@@ -81,105 +81,11 @@ classdef RobotManipulator < DynamicalSystem
             % function
             obj = obj@DynamicalSystem(name, 'SecondOrder');
             
-            % configure base joint for the model
-            if nargin < 3
-                % the base joint is not specified, use default
-                fprintf('The floating base coordinates are not configured. \n');
-                fprintf('Setting it to the default 6 DOF floating base configuration ...\n');
-                base_dofs = get_base_dofs('floating');
-            else
-                if ischar(base)
-                    base_dofs = get_base_dofs(base);
-                elseif isstruct(base)
-                    fields = {'Name','Type','Offset','Rotation','Axis','Parent','Child'};
-                    assert(all(isfield(base,fields)),...
-                        'The base dof structure must have the following fields:\n %s',implode(fields,', '));
-                    base_dofs = base;
-                elseif isempty(base)
-                    base_dofs = base;
-                else
-                    error(['The second argument must be either a character vector of ',...
-                        'the type of the floating base coordinates, or a structure array of base DOFs.'])
-                end
+            
+            
+            if nargin > 1
+                configure(obj, varargin{:});
             end
-            
-            eval_math('Needs["RobotManipulator`"];');
-            
-            if ischar(config) % configuration file name
-                % parse the model configuration file
-                [folder_name,file_name,file_ext] = fileparts(config);
-            
-                % check file type
-                if isempty(file_ext) || strcmp(file_ext,'.urdf')
-                    file_ext = '.urdf'; % default file type is URDF
-                    config_file = GetFullPath(fullfile(folder_name, [file_name,file_ext]));
-                    
-                    % extract the absolute full file path of the input file
-                    obj.ConfigFile = config_file;
-                    
-                    % load model from the URDF file
-                    [~, links, joints, transmissions] = ros_load_urdf(config_file);
-                else
-                    error('Invalid configuration file type detected: %s.\n',file_ext(2:end));
-                end
-                
-                
-            elseif isstruct(config)
-                fields = {'Name','Mass','Offset','Rotation','Inertia'};
-                assert(all(isfield(config.links,fields)),...
-                    'The links structure must have the following fields:\n %s',implode(fields,', '));
-                links = config.links;
-                
-                fields = {'Name','Type','Offset','Rotation','Axis','Parent','Child'};
-                assert(all(isfield(config.joints,fields)),...
-                    'The joints structure must have the following fields:\n %s',implode(fields,', '));
-                joints = config.joints;
-                if isfield(config,'transmissions')
-                    fields = {'Joint','MechanicalReduction'};
-                    assert(all(isfield(config.transmissions,fields)),...
-                        'The transmissions structure must have the following fields:\n %s',implode(fields,', '));
-                    transmissions = config.transimissions;
-                else
-                    transmissions = [];
-                end
-            end
-            
-            
-            
-            base_dofs(end).Child = findBaseLink(obj,joints);
-            
-            dofs = [base_dofs,joints];
-            ndof = length(dofs);
-            % Add state variables
-            x = SymVariable('x',[ndof,1],{dofs.Name});
-            dx = SymVariable('dx',[ndof,1],{dofs.Name});
-            ddx = SymVariable('ddx',[ndof,1],{dofs.Name});
-            
-            obj.addState(x,dx,ddx);
-            
-            if ~isempty(transmissions)
-                % Add joint actuator inputs
-                mechanicalReduction = zeros(1,numel(dofs));
-                for i=1:numel(dofs)
-                    if ~strcmp(dofs(i).Type,'fixed')
-                        idx = str_index({transmissions.Joint},dofs(i).Name);
-                        if ~isempty(idx)
-                            mechanicalReduction(i) = transmissions(idx).MechanicalReduction;
-                        end
-                    end
-                end
-                
-                gf(mechanicalReduction~=0,:) = diag(mechanicalReduction(mechanicalReduction~=0));
-                actuated_joints = dofs(mechanicalReduction~=0);
-                nact = length(actuated_joints);
-                u = SymVariable('u',[nact,1],{actuated_joints.Name});
-                
-                obj.addInput('u',u,gf);
-            end
-            
-           
-            % Compute the forward kinematics of the robots
-            obj = setKinematics(obj, dofs, links);
             
         end
         
@@ -200,7 +106,7 @@ classdef RobotManipulator < DynamicalSystem
         
         terminals = findEndEffector(obj, joints);
         
-        obj = setKinematics(obj, dofs, links);
+        obj = configureKinematics(obj, dofs, links);
         
         mass = getTotalMass(obj);
         
@@ -210,8 +116,7 @@ classdef RobotManipulator < DynamicalSystem
         
         pos = getComPosition(obj);
         
-        
-        obj = setDynamics(obj);
+        obj = configureDynamics(obj);
         
         [M,f] = calcDynamics(obj, qe, dqe);
         

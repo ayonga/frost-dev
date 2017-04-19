@@ -90,6 +90,9 @@ classdef RigidJoint < CoordinateFrame
             
             % consruct the superclass object first
             obj = obj@CoordinateFrame(varargin{:});
+            if nargin == 0
+                return;
+            end
             argin = struct(varargin{:});
             
             % validate and assign the joint type
