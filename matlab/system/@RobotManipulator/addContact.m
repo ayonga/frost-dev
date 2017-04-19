@@ -39,9 +39,9 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     if nargin > 2
         % get the friction cone constraint
         FC = getFrictionCone(obj, f, mu, gamma);
-        constr_name = ['friction_cone_', cotnact.Name];
+        fc_cstr = ['friction_cone_', cotnact.Name];
         % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, constr_name, FC, contact.Name);
+        obj = addUnilateralConstraint(obj, fc_cstr, FC, contact.Name);
     end
     
     % if the contact geometry is given, enforce zero moment point
@@ -53,9 +53,9 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
         else
             zmp = getZMPConstraint(obj, f, la, lb);
         end
-        constr_name = ['zmp_', cotnact.Name];
+        zmp_cstr = ['zmp_', cotnact.Name];
         % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, constr_name, zmp, contact.Name);
+        obj = addUnilateralConstraint(obj, zmp_cstr, zmp, contact.Name);
         
     end
 end
