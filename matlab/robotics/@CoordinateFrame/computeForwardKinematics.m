@@ -7,7 +7,7 @@ function g = computeForwardKinematics(obj)
     % system @type SymExpression
     
     frame = obj.Reference;
-    while isempty(frame.TwistPairs)
+    while ~isprop(frame, 'TwistPairs') %isempty(frame.TwistPairs)
         frame = frame.Reference;
         if isempty(frame)
             error('The coordinate system is not fully defined.');

@@ -30,7 +30,7 @@ function [varargout] = getBodyJacobian(obj, varargin)
         for i=1:n_pos
             c_str{i}.gst0 = varargin{i}.gst0;
             frame = varargin{i}.Reference;
-            while isempty(frame.TwistPairs)
+            while ~isprop(frame, 'TwistPairs') %isempty(frame.TwistPairs)
                 frame = frame.Reference;
                 if isempty(frame)
                     error('The coordinate system is not fully defined.');

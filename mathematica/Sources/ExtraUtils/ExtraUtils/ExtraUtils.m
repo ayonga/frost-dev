@@ -70,8 +70,33 @@ Jac::usage="Jac[h,x] Computes the Jacobian of a quantity with respect to the giv
 GetFieldIndices::usage = 
 	"GetFieldIndices[list, field] returns field position indices of element in the list based.";
 
+DesiredFunction::usage = 
+	"DesiredFunction[Type, N, a] returns the desired output functions.";
 Begin["`Private`"]
 (* Implementation of the package *)
+
+DesiredFunction::badargs = "Undefined Function Type";
+DesiredFunction["Constant", N_, a_] := {a[[#, 1]]} & /@ Range[N];
+DesiredFunction["CWF", N_, 
+   a_] := {(a[[#, 1]] Cos[a[[#, 2]] Global`t] + a[[#, 3]] Sin[a[[#, 2]] Global`t])/
+       Exp[a[[#, 4]] Global`t] + a[[#, 5]]} & /@ Range[N];
+DesiredFunction["ECWF", N_, a_] := {
+     	(a[[#, 1]] Cos[a[[#, 2]] Global`t] + a[[#, 3]] Sin[a[[#, 2]] Global`t])/
+       Exp[a[[#, 4]] Global`t] +
+      	(2*a[[#, 4]]*a[[#, 5]]*a[[#, 6]])/(a[[#, 4]]^2 + a[[#, 2]]^2 - 
+          a[[#, 6]]^2) Sin[a[[#, 6]]*Global`t] + a[[#, 7]]} & /@ Range[N];
+
+DesiredFunction["Bezier", N_, a_, 
+   M_] := {Sum[
+      a[[#, j + 1]]*Binomial[M, j]*Global`t^j*(1 - Global`t)^(M - j), {j, 0, 
+       M}]} & /@ Range[N];
+DesiredFunction["MinJerk", N_, 
+   a_] := {a[[#, 
+        2]] + (a[[#, 1]] - a[[#, 2]])*(10*(Global`t/a[[#, 3]])^3 - 
+         15*(Global`t/a[[#, 3]])^4 + 6*(Global`t/a[[#, 3]])^5)} & /@ Range[N];
+DesiredFunction[
+   type_?StringQ, ___] := (Message[
+    DesiredFunction::badargs]; $Failed);
 
 SyntaxInformation[ToVectorForm]={"ArgumentsPattern"->{_}};
 ToVectorForm[expr_?MatrixQ]:=Flatten@(expr\[Transpose]); (*matrix \[Rule] vector*)

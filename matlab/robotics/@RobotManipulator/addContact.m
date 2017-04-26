@@ -20,7 +20,7 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     pos = getCartesianPosition(obj, contact);
     rpy = getEulerAngles(obj, contact);
     
-    h = tomatrix([pos, rpy]); %effectively as transpose
+    h = tomatrix([pos; rpy]); %effectively as transpose
     % extract the contrained elements
     constr =  contact.WrenchBase' * h;
     % compute the body jacobian 
@@ -31,17 +31,18 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     % add as a set of holonomic constraints
     obj = addHolonomicConstraint(obj, contact.Name, constr, constr_jac);
     % the contact wrench input vector
-    f = obj.Inputs.(contact.Name);
+    f_name = ['f' contact.Name];
+    f = obj.Inputs.(f_name);
     
     
     % if the friction coefficients are given, enforce friction cone
     % constraints
     if nargin > 2
         % get the friction cone constraint
-        FC = getFrictionCone(obj, f, mu, gamma);
-        fc_cstr = ['friction_cone_', cotnact.Name];
+        FC = getFrictionCone(contact, f, mu, gamma);
+        fc_cstr = ['friction_cone_', contact.Name];
         % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, fc_cstr, FC, contact.Name);
+        obj = addUnilateralConstraint(obj, fc_cstr, FC, f_name);
     end
     
     % if the contact geometry is given, enforce zero moment point
@@ -49,13 +50,13 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     if nargin > 4
         % get the friction cone constraint
         if nargin > 6
-            zmp = getZMPConstraint(obj, f, la, lb, La, Lb);
+            zmp = getZMPConstraint(contact, f, la, lb, La, Lb);
         else
-            zmp = getZMPConstraint(obj, f, la, lb);
+            zmp = getZMPConstraint(contact, f, la, lb);
         end
-        zmp_cstr = ['zmp_', cotnact.Name];
+        zmp_cstr = ['zmp_', contact.Name];
         % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, zmp_cstr, zmp, contact.Name);
+        obj = addUnilateralConstraint(obj, zmp_cstr, zmp, f_name);
         
     end
 end

@@ -78,7 +78,7 @@ classdef ContactFrame < CoordinateFrame
             if isfield(argin, 'Type')
                 obj = obj.setType(argin.Type);
             else
-                error('The joint type is not defined.');
+                error('The contact type is not defined.');
             end
         end
             

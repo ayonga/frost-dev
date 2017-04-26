@@ -12,6 +12,7 @@ classdef RobotManipulator < DynamicalSystem
     %
     % @author Ayonga Hereid @date 2016-09-26
     %
+    % @new{2,0, ayonga, 2017-03-26} Change RigidBodyModel to RobotManipulator
     % @new{1,0, ayonga, 2016-09-26} Migrated from old modelConfig class
     %
     % Copyright (c) 2016, AMBER Lab
@@ -82,7 +83,6 @@ classdef RobotManipulator < DynamicalSystem
             obj = obj@DynamicalSystem(name, 'SecondOrder');
             
             
-            
             if nargin > 1
                 configure(obj, varargin{:});
             end
@@ -102,23 +102,35 @@ classdef RobotManipulator < DynamicalSystem
     
     %% methods defined in seperate files
     methods
+        
+        obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb);     
+        
+        obj = addFixedJoint(obj, fixed_joints);
+        
+        obj = removeContact(obj, contact);
+        
+        
+        
         base_link = findBaseLink(obj, joints);
         
         terminals = findEndEffector(obj, joints);
-        
-        obj = configureKinematics(obj, dofs, links);
-        
-        mass = getTotalMass(obj);
-        
+                
         indices = getLinkIndices(obj, link_names);
         
         indices = getJointIndices(obj, joint_names);
         
-        pos = getComPosition(obj);
+        
+        obj = configure(obj, config, base)
+        
+        obj = configureKinematics(obj, dofs, links)
         
         obj = configureDynamics(obj);
         
+        
+        
         [M,f] = calcDynamics(obj, qe, dqe);
+        
+        
         
         
         [varargout] = getCartesianPosition(obj, varargin);
@@ -128,9 +140,14 @@ classdef RobotManipulator < DynamicalSystem
         [varargout] = getBodyJacobian(obj, varargin);
         
         [varargout] = getSpatialJacobian(obj, varargin);
+        
+        mass = getTotalMass(obj);        
+        
+        pos = getComPosition(obj);
+        
+        bounds = getLimits(obj);
     end
     
-    %% Private methods
     
     
 end

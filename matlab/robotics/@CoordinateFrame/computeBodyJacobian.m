@@ -10,7 +10,7 @@ function Jac = computeBodyJacobian(obj, nDof)
     % Jac: the Jacobian matrix @type SymExpression
     
     frame = obj.Reference;
-    while isempty(frame.TwistPairs)
+    while ~isprop(frame, 'TwistPairs') %isempty(frame.TwistPairs)
         frame = frame.Reference;
         if isempty(frame)
             error('The coordinate system is not fully defined.');

@@ -20,8 +20,8 @@ function [varargout] = getEulerAngles(obj, varargin)
     
     
     % the number of points (one less than the nargin)
-    n_link = numel(varargin);
-    if n_link>0
+    n_pos = numel(varargin);
+    if n_pos>0
         c_str = cell(1,n_pos);
         
         
@@ -40,7 +40,7 @@ function [varargout] = getEulerAngles(obj, varargin)
         
         ang = eval_math_fun('ComputeEulerAngles',c_str);
         
-        varargout = cell(1,n_link);
+        varargout = cell(1,n_pos);
         for i=1:n_pos
             varargout{i} = ang(i,:);
         end
