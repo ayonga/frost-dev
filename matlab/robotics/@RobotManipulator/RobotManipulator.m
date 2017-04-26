@@ -128,11 +128,6 @@ classdef RobotManipulator < DynamicalSystem
         
         
         
-        [M,f] = calcDynamics(obj, qe, dqe);
-        
-        
-        
-        
         [varargout] = getCartesianPosition(obj, varargin);
         
         [varargout] = getEulerAngles(obj, varargin);

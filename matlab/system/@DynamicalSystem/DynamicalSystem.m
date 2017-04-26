@@ -134,8 +134,60 @@
         MmatDx
     end
     
+    methods
+        
+        function [dx,extra] = calcDynamics(obj, varargin)
+            % calculate the system dynamical equations
+            %
+            % @note The subclass must overload this method.
+            
+            error('No implementation presents!.');
+        end
+        
+        function M = calcMassMatrix(obj, x)
+            % calculates the mass matrix Mmat(x)
+            %
+            % Parameters: 
+            % x: the state variables @type colvec
+            
+            validateattributes(x, {'double'},...
+                {'vector','numel',obj.NumState,'real'},...
+                'DynamicalSystem.calcMassMatrix','x');
+            
+            M = feval(obj.Mmat.Name, qe);
+        end
+        
+        function f = calcDriftVector(obj, x, dx)
+            % calculates the mass matrix Fvec(x) or Fvec(x,dx)
+            %
+            % Parameters: 
+            % x: the state variables @type colvec
+            % dx: the first order derivative of state variables
+            % @type colvec
+            
+            validateattributes(x, {'double'},...
+                {'vector','numel',obj.NumState,'real'},...
+                'DynamicalSystem.calcDriftVector','x');
+            
+            if strcmp(obj.Type,'FirstOrder')
+                f_val = cellfun(@(x)feval(x.Name,x), obj.Fvec,'UniformOutput',false);
+            else
+                validateattributes(dx, {'double'},...
+                    {'vector','numel',obj.NumState,'real'},...
+                    'DynamicalSystem.calcDriftVector','dx');
+                f_val = cellfun(@(x)feval(x.Name,x,dx), obj.Fvec,'UniformOutput',false);
+            end
+            
+            f = sum([f_val{:}],2);
+        end
+    end
+    
     % methods defined in external files
     methods 
+        % simulate the dynamical system
+        sol = simulate(obj, options);
+        
+        
         % Add state variables
         obj = addState(obj, x, dx, ddx);
         
