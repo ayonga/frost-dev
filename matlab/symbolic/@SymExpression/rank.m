@@ -7,7 +7,7 @@ function r = rank(A)
 
 
     % Convert inputs to SymExpression
-    A = SymExpression(A);
+    % A = SymExpression(A);
     
     % evaluate the operation in Mathematica and return the
     % expression string

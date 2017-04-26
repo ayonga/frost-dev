@@ -100,15 +100,112 @@ classdef SymVariable < SymExpression
             
             
             if nargin == 3
-                assert(iscellstr(label) || numel(label)==prod(n),...
+                assert(iscellstr(label) && numel(label)==prod(n),...
                     'The (label) must be a cellstr array of the same number of elements as the SymVariables.');
+                assert(iscolumn(obj),...
+                    'The (label) only works with column vector.');
                 
                 obj.label = label;
                 
             end
         end
         
+    end
+    
+    methods (Hidden = true)
         
+        function C = subsasgn(L,Idx,R)
+            % Subscripted assignment for a sym array.
+            %     C = SUBSASGN(L,Idx,R) is called for the syntax L(Idx)=R.  Idx is a structure
+            %     array with the fields:
+            %         type -- string containing '()' specifying the subscript type.
+            %                 Only parenthesis subscripting is allowed.
+            %         subs -- Cell array or string containing the actual subscripts.
+            %
+            %   See also SYM.
+            
+            %             error('Non implemented for SymExpression class.');
+            if length(Idx)>1
+                error('SymExpression objects do not allow nested indexing. Assign intermediate values to variables instead.');
+            end
+            if ~strcmp(Idx.type,'()')
+                error('Invalid indexing assignment.');
+            end
+            if ~isempty(R)
+                B = SymExpression(R);
+            end
+            switch numel(Idx.subs)
+                case 0
+                    error('An indexing expression on the left side of an assignment must have at least one subscript.');
+                case 1
+                    
+                    sstr = symbol(L);
+                    % special case shortcut for L(:)
+                    if ischar(Idx.subs{1}) && strcmp(Idx.subs{1},':')
+                        sstr = [sstr,'[[;;]]'];
+                        if isempty(R)
+                            eval_math([sstr '= {};']);
+                            L.label = subsasgn(L.label,Idx,R);
+                        else
+                            eval_math([sstr '= ' B.s ';']);
+                        end
+                    elseif isnumeric(Idx.subs{1})
+                        ids = Idx.subs{1};
+                        if isempty(R)
+                            eval_math([sstr '=ToVectorForm[' sstr '];']);
+                            eval_math([sstr '=Delete[' sstr ',' mat2math(ids(:)) '];']);
+                            L.label = subsasgn(L.label,Idx,R);
+                        else
+                            for i=1:numel(ids)
+                                [n,m] = ind2sub(size(L),ids(i));
+                                sstr = [L.s,'[[',num2str(n),',', num2str(m),']]'];
+                                eval_math([sstr '= ' general2math(R(i)) ';']);
+                            end
+                        end
+                    else
+                        error('The index is invalid.');
+                    end
+                    
+                case 2
+                    ind = cell(1,2);
+                    if isempty(R)
+                        error('A null assignment can have only one non-colon index.');
+                    end
+                    for i=1:2
+                        if ischar(Idx.subs{i}) && strcmp(Idx.subs{i},':')
+                            ind{i} = ';;';
+                        elseif isnumeric(Idx.subs{i})
+                            
+                            ind{i} = eval_math(['Flatten@',mat2math(Idx.subs{i})]);
+                        else
+                            error('The index is invalid.');
+                        end
+                    end                    
+                    sstr = [L.s,'[[',ind{1},',',ind{2},']]'];
+                    eval_math([sstr '=' B.s]); 
+                otherwise
+                    error('SymExpression:subsref', ...
+                        'Not a supported subscripted reference.');
+            end
+            % create a new object with the evaluated string
+            C = L;
+            
+%             dosubs = false;
+%             for k=1:length(inds)
+%                 
+%                 if isa(inds{k}, 'symfun') || isempty(inds{k}) || ~isAllVars(inds{k})
+%                     dosubs = true;
+%                 end
+%             end
+%             if dosubs
+%                 if isa(L, 'symfun')
+%                     error(message('symbolic:sym:subscript:InvalidIndexOrFunction'));
+%                 end
+%                 C = privsubsasgn(L,R,inds{:});
+%             else
+%                 C = symfun(sym(R),[inds{:}]);
+%             end
+        end
         
         function [B] = subsref(L,Idx)
             % Subscripted reference for a sym array.

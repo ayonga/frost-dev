@@ -2,7 +2,7 @@ function Y = csch(X)
     % Symbolic hyperbolic cosecant.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Csch[' X.s ']'];

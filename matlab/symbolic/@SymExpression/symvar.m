@@ -26,7 +26,7 @@ function y = symvar(S)
     %     end
     
     % Convert inputs to SymExpression
-    S = SymExpression(S);
+    % S = SymExpression(S);
     
     % evaluate the operation in Mathematica and return the
     % expression string

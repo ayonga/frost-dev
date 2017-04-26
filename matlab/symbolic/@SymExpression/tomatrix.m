@@ -3,7 +3,7 @@ function B = tomatrix(A)
 
     
     % Convert inputs to SymExpression
-    A = SymExpression(A);
+    % A = SymExpression(A);
     
     % construct the operation string
     sstr = ['ToMatrixForm[' A.s ']'];

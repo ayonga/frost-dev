@@ -2,7 +2,7 @@ function Y = coth(X)
     % Symbolic hyperbolic cotangent.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Coth[' X.s ']'];

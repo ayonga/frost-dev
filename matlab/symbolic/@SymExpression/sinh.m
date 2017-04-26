@@ -2,7 +2,7 @@ function Y = sinh(X)
     % Symbolic hyperbolic sine.
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Sinh[' X.s ']'];

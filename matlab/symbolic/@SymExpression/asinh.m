@@ -2,7 +2,7 @@ function Y = asinh(X)
     % Symbolic inverse hyperbolic sine.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['ArcSinh[' X.s ']'];

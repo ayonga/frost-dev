@@ -3,7 +3,7 @@ function Y = sec(X)
 
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Sec[' X.s ']'];

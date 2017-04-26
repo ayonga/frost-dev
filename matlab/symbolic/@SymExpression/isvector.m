@@ -2,7 +2,7 @@ function y = isvector(X)
     % True if X is a 1-Dimensional list 
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     siz = size(X);
     if numel(siz) == 1

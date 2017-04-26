@@ -6,7 +6,7 @@ function d = det(A)
     %       det([a b;c d]) is a*d-b*c.
 
     % Convert inputs to SymExpression
-    A = SymExpression(A);
+    % A = SymExpression(A);
     
     % check if A is a square matrix
     ret = eval_math(['SquareMatrixQ[' A.s ']']);

@@ -1,4 +1,4 @@
-function y = isscalar(X)
+function y = isempty(X)
     % True if X is a scalar symbolic expression
     
     % Convert inputs to SymExpression
@@ -6,7 +6,7 @@ function y = isscalar(X)
     
     siz = size(X);
     
-    if prod(siz) == 1
+    if prod(siz) == 0
         y = true;
     else
         y = false;

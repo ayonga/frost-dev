@@ -2,7 +2,7 @@ function Y = tanh(X)
     % Symbolic hyperbolic tangent.
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Tanh[' X.s ']'];

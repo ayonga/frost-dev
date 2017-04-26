@@ -3,7 +3,7 @@ function Y = acos(X)
 
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['ArcCos[' X.s ']'];

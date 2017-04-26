@@ -2,7 +2,7 @@ function Y = asech(X)
     % Symbolic inverse hyperbolic secant.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['ArcSech[' X.s ']'];

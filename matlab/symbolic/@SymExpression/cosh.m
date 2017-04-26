@@ -2,7 +2,7 @@ function Y = cosh(X)
     % Symbolic hyperbolic cosine.
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Cosh[' X.s ']'];

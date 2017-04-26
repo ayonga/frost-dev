@@ -3,7 +3,7 @@ function B = flatten(A)
 
     
     % Convert inputs to SymExpression
-    A = SymExpression(A);
+    % A = SymExpression(A);
     
     % construct the operation string
     sstr = ['{ToVectorForm[' A.s ']}'];

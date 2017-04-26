@@ -2,7 +2,7 @@ function Y = asec(X)
     % Symbolic inverse secant.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['ArcSec[' X.s ']'];

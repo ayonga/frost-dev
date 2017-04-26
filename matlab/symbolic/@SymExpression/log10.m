@@ -3,7 +3,7 @@ function Y = log10(X)
 
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Log[' X.s ',10]'];

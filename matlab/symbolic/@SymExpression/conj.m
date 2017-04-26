@@ -3,7 +3,7 @@ function X = conj(Z)
     %   CONJ(Z) is the conjugate of a symbolic Z.
     
     % Convert inputs to SymExpression
-    Z = SymExpression(Z);
+    % Z = SymExpression(Z);
     % construct the operation string
     sstr = ['Conjugate[' Z.s ']'];
     

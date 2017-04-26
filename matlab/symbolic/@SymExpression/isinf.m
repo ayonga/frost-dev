@@ -12,7 +12,7 @@ function y = isinf(X)
     %   See also SYM/ISFINITE, SYM/ISNAN.
     
     % Convert inputs to SymExpression
-    X = SymExpression(x);
+    % X = SymExpression(x);
     
     % evaluate the operation in Mathematica and return the
     % expression string

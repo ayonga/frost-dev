@@ -2,7 +2,7 @@ function Y = cos(X)
     % Symbolic cosine function.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Cos[' X.s ']'];

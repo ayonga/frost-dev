@@ -17,7 +17,7 @@ function B = nonzeros(A, level)
     
     
     % Convert inputs to SymExpression
-    A = SymExpression(A);
+    % A = SymExpression(A);
     
     % construct the operation string
     sstr = ['Cases[' A.s ', Except[0], {' num2str(level) '}]'];

@@ -2,7 +2,7 @@ function Y = csc(X)
     % Symbolic cosecant.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Csc[' X.s ']'];

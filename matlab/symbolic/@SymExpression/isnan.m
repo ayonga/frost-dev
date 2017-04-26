@@ -10,7 +10,7 @@ function y = isnan(X)
     %   See also SYM/ISFINITE, SYM/ISINF.
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % evaluate the operation in Mathematica and return the
     % expression string

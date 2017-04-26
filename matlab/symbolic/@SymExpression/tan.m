@@ -2,7 +2,7 @@ function Y = tan(X)
     % Symbolic tangent function.
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Tan[' X.s ']'];

@@ -2,7 +2,7 @@ function Y = sqrt(X)
     % Symbolic matrix element-wise square root.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Sqrt[' X.s ']'];

@@ -2,7 +2,7 @@ function Y = sin(X)
     % Symbolic sine function.
        
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Sin[' X.s ']'];

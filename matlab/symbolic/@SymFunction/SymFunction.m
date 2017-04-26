@@ -151,7 +151,11 @@ classdef SymFunction < SymExpression
     % methods defined in external files
     methods
         
-        export(obj, export_path, derivative_level, do_build, reload);
         
+        f = export(obj, export_path, varargin);
+        
+        [J,Js] = exportJacobian(obj, export_path, varargin);
+        
+        [H,Hs] = exportHessian(obj, export_path, varargin);
     end
 end

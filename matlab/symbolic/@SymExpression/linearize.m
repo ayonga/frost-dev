@@ -8,6 +8,7 @@ function B = linearize(A, v)
     assert(isa(v,'SymVariable'), 'The second argument must a list of symbolic variable.');
     assert(isvector(v), 'The second argument must be a vector.');
     
+    A = SymExpression(A);
     
     % compute the Jacobian first
     J = jacobian(A,v);

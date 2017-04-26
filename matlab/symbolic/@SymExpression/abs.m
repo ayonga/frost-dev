@@ -6,7 +6,7 @@ function Y = abs(X)
     
     
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Abs[' X.s ']'];

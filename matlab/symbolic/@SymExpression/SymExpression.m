@@ -59,29 +59,26 @@ classdef SymExpression < handle
             
             
             
-            switch class(x)
-                case 'SymExpression'
-                    obj.f = formula(x);
-                case 'SymVariable'
-                    obj.f = formula(x);
-                case 'SymFunction'
-                    obj.f = formula(x);
-                case 'char'
-                    obj.f = general2math(x,'ConvertString',false);
-                case 'string'
-                    obj.f = general2math(x,'ConvertString',true);
-                case 'double'
-                    obj.f = general2math(x);
-                case 'cell'
-                    obj.f = general2math(x,'ConvertString',false);
-                case 'struct'
-                    obj.f = general2math(x,'ConvertString',true);
-                otherwise
-                    error('SymExpression:invalidInputType',...
-                        'Invalid input argument data type.');
-            end
+            
             
             if ~isa(x, 'SymExpression')
+                switch class(x)
+                    case 'char'
+                        obj.f = general2math(x,'ConvertString',false);
+                    case 'string'
+                        obj.f = general2math(x,'ConvertString',true);
+                    case 'double'
+                        
+                        obj.f = general2math(x);
+                    case 'cell'
+                        obj.f = general2math(x,'ConvertString',false);
+                    case 'struct'
+                        obj.f = general2math(x,'ConvertString',true);
+                    otherwise
+                        error('SymExpression:invalidInputType',...
+                            'Invalid input argument data type.');
+                end
+                
                 obj.s = eval_math('Unique[symvar$]');
                 if delayed_set
                     % delayed set the formula to the symbol
@@ -91,6 +88,7 @@ classdef SymExpression < handle
                     eval_math([obj.s '=' obj.f ';']);
                 end
             else
+                obj.f = formula(x);
                 obj.s = x.s;
             end
             
@@ -159,7 +157,7 @@ classdef SymExpression < handle
             % @see NUMEL, LENGTH
             
             % Convert inputs to SymExpression
-            A = SymExpression(A);
+            %             A = SymExpression(A);
             
             if isempty(A.s)
                 y = [0,0];
@@ -190,25 +188,25 @@ classdef SymExpression < handle
             end
         end
         
-        function status = isscalar(A)
-            % Check if the symbolic expression is a scalar (non-list)
-            
-            % Convert inputs to SymExpression
-            A = SymExpression(A);
-            
-            % evaluate the operation in Mathematica and return the
-            % expression string
-            
-            ret = eval_math(['ListQ[' A.s ']']);
-            
-            status = all(strcmp('False',ret));
-        end
+%         function status = isscalar(A)
+%             % Check if the symbolic expression is a scalar (non-list)
+%             
+%             % Convert inputs to SymExpression
+%             A = SymExpression(A);
+%             
+%             % evaluate the operation in Mathematica and return the
+%             % expression string
+%             
+%             ret = eval_math(['ListQ[' A.s ']']);
+%             
+%             status = all(strcmp('False',ret));
+%         end
         %---------------   Arithmetic  -----------------
         function B = uminus(A)
             % Symbolic negation.
             
             % Convert inputs to SymExpression
-            A = SymExpression(A);
+            % A = SymExpression(A);
             
             % construct the operation string
             sstr = ['- ' A.s];
@@ -221,7 +219,7 @@ classdef SymExpression < handle
             % Unary plus.
             
             % Convert inputs to SymExpression
-            A = SymExpression(A);
+            % A = SymExpression(A);
             
             % construct the operation string
             sstr = ['+ ' A.s];
@@ -410,7 +408,7 @@ classdef SymExpression < handle
             
             
             % Convert inputs to SymExpression
-            A = SymExpression(A);
+            % A = SymExpression(A);
             
             % construct the operation string
             sstr = ['Transpose[' A.s ']'];
@@ -431,7 +429,7 @@ classdef SymExpression < handle
             
             
             % Convert inputs to SymExpression
-            A = SymExpression(A);
+            % A = SymExpression(A);
             
             % construct the operation string
             sstr = ['ConjugateTranspose[' A.s ']'];
@@ -458,7 +456,7 @@ classdef SymExpression < handle
             
             
             % Convert inputs to SymExpression
-            A = SymExpression(A);
+            % A = SymExpression(A);
             
             % construct the operation string
             sstr = ['Inverse[' A.s ']'];
@@ -533,24 +531,35 @@ classdef SymExpression < handle
             if ~strcmp(Idx.type,'()')
                 error('Invalid indexing assignment.');
             end
-            
-            B = SymExpression(R);
+            if ~isempty(R)
+                B = SymExpression(R);
+            end
             switch numel(Idx.subs)
                 case 0
                     error('An indexing expression on the left side of an assignment must have at least one subscript.');
                 case 1
                     
-                    sstr = L.s;
+                    sstr = symbol(L);
                     % special case shortcut for L(:)
                     if ischar(Idx.subs{1}) && strcmp(Idx.subs{1},':')
                         sstr = [sstr,'[[;;]]'];
-                        eval_math([sstr '= ' B.s]); 
+                        if isempty(R)
+                            eval_math([sstr '= {};']);
+                        else
+                            eval_math([sstr '= ' B.s ';']);
+                        end
                     elseif isnumeric(Idx.subs{1})
                         ids = Idx.subs{1};
-                        for i=1:numel(ids)                        
-                            [n,m] = ind2sub(size(L),ids(i));
-                            sstr = [L.s,'[[',num2str(n),',', num2str(m),']]'];
-                            eval_math([sstr '= ' general2math(R(i))]); 
+                        if isempty(R)
+                            eval_math([sstr '=ToVectorForm[' sstr '];']);
+                            eval_math([sstr '=Delete[' sstr ',' mat2math(ids(:)) '];']);
+                            
+                        else
+                            for i=1:numel(ids)
+                                [n,m] = ind2sub(size(L),ids(i));
+                                sstr = [L.s,'[[',num2str(n),',', num2str(m),']]'];
+                                eval_math([sstr '= ' general2math(R(i)) ';']);
+                            end
                         end
                     else
                         error('The index is invalid.');
@@ -558,10 +567,14 @@ classdef SymExpression < handle
                     
                 case 2
                     ind = cell(1,2);
+                    if isempty(R)
+                        error('A null assignment can have only one non-colon index.');
+                    end
                     for i=1:2
                         if ischar(Idx.subs{i}) && strcmp(Idx.subs{i},':')
                             ind{i} = ';;';
                         elseif isnumeric(Idx.subs{i})
+                            
                             ind{i} = eval_math(['Flatten@',mat2math(Idx.subs{i})]);
                         else
                             error('The index is invalid.');

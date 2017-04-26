@@ -2,7 +2,7 @@ function Y = acsc(X)
     % Symbolic inverse cosecant.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['ArcCsc[' X.s ']'];

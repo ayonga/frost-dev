@@ -13,7 +13,7 @@ function s = sum(A,p)
     end
     
     % Convert inputs to SymExpression
-    A = SymExpression(A);
+    % A = SymExpression(A);
     
     % construct the operation string
     if p == 1

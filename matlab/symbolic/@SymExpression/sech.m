@@ -2,7 +2,7 @@ function Y = sech(X)
     %  Symbolic hyperbolic secant.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Sech[' X.s ']'];

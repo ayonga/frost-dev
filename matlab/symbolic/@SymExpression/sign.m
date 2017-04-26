@@ -9,7 +9,7 @@ function Y = sign(X)
 
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['Sign[' X.s ']'];

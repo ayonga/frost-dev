@@ -2,7 +2,7 @@ function Y = acoth(X)
     % Symbolic inverse hyperbolic cotangent.
 
     % Convert inputs to SymExpression
-    X = SymExpression(X);
+    % X = SymExpression(X);
     
     % construct the operation string
     sstr = ['ArcCoth[' X.s ']'];

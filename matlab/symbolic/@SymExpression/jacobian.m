@@ -8,7 +8,7 @@ function J = jacobian(A, x)
     
     
     % construct the operation string
-    sstr = ['D[Flatten@' A.s ',{Flatten@' x.s ',1}]'];
+    sstr = ['D[Flatten@{' A.s '},{Flatten@{' x.s '},1}]'];
     
     % create a new object with the evaluated string
     J = SymExpression(sstr);
