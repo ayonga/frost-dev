@@ -11,37 +11,19 @@ function obj = addDynamicsConstraint(obj)
     numState = plant.numState;
     
     % M(x)dx or M(x)ddx
-    x = plant.States.x;
-    if isempty(plant.Mmat)
-        if strcmp(plant.Type,'SecondOrder') 
-            ddx = plant.States.ddx;
-            MmatDx = SymFunction(['MmatDx_' plant.Name],-ddx,{x,ddx});
-        else
-            dx = plant.States.dx;
-            MmatDx = SymFunction(['MmatDx_' plant.Name],-dx,{x,dx});
-        end
-    else
-        
-        if strcmp(plant.Type,'SecondOrder') 
-            ddx = plant.States.ddx;
-            MmatDx = SymFunction(['MmatDx_' plant.Name],-plant.Mmat*ddx,{x,ddx});
-        else
-            dx = plant.States.dx;
-            MmatDx = SymFunction(['MmatDx_' plant.Name],-plant.Mmat*dx,{x,dx});
-        end
-    end    
+      
     
     mdx_cstr_fun(nNode) = NlpFunction();   % preallocation
     if strcmp(plant.Type,'SecondOrder') %second order system
         for i=node_list
-            mdx_cstr_fun(i) = NlpFunction('Name','MmatDx',...
-                'Dimension',numState,'SymFun',MmatDx,...
+            mdx_cstr_fun(i) = NlpFunction('Name','MmatDDx',...
+                'Dimension',numState,'SymFun',plant.MmatDx,...
                 'DepVariables',[vars.x(i);vars.ddx(i)]);
         end
     else                         %first order system
         for i=node_list
             mdx_cstr_fun(i) = NlpFunction('Name','MmatDx',...
-                'Dimension',numState,'SymFun',MmatDx,...
+                'Dimension',numState,'SymFun',plant.MmatDx,...
                 'DepVariables',[vars.x(i);vars.dx(i)]);
         end
     end

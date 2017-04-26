@@ -28,8 +28,8 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     vars   = obj.OptVarTable;
     if ~iscell(deps), deps = {deps}; end
     
-    assert(isa(func,'SymFunction') && isvector(func),...
-        'The second argument must be a vector SymFunction object.'); 
+    validateattributes(func, {'SymFunction'},{'vector'},...
+        'TrajectoryOptimization.addNodeConstraint','func');
     
     if nargin < 7
         type = 'Nonlinear';

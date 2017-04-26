@@ -95,7 +95,9 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     for i=1:n_deps
         if isempty(deps_array(i).JacPattern)
             js = feval(deps_array(i).Funcs.JacStruct,0);
-            deps_array(i) = setJacobianPattern(deps_array(i),js,'IndexForm');
+            if ~isempty(js)
+                deps_array(i) = setJacobianPattern(deps_array(i),js,'IndexForm');
+            end
         end
     end
     % initialize the output structure based on the deps_array.
@@ -141,23 +143,24 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
         % set the indices of non-zero Jacobian elements
         jac_index = jac_index_offset + ...
             cumsum(ones(1,deps_array(i).nnzJac));
-        jac_index_offset = jac_index(end);
-        func_struct.nzJacIndices{i} = jac_index;
-        
-        % get the sparsity pattern (i.e., the indices of non-zero elements)
-        % of the Jacobian of the current function
-       
-        jac_pattern = deps_array(i).JacPattern;
-        % retrieve the indices of dependent variables 
-        dep_indices = vertcat(func_struct.DepIndices{i}{:});
-        func_indics = func_struct.FuncIndices{i};
-        
-        %| @note The JacPattern gives the indices of non-zero Jacobian
-        % elements of the current function. 
-        func_struct.nzJacRows(jac_index) = func_indics(jac_pattern.Rows);
-        
-        func_struct.nzJacCols(jac_index) = dep_indices(jac_pattern.Cols);
-        
+        if ~isempty(jac_index)
+            jac_index_offset = jac_index(end);
+            func_struct.nzJacIndices{i} = jac_index;
+            
+            % get the sparsity pattern (i.e., the indices of non-zero elements)
+            % of the Jacobian of the current function
+            
+            jac_pattern = deps_array(i).JacPattern;
+            % retrieve the indices of dependent variables
+            dep_indices = vertcat(func_struct.DepIndices{i}{:});
+            func_indics = func_struct.FuncIndices{i};
+            
+            %| @note The JacPattern gives the indices of non-zero Jacobian
+            % elements of the current function.
+            func_struct.nzJacRows(jac_index) = func_indics(jac_pattern.Rows);
+            
+            func_struct.nzJacCols(jac_index) = dep_indices(jac_pattern.Cols);
+        end
         
         if derivative_level == 2 
             % if user-defined Hessian functions are provided

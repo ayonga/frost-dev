@@ -70,7 +70,7 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
         end
     end
     
-    % add to the decision variable table
+    % add to the constraints table
     if ismember(label,cstr_names)
         obj.ConstrTable.(label)(node_list) = constr(node_list);
     else

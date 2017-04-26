@@ -175,7 +175,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             
             % impose the system specific constraints (such as holonomic
             % constraints and unilateral constraints)
-            obj = obj.addSystemConstraint();
+            obj = addSystemConstraint(plant, obj);
         end
         
         
