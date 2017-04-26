@@ -14,7 +14,8 @@ function obj = removeHolonomicConstraint(obj, name)
         
         if isfield(obj.HolonomicConstraints, constr)
             obj.HolonomicConstraints = rmfield(obj.HolonomicConstraints,constr);
-            obj = removeInput(obj,constr);
+            obj = removeParam(obj,['p' constr]);
+            obj = removeInput(obj,['f' constr]);
         else
             error('The holonomic constraint (%s) does not exist.\n',constr);
         end

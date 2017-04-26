@@ -29,7 +29,7 @@ function obj = addHolonomicConstraint(obj, name, constr, jac, ddx)
         % (hd)
         n_constr = length(constr);
         hd = SymVariable(name,[n_constr,1]);
-        obj.addParam(name, hd);
+        obj.addParam(['p' name], hd);
         
         %% set the holonomic constraints
         % if isa(constr, 'SymFunction')
@@ -43,7 +43,7 @@ function obj = addHolonomicConstraint(obj, name, constr, jac, ddx)
             % create a SymFunction object if the input is a SymExpression
             % (assuming the constraitn is a function of states 'x');
             obj.HolonomicConstraints.(name).h = SymFunction(['h_' name '_' obj.Name], ...
-                tomatrix(constr)-hd, {obj.States.x,obj.Params.(name)});
+                tomatrix(constr)-hd, {obj.States.x,obj.Params.(['p' name])});
             
         else
             error('The constraint expression must be given as an object of SymExpression or SymFunction.');
@@ -94,7 +94,7 @@ function obj = addHolonomicConstraint(obj, name, constr, jac, ddx)
             dJh = jacobian(jac*obj.States.dx, obj.States.x);
             obj.HolonomicConstraints.(name).dJh = SymFunction(['dJh_' name '_' obj.Name], dJh, {obj.States.x, obj.States.dx});
             ddh = jac*ddx + dJh*obj.States.dx;
-            obj.HolonomicConstraints.(name).ddh = SymFunction(['ddh_' name '_' obj.Name], ddh, {obj.States.x, obj.States.dx});
+            obj.HolonomicConstraints.(name).ddh = SymFunction(['ddh_' name '_' obj.Name], ddh, {obj.States.x, obj.States.dx,obj.States.ddx});
         else
             obj.HolonomicConstraints.(name).dJh = [];
             obj.HolonomicConstraints.(name).ddh = [];
@@ -102,7 +102,7 @@ function obj = addHolonomicConstraint(obj, name, constr, jac, ddx)
         %% Add constraint wrenchs
         
         lambda = SymVariable(name, [n_constr,1]);
-        obj = addInput(obj, name, lambda, transpose(obj.HolonomicConstraints.(name).Jh));
+        obj = addInput(obj, ['f' name], lambda, transpose(obj.HolonomicConstraints.(name).Jh));
     end
     
     

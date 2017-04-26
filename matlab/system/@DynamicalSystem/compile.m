@@ -58,11 +58,22 @@ function obj = compile(obj, export_path, varargin)
         
     end
     
+    % export the unilateral constraints       
     u_constrs = fieldnames(obj.UnilateralConstraints);
-    if ~isempty(fieldnames(obj.UnilateralConstraints))
+    if ~isempty(u_constrs)
         for i=1:length(u_constrs)
             constr = u_constrs{i};
             export(obj.UnilateralConstraints.(constr).h,export_path,varargin{:});
+        end
+        
+    end
+    
+    % export the virtual constraints       
+    v_constrs = fieldnames(obj.VirtualConstraints);
+    if ~isempty(v_constrs)
+        for i=1:length(v_constrs)
+            constr = v_constrs{i};
+            export(obj.VirtualConstraints.(constr),export_path,varargin{:});
         end
         
     end

@@ -30,11 +30,16 @@
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties
+    properties (SetAccess=private)
         % The unique name identification of the system
         %
         % @type char
         Name
+        
+        % The flow (trajectory) from the dynamical system simulation
+        %
+        % @type struct
+        Flow
         
         % The highest order of the state derivatives of the system
         %
@@ -81,6 +86,7 @@
         Mmat
         
         
+        
         % The cell array of the drift vector fields Fvec(x) SymFunction
         %
         % We split the Fvec into many sub-vectors Fvec[i], such that 
@@ -113,6 +119,19 @@
         % @type struct
         UnilateralConstraints
         
+        % The virtual constraints of the dynamical system
+        %
+        % @type struct
+        VirtualConstraints
+        
+    end
+    
+    properties (Hidden, SetAccess=private)
+        
+        % The left hand side of the dynamical equation: M(x)dx or M(x)ddx
+        %
+        % @type SymFunction
+        MmatDx
     end
     
     % methods defined in external files
@@ -138,6 +157,10 @@
         % set the group of drift vector fields F(x) or F(x,dx)
         obj = setDriftVector(obj, vf);
         
+        % compile symbolic expression related to the systems
+        obj = compile(obj, export_path, varargin);
+        
+        
         % add holonomic constraints
         obj = addHolonomicConstraint(obj, name, constr, jac);
         
@@ -150,13 +173,18 @@
         % remove unilateral constraints
         obj = removeUnilateralConstraint(obj, name);
         
-        % compile symbolic expression related to the systems
-        obj = compile(obj, export_path, varargin);
+        % add virtual constraints
+        obj = addVirtualConstraint(obj, constr);
         
-        % check if (name) is a valid variable
-        [flag, var_group] = validateVarName(obj, name)
+        % remove virtual constraints
+        obj = removeVirtualConstraint(obj, name);
+        % a method called by a trajectory optimization NLP to enforce
+        % system specific constraints. All subclasses should implement
+        % their own version of this method and must call the superclass
+        % method first in your implementation.
+        nlp = addSystemConstraint(obj, nlp);
+        
     end
-    
     
     methods
         function obj = DynamicalSystem(name, type)
@@ -173,7 +201,7 @@
             obj.Name = name;
             
                     
-            obj.Type = DynamicalSystem.validateSystemType(type);
+            obj.Type = obj.validateSystemType(type);
             
             if strcmp(obj.Type,'FirstOrder')
                 obj.States = struct('x',[],'dx',[]);
@@ -187,9 +215,8 @@
             obj.Gvec = struct();
             obj.Fvec = cell(0);
             obj.Mmat = [];
+            obj.MmatDx = [];
             
-            obj.HolonomicConstraints = struct();
-            obj.UnilateralConstraints = struct();
         end
         
         
@@ -199,12 +226,32 @@
     
     methods (Static, Access=private)
         
-        function v_type = validateSystemType(type)
+        function v_type = validateSystemType(~, type)
             % validate if it is valid system type
             
             v_type = validatestring(type,{'FirstOrder','SecondOrder'});
         end
-        
+    end
+    
+    methods
+        function var_group = validateVarName(obj, name)
+            % Adds unilateral (inequality) constraints on the dynamical system
+            % states and inputs
+            %
+            % Parameters:
+            %  name: the name string of the variable @type char
+            
+            if isfield(obj.States, name) % check if it is a state variables
+                var_group = 'States';
+            elseif isfield(obj.Inputs, name) % check if it is a input variables
+                var_group = 'Inputs';
+            elseif isfield(obj.Params, name) % check if it is a parameter variables
+                var_group = 'Params';
+            else
+                error('The variable (%s) does not belong to any of the variable groups.', name);
+            end
+            
+        end
     end
     
     

@@ -15,6 +15,15 @@ function obj = addParam(obj, varargin)
     for i=1:length(new_params)
         new_param = new_params{i};
         
+        assert(isempty(regexp(new_param, '\W', 'once')) || ~isempty(regexp(new_param, '\$', 'once')),...
+            'Invalid symbol string, can NOT contain special characters.');
+        
+        assert(isempty(regexp(new_param, '_', 'once')),...
+            'Invalid symbol string, can NOT contain ''_''.');
+        
+        assert(~isempty(regexp(new_param, '^[a-z]\w*', 'match')),...
+            'First letter must be lowercase character.');
+                    
         if isfield(obj.Params, new_param)
             error('The parameter (%s) has been already defined.\n',new_param);
         else
