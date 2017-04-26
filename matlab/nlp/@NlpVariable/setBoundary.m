@@ -56,6 +56,6 @@ function obj = setBoundary(obj, lowerbound, upperbound)
         
     end
     
-    assert(any(obj.UpperBound > obj.LowerBound),...
+    assert(any(obj.UpperBound >= obj.LowerBound),...
         'The lowerbound is greater than the upper bound. Variable name: %s\n', obj.Name);
 end
