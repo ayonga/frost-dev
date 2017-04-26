@@ -1,37 +1,48 @@
-function obj = addState(obj, x, dx, ddx)
+function obj = addState(obj, varargin)
     % Add state variables of the dynamical system
     %
     % Parameters:
-    %  x: the symbolic variables of the states @type SymVariable
-    %  dx: the symbolic variables of the first order derivatives of
-    %  states @type SymVariable
-    %  ddx: the symbolic variables of the second order derivatives of
-    %  states @type SymVariable
+    %  varargin: the name-value pairs (or struct) of the system
+    %  parameters
     
-    assert(isa(x,'SymVariable') && isvector(x), ...
-        '(x) must be a vector SymVariable object.');
+    states = struct(varargin{:});
+    state_names = fieldnames(states);
+    state_vars = struct2cell(states);
+    n_state = length(state_vars{1});
     
-    assert(isa(dx,'SymVariable') && isvector(dx), ...
-        '(dx) must be a vector SymVariable object.');
-    
-    assert(length(dx) == length(x),...
-        'The dimension of (dx) is incorrect.');
-    
-    
-    if strcmp(obj.Type, 'SecondOrder')
-        if ~isempty(ddx)
-            assert(isa(ddx,'SymVariable') && isvector(x), ...
-                '(ddx) must be a vector SymVariable object.');
-            
-            assert(length(ddx) == length(x),...
-                'The dimension of (ddx) is incorrect.');
-            
-        end
-        
-        obj.States.ddx = ddx;
+    % validate the state variables
+    for i=1:numel(state_names)
+        validateStates(state_vars{i},state_names{i},n_state);
     end
-
-    obj.States.x = x;
-    obj.States.dx = dx;
-    obj.numState = length(obj.States.x);
+    
+    
+    
+    for i=1:length(state_names)
+        x = state_names{i};
+        
+        if isfield(obj.States, x)
+            error('The states (%s) has been already defined.\n',x);
+        else
+            obj.States.(x) = states.(x);
+        end
+    end
+    
+    
+    obj.numState = n_state;
+    
+    
+    function validateStates(x,var_name,n_state)
+        validateattributes(x,{'SymVariable'},...
+            {'size', [n_state,1]},...
+            'DynamicalSystem.addState',var_name);
+        
+        assert(isempty(regexp(var_name, '\W', 'once')) || ~isempty(regexp(var_name, '\$', 'once')),...
+            'Invalid symbol string, can NOT contain special characters.');
+        
+        assert(isempty(regexp(var_name, '_', 'once')),...
+            'Invalid symbol string, can NOT contain ''_''.');
+        
+        assert(~isempty(regexp(var_name, '^[a-z]\w*', 'match')),...
+            'First letter must be lowercase character.');
+    end
 end

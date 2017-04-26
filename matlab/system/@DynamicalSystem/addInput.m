@@ -42,8 +42,6 @@ function obj = addInput(obj, name, var, gf, varargin)
                 error('The third argument must be a positive integer, cellstr or a vector SymVaribale object.');
         end
         
-        
-        
         % Convert to SymExpression if the input argument is not
         if ~isa(gf,'SymExpression') 
             s_gf = SymExpression(gf);
