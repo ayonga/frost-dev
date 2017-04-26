@@ -39,15 +39,7 @@ classdef HybridSystem
         % @type digraph
         Gamma
         
-        % The rigid body model of the hybrid system
-        %
-        % @type RigidBodyModel
-        Model
         
-        % The hybrid flows (trajectory) recorder
-        %
-        % @type cell
-        Flow
         
                
         
@@ -76,8 +68,8 @@ classdef HybridSystem
             
             VertexProperties = struct();
             VertexProperties.Name =  {'Domain','Control','Param','IsTerminal'};
-            VertexProperties.Type = {{'Domain'},{'Controller'},{'struct'},{'logical'}};
-            VertexProperties.Attribute = {{},{},{},{}};
+            VertexProperties.Type = {{'DynamicalSystem'},{'Controller'},{'struct'},{'logical'}};
+            VertexProperties.Attribute = {{'scalar'},{'scalar'},{'scalar'},{'scalar'}};
             VertexProperties.DefaultValue =  {{[]},{[]},{[]},false};
         end
         
@@ -93,11 +85,11 @@ classdef HybridSystem
     
     %% Public methods
     methods (Access = public)
-        function obj = HybridSystem(name, model)
+        function obj = HybridSystem(name)
             % the default calss constructor
             %
             % Parameters:
-            % varargin: variable class construction arguments.
+            % name: the name of the hybrid system model @type char
             %
             % Return values:
             % obj: the class object
@@ -105,9 +97,6 @@ classdef HybridSystem
             assert(ischar(name), 'The object name must be a character vector.');
             obj.Name = name;
             
-            assert(isa(model, 'RigidBodyModel'), ...
-                'The model must be an object of ''RigidBodyModel''.');
-            obj.Model = model;
             
             % initialize an empty directed graph with specified properties           
             obj.Gamma = digraph;
@@ -152,14 +141,15 @@ classdef HybridSystem
     
     %% Private methods
     methods (Static, Access=private)
-        function validatePropAttribute(value, type, attribute)
+        function validatePropAttribute(name, value, type, attribute)
             
             if iscell(value)
-                cellfun(@(x)validateattributes(x,type,attribute), value);
+                cellfun(@(x)validateattributes(x,type,attribute,...
+                    'HybridSystem', name), value);
             elseif isnumeric(value)
                 % if a property is a numeric value, it must be a row vector
                 for i=1:size(value,1)
-                    validateattributes(value(i,:),type,attribute);
+                    validateattributes(value(i,:),type,attribute,'HybridSystem', name);
                 end
             else
                 error('The input argument must be a cell array of objects.');

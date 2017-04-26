@@ -78,7 +78,8 @@ for i=1:numel(propNames)
     
     % if a property exists in the input argument, validate its
     % value
-    HybridSystem.validatePropAttribute({props.(propNames{i})},...
+    HybridSystem.validatePropAttribute(propNames{i},...
+        {props.(propNames{i})},...
         valid_props.Type{prop_pos(i)},valid_props.Attribute{prop_pos(i)});
     
     % if the value is not numeric or a cell, convert it to cell to
