@@ -121,8 +121,9 @@ classdef TrajectoryOptimization < NonlinearProgram
             if nargin > 2
                 if ~isempty(num_grid)
                     % if non-default number of grids is specified, use that
-                    assert(isscalar(num_grid) && isreal(num_grid) && rem(num_grid,1) == 0 && num_grid > 0,...
-                        'The second argument must be a positive integer');
+                    validateattributes(num_grid,{'double'},...
+                        {'scalar','integer','positive'},...
+                        'TrajectoryOptimization','NumGrid',3);
                     N = num_grid;
                 end
             end

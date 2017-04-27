@@ -164,7 +164,12 @@ classdef UnilateralConstraint < handle
             var_group = cellfun(@(x)model.validateVarName(x), deps, 'UniformOutput', false);
             vars = cell(1,n_deps);
             for i=1:n_deps
-                vars{i} = model.(var_group{i}).(deps{i});
+                tmp = var_group{i};
+                if isempty(tmp{2})
+                    vars{i} = model.(tmp{1}).(deps{i});
+                else
+                    vars{i} = model.(tmp{1}).(tmp{2}).(deps{i});
+                end
             end
             if isa(h, 'SymFunction')
                 % validate the dependent variables

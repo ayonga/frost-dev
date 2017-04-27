@@ -14,7 +14,7 @@ function nlp = imposeNLPConstraint(obj, nlp)
     nlp = addNodeConstraint(nlp, obj.h_, {'x',p_name}, 'first',...
         0, 0, 'Nonlinear');
     
-    if ~isempty(obj.ddh_) % if the second derivative of the objaint exists
+    if ~isempty(obj.ddh_) % if the second derivative of the object exists
         
        
         if strcmp(obj.Model.Type,'SecondOrder') % the second order system

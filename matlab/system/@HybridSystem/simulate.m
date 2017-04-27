@@ -1,4 +1,4 @@
-function obj = simulate(obj, options)
+function sol = simulate(obj, options)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 
@@ -75,21 +75,14 @@ function obj = simulate(obj, options)
         end
     end
     
-    if isfield(options, 'x0')
-        x0 = options.x0;
-    else
-        x0 = zeros(2*obj.Model.nDof,1);
-    end
+    
             
     
-    % clear previous results
-    obj.Flow = [];
     
+    % initialization
     cur_node_idx = s_domain_idx;
     t0 = 0;
-    idx = 0;
     while (true)
-        idx = idx + 1;
         
         
         if isempty(cur_node_idx)
@@ -105,68 +98,52 @@ function obj = simulate(obj, options)
             end
         end
         
-        % find successors and associated edges
+        % the current node in the graph
+        cur_node = sim_graph.Nodes(cur_node_idx,:);
+        % the current domain defined on the node
+        cur_domain  = cur_node.Domain{1};
+        cur_control = cur_node.Control{1};
+        cur_param   = cur_node.Param{1}; 
+        % find successors nodes
         successor_nodes = successors(sim_graph, cur_node_idx);
-        
+        % find edges that may be triggered at the current node
         assoc_edges = sim_graph.Edges(findedge(sim_graph, cur_node_idx, successor_nodes),:);
         
-        cur_node = sim_graph.Nodes(cur_node_idx,:);
-        
-        
-        cur_node.Domain{1} = setParam(cur_node.Domain{1}, cur_node.Param{1});
-        
-        % configure the ODE
-        odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-6,'AbsTol',1e-6,...
-            'Events', @(t, x) checkGuard(obj, t, x, cur_node, assoc_edges));
-        
-        
-        
-        sol = ode45(@(t, x) calcDynamics(obj, t, x, cur_node), ...
-            [t0, t0+3], x0, odeopts);
-        
-        
-        % log simulation data
-        %         obj.Flow{idx} = struct;
-        
-        
-        if ~isfield(options, 'n_sample')
-            n_sample = length(sol.x);
-            calcs = cell(1,n_sample);
-            for i=1:n_sample
-                [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), cur_node);
-                value = checkGuard(obj, sol.x(i), sol.y(:,i), cur_node, assoc_edges);
-                extra.guard_value = value;
-                calcs{i} = extra;
-            end
-        else
-            n_sample = options.n_sample;
-            t_domain = sol.x(end)-sol.x(1);
-            [tspan,xsample] = even_sample(sol.x,sol.y,n_sample/t_domain);
-            for i=1:n_sample+1
-                [~,extra] = calcDynamics(obj,  tspan(i), xsample(:,i), cur_node);
-                value = checkGuard(obj, tspan(i), xsample(:,i), cur_node, assoc_edges);
-                extra.guard_value = value;
-                calcs{i} = extra;
-            end
+        % pre-process all associated guards to set up proper event function
+        n_edges = height(assoc_edges);
+        guards = assoc_edges.Guard;
+        params = assoc_edges.Param;
+        for i=1:n_edges
+            guards{i}.preProcess(cur_node, params{i});
         end
+        % set the event function
+        odeopts = odeset('Event',@(t, x) checkGuard(obj, t, x, cur_node, guards));
         
-        obj.Flow{idx} = horzcat_fields([calcs{:}]);
-        obj.Flow{idx}.node_idx = cur_node_idx;
-        % Compute reset map at the guard
-        t_f = sol.x(end);
-        x_f = sol.y(:,end);
+       
         
-        triggered_edge  = assoc_edges(sol.ie, :);
-        if isempty(triggered_edge)
+        % run the simulation
+        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,odeopts);
+        
+        
+        
+        
+        % check the index of the triggered edge
+        cur_edge  = assoc_edges(sol.ie, :);
+        if isempty(cur_edge)
             break;
         end
-        triggered_guard = triggered_edge.Guard{1};
+        cur_guard = cur_edge.Guard{1};
+        % update states and time
+        x0 = cur_guard.calcDiscreteMap(obj, t_f, x_f, cur_node);
+        t0 = t_f;
         
+        % determine the target node of the current edge, and set it to be
+        % the current node
         try
-            cur_node_name = triggered_edge.EndNodes{2};
+            cur_node_name = cur_edge.EndNodes{2};
             cur_node_idx = findnode(sim_graph, cur_node_name);
         catch
-            cur_node_idx = triggered_edge.EndNodes(2);
+            cur_node_idx = cur_edge.EndNodes(2);
         end
         
         
@@ -183,9 +160,7 @@ function obj = simulate(obj, options)
             end
         end
         
-        % update states and time
-        x0 = calcResetMap(obj,  x_f, triggered_edge);
-        t0 = t_f;
+        
         
     end
     

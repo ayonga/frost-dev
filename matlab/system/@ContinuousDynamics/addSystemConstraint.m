@@ -38,16 +38,6 @@ function nlp = addSystemConstraint(obj, nlp)
         end
     end
     
-    % The virtual constraints 
-    %     v_constr_names = fieldnames(obj.VirtualConstraints);
-    %     n_v_constr = length(v_constr_names);
-    %     if n_v_constr > 0
-    %         for i=1:n_v_constr
-    %             constr_name = v_constr_names{i};
-    %             constr = obj.VirtualConstraints.(constr_name);
-    %
-    %             nlp = constr.imposeNLPConstraint(nlp);
-    %         end
-    %     end
+    
     
 end

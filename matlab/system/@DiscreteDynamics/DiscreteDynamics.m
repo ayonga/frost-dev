@@ -21,6 +21,10 @@ classdef DiscreteDynamics < DynamicalSystem
         % @type UnilateralConstraint
         EventFunc
         
+        % The stamp data logger
+        % 
+        % @type struct
+        Stamp
     end
     
     methods
@@ -35,9 +39,14 @@ classdef DiscreteDynamics < DynamicalSystem
             
         end
         
-    end
-    
-    methods
+        function obj = addState(obj, xplus, xminus)
+            % overload the superclass 'addInput' method with fixed state
+            % fields
+            
+            obj = addState@DynamicalSystem(obj,'xplus',xplus,'xminus',xminus);
+        
+        end
+        
         function obj = setEventFunc(obj, constr)
             % Set the event function G(x,f) of the system
             %
@@ -51,15 +60,6 @@ classdef DiscreteDynamics < DynamicalSystem
                 'The event function must be a scalar unilateral constraint object.');
             
             obj.EventFunc = constr;
-        end
-        
-        function xplus = calcDynamics(obj, xminus, varargin)
-            % calculate the system dynamical equations
-            %
-            % @note The subclass must overload this method.
-            
-            
-            error('No implementation presents!.');
         end
         
         % compile symbolic expression related to the systems
@@ -80,24 +80,19 @@ classdef DiscreteDynamics < DynamicalSystem
             
         end
         
-       
-        function nlp = addSystemConstraint(obj, nlp)
-             % a method called by a trajectory optimization NLP to enforce
-             % system specific constraints. All subclasses should implement
-             % their own version of this method and must call the superclass
-             % method first in your implementation.
-             
-             
-             error('No implementation presents!.');
+        function obj = preProcess(obj, cur_node, params)
+            % do nothing
         end
+    end
         
-        function obj = addState(obj, xplus, xminus)
-            % overload the superclass 'addInput' method with fixed state
-            % fields
-            
-            obj = addState@DynamicalSystem(obj,'xplus',xplus,'xminus',xminus);
+    methods (Abstract)
+        % calculates the discrete map of the dynamical system that maps
+        % xminus from xplus. Subclasses must implement this method by its
+        % own.
+        xplus = calcDiscreteMap(obj, t, xminus, cur_node);
         
-        end
+        % calculates the event function
+        value = calcEvent(obj, t, x, cur_node);
     end
     
 end

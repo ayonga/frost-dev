@@ -76,10 +76,10 @@ classdef HybridSystem
         function EdgeProperties = get.EdgeProperties(~)
             
             EdgeProperties = struct();
-            EdgeProperties.Name =  {'Guard', 'Weights'};
-            EdgeProperties.Type = {{'DiscreteDynamic'}, {'numeric'}};
-            EdgeProperties.Attribute = {{}, {'scalar'}};
-            EdgeProperties.DefaultValue = {{[]}, NaN};
+            EdgeProperties.Name =  {'Guard', 'Param', 'Weights'};
+            EdgeProperties.Type = {{'DiscreteDynamics'}, {'struct'}, {'numeric'}};
+            EdgeProperties.Attribute = {{}, {}, {'scalar'}};
+            EdgeProperties.DefaultValue = {{[]},{[]}, NaN};
         end
     end
     

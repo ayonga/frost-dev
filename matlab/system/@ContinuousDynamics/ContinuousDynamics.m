@@ -110,16 +110,33 @@
     
     methods
         
-        function [dx,extra] = calcDynamics(obj, varargin)
-            % calculate the system dynamical equations
+        
+        function obj = preProcess(obj, controller, params)
+            % pre-process the object before the simulation 
             %
-            % @note The subclass must overload this method.
-            
-            error('No implementation presents!.');
+            % 
         end
         
-        
-        
+        function obj = postPorcess(obj, sol, controller, params)
+            % post-process the object after the simulation
+            %
+            %
+            
+            % record the simulated trajectory
+            % clear previous results
+            obj.Flow = [];
+            
+            n_sample = length(sol.x);
+            calcs = cell(1,n_sample);
+            for i=1:n_sample
+                [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), controller, params);
+                calcs{i} = extra;
+            end
+            
+            calcs_full = horzcat_fields([calcs{:}]);
+            obj.Flow = calcs_full;
+        end
+            
         
     end
     
@@ -216,26 +233,7 @@
         end
     end
     
-    methods
-        function var_group = validateVarName(obj, name)
-            % Adds unilateral (inequality) constraints on the dynamical system
-            % states and inputs
-            %
-            % Parameters:
-            %  name: the name string of the variable @type char
-            
-            if isfield(obj.States, name) % check if it is a state variables
-                var_group = 'States';
-            elseif isfield(obj.Inputs, name) % check if it is a input variables
-                var_group = 'Inputs';
-            elseif isfield(obj.Params, name) % check if it is a parameter variables
-                var_group = 'Params';
-            else
-                error('The variable (%s) does not belong to any of the variable groups.', name);
-            end
-            
-        end
-    end
+    
     
     
 end

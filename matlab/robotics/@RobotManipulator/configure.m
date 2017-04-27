@@ -112,7 +112,7 @@ function obj = configure(obj, config, base)
         nact = length(actuated_joints);
         u = SymVariable('u',[nact,1],{actuated_joints.Name});
         
-        obj.addInput('u',u,gf);
+        obj.addInput('Control','u',u,gf);
     end
     
     

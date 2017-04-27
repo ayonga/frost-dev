@@ -28,7 +28,7 @@ function obj = addHolonomicConstraint(obj, constr)
             % add constant parameters
             obj = addParam(obj, c_obj.ParamName, c_obj.Param);
             Jh = c_obj.ConstrJac;
-            obj = addInput(obj, c_obj.InputName, c_obj.Input, transpose(Jh));
+            obj = addInput(obj, 'ConsraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
         end
     
     end

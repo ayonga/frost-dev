@@ -1,4 +1,4 @@
-function [value, isterminal, direction] = checkGuard(obj, t, x, cur_node, assoc_edges)
+function [value, isterminal, direction] = checkGuard(obj, t, x, cur_node, guards)
     % Detect the guard condition (event trigger)
     %
     % Parameters:
@@ -10,35 +10,18 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, cur_node, assoc_
     
     
     
-    model = obj.Model;
-    cur_domain = cur_node.Domain{1};
-    cur_control = cur_node.Control{1};
-    % Extract states to angles and velocities
-    qe  = x(model.qeIndices);
-    dqe = x(model.dqeIndices);
-
-    % compute naturual dynamics
-    [De, He] = calcNaturalDynamics(model, qe , dqe);
-
-
-    [vfc, gfc] = calcVectorFields(cur_domain, model, qe, dqe, De, He);
-
-
-    % compute control input
-    u = calcControl(cur_control, t, qe, dqe, vfc, gfc, cur_domain);
     
-    num_edges = height(assoc_edges);
-    guards = assoc_edges.Guard;
     
-    direction  = cellfun(@(x)x.Direction, guards);
-    isterminal = ones(1, num_edges);
+    n_edges = length(guards);
+    % we always assumes that the guard function is from positive to
+    % negative
+    direction  = -ones(1, n_edges); % -1: pos->neg
+    isterminal = ones(1, n_edges);  % all are terminal
     
-    conditions = cellfun(@(x)x.Condition, guards, 'UniformOutput', false);
-    
-    raw_value = calcUnilateralCondition(cur_node.Domain{1}, conditions, model, qe, dqe, u);
-    thresholds = cellfun(@(x)calcThreshold(x, t, qe, dqe), guards);
-    
-    value = raw_value - thresholds;
-    
+    % call the event function of each guard to compute the value of events
+    value = ones(1,n_edges);
+    for i=1:n_edges
+        value(i) = guards{i}.calcEvent(t,x,cur_node);
+    end
     
 end

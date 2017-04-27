@@ -13,10 +13,10 @@ function obj = removeVirtualConstraint(obj, name)
         constr = name{i};
         
         if isfield(obj.VirtualConstraints, constr)
-            
-            obj = removeParam(obj,['a' constr]);
-            if ~isempty(obj.VirtualConstraints.(constr).PhaseParams)
-                obj = removeParam(obj,['p' constr]);
+            c_obj = obj.VirtualConstraints.(constr);
+            obj = removeParam(obj,c_obj.OutputParamName);
+            if ~isempty(c_obj.PhaseParams)
+                obj = removeParam(obj,c_obj.PhaseParamName);
             end
             obj.VirtualConstraints = rmfield(obj.VirtualConstraints,constr);
         else

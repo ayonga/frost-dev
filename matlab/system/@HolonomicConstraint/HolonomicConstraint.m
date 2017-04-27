@@ -302,6 +302,10 @@ classdef HolonomicConstraint < handle
             % Parameters:
             % degree: derivative order @type integer
             
+            if degree == 1
+                error('Currently we do not support J(x)dx = 0 type of holonomic constraitns.')
+            end
+            
             validateattributes(degree, {'double'},...
                 {'nonempty','scalar','positive','integer','>=',1,'<=',2},...
                 'HolonomicConstraint','DerivativeOrder');

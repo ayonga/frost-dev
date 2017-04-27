@@ -1,4 +1,4 @@
-classdef NlpFunction < matlab.mixin.Heterogeneous & handle
+classdef NlpFunction < handle
     % This class provides a data structure for a optimization function.
     % This function could be either a constraint or a objective function of
     % the problem.
