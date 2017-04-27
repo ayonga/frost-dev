@@ -49,11 +49,8 @@ function obj = compile(obj, export_path, varargin)
     if ~isempty(h_constrs)
         for i=1:length(h_constrs)
             constr = h_constrs{i};
-            export(obj.HolonomicConstraints.(constr).h,export_path,varargin{:});
-            export(obj.HolonomicConstraints.(constr).Jh,export_path,varargin{:});
-            if ~isempty(obj.HolonomicConstraints.(constr).dJh)
-                export(obj.HolonomicConstraints.(constr).dJh,export_path,varargin{:});
-            end
+            export(obj.HolonomicConstraints.(constr),export_path,varargin{:});
+           
         end
         
     end
@@ -63,7 +60,7 @@ function obj = compile(obj, export_path, varargin)
     if ~isempty(u_constrs)
         for i=1:length(u_constrs)
             constr = u_constrs{i};
-            export(obj.UnilateralConstraints.(constr).h,export_path,varargin{:});
+            export(obj.UnilateralConstraints.(constr),export_path,varargin{:});
         end
         
     end

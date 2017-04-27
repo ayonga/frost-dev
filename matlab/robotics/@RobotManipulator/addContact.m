@@ -1,10 +1,12 @@
-function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
+function obj = addContact(obj, contact, fric_coef, geometry)
     % Adds contact constraints for the robot manipulator
     %
     % Parameters:
     %  contact: the contact frame object @type ContactFrame
-    %  mu: the (static) coefficient of friction. @type double
-    %  gamma: the coefficient of torsional friction @type double
+    %  fric_coef: the friction coefficient @type struct
+    %  geometry: the geometry constant of the contact @type struct
+    %
+    % Optional fields of geometry:
     %  la: the distance from the origin to the rolling edge along
     %  the negative y-axis  @type double
     %  lb: the distance from the origin to the rolling edge along
@@ -13,6 +15,10 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     %  the negative x-axis  @type double
     %  Lb: the distance from the origin to the rolling edge along
     %  the positive x-axis  @type double
+    %
+    % Optional fields of fric_coef:
+    %  mu: the (static) coefficient of friction. @type double
+    %  gamma: the coefficient of torsional friction @type double
     
     assert(isa(contact, 'ContactFrame'),...
         'The contact must be given as an object of ContactFrame class.');
@@ -28,10 +34,24 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     % extract the contrained elements
     constr_jac = contact.WrenchBase' * jac;
     
+    % label for the holonomic constraint
+    label_full = cellfun(@(x)[contact.Name,x],...
+        {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
+    for i=size(contact.WrenchBase,2):-1:1
+        label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
+    end
+    
+    % create a holonomic constraint object
+    contact_constr = HolonomicConstraint(obj,...
+        constr, contact.Name,...
+        'Jacobian',constr_jac,...
+        'ConstrLabel',{label},...
+        'DerivativeOrder',2);
+    
     % add as a set of holonomic constraints
-    obj = addHolonomicConstraint(obj, contact.Name, constr, constr_jac);
+    obj = addHolonomicConstraint(obj, contact_constr);
     % the contact wrench input vector
-    f_name = ['f' contact.Name];
+    f_name = contact_constr.InputName;
     f = obj.Inputs.(f_name);
     
     
@@ -39,24 +59,30 @@ function obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb)
     % constraints
     if nargin > 2
         % get the friction cone constraint
-        FC = getFrictionCone(contact, f, mu, gamma);
-        fc_cstr = ['friction_cone_', contact.Name];
+        [friction_cone, fc_label, auxdata] = getFrictionCone(contact, f, fric_coef);
+        
+        % create an unilateral constraint object
+        fc_cstr = UnilateralConstraint(obj, friction_cone,...
+            ['fc' contact.Name], f_name, ...
+            'ConstrLabel',{fc_label(:)'},...
+            'AuxData',auxdata);
         % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, fc_cstr, FC, f_name);
+        obj = addUnilateralConstraint(obj, fc_cstr);
     end
     
     % if the contact geometry is given, enforce zero moment point
     % constraints
-    if nargin > 4
+    if nargin > 3
         % get the friction cone constraint
-        if nargin > 6
-            zmp = getZMPConstraint(contact, f, la, lb, La, Lb);
-        else
-            zmp = getZMPConstraint(contact, f, la, lb);
-        end
-        zmp_cstr = ['zmp_', contact.Name];
+        [zmp, zmp_label, auxdata] = getZMPConstraint(contact, f, geometry);
+        
+        % create an unilateral constraint object
+        zmp_cstr = UnilateralConstraint(obj, zmp,...
+            ['zmp' contact.Name], f_name, ...
+            'ConstrLabel',{zmp_label(:)'},...
+            'AuxData',auxdata);
         % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, zmp_cstr, zmp, f_name);
+        obj = addUnilateralConstraint(obj, zmp_cstr);
         
     end
 end

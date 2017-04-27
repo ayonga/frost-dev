@@ -195,6 +195,8 @@ classdef HolonomicConstraint < handle
             obj.Dimension = dim;
             
             hd = SymVariable(obj.ParamName, [dim,1]);
+            obj.Param = hd;
+            obj.Input = SymVariable(obj.InputName,[dim,1]);
             obj.h_ = SymFunction(['h_' name], h-hd,...
                 {x, hd});
             
@@ -266,7 +268,7 @@ classdef HolonomicConstraint < handle
             export(obj.h_,export_path, varargin{:});
             export(obj.Jh_,export_path, varargin{:});
             
-            if ~isempty(obj.dJh)
+            if ~isempty(obj.dJh_)
                 export(obj.dJh_,export_path, varargin{:});
             end
             

@@ -34,12 +34,12 @@ function obj = removeContact(obj, contact)
         
         % remove the associated unilateral constraints
         % 1. friction cone
-        fc_cstr = ['friction_cone_', name];
+        fc_cstr = ['fc', name];
         if isfield(obj.UnilateralConstraints, fc_cstr)
             obj.removeUnilateralConstraint(fc_cstr);
         end
         % 2. ZMP constraints
-        zmp_cstr = ['zmp_', name];
+        zmp_cstr = ['zmp', name];
         if isfield(obj.UnilateralConstraints, zmp_cstr)
             obj.removeUnilateralConstraint(zmp_cstr);
         end

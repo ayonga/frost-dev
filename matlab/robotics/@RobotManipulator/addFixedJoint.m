@@ -21,8 +21,14 @@ function obj = addFixedJoint(obj, fixed_joints)
     
     % the name will looks like something like "fixedq7q8q9" with the numbers
     % are the indices of the fixed joints
-    suffix = arrayfun(@(x)['q' num2str(x)],indices, 'UniformOutput',false);
-    name = ['fixed' suffix{:}]; 
-    obj = addHolonomicConstraint(obj, name, constr);
+    label = arrayfun(@(x)['q' num2str(x)],indices, 'UniformOutput',false);
+     
+    name = 'qfixed'; 
+    % create a holonomic constraint object
+    fixed_joints = HolonomicConstraint(obj,constr,name,...
+        'ConstrLabel',{label},...
+        'DerivativeOrder',2);
+    
+    obj = addHolonomicConstraint(obj, fixed_joints);
 end
     

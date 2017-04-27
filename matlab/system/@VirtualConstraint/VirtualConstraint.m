@@ -127,7 +127,7 @@ classdef VirtualConstraint < handle
     end
     
     
-    properties (Access %= protected)
+    properties (Access = protected)
         % The dynamical system model
         %
         % @type DynamicalSystem
@@ -283,6 +283,12 @@ classdef VirtualConstraint < handle
                 obj.setHolonomic(args.Holonomic);
             else
                 error('Please determine whether the virtual constraint is holonomic (Holonomic) or not.');
+            end
+            
+            if isfield(args, 'ExtraConfig')
+                obj.configure(args.ExtraConfig{:});
+            else
+                obj.configure();
             end
             
         end
@@ -457,7 +463,6 @@ classdef VirtualConstraint < handle
                 validateattributes(p, {'SymVariable'},...
                     {'nonempty'},...
                     'VirtualConstraint', 'PhaseParams');
-                %|@todo vars = symvar(tau);
                 obj.PhaseParams   = p;
             end
             
