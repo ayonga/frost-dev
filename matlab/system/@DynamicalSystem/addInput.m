@@ -1,7 +1,8 @@
-function obj = addInput(obj, name, var, gf, varargin)
+function obj = addInput(obj, category, name, var, gf, varargin)
     % Add input variables of the dynamical system
     %
     % Parameters:
+    %  category: the category of the input @type char
     %  name: the name of the inputs @type char
     %  var: the symbolic variables or a list or number of input signals
     %  of the inputs @type SymVariable
@@ -11,8 +12,15 @@ function obj = addInput(obj, name, var, gf, varargin)
     % 
     % @note By default, we assume the input is affine.
     
+    validatestring(category,{'Control','ConsraintWrench','External'});
     
-    if isfield(obj.Inputs, name)
+    if strcmp(category,'Control')
+        if ~isempty(fieldnames(obj.Inputs.Control))
+            error('Multiple control variable detected. Please define only one group of control input signals.');
+        end
+    end
+    
+    if isfield(obj.Inputs.(category), name)
         error('The input (%s) has been already defined.\n',name);
     else
         switch class(var)
@@ -88,9 +96,9 @@ function obj = addInput(obj, name, var, gf, varargin)
         end
         
         
-        obj.Inputs.(name) = var;
-        obj.Gmap.(name) = sfun_gf;
-        obj.Gvec.(name) = sfun_gv;
+        obj.Inputs.(category).(name) = var;
+        obj.Gmap.(category).(name) = sfun_gf;
+        obj.Gvec.(category).(name) = sfun_gv;
     end
     
     

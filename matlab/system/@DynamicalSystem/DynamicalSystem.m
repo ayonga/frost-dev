@@ -41,6 +41,12 @@
         % A structure that contains the symbolic representation of input
         % variables
         %
+        % We categorized input signals into three different groups: 
+        % Control: the control input
+        % ConstraintWrench: the constrained wrench from any bilateral
+        % (holonomic or nonholonomic) constraints
+        % External: other external inputs, such as disturbance, etc.
+        % 
         % @type struct
         Inputs
         
@@ -64,8 +70,6 @@
     
     
     methods (Abstract)
-        % calculate the dynamic equation/map
-        varargout = calcDynamics(obj, varargin);
         % compile symbolic expression related to the systems
         obj = compile(obj, export_path, varargin);
         
@@ -83,10 +87,10 @@
         obj = addState(obj, varargin);
         
         % Add input variables
-        obj = addInput(obj, name, var, gf, varargin);
+        obj = addInput(obj, category, name, var, gf, varargin);
         
         % Remove input variables
-        obj = removeInput(obj, input_name);
+        obj = removeInput(obj, category, name);
         
         % Add parameter variables
         obj = addParam(obj, varargin);
@@ -111,11 +115,21 @@
             
             obj.States = struct();
             obj.Inputs = struct();
+            obj.Inputs.Control = [];
+            obj.Inputs.ConstraintWrench = [];
+            obj.Inputs.External = [];
+            
             obj.Params = struct();
             
             obj.Gmap = struct();
-            obj.Gvec = struct();
+            obj.Gmap.Control = [];
+            obj.Gmap.ConstraintWrench = [];
+            obj.Gmap.External = [];
             
+            obj.Gvec = struct();
+            obj.Gvec.Control = [];
+            obj.Gvec.ConstraintWrench = [];
+            obj.Gvec.External = [];
         end
         
         
@@ -126,7 +140,7 @@
     
     
     methods
-        function var_group = validateVarName(obj, name)
+        function [var_group, var_category] = validateVarName(obj, name)
             % Adds unilateral (inequality) constraints on the dynamical system
             % states and inputs
             %
@@ -135,10 +149,19 @@
             
             if isfield(obj.States, name) % check if it is a state variables
                 var_group = 'States';
-            elseif isfield(obj.Inputs, name) % check if it is a input variables
+                var_category = [];
+            elseif isfield(obj.Inputs.Control, name) % check if it is a control input variables
                 var_group = 'Inputs';
+                var_category = 'Control';
+            elseif isfield(obj.Inputs.ConsraintWrench, name) % check if it is a control input variables
+                var_group = 'Inputs';
+                var_category = 'ConsraintWrench';
+            elseif isfield(obj.Inputs.External, name) % check if it is a control input variables
+                var_group = 'Inputs';
+                var_category = 'External';
             elseif isfield(obj.Params, name) % check if it is a parameter variables
                 var_group = 'Params';
+                var_category = [];
             else
                 error('The variable (%s) does not belong to any of the variable groups.', name);
             end

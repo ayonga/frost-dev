@@ -1,10 +1,13 @@
-function obj = removeInput(obj, name)
+function obj = removeInput(obj, category, name)
     % Remove input variables of the dynamical system
     %
     % Parameters:
+    %  category: the category of the input @type char
     %  name: the name of the input variables to be removed 
     %  @type cellstr
     
+    
+    validatestring(category,{'Control','ConsraintWrench','External'});
     
     assert(ischar(name) || iscellstr(name), ...
         'The name must be a character vector or cellstr.');
@@ -14,12 +17,12 @@ function obj = removeInput(obj, name)
     for i=1:length(name)
         u = name{i};
         
-        if isfield(obj.Inputs, u)
-            obj.Inputs = rmfield(obj.Inputs,u);
-            obj.Gmap = rmfield(obj.Gmap,u);
-            obj.Gvec = rmfield(obj.Gvec,u);
+        if isfield(obj.Inputs.(category), u)
+            obj.Inputs.(category) = rmfield(obj.Inputs.(category),u);
+            obj.Gmap.(category) = rmfield(obj.Gmap.(category),u);
+            obj.Gvec.(category) = rmfield(obj.Gvec.(category),u);
         else
-            error('A input variable name (%s) does not exist.\n',u);
+            error('A input variable name (%s) of category (%s) does not exist.\n',u,category);
         end
     end
 end
