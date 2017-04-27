@@ -12,7 +12,7 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
     %  d1tau: the first order derivative @type double
     %  ...
     %  dNtau: the N = RelativeDegree - 1 order derivative @type double
-    %  JdNtau: the Jacobian of dNya w.r.t. to the states @type matrix
+    %  JdNtau: the Jacobian of dNya w.r.t. to the states @type rowvec
     %
     % @note: the last Jacobian output is the Jacobian of the dNya with
     % respoect to the states, which is [x] for a first order system and

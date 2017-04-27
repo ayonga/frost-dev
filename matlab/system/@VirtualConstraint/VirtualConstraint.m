@@ -63,9 +63,6 @@ classdef VirtualConstraint < handle
         DesiredType
         
         % The relative degree of the output
-        %
-        % Currently we accept relative degree 1 and relative degree 2
-        % outputs.
         % 
         % @type integer
         RelativeDegree
@@ -100,6 +97,15 @@ classdef VirtualConstraint < handle
         % @type SymExpression
         DesiredOutput
         
+        % The name of the phase parameter variable
+        % 
+        % @type char%
+        PhaseParamName
+        
+        % The name of the output parameter variable
+        % 
+        % @type char
+        OutputParamName
     end
     
     methods
@@ -112,11 +118,16 @@ classdef VirtualConstraint < handle
         function yd = get.DesiredOutput(obj)
             yd = obj.yd_;
         end
-        
+        function name = get.PhaseParamName(obj)
+            name = ['p' obj.Name];
+        end
+        function name = get.OutputParamName(obj)
+            name = ['a' obj.Name];
+        end
     end
     
     
-    properties (Access = protected)
+    properties (Access %= protected)
         % The dynamical system model
         %
         % @type DynamicalSystem
@@ -153,7 +164,7 @@ classdef VirtualConstraint < handle
         % The phase variable
         %
         % @type SymFunction
-        PhaseFuncs
+        PhaseFuncs%
         
         % The virtual constraints ya - yd functions
         %
@@ -220,48 +231,60 @@ classdef VirtualConstraint < handle
             obj.Name = name;
             
             
-            if nargin > 3
-                args = struct(varargin{:});
-                assert(isscalar(args),...
-                    'The values of optional properties are must be scalar data.');
-                
-                
-                % validate and assign the desired outputs
-                
-                
-                if isfield(args, 'DesiredType')
-                    if isfield(args, 'PolyDegree')
-                        obj.setDesiredType(args.DesiredType, args.PolyDegree);
-                    else
-                        obj.setDesiredType(args.DesiredType);
-                    end
+            
+            args = struct(varargin{:});
+            assert(isscalar(args),...
+                'The values of optional properties are must be scalar data.');
+            
+            
+            % validate and assign the desired outputs
+            
+            
+            if isfield(args, 'DesiredType')
+                if isfield(args, 'PolyDegree')
+                    obj.setDesiredType(args.DesiredType, args.PolyDegree);
+                else
+                    obj.setDesiredType(args.DesiredType);
                 end
-                
-                if isfield(args, 'OutputLabel')
-                    obj.setOutputLabel(args.OutputLabel);
+            else
+                error('The desired output function type (DesiredType) must be given.');
+            end
+            
+            if isfield(args, 'OutputLabel')
+                obj.setOutputLabel(args.OutputLabel);
+            end
+            
+            if isfield(args, 'RelativeDegree')
+                obj.setRelativeDegree(args.RelativeDegree);
+            else
+                error('The relative degree of the virtual constraints (RelativeDegree) must be defined.');
+            end
+            
+            if isfield(args, 'PhaseType')
+                obj.setPhaseType(args.PhaseType);
+            else
+                error('The type of phase variable (PhaseType) must be given.');
+            end
+            
+            if isfield(args, 'PhaseVariable')
+                if isfield(args, 'PhaseParams')
+                    obj.setPhaseVariable(args.PhaseVariable, args.PhaseParams);
+                else
+                    obj.setPhaseVariable(args.PhaseVariable);
                 end
-                
-                if isfield(args, 'RelativeDegree')
-                    obj.setRelativeDegree(args.RelativeDegree);
-                end
-                
-                if isfield(args, 'PhaseType')
-                    obj.setPhaseType(args.PhaseType);
-                end
-                
-                if isfield(args, 'PhaseVariable')
-                    if isfield(args, 'PhaseParams')
-                        obj.setPhaseVariable(args.PhaseVariable, args.PhaseParams);
-                    else
-                        obj.setPhaseVariable(args.PhaseVariable);
-                    end
-                end
-                
-                
-                if isfield(args, 'Holonomic')
-                    obj.setHolonomic(args.Holonomic);
+            else
+                if strcmp(args.PhaseType,'StateBased')
+                    error('The phase variable (PhaseVariable) must be given if the desired outputs are state-based outputs.');
                 end
             end
+            
+            
+            if isfield(args, 'Holonomic')
+                obj.setHolonomic(args.Holonomic);
+            else
+                error('Please determine whether the virtual constraint is holonomic (Holonomic) or not.');
+            end
+            
         end
         
         
@@ -320,7 +343,7 @@ classdef VirtualConstraint < handle
         varargout = calcPhaseVariable(obj, t, x, dx, p);
         
         % enforce as NLP constraints
-        nlp = imposeNLPConstraint(obj, nlp, k, nzy)
+        nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     end
     
     
@@ -434,6 +457,7 @@ classdef VirtualConstraint < handle
                 validateattributes(p, {'SymVariable'},...
                     {'nonempty'},...
                     'VirtualConstraint', 'PhaseParams');
+                %|@todo vars = symvar(tau);
                 obj.PhaseParams   = p;
             end
             

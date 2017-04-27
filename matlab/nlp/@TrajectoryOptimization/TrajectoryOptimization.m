@@ -90,9 +90,9 @@ classdef TrajectoryOptimization < NonlinearProgram
             obj = obj@NonlinearProgram(name);
             
             % check the type of the plant
-            assert(isa(plant, 'DynamicalSystem'),...
+            assert(isa(plant, 'ContinuousDynamics'),...
                 'TrajectoryOptimization:InvalidPlant',...
-                'The plant must be an object of ''DynamicalSystem'' class or its subclasses.\n');
+                'The plant must be an object of ''ContinuousDynamics'' class or its subclasses.\n');
             % The dynamical system of interest            
             obj.Plant = plant;
             

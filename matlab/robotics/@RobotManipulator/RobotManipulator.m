@@ -1,4 +1,4 @@
-classdef RobotManipulator < DynamicalSystem
+classdef RobotManipulator < ContinuousDynamics
     % A class with basic model descriptions and functionalities
     % of the multi-link rigid-body robot platform.
     %
@@ -80,7 +80,7 @@ classdef RobotManipulator < DynamicalSystem
             
             % construct the object by calling superclass constructor
             % function
-            obj = obj@DynamicalSystem(name, 'SecondOrder');
+            obj = obj@ContinuousDynamics(name, 'SecondOrder');
             
             
             if nargin > 1

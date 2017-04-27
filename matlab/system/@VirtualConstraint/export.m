@@ -1,5 +1,5 @@
 function export(obj, export_path, varargin)
-    % export the symbolic expressions of the system dynamics matrices and
+    % export the symbolic expressions of the constraints matrices and
     % vectors and compile as MEX files.
     %
     % Parameters:

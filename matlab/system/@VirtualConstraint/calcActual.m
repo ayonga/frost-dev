@@ -11,7 +11,7 @@ function varargout = calcActual(obj, x, dx)
     %  d1ya: the first order derivative @type colvec
     %  ...
     %  dNya: the N = RelativeDegree - 1 order derivative @type colvec
-    %  JdNya: the Jacobian of dNya w.r.t. to the states @type rowvec
+    %  JdNya: the Jacobian of dNya w.r.t. to the states @type matrix
     %
     % @note: the last Jacobian output is the Jacobian of the dNya with
     % respoect to the states, which is [x] for a first order system and

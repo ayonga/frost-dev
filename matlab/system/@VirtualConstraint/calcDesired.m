@@ -14,7 +14,7 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     %  d1yd: the first order derivative @type colvec
     %  ...
     %  dNyd: the N = RelativeDegree - 1 order derivative @type colvec
-    %  JdNyd: the Jacobian of dNya w.r.t. to the states @type colvec
+    %  JdNyd: the Jacobian of dNya w.r.t. to the states @type matrix
     %
     % @note: the last Jacobian output is the Jacobian of the dNyd with
     % respoect to the states, which is [x] for a first order system and

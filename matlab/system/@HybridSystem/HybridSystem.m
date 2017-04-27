@@ -41,7 +41,7 @@ classdef HybridSystem
         
         
         
-               
+        
         
         
         
@@ -64,20 +64,20 @@ classdef HybridSystem
         EdgeProperties
     end
     methods
-        function VertexProperties = get.VertexProperties(obj)
+        function VertexProperties = get.VertexProperties(~)
             
             VertexProperties = struct();
             VertexProperties.Name =  {'Domain','Control','Param','IsTerminal'};
-            VertexProperties.Type = {{'DynamicalSystem'},{'Controller'},{'struct'},{'logical'}};
-            VertexProperties.Attribute = {{'scalar'},{'scalar'},{'scalar'},{'scalar'}};
+            VertexProperties.Type = {{'ContinuousDynamics'},{'Controller'},{'struct'},{'logical'}};
+            VertexProperties.Attribute = {{},{},{},{'nonempty'}};
             VertexProperties.DefaultValue =  {{[]},{[]},{[]},false};
         end
         
-        function EdgeProperties = get.EdgeProperties(obj)
+        function EdgeProperties = get.EdgeProperties(~)
             
             EdgeProperties = struct();
             EdgeProperties.Name =  {'Guard', 'Weights'};
-            EdgeProperties.Type = {{'Guard'}, {'numeric'}};
+            EdgeProperties.Type = {{'DiscreteDynamic'}, {'numeric'}};
             EdgeProperties.Attribute = {{}, {'scalar'}};
             EdgeProperties.DefaultValue = {{[]}, NaN};
         end

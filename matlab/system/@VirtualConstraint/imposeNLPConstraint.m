@@ -65,12 +65,12 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     
     % desired output parameters and its name in the var table of the NLP
     a = {SymVariable(tomatrix(obj.OutputParams(:)))};   
-    a_name = ['a' obj.Name];
+    a_name = obj.OutputParamName;
     
     % phat variable parameters and its name in the var table of the NLP
     if ~isempty(obj.PhaseParams)
         p = {SymVariable(tomatrix(obj.PhaseParams(:)))};
-        p_name = ['p' obj.Name];
+        p_name = obj.PhaseParamName;
     else
         p = {};
         p_name = {};
