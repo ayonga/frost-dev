@@ -69,9 +69,9 @@ classdef NonlinearProgram < handle
             % Parameters: 
             %  name: the name of the problem
             
-            obj.Name = name;
             
-            
+            validateattributes(name, {'char'},...
+                {'scalartext'},'NonlinearProgram','name');
             
             % default options
             obj.Options = struct('DerivativeLevel', 1, ...

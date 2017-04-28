@@ -12,25 +12,50 @@ function obj = configureVariables(obj, bounds)
     
     
     
-    assert(isstruct(bounds), ...
-        'The second argument must be a struct specifies the setup of the problem.');
+    % validate the input argument
+    validateattributes(bounds,{'struct'},{},...
+        'TrajectoryOptimization','bounds');
             
             
-    % configure NLP decision variables
+    %% configure NLP decision variables
     if isnan(obj.Options.ConstantTimeHorizon)
         % add time as decision variables if the problem does not
         % use constant time horizon
-        obj.addTimeVariable(bounds.time);
+        if ~isfield(bounds,'time')
+            warning('No boundary value for time variables defined.')
+            time = struct();
+        else
+            time = bounds.time;
+        end
+        obj.addTimeVariable(time);
     end
     
     % states as the decision variables
-    obj.addStateVariable(bounds.states);
-    
-    if ~isempty(fieldnames(obj.Plant.Inputs))
-        obj.addInputVariable(bounds.inputs);
+    if ~isfield(bounds,'states')
+        warning('No boundary value for state variables defined.')
+        states = struct();
+    else
+        states = bounds.states;
     end
+    obj.addStateVariable(states);
     
+    % inputs as the decision variables
+    if ~isfield(bounds,'inputs')
+        warning('No boundary value for input variables defined.')
+        inputs = struct();
+    else
+        inputs = bounds.inputs;
+    end
+    obj.addInputVariable(inputs);
+    
+    % parameters as the decision variables
     if ~isempty(fieldnames(obj.Plant.Params))
-        obj.addParamVariable(bounds.params);
+        if ~isfield(bounds,'params')
+            warning('No boundary value for parameters defined.')
+            params = struct();
+        else
+            params = bounds.params;
+        end
+        obj.addParamVariable(params);
     end
 end

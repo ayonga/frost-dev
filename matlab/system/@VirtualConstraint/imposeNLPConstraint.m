@@ -100,9 +100,9 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     if ~is_state_based
         t = SymVariable('t');
         k = SymVariable('k');
-        T  = SymVariable('T');
+        T  = [SymVariable('t0');SymVariable('tf')];
         nNode = SymVariable('N');
-        tsubs = ((k-1)/(nNode-1))*T;
+        tsubs = T(1) + ((k-1)/(nNode-1))*(T(2)-T(1));
     end
     
     y_fun = cell(rel_deg+1,1);

@@ -5,30 +5,39 @@ function obj = addTimeVariable(obj, bounds)
     %  bounds: a structed data stores the boundary information of the
     %  NLP variables @type struct
     
-    if ~isnan(obj.Options.ConstantTimeHorizon)
-        error('CANNOT add time as NLP variables when using constant time horizon.');
-    end
+    
     
     t_var = struct();
     t_var.Name = 'T';
-    t_var.Dimension = 1;
-    if isfield(bounds,'duration')
-        if isfield(bounds.duration','lb')
-            t_var.lb = bounds.duration.lb;
-        else
-            t_var.lb = 0;
+    t_var.Dimension = 2;
+    t_var.lb = zeros(2,1);
+    t_var.ub = ones(2,1);
+    t_var.x0 = [0;1];
+    if isfield(bounds, 't0')
+        if isfield(bounds.t0,'lb')
+            t_var.lb(1) = bounds.t0.lb;
         end
-        if isfield(bounds.duration','ub')
-            t_var.ub = bounds.duration.ub;
-        else
-            t_var.ub = 2;
+        if isfield(bounds.t0,'ub')
+            t_var.ub(1) = bounds.t0.ub;
         end
-        if isfield(bounds.duration','x0')
-            t_var.x0 = bounds.duration.x0;
-        else
-            t_var.x0 = 1;
+        if isfield(bounds.t0,'x0')
+            t_var.x0(1) = bounds.t0.x0;
         end
     end
+    
+    if isfield(bounds, 'tf')
+        if isfield(bounds.tf,'lb')
+            t_var.lb(2) = bounds.tf.lb;
+        end
+        if isfield(bounds.tf,'ub')
+            t_var.ub(2) = bounds.tf.ub;
+        end
+        if isfield(bounds.tf,'x0')
+            t_var.x0(2) = bounds.tf.x0;
+        end
+    end
+    
+    
     
     % determines the nodes at which the variables to be defined.
     if obj.Options.DistributeTimeVariable
@@ -37,14 +46,14 @@ function obj = addTimeVariable(obj, bounds)
         
         % add an equality constraint between the time variable at
         % neighboring nodes to make sure they are same
-        Ti  = SymVariable('ti');
-        Tn  = SymVariable('tn');
-        t_cont = SymFunction('tCont',flatten(Ti-Tn),{Ti,Tn});
+        Ti  = SymVariable('ti',[2,1]);
+        Tn  = SymVariable('tn',[2,1]);
+        t_cont = SymFunction('tCont',Ti-Tn,{Ti,Tn});
         
         % create an array of constraints structure
         t_cstr(obj.NumNode-1) = struct();
         [t_cstr.Name] = deal(t_cont.Name);
-        [t_cstr.Dimension] = deal(1);
+        [t_cstr.Dimension] = deal(2);
         [t_cstr.lb] = deal(0);
         [t_cstr.ub] = deal(0);
         [t_cstr.Type] = deal('Linear');
@@ -58,6 +67,26 @@ function obj = addTimeVariable(obj, bounds)
     else
         % otherwise only define at the first node
         obj = addVariable(obj, 'T', 'first', t_var);
+    end
+    
+    if isfield(bounds,'duration')
+        % only impose at the first node
+        T  = SymVariable('t',[2,1]);
+        timeDuration = SymFunction('timeDuration',T(2)-T(1),{T});
+        
+        if isfield(bounds.duration','lb')
+            lb = bounds.duration.lb;
+        else
+            lb = 0;
+        end
+        if isfield(bounds.duration','ub')
+            ub = bounds.duration.ub;
+        else
+            ub = inf;
+        end
+        
+        addNodeConstraint(obj, timeDuration, 'T', 'first', lb, ub, 'Linear');
+   
     end
     
 

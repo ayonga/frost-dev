@@ -52,15 +52,44 @@ function obj = addDynamicsConstraint(obj)
     end
     
     % external input vector fields
-    input_names = fieldnames(plant.Inputs);
+    
+    input_names = fieldnames(plant.Inputs.Control);
     n_inputs = numel(input_names);
-    Gvec_cstr_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    Gvec_control_fun(n_inputs,nNode) = NlpFunction(); % preallocation
     if n_inputs > 0
         for i=node_list
             for j=1:n_inputs
                 input = input_names{j};
-                Gvec_cstr_fun(j,i) = NlpFunction('Name',plant.Gvec.(input).Name,...
-                    'Dimension',numState,'SymFun',plant.Gvec.(input),...
+                Gvec_control_fun(j,i) = NlpFunction('Name',plant.Gvec.Control.(input).Name,...
+                    'Dimension',numState,'SymFun',plant.Gvec.Control.(input),...
+                    'DepVariables',[vars.x(i);vars.(input)(i)]);
+            end
+        end
+    end
+    
+    input_names = fieldnames(plant.Inputs.ConstraintWrench);
+    n_inputs = numel(input_names);
+    Gvec_wrench_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    if n_inputs > 0
+        for i=node_list
+            for j=1:n_inputs
+                input = input_names{j};
+                Gvec_wrench_fun(j,i) = NlpFunction('Name',plant.Gvec.ConstraintWrench.(input).Name,...
+                    'Dimension',numState,'SymFun',plant.Gvec.ConstraintWrench.(input),...
+                    'DepVariables',[vars.x(i);vars.(input)(i)]);
+            end
+        end
+    end
+    
+    input_names = fieldnames(plant.Inputs.External);
+    n_inputs = numel(input_names);
+    Gvec_external_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    if n_inputs > 0
+        for i=node_list
+            for j=1:n_inputs
+                input = input_names{j};
+                Gvec_external_fun(j,i) = NlpFunction('Name',plant.Gvec.External.(input).Name,...
+                    'Dimension',numState,'SymFun',plant.Gvec.External.(input),...
                     'DepVariables',[vars.x(i);vars.(input)(i)]);
             end
         end
@@ -72,7 +101,9 @@ function obj = addDynamicsConstraint(obj)
     for i=node_list
         dep_funcs = [mdx_cstr_fun(i); % M(x)dx (or M(x)ddx)
             Fvec_cstr_fun(:,i); % Fvec(x) or Fvec(x,dx)
-            Gvec_cstr_fun(:,i); % Gvec(x,u)
+            Gvec_control_fun(:,i); % Gvec(x,u);
+            Gvec_wrench_fun(:,i);
+            Gvec_external_fun(:,i)
         ];
             
         dynamics_cstr_fun(i) = NlpFunction('Name','dynamics_equation',...

@@ -79,7 +79,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             % name: the name of the problem @type char
             % plant: the dynamical system plant @type DynamicalSystem
             % num_grid: the number of grids along the trajectory 
-            % @type integer
+            % @type integerConstantTimeHorizon
             % bounds: a structed data stores the boundary information of the
             % NLP variables @type struct
             % varargin: user-defined options for the problem @type varargin
@@ -90,22 +90,33 @@ classdef TrajectoryOptimization < NonlinearProgram
             obj = obj@NonlinearProgram(name);
             
             % check the type of the plant
-            assert(isa(plant, 'ContinuousDynamics'),...
-                'TrajectoryOptimization:InvalidPlant',...
-                'The plant must be an object of ''ContinuousDynamics'' class or its subclasses.\n');
-            % The dynamical system of interest            
+            validateattributes(plant,{'ContinuousDynamics'},...
+                {},'TrajectoryOptimization','plant');
+            % The dynamical system of interest
             obj.Plant = plant;
             
-             
+            % the default number of grids
+            N = TrajectoryOptimization.DefaultNumberOfGrid;
+            if nargin > 2
+                if ~isempty(num_grid)
+                    % if non-default number of grids is specified, use that
+                    validateattributes(num_grid,{'double'},...
+                        {'scalar','integer','>=',2},...
+                        'TrajectoryOptimization','NumGrid',3);
+                    N = num_grid;
+                end
+            end
+            
+            
             
             ip = inputParser;
-            ip.addParameter('CollocationScheme','HermiteSimpson',@(x)validatestring(x,{'HermiteSimpson','Trapzoidal','PseudoSpectral'}));
-            ip.addParameter('DistributeParameters',true,@(x) isequal(x,true) || isequal(x,false));
-            ip.addParameter('DistributeTimeVariable',true,@(x) isequal(x,true) || isequal(x,false));
-            ip.addParameter('ConstantTimeHorizon',NaN,@(x) isreal(x) && x>=0);
-            ip.addParameter('IsPeriodic',false,@(x) isequal(x,true) || isequal(x,false));
-            ip.addParameter('DerivativeLevel',1,@(x) x==0 || x==1 || x==2);
-            ip.addParameter('EqualityConstraintBoundary',0,@(x) isreal(x) && x >= 0);
+            ip.addParameter('CollocationScheme','HermiteSimpsoboundsn',@(x)validatestring(x,{'HermiteSimpson','Trapzoidal','PseudoSpectral'}));
+            ip.addParameter('DistributeParameters',true,@(x)validateattributes(x,{'logical'},{}));
+            ip.addParameter('DistributeTimeVariable',true,@(x)validateattributes(x,{'logical'},{}));
+            ip.addParameter('ConstantTimeHorizon',nan(1,2),@(x)validateattributes(x,{'double'},{'real','positive','row','numel',2}));
+            ip.addParameter('IsPeriodic',false,@(x)validateattributes(x,{'logical'},{}));
+            ip.addParameter('DerivativeLevel',1,@(x)validateattributes(x,{'double'},{'scalar','integer','<=',2,'>=',0}));
+            ip.addParameter('EqualityConstraintBoundary',0,@(x)validateattributes(x,{'double'},{'real','positive'}));
             ip.parse(varargin{:});
             obj.Options = ip.Results;
             % default options
@@ -116,17 +127,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             %             obj.Options.IsPeriodic              = false;
             
                    
-            % the default number of grids
-            N = TrajectoryOptimization.DefaultNumberOfGrid;
-            if nargin > 2
-                if ~isempty(num_grid)
-                    % if non-default number of grids is specified, use that
-                    validateattributes(num_grid,{'double'},...
-                        {'scalar','integer','positive'},...
-                        'TrajectoryOptimization','NumGrid',3);
-                    N = num_grid;
-                end
-            end
+            
             % check the problem setup
             
             
@@ -140,28 +141,24 @@ classdef TrajectoryOptimization < NonlinearProgram
             % collocation scheme
             switch obj.Options.CollocationScheme
                 case 'HermiteSimpson'
-                    obj.NumNode = N*2 + 1;
+                    n_node = N*2 + 1;
                 case 'Trapzoidal'
-                    obj.NumNode = N + 1;
+                    n_node = N + 1;
                 case 'PseudoSpectral'
-                    obj.NumNode = N + 1;
-                otherwise
-                    error('TrajectoryOptimization:InvalidScheme', ...
-                        ['Unsupported collocation scheme. It must be one of the following: \n',...
-                        '%s, %s, %s \n'], 'HermiteSimpson', 'Trapzoidal', 'PseudoSpectral');
+                    n_node = N + 1;
             end
-                
+            obj.NumNode = n_node;
             
             % initialize the variable, constraints and cost function table
-            col_names = cellfun(@(x)['node',num2str(x)], num2cell(1:obj.NumNode),...
+            col_names = cellfun(@(x)['node',num2str(x)], num2cell(1:n_node),...
                 'UniformOutput',false);
 
 
-            obj.OptVarTable = cell2table(cell(obj.NumNode,0),...
+            obj.OptVarTable = cell2table(cell(n_node,0),...
                 'RowNames',col_names);
-            obj.ConstrTable = cell2table(cell(obj.NumNode,0),...
+            obj.ConstrTable = cell2table(cell(n_node,0),...
                 'RowNames',col_names);
-            obj.CostTable   = cell2table(cell(obj.NumNode,0),...
+            obj.CostTable   = cell2table(cell(n_node,0),...
                 'RowNames',col_names);
             
             
