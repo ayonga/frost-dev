@@ -32,6 +32,83 @@
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
+    
+    
+    
+    
+    
+    %% methods should be overloaded by subclasses
+    methods
+        
+        function obj = preProcess(obj, controller, params)
+            % pre-process the object before the simulation 
+            %
+            % the subclasses could overload this method to perform any
+            % pre-simulation procedures. 
+            
+            % do nothing by default.
+        end
+        
+        function obj = postPorcess(obj, sol, controller, params)
+            % post-process the object after the simulation
+            %
+            % the subclasses could overload this method to perform any
+            % pre-simulation procedures. 
+            
+            % do nothing by default.
+        end
+            
+        
+        % a method called by a trajectory optimization NLP to enforce
+        % system specific constraints. All subclasses should implement
+        % their own version of this method and must call the superclass
+        % method first in your implementation.
+        nlp = addSystemConstraint(obj, nlp);
+    end
+    
+    
+    %%
+    methods
+        function obj = ContinuousDynamics(name, type)
+            % The class construction function
+            %
+            % Parameters:
+            % name: the name of the system @type char
+            % type: the type of the system @type char
+            
+            obj = obj@DynamicalSystem(name, type);
+            
+            
+            obj.Fvec = cell(0);
+            obj.Mmat = [];
+            obj.MmatDx = [];
+            
+        end
+        
+        
+        function obj = addState(obj, x, dx, ddx)
+            % overload the superclass 'addState' method with fixed state
+            % fields
+            % 
+            % Parameters:
+            % x: the state variables @type SymVariable
+            % dx: the first order derivative of state variables @type SymVariable
+            % ddx: the second order derivative of state variables @type SymVariable
+            
+            if strcmp(obj.Type,'FirstOrder')
+                obj = addState@DynamicalSystem(obj,'x',x,'dx',dx);
+            elseif strcmp(obj.Type, 'SecondOrder')
+                obj = addState@DynamicalSystem(obj,'x',x,'dx',dx,'ddx',ddx);
+            else
+                error('Please define the type of the system first.');
+            end
+        
+        end
+        
+        
+    end
+    
+    %%
     properties (SetAccess=protected)
         
         
@@ -40,13 +117,7 @@
         % @type struct
         Flow
         
-        % The highest order of the state derivatives of the system
-        %
-        % @note The system could be either a 'FirstOrder' system or a
-        % 'SecondOrder' system.
-        %
-        % @type char
-        Type
+        
         
         % A structure that contains the symbolic representation of state
         % variables
@@ -98,52 +169,27 @@
         % @type struct
         VirtualConstraints
         
-    end
-    
-    properties (Hidden, SetAccess=private)
-        
-        % The left hand side of the dynamical equation: M(x)dx or M(x)ddx
+        % The event functions
         %
-        % @type SymFunction
-        MmatDx
-    end
-    
-    methods
-        
-        
-        function obj = preProcess(obj, controller, params)
-            % pre-process the object before the simulation 
-            %
-            % 
-        end
-        
-        function obj = postPorcess(obj, sol, controller, params)
-            % post-process the object after the simulation
-            %
-            %
-            
-            % record the simulated trajectory
-            % clear previous results
-            obj.Flow = [];
-            
-            n_sample = length(sol.x);
-            calcs = cell(1,n_sample);
-            for i=1:n_sample
-                [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), controller, params);
-                calcs{i} = extra;
-            end
-            
-            calcs_full = horzcat_fields([calcs{:}]);
-            obj.Flow = calcs_full;
-        end
-            
+        % The event functions are often subset of the unilateral
+        % constraints defined on the system. For flexibility, we define
+        % them separately.
+        %
+        % @type struct
+        EventFuncs
         
     end
     
-    % methods defined in external files
+    
+    
+    %% methods defined in external files
     methods 
+        
         % simulate the dynamical system
-        sol = simulate(obj, options);
+        [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options)
+        
+        % check event functions for simulation
+        [value, isterminal, direction] = checkGuard(obj, t, x, controller, params, eventfuncs);
         
         % set the mass matrix M(x)
         obj = setMassMatrix(obj, M);
@@ -151,9 +197,29 @@
         % set the group of drift vector fields F(x) or F(x,dx)
         obj = setDriftVector(obj, vf);
         
-        % compile symbolic expression related to the systems
-        obj = compile(obj, export_path, varargin);
+        % calculate the mass matrix
+        M = calcMassMatrix(obj, x)
         
+        % calculate the drift vector
+        f = calcDriftVector(obj, x, dx)
+        
+        % calculate the dynamical equation
+        [xdot, extra] = calcDynamics(obj, t, x, controller, params);
+        
+        % first order system dynamical equation
+        [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params);
+        
+        % second order system dynamical equation
+        [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params);
+        
+        % compile symbolic expression related to the systems
+        obj = compile(obj, export_path, varargin);        
+        
+        % add event functions
+        obj = addEvent(obj, constr)
+        
+        % remove event functions
+        obj = removeEvent(obj, name)
         
         % add holonomic constraints
         obj = addHolonomicConstraint(obj, constr);
@@ -172,58 +238,20 @@
         
         % remove virtual constraints
         obj = removeVirtualConstraint(obj, name);
-        % a method called by a trajectory optimization NLP to enforce
-        % system specific constraints. All subclasses should implement
-        % their own version of this method and must call the superclass
-        % method first in your implementation.
-        nlp = addSystemConstraint(obj, nlp);
+        
+        
         
     end
-    
-    methods
-        function obj = ContinuousDynamics(name, type)
-            % The class construction function
-            %
-            % Parameters:
-            % name: the name of the system @type char
-            % type: the type of the system @type char
-            
-            obj = obj@DynamicalSystem(name);
-            
-            if nargin > 1
-                obj.Type = obj.validateSystemType(type);
-            end
-            obj.Inputs = struct();
-            obj.Params = struct();
-            
-            obj.Gmap = struct();
-            obj.Gvec = struct();
-            obj.Fvec = cell(0);
-            obj.Mmat = [];
-            obj.MmatDx = [];
-            
-        end
+    %% private properties
+    properties (Hidden, Access=private)
         
-        
-        function obj = addState(obj, x, dx, ddx)
-            % overload the superclass 'addInput' method with fixed state
-            % fields
-            % 
-            % Parameters:
-            % x: the state variables @type SymVariable
-            % dx: the first order derivative of state variables @type SymVariable
-            % ddx: the second order derivative of state variables @type SymVariable
-            
-            if strcmp(obj.Type,'FirstOrder')
-                obj = addState@DynamicalSystem(obj,'x',x,'dx',dx);
-            elseif strcmp(obj.Type, 'SecondOrder')
-                obj = addState@DynamicalSystem(obj,'x',x,'dx',dx,'ddx',ddx);
-            end
-        
-        end
-        
+        % The left hand side of the dynamical equation: M(x)dx or M(x)ddx
+        %
+        % @type SymFunction
+        MmatDx
     end
     
+    %% private methods
     methods (Access=private)
         
         function v_type = validateSystemType(~, type)
@@ -232,9 +260,5 @@
             v_type = validatestring(type,{'FirstOrder','SecondOrder'});
         end
     end
-    
-    
-    
-    
 end
 

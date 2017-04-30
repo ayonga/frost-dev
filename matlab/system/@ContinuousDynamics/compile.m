@@ -5,7 +5,7 @@ function obj = compile(obj, export_path, varargin)
     % Parameters:
     %  export_path: the path to export the file @type char
     %  varargin: variable input parameters @type varargin
-    %   Vars: a list of symbolic variables @type SymVariable
+    %   StackVariable: whether to stack variables into one @type logical
     %   File: the (full) file name of exported file @type char
     %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
@@ -73,6 +73,15 @@ function obj = compile(obj, export_path, varargin)
             export(obj.VirtualConstraints.(constr),export_path,varargin{:});
         end
         
+    end
+    
+    % export the event functions
+    funcs = fieldnames(obj.EventFuncs);
+    if ~isempty(funcs)
+        for i=1:length(funcs)
+            fun = funcs{i};
+            export(obj.EventFuncs.(fun),export_path,varargin{:});
+        end        
     end
     
 end

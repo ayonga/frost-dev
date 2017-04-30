@@ -116,8 +116,6 @@ function sol = simulate(obj, options)
         for i=1:n_edges
             guards{i}.preProcess(cur_node, params{i});
         end
-        % set the event function
-        odeopts = odeset('Event',@(t, x) checkGuard(obj, t, x, cur_node, guards));
         
        
         

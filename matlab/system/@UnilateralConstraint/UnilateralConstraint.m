@@ -17,78 +17,7 @@ classdef UnilateralConstraint < handle
     % http://www.opensource.org/licenses/bsd-license.php
     
     
-    % properties determined internally
-    properties (SetAccess=protected, GetAccess=public)
-        % The dimension of the virtual constraints
-        %
-        % @type integer
-        Dimension
-        
-        % An indicator whether the unilateral constraints depend on the
-        % input variables of the dynamical system. If the constraints are
-        % input-dependent, then it will requires to execute the
-        % calcDynamics function to compute the required input signals.
-        %
-        % @type logical
-        InputDependent
-    end
     
-    % properties must be determined by the users
-    properties (SetAccess=protected, GetAccess=public)
-        % The name of the virtual constraints 
-        %
-        % @type char
-        Name
-        
-        
-        % The label of the holonomic constraint
-        %
-        % @type char
-        ConstrLabel
-        
-        
-        % The name list of dependent variables in the associated dynamical
-        % system model
-        %
-        % @type cellstr
-        DepLists
-        
-        % The list of auxiliary data to be used to call the function
-        %
-        % @type cell
-        AuxData
-        
-    end
-
-    
-    properties (Dependent)
-        % The holonomic constraint expression
-        %
-        % @type SymFunction
-        ConstrExpr
-        
-        
-        
-        
-    end
-    
-    methods 
-        function cstr = get.ConstrExpr(obj)
-            cstr = obj.h_;
-        end
-       
-    end
-    
-    
-    properties (Access = protected)
-        
-        
-        % The holonomic constraint expression
-        %
-        % @type SymFunction
-        h_
-        
-    end
     
     
     methods
@@ -229,7 +158,78 @@ classdef UnilateralConstraint < handle
     end
     
     
-            
+    % properties determined internally
+    properties (SetAccess=protected, GetAccess=public)
+        % The dimension of the virtual constraints
+        %
+        % @type integer
+        Dimension
+        
+        % An indicator whether the unilateral constraints depend on the
+        % input variables of the dynamical system. If the constraints are
+        % input-dependent, then it will requires to execute the
+        % calcDynamics function to compute the required input signals.
+        %
+        % @type logical
+        InputDependent
+    end
+    
+    % properties must be determined by the users
+    properties (SetAccess=protected, GetAccess=public)
+        % The name of the virtual constraints 
+        %
+        % @type char
+        Name
+        
+        
+        % The label of the holonomic constraint
+        %
+        % @type char
+        ConstrLabel
+        
+        
+        % The name list of dependent variables in the associated dynamical
+        % system model
+        %
+        % @type cellstr
+        DepLists
+        
+        % The list of auxiliary data to be used to call the function
+        %
+        % @type cell
+        AuxData
+        
+    end
+
+    
+    properties (Dependent)
+        % The holonomic constraint expression
+        %
+        % @type SymFunction
+        ConstrExpr
+        
+        
+        
+        
+    end
+    
+    methods 
+        function cstr = get.ConstrExpr(obj)
+            cstr = obj.h_;
+        end
+       
+    end
+    
+    
+    properties (Access = protected)
+        
+        
+        % The holonomic constraint expression
+        %
+        % @type SymFunction
+        h_
+        
+    end
             
     
     

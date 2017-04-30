@@ -11,7 +11,17 @@
     % modification, are permitted only in compliance with the BSD 3-Clause 
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
-    
+    %%
+    properties 
+        % The highest order of the state derivatives of the system
+        %
+        % @note The system could be either a 'FirstOrder' system or a
+        % 'SecondOrder' system.
+        %
+        % @type char
+        Type
+    end
+    %%
     properties (SetAccess=protected)
         % The unique name identification of the system
         %
@@ -68,6 +78,19 @@
         
     end
     
+    % The values for the system variables
+    properties(Access=protected)
+        
+        
+        t_
+        
+        states_
+        
+        inputs_
+        
+        params_
+        
+    end
     
     methods (Abstract)
         % compile symbolic expression related to the systems
@@ -77,7 +100,104 @@
         % system specific constraints. All subclasses should implement
         % their own version of this method and must call the superclass
         % method first in your implementation.
-        nlp = addSystemConstraint(obj, nlp);
+        nlp = addSystemConstraint(obj, nlp, varargin);
+    end
+    
+    
+    
+    methods
+        function obj = DynamicalSystem(name, type)
+            % The class construction function
+            %
+            % Parameters:
+            % name: the name of the system @type char
+            
+            assert(isvarname(name),...
+                'The name of the system must be a valid variable name vector.');
+            obj.Name = name;
+            
+            obj.Type = obj.validateSystemType(type);
+            
+            obj.States = struct();
+            obj.Inputs = struct();
+            obj.Inputs.Control = struct();
+            obj.Inputs.ConstraintWrench = struct();
+            obj.Inputs.External = struct();
+            
+            obj.Params = struct();
+            
+            obj.Gmap = struct();
+            obj.Gmap.Control = struct();
+            obj.Gmap.ConstraintWrench = struct();
+            obj.Gmap.External = struct();
+            
+            obj.Gvec = struct();
+            obj.Gvec.Control = struct();
+            obj.Gvec.ConstraintWrench = struct();
+            obj.Gvec.External = struct();
+        end
+        
+        
+        
+        
+    end
+    
+    
+    
+    methods 
+        function var_group= validateVarName(obj, name)
+            % Adds unilateral (inequality) constraints on the dynamical system
+            % states and inputs
+            %
+            % Parameters:
+            %  name: the name string of the variable @type char
+            
+            if isfield(obj.States, name) % check if it is a state variables
+                var_group = {'States',''};
+            elseif isfield(obj.Inputs.Control, name) % check if it is a control input variables
+                var_group = {'Inputs','Control'};
+            elseif isfield(obj.Inputs.ConstraintWrench, name) % check if it is a control input variables
+                var_group = {'Inputs','ConstraintWrench'};
+            elseif isfield(obj.Inputs.External, name) % check if it is a control input variables
+                var_group = {'Inputs','External'};
+            elseif isfield(obj.Params, name) % check if it is a parameter variables
+                var_group = {'Params',''}; 
+            else
+                error('The variable (%s) does not belong to any of the variable groups.', name);
+            end
+            
+        end
+        
+        
+        function obj = set.Type(obj, type)
+            
+            obj.Type = obj.validateSystemType(type);
+        end
+    end
+    
+    methods (Access=protected)
+       
+        function value = getValue(obj, vars)
+            % returns the variables (vars) value that are stored during
+            % computing the dynamics
+            
+            
+            var_group = cellfun(@(x)model.validateVarName(x), vars, 'UniformOutput', false);
+            value = cell(1,n_deps);
+            
+            for i=1:n_deps
+                tmp = var_group{i};
+                switch tmp{1}
+                    case 'States'
+                        value{i} = obj.states_.(vars{i});
+                    case 'Inputs'
+                        value{i} = obj.inputs_.(tmp{2}).(vars{i});
+                    case 'Params'
+                        value{i} = obj.params_.(vars{i});
+                end
+            end
+        end
+        
     end
     
     % methods defined in external files
@@ -98,77 +218,8 @@
         % Remove parameter variables
         obj = removeParam(obj, param_name);
         
-        
+        % set values for parameter variables
+        obj = setParamValue(obj, varargin);
     end
-    
-    methods
-        function obj = DynamicalSystem(name)
-            % The class construction function
-            %
-            % Parameters:
-            % name: the name of the system @type char
-            
-            assert(isvarname(name),...
-                'The name of the system must be a valid variable name vector.');
-            obj.Name = name;
-            
-            
-            obj.States = struct();
-            obj.Inputs = struct();
-            obj.Inputs.Control = [];
-            obj.Inputs.ConstraintWrench = [];
-            obj.Inputs.External = [];
-            
-            obj.Params = struct();
-            
-            obj.Gmap = struct();
-            obj.Gmap.Control = [];
-            obj.Gmap.ConstraintWrench = [];
-            obj.Gmap.External = [];
-            
-            obj.Gvec = struct();
-            obj.Gvec.Control = [];
-            obj.Gvec.ConstraintWrench = [];
-            obj.Gvec.External = [];
-        end
-        
-        
-        
-        
-    end
-    
-    
-    
-    methods
-        function [var_group, var_category] = validateVarName(obj, name)
-            % Adds unilateral (inequality) constraints on the dynamical system
-            % states and inputs
-            %
-            % Parameters:
-            %  name: the name string of the variable @type char
-            
-            if isfield(obj.States, name) % check if it is a state variables
-                var_group = 'States';
-                var_category = [];
-            elseif isfield(obj.Inputs.Control, name) % check if it is a control input variables
-                var_group = 'Inputs';
-                var_category = 'Control';
-            elseif isfield(obj.Inputs.ConsraintWrench, name) % check if it is a control input variables
-                var_group = 'Inputs';
-                var_category = 'ConsraintWrench';
-            elseif isfield(obj.Inputs.External, name) % check if it is a control input variables
-                var_group = 'Inputs';
-                var_category = 'External';
-            elseif isfield(obj.Params, name) % check if it is a parameter variables
-                var_group = 'Params';
-                var_category = [];
-            else
-                error('The variable (%s) does not belong to any of the variable groups.', name);
-            end
-            
-        end
-    end
-    
-    
 end
 

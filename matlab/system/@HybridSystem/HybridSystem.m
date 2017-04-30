@@ -1,4 +1,4 @@
-classdef HybridSystem
+classdef HybridSystem < handle & matlab.mixin.Copyable
     % HybridSystem defines a hybrid dynamical system that has both
     % continuous and discrete dynamics, such as bipedal locomotion.
     %
@@ -107,12 +107,34 @@ classdef HybridSystem
         end
         
         
+        function ret = isDirectedCycle(obj)
+            % returns true if the underlying directed graph is a simple
+            % directed cycle.
+            %
+            % A simple directed cycle is a directed graph that has uniform
+            % in-degree 1 and uniform out-degree 1.
+            
+            g = obj.Gamma;
+            
+            ret = all(indegree(g)==1) && all(outdegree(g)==1);
+            
+        end
         
         
         
-        
-        
-        
+        function sys = subGraph(obj, nodeIDs)
+            % extract the subgraph of the hybrid system to create a new
+            % hybrid system object with the same name
+            %
+            % Parameters:
+            % nodeIDs: the node ids of the subgraph
+            
+            sys = HybridSystem(obj.Name);
+            
+            sub_g = subgraph(obj.Gamma, nodeIDs);
+            
+            sys.Gamma = sub_g;
+        end
         
         
         
@@ -131,10 +153,6 @@ classdef HybridSystem
         obj = setEdgeProperties(obj, s, t, varargin);
         
         obj = setVertexProperties(obj, vertex, varargin);
-        
-        [dx, extra] = calcDynamics(obj, t, x, cur_node);
-        
-        [value, isterminal, direction] = checkGuard(obj, t, x, cur_node, assoc_edges);
         
         obj = simulate(obj, options);
     end

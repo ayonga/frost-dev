@@ -6,8 +6,7 @@ function f = export(obj, export_path, varargin)
     % Parameters:
     %  export_path: the path to export the file @type char
     %  varargin: variable input parameters @type varargin
-    %   Vars: a list of symbolic variables @type SymVariable
-    %   File: the (full) file name of exported file @type char
+    %   StackVariable: whether to stack variables into one @type logical
     %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
     %   Namespace: the namespace of the function @type string

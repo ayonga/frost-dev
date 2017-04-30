@@ -16,51 +16,66 @@ classdef DiscreteDynamics < DynamicalSystem
     
     properties
         
-        % The event function of the discrete event dynamical system
+        % The event name that triggers the discrete dynamics
         %
-        % @type UnilateralConstraint
-        EventFunc
+        % @type char
+        EventName
         
-        % The stamp data logger
-        % 
-        % @type struct
-        Stamp
+        
     end
+    
+    
     
     methods
         
-        function obj = DiscreteDynamics(name)
+        function obj = DiscreteDynamics(name, type, event)
             % the constructor function for DiscreteDynamics class objects
             %
             % Parameters:
             % name: the name of the object @type char
+            % event: the event name associated with the discrete map 
+            % @type char
             
-            obj = obj@DynamicalSystem(name);
+            obj = obj@DynamicalSystem(name,type);
             
+            if nargin > 2
+                obj.EventName = event;
+            end
         end
         
-        function obj = addState(obj, xplus, xminus)
-            % overload the superclass 'addInput' method with fixed state
+        
+        function obj = set.EventName(obj, event)
+            
+            if ischar(event)
+                obj.EventName = event;
+            elseif isa(event,'UnilateralConstraint')
+                obj.EventName = event.Name;
+            end
+        end
+        
+        function obj = addState(obj, xplus, xminus, dxplus, dxminus)
+            % overload the superclass 'addState' method with fixed state
             % fields
-            
-            obj = addState@DynamicalSystem(obj,'xplus',xplus,'xminus',xminus);
-        
-        end
-        
-        function obj = setEventFunc(obj, constr)
-            % Set the event function G(x,f) of the system
-            %
+            % 
             % Parameters:
-            %  constr:  the event function @type UnilateralConstraint
+            % xplus: the post-impact state variables @type SymVariable
+            % xminus: the pre-impact state variables @type SymVariable
+            % dxplus: the post-impact first order derivative of state variables @type SymVariable
+            % dxminus: the post-impact first order derivative of state variables @type SymVariable
             
-            validateattributes(constr,{'UnilateralConstraint'},...
-                {'scalar'},'DiscreteDynamics','EventFunc');
-            
-            assert(constr.Dimension==1,...
-                'The event function must be a scalar unilateral constraint object.');
-            
-            obj.EventFunc = constr;
+        
+            if strcmp(obj.Type,'FirstOrder')
+                obj = addState@DynamicalSystem(obj,'xplus',xplus);
+                obj = addState@DynamicalSystem(obj,'xminus',xminus);
+            elseif strcmp(obj.Type, 'SecondOrder')
+                obj = addState@DynamicalSystem(obj,'xplus',xplus, 'dxplus',dxplus);
+                obj = addState@DynamicalSystem(obj,'xminus',xminus, 'dxminus',dxminus);
+            else
+                error('Please define the type of the system first.');
+            end
         end
+        
+        
         
         % compile symbolic expression related to the systems
         function obj = compile(obj, export_path, varargin)
@@ -76,24 +91,14 @@ classdef DiscreteDynamics < DynamicalSystem
             %   BuildMex: flag whether to MEX the exported file @type logical
             %   Namespace: the namespace of the function @type char
             
-            export(obj.EventFunc,export_path,varargin{:});
-            
         end
         
-        function obj = preProcess(obj, cur_node, params)
-            % do nothing
-        end
+        
+        
+        
     end
         
-    methods (Abstract)
-        % calculates the discrete map of the dynamical system that maps
-        % xminus from xplus. Subclasses must implement this method by its
-        % own.
-        xplus = calcDiscreteMap(obj, t, xminus, cur_node);
-        
-        % calculates the event function
-        value = calcEvent(obj, t, x, cur_node);
-    end
+    
     
 end
 

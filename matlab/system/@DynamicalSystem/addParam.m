@@ -28,6 +28,7 @@ function obj = addParam(obj, varargin)
             error('The parameter (%s) has been already defined.\n',new_param);
         else
             obj.Params.(new_param) = params.(new_param);
+            obj.params_.(new_param) = nan(size(params.(new_param)));
         end
     end
 end

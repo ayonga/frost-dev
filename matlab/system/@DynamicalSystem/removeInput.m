@@ -7,7 +7,7 @@ function obj = removeInput(obj, category, name)
     %  @type cellstr
     
     
-    validatestring(category,{'Control','ConsraintWrench','External'});
+    validatestring(category,{'Control','ConstraintWrench','External'});
     
     assert(ischar(name) || iscellstr(name), ...
         'The name must be a character vector or cellstr.');

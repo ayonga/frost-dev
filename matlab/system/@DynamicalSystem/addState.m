@@ -24,6 +24,8 @@ function obj = addState(obj, varargin)
             error('The states (%s) has been already defined.\n',x);
         else
             obj.States.(x) = states.(x);
+            
+            obj.states_.(x) = nan(n_state,1);
         end
     end
     

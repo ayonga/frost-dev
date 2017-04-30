@@ -12,7 +12,7 @@ function obj = addInput(obj, category, name, var, gf, varargin)
     % 
     % @note By default, we assume the input is affine.
     
-    validatestring(category,{'Control','ConsraintWrench','External'});
+    validatestring(category,{'Control','ConstraintWrench','External'});
     
     if strcmp(category,'Control')
         if ~isempty(fieldnames(obj.Inputs.Control))
@@ -46,6 +46,15 @@ function obj = addInput(obj, category, name, var, gf, varargin)
                 else
                     var = SymVariable(tomatrix(var));
                 end
+                
+                assert(isempty(regexp(name, '\W', 'once')) || ~isempty(regexp(name, '\$', 'once')),...
+                    'Invalid symbol string, can NOT contain special characters.');
+                
+                assert(isempty(regexp(name, '_', 'once')),...
+                    'Invalid symbol string, can NOT contain ''_''.');
+                
+                assert(~isempty(regexp(name, '^[a-z]\w*', 'match')),...
+                    'First letter must be lowercase character.');
             otherwise
                 error('The third argument must be a positive integer, cellstr or a vector SymVaribale object.');
         end
@@ -96,9 +105,11 @@ function obj = addInput(obj, category, name, var, gf, varargin)
         end
         
         
+        % add a field with the name for Inputs, Gmap, Gvec, and inputs_
         obj.Inputs.(category).(name) = var;
         obj.Gmap.(category).(name) = sfun_gf;
         obj.Gvec.(category).(name) = sfun_gv;
+        obj.inputs_.(category).(name) = nan(length(var),1);
     end
     
     

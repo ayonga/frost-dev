@@ -4,9 +4,9 @@ function M = calcMassMatrix(obj, x)
     % Parameters:
     % x: the state variables @type colvec
 
-    validateattributes(x, {'double'},...
-        {'vector','numel',obj.numState,'real'},...
-        'ContinuousDynamics.calcMassMatrix','x');
+    %     validateattributes(x, {'double'},...
+    %         {'vector','numel',obj.numState,'real'},...
+    %         'ContinuousDynamics.calcMassMatrix','x');
 
-    M = feval(obj.Mmat.Name, qe);
+    M = feval(obj.Mmat.Name, x);
 end
