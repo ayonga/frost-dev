@@ -26,6 +26,8 @@ function obj = updateProp(obj, varargin)
         obj = setAuxdata(obj, argin.AuxData);
     end
     
-    
+    if isfield(argin, 'SymFun')
+        obj = setSymFun(obj, argin.SymFun);
+    end
     
 end

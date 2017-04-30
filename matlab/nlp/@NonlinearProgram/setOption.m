@@ -10,7 +10,7 @@ function obj = setOption(obj, varargin)
     
     new_opts = struct(varargin{:});
     
-    obj.Options = struct_overlay(obj.Options, new_opts);
+    obj.Options = struct_overlay(obj.Options, new_opts,{'AllowNew',true});
     
     
 end

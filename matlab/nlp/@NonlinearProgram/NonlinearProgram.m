@@ -23,7 +23,7 @@ classdef NonlinearProgram < handle
         
         % The class option
         %
-        % Required fileds of options:
+        % Required fields of options:
         %  DerivativeLevel: the user-defined derivative order (0, 1 or 2)
         %  to be used by a NLP solver. @type integer @default 1
         %  EqualityConstraintBoundary：a relaxation factor number for equality
@@ -69,10 +69,11 @@ classdef NonlinearProgram < handle
             % Parameters: 
             %  name: the name of the problem
             
-            
-            validateattributes(name, {'char'},...
-                {'scalartext'},'NonlinearProgram','name');
-            
+            if nargin > 0
+                validateattributes(name, {'char'},...
+                    {'scalartext'},'NonlinearProgram','name');
+                obj.Name = name;
+            end
             % default options
             obj.Options = struct('DerivativeLevel', 1, ...
                 'EqualityConstraintBoundary', 0);
