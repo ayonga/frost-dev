@@ -52,7 +52,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     obj = addHolonomicConstraint(obj, contact_constr);
     % the contact wrench input vector
     f_name = contact_constr.InputName;
-    f = obj.Inputs.(f_name);
+    f = obj.Inputs.ConstraintWrench.(f_name);
     
     
     % if the friction coefficients are given, enforce friction cone

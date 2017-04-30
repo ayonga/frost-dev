@@ -71,11 +71,11 @@ function obj = configureKinematics(obj, dofs, links)
     
     
     n_link = length(links);
-    link_obj(n_link) = RigidLink();
+    link_obj(n_link) = RigidBody();
     for i=1:n_link
-        % first create a RigidLink object array using the basic configuration
+        % first create a RigidBody object array using the basic configuration
         % of links
-        link_obj(i) = RigidLink(links(i));
+        link_obj(i) = RigidBody(links(i));
         % find the index of the parent joint (reference coordinate frame)
         % of each rigid link
         idx = str_index(link_obj(i).Name, child_links);

@@ -1,4 +1,4 @@
-classdef RobotManipulator < ContinuousDynamics
+classdef RobotLinks < ContinuousDynamics
     % A class with basic model descriptions and functionalities
     % of the multi-link rigid-body robot platform.
     %
@@ -64,7 +64,7 @@ classdef RobotManipulator < ContinuousDynamics
     methods
         
         
-        function obj = RobotManipulator(name, varargin)
+        function obj = RobotLinks(name, varargin)
             % The class constructor function
             %
             %

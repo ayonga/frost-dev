@@ -1,4 +1,4 @@
-classdef RigidLink < CoordinateFrame
+classdef RigidBody < CoordinateFrame
     % A coordinate frame that is rigidly attached to the CoM position of
     % a rigid link. In addition, this class also stores the mass and
     % inertia of the rigid link to which the frame is attached.
@@ -30,7 +30,7 @@ classdef RigidLink < CoordinateFrame
     methods
         
         
-        function obj = RigidLink(varargin)
+        function obj = RigidBody(varargin)
             % The class constructor function
             %
             % Parameters:
