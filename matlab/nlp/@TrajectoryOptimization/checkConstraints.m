@@ -1,11 +1,22 @@
-function [yc, cl, cu] = checkConstraints(obj, x)
+function [yc, cl, cu] = checkConstraints(obj, x, output_file, permission)
     % Check the violation of the constraints 
     
-    output_file = './check_constr_results.txt';
+    if nargin > 2    
+        % print to the file
+        if nargin < 4
+            permission = 'w';
+        else
+            validatestring(permission, {'a','w'});
+        end
+        f_id = fopen(output_file, permission);
+    else
+        % print on the screen 
+        f_id = 1;
+    end
     
-    f_id = fopen(output_file, 'w');
     
-    
+    fprintf(f_id, '**************************************************\n');
+    fprintf(f_id, 'Checking constraint violation of %s:\n', obj.Name);
     
     
     constr_table = obj.ConstrTable;
@@ -20,26 +31,26 @@ function [yc, cl, cu] = checkConstraints(obj, x)
         for k=1:n_node         
             constr = constr_array(k);
             if constr.Dimension ~=0
-                fprintf(f_id, '*************\n');
+                fprintf(f_id, '***************************************\n');
                 fprintf(f_id, 'Constraint: %s \t', constr_name);
                 fprintf(f_id, 'Node: %d \n', k);
-                fprintf(f_id, '*************\n');
+                fprintf(f_id, '---------------------------------------\n');
                 dep_constr = getSummands(constr);
                 cl{j,k} = constr.LowerBound;
                 cu{j,k} = constr.UpperBound;
                 yc_ll = zeros(constr.Dimension,1);
                 for ll = 1:numel(dep_constr)
-                    dep_indices = getDepIndices(dep_constr(ll));
+                    var = cellfun(@(v)x(v(:)),dep_constr(ll).DepIndices,'UniformOutput',false); % dependent variables
                     if isempty(dep_constr(ll).AuxData)
-                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, x(dep_indices));
+                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, var{:});
                     else
-                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, x(dep_indices), dep_constr(ll).AuxData);
+                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, var{:}, dep_constr(ll).AuxData{:});
                     end
                     
                 end
                 
                 yc{j,k} = yc_ll;
-                fprintf(f_id,'%12s %12s %12s\n','cl','yc','cu');
+                fprintf(f_id,'%12s %12s %12s\n','Lower','Constraint','Upper');
                 fprintf(f_id,'%12.8E %12.8E %12.8E\r\n',[constr.LowerBound, yc_ll, constr.UpperBound]');
                 
                 if (min(yc_ll - constr.LowerBound)) < 0
@@ -52,7 +63,13 @@ function [yc, cl, cu] = checkConstraints(obj, x)
         end
     end
     
-
-   
+    yc = vertcat(yc{:});
+    cl = vertcat(cl{:});
+    cu = vertcat(cu{:});
+    
+    fprintf(f_id, '**************************************************\n');
+    if f_id ~= 1
+        fclose(f_id);
+    end
 
 end

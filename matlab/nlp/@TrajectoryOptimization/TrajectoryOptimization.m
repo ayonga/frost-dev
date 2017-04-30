@@ -84,47 +84,35 @@ classdef TrajectoryOptimization < NonlinearProgram
             % NLP variables @type struct
             % varargin: user-defined options for the problem @type varargin
             
-            
+            if nargin > 0
+                name = {name};
+            else
+                name = {};
+            end
             
             % call superclass constructor
-            obj = obj@NonlinearProgram(name);
+            obj = obj@NonlinearProgram(name{:});
+            
+            if nargin == 0
+                return;
+            end
             
             % check the type of the plant
-            validateattributes(plant,{'ContinuousDynamics'},...
+            validateattributes(plant,{'DynamicalSystem'},...
                 {},'TrajectoryOptimization','plant');
             % The dynamical system of interest
             obj.Plant = plant;
             
-            % the default number of grids
-            N = TrajectoryOptimization.DefaultNumberOfGrid;
-            if nargin > 2
-                if ~isempty(num_grid)
-                    % if non-default number of grids is specified, use that
-                    validateattributes(num_grid,{'double'},...
-                        {'scalar','integer','>=',2},...
-                        'TrajectoryOptimization','NumGrid',3);
-                    N = num_grid;
-                end
-            end
-            
-            
             
             ip = inputParser;
-            ip.addParameter('CollocationScheme','HermiteSimpsoboundsn',@(x)validatestring(x,{'HermiteSimpson','Trapzoidal','PseudoSpectral'}));
+            ip.addParameter('CollocationScheme','HermiteSimpson',@(x)validatestring(x,{'HermiteSimpson','Trapzoidal','PseudoSpectral'}));
             ip.addParameter('DistributeParameters',true,@(x)validateattributes(x,{'logical'},{}));
             ip.addParameter('DistributeTimeVariable',true,@(x)validateattributes(x,{'logical'},{}));
-            ip.addParameter('ConstantTimeHorizon',nan(1,2),@(x)validateattributes(x,{'double'},{'real','positive','row','numel',2}));
-            ip.addParameter('IsPeriodic',false,@(x)validateattributes(x,{'logical'},{}));
+            ip.addParameter('ConstantTimeHorizon',nan(2,1),@(x)validateattributes(x,{'double'},{'real','positive','column','numel',2,'increasing'}));
             ip.addParameter('DerivativeLevel',1,@(x)validateattributes(x,{'double'},{'scalar','integer','<=',2,'>=',0}));
-            ip.addParameter('EqualityConstraintBoundary',0,@(x)validateattributes(x,{'double'},{'real','positive'}));
+            ip.addParameter('EqualityConstraintBoundary',0,@(x)validateattributes(x,{'double'},{'real','nonnegative','<=',1e-2}));
             ip.parse(varargin{:});
-            obj.Options = ip.Results;
-            % default options
-            %             obj.Options.CollocationScheme       = 'HermiteSimpson';
-            %             obj.Options.DistributeParameters    = false;
-            %             obj.Options.DistributeTimeVariable  = false;
-            %             obj.Options.ConstantTimeHorizon     = NaN;
-            %             obj.Options.IsPeriodic              = false;
+            obj = obj.setOption(ip.Results);
             
                    
             
@@ -136,7 +124,17 @@ classdef TrajectoryOptimization < NonlinearProgram
             
             
             
-            
+            % the default number of grids
+            N = TrajectoryOptimization.DefaultNumberOfGrid;
+            if nargin > 2
+                if ~isempty(num_grid)
+                    % if non-default number of grids is specified, use that
+                    validateattributes(num_grid,{'double'},...
+                        {'scalar','integer','nonnegative'},...
+                        'TrajectoryOptimization','NumGrid',3);
+                    N = num_grid;
+                end
+            end
             % determine actual number of nodes based on the different
             % collocation scheme
             switch obj.Options.CollocationScheme
@@ -161,19 +159,11 @@ classdef TrajectoryOptimization < NonlinearProgram
             obj.CostTable   = cell2table(cell(n_node,0),...
                 'RowNames',col_names);
             
-            
-            % configure NLP decision variables
-            obj = obj.configureVariables(bounds);
-            
-            % impose the collocation constraints
-            obj = obj.addCollocationConstraint();
-            
-            % impose the system dynamics equation constraints
-            obj = obj.addDynamicsConstraint();
-            
-            % impose the system specific constraints (such as holonomic
-            % constraints and unilateral constraints)
-            obj = addSystemConstraint(plant, obj);
+            if nargin > 3
+                if ~isempty(bounds)
+                    obj = configure(obj, bounds);
+                end
+            end
         end
         
         
@@ -189,6 +179,8 @@ classdef TrajectoryOptimization < NonlinearProgram
     methods
         
         [obj] = update(obj);
+        
+        obj = configure(obj, bounds);
         
         %% functions related to NLP variables
         
@@ -240,11 +232,11 @@ classdef TrajectoryOptimization < NonlinearProgram
         obj = removeCost(obj, label);
         %% post-processing functions
         
-        [yc, cl, cu] = checkConstraints(obj, x);
+        [yc, cl, cu] = checkConstraints(obj, x, output_file, permission);
         
-        [xc, lb, ub] = checkVariables(obj, x);
+        [yc] = checkCosts(obj, x, output_file,permission);
         
-        [yc] = checkCosts(obj, x);
+        checkVariables(obj, x, output_file, permission);
         
         [tspan, states, inputs, params] = exportSolution(obj, sol, t0);
     end

@@ -1,11 +1,21 @@
-function [xc, lb, ub] = checkVariables(obj, x)
+function checkVariables(obj, x, output_file, permission)
     % Check the violation of the constraints 
     
-    output_file = './check_variable_results.txt';
+    if nargin > 2    
+        % print to the file
+        if nargin < 4
+            permission = 'w';
+        else
+            validatestring(permission, {'a','w'});
+        end
+        f_id = fopen(output_file, permission);
+    else
+        % print on the screen 
+        f_id = 1;
+    end
     
-    f_id = fopen(output_file, 'w');
-    
-    
+    fprintf(f_id, '**************************************************\n');
+    fprintf(f_id, 'Checking variable violation of %s:\n', obj.Name);
     
     
     var_table = obj.OptVarTable;
@@ -19,16 +29,16 @@ function [xc, lb, ub] = checkVariables(obj, x)
         for k=1:n_node
             var = var_array(k);
             if ~isempty(var)
-                fprintf(f_id, '*************\n');
+                fprintf(f_id, '***************************************\n');
                 fprintf(f_id, 'Variable: %s \t', var_name);
                 fprintf(f_id, 'Node: %d \n', k);
-                fprintf(f_id, '*************\n');
+                fprintf(f_id, '---------------------------------------\n');
                 lb{j,k} = var.LowerBound;
                 ub{j,k} = var.UpperBound;
                 xc{j,k} = x(var.Indices);
                 
                 
-                fprintf(f_id,'%12s %12s %12s\n','lb','xc','ub');
+                fprintf(f_id,'%12s %12s %12s\n','Lower','Variable','Upper');
                 fprintf(f_id,'%12.8E %12.8E %12.8E\r\n',[var.LowerBound, x(var.Indices), var.UpperBound]');
                 
                 if (min(x(var.Indices) - var.LowerBound)) < 0
@@ -41,6 +51,11 @@ function [xc, lb, ub] = checkVariables(obj, x)
         end
     end
     
+    fprintf(f_id, '**************************************************\n');
+    
+    if f_id ~= 1
+        fclose(f_id);
+    end
     
 
 end

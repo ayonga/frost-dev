@@ -18,7 +18,7 @@ function obj = configureVariables(obj, bounds)
             
             
     %% configure NLP decision variables
-    if isnan(obj.Options.ConstantTimeHorizon)
+    if isnan(obj.Options.ConstantTimeHorizon) || obj.NumNode ~= 1
         % add time as decision variables if the problem does not
         % use constant time horizon
         if ~isfield(bounds,'time')

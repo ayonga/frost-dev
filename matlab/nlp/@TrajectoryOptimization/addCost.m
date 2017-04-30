@@ -17,9 +17,9 @@ function obj = addCost(obj, label, nodes, cost_array)
     
     cstr_names = obj.CostTable.Properties.VariableNames;
     
-    if ismember(label,cstr_names)
-        warning('The NLP cost functions (%s) already exist.\n Overwriting the existing cost function.', label);
-    end
+%     if ismember(label,cstr_names)
+%         warning('The NLP cost functions (%s) already exist.\n Overwriting the existing cost function.', label);
+%     end
     
     
     if ischar(nodes)

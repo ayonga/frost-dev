@@ -17,9 +17,9 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
     
     cstr_names = obj.ConstrTable.Properties.VariableNames;
     
-    if ismember(label,cstr_names)
-        warning('The NLP constraint (%s) already exist.\n Overwriting the existing constraint.', label);
-    end
+%     if ismember(label,cstr_names)
+%         warning('The NLP constraint (%s) already exist.\n Overwriting the existing constraint.', label);
+%     end
     
     if ischar(nodes)
         switch nodes

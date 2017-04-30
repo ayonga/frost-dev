@@ -1,4 +1,4 @@
-function [tspan, states, inputs, params] = exportSolution(obj, sol, t0)
+function [tspan, states, inputs, params] = exportSolution(obj, sol)
     % Analyzes the solution of the NLP problem
     %
     % Parameters:
@@ -12,30 +12,31 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol, t0)
     % params: the parameter variables @type struct
     
     
-    if nargin < 3
-        t0 = 0;
-    end
+    
     
     states = struct();
     inputs = struct();
     params = struct();
     
     vars = obj.OptVarTable;
-    
-    if isnan(obj.Options.ConstantTimeHorizon)
-        T = sol(vars.T(1).Indices);
+    if obj.NumNode > 1
+        if isnan(obj.Options.ConstantTimeHorizon)
+            T = sol(vars.T(1).Indices);
+        else
+            T = obj.Options.ConstantTimeHorizon;
+        end
+        
+        switch obj.Options.CollocationScheme
+            case 'HermiteSimpson'
+                tspan = T(1):(T(2)-T(1))/(obj.NumNode-1):(T(2));
+            case 'Trapezoidal'
+                tspan = T(1):(T(2)-T(1))/(obj.NumNode-1):(T(2));
+            case 'PseudoSpectral'
+            otherwise
+                error('Undefined integration scheme.');
+        end
     else
-        T = obj.Options.ConstantTimeHorizon;
-    end
-    
-    switch obj.Options.CollocationScheme
-        case 'HermiteSimpson'
-            tspan = t0:T/(obj.NumNode-1):(t0+T);
-        case 'Trapezoidal'
-            tspan = t0:T/(obj.NumNode-1):(t0+T);
-        case 'PseudoSpectral'
-        otherwise
-            error('Undefined integration scheme.');
+        tspan = [];
     end
     
     plant = obj.Plant;
@@ -46,7 +47,24 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol, t0)
         states.(name) = sol([vars.(name).Indices]);
     end
     
-    input_names = fieldnames(plant.Inputs);
+    input_names = fieldnames(plant.Inputs.Control);
+    if ~isempty(input_names)        
+        for j=1:length(input_names)
+            name = input_names{j};            
+            inputs.(name) = sol([vars.(name).Indices]);
+        end
+    end
+    
+    input_names = fieldnames(plant.Inputs.ConstraintWrench);
+    if ~isempty(input_names)        
+        for j=1:length(input_names)
+            name = input_names{j};            
+            inputs.(name) = sol([vars.(name).Indices]);
+        end
+    end
+    
+    
+    input_names = fieldnames(plant.Inputs.External);
     if ~isempty(input_names)        
         for j=1:length(input_names)
             name = input_names{j};            

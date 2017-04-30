@@ -72,7 +72,7 @@ function obj = addTimeVariable(obj, bounds)
     if isfield(bounds,'duration')
         % only impose at the first node
         T  = SymVariable('t',[2,1]);
-        timeDuration = SymFunction('timeDuration',T(2)-T(1),{T});
+        timeDuration = SymFunction('timeDuration',flatten(T(2)-T(1)),{T});
         
         if isfield(bounds.duration','lb')
             lb = bounds.duration.lb;
