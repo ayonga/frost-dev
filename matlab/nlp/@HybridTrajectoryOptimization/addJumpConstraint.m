@@ -1,94 +1,109 @@
-function obj = addJumpConstraint(obj, phase)
-    % Add generic switching surface constraints, including guard condition
-    % and reset map constraints
+function obj = addJumpConstraint(obj, edge, src, tar, bounds)
+    % Add jump constraints between the edge and neighboring two nodes
+    % (source and target) 
+    %
+    % These constraints include the continuity of the states/time
+    % variables, as well as system-specific discrete map constraint of the
+    % guard dynamics, and user-specific constraints.
     %
     % Parameters:
-    % phase: the index of the phase (domain) @type integer
+    % src: the source node NLP @type TrajectoryOptimization
+    % edge: the edge NLP @type TrajectoryOptimization
+    % tar: the target node NLP @type TrajectoryOptimization
     
     
+    %|@todo: 
+    % - time 
+    % - state
+    % - callback system constraint
+    % - based on event function, remove unnecessary event function
+    % constraints from source domain
     
-    % extract phase information
-    phase_idx = getPhaseIndex(obj, phase);
-    phase_info = obj.Phase{phase_idx};
+    % continuity of time
+    t_s = SymVariable('ts',[2,1]);
+    t_n = SymVariable('tn',[2,1]);
+    t_cont = SymFunction('tContDomain',flatten(ts(2)-tn(1)),{t_s,t_n});
     
-    if phase_info.IsTerminal
-        return;
-    end
-    
-    phase_funcs = obj.Funcs.Phase{phase_idx};
-    
-    % local variable for fast access
-    n_node = phase_info.NumNode;
-    var_table= phase_info.OptVarTable;
-    col_names = phase_info.ConstrTable.Properties.VariableNames;
-    
-    n_dof = obj.Model.nDof;
-    
-    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
-    edge_idx = findedge(obj.Gamma, phase_info.CurrentVertex, phase_info.NextVertex);
-    guard  = obj.Gamma.Edges.Guard{edge_idx};
-    
-    next_var_table = obj.Phase{obj.Phase{phase_idx}.NextVertex}.OptVarTable;
-    
-    
-    guard_con = repmat({{}},1, n_node);
-    q_resetmap = repmat({{}},1, n_node);
-    dq_resetmap = repmat({{}},1, n_node);
-    hbar_cont = repmat({{}},1, n_node);
-    % the guard condition is enforced at the last node
-    guard_cond = domain.UnilateralConstr(guard.Condition,:);
-    
-    %% guard
-    switch guard_cond.Type{1}
-        case 'Kinematic'
-            guard_con{n_node} = {NlpFunction('Name','guard',...
-                'Dimension',1, 'lb',0,'ub',0, 'Type', 'nonlinear',...
-                'DepVariables', {{var_table{'Qe',n_node}{1}}},...
-                'AuxData', 0,...
-                'Funcs', phase_funcs.guard_func.Funcs)};
-        case 'Force'
-            guard_con{n_node} = {NlpFunction('Name','guard',...
-                'Dimension',1, 'lb',0,'ub',0, 'Type', 'linear',...
-                'DepVariables', {{var_table{'Fe',n_node}{1}}},...
-                'Funcs', phase_funcs.guard_func.Funcs)};
-            
-        otherwise
-            error('Unrecognized guard type.');
-    end
-    
-    
-    
-    %% reset map
-    q_resetmap{n_node} = {NlpFunction('Name','qResetMap',...
-        'Dimension',n_dof, 'Type', 'linear', 'lb',-0,'ub',0,...
-        'DepVariables',{{var_table{'Qe',n_node}{1},next_var_table{'Qe',1}{1}}},...
-        'Funcs', phase_funcs.qResetMap.Funcs)};
-    
-    if guard.ResetMap.RigidImpact
-        dq_resetmap{n_node} = {NlpFunction('Name','dqResetMap',...
-            'Dimension',n_dof, 'Type', 'nonlinear', 'lb',0,'ub',0,...
-            'DepVariables',{{var_table{'dQe',n_node}{1},...
-            var_table{'Fi',n_node}{1},next_var_table{'Qe',n_node}{1},...
-            next_var_table{'dQe',1}{1}}},...
-            'Funcs', phase_funcs.dqResetMap.Funcs)};
+    % create a NlpFunction for 'edge' NLP, but use the NlpVariables from
+    % 'src' and 'tar' NLPs.
+    if src.Options.DistributeTimeVariable
+        src_time_node = 1;
     else
-        dq_resetmap{n_node} = {NlpFunction('Name','dqResetMap',...
-            'Dimension',n_dof, 'Type', 'linear', 'lb',0,'ub',0,...
-            'DepVariables',{{var_table{'dQe',n_node}{1},next_var_table{'dQe',1}{1}}},...
-            'Funcs', phase_funcs.dqResetMap.Funcs)};        
+        src_time_node = src.NumNode;
+    end
+    t_cstr = NlpFunction('Name','tContDomain',...
+        'Dimension',1,...
+        'lb', 0,...
+        'ub', 0,...
+        'Type','Linear',...
+        'SymFun',t_cont,...
+        'DepVariables',[src.OptVarTable.T(src_time_node);tar.OptVarTable.T(1)]);
+    edge.addConstraint('tContDomain','first',t_cstr);
+    
+    % state continuity (src <-> edge)
+    x_s = src.Plant.States.x;
+    x_e = edge.Plant.States.xminus;
+    x_cont_src = SymFunction(['xMinusCont_' edge.Name],x_s-x_e,{x_s,x_e});
+    x_src_cstr = NlpFunction('Name',['xMinusCont_' edge.Name],...
+        'Dimension',src.Plant.numState,...
+        'lb', 0,...
+        'ub', 0,...
+        'Type','Linear',...
+        'SymFun',x_cont_src,...
+        'DepVariables',[src.OptVarTable.x(end);edge.OptVarTable.xminus(1)]);
+    edge.addConstraint('xMinusCont','first',x_src_cstr);
+    
+    % state continuity (edge <-> tar)
+    x_t = tar.Plant.States.x;
+    x_e = edge.Plant.States.xplus;
+    x_cont_tar = SymFunction(['xPlusCont_' edge.Name],x_e-x_t,{x_e,x_t});
+    x_tar_cstr = NlpFunction('Name',['xPlusCont_' edge.Name],...
+        'Dimension',tar.Plant.numState,...
+        'lb', 0,...
+        'ub', 0,...
+        'Type','Linear',...
+        'SymFun',x_cont_tar,...
+        'DepVariables',[edge.OptVarTable.xplus(1);tar.OptVarTable.x(1)]);
+    edge.addConstraint('xPlusCont','first',x_tar_cstr);
+    
+    if strcmp(edge.Plant.Type,'SecondOrder')
+        % state derivative continuity (src <-> edge)
+        dx_s = src.Plant.States.dx;
+        dx_e = edge.Plant.States.dxminus;
+        dx_cont_src = SymFunction(['dxMinusCont_' edge.Name],dx_s-dx_e,{dx_s,dx_e});
+        dx_src_cstr = NlpFunction('Name',['dxMinusCont_' edge.Name],...
+            'Dimension',src.Plant.numState,...
+            'lb', 0,...
+            'ub', 0,...
+            'Type','Linear',...
+            'SymFun',dx_cont_src,...
+            'DepVariables',[src.OptVarTable.dx(end);edge.OptVarTable.dxminus(1)]);
+        edge.addConstraint('dxMinusCont','first',dx_src_cstr);
+        
+        % state derivative continuity (edge <-> tar)
+        dx_t = tar.Plant.States.dx;
+        dx_e = edge.Plant.States.dxplus;
+        dx_cont_tar = SymFunction(['dxPlusCont_' edge.Name],dx_e-dx_t,{dx_e,dx_t});
+        dx_tar_cstr = NlpFunction('Name',['dxPlusCont_' edge.Name],...
+            'Dimension',tar.Plant.numState,...
+            'lb', 0,...
+            'ub', 0,...
+            'Type','Linear',...
+            'SymFun',dx_cont_tar,...
+            'DepVariables',[edge.OptVarTable.dxplus(1);tar.OptVarTable.dx(1)]);
+        edge.addConstraint('dxPlusCont','first',dx_tar_cstr);
     end
     
     
-%     n_constr = getDimension(domain.HolonomicConstr);
-%     hbar_cont{n_node} = {NlpFunction('Name','hPhaseCont',...
-%             'Dimension',n_constr, 'Type', 'linear', 'lb',0,'ub',0,...
-%             'DepVariables',{{var_table{'H',1}{1},next_var_table{'H',1}{1}}},...
-%             'Funcs', phase_funcs.hPhaseCont.Funcs)}; 
     
-    obj.Phase{phase_idx}.ConstrTable = [...
-        obj.Phase{phase_idx}.ConstrTable;...
-        cell2table(guard_con,'RowNames',{'guard'},'VariableNames',col_names);...
-        cell2table(q_resetmap,'RowNames',{'qResetMap'},'VariableNames',col_names);...
-        cell2table(dq_resetmap,'RowNames',{'dqResetMap'},'VariableNames',col_names);...
-        cell2table(hbar_cont,'RowNames',{'hPhaseCont'},'VariableNames',col_names)];
+    % the event function constraint for the source domain
+    event_list = fieldnames(src.Plant.EventFuncs);
+    event_idx = str_index(edge.Plant.EventName,event_list);
+    event_obj = src.Plant.EventFuncs.(event_list{event_idx});
+    event_obj.imposeNLPConstraint(edge);
+    
+    
+    % call the system constraint callback method for the discrete dyamics
+    addSystemConstraint(edge.Plant, edge, src, tar, bounds);
+    
 end

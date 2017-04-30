@@ -1,17 +1,18 @@
-function [obj] = compileObjective(obj, export_path)
+function [obj] = compileObjective(obj, export_path, varargin)
     % Compile and export symbolic expression and derivatives of all NLP functions
     %
-    % Parameters:         
-    %  export_path: the complete directory path where the compiled symbolic
-    %  function will be exported to @type char
+    % Parameters:
+    %  export_path: the path to export the file @type char
+    %  varargin: variable input parameters @type varargin
+    %   ForceExport: force the export @type logical
+    %   BuildMex: flag whether to MEX the exported file @type logical
     
     
     
     
-    opts = struct();
+    opts = struct(varargin{:});
+    % overwrite non-changable options
     opts.StackVariable = false;
-    opts.ForceExport = false;
-    opts.BuildMex = true;
     opts.Namespace = obj.Name;
     
     deps_array_cell = arrayfun(@(x)getSummands(x), obj.CostArray, 'UniformOutput', false);

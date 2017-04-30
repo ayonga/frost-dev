@@ -3,7 +3,9 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     % programing problem --- trajectory optimization problem for a hybrid
     % dynamical system.
     % 
-    % @see NonlinearProgram, HybridSystem
+    % @see NonlinearProgram, HybridSystem, TrajectoryOptimization
+    %
+   
     %
     % @author ayonga @date 2016-10-26
     % 
@@ -16,163 +18,158 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     % http://www.opensource.org/licenses/bsd-license.php
     
     %% Public properties
-    properties (Access = public)
-    end
-    
-    %% Protected properties
-    properties (SetAccess = protected)
-        % A structure of which each sub-field provides the interface to
-        % external functions for NLP constraints or cost function.
-        %
-        % @note Typically, we will use SymFunction to construct such an object
-        % for a function. However, users could also employ other class or
-        % structure for their own custom functions. One requirement of such
-        % an object is that it must have a field called ''Funcs'' to
-        % provides the external function name (or function handles). 
-        %
-        % @note To add a new function object, create a new field in this
-        % variable.        
+    properties (Access = private)
+        % The directed graph of the hybrid system to be optimized
         % 
-        % @see SymFunction
-        %
-        % Required fields of Funcs:
-        % Model: model specific functions @type struct
-        % Phase: phase specific functions, each cell contains functions for
-        % a particular phase @type cell
-        % Generic: generic functions @type struct
-        %
-        % @type struct        
-        Funcs
-        
-        
-        % The discrete phases of the hybrid trajectory optimization
-        %
-        % @type cell
-        Phase
-        
-        
-        % The rigid body model of interest
-        %
-        % @type RigidBodyModel
-        Model
-        
-        % The directed graph of the hybrid sytem model to be optimized
-        %
-        % @type digraph
+        % @type DirectedGraph
         Gamma
         
-        % The hybrid system to be optimized
+        % The variable indices of each phase
         %
-        % @type HybridSystem
-        % Plant
+        % @type matrix
+        PhaseVarIndices
     end
     
     %% Protected properties
-    properties (SetAccess=protected, GetAccess=public)
-        
+    properties 
+        % The discrete phases of the hybrid trajectory optimization
+        %
+        % @type TrajectoryOptimization
+        Phase
         
     end
+    
+    
     
     %% Public methods
     methods (Access = public)
         
-        function obj = HybridTrajectoryOptimization(plant, varargin)
+        function obj = HybridTrajectoryOptimization(name, plant, num_grid, bounds, varargin)
             % The constructor function
             %
             % Parameters:
+            % name: the name of the NLP @type char
             % plant: the hybrid system plant @type HybridSystem
+            % num_grid: the number of grids along the trajectory 
+            % @type integerConstantTimeHorizon
+            % bounds: a structed data stores the boundary information of the
+            % NLP variables @type struct
             % options: user-defined options for the problem @type struct
             
+            if nargin > 0
+                name = {name};
+            else
+                name = {};
+            end
             
-            
-            % default options
-            default_opts.CollocationScheme = 'HermiteSimpson';
-            default_opts.DistributeParamWeights = false;
-            default_opts.NodeDistributionScheme = 'Uniform';
-            default_opts.EnableVirtualConstraint = true;
-            default_opts.UseTimeBasedOutput = false;
-            default_opts.DefaultNumberOfGrids = 10;
-            default_opts.ZeroVelocityOutputError = false;
-            default_opts.UseSameParameters = true;
-            default_opts.EnforceForceConstraint = false;
             % call superclass constructor
-            obj = obj@NonlinearProgram(default_opts);           
+            obj = obj@NonlinearProgram(name{:});
+            
+            if nargin == 0
+                return;
+            end       
+            
+            
             
             % if non-default options are specified, overwrite the default
             % options.
             obj.setOption(varargin{:});
             
             % check the type of the plant
-            assert(isa(plant, 'HybridSystem'),...
-                'HybridTrajectoryOptimization:invalidPlant',...
-                'The plant must be an object of HybridSystem catagory.\n');
+            validateattributes(plant,{'HybridSystem'},{},...
+                'HybridTrajectoryOptimization','plant',2);
             
-            obj.Gamma = plant.Gamma;
-            obj.Model = plant.Model;
-                        
-            n_vertex = height(plant.Gamma.Nodes);
-            obj.Phase = cell(n_vertex,1);
+            % validate the plant being able to use for a hybrid trajectory
+            % optimization
+            validateGraph(obj, plant);
             
-            obj.Funcs = struct;
-            obj.Funcs.Model = struct;
-            obj.Funcs.Phase = cell(n_vertex, 1);
-            obj.Funcs.Generic = struct;
+            % check if the graph is a simple directed cycle
+            if ~isDirectedCycle(plant)
+                % reorder nodes with its topological order 
+                g = reordernodes(plant.Gamma, toposort(plant.Gamma,'Order','Stable'));
+            else
+                g = plant.Gamma;
+            end
+            
+            
+            n_vertex = height(g.Nodes);
+            n_edge = height(g.Edges);
+            assert(n_edge==n_vertex || n_edge+1==n_vertex);
+            n_phase = n_vertex + n_edge;
+            
+            phase(n_phase) = TrajectoryOptimization();
+            
+            for i=1:n_phase
+                % node name as the NLP name
+                node_name = g.Nodes.Name{i};
+                % the dynamical system associated with the node
+                node_system = g.Nodes.Domain{i};
+                
+                % number of grid
+                node_ngrid = [];
+                if nargin > 2
+                    if ~isempty(num_grid)
+                        if isfield(num_grid, node_name)
+                            node_ngrid = num_grid.(node_name);
+                        end
+                    end
+                end
+                
+                
+                
+                % construct a standard trajectory optimization problem for
+                % the continuous dynamics
+                idx = 2*i-1;
+                phase(idx) = TrajectoryOptimization(node_name,...
+                    node_system, node_ngrid, [], varargin{:});
+                
+                % find the associated edge
+                next = successors(g, i);
+                if ~isempty(next)
+                    edge = findedge(g,i,next);
+                    edge_name = g.Edges.Guard(edge).Name;
+                    edge_system = g.Edges.Guard{edge};
+                    phase(idx+1) = TrajectoryOptimization(edge_name,...
+                        edge_system, 0, [], varargin{:});
+                end
+                
+                
+            end
+                
+            obj.Gamma = g;
+            obj.Phase = phase;
+            obj.PhaseVarIndices = zeros(n_phase,2);
+            
+            
+            if nargin > 3
+                if ~isempty(bounds)
+                    obj = configure(obj, bounds);
+                end
+            end
         end
         
         
         
         
-        
-        
-        
-       
     end
+    
+    
     
     %% methods defined in external files
     methods
-        obj = initializeNLP(obj, options);
+        validateGraph(~, plant);
         
-        obj = addAuxilaryVariable(obj, phase, nodes, varargin);
+        obj = configure(obj, bounds);
         
-        obj = addControlVariable(obj, phase);
+        [obj] = update(obj);
         
-        obj = addGuardVariable(obj, phase, lb, ub, x0);
+        phase_idx = getPhaseIndex(obj, varargin);
         
-        obj = addParamVariable(obj, phase, lb, ub, x0);
+        [yc, cl, cu] = checkConstraints(obj, x, output_file);
         
-        obj = addStateVariable(obj, phase);
+        [yc] = checkCosts(obj, x, output_file);
         
-        obj = addTimeVariable(obj, phase, lb, ub, x0);
-        
-        
-        obj = genericSymFunctions(obj);
-        
-        
-        obj = compileSymFunction(obj, field, phase, export_path);
-        
-        obj = addCollocationConstraint(obj, phase);
-        
-        obj = addDomainConstraint(obj, phase);
-        
-        obj = addDynamicsConstraint(obj, phase);
-        
-        obj = addJumpConstraint(obj, phase);
-
-        obj = addOutputConstraint(obj, phase)
-        
-        obj = addParamConstraint(obj, phase);
-        
-        obj = addAuxilaryConstraint(obj, phase, nodes, deps, varargin);
-        
-        obj = addRunningCost(obj, phase, func);
-        
-        obj = addTerminalCost(obj, phase, name, func, deps, nodes, auxdata)
-        
-        phase_idx = getPhaseIndex(obj, phase);
-        
-        [yc, cl, cu] = checkConstraints(obj, x);
-        
-        [xc, lb, ub] = checkVariables(obj, x);
+        checkVariables(obj, x, output_file);
         
         [calcs, params] = exportSolution(obj, sol);
     end

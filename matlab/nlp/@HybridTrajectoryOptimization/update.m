@@ -9,38 +9,33 @@ function [obj] = update(obj)
     obj.VariableArray = cell(0);
     obj.CostArray  = cell(0);
     obj.ConstrArray = cell(0);
-
-    n_phase = length(obj.Phase);
+    phase = obj.Phase;
+    n_phase = length(phase);
+    
+    index_s = 1;
     % register variables
     for i=1:n_phase
         
         % register variables
-        obj = regVariable(obj, obj.Phase{i}.OptVarTable);
+        obj = regVariable(obj, phase(i).OptVarTable);
+        
+        index_f = sum([obj.VariableArray.Dimension]);
+        obj.PhaseVarIndices(i,:)= [index_s, index_f];
+        index_s = index_f+1;
         
         % register constraints
-        obj = regConstraint(obj, obj.Phase{i}.ConstrTable);
+        obj = regConstraint(obj, phase(i).ConstrTable);
         
         % register cost functions
-        obj = regObjective(obj, obj.Phase{i}.CostTable);
-    end
-    
-    
-    
-    
-    % update variable indices
-    index_offset = 0;
-    
-    num_vars = numel(obj.VariableArray);
-
-    for i = 1:num_vars
-        dim = obj.VariableArray{i}.Dimension;
+        obj = regObjective(obj, phase(i).CostTable);
         
-        % set the index
-        obj.VariableArray{i} = setIndices(obj.VariableArray{i},...
-            index_offset + cumsum(ones(dim, 1)));
-
-        % increments (updates) offset
-        index_offset = index_offset + dim;
+        
+        
     end
+    
+    
+    
+    
+    obj = update@NonlinearProgram(obj);
     
 end
