@@ -242,8 +242,10 @@ classdef HolonomicConstraint < handle
         % enforce as NLP constraints
         nlp = imposeNLPConstraint(obj, nlp);
         
-        % calculate the holonomic constraints
-        varargou = calcConstraint(obj, x, dx);
+        % calculate the Jacobian matrix of the holonomic constraints
+        [Jh, dJh] = calcJacobian(obj, x, dx);
+        
+        h = calcConstraint(obj, x);
     end
     
     
