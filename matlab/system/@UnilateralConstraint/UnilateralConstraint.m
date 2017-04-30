@@ -19,12 +19,18 @@ classdef UnilateralConstraint < handle
     
     % properties determined internally
     properties (SetAccess=protected, GetAccess=public)
-       % The dimension of the virtual constraints
+        % The dimension of the virtual constraints
         %
         % @type integer
-        Dimension 
+        Dimension
         
-        
+        % An indicator whether the unilateral constraints depend on the
+        % input variables of the dynamical system. If the constraints are
+        % input-dependent, then it will requires to execute the
+        % calcDynamics function to compute the required input signals.
+        %
+        % @type logical
+        InputDependent
     end
     
     % properties must be determined by the users
@@ -82,17 +88,7 @@ classdef UnilateralConstraint < handle
         % @type SymFunction
         h_
         
-        
-        
     end
-    
-    
-
-   
-
-  
-
-    
     
     
     methods
@@ -157,20 +153,28 @@ classdef UnilateralConstraint < handle
                 auxdata = [];
             end
             
-            %% set the unilateral constraints
-            
+            %% set the unilateral constraints            
             if ~iscell(deps), deps = {deps}; end
             n_deps = length(deps);
+            
+            % get the variable group of each dependent variable
             var_group = cellfun(@(x)model.validateVarName(x), deps, 'UniformOutput', false);
             vars = cell(1,n_deps);
+            
+            % assume it is not input-dependent
+            input_dep = false;
             for i=1:n_deps
                 tmp = var_group{i};
-                if isempty(tmp{2})
-                    vars{i} = model.(tmp{1}).(deps{i});
-                else
+                % check if it is input-dependent
+                if strcmp(tmp{1},'Inputs')
+                    input_dep = true;
                     vars{i} = model.(tmp{1}).(tmp{2}).(deps{i});
+                else
+                    vars{i} = model.(tmp{1}).(deps{i});
                 end
             end
+            obj.InputDependent = input_dep;
+            
             if isa(h, 'SymFunction')
                 % validate the dependent variables
                 assert(length(h.Vars)==n_deps,...
@@ -194,7 +198,7 @@ classdef UnilateralConstraint < handle
                             length(h.Params),length(auxdata));
                         for i=1:numel(auxdata)
                             assert(numel(auxdata{i})== prod(size(h.Params{i})),...
-                                'The length %d-th auxiliary parameters variable does not match the function definition.',i);
+                                'The length %d-th auxiliary parameters variable does not match the function definition.',i); %#ok<PSIZE>
                         end
                         
                         obj.AuxData = auxdata;
@@ -208,7 +212,7 @@ classdef UnilateralConstraint < handle
             elseif isa(h, 'SymExpression')
                 % create a SymFunction object if the input is a SymExpression
                 
-                obj.h_ = SymFunction(['u_' name '_' obj.Name], h, vars);
+                obj.h_ = SymFunction(['u_' name '_' model.Name], h, vars);
                 obj.DepLists = deps;
                 if ~isempty(auxdata)
                     error('If the constraint depends on auxilary constant parameters, please provide it as a SymFunction object directly.');
@@ -217,19 +221,6 @@ classdef UnilateralConstraint < handle
             else
                 error('The constraint expression must be given as an object of SymExpression or SymFunction.');
             end
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
         end
         
@@ -289,8 +280,11 @@ classdef UnilateralConstraint < handle
             %
             % Return values:
             % f: the value of the unilateral constraints
-            
-            f = feval(obj.h_.Name, varargin{:});
+            if isempty(obj.AuxData)
+                f = feval(obj.h_.Name, varargin{:});
+            else
+                f = feval(obj.h_.Name, varargin{:}, obj.AuxData{:});
+            end
         end
         
         
