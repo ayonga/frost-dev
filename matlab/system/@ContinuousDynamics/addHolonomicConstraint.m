@@ -3,7 +3,7 @@ function obj = addHolonomicConstraint(obj, constr)
     %
     %
     % Parameters:
-    % constr: the expression of the constraints @type SymExrpression
+    % constr: the expression of the constraints @type HolonomicConstraint
     %
     % @note Any holonomic constraint introduces a set of constrained
     % wrenchs to the system (Lagrangian multiplier).

@@ -13,19 +13,19 @@ function nlp = addSystemConstraint(obj, nlp, src, tar, bounds)
     
     
     % by default, identity map
-    x_minus = obj.States.xminus;
-    x_plus = obj.States.xplus;
-    x_map = SymFunction(['xDiscreteMap' obj.Name],x_minus-x_plus,{x_minus,x_plus});
+    x = obj.States.x;
+    xn = obj.States.xn;
+    x_map = SymFunction(['xDiscreteMap' obj.Name],x-xn,{x,xn});
     
-    addNodeConstraint(nlp, x_map, {'xminus','xplus'}, 'first', 0, 0, 'Linear');
+    addNodeConstraint(nlp, x_map, {'x','xn'}, 'first', 0, 0, 'Linear');
     
     
     if strcmp(obj.Plant.Type,'SecondOrder')
-        dx_minus = obj.States.dxminus;
-        dx_plus = obj.States.dxplus;
-        dx_map = SymFunction(['dxDiscreteMap' obj.Name],dx_minus-dx_plus,{dx_minus,dx_plus});
+        dx = obj.States.dx;
+        dxn = obj.States.dxn;
+        dx_map = SymFunction(['dxDiscreteMap' obj.Name],dx-dxn,{dx,dxn});
         
-        addNodeConstraint(nlp, dx_map, {'dxminus','dxplus'}, 'first', 0, 0, 'Linear');
+        addNodeConstraint(nlp, dx_map, {'dx','dxn'}, 'first', 0, 0, 'Linear');
     end
     
     

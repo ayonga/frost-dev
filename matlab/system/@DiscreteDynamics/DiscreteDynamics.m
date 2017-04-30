@@ -57,19 +57,20 @@ classdef DiscreteDynamics < DynamicalSystem
             % overload the superclass 'addState' method with fixed state
             % fields
             % 
-            % Parameters:
+            % Parameters:            
+            % x: the pre-impact state variables @type SymVariable
             % xplus: the post-impact state variables @type SymVariable
-            % xminus: the pre-impact state variables @type SymVariable
+            % dx: the post-impact first order derivative of state variables @type SymVariable
             % dxplus: the post-impact first order derivative of state variables @type SymVariable
-            % dxminus: the post-impact first order derivative of state variables @type SymVariable
+            
             
         
             if strcmp(obj.Type,'FirstOrder')
-                obj = addState@DynamicalSystem(obj,'xplus',xplus);
-                obj = addState@DynamicalSystem(obj,'xminus',xminus);
+                obj = addState@DynamicalSystem(obj,'x',xplus);
+                obj = addState@DynamicalSystem(obj,'xn',xminus);
             elseif strcmp(obj.Type, 'SecondOrder')
-                obj = addState@DynamicalSystem(obj,'xplus',xplus, 'dxplus',dxplus);
-                obj = addState@DynamicalSystem(obj,'xminus',xminus, 'dxminus',dxminus);
+                obj = addState@DynamicalSystem(obj,'x',xplus, 'dx',dxplus);
+                obj = addState@DynamicalSystem(obj,'xn',xminus, 'dxn',dxminus);
             else
                 error('Please define the type of the system first.');
             end
@@ -79,17 +80,7 @@ classdef DiscreteDynamics < DynamicalSystem
         
         % compile symbolic expression related to the systems
         function obj = compile(obj, export_path, varargin)
-            % export the symbolic expressions of the system dynamics matrices and
-            % vectors and compile as MEX files.
-            %
-            % Parameters:
-            %  export_path: the path to export the file @type char
-            %  varargin: variable input parameters @type varargin
-            %   Vars: a list of symbolic variables @type SymVariable
-            %   File: the (full) file name of exported file @type char
-            %   ForceExport: force the export @type logical
-            %   BuildMex: flag whether to MEX the exported file @type logical
-            %   Namespace: the namespace of the function @type char
+            
             
         end
         

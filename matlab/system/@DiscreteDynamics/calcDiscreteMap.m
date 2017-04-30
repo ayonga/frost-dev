@@ -1,4 +1,4 @@
-function xplus = calcDiscreteMap(obj, t, xminus, varargin)
+function xn = calcDiscreteMap(obj, t, x, varargin)
     % calculates the discrete map of the dynamical system that maps
     % xminus from xplus. Subclasses must implement this method by its
     % own.
@@ -14,6 +14,6 @@ function xplus = calcDiscreteMap(obj, t, xminus, varargin)
     % Return values:
     % xplus: the post-impact states @type colvec
     
-    xplus = xminus;
+    xn = x;
     
 end

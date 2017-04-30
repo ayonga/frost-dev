@@ -12,6 +12,7 @@ classdef RobotLinks < ContinuousDynamics
     %
     % @author Ayonga Hereid @date 2016-09-26
     %
+    % @new{2,1, ayonga, 2017-03-26} Change RobotManipulator to RobotLinks
     % @new{2,0, ayonga, 2017-03-26} Change RigidBodyModel to RobotManipulator
     % @new{1,0, ayonga, 2016-09-26} Migrated from old modelConfig class
     %
