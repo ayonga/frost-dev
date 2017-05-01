@@ -43,7 +43,7 @@ classdef DiscreteDynamics < DynamicalSystem
     
     methods
         
-        function obj = DiscreteDynamics(name, type, event)
+        function obj = DiscreteDynamics(type, name, event)
             % the constructor function for DiscreteDynamics class objects
             %
             % Parameters:
@@ -102,11 +102,7 @@ classdef DiscreteDynamics < DynamicalSystem
         
         
         
-        % compile symbolic expression related to the systems
-        function obj = compile(obj, export_path, varargin)
-            
-            
-        end
+        
         
         
         

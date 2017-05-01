@@ -91,6 +91,13 @@
             obj.Mmat = [];
             obj.MmatDx = [];
             
+            obj.HolonomicConstraints = struct();
+            obj.UnilateralConstraints= struct();
+            obj.VirtualConstraints = struct();
+            obj.EventFuncs = struct();
+        
+            
+            
             % do-nothing function handle by default
             obj.PreProcess = str2func('nop');
             obj.PostPorcess = str2func('nop');

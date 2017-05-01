@@ -21,28 +21,7 @@ function obj = compile(obj, export_path, varargin)
         cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
     end
     
-    % export the input map    
-    gmap_funcs = fieldnames(obj.Gmap);
-    if ~isempty(gmap_funcs)
-        for i=1:length(gmap_funcs)
-            fun = gmap_funcs{i};
-            if ~isempty(obj.Gmap.(fun))
-                export(obj.Gmap.(fun),export_path,varargin{:});
-            end
-        end
-    end
     
-    
-    % export the input vector fields
-    gvec_funcs = fieldnames(obj.Gvec);
-    if ~isempty(gvec_funcs)
-        for i=1:length(gvec_funcs)
-            fun = gvec_funcs{i};
-            if ~isempty(obj.Gvec.(fun))
-                export(obj.Gvec.(fun),export_path,varargin{:});
-            end
-        end
-    end
     
     % export the holonomic constraints    
     h_constrs = fieldnames(obj.HolonomicConstraints);
@@ -83,5 +62,8 @@ function obj = compile(obj, export_path, varargin)
             export(obj.EventFuncs.(fun),export_path,varargin{:});
         end        
     end
+    
+    % call superclass method
+    compile@DynamicalSystem(obj, export_path, varargin{:});
     
 end

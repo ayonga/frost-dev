@@ -25,6 +25,16 @@
     end
     
     
+    % callback function handle properties to implement object specific
+    % funtionalities outside of the class without making a new subclass
+    properties (SetAccess=protected)
+        
+        % Returns the external input defined on the dynamical system.
+        %
+        % @type function_handle
+        ExternalOutputFun
+    end
+    
     % regular properties
     properties (SetAccess=protected)
         % The highest order of the state derivatives of the system
@@ -101,11 +111,6 @@
         
     end
     
-    methods (Abstract)
-        % compile symbolic expression related to the systems
-        obj = compile(obj, export_path, varargin);
-        
-    end
     
     
     
@@ -145,7 +150,7 @@
             obj.Gvec.ConstraintWrench = struct();
             obj.Gvec.External = struct();
             
-            
+            obj.ExternalOutputFun = str2func('nop');
         end
         
         function obj = setName(obj, name)

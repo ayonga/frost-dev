@@ -31,4 +31,7 @@ function obj = compile(obj, export_path, varargin)
     if ~isempty(obj.Mmat)
         export(obj.Mmat,export_path,varargin{:});
     end
+    
+    % call superclass method
+    compile@DiscreteDynamics(obj, export_path, varargin{:});
 end
