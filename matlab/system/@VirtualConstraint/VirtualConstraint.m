@@ -362,6 +362,8 @@ classdef VirtualConstraint < handle
             % Parameters:
             % label: the cell array of labels @type cellstr
             
+            if ischar(label), label = {label}; end
+            
             validateattributes(label,{'cell'},...
                 {'nonempty','numel',obj.Dimension,'row'},...
                 'VirtualConstraint','Label');
