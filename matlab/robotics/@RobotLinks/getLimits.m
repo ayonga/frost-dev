@@ -21,7 +21,8 @@ function bounds = getLimits(obj)
     bounds.states.dx.lb = dq_lb;
     bounds.states.dx.ub = dq_ub;
     
-    gf = obj.Gmap.u;
+    control = fieldnames(obj.Gmap.Control);
+    gf = obj.Gmap.Control.(control{1});
     
     u_ub = double(gf'*[limits.effort]');
     u_lb = -u_ub;

@@ -1,4 +1,4 @@
-classdef ContactFrame < CoordinateFrame
+classdef ContactFrame < CoordinateFrame & matlab.mixin.Copyable
     % A mechanical contact coordinate frame of a robot 
     %
     % @note We assume that the positive 'z' axis of the coordinate frame
@@ -74,7 +74,7 @@ classdef ContactFrame < CoordinateFrame
             
             argin = struct(varargin{:});
             
-            % validate and assign the joint type
+            % validate and assign the contact type
             if isfield(argin, 'Type')
                 obj = obj.setType(argin.Type);
             else

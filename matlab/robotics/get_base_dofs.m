@@ -47,7 +47,7 @@ function base_dofs = get_base_dofs(type)
             
             % the origin are all zeros
             [base_dofs.Offset] = deal([0,0,0]);
-            [base_dofs.Rotation] = deal([0,0,0]);
+            [base_dofs.R] = deal([0,0,0]);
             
             % the axis of the base dofs
             [base_dofs(1:3).Axis] = deal([1,0,0],[0,1,0],[0,0,1]);
@@ -80,7 +80,7 @@ function base_dofs = get_base_dofs(type)
             
             % the origin are all zeros
             [base_dofs.Offset] = deal([0,0,0]);
-            [base_dofs.Rotation] = deal([0,0,0]);
+            [base_dofs.R] = deal([0,0,0]);
             
             % the axis of the base dofs
             [base_dofs(1:3).Axis] = deal([1,0,0],[0,0,1],[0,1,0]);
@@ -111,7 +111,7 @@ function base_dofs = get_base_dofs(type)
             
             % the origin are all zeros
             [base_dofs.Offset] = deal([0,0,0]);
-            [base_dofs.Rotation] = deal([0,0,0]);
+            [base_dofs.R] = deal([0,0,0]);
             
             % the axis of the base dofs
             base_dofs.Axis = [0,1,0];
@@ -139,7 +139,7 @@ function base_dofs = get_base_dofs(type)
             
             % the origin are all zeros
             [base_dofs.Offset] = deal([0,0,0]);
-            [base_dofs.Rotation] = deal([0,0,0]);
+            [base_dofs.R] = deal([0,0,0]);
             
             % the axis of the base dofs
             base_dofs.Axis = [0,0,1];

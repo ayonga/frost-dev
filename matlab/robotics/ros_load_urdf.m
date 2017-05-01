@@ -50,9 +50,9 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             links(index).Offset = str2num(origin.getAttribute('xyz')); %#ok<*ST2NM>
             rpy = str2num(origin.getAttribute('rpy'));
             if isempty(rpy)
-                links(index).Rotation = zeros(1,3);
+                links(index).R = zeros(1,3);
             else
-                links(index).Rotation = rpy;
+                links(index).R = rpy;
             end
             links(index).Inertia = [ixx,ixy,ixz; ixy,iyy,iyz; ixz, iyz, izz];
             
@@ -88,9 +88,9 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             joints(index).Offset = str2num(origin.getAttribute('xyz'));
             rpy = str2num(origin.getAttribute('rpy'));
             if isempty(rpy)
-                joints(index).Rotation = zeros(1,3);
+                joints(index).R = zeros(1,3);
             else
-                joints(index).Rotation = rpy;
+                joints(index).R = rpy;
             end
             joints(index).Axis = str2num(axis.getAttribute('xyz'));
             joints(index).Parent = char(parent.getAttribute('link'));

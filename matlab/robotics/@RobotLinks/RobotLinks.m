@@ -65,12 +65,11 @@ classdef RobotLinks < ContinuousDynamics
     methods
         
         
-        function obj = RobotLinks(name, varargin)
+        function obj = RobotLinks(config, base)
             % The class constructor function
             %
             %
             % Parameters:
-            % name: the name of the model @type char
             % config: the configuration of the joints and links @type char           
             % base: the configuration of the floating base
             % coordinates  @type struct
@@ -81,11 +80,14 @@ classdef RobotLinks < ContinuousDynamics
             
             % construct the object by calling superclass constructor
             % function
-            obj = obj@ContinuousDynamics(name, 'SecondOrder');
+            obj = obj@ContinuousDynamics('SecondOrder');
             
-            
-            if nargin > 1
-                configure(obj, varargin{:});
+            if nargin > 0
+                if nargin > 1
+                    configure(obj, config, base);
+                else
+                    configure(obj, config);
+                end
             end
             
         end

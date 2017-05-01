@@ -94,14 +94,25 @@ classdef CoordinateFrame < handle
             end
             
             % validate and assign the Euler angles
-            if isfield(argin, 'Rotation')
-                obj = obj.setRotationMatrix(argin.Rotation);
+            if isfield(argin, 'R')
+                obj = obj.setRotationMatrix(argin.R);
             else
                 warning('The rotation angles are not defined. Using zero angles [0,0,0].');
                 obj = obj.setRotationMatrix(zeros(1,3));
             end
         end
         
+        function obj = ContactFrame(obj, type)
+            % convert a coordinate frame into a contact frame
+            
+            obj_struc = struct(...
+                'Name', obj.Name,...
+                'Reference', obj.Reference,...
+                'R', obj.R,...
+                'Offset',obj.Offset,...
+                'Type',type);
+            obj = ContactFrame(obj_struc);
+        end
         
     end
     

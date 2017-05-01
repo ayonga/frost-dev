@@ -20,7 +20,7 @@ function obj = configure(obj, config, base)
         if ischar(base)
             base_dofs = get_base_dofs(base);
         elseif isstruct(base)
-            fields = {'Name','Type','Offset','Rotation','Axis','Parent','Child'};
+            fields = {'Name','Type','Offset','R','Axis','Parent','Child'};
             assert(all(isfield(base,fields)),...
                 'The base dof structure must have the following fields:\n %s',implode(fields,', '));
             base_dofs = base;
@@ -46,19 +46,22 @@ function obj = configure(obj, config, base)
             obj.ConfigFile = config_file;
             
             % load model from the URDF file
-            [~, links, joints, transmissions] = ros_load_urdf(config_file);
+            [name, links, joints, transmissions] = ros_load_urdf(config_file);
+            obj.Name = name;
         else
             error('Invalid configuration file type detected: %s.\n',file_ext(2:end));
         end
         
         
     elseif isstruct(config)
-        fields = {'Name','Mass','Offset','Rotation','Inertia'};
+        obj.Name = config.name;
+        
+        fields = {'Name','Mass','Offset','R','Inertia'};
         assert(all(isfield(config.links,fields)),...
             'The links structure must have the following fields:\n %s',implode(fields,', '));
         links = config.links;
         
-        fields = {'Name','Type','Offset','Rotation','Axis','Parent','Child'};
+        fields = {'Name','Type','Offset','R','Axis','Parent','Child'};
         assert(all(isfield(config.joints,fields)),...
             'The joints structure must have the following fields:\n %s',implode(fields,', '));
         joints = config.joints;
@@ -125,4 +128,6 @@ function obj = configure(obj, config, base)
     fixed_joint_indices = str_index('fixed',{obj.Joints.Type});
     % enforce holonomic constraints
     obj = addFixedJoint(obj,fixed_joint_indices);
+    
+
 end
