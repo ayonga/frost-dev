@@ -10,17 +10,17 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     
     % extract the state variables into x and dx
     nx = obj.numState;
-    x = x(1:nx);
-    dx = x(nx+1:end);
+    q = x(1:nx);
+    dq = x(nx+1:end);
     
     % store time and states into object private data for future use
     obj.t_ = t;
-    obj.states_.x = x;
-    obj.states_.dx = dx;
+    obj.states_.x = q;
+    obj.states_.dx = dq;
     
     % compute the mass matrix and drift vector (internal dynamics)
-    M = calcMassMatrix(obj, x);
-    Fv = calcDriftVector(obj, x,dx);
+    M = calcMassMatrix(obj, q);
+    Fv = calcDriftVector(obj, q,dq);
     
     
     
@@ -36,9 +36,9 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
             % get the Gvec function object
             g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
-            f_ext = getExternalInput(obj, f_name, t, x, dx, params);
+            f_ext = obj.ExternalOutputFun(obj, f_name, t, q, dq, params);
             % compute the Gvec, and add it up
-            Gv_ext = Gv_ext + feval(g_fun.Name,x,f_ext);
+            Gv_ext = Gv_ext + feval(g_fun.Name,q,f_ext);
             
             % store the external inputs into the object private data
             obj.inputs_.External.(f_name) = f_ext;
@@ -61,10 +61,12 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
         for i=1:n_cstr
             c_name = h_cstr_name{i};
             cstr = h_cstr.(c_name);
+            
             % calculate the Jacobian
-            [Jh,dJh] = calcJacobian(cstr,x,dx);
-            Je(idx:idx+cstr.Dimension,:) = Jh;
-            Jedot(idx:idx+cstr.Dimension,:) = dJh; 
+            [Jh,dJh] = calcJacobian(cstr,q,dq);
+            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+            Je(cstr_indices,:) = Jh;
+            Jedot(cstr_indices-1,:) = dJh; 
             idx = idx + cstr.Dimension;
         end        
     end
@@ -81,8 +83,8 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     % compute vector fields
     % f(x)
     vfc = [
-        dx;
-        M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dx))];
+        dq;secondOrderDynamics
+        M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dq))];
     
     
     % g(x)
@@ -92,9 +94,9 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     
     % compute control inputs
     if nargout > 1
-        [u, extra] = calcControl(controller, t, x, dx, vfc, gfc, obj, params);
+        [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
     else
-        u = calcConstrol(controller, t, x, dx, vfc, gfc, obj, params);
+        u = calcConstrol(controller, t, x, vfc, gfc, obj, params);
     end
     
     Gv_u = Be*u;
@@ -103,7 +105,7 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     Gv = Gv_ext + Gv_u;
     % Calculate constrained forces
     if ~isempty(h_cstr_name)
-        lambda = -XiInv \ (Jedot * dx + Je * (M \ (Fv + Gv)));
+        lambda = -XiInv \ (Jedot * dq + Je * (M \ (Fv + Gv)));
         % the constrained wrench inputs
         Gv_c = transpose(Je)*lambda;
         
@@ -112,8 +114,9 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
         for i=1:n_cstr
             c_name = h_cstr_name{i};             
             cstr = h_cstr.(c_name);
+            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
             input_name = cstr.InputName;
-            obj.inputs_.ConstraintWrench.(input_name) = lambda(idx:idx+cstr.Dimension);
+            obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
             idx = idx + cstr.Dimension;
         end 
     end
@@ -126,8 +129,8 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     
     if nargout > 1
         extra.t       = t;
-        extra.x       = x;
-        extra.dx      = dx; 
+        extra.x       = q;
+        extra.dx      = dq; 
         extra.ddx     = xdot(nx+1:end);
         extra.u       = u;    
         extra.f_ext   = obj.inputs_.External;

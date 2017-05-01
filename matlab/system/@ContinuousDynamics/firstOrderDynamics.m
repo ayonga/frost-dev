@@ -33,7 +33,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
             % get the Gvec function object
             g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
-            f_ext = getExternalInput(obj, f_name, t, x, params);
+            f_ext = obj.ExternalOutputFun(obj, f_name, t, x, params);
             % compute the Gvec, and add it up
             Gv_ext = Gv_ext + feval(g_fun.Name,x,f_ext);
             
@@ -58,15 +58,16 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         for i=1:n_cstr
             c_name = h_cstr_name{i};
             cstr = h_cstr.(c_name);
+            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
             % calculate the Jacobian
             if cstr.DerivativeOrder == 2
                 [Jh,dJh] = calcJacobian(cstr,x);
-                Je(idx:idx+cstr.Dimension,:) = Jh;
-                Jedot(idx:idx+cstr.Dimension,:) = dJh;
+                Je(cstr_indices,:) = Jh;
+                Jedot(cstr_indices,:) = dJh;
             else
                 [Jh] = calcJacobian(cstr,x);
-                Je(idx:idx+cstr.Dimension,:) = Jh;
-                Jedot(idx:idx+cstr.Dimension,:) = Jh;
+                Je(cstr_indices,:) = Jh;
+                Jedot(cstr_indices,:) = Jh;
             end
             idx = idx + cstr.Dimension;
         end        
@@ -111,8 +112,9 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         for i=1:n_cstr
             c_name = h_cstr_name{i};
             cstr = h_cstr.(c_name);
+            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
             input_name = cstr.InputName;
-            obj.inputs_.ConstraintWrench.(input_name) = lambda(idx:idx+cstr.Dimension);
+            obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
             idx = idx + cstr.Dimension;
         end 
     end

@@ -16,7 +16,7 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
         t0 = 0;
     else
         validateattributes(t0,{'double'},...
-            {'scalar','positive','real'},...
+            {'scalar','nonnegative','real'},...
             'ContinuousDynamics.simulate','t0',2);
     end
     
@@ -63,7 +63,7 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
     
     % configure the ODE options
     odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-6,'AbsTol',1e-6);
-    
+    qe
     % configure the event functions
     if ~isempty(eventnames)
         events_list = fieldnames(obj.EventFuncs);

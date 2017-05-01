@@ -40,9 +40,11 @@ function xn = calcDiscreteMap(obj, t, x, varargin)
         for i=1:n_cstr
             c_name = cstr_name{i};
             c_obj = cstr.(c_name);
+            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+            
             % calculate the Jacobian
             [Jh] = calcJacobian(c_obj,q,dq);
-            Je(idx:idx+c_obj.Dimension,:) = Jh;
+            Je(cstr_indices,:) = Jh;
             idx = idx + c_obj.Dimension;
         end
         

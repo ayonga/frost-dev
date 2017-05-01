@@ -49,7 +49,7 @@ classdef RigidImpact < DiscreteDynamics
             % model: the RigidLinks model object @type RigidLinks
             % event: the event name of the rigid impact @type char
             
-            validateattributes(model,{'RigidLinks'},{},...
+            validateattributes(model,{'RobotLinks'},{},...
                 'RigidImpact','model',1);
             
             if nargin > 1
@@ -64,11 +64,12 @@ classdef RigidImpact < DiscreteDynamics
             obj.ImpactConstraints = struct();
             
             
-            label = model.States.x.label;
+           
             nx = model.numState;
             
-            x = model.Statex.x;
-            dx = model.State.dx;
+            x = model.States.x;
+            dx = model.States.dx;
+            label = x.label;
             xn = SymVariable('xn',[nx,1],label);
             dxn = SymVariable('dxn',[nx,1],label);
             
@@ -98,7 +99,7 @@ classdef RigidImpact < DiscreteDynamics
             
             % validate input argument
             validateattributes(constr, {'HolonomicConstraint'},...
-                {},'RigidImpact', 'ImpactConstr');
+                {},'RigidImpact', 'ImpactConstraint');
             
             n_constr = numel(constr);
             
