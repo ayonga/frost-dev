@@ -84,11 +84,12 @@ for i=1:numel(propNames)
     
     % if the value is not numeric or a cell, convert it to cell to
     % prevent future concatenation goes wrong
-    for j=vert'
+    for j=1:numel(vert)
+        k = vert(j);
         if iscell(obj.Gamma.Nodes.(propNames{i})(j))
-            obj.Gamma.Nodes.(propNames{i}){j} = props(j).(propNames{i});
+            obj.Gamma.Nodes.(propNames{i}){k} = props(j).(propNames{i});
         else
-            obj.Gamma.Nodes.(propNames{i})(j) = props(j).(propNames{i});
+            obj.Gamma.Nodes.(propNames{i})(k) = props(j).(propNames{i});
         end
     end
     

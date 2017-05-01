@@ -88,7 +88,7 @@ for i=1:numel(propNames)
     
     % if the value is not numeric or a cell, convert it to cell to
     % prevent future concatenation goes wrong
-    for j=edge'
+    for j=1:numel(edge)
         %         % check if the guard condition contains in the source domain's
         %         % unilateral constraints
         %         if strcmp(propNames{i},'Guard')
@@ -96,11 +96,11 @@ for i=1:numel(propNames)
         %             src_domain = obj.Gamma.Nodes.Domain{src_vert};
         %             validatestring(props(j).(propNames{i}).Condition, src_domain.UnilateralConstr.Name);
         %         end
-        
-        if iscell(obj.Gamma.Edges.(propNames{i})(j))
-            obj.Gamma.Edges.(propNames{i}){j} = props(j).(propNames{i});
+        k = edge(j);
+        if iscell(obj.Gamma.Edges.(propNames{i})(k))
+            obj.Gamma.Edges.(propNames{i}){k} = props(j).(propNames{i});
         else
-            obj.Gamma.Edges.(propNames{i})(j) = props(j).(propNames{i});
+            obj.Gamma.Edges.(propNames{i})(k) = props(j).(propNames{i});
         end
     end
     
