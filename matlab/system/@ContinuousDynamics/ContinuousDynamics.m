@@ -34,54 +34,67 @@
     
     
     
-    
-    
-    
-    %% methods should be overloaded by subclasses
-    methods
+    % callback function handle properties to implement object specific
+    % funtionalities outside of the class without making a new subclass
+    properties (SetAccess=protected)
         
-        function obj = preProcess(obj, controller, params)
-            % pre-process the object before the simulation 
-            %
-            % the subclasses could overload this method to perform any
-            % pre-simulation procedures. 
-            
-            % do nothing by default.
-        end
+        % pre-process function handle of the object before the simulation 
+        %
+        % @note The function handle should have the syntax:
+        % preProcess(sys, controller, params, varargin)
+        %
+        % @type function_handle
+        PreProcess
         
-        function obj = postPorcess(obj, sol, controller, params)
-            % post-process the object after the simulation
-            %
-            % the subclasses could overload this method to perform any
-            % pre-simulation procedures. 
-            
-            % do nothing by default.
-        end
-            
+        % pre-process function handle of the object after the simulation 
+        %
+        % @note The function handle should have the syntax:
+        % postPorcess(sys, sol, controller, params, varargin)
+        %
+        % @type function_handle
+        PostPorcess
         
-        % a method called by a trajectory optimization NLP to enforce
-        % system specific constraints. All subclasses should implement
-        % their own version of this method and must call the superclass
-        % method first in your implementation.
-        nlp = addSystemConstraint(obj, nlp);
+        % A handle to a function called by a trajectory optimization NLP to
+        % enforce system specific constraints. 
+        %
+        % @note The function handle should have the syntax:
+        % userNlpConstraint(nlp, bounds, varargin)
+        %
+        % @type function_handle
+        UserNlpConstraint
     end
+    
+    
+    
     
     
     %%
     methods
-        function obj = ContinuousDynamics(name, type)
+        function obj = ContinuousDynamics(type, name)
             % The class construction function
             %
-            % Parameters:
-            % name: the name of the system @type char
+            % Parameters:            
             % type: the type of the system @type char
+            % name: the name of the system @type char
             
-            obj = obj@DynamicalSystem(name, type);
+            if nargin > 1
+                superargs = {type, name};
+            else
+                superargs = {type};
+            end
+            
+            obj = obj@DynamicalSystem(superargs{:});
+            
             
             
             obj.Fvec = cell(0);
             obj.Mmat = [];
             obj.MmatDx = [];
+            
+            % do-nothing function handle by default
+            obj.PreProcess = str2func('nop');
+            obj.PostPorcess = str2func('nop');
+            obj.UserNlpConstraint = str2func('nop');
             
         end
         
@@ -251,14 +264,6 @@
         MmatDx
     end
     
-    %% private methods
-    methods (Access=private)
-        
-        function v_type = validateSystemType(~, type)
-            % validate if it is valid system type
-            
-            v_type = validatestring(type,{'FirstOrder','SecondOrder'});
-        end
-    end
+    
 end
 

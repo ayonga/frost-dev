@@ -1,4 +1,4 @@
-function sol = simulate(obj, options)
+function sol = simulate(obj, options, varargin)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 

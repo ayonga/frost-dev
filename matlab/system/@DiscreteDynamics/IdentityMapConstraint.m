@@ -1,4 +1,4 @@
-function nlp = addSystemConstraint(obj, nlp, src, tar, bounds)
+function nlp = IdentityMapConstraint(obj, nlp, src, tar, bounds, varargin)
     % Impose system specific constraints as NLP constraints for the
     % trajectory optimization problem
     %

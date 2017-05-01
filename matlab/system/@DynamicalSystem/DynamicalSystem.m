@@ -1,4 +1,4 @@
- classdef (Abstract) DynamicalSystem < handle
+ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
     % A superclass for continuous/discrete dynamic systems
     %    
     %
@@ -12,7 +12,21 @@
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     %%
-    properties 
+    % callback function handle properties to implement object specific
+    % funtionalities outside of the class without making a new subclass
+    properties (SetAccess=protected, NonCopyable)
+        
+        
+        % The unique name identification of the system
+        %
+        % @type char
+        Name
+        
+    end
+    
+    
+    % regular properties
+    properties (SetAccess=protected)
         % The highest order of the state derivatives of the system
         %
         % @note The system could be either a 'FirstOrder' system or a
@@ -20,13 +34,8 @@
         %
         % @type char
         Type
-    end
-    %%
-    properties (SetAccess=protected)
-        % The unique name identification of the system
-        %
-        % @type char
-        Name
+        
+        
         
         % A structure that contains the symbolic representation of state
         % variables
@@ -96,28 +105,28 @@
         % compile symbolic expression related to the systems
         obj = compile(obj, export_path, varargin);
         
-        % a method called by a trajectory optimization NLP to enforce
-        % system specific constraints. All subclasses should implement
-        % their own version of this method and must call the superclass
-        % method first in your implementation.
-        nlp = addSystemConstraint(obj, nlp, varargin);
     end
     
     
     
     methods
-        function obj = DynamicalSystem(name, type)
+        function obj = DynamicalSystem(type, name)
             % The class construction function
             %
             % Parameters:
+            % type: the type of the system @type char
             % name: the name of the system @type char
             
-            assert(isvarname(name),...
-                'The name of the system must be a valid variable name vector.');
-            obj.Name = name;
+            
             
             obj.Type = obj.validateSystemType(type);
+            if nargin > 1
+                assert(isvarname(name),...
+                    'The name of the system must be a valid variable name vector.');
+                obj.Name = name;
+            end
             
+            % initialize the properties
             obj.States = struct();
             obj.Inputs = struct();
             obj.Inputs.Control = struct();
@@ -135,9 +144,17 @@
             obj.Gvec.Control = struct();
             obj.Gvec.ConstraintWrench = struct();
             obj.Gvec.External = struct();
+            
+            
         end
         
-        
+        function obj = setName(obj, name)
+            % set the name of the dynamical system
+            
+            assert(isvarname(name),...
+                'The name of the system must be a valid variable name vector.');
+            obj.Name = name;
+        end
         
         
     end
@@ -169,10 +186,30 @@
         end
         
         
-        function obj = set.Type(obj, type)
+        function obj = setType(obj, type)
+            % Sets the type of the dynamical system
+            %
+            % Parameters: 
+            % type: the system type @type char
             
             obj.Type = obj.validateSystemType(type);
         end
+        
+        
+        %         function new = clone(obj, new)
+        %             % Copies the value of properties of the object to a new object
+        %
+        %             prop_list = properties(obj);
+        %
+        %             for i=1:numel(prop_list)
+        %                 prop = prop_list{i};
+        %
+        %                 if isprop(new, prop) && ~strcmp(prop,'Name')
+        %                     new.(prop) = obj.(prop);
+        %                 end
+        %             end
+        %
+        %         end
     end
     
     methods (Access=protected)
@@ -197,6 +234,13 @@
                 end
             end
         end
+        
+        function v_type = validateSystemType(~, type)
+            % validate if it is valid system type
+            
+            v_type = validatestring(type,{'FirstOrder','SecondOrder'});
+        end
+    
         
     end
     

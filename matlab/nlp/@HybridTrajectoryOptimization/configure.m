@@ -1,4 +1,4 @@
-function obj = configure(obj, bounds)
+function obj = configure(obj, bounds, varargin)
     % configure the trajectory optimizatino NLP problem
     %
     % This process will add NLP variables based on the information of the
@@ -63,7 +63,7 @@ function obj = configure(obj, bounds)
             tar_idx = 2*next - 1;
             tar = obj.Phase(tar_idx);
             
-            addJumpConstraint(obj, edge, src, tar, bounds);
+            addJumpConstraint(obj, edge, src, tar, bounds, varargin{:});
         end
     end
     

@@ -1,4 +1,4 @@
-function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options)
+function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options, varargin)
     % Simulate the dynamical system
     %
     % Parameters: 
@@ -98,14 +98,14 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
     end
     
     % pre-process
-    obj.preProcess(controller, params);
+    obj.PreProcess(obj, controller, params, varargin{:});
     
     % run the forward simulation
     sol = ode45(@(t, x) calcDynamics(obj, t, x, controller, params), ...
         [t0, tf], x0, odeopts);
         
     % post-process
-    obj.postProcess(sol, controller, params);
+    obj.PostProcess(obj, sol, controller, params, varargin{:});
     
     % record the simulated trajectory
     % clear previous results

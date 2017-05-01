@@ -1,4 +1,4 @@
-function obj = configure(obj, bounds)
+function obj = configure(obj, bounds, varargin)
     % configure the trajectory optimizatino NLP problem
     %
     % This process will add NLP variables based on the information of the
@@ -11,6 +11,8 @@ function obj = configure(obj, bounds)
     
     % configure NLP decision variables
     obj = obj.configureVariables(bounds);
+    
+    plant = obj.Plant;
     
     %| @note If the number of node equals 1, then the system is
     %either discrete event system or a ternimal node of a hybrid
@@ -26,7 +28,7 @@ function obj = configure(obj, bounds)
         
         % the holonomic constraints are enforced at the first node, the
         % derivatives of the holonomic constraints are enforced at all nodes
-        h_constr = obj.Plant.HolonomicConstraints;
+        h_constr = plant.HolonomicConstraints;
         h_constr_names = fieldnames(h_constr);
         n_h_constr = length(h_constr_names);
         if n_h_constr > 0
@@ -40,7 +42,7 @@ function obj = configure(obj, bounds)
         
         
         % the unilateral constraints are enforced at all nodes
-        u_constr = obj.Plant.UnilateralConstraints;
+        u_constr = plant.UnilateralConstraints;
         u_constr_names = fieldnames(u_constr);
         n_u_constr = length(u_constr_names);
         if n_u_constr > 0
@@ -53,5 +55,5 @@ function obj = configure(obj, bounds)
     end
     % impose the system specific constraints (such as holonomic
     % constraints and unilateral constraints)
-    obj = addSystemConstraint(obj.Plant, obj, bounds);
+    plant.UserNlpConstraint(obj, bounds, varargin{:});
 end

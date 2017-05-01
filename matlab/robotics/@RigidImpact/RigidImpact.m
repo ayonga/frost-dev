@@ -41,7 +41,7 @@ classdef RigidImpact < DiscreteDynamics
     
     methods
         
-        function obj = RigidImpact(name, model, event)
+        function obj = RigidImpact(model, event)
             % the class constructin method
             %
             % Parameters:
@@ -49,10 +49,13 @@ classdef RigidImpact < DiscreteDynamics
             % model: the RigidLinks model object @type RigidLinks
             % event: the event name of the rigid impact @type char
             
-            if nargin > 2
-                superargs = {name, 'SecondOrder', event};
+            validateattributes(model,{'RigidLinks'},{},...
+                'RigidImpact','model',1);
+            
+            if nargin > 1
+                superargs = {'SecondOrder', model.Name, event};
             else
-                superargs = {name, 'SecondOrder'};
+                superargs = {'SecondOrder', model.Name};
             end
             
             
@@ -60,8 +63,7 @@ classdef RigidImpact < DiscreteDynamics
             
             obj.ImpactConstraints = struct();
             
-            validateattributes(model,{'RigidLinks'},{},...
-                'RigidImpact','model',2);
+            
             label = model.States.x.label;
             nx = model.numState;
             
@@ -74,6 +76,8 @@ classdef RigidImpact < DiscreteDynamics
             
             obj.R = eye(nx);
             obj.Mmat = model.Mmat;
+            
+            obj.UserNlpConstraint = @obj.rigidImpactConstraint;
         end
         
         function obj = set.R(obj, R)
@@ -147,6 +151,10 @@ classdef RigidImpact < DiscreteDynamics
         end
         
         
+    end
+    
+    methods
+        nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin);
     end
     
 end

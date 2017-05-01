@@ -13,6 +13,21 @@ classdef DiscreteDynamics < DynamicalSystem
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
+    % callback function handle properties to implement object specific
+    % funtionalities outside of the class without making a new subclass
+    properties (SetAccess=protected)
+        
+        
+        
+        % A handle to a function called by a trajectory optimization NLP to
+        % enforce system specific constraints. 
+        %
+        % @note The function handle should have the syntax:
+        % userNlpConstraint(edge_nlp, src_nlp, tar_nlp, bounds, varargin)
+        %
+        % @type function_handle
+        UserNlpConstraint
+    end
     
     properties
         
@@ -32,15 +47,24 @@ classdef DiscreteDynamics < DynamicalSystem
             % the constructor function for DiscreteDynamics class objects
             %
             % Parameters:
-            % name: the name of the object @type char
+            % type: the type of the system @type char
+            % name: the name of the system @type char
             % event: the event name associated with the discrete map 
             % @type char
             
-            obj = obj@DynamicalSystem(name,type);
+            if nargin > 1
+                superargs = {type, name};
+            else
+                superargs = {type};
+            end
+            
+            obj = obj@DynamicalSystem(superargs{:});
             
             if nargin > 2
                 obj.EventName = event;
             end
+            
+            obj.UserNlpConstraint = @obj.IdentityMapConstraint;
         end
         
         
@@ -86,7 +110,7 @@ classdef DiscreteDynamics < DynamicalSystem
         
         
         
-        
+        nlp = IdentityMapConstraint(obj, nlp, src, tar, bounds, varargin);
     end
         
     

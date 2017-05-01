@@ -210,14 +210,14 @@ classdef UnilateralConstraint < handle
         
         
         
-        
     end
     
     methods 
         function cstr = get.ConstrExpr(obj)
             cstr = obj.h_;
         end
-       
+        
+        
     end
     
     
