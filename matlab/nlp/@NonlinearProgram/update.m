@@ -14,7 +14,7 @@ function [obj] = update(obj)
         dim = obj.VariableArray(i).Dimension;
         
         % set the index
-        setIndices(obj.VariableArray(i),index_offset + linspace(1,dim,1));
+        setIndices(obj.VariableArray(i),index_offset + cumsum(ones(dim,1)));
 
         % increments (updates) offset
         index_offset = index_offset + dim;
