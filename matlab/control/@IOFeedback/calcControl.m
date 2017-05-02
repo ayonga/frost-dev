@@ -34,11 +34,11 @@ function [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params)
     dim_y = sum([y.Dimension]);
     % partial derivative of the highest order of derivative (y^n-1) w.r.t.
     % the state variable 'x'
-    DLfy = zeros(dim_y,nx);   % A = DLfy*gfc; Lf = DLfy*vfc;
+    DLfy = zeros(dim_y,length(x));   % A = DLfy*gfc; Lf = DLfy*vfc;
     mu = zeros(dim_y,1);    % The derivatives mu = k(1) y + k(2) y' + ... k(n) y^(n-1)
     idx = 1; % indexing of outputs
     for i=1:ny
-        y_i = y{i};
+        y_i = y(i);
         
         % returns y, y', y'', y^(n-1), Jy^n-1
         y_a{i} = cell(1,y_i.RelativeDegree+1);
@@ -46,7 +46,7 @@ function [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params)
         tau{i} = cell(1,y_i.RelativeDegree+1);
         
         % calculate the actual outputs
-        [y_a{i,:}] = calcActual(y_i,q,dq);
+        [y_a{i}{:}] = calcActual(y_i,q,dq);
         
         % extract the parameter values 
         output_param = y_i.OutputParamName; % desired output parameters
@@ -69,9 +69,9 @@ function [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params)
             p = [];
         end
         % calculate the desired outputs
-        [y_d{i,:}] = calcDesired(y_i, t, q, dq, a, p);
+        [y_d{i}{:}] = calcDesired(y_i, t, q, dq, a, p);
         % calculate the phase variable
-        [tau{i,:}] = calcPhaseVariable(y_i, t, q, dq, p);
+        [tau{i}{:}] = calcPhaseVariable(y_i, t, q, dq, p);
         
         
         
@@ -87,10 +87,10 @@ function [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params)
         end
         
         % stack the partial derivatives of all outputs
-        y_indices = linspace(idx,idx+y_i.Dimension-1,1);
-        DLfy(y_indices,:) = y_a{i,end} - y_d{i,end};
+        y_indices = idx:idx+y_i.Dimension-1;
+        DLfy(y_indices,:) = y_a{i}{end} - y_d{i}{end};
         for j=1:y_i.RelativeDegree
-            mu(y_indices) = mu(y_indices) + K(j)*(y_a{i,j}-y_d{i,j});
+            mu(y_indices) = mu(y_indices) + K(j)*(y_a{i}{j}-y_d{i}{j});
         end
         % update the starting index for the next outpu
         idx = idx+y_i.Dimension;
