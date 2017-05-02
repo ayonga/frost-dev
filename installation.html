@@ -156,7 +156,7 @@
 </li>
 <li><a class="reference internal" href="#mathlink">MathLink</a><ul>
 <li><a class="reference internal" href="#ubuntu-or-other-linux-distributions">Ubuntu (or Other Linux distributions)</a></li>
-<li><a class="reference internal" href="#id2">Windows</a></li>
+<li><a class="reference internal" href="#id4">Windows</a></li>
 <li><a class="reference internal" href="#test">Test</a></li>
 </ul>
 </li>
@@ -203,14 +203,14 @@
 </div>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>FROST is a collection of MATLAB functions and Mathematica packages. Hence, there is no need to build the source code. However, the Mathematica package will export project-specific symbolic expressions to C++ source codes which need to be compiled as MEX files in MATLAB. This requires to setup a proper MATLAB MEX compiler for C++ before using FROST.</p>
+<p>FROST is a collection of MATLAB functions and Mathematica packages. Hence, there is no need to build the source code. However, the Mathematica package will export project-specific symbolic expressions to C++ source code which needs to be compiled as <a href="#id2"><span class="problematic" id="id3">*</span></a>.MEX files for MATLAB. This requires a proper MATLAB MEX compiler for C++ before using FROST.</p>
 <div class="section" id="setup-default-mex-compiler">
 <h3>Setup Default MEX Compiler<a class="headerlink" href="#setup-default-mex-compiler" title="Permalink to this headline">¶</a></h3>
-<p>The following instruction provides an example setup for default mex compilers on different platforms. For more information, please refer to the official document on <a class="reference external" href="https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html">www.mathworks.com</a>.</p>
+<p>The following instruction provides an example setup for the default mex compilers on different platforms. For more information, please refer to the official document on <a class="reference external" href="https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html">www.mathworks.com</a>.</p>
 <div class="section" id="linux">
 <h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
-<p>Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04 LTS and Ubuntu 16.04 LTS) is relatively straightfowrad. However, the default <code class="docutils literal"><span class="pre">g++</span></code> compiler might not be supported by MATLAB, which sometimes causes unnecessary errors. Please visit <a class="reference external" href="https://www.mathworks.com/support/compilers.html">https://www.mathworks.com/support/compilers.html</a> to find out the supported and compatiable compilers for your installed MATLAB version.</p>
-<p>First, install a suitable version of the <cite>g++</cite> compiler, for instance:</p>
+<p>Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04/16.04 LTS) is relatively straightfowrad. However, the default <code class="docutils literal"><span class="pre">g++</span></code> compiler might not be supported by MATLAB, which sometimes causes unnecessary errors (e.g., g++5.4 is case sensitive). Please visit <a class="reference external" href="https://www.mathworks.com/support/compilers.html">https://www.mathworks.com/support/compilers.html</a> to find out the supported and compatiable compilers for your MATLAB version.</p>
+<p>First, install a suitable version of the <cite>g++</cite> compiler, for instance, we need g++-4.9 for Ubuntu16.04:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install g++-4.9
 </pre></div>
 </div>
@@ -227,11 +227,11 @@ $ sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so libstdc++.so.6
 </div>
 <div class="section" id="windows">
 <h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
-<p>There are multiple compilers can be used on Windows machines. The following instruction uses MinGW as an example, as it comes at no extra cost.</p>
+<p>There are multiple compilers can be used on Windows machines. The following instruction uses MinGW as an example on a Windows10 machine (VC++ is supported for Windows7&amp;8).</p>
 <ol class="arabic simple">
 <li>Install via MATLAB Add-Ons manager:</li>
 </ol>
-<p>On newer version of MATLAB, you can install MinGW support for MATLAB directly from the Add-Ons manager. Simply search for MinGW, and click <cite>install</cite>.</p>
+<p>On newer version of MATLAB (after MATLAB2015b), you can install MinGW support directly from the Add-Ons manager. Simply search for MinGW, and click <cite>install</cite>.</p>
 <ol class="arabic simple" start="2">
 <li>Directly install from TDM-GCC:</li>
 </ol>
@@ -243,16 +243,16 @@ $ sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so libstdc++.so.6
 </ul>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do not have <code class="docutils literal"><span class="pre">space</span></code> in the installation path of TDM-GCC compiler. Highly recommend to use the default path, for example <cite>C:TDM-GCC-64</cite>.</p>
+<p class="last">Do not have <code class="docutils literal"><span class="pre">space</span></code> in the installation path of TDM-GCC compiler. The default path is recommended , for example <cite>C:TDM-GCC-64</cite>.</p>
 </div>
 </div>
 </div>
 <div class="section" id="mathlink">
 <h3>MathLink<a class="headerlink" href="#mathlink" title="Permalink to this headline">¶</a></h3>
 <p>FROST uses MathLink libraries to communicate with the Mathematica kernel from MATLAB. Thanks to the open-souce MATLAB package developed by <cite>Ben Barrowes</cite> called <a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/6044-mathematica-symbolic-toolbox-for-matlab-version-2-0/">Mathematica Symbolic Toolbox for MATLAB v2.0</a>.
-This package can be downloaded directly from the MATLAB Add-Ons manager or can be downloaded from the Mathworks file exchange website.</p>
-<p>The original package has a certain restriction on the maximum length of the input string, which could cause the evaluation of some FROST functions fail. To remove this restriction, we modified the original code and shipped the modified version together with FROST. We also included pre-compiled MEX binaries for different machines (some yet to come).</p>
-<p>Because this package uses the MathLink libraries of Mathematica during runtime, you must specifies the path of these libraries to your system path.</p>
+This package could be downloaded directly from the MATLAB Add-Ons manager or the Mathworks file exchange website.</p>
+<p>The original package has a certain restriction on the maximum length of the input string, which could cause the evaluation of some FROST functions fail. To remove this restriction, we modified the original code and shipped the modified version together with FROST. We also included pre-compiled MEX binaries, and the compiled .mex file for different machines (some yet to come). Please use the included MathLink instead of downloading it from other resources.</p>
+<p>Because this package uses the MathLink libraries of Mathematica during runtime, you must specifies the path of these libraries to your system path. To configure this environment variable:</p>
 <div class="section" id="ubuntu-or-other-linux-distributions">
 <h4>Ubuntu (or Other Linux distributions)<a class="headerlink" href="#ubuntu-or-other-linux-distributions" title="Permalink to this headline">¶</a></h4>
 <p>The easiest way to configure the <code class="docutils literal"><span class="pre">LD_LIBRARY_PATH</span></code> on your Linux machine for MATLAB would be add the following to your <cite>~/.bashrc</cite> configuration file. For instance, if the installed Mathematica version is <cite>11.0</cite>, then:</p>
@@ -265,8 +265,8 @@ This package can be downloaded directly from the MATLAB Add-Ons manager or can b
 <p class="last">Please change the version as the same as your installed Mathmetica version.</p>
 </div>
 </div>
-<div class="section" id="id2">
-<h4>Windows<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id4">
+<h4>Windows<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <p>Setting up the library path on Windows PC sometimes very complicated, and not always work. Therefore, we copied the all required the static/dynamic library files to the folder where the mathlink source file resides.</p>
 <p>We also includes a pre-compiled MEX binary on Windows machine. To use the pre-compiled binary, you must include the path to Wolfram Mathematica kernal executables to your system path.</p>
 <p>To include the Wolfram path, edit your PATH variable (user) on your system enviroment variables manager. The path to be added should looks like:</p>
@@ -280,7 +280,7 @@ This package can be downloaded directly from the MATLAB Add-Ons manager or can b
 </div>
 <div class="section" id="test">
 <h4>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h4>
-<p>To test if MathLink toolbox can sucessfully run, you can call the function <code class="docutils literal"><span class="pre">initialize_mathlink()</span></code> from MATLAB. I.e.,</p>
+<p>To test if MathLink toolbox can sucessfully run, you can go to &#8220;frost-dev/third/mathlink/&#8221;, and call the function <code class="docutils literal"><span class="pre">initialize_mathlink()</span></code> from MATLAB. I.e.,</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">initialize_mathlink</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -329,7 +329,7 @@ path. If true, it will use <strong>sparse2</strong>.</p>
     </p>
     <p>
         &copy; Copyright 2017, AMBER Lab.<br/>
-      Last updated on Feb 06, 2017.<br/>
+      Last updated on May 02, 2017.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.<br/>
     </p>
   </div>
