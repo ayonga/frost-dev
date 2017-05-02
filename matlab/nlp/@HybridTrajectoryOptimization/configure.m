@@ -11,13 +11,12 @@ function obj = configure(obj, bounds, varargin)
     g = obj.Gamma;
     n_vertex = height(g.Nodes);
     n_edge = height(g.Edges);
-    n_phase = n_vertex + n_edge;
     
     
-    for i=1:n_phase
+    for i=1:n_vertex
         node_name = g.Nodes.Name{i};
         % boundary values
-        node_bounds = [];
+        node_bounds = struct();
         if nargin > 1
             if ~isempty(bounds)
                 if isfield(bounds, node_name)
@@ -34,8 +33,8 @@ function obj = configure(obj, bounds, varargin)
         next = successors(g, i);
         if ~isempty(next)
             edge = findedge(g,i,next);
-            edge_name = g.Edges.Guard(edge).Name;
-            
+            edge_name = g.Edges.Guard{edge}.Name;
+            edge_bounds = struct();
             if nargin > 1
                 if ~isempty(bounds)
                     if isfield(bounds, edge_name)
@@ -49,7 +48,7 @@ function obj = configure(obj, bounds, varargin)
         
     end
     
-    for i=1:n_phase
+    for i=1:n_vertex
         
         next = successors(g,i);
         

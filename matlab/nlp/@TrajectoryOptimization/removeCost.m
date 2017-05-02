@@ -10,7 +10,7 @@ function obj = removeCost(obj, label)
     assert(~isempty(str_index(label,obj.CostTable.Properties.VariableNames)),...
         'Cannot delete ''%s'' from the table because it does not exist.\n',label);
     
-    warning('Removing the constraint (%s) from the constraist table.\n',label);
+    % warning('Removing the cost (%s) from the cost table.\n',label);
     obj.CostTable.(label) = [];
     
     

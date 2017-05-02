@@ -6,9 +6,9 @@ function [obj] = update(obj)
     
     
     % initialize the type of the variables
-    obj.VariableArray = cell(0);
-    obj.CostArray  = cell(0);
-    obj.ConstrArray = cell(0);
+    obj.VariableArray = NlpVariable.empty();
+    obj.CostArray  = NlpFunction.empty();
+    obj.ConstrArray = NlpFunction.empty();
     phase = obj.Phase;
     n_phase = length(phase);
     

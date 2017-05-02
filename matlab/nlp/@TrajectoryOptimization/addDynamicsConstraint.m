@@ -55,8 +55,9 @@ function obj = addDynamicsConstraint(obj)
     
     input_names = fieldnames(plant.Inputs.Control);
     n_inputs = numel(input_names);
-    Gvec_control_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    
     if n_inputs > 0
+        Gvec_control_fun(n_inputs,nNode) = NlpFunction(); % preallocation
         for i=node_list
             for j=1:n_inputs
                 input = input_names{j};
@@ -65,12 +66,15 @@ function obj = addDynamicsConstraint(obj)
                     'DepVariables',[vars.x(i);vars.(input)(i)]);
             end
         end
+    else
+        Gvec_control_fun = zeros(0,nNode);
     end
     
     input_names = fieldnames(plant.Inputs.ConstraintWrench);
     n_inputs = numel(input_names);
-    Gvec_wrench_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    
     if n_inputs > 0
+        Gvec_wrench_fun(n_inputs,nNode) = NlpFunction(); % preallocation
         for i=node_list
             for j=1:n_inputs
                 input = input_names{j};
@@ -79,12 +83,15 @@ function obj = addDynamicsConstraint(obj)
                     'DepVariables',[vars.x(i);vars.(input)(i)]);
             end
         end
+    else
+        Gvec_wrench_fun = zeros(0,nNode);
     end
     
     input_names = fieldnames(plant.Inputs.External);
     n_inputs = numel(input_names);
-    Gvec_external_fun(n_inputs,nNode) = NlpFunction(); % preallocation
+    
     if n_inputs > 0
+        Gvec_external_fun(n_inputs,nNode) = NlpFunction(); % preallocation
         for i=node_list
             for j=1:n_inputs
                 input = input_names{j};
@@ -93,6 +100,8 @@ function obj = addDynamicsConstraint(obj)
                     'DepVariables',[vars.x(i);vars.(input)(i)]);
             end
         end
+    else
+        Gvec_external_fun = zeros(0,nNode);
     end
         
     % The final dynamic equation constraint is the sum of the above

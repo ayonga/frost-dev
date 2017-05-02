@@ -18,30 +18,32 @@ function compileConstraint(obj, constr, export_path, varargin)
     opts.Namespace = obj.Name;
     
     if isempty(constr)
-        compileConstraint@NonlinearProgram(obj, export_path, varargin);
-    else
-        if ~iscell(constr), constr = {constr}; end
+        constr = obj.ConstrTable.Properties.VariableNames;
+    end
+    if ~iscell(constr), constr = {constr}; end
+    
+    for i=1:length(constr)
+        constr_array = obj.ConstrTable.(constr{i});
         
-        for i=1:length(constr)
-            constr_array = obj.ConstrTable.(constr{i});
-            
-            % We use the fact that for each constraint there is only one
-            % SymFunctioni object associated with.
-            deps_array = getSummands(constr_array(1));
-            
-            arrayfun(@(x)export(x.SymFun, export_path, opts), deps_array, 'UniformOutput', false);
-            
-            % first order derivatives (Jacobian)
-            if obj.Options.DerivativeLevel >= 1
-                arrayfun(@(x)exportJacobian(x.SymFun, export_path, opts), deps_array, 'UniformOutput', false);
-            end
-            
-            % second order derivatives (Hessian)
-            if obj.Options.DerivativeLevel >= 2
-                arrayfun(@(x)exportHessian(x.SymFun, export_path, opts), deps_array, 'UniformOutput', false);
-            end
+        % We use the fact that for each constraint there is only one
+        % SymFunction object associated with.
+        
+        % first find out non-empty NlpFunction objects
+        constr_array = constr_array(~arrayfun(@(x)x.Dimension==0,constr_array));
+        % then just use the first one
+        deps_array = getSummands(constr_array(1));
+        
+        arrayfun(@(x)export(x.SymFun, export_path, opts), deps_array, 'UniformOutput', false);
+        
+        % first order derivatives (Jacobian)
+        if obj.Options.DerivativeLevel >= 1
+            arrayfun(@(x)exportJacobian(x.SymFun, export_path, opts), deps_array, 'UniformOutput', false);
         end
         
+        % second order derivatives (Hessian)
+        if obj.Options.DerivativeLevel >= 2
+            arrayfun(@(x)exportHessian(x.SymFun, export_path, opts), deps_array, 'UniformOutput', false);
+        end
     end
     
     
