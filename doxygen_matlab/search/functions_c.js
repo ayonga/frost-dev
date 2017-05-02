@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['optimize',['optimize',['../class_ipopt_application.html#a8c3b92e45f866dce14ae1e0bce2fdee8',1,'IpoptApplication::optimize()'],['../class_solver_application.html#a39af87e72476463f231e1c654790cbd1',1,'SolverApplication::optimize()']]],
-  ['outputfcn',['outputfcn',['../outputfcn_8m.html#a492c7d2f30ec4dc269db4ac57f24f14e',1,'outputfcn.m']]],
-  ['outputpd',['OutputPD',['../class_output_p_d.html#aba475d8d0b58158c29de11fd3e4e27d4',1,'OutputPD']]]
+  ['ne',['ne',['../class_sym_expression.html#a69de24289469ed3393c269b60f1f631b',1,'SymExpression']]],
+  ['nlpfunction',['NlpFunction',['../class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef',1,'NlpFunction']]],
+  ['nlpvariable',['NlpVariable',['../class_nlp_variable.html#ab2603831293cf002816c769afe079df7',1,'NlpVariable']]],
+  ['nonlinearprogram',['NonlinearProgram',['../class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44',1,'NonlinearProgram']]],
+  ['nop',['nop',['../nop_8m.html#aff38c9a6f1f5b8385f4d25730b02e48f',1,'nop.m']]],
+  ['num2mathstr',['num2mathstr',['../num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e',1,'num2mathstr.m']]]
 ];

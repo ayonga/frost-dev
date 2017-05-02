@@ -1,9 +1,23 @@
 var searchData=
 [
-  ['hline_2em',['hline.m',['../hline_8m.html',1,'']]],
-  ['horzcat_5fdomains_2em',['horzcat_domains.m',['../horzcat__domains_8m.html',1,'']]],
-  ['horzcat_5ffields_2em',['horzcat_fields.m',['../horzcat__fields_8m.html',1,'']]],
-  ['horzcat_5ffields_5fdomains_2em',['horzcat_fields_domains.m',['../horzcat__fields__domains_8m.html',1,'']]],
-  ['hybridsystem_2em',['HybridSystem.m',['../_hybrid_system_8m.html',1,'']]],
-  ['hybridtrajectoryoptimization_2em',['HybridTrajectoryOptimization.m',['../_hybrid_trajectory_optimization_8m.html',1,'']]]
+  ['general2math_2em',['general2math.m',['../general2math_8m.html',1,'']]],
+  ['general2str_2em',['general2str.m',['../general2str_8m.html',1,'']]],
+  ['get_5fbase_5fdofs_2em',['get_base_dofs.m',['../get__base__dofs_8m.html',1,'']]],
+  ['getbodyjacobian_2em',['getBodyJacobian.m',['../get_body_jacobian_8m.html',1,'']]],
+  ['getcartesianposition_2em',['getCartesianPosition.m',['../get_cartesian_position_8m.html',1,'']]],
+  ['getcomposition_2em',['getComPosition.m',['../get_com_position_8m.html',1,'']]],
+  ['geteulerangles_2em',['getEulerAngles.m',['../get_euler_angles_8m.html',1,'']]],
+  ['getexternalinput_2em',['getExternalInput.m',['../get_external_input_8m.html',1,'']]],
+  ['getfieldd_2em',['getfieldd.m',['../getfieldd_8m.html',1,'']]],
+  ['getfrictioncone_2em',['getFrictionCone.m',['../get_friction_cone_8m.html',1,'']]],
+  ['getinitialguess_2em',['getInitialGuess.m',['../get_initial_guess_8m.html',1,'']]],
+  ['getjointindices_2em',['getJointIndices.m',['../get_joint_indices_8m.html',1,'']]],
+  ['getlimits_2em',['getLimits.m',['../get_limits_8m.html',1,'']]],
+  ['getlinkindices_2em',['getLinkIndices.m',['../get_link_indices_8m.html',1,'']]],
+  ['getphaseindex_2em',['getPhaseIndex.m',['../get_phase_index_8m.html',1,'']]],
+  ['getspatialjacobian_2em',['getSpatialJacobian.m',['../get_spatial_jacobian_8m.html',1,'']]],
+  ['gettotalmass_2em',['getTotalMass.m',['../get_total_mass_8m.html',1,'']]],
+  ['gettwist_2em',['getTwist.m',['../get_twist_8m.html',1,'']]],
+  ['getvarinfo_2em',['getVarInfo.m',['../get_var_info_8m.html',1,'']]],
+  ['getzmpconstraint_2em',['getZMPConstraint.m',['../get_z_m_p_constraint_8m.html',1,'']]]
 ];

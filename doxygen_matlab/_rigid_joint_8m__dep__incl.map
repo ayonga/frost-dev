@@ -1,0 +1,11 @@
+<map id="robotics/@RigidJoint/RigidJoint.m" name="robotics/@RigidJoint/RigidJoint.m">
+<area shape="rect" id="node2" href="$compute_twist_8m.html" title="robotics/@RigidJoint\l/computeTwist.m" alt="" coords="5,95,149,136"/>
+<area shape="rect" id="node3" href="$get_twist_8m.html" title="robotics/@RigidJoint\l/getTwist.m" alt="" coords="173,95,317,136"/>
+<area shape="rect" id="node4" href="$set_axis_8m.html" title="robotics/@RigidJoint\l/setAxis.m" alt="" coords="341,95,485,136"/>
+<area shape="rect" id="node5" href="$set_chain_indices_8m.html" title="robotics/@RigidJoint\l/setChainIndices.m" alt="" coords="509,95,653,136"/>
+<area shape="rect" id="node6" href="$set_child_8m.html" title="robotics/@RigidJoint\l/setChild.m" alt="" coords="677,95,821,136"/>
+<area shape="rect" id="node7" href="$set_limit_8m.html" title="robotics/@RigidJoint\l/setLimit.m" alt="" coords="845,95,989,136"/>
+<area shape="rect" id="node8" href="$set_parent_8m.html" title="robotics/@RigidJoint\l/setParent.m" alt="" coords="1013,95,1157,136"/>
+<area shape="rect" id="node9" href="$set_twist_pairs_8m.html" title="robotics/@RigidJoint\l/setTwistPairs.m" alt="" coords="1181,95,1325,136"/>
+<area shape="rect" id="node10" href="$robotics_2_0D_rigid_joint_2set_type_8m.html" title="robotics/@RigidJoint\l/setType.m" alt="" coords="1349,95,1493,136"/>
+</map>

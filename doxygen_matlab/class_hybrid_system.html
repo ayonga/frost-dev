@@ -153,9 +153,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3297e97d0938639c85ace0f2f7bb3728"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728">HybridSystem</a> (name, model)</td></tr>
-<tr class="memdesc:a3297e97d0938639c85ace0f2f7bb3728"><td class="mdescLeft">&#160;</td><td class="mdescRight">the default calss constructor  <a href="#a3297e97d0938639c85ace0f2f7bb3728">More...</a><br /></td></tr>
-<tr class="separator:a3297e97d0938639c85ace0f2f7bb3728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e15fd6c9b29a0f829b3bcdf7acee812"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812">HybridSystem</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a6e15fd6c9b29a0f829b3bcdf7acee812"><td class="mdescLeft">&#160;</td><td class="mdescRight">the default calss constructor  <a href="#a6e15fd6c9b29a0f829b3bcdf7acee812">More...</a><br /></td></tr>
+<tr class="separator:a6e15fd6c9b29a0f829b3bcdf7acee812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6209d10fd6000619ad8253456c7d4da"><td class="memItemLeft" align="right" valign="top">function   ret  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#ab6209d10fd6000619ad8253456c7d4da">isDirectedCycle</a> ()</td></tr>
+<tr class="memdesc:ab6209d10fd6000619ad8253456c7d4da"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns true if the underlying directed graph is a simple directed cycle.  <a href="#ab6209d10fd6000619ad8253456c7d4da">More...</a><br /></td></tr>
+<tr class="separator:ab6209d10fd6000619ad8253456c7d4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af47acec4747eb12fec1d6e94b9a997e3"><td class="memItemLeft" align="right" valign="top">function   sys  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3">subGraph</a> (nodeIDs)</td></tr>
+<tr class="memdesc:af47acec4747eb12fec1d6e94b9a997e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">extract the subgraph of the hybrid system to create a new hybrid system object with the same name  <a href="#af47acec4747eb12fec1d6e94b9a997e3">More...</a><br /></td></tr>
+<tr class="separator:af47acec4747eb12fec1d6e94b9a997e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0a3fa58093e69aaf5f729f357505725"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725">addVertex</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:ad0a3fa58093e69aaf5f729f357505725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a vertex or a group of vertices to the directed graph 'Gamma'.  <a href="#ad0a3fa58093e69aaf5f729f357505725">More...</a><br /></td></tr>
 <tr class="separator:ad0a3fa58093e69aaf5f729f357505725"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,15 +180,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a782dc0ef6886acfaad428af3fc43db1f"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f">setVertexProperties</a> (<a class="el" href="classcellstr.html">cellstr</a> vertex, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a782dc0ef6886acfaad428af3fc43db1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the values of vertex properties.  <a href="#a782dc0ef6886acfaad428af3fc43db1f">More...</a><br /></td></tr>
 <tr class="separator:a782dc0ef6886acfaad428af3fc43db1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3cb624d499c8c03c829c71892368ca8"><td class="memItemLeft" align="right" valign="top">function [ <a class="el" href="classcolvec.html">colvec</a> dx ,   extra  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#ae3cb624d499c8c03c829c71892368ca8">calcDynamics</a> (<a class="el" href="classdouble.html">double</a> t,<a class="el" href="classcolvec.html">colvec</a> x,<a class="el" href="classtable.html">table</a> cur_node)</td></tr>
-<tr class="memdesc:ae3cb624d499c8c03c829c71892368ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function computes the continuous dynamics of the dynmical system.  <a href="#ae3cb624d499c8c03c829c71892368ca8">More...</a><br /></td></tr>
-<tr class="separator:ae3cb624d499c8c03c829c71892368ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f4627b33c446bbcf7856a7fac4aa8c"><td class="memItemLeft" align="right" valign="top">function [   value ,   isterminal ,   direction  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c">checkGuard</a> (<a class="el" href="classdouble.html">double</a> t,<a class="el" href="classcolvec.html">colvec</a> x, cur_node,<a class="el" href="classtable.html">table</a> assoc_edges)</td></tr>
-<tr class="memdesc:a54f4627b33c446bbcf7856a7fac4aa8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect the guard condition (event trigger)  <a href="#a54f4627b33c446bbcf7856a7fac4aa8c">More...</a><br /></td></tr>
-<tr class="separator:a54f4627b33c446bbcf7856a7fac4aa8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f3afd2902bfa350b6d738217e91a4c2"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2">simulate</a> (<a class="el" href="classstruct.html">struct</a> options)</td></tr>
-<tr class="memdesc:a6f3afd2902bfa350b6d738217e91a4c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate the hybrid dynamical system.  <a href="#a6f3afd2902bfa350b6d738217e91a4c2">More...</a><br /></td></tr>
-<tr class="separator:a6f3afd2902bfa350b6d738217e91a4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6e758d4e3202c993ff0696589be9db"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#adc6e758d4e3202c993ff0696589be9db">simulate</a> (t0, x0, tf,<a class="el" href="classstruct.html">struct</a> options, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:adc6e758d4e3202c993ff0696589be9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate the hybrid dynamical system.  <a href="#adc6e758d4e3202c993ff0696589be9db">More...</a><br /></td></tr>
+<tr class="separator:adc6e758d4e3202c993ff0696589be9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -192,18 +192,58 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a49702b91e0049e64faf01d4ad1ffbc6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdigraph.html">digraph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a49702b91e0049e64faf01d4ad1ffbc6a">Gamma</a></td></tr>
 <tr class="memdesc:a49702b91e0049e64faf01d4ad1ffbc6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The directed graph that describes the hybrid dynamical system structure.  <a href="#a49702b91e0049e64faf01d4ad1ffbc6a">More...</a><br /></td></tr>
 <tr class="separator:a49702b91e0049e64faf01d4ad1ffbc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a2b93d352d6d6b6b3ba0815cd150fa2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rigid_body_model.html">RigidBodyModel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a8a2b93d352d6d6b6b3ba0815cd150fa2">Model</a></td></tr>
-<tr class="memdesc:a8a2b93d352d6d6b6b3ba0815cd150fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rigid body model of the hybrid system.  <a href="#a8a2b93d352d6d6b6b3ba0815cd150fa2">More...</a><br /></td></tr>
-<tr class="separator:a8a2b93d352d6d6b6b3ba0815cd150fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82351203e9f6d894e9f41c8c5ecbba3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a82351203e9f6d894e9f41c8c5ecbba3b">Flow</a></td></tr>
-<tr class="memdesc:a82351203e9f6d894e9f41c8c5ecbba3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The hybrid flows (trajectory) recorder.  <a href="#a82351203e9f6d894e9f41c8c5ecbba3b">More...</a><br /></td></tr>
-<tr class="separator:a82351203e9f6d894e9f41c8c5ecbba3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a056365fa500f70c3f4454d4a84973e6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a056365fa500f70c3f4454d4a84973e6a">VertexProperties</a></td></tr>
 <tr class="memdesc:a056365fa500f70c3f4454d4a84973e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure describes the name, type, attributes, and default value of each properties of the vertex.  <a href="#a056365fa500f70c3f4454d4a84973e6a">More...</a><br /></td></tr>
 <tr class="separator:a056365fa500f70c3f4454d4a84973e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a585ddfbe131ec481eab5b19c49880e7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_system.html#a585ddfbe131ec481eab5b19c49880e7d">EdgeProperties</a></td></tr>
 <tr class="memdesc:a585ddfbe131ec481eab5b19c49880e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure describes the name, type, attributes, and default value of each properties of the edge.  <a href="#a585ddfbe131ec481eab5b19c49880e7d">More...</a><br /></td></tr>
 <tr class="separator:a585ddfbe131ec481eab5b19c49880e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
+<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
+<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
+<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
+<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
+<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
+<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
+<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
+<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
+<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
+<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
+<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
+<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
+<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
+<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
+<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
+<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
+<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
+<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
+<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
+<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
+<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
+<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
+<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
+<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
+<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
+<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
+<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
+<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
+<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
+<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
+<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_hybrid_system.html" title="HybridSystem defines a hybrid dynamical system that has both continuous and discrete dynamics...">HybridSystem</a> defines a hybrid dynamical system that has both continuous and discrete dynamics, such as bipedal locomotion. </p>
@@ -218,40 +258,35 @@ Public Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00017">17</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 </div><div class="dynheader">
+Inheritance diagram for HybridSystem:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_system__inherit__graph.png" border="0" usemap="#_hybrid_system_inherit__map" alt="Inheritance graph"/></div>
+<map name="_hybrid_system_inherit__map" id="_hybrid_system_inherit__map">
+<area shape="rect" id="node2" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
 Collaboration diagram for HybridSystem:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system__coll__graph.png" border="0" usemap="#_hybrid_system_coll__map" alt="Collaboration graph"/></div>
 <map name="_hybrid_system_coll__map" id="_hybrid_system_coll__map">
-<area shape="rect" id="node2" href="classdigraph.html" title="A MatLab digraph. " alt="" coords="5,169,69,196"/>
-<area shape="rect" id="node3" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="95,169,137,196"/>
-<area shape="rect" id="node4" href="classstruct.html" title="A MatLab struct. " alt="" coords="303,5,358,32"/>
-<area shape="rect" id="node6" href="class_rigid_body_model.html" title="A class with basic model descriptions and functionalities of the multi&#45;link rigid&#45;body robot platform..." alt="" coords="412,169,529,196"/>
-<area shape="rect" id="node5" href="classchar.html" title="A MatLab character array. " alt="" coords="183,5,230,32"/>
-<area shape="rect" id="node7" href="classdouble.html" title="A double value. " alt="" coords="518,5,578,32"/>
-<area shape="rect" id="node8" href="classrowvec.html" title="A matlab row vector. " alt="" coords="421,5,485,32"/>
+<area shape="rect" id="node2" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
+<area shape="rect" id="node4" href="classdigraph.html" title="A MatLab digraph. " alt="" coords="191,5,255,32"/>
+<area shape="rect" id="node5" href="classstruct.html" title="A MatLab struct. " alt="" coords="280,5,335,32"/>
+<area shape="rect" id="node6" href="classchar.html" title="A MatLab character array. " alt="" coords="411,5,457,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3297e97d0938639c85ace0f2f7bb3728"></a>
+<a class="anchor" id="a6e15fd6c9b29a0f829b3bcdf7acee812"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">HybridSystem.HybridSystem </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>model</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -259,33 +294,35 @@ Collaboration diagram for HybridSystem:</div>
 <p>the default calss constructor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">varargin</td><td>variable class construction arguments. </td></tr>
+    <tr><td class="paramname">name</td><td>the name of the hybrid system model </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00171">171</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00151">151</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 
-<p>References <a class="el" href="add_edge_8m_source.html#l00018">addEdge()</a>, <a class="el" href="add_vertex_8m_source.html#l00018">addVertex()</a>, <a class="el" href="calc_dynamics_8m_source.html#l00018">calcDynamics()</a>, <a class="el" href="check_guard_8m_source.html#l00018">checkGuard()</a>, <a class="el" href="rm_edge_8m_source.html#l00018">rmEdge()</a>, <a class="el" href="rm_vertex_8m_source.html#l00018">rmVertex()</a>, <a class="el" href="set_edge_properties_8m_source.html#l00018">setEdgeProperties()</a>, <a class="el" href="set_vertex_properties_8m_source.html#l00018">setVertexProperties()</a>, and <a class="el" href="simulate_8m_source.html#l00018">simulate()</a>.</p>
+<p>References <a class="el" href="add_vertex_8m_source.html#l00018">addVertex()</a>, and <a class="el" href="rm_vertex_8m_source.html#l00018">rmVertex()</a>.</p>
+
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_hybrid_system_a3297e97d0938639c85ace0f2f7bb3728_cgraph.png" border="0" usemap="#class_hybrid_system_a3297e97d0938639c85ace0f2f7bb3728_cgraph" alt=""/></div>
-<map name="class_hybrid_system_a3297e97d0938639c85ace0f2f7bb3728_cgraph" id="class_hybrid_system_a3297e97d0938639c85ace0f2f7bb3728_cgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="281,195,445,221"/>
-<area shape="rect" id="node4" href="class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="549,347,721,373"/>
-<area shape="rect" id="node5" href="class_hybrid_system.html#ae3cb624d499c8c03c829c71892368ca8" title="This function computes the continuous dynamics of the dynmical system. " alt="" coords="537,5,733,32"/>
-<area shape="rect" id="node6" href="class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c" title="Detect the guard condition (event trigger) " alt="" coords="544,157,727,184"/>
-<area shape="rect" id="node7" href="class_hybrid_system.html#a8189d23fc5283519d0ec0453a6af4087" title="Removes a edge or a group of edges from the directed graph object &#39;Gamma&#39;. " alt="" coords="284,245,443,272"/>
-<area shape="rect" id="node8" href="class_hybrid_system.html#a93a0f7785dfcf19ea8597eb3492a75df" title="Removes a vertex or a group of vertices from the directed graph object &#39;Gamma&#39;. " alt="" coords="280,296,447,323"/>
-<area shape="rect" id="node9" href="class_hybrid_system.html#aa105ed37143b703f242e3340f6d18f16" title="Sets the values of edge properties. " alt="" coords="525,397,745,424"/>
-<area shape="rect" id="node10" href="class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f" title="Sets the values of vertex properties. " alt="" coords="249,448,477,475"/>
-<area shape="rect" id="node11" href="class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="282,93,445,120"/>
-<area shape="rect" id="node3" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="807,372,873,399"/>
-<area shape="rect" id="node12" href="even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6" title="even_sample" alt="" coords="586,107,685,133"/>
-<area shape="rect" id="node13" href="horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0" title="Take a struct array and return one structure with all fields horizcontall concatenated. " alt="" coords="584,56,687,83"/>
-<area shape="rect" id="node14" href="blank__struct_8m.html#a69e32a3670b645b3840dd133da5e4329" title="STRUCT_BLANK Simple function to copy struture (fields, no data) of given structure For parsing into s..." alt="" coords="793,56,887,83"/>
+<div class="center"><img src="class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_cgraph.png" border="0" usemap="#class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_cgraph" alt=""/></div>
+<map name="class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_cgraph" id="class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_cgraph">
+<area shape="rect" id="node2" href="class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="249,5,421,32"/>
+<area shape="rect" id="node4" href="class_hybrid_system.html#a93a0f7785dfcf19ea8597eb3492a75df" title="Removes a vertex or a group of vertices from the directed graph object &#39;Gamma&#39;. " alt="" coords="252,56,419,83"/>
+<area shape="rect" id="node3" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="469,5,536,32"/>
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_icgraph.png" border="0" usemap="#class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_icgraph" alt=""/></div>
+<map name="class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_icgraph" id="class_hybrid_system_a6e15fd6c9b29a0f829b3bcdf7acee812_icgraph">
+<area shape="rect" id="node2" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="249,5,419,32"/>
 </map>
 </div>
 </p>
@@ -328,9 +365,9 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="add_edge_8m_source.html#l00018">18</a> of file <a class="el" href="add_edge_8m_source.html">addEdge.m</a>.</p>
 
-<p>References <a class="el" href="add_vertex_8m_source.html#l00018">addVertex()</a>, and <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
+<p>References <a class="el" href="add_vertex_8m_source.html#l00018">addVertex()</a>, <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, and <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -348,7 +385,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system_afb0fd5b9ddc99ed32ee65faff0b33eeb_icgraph.png" border="0" usemap="#class_hybrid_system_afb0fd5b9ddc99ed32ee65faff0b33eeb_icgraph" alt=""/></div>
 <map name="class_hybrid_system_afb0fd5b9ddc99ed32ee65faff0b33eeb_icgraph" id="class_hybrid_system_afb0fd5b9ddc99ed32ee65faff0b33eeb_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="217,5,413,32"/>
+<area shape="rect" id="node2" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="217,5,387,32"/>
 </map>
 </div>
 </p>
@@ -382,9 +419,9 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="add_vertex_8m_source.html#l00018">18</a> of file <a class="el" href="add_vertex_8m_source.html">addVertex.m</a>.</p>
 
-<p>References <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
+<p>References <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, and <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
 
-<p>Referenced by <a class="el" href="add_edge_8m_source.html#l00018">addEdge()</a>, and <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
+<p>Referenced by <a class="el" href="add_edge_8m_source.html#l00018">addEdge()</a>, <a class="el" href="_hybrid_system_8m_source.html#l00151">HybridSystem()</a>, and <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -401,138 +438,32 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system_ad0a3fa58093e69aaf5f729f357505725_icgraph.png" border="0" usemap="#class_hybrid_system_ad0a3fa58093e69aaf5f729f357505725_icgraph" alt=""/></div>
 <map name="class_hybrid_system_ad0a3fa58093e69aaf5f729f357505725_icgraph" id="class_hybrid_system_ad0a3fa58093e69aaf5f729f357505725_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="225,5,389,32"/>
-<area shape="rect" id="node3" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="437,31,633,57"/>
+<area shape="rect" id="node2" href="class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="241,5,405,32"/>
+<area shape="rect" id="node3" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="469,56,639,83"/>
+<area shape="rect" id="node4" href="class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812" title="the default calss constructor " alt="" coords="225,107,421,133"/>
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ae3cb624d499c8c03c829c71892368ca8"></a>
+<a class="anchor" id="ab6209d10fd6000619ad8253456c7d4da"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function [ <a class="el" href="classcolvec.html">colvec</a> dx ,   extra  ] = HybridSystem.calcDynamics </td>
+          <td class="memname">function   ret  = HybridSystem.isDirectedCycle </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classdouble.html">double</a>&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcolvec.html">colvec</a>&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtable.html">table</a>&#160;</td>
-          <td class="paramname"><em>cur_node</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function computes the continuous dynamics of the dynmical system. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>the time instant </td></tr>
-    <tr><td class="paramname">x</td><td>the system states </td></tr>
-    <tr><td class="paramname">cur_node</td><td>the current node being calculated Return values: </td></tr>
-    <tr><td class="paramname">dx</td><td>the first order derivatives</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Required fields of cur_node:</dt><dd></dd></dl>
-<dl class="section user"><dt>Generated fields of extra:</dt><dd></dd></dl>
+<p>returns true if the underlying directed graph is a simple directed cycle. </p>
+<p>A simple directed cycle is a directed graph that has uniform in-degree 1 and uniform out-degree 1. </p>
 
-<p>Definition at line <a class="el" href="calc_dynamics_8m_source.html#l00018">18</a> of file <a class="el" href="calc_dynamics_8m_source.html">calcDynamics.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>, and <a class="el" href="simulate_8m_source.html#l00018">simulate()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_hybrid_system_ae3cb624d499c8c03c829c71892368ca8_icgraph.png" border="0" usemap="#class_hybrid_system_ae3cb624d499c8c03c829c71892368ca8_icgraph" alt=""/></div>
-<map name="class_hybrid_system_ae3cb624d499c8c03c829c71892368ca8_icgraph" id="class_hybrid_system_ae3cb624d499c8c03c829c71892368ca8_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="460,5,656,32"/>
-<area shape="rect" id="node3" href="class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="249,31,412,57"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a54f4627b33c446bbcf7856a7fac4aa8c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function [   value ,   isterminal ,   direction  ] = HybridSystem.checkGuard </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classdouble.html">double</a>&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classcolvec.html">colvec</a>&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>cur_node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtable.html">table</a>&#160;</td>
-          <td class="paramname"><em>assoc_edges</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Detect the guard condition (event trigger) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>the absolute time </td></tr>
-    <tr><td class="paramname">x</td><td>the system states </td></tr>
-    <tr><td class="paramname">assoc_edges</td><td>a table of transition edges from the current domain</td></tr>
-    <tr><td class="paramname">cur_domain</td><td>the current domain</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section user"><dt>Required fields of cur_node:</dt><dd></dd></dl>
-<dl class="section user"><dt>Required fields of assoc_edges:</dt><dd></dd></dl>
-<dl class="section user"><dt>Required fields of x:</dt><dd></dd></dl>
-
-<p>Definition at line <a class="el" href="check_guard_8m_source.html#l00018">18</a> of file <a class="el" href="check_guard_8m_source.html">checkGuard.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>, and <a class="el" href="simulate_8m_source.html#l00018">simulate()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_hybrid_system_a54f4627b33c446bbcf7856a7fac4aa8c_icgraph.png" border="0" usemap="#class_hybrid_system_a54f4627b33c446bbcf7856a7fac4aa8c_icgraph" alt=""/></div>
-<map name="class_hybrid_system_a54f4627b33c446bbcf7856a7fac4aa8c_icgraph" id="class_hybrid_system_a54f4627b33c446bbcf7856a7fac4aa8c_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="447,5,643,32"/>
-<area shape="rect" id="node3" href="class_hybrid_system.html#a6f3afd2902bfa350b6d738217e91a4c2" title="Simulate the hybrid dynamical system. " alt="" coords="236,31,399,57"/>
-</map>
-</div>
-</p>
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00173">173</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 
 </div>
 </div>
@@ -564,14 +495,14 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="rm_edge_8m_source.html#l00018">18</a> of file <a class="el" href="rm_edge_8m_source.html">rmEdge.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system_a8189d23fc5283519d0ec0453a6af4087_icgraph.png" border="0" usemap="#class_hybrid_system_a8189d23fc5283519d0ec0453a6af4087_icgraph" alt=""/></div>
 <map name="class_hybrid_system_a8189d23fc5283519d0ec0453a6af4087_icgraph" id="class_hybrid_system_a8189d23fc5283519d0ec0453a6af4087_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="212,5,408,32"/>
+<area shape="rect" id="node2" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="212,5,381,32"/>
 </map>
 </div>
 </p>
@@ -605,14 +536,15 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="rm_vertex_8m_source.html#l00018">18</a> of file <a class="el" href="rm_vertex_8m_source.html">rmVertex.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00151">HybridSystem()</a>, and <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system_a93a0f7785dfcf19ea8597eb3492a75df_icgraph.png" border="0" usemap="#class_hybrid_system_a93a0f7785dfcf19ea8597eb3492a75df_icgraph" alt=""/></div>
 <map name="class_hybrid_system_a93a0f7785dfcf19ea8597eb3492a75df_icgraph" id="class_hybrid_system_a93a0f7785dfcf19ea8597eb3492a75df_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="220,5,416,32"/>
+<area shape="rect" id="node2" href="class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812" title="the default calss constructor " alt="" coords="220,5,416,32"/>
+<area shape="rect" id="node3" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="464,31,633,57"/>
 </map>
 </div>
 </p>
@@ -660,9 +592,9 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="set_edge_properties_8m_source.html#l00018">18</a> of file <a class="el" href="set_edge_properties_8m_source.html">setEdgeProperties.m</a>.</p>
 
-<p>References <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
+<p>References <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, and <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -679,7 +611,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system_aa105ed37143b703f242e3340f6d18f16_icgraph.png" border="0" usemap="#class_hybrid_system_aa105ed37143b703f242e3340f6d18f16_icgraph" alt=""/></div>
 <map name="class_hybrid_system_aa105ed37143b703f242e3340f6d18f16_icgraph" id="class_hybrid_system_aa105ed37143b703f242e3340f6d18f16_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="273,5,469,32"/>
+<area shape="rect" id="node2" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="273,5,443,32"/>
 </map>
 </div>
 </p>
@@ -722,9 +654,9 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="set_vertex_properties_8m_source.html#l00018">18</a> of file <a class="el" href="set_vertex_properties_8m_source.html">setVertexProperties.m</a>.</p>
 
-<p>References <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
+<p>References <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, and <a class="el" href="implode_8m_source.html#l00017">implode()</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -741,23 +673,51 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_system_a782dc0ef6886acfaad428af3fc43db1f_icgraph.png" border="0" usemap="#class_hybrid_system_a782dc0ef6886acfaad428af3fc43db1f_icgraph" alt=""/></div>
 <map name="class_hybrid_system_a782dc0ef6886acfaad428af3fc43db1f_icgraph" id="class_hybrid_system_a782dc0ef6886acfaad428af3fc43db1f_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="281,5,477,32"/>
+<area shape="rect" id="node2" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="281,5,451,32"/>
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a6f3afd2902bfa350b6d738217e91a4c2"></a>
+<a class="anchor" id="adc6e758d4e3202c993ff0696589be9db"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function   obj  = HybridSystem.simulate </td>
+          <td class="memname">function   sol  = HybridSystem.simulate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
-          <td class="paramname"><em>options</em></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -769,45 +729,69 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Required fields of options:</dt><dd></dd></dl>
 <dl class="section user"><dt>Optional fields of options:</dt><dd><ul>
-<li><code>subgraph&#160;&mdash;&#160;</code> the node list of the subgraph to be simulated </li>
-<li><code>start&#160;&mdash;&#160;</code> the first domain from which the simulation starts, the first domain in the graph if not explicitly specified </li>
-<li><code>terminal&#160;&mdash;&#160;</code> the last domain at which the simulation terminates, empty if not explicitly specified</li>
-</ul>
-<ul>
 <li><code>numcycle&#160;&mdash;&#160;</code> the number of cycle if the simulated system is periodic, 1 if not specified </li>
-<li><code>x0&#160;&mdash;&#160;</code> the initial states of the system, zero if not specified</li>
+<li><code>x0&#160;&mdash;&#160;</code> the initial states of the system, zero if not specified </li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="simulate_8m_source.html#l00018">18</a> of file <a class="el" href="simulate_8m_source.html">simulate.m</a>.</p>
+<p>Definition at line <a class="el" href="_0D_hybrid_system_2simulate_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_hybrid_system_2simulate_8m_source.html">simulate.m</a>.</p>
 
-<p>References <a class="el" href="calc_dynamics_8m_source.html#l00018">calcDynamics()</a>, <a class="el" href="check_guard_8m_source.html#l00018">checkGuard()</a>, <a class="el" href="even__sample_8m_source.html#l00017">even_sample()</a>, and <a class="el" href="horzcat__fields_8m_source.html#l00017">horzcat_fields()</a>.</p>
-
-<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00171">HybridSystem()</a>.</p>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_cgraph.png" border="0" usemap="#class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_cgraph" alt=""/></div>
-<map name="class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_cgraph" id="class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_cgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#ae3cb624d499c8c03c829c71892368ca8" title="This function computes the continuous dynamics of the dynmical system. " alt="" coords="216,5,412,32"/>
-<area shape="rect" id="node3" href="class_hybrid_system.html#a54f4627b33c446bbcf7856a7fac4aa8c" title="Detect the guard condition (event trigger) " alt="" coords="223,56,405,83"/>
-<area shape="rect" id="node4" href="even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6" title="even_sample" alt="" coords="265,107,363,133"/>
-<area shape="rect" id="node5" href="horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0" title="Take a struct array and return one structure with all fields horizcontall concatenated. " alt="" coords="263,157,365,184"/>
-<area shape="rect" id="node6" href="blank__struct_8m.html#a69e32a3670b645b3840dd133da5e4329" title="STRUCT_BLANK Simple function to copy struture (fields, no data) of given structure For parsing into s..." alt="" coords="460,157,553,184"/>
-</map>
-</div>
-</p>
+<p>Referenced by <a class="el" href="_hybrid_system_8m_source.html#l00193">subGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_icgraph.png" border="0" usemap="#class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_icgraph" alt=""/></div>
-<map name="class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_icgraph" id="class_hybrid_system_a6f3afd2902bfa350b6d738217e91a4c2_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="216,5,412,32"/>
+<div class="center"><img src="class_hybrid_system_adc6e758d4e3202c993ff0696589be9db_icgraph.png" border="0" usemap="#class_hybrid_system_adc6e758d4e3202c993ff0696589be9db_icgraph" alt=""/></div>
+<map name="class_hybrid_system_adc6e758d4e3202c993ff0696589be9db_icgraph" id="class_hybrid_system_adc6e758d4e3202c993ff0696589be9db_icgraph">
+<area shape="rect" id="node2" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="216,5,385,32"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af47acec4747eb12fec1d6e94b9a997e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   sys  = HybridSystem.subGraph </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>nodeIDs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>extract the subgraph of the hybrid system to create a new hybrid system object with the same name </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nodeIDs</td><td>the node ids of the subgraph</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of sys:</dt><dd></dd></dl>
+
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00193">193</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
+
+<p>References <a class="el" href="add_edge_8m_source.html#l00018">addEdge()</a>, <a class="el" href="add_vertex_8m_source.html#l00018">addVertex()</a>, <a class="el" href="_hybrid_system_8m_source.html#l00151">HybridSystem()</a>, <a class="el" href="rm_edge_8m_source.html#l00018">rmEdge()</a>, <a class="el" href="rm_vertex_8m_source.html#l00018">rmVertex()</a>, <a class="el" href="set_edge_properties_8m_source.html#l00018">setEdgeProperties()</a>, <a class="el" href="set_vertex_properties_8m_source.html#l00018">setVertexProperties()</a>, and <a class="el" href="_0D_hybrid_system_2simulate_8m_source.html#l00018">simulate()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_system_af47acec4747eb12fec1d6e94b9a997e3_cgraph.png" border="0" usemap="#class_hybrid_system_af47acec4747eb12fec1d6e94b9a997e3_cgraph" alt=""/></div>
+<map name="class_hybrid_system_af47acec4747eb12fec1d6e94b9a997e3_cgraph" id="class_hybrid_system_af47acec4747eb12fec1d6e94b9a997e3_cgraph">
+<area shape="rect" id="node2" href="class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="239,5,403,32"/>
+<area shape="rect" id="node3" href="class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="495,95,667,121"/>
+<area shape="rect" id="node5" href="class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812" title="the default calss constructor " alt="" coords="223,107,419,133"/>
+<area shape="rect" id="node6" href="class_hybrid_system.html#a93a0f7785dfcf19ea8597eb3492a75df" title="Removes a vertex or a group of vertices from the directed graph object &#39;Gamma&#39;. " alt="" coords="497,145,664,172"/>
+<area shape="rect" id="node7" href="class_hybrid_system.html#a8189d23fc5283519d0ec0453a6af4087" title="Removes a edge or a group of edges from the directed graph object &#39;Gamma&#39;. " alt="" coords="241,208,400,235"/>
+<area shape="rect" id="node8" href="class_hybrid_system.html#aa105ed37143b703f242e3340f6d18f16" title="Sets the values of edge properties. " alt="" coords="471,212,691,239"/>
+<area shape="rect" id="node9" href="class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f" title="Sets the values of vertex properties. " alt="" coords="467,293,695,320"/>
+<area shape="rect" id="node10" href="class_hybrid_system.html#adc6e758d4e3202c993ff0696589be9db" title="Simulate the hybrid dynamical system. " alt="" coords="239,360,402,387"/>
+<area shape="rect" id="node4" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="743,145,809,172"/>
 </map>
 </div>
 </p>
@@ -834,26 +818,7 @@ This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
 <dd>
 [readonly] </dd></dl>
 
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00125">125</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a82351203e9f6d894e9f41c8c5ecbba3b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HybridSystem.Flow</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The hybrid flows (trajectory) recorder. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00089">89</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00105">105</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 
 </div>
 </div>
@@ -872,30 +837,9 @@ This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00064">64</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00066">66</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00119">HybridTrajectoryOptimization.HybridTrajectoryOptimization()</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8a2b93d352d6d6b6b3ba0815cd150fa2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HybridSystem.Model</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The rigid body model of the hybrid system. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00077">77</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
-
-<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00119">HybridTrajectoryOptimization.HybridTrajectoryOptimization()</a>.</p>
+<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization.HybridTrajectoryOptimization()</a>.</p>
 
 </div>
 </div>
@@ -915,7 +859,7 @@ This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00051">51</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00053">53</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 
 </div>
 </div>
@@ -938,7 +882,7 @@ This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
 <dd>
 [readonly] </dd></dl>
 
-<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00111">111</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
+<p>Definition at line <a class="el" href="_hybrid_system_8m_source.html#l00091">91</a> of file <a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a>.</p>
 
 </div>
 </div>
@@ -946,13 +890,11 @@ This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
 <li>system/@HybridSystem/<a class="el" href="_hybrid_system_8m_source.html">HybridSystem.m</a></li>
 <li>system/@HybridSystem/<a class="el" href="add_edge_8m_source.html">addEdge.m</a></li>
 <li>system/@HybridSystem/<a class="el" href="add_vertex_8m_source.html">addVertex.m</a></li>
-<li>system/@HybridSystem/<a class="el" href="calc_dynamics_8m_source.html">calcDynamics.m</a></li>
-<li>system/@HybridSystem/<a class="el" href="check_guard_8m_source.html">checkGuard.m</a></li>
 <li>system/@HybridSystem/<a class="el" href="rm_edge_8m_source.html">rmEdge.m</a></li>
 <li>system/@HybridSystem/<a class="el" href="rm_vertex_8m_source.html">rmVertex.m</a></li>
 <li>system/@HybridSystem/<a class="el" href="set_edge_properties_8m_source.html">setEdgeProperties.m</a></li>
 <li>system/@HybridSystem/<a class="el" href="set_vertex_properties_8m_source.html">setVertexProperties.m</a></li>
-<li>system/@HybridSystem/<a class="el" href="simulate_8m_source.html">simulate.m</a></li>
+<li>system/@HybridSystem/<a class="el" href="_0D_hybrid_system_2simulate_8m_source.html">simulate.m</a></li>
 </ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -969,7 +911,7 @@ This property has the MATLAB attribute <code>Dependent</code> set to true. </dd>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Mon Jan 30 2017 17:09:19 for FROST by &#160;<br/>
+	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

@@ -1,9 +1,11 @@
 <map id="nlp/@NonlinearProgram/NonlinearProgram.m" name="nlp/@NonlinearProgram/NonlinearProgram.m">
-<area shape="rect" id="node2" href="$get_initial_guess_8m.html" title="nlp/@NonlinearProgram\l/getInitialGuess.m" alt="" coords="5,95,167,136"/>
-<area shape="rect" id="node3" href="$get_var_info_8m.html" title="nlp/@NonlinearProgram\l/getVarInfo.m" alt="" coords="191,95,352,136"/>
-<area shape="rect" id="node4" href="$reg_constraint_8m.html" title="nlp/@NonlinearProgram\l/regConstraint.m" alt="" coords="376,95,537,136"/>
-<area shape="rect" id="node5" href="$reg_objective_8m.html" title="nlp/@NonlinearProgram\l/regObjective.m" alt="" coords="561,95,723,136"/>
-<area shape="rect" id="node6" href="$reg_variable_8m.html" title="nlp/@NonlinearProgram\l/regVariable.m" alt="" coords="747,95,908,136"/>
-<area shape="rect" id="node7" href="$set_option_8m.html" title="nlp/@NonlinearProgram\l/setOption.m" alt="" coords="932,95,1093,136"/>
-<area shape="rect" id="node8" href="$_0D_nonlinear_program_2update_8m.html" title="nlp/@NonlinearProgram\l/update.m" alt="" coords="1117,95,1279,136"/>
+<area shape="rect" id="node2" href="$_0D_nonlinear_program_2compile_constraint_8m.html" title="nlp/@NonlinearProgram\l/compileConstraint.m" alt="" coords="5,95,167,136"/>
+<area shape="rect" id="node3" href="$_0D_nonlinear_program_2compile_objective_8m.html" title="nlp/@NonlinearProgram\l/compileObjective.m" alt="" coords="191,95,352,136"/>
+<area shape="rect" id="node4" href="$get_initial_guess_8m.html" title="nlp/@NonlinearProgram\l/getInitialGuess.m" alt="" coords="376,95,537,136"/>
+<area shape="rect" id="node5" href="$get_var_info_8m.html" title="nlp/@NonlinearProgram\l/getVarInfo.m" alt="" coords="561,95,723,136"/>
+<area shape="rect" id="node6" href="$reg_constraint_8m.html" title="nlp/@NonlinearProgram\l/regConstraint.m" alt="" coords="747,95,908,136"/>
+<area shape="rect" id="node7" href="$reg_objective_8m.html" title="nlp/@NonlinearProgram\l/regObjective.m" alt="" coords="932,95,1093,136"/>
+<area shape="rect" id="node8" href="$reg_variable_8m.html" title="nlp/@NonlinearProgram\l/regVariable.m" alt="" coords="1117,95,1279,136"/>
+<area shape="rect" id="node9" href="$set_option_8m.html" title="nlp/@NonlinearProgram\l/setOption.m" alt="" coords="1303,95,1464,136"/>
+<area shape="rect" id="node10" href="$_0D_nonlinear_program_2update_8m.html" title="nlp/@NonlinearProgram\l/update.m" alt="" coords="1488,95,1649,136"/>
 </map>

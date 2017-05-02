@@ -1,0 +1,4 @@
+<map id="RigidImpact::removeImpactConstraint" name="RigidImpact::removeImpactConstraint">
+<area shape="rect" id="node2" href="$class_rigid_impact.html#a966f64617151bf54603065e191eb613a" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="236,5,435,32"/>
+<area shape="rect" id="node3" href="$class_rigid_impact.html#aecf89c5190a0787a167dec6a89ff075b" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="253,57,417,98"/>
+</map>

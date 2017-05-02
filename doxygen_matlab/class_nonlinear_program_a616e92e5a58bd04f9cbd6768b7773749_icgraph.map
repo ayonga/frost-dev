@@ -1,4 +1,7 @@
 <map id="NonlinearProgram::regVariable" name="NonlinearProgram::regVariable">
-<area shape="rect" id="node2" href="$class_nonlinear_program.html#a5207750db02c9af45b8dbc9245a6bd35" title="The default class constructor function. " alt="" coords="252,5,441,47"/>
-<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="489,5,688,47"/>
+<area shape="rect" id="node2" href="$class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="252,77,441,119"/>
+<area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="489,5,680,47"/>
+<area shape="rect" id="node6" href="$class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="508,173,661,215"/>
+<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="728,47,927,88"/>
+<area shape="rect" id="node4" href="$class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="747,133,908,175"/>
 </map>

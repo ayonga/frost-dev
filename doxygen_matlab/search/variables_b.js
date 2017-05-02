@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['linear',['LINEAR',['../class_nlp_function.html#af2766bf8bb0a9a6a49a40542d8d91a3f',1,'NlpFunction']]],
-  ['linearize',['Linearize',['../class_kinematics.html#a841e5af4aa10f20335bc8eb7e33d08a4',1,'Kinematics']]],
-  ['linearizeflagchanged',['LinearizeFlagChanged',['../class_kinematics.html#af6aa906edb9414861b5d531ca44e3da9',1,'Kinematics']]],
-  ['lineobjects',['LineObjects',['../classanimator.html#acc017978719f8e3c4a22f0f4ea12529b',1,'animator::LineObjects()'],['../class_rigid_body_model.html#a1332e71c503d9fbbfc5e3100e95767aa',1,'RigidBodyModel::LineObjects()']]],
-  ['links',['Links',['../class_rigid_body_model.html#ac16220b99300784909be87c696fa8ef0',1,'RigidBodyModel']]],
-  ['lowerbound',['LowerBound',['../class_nlp_function.html#a5d6b43b5939f73f3773ce820b5878509',1,'NlpFunction::LowerBound()'],['../class_nlp_variable.html#a6ca102a70c214d1a05beee0fda6ddee7',1,'NlpVariable::LowerBound()']]]
+  ['name',['Name',['../class_controller.html#a3476e78eae56965e347f0ffd4f2465c4',1,'Controller::Name()'],['../class_nlp_function.html#a47d4c2d101d678316ff60268bacb876f',1,'NlpFunction::Name()'],['../class_nlp_variable.html#ae52fce14d4fd9b51063b94444c193025',1,'NlpVariable::Name()'],['../class_nonlinear_program.html#aa2d7852939ee6661d06ac4b6d3487cfc',1,'NonlinearProgram::Name()'],['../class_coordinate_frame.html#a98e6f969fce5a5bcab1e2846e73a9d8e',1,'CoordinateFrame::Name()'],['../class_sym_function.html#a842e064ae0c7151df657651467ea6917',1,'SymFunction::Name()'],['../class_holonomic_constraint.html#af619553c61aec2686ab9d0e4afeb3ab6',1,'HolonomicConstraint::Name()'],['../class_hybrid_system.html#a5a4d0a5ce1d129d514e7f9ad0f888775',1,'HybridSystem::Name()'],['../class_unilateral_constraint.html#a0c6c6eaae45e04c57b54241f0d0ea995',1,'UnilateralConstraint::Name()'],['../class_virtual_constraint.html#aa7de8f687fe3d03642a41cc79da7a2bf',1,'VirtualConstraint::Name()']]],
+  ['nlp',['Nlp',['../class_ipopt_application.html#a328bc58c58e1a53112eea84bbeeddec3',1,'IpoptApplication']]],
+  ['nnzhess',['nnzHess',['../class_nlp_function.html#a5b094daabc3be0053703dbefb4032e01',1,'NlpFunction']]],
+  ['nnzhessindices',['nnzHessIndices',['../class_nlp_function.html#a08f0811c20472eec58284c844e7c46bf',1,'NlpFunction']]],
+  ['nnzjac',['nnzJac',['../class_nlp_function.html#a9e8d1064abe409ee2a5f6d77b40839bd',1,'NlpFunction']]],
+  ['nnzjacindices',['nnzJacIndices',['../class_nlp_function.html#a0a467add9c23648324079fba093c1dc1',1,'NlpFunction']]],
+  ['notify',['notify',['../classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f',1,'handle']]],
+  ['numnode',['NumNode',['../class_trajectory_optimization.html#a71727bec3376dcc78bd51b8560ebb250',1,'TrajectoryOptimization']]]
 ];

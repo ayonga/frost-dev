@@ -1,0 +1,4 @@
+<map id="RobotLinks::addFixedJoint" name="RobotLinks::addFixedJoint">
+<area shape="rect" id="node2" href="$class_robot_links.html#abbb2c489215184c6e5e3208f743587f5" title="configures the robot manipulator objects from the configuration (struct or URDF/YAML) file ..." alt="" coords="231,5,380,32"/>
+<area shape="rect" id="node3" href="$class_robot_links.html#ab6e6ed4eadf6eda2ae3aa23a913ee4c7" title="The class constructor function. " alt="" coords="428,31,591,57"/>
+</map>

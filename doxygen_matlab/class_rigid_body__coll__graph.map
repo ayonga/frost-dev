@@ -1,0 +1,8 @@
+<map id="RigidBody" name="RigidBody">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html" title="A kinematic coordinate frame class. " alt="" coords="89,109,212,136"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="259,5,319,32"/>
+<area shape="rect" id="node4" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="99,5,146,32"/>
+<area shape="rect" id="node6" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="171,5,235,32"/>
+<area shape="rect" id="node7" href="$classdouble.html" title="A double value. " alt="" coords="326,109,386,136"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="CoordinateFrame::computeCartesianPosition" name="CoordinateFrame::computeCartesianPosition">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="254,5,461,32"/>
+<area shape="rect" id="node3" href="$class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="233,56,481,83"/>
+</map>

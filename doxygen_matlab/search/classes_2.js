@@ -1,6 +1,7 @@
 var searchData=
 [
   ['digraph',['digraph',['../classdigraph.html',1,'']]],
-  ['domain',['Domain',['../class_domain.html',1,'']]],
-  ['double',['double',['../classdouble.html',1,'']]]
+  ['discretedynamics',['DiscreteDynamics',['../class_discrete_dynamics.html',1,'']]],
+  ['double',['double',['../classdouble.html',1,'']]],
+  ['dynamicalsystem',['DynamicalSystem',['../class_dynamical_system.html',1,'']]]
 ];

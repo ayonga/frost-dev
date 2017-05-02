@@ -1,0 +1,5 @@
+<map id="TrajectoryOptimization::addCost" name="TrajectoryOptimization::addCost">
+<area shape="rect" id="node2" href="$class_trajectory_optimization.html#a0053a68d3dde1c56cc08b457c04525e4" title="Add a cost function that only depends on variables at a particular node. The input argument &#39;nodes&#39; w..." alt="" coords="207,5,360,47"/>
+<area shape="rect" id="node3" href="$class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="408,64,569,105"/>
+<area shape="rect" id="node4" href="$class_trajectory_optimization.html#a60b26164cd1b45510c1ddf869c1e7b14" title="Add a running cost to the problem. " alt="" coords="207,123,360,164"/>
+</map>

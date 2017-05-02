@@ -1,9 +1,24 @@
 var searchData=
 [
-  ['hline',['hline',['../hline_8m.html#a938c11cd202783bc1d04fa02006deb2b',1,'hline.m']]],
-  ['horzcat_5fdomains',['horzcat_domains',['../horzcat__domains_8m.html#aeecc3217b9a25532930cca125a449dab',1,'horzcat_domains.m']]],
-  ['horzcat_5ffields',['horzcat_fields',['../horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0',1,'horzcat_fields.m']]],
-  ['horzcat_5ffields_5fdomains',['horzcat_fields_domains',['../horzcat__fields__domains_8m.html#a930bb33692ce2bede234feed4cf71eba',1,'horzcat_fields_domains.m']]],
-  ['hybridsystem',['HybridSystem',['../class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728',1,'HybridSystem']]],
-  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9',1,'HybridTrajectoryOptimization']]]
+  ['general2math',['general2math',['../general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e',1,'general2math.m']]],
+  ['general2str',['general2str',['../general2str_8m.html#ad9ab1321cead8451ecdbc9d5a8aa930e',1,'general2str.m']]],
+  ['get_5fbase_5fdofs',['get_base_dofs',['../get__base__dofs_8m.html#a0de265953895aff98072b4ed21f1448f',1,'get_base_dofs.m']]],
+  ['getbodyjacobian',['getBodyJacobian',['../class_robot_links.html#a7834bf06f3cc86116cc6f628e66920bb',1,'RobotLinks']]],
+  ['getcartesianposition',['getCartesianPosition',['../class_robot_links.html#a7fe27189c183879331b39a0d42e3527d',1,'RobotLinks']]],
+  ['getcomposition',['getComPosition',['../class_robot_links.html#a5aa08f041f850a3bdbc4c2b96df5e97d',1,'RobotLinks']]],
+  ['getdepindices',['getDepIndices',['../class_nlp_function.html#a2ce9413b3ef885f931c181235a369846',1,'NlpFunction']]],
+  ['geteulerangles',['getEulerAngles',['../class_robot_links.html#a3d6ab2d8705012d4c7171c7d32d69854',1,'RobotLinks']]],
+  ['getfieldd',['getfieldd',['../getfieldd_8m.html#a764f95954418427ad6a3622f79891817',1,'getfieldd.m']]],
+  ['getfrictioncone',['getFrictionCone',['../class_contact_frame.html#ae05dc7795bda90260ef0ac32141cbc53',1,'ContactFrame']]],
+  ['getinitialguess',['getInitialGuess',['../class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2',1,'NonlinearProgram']]],
+  ['getjointindices',['getJointIndices',['../class_robot_links.html#ac93e23f2716f9f3e58fc56fa29684ed7',1,'RobotLinks']]],
+  ['getlimits',['getLimits',['../class_robot_links.html#aaa640c5a6d6b3427e485ed679e9e9d1f',1,'RobotLinks']]],
+  ['getlinkindices',['getLinkIndices',['../class_robot_links.html#a6231f629129d3b40d24ed398c4cab896',1,'RobotLinks']]],
+  ['getphaseindex',['getPhaseIndex',['../class_hybrid_trajectory_optimization.html#a59fcfe213c4ab7e8ea8ea9ff83ee5ec8',1,'HybridTrajectoryOptimization']]],
+  ['getspatialjacobian',['getSpatialJacobian',['../class_robot_links.html#ae32fdf42050a676f1b6cb933861ae067',1,'RobotLinks']]],
+  ['getsummands',['getSummands',['../class_nlp_function.html#a019e6a5b80f6132bb745c2f4991e2b1e',1,'NlpFunction']]],
+  ['gettotalmass',['getTotalMass',['../class_robot_links.html#afcbc86f47cc7ffcd126605357a2b9155',1,'RobotLinks']]],
+  ['gettwist',['getTwist',['../class_rigid_joint.html#a45764d405f1192c532bd8c160d58eac8',1,'RigidJoint']]],
+  ['getvarinfo',['getVarInfo',['../class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765',1,'NonlinearProgram']]],
+  ['getzmpconstraint',['getZMPConstraint',['../class_contact_frame.html#acb58f753b10b156300cfd741aa820609',1,'ContactFrame']]]
 ];

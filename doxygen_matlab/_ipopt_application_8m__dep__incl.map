@@ -1,5 +1,5 @@
 <map id="solver/@IpoptApplication/IpoptApplication.m" name="solver/@IpoptApplication/IpoptApplication.m">
 <area shape="rect" id="node2" href="$array2struct_8m.html" title="solver/@IpoptApplication\l/array2struct.m" alt="" coords="5,95,173,136"/>
-<area shape="rect" id="node3" href="$solver_2_0D_ipopt_application_2initialize_8m.html" title="solver/@IpoptApplication\l/initialize.m" alt="" coords="197,95,365,136"/>
+<area shape="rect" id="node3" href="$initialize_8m.html" title="solver/@IpoptApplication\l/initialize.m" alt="" coords="197,95,365,136"/>
 <area shape="rect" id="node4" href="$optimize_8m.html" title="solver/@IpoptApplication\l/optimize.m" alt="" coords="389,95,557,136"/>
 </map>

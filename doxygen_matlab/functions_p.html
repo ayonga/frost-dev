@@ -133,7 +133,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
       <li><a href="functions.html#index_a"><span>a</span></a></li>
-      <li><a href="functions_b.html#index_b"><span>b</span></a></li>
       <li><a href="functions_c.html#index_c"><span>c</span></a></li>
       <li><a href="functions_d.html#index_d"><span>d</span></a></li>
       <li><a href="functions_e.html#index_e"><span>e</span></a></li>
@@ -142,18 +141,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_h.html#index_h"><span>h</span></a></li>
       <li><a href="functions_i.html#index_i"><span>i</span></a></li>
       <li><a href="functions_j.html#index_j"><span>j</span></a></li>
-      <li><a href="functions_k.html#index_k"><span>k</span></a></li>
       <li><a href="functions_l.html#index_l"><span>l</span></a></li>
       <li><a href="functions_m.html#index_m"><span>m</span></a></li>
       <li><a href="functions_n.html#index_n"><span>n</span></a></li>
       <li><a href="functions_o.html#index_o"><span>o</span></a></li>
       <li class="current"><a href="functions_p.html#index_p"><span>p</span></a></li>
-      <li><a href="functions_q.html#index_q"><span>q</span></a></li>
       <li><a href="functions_r.html#index_r"><span>r</span></a></li>
       <li><a href="functions_s.html#index_s"><span>s</span></a></li>
       <li><a href="functions_t.html#index_t"><span>t</span></a></li>
       <li><a href="functions_u.html#index_u"><span>u</span></a></li>
       <li><a href="functions_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_w.html#index_w"><span>w</span></a></li>
+      <li><a href="functions_y.html#index_y"><span>y</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -177,20 +176,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>Param
 : <a class="el" href="class_controller.html#a4f8dcb168f555e179b9af142ce7fc0aa">Controller</a>
-, <a class="el" href="class_virtual_constr_domain.html#acb503289ed3f5a96f90d12abaacfa564">VirtualConstrDomain</a>
+, <a class="el" href="class_holonomic_constraint.html#a609005833ec42f4b58dee205e3a12be1">HolonomicConstraint</a>
 </li>
-<li>Parameters
-: <a class="el" href="class_kinematic_expr.html#a761bfb5d4c5b890b502a7e14d70a6d90">KinematicExpr</a>
+<li>ParamName
+: <a class="el" href="class_holonomic_constraint.html#a63f41cee94dcf9ec1685063a7ebe53ce">HolonomicConstraint</a>
 </li>
-<li>ParentLink
-: <a class="el" href="class_kinematic_contact.html#a08fb18a3b144c049d2b4fcf821a68985">KinematicContact</a>
-, <a class="el" href="class_kinematic_orientation.html#a681f4f8947611037b5c9111e17e8f1a6">KinematicOrientation</a>
+<li>Params
+: <a class="el" href="class_sym_function.html#af3b56ef15a25dd0ff453ae480adb6e5b">SymFunction</a>
+</li>
+<li>Parent
+: <a class="el" href="class_rigid_joint.html#a431b2b7e0cca75dbe589abcef8c6ca7e">RigidJoint</a>
 </li>
 <li>parse()
 : <a class="el" href="classanimator.html#ab1de951f4cffe5c4c759d02f96e39bbb">animator</a>
-</li>
-<li>ParSymbols
-: <a class="el" href="class_sym_function.html#a45dab5ad54ba8f75453d7b141124b8e6">SymFunction</a>
 </li>
 <li>permute
 : <a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">handle</a>
@@ -198,21 +196,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Phase
 : <a class="el" href="class_hybrid_trajectory_optimization.html#afde5b3c3d5011775a298137360a17cd4">HybridTrajectoryOptimization</a>
 </li>
+<li>PhaseFuncs
+: <a class="el" href="class_virtual_constraint.html#acaa588b02d93048f0203f9b1e4d20b3a">VirtualConstraint</a>
+</li>
+<li>PhaseParamName
+: <a class="el" href="class_virtual_constraint.html#a424c5f7cd56b4b63ff6cbf9218f2b559">VirtualConstraint</a>
+</li>
+<li>PhaseParams
+: <a class="el" href="class_virtual_constraint.html#a1ed87743c12cf5ba9ff1ed29c35229f0">VirtualConstraint</a>
+</li>
+<li>PhaseType
+: <a class="el" href="class_virtual_constraint.html#a51c6f80cc3b886946df9f8c0375bf1b0">VirtualConstraint</a>
+</li>
 <li>PhaseVariable
-: <a class="el" href="class_virtual_constr_domain.html#a0fb27a3787f4a6cf3d789647b5f53fdc">VirtualConstrDomain</a>
+: <a class="el" href="class_virtual_constraint.html#ae3310be96ebcbe0015686739ddb1e9d9">VirtualConstraint</a>
 </li>
-<li>pIndex
-: <a class="el" href="class_kinematic_com.html#af41f9d1f8d6cf87d7c2216da2701cfce">KinematicCom</a>
-, <a class="el" href="class_kinematic_orientation.html#ad4085bdf0c8f47e04bf522fff3702e63">KinematicOrientation</a>
+<li>Plant
+: <a class="el" href="class_trajectory_optimization.html#ab1800e95ac8aab59ab0461215ecf2440">TrajectoryOptimization</a>
 </li>
-<li>PreCommands
-: <a class="el" href="class_sym_function.html#a3072587e76e4037069da3002495ddb41">SymFunction</a>
+<li>plus()
+: <a class="el" href="class_sym_expression.html#a13ae1f200548de5ee30cd92eeadbe3b3">SymExpression</a>
 </li>
-<li>Prefix
-: <a class="el" href="class_kinematics.html#ae8704a6181978550824af478114854f6">Kinematics</a>
+<li>PolyDegree
+: <a class="el" href="class_virtual_constraint.html#a2eb6228eea8c130811f86548865cb8b6">VirtualConstraint</a>
 </li>
-<li>print()
-: <a class="el" href="class_kinematics.html#aabf9883c6301589c35e7a20147158eea">Kinematics</a>
+<li>power()
+: <a class="el" href="class_sym_expression.html#ac4a1cc2c74e7f5fc1ca9cfc9611546fe">SymExpression</a>
+</li>
+<li>privToCell()
+: <a class="el" href="class_sym_expression.html#a5b6267c2f855a0e57803e029f9e8bd66">SymExpression</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -230,7 +242,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Mon Jan 30 2017 17:09:19 for FROST by &#160;<br/>
+	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

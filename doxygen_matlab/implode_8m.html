@@ -183,46 +183,62 @@ Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="implode_8m_source.html#l00017">17</a> of file <a class="el" href="implode_8m_source.html">implode.m</a>.</p>
 
-<p>Referenced by <a class="el" href="add_auxilary_constraint_8m_source.html#l00018">HybridTrajectoryOptimization.addAuxilaryConstraint()</a>, <a class="el" href="add_auxilary_variable_8m_source.html#l00018">HybridTrajectoryOptimization.addAuxilaryVariable()</a>, <a class="el" href="add_edge_8m_source.html#l00018">HybridSystem.addEdge()</a>, <a class="el" href="add_vertex_8m_source.html#l00018">HybridSystem.addVertex()</a>, <a class="el" href="cell2str_8m_source.html#l00017">cell2str()</a>, <a class="el" href="cell2tensor_8m_source.html#l00017">cell2tensor()</a>, <a class="el" href="check__error_8m_source.html#l00017">check_error()</a>, <a class="el" href="nlp_2_0D_sym_function_2export_8m_source.html#l00018">SymFunction.export()</a>, <a class="el" href="_kinematic_contact_8m_source.html#l00333">KinematicContact.getJacMathCommand()</a>, <a class="el" href="mat2math_8m_source.html#l00017">mat2math()</a>, <a class="el" href="set_edge_properties_8m_source.html#l00018">HybridSystem.setEdgeProperties()</a>, <a class="el" href="set_vertex_properties_8m_source.html#l00018">HybridSystem.setVertexProperties()</a>, <a class="el" href="struct2assoc_8m_source.html#l00017">struct2assoc()</a>, and <a class="el" href="struct__overlay_8m_source.html#l00017">struct_overlay()</a>.</p>
+<p>Referenced by <a class="el" href="add_constraint_8m_source.html#l00018">TrajectoryOptimization.addConstraint()</a>, <a class="el" href="add_cost_8m_source.html#l00018">TrajectoryOptimization.addCost()</a>, <a class="el" href="add_edge_8m_source.html#l00018">HybridSystem.addEdge()</a>, <a class="el" href="add_node_constraint_8m_source.html#l00018">TrajectoryOptimization.addNodeConstraint()</a>, <a class="el" href="add_node_cost_8m_source.html#l00018">TrajectoryOptimization.addNodeCost()</a>, <a class="el" href="add_variable_8m_source.html#l00018">TrajectoryOptimization.addVariable()</a>, <a class="el" href="add_vertex_8m_source.html#l00018">HybridSystem.addVertex()</a>, <a class="el" href="cell2str_8m_source.html#l00017">cell2str()</a>, <a class="el" href="cell2tensor_8m_source.html#l00017">cell2tensor()</a>, <a class="el" href="check__error_8m_source.html#l00017">check_error()</a>, <a class="el" href="robotics_2_0D_robot_links_2configure_8m_source.html#l00018">RobotLinks.configure()</a>, <a class="el" href="mat2math_8m_source.html#l00017">mat2math()</a>, <a class="el" href="set_edge_properties_8m_source.html#l00018">HybridSystem.setEdgeProperties()</a>, <a class="el" href="set_funcs_8m_source.html#l00018">NlpFunction.setFuncs()</a>, <a class="el" href="set_limit_8m_source.html#l00018">RigidJoint.setLimit()</a>, <a class="el" href="set_vertex_properties_8m_source.html#l00018">HybridSystem.setVertexProperties()</a>, <a class="el" href="struct2assoc_8m_source.html#l00017">struct2assoc()</a>, <a class="el" href="struct__overlay_8m_source.html#l00017">struct_overlay()</a>, and <a class="el" href="validate_graph_8m_source.html#l00018">HybridTrajectoryOptimization.validateGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="implode_8m_a4dc124f4c46ec0b6543d860d27ab3c64_icgraph.png" border="0" usemap="#implode_8m_a4dc124f4c46ec0b6543d860d27ab3c64_icgraph" alt=""/></div>
 <map name="implode_8m_a4dc124f4c46ec0b6543d860d27ab3c64_icgraph" id="implode_8m_a4dc124f4c46ec0b6543d860d27ab3c64_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ac7549d64dafe5477dba55a68ca7379d3" title="Add auxilary user&#45;defined constraints constraints. " alt="" coords="139,5,329,47"/>
-<area shape="rect" id="node4" href="class_hybrid_trajectory_optimization.html#a927973ac549f441165b65967d217be9c" title="Adds auxilary defect variables (such as h or impF) as the NLP decision variables to the problem..." alt="" coords="139,71,329,112"/>
-<area shape="rect" id="node5" href="class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="422,910,586,937"/>
-<area shape="rect" id="node7" href="class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="148,885,320,911"/>
-<area shape="rect" id="node8" href="cell2str_8m.html#a3ce6f23b8f8fb7584a53d36719abce87" title="cell2str" alt="" coords="202,137,266,163"/>
-<area shape="rect" id="node11" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="191,439,277,466"/>
-<area shape="rect" id="node13" href="class_kinematic_contact.html#aa747df38de9cecb96c9b7118ed795e1f" title="This function returns he Mathematica command to compile the symbolic expression for the Jacobian of k..." alt="" coords="417,581,591,623"/>
-<area shape="rect" id="node25" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="713,465,810,491"/>
-<area shape="rect" id="node26" href="check__error_8m.html#a46c538e4b8713afed201852fec15b541" title="check_error" alt="" coords="189,733,279,759"/>
-<area shape="rect" id="node27" href="class_sym_function.html#aac82178b370a58decbdf84a22c991fbe" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="163,783,305,810"/>
-<area shape="rect" id="node28" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="194,523,274,550"/>
-<area shape="rect" id="node29" href="class_hybrid_system.html#aa105ed37143b703f242e3340f6d18f16" title="Sets the values of edge properties. " alt="" coords="124,682,344,709"/>
-<area shape="rect" id="node30" href="class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f" title="Sets the values of vertex properties. " alt="" coords="120,834,348,861"/>
-<area shape="rect" id="node31" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="182,999,286,1026"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a3e9e5f01b699bdc05b8c0e8acae87dd9" title="The constructor function. " alt="" coords="662,48,861,89"/>
-<area shape="rect" id="node6" href="class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="663,834,859,861"/>
-<area shape="rect" id="node9" href="general2str_8m.html#ad9ab1321cead8451ecdbc9d5a8aa930e" title="general2str" alt="" coords="461,114,547,141"/>
-<area shape="rect" id="node10" href="struct2str_8m.html#ade5b9c6df5865f7aa227593a05f70a40" title="struct2str" alt="" coords="723,114,800,141"/>
-<area shape="rect" id="node12" href="class_kinematic_contact.html#afffb4a2fe1c478edcd51aa40ad57d1b5" title="This function returns he Mathematica command to compile the symbolic expression for the kinematic con..." alt="" coords="419,516,589,557"/>
-<area shape="rect" id="node14" href="class_kinematic_expr.html#a2e680261ff1bf2005eabd1d7cdf6bff5" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="424,414,584,441"/>
-<area shape="rect" id="node16" href="class_kinematic_group.html#ae184dc007b8ef5160fbc97b4aa1246c2" title="This function computes the symbolic expression of the kinematics constraints in Mathematica. " alt="" coords="420,297,588,323"/>
-<area shape="rect" id="node21" href="class_kinematic_orientation.html#af295e2259e8c0e65fa9956ffc06328a8" title="This function returns he Mathematica command to compile the symbolic expression for the kinematic con..." alt="" coords="426,231,582,272"/>
-<area shape="rect" id="node22" href="class_kinematic_orientation.html#a568a63093c329f175bd0ca5f01c6bf46" title="overload the Jacobian compilation command This function returns the Mathematica command to compile th..." alt="" coords="425,165,583,207"/>
-<area shape="rect" id="node23" href="class_hybrid_trajectory_optimization.html#ad8512a9b7dda6328cbffd7244f5f0cb0" title="This function creates symbolic functions for the hybrid trajectory optimization problem. " alt="" coords="409,348,599,389"/>
-<area shape="rect" id="node24" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="454,465,554,491"/>
-<area shape="rect" id="node15" href="class_kinematic_expr.html#a269f8b1e68f08cf53b265396db0c790e" title="The constructor function. " alt="" coords="661,414,861,441"/>
-<area shape="rect" id="node17" href="class_kinematic_group.html#a30032f1030a7e5cf51b546a12ea3fb72" title="Returns the dimension of the kinematic function. " alt="" coords="660,297,863,323"/>
-<area shape="rect" id="node18" href="class_kinematic_group.html#a10c265b7ba7104aa4c6e5793f65a0f0e" title="Generates indices for the kinematic objects in the group. " alt="" coords="911,297,1105,323"/>
-<area shape="rect" id="node19" href="class_kinematic_group.html#a699391380d9fa14bc972a0f3bc909603" title="add kinematic objects to the group " alt="" coords="1164,259,1367,286"/>
-<area shape="rect" id="node20" href="class_kinematic_group.html#a63a4f1713ee36d023d07ca2f49c45154" title="remove kinematic objects from the group " alt="" coords="1153,335,1377,362"/>
-<area shape="rect" id="node32" href="classanimator.html#aa6bf3057353515090f8a3ff4b9bd3554" title="The constructor function. " alt="" coords="439,961,569,987"/>
-<area shape="rect" id="node33" href="classanimator.html#a16a574a9371f6de46acd7396424aec7e" title="animator.setOption" alt="" coords="436,1011,572,1038"/>
-<area shape="rect" id="node34" href="class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="396,1062,612,1089"/>
+<area shape="rect" id="node2" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="157,245,311,287"/>
+<area shape="rect" id="node8" href="class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="427,549,581,591"/>
+<area shape="rect" id="node11" href="class_trajectory_optimization.html#a2fae519f4ebafc025cfea9edcc3bd302" title="Add NLP object functions. " alt="" coords="427,623,581,664"/>
+<area shape="rect" id="node12" href="class_trajectory_optimization.html#a0053a68d3dde1c56cc08b457c04525e4" title="Add a cost function that only depends on variables at a particular node. The input argument &#39;nodes&#39; w..." alt="" coords="683,757,836,799"/>
+<area shape="rect" id="node14" href="class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="422,841,586,867"/>
+<area shape="rect" id="node16" href="class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897" title="Adds NLP decision variables. " alt="" coords="427,411,581,452"/>
+<area shape="rect" id="node19" href="class_hybrid_system.html#ad0a3fa58093e69aaf5f729f357505725" title="Adds a vertex or a group of vertices to the directed graph &#39;Gamma&#39;. " alt="" coords="148,891,320,918"/>
+<area shape="rect" id="node21" href="cell2str_8m.html#a3ce6f23b8f8fb7584a53d36719abce87" title="cell2str" alt="" coords="202,993,266,1019"/>
+<area shape="rect" id="node23" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="191,1170,277,1197"/>
+<area shape="rect" id="node29" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="711,1145,808,1171"/>
+<area shape="rect" id="node30" href="check__error_8m.html#a46c538e4b8713afed201852fec15b541" title="check_error" alt="" coords="189,1423,279,1450"/>
+<area shape="rect" id="node31" href="class_robot_links.html#abbb2c489215184c6e5e3208f743587f5" title="configures the robot manipulator objects from the configuration (struct or URDF/YAML) file ..." alt="" coords="159,1538,309,1565"/>
+<area shape="rect" id="node33" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="194,1322,274,1349"/>
+<area shape="rect" id="node38" href="class_hybrid_system.html#aa105ed37143b703f242e3340f6d18f16" title="Sets the values of edge properties. " alt="" coords="124,739,344,766"/>
+<area shape="rect" id="node39" href="class_nlp_function.html#a074544cc7d262d673ea3b9b73e2aeaee" title="This function specify the functions (name) that calculates the the function. " alt="" coords="157,1677,311,1703"/>
+<area shape="rect" id="node43" href="class_rigid_joint.html#a3ddd477ef88ae1bdf16af8cd9a4d30e3" title="set the physical limits of the rigid joints " alt="" coords="167,1373,301,1399"/>
+<area shape="rect" id="node44" href="class_hybrid_system.html#a782dc0ef6886acfaad428af3fc43db1f" title="Sets the values of vertex properties. " alt="" coords="120,790,348,817"/>
+<area shape="rect" id="node45" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="182,1854,286,1881"/>
+<area shape="rect" id="node50" href="class_hybrid_trajectory_optimization.html#adb58e04362bdeb6fbcf7ccd7abe39446" title="validate the directed graph of the hybrid system model " alt="" coords="139,67,329,108"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="409,41,599,83"/>
+<area shape="rect" id="node5" href="class_trajectory_optimization.html#afdd7052fbe6615ecc8d24581b2d3ff49" title="Add direct collocation equations as a set of equality constraints. " alt="" coords="671,209,847,251"/>
+<area shape="rect" id="node6" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="907,428,1068,469"/>
+<area shape="rect" id="node7" href="class_trajectory_optimization.html#a046b39ee460cbbed805625de353683a5" title="Add system dynamics equations as a set of equality constraints. " alt="" coords="674,92,845,133"/>
+<area shape="rect" id="node9" href="class_trajectory_optimization.html#a78d6f58de4431b0ef40b5d8ea14e7498" title="Adds time as the NLP decision variables to the problem. " alt="" coords="683,523,836,564"/>
+<area shape="rect" id="node10" href="class_trajectory_optimization.html#accfe5d3192cdcef8e88142a920336325" title="Adds parameters as the NLP decision variables to the problem. " alt="" coords="683,275,836,316"/>
+<area shape="rect" id="node4" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="660,5,859,47"/>
+<area shape="rect" id="node13" href="class_trajectory_optimization.html#a60b26164cd1b45510c1ddf869c1e7b14" title="Add a running cost to the problem. " alt="" coords="683,640,836,681"/>
+<area shape="rect" id="node15" href="class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="675,841,844,867"/>
+<area shape="rect" id="node17" href="class_trajectory_optimization.html#a036a541b68bc8706da642fceb4c008bc" title="Adds input variables as the NLP decision variables to the problem. " alt="" coords="683,457,836,499"/>
+<area shape="rect" id="node18" href="class_trajectory_optimization.html#a15613a842aceadbe23482cc59594f2a6" title="Adds state variables as the NLP decision variables to the problem. " alt="" coords="683,340,836,381"/>
+<area shape="rect" id="node20" href="class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812" title="the default calss constructor " alt="" coords="406,891,602,918"/>
+<area shape="rect" id="node22" href="general2str_8m.html#ad9ab1321cead8451ecdbc9d5a8aa930e" title="general2str" alt="" coords="461,993,547,1019"/>
+<area shape="rect" id="node24" href="class_sym_variable.html#ad303d179742392c405e5f4ca366efefd" title="The class constructor function. " alt="" coords="415,1195,593,1222"/>
+<area shape="rect" id="node25" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="934,1094,1041,1121"/>
+<area shape="rect" id="node26" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="454,1246,554,1273"/>
+<area shape="rect" id="node27" href="class_sym_expression.html#a7985e72d9b9ef1dd2d0e4e3db49b6f3a" title="Subscripted assignment for a sym array. C = SUBSASGN(L,Idx,R) is called for the syntax L(Idx)=R..." alt="" coords="670,1259,849,1286"/>
+<area shape="rect" id="node28" href="class_sym_variable.html#a8f1fd6453c2b4d9a6aae2340af4d911d" title="Subscripted assignment for a sym array. C = SUBSASGN(L,Idx,R) is called for the syntax L(Idx)=R..." alt="" coords="679,1335,839,1362"/>
+<area shape="rect" id="node32" href="class_robot_links.html#ab6e6ed4eadf6eda2ae3aa23a913ee4c7" title="The class constructor function. " alt="" coords="423,1601,585,1627"/>
+<area shape="rect" id="node34" href="class_rigid_joint.html#afcb4a44293aabf2e4204dee0d34adca5" title="set the twist paris of all precedent joints " alt="" coords="420,1398,588,1425"/>
+<area shape="rect" id="node36" href="class_sym_expression.html#a30d793e0f038360bb7157921f19ea19e" title="Subscripted reference for a sym array. B = SUBSREF(A,S) is called for the syntax A(I). S is a structure array with the fields: type – string containing () specifying the subscript type. Only parenthesis subscripting is allowed. subs – Cell array or string containing the actual subscripts. " alt="" coords="421,1449,587,1475"/>
+<area shape="rect" id="node37" href="class_sym_variable.html#a9a1c720d234e1e466d350597ad09428d" title="Subscripted reference for a sym array. B = SUBSREF(A,S) is called for the syntax A(I). S is a structure array with the fields: type – string containing () specifying the subscript type. Only parenthesis subscripting is allowed. subs – Cell array or string containing the actual subscripts. " alt="" coords="431,1499,577,1526"/>
+<area shape="rect" id="node35" href="class_rigid_joint.html#a0521222587d9fa25b79cb0f98f5725e2" title="The class constructor function. " alt="" coords="686,1474,833,1501"/>
+<area shape="rect" id="node40" href="class_nlp_function.html#ac87aece2735ef77e11cace072cff3cef" title="The class constructor function. " alt="" coords="674,1665,845,1691"/>
+<area shape="rect" id="node41" href="class_nlp_function.html#a2ce9413b3ef885f931c181235a369846" title="Returns the indices of the dependent variables. " alt="" coords="667,1741,851,1767"/>
+<area shape="rect" id="node42" href="class_nlp_function.html#a71e19571ac6ba29098585583ac54950d" title="This function specify the symbolic expression (SymFunction) of the NLP function. " alt="" coords="421,1702,587,1729"/>
+<area shape="rect" id="node46" href="classanimator.html#aa6bf3057353515090f8a3ff4b9bd3554" title="The constructor function. " alt="" coords="439,1803,569,1830"/>
+<area shape="rect" id="node47" href="classanimator.html#a16a574a9371f6de46acd7396424aec7e" title="animator.setOption" alt="" coords="436,1854,572,1881"/>
+<area shape="rect" id="node48" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="409,1905,599,1931"/>
+<area shape="rect" id="node49" href="class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="396,1955,612,1982"/>
 </map>
 </div>
 </p>
@@ -244,7 +260,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Mon Jan 30 2017 17:09:19 for FROST by &#160;<br/>
+	Generated on Tue May 2 2017 13:38:47 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

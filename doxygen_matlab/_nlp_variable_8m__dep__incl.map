@@ -1,8 +1,6 @@
 <map id="nlp/@NlpVariable/NlpVariable.m" name="nlp/@NlpVariable/NlpVariable.m">
 <area shape="rect" id="node2" href="$_0D_nlp_variable_2set_boundary_8m.html" title="nlp/@NlpVariable/setBoundary.m" alt="" coords="5,87,221,114"/>
-<area shape="rect" id="node3" href="$_0D_nlp_variable_2set_dimension_8m.html" title="nlp/@NlpVariable/setDimension.m" alt="" coords="246,87,469,114"/>
-<area shape="rect" id="node4" href="$set_indices_8m.html" title="nlp/@NlpVariable/setIndices.m" alt="" coords="493,87,696,114"/>
-<area shape="rect" id="node5" href="$set_initial_value_8m.html" title="nlp/@NlpVariable/setInitial\lValue.m" alt="" coords="721,80,898,121"/>
-<area shape="rect" id="node6" href="$_0D_nlp_variable_2set_name_8m.html" title="nlp/@NlpVariable/setName.m" alt="" coords="922,87,1118,114"/>
-<area shape="rect" id="node7" href="$_0D_nlp_variable_2update_prop_8m.html" title="nlp/@NlpVariable/updateProp.m" alt="" coords="1142,87,1351,114"/>
+<area shape="rect" id="node3" href="$set_indices_8m.html" title="nlp/@NlpVariable/setIndices.m" alt="" coords="245,87,448,114"/>
+<area shape="rect" id="node4" href="$set_initial_value_8m.html" title="nlp/@NlpVariable/setInitial\lValue.m" alt="" coords="473,80,650,121"/>
+<area shape="rect" id="node5" href="$_0D_nlp_variable_2update_prop_8m.html" title="nlp/@NlpVariable/updateProp.m" alt="" coords="674,87,883,114"/>
 </map>

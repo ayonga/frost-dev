@@ -1,0 +1,5 @@
+<map id="RigidBody::RigidBody" name="RigidBody::RigidBody">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#aadb5453fb20b19359b53f0f8db3c2008" title="The class constructor function. " alt="" coords="204,5,397,47"/>
+<area shape="rect" id="node3" href="$class_rigid_body.html#a882d54d6c4fe21f3d4542ada0d416fed" title="sets the inertia (matrix) of the link " alt="" coords="229,71,373,98"/>
+<area shape="rect" id="node4" href="$class_rigid_body.html#a6e58f8a0664d6c27dd94d4d5ab4d48f0" title="sets the link mass " alt="" coords="231,122,371,149"/>
+</map>

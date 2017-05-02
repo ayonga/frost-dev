@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.11"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>FROST: utils/ros/ros_load_urdf.m File Reference</title>
+        <title>FROST: robotics/ros_load_urdf.m File Reference</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -138,7 +138,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_3fb71e5882efe1e46d90cb02506cc25e.html">utils</a></li><li class="navelem"><a class="el" href="dir_465948126ffbab69011cbfc989b46fb2.html">ros</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_57d9ede575b84f3b57e579579b7fd954.html">robotics</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -156,21 +156,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04367518e23f6fb71788853a767edd"><td class="memItemLeft" align="right" valign="top">function   urdf_model  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ros__load__urdf_8m.html#a3c04367518e23f6fb71788853a767edd">ros_load_urdf</a> (urdf_file)</td></tr>
-<tr class="memdesc:a3c04367518e23f6fb71788853a767edd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function parse the ROS URDF file.  <a href="#a3c04367518e23f6fb71788853a767edd">More...</a><br /></td></tr>
-<tr class="separator:a3c04367518e23f6fb71788853a767edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e44bd04d4b32472152a26e09e8b79e3"><td class="memItemLeft" align="right" valign="top">function [ <a class="el" href="classchar.html">char</a> name , structure links ,   joints ,   transmissions  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ros__load__urdf_8m.html#a2e44bd04d4b32472152a26e09e8b79e3">ros_load_urdf</a> (urdf_file)</td></tr>
+<tr class="memdesc:a2e44bd04d4b32472152a26e09e8b79e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function parse the ROS URDF file.  <a href="#a2e44bd04d4b32472152a26e09e8b79e3">More...</a><br /></td></tr>
+<tr class="separator:a2e44bd04d4b32472152a26e09e8b79e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This function parse the ROS URDF file. </p>
 
 <p>Definition in file <a class="el" href="ros__load__urdf_8m_source.html">ros_load_urdf.m</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a3c04367518e23f6fb71788853a767edd"></a>
+<a class="anchor" id="a2e44bd04d4b32472152a26e09e8b79e3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function   urdf_model  = ros_load_urdf </td>
+          <td class="memname">function [ <a class="el" href="classchar.html">char</a> name , structure links ,   joints ,   transmissions  ] = ros_load_urdf </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>urdf_file</em></td><td>)</td>
@@ -183,22 +183,23 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>At this moment, this parser only support the <code>link</code> and <code>joint</code> elements in the URDF file. More options are coming soon ...</dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">urdf_model</td><td>the parsed model structure</td></tr>
+    <tr><td class="paramname">name</td><td>the name of the robot model </td></tr>
+    <tr><td class="paramname">links</td><td>an array of rigid links structure joints an array of rigid joints structure </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Generated fields of urdf_model:</dt><dd></dd></dl>
 
 <p>Definition at line <a class="el" href="ros__load__urdf_8m_source.html#l00017">17</a> of file <a class="el" href="ros__load__urdf_8m_source.html">ros_load_urdf.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_rigid_body_model_8m_source.html#l00279">RigidBodyModel.RigidBodyModel()</a>.</p>
+<p>Referenced by <a class="el" href="robotics_2_0D_robot_links_2configure_8m_source.html#l00018">RobotLinks.configure()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="ros__load__urdf_8m_a3c04367518e23f6fb71788853a767edd_icgraph.png" border="0" usemap="#ros__load__urdf_8m_a3c04367518e23f6fb71788853a767edd_icgraph" alt=""/></div>
-<map name="ros__load__urdf_8m_a3c04367518e23f6fb71788853a767edd_icgraph" id="ros__load__urdf_8m_a3c04367518e23f6fb71788853a767edd_icgraph">
-<area shape="rect" id="node2" href="class_rigid_body_model.html#a00376d1ce728807c31e1709d79e6bf03" title="The class constructor function. " alt="" coords="153,5,339,47"/>
+<div class="center"><img src="ros__load__urdf_8m_a2e44bd04d4b32472152a26e09e8b79e3_icgraph.png" border="0" usemap="#ros__load__urdf_8m_a2e44bd04d4b32472152a26e09e8b79e3_icgraph" alt=""/></div>
+<map name="ros__load__urdf_8m_a2e44bd04d4b32472152a26e09e8b79e3_icgraph" id="ros__load__urdf_8m_a2e44bd04d4b32472152a26e09e8b79e3_icgraph">
+<area shape="rect" id="node2" href="class_robot_links.html#abbb2c489215184c6e5e3208f743587f5" title="configures the robot manipulator objects from the configuration (struct or URDF/YAML) file ..." alt="" coords="153,5,303,32"/>
+<area shape="rect" id="node3" href="class_robot_links.html#ab6e6ed4eadf6eda2ae3aa23a913ee4c7" title="The class constructor function. " alt="" coords="351,5,513,32"/>
 </map>
 </div>
 </p>
@@ -220,7 +221,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Mon Jan 30 2017 17:09:19 for FROST by &#160;<br/>
+	Generated on Tue May 2 2017 13:38:47 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

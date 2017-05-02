@@ -1,0 +1,4 @@
+<map id="CoordinateFrame::setReference" name="CoordinateFrame::setReference">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#a0bacb229b03736fa6367fa25d1f7c2b8" title="computes the homogeneous transformation matrix from the world coordinates " alt="" coords="261,5,441,47"/>
+<area shape="rect" id="node3" href="$class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="489,13,737,39"/>
+</map>

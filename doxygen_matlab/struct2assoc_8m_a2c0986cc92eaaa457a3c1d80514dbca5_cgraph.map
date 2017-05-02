@@ -1,7 +1,8 @@
 <map id="struct2assoc" name="struct2assoc">
-<area shape="rect" id="node2" href="$general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="151,56,251,83"/>
-<area shape="rect" id="node4" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="435,56,501,83"/>
-<area shape="rect" id="node3" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="300,5,385,32"/>
-<area shape="rect" id="node5" href="$mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="303,56,383,83"/>
-<area shape="rect" id="node6" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="299,107,387,133"/>
+<area shape="rect" id="node2" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="151,47,236,73"/>
+<area shape="rect" id="node3" href="$general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="284,109,384,136"/>
+<area shape="rect" id="node5" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="584,40,651,67"/>
+<area shape="rect" id="node7" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="432,192,520,219"/>
+<area shape="rect" id="node4" href="$mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="436,91,516,117"/>
+<area shape="rect" id="node6" href="$num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="568,116,667,143"/>
 </map>

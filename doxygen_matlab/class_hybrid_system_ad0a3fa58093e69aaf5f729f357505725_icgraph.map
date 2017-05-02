@@ -1,4 +1,5 @@
 <map id="HybridSystem::addVertex" name="HybridSystem::addVertex">
-<area shape="rect" id="node2" href="$class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="225,5,389,32"/>
-<area shape="rect" id="node3" href="$class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="437,31,633,57"/>
+<area shape="rect" id="node2" href="$class_hybrid_system.html#afb0fd5b9ddc99ed32ee65faff0b33eeb" title="Adds an edge or a group of edges to the directed graph &#39;Gamma&#39;. " alt="" coords="241,5,405,32"/>
+<area shape="rect" id="node3" href="$class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="469,56,639,83"/>
+<area shape="rect" id="node4" href="$class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812" title="the default calss constructor " alt="" coords="225,107,421,133"/>
 </map>

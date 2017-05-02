@@ -1,3 +1,7 @@
 <map id="NlpFunction::updateProp" name="NlpFunction::updateProp">
-<area shape="rect" id="node2" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="220,5,393,32"/>
+<area shape="rect" id="node2" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="223,5,390,32"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="220,56,393,83"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html#a71e19571ac6ba29098585583ac54950d" title="This function specify the symbolic expression (SymFunction) of the NLP function. " alt="" coords="223,107,390,133"/>
+<area shape="rect" id="node5" href="$class_nlp_function.html#a074544cc7d262d673ea3b9b73e2aeaee" title="This function specify the functions (name) that calculates the the function. " alt="" coords="441,107,596,133"/>
+<area shape="rect" id="node6" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="644,107,711,133"/>
 </map>

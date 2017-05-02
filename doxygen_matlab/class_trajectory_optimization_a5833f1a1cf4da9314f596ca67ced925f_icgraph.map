@@ -1,0 +1,5 @@
+<map id="TrajectoryOptimization::updateVariableProp" name="TrajectoryOptimization::updateVariableProp">
+<area shape="rect" id="node2" href="$class_trajectory_optimization.html#a036a541b68bc8706da642fceb4c008bc" title="Adds input variables as the NLP decision variables to the problem. " alt="" coords="207,5,360,47"/>
+<area shape="rect" id="node3" href="$class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="408,64,569,105"/>
+<area shape="rect" id="node4" href="$class_trajectory_optimization.html#a15613a842aceadbe23482cc59594f2a6" title="Adds state variables as the NLP decision variables to the problem. " alt="" coords="207,123,360,164"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="CoordinateFrame::RigidPosition" name="CoordinateFrame::RigidPosition">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="260,5,440,47"/>
+<area shape="rect" id="node4" href="$class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="740,45,940,71"/>
+<area shape="rect" id="node3" href="$class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="488,17,692,43"/>
+<area shape="rect" id="node5" href="$class_rigid_joint.html#a4ae506579ea5ca78af5de27c48af7867" title="computes the twist from the base frame " alt="" coords="988,45,1159,71"/>
+<area shape="rect" id="node6" href="$class_rigid_joint.html#a0521222587d9fa25b79cb0f98f5725e2" title="The class constructor function. " alt="" coords="1423,45,1569,71"/>
+<area shape="rect" id="node7" href="$class_rigid_joint.html#afcb4a44293aabf2e4204dee0d34adca5" title="set the twist paris of all precedent joints " alt="" coords="1207,70,1375,97"/>
+</map>

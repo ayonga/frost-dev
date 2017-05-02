@@ -1,15 +1,16 @@
 var searchData=
 [
-  ['name',['Name',['../class_controller.html#a3476e78eae56965e347f0ffd4f2465c4',1,'Controller::Name()'],['../class_kinematics.html#ac8520ca968fd40d7a051378f72b541eb',1,'Kinematics::Name()'],['../class_rigid_body_model.html#ad1914c24ada2339da26cc8f07cc9491a',1,'RigidBodyModel::Name()'],['../class_nlp_function.html#a47d4c2d101d678316ff60268bacb876f',1,'NlpFunction::Name()'],['../class_nlp_variable.html#ae52fce14d4fd9b51063b94444c193025',1,'NlpVariable::Name()'],['../class_sym_function.html#a842e064ae0c7151df657651467ea6917',1,'SymFunction::Name()'],['../class_domain.html#a86f90f4b8871974fba8afb581aef2f86',1,'Domain::Name()'],['../class_guard.html#a89b41c0de5663d09ce40cdee1f537e30',1,'Guard::Name()'],['../class_hybrid_system.html#a5a4d0a5ce1d129d514e7f9ad0f888775',1,'HybridSystem::Name()']]],
-  ['nbasedof',['nBaseDof',['../class_rigid_body_model.html#af92f7a5908117f717f5bbdbcdab2d2cf',1,'RigidBodyModel']]],
-  ['ndof',['nDof',['../class_rigid_body_model.html#a539d3795727949d40b3585ed9224cabc',1,'RigidBodyModel']]],
-  ['nlp',['Nlp',['../class_ipopt_application.html#a328bc58c58e1a53112eea84bbeeddec3',1,'IpoptApplication']]],
-  ['nnzhess',['nnzHess',['../class_nlp_function.html#a5b094daabc3be0053703dbefb4032e01',1,'NlpFunction']]],
-  ['nnzhessindices',['nnzHessIndices',['../class_nlp_function.html#a08f0811c20472eec58284c844e7c46bf',1,'NlpFunction']]],
-  ['nnzjac',['nnzJac',['../class_nlp_function.html#a9e8d1064abe409ee2a5f6d77b40839bd',1,'NlpFunction']]],
-  ['nnzjacindices',['nnzJacIndices',['../class_nlp_function.html#a0a467add9c23648324079fba093c1dc1',1,'NlpFunction']]],
-  ['nonlinear',['NONLINEAR',['../class_nlp_function.html#a51e889d334d7c4845b149c4b8b58a553',1,'NlpFunction']]],
-  ['normalaxis',['NormalAxis',['../class_kinematic_contact.html#a2aeae96e6df93bbff64056bd9140db67',1,'KinematicContact']]],
-  ['normalaxissign',['NormalAxisSign',['../class_kinematic_contact.html#a7a74ca91635fb218310d75994b245011',1,'KinematicContact']]],
-  ['notify',['notify',['../classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f',1,'handle']]]
+  ['param',['Param',['../class_controller.html#a4f8dcb168f555e179b9af142ce7fc0aa',1,'Controller::Param()'],['../class_holonomic_constraint.html#a609005833ec42f4b58dee205e3a12be1',1,'HolonomicConstraint::Param()']]],
+  ['paramname',['ParamName',['../class_holonomic_constraint.html#a63f41cee94dcf9ec1685063a7ebe53ce',1,'HolonomicConstraint']]],
+  ['params',['Params',['../class_sym_function.html#af3b56ef15a25dd0ff453ae480adb6e5b',1,'SymFunction']]],
+  ['parent',['Parent',['../class_rigid_joint.html#a431b2b7e0cca75dbe589abcef8c6ca7e',1,'RigidJoint']]],
+  ['permute',['permute',['../classhandle.html#a6dc9f59313af54f392d8e273d71ace7b',1,'handle']]],
+  ['phase',['Phase',['../class_hybrid_trajectory_optimization.html#afde5b3c3d5011775a298137360a17cd4',1,'HybridTrajectoryOptimization']]],
+  ['phasefuncs',['PhaseFuncs',['../class_virtual_constraint.html#acaa588b02d93048f0203f9b1e4d20b3a',1,'VirtualConstraint']]],
+  ['phaseparamname',['PhaseParamName',['../class_virtual_constraint.html#a424c5f7cd56b4b63ff6cbf9218f2b559',1,'VirtualConstraint']]],
+  ['phaseparams',['PhaseParams',['../class_virtual_constraint.html#a1ed87743c12cf5ba9ff1ed29c35229f0',1,'VirtualConstraint']]],
+  ['phasetype',['PhaseType',['../class_virtual_constraint.html#a51c6f80cc3b886946df9f8c0375bf1b0',1,'VirtualConstraint']]],
+  ['phasevariable',['PhaseVariable',['../class_virtual_constraint.html#ae3310be96ebcbe0015686739ddb1e9d9',1,'VirtualConstraint']]],
+  ['plant',['Plant',['../class_trajectory_optimization.html#ab1800e95ac8aab59ab0461215ecf2440',1,'TrajectoryOptimization']]],
+  ['polydegree',['PolyDegree',['../class_virtual_constraint.html#a2eb6228eea8c130811f86548865cb8b6',1,'VirtualConstraint']]]
 ];

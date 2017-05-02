@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['mass',['Mass',['../class_rigid_body.html#a1d2241c5e1c201bd7def6ca05d6cc941',1,'RigidBody']]],
   ['mat2math',['mat2math',['../mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a',1,'mat2math.m']]],
   ['mat2math_2em',['mat2math.m',['../mat2math_8m.html',1,'']]],
   ['matrix',['matrix',['../classmatrix.html',1,'']]],
@@ -13,13 +14,17 @@ var searchData=
   ['min_5fabs_5fnonzero_2em',['min_abs_nonzero.m',['../min__abs__nonzero_8m.html',1,'']]],
   ['min_5fjerk',['min_jerk',['../min__jerk_8m.html#a8277b6f73437e7e7fbc9e4b891211616',1,'min_jerk.m']]],
   ['min_5fjerk_2em',['min_jerk.m',['../min__jerk_8m.html',1,'']]],
-  ['model',['Model',['../class_hybrid_trajectory_optimization.html#a487cd9e04fc90e18c74d1249f1b24201',1,'HybridTrajectoryOptimization::Model()'],['../class_hybrid_system.html#a8a2b93d352d6d6b6b3ba0815cd150fa2',1,'HybridSystem::Model()']]],
-  ['modeltype',['ModelType',['../class_kinematic_contact.html#a09042301dfb6f42e5bc6da3561040cee',1,'KinematicContact']]],
+  ['minus',['minus',['../class_sym_expression.html#af1b6587fb5968064777106a5841853d6',1,'SymExpression']]],
+  ['mldivide',['mldivide',['../class_sym_expression.html#a2ea6d7dcec5e611c508121053f5cac63',1,'SymExpression']]],
+  ['model',['Model',['../class_holonomic_constraint.html#a697d7b991179bfc1817aeff9d85657e7',1,'HolonomicConstraint::Model()'],['../class_virtual_constraint.html#afe77e169d31659fbe64ca2ca0b5ee841',1,'VirtualConstraint::Model()']]],
+  ['mpower',['mpower',['../class_sym_expression.html#a62ea1580691bbffe7d56c7feb300bfd3',1,'SymExpression']]],
+  ['mrdivide',['mrdivide',['../class_sym_expression.html#aebfa0fcd39deb62b6afe1cfd3b210c55',1,'SymExpression']]],
+  ['mtimes',['mtimes',['../class_sym_expression.html#a4fdf6537e1fbf17a3e653cbeaa1147f2',1,'SymExpression']]],
   ['mtoc_5fsubst_5fbezier_5fm_5ftsbus_5fcotm_5fsingleterm_5fbezier',['mtoc_subst_bezier_m_tsbus_cotm_singleterm_bezier',['../bezier_8m.html#a02d72454dd31a480aa2f38039712682d',1,'bezier.m']]],
+  ['mtoc_5fsubst_5fbuild_5fmex_5fm_5ftsbus_5fcotm_5fnormalize',['mtoc_subst_build_mex_m_tsbus_cotm_normalize',['../build__mex_8m.html#a13431051772aacae1d24898c80cbb32c',1,'build_mex.m']]],
   ['mtoc_5fsubst_5fdisplay_5fsystem_5finfo_5fm_5ftsbus_5fcotm_5fchomp',['mtoc_subst_display_system_info_m_tsbus_cotm_chomp',['../display__system__info_8m.html#a6debecb8fd7c83a8d7b8471e4ce037da',1,'display_system_info.m']]],
   ['mtoc_5fsubst_5fdisplay_5fsystem_5finfo_5fm_5ftsbus_5fcotm_5fmemsize_5fusing_5fmemory_5ffcn',['mtoc_subst_display_system_info_m_tsbus_cotm_memsize_using_memory_fcn',['../display__system__info_8m.html#a838176b27c00fd128a7a6587309e820a',1,'display_system_info.m']]],
   ['mtoc_5fsubst_5fdisplay_5fsystem_5finfo_5fm_5ftsbus_5fcotm_5fsysctl_5fprop',['mtoc_subst_display_system_info_m_tsbus_cotm_sysctl_prop',['../display__system__info_8m.html#a8493def0c0b32940e28e4b191b3d28bc',1,'display_system_info.m']]],
   ['mtoc_5fsubst_5fhorzcat_5ffields_5fm_5ftsbus_5fcotm_5fblank_5fstruct',['mtoc_subst_horzcat_fields_m_tsbus_cotm_blank_struct',['../horzcat__fields_8m.html#a7fb9bcd0d04b8731edd144a0affe6152',1,'horzcat_fields.m']]],
-  ['mtoc_5fsubst_5fpatchline_5fm_5ftsbus_5fcotm_5fparseinputs',['mtoc_subst_patchline_m_tsbus_cotm_parseInputs',['../patchline_8m.html#ad3793a479f9c3f80f941fd057affdc8a',1,'patchline.m']]],
-  ['mu',['Mu',['../class_kinematic_contact.html#ad3ab0ae17ea2495825e331897c406d7a',1,'KinematicContact']]]
+  ['mtoc_5fsubst_5fpatchline_5fm_5ftsbus_5fcotm_5fparseinputs',['mtoc_subst_patchline_m_tsbus_cotm_parseInputs',['../patchline_8m.html#ad3793a479f9c3f80f941fd057affdc8a',1,'patchline.m']]]
 ];

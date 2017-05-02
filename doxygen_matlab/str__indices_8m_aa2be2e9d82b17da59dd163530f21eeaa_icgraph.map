@@ -1,0 +1,8 @@
+<map id="str_indices" name="str_indices">
+<area shape="rect" id="node2" href="$class_robot_links.html#af950d34b83eed74165b3086b5169f979" title="Determines the base link of an array of rigid joints. " alt="" coords="395,31,566,57"/>
+<area shape="rect" id="node5" href="$class_robot_links.html#a1c46ee216aefae7b70b64fcd5cf133ad" title="Determines the end effector link of an array of rigid joints. " alt="" coords="139,107,325,133"/>
+<area shape="rect" id="node7" href="$class_robot_links.html#a6231f629129d3b40d24ed398c4cab896" title="Returns the indices of links specified by the name string. " alt="" coords="636,183,816,209"/>
+<area shape="rect" id="node3" href="$class_robot_links.html#abbb2c489215184c6e5e3208f743587f5" title="configures the robot manipulator objects from the configuration (struct or URDF/YAML) file ..." alt="" coords="651,31,801,57"/>
+<area shape="rect" id="node4" href="$class_robot_links.html#ab6e6ed4eadf6eda2ae3aa23a913ee4c7" title="The class constructor function. " alt="" coords="864,81,1027,108"/>
+<area shape="rect" id="node6" href="$class_robot_links.html#a4bcff395430bbf53801b595fdf7dbdb9" title="Compute the forward kinematics of the robots using the coordinate configurations. ..." alt="" coords="373,81,588,108"/>
+</map>

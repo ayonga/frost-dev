@@ -1,0 +1,6 @@
+<map id="TrajectoryOptimization::addTimeVariable" name="TrajectoryOptimization::addTimeVariable">
+<area shape="rect" id="node2" href="$class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="408,5,561,47"/>
+<area shape="rect" id="node4" href="$class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="207,64,360,105"/>
+<area shape="rect" id="node5" href="$class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897" title="Adds NLP decision variables. " alt="" coords="408,123,561,164"/>
+<area shape="rect" id="node3" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="609,71,676,98"/>
+</map>

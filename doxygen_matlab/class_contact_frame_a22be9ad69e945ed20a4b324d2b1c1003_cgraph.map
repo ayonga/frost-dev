@@ -1,0 +1,6 @@
+<map id="ContactFrame::ContactFrame" name="ContactFrame::ContactFrame">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#aadb5453fb20b19359b53f0f8db3c2008" title="The class constructor function. " alt="" coords="262,5,455,47"/>
+<area shape="rect" id="node3" href="$class_contact_frame.html#ae05dc7795bda90260ef0ac32141cbc53" title="returns the symbolic expression of the friction cone constraints of the contact " alt="" coords="256,71,461,98"/>
+<area shape="rect" id="node4" href="$class_contact_frame.html#acb58f753b10b156300cfd741aa820609" title="returns the symbolic expression of the zero moment point constraints of the contact ..." alt="" coords="249,122,468,149"/>
+<area shape="rect" id="node5" href="$class_contact_frame.html#a979bd94b410fb260cfce36df8e411d1f" title="Sets the contact type. " alt="" coords="279,173,439,199"/>
+</map>

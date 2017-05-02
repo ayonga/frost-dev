@@ -1,7 +1,20 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_controller.html" title="This abstract class defines interfaces to configuration and functionalities of different types of con..." alt="" coords="5,81,84,108"/>
-<area shape="rect" id="node2" href="$class_c_l_f_q_p.html" title="This class defines a class of Control Lyapunov Functions (CLFs) that use quadratic programming (QP) ..." alt="" coords="145,5,212,32"/>
-<area shape="rect" id="node3" href="$class_i_o_feedback.html" title="This class defines the classic input&#45;output feedback linearization controller. " alt="" coords="132,56,225,83"/>
-<area shape="rect" id="node4" href="$class_joint_p_d.html" title="This class defines a PD feedback control on the joint space. " alt="" coords="144,107,213,133"/>
-<area shape="rect" id="node5" href="$class_output_p_d.html" title="This class defines the PD controller for system outputs. " alt="" coords="139,157,219,184"/>
+<area shape="rect" id="node1" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="14,271,74,297"/>
+<area shape="rect" id="node2" href="$class_coordinate_frame.html" title="A kinematic coordinate frame class. " alt="" coords="141,93,264,120"/>
+<area shape="rect" id="node6" href="$class_holonomic_constraint.html" title="HolonomicConstraint: represents a group of holonomic constraints of a dynamical systems. " alt="" coords="131,144,275,171"/>
+<area shape="rect" id="node7" href="$class_hybrid_system.html" title="HybridSystem defines a hybrid dynamical system that has both continuous and discrete dynamics..." alt="" coords="150,43,255,69"/>
+<area shape="rect" id="node8" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="157,195,249,221"/>
+<area shape="rect" id="node9" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="158,245,247,272"/>
+<area shape="rect" id="node10" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="139,296,266,323"/>
+<area shape="rect" id="node13" href="$class_ref.html" title="Ref" alt="" coords="181,347,224,373"/>
+<area shape="rect" id="node14" href="$class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="145,397,260,424"/>
+<area shape="rect" id="node17" href="$class_unilateral_constraint.html" title="HolonomicConstraint: represents a group of holonomic constraints of a dynamical systems. " alt="" coords="134,448,271,475"/>
+<area shape="rect" id="node18" href="$class_virtual_constraint.html" title="VirtualConstraint: represents a group of virtual constraints of a dynamical systems. " alt="" coords="143,499,262,525"/>
+<area shape="rect" id="node3" href="$class_contact_frame.html" title="A mechanical contact coordinate frame of a robot. " alt="" coords="365,5,471,32"/>
+<area shape="rect" id="node4" href="$class_rigid_body.html" title="A coordinate frame that is rigidly attached to the CoM position of a rigid link. In addition..." alt="" coords="377,81,459,108"/>
+<area shape="rect" id="node5" href="$class_rigid_joint.html" title="A coordinate frame that is rigidly attached to the origin a rigid joint and the child link of the joi..." alt="" coords="378,132,458,159"/>
+<area shape="rect" id="node11" href="$class_hybrid_trajectory_optimization.html" title="HybridTrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory ..." alt="" coords="323,271,513,297"/>
+<area shape="rect" id="node12" href="$class_trajectory_optimization.html" title="TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimi..." alt="" coords="341,321,495,348"/>
+<area shape="rect" id="node15" href="$class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="369,372,467,399"/>
+<area shape="rect" id="node16" href="$class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="370,423,466,449"/>
 </map>

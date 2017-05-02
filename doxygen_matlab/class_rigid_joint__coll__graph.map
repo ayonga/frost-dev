@@ -1,0 +1,9 @@
+<map id="RigidJoint" name="RigidJoint">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html" title="A kinematic coordinate frame class. " alt="" coords="203,118,326,145"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="163,5,223,32"/>
+<area shape="rect" id="node8" href="$class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="65,118,179,145"/>
+<area shape="rect" id="node4" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="255,5,314,32"/>
+<area shape="rect" id="node5" href="$classchar.html" title="A MatLab character array. " alt="" coords="84,5,131,32"/>
+<area shape="rect" id="node6" href="$classrowvec.html" title="A matlab row vector. " alt="" coords="354,5,418,32"/>
+<area shape="rect" id="node7" href="$classstruct.html" title="A MatLab struct. " alt="" coords="565,118,620,145"/>
+</map>

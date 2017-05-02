@@ -2,4 +2,10 @@
 <area shape="rect" id="node2" href="$classanimator.html#aa6bf3057353515090f8a3ff4b9bd3554" title="The constructor function. " alt="" coords="200,5,331,32"/>
 <area shape="rect" id="node3" href="$class_ipopt_application.html#aa7d393893452826d96862060d53176b1" title="The default constructor function. " alt="" coords="157,56,373,83"/>
 <area shape="rect" id="node4" href="$classanimator.html#a16a574a9371f6de46acd7396424aec7e" title="animator::setOption" alt="" coords="197,107,333,133"/>
+<area shape="rect" id="node5" href="$class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="170,157,361,184"/>
+<area shape="rect" id="node6" href="$class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="421,150,611,191"/>
+<area shape="rect" id="node7" href="$class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="897,102,1096,143"/>
+<area shape="rect" id="node8" href="$class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="659,117,849,158"/>
+<area shape="rect" id="node9" href="$class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="677,182,831,223"/>
+<area shape="rect" id="node10" href="$class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="916,197,1077,238"/>
 </map>

@@ -1,0 +1,12 @@
+<map id="HybridTrajectoryOptimization::update" name="HybridTrajectoryOptimization::update">
+<area shape="rect" id="node2" href="$class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="244,145,433,186"/>
+<area shape="rect" id="node3" href="$class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="488,5,687,32"/>
+<area shape="rect" id="node5" href="$class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="484,56,691,83"/>
+<area shape="rect" id="node6" href="$class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="481,325,693,352"/>
+<area shape="rect" id="node4" href="$class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="501,157,674,184"/>
+<area shape="rect" id="node7" href="$class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="490,208,685,235"/>
+<area shape="rect" id="node8" href="$class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="496,259,679,301"/>
+<area shape="rect" id="node9" href="$class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="492,107,683,133"/>
+<area shape="rect" id="node10" href="$struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="741,107,845,133"/>
+<area shape="rect" id="node11" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="893,107,960,133"/>
+</map>

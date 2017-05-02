@@ -1,0 +1,5 @@
+<map id="TrajectoryOptimization::addStateVariable" name="TrajectoryOptimization::addStateVariable">
+<area shape="rect" id="node2" href="$class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897" title="Adds NLP decision variables. " alt="" coords="207,5,360,47"/>
+<area shape="rect" id="node4" href="$class_trajectory_optimization.html#a5833f1a1cf4da9314f596ca67ced925f" title="This function updates the properties of the NLP variable objects based on the input name&#45;value pair a..." alt="" coords="207,71,360,112"/>
+<area shape="rect" id="node3" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="408,13,475,39"/>
+</map>

@@ -1,4 +1,8 @@
 <map id="SymFunction" name="SymFunction">
-<area shape="rect" id="node2" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="5,5,48,32"/>
-<area shape="rect" id="node3" href="$classchar.html" title="A MatLab character array. " alt="" coords="114,5,161,32"/>
+<area shape="rect" id="node2" href="$class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="87,109,202,136"/>
+<area shape="rect" id="node6" href="$class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="55,199,151,225"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="115,5,175,32"/>
+<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="207,5,253,32"/>
+<area shape="rect" id="node5" href="$classstruct.html" title="A MatLab struct. " alt="" coords="277,199,332,225"/>
+<area shape="rect" id="node7" href="$classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="5,109,63,136"/>
 </map>

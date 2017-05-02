@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmatrix.html" title="A matlab matrix. " alt="" coords="5,5,64,32"/>
-<area shape="rect" id="node2" href="$classsparsematrix.html" title="A matlab sparse matrix. " alt="" coords="112,5,209,32"/>
+<area shape="rect" id="node1" href="$class_solver_application.html" title="SolverApplication defines an abstract interface class for NLP solvers. " alt="" coords="5,5,128,32"/>
+<area shape="rect" id="node2" href="$class_ipopt_application.html" title="IpoptApplication defines an interface application class for IPOPT solvers. " alt="" coords="176,5,291,32"/>
 </map>

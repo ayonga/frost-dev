@@ -1,3 +1,4 @@
 <map id="HybridSystem::rmVertex" name="HybridSystem::rmVertex">
-<area shape="rect" id="node2" href="$class_hybrid_system.html#a3297e97d0938639c85ace0f2f7bb3728" title="the default calss constructor " alt="" coords="220,5,416,32"/>
+<area shape="rect" id="node2" href="$class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812" title="the default calss constructor " alt="" coords="220,5,416,32"/>
+<area shape="rect" id="node3" href="$class_hybrid_system.html#af47acec4747eb12fec1d6e94b9a997e3" title="extract the subgraph of the hybrid system to create a new hybrid system object with the same name ..." alt="" coords="464,31,633,57"/>
 </map>

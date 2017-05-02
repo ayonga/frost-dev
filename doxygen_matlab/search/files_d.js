@@ -1,8 +1,12 @@
 var searchData=
 [
-  ['patchline_2em',['patchline.m',['../patchline_8m.html',1,'']]],
-  ['plot_5fcompare_2em',['plot_compare.m',['../plot__compare_8m.html',1,'']]],
-  ['plot_5fformat_2em',['plot_format.m',['../plot__format_8m.html',1,'']]],
-  ['plot_5fsave_2em',['plot_save.m',['../plot__save_8m.html',1,'']]],
-  ['print_2em',['print.m',['../print_8m.html',1,'']]]
+  ['nlpfunction_2em',['NlpFunction.m',['../_nlp_function_8m.html',1,'']]],
+  ['nlpvariable_2em',['NlpVariable.m',['../_nlp_variable_8m.html',1,'']]],
+  ['nonlinearprogram_2em',['NonlinearProgram.m',['../_nonlinear_program_8m.html',1,'']]],
+  ['nonzeros_2em',['nonzeros.m',['../nonzeros_8m.html',1,'']]],
+  ['nop_2em',['nop.m',['../nop_8m.html',1,'']]],
+  ['norm_2em',['norm.m',['../norm_8m.html',1,'']]],
+  ['num2mathstr_2em',['num2mathstr.m',['../num2mathstr_8m.html',1,'']]],
+  ['numel_2em',['numel.m',['../numel_8m.html',1,'']]],
+  ['nzind_2em',['nzind.m',['../nzind_8m.html',1,'']]]
 ];

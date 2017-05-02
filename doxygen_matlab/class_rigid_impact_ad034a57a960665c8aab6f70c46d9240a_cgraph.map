@@ -1,0 +1,5 @@
+<map id="RigidImpact::RigidImpact" name="RigidImpact::RigidImpact">
+<area shape="rect" id="node2" href="$class_discrete_dynamics.html#aef55ee1b305875ad05c2a4c3b1a5517e" title="overload the superclass addState method with fixed state fields " alt="" coords="224,13,415,39"/>
+<area shape="rect" id="node4" href="$class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="226,64,413,105"/>
+<area shape="rect" id="node3" href="$class_discrete_dynamics.html#a5753c076e46e5b14833ddcf8e5a209a9" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="463,5,644,47"/>
+</map>

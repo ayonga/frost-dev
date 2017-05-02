@@ -1,0 +1,5 @@
+<map id="TrajectoryOptimization::addCollocationConstraint" name="TrajectoryOptimization::addCollocationConstraint">
+<area shape="rect" id="node2" href="$class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="229,5,383,47"/>
+<area shape="rect" id="node4" href="$class_trajectory_optimization.html#a91557e771978f4b6b51e4e071f34daa8" title="Return the SymFunction object of the direct collocation constraint given the state (x) and derivative..." alt="" coords="229,71,383,112"/>
+<area shape="rect" id="node3" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="431,13,497,39"/>
+</map>

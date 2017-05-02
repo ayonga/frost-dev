@@ -1,22 +1,7 @@
 var searchData=
 [
-  ['general2math',['general2math',['../general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e',1,'general2math.m']]],
-  ['general2str',['general2str',['../general2str_8m.html#ad9ab1321cead8451ecdbc9d5a8aa930e',1,'general2str.m']]],
-  ['genericsymfunctions',['genericSymFunctions',['../class_hybrid_trajectory_optimization.html#ad8512a9b7dda6328cbffd7244f5f0cb0',1,'HybridTrajectoryOptimization']]],
-  ['getdepindices',['getDepIndices',['../class_nlp_function.html#a2ce9413b3ef885f931c181235a369846',1,'NlpFunction']]],
-  ['getdepobject',['getDepObject',['../class_nlp_function.html#a8d5f7f9456fb488ba39440d20f01ff44',1,'NlpFunction::getDepObject()'],['../class_nlp_function_sum.html#ad85b08193a9a6113e4821ec51a9faffc',1,'NlpFunctionSum::getDepObject()']]],
-  ['getdesoutputexpr',['getDesOutputExpr',['../class_virtual_constr_domain.html#a1aa2644d806040d7151bec7bfe69745e',1,'VirtualConstrDomain']]],
-  ['getdimension',['getDimension',['../class_kinematic_contact.html#abe4dad91ad67e526a4616fd9a43b0ff3',1,'KinematicContact::getDimension()'],['../class_kinematic_group.html#a30032f1030a7e5cf51b546a12ea3fb72',1,'KinematicGroup::getDimension()'],['../class_kinematics.html#a83555866124f52d45f3ba110b8268b49',1,'Kinematics::getDimension()']]],
-  ['getfieldd',['getfieldd',['../getfieldd_8m.html#a764f95954418427ad6a3622f79891817',1,'getfieldd.m']]],
-  ['getindex',['getIndex',['../class_kinematic_group.html#a95243d6e19ad384c84d8c95e45fd1537',1,'KinematicGroup']]],
-  ['getinitialguess',['getInitialGuess',['../class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2',1,'NonlinearProgram']]],
-  ['getjacdotmathcommand',['getJacDotMathCommand',['../class_kinematics.html#ae66455e55b64885bfa29ff4b9e035c9d',1,'Kinematics']]],
-  ['getjacmathcommand',['getJacMathCommand',['../class_kinematic_contact.html#aa747df38de9cecb96c9b7118ed795e1f',1,'KinematicContact::getJacMathCommand()'],['../class_kinematics.html#af0fadcb7f14e4a326f38be97e6bf18a3',1,'Kinematics::getJacMathCommand()'],['../class_kinematic_orientation.html#a568a63093c329f175bd0ca5f01c6bf46',1,'KinematicOrientation::getJacMathCommand()']]],
-  ['getkinmathcommand',['getKinMathCommand',['../class_kinematic_contact.html#afffb4a2fe1c478edcd51aa40ad57d1b5',1,'KinematicContact::getKinMathCommand()'],['../class_kinematics.html#a342f371ce41796c4bfe2145c226da864',1,'Kinematics::getKinMathCommand()'],['../class_kinematic_com.html#a43811e3668a4cfd44f6668d6987bb9c2',1,'KinematicCom::getKinMathCommand()'],['../class_kinematic_dof.html#ab61368026561d50db90a24ed30244aa4',1,'KinematicDof::getKinMathCommand()'],['../class_kinematic_orientation.html#af295e2259e8c0e65fa9956ffc06328a8',1,'KinematicOrientation::getKinMathCommand()']]],
-  ['getphaseindex',['getPhaseIndex',['../class_hybrid_trajectory_optimization.html#a6311465a46c46dfe0655577bc395ccfb',1,'HybridTrajectoryOptimization']]],
-  ['getposition',['getPosition',['../class_kinematic_group.html#a0f178b2e47c4609fc3cfdf5be40e5756',1,'KinematicGroup']]],
-  ['getpositionoutputindex',['getPositionOutputIndex',['../class_virtual_constr_domain.html#ac6009cbb72460206a890c6cdad65219c',1,'VirtualConstrDomain']]],
-  ['getvarinfo',['getVarInfo',['../class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765',1,'NonlinearProgram']]],
-  ['getwrenchconstraint',['getWrenchConstraint',['../class_kinematic_contact.html#aba7e26cc51b2ee1ba153714da10214b1',1,'KinematicContact']]],
-  ['guard',['Guard',['../class_guard.html#a60fdcb8d03b5139b31f35ae262777cd6',1,'Guard']]]
+  ['findbaselink',['findBaseLink',['../class_robot_links.html#af950d34b83eed74165b3086b5169f979',1,'RobotLinks']]],
+  ['findendeffector',['findEndEffector',['../class_robot_links.html#a1c46ee216aefae7b70b64fcd5cf133ad',1,'RobotLinks']]],
+  ['first',['first',['../class_sym_expression.html#a0a0bb841fa9eca58000a1e553bac7a05',1,'SymExpression']]],
+  ['formula',['formula',['../class_sym_expression.html#a2345dae8c30f6ce6f5667e628b0aeb70',1,'SymExpression']]]
 ];

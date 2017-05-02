@@ -1,3 +1,5 @@
-<map id="nlp/@SymFunction/SymFunction.m" name="nlp/@SymFunction/SymFunction.m">
-<area shape="rect" id="node2" href="$nlp_2_0D_sym_function_2export_8m.html" title="nlp/@SymFunction/export.m" alt="" coords="26,80,215,107"/>
+<map id="symbolic/@SymFunction/SymFunction.m" name="symbolic/@SymFunction/SymFunction.m">
+<area shape="rect" id="node2" href="$symbolic_2_0D_sym_function_2export_8m.html" title="symbolic/@SymFunction\l/export.m" alt="" coords="5,95,175,136"/>
+<area shape="rect" id="node3" href="$export_hessian_8m.html" title="symbolic/@SymFunction\l/exportHessian.m" alt="" coords="199,95,368,136"/>
+<area shape="rect" id="node4" href="$export_jacobian_8m.html" title="symbolic/@SymFunction\l/exportJacobian.m" alt="" coords="392,95,561,136"/>
 </map>

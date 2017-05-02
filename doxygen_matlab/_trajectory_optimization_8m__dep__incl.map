@@ -1,0 +1,30 @@
+<map id="nlp/@TrajectoryOptimization/TrajectoryOptimization.m" name="nlp/@TrajectoryOptimization/TrajectoryOptimization.m">
+<area shape="rect" id="node2" href="$add_collocation_constraint_8m.html" title="nlp/@TrajectoryOptimization\l/addCollocationConstraint.m" alt="" coords="5,95,193,136"/>
+<area shape="rect" id="node3" href="$add_constraint_8m.html" title="nlp/@TrajectoryOptimization\l/addConstraint.m" alt="" coords="217,95,405,136"/>
+<area shape="rect" id="node4" href="$add_cost_8m.html" title="nlp/@TrajectoryOptimization\l/addCost.m" alt="" coords="429,95,617,136"/>
+<area shape="rect" id="node5" href="$add_dynamics_constraint_8m.html" title="nlp/@TrajectoryOptimization\l/addDynamicsConstraint.m" alt="" coords="641,95,829,136"/>
+<area shape="rect" id="node6" href="$add_input_variable_8m.html" title="nlp/@TrajectoryOptimization\l/addInputVariable.m" alt="" coords="853,95,1041,136"/>
+<area shape="rect" id="node7" href="$add_node_constraint_8m.html" title="nlp/@TrajectoryOptimization\l/addNodeConstraint.m" alt="" coords="1065,95,1253,136"/>
+<area shape="rect" id="node8" href="$add_node_cost_8m.html" title="nlp/@TrajectoryOptimization\l/addNodeCost.m" alt="" coords="1277,95,1465,136"/>
+<area shape="rect" id="node9" href="$add_param_variable_8m.html" title="nlp/@TrajectoryOptimization\l/addParamVariable.m" alt="" coords="1489,95,1677,136"/>
+<area shape="rect" id="node10" href="$add_running_cost_8m.html" title="nlp/@TrajectoryOptimization\l/addRunningCost.m" alt="" coords="1701,95,1889,136"/>
+<area shape="rect" id="node11" href="$add_state_variable_8m.html" title="nlp/@TrajectoryOptimization\l/addStateVariable.m" alt="" coords="1913,95,2101,136"/>
+<area shape="rect" id="node12" href="$add_time_variable_8m.html" title="nlp/@TrajectoryOptimization\l/addTimeVariable.m" alt="" coords="2125,95,2313,136"/>
+<area shape="rect" id="node13" href="$add_variable_8m.html" title="nlp/@TrajectoryOptimization\l/addVariable.m" alt="" coords="2337,95,2525,136"/>
+<area shape="rect" id="node14" href="$_0D_trajectory_optimization_2check_constraints_8m.html" title="nlp/@TrajectoryOptimization\l/checkConstraints.m" alt="" coords="2549,95,2737,136"/>
+<area shape="rect" id="node15" href="$_0D_trajectory_optimization_2check_costs_8m.html" title="nlp/@TrajectoryOptimization\l/checkCosts.m" alt="" coords="2761,95,2949,136"/>
+<area shape="rect" id="node16" href="$_0D_trajectory_optimization_2check_variables_8m.html" title="nlp/@TrajectoryOptimization\l/checkVariables.m" alt="" coords="2973,95,3161,136"/>
+<area shape="rect" id="node17" href="$_0D_trajectory_optimization_2compile_constraint_8m.html" title="nlp/@TrajectoryOptimization\l/compileConstraint.m" alt="" coords="3185,95,3373,136"/>
+<area shape="rect" id="node18" href="$_0D_trajectory_optimization_2compile_objective_8m.html" title="nlp/@TrajectoryOptimization\l/compileObjective.m" alt="" coords="3397,95,3585,136"/>
+<area shape="rect" id="node19" href="$nlp_2_0D_trajectory_optimization_2configure_8m.html" title="nlp/@TrajectoryOptimization\l/configure.m" alt="" coords="3609,95,3797,136"/>
+<area shape="rect" id="node20" href="$configure_variables_8m.html" title="nlp/@TrajectoryOptimization\l/configureVariables.m" alt="" coords="3821,95,4009,136"/>
+<area shape="rect" id="node21" href="$direct_collocation_8m.html" title="nlp/@TrajectoryOptimization\l/directCollocation.m" alt="" coords="4033,95,4221,136"/>
+<area shape="rect" id="node22" href="$_0D_trajectory_optimization_2export_solution_8m.html" title="nlp/@TrajectoryOptimization\l/exportSolution.m" alt="" coords="4245,95,4433,136"/>
+<area shape="rect" id="node23" href="$remove_constraint_8m.html" title="nlp/@TrajectoryOptimization\l/removeConstraint.m" alt="" coords="4457,95,4645,136"/>
+<area shape="rect" id="node24" href="$remove_cost_8m.html" title="nlp/@TrajectoryOptimization\l/removeCost.m" alt="" coords="4669,95,4857,136"/>
+<area shape="rect" id="node25" href="$remove_variable_8m.html" title="nlp/@TrajectoryOptimization\l/removeVariable.m" alt="" coords="4881,95,5069,136"/>
+<area shape="rect" id="node26" href="$_0D_trajectory_optimization_2update_8m.html" title="nlp/@TrajectoryOptimization\l/update.m" alt="" coords="5093,95,5281,136"/>
+<area shape="rect" id="node27" href="$update_constr_prop_8m.html" title="nlp/@TrajectoryOptimization\l/updateConstrProp.m" alt="" coords="5305,95,5493,136"/>
+<area shape="rect" id="node28" href="$update_cost_prop_8m.html" title="nlp/@TrajectoryOptimization\l/updateCostProp.m" alt="" coords="5517,95,5705,136"/>
+<area shape="rect" id="node29" href="$update_variable_prop_8m.html" title="nlp/@TrajectoryOptimization\l/updateVariableProp.m" alt="" coords="5729,95,5917,136"/>
+</map>

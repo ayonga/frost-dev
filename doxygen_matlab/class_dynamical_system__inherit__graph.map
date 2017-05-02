@@ -1,0 +1,4 @@
+<map id="DynamicalSystem" name="DynamicalSystem">
+<area shape="rect" id="node2" href="$class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node3" href="$class_rigid_impact.html" title="RigidImpact represents a rigid body impact map assuming that the impact is plastic and occurs instant..." alt="" coords="25,155,117,181"/>
+</map>

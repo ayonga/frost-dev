@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['nlpfunction_2em',['NlpFunction.m',['../_nlp_function_8m.html',1,'']]],
-  ['nlpfunctionsum_2em',['NlpFunctionSum.m',['../_nlp_function_sum_8m.html',1,'']]],
-  ['nlpvariable_2em',['NlpVariable.m',['../_nlp_variable_8m.html',1,'']]],
-  ['nonlinearprogram_2em',['NonlinearProgram.m',['../_nonlinear_program_8m.html',1,'']]]
+  ['label2ind_2em',['label2ind.m',['../label2ind_8m.html',1,'']]],
+  ['linearize_2em',['linearize.m',['../linearize_8m.html',1,'']]],
+  ['log_2em',['log.m',['../log_8m.html',1,'']]],
+  ['log10_2em',['log10.m',['../log10_8m.html',1,'']]],
+  ['log2_2em',['log2.m',['../log2_8m.html',1,'']]]
 ];
