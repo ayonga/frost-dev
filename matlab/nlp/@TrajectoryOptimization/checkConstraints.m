@@ -1,9 +1,13 @@
-function [yc, cl, cu] = checkConstraints(obj, x, output_file, permission)
+function [yc, cl, cu] = checkConstraints(obj, x, tol, output_file, permission)
     % Check the violation of the constraints 
     
-    if nargin > 2    
+    if nargin < 3
+        tol = 1e-3;
+    end
+    
+    if nargin > 3   
         % print to the file
-        if nargin < 4
+        if nargin < 5
             permission = 'w';
         else
             validatestring(permission, {'a','w'});
@@ -40,7 +44,8 @@ function [yc, cl, cu] = checkConstraints(obj, x, output_file, permission)
                 cu{j,k} = constr.UpperBound;
                 yc_ll = zeros(constr.Dimension,1);
                 for ll = 1:numel(dep_constr)
-                    var = cellfun(@(v)x(v(:)),dep_constr(ll).DepIndices,'UniformOutput',false); % dependent variables
+                    dep_var = dep_constr(ll).DepVariables;
+                    var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
                     if isempty(dep_constr(ll).AuxData)
                         yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, var{:});
                     else
@@ -53,10 +58,10 @@ function [yc, cl, cu] = checkConstraints(obj, x, output_file, permission)
                 fprintf(f_id,'%12s %12s %12s\n','Lower','Constraint','Upper');
                 fprintf(f_id,'%12.8E %12.8E %12.8E\r\n',[constr.LowerBound, yc_ll, constr.UpperBound]');
                 
-                if (min(yc_ll - constr.LowerBound)) < 0
+                if (min(yc_ll - constr.LowerBound)) < -tol
                     fprintf(f_id,'$$ Lower bound violated: %12.8E \n',min(yc_ll - constr.LowerBound));
                 end
-                if (max(yc_ll - constr.UpperBound)) > 0
+                if (max(yc_ll - constr.UpperBound)) > tol
                     fprintf(f_id,'$$ Upper bound violated: %12.8E \n',max(yc_ll - constr.UpperBound));
                 end
             end

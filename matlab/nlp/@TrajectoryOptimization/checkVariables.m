@@ -1,9 +1,13 @@
-function checkVariables(obj, x, output_file, permission)
+function checkVariables(obj, x, tol, output_file, permission)
     % Check the violation of the constraints 
     
-    if nargin > 2    
+    if nargin < 3
+        tol = 1e-3;
+    end
+    
+    if nargin > 3    
         % print to the file
-        if nargin < 4
+        if nargin < 5
             permission = 'w';
         else
             validatestring(permission, {'a','w'});
@@ -41,10 +45,10 @@ function checkVariables(obj, x, output_file, permission)
                 fprintf(f_id,'%12s %12s %12s\n','Lower','Variable','Upper');
                 fprintf(f_id,'%12.8E %12.8E %12.8E\r\n',[var.LowerBound, x(var.Indices), var.UpperBound]');
                 
-                if (min(x(var.Indices) - var.LowerBound)) < 0
+                if (min(x(var.Indices) - var.LowerBound)) < -tol
                     fprintf(f_id,'$$ Lower bound violated: %12.8E \n',min(x(var.Indices) - var.LowerBound));
                 end
-                if (max(x(var.Indices) - var.UpperBound)) > 0
+                if (max(x(var.Indices) - var.UpperBound)) > tol
                     fprintf(f_id,'$$ Upper bound violated: %12.8E \n',max(x(var.Indices) - var.UpperBound));
                 end
             end

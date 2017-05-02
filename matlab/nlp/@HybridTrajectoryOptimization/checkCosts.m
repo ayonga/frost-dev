@@ -2,7 +2,7 @@ function [yc] = checkCosts(obj, x, output_file)
     % Check the value of const function 
     
     phase = obj.Phase;
-    phase_var_indices = obj.PhaseVarIndices;
+    %     phase_var_indices = obj.PhaseVarIndices;
     n_phase = length(phase);
     yc = cell(n_phase,1);
     permission = 'w';
@@ -12,11 +12,11 @@ function [yc] = checkCosts(obj, x, output_file)
         end
         
         
-        var = x(phase_var_indices(i,1):phase_var_indices(i,2));
+        %         var = x(phase_var_indices(i,1):phase_var_indices(i,2));
         if nargin > 2
-            [yc{i}] = checkCosts(phase(i), var, output_file, permission);
+            [yc{i}] = checkCosts(phase(i), x, output_file, permission);
         else
-            [yc{i}] = checkCosts(phase(i), var);
+            [yc{i}] = checkCosts(phase(i), x);
         end
         
         

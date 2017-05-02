@@ -1,8 +1,12 @@
-function [yc, cl, cu] = checkConstraints(obj, x, output_file)
+function [yc, cl, cu] = checkConstraints(obj, x, tol, output_file)
     % Check the violation of the constraints 
     
+    if nargin < 3
+        tol = 1e-3;
+    end
+    
     phase = obj.Phase;
-    phase_var_indices = obj.PhaseVarIndices;
+    % phase_var_indices = obj.PhaseVarIndices;
     n_phase = length(phase);
     yc = cell(n_phase,1);
     cl = cell(n_phase,1);
@@ -14,11 +18,11 @@ function [yc, cl, cu] = checkConstraints(obj, x, output_file)
         end
         
         
-        var = x(phase_var_indices(i,1):phase_var_indices(i,2));
-        if nargin > 2
-            [yc{i}, cl{i}, cu{i}] = checkConstraints(phase(i), var, output_file, permission);
+        % var = x(phase_var_indices(i,1):phase_var_indices(i,2));
+        if nargin > 3
+            [yc{i}, cl{i}, cu{i}] = checkConstraints(phase(i), x, tol, output_file, permission);
         else
-            [yc{i}, cl{i}, cu{i}] = checkConstraints(phase(i), var);
+            [yc{i}, cl{i}, cu{i}] = checkConstraints(phase(i), x, tol);
         end
         
         

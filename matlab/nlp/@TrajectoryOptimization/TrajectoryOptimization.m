@@ -232,11 +232,11 @@ classdef TrajectoryOptimization < NonlinearProgram
         obj = removeCost(obj, label);
         %% post-processing functions
         
-        [yc, cl, cu] = checkConstraints(obj, x, output_file, permission);
+        [yc, cl, cu] = checkConstraints(obj, x, tol, output_file, permission);
         
         [yc] = checkCosts(obj, x, output_file,permission);
         
-        checkVariables(obj, x, output_file, permission);
+        checkVariables(obj, x, tol, output_file, permission);
         
         [tspan, states, inputs, params] = exportSolution(obj, sol, t0);
     end

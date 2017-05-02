@@ -44,7 +44,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = HybridTrajectoryOptimization(name, plant, num_grid, bounds, varargin)
+        function obj = HybridTrajectoryOptimization(name, plant, num_grid, varargin)
             % The constructor function
             %
             % Parameters:
@@ -99,7 +99,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             
             phase(n_phase) = TrajectoryOptimization();
             
-            for i=1:n_phase
+            for i=1:n_vertex
                 % node name as the NLP name
                 node_name = g.Nodes.Name{i};
                 % the dynamical system associated with the node
@@ -127,7 +127,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                 next = successors(g, i);
                 if ~isempty(next)
                     edge = findedge(g,i,next);
-                    edge_name = g.Edges.Guard(edge).Name;
+                    edge_name = g.Edges.Guard{edge}.Name;
                     edge_system = g.Edges.Guard{edge};
                     phase(idx+1) = TrajectoryOptimization(edge_name,...
                         edge_system, 0, [], varargin{:});
@@ -141,11 +141,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             obj.PhaseVarIndices = zeros(n_phase,2);
             
             
-            if nargin > 3
-                if ~isempty(bounds)
-                    obj = configure(obj, bounds);
-                end
-            end
+            
         end
         
         
@@ -157,6 +153,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     
     %% methods defined in external files
     methods
+        obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin);
+
         validateGraph(~, plant);
         
         obj = configure(obj, bounds);
@@ -165,11 +163,11 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         
         phase_idx = getPhaseIndex(obj, varargin);
         
-        [yc, cl, cu] = checkConstraints(obj, x, output_file);
+        [yc, cl, cu] = checkConstraints(obj, x, tol, output_file);
         
         [yc] = checkCosts(obj, x, output_file);
         
-        checkVariables(obj, x, output_file);
+        checkVariables(obj, x, tol, output_file);
         
         [calcs, params] = exportSolution(obj, sol);
     end
