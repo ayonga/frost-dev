@@ -138,6 +138,10 @@
             obj.Inputs.ConstraintWrench = struct();
             obj.Inputs.External = struct();
             
+            obj.inputs_.Control = struct();
+            obj.inputs_.ConstraintWrench = struct();
+            obj.inputs_.External = struct();
+            
             obj.Params = struct();
             
             obj.Gmap = struct();
@@ -223,11 +227,13 @@
             % returns the variables (vars) value that are stored during
             % computing the dynamics
             
+            if ~iscell(vars), vars = {vars}; end
             
-            var_group = cellfun(@(x)model.validateVarName(x), vars, 'UniformOutput', false);
-            value = cell(1,n_deps);
+            var_group = cellfun(@(x)obj.validateVarName(x), vars, 'UniformOutput', false);
+            n_vars = numel(vars);
+            value = cell(1,n_vars);
             
-            for i=1:n_deps
+            for i=1:n_vars
                 tmp = var_group{i};
                 switch tmp{1}
                     case 'States'

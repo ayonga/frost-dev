@@ -63,7 +63,7 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
     
     % configure the ODE options
     odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-6,'AbsTol',1e-6);
-    qe
+    
     % configure the event functions
     if ~isempty(eventnames)
         events_list = fieldnames(obj.EventFuncs);
@@ -85,8 +85,9 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
             end
             if any(event_indices)
                 
-                eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices~=0));
-                odeopts.Event = @(t, x) checkGuard(obj, t, x, controller, params, eventfuncs);
+                eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices~=0),'UniformOutput',false);
+                eventfuncs = vertcat(eventfuncs{:});
+                odeopts.Events = @(t, x) checkGuard(obj, t, x, controller, params, eventfuncs);
             end
         end
     end

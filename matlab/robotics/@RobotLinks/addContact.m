@@ -8,13 +8,13 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     %
     % Optional fields of geometry:
     %  la: the distance from the origin to the rolling edge along
-    %  the negative y-axis  @type double
-    %  lb: the distance from the origin to the rolling edge along
-    %  the positive y-axis  @type double    
-    %  La: the distance from the origin to the rolling edge along
-    %  the negative x-axis  @type double
-    %  Lb: the distance from the origin to the rolling edge along
     %  the positive x-axis  @type double
+    %  lb: the distance from the origin to the rolling edge along
+    %  the negative x-axis  @type double    
+    %  La: the distance from the origin to the rolling edge along
+    %  the negative y-axis  @type double
+    %  Lb: the distance from the origin to the rolling edge along
+    %  the positive y-axis  @type double
     %
     % Optional fields of fric_coef:
     %  mu: the (static) coefficient of friction. @type double

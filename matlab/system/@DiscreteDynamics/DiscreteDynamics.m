@@ -15,7 +15,7 @@ classdef DiscreteDynamics < DynamicalSystem
     
     % callback function handle properties to implement object specific
     % funtionalities outside of the class without making a new subclass
-    properties (SetAccess=protected)
+    properties
         
         
         

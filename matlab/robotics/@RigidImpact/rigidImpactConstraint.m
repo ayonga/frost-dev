@@ -34,6 +34,7 @@ function nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin)
         %% impact constraints
         cstr = obj.ImpactConstraints;
         n_cstr = numel(cstr_name);
+        nx  = length(x);
         % initialize the Jacobian matrix
         Gvec = zeros(nx,1);
         deltaF = cell(1, n_cstr);
@@ -50,7 +51,7 @@ function nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin)
         Gvec = subs(Gvec, x, xn);
         % D(q^+)*(dq^+ - R*dq^-) = sum(J_i'(q^+)*deltaF_i)
         delta_dq = M*(dxn - R*dx) - Gvec;
-        dx_map = SymFunction(['dxDiscreteMap' obj.Name],delta_dq,[dx,xn,dxn,deltaF]);
+        dx_map = SymFunction(['dxDiscreteMap' obj.Name],delta_dq,[{dx},{xn},{dxn},deltaF]);
         
         addNodeConstraint(nlp, dx_map, ['dx','xn', 'dxn', input_name], 'first', 0, 0, 'Linear');
         

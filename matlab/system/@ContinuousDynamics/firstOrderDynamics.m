@@ -58,7 +58,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         for i=1:n_cstr
             c_name = h_cstr_name{i};
             cstr = h_cstr.(c_name);
-            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+            cstr_indices = idx:idx+cstr.Dimension-1;
             % calculate the Jacobian
             if cstr.DerivativeOrder == 2
                 [Jh,dJh] = calcJacobian(cstr,x);
@@ -76,7 +76,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
     
     %% calculate the constrained vector fields and control inputs
     control_name = fieldnames(obj.Inputs.Control);
-    Be = obj.Gmap.Control.(control_name{1});
+    feval(obj.Gmap.Control.(control_name{1}).Name,q);
     Ie    = eye(nx);
     
     
@@ -94,7 +94,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
     if narargout > 1
         [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
     else
-        u = calcConstrol(controller, t, x, vfc, gfc, obj, params);
+        u = calcControl(controller, t, x, vfc, gfc, obj, params);
     end
     
     Gv_u = Be*u;
@@ -112,7 +112,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         for i=1:n_cstr
             c_name = h_cstr_name{i};
             cstr = h_cstr.(c_name);
-            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+            cstr_indices = idx:idx+cstr.Dimension-1;
             input_name = cstr.InputName;
             obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
             idx = idx + cstr.Dimension;

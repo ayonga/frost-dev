@@ -188,19 +188,30 @@ classdef SymExpression < handle
             end
         end
         
-%         function status = isscalar(A)
-%             % Check if the symbolic expression is a scalar (non-list)
-%             
-%             % Convert inputs to SymExpression
-%             A = SymExpression(A);
-%             
-%             % evaluate the operation in Mathematica and return the
-%             % expression string
-%             
-%             ret = eval_math(['ListQ[' A.s ']']);
-%             
-%             status = all(strcmp('False',ret));
-%         end
+        function status = islist(A)
+            % Check if the symbolic expression is a scalar (non-list)
+            
+            % Convert inputs to SymExpression
+            A = SymExpression(A);
+            
+            % evaluate the operation in Mathematica and return the
+            % expression string
+            
+            ret = eval_math(['ListQ[' A.s ']']);
+            
+            status = all(strcmp('True',ret));
+        end
+        function X = first(A)
+            
+            if ~islist(A)
+                X = A;
+                return;
+            end
+            % construct the operation string
+            sstr = ['First[' A.s ']'];
+            % create a new object with the evaluated string
+            X = SymExpression(sstr);
+        end
         %---------------   Arithmetic  -----------------
         function B = uminus(A)
             % Symbolic negation.
@@ -259,12 +270,20 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
+            if isscalar(A) && islist(A) && islist(B)
+                A = first(A);
+            end
+            if isscalar(B) && islist(B) && islist(A)
+                B = first(B);
+            end
             % construct the operation string
             sstr = ['Times[' A.s ',' B.s ']'];
             % create a new object with the evaluated string
             X = SymExpression(sstr);
         end
-
+        
+        
+            
         function X = mtimes(A, B)
             % Symbolic matrix multiplication.
             %   MTIMES(A,B) overloads symbolic A * B.
@@ -331,6 +350,13 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
+
+            if isscalar(A) && islist(A) && islist(B)
+                A = first(A);
+            end
+            if isscalar(B) && islist(B) && islist(A)
+                B = first(B);
+            end
             % construct the operation string
             sstr = ['Divide[' A.s ',' B.s ']'];
             % create a new object with the evaluated string
@@ -346,6 +372,12 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
+            if isscalar(A) && islist(A) && islist(B)
+                A = first(A);
+            end
+            if isscalar(B) && islist(B) && islist(A)
+                B = first(B);
+            end
             % construct the operation string
             sstr = ['Divide[' B.s ',' A.s ']'];
             % create a new object with the evaluated string

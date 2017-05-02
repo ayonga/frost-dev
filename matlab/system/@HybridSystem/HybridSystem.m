@@ -154,7 +154,7 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         
         obj = setVertexProperties(obj, vertex, varargin);
         
-        obj = simulate(obj, options);
+        obj = simulate(obj, t0, x0, tf, options, varargin);
     end
     
     %% Private methods

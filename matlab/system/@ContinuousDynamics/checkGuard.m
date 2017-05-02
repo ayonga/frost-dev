@@ -24,10 +24,10 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
     value = ones(1,nevent);
     for i=1:nevent
         % get the value of the dependent variables
-        dep_val = getValue(obj,eventfuncs{i}.DepLists);
+        dep_val = getValue(obj,eventfuncs(i).DepLists);
         
         % compute the value of the event function
-        value(i) = eventfuncs{i}.calcConstraint(dep_val{:});
+        value(i) = eventfuncs(i).calcConstraint(dep_val{:});
     end
     
 end

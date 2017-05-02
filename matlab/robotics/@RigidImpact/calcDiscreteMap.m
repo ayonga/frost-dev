@@ -1,4 +1,4 @@
-function xn = calcDiscreteMap(obj, t, x, varargin)
+function [xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
     % calculates the discrete map of the dynamical system that maps
     % xminus from xplus. Subclasses must implement this method by its
     % own.
@@ -29,8 +29,8 @@ function xn = calcDiscreteMap(obj, t, x, varargin)
         dq = R*dqminus;
         
         %% impact constraints
-        cstr = obj.ImpactConstraints;
-        n_cstr = numel(cstr_name);
+        cstr = struct2array(obj.ImpactConstraints);
+        n_cstr = length(cstr);
         % determine the total dimension of the holonomic constraints
         cdim = sum([cstr.Dimension]);
         % initialize the Jacobian matrix
@@ -38,9 +38,8 @@ function xn = calcDiscreteMap(obj, t, x, varargin)
         
         idx = 1;
         for i=1:n_cstr
-            c_name = cstr_name{i};
-            c_obj = cstr.(c_name);
-            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+            c_obj = cstr(i);
+            cstr_indices = idx:idx+c_obj.Dimension-1;
             
             % calculate the Jacobian
             [Jh] = calcJacobian(c_obj,q,dq);
@@ -52,15 +51,37 @@ function xn = calcDiscreteMap(obj, t, x, varargin)
         % inertia matrix
         De = feval(obj.Mmat.Name, q);
         
-        % Compute Dynamically Consistent Contact Null-Space from Lagrange
-        % Multiplier Formulation
-        DbarInv = Je * (De \ transpose(Je));
-        I = eye(nx);
-        Jbar = De \ transpose(transpose(DbarInv) \ Je );
-        Nbar = I - Jbar * Je;
+        % % Compute Dynamically Consistent Contact Null-Space from Lagrange
+        % % Multiplier Formulation
+        %         DbarInv = Je * (De \ transpose(Je));
+        %         I = eye(nx);
+        %         Jbar = De \ transpose(transpose(DbarInv) \ Je );
+        %         Nbar = I - Jbar * Je;
+        % % Apply null-space projection
+        %         dqplus = Nbar * dq;
         
-        % Apply null-space projection
-        dqplus = Nbar * dq;
+        
+        nImpConstr = size(Je,1);
+        A = [De -Je'; Je zeros(nImpConstr)];
+        b = [De*dq; zeros(nImpConstr,1)];
+        y = A\b;
+        
+        ImpF = y((obj.numState+1):end);
+        
+        idx = 1;
+        for i=1:n_cstr
+            c_obj = cstr(i);
+            cstr_indices = idx:idx+c_obj.Dimension-1;
+            
+            % calculate the Jacobian
+            lambda.(c_obj.InputName) = ImpF(cstr_indices);
+            idx = idx + c_obj.Dimension;
+        end
+        
+        
+        dqplus = y(1:obj.numState);
+        
+        
         qplus  = q;
         
     end

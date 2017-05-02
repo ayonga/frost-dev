@@ -1,4 +1,4 @@
-function sol = simulate(obj, options, varargin)
+function sol = simulate(obj, t0, x0, tf, options, varargin)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 
@@ -6,82 +6,39 @@ function sol = simulate(obj, options, varargin)
     %
     %
     % Optional fields of options:
-    % subgraph: the node list of the subgraph to be simulated @type colvec
-    % start: the first domain from which the simulation starts, 
-    % the first domain in the graph if not explicitly specified @type char
-    % terminal: the last domain at which the simulation terminates, 
-    % empty if not explicitly specified 
-    % @type char
     % numcycle: the number of cycle if the simulated system is periodic,  
     % 1 if not specified @type double
     % x0: the initial states of the system, zero if not specified
     % @type colvec
     
-    % parse simulation options
-    if nargin < 2
-        options = struct;
-    end
-    
-    if isfield(options, 'subgraph')
-        % if a subgraph is specified to be simulated, then extract this
-        % subgraph.
-        sim_graph = subgraph(obj.Gamma, options.subgraph);
-        
-        
-    else
-        % otherwise use the original whole graph for simulation
-        sim_graph = obj.Gamma;
-    end
     
     
-    if isfield(options, 'start')
-        s_domain_idx = findnode(sim_graph, options.start);
-        assert(s_domain_idx~=0, ...
-            'Unbale to find the specified starting domain in the system graph.');
+    
+    sim_graph = obj.Gamma;
+    idx_no_in = find(indegree(sim_graph)==0,1);
+    if ~isempty(idx_no_in)
+        s_domain_idx = idx_no_in;
     else
         s_domain_idx = 1;
     end
-    
-    if isfield(options, 'terminal')
-        if isfield(options, 'numcycle')
-            warning('It is not allowed to specify the terminal domain and the number of cycle at the same time.');
-        end
-        t_domain_idx = findnode(sim_graph, options.terminal);
-        assert(t_domain_idx~=0, ...
-            'Unbale to find the specified end domain in the system graph.');
-        if ~sim_graph.Nodes.IsTerminal(t_domain_idx)
-            warning(['The specified terminal domain %s is not a terminal node of the system. \n',...
-                'Setting %s to a terminal node: '], sim_graph.Nodes.Name{t_domain_idx}, ...
-                sim_graph.Nodes.Name{t_domain_idx});
-            sim_graph.Nodes.IsTerminal(t_domain_idx) = true;
-        end
-    else
-        if isfield(options, 'numcycle')
-            if isdag(sim_graph)
-                error('The simulated graph is acyclic. It is not allowed to specify the number of cycles.');                
-            end
-            numcycle = options.numcycle;
-        else
-            numcycle = 1;
-        end
-        t_domain_idx = find(sim_graph.Nodes.IsTerminal);
-    end
-    
-    
-    if isdag(sim_graph) % acyclic graph
-        if ~any(sim_graph.Nodes.IsTerminal)
-            % there is no terminal domain exists in a acyclic graph
-            error('The specified subgraph is acyclic but there is no terminal node in the graph.');
-        end
-    end
-    
-    
             
+    idx_no_out = find(outdegree(sim_graph)==0,1);
+    if ~isempty(idx_no_in)
+        t_domain_idx = idx_no_out;
+    else
+        t_domain_idx = [];
+    end
+    
+    sim_opts = struct(varargin{:});
+    if isfield(sim_opts,'NumCycle')
+        numcycle = sim_opts.NumCycle;
+    else
+        numcycle = 1;
+    end
     
     
     % initialization
     cur_node_idx = s_domain_idx;
-    t0 = 0;
     while (true)
         
         
@@ -111,16 +68,15 @@ function sol = simulate(obj, options, varargin)
         
         % pre-process all associated guards to set up proper event function
         n_edges = height(assoc_edges);
-        guards = assoc_edges.Guard;
-        params = assoc_edges.Param;
+        eventnames = cell(1,n_edges);
         for i=1:n_edges
-            guards{i}.preProcess(cur_node, params{i});
+            eventnames{i} = assoc_edges.Guard{i}.EventName;
         end
         
        
         
         % run the simulation
-        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,odeopts);
+        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,eventnames,options);
         
         
         
@@ -131,8 +87,11 @@ function sol = simulate(obj, options, varargin)
             break;
         end
         cur_guard = cur_edge.Guard{1};
+        cur_gurad_param = cur_edge.Param{1};
         % update states and time
-        x0 = cur_guard.calcDiscreteMap(obj, t_f, x_f, cur_node);
+        t_f = sol.x(end);
+        x_f = sol.y(:,end);
+        x0 = cur_guard.calcDiscreteMap(t_f, x_f, cur_node, cur_gurad_param);
         t0 = t_f;
         
         % determine the target node of the current edge, and set it to be

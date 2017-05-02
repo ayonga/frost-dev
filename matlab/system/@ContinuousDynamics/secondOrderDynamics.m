@@ -26,11 +26,12 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     
     
     %% get the external input
+    % initialize the Gv_ext vector
+    Gv_ext = zeros(nx,1);
     f_ext_name = fieldnames(obj.Inputs.External);
     if ~isempty(f_ext_name)              % if external inputs are defined
         n_ext = length(f_ext_name);
-        % initialize the Gv_ext vector
-        Gv_ext = zeros(nx,1);
+        
         for i=1:n_ext   
             f_name = f_ext_name{i};
             % get the Gvec function object
@@ -49,8 +50,8 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     %% holonomic constraints
     h_cstr_name = fieldnames(obj.HolonomicConstraints);
     if ~isempty(h_cstr_name)           % if holonomic constraints are defined
-        h_cstr = obj.HolonomicConstraints;
-        n_cstr = numel(h_cstr_name);
+        h_cstr = struct2array(obj.HolonomicConstraints);
+        n_cstr = length(h_cstr);
         % determine the total dimension of the holonomic constraints
         cdim = sum([h_cstr.Dimension]);
         % initialize the Jacobian matrix
@@ -59,14 +60,13 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
         
         idx = 1;
         for i=1:n_cstr
-            c_name = h_cstr_name{i};
-            cstr = h_cstr.(c_name);
+            cstr = h_cstr(i);
             
             % calculate the Jacobian
             [Jh,dJh] = calcJacobian(cstr,q,dq);
-            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+            cstr_indices = idx:idx+cstr.Dimension-1;
             Je(cstr_indices,:) = Jh;
-            Jedot(cstr_indices-1,:) = dJh; 
+            Jedot(cstr_indices,:) = dJh; 
             idx = idx + cstr.Dimension;
         end        
     end
@@ -74,36 +74,40 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     
     %% calculate the constrained vector fields and control inputs
     control_name = fieldnames(obj.Inputs.Control);
-    Be = obj.Gmap.Control.(control_name{1});
-    Ie    = eye(nx);
-    
-    
-    
-    XiInv = Je * (M \ transpose(Je));
-    % compute vector fields
-    % f(x)
-    vfc = [
-        dq;secondOrderDynamics
-        M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dq))];
-    
-    
-    % g(x)
-    gfc = [
-        zeros(size(Be));
-        M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
-    
-    % compute control inputs
-    if nargout > 1
-        [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
-    else
-        u = calcConstrol(controller, t, x, vfc, gfc, obj, params);
+    Gv_u = zeros(nx,1);
+    if ~isempty(control_name)
+        Be = feval(obj.Gmap.Control.(control_name{1}).Name,q);
+        Ie    = eye(nx);
+        
+        
+        
+        XiInv = Je * (M \ transpose(Je));
+        % compute vector fields
+        % f(x)
+        vfc = [
+            dq;
+            M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dq))];
+        
+        
+        % g(x)
+        gfc = [
+            zeros(size(Be));
+            M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
+        
+        % compute control inputs
+        if nargout > 1
+            [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
+        else
+            u = calcControl(controller, t, x, vfc, gfc, obj, params);
+        end
+        
+        Gv_u = Be*u;
+        obj.inputs_.Control.(control_name{1}) = u;
     end
-    
-    Gv_u = Be*u;
-    obj.inputs_.Control.(control_name{1}) = u;
     %% calculate constraint wrench of holonomic constraints
     Gv = Gv_ext + Gv_u;
     % Calculate constrained forces
+    Gv_c = zeros(nx,1);
     if ~isempty(h_cstr_name)
         lambda = -XiInv \ (Jedot * dq + Je * (M \ (Fv + Gv)));
         % the constrained wrench inputs
@@ -111,10 +115,9 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
         
         % extract and store
         idx = 1;
-        for i=1:n_cstr
-            c_name = h_cstr_name{i};             
-            cstr = h_cstr.(c_name);
-            cstr_indices = linspace(idx,idx+cstr.Dimension-1,1);
+        for i=1:n_cstr           
+            cstr = h_cstr(i);
+            cstr_indices = idx:idx+cstr.Dimension-1;
             input_name = cstr.InputName;
             obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
             idx = idx + cstr.Dimension;
@@ -124,7 +127,8 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     Gv = Gv + Gv_c;
     
     % the system dynamics
-    xdot = M \ (Fv + Gv);
+    xdot = [dq; 
+        M \ (Fv + Gv)];
     
     
     if nargout > 1

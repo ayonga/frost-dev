@@ -36,7 +36,7 @@
     
     % callback function handle properties to implement object specific
     % funtionalities outside of the class without making a new subclass
-    properties (SetAccess=protected)
+    properties
         
         % pre-process function handle of the object before the simulation 
         %
@@ -52,7 +52,7 @@
         % postPorcess(sys, sol, controller, params, varargin)
         %
         % @type function_handle
-        PostPorcess
+        PostProcess
         
         % A handle to a function called by a trajectory optimization NLP to
         % enforce system specific constraints. 
@@ -100,7 +100,7 @@
             
             % do-nothing function handle by default
             obj.PreProcess = str2func('nop');
-            obj.PostPorcess = str2func('nop');
+            obj.PostProcess = str2func('nop');
             obj.UserNlpConstraint = str2func('nop');
             
         end
@@ -206,7 +206,7 @@
     methods 
         
         % simulate the dynamical system
-        [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options)
+        [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options, varargin);
         
         % check event functions for simulation
         [value, isterminal, direction] = checkGuard(obj, t, x, controller, params, eventfuncs);
@@ -263,7 +263,7 @@
         
     end
     %% private properties
-    properties (Hidden, Access=private)
+    properties (Hidden, SetAccess=private)
         
         % The left hand side of the dynamical equation: M(x)dx or M(x)ddx
         %
