@@ -1,4 +1,4 @@
-function options = setOption(obj, varargin)
+function obj = setOption(obj, varargin)
     % Sets the object options, and return the complete list of option
     % structure including unchanged default options.
     %
@@ -10,8 +10,7 @@ function options = setOption(obj, varargin)
     
     new_opts = struct(varargin{:});
     
-    options = struct_overlay(obj.Options, new_opts, {'AllowNew', true});
+    obj.Options = struct_overlay(obj.Options, new_opts,{'AllowNew',true});
     
     
-    obj.Options = options;
 end

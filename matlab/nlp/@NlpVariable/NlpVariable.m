@@ -25,8 +25,8 @@ classdef NlpVariable < handle
         % group. For example, the joint configurations 'q' and control
         % inputs 'u'. The 'dimension' specifies the length of this vector.
         %
-        % @type integer
-        Dimension
+        % @type integer @default 0
+        Dimension = 0;
         
         % The typical value of the variable
         %
@@ -78,13 +78,21 @@ classdef NlpVariable < handle
                 return;
             end
             
+            
             % update property values using the input arguments
             % load default values if not specified explicitly
             
             argin = struct(varargin{:});
             % check name type
             if isfield(argin, 'Name')
-                obj = setName(obj, argin.Name);
+                assert(ischar(argin.Name), 'The name must be a string.');
+            
+                % validate name string
+                assert(isempty(regexp(argin.Name, '\W', 'once')),...
+                    'NlpVariable:invalidNameStr', ...
+                    'Invalid name string, it CANNOT contain special characters.');
+                
+                obj.Name = argin.Name;
             else
                 if ~isstruct(varargin{1})
                     error('The ''Name'' must be specified in the argument list.');
@@ -97,22 +105,27 @@ classdef NlpVariable < handle
             
             % set the dimension to be 1 by default
             if isfield(argin, 'Dimension')
-                obj = setDimension(obj, argin.Dimension);
+                assert(isscalar(argin.Dimension) && argin.Dimension >=0 ...
+                    && rem(argin.Dimension,1)==0 && isreal(argin.Dimension), ...
+                    'The dimension must be a scalar positive value.');
+                obj.Dimension = argin.Dimension;
             else
-                obj = setDimension(obj, 1);
+                if ~isstruct(varargin{1})
+                    error('The ''Dimension'' must be specified in the argument list.');
+                else
+                    error('The input structure must have a ''Dimension'' field');
+                end
             end
             
             % set boundary values
-            if isfield(argin, 'lb')
-                obj =  setBoundary(obj, argin.lb, []);
+            if all(isfield(argin, {'ub','lb'}))
+                obj =  setBoundary(obj, argin.lb, argin.ub);
+            elseif isfield(argin, 'lb')
+                obj =  setBoundary(obj, argin.lb, inf);
+            elseif isfield(argin, 'ub')
+                obj =  setBoundary(obj, -inf, argin.ub);
             else
-                obj =  setBoundary(obj, -inf, []);
-            end
-            
-            if isfield(argin, 'ub')
-                obj =  setBoundary(obj, [], argin.ub);
-            else
-                obj =  setBoundary(obj, [], inf);
+                obj =  setBoundary(obj, -inf, inf);
             end
             
             % set typical initial value
@@ -129,6 +142,8 @@ classdef NlpVariable < handle
         
     end
     
+   
+    
     %% methods defined in external files
     methods
         obj = setIndices(obj, index);
@@ -136,10 +151,6 @@ classdef NlpVariable < handle
         obj = setBoundary(obj, lowerbound, upperbound);
         
         obj = setInitialValue(obj, x);
-        
-        obj = setName(obj, name);
-        
-        obj = setDimension(obj, dim);
         
         obj = updateProp(obj, varargin);
     end

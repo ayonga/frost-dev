@@ -6,9 +6,9 @@ function obj = setType(obj, type)
     
     % specify the function type
     if strcmpi(type, 'Linear')
-        obj.Type = NlpFunction.LINEAR;
+        obj.Type = 'Linear';
     elseif strcmpi(type, 'Nonlinear')
-        obj.Type = NlpFunction.NONLINEAR;
+        obj.Type = 'Nonlinear';
     else
         error('NlpFunction:incorrectFunctionType',...
             'Unspecified function type detected.\n');

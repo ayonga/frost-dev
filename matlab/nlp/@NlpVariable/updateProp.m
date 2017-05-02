@@ -4,7 +4,6 @@ function obj = updateProp(obj, varargin)
     %
     % Parameters:
     %  varargin: variable nama-value pair input arguments, in detail:
-    %   Dimension: dimension of the variable @type integer
     %   lb: lower limit @type colvec
     %   ub: upper limit @type colvec
     %   x0: a typical value of the variable @type colvec
@@ -15,11 +14,11 @@ function obj = updateProp(obj, varargin)
     
     
     % set boundary values
-    if isfield(argin, 'lb')
+    if all(isfield(argin, {'ub','lb'}))
+        obj =  setBoundary(obj, argin.lb, argin.ub);
+    elseif isfield(argin, 'lb')
         obj =  setBoundary(obj, argin.lb, []);
-    end
-    
-    if isfield(argin, 'ub')
+    elseif isfield(argin, 'ub')
         obj =  setBoundary(obj, [], argin.ub);
     end
     

@@ -81,7 +81,7 @@ classdef IpoptApplication < SolverApplication
                 options.ipopt = struct_overlay(options.ipopt,new_opts,{'AllowNew',true});
             end
             
-            if exist('sparse2','file')
+            if exist(['sparse2.',mexext],'file') == 3
                 options.UseMexSparse = true;
             else
                 options.UseMexSparse = false;

@@ -80,26 +80,27 @@ for i=1:numel(propNames)
     
     % if a property exists in the input argument, validate its
     % value
-    HybridSystem.validatePropAttribute({props.(propNames{i})},...
+    HybridSystem.validatePropAttribute(propNames{i},...
+        {props.(propNames{i})},...
         valid_props.Type{prop_pos(i)},valid_props.Attribute{prop_pos(i)});
     
     
     
     % if the value is not numeric or a cell, convert it to cell to
     % prevent future concatenation goes wrong
-    for j=edge'
-        % check if the guard condition contains in the source domain's
-        % unilateral constraints
-        if strcmp(propNames{i},'Guard')
-            src_vert = findnode(obj.Gamma, s{j});
-            src_domain = obj.Gamma.Nodes.Domain{src_vert};
-            validatestring(props(j).(propNames{i}).Condition, src_domain.UnilateralConstr.Name);
-        end
-        
-        if iscell(obj.Gamma.Edges.(propNames{i})(j))
-            obj.Gamma.Edges.(propNames{i}){j} = props(j).(propNames{i});
+    for j=1:numel(edge)
+        %         % check if the guard condition contains in the source domain's
+        %         % unilateral constraints
+        %         if strcmp(propNames{i},'Guard')
+        %             src_vert = findnode(obj.Gamma, s{j});
+        %             src_domain = obj.Gamma.Nodes.Domain{src_vert};
+        %             validatestring(props(j).(propNames{i}).Condition, src_domain.UnilateralConstr.Name);
+        %         end
+        k = edge(j);
+        if iscell(obj.Gamma.Edges.(propNames{i})(k))
+            obj.Gamma.Edges.(propNames{i}){k} = props(j).(propNames{i});
         else
-            obj.Gamma.Edges.(propNames{i})(j) = props(j).(propNames{i});
+            obj.Gamma.Edges.(propNames{i})(k) = props(j).(propNames{i});
         end
     end
     

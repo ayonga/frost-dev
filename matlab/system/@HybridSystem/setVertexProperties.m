@@ -78,16 +78,18 @@ for i=1:numel(propNames)
     
     % if a property exists in the input argument, validate its
     % value
-    HybridSystem.validatePropAttribute({props.(propNames{i})},...
+    HybridSystem.validatePropAttribute(propNames{i},...
+        {props.(propNames{i})},...
         valid_props.Type{prop_pos(i)},valid_props.Attribute{prop_pos(i)});
     
     % if the value is not numeric or a cell, convert it to cell to
     % prevent future concatenation goes wrong
-    for j=vert'
+    for j=1:numel(vert)
+        k = vert(j);
         if iscell(obj.Gamma.Nodes.(propNames{i})(j))
-            obj.Gamma.Nodes.(propNames{i}){j} = props(j).(propNames{i});
+            obj.Gamma.Nodes.(propNames{i}){k} = props(j).(propNames{i});
         else
-            obj.Gamma.Nodes.(propNames{i})(j) = props(j).(propNames{i});
+            obj.Gamma.Nodes.(propNames{i})(k) = props(j).(propNames{i});
         end
     end
     

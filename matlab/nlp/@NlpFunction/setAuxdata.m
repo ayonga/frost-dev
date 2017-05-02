@@ -5,10 +5,26 @@ function obj = setAuxdata(obj, auxdata)
     % Parameters:
     % auxdata: a set of auxilary input argument @type rowvec
     
-    assert(isvector(auxdata) && isnumeric(auxdata), ...
-        'The auxilary input argument must be a vector of numeric values.');
+    if ~iscell(auxdata), auxdata = {auxdata}; end
+    
+    
+    
+    if ~isempty(obj.SymFun)
+        
+        assert(numel(auxdata) == numel(obj.SymFun.Params),...
+            'The number of the constant parameters does not match.');
+        
+        nvar1 = cellfun(@(x)length(flatten(x)), obj.SymFun.Params);        
+        nvar2 = cellfun(@(x)numel(x), auxdata); 
+        
+        for i=1:numel(auxdata)
+            
+            assert(nvar1(i) == nvar2(i),...
+                'The dimension of the $d-th parameter does not match.',i);
+        end
+    end
     
     obj.AuxData = auxdata;
     
-
+    
 end

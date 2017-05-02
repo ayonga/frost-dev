@@ -1,94 +1,109 @@
-function obj = addJumpConstraint(obj, phase)
-    % Add generic switching surface constraints, including guard condition
-    % and reset map constraints
+function obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin)
+    % Add jump constraints between the edge and neighboring two nodes
+    % (source and target) 
+    %
+    % These constraints include the continuity of the states/time
+    % variables, as well as system-specific discrete map constraint of the
+    % guard dynamics, and user-specific constraints.
     %
     % Parameters:
-    % phase: the index of the phase (domain) @type integer
+    % src: the source node NLP @type TrajectoryOptimization
+    % edge: the edge NLP @type TrajectoryOptimization
+    % tar: the target node NLP @type TrajectoryOptimization
     
     
     
-    % extract phase information
-    phase_idx = getPhaseIndex(obj, phase);
-    phase_info = obj.Phase{phase_idx};
+    %% continuity of time
+    t_s = SymVariable('ts',[2,1]);
+    t_n = SymVariable('tn',[2,1]);
+    t_cont = SymFunction('tContDomain',flatten(t_s(2)-t_n(1)),{t_s,t_n});
     
-    if phase_info.IsTerminal
-        return;
-    end
-    
-    phase_funcs = obj.Funcs.Phase{phase_idx};
-    
-    % local variable for fast access
-    n_node = phase_info.NumNode;
-    var_table= phase_info.OptVarTable;
-    col_names = phase_info.ConstrTable.Properties.VariableNames;
-    
-    n_dof = obj.Model.nDof;
-    
-    domain = obj.Gamma.Nodes.Domain{phase_info.CurrentVertex};
-    edge_idx = findedge(obj.Gamma, phase_info.CurrentVertex, phase_info.NextVertex);
-    guard  = obj.Gamma.Edges.Guard{edge_idx};
-    
-    next_var_table = obj.Phase{obj.Phase{phase_idx}.NextVertex}.OptVarTable;
-    
-    
-    guard_con = repmat({{}},1, n_node);
-    q_resetmap = repmat({{}},1, n_node);
-    dq_resetmap = repmat({{}},1, n_node);
-    hbar_cont = repmat({{}},1, n_node);
-    % the guard condition is enforced at the last node
-    guard_cond = domain.UnilateralConstr(guard.Condition,:);
-    
-    %% guard
-    switch guard_cond.Type{1}
-        case 'Kinematic'
-            guard_con{n_node} = {NlpFunction('Name','guard',...
-                'Dimension',1, 'lb',0,'ub',0, 'Type', 'nonlinear',...
-                'DepVariables', {{var_table{'Qe',n_node}{1}}},...
-                'AuxData', 0,...
-                'Funcs', phase_funcs.guard_func.Funcs)};
-        case 'Force'
-            guard_con{n_node} = {NlpFunction('Name','guard',...
-                'Dimension',1, 'lb',0,'ub',0, 'Type', 'linear',...
-                'DepVariables', {{var_table{'Fe',n_node}{1}}},...
-                'Funcs', phase_funcs.guard_func.Funcs)};
-            
-        otherwise
-            error('Unrecognized guard type.');
-    end
-    
-    
-    
-    %% reset map
-    q_resetmap{n_node} = {NlpFunction('Name','qResetMap',...
-        'Dimension',n_dof, 'Type', 'linear', 'lb',-0,'ub',0,...
-        'DepVariables',{{var_table{'Qe',n_node}{1},next_var_table{'Qe',1}{1}}},...
-        'Funcs', phase_funcs.qResetMap.Funcs)};
-    
-    if guard.ResetMap.RigidImpact
-        dq_resetmap{n_node} = {NlpFunction('Name','dqResetMap',...
-            'Dimension',n_dof, 'Type', 'nonlinear', 'lb',0,'ub',0,...
-            'DepVariables',{{var_table{'dQe',n_node}{1},...
-            var_table{'Fi',n_node}{1},next_var_table{'Qe',n_node}{1},...
-            next_var_table{'dQe',1}{1}}},...
-            'Funcs', phase_funcs.dqResetMap.Funcs)};
+    % create a NlpFunction for 'edge' NLP, but use the NlpVariables from
+    % 'src' and 'tar' NLPs.
+    if ~src.Options.DistributeTimeVariable
+        src_time_node = src.NumNode;
     else
-        dq_resetmap{n_node} = {NlpFunction('Name','dqResetMap',...
-            'Dimension',n_dof, 'Type', 'linear', 'lb',0,'ub',0,...
-            'DepVariables',{{var_table{'dQe',n_node}{1},next_var_table{'dQe',1}{1}}},...
-            'Funcs', phase_funcs.dqResetMap.Funcs)};        
+        src_time_node = 1;
+    end
+    t_cstr = NlpFunction('Name','tContDomain',...
+        'Dimension',1,...
+        'lb', 0,...
+        'ub', 0,...
+        'Type','Linear',...
+        'SymFun',t_cont,...
+        'DepVariables',[src.OptVarTable.T(src_time_node);tar.OptVarTable.T(1)]);
+    edge.addConstraint('tContDomain','first',t_cstr);
+    
+    %% state continuity (src <-> edge)
+    x_s = src.Plant.States.x;
+    x_e = SymVariable('xp',size(x_s));
+    x_cont_src = SymFunction(['xMinusCont_' edge.Name],x_s-x_e,{x_s,x_e});
+    x_src_cstr = NlpFunction('Name',['xMinusCont_' edge.Name],...
+        'Dimension',src.Plant.numState,...
+        'lb', 0,...
+        'ub', 0,...
+        'Type','Linear',...
+        'SymFun',x_cont_src,...
+        'DepVariables',[src.OptVarTable.x(end);edge.OptVarTable.x(1)]);
+    edge.addConstraint('xMinusCont','first',x_src_cstr);
+    
+    %% state continuity (edge <-> tar)
+    x_t = tar.Plant.States.x;
+    x_e = edge.Plant.States.xn;
+    x_cont_tar = SymFunction(['xPlusCont_' edge.Name],x_e-x_t,{x_e,x_t});
+    x_tar_cstr = NlpFunction('Name',['xPlusCont_' edge.Name],...
+        'Dimension',tar.Plant.numState,...
+        'lb', 0,...
+        'ub', 0,...
+        'Type','Linear',...
+        'SymFun',x_cont_tar,...
+        'DepVariables',[edge.OptVarTable.xn(1);tar.OptVarTable.x(1)]);
+    edge.addConstraint('xPlusCont','first',x_tar_cstr);
+    
+    if strcmp(edge.Plant.Type,'SecondOrder')
+        %% state derivative continuity (src <-> edge)
+        dx_s = src.Plant.States.dx;
+        dx_e = SymVariable('xp',size(x_s));
+        dx_cont_src = SymFunction(['dxMinusCont_' edge.Name],dx_s-dx_e,{dx_s,dx_e});
+        dx_src_cstr = NlpFunction('Name',['dxMinusCont_' edge.Name],...
+            'Dimension',src.Plant.numState,...
+            'lb', 0,...
+            'ub', 0,...
+            'Type','Linear',...
+            'SymFun',dx_cont_src,...
+            'DepVariables',[src.OptVarTable.dx(end);edge.OptVarTable.dx(1)]);
+        edge.addConstraint('dxMinusCont','first',dx_src_cstr);
+        
+        %% state derivative continuity (edge <-> tar)
+        dx_t = tar.Plant.States.dx;
+        dx_e = edge.Plant.States.dxn;
+        dx_cont_tar = SymFunction(['dxPlusCont_' edge.Name],dx_e-dx_t,{dx_e,dx_t});
+        dx_tar_cstr = NlpFunction('Name',['dxPlusCont_' edge.Name],...
+            'Dimension',tar.Plant.numState,...
+            'lb', 0,...
+            'ub', 0,...
+            'Type','Linear',...
+            'SymFun',dx_cont_tar,...
+            'DepVariables',[edge.OptVarTable.dxn(1);tar.OptVarTable.dx(1)]);
+        edge.addConstraint('dxPlusCont','first',dx_tar_cstr);
     end
     
     
-%     n_constr = getDimension(domain.HolonomicConstr);
-%     hbar_cont{n_node} = {NlpFunction('Name','hPhaseCont',...
-%             'Dimension',n_constr, 'Type', 'linear', 'lb',0,'ub',0,...
-%             'DepVariables',{{var_table{'H',1}{1},next_var_table{'H',1}{1}}},...
-%             'Funcs', phase_funcs.hPhaseCont.Funcs)}; 
     
-    obj.Phase{phase_idx}.ConstrTable = [...
-        obj.Phase{phase_idx}.ConstrTable;...
-        cell2table(guard_con,'RowNames',{'guard'},'VariableNames',col_names);...
-        cell2table(q_resetmap,'RowNames',{'qResetMap'},'VariableNames',col_names);...
-        cell2table(dq_resetmap,'RowNames',{'dqResetMap'},'VariableNames',col_names);...
-        cell2table(hbar_cont,'RowNames',{'hPhaseCont'},'VariableNames',col_names)];
+    %% the event function constraint for the source domain
+    event_list = fieldnames(src.Plant.EventFuncs);  % all events
+    % find the index of the event associated with the edge
+    event_idx = str_index(edge.Plant.EventName,event_list);
+    % extract the event function object using the index
+    event_obj = src.Plant.EventFuncs.(event_list{event_idx});
+    % impose the NLP constraints (unilateral constraints)
+    event_obj.imposeNLPConstraint(src);
+    % update the upper bound at the last node to be zero (to ensure equality)
+    event_cstr_name = event_obj.ConstrExpr.Name;
+    updateConstrProp(src,event_cstr_name,'last','ub',0);
+    
+    
+    %% call the system constraint callback method for the discrete dyamics
+    plant = edge.Plant;
+    plant.UserNlpConstraint(edge, src, tar, bounds, varargin{:});
 end

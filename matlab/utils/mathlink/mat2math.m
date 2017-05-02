@@ -15,7 +15,7 @@ function expr = mat2math(A, varargin)
     s = size(A);
     assert(length(s)==2,'Input matrix must be a 2-D matrix.');
     
-    func = @(x) num2str(x, varargin{:});
+    func = @(x) num2mathstr(x, varargin{:});
     raw = arrayfun(func, A, 'UniformOutput', false);
     
     rows = cell(s(1), 1);
@@ -23,7 +23,12 @@ function expr = mat2math(A, varargin)
         rows{i} = strcat('{',strjoin(raw(i, :), ', '),'}');
     end
     
+    %     if s(1) > 1
     expr = ['{',implode(rows',','),'}'];
+    %     else
+    %         expr = rows{:};
+    %     end
+    
     
     
     

@@ -116,8 +116,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
 namespace <*TemplateSlot["namespace"]*>
 {
-namespace <*TemplateSlot["behavior"]*>
-{
 
 void <*TemplateSlot["name"]*>_raw(<*StringImplode[Table["double *p_" <> TemplateSlot["argouts"][[i]], {i, Length[TemplateSlot["argouts"]]}], ", "]*>, <*StringImplode[Table["const double *"<>ToString[arg], {arg, TemplateSlot["argins"]}], ","]*>)
 {
@@ -128,7 +126,6 @@ void <*TemplateSlot["name"]*>_raw(<*StringImplode[Table["double *p_" <> Template
 ]*>
 }
 
-}
 }
 
 #endif // MATLAB_MEX_FILE

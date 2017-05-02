@@ -29,10 +29,7 @@ classdef IOFeedback < Controller
             % call superclass constructor
             obj = obj@Controller(name);
              
-            % initialize default control parameters
-            ep = 10;
-            obj.Param.kp = ep^2;
-            obj.Param.kd = 2*ep;
+            
         end
         
         
