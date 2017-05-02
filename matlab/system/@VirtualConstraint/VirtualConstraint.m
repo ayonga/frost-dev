@@ -78,6 +78,26 @@ classdef VirtualConstraint < handle
         %
         % @type integer
         PolyDegree
+        
+        % The actual outputs
+        %
+        % @type SymFunction
+        ActualFuncs
+        
+        % The desired outputs
+        %
+        % @type SymFunction
+        DesiredFuncs
+        
+        % The phase variable
+        %
+        % @type SymFunction
+        PhaseFuncs%
+        
+        % The virtual constraints ya - yd functions
+        %
+        % @type SymFunction
+        OutputFuncs
     
     end
 
@@ -151,25 +171,7 @@ classdef VirtualConstraint < handle
         tau_
         
         
-        % The actual outputs
-        %
-        % @type SymFunction
-        ActualFuncs
         
-        % The desired outputs
-        %
-        % @type SymFunction
-        DesiredFuncs
-        
-        % The phase variable
-        %
-        % @type SymFunction
-        PhaseFuncs%
-        
-        % The virtual constraints ya - yd functions
-        %
-        % @type SymFunction
-        OutputFuncs
         
         
     end
