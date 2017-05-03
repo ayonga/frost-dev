@@ -21,12 +21,14 @@ function right_stance_constraints(nlp, bounds, varargin)
     
     % output boundary 
     y_pos = domain.VirtualConstraints.position;
-    y_bound_idx = str_indices({'RightTorsoRoll','RightTorsoPitch','LeftLegRoll'},y_pos.OutputLabel);
+    y_bound_idx = str_indices({'RightTorsoRoll','RightTorsoPitch','LeftLegRoll',...
+        'LeftFootCartX','LeftFootCartY','LeftFootCartZ'},y_pos.OutputLabel);
     
     y_bound = y_pos.ActualOutput(y_bound_idx);
-    
+    lb = [-0.2,-0.1,-0.2,0,0,0]';
+    ub = [0.2,0.2,0.05,0,0,0]';
     y_bound_fun = SymFunction(['output_boundary_',domain.Name], y_bound, {domain.States.x});
-    addNodeConstraint(nlp, y_bound_fun, {'x'}, 'all', [-0.2,-0.1,-0.2],[0.2,0.2,0.05],'Linear');
+    addNodeConstraint(nlp, y_bound_fun, {'x'}, 'all', lb, ub,'Linear');
     
     % impact velocity
     J_left_sole = getBodyJacobian(domain, domain.ContactPoints.LeftSole);

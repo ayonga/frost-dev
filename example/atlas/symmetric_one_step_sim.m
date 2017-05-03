@@ -63,15 +63,7 @@ r_stance_param.pposition = new_param{1}.p;
 r_stance_param.kvelocity = 10;
 r_stance_param.kposition = [100,20];
 atlas_flat = setVertexProperties(atlas_flat,'RightStance','Param',r_stance_param);
-% left-stance parameters
-% l_stance_param = struct;
-% l_stance_param.avelocity = new_param{2}.v;
-% l_stance_param.pvelocity = new_param{2}.p;
-% l_stance_param.aposition = new_param{2}.a;
-% l_stance_param.pposition = new_param{2}.p;
-% l_stance_param.kvelocity = 10;
-% l_stance_param.kposition = [100,20];
-% atlas_flat = setVertexProperties(atlas_flat,'LeftStance','Param',l_stance_param);
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%%% Run the simulator
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

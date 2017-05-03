@@ -88,7 +88,9 @@ atlas_flat = setVertexProperties(atlas_flat,'LeftStance','Param',l_stance_param)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%%% Run the simulator
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-x0 = [new_param{1}.q0;new_param{1}.dq0];
+xf = [new_param{2}.qf;new_param{1}.dqf];
+x0 = r_impact.calcDiscreteMap(0,xf);
+
 % run the single domain first (no hybrid system model)
 % r_stance.simulate(0,x0,10,io_control,r_stance_param,'nsf',[]);
 tic

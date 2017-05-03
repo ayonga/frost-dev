@@ -2,7 +2,7 @@
 % 
 %
 %% model & simulation
-% symmetric_one_step_sim;
+symmetric_one_step_sim;
 %% bound
 model_bounds = atlas.getLimits();
 bounds = struct();
@@ -41,7 +41,7 @@ bounds.RightStance.position.kd = 20;
 r_stance.UserNlpConstraint = str2func('right_stance_constraints');
 l_impact.UserNlpConstraint = str2func('left_impact_constraints');
 num_grid.RightStance = 10;
-nlp = HybridTrajectoryOptimization('AtlasFlat',atlas_flat,num_grid,'EqualityConstraintBoundary',1e-4);
+nlp = HybridTrajectoryOptimization('AtlasFlat',atlas_flat,num_grid,[],'EqualityConstraintBoundary',1e-4);
 nlp.configure(bounds);
 
 % remove constraint wrench constraints
