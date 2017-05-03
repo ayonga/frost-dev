@@ -82,7 +82,9 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
         
         
         % check the index of the triggered edge
-        cur_edge  = assoc_edges(sol.ie, :);
+        cur_edge  = assoc_edges(unique(sol.ie), :);
+        assert(height(cur_edge)<=1,...
+            'There are more than one event triggered.');
         if isempty(cur_edge)
             break;
         end
@@ -97,7 +99,7 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
         % determine the target node of the current edge, and set it to be
         % the current node
         try
-            cur_node_name = cur_edge.EndNodes{2};
+            cur_node_name = cur_edge.EndNodes{1,2};
             cur_node_idx = findnode(sim_graph, cur_node_name);
         catch
             cur_node_idx = cur_edge.EndNodes(2);
