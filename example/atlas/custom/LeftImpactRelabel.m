@@ -1,11 +1,22 @@
 % Left Foot Impact (guard)
-function guard = LeftImpact(domain)
+function guard = LeftImpactRelabel(domain)
     
     
     guard = RigidImpact('LeftImpact',domain,'nsf');
     
+    %     frame = domain.ContactPoints.LeftSole;
+    %     pos = getCartesianPosition(domain, frame);
+    %     rpy = getEulerAngles(domain, frame);
+    %     h = tomatrix([pos; rpy]); %effectively as transpose
+    %     jac = getBodyJacobian(domain, frame);
+    %     impact_cstr = HolonomicConstraint(domain,h, 'LeftSoleImpact',...
+    %         'Jacobian',jac,...
+    %         'DerivativeOrder',2);
+    %
+    guard.addImpactConstraint(domain.HolonomicConstraints.RightSole);
+    guard.addImpactConstraint(domain.HolonomicConstraints.qfixed);
     % set the impact constraint
-    guard.addImpactConstraint(struct2array(domain.HolonomicConstraints));
+    %     guard.addImpactConstraint(struct2array(domain.HolonomicConstraints));
     
     
     jointName = {domain.Joints.Name};
@@ -47,7 +58,7 @@ function guard = LeftImpact(domain)
     
     relabel = diag(swappingSign);
     R = relabel(swappingIndices,:);
-    R(1:2,1:2) = zeros(2);
+    %     R(1:2,1:2) = zeros(2);
     
     guard.R = R;
 end
