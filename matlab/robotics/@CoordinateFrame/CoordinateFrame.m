@@ -102,7 +102,7 @@ classdef CoordinateFrame < handle
             end
         end
         
-        function obj = ContactFrame(obj, type)
+        function obj = ToContactFrame(obj, type)
             % convert a coordinate frame into a contact frame
             
             obj_struc = struct(...

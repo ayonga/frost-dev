@@ -1,4 +1,4 @@
-classdef ContactFrame < CoordinateFrame & matlab.mixin.Copyable
+classdef  (InferiorClasses = {?CoordinateFrame})  ContactFrame < CoordinateFrame & matlab.mixin.Copyable
     % A mechanical contact coordinate frame of a robot 
     %
     % @note We assume that the positive 'z' axis of the coordinate frame
