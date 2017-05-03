@@ -65,6 +65,10 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
             % calculate the Jacobian
             [Jh,dJh] = calcJacobian(cstr,q,dq);
             cstr_indices = idx:idx+cstr.Dimension-1;
+            tol = 1e-3;
+            if norm(Jh*dq) > tol
+                warning('The holonomic constraint %s violated.', h_cstr_name{i});
+            end            
             Je(cstr_indices,:) = Jh;
             Jedot(cstr_indices,:) = dJh; 
             idx = idx + cstr.Dimension;
