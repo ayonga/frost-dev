@@ -127,7 +127,8 @@ function obj = configure(obj, config, base)
     % find the fixed joint indices
     fixed_joint_indices = str_index('fixed',{obj.Joints.Type});
     % enforce holonomic constraints
-    obj = addFixedJoint(obj,fixed_joint_indices);
-    
+    if ~isempty(fixed_joint_indices)
+        obj = addFixedJoint(obj,fixed_joint_indices);
+    end
 
 end
