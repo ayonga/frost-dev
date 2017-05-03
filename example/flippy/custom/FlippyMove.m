@@ -50,49 +50,7 @@ classdef FlippyMove < HybridSystem
         end
         
         
-        function obj = loadParam(obj, param_config_file, model)
-            
-            
-            old_params = cell_to_matrix_scan(yaml_read_file(param_config_file));
-            params = cell(1,1);
-            for i=1:1
-                params{i}.a = old_params.domain(i).a;
-                params{i}.v = old_params.domain(i).v;
-                params{i}.p = old_params.domain(i).p(1:2)';
-            end
-            
-            obj = setVertexProperties(obj, 1:1, 'Param',...
-                params);
-            
-            old_dofs = {'BasePosX'
-                'BasePosY'
-                'BasePosZ'
-                'BaseRotX'
-                'BaseRotY'
-                'BaseRotZ'
-                'shoulder_pan_joint'
-                'shoulder_lift_joint'
-                'elbow_joint'
-                'wrist_1_joint'
-                'wrist_2_joint'
-                'wrist_3_joint'};
-            q0 = zeros(model.nDof,1);
-            dq0 = zeros(model.nDof,1);
-            q0_old = old_params.domain(1).x_plus(1:model.nDof);
-            dq0_old = old_params.domain(1).x_plus(model.nDof+1:end);
-            for i=1:model.nDof
-                idx = find(strcmp(model.Dof(i).name,old_dofs));
-                if isempty(idx)
-                    q0(i) = 0;
-                    dq0(i) = 0;
-                else
-                    q0(i) = q0_old(idx);
-                    dq0(i) = dq0_old(idx);
-                end
-            end
-            
-            obj.sim_opts.x0 = [q0;dq0];
-        end
+        
         
         function obj = compile(obj, model, export_path)
             

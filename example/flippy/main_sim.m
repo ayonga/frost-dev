@@ -25,16 +25,16 @@ flippy.configureDynamics();
 
 
 % contacts???
-% wrist_3_link = obj.Links(getLinkIndices(obj, 'wrist_3_link'));
+% wrist_3_link = flippy.Links(getLinkIndices(flippy, 'wrist_3_link'));
 % wrist_3_frame = wrist_3_link.Reference;
 % % wrist_3_joint = obj.Joints(getJointIndices(obj, 'r_leg_akx'));
 % EndEff = ContactFrame(...
 %     'Name','EndEff',...
 %     'Reference',wrist_3_frame,...
 %     'Offset',[0, 0, 0],...
-%     'Type',PlanarContactWithFriction,...
 %     'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
 %     );
+% EndEff_contact = ToContactFrame(EndEff,'PlanarContactWithFriction');
 % flippy.addContact(EndEff);
 
 
@@ -103,16 +103,7 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 flippy.compile(export_path);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Model for the movement of FLIPPY from point A to point B
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-flippy_move = FlippyMove(flippy);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Compile and export behavior specific functions
-%%%% (uncomment the following lines when run it for the first time.)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% flippy_move = compile(flippy_move, flippy, export_path);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -120,17 +111,29 @@ flippy_move = FlippyMove(flippy);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 old_param_file = [cur,'/param/flippy_move_2017_05_02_1711.yaml'];
 
-flippy_move = loadParam(flippy_move, old_param_file, flippy);
+[params,x0] = loadParam(old_param_file);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the simulator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-flippy_move = simulate(flippy_move);
+% you can assign these function handle to have additional processing
+% functions in the simulation
+flippy.PreProcess = str2func('nop'); %called before ode
+flippy.PostProcess = str2func('nop');% called after ode
+% flippy.UserNlpConstraint = str2func('nop');
 
+
+t0 = 0;
+tf = 10;
+eventnames = 'deltafinal';
+sim_opts = [];
+% tic
+% flippy.simulate(t0, x0, tf, io_control, params, eventnames, sim_opts)
+% toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-export_file = fullfile(cur,'tmp','flippy_move.avi');
-anim_obj = animator(flippy);
-anim_obj.Options.ViewAngle=[39,24];
-anim_obj.animate(flippy_move.Flow, export_file);
+% export_file = fullfile(cur,'tmp','flippy_move.avi');
+% anim_obj = animator(flippy);
+% anim_obj.Options.ViewAngle=[39,24];
+% anim_obj.animate(flippy_move.Flow, export_file);
