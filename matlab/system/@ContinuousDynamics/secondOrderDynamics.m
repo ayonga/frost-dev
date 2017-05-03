@@ -72,7 +72,10 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
             Je(cstr_indices,:) = Jh;
             Jedot(cstr_indices,:) = dJh; 
             idx = idx + cstr.Dimension;
-        end        
+        end 
+    else
+        Je = [];
+        Jedot = [];
     end
     
     
@@ -83,21 +86,27 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
         Be = feval(obj.Gmap.Control.(control_name{1}).Name,q);
         Ie    = eye(nx);
         
-        
-        
-        XiInv = Je * (M \ transpose(Je));
-        % compute vector fields
-        % f(x)
-        vfc = [
-            dq;
-            M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dq))];
-        
-        
-        % g(x)
-        gfc = [
-            zeros(size(Be));
-            M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
-        
+        if isempty(Je)
+            vfc = [
+                dq;
+                M \ (Fv + Gv_ext)];
+            gfc = [
+                zeros(size(Be));
+                M \ Be];
+        else
+            XiInv = Je * (M \ transpose(Je));
+            % compute vector fields
+            % f(x)
+            vfc = [
+                dq;
+                M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dq))];
+            
+            
+            % g(x)
+            gfc = [
+                zeros(size(Be));
+                M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
+        end
         % compute control inputs
         if nargout > 1
             [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
