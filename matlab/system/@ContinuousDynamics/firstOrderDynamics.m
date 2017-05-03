@@ -70,38 +70,47 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
                 Jedot(cstr_indices,:) = Jh;
             end
             idx = idx + cstr.Dimension;
-        end        
+        end  
+    else
+        Je = [];
+        Jedot = [];
     end
     
     
     %% calculate the constrained vector fields and control inputs
     control_name = fieldnames(obj.Inputs.Control);
-    feval(obj.Gmap.Control.(control_name{1}).Name,q);
-    Ie    = eye(nx);
-    
-    
-    
-    XiInv = Jedot * (M \ transpose(Je));
-    % compute vector fields
-    % f(x)
-    vfc = M \ ((Ie - transpose(Je) * (XiInv \ (Jedot / M))) * (Fv + Gv_ect));
+    if ~isempty(control_name)
+        Be = feval(obj.Gmap.Control.(control_name{1}).Name,q);
+        Ie    = eye(nx);
         
+        if isempty(Je)
+            vfc = M\(Fv + Gv_ext);
+            gfc = M\Be;
+        else
         
-    % g(x)
-    gfc =  M \ (Ie - transpose(Je)* (XiInv \ (Jedot / M))) * Be;
-    
-    % compute control inputs
-    if narargout > 1
-        [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
-    else
-        u = calcControl(controller, t, x, vfc, gfc, obj, params);
+            XiInv = Jedot * (M \ transpose(Je));
+            % compute vector fields
+            % f(x)
+            vfc = M \ ((Ie - transpose(Je) * (XiInv \ (Jedot / M))) * (Fv + Gv_ext));
+            
+            
+            % g(x)
+            gfc =  M \ (Ie - transpose(Je)* (XiInv \ (Jedot / M))) * Be;
+        end
+        % compute control inputs
+        if narargout > 1
+            [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
+        else
+            u = calcControl(controller, t, x, vfc, gfc, obj, params);
+        end
+        
+        Gv_u = Be*u;
+        obj.inputs_.Control.(control_name{1}) = u;
     end
-    
-    Gv_u = Be*u;
-    obj.inputs_.Control.(control_name{1}) = u;
     %% calculate constraint wrench of holonomic constraints
     Gv = Gv_ext + Gv_u;
     % Calculate constrained forces
+    Gv_c = zeros(nx,1);
     if ~isempty(h_cstr_name)
         lambda = -XiInv \ (Jedot * (M \ (Fv + Gv)));
         % the constrained wrench inputs
