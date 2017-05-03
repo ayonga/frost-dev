@@ -171,7 +171,7 @@ classdef VirtualConstraint < handle
         tau_
         
         
-        
+        PhaseParamExists = false;
         
         
     end
@@ -468,6 +468,7 @@ classdef VirtualConstraint < handle
                     {'nonempty'},...
                     'VirtualConstraint', 'PhaseParams');
                 obj.PhaseParams   = p;
+                obj.PhaseParamExists  = true;
             end
             
         end
