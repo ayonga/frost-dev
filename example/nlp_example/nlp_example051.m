@@ -1,83 +1,76 @@
-addpath('../..');
-addpath('export/');
+clear
 
-matlab_setup;
+cur = fileparts(mfilename('fullpath'));
+
+export_path = fullfile(cur, 'export');
+if ~exist(export_path,'dir')
+    mkdir(export_path);
+end
+addpath(genpath(cur));
 
 
-options.DerivativeLevel = 1;
-nlp = NonlinearProgram(options);
+nlp = NonlinearProgram('nlp051');
+nlp.setOption('DerivativeLevel',1);
 
 
-x = NlpVariable('Name', 'x', 'Dimension', 3, ...
+x_s = SymVariable('x',[3,1]);
+y_s = SymVariable('y',[2,1]);
+x_var = NlpVariable('Name', 'x', 'Dimension', 3, ...
     'lb', -inf, 'ub', inf, 'x0', [2.5 0.5 2]);
-y = NlpVariable('Name', 'y', 'Dimension', 2, ...
+y_var = NlpVariable('Name', 'y', 'Dimension', 2, ...
     'lb', -inf, 'ub', inf, 'x0', [-1 0.5]);
-nlp = addVariable(nlp,x);
-nlp = addVariable(nlp,y);
+nlp = regVariable(nlp,x_var);
+nlp = regVariable(nlp,y_var);
 
-nlp = genVarIndices(nlp);
+nlp = update(nlp);
 
-costs(1) = NlpFunction('Name', 'f_cost1', 'Type', 'nonlinear');
-costs(1) = setDependent(costs(1),{x});
-js = feval('Js_cost1',0);
-costs(1) = setJacobianPattern(costs(1),js,'IndexForm');
-costs(1) = setJacobianFunction(costs(1),'J_cost1');
-hs = feval('Hs_cost1',0);
-costs(1) = setHessianPattern(costs(1),hs,'IndexForm');
-costs(1) = setHessianFunction(costs(1),'H_cost1');
+f1 = (x_s(1)-x_s(2)).^2;
+f2 = (x_s(2) + x_s(3) - 2).^2;
+f3 = (y_s(1)-1).^2 + (y_s(2)-1).^2;
 
-costs(2) = NlpFunction('Name', 'f_cost2','Type','nonlinear');
-costs(2) = setDependent(costs(2),{x});
-js = feval('Js_cost2',0);
-costs(2) = setJacobianPattern(costs(2),js,'IndexForm');
-costs(2) = setJacobianFunction(costs(2),'J_cost2');
-hs = feval('Hs_cost2',0);
-costs(2) = setHessianPattern(costs(2),hs,'IndexForm');
-costs(2) = setHessianFunction(costs(2),'H_cost2');
+f_cost1 = SymFunction('f_cost1',f1,{x_s});
+f_cost2 = SymFunction('f_cost2',f2,{x_s});
+f_cost3 = SymFunction('f_cost3',f3,{y_s});
 
-costs(3) = NlpFunction('Name','f_cost3','Type','nonlinear');
-costs(3) = setDependent(costs(3),{y});
-js = feval('Js_cost3',0);
-costs(3) = setJacobianPattern(costs(3),js,'IndexForm');
-costs(3) = setJacobianFunction(costs(3),'J_cost3');
-hs = feval('Hs_cost3',0);
-costs(3) = setHessianPattern(costs(3),hs,'IndexForm');
-costs(3) = setHessianFunction(costs(3),'H_cost3');
+costs(1) = NlpFunction('Name', 'f_cost1',...
+    'SymFun',f_cost1, 'Type', 'Nonlinear',...
+    'DepVariables',x_var);
+costs(2) = NlpFunction('Name', 'f_cost21',...
+    'SymFun',f_cost2, 'Type', 'Nonlinear',...
+    'DepVariables',x_var);
 
-nlp = addObjective(nlp,costs);
+costs(3) = NlpFunction('Name', 'f_cost3',...
+    'SymFun',f_cost3, 'Type', 'Nonlinear',...
+    'DepVariables',y_var);
 
-constrs(1) = NlpFunction('Name','f_constr1','Type','nonlinear');
-constrs(1) = setDependent(constrs(1),{x});
-js = feval('Js_constr1',0);
-constrs(1) = setJacobianPattern(constrs(1),js,'IndexForm');
-constrs(1) = setJacobianFunction(constrs(1),'J_constr1');
-hs = feval('Hs_constr1',0);
-constrs(1) = setHessianPattern(constrs(1),hs,'IndexForm');
-constrs(1) = setHessianFunction(constrs(1),'H_constr1');
-constrs(1) = setBoundaryValue(constrs(1),4,4);
+nlp = regObjective(nlp,costs);
 
-constrs(2) = NlpFunction('Name', 'f_constr2', 'Type', 'nonlinear');
-constrs(2) = setDependent(constrs(2),{x,y});
-js = feval('Js_constr2',0);
-constrs(2) = setJacobianPattern(constrs(2),js,'IndexForm');
-constrs(2) = setJacobianFunction(constrs(2),'J_constr2');
-hs = feval('Hs_constr2',0);
-constrs(2) = setHessianPattern(constrs(2),hs,'IndexForm');
-constrs(2) = setHessianFunction(constrs(2),'H_constr2');
-constrs(2) = setBoundaryValue(constrs(2),0,0);
 
-constrs(3) = NlpFunction('Name', 'f_constr3', 'Type', 'nonlinear');
-constrs(3) = setDependent(constrs(3),{x,y});
-js = feval('Js_constr3',0);
-constrs(3) = setJacobianPattern(constrs(3),js,'IndexForm');
-constrs(3) = setJacobianFunction(constrs(3),'J_constr3');
-hs = feval('Hs_constr3',0);
-constrs(3) = setHessianPattern(constrs(3),hs,'IndexForm');
-constrs(3) = setHessianFunction(constrs(3),'H_constr3');
-constrs(3) = setBoundaryValue(constrs(3),0,0);
+c1 = x_s(1) + 3*x_s(2);
+c2 = x_s(3) + y_s(1) - 2*y_s(2);
+c3 = x_s(2) - y_s(2);
 
-nlp = addConstraint(nlp,constrs);
+f_constr1 = SymFunction('f_constr1',c1,{x_s});
+f_constr2 = SymFunction('f_constr2',c2,{x_s,y_s});
+f_constr3 = SymFunction('f_constr3',c3,{x_s,y_s});
 
+constrs(1) = NlpFunction('Name','f_constr1','Type','nonlinear',...
+    'SymFun',f_constr1,'DepVariables',x_var,'lb',4,'ub',4);
+
+constrs(2) = NlpFunction('Name','f_constr2','Type','nonlinear',...
+    'SymFun',f_constr2,'DepVariables',[x_var;y_var],'lb',0,'ub',0);
+
+constrs(3) = NlpFunction('Name','f_constr3','Type','nonlinear',...
+    'SymFun',f_constr3,'DepVariables',[x_var;y_var],'lb',0,'ub',0);
+
+
+
+nlp = regConstraint(nlp,constrs);
+
+
+nlp.update;
+nlp.compileConstraint(export_path);
+nlp.compileObjective(export_path);
 
 extraOpts.fixed_variable_treatment = 'RELAX_BOUNDS';
 extraOpts.point_perturbation_radius = 0;
@@ -90,4 +83,4 @@ solverApp = IpoptApplication(nlp, extraOpts);
 
 
 
-[sol, info] = optimize(solverApp, nlp);
+[sol, info] = optimize(solverApp);

@@ -1,27 +1,29 @@
 function obj = setDependentVariable(obj, depvars)
     % This function sets the dependent variables of the function
     %
-    % Each cell may contains an array of NlpVariable objects. After
-    % configuration, the funcion will be evaluated using typical
-    % values of dependent variables. This process first checks if
-    % the given function has been defined, and also determines the
-    % dimension of the function
-    %
     % Parameters:
-    %  depvars: a cell array of dependent variables @type
+    %  depvars: an array of dependent variables @type
     %  NlpVariables
 
-    assert(iscell(depvars),...
-        'NlpFunction:setDependentError',...
-        'The list of dependent variables must be a cell array.\n');
 
-    assert(all(cellfun(@(x)isa(x,'NlpVariable'),depvars)),...
+    assert(isa(depvars,'NlpVariable'),...
         'NlpFunction:incorrectDataType',...
-        'Each cell must consists of a single or an array of NlpVariable objects.\n');
+        'The second argument must be a scalar or an array of NlpVariable objects.\n');
 
 
-    obj.DepVariables = depvars;
+    if ~isempty(obj.SymFun)
+        vars = cellfun(@(x)flatten(x), obj.SymFun.Vars,'UniformOutput',false);        
+        nvar1 = length([vars{:}]);
+        nvar2 = sum([depvars.Dimension]);
+        
+        assert(nvar1 == nvar2,...
+            'The dimensions of the dependent variables do not match.');
+    end
+    
+    obj.DepVariables = depvars(:);
 
+    
+    
 
     % evaluate the function using typical values of dependent
     % variables

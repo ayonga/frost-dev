@@ -16,35 +16,38 @@ classdef NonlinearProgram < handle
     
     %% Protected properties
     properties (SetAccess=protected, GetAccess=public)
-        
+        % The name of the problem
+        %
+        % @type char
+        Name
         
         % The class option
         %
-        % Required fileds of options:
+        % Required fields of options:
         %  DerivativeLevel: the user-defined derivative order (0, 1 or 2)
         %  to be used by a NLP solver. @type integer @default 1
-        %  DerivativeType:  
-        %  
+        %  EqualityConstraintBoundary：a relaxation factor number for equality
+        %  constraints. @type double
         % 
         % @type struct
         Options 
         
         
-        % The cell array contains all information regarding NLP
+        % An array contains all information regarding NLP
         % optimization variables
         %
-        % @type cell
+        % @type NlpVariable
         VariableArray
         
                 
-        % A cell array data stores objective functions
+        % An array data stores objective functions
         %
-        % @type cell
+        % @type NlpFunction
         CostArray
         
         % A cell array data stores all constraints functions
         %
-        % @type cell
+        % @type NlpFunction
         ConstrArray
         
         
@@ -60,27 +63,22 @@ classdef NonlinearProgram < handle
     %% Public methods
     methods
         
-        function obj = NonlinearProgram(varargin)
+        function obj = NonlinearProgram(name)
             % The default class constructor function
             %
             % Parameters: 
-            %  varargin: non-default configuration options. It will overwrite
-            %        the default options @type struct
+            %  name: the name of the problem
             
-            
-            
+            if nargin > 0
+                validateattributes(name, {'char'},...
+                    {'scalartext'},'NonlinearProgram','name');
+                obj.Name = name;
+            end
             % default options
-            obj.Options = struct();
-            obj.Options.DerivativeLevel = 1;
-            obj.Options.EqualityBoundRelaxFactor = 1e-5;
-            % if non-default options are specified, overwrite the default
-            % options.
-            obj.Options = setOption(obj, varargin{:});
+            obj.Options = struct('DerivativeLevel', 1, ...
+                'EqualityConstraintBoundary', 0);
             
-            % initialize the type of the variables
-            obj.VariableArray = cell(0);
-            obj.CostArray  = cell(0);
-            obj.ConstrArray = cell(0);
+            
             
             
         end
@@ -102,7 +100,7 @@ classdef NonlinearProgram < handle
         
         [x0] = getInitialGuess(obj, method);
         
-        
+        obj = setOption(obj, varargin);
         
     end
         

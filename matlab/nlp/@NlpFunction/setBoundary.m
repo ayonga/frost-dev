@@ -18,16 +18,7 @@ function obj = setBoundary(obj, lowerbound, upperbound)
 
     
     
-    if nargin < 2
-        lowerbound = -Inf;
-        warning('NlpFunction:checkArgs',...
-            'Lower limit not specified, automatically set to -Inf.');
-    end
-    if nargin < 3
-        upperbound = Inf;
-        warning('NlpFunction:checkArgs',...
-            'Upper limit not specified, automatically set to Inf.');
-    end
+   
         
     
     if ~isempty(lowerbound)
@@ -35,14 +26,11 @@ function obj = setBoundary(obj, lowerbound, upperbound)
         if isscalar(lowerbound)
             lowerbound = lowerbound*ones(obj.Dimension,1);
         end
-        assert(isvector(lowerbound),...
-            'NlpFunction:wrongDimension',...
-            'The lower limit should be a vector or a scalar');
-        if size(lowerbound,1) == 1
-            obj.LowerBound = transpose(lowerbound); % make column vector
-        else
-            obj.LowerBound = lowerbound;
-        end
+        validateattributes(lowerbound,{'double'},...
+            {'vector','numel',obj.Dimension,'real'},...
+            'NlpFunction.SetBoundary','lowerbound');
+        obj.LowerBound = lowerbound(:);
+        
     end
     
     if ~isempty(upperbound)
@@ -51,16 +39,14 @@ function obj = setBoundary(obj, lowerbound, upperbound)
         end
         
         
-        assert(isvector(upperbound),...
-            'NlpFunction:wrongDimension',...
-            'The upper limit should be a vector or a scalar');
+        validateattributes(upperbound,{'double'},...
+            {'vector','numel',obj.Dimension,'real'},...
+            'NlpFunction.SetBoundary','upperbound');
         
         % specifies lower/upper limits
-        
-        if size(upperbound,1) == 1
-            obj.UpperBound = transpose(upperbound); % make column vector
-        else
-            obj.UpperBound = upperbound;
-        end
+        obj.UpperBound = upperbound(:);
     end
+    
+    assert(any(obj.UpperBound >= obj.LowerBound),...
+        'The lowerbound is greater than the upper bound. NlpFunction name: %s\n', obj.Name);
 end

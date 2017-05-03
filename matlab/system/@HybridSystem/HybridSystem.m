@@ -1,4 +1,4 @@
-classdef HybridSystem
+classdef HybridSystem < handle & matlab.mixin.Copyable
     % HybridSystem defines a hybrid dynamical system that has both
     % continuous and discrete dynamics, such as bipedal locomotion.
     %
@@ -39,17 +39,9 @@ classdef HybridSystem
         % @type digraph
         Gamma
         
-        % The rigid body model of the hybrid system
-        %
-        % @type RigidBodyModel
-        Model
         
-        % The hybrid flows (trajectory) recorder
-        %
-        % @type cell
-        Flow
         
-               
+        
         
         
         
@@ -72,42 +64,39 @@ classdef HybridSystem
         EdgeProperties
     end
     methods
-        function VertexProperties = get.VertexProperties(obj)
+        function VertexProperties = get.VertexProperties(~)
             
             VertexProperties = struct();
             VertexProperties.Name =  {'Domain','Control','Param','IsTerminal'};
-            VertexProperties.Type = {{'Domain'},{'Controller'},{'struct'},{'logical'}};
-            VertexProperties.Attribute = {{},{},{},{}};
+            VertexProperties.Type = {{'ContinuousDynamics'},{'Controller'},{'struct'},{'logical'}};
+            VertexProperties.Attribute = {{},{},{},{'nonempty'}};
             VertexProperties.DefaultValue =  {{[]},{[]},{[]},false};
         end
         
-        function EdgeProperties = get.EdgeProperties(obj)
+        function EdgeProperties = get.EdgeProperties(~)
             
             EdgeProperties = struct();
-            EdgeProperties.Name =  {'Guard', 'Weights'};
-            EdgeProperties.Type = {{'Guard'}, {'numeric'}};
-            EdgeProperties.Attribute = {{}, {'scalar'}};
-            EdgeProperties.DefaultValue = {{[]}, NaN};
+            EdgeProperties.Name =  {'Guard', 'Param', 'Weights'};
+            EdgeProperties.Type = {{'DiscreteDynamics'}, {'struct'}, {'numeric'}};
+            EdgeProperties.Attribute = {{}, {}, {'scalar'}};
+            EdgeProperties.DefaultValue = {{[]},{[]}, NaN};
         end
     end
     
     %% Public methods
     methods (Access = public)
-        function obj = HybridSystem(name, model)
+        function obj = HybridSystem(name)
             % the default calss constructor
             %
             % Parameters:
-            % varargin: variable class construction arguments.
+            % name: the name of the hybrid system model @type char
             %
             % Return values:
             % obj: the class object
             
-            assert(ischar(name), 'The object name must be a string.');
+            assert(ischar(name), 'The object name must be a character vector.');
             obj.Name = name;
             
-            assert(isa(model, 'RigidBodyModel'), ...
-                'The model must be an object of ''RigidBodyModel''.');
-            obj.Model = model;
             
             % initialize an empty directed graph with specified properties           
             obj.Gamma = digraph;
@@ -118,12 +107,34 @@ classdef HybridSystem
         end
         
         
+        function ret = isDirectedCycle(obj)
+            % returns true if the underlying directed graph is a simple
+            % directed cycle.
+            %
+            % A simple directed cycle is a directed graph that has uniform
+            % in-degree 1 and uniform out-degree 1.
+            
+            g = obj.Gamma;
+            
+            ret = all(indegree(g)==1) && all(outdegree(g)==1);
+            
+        end
         
         
         
-        
-        
-        
+        function sys = subGraph(obj, nodeIDs)
+            % extract the subgraph of the hybrid system to create a new
+            % hybrid system object with the same name
+            %
+            % Parameters:
+            % nodeIDs: the node ids of the subgraph
+            
+            sys = HybridSystem(obj.Name);
+            
+            sub_g = subgraph(obj.Gamma, nodeIDs);
+            
+            sys.Gamma = sub_g;
+        end
         
         
         
@@ -143,23 +154,20 @@ classdef HybridSystem
         
         obj = setVertexProperties(obj, vertex, varargin);
         
-        [dx, extra] = calcDynamics(obj, t, x, cur_node);
-        
-        [value, isterminal, direction] = checkGuard(obj, t, x, cur_node, assoc_edges);
-        
-        obj = simulate(obj, options);
+        obj = simulate(obj, t0, x0, tf, options, varargin);
     end
     
     %% Private methods
     methods (Static, Access=private)
-        function validatePropAttribute(value, type, attribute)
+        function validatePropAttribute(name, value, type, attribute)
             
             if iscell(value)
-                cellfun(@(x)validateattributes(x,type,attribute), value);
+                cellfun(@(x)validateattributes(x,type,attribute,...
+                    'HybridSystem', name), value);
             elseif isnumeric(value)
                 % if a property is a numeric value, it must be a row vector
                 for i=1:size(value,1)
-                    validateattributes(value(i,:),type,attribute);
+                    validateattributes(value(i,:),type,attribute,'HybridSystem', name);
                 end
             else
                 error('The input argument must be a cell array of objects.');

@@ -15,10 +15,9 @@ function [nVar, lowerbound, upperbound] = getVarInfo(obj)
     
     
     
-    nVar = sum(cellfun(@(x)x.Dimension, obj.VariableArray));     
-    lb = vertcat(cellfun(@(x)x.LowerBound, obj.VariableArray, 'UniformOutput', false));
-    ub = vertcat(cellfun(@(x)x.UpperBound, obj.VariableArray, 'UniformOutput', false));
+    nVar = sum([obj.VariableArray.Dimension]);
+    lowerbound = vertcat(obj.VariableArray.LowerBound);
+    upperbound = vertcat(obj.VariableArray.UpperBound);
     
-    lowerbound = vertcat(lb{:});
-    upperbound = vertcat(ub{:});
+   
 end

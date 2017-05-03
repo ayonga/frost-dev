@@ -19,8 +19,8 @@ function [sol, info] = optimize(obj, x0)
     opts = struct;
     opts.lb = lb;
     opts.ub = ub;
-    opts.cl = vertcat(obj.Constraint.LowerBound{:});
-    opts.cu = vertcat(obj.Constraint.UpperBound{:});
+    opts.cl = vertcat(obj.Constraint.LowerBound);
+    opts.cu = vertcat(obj.Constraint.UpperBound);
     opts.ipopt = obj.Options.ipopt;
     
     
@@ -44,7 +44,7 @@ function [sol, info] = optimize(obj, x0)
     
     [sol, info] = ipopt(x0, Funcs, opts);
     
-    
+end    
     
     %% objective function
     function f = IpoptObjective(x, objective)
@@ -57,13 +57,13 @@ function [sol, info] = optimize(obj, x0)
         
         f = 0;
         for i = 1:objective.numFuncs
-            var = x(objective.DepIndices{i}); % dependent variables
-            
+            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            %cellfun(@(x)a(x{:}]),ind)
             % calculate cost value
             if isempty(objective.AuxData{i})
-                f = f + feval(objective.Funcs{i}, var);
+                f = f + feval(objective.Funcs{i}, var{:});
             else
-                f = f + feval(objective.Funcs{i}, var, objective.AuxData{i});
+                f = f + feval(objective.Funcs{i}, var{:}, objective.AuxData{i}{:});
             end
             
         end
@@ -83,13 +83,13 @@ function [sol, info] = optimize(obj, x0)
         % preallocation
         C   = zeros(constraint.Dimension,1);
         for i = 1:constraint.numFuncs
-            var = x(constraint.DepIndices{i}); % dependent variables
+            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
             
             % calculate constraints
             if isempty(constraint.AuxData{i})
-                C(constraint.FuncIndices{i}) = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var);
+                C(constraint.FuncIndices{i}) = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var{:});
             else
-                C(constraint.FuncIndices{i})  = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var, constraint.AuxData{i});
+                C(constraint.FuncIndices{i})  = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var{:}, constraint.AuxData{i}{:});
             end
         end
         
@@ -113,13 +113,13 @@ function [sol, info] = optimize(obj, x0)
         % preallocation
         J_val   = zeros(objective.nnzJac,1);
         for i = 1:objective.numFuncs
-            var = x(objective.DepIndices{i});% dependent variables
+            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
             
             % calculate gradient
             if isempty(objective.AuxData{i})
-                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var);
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var{:});
             else
-                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var, objective.AuxData{i});
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var{:}, objective.AuxData{i}{:});
             end
             
         end
@@ -150,13 +150,13 @@ function [sol, info] = optimize(obj, x0)
         % preallocation
         J_val   = zeros(constraint.nnzJac,1);
         for i = 1:constraint.numFuncs
-            var = x(constraint.DepIndices{i});% dependent variables
+            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
             
             % calculate Jacobian
             if isempty(constraint.AuxData{i})
-                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var);
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var{:});
             else
-                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var, constraint.AuxData{i});
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var{:}, constraint.AuxData{i}{:});
             end
             
         end
@@ -190,7 +190,7 @@ function [sol, info] = optimize(obj, x0)
                 ones(constraint.nnzJac,1), constraint.Dimension, ...
                 dimVars, constraint.nnzJac);
         else
-            J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+            J = sparse(constraint.nzJacRows, constraint.nzJacCols,...
                 ones(constraint.nnzJac,1), constraint.Dimension, ...
                 dimVars, constraint.nnzJac);
         
@@ -220,16 +220,16 @@ function [sol, info] = optimize(obj, x0)
         
         % compute the Hessian for objective function
         for i = 1:objective.numFuncs
-            var = x(objective.DepIndices{i});% dependent variables
+            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
             
             if ~isempty(objective.nzHessIndices{i})
                 % if the function is a linear function, then the Hessian of
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(objective.AuxData{i})
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma);
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma);
                 else
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma, objective.AuxData{i});
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma, objective.AuxData{i}{:});
                 end
             end
             
@@ -245,7 +245,7 @@ function [sol, info] = optimize(obj, x0)
         hes_constr   = zeros(constraint.nnzHess,1);
         % compute the Hessian for constraints
         for i = 1:constraint.numFuncs
-            var = x(constraint.DepIndices{i});% dependent variables
+            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
             lambda_i = lambda(constraint.FuncIndices{i});
             
             if ~isempty(constraint.nzHessIndices{i})
@@ -253,9 +253,9 @@ function [sol, info] = optimize(obj, x0)
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(constraint.AuxData{i})
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i);
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i);
                 else
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i, constraint.AuxData{i});
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i, constraint.AuxData{i}{:});
                 end
             end
             
@@ -266,7 +266,7 @@ function [sol, info] = optimize(obj, x0)
             H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
                 hes_constr, dimVars, dimVars, constraint.nnzHess);
         else
-            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse(constraint.nzHessRows,constraint.nzHessRows,...
                 hes_constr, dimVars, dimVars, constraint.nnzHess);
         end
         
@@ -308,5 +308,3 @@ function [sol, info] = optimize(obj, x0)
         H_ret = H_objective + H_constr;
         
     end
-    %%
-end

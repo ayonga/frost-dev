@@ -15,10 +15,7 @@ classdef NlpFunction < handle
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    properties(Constant,Hidden)
-        LINEAR = true;
-        NONLINEAR = false;
-    end
+    
     
     
     properties (SetAccess = protected, GetAccess = public)
@@ -40,7 +37,11 @@ classdef NlpFunction < handle
         % @type NlpVariable
         DepVariables
                 
-        
+        % An array of summand NlpFunctions that are to be summed up to get
+        % the current NLP function
+        %
+        % @type NlpFunction
+        SummandFunctions
         
         % Stores the indices of the function
         %
@@ -73,33 +74,13 @@ classdef NlpFunction < handle
         %   function Jacobian @type char
         %   JacStruct: a string of the function that computes the
         %   sparsity structure of function Jacobian @type char
-        %   Hess: a string of the function that computes the 
+        %   Hess: a string of the function that computes the
         %   function Hessian @type char
         %   HessStruct: a string of the function that computes the
         %   sparsity structure of function Hessian @type char
         % @type struct
         Funcs
         
-        % % The name of the function that computes the Jacobian of the
-        % % function
-        % %
-        % % Typically, this function is generated as a MEX function by
-        % % Mathematica symbolic engine. It can be also written as a matlab
-        % % function by the user.
-        % %
-        % % @type char
-        % JacFunc
-        
-        
-        % % The name of the function that computes the Jacobian of the
-        % % function
-        % %
-        % % Typically, this function is generated as a MEX function by
-        % % Mathematica symbolic engine. It can be also written as a matlab
-        % % function by the user.
-        % %
-        % % @type char
-        % HessFunc
         
         % A two-vector structure that specifies the non-zero structure of
         % the first order Jacobian of the function with respect to the
@@ -152,11 +133,15 @@ classdef NlpFunction < handle
         % A constant array of auxiliary data that will be used to construct
         % the function handles
         %
-        % @type matrix
+        % @type cell
         AuxData
         
         
-        
+        % The associated SymFunction object that specifies the symbolic
+        % expression of the NlpFunction
+        %
+        % @type SymFunction
+        SymFun
     end
     
     properties (SetAccess = protected, GetAccess = public)
@@ -174,8 +159,8 @@ classdef NlpFunction < handle
         % It gives a quick access to the dimension of the function output
         % without actually evaluating the function
         %
-        % @type integer
-        Dimension
+        % @type integer @default 0
+        Dimension = 0
     end
     
     
@@ -187,27 +172,19 @@ classdef NlpFunction < handle
             % varargin: variable nama-value pair input arguments, in detail:
             %  Name: the name of the function. @type char        
             %  Type: the type of the function. @type char
-            
+            %
             % 
             % @attention The 'auxdata' argument must be an 1-dimensional
             % vector of constants.
             
-            
-            % parse input arguments
-            %             p = inputParser;
-            %             p.addRequired('name',@ischar);
-            %             p.addOptional('type','Nonlinear', @ischar);
-            %             p.addOptional('auxdata',[],@isnumeric || @iscell);
-            %
-            %             p.parse(varargin{:});
-            %             obj.Name = p.Results.name;
-            %             obj.AuxData = p.Results.auxdata;
-            
+                        
             % MATLAB suggests a class must support the no input argument
             % constructor syntax.
             if nargin == 0
                 return;
             end
+            
+            
             
             
             argin = struct(varargin{:});
@@ -223,50 +200,105 @@ classdef NlpFunction < handle
             end
             
             if isfield(argin, 'Type')
-                obj = setType(obj, argin.Type);
+                if ~isempty(argin.Type)
+                    obj = setType(obj, argin.Type);
+                end
             end            
             
             if isfield(argin, 'Dimension')
-                obj = setDimension(obj, argin.Dimension);
+                if ~isempty(argin.Dimension)
+                    obj = setDimension(obj, argin.Dimension);
+                end
             end
             
             if isfield(argin, 'DepVariables')
-                obj = setDependentVariable(obj, argin.DepVariables);
+                if ~isempty(argin.DepVariables)
+                    obj = setDependentVariable(obj, argin.DepVariables);
+                end
             end
             
             if isfield(argin, 'Funcs')
-                obj = setFuncs(obj, argin.Funcs);
+                if ~isempty(argin.Funcs)
+                    obj = setFuncs(obj, argin.Funcs);
+                end
             end
             
-            if isfield(argin, 'AuxData') && ~isempty(argin.AuxData)
-                obj = setAuxdata(obj, argin.AuxData);
+            if isfield(argin, 'SymFun')
+                if ~isempty(argin.SymFun)
+                    obj = setSymFun(obj, argin.SymFun);
+                end                
             end
             
-            % update additional properties
-            obj = updateProp(obj, varargin{:});
+            
+            % set boundary values
+            if all(isfield(argin, {'ub','lb'}))
+                obj =  setBoundary(obj, argin.lb, argin.ub);
+            elseif isfield(argin, 'lb')
+                obj =  setBoundary(obj, argin.lb, inf);
+            elseif isfield(argin, 'ub')
+                obj =  setBoundary(obj, -inf, argin.ub);
+            else
+                obj =  setBoundary(obj, -inf, inf);
+            end
+            
+            
+            if isfield(argin, 'AuxData')
+                if ~isempty(argin.AuxData)
+                    obj = setAuxdata(obj, argin.AuxData);
+                end
+            end
+            
+            if isfield(argin, 'Summand')
+                if ~isempty(argin.Summand)
+                    obj = setSummands(obj, argin.Summand);
+                end
+            end
         end
         
-        function deps = getDepObject(obj)
+        function funcs = getSummands(obj)
             % Returns the object of the dependent function
             %
             % For most of the function object, the dependent object is
             % itself.
             %
             % Return values: 
-            % deps: the dependent objects 
+            % funcs: the summand function objects @type NlpFunction
             
-            deps = {obj};
+            if isempty(obj.SummandFunctions)
+                funcs = obj;
+            else
+                funcs = arrayfun(@(x)getSummands(x), obj.SummandFunctions,...
+                    'UniformOutput', false);
+                funcs = vertcat(funcs{:});
+            end
             
         end
 
+        function obj = setSummands(obj, summands)
+            % Sets dependent objects of the Nlp Function
+            %
+            % Parameters:
+            % summands: the summand function objects @type NlpFunction
+            
+            
+            if ~isa(summands,'NlpFunction')
+                error('NlpFunctionSum:invalidObject', ...
+                    'There exist non-NlpFunction objects in the dependent functions list.');
+            end
+            
+            obj.SummandFunctions = summands(:);
+        end
+        
         function indices = getDepIndices(obj)
             % Returns the indices of the dependent variables
             %
             % Return values:
             % indices: the indices of dependent variables @type colvec
-            indices = vertcat(cellfun(@(x)x.Indices, obj.DepVariables, ...
-                'UniformOutput', false));
+            indices = {obj.DepVariables.Indices};
         end
+        
+        
+        
     end
     
     
@@ -295,6 +327,15 @@ classdef NlpFunction < handle
         
         obj = updateProp(obj, varargin);
         
+        val = checkFuncs(obj, x, derivative_level);
+        
+        obj = setDimension(obj, dim);
+        
+        obj = setFuncIndices(obj, index);
+        
+        obj = setFuncs(obj, funcs);
+        
+        obj = setSymFun(obj, symfun);
         
     end
 end

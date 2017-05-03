@@ -14,9 +14,12 @@ function obj = setInitialValue(obj, x)
         if isscalar(x)
             x = x*ones(obj.Dimension,1);
         else
-            if size(x,1) == 1
+            if isrow(x)
                 x = transpose(x);
             end
+            validateattributes(x,{'double'},...
+                {'vector','numel',obj.Dimension,'real'},...
+                'NlpVariable.setInitialValue','InitialValue');
         end
         obj.InitialValue = x;
     else 

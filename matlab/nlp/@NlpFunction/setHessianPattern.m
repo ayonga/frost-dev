@@ -25,7 +25,7 @@ function obj = setHessianPattern(obj, hes_sp, sp_form)
         sp_form = 'MatrixForm';
     end
 
-    dimDeps = sum(cellfun(@(x)x.Dimension, obj.DepVariables));
+    dimDeps = sum([obj.DepVariables.Dimension]);
 
     if isempty(hes_sp)
         obj.Type = NlpFunction.LINEAR;
