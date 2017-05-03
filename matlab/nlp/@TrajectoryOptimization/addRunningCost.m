@@ -47,9 +47,9 @@ function obj = addRunningCost(obj, func, deps, auxdata)
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson'
             cost_terminal = SymFunction([func.Name,'_terminal'],...
-                ((Ts./(N-1))./6).*func, s_dep_vars, s_dep_params);
+                tovector(((Ts./(N-1))./6).*func), s_dep_vars, s_dep_params);
             cost_interior = SymFunction([func.Name,'_interior'],...
-                (2.*(Ts./(N-1))./3).*func, s_dep_vars, s_dep_params);
+                tovector((2.*(Ts./(N-1))./3).*func), s_dep_vars, s_dep_params);
             
             % first node
             cost(1).SymFun = cost_terminal;

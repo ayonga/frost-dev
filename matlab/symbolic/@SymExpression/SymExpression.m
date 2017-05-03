@@ -270,14 +270,14 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            if isscalar(A) && islist(A)
+            if isscalar(A) && islist(A) && islist(B)
                 if isvectorform(A)
                     A = first(A);
                 else
                     A = first(tovector(A));
                 end
             end
-            if isscalar(B) && islist(B)
+            if isscalar(B) && islist(B) && islist(B)
                 if isvectorform(B)
                     B = first(B);
                 else
