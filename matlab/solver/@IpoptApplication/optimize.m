@@ -44,7 +44,7 @@ function [sol, info] = optimize(obj, x0)
     
     [sol, info] = ipopt(x0, Funcs, opts);
     
-    
+end    
     
     %% objective function
     function f = IpoptObjective(x, objective)
@@ -308,5 +308,3 @@ function [sol, info] = optimize(obj, x0)
         H_ret = H_objective + H_constr;
         
     end
-    %%
-end

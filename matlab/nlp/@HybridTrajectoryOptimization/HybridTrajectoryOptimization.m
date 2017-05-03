@@ -44,7 +44,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = HybridTrajectoryOptimization(name, plant, num_grid, varargin)
+        function obj = HybridTrajectoryOptimization(name, plant, num_grid, bounds, varargin)
             % The constructor function
             %
             % Parameters:
@@ -140,7 +140,11 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             obj.Phase = phase;
             obj.PhaseVarIndices = zeros(n_phase,2);
             
-            
+            if nargin > 3
+                if ~isempty(bounds)
+                    obj = configure(obj, bounds);
+                end
+            end
             
         end
         

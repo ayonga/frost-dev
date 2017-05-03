@@ -25,12 +25,20 @@ function compileObjective(obj, cost, export_path, exclude, varargin)
     
     if isempty(cost)
         cost = obj.CostTable.Properties.VariableNames;
+        phase_cost_names = [];
+    else
+        if ~iscell(cost), cost = {cost}; end
+        phase_cost_names = obj.CostTable.Properties.VariableNames;
     end
-    if ~iscell(cost), cost = {cost}; end
     
     for i=1:length(cost)
         if ~isempty(exclude)
             if any(strcmp(cost{i},exclude))
+                continue;
+            end
+        end
+        if ~isempty(phase_cost_names)
+            if ~any(strcmp(cost{i},phase_cost_names))
                 continue;
             end
         end
@@ -39,7 +47,7 @@ function compileObjective(obj, cost, export_path, exclude, varargin)
         % We use the fact that for each objective function there could
         % be multiple SymFunction objects (running cost) associated
         % with
-        
+        cost_array = cost_array(~arrayfun(@(x)x.Dimension==0,cost_array));
         deps_array_cell = arrayfun(@(x)getSummands(x), cost_array, 'UniformOutput', false);
         func_array = vertcat(deps_array_cell{:});
         arrayfun(@(x)export(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);

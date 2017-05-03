@@ -39,12 +39,14 @@ function compileConstraint(obj, phase, constr, export_path, exclude, varargin)
         phase_nlp = obj.Phase(k);
         if isempty(constr)
             phase_constr = phase_nlp.ConstrTable.Properties.VariableNames;
+            phase_constr_names = [];
         else
             if ~iscell(constr)
                 phase_constr = {constr};
             else
                 phase_constr = constr;
             end
+            phase_constr_names = phase_nlp.ConstrTable.Properties.VariableNames;
         end
         
         
@@ -54,6 +56,12 @@ function compileConstraint(obj, phase, constr, export_path, exclude, varargin)
                     continue;
                 end
             end
+            if ~isempty(phase_constr_names)
+                if ~any(strcmp(phase_constr{i},phase_constr_names))
+                    continue;
+                end
+            end
+            
             constr_array = phase_nlp.ConstrTable.(phase_constr{i});
             
             % We use the fact that for each constraint there is only one

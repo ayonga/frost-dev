@@ -108,7 +108,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             ip.addParameter('CollocationScheme','HermiteSimpson',@(x)validatestring(x,{'HermiteSimpson','Trapzoidal','PseudoSpectral'}));
             ip.addParameter('DistributeParameters',true,@(x)validateattributes(x,{'logical'},{}));
             ip.addParameter('DistributeTimeVariable',true,@(x)validateattributes(x,{'logical'},{}));
-            ip.addParameter('ConstantTimeHorizon',nan(2,1),@(x)validateattributes(x,{'double'},{'real','positive','column','numel',2,'increasing'}));
+            ip.addParameter('ConstantTimeHorizon',nan(2,1),@(x)validateattributes(x,{'double'},{'real','nonnegative','column','numel',2,'increasing'}));
             ip.addParameter('DerivativeLevel',1,@(x)validateattributes(x,{'double'},{'scalar','integer','<=',2,'>=',0}));
             ip.addParameter('EqualityConstraintBoundary',0,@(x)validateattributes(x,{'double'},{'real','nonnegative','<=',1e-2}));
             ip.parse(varargin{:});

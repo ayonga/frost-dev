@@ -288,15 +288,17 @@ classdef SymExpression < handle
             % Symbolic matrix multiplication.
             %   MTIMES(A,B) overloads symbolic A * B.
             
-            if isscalar(B) || isscalar(A)
+            % Convert inputs to SymExpression
+            A = SymExpression(A);
+            B = SymExpression(B);
+            
+            if (isscalar(B) && ~islist(B)) || (isscalar(A)&& ~islist(A))
                 X = times(A,B);
                 return;
             end
             
             
-            % Convert inputs to SymExpression
-            A = SymExpression(A);
-            B = SymExpression(B);
+            
             % construct the operation string
             sstr = ['Dot[' A.s ',' B.s ']'];
             % create a new object with the evaluated string

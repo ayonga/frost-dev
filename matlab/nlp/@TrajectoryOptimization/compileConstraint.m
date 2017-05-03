@@ -26,8 +26,12 @@ function compileConstraint(obj, constr, export_path, exclude, varargin)
     
     if isempty(constr)
         constr = obj.ConstrTable.Properties.VariableNames;
+        phase_constr_names = {};
+    else
+        if ~iscell(constr), constr = {constr}; end
+        phase_constr_names = obj.ConstrTable.Properties.VariableNames;
     end
-    if ~iscell(constr), constr = {constr}; end
+    
     
     for i=1:length(constr)
         if ~isempty(exclude)
@@ -35,6 +39,12 @@ function compileConstraint(obj, constr, export_path, exclude, varargin)
                 continue;
             end
         end
+        if ~isempty(phase_constr_names)
+            if ~any(strcmp(constr{i},phase_constr_names))
+                continue;
+            end
+        end
+        
         constr_array = obj.ConstrTable.(constr{i});
         
         % We use the fact that for each constraint there is only one
