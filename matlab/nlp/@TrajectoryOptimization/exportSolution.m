@@ -36,17 +36,18 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
                 error('Undefined integration scheme.');
         end
     else
-        tspan = [];
+        tspan = {};
     end
     
     plant = obj.Plant;
     state_names = fieldnames(plant.States);
+    states = struct();
     for j=1:length(state_names)        
         name = state_names{j};
         
         states.(name) = sol([vars.(name).Indices]);
     end
-    
+    inputs = struct();
     input_names = fieldnames(plant.Inputs.Control);
     if ~isempty(input_names)        
         for j=1:length(input_names)
@@ -65,6 +66,7 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     
     
     input_names = fieldnames(plant.Inputs.External);
+    
     if ~isempty(input_names)        
         for j=1:length(input_names)
             name = input_names{j};            
@@ -75,6 +77,7 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     
     
     param_names = fieldnames(plant.Params);
+    params = struct();
     if ~isempty(param_names)        
         for j=1:length(param_names)
             name = param_names{j};            

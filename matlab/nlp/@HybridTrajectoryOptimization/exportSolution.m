@@ -5,7 +5,7 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     % sol: The solution vector of the NLP problem @type colvec
     
     phase = obj.Phase;
-    phase_var_indices = obj.PhaseVarIndices;
+    % phase_var_indices = obj.PhaseVarIndices;
     n_phase = length(phase);
     
     tspan = cell(n_phase,1);
@@ -15,8 +15,8 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     
     
     for i = 1:n_phase
-        sol_i = sol(phase_var_indices(i,1):phase_var_indices(i,2));
-        [tspan{i}, states{i}, inputs{i}, params{i}] = exportSolution(obj, sol_i);
+        % sol_i = sol(phase_var_indices(i,1):phase_var_indices(i,2));
+        [tspan{i}, states{i}, inputs{i}, params{i}] = exportSolution(phase(i), sol);
     end
     
     

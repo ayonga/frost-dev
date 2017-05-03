@@ -14,7 +14,15 @@ classdef RigidImpact < DiscreteDynamics
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    
+    properties 
+        
+        
+        % The coordinate relabeling matrix
+        %
+        % @type matrix
+        R
+        
+    end
     properties (SetAccess=protected)
         
         
@@ -24,10 +32,7 @@ classdef RigidImpact < DiscreteDynamics
         ImpactConstraints
         
         
-        % The coordinate relabeling matrix
-        %
-        % @type matrix
-        R
+        
     
     end
     

@@ -169,7 +169,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         
         checkVariables(obj, x, tol, output_file);
         
-        [calcs, params] = exportSolution(obj, sol);
+        [tspan, states, inputs, params] = exportSolution(obj, sol);
     end
 end
 

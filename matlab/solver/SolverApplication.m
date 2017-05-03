@@ -1,4 +1,4 @@
-classdef (Abstract) SolverApplication
+classdef (Abstract) SolverApplication < handle
     % SolverApplication defines an abstract interface class for NLP solvers
     % 
     %

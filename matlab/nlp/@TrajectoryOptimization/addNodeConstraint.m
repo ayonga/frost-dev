@@ -74,10 +74,11 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
         end
     end
     
-    if lb == 0 && ub ==0 % equality constraints
-        lb = -obj.Options.EqualityConstraintBoundary;
-        ub = obj.Options.EqualityConstraintBoundary;
-    end
+    eq_index = (lb==ub); % upper/lower bounds are the same
+    % relax the lower bound
+    lb(eq_index) = lb(eq_index) - obj.Options.EqualityConstraintBoundary;
+    % relax the upper bound
+    ub(eq_index) = ub(eq_index) + obj.Options.EqualityConstraintBoundary;
     
     n_node = numel(node_list);
     cstr(n_node) = struct();

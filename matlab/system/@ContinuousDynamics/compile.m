@@ -18,7 +18,14 @@ function obj = compile(obj, export_path, varargin)
     
     % export the drift vector
     if ~isempty(obj.Fvec)
-        cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
+        prompt = 'Compiling the drift vector often takes very long time. Do you wish to CONTINUE? Y/N [Y]: ';
+        str = input(prompt,'s');
+        if isempty(str)
+            str = 'Y';
+        end
+        if strcmpi(str,'Y')
+            cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
+        end
     end
     
     

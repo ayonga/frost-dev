@@ -13,9 +13,9 @@ function obj = addVariable(obj, label, nodes, varargin)
     
     varnames = obj.OptVarTable.Properties.VariableNames;
 
-    if ismember(label,varnames)
-        warning('The NLP variable (%s) already exists.\n Overwriting the existing NLP variable.', label);
-    end
+    %     if ismember(label,varnames)
+    %         warning('The NLP variable (%s) already exists.\n Overwriting the existing NLP variable.', label);
+    %     end
     
     
     if ischar(nodes)
