@@ -270,11 +270,19 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             A = SymExpression(A);
             B = SymExpression(B);
-            if isscalar(A) && islist(A) && islist(B)
-                A = first(A);
+            if isscalar(A) && islist(A)
+                if isvectorform(A)
+                    A = first(A);
+                else
+                    A = first(tovector(A));
+                end
             end
-            if isscalar(B) && islist(B) && islist(A)
-                B = first(B);
+            if isscalar(B) && islist(B)
+                if isvectorform(B)
+                    B = first(B);
+                else
+                    B = first(tovector(B));
+                end
             end
             % construct the operation string
             sstr = ['Times[' A.s ',' B.s ']'];
@@ -292,11 +300,16 @@ classdef SymExpression < handle
             A = SymExpression(A);
             B = SymExpression(B);
             
-            if (isscalar(B) && ~islist(B)) || (isscalar(A)&& ~islist(A))
+            if isscalar(B) || isscalar(A)
                 X = times(A,B);
                 return;
             end
-            
+            if isvectorform(A)
+                A = flatten(A);
+            end
+            if isvectorform(B)
+                B = flatten(B);
+            end
             
             
             % construct the operation string
