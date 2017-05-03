@@ -97,14 +97,14 @@ classdef animator
             hold all;
             grid on
             axis equal
-            anim_axis=[-1 1 -0.5 0.5 -0.3 1.7];
+            anim_axis=[-0.1 0.8 -1 1 0.5 1.5];
             
             axis(anim_axis);
             view(options.ViewAngle);
             
             
-            g_x = -1:ground.MeshSize:ground.Size(1)-1;
-            g_y = -ground.Size(2)/2:ground.MeshSize:ground.Size(2)/2;
+            g_x = -2:ground.MeshSize:ground.Size(1)-2;
+            g_y = -2*ground.Size(2):ground.MeshSize:2*ground.Size(2);
             g_z = 0;
             
             [g_X,g_Y,g_Z] = meshgrid(g_x, g_y, g_z);
@@ -145,7 +145,7 @@ classdef animator
                     
                     new_axis = anim_axis + [offset(j) offset(j) 0 0 0 0];
                     
-                    axis(new_axis);
+%                     axis(new_axis);
                     
                     
                     

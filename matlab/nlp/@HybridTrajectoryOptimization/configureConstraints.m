@@ -14,11 +14,11 @@ function obj = configureConstraints(obj)
         obj = addDynamicsConstraint(obj, i);
         
         
-        obj = addDomainConstraint(obj, i);
+%         obj = addDomainConstraint(obj, i);
             
         obj = addCollocationConstraint(obj, i);
         
-        obj = addJumpConstraint(obj, i);
+%         obj = addJumpConstraint(obj, i);
 
         obj = addOutputConstraint(obj, i);
         

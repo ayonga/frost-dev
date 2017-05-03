@@ -11,7 +11,7 @@ function obj = configureOptVariables(obj)
     
     for i=1:n_phase
         % time variable
-        obj = addTimeVariable(obj, i);
+        obj = addTimeVariable(obj, i, 0.3);
         
         % state variables
         obj = addStateVariable(obj, i);
@@ -24,10 +24,10 @@ function obj = configureOptVariables(obj)
             obj = addParamVariable(obj, i);
         end
         
-        if ~obj.Phase{i}.IsTerminal
-            % guard variables
-            obj = addGuardVariable(obj, i);
-        end
+%         if ~obj.Phase{i}.IsTerminal
+%             % guard variables
+%             obj = addGuardVariable(obj, i);
+%         end
     end
     
 end

@@ -136,7 +136,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         
         obj = addControlVariable(obj, phase);
         
-        obj = addGuardVariable(obj, phase, lb, ub, x0);
+%         obj = addGuardVariable(obj, phase, lb, ub, x0);
         
         obj = addParamVariable(obj, phase, lb, ub, x0);
         

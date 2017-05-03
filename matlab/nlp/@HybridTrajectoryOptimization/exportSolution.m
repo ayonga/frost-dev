@@ -39,17 +39,22 @@ function [calcs, params] = exportSolution(obj, sol)
             calcs{j}.Fe(:,i)  = sol(var_table{'Fe',i}{1}.Indices);
             
         end
-        calcs{j}.h  = sol(var_table{'H',1}{1}.Indices);
+%         calcs{j}.h  = sol(var_table{'H',1}{1}.Indices);
         if obj.Options.EnableVirtualConstraint
             a_vec = sol(var_table{'A',1}{1}.Indices);            
             n_param = cur_domain.DesPositionOutput.NumParam;
             n_output = getDimension(cur_domain.ActPositionOutput);
+            params{j}.name = obj.Gamma.Nodes.Name{1};
             a_mat = reshape(a_vec,n_param,n_output);
             params{j}.a = a_mat';
             params{j}.p = sol(var_table{'P',1}{1}.Indices);
             if ~isempty(cur_domain.ActVelocityOutput)
                 params{j}.v = sol(var_table{'V',1}{1}.Indices);
             end
+            x_plus = [calcs{1}.qe(:,1);calcs{1}.dqe(:,1)];
+            x_minus = [calcs{1}.qe(:,end);calcs{1}.dqe(:,end)];
+            params{j}.x_plus = x_plus;
+            params{j}.x_minus= x_minus;
         end
        
             

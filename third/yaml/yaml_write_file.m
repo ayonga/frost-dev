@@ -14,6 +14,7 @@ end
 str = yaml_dump(obj, rowOnly);
 
 fid = fopen(filePath, 'w');
+fprintf(fid, '%s\n','domain:');
 fprintf(fid, '%s', str);
 fclose(fid);
 
