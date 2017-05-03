@@ -354,7 +354,7 @@ GetGST0[arg_?AssociationQ]:= Rationalize@arg["gst0"];
 
 GetTwist[arg_?AssociationQ]:= Rationalize@arg["TwistPairs"];
 
-GetChainIndices[arg_?AssociationQ]:= Flatten@arg["ChainIndices"];
+GetChainIndices[arg_?AssociationQ]:= Flatten@{arg["ChainIndices"]};
 
 
 
