@@ -42,8 +42,6 @@ atlas_flat = setEdgeProperties(atlas_flat, 'RightStance', 'RightStance', ...
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % r_stance.compile(export_path);
-% l_stance.compile(export_path);
-% r_impact.compile(export_path);
 % l_impact.compile(export_path);
 
 

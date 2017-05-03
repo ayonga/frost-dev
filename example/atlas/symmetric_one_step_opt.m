@@ -2,7 +2,7 @@
 % 
 %
 %% model & simulation
-symmetric_one_step_sim;
+% symmetric_one_step_sim;
 %% bound
 model_bounds = atlas.getLimits();
 bounds = struct();
@@ -45,8 +45,8 @@ nlp = HybridTrajectoryOptimization('AtlasFlat',atlas_flat,num_grid,'EqualityCons
 nlp.configure(bounds);
 
 % remove constraint wrench constraints
-removeConstraint(nlp.Phase(1),'u_friction_cone_RightSole');
-removeConstraint(nlp.Phase(1),'u_zmp_RightSole');
+% removeConstraint(nlp.Phase(1),'u_friction_cone_RightSole');
+% removeConstraint(nlp.Phase(1),'u_zmp_RightSole');
 %% cost
 u = r_stance.Inputs.Control.u;
 u2r = tovector(norm(u).^2);

@@ -18,8 +18,4 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
         % sol_i = sol(phase_var_indices(i,1):phase_var_indices(i,2));
         [tspan{i}, states{i}, inputs{i}, params{i}] = exportSolution(phase(i), sol);
     end
-    
-    
-    
-    
 end
