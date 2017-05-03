@@ -1,12 +1,21 @@
-function [obj] = compileObjective(obj, cost, export_path, varargin)
+function compileObjective(obj, cost, export_path, exclude, varargin)
     % Compile and export symbolic expression and derivatives of all NLP functions
     %
+    % @note If 'cost' is emtpy, then it will compile all cost functions.
+    %
     % Parameters:         
+    %  cost: the cost function to be compiled @type cellstr
     %  export_path: the path to export the file @type char
+    %  exclude: a list of functions to be excluded @type cellstr
     %  varargin: variable input parameters @type varargin
     %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
     
+    if nargin < 4
+        exclude = {};
+    else
+        if ~iscell(exclude), exclude = {exclude}; end
+    end
     
     
     opts = struct(varargin{:});
@@ -20,6 +29,11 @@ function [obj] = compileObjective(obj, cost, export_path, varargin)
     if ~iscell(cost), cost = {cost}; end
     
     for i=1:length(cost)
+        if ~isempty(exclude)
+            if any(strcmp(cost{i},exclude))
+                continue;
+            end
+        end
         cost_array = obj.CostTable.(cost{i});
         
         % We use the fact that for each objective function there could

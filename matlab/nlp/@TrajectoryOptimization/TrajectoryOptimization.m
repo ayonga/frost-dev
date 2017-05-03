@@ -182,6 +182,10 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = configure(obj, bounds);
         
+        compileConstraint(obj, constr, export_path, exclude, varargin);
+        
+        compileObjective(obj, cost, export_path, exclude, varargin);
+        
         %% functions related to NLP variables
         
         obj = addVariable(obj, label, nodes, varargin);

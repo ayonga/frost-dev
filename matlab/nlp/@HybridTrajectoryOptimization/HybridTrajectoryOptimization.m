@@ -170,6 +170,10 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         checkVariables(obj, x, tol, output_file);
         
         [tspan, states, inputs, params] = exportSolution(obj, sol);
+        
+        compileConstraint(obj, phase, constr, export_path, exclude, varargin);
+        
+        compileObjective(obj, phase, cost, export_path, exclude, varargin);
     end
 end
 

@@ -1,16 +1,23 @@
-function compileConstraint(obj, constr, export_path, varargin)
+function compileConstraint(obj, constr, export_path, exclude, varargin)
     % Compile and export symbolic expression and derivatives of all NLP functions
+    %
+    % @note If 'constr' is emtpy, then it will compile all constraints.
     %
     % Parameters:
     %  constr: a list of constraints to be compiled @type cellstr
     %  export_path: the path to export the file @type char
+    %  exclude: a list of functions to be excluded @type cellstr
     %  varargin: variable input parameters @type varargin
     %   StackVariable: whether to stack variables into one @type logical
     %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
     %   Namespace: the namespace of the function @type string
     
-    
+    if nargin < 4
+        exclude = {};
+    else
+        if ~iscell(exclude), exclude = {exclude}; end
+    end
     
     opts = struct(varargin{:});
     % overwrite non-changable options
@@ -23,6 +30,11 @@ function compileConstraint(obj, constr, export_path, varargin)
     if ~iscell(constr), constr = {constr}; end
     
     for i=1:length(constr)
+        if ~isempty(exclude)
+            if any(strcmp(constr{i},exclude))
+                continue;
+            end
+        end
         constr_array = obj.ConstrTable.(constr{i});
         
         % We use the fact that for each constraint there is only one
