@@ -16,7 +16,7 @@ function domain = LeftStance(model)
     domain.setName('LeftStance');
     
     % add contact
-    left_sole = ContactFrame(domain.ContactPoints.LeftSole,...
+    left_sole = ToContactFrame(domain.ContactPoints.LeftSole,...
         'PlanarContactWithFriction');
     fric_coef.mu = 0.6;
     fric_coef.gamma = 100;

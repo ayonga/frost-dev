@@ -16,7 +16,7 @@ function domain = RightStance(model)
     domain.setName('RightStance');
     
     % add contact
-    right_sole = ContactFrame(domain.ContactPoints.RightSole,...
+    right_sole = ToContactFrame(domain.ContactPoints.RightSole,...
         'PlanarContactWithFriction');
     fric_coef.mu = 0.6;
     fric_coef.gamma = 100;
