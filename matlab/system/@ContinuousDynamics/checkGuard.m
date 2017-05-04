@@ -18,6 +18,16 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
     % calcDynamics method.
     if any([eventfuncs.InputDependent])
         calcDynamics(obj, t, x, controller, params);
+    else
+        if strcmp(obj.Type,'FirstOrder')
+            obj.t_ = t;
+            obj.states_.x = x;
+        else
+            obj.t_ = t;
+            nx = obj.numState;
+            obj.states_.x = x(1:nx);
+            obj.states_.dx = x(nx+1:end);
+        end
     end
     
     % call the event function of each guard to compute the value of events
