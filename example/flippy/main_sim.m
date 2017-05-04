@@ -41,7 +41,7 @@ flippy.configureDynamics();
 % unilateral constraints???
 q = flippy.States.x; % symbolic variable for joint configuration
 q_wr = q('wrist_3_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
-delta_final =  q_wr - pi; % 
+delta_final =  - q_wr + pi; % 
 u_delta_final = UnilateralConstraint(flippy,delta_final,'deltafinal','x'); %'x' represents joint configuration here, the delta_final is function of x
 
 % unilateral constraints will be automatically imposed as path constraint
@@ -127,9 +127,9 @@ t0 = 0;
 tf = 10;
 eventnames = 'deltafinal';
 sim_opts = [];
-% tic
-% flippy.simulate(t0, x0, tf, io_control, params, eventnames, sim_opts)
-% toc
+tic
+flippy.simulate(t0, x0, tf, io_control, params, eventnames, sim_opts)
+toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

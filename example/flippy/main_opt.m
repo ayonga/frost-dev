@@ -21,6 +21,13 @@ bounds.time.tf.ub = 1;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 1;
 
+bounds.states.x.lb = [ -pi, -pi, 0, -pi, -pi, -pi]';
+bounds.states.x.ub = [pi,  pi, pi, pi, pi, pi];
+bounds.states.dx.lb = -17*ones(6,1);
+bounds.states.dx.ub = 17*ones(6,1);
+bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000];
+bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000];
+
 
 
 
