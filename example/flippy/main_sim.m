@@ -79,8 +79,8 @@ y1 = VirtualConstraint(flippy, ya1, y1_name,...
 y_sp = q('shoulder_pan_joint');
 y_sl = q('shoulder_lift_joint');
 y_el = q('elbow_joint');
-y_wy = q('wrist_2_joint');
 y_wp = q('wrist_1_joint');
+y_wy = q('wrist_2_joint');
 ya_2 = [y_sp; y_sl; y_el; y_wy; y_wp];
     
 y2_label = {'ShoulderPan',...
@@ -101,7 +101,7 @@ io_control  = IOFeedback('IO');
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-flippy.compile(export_path);
+% flippy.compile(export_path);
 
 
 
