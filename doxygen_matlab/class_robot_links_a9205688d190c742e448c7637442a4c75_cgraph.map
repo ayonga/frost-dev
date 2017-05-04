@@ -1,0 +1,5 @@
+<map id="RobotLinks::addFixedJoint" name="RobotLinks::addFixedJoint">
+<area shape="rect" id="node2" href="$class_continuous_dynamics.html#a74d1118311b8a10c28e7afa393c4d7e0" title="Adds a holonomic constraint to the dynamical system. " alt="" coords="231,23,404,65"/>
+<area shape="rect" id="node3" href="$class_dynamical_system.html#a1e40a6d810f010012b9baa31d68cd6b3" title="Add input variables of the dynamical system. " alt="" coords="457,5,643,32"/>
+<area shape="rect" id="node4" href="$class_dynamical_system.html#a8e90549435054b72ff63a320e24491f7" title="Add parameter variables of the dynamical system. " alt="" coords="452,56,648,83"/>
+</map>

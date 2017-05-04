@@ -1,12 +1,15 @@
 <map id="RobotLinks::configure" name="RobotLinks::configure">
-<area shape="rect" id="node2" href="$class_robot_links.html#a47b751205684c5eac362a09d256a6f39" title="enforces fixed joints as holonomic constraints of the dynamical system of the robot manipulator ..." alt="" coords="221,5,399,32"/>
-<area shape="rect" id="node3" href="$class_robot_links.html#a4bcff395430bbf53801b595fdf7dbdb9" title="Compute the forward kinematics of the robots using the coordinate configurations. ..." alt="" coords="203,56,417,83"/>
-<area shape="rect" id="node6" href="$str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="521,107,596,133"/>
-<area shape="rect" id="node7" href="$eval__math_8m.html#a5c3fd15a4544a45aca27359d24bcb5cc" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="269,157,351,184"/>
-<area shape="rect" id="node8" href="$class_robot_links.html#af950d34b83eed74165b3086b5169f979" title="Determines the base link of an array of rigid joints. " alt="" coords="473,183,644,209"/>
-<area shape="rect" id="node9" href="$get__base__dofs_8m.html#a0de265953895aff98072b4ed21f1448f" title="It returns the default configuration of the floating base coordinates of a robot manipulator. " alt="" coords="257,259,363,285"/>
-<area shape="rect" id="node10" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="277,309,343,336"/>
-<area shape="rect" id="node11" href="$ros__load__urdf_8m.html#a2e44bd04d4b32472152a26e09e8b79e3" title="This function parse the ROS URDF file. " alt="" coords="260,360,360,387"/>
-<area shape="rect" id="node4" href="$class_robot_links.html#a1c46ee216aefae7b70b64fcd5cf133ad" title="Determines the end effector link of an array of rigid joints. " alt="" coords="465,56,652,83"/>
-<area shape="rect" id="node5" href="$str__indices_8m.html#aa2be2e9d82b17da59dd163530f21eeaa" title="str_indices" alt="" coords="700,107,785,133"/>
+<area shape="rect" id="node2" href="$class_robot_links.html#a9205688d190c742e448c7637442a4c75" title="enforces fixed joints as holonomic constraints of the dynamical system of the robot manipulator ..." alt="" coords="221,35,399,61"/>
+<area shape="rect" id="node6" href="$class_robot_links.html#a4bcff395430bbf53801b595fdf7dbdb9" title="Compute the forward kinematics of the robots using the coordinate configurations. ..." alt="" coords="203,89,417,116"/>
+<area shape="rect" id="node9" href="$str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="521,140,596,167"/>
+<area shape="rect" id="node10" href="$eval__math_8m.html#a5c3fd15a4544a45aca27359d24bcb5cc" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="269,191,351,217"/>
+<area shape="rect" id="node11" href="$class_robot_links.html#af950d34b83eed74165b3086b5169f979" title="Determines the base link of an array of rigid joints. " alt="" coords="473,216,644,243"/>
+<area shape="rect" id="node12" href="$get__base__dofs_8m.html#a0de265953895aff98072b4ed21f1448f" title="It returns the default configuration of the floating base coordinates of a robot manipulator. " alt="" coords="257,292,363,319"/>
+<area shape="rect" id="node13" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="277,343,343,369"/>
+<area shape="rect" id="node14" href="$ros__load__urdf_8m.html#a2e44bd04d4b32472152a26e09e8b79e3" title="This function parse the ROS URDF file. " alt="" coords="260,393,360,420"/>
+<area shape="rect" id="node3" href="$class_continuous_dynamics.html#a74d1118311b8a10c28e7afa393c4d7e0" title="Adds a holonomic constraint to the dynamical system. " alt="" coords="472,23,645,65"/>
+<area shape="rect" id="node4" href="$class_dynamical_system.html#a1e40a6d810f010012b9baa31d68cd6b3" title="Add input variables of the dynamical system. " alt="" coords="705,5,891,32"/>
+<area shape="rect" id="node5" href="$class_dynamical_system.html#a8e90549435054b72ff63a320e24491f7" title="Add parameter variables of the dynamical system. " alt="" coords="700,56,896,83"/>
+<area shape="rect" id="node7" href="$class_robot_links.html#a1c46ee216aefae7b70b64fcd5cf133ad" title="Determines the end effector link of an array of rigid joints. " alt="" coords="465,89,652,116"/>
+<area shape="rect" id="node8" href="$str__indices_8m.html#aa2be2e9d82b17da59dd163530f21eeaa" title="str_indices" alt="" coords="755,148,841,175"/>
 </map>

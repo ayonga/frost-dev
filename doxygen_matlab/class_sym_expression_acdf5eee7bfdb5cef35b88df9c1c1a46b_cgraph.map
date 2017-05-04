@@ -9,7 +9,7 @@
 <area shape="rect" id="node9" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="901,5,987,32"/>
 <area shape="rect" id="node11" href="$mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="704,213,784,240"/>
 <area shape="rect" id="node12" href="$num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="895,163,993,189"/>
-<area shape="rect" id="node13" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="900,112,988,139"/>
+<area shape="rect" id="node13" href="$str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6" title="Converts a Matlab string to a Mathematica string. " alt="" coords="900,112,988,139"/>
 <area shape="rect" id="node14" href="$struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="695,61,793,88"/>
 <area shape="rect" id="node10" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1073,61,1140,88"/>
 </map>

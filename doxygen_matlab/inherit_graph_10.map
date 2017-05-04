@@ -1,5 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="5,5,135,32"/>
-<area shape="rect" id="node2" href="$class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="183,5,313,32"/>
-<area shape="rect" id="node3" href="$class_rigid_impact.html" title="RigidImpact represents a rigid body impact map assuming that the impact is plastic and occurs instant..." alt="" coords="361,5,453,32"/>
+<area shape="rect" id="node1" href="$classinteger.html" title="An integer value. " alt="" coords="5,5,67,32"/>
 </map>

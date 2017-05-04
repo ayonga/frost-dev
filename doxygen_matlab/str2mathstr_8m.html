@@ -156,29 +156,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1bf29b3e41bc10ca2f26b19d57714431"><td class="memItemLeft" align="right" valign="top">function   expr  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431">str2mathstr</a> (s, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a1bf29b3e41bc10ca2f26b19d57714431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a Matlab string to a Mathematica string.  <a href="#a1bf29b3e41bc10ca2f26b19d57714431">More...</a><br /></td></tr>
-<tr class="separator:a1bf29b3e41bc10ca2f26b19d57714431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19524b891d455b20019d82d83db4a3d6"><td class="memItemLeft" align="right" valign="top">function   expr  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6">str2mathstr</a> (<a class="el" href="classchar.html">char</a> s,varragin <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a19524b891d455b20019d82d83db4a3d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a Matlab string to a Mathematica string.  <a href="#a19524b891d455b20019d82d83db4a3d6">More...</a><br /></td></tr>
+<tr class="separator:a19524b891d455b20019d82d83db4a3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Converts a Matlab string to a Mathematica string. </p>
 
 <p>Definition in file <a class="el" href="str2mathstr_8m_source.html">str2mathstr.m</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a1bf29b3e41bc10ca2f26b19d57714431"></a>
+<a class="anchor" id="a19524b891d455b20019d82d83db4a3d6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">function   expr  = str2mathstr </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
           <td class="paramname"><em>s</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">varragin&#160;</td>
           <td class="paramname"><em>varargin</em>&#160;</td>
         </tr>
         <tr>
@@ -192,25 +192,28 @@ Functions</h2></td></tr>
 <p>Converts a Matlab string to a Mathematica string. </p>
 <dl class="section author"><dt>Author</dt><dd>ayonga </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016-11-23</dd></dl>
-<p>varargin: conversion options. ConvertString: If false, this will keep the character as it is, which will be considered as symbolic variables in Mathematica </p><dl class="section user"><dt>Default:</dt><dd>true</dd></dl>
 <p>Copyright (c) 2016, AMBER Lab All right reserved.</p>
 <p>Redistribution and use in source and binary forms, with or without modification, are permitted only in compliance with the BSD 3-Clause license, see <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">varargin</td><td></td></tr>
+    <tr><td class="paramname">s</td><td>the character array </td></tr>
+    <tr><td class="paramname">varargin</td><td>conversion options. <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;str2mathstr ( ...,  [ &quot;ConvertString&quot;, ConvertString_value ] ) </div></div><!-- fragment --> <em>Named Parameters for varargin:</em><ul>
+<li><span class="paramname"> ConvertString</span> ConvertString ( <b>Default:</b> <code>true</code> )</li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Definition at line <a class="el" href="str2mathstr_8m_source.html#l00017">17</a> of file <a class="el" href="str2mathstr_8m_source.html">str2mathstr.m</a>.</p>
 
-<p>Referenced by <a class="el" href="general2math_8m_source.html#l00017">general2math()</a>, <a class="el" href="struct2assoc_8m_source.html#l00017">struct2assoc()</a>, <a class="el" href="_sym_variable_8m_source.html#l00048">SymVariable.SymVariable()</a>, and <a class="el" href="_virtual_constraint_8m_source.html#l00411">VirtualConstraint.VirtualConstraint()</a>.</p>
+<p>Referenced by <a class="el" href="general2math_8m_source.html#l00017">general2math()</a>, <a class="el" href="struct2assoc_8m_source.html#l00017">struct2assoc()</a>, <a class="el" href="_sym_variable_8m_source.html#l00048">SymVariable.SymVariable()</a>, and <a class="el" href="_virtual_constraint_8m_source.html#l00459">VirtualConstraint.VirtualConstraint()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="str2mathstr_8m_a1bf29b3e41bc10ca2f26b19d57714431_icgraph.png" border="0" usemap="#str2mathstr_8m_a1bf29b3e41bc10ca2f26b19d57714431_icgraph" alt=""/></div>
-<map name="str2mathstr_8m_a1bf29b3e41bc10ca2f26b19d57714431_icgraph" id="str2mathstr_8m_a1bf29b3e41bc10ca2f26b19d57714431_icgraph">
+<div class="center"><img src="str2mathstr_8m_a19524b891d455b20019d82d83db4a3d6_icgraph.png" border="0" usemap="#str2mathstr_8m_a19524b891d455b20019d82d83db4a3d6_icgraph" alt=""/></div>
+<map name="str2mathstr_8m_a19524b891d455b20019d82d83db4a3d6_icgraph" id="str2mathstr_8m_a19524b891d455b20019d82d83db4a3d6_icgraph">
 <area shape="rect" id="node2" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="141,1836,241,1863"/>
 <area shape="rect" id="node14" href="class_virtual_constraint.html#a1dc73a6977696a159d304490b3721b0a" title="The class constructor function. " alt="" coords="1054,2301,1181,2342"/>
 <area shape="rect" id="node15" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="597,1937,694,1964"/>
@@ -224,11 +227,11 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node6" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="1027,1899,1207,1941"/>
 <area shape="rect" id="node7" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="1027,1965,1207,2006"/>
 <area shape="rect" id="node8" href="class_robot_links.html#a9c93d7f7decc0b3aa7e1fcd69501aa6a" title="Set the symbolic expressions of the dynamics of the rigid body system. " alt="" coords="1013,2031,1221,2057"/>
-<area shape="rect" id="node9" href="class_robot_links.html#a7834bf06f3cc86116cc6f628e66920bb" title="Returns the symbolic representation of the body jacobians of coordinate frames. " alt="" coords="1019,2081,1215,2108"/>
-<area shape="rect" id="node10" href="class_robot_links.html#a7fe27189c183879331b39a0d42e3527d" title="Returns the symbolic representation of the Cartesian positions of a rigid point specified by a list o..." alt="" coords="1032,2133,1203,2174"/>
+<area shape="rect" id="node9" href="class_robot_links.html#a27048f204b37ef961304a70cf235a8b5" title="Returns the symbolic representation of the body jacobians of coordinate frames. " alt="" coords="1019,2081,1215,2108"/>
+<area shape="rect" id="node10" href="class_robot_links.html#acf701ad3213e99dfc9a7a9d0d4d82ae0" title="Returns the symbolic representation of the Cartesian positions of a rigid point specified by a coordi..." alt="" coords="1032,2133,1203,2174"/>
 <area shape="rect" id="node11" href="class_robot_links.html#a5aa08f041f850a3bdbc4c2b96df5e97d" title="Returns the symbolic representation of the robot manipulator. " alt="" coords="1023,2199,1212,2225"/>
-<area shape="rect" id="node12" href="class_robot_links.html#a3d6ab2d8705012d4c7171c7d32d69854" title="Returns the symbolic representation of the Euler angles of a rigid link. " alt="" coords="1025,2249,1209,2276"/>
-<area shape="rect" id="node13" href="class_robot_links.html#ae32fdf42050a676f1b6cb933861ae067" title="Returns the symbolic representation of the spatial jacobian of the point that is rigidly attached to ..." alt="" coords="1014,1783,1221,1809"/>
+<area shape="rect" id="node12" href="class_robot_links.html#af7fa39e09b8e3824fb9c1da5dab06069" title="Returns the symbolic representation of the Euler angles of a rigid link. " alt="" coords="1025,2249,1209,2276"/>
+<area shape="rect" id="node13" href="class_robot_links.html#aac7d8eca62bf36868c1bb9d784017cb3" title="Returns the symbolic representation of the spatial jacobian of the point that is rigidly attached to ..." alt="" coords="1014,1783,1221,1809"/>
 <area shape="rect" id="node20" href="class_sym_function.html#a31bb3cacb984727ed4f797aba9e15fe7" title="Export the symbolic expression of functions to C/C++ source files and build them as MEX files..." alt="" coords="805,316,947,343"/>
 <area shape="rect" id="node21" href="class_sym_function.html#a701caf9d661e1bb24bb653dc67467272" title="Export the symbolic expression of the Hessian of the function to C/C++ source files and build them as..." alt="" coords="1022,265,1213,292"/>
 <area shape="rect" id="node22" href="class_sym_function.html#aded9be16523a00331fc8c5278fd6f1f3" title="The class constructor function. " alt="" coords="1269,316,1453,343"/>
@@ -242,7 +245,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node30" href="class_sym_expression.html#a6a61eb0d470f41deca6126dd85a8acec" title="Symbolic array right division. RDIVIDE(A,B) overloads symbolic A ./ B. " alt="" coords="1037,1431,1197,1457"/>
 <area shape="rect" id="node31" href="class_sym_expression.html#aebfa0fcd39deb62b6afe1cfd3b210c55" title="/ Slash or symbolic right matrix divide. A/B is the matrix division of B into A, which is roughly the..." alt="" coords="1276,1431,1447,1457"/>
 <area shape="rect" id="node32" href="class_sym_expression.html#aa8984cc583c993adc3be02348021c8e7" title="Symbolic array left division. LDIVIDE(A,B) overloads symbolic A . B. " alt="" coords="1038,1329,1197,1356"/>
-<area shape="rect" id="node33" href="class_sym_expression.html#a2ea6d7dcec5e611c508121053f5cac63" title="Symbolic matrix left division. MLDIVIDE(A,B) overloads symbolic A \ B. X = A solves the symbolic line..." alt="" coords="1276,1279,1447,1305"/>
+<area shape="rect" id="node33" href="class_sym_expression.html#a2ea6d7dcec5e611c508121053f5cac63" title="Symbolic matrix left division. MLDIVIDE(A,B) overloads symbolic A \ B. X = A \ B solves the symbolic ..." alt="" coords="1276,1279,1447,1305"/>
 <area shape="rect" id="node34" href="class_sym_expression.html#acc02d69d3dd8d8edc0c83f9dc6429f50" title="&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;— Arithmetic &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;— Symbolic negation. " alt="" coords="563,1380,727,1407"/>
 <area shape="rect" id="node35" href="class_sym_expression.html#a559d946a47b99915b0eb7d3c75c88dd5" title="Unary plus. " alt="" coords="569,1431,722,1457"/>
 <area shape="rect" id="node36" href="class_sym_expression.html#a13ae1f200548de5ee30cd92eeadbe3b3" title="Symbolic plus operation. " alt="" coords="572,1481,719,1508"/>
@@ -281,7 +284,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:47 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

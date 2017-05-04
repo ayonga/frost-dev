@@ -163,6 +163,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0d8fadd709dd87f689533d0ea1d7e74c"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a0d8fadd709dd87f689533d0ea1d7e74c">configure</a> (<a class="el" href="classstruct.html">struct</a> bounds)</td></tr>
 <tr class="memdesc:a0d8fadd709dd87f689533d0ea1d7e74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the trajectory optimizatino NLP problem  <a href="#a0d8fadd709dd87f689533d0ea1d7e74c">More...</a><br /></td></tr>
 <tr class="separator:a0d8fadd709dd87f689533d0ea1d7e74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e9df4331fad718ff37fad935f7ad45"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#ae9e9df4331fad718ff37fad935f7ad45">compileConstraint</a> (<a class="el" href="classcellstr.html">cellstr</a> constr,<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classcellstr.html">cellstr</a> exclude,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ae9e9df4331fad718ff37fad935f7ad45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#ae9e9df4331fad718ff37fad935f7ad45">More...</a><br /></td></tr>
+<tr class="separator:ae9e9df4331fad718ff37fad935f7ad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28736482e6f06c65bea70fe43f7aea5"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#af28736482e6f06c65bea70fe43f7aea5">compileObjective</a> (<a class="el" href="classcellstr.html">cellstr</a> cost,<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classcellstr.html">cellstr</a> exclude,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:af28736482e6f06c65bea70fe43f7aea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#af28736482e6f06c65bea70fe43f7aea5">More...</a><br /></td></tr>
+<tr class="separator:af28736482e6f06c65bea70fe43f7aea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44f7e314d46776fb0652e43c2a706897"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897">addVariable</a> (<a class="el" href="classchar.html">char</a> label,<a class="el" href="classrowvec.html">rowvec</a> nodes, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a44f7e314d46776fb0652e43c2a706897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds NLP decision variables.  <a href="#a44f7e314d46776fb0652e43c2a706897">More...</a><br /></td></tr>
 <tr class="separator:a44f7e314d46776fb0652e43c2a706897"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,11 +205,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a046b39ee460cbbed805625de353683a5"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a046b39ee460cbbed805625de353683a5">addDynamicsConstraint</a> ()</td></tr>
 <tr class="memdesc:a046b39ee460cbbed805625de353683a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add system dynamics equations as a set of equality constraints.  <a href="#a046b39ee460cbbed805625de353683a5">More...</a><br /></td></tr>
 <tr class="separator:a046b39ee460cbbed805625de353683a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31cfc9f8e1cfbb0719578709bc9e5e42"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a31cfc9f8e1cfbb0719578709bc9e5e42">addSystemConstraint</a> ()</td></tr>
-<tr class="separator:a31cfc9f8e1cfbb0719578709bc9e5e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4018005f6dc749351b0a33fdc57920c9"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9">addNodeConstraint</a> (<a class="el" href="class_sym_function.html">SymFunction</a> func,<a class="el" href="classcellstr.html">cellstr</a> deps, nodes,<a class="el" href="classcolvec.html">colvec</a> lb,<a class="el" href="classcolvec.html">colvec</a> ub,<a class="el" href="classchar.html">char</a> type,<a class="el" href="classdouble.html">double</a> auxdata)</td></tr>
-<tr class="memdesc:a4018005f6dc749351b0a33fdc57920c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add NLP constraint function that only depends on variables at a particular node. The input argument 'nodes' will specify at which nodes the function is defined.  <a href="#a4018005f6dc749351b0a33fdc57920c9">More...</a><br /></td></tr>
-<tr class="separator:a4018005f6dc749351b0a33fdc57920c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d6f5c021fc3fd11274980f92a1f933f"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a3d6f5c021fc3fd11274980f92a1f933f">addNodeConstraint</a> (<a class="el" href="class_sym_function.html">SymFunction</a> func,<a class="el" href="classcellstr.html">cellstr</a> deps,<a class="el" href="classchar.html">char</a> nodes,<a class="el" href="classcolvec.html">colvec</a> lb,<a class="el" href="classcolvec.html">colvec</a> ub,<a class="el" href="classchar.html">char</a> type,<a class="el" href="classdouble.html">double</a> auxdata)</td></tr>
+<tr class="memdesc:a3d6f5c021fc3fd11274980f92a1f933f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add NLP constraint function that only depends on variables at a particular node. The input argument 'nodes' will specify at which nodes the function is defined.  <a href="#a3d6f5c021fc3fd11274980f92a1f933f">More...</a><br /></td></tr>
+<tr class="separator:a3d6f5c021fc3fd11274980f92a1f933f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7679d65bee51425c95b7696dc76b012c"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_trajectory_optimization.html#a7679d65bee51425c95b7696dc76b012c">updateConstrProp</a> (<a class="el" href="classchar.html">char</a> label,<a class="el" href="classchar.html">char</a> node, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a7679d65bee51425c95b7696dc76b012c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the properties of the constraint objects based on the input name-value pair arguments.  <a href="#a7679d65bee51425c95b7696dc76b012c">More...</a><br /></td></tr>
 <tr class="separator:a7679d65bee51425c95b7696dc76b012c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,9 +245,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a359e0c39f3144e1aec13b2fd500c8f44 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44">NonlinearProgram</a> (name)</td></tr>
 <tr class="memdesc:a359e0c39f3144e1aec13b2fd500c8f44 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default class constructor function.  <a href="#a359e0c39f3144e1aec13b2fd500c8f44">More...</a><br /></td></tr>
 <tr class="separator:a359e0c39f3144e1aec13b2fd500c8f44 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616e92e5a58bd04f9cbd6768b7773749 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749">regVariable</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a616e92e5a58bd04f9cbd6768b7773749 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#a616e92e5a58bd04f9cbd6768b7773749">More...</a><br /></td></tr>
-<tr class="separator:a616e92e5a58bd04f9cbd6768b7773749 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe0a555646a765fcf37eccedbea87094 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094">regVariable</a> (<a class="el" href="class_nlp_variable.html">NlpVariable</a> vars)</td></tr>
+<tr class="memdesc:afe0a555646a765fcf37eccedbea87094 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#afe0a555646a765fcf37eccedbea87094">More...</a><br /></td></tr>
+<tr class="separator:afe0a555646a765fcf37eccedbea87094 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68afb570d51f6afcb91aa233885ba1ad inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad">update</a> ()</td></tr>
 <tr class="memdesc:a68afb570d51f6afcb91aa233885ba1ad inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the NLP problems before load it to NLP solver.  <a href="#a68afb570d51f6afcb91aa233885ba1ad">More...</a><br /></td></tr>
 <tr class="separator:a68afb570d51f6afcb91aa233885ba1ad inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -262,6 +266,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8acd8346e88ac50c24f55b7b23413b8a inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a">setOption</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a8acd8346e88ac50c24f55b7b23413b8a inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the object options, and return the complete list of option structure including unchanged default options.  <a href="#a8acd8346e88ac50c24f55b7b23413b8a">More...</a><br /></td></tr>
 <tr class="separator:a8acd8346e88ac50c24f55b7b23413b8a inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2141863b674dcea33fb0a4999b3f27 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27">compileConstraint</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:aed2141863b674dcea33fb0a4999b3f27 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#aed2141863b674dcea33fb0a4999b3f27">More...</a><br /></td></tr>
+<tr class="separator:aed2141863b674dcea33fb0a4999b3f27 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d95f8fa6e875dced3663f7f8532552 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552">compileObjective</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a32d95f8fa6e875dced3663f7f8532552 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#a32d95f8fa6e875dced3663f7f8532552">More...</a><br /></td></tr>
+<tr class="separator:a32d95f8fa6e875dced3663f7f8532552 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -375,23 +385,24 @@ Collaboration diagram for TrajectoryOptimization:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_trajectory_optimization__coll__graph.png" border="0" usemap="#_trajectory_optimization_coll__map" alt="Collaboration graph"/></div>
 <map name="_trajectory_optimization_coll__map" id="_trajectory_optimization_coll__map">
-<area shape="rect" id="node2" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="759,572,886,599"/>
-<area shape="rect" id="node3" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="470,5,530,32"/>
-<area shape="rect" id="node4" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="506,468,598,495"/>
-<area shape="rect" id="node11" href="class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="593,109,708,136"/>
-<area shape="rect" id="node14" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="157,355,246,382"/>
-<area shape="rect" id="node5" href="classlogical.html" title="A boolean value. " alt="" coords="413,355,472,382"/>
-<area shape="rect" id="node6" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="669,355,712,382"/>
-<area shape="rect" id="node7" href="classcolvec.html" title="A matlab column vector. " alt="" coords="317,199,377,225"/>
-<area shape="rect" id="node8" href="classstruct.html" title="A MatLab struct. " alt="" coords="751,199,806,225"/>
-<area shape="rect" id="node10" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="547,355,645,382"/>
-<area shape="rect" id="node9" href="classchar.html" title="A MatLab character array. " alt="" coords="773,5,819,32"/>
-<area shape="rect" id="node12" href="class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="505,199,601,225"/>
-<area shape="rect" id="node13" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="511,109,569,136"/>
-<area shape="rect" id="node15" href="classinteger.html" title="An integer value. " alt="" coords="39,199,100,225"/>
-<area shape="rect" id="node16" href="classdouble.html" title="A double value. " alt="" coords="910,572,970,599"/>
-<area shape="rect" id="node17" href="classtable.html" title="A MatLab table. " alt="" coords="1057,572,1108,599"/>
-<area shape="rect" id="node18" href="class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="1133,572,1262,599"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="698,689,825,716"/>
+<area shape="rect" id="node3" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="381,5,441,32"/>
+<area shape="rect" id="node4" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="521,585,613,612"/>
+<area shape="rect" id="node11" href="class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="581,109,696,136"/>
+<area shape="rect" id="node14" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="215,473,305,499"/>
+<area shape="rect" id="node18" href="class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="1131,473,1261,499"/>
+<area shape="rect" id="node5" href="classlogical.html" title="A boolean value. " alt="" coords="329,473,388,499"/>
+<area shape="rect" id="node6" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="412,473,455,499"/>
+<area shape="rect" id="node7" href="classcolvec.html" title="A matlab column vector. " alt="" coords="409,213,469,240"/>
+<area shape="rect" id="node8" href="classstruct.html" title="A MatLab struct. " alt="" coords="978,213,1033,240"/>
+<area shape="rect" id="node10" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="672,473,771,499"/>
+<area shape="rect" id="node9" href="classchar.html" title="A MatLab character array. " alt="" coords="761,5,807,32"/>
+<area shape="rect" id="node12" href="class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="549,213,645,240"/>
+<area shape="rect" id="node13" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="499,109,557,136"/>
+<area shape="rect" id="node15" href="classinteger.html" title="An integer value. " alt="" coords="97,213,159,240"/>
+<area shape="rect" id="node16" href="classdouble.html" title="A double value. " alt="" coords="1447,213,1507,240"/>
+<area shape="rect" id="node17" href="classtable.html" title="A MatLab table. " alt="" coords="1184,689,1235,716"/>
+<area shape="rect" id="node20" href="classfunction__handle.html" title="A MatLab function handle. " alt="" coords="1293,213,1406,240"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -459,7 +470,7 @@ Collaboration diagram for TrajectoryOptimization:</div>
 
 <p>Definition at line <a class="el" href="_trajectory_optimization_8m_source.html#l00141">141</a> of file <a class="el" href="_trajectory_optimization_8m_source.html">TrajectoryOptimization.m</a>.</p>
 
-<p>References <a class="el" href="add_collocation_constraint_8m_source.html#l00018">addCollocationConstraint()</a>, <a class="el" href="add_constraint_8m_source.html#l00018">addConstraint()</a>, <a class="el" href="add_cost_8m_source.html#l00018">addCost()</a>, <a class="el" href="add_dynamics_constraint_8m_source.html#l00018">addDynamicsConstraint()</a>, <a class="el" href="add_input_variable_8m_source.html#l00018">addInputVariable()</a>, <a class="el" href="add_node_constraint_8m_source.html#l00018">addNodeConstraint()</a>, <a class="el" href="add_node_cost_8m_source.html#l00018">addNodeCost()</a>, <a class="el" href="add_param_variable_8m_source.html#l00018">addParamVariable()</a>, <a class="el" href="add_running_cost_8m_source.html#l00018">addRunningCost()</a>, <a class="el" href="add_state_variable_8m_source.html#l00018">addStateVariable()</a>, <a class="el" href="class_trajectory_optimization.html#a31cfc9f8e1cfbb0719578709bc9e5e42">addSystemConstraint()</a>, <a class="el" href="add_time_variable_8m_source.html#l00018">addTimeVariable()</a>, <a class="el" href="add_variable_8m_source.html#l00018">addVariable()</a>, <a class="el" href="_0D_trajectory_optimization_2check_constraints_8m_source.html#l00018">checkConstraints()</a>, <a class="el" href="_0D_trajectory_optimization_2check_costs_8m_source.html#l00018">checkCosts()</a>, <a class="el" href="_0D_trajectory_optimization_2check_variables_8m_source.html#l00018">checkVariables()</a>, <a class="el" href="nlp_2_0D_trajectory_optimization_2configure_8m_source.html#l00018">configure()</a>, <a class="el" href="configure_variables_8m_source.html#l00018">configureVariables()</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00044">DefaultNumberOfGrid</a>, <a class="el" href="direct_collocation_8m_source.html#l00018">directCollocation()</a>, <a class="el" href="_0D_trajectory_optimization_2export_solution_8m_source.html#l00018">exportSolution()</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00121">NonlinearProgram.NonlinearProgram()</a>, <a class="el" href="remove_constraint_8m_source.html#l00018">removeConstraint()</a>, <a class="el" href="remove_cost_8m_source.html#l00018">removeCost()</a>, <a class="el" href="remove_variable_8m_source.html#l00018">removeVariable()</a>, <a class="el" href="_0D_trajectory_optimization_2update_8m_source.html#l00018">update()</a>, <a class="el" href="update_constr_prop_8m_source.html#l00018">updateConstrProp()</a>, <a class="el" href="update_cost_prop_8m_source.html#l00018">updateCostProp()</a>, and <a class="el" href="update_variable_prop_8m_source.html#l00018">updateVariableProp()</a>.</p>
+<p>References <a class="el" href="add_collocation_constraint_8m_source.html#l00018">addCollocationConstraint()</a>, <a class="el" href="add_constraint_8m_source.html#l00018">addConstraint()</a>, <a class="el" href="add_cost_8m_source.html#l00018">addCost()</a>, <a class="el" href="add_dynamics_constraint_8m_source.html#l00018">addDynamicsConstraint()</a>, <a class="el" href="add_input_variable_8m_source.html#l00018">addInputVariable()</a>, <a class="el" href="add_node_constraint_8m_source.html#l00018">addNodeConstraint()</a>, <a class="el" href="add_node_cost_8m_source.html#l00018">addNodeCost()</a>, <a class="el" href="add_param_variable_8m_source.html#l00018">addParamVariable()</a>, <a class="el" href="add_running_cost_8m_source.html#l00018">addRunningCost()</a>, <a class="el" href="add_state_variable_8m_source.html#l00018">addStateVariable()</a>, <a class="el" href="add_time_variable_8m_source.html#l00018">addTimeVariable()</a>, <a class="el" href="add_variable_8m_source.html#l00018">addVariable()</a>, <a class="el" href="_0D_trajectory_optimization_2check_constraints_8m_source.html#l00018">checkConstraints()</a>, <a class="el" href="_0D_trajectory_optimization_2check_costs_8m_source.html#l00018">checkCosts()</a>, <a class="el" href="_0D_trajectory_optimization_2check_variables_8m_source.html#l00018">checkVariables()</a>, <a class="el" href="_0D_trajectory_optimization_2compile_constraint_8m_source.html#l00018">compileConstraint()</a>, <a class="el" href="_0D_trajectory_optimization_2compile_objective_8m_source.html#l00018">compileObjective()</a>, <a class="el" href="nlp_2_0D_trajectory_optimization_2configure_8m_source.html#l00018">configure()</a>, <a class="el" href="configure_variables_8m_source.html#l00018">configureVariables()</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00044">DefaultNumberOfGrid</a>, <a class="el" href="direct_collocation_8m_source.html#l00018">directCollocation()</a>, <a class="el" href="_0D_trajectory_optimization_2export_solution_8m_source.html#l00018">exportSolution()</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00121">NonlinearProgram.NonlinearProgram()</a>, <a class="el" href="remove_constraint_8m_source.html#l00018">removeConstraint()</a>, <a class="el" href="remove_cost_8m_source.html#l00018">removeCost()</a>, <a class="el" href="remove_variable_8m_source.html#l00018">removeVariable()</a>, <a class="el" href="_0D_trajectory_optimization_2update_8m_source.html#l00018">update()</a>, <a class="el" href="update_constr_prop_8m_source.html#l00018">updateConstrProp()</a>, <a class="el" href="update_cost_prop_8m_source.html#l00018">updateCostProp()</a>, and <a class="el" href="update_variable_prop_8m_source.html#l00018">updateVariableProp()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -467,43 +478,46 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_trajectory_optimization_ac25b805aa9b3b7fa8ad35e6d05a6beff_cgraph.png" border="0" usemap="#class_trajectory_optimization_ac25b805aa9b3b7fa8ad35e6d05a6beff_cgraph" alt=""/></div>
 <map name="class_trajectory_optimization_ac25b805aa9b3b7fa8ad35e6d05a6beff_cgraph" id="class_trajectory_optimization_ac25b805aa9b3b7fa8ad35e6d05a6beff_cgraph">
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#afdd7052fbe6615ecc8d24581b2d3ff49" title="Add direct collocation equations as a set of equality constraints. " alt="" coords="215,234,391,275"/>
-<area shape="rect" id="node3" href="class_trajectory_optimization.html#a91557e771978f4b6b51e4e071f34daa8" title="Return the SymFunction object of the direct collocation constraint given the state (x) and derivative..." alt="" coords="457,175,610,216"/>
-<area shape="rect" id="node4" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="705,402,859,443"/>
+<area shape="rect" id="node3" href="class_trajectory_optimization.html#a91557e771978f4b6b51e4e071f34daa8" title="Return the SymFunction object of the direct collocation constraint given the state (x) and derivative..." alt="" coords="457,178,610,219"/>
+<area shape="rect" id="node4" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="705,410,859,451"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a2fae519f4ebafc025cfea9edcc3bd302" title="Add NLP object functions. " alt="" coords="457,55,610,96"/>
-<area shape="rect" id="node7" href="class_trajectory_optimization.html#a046b39ee460cbbed805625de353683a5" title="Add system dynamics equations as a set of equality constraints. " alt="" coords="448,343,619,384"/>
-<area shape="rect" id="node8" href="class_trajectory_optimization.html#a036a541b68bc8706da642fceb4c008bc" title="Adds input variables as the NLP decision variables to the problem. " alt="" coords="226,700,379,742"/>
-<area shape="rect" id="node9" href="class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897" title="Adds NLP decision variables. " alt="" coords="457,578,610,619"/>
-<area shape="rect" id="node10" href="class_trajectory_optimization.html#a5833f1a1cf4da9314f596ca67ced925f" title="This function updates the properties of the NLP variable objects based on the input name&#45;value pair a..." alt="" coords="457,700,610,742"/>
-<area shape="rect" id="node11" href="class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="457,460,610,502"/>
+<area shape="rect" id="node7" href="class_trajectory_optimization.html#a046b39ee460cbbed805625de353683a5" title="Add system dynamics equations as a set of equality constraints. " alt="" coords="448,351,619,392"/>
+<area shape="rect" id="node8" href="class_trajectory_optimization.html#a036a541b68bc8706da642fceb4c008bc" title="Adds input variables as the NLP decision variables to the problem. " alt="" coords="226,584,379,626"/>
+<area shape="rect" id="node9" href="class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897" title="Adds NLP decision variables. " alt="" coords="457,584,610,626"/>
+<area shape="rect" id="node10" href="class_trajectory_optimization.html#a5833f1a1cf4da9314f596ca67ced925f" title="This function updates the properties of the NLP variable objects based on the input name&#45;value pair a..." alt="" coords="457,519,610,560"/>
+<area shape="rect" id="node11" href="class_trajectory_optimization.html#a3d6f5c021fc3fd11274980f92a1f933f" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="457,702,610,743"/>
 <area shape="rect" id="node12" href="class_trajectory_optimization.html#a0053a68d3dde1c56cc08b457c04525e4" title="Add a cost function that only depends on variables at a particular node. The input argument &#39;nodes&#39; w..." alt="" coords="226,116,379,158"/>
-<area shape="rect" id="node13" href="class_trajectory_optimization.html#accfe5d3192cdcef8e88142a920336325" title="Adds parameters as the NLP decision variables to the problem. " alt="" coords="226,518,379,559"/>
+<area shape="rect" id="node13" href="class_trajectory_optimization.html#accfe5d3192cdcef8e88142a920336325" title="Adds parameters as the NLP decision variables to the problem. " alt="" coords="226,402,379,443"/>
 <area shape="rect" id="node14" href="class_trajectory_optimization.html#a60b26164cd1b45510c1ddf869c1e7b14" title="Add a running cost to the problem. " alt="" coords="226,51,379,92"/>
-<area shape="rect" id="node15" href="class_trajectory_optimization.html#a15613a842aceadbe23482cc59594f2a6" title="Adds state variables as the NLP decision variables to the problem. " alt="" coords="226,635,379,676"/>
-<area shape="rect" id="node16" href="class_trajectory_optimization.html#a31cfc9f8e1cfbb0719578709bc9e5e42" title="TrajectoryOptimization\l.addSystemConstraint" alt="" coords="225,766,381,807"/>
-<area shape="rect" id="node17" href="class_trajectory_optimization.html#a78d6f58de4431b0ef40b5d8ea14e7498" title="Adds time as the NLP decision variables to the problem. " alt="" coords="226,452,379,494"/>
-<area shape="rect" id="node18" href="class_trajectory_optimization.html#ab5eae2b8c5aed75ac3ef4a0c6ba7aa63" title="Check the violation of the constraints. " alt="" coords="226,883,379,924"/>
-<area shape="rect" id="node19" href="class_trajectory_optimization.html#ae1819b01cc9c476df3fad9f78ee8ab37" title="Check the value of const function. " alt="" coords="226,948,379,990"/>
-<area shape="rect" id="node20" href="class_trajectory_optimization.html#a0667471fc623321260961db4c900c612" title="Check the violation of the constraints. " alt="" coords="226,1014,379,1055"/>
-<area shape="rect" id="node21" href="class_trajectory_optimization.html#a0d8fadd709dd87f689533d0ea1d7e74c" title="configure the trajectory optimizatino NLP problem " alt="" coords="226,1079,379,1120"/>
-<area shape="rect" id="node22" href="class_trajectory_optimization.html#aec52bedb3f4e1f079e56a4737d0ef693" title="This function configures the structure of the optimization variable by adding (registering) them to t..." alt="" coords="226,1144,379,1186"/>
-<area shape="rect" id="node23" href="class_trajectory_optimization.html#adef44162578283f992d0e2aa4e008937" title="Analyzes the solution of the NLP problem. " alt="" coords="226,1210,379,1251"/>
-<area shape="rect" id="node24" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="439,1439,628,1480"/>
-<area shape="rect" id="node33" href="class_trajectory_optimization.html#a7d77984ca51d8e787801c15f4f13e8b7" title="Removes a group of NLP constraints. " alt="" coords="226,1275,379,1316"/>
-<area shape="rect" id="node35" href="class_trajectory_optimization.html#a2424cddcd973d5a8a3b32714d2c94ba2" title="Removes a group of NLP cost functions. " alt="" coords="226,1340,379,1382"/>
-<area shape="rect" id="node36" href="class_trajectory_optimization.html#aa032733cd6971ce9ad9fc1c3102f41c9" title="Removes a NLP optimization variable. " alt="" coords="226,1406,379,1447"/>
-<area shape="rect" id="node37" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="226,1523,379,1564"/>
-<area shape="rect" id="node38" href="class_trajectory_optimization.html#a7679d65bee51425c95b7696dc76b012c" title="This function updates the properties of the constraint objects based on the input name&#45;value pair arg..." alt="" coords="226,1588,379,1630"/>
-<area shape="rect" id="node39" href="class_trajectory_optimization.html#aced71253b2987762efd4d970b2295135" title="This function updates the properties of the cost function objects based on the input name&#45;value pair ..." alt="" coords="226,1654,379,1695"/>
-<area shape="rect" id="node5" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1088,441,1155,468"/>
-<area shape="rect" id="node25" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="691,1287,873,1328"/>
-<area shape="rect" id="node26" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="685,1353,879,1380"/>
-<area shape="rect" id="node27" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="676,1505,888,1532"/>
-<area shape="rect" id="node28" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="679,1556,885,1582"/>
-<area shape="rect" id="node29" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="683,1606,881,1633"/>
-<area shape="rect" id="node30" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="687,1404,877,1430"/>
-<area shape="rect" id="node32" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="695,1454,869,1481"/>
-<area shape="rect" id="node31" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="936,1020,1040,1046"/>
-<area shape="rect" id="node34" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="496,1348,571,1374"/>
+<area shape="rect" id="node15" href="class_trajectory_optimization.html#a15613a842aceadbe23482cc59594f2a6" title="Adds state variables as the NLP decision variables to the problem. " alt="" coords="226,519,379,560"/>
+<area shape="rect" id="node16" href="class_trajectory_optimization.html#a78d6f58de4431b0ef40b5d8ea14e7498" title="Adds time as the NLP decision variables to the problem. " alt="" coords="226,702,379,743"/>
+<area shape="rect" id="node17" href="class_trajectory_optimization.html#ab5eae2b8c5aed75ac3ef4a0c6ba7aa63" title="Check the violation of the constraints. " alt="" coords="226,819,379,860"/>
+<area shape="rect" id="node18" href="class_trajectory_optimization.html#ae1819b01cc9c476df3fad9f78ee8ab37" title="Check the value of const function. " alt="" coords="226,884,379,926"/>
+<area shape="rect" id="node19" href="class_trajectory_optimization.html#a0667471fc623321260961db4c900c612" title="Check the violation of the constraints. " alt="" coords="226,950,379,991"/>
+<area shape="rect" id="node20" href="class_trajectory_optimization.html#ae9e9df4331fad718ff37fad935f7ad45" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="226,1015,379,1056"/>
+<area shape="rect" id="node21" href="class_trajectory_optimization.html#af28736482e6f06c65bea70fe43f7aea5" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="226,1080,379,1122"/>
+<area shape="rect" id="node22" href="class_trajectory_optimization.html#a0d8fadd709dd87f689533d0ea1d7e74c" title="configure the trajectory optimizatino NLP problem " alt="" coords="226,1146,379,1187"/>
+<area shape="rect" id="node23" href="class_trajectory_optimization.html#aec52bedb3f4e1f079e56a4737d0ef693" title="This function configures the structure of the optimization variable by adding (registering) them to t..." alt="" coords="226,1211,379,1252"/>
+<area shape="rect" id="node24" href="class_trajectory_optimization.html#adef44162578283f992d0e2aa4e008937" title="Analyzes the solution of the NLP problem. " alt="" coords="226,1276,379,1318"/>
+<area shape="rect" id="node25" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="439,1506,628,1547"/>
+<area shape="rect" id="node36" href="class_trajectory_optimization.html#a7d77984ca51d8e787801c15f4f13e8b7" title="Removes a group of NLP constraints. " alt="" coords="226,1342,379,1383"/>
+<area shape="rect" id="node38" href="class_trajectory_optimization.html#a2424cddcd973d5a8a3b32714d2c94ba2" title="Removes a group of NLP cost functions. " alt="" coords="226,1407,379,1448"/>
+<area shape="rect" id="node39" href="class_trajectory_optimization.html#aa032733cd6971ce9ad9fc1c3102f41c9" title="Removes a NLP optimization variable. " alt="" coords="226,1472,379,1514"/>
+<area shape="rect" id="node40" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="226,1590,379,1631"/>
+<area shape="rect" id="node41" href="class_trajectory_optimization.html#a7679d65bee51425c95b7696dc76b012c" title="This function updates the properties of the constraint objects based on the input name&#45;value pair arg..." alt="" coords="226,1655,379,1696"/>
+<area shape="rect" id="node42" href="class_trajectory_optimization.html#aced71253b2987762efd4d970b2295135" title="This function updates the properties of the cost function objects based on the input name&#45;value pair ..." alt="" coords="226,1720,379,1762"/>
+<area shape="rect" id="node5" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1088,492,1155,518"/>
+<area shape="rect" id="node26" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="693,1223,871,1264"/>
+<area shape="rect" id="node27" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="693,1288,871,1330"/>
+<area shape="rect" id="node28" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="691,1354,873,1395"/>
+<area shape="rect" id="node29" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="685,1420,879,1446"/>
+<area shape="rect" id="node30" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="676,1572,888,1598"/>
+<area shape="rect" id="node31" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="679,1622,885,1649"/>
+<area shape="rect" id="node32" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094" title="This method registers the information of an optimization variable. " alt="" coords="683,1673,881,1700"/>
+<area shape="rect" id="node33" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="687,1470,877,1497"/>
+<area shape="rect" id="node35" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="695,1521,869,1548"/>
+<area shape="rect" id="node34" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="936,1114,1040,1141"/>
+<area shape="rect" id="node37" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="496,1414,571,1441"/>
 </map>
 </div>
 </p>
@@ -623,12 +637,12 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#afdd7052fbe6615ecc8d24581b2d3ff49" title="Add direct collocation equations as a set of equality constraints. " alt="" coords="453,181,629,223"/>
 <area shape="rect" id="node3" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="703,152,864,193"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#a046b39ee460cbbed805625de353683a5" title="Add system dynamics equations as a set of equality constraints. " alt="" coords="455,299,626,340"/>
-<area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="207,357,397,399"/>
-<area shape="rect" id="node8" href="class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="225,123,379,164"/>
+<area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#ad077eec573db089f54094c202d16f5b5" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="207,357,397,399"/>
+<area shape="rect" id="node8" href="class_trajectory_optimization.html#a3d6f5c021fc3fd11274980f92a1f933f" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="225,123,379,164"/>
 <area shape="rect" id="node9" href="class_trajectory_optimization.html#a78d6f58de4431b0ef40b5d8ea14e7498" title="Adds time as the NLP decision variables to the problem. " alt="" coords="464,64,617,105"/>
 <area shape="rect" id="node10" href="class_trajectory_optimization.html#accfe5d3192cdcef8e88142a920336325" title="Adds parameters as the NLP decision variables to the problem. " alt="" coords="225,5,379,47"/>
 <area shape="rect" id="node6" href="class_hybrid_trajectory_optimization.html#ab24a8ba344e2e3aae6347a668fc906e6" title="configure the trajectory optimizatino NLP problem " alt="" coords="445,416,636,457"/>
-<area shape="rect" id="node7" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="684,387,883,428"/>
+<area shape="rect" id="node7" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="684,387,883,428"/>
 </map>
 </div>
 </p>
@@ -805,7 +819,7 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a4018005f6dc749351b0a33fdc57920c9"></a>
+<a class="anchor" id="a3d6f5c021fc3fd11274980f92a1f933f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -824,7 +838,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
           <td class="paramname"><em>nodes</em>, </td>
         </tr>
         <tr>
@@ -868,11 +882,11 @@ This method can be used to add any terminal constraint by specify 'nodes' as eit
   <table class="params">
     <tr><td class="paramname">func</td><td>a symbolic function of the constraint </td></tr>
     <tr><td class="paramname">deps</td><td>a list of dependent variables </td></tr>
+    <tr><td class="paramname">nodes</td><td>an indicator of <code>first</code> or <code>last</code> node </td></tr>
     <tr><td class="paramname">lb</td><td>the lower bound of the constraints </td></tr>
     <tr><td class="paramname">ub</td><td>the upper bound of the constraints </td></tr>
     <tr><td class="paramname">type</td><td>the type of the constraints ('Linear' or 'Nonlinear') </td></tr>
     <tr><td class="paramname">auxdata</td><td>auxilary constant data to be feed in the function</td></tr>
-    <tr><td class="paramname">node</td><td>an indicator of <code>first</code> or <code>last</code> node</td></tr>
   </table>
   </dd>
 </dl>
@@ -887,8 +901,8 @@ This method can be used to add any terminal constraint by specify 'nodes' as eit
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_cgraph.png" border="0" usemap="#class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_cgraph" alt=""/></div>
-<map name="class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_cgraph" id="class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_cgraph">
+<div class="center"><img src="class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_cgraph.png" border="0" usemap="#class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_cgraph" alt=""/></div>
+<map name="class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_cgraph" id="class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_cgraph">
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="207,5,360,47"/>
 <area shape="rect" id="node3" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="408,42,475,69"/>
 </map>
@@ -898,8 +912,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_icgraph.png" border="0" usemap="#class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_icgraph" alt=""/></div>
-<map name="class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_icgraph" id="class_trajectory_optimization_a4018005f6dc749351b0a33fdc57920c9_icgraph">
+<div class="center"><img src="class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_icgraph.png" border="0" usemap="#class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_icgraph" alt=""/></div>
+<map name="class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_icgraph" id="class_trajectory_optimization_a3d6f5c021fc3fd11274980f92a1f933f_icgraph">
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#a78d6f58de4431b0ef40b5d8ea14e7498" title="Adds time as the NLP decision variables to the problem. " alt="" coords="207,5,360,47"/>
 <area shape="rect" id="node3" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="408,35,569,76"/>
 </map>
@@ -1163,33 +1177,6 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a31cfc9f8e1cfbb0719578709bc9e5e42"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">function obj = TrajectoryOptimization.addSystemConstraint </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Referenced by <a class="el" href="_trajectory_optimization_8m_source.html#l00141">TrajectoryOptimization()</a>.</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_trajectory_optimization_a31cfc9f8e1cfbb0719578709bc9e5e42_icgraph.png" border="0" usemap="#class_trajectory_optimization_a31cfc9f8e1cfbb0719578709bc9e5e42_icgraph" alt=""/></div>
-<map name="class_trajectory_optimization_a31cfc9f8e1cfbb0719578709bc9e5e42_icgraph" id="class_trajectory_optimization_a31cfc9f8e1cfbb0719578709bc9e5e42_icgraph">
-<area shape="rect" id="node2" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="209,5,371,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
 <a class="anchor" id="a78d6f58de4431b0ef40b5d8ea14e7498"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1225,7 +1212,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_trajectory_optimization_a78d6f58de4431b0ef40b5d8ea14e7498_cgraph.png" border="0" usemap="#class_trajectory_optimization_a78d6f58de4431b0ef40b5d8ea14e7498_cgraph" alt=""/></div>
 <map name="class_trajectory_optimization_a78d6f58de4431b0ef40b5d8ea14e7498_cgraph" id="class_trajectory_optimization_a78d6f58de4431b0ef40b5d8ea14e7498_cgraph">
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="408,5,561,47"/>
-<area shape="rect" id="node4" href="class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="207,64,360,105"/>
+<area shape="rect" id="node4" href="class_trajectory_optimization.html#a3d6f5c021fc3fd11274980f92a1f933f" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="207,64,360,105"/>
 <area shape="rect" id="node5" href="class_trajectory_optimization.html#a44f7e314d46776fb0652e43c2a706897" title="Adds NLP decision variables. " alt="" coords="408,123,561,164"/>
 <area shape="rect" id="node3" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="609,71,676,98"/>
 </map>
@@ -1472,6 +1459,144 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_trajectory_optimization_a0667471fc623321260961db4c900c612_icgraph.png" border="0" usemap="#class_trajectory_optimization_a0667471fc623321260961db4c900c612_icgraph" alt=""/></div>
 <map name="class_trajectory_optimization_a0667471fc623321260961db4c900c612_icgraph" id="class_trajectory_optimization_a0667471fc623321260961db4c900c612_icgraph">
+<area shape="rect" id="node2" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="207,5,368,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae9e9df4331fad718ff37fad935f7ad45"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function  TrajectoryOptimization.compileConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>constr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>exclude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile and export symbolic expression and derivatives of all NLP functions. </p>
+<dl class="section note"><dt>Note</dt><dd>If <code>constr</code> is emtpy, then it will compile all constraints.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constr</td><td>a list of constraints to be compiled </td></tr>
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">exclude</td><td>a list of functions to be excluded </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_trajectory_optimization.html#ae9e9df4331fad718ff37fad935f7ad45">compileConstraint</a> ( ..., StackVariable, ForceExport, BuildMex, Namespace ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_trajectory_optimization_2compile_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_trajectory_optimization_2compile_constraint_8m_source.html">compileConstraint.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_trajectory_optimization_8m_source.html#l00141">TrajectoryOptimization()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_trajectory_optimization_ae9e9df4331fad718ff37fad935f7ad45_icgraph.png" border="0" usemap="#class_trajectory_optimization_ae9e9df4331fad718ff37fad935f7ad45_icgraph" alt=""/></div>
+<map name="class_trajectory_optimization_ae9e9df4331fad718ff37fad935f7ad45_icgraph" id="class_trajectory_optimization_ae9e9df4331fad718ff37fad935f7ad45_icgraph">
+<area shape="rect" id="node2" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="207,5,368,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af28736482e6f06c65bea70fe43f7aea5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function  TrajectoryOptimization.compileObjective </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>cost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>exclude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile and export symbolic expression and derivatives of all NLP functions. </p>
+<dl class="section note"><dt>Note</dt><dd>If <code>cost</code> is emtpy, then it will compile all cost functions.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cost</td><td>the cost function to be compiled </td></tr>
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">exclude</td><td>a list of functions to be excluded </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_trajectory_optimization.html#af28736482e6f06c65bea70fe43f7aea5">compileObjective</a> ( ..., ForceExport, BuildMex ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_trajectory_optimization_2compile_objective_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_trajectory_optimization_2compile_objective_8m_source.html">compileObjective.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_trajectory_optimization_8m_source.html#l00141">TrajectoryOptimization()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_trajectory_optimization_af28736482e6f06c65bea70fe43f7aea5_icgraph.png" border="0" usemap="#class_trajectory_optimization_af28736482e6f06c65bea70fe43f7aea5_icgraph" alt=""/></div>
+<map name="class_trajectory_optimization_af28736482e6f06c65bea70fe43f7aea5_icgraph" id="class_trajectory_optimization_af28736482e6f06c65bea70fe43f7aea5_icgraph">
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="207,5,368,47"/>
 </map>
 </div>
@@ -1861,16 +1986,18 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_trajectory_optimization_a36dfddcedc7d4ad9f263f85eb18374cd_cgraph.png" border="0" usemap="#class_trajectory_optimization_a36dfddcedc7d4ad9f263f85eb18374cd_cgraph" alt=""/></div>
 <map name="class_trajectory_optimization_a36dfddcedc7d4ad9f263f85eb18374cd_cgraph" id="class_trajectory_optimization_a36dfddcedc7d4ad9f263f85eb18374cd_cgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="207,177,396,218"/>
-<area shape="rect" id="node5" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="444,5,656,32"/>
-<area shape="rect" id="node6" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="447,275,653,301"/>
-<area shape="rect" id="node7" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="451,325,649,352"/>
-<area shape="rect" id="node3" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="459,107,641,149"/>
-<area shape="rect" id="node4" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="453,173,647,200"/>
-<area shape="rect" id="node8" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="455,224,645,251"/>
-<area shape="rect" id="node11" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="463,56,637,83"/>
-<area shape="rect" id="node9" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="704,224,808,251"/>
-<area shape="rect" id="node10" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="856,224,923,251"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="207,257,396,298"/>
+<area shape="rect" id="node7" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="444,355,656,381"/>
+<area shape="rect" id="node8" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="447,405,653,432"/>
+<area shape="rect" id="node9" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094" title="This method registers the information of an optimization variable. " alt="" coords="451,456,649,483"/>
+<area shape="rect" id="node3" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="461,158,639,199"/>
+<area shape="rect" id="node4" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="461,223,639,265"/>
+<area shape="rect" id="node5" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="459,289,641,330"/>
+<area shape="rect" id="node6" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="453,5,647,32"/>
+<area shape="rect" id="node10" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="455,56,645,83"/>
+<area shape="rect" id="node13" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="463,107,637,133"/>
+<area shape="rect" id="node11" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="704,56,808,83"/>
+<area shape="rect" id="node12" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="856,56,923,83"/>
 </map>
 </div>
 </p>
@@ -2247,6 +2374,8 @@ Here is the caller graph for this function:</div>
 <li>nlp/@TrajectoryOptimization/<a class="el" href="_0D_trajectory_optimization_2check_constraints_8m_source.html">checkConstraints.m</a></li>
 <li>nlp/@TrajectoryOptimization/<a class="el" href="_0D_trajectory_optimization_2check_costs_8m_source.html">checkCosts.m</a></li>
 <li>nlp/@TrajectoryOptimization/<a class="el" href="_0D_trajectory_optimization_2check_variables_8m_source.html">checkVariables.m</a></li>
+<li>nlp/@TrajectoryOptimization/<a class="el" href="_0D_trajectory_optimization_2compile_constraint_8m_source.html">compileConstraint.m</a></li>
+<li>nlp/@TrajectoryOptimization/<a class="el" href="_0D_trajectory_optimization_2compile_objective_8m_source.html">compileObjective.m</a></li>
 <li>nlp/@TrajectoryOptimization/<a class="el" href="nlp_2_0D_trajectory_optimization_2configure_8m_source.html">configure.m</a></li>
 <li>nlp/@TrajectoryOptimization/<a class="el" href="configure_variables_8m_source.html">configureVariables.m</a></li>
 <li>nlp/@TrajectoryOptimization/<a class="el" href="direct_collocation_8m_source.html">directCollocation.m</a></li>
@@ -2274,7 +2403,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

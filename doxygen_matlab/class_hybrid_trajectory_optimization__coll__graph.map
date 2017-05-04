@@ -1,20 +1,21 @@
 <map id="HybridTrajectoryOptimization" name="HybridTrajectoryOptimization">
-<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="367,572,494,599"/>
-<area shape="rect" id="node16" href="$class_trajectory_optimization.html" title="TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimi..." alt="" coords="530,691,683,717"/>
-<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="554,5,614,32"/>
-<area shape="rect" id="node4" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="401,468,493,495"/>
-<area shape="rect" id="node11" href="$class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="589,109,704,136"/>
-<area shape="rect" id="node14" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="247,355,337,382"/>
-<area shape="rect" id="node5" href="$classlogical.html" title="A boolean value. " alt="" coords="763,355,821,382"/>
-<area shape="rect" id="node6" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="361,355,404,382"/>
-<area shape="rect" id="node7" href="$classcolvec.html" title="A matlab column vector. " alt="" coords="141,199,201,225"/>
-<area shape="rect" id="node8" href="$classstruct.html" title="A MatLab struct. " alt="" coords="842,199,897,225"/>
-<area shape="rect" id="node10" href="$class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="640,355,739,382"/>
-<area shape="rect" id="node9" href="$classchar.html" title="A MatLab character array. " alt="" coords="265,5,311,32"/>
-<area shape="rect" id="node12" href="$class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="684,199,780,225"/>
-<area shape="rect" id="node13" href="$classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="729,109,786,136"/>
-<area shape="rect" id="node15" href="$classinteger.html" title="An integer value. " alt="" coords="403,199,464,225"/>
-<area shape="rect" id="node17" href="$classdouble.html" title="A double value. " alt="" coords="518,572,578,599"/>
-<area shape="rect" id="node18" href="$classtable.html" title="A MatLab table. " alt="" coords="636,572,687,599"/>
-<area shape="rect" id="node19" href="$class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="711,572,841,599"/>
+<area shape="rect" id="node2" href="$class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="218,689,345,716"/>
+<area shape="rect" id="node16" href="$class_trajectory_optimization.html" title="TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimi..." alt="" coords="289,808,442,835"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="199,5,259,32"/>
+<area shape="rect" id="node4" href="$class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="377,585,469,612"/>
+<area shape="rect" id="node11" href="$class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="544,109,659,136"/>
+<area shape="rect" id="node14" href="$class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="145,473,234,499"/>
+<area shape="rect" id="node19" href="$class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="1213,473,1342,499"/>
+<area shape="rect" id="node5" href="$classlogical.html" title="A boolean value. " alt="" coords="701,473,760,499"/>
+<area shape="rect" id="node6" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="259,473,301,499"/>
+<area shape="rect" id="node7" href="$classcolvec.html" title="A matlab column vector. " alt="" coords="365,213,425,240"/>
+<area shape="rect" id="node8" href="$classstruct.html" title="A MatLab struct. " alt="" coords="862,213,917,240"/>
+<area shape="rect" id="node10" href="$class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="579,473,677,499"/>
+<area shape="rect" id="node9" href="$classchar.html" title="A MatLab character array. " alt="" coords="753,5,799,32"/>
+<area shape="rect" id="node12" href="$class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="495,213,591,240"/>
+<area shape="rect" id="node13" href="$classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="462,109,519,136"/>
+<area shape="rect" id="node15" href="$classinteger.html" title="An integer value. " alt="" coords="112,213,173,240"/>
+<area shape="rect" id="node17" href="$classdouble.html" title="A double value. " alt="" coords="1131,213,1191,240"/>
+<area shape="rect" id="node18" href="$classtable.html" title="A MatLab table. " alt="" coords="369,689,420,716"/>
+<area shape="rect" id="node21" href="$classfunction__handle.html" title="A MatLab function handle. " alt="" coords="1417,213,1530,240"/>
 </map>

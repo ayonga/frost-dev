@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name',['Name',['../class_controller.html#a3476e78eae56965e347f0ffd4f2465c4',1,'Controller::Name()'],['../class_nlp_function.html#a47d4c2d101d678316ff60268bacb876f',1,'NlpFunction::Name()'],['../class_nlp_variable.html#ae52fce14d4fd9b51063b94444c193025',1,'NlpVariable::Name()'],['../class_nonlinear_program.html#aa2d7852939ee6661d06ac4b6d3487cfc',1,'NonlinearProgram::Name()'],['../class_coordinate_frame.html#a98e6f969fce5a5bcab1e2846e73a9d8e',1,'CoordinateFrame::Name()'],['../class_sym_function.html#a842e064ae0c7151df657651467ea6917',1,'SymFunction::Name()'],['../class_holonomic_constraint.html#af619553c61aec2686ab9d0e4afeb3ab6',1,'HolonomicConstraint::Name()'],['../class_hybrid_system.html#a5a4d0a5ce1d129d514e7f9ad0f888775',1,'HybridSystem::Name()'],['../class_unilateral_constraint.html#a0c6c6eaae45e04c57b54241f0d0ea995',1,'UnilateralConstraint::Name()'],['../class_virtual_constraint.html#aa7de8f687fe3d03642a41cc79da7a2bf',1,'VirtualConstraint::Name()']]],
+  ['name',['Name',['../class_controller.html#a3476e78eae56965e347f0ffd4f2465c4',1,'Controller::Name()'],['../class_nlp_function.html#a47d4c2d101d678316ff60268bacb876f',1,'NlpFunction::Name()'],['../class_nlp_variable.html#ae52fce14d4fd9b51063b94444c193025',1,'NlpVariable::Name()'],['../class_nonlinear_program.html#aa2d7852939ee6661d06ac4b6d3487cfc',1,'NonlinearProgram::Name()'],['../class_coordinate_frame.html#a98e6f969fce5a5bcab1e2846e73a9d8e',1,'CoordinateFrame::Name()'],['../class_sym_function.html#a842e064ae0c7151df657651467ea6917',1,'SymFunction::Name()'],['../class_dynamical_system.html#adc61a10791020cef1e8b6640fbd4e220',1,'DynamicalSystem::Name()'],['../class_holonomic_constraint.html#af619553c61aec2686ab9d0e4afeb3ab6',1,'HolonomicConstraint::Name()'],['../class_hybrid_system.html#a5a4d0a5ce1d129d514e7f9ad0f888775',1,'HybridSystem::Name()'],['../class_unilateral_constraint.html#a0c6c6eaae45e04c57b54241f0d0ea995',1,'UnilateralConstraint::Name()'],['../class_virtual_constraint.html#aa7de8f687fe3d03642a41cc79da7a2bf',1,'VirtualConstraint::Name()']]],
   ['ne',['ne',['../class_sym_expression.html#a69de24289469ed3393c269b60f1f631b',1,'SymExpression']]],
   ['new_20features_20in_20frost_20version_201_2e0',['New features in FROST Version 1.0',['../newfeat1_0.html',1,'']]],
   ['new_20features_20in_20frost_20version_202_2e0',['New features in FROST Version 2.0',['../newfeat2_0.html',1,'']]],
@@ -25,5 +25,6 @@ var searchData=
   ['num2mathstr_2em',['num2mathstr.m',['../num2mathstr_8m.html',1,'']]],
   ['numel_2em',['numel.m',['../numel_8m.html',1,'']]],
   ['numnode',['NumNode',['../class_trajectory_optimization.html#a71727bec3376dcc78bd51b8560ebb250',1,'TrajectoryOptimization']]],
+  ['numstate',['numState',['../class_dynamical_system.html#a5bd6eb3599c404320bc2e8a9ebcd7ae6',1,'DynamicalSystem']]],
   ['nzind_2em',['nzind.m',['../nzind_8m.html',1,'']]]
 ];

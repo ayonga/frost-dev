@@ -6,5 +6,5 @@ var searchData=
   ['horzcat_5ffields',['horzcat_fields',['../horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0',1,'horzcat_fields.m']]],
   ['horzcat_5ffields_5fdomains',['horzcat_fields_domains',['../horzcat__fields__domains_8m.html#a930bb33692ce2bede234feed4cf71eba',1,'horzcat_fields_domains.m']]],
   ['hybridsystem',['HybridSystem',['../class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812',1,'HybridSystem']]],
-  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d',1,'HybridTrajectoryOptimization']]]
+  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663',1,'HybridTrajectoryOptimization']]]
 ];

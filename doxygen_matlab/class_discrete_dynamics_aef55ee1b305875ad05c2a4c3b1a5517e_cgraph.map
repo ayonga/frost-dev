@@ -1,3 +1,5 @@
 <map id="DiscreteDynamics::addState" name="DiscreteDynamics::addState">
-<area shape="rect" id="node2" href="$class_discrete_dynamics.html#a5753c076e46e5b14833ddcf8e5a209a9" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="244,5,425,47"/>
+<area shape="rect" id="node2" href="$class_discrete_dynamics.html#a04155a66907d971489e645b5e4c1ccd2" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="244,5,480,32"/>
+<area shape="rect" id="node3" href="$class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc" title="The class construction function. " alt="" coords="263,57,461,98"/>
+<area shape="rect" id="node4" href="$class_discrete_dynamics.html#a5753c076e46e5b14833ddcf8e5a209a9" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="271,122,453,163"/>
 </map>

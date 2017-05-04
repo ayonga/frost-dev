@@ -3,6 +3,8 @@ var searchData=
   ['validategraph',['validateGraph',['../class_hybrid_trajectory_optimization.html#adb58e04362bdeb6fbcf7ccd7abe39446',1,'HybridTrajectoryOptimization']]],
   ['validategraph_2em',['validateGraph.m',['../validate_graph_8m.html',1,'']]],
   ['validatename',['validateName',['../class_holonomic_constraint.html#aea1398b2b9adc99fc2ad468378c51e8b',1,'HolonomicConstraint::validateName()'],['../class_unilateral_constraint.html#a3ddea000c580fba39d8673fabeb4db3b',1,'UnilateralConstraint::validateName()'],['../class_virtual_constraint.html#a5ae4c92b04f21694e287a5491467bdcf',1,'VirtualConstraint::validateName()']]],
+  ['validatesystemtype',['validateSystemType',['../class_dynamical_system.html#abb5acd29436293588d02136412c3149c',1,'DynamicalSystem']]],
+  ['validatevarname',['validateVarName',['../class_dynamical_system.html#a48eaf6ea3ab14462c1a7cfa03206d3af',1,'DynamicalSystem']]],
   ['varargin',['varargin',['../classvarargin.html',1,'']]],
   ['varargout',['varargout',['../classvarargout.html',1,'']]],
   ['variablearray',['VariableArray',['../class_nonlinear_program.html#abb7d60573c5a0a829d86880156fc4e37',1,'NonlinearProgram']]],
@@ -16,6 +18,7 @@ var searchData=
   ['vertexproperties',['VertexProperties',['../class_hybrid_system.html#a056365fa500f70c3f4454d4a84973e6a',1,'HybridSystem']]],
   ['virtualconstraint',['VirtualConstraint',['../class_virtual_constraint.html',1,'VirtualConstraint'],['../class_virtual_constraint.html#a1dc73a6977696a159d304490b3721b0a',1,'VirtualConstraint::VirtualConstraint()']]],
   ['virtualconstraint_2em',['VirtualConstraint.m',['../_virtual_constraint_8m.html',1,'']]],
+  ['virtualconstraints',['VirtualConstraints',['../class_continuous_dynamics.html#a2a159690101a5448de27b4baa75bd60e',1,'ContinuousDynamics']]],
   ['vline',['vline',['../vline_8m.html#a63eb265cf12d9b3de0486145d7fe1c03',1,'vline.m']]],
   ['vline_2em',['vline.m',['../vline_8m.html',1,'']]]
 ];

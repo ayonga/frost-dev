@@ -1,3 +1,5 @@
 <map id="HybridTrajectoryOptimization::getPhaseIndex" name="HybridTrajectoryOptimization::getPhaseIndex">
-<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#a4f774114c4dff3e952b3b86af64b1a38" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="244,5,435,47"/>
+<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="483,64,681,105"/>
+<area shape="rect" id="node4" href="$class_hybrid_trajectory_optimization.html#ae95f2935832754f5fa98b1e0eddad79b" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="244,123,435,164"/>
 </map>

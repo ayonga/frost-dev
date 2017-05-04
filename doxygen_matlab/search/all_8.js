@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['identitymapconstraint',['IdentityMapConstraint',['../class_discrete_dynamics.html#a5753c076e46e5b14833ddcf8e5a209a9',1,'DiscreteDynamics']]],
+  ['identitymapconstraint',['IdentityMapConstraint',['../class_discrete_dynamics.html#ad3e456b72bca23bae715d212f1cf920a',1,'DiscreteDynamics']]],
   ['identitymapconstraint_2em',['IdentityMapConstraint.m',['../_identity_map_constraint_8m.html',1,'']]],
   ['impactconstraints',['ImpactConstraints',['../class_rigid_impact.html#aa0ebc04ff82ed12bcc7bb2175abf5a1a',1,'RigidImpact']]],
   ['implode',['implode',['../implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64',1,'implode.m']]],
@@ -19,6 +19,8 @@ var searchData=
   ['input',['Input',['../class_holonomic_constraint.html#a897109082f6b76351efaf2159a4a922b',1,'HolonomicConstraint']]],
   ['inputdependent',['InputDependent',['../class_unilateral_constraint.html#a344aae05a23e149f2de54bd643fa391f',1,'UnilateralConstraint']]],
   ['inputname',['InputName',['../class_holonomic_constraint.html#af74e7ca1aa9d3c3809adda7fb618e196',1,'HolonomicConstraint']]],
+  ['inputs',['Inputs',['../class_dynamical_system.html#a5f85366dc922b01cba937c637f974f93',1,'DynamicalSystem']]],
+  ['inputs_5f',['inputs_',['../class_dynamical_system.html#ade263c814bb20851e716abd686795174',1,'DynamicalSystem']]],
   ['integer',['integer',['../classinteger.html',1,'']]],
   ['integration_5fcheck',['integration_check',['../integration__check_8m.html#afda1b49f668a3be88bb7acc9f8deca83',1,'integration_check.m']]],
   ['integration_5fcheck_2em',['integration_check.m',['../integration__check_8m.html',1,'']]],
@@ -27,7 +29,7 @@ var searchData=
   ['inv',['inv',['../class_sym_expression.html#ae242e32eeabecc849fccf026439d6fa7',1,'SymExpression']]],
   ['iofeedback',['IOFeedback',['../class_i_o_feedback.html',1,'IOFeedback'],['../class_i_o_feedback.html#a21b5aad87bad7dbce1b714f904f53ed9',1,'IOFeedback::IOFeedback()']]],
   ['iofeedback_2em',['IOFeedback.m',['../_i_o_feedback_8m.html',1,'']]],
-  ['ipoptapplication',['IpoptApplication',['../class_ipopt_application.html',1,'IpoptApplication'],['../class_ipopt_application.html#aa7d393893452826d96862060d53176b1',1,'IpoptApplication::IpoptApplication()']]],
+  ['ipoptapplication',['IpoptApplication',['../class_ipopt_application.html',1,'IpoptApplication'],['../class_ipopt_application.html#a7fab0b8eaae47c494b97edc7cff5ed3a',1,'IpoptApplication::IpoptApplication()']]],
   ['ipoptapplication_2em',['IpoptApplication.m',['../_ipopt_application_8m.html',1,'']]],
   ['isdirectedcycle',['isDirectedCycle',['../class_hybrid_system.html#ab6209d10fd6000619ad8253456c7d4da',1,'HybridSystem']]],
   ['isempty_2em',['isempty.m',['../isempty_8m.html',1,'']]],

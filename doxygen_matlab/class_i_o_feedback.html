@@ -158,9 +158,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7be0fd2df6fbade6cfe91260360525f"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_feedback.html#ac7be0fd2df6fbade6cfe91260360525f">setParam</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:ac7be0fd2df6fbade6cfe91260360525f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the controller parameters.  <a href="#ac7be0fd2df6fbade6cfe91260360525f">More...</a><br /></td></tr>
 <tr class="separator:ac7be0fd2df6fbade6cfe91260360525f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a5b8f9659a26adc633ce838b60adcb6"><td class="memItemLeft" align="right" valign="top">function [   u ,   extra  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_feedback.html#a0a5b8f9659a26adc633ce838b60adcb6">calcControl</a> (<a class="el" href="classdouble.html">double</a> t, qe, dqe,<a class="el" href="classcolvec.html">colvec</a> vfc,<a class="el" href="classcolvec.html">colvec</a> gfc,Domain domain)</td></tr>
-<tr class="memdesc:a0a5b8f9659a26adc633ce838b60adcb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the classical input-output feedback linearization control law for virtual constraints.  <a href="#a0a5b8f9659a26adc633ce838b60adcb6">More...</a><br /></td></tr>
-<tr class="separator:a0a5b8f9659a26adc633ce838b60adcb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde066035c7d73c506cd7d9fcc5ea7b1"><td class="memItemLeft" align="right" valign="top">function [   u ,   extra  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_o_feedback.html#abde066035c7d73c506cd7d9fcc5ea7b1">calcControl</a> (<a class="el" href="classdouble.html">double</a> t,<a class="el" href="classcolvec.html">colvec</a> x,<a class="el" href="classcolvec.html">colvec</a> vfc,<a class="el" href="classcolvec.html">colvec</a> gfc,Domain domain,<a class="el" href="classstruct.html">struct</a> params)</td></tr>
+<tr class="memdesc:abde066035c7d73c506cd7d9fcc5ea7b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the classical input-output feedback linearization control law for virtual constraints.  <a href="#abde066035c7d73c506cd7d9fcc5ea7b1">More...</a><br /></td></tr>
+<tr class="separator:abde066035c7d73c506cd7d9fcc5ea7b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_controller"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_controller')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_controller.html">Controller</a></td></tr>
 <tr class="memitem:a0ab27e3e99d55ac7f903f50e615e9427 inherit pub_methods_class_controller"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427">Controller</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
 <tr class="memdesc:a0ab27e3e99d55ac7f903f50e615e9427 inherit pub_methods_class_controller"><td class="mdescLeft">&#160;</td><td class="mdescRight">The controller class constructor function.  <a href="#a0ab27e3e99d55ac7f903f50e615e9427">More...</a><br /></td></tr>
@@ -236,7 +236,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_i_o_feedback_a21b5aad87bad7dbce1b714f904f53ed9_cgraph.png" border="0" usemap="#class_i_o_feedback_a21b5aad87bad7dbce1b714f904f53ed9_cgraph" alt=""/></div>
 <map name="class_i_o_feedback_a21b5aad87bad7dbce1b714f904f53ed9_cgraph" id="class_i_o_feedback_a21b5aad87bad7dbce1b714f904f53ed9_cgraph">
-<area shape="rect" id="node2" href="class_i_o_feedback.html#a0a5b8f9659a26adc633ce838b60adcb6" title="Computes the classical input&#45;output feedback linearization control law for virtual constraints..." alt="" coords="225,5,392,32"/>
+<area shape="rect" id="node2" href="class_i_o_feedback.html#abde066035c7d73c506cd7d9fcc5ea7b1" title="Computes the classical input&#45;output feedback linearization control law for virtual constraints..." alt="" coords="225,5,392,32"/>
 <area shape="rect" id="node3" href="class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427" title="The controller class constructor function. " alt="" coords="237,56,380,83"/>
 <area shape="rect" id="node6" href="class_i_o_feedback.html#ac7be0fd2df6fbade6cfe91260360525f" title="Sets the controller parameters. " alt="" coords="230,107,387,133"/>
 <area shape="rect" id="node4" href="class_controller.html#ae856efa40de7c6ed98b5af7842fc182b" title="Controller.calcControl" alt="" coords="440,31,592,57"/>
@@ -248,7 +248,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a0a5b8f9659a26adc633ce838b60adcb6"></a>
+<a class="anchor" id="abde066035c7d73c506cd7d9fcc5ea7b1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -261,14 +261,8 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>qe</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>dqe</em>, </td>
+          <td class="paramtype"><a class="el" href="classcolvec.html">colvec</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -286,7 +280,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Domain&#160;</td>
-          <td class="paramname"><em>domain</em>&#160;</td>
+          <td class="paramname"><em>domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
+          <td class="paramname"><em>params</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -325,8 +325,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_i_o_feedback_a0a5b8f9659a26adc633ce838b60adcb6_icgraph.png" border="0" usemap="#class_i_o_feedback_a0a5b8f9659a26adc633ce838b60adcb6_icgraph" alt=""/></div>
-<map name="class_i_o_feedback_a0a5b8f9659a26adc633ce838b60adcb6_icgraph" id="class_i_o_feedback_a0a5b8f9659a26adc633ce838b60adcb6_icgraph">
+<div class="center"><img src="class_i_o_feedback_abde066035c7d73c506cd7d9fcc5ea7b1_icgraph.png" border="0" usemap="#class_i_o_feedback_abde066035c7d73c506cd7d9fcc5ea7b1_icgraph" alt=""/></div>
+<map name="class_i_o_feedback_abde066035c7d73c506cd7d9fcc5ea7b1_icgraph" id="class_i_o_feedback_abde066035c7d73c506cd7d9fcc5ea7b1_icgraph">
 <area shape="rect" id="node2" href="class_i_o_feedback.html#a21b5aad87bad7dbce1b714f904f53ed9" title="The controller class constructor function. " alt="" coords="220,5,392,32"/>
 </map>
 </div>
@@ -410,7 +410,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

@@ -1,0 +1,6 @@
+<map id="ContinuousDynamics::calcDynamics" name="ContinuousDynamics::calcDynamics">
+<area shape="rect" id="node2" href="$class_continuous_dynamics.html#a6ca9313352a1dc5dc1d1722e5bb2b900" title="calculate the dynamical equation of the first order dynamical system " alt="" coords="208,5,355,47"/>
+<area shape="rect" id="node5" href="$class_continuous_dynamics.html#afc8d20ecc7aa240e2ac96542e15a1eec" title="calculate the dynamical equation of the second order dynamical system " alt="" coords="200,71,363,112"/>
+<area shape="rect" id="node3" href="$class_continuous_dynamics.html#aa5321379a982e627d57e53c0a0c8e812" title="calculates the mass matrix Mmat(x) " alt="" coords="411,5,557,47"/>
+<area shape="rect" id="node4" href="$class_continuous_dynamics.html#ae5b5e507c832801f55ecf6d37c4b8c12" title="calculates the mass matrix Fvec(x) or Fvec(x,dx) " alt="" coords="411,71,557,112"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="HybridTrajectoryOptimization::configure" name="HybridTrajectoryOptimization::configure">
-<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="244,35,435,76"/>
+<area shape="rect" id="node2" href="$class_hybrid_trajectory_optimization.html#ad077eec573db089f54094c202d16f5b5" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="244,35,435,76"/>
 <area shape="rect" id="node3" href="$class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="483,5,636,47"/>
 <area shape="rect" id="node5" href="$str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="522,71,597,98"/>
 <area shape="rect" id="node4" href="$implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="684,13,751,39"/>

@@ -173,7 +173,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
 <li>calcActual()
-: <a class="el" href="class_virtual_constraint.html#a74a57f5bffaf8d92dbfed87a7b36f598">VirtualConstraint</a>
+: <a class="el" href="class_virtual_constraint.html#a391b1a7c4fd488b8d27dc3e41634033e">VirtualConstraint</a>
 </li>
 <li>calcConstraint()
 : <a class="el" href="class_holonomic_constraint.html#a248466644f6bdd63de118092dd4e48c9">HolonomicConstraint</a>
@@ -182,21 +182,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>calcControl()
 : <a class="el" href="class_c_l_f_q_p.html#a9469b9511dacdc3aa0749018a58e98c0">CLFQP</a>
 , <a class="el" href="class_controller.html#ae856efa40de7c6ed98b5af7842fc182b">Controller</a>
-, <a class="el" href="class_i_o_feedback.html#a0a5b8f9659a26adc633ce838b60adcb6">IOFeedback</a>
+, <a class="el" href="class_i_o_feedback.html#abde066035c7d73c506cd7d9fcc5ea7b1">IOFeedback</a>
 , <a class="el" href="class_joint_p_d.html#aca1c8eba15fc3d26903ca62e2780809e">JointPD</a>
 , <a class="el" href="class_output_p_d.html#a9623592acf5740bdba15f1882f6f9089">OutputPD</a>
 </li>
 <li>calcDesired()
-: <a class="el" href="class_virtual_constraint.html#ad8b39251233fa5ba325ffde3f97d0a77">VirtualConstraint</a>
+: <a class="el" href="class_virtual_constraint.html#a2913971f86236dc7b2b88d6ae5470f08">VirtualConstraint</a>
 </li>
 <li>calcDiscreteMap()
-: <a class="el" href="class_rigid_impact.html#a966f64617151bf54603065e191eb613a">RigidImpact</a>
+: <a class="el" href="class_discrete_dynamics.html#a2a7d4016cdcef3e23d17814f34235597">DiscreteDynamics</a>
+, <a class="el" href="class_rigid_impact.html#ad1089205f9ab947d30e80c7d5221967d">RigidImpact</a>
+</li>
+<li>calcDriftVector()
+: <a class="el" href="class_continuous_dynamics.html#ae5b5e507c832801f55ecf6d37c4b8c12">ContinuousDynamics</a>
+</li>
+<li>calcDynamics()
+: <a class="el" href="class_continuous_dynamics.html#a03b08d526af5bed25b9eaef975fabfcd">ContinuousDynamics</a>
 </li>
 <li>calcJacobian()
 : <a class="el" href="class_holonomic_constraint.html#a224fb9bc13a2e51705cca385761b650c">HolonomicConstraint</a>
 </li>
+<li>calcMassMatrix()
+: <a class="el" href="class_continuous_dynamics.html#aa5321379a982e627d57e53c0a0c8e812">ContinuousDynamics</a>
+</li>
 <li>calcPhaseVariable()
-: <a class="el" href="class_virtual_constraint.html#ac3fda73b4b705ad961bf60aa4c5e3171">VirtualConstraint</a>
+: <a class="el" href="class_virtual_constraint.html#a4a3ada2a66ad2e034a41e5c75a5d5e0f">VirtualConstraint</a>
 </li>
 <li>char()
 : <a class="el" href="class_sym_expression.html#a5e377c717e9d6ea0d05b749b440efa08">SymExpression</a>
@@ -212,12 +222,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>checkFuncs()
 : <a class="el" href="class_nlp_function.html#a14392a5040e9f616d0b14d70cd86532d">NlpFunction</a>
 </li>
+<li>checkGuard()
+: <a class="el" href="class_continuous_dynamics.html#a37641d1e24d081f8abfa48edb7178009">ContinuousDynamics</a>
+</li>
 <li>checkVariables()
 : <a class="el" href="class_hybrid_trajectory_optimization.html#a1d62fd5e8df3a22a67f7339e8b8d3122">HybridTrajectoryOptimization</a>
 , <a class="el" href="class_trajectory_optimization.html#a0667471fc623321260961db4c900c612">TrajectoryOptimization</a>
 </li>
 <li>CLFQP()
 : <a class="el" href="class_c_l_f_q_p.html#acaf74de7d601d1a15685cd8ba406326a">CLFQP</a>
+</li>
+<li>compile()
+: <a class="el" href="class_continuous_dynamics.html#ac389e7676e01a69551e4781c347f5545">ContinuousDynamics</a>
+, <a class="el" href="class_dynamical_system.html#a41c2c076844b61cbd10f1796ef5b2c20">DynamicalSystem</a>
+, <a class="el" href="class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5">RigidImpact</a>
+</li>
+<li>compileConstraint()
+: <a class="el" href="class_hybrid_trajectory_optimization.html#a4f774114c4dff3e952b3b86af64b1a38">HybridTrajectoryOptimization</a>
+, <a class="el" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27">NonlinearProgram</a>
+, <a class="el" href="class_trajectory_optimization.html#ae9e9df4331fad718ff37fad935f7ad45">TrajectoryOptimization</a>
+</li>
+<li>compileObjective()
+: <a class="el" href="class_hybrid_trajectory_optimization.html#ae95f2935832754f5fa98b1e0eddad79b">HybridTrajectoryOptimization</a>
+, <a class="el" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552">NonlinearProgram</a>
+, <a class="el" href="class_trajectory_optimization.html#af28736482e6f06c65bea70fe43f7aea5">TrajectoryOptimization</a>
 </li>
 <li>computeBodyJacobian()
 : <a class="el" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130">CoordinateFrame</a>
@@ -258,7 +286,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>ContactFrame()
 : <a class="el" href="class_contact_frame.html#a22be9ad69e945ed20a4b324d2b1c1003">ContactFrame</a>
-, <a class="el" href="class_coordinate_frame.html#a8505a69ac2e8b9ed1b62e76971534301">CoordinateFrame</a>
+</li>
+<li>ContinuousDynamics()
+: <a class="el" href="class_continuous_dynamics.html#af9e99f30ba6a82407044abbb050b5926">ContinuousDynamics</a>
 </li>
 <li>Controller()
 : <a class="el" href="class_controller.html#a0ab27e3e99d55ac7f903f50e615e9427">Controller</a>
@@ -285,7 +315,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

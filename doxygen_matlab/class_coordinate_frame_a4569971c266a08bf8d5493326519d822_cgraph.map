@@ -1,0 +1,7 @@
+<map id="CoordinateFrame::ToContactFrame" name="CoordinateFrame::ToContactFrame">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#a0bacb229b03736fa6367fa25d1f7c2b8" title="computes the homogeneous transformation matrix from the world coordinates " alt="" coords="500,20,680,61"/>
+<area shape="rect" id="node4" href="$class_coordinate_frame.html#af3e954ae2c9810cc5f8949716a42778e" title="set the offset of the origin of the frame from the reference frame origin (in the reference frame) ..." alt="" coords="256,27,440,54"/>
+<area shape="rect" id="node5" href="$class_coordinate_frame.html#a21b221d818a5142fefbbc961d4ad4964" title="set the reference frame " alt="" coords="244,78,452,104"/>
+<area shape="rect" id="node6" href="$class_coordinate_frame.html#a6e855b73babdee69e4ddd30b8b5acd03" title="set the rotation matrix (R) of the frame w.r.t to the reference frame " alt="" coords="249,129,447,170"/>
+<area shape="rect" id="node3" href="$class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="728,27,976,54"/>
+</map>

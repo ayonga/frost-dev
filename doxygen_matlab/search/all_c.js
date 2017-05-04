@@ -16,6 +16,8 @@ var searchData=
   ['min_5fjerk_2em',['min_jerk.m',['../min__jerk_8m.html',1,'']]],
   ['minus',['minus',['../class_sym_expression.html#af1b6587fb5968064777106a5841853d6',1,'SymExpression']]],
   ['mldivide',['mldivide',['../class_sym_expression.html#a2ea6d7dcec5e611c508121053f5cac63',1,'SymExpression']]],
+  ['mmat',['Mmat',['../class_continuous_dynamics.html#af4ccc79d44ed84450075e3759928d637',1,'ContinuousDynamics']]],
+  ['mmatdx',['MmatDx',['../class_continuous_dynamics.html#adacb47f952f8f4ff56febc4b3aee3049',1,'ContinuousDynamics']]],
   ['model',['Model',['../class_holonomic_constraint.html#a697d7b991179bfc1817aeff9d85657e7',1,'HolonomicConstraint::Model()'],['../class_virtual_constraint.html#afe77e169d31659fbe64ca2ca0b5ee841',1,'VirtualConstraint::Model()']]],
   ['mpower',['mpower',['../class_sym_expression.html#a62ea1580691bbffe7d56c7feb300bfd3',1,'SymExpression']]],
   ['mrdivide',['mrdivide',['../class_sym_expression.html#aebfa0fcd39deb62b6afe1cfd3b210c55',1,'SymExpression']]],

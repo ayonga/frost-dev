@@ -1,0 +1,11 @@
+<map id="DynamicalSystem::DynamicalSystem" name="DynamicalSystem::DynamicalSystem">
+<area shape="rect" id="node2" href="$class_discrete_dynamics.html#a4a77ec98fb20b6df0d15fe864c22628f" title="overload the superclass addState method with fixed state fields " alt="" coords="252,5,443,32"/>
+<area shape="rect" id="node4" href="$class_continuous_dynamics.html#aff10703c67780c0db8ed9e3ec7efce86" title="overload the superclass addState method with fixed state fields " alt="" coords="274,57,421,98"/>
+<area shape="rect" id="node5" href="$class_continuous_dynamics.html#ac389e7676e01a69551e4781c347f5545" title="export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files..." alt="" coords="274,122,421,163"/>
+<area shape="rect" id="node6" href="$class_continuous_dynamics.html#af9e99f30ba6a82407044abbb050b5926" title="The class construction function. " alt="" coords="270,253,425,294"/>
+<area shape="rect" id="node8" href="$class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="254,187,441,229"/>
+<area shape="rect" id="node3" href="$class_rigid_impact.html#ad034a57a960665c8aab6f70c46d9240a" title="the class constructin method " alt="" coords="491,75,661,101"/>
+<area shape="rect" id="node7" href="$class_robot_links.html#ab6e6ed4eadf6eda2ae3aa23a913ee4c7" title="The class constructor function. " alt="" coords="495,260,657,287"/>
+<area shape="rect" id="node9" href="$class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5" title="export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files..." alt="" coords="503,195,649,221"/>
+<area shape="rect" id="node10" href="$class_rigid_impact.html#aa5864d9954d6b2bd598d9e60b39ec0f6" title="Remove impact (holonomic) constraints defined for the system. " alt="" coords="709,187,892,229"/>
+</map>

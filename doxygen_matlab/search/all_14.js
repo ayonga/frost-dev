@@ -3,6 +3,7 @@ var searchData=
   ['uminus',['uminus',['../class_sym_expression.html#acc02d69d3dd8d8edc0c83f9dc6429f50',1,'SymExpression']]],
   ['unilateralconstraint',['UnilateralConstraint',['../class_unilateral_constraint.html',1,'UnilateralConstraint'],['../class_unilateral_constraint.html#a20ffd6c9ff2c5ea118107d0b4af24503',1,'UnilateralConstraint::UnilateralConstraint()']]],
   ['unilateralconstraint_2em',['UnilateralConstraint.m',['../_unilateral_constraint_8m.html',1,'']]],
+  ['unilateralconstraints',['UnilateralConstraints',['../class_continuous_dynamics.html#aa46f578076f504540c0ce1878f2a1212',1,'ContinuousDynamics']]],
   ['unique_2em',['unique.m',['../unique_8m.html',1,'']]],
   ['update',['update',['../class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef',1,'HybridTrajectoryOptimization::update()'],['../class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad',1,'NonlinearProgram::update()'],['../class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd',1,'TrajectoryOptimization::update()']]],
   ['update_2em',['update.m',['../_0D_trajectory_optimization_2update_8m.html',1,'']]],
@@ -19,5 +20,5 @@ var searchData=
   ['updatevariableprop_2em',['updateVariableProp.m',['../update_variable_prop_8m.html',1,'']]],
   ['uplus',['uplus',['../class_sym_expression.html#a559d946a47b99915b0eb7d3c75c88dd5',1,'SymExpression']]],
   ['upperbound',['UpperBound',['../class_nlp_function.html#a9be8e9e86c15782451bcaf1855012bb0',1,'NlpFunction::UpperBound()'],['../class_nlp_variable.html#a8c0ef3d36e3158f032b6698f7bf5cbfc',1,'NlpVariable::UpperBound()']]],
-  ['usernlpconstraint',['UserNlpConstraint',['../class_discrete_dynamics.html#aaf749aa5fb24c4008794c782fa58c1f3',1,'DiscreteDynamics']]]
+  ['usernlpconstraint',['UserNlpConstraint',['../class_continuous_dynamics.html#a41f79672603b97e08193ffe0cfdfefca',1,'ContinuousDynamics::UserNlpConstraint()'],['../class_discrete_dynamics.html#aaf749aa5fb24c4008794c782fa58c1f3',1,'DiscreteDynamics::UserNlpConstraint()']]]
 ];

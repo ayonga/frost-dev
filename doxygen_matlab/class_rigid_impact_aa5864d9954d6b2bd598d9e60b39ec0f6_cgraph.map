@@ -1,4 +1,8 @@
 <map id="RigidImpact::removeImpactConstraint" name="RigidImpact::removeImpactConstraint">
-<area shape="rect" id="node2" href="$class_rigid_impact.html#a966f64617151bf54603065e191eb613a" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="236,5,435,32"/>
-<area shape="rect" id="node3" href="$class_rigid_impact.html#aecf89c5190a0787a167dec6a89ff075b" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="253,57,417,98"/>
+<area shape="rect" id="node2" href="$class_rigid_impact.html#ad1089205f9ab947d30e80c7d5221967d" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="241,5,440,32"/>
+<area shape="rect" id="node3" href="$class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5" title="export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files..." alt="" coords="268,56,413,83"/>
+<area shape="rect" id="node6" href="$class_dynamical_system.html#aa0a12e5b2dab2e82cf4eb0963232b36a" title="Remove input variables of the dynamical system. " alt="" coords="236,107,445,133"/>
+<area shape="rect" id="node7" href="$class_rigid_impact.html#aa99b7bd8d4192fc556c30aa6b27c017c" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="259,158,423,199"/>
+<area shape="rect" id="node4" href="$class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="493,49,680,90"/>
+<area shape="rect" id="node5" href="$class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc" title="The class construction function. " alt="" coords="728,49,927,90"/>
 </map>

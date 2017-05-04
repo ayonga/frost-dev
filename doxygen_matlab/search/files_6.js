@@ -7,7 +7,6 @@ var searchData=
   ['getcartesianposition_2em',['getCartesianPosition.m',['../get_cartesian_position_8m.html',1,'']]],
   ['getcomposition_2em',['getComPosition.m',['../get_com_position_8m.html',1,'']]],
   ['geteulerangles_2em',['getEulerAngles.m',['../get_euler_angles_8m.html',1,'']]],
-  ['getexternalinput_2em',['getExternalInput.m',['../get_external_input_8m.html',1,'']]],
   ['getfieldd_2em',['getfieldd.m',['../getfieldd_8m.html',1,'']]],
   ['getfrictioncone_2em',['getFrictionCone.m',['../get_friction_cone_8m.html',1,'']]],
   ['getinitialguess_2em',['getInitialGuess.m',['../get_initial_guess_8m.html',1,'']]],
@@ -18,6 +17,7 @@ var searchData=
   ['getspatialjacobian_2em',['getSpatialJacobian.m',['../get_spatial_jacobian_8m.html',1,'']]],
   ['gettotalmass_2em',['getTotalMass.m',['../get_total_mass_8m.html',1,'']]],
   ['gettwist_2em',['getTwist.m',['../get_twist_8m.html',1,'']]],
+  ['gettwists_2em',['getTwists.m',['../get_twists_8m.html',1,'']]],
   ['getvarinfo_2em',['getVarInfo.m',['../get_var_info_8m.html',1,'']]],
   ['getzmpconstraint_2em',['getZMPConstraint.m',['../get_z_m_p_constraint_8m.html',1,'']]]
 ];

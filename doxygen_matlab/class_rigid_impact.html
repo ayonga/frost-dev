@@ -162,31 +162,71 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5864d9954d6b2bd598d9e60b39ec0f6"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#aa5864d9954d6b2bd598d9e60b39ec0f6">removeImpactConstraint</a> (<a class="el" href="classcellstr.html">cellstr</a> name)</td></tr>
 <tr class="memdesc:aa5864d9954d6b2bd598d9e60b39ec0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove impact (holonomic) constraints defined for the system.  <a href="#aa5864d9954d6b2bd598d9e60b39ec0f6">More...</a><br /></td></tr>
 <tr class="separator:aa5864d9954d6b2bd598d9e60b39ec0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecf89c5190a0787a167dec6a89ff075b"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#aecf89c5190a0787a167dec6a89ff075b">rigidImpactConstraint</a> (<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp, src, tar,<a class="el" href="classstruct.html">struct</a> bounds, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:aecf89c5190a0787a167dec6a89ff075b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impose system specific constraints as NLP constraints for the trajectory optimization problem.  <a href="#aecf89c5190a0787a167dec6a89ff075b">More...</a><br /></td></tr>
-<tr class="separator:aecf89c5190a0787a167dec6a89ff075b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a966f64617151bf54603065e191eb613a"><td class="memItemLeft" align="right" valign="top">function [   xn ,   lambda  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#a966f64617151bf54603065e191eb613a">calcDiscreteMap</a> (t, x, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a966f64617151bf54603065e191eb613a"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must implement this method by its own.  <a href="#a966f64617151bf54603065e191eb613a">More...</a><br /></td></tr>
-<tr class="separator:a966f64617151bf54603065e191eb613a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa99b7bd8d4192fc556c30aa6b27c017c"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#aa99b7bd8d4192fc556c30aa6b27c017c">rigidImpactConstraint</a> (<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> src,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> tar,<a class="el" href="classstruct.html">struct</a> bounds,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:aa99b7bd8d4192fc556c30aa6b27c017c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impose system specific constraints as NLP constraints for the trajectory optimization problem.  <a href="#aa99b7bd8d4192fc556c30aa6b27c017c">More...</a><br /></td></tr>
+<tr class="separator:aa99b7bd8d4192fc556c30aa6b27c017c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1089205f9ab947d30e80c7d5221967d"><td class="memItemLeft" align="right" valign="top">function [   xn ,   lambda  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#ad1089205f9ab947d30e80c7d5221967d">calcDiscreteMap</a> (t,<a class="el" href="classcolvec.html">colvec</a> x, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ad1089205f9ab947d30e80c7d5221967d"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must implement this method by its own.  <a href="#ad1089205f9ab947d30e80c7d5221967d">More...</a><br /></td></tr>
+<tr class="separator:ad1089205f9ab947d30e80c7d5221967d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d6578798073eab29e66b260d7d63a5"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5">compile</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ab0d6578798073eab29e66b260d7d63a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#ab0d6578798073eab29e66b260d7d63a5">More...</a><br /></td></tr>
+<tr class="separator:ab0d6578798073eab29e66b260d7d63a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_discrete_dynamics"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_discrete_dynamics')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_discrete_dynamics.html">DiscreteDynamics</a></td></tr>
 <tr class="memitem:af150bb07faed027a02346fc5c4aaba27 inherit pub_methods_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27">DiscreteDynamics</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name,<a class="el" href="classchar.html">char</a> event)</td></tr>
 <tr class="memdesc:af150bb07faed027a02346fc5c4aaba27 inherit pub_methods_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">the constructor function for <a class="el" href="class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events...">DiscreteDynamics</a> class objects  <a href="#af150bb07faed027a02346fc5c4aaba27">More...</a><br /></td></tr>
 <tr class="separator:af150bb07faed027a02346fc5c4aaba27 inherit pub_methods_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef55ee1b305875ad05c2a4c3b1a5517e inherit pub_methods_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#aef55ee1b305875ad05c2a4c3b1a5517e">addState</a> (<a class="el" href="class_sym_variable.html">SymVariable</a> xplus, xminus,<a class="el" href="class_sym_variable.html">SymVariable</a> dxplus, dxminus)</td></tr>
-<tr class="memdesc:aef55ee1b305875ad05c2a4c3b1a5517e inherit pub_methods_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload the superclass <code>addState</code> method with fixed state fields  <a href="#aef55ee1b305875ad05c2a4c3b1a5517e">More...</a><br /></td></tr>
-<tr class="separator:aef55ee1b305875ad05c2a4c3b1a5517e inherit pub_methods_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5753c076e46e5b14833ddcf8e5a209a9 inherit pub_methods_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#a5753c076e46e5b14833ddcf8e5a209a9">IdentityMapConstraint</a> (<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp, src, tar,<a class="el" href="classstruct.html">struct</a> bounds, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a5753c076e46e5b14833ddcf8e5a209a9 inherit pub_methods_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impose system specific constraints as NLP constraints for the trajectory optimization problem.  <a href="#a5753c076e46e5b14833ddcf8e5a209a9">More...</a><br /></td></tr>
-<tr class="separator:a5753c076e46e5b14833ddcf8e5a209a9 inherit pub_methods_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a77ec98fb20b6df0d15fe864c22628f inherit pub_methods_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#a4a77ec98fb20b6df0d15fe864c22628f">addState</a> (<a class="el" href="class_sym_variable.html">SymVariable</a> x,<a class="el" href="class_sym_variable.html">SymVariable</a> xn,<a class="el" href="class_sym_variable.html">SymVariable</a> dx,<a class="el" href="class_sym_variable.html">SymVariable</a> dxn)</td></tr>
+<tr class="memdesc:a4a77ec98fb20b6df0d15fe864c22628f inherit pub_methods_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload the superclass <code>addState</code> method with fixed state fields  <a href="#a4a77ec98fb20b6df0d15fe864c22628f">More...</a><br /></td></tr>
+<tr class="separator:a4a77ec98fb20b6df0d15fe864c22628f inherit pub_methods_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a7d4016cdcef3e23d17814f34235597 inherit pub_methods_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top">function   xn  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#a2a7d4016cdcef3e23d17814f34235597">calcDiscreteMap</a> (<a class="el" href="classdouble.html">double</a> t,<a class="el" href="classcolvec.html">colvec</a> x,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a2a7d4016cdcef3e23d17814f34235597 inherit pub_methods_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must implement this method by its own.  <a href="#a2a7d4016cdcef3e23d17814f34235597">More...</a><br /></td></tr>
+<tr class="separator:a2a7d4016cdcef3e23d17814f34235597 inherit pub_methods_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e456b72bca23bae715d212f1cf920a inherit pub_methods_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#ad3e456b72bca23bae715d212f1cf920a">IdentityMapConstraint</a> (<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> nlp,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> src,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> tar,<a class="el" href="classstruct.html">struct</a> bounds,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ad3e456b72bca23bae715d212f1cf920a inherit pub_methods_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impose system specific constraints as NLP constraints for the trajectory optimization problem.  <a href="#ad3e456b72bca23bae715d212f1cf920a">More...</a><br /></td></tr>
+<tr class="separator:ad3e456b72bca23bae715d212f1cf920a inherit pub_methods_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_dynamical_system"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_dynamical_system')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_dynamical_system.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a5693f16166671aec61db6b88fb83cde9">addState</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add state variables of the dynamical system.  <a href="#a5693f16166671aec61db6b88fb83cde9">More...</a><br /></td></tr>
+<tr class="separator:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a1e40a6d810f010012b9baa31d68cd6b3">addInput</a> (category, name, var, gf, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add input variables of the dynamical system.  <a href="#a1e40a6d810f010012b9baa31d68cd6b3">More...</a><br /></td></tr>
+<tr class="separator:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#aa0a12e5b2dab2e82cf4eb0963232b36a">removeInput</a> (category, name)</td></tr>
+<tr class="memdesc:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove input variables of the dynamical system.  <a href="#aa0a12e5b2dab2e82cf4eb0963232b36a">More...</a><br /></td></tr>
+<tr class="separator:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a8e90549435054b72ff63a320e24491f7">addParam</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add parameter variables of the dynamical system.  <a href="#a8e90549435054b72ff63a320e24491f7">More...</a><br /></td></tr>
+<tr class="separator:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a84134aa9f80d4371b5c7042389b6c0ba">removeParam</a> (param_name)</td></tr>
+<tr class="memdesc:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove parameter variables of the dynamical system.  <a href="#a84134aa9f80d4371b5c7042389b6c0ba">More...</a><br /></td></tr>
+<tr class="separator:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a2aa34f1a91ef223214ca2c0107e3b069">setParamValue</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the actual value of the system parameters  <a href="#a2aa34f1a91ef223214ca2c0107e3b069">More...</a><br /></td></tr>
+<tr class="separator:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a41c2c076844b61cbd10f1796ef5b2c20">compile</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#a41c2c076844b61cbd10f1796ef5b2c20">More...</a><br /></td></tr>
+<tr class="separator:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc">DynamicalSystem</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class construction function.  <a href="#a0159cd3624ed7282c0280b67739a83cc">More...</a><br /></td></tr>
+<tr class="separator:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#ac2d532f9277eec4c2bd9fb257056c77e">setName</a> (name)</td></tr>
+<tr class="memdesc:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the name of the dynamical system  <a href="#ac2d532f9277eec4c2bd9fb257056c77e">More...</a><br /></td></tr>
+<tr class="separator:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   var_group  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a48eaf6ea3ab14462c1a7cfa03206d3af">validateVarName</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unilateral (inequality) constraints on the dynamical system states and inputs.  <a href="#a48eaf6ea3ab14462c1a7cfa03206d3af">More...</a><br /></td></tr>
+<tr class="separator:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a3f38330ce1a44879b0599e0584e147aa">setType</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
+<tr class="memdesc:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of the dynamical system.  <a href="#a3f38330ce1a44879b0599e0584e147aa">More...</a><br /></td></tr>
+<tr class="separator:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_holonomic_constraint.html">HolonomicConstraint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#aa0ebc04ff82ed12bcc7bb2175abf5a1a">ImpactConstraints</a></td></tr>
-<tr class="memdesc:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The impact constraints (holonomic)  <a href="#aa0ebc04ff82ed12bcc7bb2175abf5a1a">More...</a><br /></td></tr>
-<tr class="separator:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2496bc8a16810854580b387818fdd30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmatrix.html">matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#ae2496bc8a16810854580b387818fdd30">R</a></td></tr>
 <tr class="memdesc:ae2496bc8a16810854580b387818fdd30"><td class="mdescLeft">&#160;</td><td class="mdescRight">The coordinate relabeling matrix.  <a href="#ae2496bc8a16810854580b387818fdd30">More...</a><br /></td></tr>
 <tr class="separator:ae2496bc8a16810854580b387818fdd30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_holonomic_constraint.html">HolonomicConstraint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rigid_impact.html#aa0ebc04ff82ed12bcc7bb2175abf5a1a">ImpactConstraints</a></td></tr>
+<tr class="memdesc:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The impact constraints (holonomic)  <a href="#aa0ebc04ff82ed12bcc7bb2175abf5a1a">More...</a><br /></td></tr>
+<tr class="separator:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_discrete_dynamics"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_discrete_dynamics')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_discrete_dynamics.html">DiscreteDynamics</a></td></tr>
 <tr class="memitem:aaf749aa5fb24c4008794c782fa58c1f3 inherit pub_attribs_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#aaf749aa5fb24c4008794c782fa58c1f3">UserNlpConstraint</a></td></tr>
 <tr class="memdesc:aaf749aa5fb24c4008794c782fa58c1f3 inherit pub_attribs_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">A handle to a function called by a trajectory optimization NLP to enforce system specific constraints.  <a href="#aaf749aa5fb24c4008794c782fa58c1f3">More...</a><br /></td></tr>
@@ -194,6 +234,109 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a72b4b01a0efbc670cefdbe3ed4f70a65 inherit pub_attribs_class_discrete_dynamics"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_discrete_dynamics.html#a72b4b01a0efbc670cefdbe3ed4f70a65">EventName</a></td></tr>
 <tr class="memdesc:a72b4b01a0efbc670cefdbe3ed4f70a65 inherit pub_attribs_class_discrete_dynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">The event name that triggers the discrete dynamics.  <a href="#a72b4b01a0efbc670cefdbe3ed4f70a65">More...</a><br /></td></tr>
 <tr class="separator:a72b4b01a0efbc670cefdbe3ed4f70a65 inherit pub_attribs_class_discrete_dynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_class_dynamical_system"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_dynamical_system')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_dynamical_system.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#adc61a10791020cef1e8b6640fbd4e220">Name</a></td></tr>
+<tr class="memdesc:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique name identification of the system.  <a href="#adc61a10791020cef1e8b6640fbd4e220">More...</a><br /></td></tr>
+<tr class="separator:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a449cc2e12159e952b4eef5d124f4b387 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a449cc2e12159e952b4eef5d124f4b387">ExternalOutputFun</a></td></tr>
+<tr class="memdesc:a449cc2e12159e952b4eef5d124f4b387 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the external input defined on the dynamical system.  <a href="#a449cc2e12159e952b4eef5d124f4b387">More...</a><br /></td></tr>
+<tr class="separator:a449cc2e12159e952b4eef5d124f4b387 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a23faa51b2b643490ad554107a1c949c5">Type</a></td></tr>
+<tr class="memdesc:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The highest order of the state derivatives of the system.  <a href="#a23faa51b2b643490ad554107a1c949c5">More...</a><br /></td></tr>
+<tr class="separator:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a6d5df3dd7741e0f4efc56a6b727cd4f8">States</a></td></tr>
+<tr class="memdesc:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains the symbolic representation of state variables.  <a href="#a6d5df3dd7741e0f4efc56a6b727cd4f8">More...</a><br /></td></tr>
+<tr class="separator:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a5bd6eb3599c404320bc2e8a9ebcd7ae6">numState</a></td></tr>
+<tr class="memdesc:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total number of system states.  <a href="#a5bd6eb3599c404320bc2e8a9ebcd7ae6">More...</a><br /></td></tr>
+<tr class="separator:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a5f85366dc922b01cba937c637f974f93">Inputs</a></td></tr>
+<tr class="memdesc:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains the symbolic representation of input variables.  <a href="#a5f85366dc922b01cba937c637f974f93">More...</a><br /></td></tr>
+<tr class="separator:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#ab3468418c7af6d1a29826c52fbb8a3f3">Params</a></td></tr>
+<tr class="memdesc:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parameters of the system.  <a href="#ab3468418c7af6d1a29826c52fbb8a3f3">More...</a><br /></td></tr>
+<tr class="separator:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a830da5aafff9e09005dbfdf92fca7028">Gvec</a></td></tr>
+<tr class="memdesc:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct of input vector fields Gvec(x,u) <a class="el" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="#a830da5aafff9e09005dbfdf92fca7028">More...</a><br /></td></tr>
+<tr class="separator:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#abb47145f1dbc23468e77fbd4f63dfaf3">Gmap</a></td></tr>
+<tr class="memdesc:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct of input map Gmap(x) <a class="el" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="#abb47145f1dbc23468e77fbd4f63dfaf3">More...</a><br /></td></tr>
+<tr class="separator:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
+<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
+<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
+<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
+<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
+<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
+<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
+<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
+<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
+<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
+<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
+<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
+<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
+<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
+<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
+<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
+<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
+<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
+<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
+<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
+<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
+<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
+<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
+<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
+<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
+<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
+<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
+<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
+<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
+<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
+<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
+<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_class_dynamical_system"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_dynamical_system')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_dynamical_system.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   value  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a28065d40ff9cec20de0e49c61801c211">getValue</a> (vars)</td></tr>
+<tr class="memdesc:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the variables (vars) value that are stored during computing the dynamics  <a href="#a28065d40ff9cec20de0e49c61801c211">More...</a><br /></td></tr>
+<tr class="separator:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5acd29436293588d02136412c3149c inherit pro_methods_class_dynamical_system"><td class="memItemLeft" align="right" valign="top">function   v_type  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#abb5acd29436293588d02136412c3149c">validateSystemType</a> (type)</td></tr>
+<tr class="memdesc:abb5acd29436293588d02136412c3149c inherit pro_methods_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">validate if it is valid system type  <a href="#abb5acd29436293588d02136412c3149c">More...</a><br /></td></tr>
+<tr class="separator:abb5acd29436293588d02136412c3149c inherit pro_methods_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_dynamical_system"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_dynamical_system')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_dynamical_system.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a3d3f49465f71ce92edcafa592925a170">t_</a></td></tr>
+<tr class="memdesc:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time.  <a href="#a3d3f49465f71ce92edcafa592925a170">More...</a><br /></td></tr>
+<tr class="separator:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#aa9d64b145e769d1abe8fe74ee0f54af7">states_</a></td></tr>
+<tr class="memdesc:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The states.  <a href="#aa9d64b145e769d1abe8fe74ee0f54af7">More...</a><br /></td></tr>
+<tr class="separator:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade263c814bb20851e716abd686795174 inherit pro_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#ade263c814bb20851e716abd686795174">inputs_</a></td></tr>
+<tr class="memdesc:ade263c814bb20851e716abd686795174 inherit pro_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The inputs.  <a href="#ade263c814bb20851e716abd686795174">More...</a><br /></td></tr>
+<tr class="separator:ade263c814bb20851e716abd686795174 inherit pro_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a31a12a8e598c2a650b0ae89e21188968">params_</a></td></tr>
+<tr class="memdesc:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parameters.  <a href="#a31a12a8e598c2a650b0ae89e21188968">More...</a><br /></td></tr>
+<tr class="separator:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a55123ad63013e90cd3b6f309b85e2077">GmapName_</a></td></tr>
+<tr class="memdesc:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the Gmap functions.  <a href="#a55123ad63013e90cd3b6f309b85e2077">More...</a><br /></td></tr>
+<tr class="separator:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_class_dynamical_system"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dynamical_system.html#a6ada83aae2363123232f41cc150b06d7">GvecName_</a></td></tr>
+<tr class="memdesc:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_class_dynamical_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the Gvec functions.  <a href="#a6ada83aae2363123232f41cc150b06d7">More...</a><br /></td></tr>
+<tr class="separator:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_class_dynamical_system"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_rigid_impact.html" title="RigidImpact represents a rigid body impact map assuming that the impact is plastic and occurs instant...">RigidImpact</a> represents a rigid body impact map assuming that the impact is plastic and occurs instantaneously. </p>
@@ -204,8 +347,9 @@ Inheritance diagram for RigidImpact:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_impact__inherit__graph.png" border="0" usemap="#_rigid_impact_inherit__map" alt="Inheritance graph"/></div>
 <map name="_rigid_impact_inherit__map" id="_rigid_impact_inherit__map">
-<area shape="rect" id="node2" href="class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="5,80,136,107"/>
-<area shape="rect" id="node3" href="class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="6,5,135,32"/>
+<area shape="rect" id="node2" href="class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="17,155,147,181"/>
+<area shape="rect" id="node3" href="class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="17,80,147,107"/>
+<area shape="rect" id="node4" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -213,19 +357,20 @@ Collaboration diagram for RigidImpact:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_impact__coll__graph.png" border="0" usemap="#_rigid_impact_coll__map" alt="Collaboration graph"/></div>
 <map name="_rigid_impact_coll__map" id="_rigid_impact_coll__map">
-<area shape="rect" id="node2" href="class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="107,515,237,541"/>
-<area shape="rect" id="node3" href="class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="181,336,310,363"/>
-<area shape="rect" id="node7" href="class_holonomic_constraint.html" title="HolonomicConstraint: represents a group of holonomic constraints of a dynamical systems. " alt="" coords="388,515,532,541"/>
-<area shape="rect" id="node4" href="classfunction__handle.html" title="A MatLab function handle. " alt="" coords="43,336,157,363"/>
-<area shape="rect" id="node5" href="classchar.html" title="A MatLab character array. " alt="" coords="357,5,403,32"/>
-<area shape="rect" id="node9" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="411,336,509,363"/>
-<area shape="rect" id="node10" href="class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="509,109,624,136"/>
-<area shape="rect" id="node6" href="classmatrix.html" title="A matlab matrix. " alt="" coords="564,515,623,541"/>
-<area shape="rect" id="node8" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="645,5,705,32"/>
-<area shape="rect" id="node12" href="class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="613,215,709,241"/>
-<area shape="rect" id="node11" href="classstruct.html" title="A MatLab struct. " alt="" coords="474,215,529,241"/>
-<area shape="rect" id="node13" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="649,109,706,136"/>
-<area shape="rect" id="node14" href="classinteger.html" title="An integer value. " alt="" coords="533,336,595,363"/>
+<area shape="rect" id="node2" href="class_discrete_dynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="234,347,365,373"/>
+<area shape="rect" id="node3" href="class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="261,241,391,268"/>
+<area shape="rect" id="node11" href="class_holonomic_constraint.html" title="HolonomicConstraint: represents a group of holonomic constraints of a dynamical systems. " alt="" coords="569,647,713,673"/>
+<area shape="rect" id="node4" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="500,5,560,32"/>
+<area shape="rect" id="node13" href="class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="689,241,803,268"/>
+<area shape="rect" id="node6" href="classfunction__handle.html" title="A MatLab function handle. " alt="" coords="5,5,119,32"/>
+<area shape="rect" id="node7" href="classdouble.html" title="A double value. " alt="" coords="189,5,249,32"/>
+<area shape="rect" id="node8" href="classstruct.html" title="A MatLab struct. " alt="" coords="395,5,449,32"/>
+<area shape="rect" id="node12" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="591,468,690,495"/>
+<area shape="rect" id="node9" href="classchar.html" title="A MatLab character array. " alt="" coords="723,5,769,32"/>
+<area shape="rect" id="node10" href="classmatrix.html" title="A matlab matrix. " alt="" coords="410,647,469,673"/>
+<area shape="rect" id="node14" href="class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="698,347,794,373"/>
+<area shape="rect" id="node15" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="828,241,885,268"/>
+<area shape="rect" id="node16" href="classinteger.html" title="An integer value. " alt="" coords="809,468,870,495"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -270,18 +415,20 @@ Collaboration diagram for RigidImpact:</div>
 </dl>
 <dl class="section user"><dt>Required fields of model:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00083">83</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00085">85</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
 
-<p>References <a class="el" href="_discrete_dynamics_8m_source.html#l00128">DiscreteDynamics.addState()</a>, <a class="el" href="_discrete_dynamics_8m_source.html#l00080">DiscreteDynamics.DiscreteDynamics()</a>, and <a class="el" href="_rigid_impact_8m_source.html#l00055">R</a>.</p>
+<p>References <a class="el" href="_discrete_dynamics_8m_source.html#l00128">DiscreteDynamics.addState()</a>, <a class="el" href="_discrete_dynamics_8m_source.html#l00080">DiscreteDynamics.DiscreteDynamics()</a>, and <a class="el" href="_rigid_impact_8m_source.html#l00041">R</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_impact_ad034a57a960665c8aab6f70c46d9240a_cgraph.png" border="0" usemap="#class_rigid_impact_ad034a57a960665c8aab6f70c46d9240a_cgraph" alt=""/></div>
 <map name="class_rigid_impact_ad034a57a960665c8aab6f70c46d9240a_cgraph" id="class_rigid_impact_ad034a57a960665c8aab6f70c46d9240a_cgraph">
-<area shape="rect" id="node2" href="class_discrete_dynamics.html#aef55ee1b305875ad05c2a4c3b1a5517e" title="overload the superclass addState method with fixed state fields " alt="" coords="224,13,415,39"/>
-<area shape="rect" id="node4" href="class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="226,64,413,105"/>
-<area shape="rect" id="node3" href="class_discrete_dynamics.html#a5753c076e46e5b14833ddcf8e5a209a9" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="463,5,644,47"/>
+<area shape="rect" id="node2" href="class_discrete_dynamics.html#a4a77ec98fb20b6df0d15fe864c22628f" title="overload the superclass addState method with fixed state fields " alt="" coords="224,67,415,93"/>
+<area shape="rect" id="node6" href="class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="226,119,413,161"/>
+<area shape="rect" id="node3" href="class_discrete_dynamics.html#a2a7d4016cdcef3e23d17814f34235597" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="463,5,699,32"/>
+<area shape="rect" id="node4" href="class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc" title="The class construction function. " alt="" coords="481,122,680,163"/>
+<area shape="rect" id="node5" href="class_discrete_dynamics.html#ad3e456b72bca23bae715d212f1cf920a" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="490,57,671,98"/>
 </map>
 </div>
 </p>
@@ -311,16 +458,28 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00144">144</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00146">146</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
+
+<p>References <a class="el" href="add_input_8m_source.html#l00018">DynamicalSystem.addInput()</a>, and <a class="el" href="class__substitutes_8c_source.html#l00193">handle.transpose</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_rigid_impact_ad925320584772e451f74e5df8435c53e_cgraph.png" border="0" usemap="#class_rigid_impact_ad925320584772e451f74e5df8435c53e_cgraph" alt=""/></div>
+<map name="class_rigid_impact_ad925320584772e451f74e5df8435c53e_cgraph" id="class_rigid_impact_ad925320584772e451f74e5df8435c53e_cgraph">
+<area shape="rect" id="node2" href="class_dynamical_system.html#a1e40a6d810f010012b9baa31d68cd6b3" title="Add input variables of the dynamical system. " alt="" coords="275,5,461,32"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<a class="anchor" id="a966f64617151bf54603065e191eb613a"></a>
+<a class="anchor" id="ad1089205f9ab947d30e80c7d5221967d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">function [   xn ,   lambda  ] = RigidImpact.calcDiscreteMap </td>
+          <td class="memname">function [ <a class="el" href="classcolvec.html">colvec</a> xn , <a class="el" href="classstruct.html">struct</a> lambda  ] = RigidImpact.calcDiscreteMap </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -328,7 +487,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classcolvec.html">colvec</a>&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
@@ -350,23 +509,99 @@ Here is the call graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>the time instant </td></tr>
-    <tr><td class="paramname">varargin</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>the pre-impact states</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">xn</td><td>the post-impact states </td></tr>
+    <tr><td class="paramname">lambda</td><td>the impulsive wrench </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Definition at line <a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html#l00018">18</a> of file <a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html">calcDiscreteMap.m</a>.</p>
 
-<p>References <a class="el" href="_rigid_impact_8m_source.html#l00055">R</a>.</p>
+<p>References <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, and <a class="el" href="_rigid_impact_8m_source.html#l00041">R</a>.</p>
 
-<p>Referenced by <a class="el" href="_rigid_impact_8m_source.html#l00186">removeImpactConstraint()</a>.</p>
+<p>Referenced by <a class="el" href="_rigid_impact_8m_source.html#l00188">removeImpactConstraint()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_rigid_impact_a966f64617151bf54603065e191eb613a_icgraph.png" border="0" usemap="#class_rigid_impact_a966f64617151bf54603065e191eb613a_icgraph" alt=""/></div>
-<map name="class_rigid_impact_a966f64617151bf54603065e191eb613a_icgraph" id="class_rigid_impact_a966f64617151bf54603065e191eb613a_icgraph">
+<div class="center"><img src="class_rigid_impact_ad1089205f9ab947d30e80c7d5221967d_icgraph.png" border="0" usemap="#class_rigid_impact_ad1089205f9ab947d30e80c7d5221967d_icgraph" alt=""/></div>
+<map name="class_rigid_impact_ad1089205f9ab947d30e80c7d5221967d_icgraph" id="class_rigid_impact_ad1089205f9ab947d30e80c7d5221967d_icgraph">
 <area shape="rect" id="node2" href="class_rigid_impact.html#aa5864d9954d6b2bd598d9e60b39ec0f6" title="Remove impact (holonomic) constraints defined for the system. " alt="" coords="252,5,435,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ab0d6578798073eab29e66b260d7d63a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = RigidImpact.compile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5">compile</a> ( ..., StackVariable, File, ForceExport, BuildMex, Namespace ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="robotics_2_0D_rigid_impact_2compile_8m_source.html#l00018">18</a> of file <a class="el" href="robotics_2_0D_rigid_impact_2compile_8m_source.html">compile.m</a>.</p>
+
+<p>References <a class="el" href="_discrete_dynamics_8m_source.html#l00080">DiscreteDynamics.DiscreteDynamics()</a>, and <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>.</p>
+
+<p>Referenced by <a class="el" href="_rigid_impact_8m_source.html#l00188">removeImpactConstraint()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_cgraph.png" border="0" usemap="#class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_cgraph" alt=""/></div>
+<map name="class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_cgraph" id="class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_cgraph">
+<area shape="rect" id="node2" href="class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="199,5,385,47"/>
+<area shape="rect" id="node3" href="class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc" title="The class construction function. " alt="" coords="433,5,632,47"/>
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_icgraph.png" border="0" usemap="#class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_icgraph" alt=""/></div>
+<map name="class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_icgraph" id="class_rigid_impact_ab0d6578798073eab29e66b260d7d63a5_icgraph">
+<area shape="rect" id="node2" href="class_rigid_impact.html#aa5864d9954d6b2bd598d9e60b39ec0f6" title="Remove impact (holonomic) constraints defined for the system. " alt="" coords="199,5,381,47"/>
 </map>
 </div>
 </p>
@@ -396,24 +631,28 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00186">186</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00188">188</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
 
-<p>References <a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html#l00018">calcDiscreteMap()</a>, and <a class="el" href="rigid_impact_constraint_8m_source.html#l00018">rigidImpactConstraint()</a>.</p>
+<p>References <a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html#l00018">calcDiscreteMap()</a>, <a class="el" href="robotics_2_0D_rigid_impact_2compile_8m_source.html#l00018">compile()</a>, <a class="el" href="remove_input_8m_source.html#l00018">DynamicalSystem.removeInput()</a>, and <a class="el" href="rigid_impact_constraint_8m_source.html#l00018">rigidImpactConstraint()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_impact_aa5864d9954d6b2bd598d9e60b39ec0f6_cgraph.png" border="0" usemap="#class_rigid_impact_aa5864d9954d6b2bd598d9e60b39ec0f6_cgraph" alt=""/></div>
 <map name="class_rigid_impact_aa5864d9954d6b2bd598d9e60b39ec0f6_cgraph" id="class_rigid_impact_aa5864d9954d6b2bd598d9e60b39ec0f6_cgraph">
-<area shape="rect" id="node2" href="class_rigid_impact.html#a966f64617151bf54603065e191eb613a" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="236,5,435,32"/>
-<area shape="rect" id="node3" href="class_rigid_impact.html#aecf89c5190a0787a167dec6a89ff075b" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="253,57,417,98"/>
+<area shape="rect" id="node2" href="class_rigid_impact.html#ad1089205f9ab947d30e80c7d5221967d" title="calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must impl..." alt="" coords="241,5,440,32"/>
+<area shape="rect" id="node3" href="class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5" title="export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files..." alt="" coords="268,56,413,83"/>
+<area shape="rect" id="node6" href="class_dynamical_system.html#aa0a12e5b2dab2e82cf4eb0963232b36a" title="Remove input variables of the dynamical system. " alt="" coords="236,107,445,133"/>
+<area shape="rect" id="node7" href="class_rigid_impact.html#aa99b7bd8d4192fc556c30aa6b27c017c" title="Impose system specific constraints as NLP constraints for the trajectory optimization problem..." alt="" coords="259,158,423,199"/>
+<area shape="rect" id="node4" href="class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27" title="the constructor function for DiscreteDynamics class objects " alt="" coords="493,49,680,90"/>
+<area shape="rect" id="node5" href="class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc" title="The class construction function. " alt="" coords="728,49,927,90"/>
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="aecf89c5190a0787a167dec6a89ff075b"></a>
+<a class="anchor" id="aa99b7bd8d4192fc556c30aa6b27c017c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -426,13 +665,13 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a>&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a>&#160;</td>
           <td class="paramname"><em>tar</em>, </td>
         </tr>
         <tr>
@@ -444,7 +683,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
           <td class="paramname"><em>varargin</em>&#160;</td>
         </tr>
         <tr>
@@ -459,23 +698,25 @@ Here is the call graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nlp</td><td>an trajectory optimization NLP object of the system</td></tr>
+    <tr><td class="paramname">src</td><td>the NLP of the source domain system</td></tr>
+    <tr><td class="paramname">tar</td><td>the NLP of the target domain system</td></tr>
     <tr><td class="paramname">bounds</td><td>a struct data contains the boundary values </td></tr>
-    <tr><td class="paramname">varargin</td><td></td></tr>
+    <tr><td class="paramname">varargin</td><td>extra argument </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Definition at line <a class="el" href="rigid_impact_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="rigid_impact_constraint_8m_source.html">rigidImpactConstraint.m</a>.</p>
 
-<p>References <a class="el" href="_rigid_impact_8m_source.html#l00055">R</a>.</p>
+<p>References <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, <a class="el" href="_dynamical_system_8m_source.html#l00149">DynamicalSystem.Gvec</a>, and <a class="el" href="_rigid_impact_8m_source.html#l00041">R</a>.</p>
 
-<p>Referenced by <a class="el" href="_rigid_impact_8m_source.html#l00186">removeImpactConstraint()</a>.</p>
+<p>Referenced by <a class="el" href="_rigid_impact_8m_source.html#l00188">removeImpactConstraint()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_rigid_impact_aecf89c5190a0787a167dec6a89ff075b_icgraph.png" border="0" usemap="#class_rigid_impact_aecf89c5190a0787a167dec6a89ff075b_icgraph" alt=""/></div>
-<map name="class_rigid_impact_aecf89c5190a0787a167dec6a89ff075b_icgraph" id="class_rigid_impact_aecf89c5190a0787a167dec6a89ff075b_icgraph">
+<div class="center"><img src="class_rigid_impact_aa99b7bd8d4192fc556c30aa6b27c017c_icgraph.png" border="0" usemap="#class_rigid_impact_aa99b7bd8d4192fc556c30aa6b27c017c_icgraph" alt=""/></div>
+<map name="class_rigid_impact_aa99b7bd8d4192fc556c30aa6b27c017c_icgraph" id="class_rigid_impact_aa99b7bd8d4192fc556c30aa6b27c017c_icgraph">
 <area shape="rect" id="node2" href="class_rigid_impact.html#aa5864d9954d6b2bd598d9e60b39ec0f6" title="Remove impact (holonomic) constraints defined for the system. " alt="" coords="217,5,400,47"/>
 </map>
 </div>
@@ -499,7 +740,7 @@ Here is the caller graph for this function:</div>
 <dd>
 <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00042">42</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00054">54</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
 
 </div>
 </div>
@@ -514,21 +755,18 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>The coordinate relabeling matrix. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a></dd>
-<dd>
-This property has custom functionality when its value is changed. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This property has custom functionality when its value is changed. </dd></dl>
 
-<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00055">55</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
+<p>Definition at line <a class="el" href="_rigid_impact_8m_source.html#l00041">41</a> of file <a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a>.</p>
 
-<p>Referenced by <a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html#l00018">calcDiscreteMap()</a>, <a class="el" href="_rigid_impact_8m_source.html#l00083">RigidImpact()</a>, and <a class="el" href="rigid_impact_constraint_8m_source.html#l00018">rigidImpactConstraint()</a>.</p>
+<p>Referenced by <a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html#l00018">calcDiscreteMap()</a>, <a class="el" href="_rigid_impact_8m_source.html#l00085">RigidImpact()</a>, and <a class="el" href="rigid_impact_constraint_8m_source.html#l00018">rigidImpactConstraint()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>robotics/@RigidImpact/<a class="el" href="_rigid_impact_8m_source.html">RigidImpact.m</a></li>
 <li>robotics/@RigidImpact/<a class="el" href="robotics_2_0D_rigid_impact_2calc_discrete_map_8m_source.html">calcDiscreteMap.m</a></li>
+<li>robotics/@RigidImpact/<a class="el" href="robotics_2_0D_rigid_impact_2compile_8m_source.html">compile.m</a></li>
 <li>robotics/@RigidImpact/<a class="el" href="rigid_impact_constraint_8m_source.html">rigidImpactConstraint.m</a></li>
 </ul>
 </div><!-- contents -->
@@ -546,7 +784,7 @@ This property has custom functionality when its value is changed. </dd></dl>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

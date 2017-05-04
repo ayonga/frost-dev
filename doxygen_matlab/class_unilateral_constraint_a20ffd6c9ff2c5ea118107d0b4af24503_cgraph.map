@@ -1,3 +1,4 @@
 <map id="UnilateralConstraint::UnilateralConstraint" name="UnilateralConstraint::UnilateralConstraint">
-<area shape="rect" id="node2" href="$class_unilateral_constraint.html#a3ddea000c580fba39d8673fabeb4db3b" title="Name. " alt="" coords="199,5,336,47"/>
+<area shape="rect" id="node2" href="$class_unilateral_constraint.html#a3ddea000c580fba39d8673fabeb4db3b" title="Name. " alt="" coords="221,5,359,47"/>
+<area shape="rect" id="node3" href="$class_dynamical_system.html#a48eaf6ea3ab14462c1a7cfa03206d3af" title="Adds unilateral (inequality) constraints on the dynamical system states and inputs. " alt="" coords="199,71,381,112"/>
 </map>

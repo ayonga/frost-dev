@@ -162,9 +162,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac5c10eb8025d60a0d2c31169e749332e"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e">setBoundary</a> (<a class="el" href="classcolvec.html">colvec</a> lowerbound,<a class="el" href="classcolvec.html">colvec</a> upperbound)</td></tr>
 <tr class="memdesc:ac5c10eb8025d60a0d2c31169e749332e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the lower/upper boundary value for a NLP variable.  <a href="#ac5c10eb8025d60a0d2c31169e749332e">More...</a><br /></td></tr>
 <tr class="separator:ac5c10eb8025d60a0d2c31169e749332e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3844e5e5e6ede385cbfa5bf685cd3c42"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42">setInitialValue</a> (x)</td></tr>
-<tr class="memdesc:a3844e5e5e6ede385cbfa5bf685cd3c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a typical initial value for the NLP variables. This value will be used to assign the initial value for the NLP solver.  <a href="#a3844e5e5e6ede385cbfa5bf685cd3c42">More...</a><br /></td></tr>
-<tr class="separator:a3844e5e5e6ede385cbfa5bf685cd3c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e2b0fc6662b715bb87dbd5269ead2dd"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a2e2b0fc6662b715bb87dbd5269ead2dd">setInitialValue</a> (<a class="el" href="classcolvec.html">colvec</a> x)</td></tr>
+<tr class="memdesc:a2e2b0fc6662b715bb87dbd5269ead2dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a typical initial value for the NLP variables. This value will be used to assign the initial value for the NLP solver.  <a href="#a2e2b0fc6662b715bb87dbd5269ead2dd">More...</a><br /></td></tr>
+<tr class="separator:a2e2b0fc6662b715bb87dbd5269ead2dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d548587682699ed5230c6971c05a1c1"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1">updateProp</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a7d548587682699ed5230c6971c05a1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the properties of the class object based on the input name-value pair arguments.  <a href="#a7d548587682699ed5230c6971c05a1c1">More...</a><br /></td></tr>
 <tr class="separator:a7d548587682699ed5230c6971c05a1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -302,7 +302,7 @@ Here is the call graph for this function:</div>
 <map name="class_nlp_variable_ab2603831293cf002816c769afe079df7_cgraph" id="class_nlp_variable_ab2603831293cf002816c769afe079df7_cgraph">
 <area shape="rect" id="node2" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="432,53,603,79"/>
 <area shape="rect" id="node3" href="class_nlp_variable.html#ae32413eb7beefc0eeaad9aacafc87839" title="Sets indinces of the Nlp Variables. " alt="" coords="220,27,377,54"/>
-<area shape="rect" id="node4" href="class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="428,115,607,142"/>
+<area shape="rect" id="node4" href="class_nlp_variable.html#a2e2b0fc6662b715bb87dbd5269ead2dd" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="428,115,607,142"/>
 <area shape="rect" id="node5" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="217,78,380,105"/>
 </map>
 </div>
@@ -406,14 +406,14 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a3844e5e5e6ede385cbfa5bf685cd3c42"></a>
+<a class="anchor" id="a2e2b0fc6662b715bb87dbd5269ead2dd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">function   obj  = NlpVariable.setInitialValue </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classcolvec.html">colvec</a>&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
           <td></td>
         </tr>
@@ -424,7 +424,7 @@ Here is the caller graph for this function:</div>
 <dl class="section note"><dt>Note</dt><dd>If the initial value is not given, then use the middle value of the lower/upper boundaries.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x0</td><td>an array of initial value of the NLP variables</td></tr>
+    <tr><td class="paramname">x</td><td>an array of initial value of the NLP variables</td></tr>
   </table>
   </dd>
 </dl>
@@ -439,8 +439,8 @@ Here is the caller graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph.png" border="0" usemap="#class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph" alt=""/></div>
-<map name="class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph" id="class_nlp_variable_a3844e5e5e6ede385cbfa5bf685cd3c42_icgraph">
+<div class="center"><img src="class_nlp_variable_a2e2b0fc6662b715bb87dbd5269ead2dd_icgraph.png" border="0" usemap="#class_nlp_variable_a2e2b0fc6662b715bb87dbd5269ead2dd_icgraph" alt=""/></div>
+<map name="class_nlp_variable_a2e2b0fc6662b715bb87dbd5269ead2dd_icgraph" id="class_nlp_variable_a2e2b0fc6662b715bb87dbd5269ead2dd_icgraph">
 <area shape="rect" id="node2" href="class_nlp_variable.html#ab2603831293cf002816c769afe079df7" title="The class constructor function. " alt="" coords="443,5,607,32"/>
 <area shape="rect" id="node3" href="class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="232,31,395,57"/>
 </map>
@@ -488,7 +488,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph.png" border="0" usemap="#class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph" alt=""/></div>
 <map name="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph" id="class_nlp_variable_a7d548587682699ed5230c6971c05a1c1_cgraph">
 <area shape="rect" id="node2" href="class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="220,5,391,32"/>
-<area shape="rect" id="node3" href="class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="216,56,395,83"/>
+<area shape="rect" id="node3" href="class_nlp_variable.html#a2e2b0fc6662b715bb87dbd5269ead2dd" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="216,56,395,83"/>
 </map>
 </div>
 </p>
@@ -645,7 +645,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

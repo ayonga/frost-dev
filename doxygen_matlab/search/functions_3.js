@@ -10,5 +10,6 @@ var searchData=
   ['discretedynamics',['DiscreteDynamics',['../class_discrete_dynamics.html#af150bb07faed027a02346fc5c4aaba27',1,'DiscreteDynamics']]],
   ['display',['display',['../class_sym_expression.html#a34cbc134236e02b182ed8ce8c938f697',1,'SymExpression']]],
   ['display_5fsystem_5finfo',['display_system_info',['../display__system__info_8m.html#a0caed4f08ebf7827954c6beef7998456',1,'display_system_info.m']]],
-  ['double',['double',['../class_sym_expression.html#af198b3d09f5c9a6ab46713b2313e350c',1,'SymExpression']]]
+  ['double',['double',['../class_sym_expression.html#af198b3d09f5c9a6ab46713b2313e350c',1,'SymExpression']]],
+  ['dynamicalsystem',['DynamicalSystem',['../class_dynamical_system.html#a0159cd3624ed7282c0280b67739a83cc',1,'DynamicalSystem']]]
 ];

@@ -1,3 +1,5 @@
 <map id="DiscreteDynamics::DiscreteDynamics" name="DiscreteDynamics::DiscreteDynamics">
-<area shape="rect" id="node2" href="$class_rigid_impact.html#ad034a57a960665c8aab6f70c46d9240a" title="the class constructin method " alt="" coords="240,13,411,39"/>
+<area shape="rect" id="node2" href="$class_rigid_impact.html#ab0d6578798073eab29e66b260d7d63a5" title="export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files..." alt="" coords="253,13,398,39"/>
+<area shape="rect" id="node4" href="$class_rigid_impact.html#ad034a57a960665c8aab6f70c46d9240a" title="the class constructin method " alt="" coords="240,63,411,90"/>
+<area shape="rect" id="node3" href="$class_rigid_impact.html#aa5864d9954d6b2bd598d9e60b39ec0f6" title="Remove impact (holonomic) constraints defined for the system. " alt="" coords="459,5,641,47"/>
 </map>

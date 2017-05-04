@@ -1,6 +1,6 @@
 <map id="NlpFunction::NlpFunction" name="NlpFunction::NlpFunction">
 <area shape="rect" id="node2" href="$class_nlp_function.html#aee989318a7b4c7fe31b55d8891c23b66" title="Sets the auxilary input argument data to call the NLP function. These auxilary data must be a vector ..." alt="" coords="233,5,399,32"/>
-<area shape="rect" id="node3" href="$class_nlp_function.html#a72c6989ec09f968874fcb9602d707523" title="set the upper/lower boundary values of the function if they exist " alt="" coords="229,56,403,83"/>
+<area shape="rect" id="node3" href="$class_nlp_function.html#a0199ce357b091ab94c5447c7f3bdfa49" title="set the upper/lower boundary values of the function if they exist " alt="" coords="229,56,403,83"/>
 <area shape="rect" id="node4" href="$class_nlp_function.html#a3f4d8b11ffc76edf50d0eec0c9276ad5" title="This function sets the dependent variables of the function. " alt="" coords="225,107,407,149"/>
 <area shape="rect" id="node5" href="$class_nlp_function.html#a8035001a2e06f5f13a242e5b8802aeaa" title="Sets the dimension of the NLP variable vector. " alt="" coords="226,173,406,200"/>
 <area shape="rect" id="node6" href="$class_nlp_function.html#a074544cc7d262d673ea3b9b73e2aeaee" title="This function specify the functions (name) that calculates the the function. " alt="" coords="456,300,611,327"/>

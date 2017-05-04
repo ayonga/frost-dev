@@ -1,6 +1,6 @@
 <map id="NlpVariable::NlpVariable" name="NlpVariable::NlpVariable">
 <area shape="rect" id="node2" href="$class_nlp_variable.html#ac5c10eb8025d60a0d2c31169e749332e" title="Sets the lower/upper boundary value for a NLP variable. " alt="" coords="432,53,603,79"/>
 <area shape="rect" id="node3" href="$class_nlp_variable.html#ae32413eb7beefc0eeaad9aacafc87839" title="Sets indinces of the Nlp Variables. " alt="" coords="220,27,377,54"/>
-<area shape="rect" id="node4" href="$class_nlp_variable.html#a3844e5e5e6ede385cbfa5bf685cd3c42" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="428,115,607,142"/>
+<area shape="rect" id="node4" href="$class_nlp_variable.html#a2e2b0fc6662b715bb87dbd5269ead2dd" title="Sets a typical initial value for the NLP variables. This value will be used to assign the initial val..." alt="" coords="428,115,607,142"/>
 <area shape="rect" id="node5" href="$class_nlp_variable.html#a7d548587682699ed5230c6971c05a1c1" title="This function updates the properties of the class object based on the input name&#45;value pair arguments..." alt="" coords="217,78,380,105"/>
 </map>

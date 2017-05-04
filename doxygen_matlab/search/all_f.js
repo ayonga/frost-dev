@@ -2,7 +2,8 @@ var searchData=
 [
   ['param',['Param',['../class_controller.html#a4f8dcb168f555e179b9af142ce7fc0aa',1,'Controller::Param()'],['../class_holonomic_constraint.html#a609005833ec42f4b58dee205e3a12be1',1,'HolonomicConstraint::Param()']]],
   ['paramname',['ParamName',['../class_holonomic_constraint.html#a63f41cee94dcf9ec1685063a7ebe53ce',1,'HolonomicConstraint']]],
-  ['params',['Params',['../class_sym_function.html#af3b56ef15a25dd0ff453ae480adb6e5b',1,'SymFunction']]],
+  ['params',['Params',['../class_sym_function.html#af3b56ef15a25dd0ff453ae480adb6e5b',1,'SymFunction::Params()'],['../class_dynamical_system.html#ab3468418c7af6d1a29826c52fbb8a3f3',1,'DynamicalSystem::Params()']]],
+  ['params_5f',['params_',['../class_dynamical_system.html#a31a12a8e598c2a650b0ae89e21188968',1,'DynamicalSystem']]],
   ['parent',['Parent',['../class_rigid_joint.html#a431b2b7e0cca75dbe589abcef8c6ca7e',1,'RigidJoint']]],
   ['parse',['parse',['../classanimator.html#ab1de951f4cffe5c4c759d02f96e39bbb',1,'animator']]],
   ['patchline',['patchline',['../patchline_8m.html#af86cd36e575a62a4d499b869338f6b77',1,'patchline.m']]],
@@ -10,6 +11,7 @@ var searchData=
   ['permute',['permute',['../classhandle.html#a6dc9f59313af54f392d8e273d71ace7b',1,'handle']]],
   ['phase',['Phase',['../class_hybrid_trajectory_optimization.html#afde5b3c3d5011775a298137360a17cd4',1,'HybridTrajectoryOptimization']]],
   ['phasefuncs',['PhaseFuncs',['../class_virtual_constraint.html#acaa588b02d93048f0203f9b1e4d20b3a',1,'VirtualConstraint']]],
+  ['phasefuncsname_5f',['PhaseFuncsName_',['../class_virtual_constraint.html#ac84f6f2afeeeca41a847364cfb6978e8',1,'VirtualConstraint']]],
   ['phaseparamname',['PhaseParamName',['../class_virtual_constraint.html#a424c5f7cd56b4b63ff6cbf9218f2b559',1,'VirtualConstraint']]],
   ['phaseparams',['PhaseParams',['../class_virtual_constraint.html#a1ed87743c12cf5ba9ff1ed29c35229f0',1,'VirtualConstraint']]],
   ['phasetype',['PhaseType',['../class_virtual_constraint.html#a51c6f80cc3b886946df9f8c0375bf1b0',1,'VirtualConstraint']]],
@@ -23,6 +25,8 @@ var searchData=
   ['plot_5fsave_2em',['plot_save.m',['../plot__save_8m.html',1,'']]],
   ['plus',['plus',['../class_sym_expression.html#a13ae1f200548de5ee30cd92eeadbe3b3',1,'SymExpression']]],
   ['polydegree',['PolyDegree',['../class_virtual_constraint.html#a2eb6228eea8c130811f86548865cb8b6',1,'VirtualConstraint']]],
+  ['postprocess',['PostProcess',['../class_continuous_dynamics.html#a77ee3c4dc87ba0991e8814ac374aa08b',1,'ContinuousDynamics']]],
   ['power',['power',['../class_sym_expression.html#ac4a1cc2c74e7f5fc1ca9cfc9611546fe',1,'SymExpression']]],
+  ['preprocess',['PreProcess',['../class_continuous_dynamics.html#a1737a884325d663560dbd1fd60833e19',1,'ContinuousDynamics']]],
   ['privtocell',['privToCell',['../class_sym_expression.html#a5b6267c2f855a0e57803e029f9e8bd66',1,'SymExpression']]]
 ];

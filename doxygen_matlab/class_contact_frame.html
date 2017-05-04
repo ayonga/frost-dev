@@ -169,9 +169,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aadb5453fb20b19359b53f0f8db3c2008 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#aadb5453fb20b19359b53f0f8db3c2008">CoordinateFrame</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:aadb5453fb20b19359b53f0f8db3c2008 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#aadb5453fb20b19359b53f0f8db3c2008">More...</a><br /></td></tr>
 <tr class="separator:aadb5453fb20b19359b53f0f8db3c2008 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8505a69ac2e8b9ed1b62e76971534301 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#a8505a69ac2e8b9ed1b62e76971534301">ContactFrame</a> (type)</td></tr>
-<tr class="memdesc:a8505a69ac2e8b9ed1b62e76971534301 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a coordinate frame into a contact frame  <a href="#a8505a69ac2e8b9ed1b62e76971534301">More...</a><br /></td></tr>
-<tr class="separator:a8505a69ac2e8b9ed1b62e76971534301 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad092d78bf0cd99c6abfa1605d3b2fe09 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#ad092d78bf0cd99c6abfa1605d3b2fe09">ToContactFrame</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
+<tr class="memdesc:ad092d78bf0cd99c6abfa1605d3b2fe09 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a coordinate frame into a contact frame  <a href="#ad092d78bf0cd99c6abfa1605d3b2fe09">More...</a><br /></td></tr>
+<tr class="separator:ad092d78bf0cd99c6abfa1605d3b2fe09 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21b221d818a5142fefbbc961d4ad4964 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#a21b221d818a5142fefbbc961d4ad4964">setReference</a> (<a class="el" href="class_coordinate_frame.html">CoordinateFrame</a> ref)</td></tr>
 <tr class="memdesc:a21b221d818a5142fefbbc961d4ad4964 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the reference frame  <a href="#a21b221d818a5142fefbbc961d4ad4964">More...</a><br /></td></tr>
 <tr class="separator:a21b221d818a5142fefbbc961d4ad4964 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,6 +199,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7e1b682a4dd211e5ae4d29aa7e470f1 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   Jac  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1">computeSpatialJacobian</a> (<a class="el" href="classinteger.html">integer</a> nDof)</td></tr>
 <tr class="memdesc:ae7e1b682a4dd211e5ae4d29aa7e470f1 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the spatial Jacobian matrix of the coordinate frame  <a href="#ae7e1b682a4dd211e5ae4d29aa7e470f1">More...</a><br /></td></tr>
 <tr class="separator:ae7e1b682a4dd211e5ae4d29aa7e470f1 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37998ae1e5ba031f1b7f81e5f5da5b4 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   c_str  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#ad37998ae1e5ba031f1b7f81e5f5da5b4">getTwists</a> (<a class="el" href="classmatrix.html">matrix</a> p)</td></tr>
+<tr class="memdesc:ad37998ae1e5ba031f1b7f81e5f5da5b4 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the symbolic representation of the body jacobians of coordinate frames.  <a href="#ad37998ae1e5ba031f1b7f81e5f5da5b4">More...</a><br /></td></tr>
+<tr class="separator:ad37998ae1e5ba031f1b7f81e5f5da5b4 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -613,7 +616,7 @@ This property has non-standard access specifiers: <code>SetAccess = Protected, G
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

@@ -156,9 +156,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ada8bdd985ae258aebcb23f7b92cce307"><td class="memItemLeft" align="right" valign="top">function   status  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="build__mex_8m.html#ada8bdd985ae258aebcb23f7b92cce307">build_mex</a> (build_dir, src_files,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:ada8bdd985ae258aebcb23f7b92cce307"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14.04).  <a href="#ada8bdd985ae258aebcb23f7b92cce307">More...</a><br /></td></tr>
-<tr class="separator:ada8bdd985ae258aebcb23f7b92cce307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f240bc7290bcea9dcce22090b6ba481"><td class="memItemLeft" align="right" valign="top">function   status  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="build__mex_8m.html#a8f240bc7290bcea9dcce22090b6ba481">build_mex</a> (<a class="el" href="classchar.html">char</a> build_dir,<a class="el" href="classcellstr.html">cellstr</a> src_files,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a8f240bc7290bcea9dcce22090b6ba481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14.04).  <a href="#a8f240bc7290bcea9dcce22090b6ba481">More...</a><br /></td></tr>
+<tr class="separator:a8f240bc7290bcea9dcce22090b6ba481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13431051772aacae1d24898c80cbb32c"><td class="memItemLeft" align="right" valign="top">function   file  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="build__mex_8m.html#a13431051772aacae1d24898c80cbb32c">buildmex&gt;normalize</a> (file, ext)</td></tr>
 <tr class="separator:a13431051772aacae1d24898c80cbb32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -167,20 +167,20 @@ Functions</h2></td></tr>
 
 <p>Definition in file <a class="el" href="build__mex_8m_source.html">build_mex.m</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ada8bdd985ae258aebcb23f7b92cce307"></a>
+<a class="anchor" id="a8f240bc7290bcea9dcce22090b6ba481"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">function   status  = build_mex </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
           <td class="paramname"><em>build_dir</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
           <td class="paramname"><em>src_files</em>, </td>
         </tr>
         <tr>
@@ -203,11 +203,9 @@ Functions</h2></td></tr>
 Ayonga Hereid Copyright (c) 2016, AMBER Lab All right reserved.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">varargin</td><td>extra MEX build options <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;build_mex ( ..., path, f_list ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
-<li><span class="paramname"> path</span> the directory name of the folder where the source functions are located. It will be also used as the build directory for MEX files.</li>
-<li><span class="paramname"> f_list</span> the list of file names that need to be compiled.</li>
-</ul>
-</td></tr>
+    <tr><td class="paramname">build_dir</td><td>the directory name of the folder where the source functions are located. It will be also used as the build directory for MEX files.</td></tr>
+    <tr><td class="paramname">src_files</td><td>the list of file names that need to be compiled.</td></tr>
+    <tr><td class="paramname">varargin</td><td>extra MEX build options </td></tr>
   </table>
   </dd>
 </dl>
@@ -241,7 +239,7 @@ Ayonga Hereid Copyright (c) 2016, AMBER Lab All right reserved.</dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="build__mex_8m_source.html#l00116">116</a> of file <a class="el" href="build__mex_8m_source.html">build_mex.m</a>.</p>
+<p>Definition at line <a class="el" href="build__mex_8m_source.html#l00113">113</a> of file <a class="el" href="build__mex_8m_source.html">build_mex.m</a>.</p>
 
 </div>
 </div>
@@ -260,7 +258,7 @@ Ayonga Hereid Copyright (c) 2016, AMBER Lab All right reserved.</dd></dl>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:47 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

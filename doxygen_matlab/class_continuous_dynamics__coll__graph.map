@@ -1,0 +1,13 @@
+<map id="ContinuousDynamics" name="ContinuousDynamics">
+<area shape="rect" id="node2" href="$class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="292,473,421,499"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="344,5,404,32"/>
+<area shape="rect" id="node11" href="$class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="606,109,721,136"/>
+<area shape="rect" id="node5" href="$classfunction__handle.html" title="A MatLab function handle. " alt="" coords="5,213,119,240"/>
+<area shape="rect" id="node6" href="$classdouble.html" title="A double value. " alt="" coords="253,213,313,240"/>
+<area shape="rect" id="node7" href="$classstruct.html" title="A MatLab struct. " alt="" coords="504,213,559,240"/>
+<area shape="rect" id="node10" href="$class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="705,473,803,499"/>
+<area shape="rect" id="node8" href="$classchar.html" title="A MatLab character array. " alt="" coords="640,5,687,32"/>
+<area shape="rect" id="node9" href="$classcell.html" title="A MatLab cell array or matrix. " alt="" coords="638,473,681,499"/>
+<area shape="rect" id="node12" href="$class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="585,213,681,240"/>
+<area shape="rect" id="node13" href="$classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="524,109,581,136"/>
+</map>

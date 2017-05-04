@@ -3,7 +3,7 @@
 <area shape="rect" id="node3" href="$class_sym_expression.html#aa8984cc583c993adc3be02348021c8e7" title="Symbolic array left division. LDIVIDE(A,B) overloads symbolic A . B. " alt="" coords="395,5,554,32"/>
 <area shape="rect" id="node5" href="$class_sym_expression.html#a6a61eb0d470f41deca6126dd85a8acec" title="Symbolic array right division. RDIVIDE(A,B) overloads symbolic A ./ B. " alt="" coords="395,81,555,108"/>
 <area shape="rect" id="node7" href="$class_sym_expression.html#a64e4f6fb3db5417eee002b7279f86642" title="Symbolic array multiplication. TIMES(A,B) overloads symbolic A .* B. " alt="" coords="397,132,552,159"/>
-<area shape="rect" id="node4" href="$class_sym_expression.html#a2ea6d7dcec5e611c508121053f5cac63" title="Symbolic matrix left division. MLDIVIDE(A,B) overloads symbolic A \ B. X = A solves the symbolic line..." alt="" coords="603,5,773,32"/>
+<area shape="rect" id="node4" href="$class_sym_expression.html#a2ea6d7dcec5e611c508121053f5cac63" title="Symbolic matrix left division. MLDIVIDE(A,B) overloads symbolic A \ B. X = A \ B solves the symbolic ..." alt="" coords="603,5,773,32"/>
 <area shape="rect" id="node6" href="$class_sym_expression.html#aebfa0fcd39deb62b6afe1cfd3b210c55" title="/ Slash or symbolic right matrix divide. A/B is the matrix division of B into A, which is roughly the..." alt="" coords="603,81,773,108"/>
 <area shape="rect" id="node8" href="$class_sym_expression.html#a4fdf6537e1fbf17a3e653cbeaa1147f2" title="Symbolic matrix multiplication. MTIMES(A,B) overloads symbolic A * B. " alt="" coords="605,132,771,159"/>
 </map>

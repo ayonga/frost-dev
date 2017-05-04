@@ -1,6 +1,6 @@
 <map id="SymVariable::SymVariable" name="SymVariable::SymVariable">
 <area shape="rect" id="node2" href="$cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="487,132,573,159"/>
-<area shape="rect" id="node7" href="$str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1049,81,1137,108"/>
+<area shape="rect" id="node7" href="$str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1049,81,1137,108"/>
 <area shape="rect" id="node9" href="$class_sym_expression.html#a18d208b0f86f9ac213db1cc12c625384" title="Last index in an indexing expression for a sym array. END(A,K,N) is called for indexing expressions i..." alt="" coords="232,240,375,267"/>
 <area shape="rect" id="node12" href="$eval__math_8m.html#a5c3fd15a4544a45aca27359d24bcb5cc" title="A wrapper function that calls the mathlink function to evaluate the expression specified by expr..." alt="" coords="906,296,989,323"/>
 <area shape="rect" id="node13" href="$class_sym_expression.html#ab5665a86423d4503f856850e4ac627e4" title="The class constructor function. " alt="" coords="423,183,637,209"/>

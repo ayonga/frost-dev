@@ -1,6 +1,6 @@
 <map id="NonlinearProgram::getInitialGuess" name="NonlinearProgram::getInitialGuess">
 <area shape="rect" id="node2" href="$class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="236,58,425,99"/>
-<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="712,13,911,54"/>
+<area shape="rect" id="node3" href="$class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="712,13,911,54"/>
 <area shape="rect" id="node4" href="$class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="731,103,892,145"/>
 <area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="473,29,664,70"/>
 <area shape="rect" id="node6" href="$class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="492,146,645,187"/>

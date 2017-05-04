@@ -2,7 +2,9 @@ var searchData=
 [
   ['h',['h',['../class_ref.html#a8ec1d9d32ecbda23ca63c89a822cd21f',1,'Ref']]],
   ['h_5f',['h_',['../class_holonomic_constraint.html#a9dba1ed38783c9a3ceb95bbb7ee1ff01',1,'HolonomicConstraint::h_()'],['../class_unilateral_constraint.html#ad40547f743d6d448fa803443287e5902',1,'UnilateralConstraint::h_()']]],
+  ['h_5fname',['h_name',['../class_holonomic_constraint.html#a149f80af00216877f46ba2717dc14712',1,'HolonomicConstraint']]],
   ['handle',['handle',['../classhandle.html',1,'']]],
+  ['hasphaseparam',['hasPhaseParam',['../class_virtual_constraint.html#a14ee87fc821d23ab4002b35fe1126ae3',1,'VirtualConstraint']]],
   ['hessian_2em',['hessian.m',['../hessian_8m.html',1,'']]],
   ['hesspattern',['HessPattern',['../class_nlp_function.html#a853b8637b7f6e45f7a747c78151a8e99',1,'NlpFunction']]],
   ['hline',['hline',['../hline_8m.html#a938c11cd202783bc1d04fa02006deb2b',1,'hline.m']]],
@@ -10,6 +12,7 @@ var searchData=
   ['holonomic',['Holonomic',['../class_virtual_constraint.html#a92d5167605a61953faac5625a0975049',1,'VirtualConstraint']]],
   ['holonomicconstraint',['HolonomicConstraint',['../class_holonomic_constraint.html',1,'HolonomicConstraint'],['../class_holonomic_constraint.html#a95d2ad5df31adb8428d377e7836a5134',1,'HolonomicConstraint::HolonomicConstraint()']]],
   ['holonomicconstraint_2em',['HolonomicConstraint.m',['../_holonomic_constraint_8m.html',1,'']]],
+  ['holonomicconstraints',['HolonomicConstraints',['../class_continuous_dynamics.html#a5c43bbd658e9ffb215a1021938b450ea',1,'ContinuousDynamics']]],
   ['horzcat_2em',['horzcat.m',['../_0D_sym_variable_2horzcat_8m.html',1,'']]],
   ['horzcat_2em',['horzcat.m',['../_0D_sym_expression_2horzcat_8m.html',1,'']]],
   ['horzcat_5fdomains',['horzcat_domains',['../horzcat__domains_8m.html#aeecc3217b9a25532930cca125a449dab',1,'horzcat_domains.m']]],
@@ -20,6 +23,6 @@ var searchData=
   ['horzcat_5ffields_5fdomains_2em',['horzcat_fields_domains.m',['../horzcat__fields__domains_8m.html',1,'']]],
   ['hybridsystem',['HybridSystem',['../class_hybrid_system.html',1,'HybridSystem'],['../class_hybrid_system.html#a6e15fd6c9b29a0f829b3bcdf7acee812',1,'HybridSystem::HybridSystem()']]],
   ['hybridsystem_2em',['HybridSystem.m',['../_hybrid_system_8m.html',1,'']]],
-  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html',1,'HybridTrajectoryOptimization'],['../class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d',1,'HybridTrajectoryOptimization::HybridTrajectoryOptimization()']]],
+  ['hybridtrajectoryoptimization',['HybridTrajectoryOptimization',['../class_hybrid_trajectory_optimization.html',1,'HybridTrajectoryOptimization'],['../class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663',1,'HybridTrajectoryOptimization::HybridTrajectoryOptimization()']]],
   ['hybridtrajectoryoptimization_2em',['HybridTrajectoryOptimization.m',['../_hybrid_trajectory_optimization_8m.html',1,'']]]
 ];

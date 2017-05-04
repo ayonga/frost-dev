@@ -2,10 +2,10 @@
 <area shape="rect" id="node2" href="$class_trajectory_optimization.html#afdd7052fbe6615ecc8d24581b2d3ff49" title="Add direct collocation equations as a set of equality constraints. " alt="" coords="453,181,629,223"/>
 <area shape="rect" id="node3" href="$class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="703,152,864,193"/>
 <area shape="rect" id="node4" href="$class_trajectory_optimization.html#a046b39ee460cbbed805625de353683a5" title="Add system dynamics equations as a set of equality constraints. " alt="" coords="455,299,626,340"/>
-<area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="207,357,397,399"/>
-<area shape="rect" id="node8" href="$class_trajectory_optimization.html#a4018005f6dc749351b0a33fdc57920c9" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="225,123,379,164"/>
+<area shape="rect" id="node5" href="$class_hybrid_trajectory_optimization.html#ad077eec573db089f54094c202d16f5b5" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="207,357,397,399"/>
+<area shape="rect" id="node8" href="$class_trajectory_optimization.html#a3d6f5c021fc3fd11274980f92a1f933f" title="Add NLP constraint function that only depends on variables at a particular node. The input argument &#39;..." alt="" coords="225,123,379,164"/>
 <area shape="rect" id="node9" href="$class_trajectory_optimization.html#a78d6f58de4431b0ef40b5d8ea14e7498" title="Adds time as the NLP decision variables to the problem. " alt="" coords="464,64,617,105"/>
 <area shape="rect" id="node10" href="$class_trajectory_optimization.html#accfe5d3192cdcef8e88142a920336325" title="Adds parameters as the NLP decision variables to the problem. " alt="" coords="225,5,379,47"/>
 <area shape="rect" id="node6" href="$class_hybrid_trajectory_optimization.html#ab24a8ba344e2e3aae6347a668fc906e6" title="configure the trajectory optimizatino NLP problem " alt="" coords="445,416,636,457"/>
-<area shape="rect" id="node7" href="$class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="684,387,883,428"/>
+<area shape="rect" id="node7" href="$class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="684,387,883,428"/>
 </map>

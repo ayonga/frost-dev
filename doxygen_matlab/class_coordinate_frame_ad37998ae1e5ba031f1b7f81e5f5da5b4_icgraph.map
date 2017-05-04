@@ -1,0 +1,7 @@
+<map id="CoordinateFrame::getTwists" name="CoordinateFrame::getTwists">
+<area shape="rect" id="node2" href="$class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="240,5,444,32"/>
+<area shape="rect" id="node3" href="$class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="492,5,692,32"/>
+<area shape="rect" id="node4" href="$class_rigid_joint.html#a4ae506579ea5ca78af5de27c48af7867" title="computes the twist from the base frame " alt="" coords="740,5,911,32"/>
+<area shape="rect" id="node5" href="$class_rigid_joint.html#a0521222587d9fa25b79cb0f98f5725e2" title="The class constructor function. " alt="" coords="1175,5,1321,32"/>
+<area shape="rect" id="node6" href="$class_rigid_joint.html#afcb4a44293aabf2e4204dee0d34adca5" title="set the twist paris of all precedent joints " alt="" coords="959,31,1127,57"/>
+</map>

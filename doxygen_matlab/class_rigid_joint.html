@@ -187,9 +187,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aadb5453fb20b19359b53f0f8db3c2008 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#aadb5453fb20b19359b53f0f8db3c2008">CoordinateFrame</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:aadb5453fb20b19359b53f0f8db3c2008 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#aadb5453fb20b19359b53f0f8db3c2008">More...</a><br /></td></tr>
 <tr class="separator:aadb5453fb20b19359b53f0f8db3c2008 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8505a69ac2e8b9ed1b62e76971534301 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#a8505a69ac2e8b9ed1b62e76971534301">ContactFrame</a> (type)</td></tr>
-<tr class="memdesc:a8505a69ac2e8b9ed1b62e76971534301 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a coordinate frame into a contact frame  <a href="#a8505a69ac2e8b9ed1b62e76971534301">More...</a><br /></td></tr>
-<tr class="separator:a8505a69ac2e8b9ed1b62e76971534301 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad092d78bf0cd99c6abfa1605d3b2fe09 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#ad092d78bf0cd99c6abfa1605d3b2fe09">ToContactFrame</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
+<tr class="memdesc:ad092d78bf0cd99c6abfa1605d3b2fe09 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a coordinate frame into a contact frame  <a href="#ad092d78bf0cd99c6abfa1605d3b2fe09">More...</a><br /></td></tr>
+<tr class="separator:ad092d78bf0cd99c6abfa1605d3b2fe09 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21b221d818a5142fefbbc961d4ad4964 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#a21b221d818a5142fefbbc961d4ad4964">setReference</a> (<a class="el" href="class_coordinate_frame.html">CoordinateFrame</a> ref)</td></tr>
 <tr class="memdesc:a21b221d818a5142fefbbc961d4ad4964 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the reference frame  <a href="#a21b221d818a5142fefbbc961d4ad4964">More...</a><br /></td></tr>
 <tr class="separator:a21b221d818a5142fefbbc961d4ad4964 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,6 +217,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7e1b682a4dd211e5ae4d29aa7e470f1 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   Jac  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1">computeSpatialJacobian</a> (<a class="el" href="classinteger.html">integer</a> nDof)</td></tr>
 <tr class="memdesc:ae7e1b682a4dd211e5ae4d29aa7e470f1 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the spatial Jacobian matrix of the coordinate frame  <a href="#ae7e1b682a4dd211e5ae4d29aa7e470f1">More...</a><br /></td></tr>
 <tr class="separator:ae7e1b682a4dd211e5ae4d29aa7e470f1 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37998ae1e5ba031f1b7f81e5f5da5b4 inherit pub_methods_class_coordinate_frame"><td class="memItemLeft" align="right" valign="top">function   c_str  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_coordinate_frame.html#ad37998ae1e5ba031f1b7f81e5f5da5b4">getTwists</a> (<a class="el" href="classmatrix.html">matrix</a> p)</td></tr>
+<tr class="memdesc:ad37998ae1e5ba031f1b7f81e5f5da5b4 inherit pub_methods_class_coordinate_frame"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the symbolic representation of the body jacobians of coordinate frames.  <a href="#ad37998ae1e5ba031f1b7f81e5f5da5b4">More...</a><br /></td></tr>
+<tr class="separator:ad37998ae1e5ba031f1b7f81e5f5da5b4 inherit pub_methods_class_coordinate_frame"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -404,34 +407,35 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_joint_a0521222587d9fa25b79cb0f98f5725e2_cgraph.png" border="0" usemap="#class_rigid_joint_a0521222587d9fa25b79cb0f98f5725e2_cgraph" alt=""/></div>
 <map name="class_rigid_joint_a0521222587d9fa25b79cb0f98f5725e2_cgraph" id="class_rigid_joint_a0521222587d9fa25b79cb0f98f5725e2_cgraph">
-<area shape="rect" id="node2" href="class_rigid_joint.html#a4ae506579ea5ca78af5de27c48af7867" title="computes the twist from the base frame " alt="" coords="441,365,612,392"/>
-<area shape="rect" id="node21" href="class_coordinate_frame.html#aadb5453fb20b19359b53f0f8db3c2008" title="The class constructor function. " alt="" coords="200,518,393,559"/>
-<area shape="rect" id="node22" href="class_rigid_joint.html#a45764d405f1192c532bd8c160d58eac8" title="returns the twist vector of the rigid joint " alt="" coords="227,584,366,610"/>
-<area shape="rect" id="node23" href="class_rigid_joint.html#a73406935217c2797a259bfd87060bb1c" title="set the joint rotation axis vector in the joint coordinate " alt="" coords="231,634,363,661"/>
-<area shape="rect" id="node24" href="class_rigid_joint.html#afd49006f669095b78ae17d6c7a1ec648" title="Set the kinematic chain indices of the parent reference frames. " alt="" coords="205,685,388,712"/>
-<area shape="rect" id="node25" href="class_rigid_joint.html#a7f4fcd8ca72a53b1160c5cb8f232910a" title="set the child link frame " alt="" coords="229,736,365,762"/>
-<area shape="rect" id="node26" href="class_rigid_joint.html#a3ddd477ef88ae1bdf16af8cd9a4d30e3" title="set the physical limits of the rigid joints " alt="" coords="459,466,594,493"/>
-<area shape="rect" id="node27" href="class_rigid_joint.html#a11f86a02b7438080149e08ee22703c13" title="set the parent link frame " alt="" coords="225,786,369,813"/>
-<area shape="rect" id="node28" href="class_rigid_joint.html#afcb4a44293aabf2e4204dee0d34adca5" title="set the twist paris of all precedent joints " alt="" coords="213,416,381,442"/>
-<area shape="rect" id="node29" href="class_rigid_joint.html#a94099bf9833e2b8244c5b32c5971020d" title="Sets the joint type. " alt="" coords="229,837,364,864"/>
-<area shape="rect" id="node3" href="class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="660,304,860,330"/>
-<area shape="rect" id="node4" href="class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="908,209,1112,236"/>
-<area shape="rect" id="node15" href="class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="1409,361,1615,388"/>
-<area shape="rect" id="node18" href="class_coordinate_frame.html#a1fb436a398caf568281de029ef6e16f4" title="extract the rigid orientation from the homogeneous transformation matrix " alt="" coords="1401,16,1623,42"/>
-<area shape="rect" id="node5" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130" title="computes the body Jacobian matrix of the coordinate frame " alt="" coords="1160,103,1340,144"/>
-<area shape="rect" id="node14" href="class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="1160,299,1340,340"/>
-<area shape="rect" id="node17" href="class_coordinate_frame.html#af3978ef8926cccac24b0ae5a8e224a87" title="computes the Euler angles the body (current) coordinate frame in the world frame (base coordinate) ..." alt="" coords="1160,38,1340,79"/>
-<area shape="rect" id="node19" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="1160,168,1340,210"/>
-<area shape="rect" id="node20" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="1160,234,1340,275"/>
-<area shape="rect" id="node6" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="1459,176,1565,202"/>
-<area shape="rect" id="node7" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="1684,238,1769,265"/>
-<area shape="rect" id="node13" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1965,162,2063,189"/>
-<area shape="rect" id="node8" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="1817,238,1917,265"/>
-<area shape="rect" id="node10" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="2127,346,2193,373"/>
-<area shape="rect" id="node9" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1974,314,2054,341"/>
-<area shape="rect" id="node11" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="2111,277,2209,304"/>
-<area shape="rect" id="node12" href="str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="2116,201,2204,228"/>
-<area shape="rect" id="node16" href="class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="1388,306,1636,333"/>
+<area shape="rect" id="node2" href="class_rigid_joint.html#a4ae506579ea5ca78af5de27c48af7867" title="computes the twist from the base frame " alt="" coords="441,420,612,446"/>
+<area shape="rect" id="node22" href="class_coordinate_frame.html#aadb5453fb20b19359b53f0f8db3c2008" title="The class constructor function. " alt="" coords="200,572,393,614"/>
+<area shape="rect" id="node23" href="class_rigid_joint.html#a45764d405f1192c532bd8c160d58eac8" title="returns the twist vector of the rigid joint " alt="" coords="227,638,366,665"/>
+<area shape="rect" id="node24" href="class_rigid_joint.html#a73406935217c2797a259bfd87060bb1c" title="set the joint rotation axis vector in the joint coordinate " alt="" coords="231,689,363,716"/>
+<area shape="rect" id="node25" href="class_rigid_joint.html#afd49006f669095b78ae17d6c7a1ec648" title="Set the kinematic chain indices of the parent reference frames. " alt="" coords="205,740,388,766"/>
+<area shape="rect" id="node26" href="class_rigid_joint.html#a7f4fcd8ca72a53b1160c5cb8f232910a" title="set the child link frame " alt="" coords="229,790,365,817"/>
+<area shape="rect" id="node27" href="class_rigid_joint.html#a3ddd477ef88ae1bdf16af8cd9a4d30e3" title="set the physical limits of the rigid joints " alt="" coords="459,521,594,548"/>
+<area shape="rect" id="node28" href="class_rigid_joint.html#a11f86a02b7438080149e08ee22703c13" title="set the parent link frame " alt="" coords="225,841,369,868"/>
+<area shape="rect" id="node29" href="class_rigid_joint.html#afcb4a44293aabf2e4204dee0d34adca5" title="set the twist paris of all precedent joints " alt="" coords="213,470,381,497"/>
+<area shape="rect" id="node30" href="class_rigid_joint.html#a94099bf9833e2b8244c5b32c5971020d" title="Sets the joint type. " alt="" coords="229,892,364,918"/>
+<area shape="rect" id="node3" href="class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="660,332,860,358"/>
+<area shape="rect" id="node4" href="class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="908,244,1112,270"/>
+<area shape="rect" id="node15" href="class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="1415,416,1622,442"/>
+<area shape="rect" id="node18" href="class_coordinate_frame.html#a1fb436a398caf568281de029ef6e16f4" title="extract the rigid orientation from the homogeneous transformation matrix " alt="" coords="1407,18,1630,45"/>
+<area shape="rect" id="node5" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130" title="computes the body Jacobian matrix of the coordinate frame " alt="" coords="1163,171,1343,212"/>
+<area shape="rect" id="node14" href="class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="1163,354,1343,395"/>
+<area shape="rect" id="node17" href="class_coordinate_frame.html#af3978ef8926cccac24b0ae5a8e224a87" title="computes the Euler angles the body (current) coordinate frame in the world frame (base coordinate) ..." alt="" coords="1163,40,1343,82"/>
+<area shape="rect" id="node19" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="1163,236,1343,278"/>
+<area shape="rect" id="node20" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="1163,106,1343,147"/>
+<area shape="rect" id="node21" href="class_coordinate_frame.html#ad37998ae1e5ba031f1b7f81e5f5da5b4" title="Returns the symbolic representation of the body jacobians of coordinate frames. " alt="" coords="1160,302,1347,329"/>
+<area shape="rect" id="node6" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="1465,178,1572,205"/>
+<area shape="rect" id="node7" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="1691,274,1776,301"/>
+<area shape="rect" id="node13" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1972,217,2069,244"/>
+<area shape="rect" id="node8" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="1824,274,1924,301"/>
+<area shape="rect" id="node10" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="2133,401,2200,428"/>
+<area shape="rect" id="node9" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1981,369,2061,396"/>
+<area shape="rect" id="node11" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="2117,332,2216,358"/>
+<area shape="rect" id="node12" href="str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6" title="Converts a Matlab string to a Mathematica string. " alt="" coords="2123,256,2211,282"/>
+<area shape="rect" id="node16" href="class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="1395,332,1643,358"/>
 </map>
 </div>
 </p>
@@ -457,7 +461,7 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="compute_twist_8m_source.html#l00018">18</a> of file <a class="el" href="compute_twist_8m_source.html">computeTwist.m</a>.</p>
 
-<p>References <a class="el" href="_coordinate_frame_8m_source.html#l00216">CoordinateFrame.RigidAdjoint()</a>, and <a class="el" href="class__substitutes_8c_source.html#l00193">handle.transpose</a>.</p>
+<p>References <a class="el" href="_coordinate_frame_8m_source.html#l00217">CoordinateFrame.RigidAdjoint()</a>, and <a class="el" href="class__substitutes_8c_source.html#l00193">handle.transpose</a>.</p>
 
 <p>Referenced by <a class="el" href="_rigid_joint_8m_source.html#l00149">RigidJoint()</a>, and <a class="el" href="set_twist_pairs_8m_source.html#l00018">setTwistPairs()</a>.</p>
 
@@ -466,24 +470,25 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_joint_a4ae506579ea5ca78af5de27c48af7867_cgraph.png" border="0" usemap="#class_rigid_joint_a4ae506579ea5ca78af5de27c48af7867_cgraph" alt=""/></div>
 <map name="class_rigid_joint_a4ae506579ea5ca78af5de27c48af7867_cgraph" id="class_rigid_joint_a4ae506579ea5ca78af5de27c48af7867_cgraph">
-<area shape="rect" id="node2" href="class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="224,191,424,217"/>
-<area shape="rect" id="node3" href="class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="472,191,676,217"/>
-<area shape="rect" id="node14" href="class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="973,5,1179,32"/>
-<area shape="rect" id="node17" href="class_coordinate_frame.html#a1fb436a398caf568281de029ef6e16f4" title="extract the rigid orientation from the homogeneous transformation matrix " alt="" coords="965,351,1187,377"/>
-<area shape="rect" id="node4" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130" title="computes the body Jacobian matrix of the coordinate frame " alt="" coords="724,183,904,225"/>
-<area shape="rect" id="node13" href="class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="724,53,904,94"/>
-<area shape="rect" id="node16" href="class_coordinate_frame.html#af3978ef8926cccac24b0ae5a8e224a87" title="computes the Euler angles the body (current) coordinate frame in the world frame (base coordinate) ..." alt="" coords="724,314,904,355"/>
-<area shape="rect" id="node18" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="724,249,904,290"/>
-<area shape="rect" id="node19" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="724,118,904,159"/>
-<area shape="rect" id="node5" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="1023,191,1129,217"/>
-<area shape="rect" id="node6" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="1248,241,1333,268"/>
-<area shape="rect" id="node12" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1529,241,1627,268"/>
-<area shape="rect" id="node7" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="1381,292,1481,319"/>
-<area shape="rect" id="node9" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1691,241,1757,268"/>
-<area shape="rect" id="node8" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1538,343,1618,369"/>
-<area shape="rect" id="node10" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="1675,368,1773,395"/>
-<area shape="rect" id="node11" href="str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1680,292,1768,319"/>
-<area shape="rect" id="node15" href="class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="952,60,1200,87"/>
+<area shape="rect" id="node2" href="class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="224,191,424,218"/>
+<area shape="rect" id="node3" href="class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="472,191,676,218"/>
+<area shape="rect" id="node14" href="class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="979,11,1186,38"/>
+<area shape="rect" id="node17" href="class_coordinate_frame.html#a1fb436a398caf568281de029ef6e16f4" title="extract the rigid orientation from the homogeneous transformation matrix " alt="" coords="971,383,1194,410"/>
+<area shape="rect" id="node4" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130" title="computes the body Jacobian matrix of the coordinate frame " alt="" coords="727,216,907,257"/>
+<area shape="rect" id="node13" href="class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="727,33,907,74"/>
+<area shape="rect" id="node16" href="class_coordinate_frame.html#af3978ef8926cccac24b0ae5a8e224a87" title="computes the Euler angles the body (current) coordinate frame in the world frame (base coordinate) ..." alt="" coords="727,346,907,388"/>
+<area shape="rect" id="node18" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="727,281,907,322"/>
+<area shape="rect" id="node19" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="727,150,907,192"/>
+<area shape="rect" id="node20" href="class_coordinate_frame.html#ad37998ae1e5ba031f1b7f81e5f5da5b4" title="Returns the symbolic representation of the body jacobians of coordinate frames. " alt="" coords="724,99,911,126"/>
+<area shape="rect" id="node5" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="1029,223,1136,250"/>
+<area shape="rect" id="node6" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="1255,172,1340,199"/>
+<area shape="rect" id="node12" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1536,172,1633,199"/>
+<area shape="rect" id="node7" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="1388,122,1488,148"/>
+<area shape="rect" id="node9" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1697,172,1764,199"/>
+<area shape="rect" id="node8" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1545,71,1625,98"/>
+<area shape="rect" id="node10" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="1681,46,1780,72"/>
+<area shape="rect" id="node11" href="str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1687,122,1775,148"/>
+<area shape="rect" id="node15" href="class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="959,80,1207,107"/>
 </map>
 </div>
 </p>
@@ -786,25 +791,26 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_rigid_joint_afcb4a44293aabf2e4204dee0d34adca5_cgraph.png" border="0" usemap="#class_rigid_joint_afcb4a44293aabf2e4204dee0d34adca5_cgraph" alt=""/></div>
 <map name="class_rigid_joint_afcb4a44293aabf2e4204dee0d34adca5_cgraph" id="class_rigid_joint_afcb4a44293aabf2e4204dee0d34adca5_cgraph">
-<area shape="rect" id="node2" href="class_rigid_joint.html#a4ae506579ea5ca78af5de27c48af7867" title="computes the twist from the base frame " alt="" coords="221,219,392,246"/>
-<area shape="rect" id="node9" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1754,23,1834,50"/>
-<area shape="rect" id="node3" href="class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="440,298,640,324"/>
-<area shape="rect" id="node4" href="class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="688,246,892,272"/>
-<area shape="rect" id="node15" href="class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="1189,450,1395,476"/>
-<area shape="rect" id="node18" href="class_coordinate_frame.html#a1fb436a398caf568281de029ef6e16f4" title="extract the rigid orientation from the homogeneous transformation matrix " alt="" coords="1181,307,1403,334"/>
-<area shape="rect" id="node5" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130" title="computes the body Jacobian matrix of the coordinate frame " alt="" coords="940,74,1120,116"/>
-<area shape="rect" id="node14" href="class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="940,388,1120,429"/>
-<area shape="rect" id="node17" href="class_coordinate_frame.html#af3978ef8926cccac24b0ae5a8e224a87" title="computes the Euler angles the body (current) coordinate frame in the world frame (base coordinate) ..." alt="" coords="940,270,1120,312"/>
-<area shape="rect" id="node19" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="940,140,1120,181"/>
-<area shape="rect" id="node20" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="940,205,1120,246"/>
-<area shape="rect" id="node6" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="1239,147,1345,174"/>
-<area shape="rect" id="node7" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="1464,99,1549,126"/>
-<area shape="rect" id="node13" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1745,175,1843,202"/>
-<area shape="rect" id="node8" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="1597,99,1697,126"/>
-<area shape="rect" id="node10" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1907,23,1973,50"/>
-<area shape="rect" id="node11" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="1891,74,1989,100"/>
-<area shape="rect" id="node12" href="str2mathstr_8m.html#a1bf29b3e41bc10ca2f26b19d57714431" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1896,150,1984,176"/>
-<area shape="rect" id="node16" href="class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="1168,395,1416,422"/>
+<area shape="rect" id="node2" href="class_rigid_joint.html#a4ae506579ea5ca78af5de27c48af7867" title="computes the twist from the base frame " alt="" coords="221,299,392,326"/>
+<area shape="rect" id="node9" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a" title="Converts a 2&#45;D matrix to a string that will be read as a matrix (tensor) in Mathematica. " alt="" coords="1761,459,1841,486"/>
+<area shape="rect" id="node3" href="class_coordinate_frame.html#af5b6ffd8f7ead407ec333032d821094e" title="rigid adjoint matrix from the homonegeous matrix " alt="" coords="440,103,640,130"/>
+<area shape="rect" id="node4" href="class_coordinate_frame.html#ae2becca0e8f343a0ceab2d4b0fa43430" title="converts the axis vector to a skew matrix " alt="" coords="688,194,892,220"/>
+<area shape="rect" id="node15" href="class_coordinate_frame.html#a12012edfde16c0adb89d440c5b9d5413" title="extract the rigid position from the homogeneous transformation matrix " alt="" coords="1195,100,1402,127"/>
+<area shape="rect" id="node18" href="class_coordinate_frame.html#a1fb436a398caf568281de029ef6e16f4" title="extract the rigid orientation from the homogeneous transformation matrix " alt="" coords="1187,15,1410,42"/>
+<area shape="rect" id="node5" href="class_coordinate_frame.html#af08e9bcb58fadb4d48ece1e7e9a41130" title="computes the body Jacobian matrix of the coordinate frame " alt="" coords="943,376,1123,417"/>
+<area shape="rect" id="node14" href="class_coordinate_frame.html#a83033534e978d6c9a3bd67f2d9cbe453" title="computes the cartesian position of a point p in the body (current) coordinate frame ..." alt="" coords="943,128,1123,169"/>
+<area shape="rect" id="node17" href="class_coordinate_frame.html#af3978ef8926cccac24b0ae5a8e224a87" title="computes the Euler angles the body (current) coordinate frame in the world frame (base coordinate) ..." alt="" coords="943,62,1123,104"/>
+<area shape="rect" id="node19" href="class_coordinate_frame.html#ab3ba322fc6572fb9122c80145b5ecbc7" title="computes the forward kinematics transformation matrix of the coordinate frame " alt="" coords="943,245,1123,286"/>
+<area shape="rect" id="node20" href="class_coordinate_frame.html#ae7e1b682a4dd211e5ae4d29aa7e470f1" title="computes the spatial Jacobian matrix of the coordinate frame " alt="" coords="943,310,1123,352"/>
+<area shape="rect" id="node21" href="class_coordinate_frame.html#ad37998ae1e5ba031f1b7f81e5f5da5b4" title="Returns the symbolic representation of the body jacobians of coordinate frames. " alt="" coords="940,194,1127,220"/>
+<area shape="rect" id="node6" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9" title="Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function &#39;fun&#39; at the ..." alt="" coords="1245,314,1352,340"/>
+<area shape="rect" id="node7" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6" title="Convert a cell array to a Mathematica tensor. " alt="" coords="1471,314,1556,340"/>
+<area shape="rect" id="node13" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5" title="Converts a Matlab structure into a string that describes an expression for Mathematica association..." alt="" coords="1752,307,1849,334"/>
+<area shape="rect" id="node8" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e" title="Convert a general expression to a Mathematica expression. " alt="" coords="1604,358,1704,384"/>
+<area shape="rect" id="node10" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1913,307,1980,334"/>
+<area shape="rect" id="node11" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e" title="num2mathstr" alt="" coords="1897,434,1996,460"/>
+<area shape="rect" id="node12" href="str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6" title="Converts a Matlab string to a Mathematica string. " alt="" coords="1903,358,1991,384"/>
+<area shape="rect" id="node16" href="class_coordinate_frame.html#a0636b9b6c9da7fa5291409ab01e80b28" title="Convert a rotation + translation to a homogeneous matrix. " alt="" coords="1175,172,1423,199"/>
 </map>
 </div>
 </p>
@@ -1050,7 +1056,7 @@ This property has non-standard access specifiers: <code>SetAccess = Protected, G
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

@@ -156,9 +156,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a359e0c39f3144e1aec13b2fd500c8f44"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44">NonlinearProgram</a> (name)</td></tr>
 <tr class="memdesc:a359e0c39f3144e1aec13b2fd500c8f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default class constructor function.  <a href="#a359e0c39f3144e1aec13b2fd500c8f44">More...</a><br /></td></tr>
 <tr class="separator:a359e0c39f3144e1aec13b2fd500c8f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616e92e5a58bd04f9cbd6768b7773749"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749">regVariable</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a616e92e5a58bd04f9cbd6768b7773749"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#a616e92e5a58bd04f9cbd6768b7773749">More...</a><br /></td></tr>
-<tr class="separator:a616e92e5a58bd04f9cbd6768b7773749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe0a555646a765fcf37eccedbea87094"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094">regVariable</a> (<a class="el" href="class_nlp_variable.html">NlpVariable</a> vars)</td></tr>
+<tr class="memdesc:afe0a555646a765fcf37eccedbea87094"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#afe0a555646a765fcf37eccedbea87094">More...</a><br /></td></tr>
+<tr class="separator:afe0a555646a765fcf37eccedbea87094"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68afb570d51f6afcb91aa233885ba1ad"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad">update</a> ()</td></tr>
 <tr class="memdesc:a68afb570d51f6afcb91aa233885ba1ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the NLP problems before load it to NLP solver.  <a href="#a68afb570d51f6afcb91aa233885ba1ad">More...</a><br /></td></tr>
 <tr class="separator:a68afb570d51f6afcb91aa233885ba1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +177,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8acd8346e88ac50c24f55b7b23413b8a"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a">setOption</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a8acd8346e88ac50c24f55b7b23413b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the object options, and return the complete list of option structure including unchanged default options.  <a href="#a8acd8346e88ac50c24f55b7b23413b8a">More...</a><br /></td></tr>
 <tr class="separator:a8acd8346e88ac50c24f55b7b23413b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2141863b674dcea33fb0a4999b3f27"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27">compileConstraint</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:aed2141863b674dcea33fb0a4999b3f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#aed2141863b674dcea33fb0a4999b3f27">More...</a><br /></td></tr>
+<tr class="separator:aed2141863b674dcea33fb0a4999b3f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d95f8fa6e875dced3663f7f8532552"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552">compileObjective</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a32d95f8fa6e875dced3663f7f8532552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#a32d95f8fa6e875dced3663f7f8532552">More...</a><br /></td></tr>
+<tr class="separator:a32d95f8fa6e875dced3663f7f8532552"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -313,7 +319,7 @@ Collaboration diagram for NonlinearProgram:</div>
 
 <p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00121">121</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
-<p>References <a class="el" href="get_initial_guess_8m_source.html#l00018">getInitialGuess()</a>, <a class="el" href="get_var_info_8m_source.html#l00018">getVarInfo()</a>, <a class="el" href="reg_constraint_8m_source.html#l00018">regConstraint()</a>, <a class="el" href="reg_objective_8m_source.html#l00018">regObjective()</a>, <a class="el" href="reg_variable_8m_source.html#l00018">regVariable()</a>, <a class="el" href="set_option_8m_source.html#l00018">setOption()</a>, and <a class="el" href="_0D_nonlinear_program_2update_8m_source.html#l00018">update()</a>.</p>
+<p>References <a class="el" href="_0D_nonlinear_program_2compile_constraint_8m_source.html#l00018">compileConstraint()</a>, <a class="el" href="_0D_nonlinear_program_2compile_objective_8m_source.html#l00018">compileObjective()</a>, <a class="el" href="get_initial_guess_8m_source.html#l00018">getInitialGuess()</a>, <a class="el" href="get_var_info_8m_source.html#l00018">getVarInfo()</a>, <a class="el" href="reg_constraint_8m_source.html#l00018">regConstraint()</a>, <a class="el" href="reg_objective_8m_source.html#l00018">regObjective()</a>, <a class="el" href="reg_variable_8m_source.html#l00018">regVariable()</a>, <a class="el" href="set_option_8m_source.html#l00018">setOption()</a>, and <a class="el" href="_0D_nonlinear_program_2update_8m_source.html#l00018">update()</a>.</p>
 
 <p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization.HybridTrajectoryOptimization()</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00141">TrajectoryOptimization.TrajectoryOptimization()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2update_8m_source.html#l00018">HybridTrajectoryOptimization.update()</a>, and <a class="el" href="_0D_trajectory_optimization_2update_8m_source.html#l00018">TrajectoryOptimization.update()</a>.</p>
 
@@ -322,15 +328,17 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_cgraph.png" border="0" usemap="#class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_cgraph" alt=""/></div>
 <map name="class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_cgraph" id="class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_cgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="257,5,440,47"/>
-<area shape="rect" id="node3" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="251,71,446,98"/>
-<area shape="rect" id="node4" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="243,122,455,149"/>
-<area shape="rect" id="node5" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="245,173,452,199"/>
-<area shape="rect" id="node6" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="249,223,448,250"/>
-<area shape="rect" id="node7" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="253,274,444,301"/>
-<area shape="rect" id="node10" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="262,325,435,351"/>
-<area shape="rect" id="node8" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="503,274,607,301"/>
-<area shape="rect" id="node9" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="655,274,721,301"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="259,5,438,47"/>
+<area shape="rect" id="node3" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="259,71,438,112"/>
+<area shape="rect" id="node4" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="257,136,440,177"/>
+<area shape="rect" id="node5" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="251,202,446,229"/>
+<area shape="rect" id="node6" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="243,253,455,279"/>
+<area shape="rect" id="node7" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="245,303,452,330"/>
+<area shape="rect" id="node8" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094" title="This method registers the information of an optimization variable. " alt="" coords="249,354,448,381"/>
+<area shape="rect" id="node9" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="253,405,444,431"/>
+<area shape="rect" id="node12" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="262,455,435,482"/>
+<area shape="rect" id="node10" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="503,405,607,431"/>
+<area shape="rect" id="node11" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="655,405,721,431"/>
 </map>
 </div>
 </p>
@@ -340,7 +348,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_icgraph.png" border="0" usemap="#class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_icgraph" id="class_nonlinear_program_a359e0c39f3144e1aec13b2fd500c8f44_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="481,13,680,54"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="481,13,680,54"/>
 <area shape="rect" id="node3" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="500,103,661,145"/>
 <area shape="rect" id="node4" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="243,29,433,70"/>
 <area shape="rect" id="node5" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="261,146,415,187"/>
@@ -351,6 +359,120 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aed2141863b674dcea33fb0a4999b3f27"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function  NonlinearProgram.compileConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile and export symbolic expression and derivatives of all NLP functions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27">compileConstraint</a> ( ..., ForceExport, BuildMex ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_nonlinear_program_2compile_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nonlinear_program_2compile_constraint_8m_source.html">compileConstraint.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00121">NonlinearProgram()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nonlinear_program_aed2141863b674dcea33fb0a4999b3f27_icgraph.png" border="0" usemap="#class_nonlinear_program_aed2141863b674dcea33fb0a4999b3f27_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_aed2141863b674dcea33fb0a4999b3f27_icgraph" id="class_nonlinear_program_aed2141863b674dcea33fb0a4999b3f27_icgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="232,58,421,99"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="708,13,907,54"/>
+<area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="727,103,888,145"/>
+<area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="469,29,660,70"/>
+<area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="488,146,641,187"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a32d95f8fa6e875dced3663f7f8532552"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function  NonlinearProgram.compileObjective </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile and export symbolic expression and derivatives of all NLP functions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552">compileObjective</a> ( ..., ForceExport, BuildMex ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_nonlinear_program_2compile_objective_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_nonlinear_program_2compile_objective_8m_source.html">compileObjective.m</a>.</p>
+
+<p>Referenced by <a class="el" href="_nonlinear_program_8m_source.html#l00121">NonlinearProgram()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_nonlinear_program_a32d95f8fa6e875dced3663f7f8532552_icgraph.png" border="0" usemap="#class_nonlinear_program_a32d95f8fa6e875dced3663f7f8532552_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_a32d95f8fa6e875dced3663f7f8532552_icgraph" id="class_nonlinear_program_a32d95f8fa6e875dced3663f7f8532552_icgraph">
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="232,58,421,99"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="708,13,907,54"/>
+<area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="727,103,888,145"/>
+<area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="469,29,660,70"/>
+<area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="488,146,641,187"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a6b55533176c1ff3f6dcb545eb01347d2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -384,7 +506,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph.png" border="0" usemap="#class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph" id="class_nonlinear_program_a6b55533176c1ff3f6dcb545eb01347d2_icgraph">
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="236,58,425,99"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="712,13,911,54"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="712,13,911,54"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="731,103,892,145"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="473,29,664,70"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="492,146,645,187"/>
@@ -427,7 +549,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph.png" border="0" usemap="#class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph" id="class_nonlinear_program_a18934c38a77bf78db80fc54e101b5765_icgraph">
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="248,58,437,99"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="724,13,923,54"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="724,13,923,54"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="743,103,904,145"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="485,29,676,70"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="504,146,657,187"/>
@@ -476,7 +598,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="265,77,455,119"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="503,5,693,47"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="521,173,675,215"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="741,47,940,88"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="741,47,940,88"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="760,133,921,175"/>
 </map>
 </div>
@@ -523,7 +645,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="260,77,449,119"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="497,5,688,47"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="516,173,669,215"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="736,47,935,88"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="736,47,935,88"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="755,133,916,175"/>
 </map>
 </div>
@@ -531,15 +653,15 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a616e92e5a58bd04f9cbd6768b7773749"></a>
+<a class="anchor" id="afe0a555646a765fcf37eccedbea87094"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">function   obj  = NonlinearProgram.regVariable </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_nlp_variable.html">NlpVariable</a>&#160;</td>
+          <td class="paramname"><em>vars</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -564,12 +686,12 @@ Here is the caller graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph.png" border="0" usemap="#class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph" alt=""/></div>
-<map name="class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph" id="class_nonlinear_program_a616e92e5a58bd04f9cbd6768b7773749_icgraph">
+<div class="center"><img src="class_nonlinear_program_afe0a555646a765fcf37eccedbea87094_icgraph.png" border="0" usemap="#class_nonlinear_program_afe0a555646a765fcf37eccedbea87094_icgraph" alt=""/></div>
+<map name="class_nonlinear_program_afe0a555646a765fcf37eccedbea87094_icgraph" id="class_nonlinear_program_afe0a555646a765fcf37eccedbea87094_icgraph">
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="252,77,441,119"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="489,5,680,47"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="508,173,661,215"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="728,47,927,88"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="728,47,927,88"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="747,133,908,175"/>
 </map>
 </div>
@@ -629,7 +751,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_nonlinear_program_a8acd8346e88ac50c24f55b7b23413b8a_icgraph.png" border="0" usemap="#class_nonlinear_program_a8acd8346e88ac50c24f55b7b23413b8a_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a8acd8346e88ac50c24f55b7b23413b8a_icgraph" id="class_nonlinear_program_a8acd8346e88ac50c24f55b7b23413b8a_icgraph">
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="244,58,433,99"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="720,13,919,54"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="720,13,919,54"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="739,103,900,145"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="481,29,672,70"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="500,146,653,187"/>
@@ -664,7 +786,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph.png" border="0" usemap="#class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph" alt=""/></div>
 <map name="class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph" id="class_nonlinear_program_a68afb570d51f6afcb91aa233885ba1ad_icgraph">
 <area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="227,58,416,99"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="703,13,901,54"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="703,13,901,54"/>
 <area shape="rect" id="node4" href="class_trajectory_optimization.html#ac25b805aa9b3b7fa8ad35e6d05a6beff" title="The constructor function. " alt="" coords="721,103,883,145"/>
 <area shape="rect" id="node5" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="464,29,655,70"/>
 <area shape="rect" id="node6" href="class_trajectory_optimization.html#a36dfddcedc7d4ad9f263f85eb18374cd" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="483,146,636,187"/>
@@ -751,7 +873,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_nonlinear_program_8m_source.html#l00053">53</a> of file <a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a>.</p>
 
-<p>Referenced by <a class="el" href="add_jump_constraint_8m_source.html#l00018">HybridTrajectoryOptimization.addJumpConstraint()</a>, and <a class="el" href="_0D_virtual_constraint_2impose_n_l_p_constraint_8m_source.html#l00018">VirtualConstraint.imposeNLPConstraint()</a>.</p>
+<p>Referenced by <a class="el" href="add_jump_constraint_8m_source.html#l00018">HybridTrajectoryOptimization.addJumpConstraint()</a>, <a class="el" href="_0D_virtual_constraint_2impose_n_l_p_constraint_8m_source.html#l00018">VirtualConstraint.imposeNLPConstraint()</a>, and <a class="el" href="_ipopt_application_8m_source.html#l00075">IpoptApplication.IpoptApplication()</a>.</p>
 
 </div>
 </div>
@@ -792,6 +914,8 @@ Here is the caller graph for this function:</div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nlp/@NonlinearProgram/<a class="el" href="_nonlinear_program_8m_source.html">NonlinearProgram.m</a></li>
+<li>nlp/@NonlinearProgram/<a class="el" href="_0D_nonlinear_program_2compile_constraint_8m_source.html">compileConstraint.m</a></li>
+<li>nlp/@NonlinearProgram/<a class="el" href="_0D_nonlinear_program_2compile_objective_8m_source.html">compileObjective.m</a></li>
 <li>nlp/@NonlinearProgram/<a class="el" href="get_initial_guess_8m_source.html">getInitialGuess.m</a></li>
 <li>nlp/@NonlinearProgram/<a class="el" href="get_var_info_8m_source.html">getVarInfo.m</a></li>
 <li>nlp/@NonlinearProgram/<a class="el" href="reg_constraint_8m_source.html">regConstraint.m</a></li>
@@ -815,7 +939,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

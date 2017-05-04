@@ -11,13 +11,14 @@ var searchData=
   ['even_5fsample_2em',['even_sample.m',['../even__sample_8m.html',1,'']]],
   ['even_5fsample_5ffields',['even_sample_fields',['../even__sample__fields_8m.html#ad6489f72b1cf7b95a79a312b3486f8e3',1,'even_sample_fields.m']]],
   ['even_5fsample_5ffields_2em',['even_sample_fields.m',['../even__sample__fields_8m.html',1,'']]],
+  ['eventfuncs',['EventFuncs',['../class_continuous_dynamics.html#ac9e98fd2962dbc050effd7a099b5418c',1,'ContinuousDynamics']]],
   ['eventname',['EventName',['../class_discrete_dynamics.html#a72b4b01a0efbc670cefdbe3ed4f70a65',1,'DiscreteDynamics']]],
   ['exp_2em',['exp.m',['../exp_8m.html',1,'']]],
   ['expm_2em',['expm.m',['../expm_8m.html',1,'']]],
   ['export',['export',['../class_sym_function.html#a31bb3cacb984727ed4f797aba9e15fe7',1,'SymFunction::export()'],['../class_holonomic_constraint.html#ac7118d5aac5feaa12bf5634226ee7ebb',1,'HolonomicConstraint::export()'],['../class_unilateral_constraint.html#a231d05206d4ea0d14059793c3559a3cd',1,'UnilateralConstraint::export()'],['../class_virtual_constraint.html#a38747bc9af2a4d545298b2067ec9f489',1,'VirtualConstraint::export()']]],
-  ['export_2em',['export.m',['../symbolic_2_0D_sym_function_2export_8m.html',1,'']]],
   ['export_2em',['export.m',['../system_2_0D_virtual_constraint_2export_8m.html',1,'']]],
   ['export_2em',['export.m',['../symbolic_2_0D_sym_expression_2export_8m.html',1,'']]],
+  ['export_2em',['export.m',['../symbolic_2_0D_sym_function_2export_8m.html',1,'']]],
   ['exporthessian',['exportHessian',['../class_sym_function.html#a701caf9d661e1bb24bb653dc67467272',1,'SymFunction']]],
   ['exporthessian_2em',['exportHessian.m',['../export_hessian_8m.html',1,'']]],
   ['exportjacobian',['exportJacobian',['../class_sym_function.html#a73579095ba025e2c82ae33d8acc72683',1,'SymFunction']]],
@@ -25,6 +26,7 @@ var searchData=
   ['exportsolution',['exportSolution',['../class_hybrid_trajectory_optimization.html#a8661e96ef3f8bb66f34de8b8b46f7e43',1,'HybridTrajectoryOptimization::exportSolution()'],['../class_trajectory_optimization.html#adef44162578283f992d0e2aa4e008937',1,'TrajectoryOptimization::exportSolution()']]],
   ['exportsolution_2em',['exportSolution.m',['../_0D_hybrid_trajectory_optimization_2export_solution_8m.html',1,'']]],
   ['exportsolution_2em',['exportSolution.m',['../_0D_trajectory_optimization_2export_solution_8m.html',1,'']]],
+  ['externaloutputfun',['ExternalOutputFun',['../class_dynamical_system.html#a449cc2e12159e952b4eef5d124f4b387',1,'DynamicalSystem']]],
   ['extract_5fstruct_5fslice',['extract_struct_slice',['../extract__struct__slice_8m.html#a90450e44c59f069c2f0ffd4b8dc745e2',1,'extract_struct_slice.m']]],
   ['extract_5fstruct_5fslice_2em',['extract_struct_slice.m',['../extract__struct__slice_8m.html',1,'']]]
 ];

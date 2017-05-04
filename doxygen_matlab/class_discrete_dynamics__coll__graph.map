@@ -1,5 +1,8 @@
 <map id="DiscreteDynamics" name="DiscreteDynamics">
-<area shape="rect" id="node2" href="$class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="5,5,135,32"/>
-<area shape="rect" id="node3" href="$classfunction__handle.html" title="A MatLab function handle. " alt="" coords="159,5,272,32"/>
-<area shape="rect" id="node4" href="$classchar.html" title="A MatLab character array. " alt="" coords="336,5,383,32"/>
+<area shape="rect" id="node2" href="$class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="299,241,428,268"/>
+<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="367,5,427,32"/>
+<area shape="rect" id="node5" href="$classfunction__handle.html" title="A MatLab function handle. " alt="" coords="5,5,119,32"/>
+<area shape="rect" id="node6" href="$classdouble.html" title="A double value. " alt="" coords="197,5,257,32"/>
+<area shape="rect" id="node7" href="$classstruct.html" title="A MatLab struct. " alt="" coords="288,5,343,32"/>
+<area shape="rect" id="node8" href="$classchar.html" title="A MatLab character array. " alt="" coords="553,5,600,32"/>
 </map>

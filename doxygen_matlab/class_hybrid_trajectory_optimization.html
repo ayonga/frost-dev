@@ -153,12 +153,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a81d5d632c3855ca613257e9bbdb18a3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d">HybridTrajectoryOptimization</a> (<a class="el" href="classchar.html">char</a> name,<a class="el" href="class_hybrid_system.html">HybridSystem</a> plant,integerConstantTimeHorizon num_grid, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a81d5d632c3855ca613257e9bbdb18a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor function.  <a href="#a81d5d632c3855ca613257e9bbdb18a3d">More...</a><br /></td></tr>
-<tr class="separator:a81d5d632c3855ca613257e9bbdb18a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab09234514a3498197079b2b92b15f762"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762">addJumpConstraint</a> (<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> edge,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> src,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> tar, bounds, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:ab09234514a3498197079b2b92b15f762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add jump constraints between the edge and neighboring two nodes (source and target)  <a href="#ab09234514a3498197079b2b92b15f762">More...</a><br /></td></tr>
-<tr class="separator:ab09234514a3498197079b2b92b15f762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad022f63572fbbe4e9dd079201cb6d663"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663">HybridTrajectoryOptimization</a> (<a class="el" href="classchar.html">char</a> name,<a class="el" href="class_hybrid_system.html">HybridSystem</a> plant,integerConstantTimeHorizon num_grid,<a class="el" href="classstruct.html">struct</a> bounds, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ad022f63572fbbe4e9dd079201cb6d663"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor function.  <a href="#ad022f63572fbbe4e9dd079201cb6d663">More...</a><br /></td></tr>
+<tr class="separator:ad022f63572fbbe4e9dd079201cb6d663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad077eec573db089f54094c202d16f5b5"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#ad077eec573db089f54094c202d16f5b5">addJumpConstraint</a> (<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> edge,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> src,<a class="el" href="class_trajectory_optimization.html">TrajectoryOptimization</a> tar,<a class="el" href="classstruct.html">struct</a> bounds,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ad077eec573db089f54094c202d16f5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add jump constraints between the edge and neighboring two nodes (source and target)  <a href="#ad077eec573db089f54094c202d16f5b5">More...</a><br /></td></tr>
+<tr class="separator:ad077eec573db089f54094c202d16f5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb58e04362bdeb6fbcf7ccd7abe39446"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#adb58e04362bdeb6fbcf7ccd7abe39446">validateGraph</a> (plant)</td></tr>
 <tr class="memdesc:adb58e04362bdeb6fbcf7ccd7abe39446"><td class="mdescLeft">&#160;</td><td class="mdescRight">validate the directed graph of the hybrid system model  <a href="#adb58e04362bdeb6fbcf7ccd7abe39446">More...</a><br /></td></tr>
 <tr class="separator:adb58e04362bdeb6fbcf7ccd7abe39446"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,16 +180,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1d62fd5e8df3a22a67f7339e8b8d3122"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#a1d62fd5e8df3a22a67f7339e8b8d3122">checkVariables</a> (x, tol, output_file)</td></tr>
 <tr class="memdesc:a1d62fd5e8df3a22a67f7339e8b8d3122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the violation of the constraints.  <a href="#a1d62fd5e8df3a22a67f7339e8b8d3122">More...</a><br /></td></tr>
 <tr class="separator:a1d62fd5e8df3a22a67f7339e8b8d3122"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8661e96ef3f8bb66f34de8b8b46f7e43"><td class="memItemLeft" align="right" valign="top">function [   calcs ,   params  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#a8661e96ef3f8bb66f34de8b8b46f7e43">exportSolution</a> (<a class="el" href="classcolvec.html">colvec</a> sol)</td></tr>
+<tr class="memitem:a8661e96ef3f8bb66f34de8b8b46f7e43"><td class="memItemLeft" align="right" valign="top">function [   tspan ,   states ,   inputs ,   params  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#a8661e96ef3f8bb66f34de8b8b46f7e43">exportSolution</a> (<a class="el" href="classcolvec.html">colvec</a> sol)</td></tr>
 <tr class="memdesc:a8661e96ef3f8bb66f34de8b8b46f7e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes the solution of the NLP problem.  <a href="#a8661e96ef3f8bb66f34de8b8b46f7e43">More...</a><br /></td></tr>
 <tr class="separator:a8661e96ef3f8bb66f34de8b8b46f7e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f774114c4dff3e952b3b86af64b1a38"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#a4f774114c4dff3e952b3b86af64b1a38">compileConstraint</a> (<a class="el" href="classinteger.html">integer</a> phase,<a class="el" href="classcellstr.html">cellstr</a> constr,<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classcellstr.html">cellstr</a> exclude,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a4f774114c4dff3e952b3b86af64b1a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#a4f774114c4dff3e952b3b86af64b1a38">More...</a><br /></td></tr>
+<tr class="separator:a4f774114c4dff3e952b3b86af64b1a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae95f2935832754f5fa98b1e0eddad79b"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hybrid_trajectory_optimization.html#ae95f2935832754f5fa98b1e0eddad79b">compileObjective</a> (<a class="el" href="classinteger.html">integer</a> phase,<a class="el" href="classcellstr.html">cellstr</a> cost,<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classcellstr.html">cellstr</a> exclude,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ae95f2935832754f5fa98b1e0eddad79b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#ae95f2935832754f5fa98b1e0eddad79b">More...</a><br /></td></tr>
+<tr class="separator:ae95f2935832754f5fa98b1e0eddad79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_nonlinear_program"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_nonlinear_program')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_nonlinear_program.html">NonlinearProgram</a></td></tr>
 <tr class="memitem:a359e0c39f3144e1aec13b2fd500c8f44 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44">NonlinearProgram</a> (name)</td></tr>
 <tr class="memdesc:a359e0c39f3144e1aec13b2fd500c8f44 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default class constructor function.  <a href="#a359e0c39f3144e1aec13b2fd500c8f44">More...</a><br /></td></tr>
 <tr class="separator:a359e0c39f3144e1aec13b2fd500c8f44 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616e92e5a58bd04f9cbd6768b7773749 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749">regVariable</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
-<tr class="memdesc:a616e92e5a58bd04f9cbd6768b7773749 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#a616e92e5a58bd04f9cbd6768b7773749">More...</a><br /></td></tr>
-<tr class="separator:a616e92e5a58bd04f9cbd6768b7773749 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe0a555646a765fcf37eccedbea87094 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094">regVariable</a> (<a class="el" href="class_nlp_variable.html">NlpVariable</a> vars)</td></tr>
+<tr class="memdesc:afe0a555646a765fcf37eccedbea87094 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method registers the information of an optimization variable.  <a href="#afe0a555646a765fcf37eccedbea87094">More...</a><br /></td></tr>
+<tr class="separator:afe0a555646a765fcf37eccedbea87094 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68afb570d51f6afcb91aa233885ba1ad inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad">update</a> ()</td></tr>
 <tr class="memdesc:a68afb570d51f6afcb91aa233885ba1ad inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the NLP problems before load it to NLP solver.  <a href="#a68afb570d51f6afcb91aa233885ba1ad">More...</a><br /></td></tr>
 <tr class="separator:a68afb570d51f6afcb91aa233885ba1ad inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,6 +214,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8acd8346e88ac50c24f55b7b23413b8a inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a">setOption</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a8acd8346e88ac50c24f55b7b23413b8a inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the object options, and return the complete list of option structure including unchanged default options.  <a href="#a8acd8346e88ac50c24f55b7b23413b8a">More...</a><br /></td></tr>
 <tr class="separator:a8acd8346e88ac50c24f55b7b23413b8a inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2141863b674dcea33fb0a4999b3f27 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27">compileConstraint</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:aed2141863b674dcea33fb0a4999b3f27 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#aed2141863b674dcea33fb0a4999b3f27">More...</a><br /></td></tr>
+<tr class="separator:aed2141863b674dcea33fb0a4999b3f27 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d95f8fa6e875dced3663f7f8532552 inherit pub_methods_class_nonlinear_program"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552">compileObjective</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a32d95f8fa6e875dced3663f7f8532552 inherit pub_methods_class_nonlinear_program"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#a32d95f8fa6e875dced3663f7f8532552">More...</a><br /></td></tr>
+<tr class="separator:a32d95f8fa6e875dced3663f7f8532552 inherit pub_methods_class_nonlinear_program"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -299,28 +311,29 @@ Collaboration diagram for HybridTrajectoryOptimization:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization__coll__graph.png" border="0" usemap="#_hybrid_trajectory_optimization_coll__map" alt="Collaboration graph"/></div>
 <map name="_hybrid_trajectory_optimization_coll__map" id="_hybrid_trajectory_optimization_coll__map">
-<area shape="rect" id="node2" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="367,572,494,599"/>
-<area shape="rect" id="node16" href="class_trajectory_optimization.html" title="TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimi..." alt="" coords="530,691,683,717"/>
-<area shape="rect" id="node3" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="554,5,614,32"/>
-<area shape="rect" id="node4" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="401,468,493,495"/>
-<area shape="rect" id="node11" href="class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="589,109,704,136"/>
-<area shape="rect" id="node14" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="247,355,337,382"/>
-<area shape="rect" id="node5" href="classlogical.html" title="A boolean value. " alt="" coords="763,355,821,382"/>
-<area shape="rect" id="node6" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="361,355,404,382"/>
-<area shape="rect" id="node7" href="classcolvec.html" title="A matlab column vector. " alt="" coords="141,199,201,225"/>
-<area shape="rect" id="node8" href="classstruct.html" title="A MatLab struct. " alt="" coords="842,199,897,225"/>
-<area shape="rect" id="node10" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="640,355,739,382"/>
-<area shape="rect" id="node9" href="classchar.html" title="A MatLab character array. " alt="" coords="265,5,311,32"/>
-<area shape="rect" id="node12" href="class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="684,199,780,225"/>
-<area shape="rect" id="node13" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="729,109,786,136"/>
-<area shape="rect" id="node15" href="classinteger.html" title="An integer value. " alt="" coords="403,199,464,225"/>
-<area shape="rect" id="node17" href="classdouble.html" title="A double value. " alt="" coords="518,572,578,599"/>
-<area shape="rect" id="node18" href="classtable.html" title="A MatLab table. " alt="" coords="636,572,687,599"/>
-<area shape="rect" id="node19" href="class_dynamical_system.html" title="DynamicalSystem. " alt="" coords="711,572,841,599"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html" title="NonlinearProgram defines an abstract class for general nonlinear programing problems. " alt="" coords="218,689,345,716"/>
+<area shape="rect" id="node16" href="class_trajectory_optimization.html" title="TrajectoryOptimization defines a particular type of nonlinear programing problem — trajectory optimi..." alt="" coords="289,808,442,835"/>
+<area shape="rect" id="node3" href="classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="199,5,259,32"/>
+<area shape="rect" id="node4" href="class_nlp_function.html" title="This class provides a data structure for a optimization function. This function could be either a con..." alt="" coords="377,585,469,612"/>
+<area shape="rect" id="node11" href="class_sym_expression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="544,109,659,136"/>
+<area shape="rect" id="node14" href="class_nlp_variable.html" title="This class provides a data structure for NLP optimization variables. " alt="" coords="145,473,234,499"/>
+<area shape="rect" id="node19" href="class_dynamical_system.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="1213,473,1342,499"/>
+<area shape="rect" id="node5" href="classlogical.html" title="A boolean value. " alt="" coords="701,473,760,499"/>
+<area shape="rect" id="node6" href="classcell.html" title="A MatLab cell array or matrix. " alt="" coords="259,473,301,499"/>
+<area shape="rect" id="node7" href="classcolvec.html" title="A matlab column vector. " alt="" coords="365,213,425,240"/>
+<area shape="rect" id="node8" href="classstruct.html" title="A MatLab struct. " alt="" coords="862,213,917,240"/>
+<area shape="rect" id="node10" href="class_sym_function.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="579,473,677,499"/>
+<area shape="rect" id="node9" href="classchar.html" title="A MatLab character array. " alt="" coords="753,5,799,32"/>
+<area shape="rect" id="node12" href="class_sym_variable.html" title="An object that represents a list of symbolic variables. " alt="" coords="495,213,591,240"/>
+<area shape="rect" id="node13" href="classcellstr.html" title="A MatLab cell array of strings. " alt="" coords="462,109,519,136"/>
+<area shape="rect" id="node15" href="classinteger.html" title="An integer value. " alt="" coords="112,213,173,240"/>
+<area shape="rect" id="node17" href="classdouble.html" title="A double value. " alt="" coords="1131,213,1191,240"/>
+<area shape="rect" id="node18" href="classtable.html" title="A MatLab table. " alt="" coords="369,689,420,716"/>
+<area shape="rect" id="node21" href="classfunction__handle.html" title="A MatLab function handle. " alt="" coords="1417,213,1530,240"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a81d5d632c3855ca613257e9bbdb18a3d"></a>
+<a class="anchor" id="ad022f63572fbbe4e9dd079201cb6d663"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -345,6 +358,12 @@ Collaboration diagram for HybridTrajectoryOptimization:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
+          <td class="paramname"><em>bounds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>varargin</em>&#160;</td>
         </tr>
@@ -362,6 +381,7 @@ Collaboration diagram for HybridTrajectoryOptimization:</div>
     <tr><td class="paramname">name</td><td>the name of the NLP </td></tr>
     <tr><td class="paramname">plant</td><td>the hybrid system plant </td></tr>
     <tr><td class="paramname">num_grid</td><td>the number of grids along the trajectory</td></tr>
+    <tr><td class="paramname">bounds</td><td>a structed data stores the boundary information of the NLP variables </td></tr>
     <tr><td class="paramname">varargin</td><td></td></tr>
   </table>
   </dd>
@@ -369,34 +389,38 @@ Collaboration diagram for HybridTrajectoryOptimization:</div>
 
 <p>Definition at line <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">81</a> of file <a class="el" href="_hybrid_trajectory_optimization_8m_source.html">HybridTrajectoryOptimization.m</a>.</p>
 
-<p>References <a class="el" href="add_jump_constraint_8m_source.html#l00018">addJumpConstraint()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2check_constraints_8m_source.html#l00018">checkConstraints()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2check_costs_8m_source.html#l00018">checkCosts()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2check_variables_8m_source.html#l00018">checkVariables()</a>, <a class="el" href="nlp_2_0D_hybrid_trajectory_optimization_2configure_8m_source.html#l00018">configure()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2export_solution_8m_source.html#l00018">exportSolution()</a>, <a class="el" href="_hybrid_system_8m_source.html#l00066">HybridSystem.Gamma</a>, <a class="el" href="get_phase_index_8m_source.html#l00018">getPhaseIndex()</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00121">NonlinearProgram.NonlinearProgram()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2update_8m_source.html#l00018">update()</a>, and <a class="el" href="validate_graph_8m_source.html#l00018">validateGraph()</a>.</p>
+<p>References <a class="el" href="add_jump_constraint_8m_source.html#l00018">addJumpConstraint()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2check_constraints_8m_source.html#l00018">checkConstraints()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2check_costs_8m_source.html#l00018">checkCosts()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2check_variables_8m_source.html#l00018">checkVariables()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_constraint_8m_source.html#l00018">compileConstraint()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_objective_8m_source.html#l00018">compileObjective()</a>, <a class="el" href="nlp_2_0D_hybrid_trajectory_optimization_2configure_8m_source.html#l00018">configure()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2export_solution_8m_source.html#l00018">exportSolution()</a>, <a class="el" href="_hybrid_system_8m_source.html#l00066">HybridSystem.Gamma</a>, <a class="el" href="get_phase_index_8m_source.html#l00018">getPhaseIndex()</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00121">NonlinearProgram.NonlinearProgram()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2update_8m_source.html#l00018">update()</a>, and <a class="el" href="validate_graph_8m_source.html#l00018">validateGraph()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_hybrid_trajectory_optimization_a81d5d632c3855ca613257e9bbdb18a3d_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a81d5d632c3855ca613257e9bbdb18a3d_cgraph" alt=""/></div>
-<map name="class_hybrid_trajectory_optimization_a81d5d632c3855ca613257e9bbdb18a3d_cgraph" id="class_hybrid_trajectory_optimization_a81d5d632c3855ca613257e9bbdb18a3d_cgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="491,154,681,195"/>
-<area shape="rect" id="node6" href="class_hybrid_trajectory_optimization.html#a6fc407f03054dfc8e71cd9726c4abf5c" title="Check the violation of the constraints. " alt="" coords="252,47,443,88"/>
-<area shape="rect" id="node7" href="class_hybrid_trajectory_optimization.html#aa28679994fad74d2128333101c285e36" title="Check the value of const function. " alt="" coords="252,112,443,154"/>
-<area shape="rect" id="node8" href="class_hybrid_trajectory_optimization.html#a1d62fd5e8df3a22a67f7339e8b8d3122" title="Check the violation of the constraints. " alt="" coords="252,178,443,219"/>
-<area shape="rect" id="node9" href="class_hybrid_trajectory_optimization.html#ab24a8ba344e2e3aae6347a668fc906e6" title="configure the trajectory optimizatino NLP problem " alt="" coords="252,243,443,284"/>
-<area shape="rect" id="node10" href="class_hybrid_trajectory_optimization.html#a8661e96ef3f8bb66f34de8b8b46f7e43" title="Analyzes the solution of the NLP problem. " alt="" coords="252,308,443,350"/>
-<area shape="rect" id="node11" href="class_hybrid_trajectory_optimization.html#a59fcfe213c4ab7e8ea8ea9ff83ee5ec8" title="Returns the index of a particular phase (TrajectoryOptimization object) associated with the input arg..." alt="" coords="252,374,443,415"/>
-<area shape="rect" id="node12" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="491,432,681,474"/>
-<area shape="rect" id="node21" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="252,491,443,532"/>
-<area shape="rect" id="node22" href="class_hybrid_trajectory_optimization.html#adb58e04362bdeb6fbcf7ccd7abe39446" title="validate the directed graph of the hybrid system model " alt="" coords="491,600,681,642"/>
-<area shape="rect" id="node3" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="989,259,1143,300"/>
-<area shape="rect" id="node5" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="798,186,873,213"/>
-<area shape="rect" id="node4" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1191,456,1257,482"/>
-<area shape="rect" id="node13" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="736,237,935,264"/>
-<area shape="rect" id="node14" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="749,288,922,314"/>
-<area shape="rect" id="node15" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="732,506,939,533"/>
-<area shape="rect" id="node16" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="729,557,941,584"/>
-<area shape="rect" id="node17" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="738,338,933,365"/>
-<area shape="rect" id="node18" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="744,390,927,431"/>
-<area shape="rect" id="node19" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="740,456,931,482"/>
-<area shape="rect" id="node20" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="1014,456,1118,482"/>
+<div class="center"><img src="class_hybrid_trajectory_optimization_ad022f63572fbbe4e9dd079201cb6d663_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ad022f63572fbbe4e9dd079201cb6d663_cgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_ad022f63572fbbe4e9dd079201cb6d663_cgraph" id="class_hybrid_trajectory_optimization_ad022f63572fbbe4e9dd079201cb6d663_cgraph">
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad077eec573db089f54094c202d16f5b5" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="491,247,681,288"/>
+<area shape="rect" id="node6" href="class_hybrid_trajectory_optimization.html#a6fc407f03054dfc8e71cd9726c4abf5c" title="Check the violation of the constraints. " alt="" coords="252,51,443,92"/>
+<area shape="rect" id="node7" href="class_hybrid_trajectory_optimization.html#aa28679994fad74d2128333101c285e36" title="Check the value of const function. " alt="" coords="252,116,443,158"/>
+<area shape="rect" id="node8" href="class_hybrid_trajectory_optimization.html#a1d62fd5e8df3a22a67f7339e8b8d3122" title="Check the violation of the constraints. " alt="" coords="252,182,443,223"/>
+<area shape="rect" id="node9" href="class_hybrid_trajectory_optimization.html#a4f774114c4dff3e952b3b86af64b1a38" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="252,312,443,354"/>
+<area shape="rect" id="node10" href="class_hybrid_trajectory_optimization.html#a59fcfe213c4ab7e8ea8ea9ff83ee5ec8" title="Returns the index of a particular phase (TrajectoryOptimization object) associated with the input arg..." alt="" coords="491,371,681,412"/>
+<area shape="rect" id="node11" href="class_hybrid_trajectory_optimization.html#ae95f2935832754f5fa98b1e0eddad79b" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="252,430,443,471"/>
+<area shape="rect" id="node12" href="class_hybrid_trajectory_optimization.html#ab24a8ba344e2e3aae6347a668fc906e6" title="configure the trajectory optimizatino NLP problem " alt="" coords="252,247,443,288"/>
+<area shape="rect" id="node13" href="class_hybrid_trajectory_optimization.html#a8661e96ef3f8bb66f34de8b8b46f7e43" title="Analyzes the solution of the NLP problem. " alt="" coords="252,495,443,536"/>
+<area shape="rect" id="node14" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="491,560,681,602"/>
+<area shape="rect" id="node25" href="class_hybrid_trajectory_optimization.html#a5bf49cba5690869a94db048e565f88ef" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="252,560,443,602"/>
+<area shape="rect" id="node26" href="class_hybrid_trajectory_optimization.html#adb58e04362bdeb6fbcf7ccd7abe39446" title="validate the directed graph of the hybrid system model " alt="" coords="989,763,1180,804"/>
+<area shape="rect" id="node3" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="1008,403,1161,444"/>
+<area shape="rect" id="node5" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="798,305,873,332"/>
+<area shape="rect" id="node4" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="1228,625,1295,652"/>
+<area shape="rect" id="node15" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094" title="This method registers the information of an optimization variable. " alt="" coords="736,356,935,382"/>
+<area shape="rect" id="node16" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="749,457,922,484"/>
+<area shape="rect" id="node17" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="732,406,939,433"/>
+<area shape="rect" id="node18" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="729,808,941,834"/>
+<area shape="rect" id="node19" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="738,508,933,534"/>
+<area shape="rect" id="node20" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="744,559,927,600"/>
+<area shape="rect" id="node21" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="740,625,931,652"/>
+<area shape="rect" id="node23" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="746,676,925,718"/>
+<area shape="rect" id="node24" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="746,742,925,783"/>
+<area shape="rect" id="node22" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="1033,625,1137,652"/>
 </map>
 </div>
 </p>
@@ -404,7 +428,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ab09234514a3498197079b2b92b15f762"></a>
+<a class="anchor" id="ad077eec573db089f54094c202d16f5b5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -429,13 +453,13 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
           <td class="paramname"><em>bounds</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
           <td class="paramname"><em>varargin</em>&#160;</td>
         </tr>
         <tr>
@@ -452,7 +476,9 @@ Here is the call graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">edge</td><td>the edge NLP </td></tr>
     <tr><td class="paramname">src</td><td>the source node NLP </td></tr>
-    <tr><td class="paramname">tar</td><td>the target node NLP</td></tr>
+    <tr><td class="paramname">tar</td><td>the target node NLP </td></tr>
+    <tr><td class="paramname">bounds</td><td>the boundary values </td></tr>
+    <tr><td class="paramname">varargin</td><td>extra argument</td></tr>
   </table>
   </dd>
 </dl>
@@ -462,15 +488,15 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="add_jump_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="add_jump_constraint_8m_source.html">addJumpConstraint.m</a>.</p>
 
-<p>References <a class="el" href="add_constraint_8m_source.html#l00018">TrajectoryOptimization.addConstraint()</a>, <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00041">NonlinearProgram.Name</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00063">TrajectoryOptimization.NumNode</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00053">NonlinearProgram.Options</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00075">TrajectoryOptimization.OptVarTable</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00120">TrajectoryOptimization.Plant</a>, and <a class="el" href="str__index_8m_source.html#l00017">str_index()</a>.</p>
+<p>References <a class="el" href="add_constraint_8m_source.html#l00018">TrajectoryOptimization.addConstraint()</a>, <a class="el" href="class__substitutes_8c_source.html#l00168">handle.fieldnames</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00041">NonlinearProgram.Name</a>, <a class="el" href="_dynamical_system_8m_source.html#l00043">DynamicalSystem.Name</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00063">TrajectoryOptimization.NumNode</a>, <a class="el" href="_dynamical_system_8m_source.html#l00105">DynamicalSystem.numState</a>, <a class="el" href="_nonlinear_program_8m_source.html#l00053">NonlinearProgram.Options</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00075">TrajectoryOptimization.OptVarTable</a>, <a class="el" href="_trajectory_optimization_8m_source.html#l00120">TrajectoryOptimization.Plant</a>, <a class="el" href="_dynamical_system_8m_source.html#l00092">DynamicalSystem.States</a>, <a class="el" href="str__index_8m_source.html#l00017">str_index()</a>, and <a class="el" href="_dynamical_system_8m_source.html#l00075">DynamicalSystem.Type</a>.</p>
 
 <p>Referenced by <a class="el" href="nlp_2_0D_hybrid_trajectory_optimization_2configure_8m_source.html#l00018">configure()</a>, and <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_cgraph" alt=""/></div>
-<map name="class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_cgraph" id="class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_cgraph">
+<div class="center"><img src="class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_cgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_cgraph" id="class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_cgraph">
 <area shape="rect" id="node2" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="244,5,397,47"/>
 <area shape="rect" id="node4" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="283,71,358,98"/>
 <area shape="rect" id="node3" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="445,13,512,39"/>
@@ -481,10 +507,10 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_icgraph" alt=""/></div>
-<map name="class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_icgraph" id="class_hybrid_trajectory_optimization_ab09234514a3498197079b2b92b15f762_icgraph">
+<div class="center"><img src="class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_icgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_icgraph" id="class_hybrid_trajectory_optimization_ad077eec573db089f54094c202d16f5b5_icgraph">
 <area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ab24a8ba344e2e3aae6347a668fc906e6" title="configure the trajectory optimizatino NLP problem " alt="" coords="244,5,435,47"/>
-<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="483,35,681,76"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="483,35,681,76"/>
 </map>
 </div>
 </p>
@@ -532,7 +558,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_a6fc407f03054dfc8e71cd9726c4abf5c_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a6fc407f03054dfc8e71cd9726c4abf5c_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_a6fc407f03054dfc8e71cd9726c4abf5c_icgraph" id="class_hybrid_trajectory_optimization_a6fc407f03054dfc8e71cd9726c4abf5c_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -574,7 +600,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_aa28679994fad74d2128333101c285e36_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_aa28679994fad74d2128333101c285e36_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_aa28679994fad74d2128333101c285e36_icgraph" id="class_hybrid_trajectory_optimization_aa28679994fad74d2128333101c285e36_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -622,7 +648,189 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_a1d62fd5e8df3a22a67f7339e8b8d3122_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a1d62fd5e8df3a22a67f7339e8b8d3122_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_a1d62fd5e8df3a22a67f7339e8b8d3122_icgraph" id="class_hybrid_trajectory_optimization_a1d62fd5e8df3a22a67f7339e8b8d3122_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a4f774114c4dff3e952b3b86af64b1a38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function  HybridTrajectoryOptimization.compileConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classinteger.html">integer</a>&#160;</td>
+          <td class="paramname"><em>phase</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>constr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>exclude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile and export symbolic expression and derivatives of all NLP functions. </p>
+<dl class="section note"><dt>Note</dt><dd>If <code>phase</code> is empty, then it will compile all phases. </dd>
+<dd>
+If <code>constr</code> is emtpy, then it will compile all constraints.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phase</td><td>the phase Nlp </td></tr>
+    <tr><td class="paramname">constr</td><td>a list of constraints to be compiled </td></tr>
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">exclude</td><td>a list of functions to be excluded </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_hybrid_trajectory_optimization.html#a4f774114c4dff3e952b3b86af64b1a38">compileConstraint</a> ( ..., StackVariable, ForceExport, BuildMex, Namespace ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_constraint_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_constraint_8m_source.html">compileConstraint.m</a>.</p>
+
+<p>References <a class="el" href="get_phase_index_8m_source.html#l00018">getPhaseIndex()</a>.</p>
+
+<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_cgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_cgraph" id="class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_cgraph">
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a59fcfe213c4ab7e8ea8ea9ff83ee5ec8" title="Returns the index of a particular phase (TrajectoryOptimization object) associated with the input arg..." alt="" coords="244,5,435,47"/>
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_icgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_icgraph" id="class_hybrid_trajectory_optimization_a4f774114c4dff3e952b3b86af64b1a38_icgraph">
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae95f2935832754f5fa98b1e0eddad79b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = HybridTrajectoryOptimization.compileObjective </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classinteger.html">integer</a>&#160;</td>
+          <td class="paramname"><em>phase</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>cost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>exclude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compile and export symbolic expression and derivatives of all NLP functions. </p>
+<dl class="section note"><dt>Note</dt><dd>If <code>phase</code> is empty, then it will compile all phases. </dd>
+<dd>
+If <code>cost</code> is emtpy, then it will compile all cost functions.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phase</td><td>the phase Nlp </td></tr>
+    <tr><td class="paramname">cost</td><td>a list of cost function to be compiled </td></tr>
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">exclude</td><td>a list of functions to be excluded </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="class_hybrid_trajectory_optimization.html#ae95f2935832754f5fa98b1e0eddad79b">compileObjective</a> ( ..., StackVariable, ForceExport, BuildMex, Namespace ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_objective_8m_source.html#l00018">18</a> of file <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_objective_8m_source.html">compileObjective.m</a>.</p>
+
+<p>References <a class="el" href="get_phase_index_8m_source.html#l00018">getPhaseIndex()</a>.</p>
+
+<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_cgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_cgraph" id="class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_cgraph">
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a59fcfe213c4ab7e8ea8ea9ff83ee5ec8" title="Returns the index of a particular phase (TrajectoryOptimization object) associated with the input arg..." alt="" coords="244,5,435,47"/>
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_icgraph" alt=""/></div>
+<map name="class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_icgraph" id="class_hybrid_trajectory_optimization_ae95f2935832754f5fa98b1e0eddad79b_icgraph">
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -663,7 +871,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_cgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_cgraph" id="class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_cgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ab09234514a3498197079b2b92b15f762" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="244,35,435,76"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad077eec573db089f54094c202d16f5b5" title="Add jump constraints between the edge and neighboring two nodes (source and target) ..." alt="" coords="244,35,435,76"/>
 <area shape="rect" id="node3" href="class_trajectory_optimization.html#ae5f8bab4b0584bf36c0c4d9b5df7eb92" title="Add NLP constraints constraints. " alt="" coords="483,5,636,47"/>
 <area shape="rect" id="node5" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728" title="str_index" alt="" coords="522,71,597,98"/>
 <area shape="rect" id="node4" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="684,13,751,39"/>
@@ -676,7 +884,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_icgraph" id="class_hybrid_trajectory_optimization_ab24a8ba344e2e3aae6347a668fc906e6_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -714,7 +922,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_a8661e96ef3f8bb66f34de8b8b46f7e43_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a8661e96ef3f8bb66f34de8b8b46f7e43_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_a8661e96ef3f8bb66f34de8b8b46f7e43_icgraph" id="class_hybrid_trajectory_optimization_a8661e96ef3f8bb66f34de8b8b46f7e43_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -745,14 +953,16 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="get_phase_index_8m_source.html#l00018">18</a> of file <a class="el" href="get_phase_index_8m_source.html">getPhaseIndex.m</a>.</p>
 
-<p>Referenced by <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization()</a>.</p>
+<p>Referenced by <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_constraint_8m_source.html#l00018">compileConstraint()</a>, <a class="el" href="_0D_hybrid_trajectory_optimization_2compile_objective_8m_source.html#l00018">compileObjective()</a>, and <a class="el" href="_hybrid_trajectory_optimization_8m_source.html#l00081">HybridTrajectoryOptimization()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_a59fcfe213c4ab7e8ea8ea9ff83ee5ec8_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a59fcfe213c4ab7e8ea8ea9ff83ee5ec8_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_a59fcfe213c4ab7e8ea8ea9ff83ee5ec8_icgraph" id="class_hybrid_trajectory_optimization_a59fcfe213c4ab7e8ea8ea9ff83ee5ec8_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a4f774114c4dff3e952b3b86af64b1a38" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="244,5,435,47"/>
+<area shape="rect" id="node3" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="483,64,681,105"/>
+<area shape="rect" id="node4" href="class_hybrid_trajectory_optimization.html#ae95f2935832754f5fa98b1e0eddad79b" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="244,123,435,164"/>
 </map>
 </div>
 </p>
@@ -787,14 +997,16 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_cgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_cgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_cgraph" id="class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_cgraph">
-<area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="244,145,433,186"/>
-<area shape="rect" id="node3" href="class_nonlinear_program.html#a616e92e5a58bd04f9cbd6768b7773749" title="This method registers the information of an optimization variable. " alt="" coords="488,5,687,32"/>
+<area shape="rect" id="node2" href="class_nonlinear_program.html#a359e0c39f3144e1aec13b2fd500c8f44" title="The default class constructor function. " alt="" coords="244,209,433,250"/>
+<area shape="rect" id="node3" href="class_nonlinear_program.html#afe0a555646a765fcf37eccedbea87094" title="This method registers the information of an optimization variable. " alt="" coords="488,5,687,32"/>
 <area shape="rect" id="node5" href="class_nonlinear_program.html#ac69a4a0d696fffa572396d5c58a1e5a5" title="This method registers the information of a NLP function as a cost function. " alt="" coords="484,56,691,83"/>
-<area shape="rect" id="node6" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="481,325,693,352"/>
-<area shape="rect" id="node4" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="501,157,674,184"/>
-<area shape="rect" id="node7" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="490,208,685,235"/>
-<area shape="rect" id="node8" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="496,259,679,301"/>
+<area shape="rect" id="node6" href="class_nonlinear_program.html#a8b7c158b15629514ce37fc2aa14439ee" title="This method registers the information of a NLP function as a constraint. " alt="" coords="481,457,693,484"/>
+<area shape="rect" id="node4" href="class_nonlinear_program.html#a68afb570d51f6afcb91aa233885ba1ad" title="Updates the NLP problems before load it to NLP solver. " alt="" coords="501,289,674,316"/>
+<area shape="rect" id="node7" href="class_nonlinear_program.html#a18934c38a77bf78db80fc54e101b5765" title="The function returns the dimension, upper/lower limits of NLP variables. " alt="" coords="490,340,685,367"/>
+<area shape="rect" id="node8" href="class_nonlinear_program.html#a6b55533176c1ff3f6dcb545eb01347d2" title="This function returns an initial guess for the NLP. " alt="" coords="496,391,679,433"/>
 <area shape="rect" id="node9" href="class_nonlinear_program.html#a8acd8346e88ac50c24f55b7b23413b8a" title="Sets the object options, and return the complete list of option structure including unchanged default..." alt="" coords="492,107,683,133"/>
+<area shape="rect" id="node12" href="class_nonlinear_program.html#aed2141863b674dcea33fb0a4999b3f27" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="498,158,677,199"/>
+<area shape="rect" id="node13" href="class_nonlinear_program.html#a32d95f8fa6e875dced3663f7f8532552" title="Compile and export symbolic expression and derivatives of all NLP functions. " alt="" coords="498,223,677,265"/>
 <area shape="rect" id="node10" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0" title="struct_overlay" alt="" coords="741,107,845,133"/>
 <area shape="rect" id="node11" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64" title="implode" alt="" coords="893,107,960,133"/>
 </map>
@@ -806,7 +1018,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_icgraph" id="class_hybrid_trajectory_optimization_a5bf49cba5690869a94db048e565f88ef_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -852,7 +1064,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hybrid_trajectory_optimization_adb58e04362bdeb6fbcf7ccd7abe39446_icgraph.png" border="0" usemap="#class_hybrid_trajectory_optimization_adb58e04362bdeb6fbcf7ccd7abe39446_icgraph" alt=""/></div>
 <map name="class_hybrid_trajectory_optimization_adb58e04362bdeb6fbcf7ccd7abe39446_icgraph" id="class_hybrid_trajectory_optimization_adb58e04362bdeb6fbcf7ccd7abe39446_icgraph">
-<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#a81d5d632c3855ca613257e9bbdb18a3d" title="The constructor function. " alt="" coords="244,5,443,47"/>
+<area shape="rect" id="node2" href="class_hybrid_trajectory_optimization.html#ad022f63572fbbe4e9dd079201cb6d663" title="The constructor function. " alt="" coords="244,5,443,47"/>
 </map>
 </div>
 </p>
@@ -882,6 +1094,8 @@ Here is the caller graph for this function:</div>
 <li>nlp/@HybridTrajectoryOptimization/<a class="el" href="_0D_hybrid_trajectory_optimization_2check_constraints_8m_source.html">checkConstraints.m</a></li>
 <li>nlp/@HybridTrajectoryOptimization/<a class="el" href="_0D_hybrid_trajectory_optimization_2check_costs_8m_source.html">checkCosts.m</a></li>
 <li>nlp/@HybridTrajectoryOptimization/<a class="el" href="_0D_hybrid_trajectory_optimization_2check_variables_8m_source.html">checkVariables.m</a></li>
+<li>nlp/@HybridTrajectoryOptimization/<a class="el" href="_0D_hybrid_trajectory_optimization_2compile_constraint_8m_source.html">compileConstraint.m</a></li>
+<li>nlp/@HybridTrajectoryOptimization/<a class="el" href="_0D_hybrid_trajectory_optimization_2compile_objective_8m_source.html">compileObjective.m</a></li>
 <li>nlp/@HybridTrajectoryOptimization/<a class="el" href="nlp_2_0D_hybrid_trajectory_optimization_2configure_8m_source.html">configure.m</a></li>
 <li>nlp/@HybridTrajectoryOptimization/<a class="el" href="_0D_hybrid_trajectory_optimization_2export_solution_8m_source.html">exportSolution.m</a></li>
 <li>nlp/@HybridTrajectoryOptimization/<a class="el" href="get_phase_index_8m_source.html">getPhaseIndex.m</a></li>
@@ -903,7 +1117,7 @@ Here is the caller graph for this function:</div>
     </p>
     <p class="pull-left"><small>
         &copy; Copyright 2017, AMBER Lab.<br/>
-	Generated on Tue May 2 2017 13:38:48 for FROST by &#160;<br/>
+	Generated on Thu May 4 2017 10:42:13 for FROST by &#160;<br/>
 	<a href="http://www.doxygen.org/index.html">
 	<img class="footer" src="doxygen.png" alt="doxygen"/>
 	</a> 1.8.11

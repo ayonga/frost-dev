@@ -1,0 +1,5 @@
+<map id="ContinuousDynamics::secondOrderDynamics" name="ContinuousDynamics::secondOrderDynamics">
+<area shape="rect" id="node2" href="$class_continuous_dynamics.html#a03b08d526af5bed25b9eaef975fabfcd" title="calculate the dynamical equation dx " alt="" coords="216,35,363,76"/>
+<area shape="rect" id="node3" href="$class_continuous_dynamics.html#a37641d1e24d081f8abfa48edb7178009" title="Detect the guard condition (event trigger) " alt="" coords="411,5,557,47"/>
+<area shape="rect" id="node4" href="$class_continuous_dynamics.html#ae2fc4472f6d6bc6ed6ce8d7c5e8cfef1" title="Simulate the dynamical system. " alt="" coords="605,35,752,76"/>
+</map>
