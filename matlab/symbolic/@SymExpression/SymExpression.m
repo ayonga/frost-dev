@@ -38,7 +38,7 @@ classdef SymExpression < handle
             %    - numeric: create a numeric symbolic expression
             %    - char: create symbolic expression specified by 'x'
             
-            if nargin == 0 || isempty(x)
+            if nargin == 0 
                 % construct empty object
                 return;
             end
@@ -62,23 +62,26 @@ classdef SymExpression < handle
             
             
             if ~isa(x, 'SymExpression')
-                switch class(x)
-                    case 'char'
-                        obj.f = general2math(x,'ConvertString',false);
-                    case 'string'
-                        obj.f = general2math(x,'ConvertString',true);
-                    case 'double'
-                        
-                        obj.f = general2math(x);
-                    case 'cell'
-                        obj.f = general2math(x,'ConvertString',false);
-                    case 'struct'
-                        obj.f = general2math(x,'ConvertString',true);
-                    otherwise
-                        error('SymExpression:invalidInputType',...
-                            'Invalid input argument data type.');
+                if isempty(x)
+                    obj.f = '{}';
+                else
+                    switch class(x)
+                        case 'char'
+                            obj.f = general2math(x,'ConvertString',false);
+                        case 'string'
+                            obj.f = general2math(x,'ConvertString',true);
+                        case 'double'
+                            
+                            obj.f = general2math(x);
+                        case 'cell'
+                            obj.f = general2math(x,'ConvertString',false);
+                        case 'struct'
+                            obj.f = general2math(x,'ConvertString',true);
+                        otherwise
+                            error('SymExpression:invalidInputType',...
+                                'Invalid input argument data type.');
+                    end
                 end
-                
                 obj.s = eval_math('Unique[symvar$]');
                 if delayed_set
                     % delayed set the formula to the symbol
