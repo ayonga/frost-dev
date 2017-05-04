@@ -202,5 +202,6 @@ classdef CoordinateFrame < handle
         
         Jac = computeSpatialJacobian(obj, nDof);
         
+        c_str = getTwists(obj, p);
     end
 end

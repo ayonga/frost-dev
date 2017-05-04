@@ -1,10 +1,12 @@
-function [varargout] = getCartesianPosition(obj, varargin)
+function [pos] = getCartesianPosition(obj, frame, p)
     % Returns the symbolic representation of the Cartesian positions of a
-    % rigid point specified by a list of (parentlink,offset) pairs
+    % rigid point specified by a coordinate frame and an offset
     %
     % Parameters:
-    % varargin: the pairs of {parentlink,offset} of specified points 
+    % frame: the list of coordinate frame of the point 
     % @type cell
+    % offset: the offset of the point from the origin of the frame 
+    % @type matrix
     % 
     % Return values:
     % pos: the 3-Dimensional SO(3) position vectors of the fixed rigid
@@ -13,41 +15,19 @@ function [varargout] = getCartesianPosition(obj, varargin)
     %
     % @note Syntax for ont point
     %  
-    % >> getCartesianPosition(obj,{'Link1',[0,0,0.1]})
+    % >> getCartesianPosition(obj,pf,offset)
     %
-    % @note Syntax for multiple points
+    % @note Syntax for multiple points (offset should be np*3 matrix)
     % 
-    % >> getCartesianPosition(obj,{'Link1',[0,0,0.1]},{'Link2',[0.2,0,0.1]})
+    % >> getCartesianPosition(obj,pfarray, offset)
     
-    
-    % the number of points (one less than the nargin)
-    n_pos = numel(varargin);
-    if n_pos > 0
-        
-        c_str = cell(1,n_pos);
-        
-        
-        for i=1:n_pos
-            c_str{i}.gst0 = varargin{i}.gst0;
-            frame = varargin{i}.Reference;
-            while isempty(frame.TwistPairs)
-                frame = frame.Reference;   
-                if isempty(frame)
-                    error('The coordinate system is not fully defined.');
-                end
-            end
-            
-            c_str{i}.TwistPairs = frame.TwistPairs;
-        end
-        
-        pos = eval_math_fun('ComputeCartesianPositions',c_str);
-        
-        varargout = cell(1,n_pos);
-        for i=1:n_pos
-            varargout{i} = pos(i,:);
-        end
-    else
-        varargout = {};
+    if nargin < 3
+        p = [];
     end
+    c_str = getTwists(frame, p);
+    
+    pos = eval_math_fun('ComputeCartesianPositions',c_str);
+        
+       
     
 end

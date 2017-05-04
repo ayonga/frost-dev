@@ -29,7 +29,7 @@ function obj = configureDynamics(obj)
     dQe = obj.States.dx;
     
     %|@note !!! The minus sign !!!
-    % Fvec appears at the right hand side (typically C(q,dq)dq + G(q)
+    % Fvec appears at the right hand side (typically -C(q,dq)dq - G(q)
     % appears at the left hand side of the Euler-Lagrangian Equation)
     Ce1 = cell(obj.numState,1);
     Ce2 = cell(obj.numState,1);

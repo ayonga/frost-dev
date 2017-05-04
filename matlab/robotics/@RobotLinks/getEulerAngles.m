@@ -1,51 +1,35 @@
-function [varargout] = getEulerAngles(obj, varargin)
+function ang= getEulerAngles(obj, frame, p)
     % Returns the symbolic representation of the Euler angles of a
     % rigid link.
     %
     % Parameters:
-    % varargin: the name of the rigid links @type char
+    % frame: the list of coordinate frame of the point 
+    % @type cell
+    % offset: the offset of the point from the origin of the frame 
+    % @type matrix
     % 
     % Return values:    
     %  ang: the 3-dimensional Euler angles (roll,pitch,yaw) vector of the
     %  CoM of the system @type SymExpression
     %
     %
-    % @note Syntax for ont link
+    % @note Syntax for ont point
     %  
-    % >> getEulerAngles(obj,'Link1')
+    % >> getSpatialJacobian(obj,pf,offset)
     %
-    % @note Syntax for multiple links
+    % @note Syntax for multiple points (offset should be np*3 matrix)
     % 
-    % >> getEulerAngles(obj,{'Link1','Link2'})
+    % >> getSpatialJacobian(obj,pfarray, offset)
     
     
     % the number of points (one less than the nargin)
-    n_pos = numel(varargin);
-    if n_pos>0
-        c_str = cell(1,n_pos);
-        
-        
-        for i=1:n_pos
-            c_str{i}.gst0 = varargin{i}.gst0;
-            frame = varargin{i}.Reference;
-            while isempty(frame.TwistPairs)
-                frame = frame.Reference;
-                if isempty(frame)
-                    error('The coordinate system is not fully defined.');
-                end
-            end
-            
-            c_str{i}.TwistPairs = frame.TwistPairs;
-        end
-        
-        ang = eval_math_fun('ComputeEulerAngles',c_str);
-        
-        varargout = cell(1,n_pos);
-        for i=1:n_pos
-            varargout{i} = ang(i,:);
-        end
-    else
-        varargout = {};
+    if nargin < 3
+        p = [];
     end
+    c_str = getTwists(frame, p);
+        
+    ang = eval_math_fun('ComputeEulerAngles',c_str);
+    
+   
     
 end
