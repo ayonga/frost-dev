@@ -127,7 +127,7 @@ classdef RobotLinks < ContinuousDynamics
         
         obj = configureKinematics(obj, dofs, links)
         
-        obj = configureDynamics(obj);
+        obj = configureDynamics(obj, varargin);
         
         
         

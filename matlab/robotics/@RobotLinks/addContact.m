@@ -26,7 +26,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     pos = getCartesianPosition(obj, contact);
     rpy = getEulerAngles(obj, contact);
     
-    h = tomatrix([pos; rpy]); %effectively as transpose
+    h = transpose([pos, rpy]); %effectively as transpose
     % extract the contrained elements
     constr =  contact.WrenchBase' * h;
     % compute the body jacobian 

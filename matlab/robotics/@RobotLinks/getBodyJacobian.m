@@ -32,8 +32,12 @@ function [J] = getBodyJacobian(obj, frame, p)
     jac = eval_math_fun('ComputeBodyJacobians',[c_str, {obj.numState}]);
     
     n_pos = length(frame);
-    J = cell(1,n_pos);
-    for i=1:n_pos
-        J{i} = jac(i,:);
+    if n_pos > 1
+        J = cell(1,n_pos);
+        for i=1:n_pos
+            J{i} = jac(i,:);
+        end
+    else
+        J = jac(1,:);
     end
 end

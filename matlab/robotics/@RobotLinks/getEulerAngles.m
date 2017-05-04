@@ -15,11 +15,11 @@ function ang= getEulerAngles(obj, frame, p)
     %
     % @note Syntax for ont point
     %  
-    % >> getSpatialJacobian(obj,pf,offset)
+    % >> getEulerAngles(obj,pf,offset)
     %
     % @note Syntax for multiple points (offset should be np*3 matrix)
     % 
-    % >> getSpatialJacobian(obj,pfarray, offset)
+    % >> getEulerAngles(obj,pfarray, offset)
     
     
     % the number of points (one less than the nargin)
