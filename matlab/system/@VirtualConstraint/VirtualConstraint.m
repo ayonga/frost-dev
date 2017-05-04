@@ -170,7 +170,10 @@ classdef VirtualConstraint < handle
         % @type SymExpression
         tau_
         
-        
+        % An indicator that shows there is a parameter variable for phase
+        %
+        % @type logical
+        hasPhaseParam = false;
         
         
         
@@ -467,6 +470,7 @@ classdef VirtualConstraint < handle
                 validateattributes(p, {'SymVariable'},...
                     {'nonempty'},...
                     'VirtualConstraint', 'PhaseParams');
+                obj.hasPhaseParam = true;
                 obj.PhaseParams   = p;
             end
             

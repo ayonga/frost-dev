@@ -29,7 +29,7 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
     assert(~isempty(tau_funcs),...
         'The functions for the phase variable are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
-    if ~isempty(obj.PhaseParams)
+    if obj.hasPhaseParam
         params = {p(:)};
     else
         params = {};

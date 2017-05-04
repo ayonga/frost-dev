@@ -29,7 +29,7 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     rel_deg = obj.RelativeDegree;
     is_state_based = strcmp(obj.PhaseType, 'StateBased');
     
-    if ~isempty(obj.PhaseParams) && is_state_based
+    if obj.hasPhaseParam && is_state_based
         params = {a(:), p(:)};
     else
         params = {a(:)};
