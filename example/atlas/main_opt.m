@@ -10,6 +10,7 @@ bounds.RightStance = model_bounds;
 
 bounds.RightStance.time.t0.lb = 0;
 bounds.RightStance.time.t0.ub = 0;
+bounds.RightStance.time.t0.x0 = 0;
 bounds.RightStance.time.tf.lb = 0.2;
 bounds.RightStance.time.tf.ub = 1;
 bounds.RightStance.time.duration.lb = 0.2;

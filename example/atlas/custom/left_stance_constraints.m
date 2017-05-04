@@ -4,10 +4,10 @@ function left_stance_constraints(nlp, bounds, varargin)
     
     domain.VirtualConstraints.velocity.imposeNLPConstraint(nlp, bounds.velocity.ep, 0);
     
-    tau = domain.VirtualConstraints.velocity.PhaseFuncs{1};
-    
-    addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'first', 0, 0, 'Nonlinear');
-    addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'last', 1, 1, 'Nonlinear');
+%     tau = domain.VirtualConstraints.velocity.PhaseFuncs{1};
+%     
+%     addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'first', 0, 0, 'Nonlinear');
+%     addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'last', 1, 1, 'Nonlinear');
     
     
     domain.VirtualConstraints.position.imposeNLPConstraint(nlp, [bounds.position.kp,bounds.position.kd], [1,1]);
