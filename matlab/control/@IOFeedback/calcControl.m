@@ -41,13 +41,10 @@ function [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params)
         y_i = y(i);
         
         % returns y, y', y'', y^(n-1), Jy^n-1
-        y_a{i} = cell(1,y_i.RelativeDegree+1);
-        y_d{i} = cell(1,y_i.RelativeDegree+1);
-        tau{i} = cell(1,y_i.RelativeDegree+1);
         
         % calculate the actual outputs
-        [y_a{i}{:}] = calcActual(y_i,q,dq);
-        
+%         [y_a{i}{:}] = calcActual(y_i,q,dq);
+        y_a{i} = calcActual(y_i,q,dq);
         % extract the parameter values 
         output_param = y_i.OutputParamName; % desired output parameters
         phase_param  = y_i.PhaseParamName;  % phase variable parameters
@@ -69,9 +66,9 @@ function [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params)
             p = [];
         end
         % calculate the desired outputs
-        [y_d{i}{:}] = calcDesired(y_i, t, q, dq, a, p);
+        y_d{i} = calcDesired(y_i, t, q, dq, a, p);
         % calculate the phase variable
-        [tau{i}{:}] = calcPhaseVariable(y_i, t, q, dq, p);
+        tau{i} = calcPhaseVariable(y_i, t, q, dq, p);
         
         
         
