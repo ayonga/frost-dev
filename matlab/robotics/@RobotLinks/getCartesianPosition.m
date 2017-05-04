@@ -5,7 +5,7 @@ function [pos] = getCartesianPosition(obj, frame, p)
     % Parameters:
     % frame: the list of coordinate frame of the point 
     % @type cell
-    % offset: the offset of the point from the origin of the frame 
+    % p: the offset of the point from the origin of the frame 
     % @type matrix
     % 
     % Return values:

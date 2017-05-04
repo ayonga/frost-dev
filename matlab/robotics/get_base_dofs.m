@@ -6,7 +6,7 @@ function base_dofs = get_base_dofs(type)
     % type: the type of the floating base configuration @type char
     %
     % Return values:
-    % base: the array of base coordinates @type RigitJoint
+    % base: the array of base coordinates @type struct
     %
     % @note The supported base joint types are:
     %   - floating: This joint allows motion for all 6 degrees of

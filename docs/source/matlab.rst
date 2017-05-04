@@ -12,7 +12,6 @@ The majority of FROST's Matlab code is written as the *object oriented programmi
    :maxdepth: 2
 
    model
-   kinematic
    system
    control
    nlp

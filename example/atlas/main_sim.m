@@ -94,7 +94,7 @@ x0 = r_impact.calcDiscreteMap(0,xf);
 % run the single domain first (no hybrid system model)
 % r_stance.simulate(0,x0,10,io_control,r_stance_param,'nsf',[]);
 tic
-atlas_flat.simulate(0, x0, [], [])
+atlas_flat.simulate(0, x0, [], [],'NumCycle',1)
 toc
 % 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

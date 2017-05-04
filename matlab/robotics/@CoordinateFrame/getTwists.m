@@ -6,8 +6,6 @@ function c_str = getTwists(obj, p)
     % 
     %
     % Parameters:
-    % frame: the list of coordinate frame of the point 
-    % @type cell
     % p: the offset of the point from the origin of the frame 
     % @type matrix
     %

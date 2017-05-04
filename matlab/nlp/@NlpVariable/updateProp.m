@@ -3,10 +3,10 @@ function obj = updateProp(obj, varargin)
     % input name-value pair arguments.
     %
     % Parameters:
-    %  varargin: variable nama-value pair input arguments, in detail:
-    %   lb: lower limit @type colvec
-    %   ub: upper limit @type colvec
-    %   x0: a typical value of the variable @type colvec
+    % varargin: variable nama-value pair input arguments, in detail:
+    % lb: lower limit @type colvec
+    % ub: upper limit @type colvec
+    % x0: a typical value of the variable @type colvec
     
     argin = struct(varargin{:});
     

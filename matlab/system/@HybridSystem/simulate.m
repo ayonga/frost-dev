@@ -2,14 +2,12 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 
-    % options: simulation options of hybrid system @type struct
-    %
-    %
-    % Optional fields of options:
-    % numcycle: the number of cycle if the simulated system is periodic,  
-    % 1 if not specified @type double
-    % x0: the initial states of the system, zero if not specified
-    % @type colvec
+    % t0: the starting time @type double
+    % x0: the initial condition states @type colvec
+    % tf: the terminating time @type double
+    % options: the ODE options @type struct
+    % varargin: extra simulation options
+    
     
     
     

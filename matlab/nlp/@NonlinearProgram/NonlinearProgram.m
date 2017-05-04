@@ -88,7 +88,7 @@ classdef NonlinearProgram < handle
     %% Function definitions
     methods
         
-        [obj] = regVariable(obj, varargin);
+        [obj] = regVariable(obj, vars);
         
         [obj] = update(obj);
         
@@ -101,7 +101,10 @@ classdef NonlinearProgram < handle
         [x0] = getInitialGuess(obj, method);
         
         obj = setOption(obj, varargin);
+       
+        compileConstraint(obj, export_path, varargin);
         
+        compileObjective(obj, export_path, varargin);
     end
         
     

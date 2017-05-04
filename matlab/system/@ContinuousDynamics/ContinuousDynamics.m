@@ -1,4 +1,4 @@
- classdef ContinuousDynamics < DynamicalSystem
+classdef ContinuousDynamics < DynamicalSystem
     % Continuous state dynamic system governed by differential equations.
     %
     % It could be either a
@@ -219,10 +219,10 @@
         obj = compile(obj, export_path, varargin);        
         
         % add event functions
-        obj = addEvent(obj, constr)
+        obj = addEvent(obj, constr);
         
         % remove event functions
-        obj = removeEvent(obj, name)
+        obj = removeEvent(obj, name);
         
         % add holonomic constraints
         obj = addHolonomicConstraint(obj, constr);
@@ -231,7 +231,7 @@
         obj = removeHolonomicConstraint(obj, name);
         
         % add unilateral constraints
-        obj = addUnilateralConstraint(obj, name, constr, deps);
+        obj = addUnilateralConstraint(obj, constr);
         
         % remove unilateral constraints
         obj = removeUnilateralConstraint(obj, name);

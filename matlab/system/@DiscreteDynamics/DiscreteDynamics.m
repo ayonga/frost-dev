@@ -77,34 +77,35 @@ classdef DiscreteDynamics < DynamicalSystem
             end
         end
         
-        function obj = addState(obj, xplus, xminus, dxplus, dxminus)
+        function obj = addState(obj, x, xn, dx, dxn)
             % overload the superclass 'addState' method with fixed state
             % fields
             % 
             % Parameters:            
             % x: the pre-impact state variables @type SymVariable
-            % xplus: the post-impact state variables @type SymVariable
-            % dx: the post-impact first order derivative of state variables @type SymVariable
-            % dxplus: the post-impact first order derivative of state variables @type SymVariable
+            % xn: the post-impact state variables @type SymVariable
+            % dx: the pre-impact first order derivative of state variables @type SymVariable
+            % dxn: the post-impact first order derivative of state variables @type SymVariable
             
             
         
             if strcmp(obj.Type,'FirstOrder')
-                obj = addState@DynamicalSystem(obj,'x',xplus);
-                obj = addState@DynamicalSystem(obj,'xn',xminus);
+                obj = addState@DynamicalSystem(obj,'x',x);
+                obj = addState@DynamicalSystem(obj,'xn',xn);
             elseif strcmp(obj.Type, 'SecondOrder')
-                obj = addState@DynamicalSystem(obj,'x',xplus, 'dx',dxplus);
-                obj = addState@DynamicalSystem(obj,'xn',xminus, 'dxn',dxminus);
+                obj = addState@DynamicalSystem(obj,'x',x, 'dx',dx);
+                obj = addState@DynamicalSystem(obj,'xn',xn, 'dxn',dxn);
             else
                 error('Please define the type of the system first.');
             end
         end
         
-        
-        
-        
-        
-        
+    end
+    
+    
+    % methods defined in separate files
+    methods
+        xn = calcDiscreteMap(obj, t, x, varargin);
         
         nlp = IdentityMapConstraint(obj, nlp, src, tar, bounds, varargin);
     end

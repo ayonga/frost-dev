@@ -6,7 +6,7 @@ function obj = setInitialValue(obj, x)
     % the lower/upper boundaries.
     %
     % Parameters: 
-    % x0: an array of initial value of the NLP variables @type colvec
+    % x: an array of initial value of the NLP variables @type colvec
     
     % determine the typical value
     if nargin > 1

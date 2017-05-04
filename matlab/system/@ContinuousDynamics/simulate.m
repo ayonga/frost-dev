@@ -9,7 +9,7 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
     % params: extra parameters @type struct
     % eventnames: the name of eventnames to be used @type cellstr
     % options: simulation options of hybrid system @type struct
-    
+    % varargin: extra arguments @type varargin
     
     if isempty(t0)
         % default initial time
@@ -110,15 +110,15 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
     
     % record the simulated trajectory
     % clear previous results
-    obj.Flow = [];
-    
-    n_sample = length(sol.x);
-    calcs = cell(1,n_sample);
-    for i=1:n_sample
-        [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), controller, params);
-        calcs{i} = extra;
-    end
-    
-    calcs_full = horzcat_fields([calcs{:}]);
-    obj.Flow = calcs_full;
+    %     obj.Flow = [];
+    %
+    %     n_sample = length(sol.x);
+    %     calcs = cell(1,n_sample);
+    %     for i=1:n_sample
+    %         [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), controller, params);
+    %         calcs{i} = extra;
+    %     end
+    %
+    %     calcs_full = horzcat_fields([calcs{:}]);
+    %     obj.Flow = calcs_full;
 end

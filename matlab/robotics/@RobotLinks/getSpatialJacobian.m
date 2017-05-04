@@ -5,7 +5,7 @@ function [J] = getSpatialJacobian(obj, frame, p)
     % Parameters:
     % frame: the list of coordinate frame of the point 
     % @type cell
-    % offset: the offset of the point from the origin of the frame 
+    % p: the offset of the point from the origin of the frame 
     % @type matrix
     % 
     % Return values:
@@ -21,8 +21,6 @@ function [J] = getSpatialJacobian(obj, frame, p)
     % >> getSpatialJacobian(obj,pfarray, offset)
     
     
-    % the number of points (one less than the nargin)
-    % the number of points (one less than the nargin)
     if nargin < 3
         p = [];
     end

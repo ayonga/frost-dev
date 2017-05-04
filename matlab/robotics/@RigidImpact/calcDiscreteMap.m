@@ -9,10 +9,11 @@ function [xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
     %
     % Parameters:
     % t: the time instant
-    % xminus: the pre-impact states @type colvec
+    % x: the pre-impact states @type colvec
     %
     % Return values:
-    % xplus: the post-impact states @type colvec
+    % xn: the post-impact states @type colvec
+    % lambda: the impulsive wrench @type struct
     
     R = obj.R;
     cstr_name = fieldnames(obj.ImpactConstraints);

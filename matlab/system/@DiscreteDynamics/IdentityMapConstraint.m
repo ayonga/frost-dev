@@ -5,12 +5,12 @@ function nlp = IdentityMapConstraint(obj, nlp, src, tar, bounds, varargin)
     % Parameters:
     % nlp: an trajectory optimization NLP object of the system
     % @type TrajectoryOptimization
-    % src_nlp: the NLP of the source domain system
+    % src: the NLP of the source domain system
     % @type TrajectoryOptimization
-    % tar_nlp: the NLP of the target domain system
+    % tar: the NLP of the target domain system
     % @type TrajectoryOptimization
     % bounds: a struct data contains the boundary values @type struct
-    
+    % varargin: extra arguments @type varargin
     
     % by default, identity map
     x = obj.States.x;

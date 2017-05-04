@@ -15,6 +15,10 @@ function f = calcDriftVector(obj, x, dx)
     %     Ce = -Ce_mat(x,dx);
     %     Ge = -Ge_vec(x);
     %     f = Ce*dx + Ge;
+    
+    
+    %|@todo This calculation is slow due to multiple function invoke.
+    %Better ideas to improve the speed? 
     f_vec_name = obj.FvecName_;
     n_fun = length(f_vec_name);
     f_val = zeros(obj.numState,n_fun);

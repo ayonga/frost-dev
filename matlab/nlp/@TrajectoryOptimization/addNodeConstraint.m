@@ -15,7 +15,7 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     % Parameters:
     % func: a symbolic function of the constraint @type SymFunction
     % deps: a list of dependent variables @type cellstr
-    % node: an indicator of 'first' or 'last' node @type char
+    % nodes: an indicator of 'first' or 'last' node @type char
     % lb: the lower bound of the constraints @type colvec
     % ub: the upper bound of the constraints @type colvec
     % type: the type of the constraints (''Linear'' or ''Nonlinear'') @type char

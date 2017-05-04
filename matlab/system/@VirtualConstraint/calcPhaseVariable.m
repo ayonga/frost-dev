@@ -2,6 +2,7 @@ function tau = calcPhaseVariable(obj, t, x, dx, p)
     % calculate the phase variable
     %
     % Parameters:
+    % t: the time @type double
     % x: the states @type colvec
     % dx: the first order derivatives @type colvec
     % p: the parameter set @type colvec

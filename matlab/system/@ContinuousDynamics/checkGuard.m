@@ -6,7 +6,7 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
     %  x: the system states @type colvec
     %  controller: the controller @type Controller
     %  params: the parameter structure @type struct
-    %  events: a list of event function 
+    %  eventfuncs: a list of event function @type UnilateralConstraint
     
     nevent = numel(eventfuncs);
     % we always assumes that the guard function is from positive to

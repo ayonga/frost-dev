@@ -3,10 +3,9 @@ function expr = str2mathstr(s, varargin)
     %
     % @author ayonga @date 2016-11-23
     %
-    % varargin: conversion options.     
-    % ConvertString: If false, this will keep the character as it is, which
-    % will be considered as symbolic variables in Mathematica 
-    % @type logical @default true
+    % Parameters:
+    % s: the character array @type char
+    % varargin: conversion options. @type varragin
     %
     % Copyright (c) 2016, AMBER Lab
     % All right reserved.
