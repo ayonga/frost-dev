@@ -73,7 +73,8 @@ function domain = LeftStance(model)
     
     r_hip_frame = domain.Joints(getJointIndices(domain,'r_leg_hpy'));
     r_ankle_frame = domain.Joints(getJointIndices(domain,'r_leg_aky'));
-    [p_lhp,p_lak] = getCartesianPosition(domain, r_hip_frame, r_ankle_frame);
+    [p_lhp] = getCartesianPosition(domain, r_hip_frame);
+    [p_lak] = getCartesianPosition(domain, r_ankle_frame);
     % p_lak = getCartesianPosition(domain, r_ankle_frame);
     nsl = (p_lak(1) - p_lhp(1))/(p_lak(3) - p_lhp(3));
     y_nsl = linearize(nsl,x);

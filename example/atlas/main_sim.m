@@ -16,7 +16,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
 atlas = AtlasRobot(urdf);
-atlas.configureDynamics();
+atlas.configureDynamics('DelayCoriolisSet',false);
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,10 +52,10 @@ atlas_flat = setEdgeProperties(atlas_flat, srcs, tars, ...
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% r_stance.compile(export_path);
-% l_stance.compile(export_path);
-% r_impact.compile(export_path);
-% l_impact.compile(export_path);
+r_stance.compile(export_path);
+l_stance.compile(export_path);
+r_impact.compile(export_path);
+l_impact.compile(export_path);
 
 
 
