@@ -16,10 +16,10 @@ classdef AtlasRobot < RobotLinks
             
             limits = [base.Limit];
             
-            [limits.lower] = deal(-0.6, -0.2, 0.7, -0.05, -0.5, -0.05);
-            [limits.upper] = deal(0.3, 0.2, 0.9, 0.05, 0.5, 0.05);
+            [limits.lower] = deal(-0.6, -0.2, 0.7, -0.1, -0.5, -0.1);
+            [limits.upper] = deal(0.3, 0.2, 0.9, 0.1, 0.5, 0.1);
             [limits.velocity] = deal(1, 0.1, 0.5, 0.5, 0.5, 0.5);
-            
+            [limits.effort] = deal(0);
             for i=1:6
                 base(i).Limit = limits(i);
             end

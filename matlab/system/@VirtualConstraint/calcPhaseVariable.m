@@ -25,11 +25,11 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
         return;
     end
     model_type = obj.Model.Type;
-    tau_funcs = obj.PhaseFuncs;
+    tau_funcs = obj.PhaseFuncsName_;
     assert(~isempty(tau_funcs),...
         'The functions for the phase variable are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
-    if ~isempty(obj.PhaseParams)
+    if obj.hasPhaseParam
         params = {p(:)};
     else
         params = {};
@@ -44,12 +44,12 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
     
     
     
-    varargout{1} = feval(tau_funcs{1}.Name, x, params{:});
+    varargout{1} = feval(tau_funcs{1}, x, params{:});
     if rel_deg > 1
         for i=2:rel_deg
-            varargout{i} = feval(tau_funcs{i}.Name, states{:}, params{:});                 %#ok<*AGROW>
+            varargout{i} = feval(tau_funcs{i}, states{:}, params{:});                 %#ok<*AGROW>
         end
     end
-    varargout{rel_deg+1} = feval(tau_funcs{rel_deg+1}.Name, states{:}, params{:});
+    varargout{rel_deg+1} = feval(tau_funcs{rel_deg+1}, states{:}, params{:});
     
 end

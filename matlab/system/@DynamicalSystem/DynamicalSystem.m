@@ -97,21 +97,29 @@
         
     end
     
-    % The values for the system variables
-    properties(Access=protected)
+    
+    
+    % methods defined in external files
+    methods 
         
+        % Add state variables
+        obj = addState(obj, varargin);
         
-        t_
+        % Add input variables
+        obj = addInput(obj, category, name, var, gf, varargin);
         
-        states_
+        % Remove input variables
+        obj = removeInput(obj, category, name);
         
-        inputs_
+        % Add parameter variables
+        obj = addParam(obj, varargin);
         
-        params_
+        % Remove parameter variables
+        obj = removeParam(obj, param_name);
         
+        % set values for parameter variables
+        obj = setParamValue(obj, varargin);
     end
-    
-    
     
     
     methods
@@ -166,11 +174,6 @@
         end
         
         
-    end
-    
-    
-    
-    methods 
         function var_group= validateVarName(obj, name)
             % Adds unilateral (inequality) constraints on the dynamical system
             % states and inputs
@@ -255,26 +258,39 @@
         
     end
     
-    % methods defined in external files
-    methods 
+    % The values for the system variables
+    properties(Access=protected,Hidden)
         
-        % Add state variables
-        obj = addState(obj, varargin);
+        % The time 
+        %
+        % @type double
+        t_
         
-        % Add input variables
-        obj = addInput(obj, category, name, var, gf, varargin);
+        % The states
+        %
+        % @type struct
+        states_
         
-        % Remove input variables
-        obj = removeInput(obj, category, name);
+        % The inputs
+        %
+        % @type struct
+        inputs_
         
-        % Add parameter variables
-        obj = addParam(obj, varargin);
+        % The parameters
+        %
+        % @type struct
+        params_
         
-        % Remove parameter variables
-        obj = removeParam(obj, param_name);
         
-        % set values for parameter variables
-        obj = setParamValue(obj, varargin);
+        % The name of the Gmap functions
+        %
+        % @type struct
+        GmapName_
+        
+        % The name of the Gvec functions
+        %
+        % @type struct
+        GvecName_
     end
 end
 

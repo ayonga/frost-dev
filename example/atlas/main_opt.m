@@ -54,8 +54,8 @@ step_width_min = 0.17;
 step_width_max = 0.25;
 bounds.LeftStance.params.pqfixed.lb = zeros(3,1);
 bounds.LeftStance.params.pqfixed.ub = zeros(3,1);
-bounds.LeftStance.params.pRightSole.lb = [step_length_min;step_width_min;0;0;0;0];
-bounds.LeftStance.params.pRightSole.ub = [step_length_max;step_width_max;0;0;0;0];
+bounds.LeftStance.params.pLeftSole.lb = [step_length_min;step_width_min;0;0;0;0];
+bounds.LeftStance.params.pLeftSole.ub = [step_length_max;step_width_max;0;0;0;0];
 bounds.LeftStance.params.avelocity.lb = 0.2;
 bounds.LeftStance.params.avelocity.ub = 0.6;
 bounds.LeftStance.params.pvelocity.lb = [0.05, -0.3];
@@ -77,8 +77,16 @@ r_impact.UserNlpConstraint = str2func('right_impact_constraints');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 num_grid.RightStance = 10;
 num_grid.LeftStance = 10;
-nlp = HybridTrajectoryOptimization('AtlasFlat',atlas_flat,num_grid,'EqualityConstraintBoundary',1e-4);
+nlp = HybridTrajectoryOptimization('AtlasFlat',atlas_flat,num_grid,[],'EqualityConstraintBoundary',1e-4);
 nlp.configure(bounds);
+
+event_cstr_name = 'u_nsf_RightStance';
+numNode = nlp.Phase(1).NumNode;
+updateConstrProp(nlp.Phase(1),event_cstr_name,floor(numNode/4),'lb',0.02);
+updateConstrProp(nlp.Phase(1),event_cstr_name,floor(numNode/2),'lb',0.06);
+updateConstrProp(nlp.Phase(1),event_cstr_name,floor(3*numNode/4),'lb',0.02);
+
+
 
 u = r_stance.Inputs.Control.u;
 u2r = tovector(norm(u).^2);
@@ -91,15 +99,20 @@ u2l = tovector(norm(u).^2);
 u2l_fun = SymFunction(['torque_' l_stance.Name],u2l,{u});
 ls_phase = getPhaseIndex(nlp,'LeftStance');
 addRunningCost(nlp.Phase(ls_phase),u2l_fun,'u');
+
+nlp.update;
+% removeConstraint(nlp.Phase(1),'u_friction_cone_RightSole');
+% removeConstraint(nlp.Phase(1),'u_zmp_RightSole');
+% removeConstraint(nlp.Phase(3),'u_friction_cone_LeftSole');
+% removeConstraint(nlp.Phase(3),'u_zmp_LeftSole');
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% compileConstraint(nlp,[],[],export_path);
+compileConstraint(nlp,[],[],export_path,{'dynamics_equation','intX','intXdot'});
 % compileObjective(nlp,[],[],export_path);
-% constr_list = nlp.Phase(1).ConstrTable.Properties.VariableNames;
-% compileConstraint(nlp,1,constr_list(18:23),export_path);
-% constr_list = nlp.Phase(3).ConstrTable.Properties.VariableNames;
+% compileConstraint(nlp,1,'output_boundary_RightStance',export_path);
 % compileConstraint(nlp,4,'xDiscreteMapRightImpact',export_path);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
@@ -108,11 +121,6 @@ loadNodeInitialGuess(nlp.Phase(1),r_stance, r_stance_param);
 loadNodeInitialGuess(nlp.Phase(3),l_stance, l_stance_param);
 loadEdgeInitialGuess(nlp.Phase(2),r_stance,l_stance);
 loadEdgeInitialGuess(nlp.Phase(4),l_stance,r_stance);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Run the simulator
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% atlas_multiwalk = simulate(atlas_multiwalk);
-% atlas_multiwalk_opt = atlas_multiwalk_opt.loadInitialGuess(atlas_multiwalk);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Link the NLP problem to a NLP solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,3 +143,17 @@ solver = IpoptApplication(nlp);
 % export_file = fullfile(cur,'tmp','atlas_multi_contact_walking.avi');
 % anim = animator(atlas);
 % anim.animate(calcs,export_file)
+
+
+r_stance_param = struct_overlay(r_stance_param,params{1},{'AllowNew',true});
+atlas_flat = setVertexProperties(atlas_flat,'RightStance','Param',r_stance_param);
+l_stance_param = struct_overlay(l_stance_param,params{3},{'AllowNew',true});
+atlas_flat = setVertexProperties(atlas_flat,'LeftStance','Param',l_stance_param);
+
+x0 = [states{1}.x(:,1);states{1}.dx(:,1)];
+
+% run the single domain first (no hybrid system model)
+% r_stance.simulate(0,x0,10,io_control,r_stance_param,'nsf',[]);
+tic
+atlas_flat.simulate(0, x0, [], [])
+toc

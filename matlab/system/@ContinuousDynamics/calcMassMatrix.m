@@ -8,5 +8,5 @@ function M = calcMassMatrix(obj, x)
     %         {'vector','numel',obj.numState,'real'},...
     %         'ContinuousDynamics.calcMassMatrix','x');
 
-    M = feval(obj.Mmat.Name, x);
+    M = feval(obj.MmatName_, x);
 end

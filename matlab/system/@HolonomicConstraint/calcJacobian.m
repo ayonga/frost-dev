@@ -16,15 +16,15 @@ function [Jh,dJh] = calcJacobian(obj, x, dx)
     switch obj.Model.Type
         case 'FirstOrder'
             if obj.DerivativeOrder == 1
-                Jh = feval(obj.Jh_.Name, x);
+                Jh = feval(obj.Jh_name, x);
                 dJh = [];
             else
-                Jh = feval(obj.Jh_.Name, x);
-                dJh = feval(obj.dJh_.Name, x);
+                Jh = feval(obj.Jh_name, x);
+                dJh = feval(obj.dJh_name, x);
             end
         case 'SecondOrder'
-            Jh = feval(obj.Jh_.Name, x);
-            dJh = feval(obj.dJh_.Name, x, dx);
+            Jh = feval(obj.Jh_name, x);
+            dJh = feval(obj.dJh_name, x, dx);
     end
     
     

@@ -104,6 +104,10 @@ classdef CoordinateFrame < handle
         
         function obj = ToContactFrame(obj, type)
             % convert a coordinate frame into a contact frame
+            %
+            % Parameters:
+            % obj: the coordinate frame object @type CoordinateFrame
+            % type: the contact type @type char
             
             obj_struc = struct(...
                 'Name', obj.Name,...

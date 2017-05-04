@@ -30,6 +30,9 @@ function obj = configure(obj)
         ddh = Jh*ddx + dJh*dx;
         obj.ddh_ = SymFunction(['ddh_' name '_' model.Name], ddh, {x, dx, ddx});
         
+        obj.dh_name = obj.dh_.Name;
+        obj.ddh_name = obj.ddh_.Name;
+        obj.dJh_name = obj.dJh_.Name;
     else
         if order == 2
             M = model.Mmat;
@@ -42,12 +45,20 @@ function obj = configure(obj)
             obj.dJh_ = SymFunction(['dJh_' name '_' model.Name], dJh, {x});
             ddh = dJh*dx;
             obj.ddh_ = SymFunction(['ddh_' name '_' model.Name], ddh, {x, dx});
+            obj.dh_name = obj.dh_.Name;
+            obj.ddh_name = obj.ddh_.Name;
+            obj.dJh_name = obj.dJh_.Name;
         else
             dh = Jh * dx;
             obj.dh_ = SymFunction(['dh_' name '_' model.Name], dh, {x,dx});
+            obj.dh_name = obj.dh_.Name;
         end
         
         
     end
+    
+    obj.h_name = obj.h_.Name;
+    obj.Jh_name = obj.Jh_.Name;
+    
             
 end

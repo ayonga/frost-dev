@@ -13,13 +13,21 @@ function f = calcDriftVector(obj, x, dx)
     %         {'vector','numel',obj.numState,'real'},...
     %         'ContinuousDynamics.calcDriftVector','dx');
     
-    
-    if strcmp(obj.Type,'FirstOrder')
-        f_val = cellfun(@(f)feval(f.Name,x), obj.Fvec,'UniformOutput',false);
+    f_vec_name = obj.FvecName_;
+    n_fun = length(f_vec_name);
+    f_val = zeros(obj.numState,n_fun);
+    if strcmp(obj.Type,'FirstOrder')        
+        for i=1:n_fun
+            f_val(:,i) = feval(f_vec_name{i},x);
+        end
+        %         f_val = cellfun(@(f)feval(f.Name,x), obj.Fvec,'UniformOutput',false);
     else
-        
-        f_val = cellfun(@(f)feval(f.Name,x,dx), obj.Fvec,'UniformOutput',false);
+        for i=1:n_fun
+            f_val(:,i) = feval(f_vec_name{i},x,dx);
+        end
+        %         f_val = cellfun(@(f)feval(f,x,dx), obj.Fvec,'UniformOutput',false);
     end
-
-    f = sum([f_val{:}],2);
+    
+    %         f = sum([f_val{:}],2);
+    f = sum(f_val,2);
 end
