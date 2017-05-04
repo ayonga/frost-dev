@@ -1,4 +1,4 @@
-function varargout = calcActual(obj, x, dx)
+function ya = calcActual(obj, x, dx)
     % calculate the actual outputs
     %
     % Parameters:
@@ -6,7 +6,7 @@ function varargout = calcActual(obj, x, dx)
     % dx: the first order derivatives @type colvec
     %
     % Return values:
-    % varargout: variable outputs in the following order:
+    % ya: variable outputs in the following order:
     %  ya: the actual output value @type colvec
     %  d1ya: the first order derivative @type colvec
     %  ...
@@ -19,18 +19,19 @@ function varargout = calcActual(obj, x, dx)
     
     model_type = obj.Model.Type;
     ya_funcs = obj.ActualFuncsName_;
+    
     assert(~isempty(ya_funcs),...
         'The functions for actual outputs are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
-    
+    ya = cell(1,rel_deg+1);
     
     if obj.Holonomic
         % holonomic virtual constraints
         % compute the actual output
-        varargout{1} = feval(ya_funcs{1}, x);
+        ya{1} = feval(ya_funcs{1}, x);
     else
         % non-holonomic virtual constraints
-        varargout{1} = feval(ya_funcs{1}, x, dx);
+        ya{1} = feval(ya_funcs{1}, x, dx);
         
     end
     
@@ -44,10 +45,10 @@ function varargout = calcActual(obj, x, dx)
     % compute high-order derivatives
     if rel_deg > 1
         for i=2:rel_deg
-            varargout{i} = feval(ya_funcs{i}, states{:});                 %#ok<*AGROW>
+            ya{i} = feval(ya_funcs{i}, states{:});                 %#ok<*AGROW>
         end
     end
-    varargout{rel_deg+1} = feval(ya_funcs{rel_deg+1}, states{:});
+    ya{rel_deg+1} = feval(ya_funcs{rel_deg+1}, states{:});
     
     
     

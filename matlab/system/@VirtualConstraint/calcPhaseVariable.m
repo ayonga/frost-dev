@@ -1,4 +1,4 @@
-function varargout = calcPhaseVariable(obj, t, x, dx, p)
+function tau = calcPhaseVariable(obj, t, x, dx, p)
     % calculate the phase variable
     %
     % Parameters:
@@ -7,7 +7,7 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
     % p: the parameter set @type colvec
     %
     % Return values:
-    % varargout: variable outputs in the following order:
+    % tau: variable outputs in the following order:
     %  tau: the phase variable value @type double
     %  d1tau: the first order derivative @type double
     %  ...
@@ -18,17 +18,18 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
     % respoect to the states, which is [x] for a first order system and
     % [x;dx] for a second order system.
     
-    
-    if strcmp(obj.PhaseType, 'TimeBased')
-        varargout{1} = t;
-        [varargout{2:nargout}] = deal(1);
-        return;
-    end
     model_type = obj.Model.Type;
     tau_funcs = obj.PhaseFuncsName_;
     assert(~isempty(tau_funcs),...
         'The functions for the phase variable are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
+    tau = cell(1,rel_deg+1);
+    if strcmp(obj.PhaseType, 'TimeBased')
+        tau{1} = t;
+        [tau{2:rel_deg+1}] = deal(1);
+        return;
+    end
+    
     if obj.hasPhaseParam
         params = {p(:)};
     else
@@ -44,12 +45,12 @@ function varargout = calcPhaseVariable(obj, t, x, dx, p)
     
     
     
-    varargout{1} = feval(tau_funcs{1}, x, params{:});
+    tau{1} = feval(tau_funcs{1}, x, params{:});
     if rel_deg > 1
         for i=2:rel_deg
-            varargout{i} = feval(tau_funcs{i}, states{:}, params{:});                 %#ok<*AGROW>
+            tau{i} = feval(tau_funcs{i}, states{:}, params{:});                 %#ok<*AGROW>
         end
     end
-    varargout{rel_deg+1} = feval(tau_funcs{rel_deg+1}, states{:}, params{:});
+    tau{rel_deg+1} = feval(tau_funcs{rel_deg+1}, states{:}, params{:});
     
 end

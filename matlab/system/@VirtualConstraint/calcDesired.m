@@ -1,4 +1,4 @@
-function varargout = calcDesired(obj, t, x, dx, a, p)
+function yd = calcDesired(obj, t, x, dx, a, p)
     % calculate the desired outputs
     %
     % Parameters:
@@ -9,7 +9,7 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     % p: the parameters of the phase variable @type colvec
     %
     % Return values:
-    % varargout: variable outputs in the following order:
+    % yd: variable outputs in the following order:
     %  yd: the actual output value @type colvec
     %  d1yd: the first order derivative @type colvec
     %  ...
@@ -27,6 +27,7 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     assert(~isempty(yd_funcs),...
         'The functions for desired outputs are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
+    yd = cell(1,rel_deg+1);
     is_state_based = strcmp(obj.PhaseType, 'StateBased');
     
     if obj.hasPhaseParam && is_state_based
@@ -47,22 +48,22 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     % compute the derivatives
     if is_state_based
         
-        varargout{1} = feval(yd_funcs{1}, x, params{:});
+        yd{1} = feval(yd_funcs{1}, x, params{:});
         if rel_deg > 1
             for i=2:rel_deg
-                varargout{i} = feval(yd_funcs{i}, states{:}, params{:});    %#ok<*AGROW>
+                yd{i} = feval(yd_funcs{i}, states{:}, params{:});    %#ok<*AGROW>
             end
         end
-        varargout{rel_deg+1} = feval(yd_funcs{rel_deg+1}, states{:}, params{:});
+        yd{rel_deg+1} = feval(yd_funcs{rel_deg+1}, states{:}, params{:});
         
     else
-        varargout{1} = feval(yd_funcs{1}, t, params{:});
+        yd{1} = feval(yd_funcs{1}, t, params{:});
         if rel_deg > 1
             for i=2:rel_deg
-                varargout{i} = feval(yd_funcs{i}, t, params{:});    %#ok<*AGROW>
+                yd{i} = feval(yd_funcs{i}, t, params{:});    %#ok<*AGROW>
             end
         end
-        varargout{rel_deg+1} = feval(yd_funcs{rel_deg+1}, t, params{:});
+        yd{rel_deg+1} = feval(yd_funcs{rel_deg+1}, t, params{:});
     end
     
 end
