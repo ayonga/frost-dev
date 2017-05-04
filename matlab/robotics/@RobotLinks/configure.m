@@ -110,9 +110,12 @@ function obj = configure(obj, config, base)
             end
         end
         
-        gf(mechanicalReduction~=0,:) = diag(mechanicalReduction(mechanicalReduction~=0));
         actuated_joints = dofs(mechanicalReduction~=0);
         nact = length(actuated_joints);
+        
+        gf = zeros(obj.numState, nact);
+        gf(mechanicalReduction~=0,:) = diag(mechanicalReduction(mechanicalReduction~=0));
+        
         u = SymVariable('u',[nact,1],{actuated_joints.Name});
         
         obj.addInput('Control','u',u,gf);
