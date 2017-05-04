@@ -18,17 +18,24 @@ function tau = calcPhaseVariable(obj, t, x, dx, p)
     % respoect to the states, which is [x] for a first order system and
     % [x;dx] for a second order system.
     
-    model_type = obj.Model.Type;
-    tau_funcs = obj.PhaseFuncsName_;
-    assert(~isempty(tau_funcs),...
-        'The functions for the phase variable are not defined. Please run compile(obj, varargin) first.');
+    
+    
     rel_deg = obj.RelativeDegree;
     tau = cell(1,rel_deg+1);
     if strcmp(obj.PhaseType, 'TimeBased')
         tau{1} = t;
         [tau{2:rel_deg+1}] = deal(1);
         return;
+    else % StateBased
+        if isempty(obj.tau_)
+            return;
+        end
     end
+    
+    model_type = obj.Model.Type;
+    tau_funcs = obj.PhaseFuncsName_;
+    assert(~isempty(tau_funcs),...
+        'The functions for the phase variable are not defined. Please run compile(obj, varargin) first.');
     
     if obj.hasPhaseParam
         params = {p(:)};

@@ -295,10 +295,6 @@ classdef VirtualConstraint < handle
                 else
                     obj.setPhaseVariable(args.PhaseVariable);
                 end
-            else
-                if strcmp(args.PhaseType,'StateBased')
-                    error('The phase variable (PhaseVariable) must be given if the desired outputs are state-based outputs.');
-                end
             end
             
             

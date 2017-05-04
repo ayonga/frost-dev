@@ -57,7 +57,7 @@ function domain = LeftStance(model)
     
     y1 = VirtualConstraint(domain,v_hip,'velocity','DesiredType','Constant',...
         'RelativeDegree',1,'OutputLabel',{'vhip'},'PhaseType','StateBased',...
-        'PhaseVariable',tau,'PhaseParams',p,'Holonomic',false);
+        'Holonomic',false);
     
     
     
