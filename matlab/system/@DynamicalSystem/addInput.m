@@ -109,6 +109,8 @@ function obj = addInput(obj, category, name, var, gf, varargin)
         obj.Inputs.(category).(name) = var;
         obj.Gmap.(category).(name) = sfun_gf;
         obj.Gvec.(category).(name) = sfun_gv;
+        obj.GmapName_.(category).(name) = sfun_gf.Name;
+        obj.GvecName_.(category).(name) = sfun_gv.Name;
         obj.inputs_.(category).(name) = nan(length(var),1);
     end
     

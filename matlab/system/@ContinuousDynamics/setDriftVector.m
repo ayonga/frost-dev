@@ -31,5 +31,5 @@ function obj = setDriftVector(obj, vf)
         end
     end
     
-    
+    obj.FvecName_ = cellfun(@(f)f.Name, obj.Fvec,'UniformOutput',false);
 end

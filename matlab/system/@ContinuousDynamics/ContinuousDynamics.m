@@ -139,23 +139,6 @@
         
         
         
-        % A structure that contains the symbolic representation of state
-        % variables
-        %
-        % Required fields of States:
-        %  x: the state variables x(t) @type SymVariable
-        %  dx: the first order derivatives of X, i.e. xdot(t)
-        %  @type SymVariable
-        %
-        % Optional fields of States:
-        %  ddx: the second order derivatives of X , i.e. xddot(t) 
-        %  @type SymVariable
-        %
-        % @type struct
-        % States
-        
-        
-        
         % The mass matrix Mmat(x) 
         %
         % @type SymFunction
@@ -269,8 +252,21 @@
         %
         % @type SymFunction
         MmatDx
+        
+        
     end
     
+    properties (Access=private, Hidden)
+        % The function name of the Mmat
+        %
+        % @type char
+        MmatName_
+        
+        % The function names of the Fvec
+        %
+        % @type cellstr
+        FvecName_
+    end
     
 end
 

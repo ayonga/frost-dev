@@ -18,7 +18,7 @@ function varargout = calcActual(obj, x, dx)
     % [x;dx] for a second order system.
     
     model_type = obj.Model.Type;
-    ya_funcs = obj.ActualFuncs;
+    ya_funcs = obj.ActualFuncsName_;
     assert(~isempty(ya_funcs),...
         'The functions for actual outputs are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
@@ -27,10 +27,10 @@ function varargout = calcActual(obj, x, dx)
     if obj.Holonomic
         % holonomic virtual constraints
         % compute the actual output
-        varargout{1} = feval(ya_funcs{1}.Name, x);
+        varargout{1} = feval(ya_funcs{1}, x);
     else
         % non-holonomic virtual constraints
-        varargout{1} = feval(ya_funcs{1}.Name, x, dx);
+        varargout{1} = feval(ya_funcs{1}, x, dx);
         
     end
     
@@ -44,10 +44,10 @@ function varargout = calcActual(obj, x, dx)
     % compute high-order derivatives
     if rel_deg > 1
         for i=2:rel_deg
-            varargout{i} = feval(ya_funcs{i}.Name, states{:});                 %#ok<*AGROW>
+            varargout{i} = feval(ya_funcs{i}, states{:});                 %#ok<*AGROW>
         end
     end
-    varargout{rel_deg+1} = feval(ya_funcs{rel_deg+1}.Name, states{:});
+    varargout{rel_deg+1} = feval(ya_funcs{rel_deg+1}, states{:});
     
     
     

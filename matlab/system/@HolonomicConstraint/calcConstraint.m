@@ -11,7 +11,7 @@ function h = calcConstraint(obj, x)
     
     
     
-    h = feval(obj.h_.Name, x, hd);
+    h = feval(obj.h_name, x, hd);
     
     
     

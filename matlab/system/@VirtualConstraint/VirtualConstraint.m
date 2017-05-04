@@ -176,7 +176,25 @@ classdef VirtualConstraint < handle
         hasPhaseParam = false;
         
         
+        % The actual outputs
+        %
+        % @type char
+        ActualFuncsName_
         
+        % The desired outputs
+        %
+        % @type char
+        DesiredFuncsName_
+        
+        % The phase variable
+        %
+        % @type char
+        PhaseFuncsName_
+        
+        % The virtual constraints ya - yd functions
+        %
+        % @type char
+        OutputFuncsName_
     end
     
     

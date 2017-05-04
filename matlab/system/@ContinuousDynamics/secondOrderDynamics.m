@@ -35,11 +35,11 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
         for i=1:n_ext   
             f_name = f_ext_name{i};
             % get the Gvec function object
-            g_fun = obj.Gvec.External.(f_name);
+            % g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
             f_ext = obj.ExternalOutputFun(obj, f_name, t, q, dq, params);
             % compute the Gvec, and add it up
-            Gv_ext = Gv_ext + feval(g_fun.Name,q,f_ext);
+            Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),q,f_ext);
             
             % store the external inputs into the object private data
             obj.inputs_.External.(f_name) = f_ext;
@@ -83,7 +83,7 @@ function [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params)
     control_name = fieldnames(obj.Inputs.Control);
     Gv_u = zeros(nx,1);
     if ~isempty(control_name)
-        Be = feval(obj.Gmap.Control.(control_name{1}).Name,q);
+        Be = feval(obj.GmapName_.Control.(control_name{1}),q);
         Ie    = eye(nx);
         
         if isempty(Je)

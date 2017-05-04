@@ -21,7 +21,7 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     % [x;dx] for a second order system.
     
     model_type = obj.Model.Type;
-    yd_funcs = obj.DesiredFuncs;
+    yd_funcs = obj.DesiredFuncsName_;
     
     
     assert(~isempty(yd_funcs),...
@@ -47,22 +47,22 @@ function varargout = calcDesired(obj, t, x, dx, a, p)
     % compute the derivatives
     if is_state_based
         
-        varargout{1} = feval(yd_funcs{1}.Name, x, params{:});
+        varargout{1} = feval(yd_funcs{1}, x, params{:});
         if rel_deg > 1
             for i=2:rel_deg
-                varargout{i} = feval(yd_funcs{i}.Name, states{:}, params{:});    %#ok<*AGROW>
+                varargout{i} = feval(yd_funcs{i}, states{:}, params{:});    %#ok<*AGROW>
             end
         end
-        varargout{rel_deg+1} = feval(yd_funcs{rel_deg+1}.Name, states{:}, params{:});
+        varargout{rel_deg+1} = feval(yd_funcs{rel_deg+1}, states{:}, params{:});
         
     else
-        varargout{1} = feval(yd_funcs{1}.Name, t, params{:});
+        varargout{1} = feval(yd_funcs{1}, t, params{:});
         if rel_deg > 1
             for i=2:rel_deg
-                varargout{i} = feval(yd_funcs{i}.Name, t, params{:});    %#ok<*AGROW>
+                varargout{i} = feval(yd_funcs{i}, t, params{:});    %#ok<*AGROW>
             end
         end
-        varargout{rel_deg+1} = feval(yd_funcs{rel_deg+1}.Name, t, params{:});
+        varargout{rel_deg+1} = feval(yd_funcs{rel_deg+1}, t, params{:});
     end
     
 end

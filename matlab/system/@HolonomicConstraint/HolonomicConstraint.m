@@ -113,32 +113,33 @@ classdef HolonomicConstraint < handle
         %
         % @type SymFunction
         h_
+        h_name
         
         % The Jacobian matrix of the holonomic constraint expression
         %
         % @type SymFunction
         Jh_
-        
+        Jh_name
         
         % The first order derivative of the holonomic constraint expression
         %
         % @type SymFunction
         dh_
-        
+        dh_name
         % The first order derivative of the Jacobian matrix of the
         % holonomic constraint expression
         % 
         %
         % @type SymFunction
         dJh_
-        
+        dJh_name
         
         % The second order derivatives of the holonomic constraints
         % expression
         %
         % @type SymFunction
         ddh_
-        
+        ddh_name
     end
     
     

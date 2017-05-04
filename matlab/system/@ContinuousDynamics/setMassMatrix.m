@@ -38,6 +38,6 @@ function obj = setMassMatrix(obj, M)
         end
     end
     
-    
+    obj.MmatName_ = obj.Mmat.Name;
       
 end

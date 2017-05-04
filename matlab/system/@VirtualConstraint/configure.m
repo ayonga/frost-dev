@@ -149,4 +149,8 @@ function obj = configure(obj, varargin)
     obj.ActualFuncs = ya_fun;
     obj.DesiredFuncs = yd_fun;
     obj.PhaseFuncs = tau_fun;
+    
+    obj.ActualFuncsName_ = cellfun(@(f)f.Name, ya_fun,'UniformOutput',false);
+    obj.DesiredFuncsName_ = cellfun(@(f)f.Name, yd_fun,'UniformOutput',false);
+    obj.PhaseFuncsName_ = cellfun(@(f)f.Name, tau_fun,'UniformOutput',false);
 end
