@@ -19,6 +19,7 @@ function obj = configureDynamics(obj, varargin)
     end
     
     % set the inertia matrix 
+    fprintf('Evaluating the inertia matrix D(q): \t');
     tic
     De = eval_math_fun('InertiaMatrix',[links,{obj.numState}]);
     toc
@@ -33,15 +34,28 @@ function obj = configureDynamics(obj, varargin)
     Ce1 = cell(obj.numState,1);
     Ce2 = cell(obj.numState,1);
     Ce3 = cell(obj.numState,1);
-    tic
+    m = 100;
+    fprintf('Evaluating the coriolis term C(q,dq)dq: \t');
+    bs = '\b';
+    sp = ' ';
+    msg = '%d percents completed…\n'; % carriage return included in case error interrupts loop
+    msglen = length(msg)-3; % compensate for conversion character and carriage return
+    fprintf(1,sp(ones(1,ceil(log10(m+1))+msglen)));
     for i=1:obj.numState
+        k = floor(((i-1)*3+1)*100/(3*obj.numState));
+        fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
         Ce1{i} = SymFunction(['Ce1_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart1',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
+        k = floor(((i-1)*3+2)*100/(3*obj.numState));
+        fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
         Ce2{i} = SymFunction(['Ce2_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart2',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
+        k = floor(((i-1)*3+3)*100/(3*obj.numState));
+        fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
         Ce3{i} = SymFunction(['Ce3_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart3',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
     end
     toc
     % We add dQe as dependent variables to the gravity vector in order to have a same structure
     % as the corilios forces
+    fprintf('Evaluating the gravity vector G(q): \t');
     Ge = SymFunction(['Ge_vec_',obj.Name],-eval_math_fun('GravityVector',[links,{Qe}]),{Qe,dQe});
     
     vf = [Ce1;Ce2;Ce3;{Ge}];
