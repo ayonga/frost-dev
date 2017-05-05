@@ -7,8 +7,8 @@ function obj = setRotationMatrix(obj,r)
     % rowvec|matrix
     
     if isvector(r) && length(r) == 3
-        rpy = rad2deg(r);
-        obj.R = rotz(rpy(3)) * roty(rpy(2)) * rotx(rpy(1));
+        %         rpy = rad2deg(r);
+        obj.R = rotz(r(3)) * roty(r(2)) * rotx(r(1));
     elseif all(size(r)==[3,3])
         assert(abs(det(r))==1,...
             'The determinant of the rotation matrix must equal 1.');
