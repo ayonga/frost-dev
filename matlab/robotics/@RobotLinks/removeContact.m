@@ -2,7 +2,7 @@ function obj = removeContact(obj, contact)
     % Remove contact constraints defined for the system
     %
     % Parameters:
-    % name: the name of the contact @type cellstr
+    % contact: the name of the contact @type cellstr
     
     % validate the input argument
     if ischar(contact)

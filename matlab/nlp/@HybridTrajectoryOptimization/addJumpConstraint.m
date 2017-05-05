@@ -10,6 +10,8 @@ function obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin)
     % src: the source node NLP @type TrajectoryOptimization
     % edge: the edge NLP @type TrajectoryOptimization
     % tar: the target node NLP @type TrajectoryOptimization
+    % bounds: the boundary values @type struct
+    % varargin: extra argument @type varargin
     
     
     

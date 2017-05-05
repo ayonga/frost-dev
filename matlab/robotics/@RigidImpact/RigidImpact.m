@@ -167,6 +167,8 @@ classdef RigidImpact < DiscreteDynamics
         
         
         [xn,lambda] = calcDiscreteMap(obj, t, x, varargin);
+        
+        obj = compile(obj, export_path, varargin);
     end
     
 end

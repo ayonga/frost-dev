@@ -8,7 +8,7 @@ function obj = rmVertex(obj, vertex_name)
 % unexpected behaviors to be occured.
 %
 % Parameters:
-% vname: the vertex name of type cellstr
+% vertex_name: the vertex name of type cellstr
 %
 % See also: digraph, rmnode
 

@@ -106,7 +106,6 @@ classdef CoordinateFrame < handle
             % convert a coordinate frame into a contact frame
             %
             % Parameters:
-            % obj: the coordinate frame object @type CoordinateFrame
             % type: the contact type @type char
             
             obj_struc = struct(...
@@ -202,5 +201,6 @@ classdef CoordinateFrame < handle
         
         Jac = computeSpatialJacobian(obj, nDof);
         
+        c_str = getTwists(obj, p);
     end
 end

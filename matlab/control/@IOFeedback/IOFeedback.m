@@ -39,7 +39,7 @@ classdef IOFeedback < Controller
     methods
         obj = setParam(obj, varargin);
         
-        [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain);
+        [u, extra] = calcControl(obj, t, x, vfc, gfc, domain, params);
     end
     
 end

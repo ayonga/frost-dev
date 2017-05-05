@@ -146,9 +146,9 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         
         obj = addEdge(obj, varargin);
         
-        obj = rmVertex(obj, varargin);
+        obj = rmVertex(obj, vertex_name);
         
-        obj = rmEdge(obj, varargin);
+        obj = rmEdge(obj, s, t);
         
         obj = setEdgeProperties(obj, s, t, varargin);
         

@@ -3,7 +3,7 @@ function obj = addFixedJoint(obj, fixed_joints)
     % the robot manipulator
     %
     % Parameters:
-    % joints: the list of fixed joints @type cellstr
+    % fixed_joints: the list of fixed joints @type cellstr
     
     if iscellstr(fixed_joints)
         indices = obj.getJointIndices(fixed_joints);

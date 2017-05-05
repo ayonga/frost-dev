@@ -6,7 +6,7 @@ function [obj] = compileObjective(obj, phase, cost, export_path, exclude, vararg
     %
     % Parameters:
     %  phase: the phase Nlp @type integer
-    %  constr: a list of constraints to be compiled @type cellstr
+    %  cost: a list of cost function to be compiled @type cellstr
     %  export_path: the path to export the file @type char
     %  exclude: a list of functions to be excluded @type cellstr
     %  varargin: variable input parameters @type varargin

@@ -3,10 +3,10 @@ function [status] = build_mex(build_dir, src_files, varargin)
     % (Tested on Ubuntu 14.04).
     %
     % Parameters:
-    %  path: the directory name of the folder where the source functions are
+    %  build_dir: the directory name of the folder where the source functions are
     %  located. It will be also used as the build directory for MEX files.
     %  @type char
-    %  f_list: the list of file names that need to be compiled. @type
+    %  src_files: the list of file names that need to be compiled. @type
     %  cellstr 
     %  varargin: extra MEX build options @type varargin
     %

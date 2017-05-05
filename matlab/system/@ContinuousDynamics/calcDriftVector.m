@@ -12,7 +12,13 @@ function f = calcDriftVector(obj, x, dx)
     %     validateattributes(dx, {'double'},...
     %         {'vector','numel',obj.numState,'real'},...
     %         'ContinuousDynamics.calcDriftVector','dx');
+    %     Ce = -Ce_mat(x,dx);
+    %     Ge = -Ge_vec(x);
+    %     f = Ce*dx + Ge;
     
+    
+    %|@todo This calculation is slow due to multiple function invoke.
+    %Better ideas to improve the speed? 
     f_vec_name = obj.FvecName_;
     n_fun = length(f_vec_name);
     f_val = zeros(obj.numState,n_fun);
@@ -20,14 +26,11 @@ function f = calcDriftVector(obj, x, dx)
         for i=1:n_fun
             f_val(:,i) = feval(f_vec_name{i},x);
         end
-        %         f_val = cellfun(@(f)feval(f.Name,x), obj.Fvec,'UniformOutput',false);
     else
         for i=1:n_fun
             f_val(:,i) = feval(f_vec_name{i},x,dx);
         end
-        %         f_val = cellfun(@(f)feval(f,x,dx), obj.Fvec,'UniformOutput',false);
     end
     
-    %         f = sum([f_val{:}],2);
     f = sum(f_val,2);
 end

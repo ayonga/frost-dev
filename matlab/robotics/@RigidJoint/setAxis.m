@@ -10,7 +10,8 @@ function obj = setAxis(obj, axis)
     % validate if it is a numeric 1x3 vector
     validateattributes(axis, {'numeric'},{'size',[1,3]});
     
-    assert(norm(axis)==1,...
+    tol = 1e-1;
+    assert(abs(norm(axis) - 1) < tol,...
         'The axis must be a unit vector.');
     obj.Axis = axis;
     

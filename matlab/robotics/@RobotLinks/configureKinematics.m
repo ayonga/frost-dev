@@ -52,6 +52,8 @@ function obj = configureKinematics(obj, dofs, links)
         for j=1:numel(kin_branch)
             if j > 1
                 dof_obj(kin_branch(j)).setReference(dof_obj(kin_branch(j-1)));
+            else
+                dof_obj(kin_branch(j)).setReference(dof_obj(kin_branch(j)));
             end
             dof_obj(kin_branch(j)).setChainIndices(kin_branch(1:j));
             dof_obj(kin_branch(j)).computeHomogeneousTransform();

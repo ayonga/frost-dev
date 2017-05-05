@@ -323,7 +323,7 @@ classdef NlpFunction < handle
         
         obj = setDependentVariable(obj, depvars);
         
-        obj = setBoundary(obj, cl, cu);
+        obj = setBoundary(obj, lowerbound, upperbound);
         
         obj = updateProp(obj, varargin);
         

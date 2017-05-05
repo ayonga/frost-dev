@@ -67,10 +67,15 @@ function obj = configure(obj, varargin)
         % substitute the time variable with the state-based phase
         % variable tau: t -> tau
         tau = obj.tau_;
-        yd = subs(obj.yd_, t, tau);
+        no_tau = isempty(tau);
+        if no_tau
+            yd = obj.yd_;
+        else
+            yd = subs(obj.yd_, t, tau);
+            % tau(x,p) (becomes tau(x) if p is empty)
+            tau_fun{1} = SymFunction(['tau_' name], tau, [{model.States.x}, p]);
+        end
         
-        % tau(x,p) (becomes tau(x) if p is empty)
-        tau_fun{1} = SymFunction(['tau_' name], tau, [{model.States.x}, p]);
         % yd(x,a,p) (becomes yd(x,a) if p is empty)
         yd_fun{1} = SymFunction(['yd_' name], yd, [{model.States.x}, a, p]);
         
@@ -105,9 +110,10 @@ function obj = configure(obj, varargin)
             for i=2:rel_deg
                 yd_der = jacobian(yd_fun{i-1},X)*dX;
                 yd_fun{i} = SymFunction(['d' num2str(i-1) 'yd_' name], yd_der, [x, a, p]);
-                
-                tau_der = jacobian(tau_fun{i-1},X)*dX;
-                tau_fun{i} = SymFunction(['d' num2str(i-1) 'tau_' name], tau_der, [x, p]);
+                if ~no_tau
+                    tau_der = jacobian(tau_fun{i-1},X)*dX;
+                    tau_fun{i} = SymFunction(['d' num2str(i-1) 'tau_' name], tau_der, [x, p]);
+                end
             end
         else
             for i=2:rel_deg
@@ -133,9 +139,10 @@ function obj = configure(obj, varargin)
         % yd_fun{rel_deg+2} = SymFunction(['d' num2str(rel_deg) 'yd_' name], yd_der, [x, dx, a, p]);
         
         
-        
-        Jtau = jacobian(tau_fun{rel_deg},X);        
-        tau_fun{rel_deg+1} = SymFunction(['Jd' num2str(rel_deg) 'tau_' name], Jtau, [x, p]);
+        if ~no_tau
+            Jtau = jacobian(tau_fun{rel_deg},X);
+            tau_fun{rel_deg+1} = SymFunction(['Jd' num2str(rel_deg) 'tau_' name], Jtau, [x, p]);
+        end
         % tau_der = Jtau*dX;
         % tau_fun{rel_deg+1} = SymFunction(['d' num2str(rel_deg) 'tau_' name], tau_der, [x, dx, p]);
     else     
@@ -148,9 +155,12 @@ function obj = configure(obj, varargin)
             
     obj.ActualFuncs = ya_fun;
     obj.DesiredFuncs = yd_fun;
-    obj.PhaseFuncs = tau_fun;
+    
     
     obj.ActualFuncsName_ = cellfun(@(f)f.Name, ya_fun,'UniformOutput',false);
     obj.DesiredFuncsName_ = cellfun(@(f)f.Name, yd_fun,'UniformOutput',false);
-    obj.PhaseFuncsName_ = cellfun(@(f)f.Name, tau_fun,'UniformOutput',false);
+    if ~no_tau
+        obj.PhaseFuncs = tau_fun;
+        obj.PhaseFuncsName_ = cellfun(@(f)f.Name, tau_fun,'UniformOutput',false);
+    end
 end

@@ -2,7 +2,7 @@ function indices = getJointIndices(obj, joint_names)
     % Returns the indices of joints specified by the name string
     %
     % Parameters:
-    %  dof_names: a cell array of strings of the DoF name
+    %  joint_names: a cell array of strings of the DoF name
     %
     % Return values:
     %  indices: position indices of joints in the obj.joints

@@ -106,7 +106,7 @@ classdef RobotLinks < ContinuousDynamics
     %% methods defined in seperate files
     methods
         
-        obj = addContact(obj, contact, mu, gamma, la, lb, La, Lb);     
+        obj = addContact(obj, contact, fric_coef, geometry);     
         
         obj = addFixedJoint(obj, fixed_joints);
         
@@ -127,17 +127,17 @@ classdef RobotLinks < ContinuousDynamics
         
         obj = configureKinematics(obj, dofs, links)
         
-        obj = configureDynamics(obj);
+        obj = configureDynamics(obj, varargin);
         
         
         
-        [varargout] = getCartesianPosition(obj, varargin);
+        [varargout] = getCartesianPosition(obj, frame, p);
         
-        [varargout] = getEulerAngles(obj, varargin);
+        [varargout] = getEulerAngles(obj, frame, p);
         
-        [varargout] = getBodyJacobian(obj, varargin);
+        [varargout] = getBodyJacobian(obj, frame, p);
         
-        [varargout] = getSpatialJacobian(obj, varargin);
+        [varargout] = getSpatialJacobian(obj, frame, p);
         
         mass = getTotalMass(obj);        
         

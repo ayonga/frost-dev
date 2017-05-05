@@ -38,7 +38,7 @@ classdef SymExpression < handle
             %    - numeric: create a numeric symbolic expression
             %    - char: create symbolic expression specified by 'x'
             
-            if nargin == 0 || isempty(x)
+            if nargin == 0 
                 % construct empty object
                 return;
             end
@@ -62,23 +62,26 @@ classdef SymExpression < handle
             
             
             if ~isa(x, 'SymExpression')
-                switch class(x)
-                    case 'char'
-                        obj.f = general2math(x,'ConvertString',false);
-                    case 'string'
-                        obj.f = general2math(x,'ConvertString',true);
-                    case 'double'
-                        
-                        obj.f = general2math(x);
-                    case 'cell'
-                        obj.f = general2math(x,'ConvertString',false);
-                    case 'struct'
-                        obj.f = general2math(x,'ConvertString',true);
-                    otherwise
-                        error('SymExpression:invalidInputType',...
-                            'Invalid input argument data type.');
+                if isempty(x)
+                    obj.f = '{}';
+                else
+                    switch class(x)
+                        case 'char'
+                            obj.f = general2math(x,'ConvertString',false);
+                        case 'string'
+                            obj.f = general2math(x,'ConvertString',true);
+                        case 'double'
+                            
+                            obj.f = general2math(x);
+                        case 'cell'
+                            obj.f = general2math(x,'ConvertString',false);
+                        case 'struct'
+                            obj.f = general2math(x,'ConvertString',true);
+                        otherwise
+                            error('SymExpression:invalidInputType',...
+                                'Invalid input argument data type.');
+                    end
                 end
-                
                 obj.s = eval_math('Unique[symvar$]');
                 if delayed_set
                     % delayed set the formula to the symbol
@@ -403,7 +406,7 @@ classdef SymExpression < handle
             %/  Slash or symbolic right matrix divide.
             %   A/B is the matrix division of B into A, which is roughly the
             %   same as A*INV(B) , except it is computed in a different way.
-            %   More precisely, A/B = (B'\A')'. See SYM/MLDIVIDE for details.
+            %   More precisely, A / B = (B' \ A')'. See SYM/MLDIVIDE for details.
             %   Warning messages are produced if X does not exist or is not unique.
             %   Rectangular matrices A are allowed, but the equations must be
             %   consistent; a least squares solution is not computed.
@@ -425,7 +428,7 @@ classdef SymExpression < handle
         function X = mldivide(A, B)
             % Symbolic matrix left division.
             %   MLDIVIDE(A,B) overloads symbolic A \ B.
-            %   X = A\B solves the symbolic linear equations A*X = B.
+            %   X = A \ B solves the symbolic linear equations A*X = B.
             %   Warning messages are produced if X does not exist or is not unique.
             %   Rectangular matrices A are allowed, but the equations must be
             %   consistent; a least squares solution is not computed.

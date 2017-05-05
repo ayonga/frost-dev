@@ -1,4 +1,4 @@
-function [obj] = compileObjective(obj, export_path, varargin)
+function compileObjective(obj, export_path, varargin)
     % Compile and export symbolic expression and derivatives of all NLP functions
     %
     % Parameters:
