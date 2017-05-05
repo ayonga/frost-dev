@@ -12,21 +12,10 @@ function obj = configureDynamics(obj, varargin)
     end
     
     n_link = length(obj.Links);
-    links = cell(1,n_link);
+    links = getTwists(obj.Links);
     for i=1:n_link
         links{i}.Mass = obj.Links(i).Mass;
-        links{i}.Inertia = obj.Links(i).Inertia;        
-        links{i}.gst0 = obj.Links(i).gst0;
-        frame = obj.Links(i).Reference;
-        while isempty(frame.TwistPairs)
-            frame = frame.Reference;
-            if isempty(frame)
-                error('The coordinate system is not fully defined.');
-            end
-        end
-        
-        links{i}.TwistPairs = frame.TwistPairs;
-        links{i}.ChainIndices = frame.ChainIndices;
+        links{i}.Inertia = obj.Links(i).Inertia;   
     end
     
     % set the inertia matrix 
