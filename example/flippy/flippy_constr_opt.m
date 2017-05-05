@@ -18,9 +18,9 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     % relative degree 1 output
     plant.VirtualConstraints.vel.imposeNLPConstraint(nlp, bounds.vel.ep, 0);
     % tau boundary [0,1]
-    tau = plant.VirtualConstraints.vel.PhaseFuncs{1};
-    addNodeConstraint(nlp, tau, {'x','pvel'}, 'first', 0, 0, 'Nonlinear');
-    addNodeConstraint(nlp, tau, {'x','pvel'}, 'last', 1, 1, 'Nonlinear');
+%     tau = plant.VirtualConstraints.vel.PhaseFuncs{1};
+%     addNodeConstraint(nlp, tau, {'x','pvel'}, 'first', 0, 0, 'Nonlinear');
+%     addNodeConstraint(nlp, tau, {'x','pvel'}, 'last', 1, 1, 'Nonlinear');
     
     % relative degree 2 outputs
     plant.VirtualConstraints.pos.imposeNLPConstraint(nlp, [bounds.pos.kp,bounds.pos.kd], [1,1]);
@@ -40,10 +40,13 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
         );
     p = getCartesianPosition(plant,EndEff);
     x = plant.States.x;
-    p_z = p(3) - 1.0;
-    p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
+    dx = plant.States.dx;
+    ddx = plant.States.ddx;
+    
     
     n_node = nlp.NumNode;
+    p_z = p(3) - 1.0;
+    p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
     addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.0, 0.03, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.2, 0.3, 'Nonlinear');
@@ -58,4 +61,35 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
     addNodeConstraint(nlp, p_y_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), 0.0, 0.0, 'Nonlinear');
+    
+    % get acceleration along x, y and z directions of end effector
+    v_x = jacobian(p_x, x)*dx ;
+    v_y = jacobian(p_y, x)*dx ;
+    v_z = jacobian(p_z, x)*dx ;
+    
+    a_x = jacobian(v_x,dx)*ddx + jacobian(v_x,x)*dx;
+    a_y = jacobian(v_y,dx)*ddx + jacobian(v_y,x)*dx;
+    a_z = jacobian(v_z,dx)*ddx + jacobian(v_z,x)*dx;
+
+    % get orientation of the end effector in terms of euler angles
+    orientation = getEulerAngles(plant,EndEff);
+    g = 9.81; % acceleration due to gravity - a constant
+    mu = 0.26; % coefficient of restitution
+    
+    o_x = orientation(1);
+    o_y = orientation(2);
+    
+    % these are the slipping constraints
+    a_slip_y = a_z*sin(o_x)-a_y*cos(o_x)+g*sin(o_x) ...
+                - mu* (a_y*sin(o_x) + a_z*cos(o_x) + g*cos(o_x));
+    a_slip_x = a_z*sin(o_y)-a_x*cos(o_y)+g*sin(o_y) ...
+                - mu* (a_x*sin(o_y) + a_z*cos(o_y) + g*cos(o_y));
+            
+    a_slip_y_func = SymFunction(['endeffoy_sca_' plant.Name],a_slip_y,{x,dx,ddx});
+%     addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 'all', -1000, 0.0, 'Nonlinear');
+            
+    a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
+%     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -1000, 0.0, 'Nonlinear');
+    
+    
 end

@@ -34,8 +34,8 @@ bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000];
 
 bounds.params.avel.lb = 4*pi;
 bounds.params.avel.ub = 4*pi;
-bounds.params.pvel.lb = [0, pi];
-bounds.params.pvel.ub = [0, pi];
+bounds.params.pvel.lb = [pi, 0];
+bounds.params.pvel.ub = [pi, 0];
 bounds.params.apos.lb = -100;
 bounds.params.apos.ub = 100;
 bounds.params.ppos.lb = [0, pi];
@@ -64,11 +64,11 @@ flippy_cost_opt(nlp, bounds);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nlp.update;
-% exclude = {'dynamics_equation'};
-exlucde = [];
-compileConstraint(nlp,[],export_path,exclude);
-compileObjective(nlp,[],export_path);
+% nlp.update;
+% % exclude = {'dynamics_equation'};
+% exclude = [];
+% compileConstraint(nlp,[],export_path,exclude);
+% compileObjective(nlp,[],export_path);
 
 
 
