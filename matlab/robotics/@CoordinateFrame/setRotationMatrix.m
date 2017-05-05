@@ -10,7 +10,7 @@ function obj = setRotationMatrix(obj,r)
         %         rpy = rad2deg(r);
         obj.R = rotz(r(3)) * roty(r(2)) * rotx(r(1));
     elseif all(size(r)==[3,3])
-        assert(abs(det(r))==1,...
+        assert(abs(det(r))-1 <= 1e-6,...
             'The determinant of the rotation matrix must equal 1.');
         obj.R = r;
     end
