@@ -46,8 +46,8 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
     %% holonomic constraints
     h_cstr_name = fieldnames(obj.HolonomicConstraints);
     if ~isempty(h_cstr_name)           % if holonomic constraints are defined
-        h_cstr = obj.HolonomicConstraints;
-        n_cstr = numel(h_cstr_name);
+        h_cstr = struct2array(obj.HolonomicConstraints);
+        n_cstr = length(h_cstr);
         % determine the total dimension of the holonomic constraints
         cdim = sum([h_cstr.Dimension]);
         % initialize the Jacobian matrix
@@ -56,8 +56,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         
         idx = 1;
         for i=1:n_cstr
-            c_name = h_cstr_name{i};
-            cstr = h_cstr.(c_name);
+            cstr = h_cstr(i);
             cstr_indices = idx:idx+cstr.Dimension-1;
             % calculate the Jacobian
             if cstr.DerivativeOrder == 2
@@ -69,6 +68,10 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
                 Je(cstr_indices,:) = Jh;
                 Jedot(cstr_indices,:) = Jh;
             end
+	    tol = 1e-3;
+            if norm(Jh*x) > tol
+                warning('The holonomic constraint %s violated.', h_cstr_name{i});
+            end     
             idx = idx + cstr.Dimension;
         end  
     else
@@ -118,9 +121,8 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         
         % extract and store
         idx = 1;
-        for i=1:n_cstr
-            c_name = h_cstr_name{i};
-            cstr = h_cstr.(c_name);
+        for i=1:n_cstr           
+            cstr = h_cstr(i);
             cstr_indices = idx:idx+cstr.Dimension-1;
             input_name = cstr.InputName;
             obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
@@ -134,24 +136,12 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
     xdot = M \ (Fv + Gv);
     
     
-    if narargout > 1
+    if nargout > 1
         extra.t       = t;
         extra.x       = x;
         extra.dx      = xdot;        
         extra.u       = u;    
         extra.f_ext   = obj.inputs_.External;
         extra.lambda  = obj.inputs_.ConstraintWrench;
-        % extra.vfc     = vfc;
-        % extra.gfc     = gfc;
-        % extra.F       = Fvec;
-        % extra.G       = Gvec;
-        % extra.Gu      = Gvec_control;
-        % extra.Gw      = Gvec_wrench;
-        % extra.Ge      = Gvec_external;
-        % extra.M       = M;
-        % extra.Je      = Je;
-        % extra.Jedot   = Jedot;
-        % extra.domain = cur_domain;
-        % extra.control = cur_control;
     end
 end

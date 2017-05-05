@@ -52,6 +52,7 @@ function obj = configureDynamics(obj, varargin)
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
         Ce3{i} = SymFunction(['Ce3_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart3',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
     end
+    fprintf(1,sp(ones(1,40)));
     toc
     % We add dQe as dependent variables to the gravity vector in order to have a same structure
     % as the corilios forces
