@@ -128,6 +128,8 @@ function [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger)
             obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
             idx = idx + cstr.Dimension;
         end 
+    else
+        hval = [];
     end
     
     Gv = Gv + Gv_c;

@@ -66,7 +66,7 @@ y1_name = 'vel';
 y1 = VirtualConstraint(flippy, ya1, y1_name,...
     'DesiredType','Constant',...
     'RelativeDegree',1,'OutputLabel',{'WristRoll'},'PhaseType','StateBased',...
-    p,'Holonomic',false);
+    'Holonomic',false);
 
 % % y2 
 % obj = addPositionOutput(obj, ...
@@ -127,8 +127,9 @@ t0 = 0;
 tf = 10;
 eventnames = 'deltafinal';
 sim_opts = [];
+logger = SimLogger(flippy);
 tic
-flippy.simulate(t0, x0, tf, io_control, params, eventnames, sim_opts)
+flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
 toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
