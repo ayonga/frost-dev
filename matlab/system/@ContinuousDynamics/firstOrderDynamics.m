@@ -1,4 +1,4 @@
-function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
+function [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger)
     % calculate the dynamical equation of the first order dynamical system
     %
     % Parameters:
@@ -6,7 +6,10 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
     % x: the states @type colvec
     % controller: the controller @type Controller
     % params: the parameter structure @type struct
-    
+    % logger: the data logger object @type SimLogger
+    %
+    % Return values:
+    % xdot: the derivative of the system states @type colvec
     
     % extract the state variables into x and dx
     nx = obj.numState;
@@ -33,7 +36,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
             % get the Gvec function object
             % g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
-            f_ext = obj.ExternalOutputFun(obj, f_name, t, x, params);
+            f_ext = obj.ExternalInputFun(obj, f_name, t, x, params, logger);
             % compute the Gvec, and add it up
             Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),x,f_ext);
             
@@ -101,11 +104,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
             gfc =  M \ (Ie - transpose(Je)* (XiInv \ (Jedot / M))) * Be;
         end
         % compute control inputs
-        if narargout > 1
-            [u, extra] = calcControl(controller, t, x, vfc, gfc, obj, params);
-        else
-            u = calcControl(controller, t, x, vfc, gfc, obj, params);
-        end
+        u = calcControl(controller, t, x, vfc, gfc, obj, params, logger);
         
         Gv_u = Be*u;
         obj.inputs_.Control.(control_name{1}) = u;
@@ -123,6 +122,7 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
         idx = 1;
         for i=1:n_cstr           
             cstr = h_cstr(i);
+            hval.(h_cstr_name{i}) = calcConstraint(cstr,x);
             cstr_indices = idx:idx+cstr.Dimension-1;
             input_name = cstr.InputName;
             obj.inputs_.ConstraintWrench.(input_name) = lambda(cstr_indices);
@@ -134,14 +134,16 @@ function [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params)
     
     % the system dynamics
     xdot = M \ (Fv + Gv);
+    obj.states_.dx = xdot;
     
-    
-    if nargout > 1
-        extra.t       = t;
-        extra.x       = x;
-        extra.dx      = xdot;        
-        extra.u       = u;    
-        extra.f_ext   = obj.inputs_.External;
-        extra.lambda  = obj.inputs_.ConstraintWrench;
+    if ~isempty(logger)
+        calc = logger.calc;
+
+        calc.t       = t;
+        calc.states  = obj.states_;
+        calc.inputs  = obj.inputs_;
+        calc.hval    = hval;
+
+        logger.calc  = calc;
     end
 end

@@ -42,7 +42,10 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         
         
         
-        
+        % The option of the hybrid system model
+        %
+        % @type struct
+        Options
         
         
     end
@@ -50,7 +53,7 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
     
 
     
-    properties (Dependent, Hidden)
+    properties (Dependent)
         % A structure describes the name, type, attributes, and
         % default value of each properties of the vertex
         %
@@ -85,11 +88,12 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
     
     %% Public methods
     methods (Access = public)
-        function obj = HybridSystem(name)
+        function obj = HybridSystem(name, varargin)
             % the default calss constructor
             %
             % Parameters:
             % name: the name of the hybrid system model @type char
+            % varargin: variable parameter input argument @type varargin
             %
             % Return values:
             % obj: the class object
@@ -103,10 +107,39 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
             % add a dummy node and remove it to initialize the properties
             obj = addVertex(obj,'dummy');
             obj = rmVertex(obj,'dummy');
+
+            % load default options
+            obj.Options = struct;
+            obj.Options.Logger = 'SimLogger';
+            obj.Options.OdeSolver = @ode45;
+
+            % parse the input options
+            if nargin > 1
+                % create a structure from the input argument
+                opts = struct(varargin{:});
+                % overwrite the default options
+                obj.setOption(opts);
+            end
             
         end
         
-        
+        function obj = setOption(obj, varargin)
+            % Sets the object options, and return the complete list of option
+            % structure including unchanged default options.
+            %
+            % Parameters:
+            % varargin: name-value pairs of option field value
+            %
+            % Return values:
+            % options: the complete list of final option structure
+            
+            new_opts = struct(varargin{:});
+            
+            obj.Options = struct_overlay(obj.Options, new_opts,{'AllowNew',true});
+            
+            
+        end
+
         function ret = isDirectedCycle(obj)
             % returns true if the underlying directed graph is a simple
             % directed cycle.
@@ -128,6 +161,10 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
             %
             % Parameters:
             % nodeIDs: the node ids of the subgraph
+            %
+            % Return values:
+            % sys: a new HybridSystem object with the subgraph specified by
+            % the nodeIDs @type HybridSystem
             
             sys = HybridSystem(obj.Name);
             
@@ -154,7 +191,7 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         
         obj = setVertexProperties(obj, vertex, varargin);
         
-        obj = simulate(obj, t0, x0, tf, options, varargin);
+        obj = simulate(obj, t0, x0, tf, logger, options, varargin);
     end
     
     %% Private methods
