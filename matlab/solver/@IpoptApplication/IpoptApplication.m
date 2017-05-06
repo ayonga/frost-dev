@@ -42,8 +42,9 @@ classdef IpoptApplication < SolverApplication
             % The default constructor function
             %
             % Parameters:
-            %  nlp: the NLP problem object to be solved
-            %  opts_in: the solver options
+            %  nlp: the NLP problem object to be solved 
+            %  @type NonlinearProgram
+            %  new_opts: the new solver options @type struct
             
             
             obj = obj@SolverApplication();

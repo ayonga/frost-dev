@@ -16,7 +16,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
 atlas = AtlasRobot(urdf);
-atlas.configureDynamics();
+atlas.configureDynamics('DelayCoriolisSet',true);
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,13 +88,14 @@ atlas_flat = setVertexProperties(atlas_flat,'LeftStance','Param',l_stance_param)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%%% Run the simulator
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-xf = [new_param{2}.qf;new_param{1}.dqf];
-x0 = r_impact.calcDiscreteMap(0,xf);
-
+% xf = [new_param{2}.qf;new_param{1}.dqf];
+% x0 = r_impact.calcDiscreteMap(0,xf);
+x0 = [new_param{1}.q0;new_param{1}.dq0];
 % run the single domain first (no hybrid system model)
-% r_stance.simulate(0,x0,10,io_control,r_stance_param,'nsf',[]);
+% logger = SimLogger(r_stance);
+% r_stance.simulate(0,x0,[],io_control,r_stance_param,logger,'nsf')
 tic
-atlas_flat.simulate(0, x0, [], [])
+logger = atlas_flat.simulate(0, x0, [], [],'NumCycle',1);
 toc
 % 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

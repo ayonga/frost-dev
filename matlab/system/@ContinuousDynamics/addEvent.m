@@ -2,7 +2,6 @@ function obj = addEvent(obj, constr)
     % Adds event function for the dynamical system states and inputs
     %
     % Parameters:   
-    %  name: the name of the constraint @type char
     %  constr: the event function @type UnilateralConstraint
 
     % validate input argument

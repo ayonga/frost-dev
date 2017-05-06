@@ -35,11 +35,24 @@ classdef CLFQP < Controller
         end
         
         
-        
-    end
-    
-    methods
-        [u, extra] = calcControl(obj, t, qe, dqe, vfc, gfc, domain);
+        function u = calcControl(obj, t, x, vfc, gfc, plant, params, logger)
+            % Computes the classical input-output feedback linearization
+            % control law for virtual constraints
+            %
+            % Parameters:
+            % t: the time instant @type double
+            % x: the states @type colvec
+            % vfc: the vector field f(x) @type colvec
+            % gfc: the vector field g(x) @type colvec
+            % plant: the continuous domain @type DynamicalSystem
+            % params: the control parameters @type struct
+            % logger: the data logger object @type SimLogger
+            %
+            % Return values:
+            % u: the computed torque @type colvec
+            error('This class has not been completely defined yet.');
+            
+        end
     end
     
 end

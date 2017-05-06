@@ -5,6 +5,8 @@ function obj = setMassMatrix(obj, M)
     %  M:  the mass matrix M(x) @type SymFunction
     
     x = obj.States.x;
+    mmat_name = ['Mmat_',obj.Name];
+    mmat_ddx_name = ['MmatDx_' obj.Name];
     % validate and set the mass matrix M(x)
     if ~isempty(M)
         
@@ -17,27 +19,27 @@ function obj = setMassMatrix(obj, M)
             obj.Mmat = M;
         else
             M = SymExpression(M);
-            obj.Mmat = SymFunction(['Mmat_',obj.Name],M,{x});
+            obj.Mmat = SymFunction(mmat_name,M,{x});
         end
         
         if strcmp(obj.Type,'SecondOrder') 
             ddx = obj.States.ddx;
-            obj.MmatDx = SymFunction(['MmatDDx_' obj.Name],-obj.Mmat*ddx,{x,ddx});
+            obj.MmatDx = SymFunction(mmat_ddx_name,-obj.Mmat*ddx,{x,ddx});
         else
             dx = obj.States.dx;
-            obj.MmatDx = SymFunction(['MmatDx_' obj.Name],-obj.Mmat*dx,{x,dx});
+            obj.MmatDx = SymFunction(mmat_ddx_name,-obj.Mmat*dx,{x,dx});
         end
     else
         obj.Mmat = [];
         if strcmp(obj.Type,'SecondOrder') 
             ddx = obj.States.ddx;
-            obj.MmatDx = SymFunction(['MmatDDx_' obj.Name],-ddx,{x,ddx});
+            obj.MmatDx = SymFunction(mmat_ddx_name,-ddx,{x,ddx});
         else
             dx = obj.States.dx;
-            obj.MmatDx = SymFunction(['MmatDx_' obj.Name],-dx,{x,dx});
+            obj.MmatDx = SymFunction(mmat_ddx_name,-dx,{x,dx});
         end
     end
     
-    obj.MmatName_ = obj.Mmat.Name;
+    obj.MmatName_ = mmat_name;
       
 end

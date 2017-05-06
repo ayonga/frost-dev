@@ -1,4 +1,4 @@
-function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options, varargin)
+function [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver)
     % Simulate the dynamical system
     %
     % Parameters: 
@@ -6,18 +6,23 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
     % x0: the initial states @type colvec
     % tf: the terminating time instant @type double
     % controller: the controller for the dynamical system @type Controller
-    % params: extra parameters @type struct
+    % params: extra parameters @type struct    
+    % logger: the data logger object @type SimLogger
     % eventnames: the name of eventnames to be used @type cellstr
     % options: simulation options of hybrid system @type struct
+    % solver: the ODE solver @type function_handle
+    %
+    % Return values:
+    % sol: a structure contains the integration result of the ODE solver
+    % @type struct
     
-    
-    if isempty(t0)
-        % default initial time
-        t0 = 0;
-    else
+    if nargin > 1 && ~isempty(t0)
         validateattributes(t0,{'double'},...
             {'scalar','nonnegative','real'},...
-            'ContinuousDynamics.simulate','t0',2);
+            'ContinuousDynamics.simulate','t0',2);        
+    else
+        % default initial time
+        t0 = 0;
     end
     
     
@@ -27,45 +32,58 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
         % second order system
         nx = 2*obj.numState;
     end
-    if isempty(x0)
-        % default zero initial condition
-        warning('Starting the simulation with zero initial condition!')
-        x0 = zeros(nx,1);
-    else
+    if nargin > 2 && ~isempty(x0)
         % validate the initial states
         validateattributes(x0,{'double'},...
             {'vector','numel',nx,'real'},...
-            'ContinuousDynamics.simulate','x0',3);
-    
+            'ContinuousDynamics.simulate','x0',3);        
+    else
+        % default zero initial condition
+        warning('Starting the simulation with zero initial condition!')
+        x0 = zeros(nx,1);
     end
     
     
-    if isempty(tf)
-        % default terminal time
-        tf = t0 + 100;
-    else
+    if nargin > 3 && ~isempty(tf)
         validateattributes(tf,{'double'},...
             {'scalar','positive','real'},...
-            'ContinuousDynamics.simulate','tf',4);
+            'ContinuousDynamics.simulate','tf',4);        
+    else
+        % default terminal time
+        tf = t0 + 100;
     end
     
     % validate the controller object
-    if ~isempty(controller)
+    if nargin > 4 && ~isempty(controller)
         validateattributes(controller, {'Controller'},...
             {},'ContinuousDynamics.simulate','controller',5);
+    else
+        controller = [];
     end
     % validate the parameter structure
-    if ~isempty(params)
+    if nargin > 5 && ~isempty(params)
         validateattributes(params, {'struct'},...
             {},'ContinuousDynamics.simulate','params',6);
         obj.setParamValue(params);
+    else
+        params = [];
     end
     
     % configure the ODE options
     odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-6,'AbsTol',1e-6);
     
+    if nargin > 6 && ~isempty(logger)
+        validateattributes(logger, {'SimLogger'},...
+            {},'ContinuousDynamics.simulate','options',7);
+        odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
+        logger.initialize();
+        logger.static.params     = obj.params_;
+    else
+        logger = [];
+    end
+    
     % configure the event functions
-    if ~isempty(eventnames)
+    if nargin > 7 && ~isempty(eventnames)
         events_list = fieldnames(obj.EventFuncs);
         if isempty(events_list)
             warning('There is no event function defined for the system.');
@@ -87,38 +105,40 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, optio
                 
                 eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices~=0),'UniformOutput',false);
                 eventfuncs = vertcat(eventfuncs{:});
-                odeopts.Events = @(t, x) checkGuard(obj, t, x, controller, params, eventfuncs);
+                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, controller, params, eventfuncs));
             end
         end
     end
-    % parse simulation options
-    if ~isempty(options)
-        validateattributes(options, {'struct'},...
-            {},'ContinuousDynamics.simulate','options',7);
-        odeopts = struct_overlay(odeopts, options);
-    end
     
+    
+    
+    if nargin > 8 && ~isempty(options)
+        validateattributes(options, {'struct'},...
+            {},'ContinuousDynamics.simulate','options',9);
+        odeopts = odeset(odeopts, options);
+    end
+
+    if nargin > 9 && ~isempty(solver)
+        validateattributes(solver, {'function_handle'},...
+            {},'ContinuousDynamics.simulate','solver',10);
+    else
+        solver = @ode45;
+    end
+
     % pre-process
-    obj.PreProcess(obj, controller, params, varargin{:});
+    obj.PreProcess(obj, controller, params);
     
     % run the forward simulation
-    sol = ode45(@(t, x) calcDynamics(obj, t, x, controller, params), ...
+    sol = solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
         [t0, tf], x0, odeopts);
-        
-    % post-process
-    obj.PostProcess(obj, sol, controller, params, varargin{:});
     
-    % record the simulated trajectory
-    % clear previous results
-    obj.Flow = [];
-    
-    n_sample = length(sol.x);
-    calcs = cell(1,n_sample);
-    for i=1:n_sample
-        [~,extra] = calcDynamics(obj,  sol.x(i), sol.y(:,i), controller, params);
-        calcs{i} = extra;
+    % calculate the dynamics at the guard 
+    if isfield(sol,'xe') && ~isempty(sol.xe)
+        calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
+        updateLastLog(logger);
     end
+    % post-process
+    obj.PostProcess(obj, sol, controller, params);
     
-    calcs_full = horzcat_fields([calcs{:}]);
-    obj.Flow = calcs_full;
+    
 end

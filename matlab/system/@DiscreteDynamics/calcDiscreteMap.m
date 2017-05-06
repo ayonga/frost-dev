@@ -8,11 +8,12 @@ function xn = calcDiscreteMap(obj, t, x, varargin)
     % this class
     %
     % Parameters:
-    % t: the time instant
-    % xminus: the pre-impact states @type colvec
+    % t: the time instant @type double
+    % x: the pre-impact states @type colvec
+    % varargin: extra argument @type varargin
     %
     % Return values:
-    % xplus: the post-impact states @type colvec
+    % xn: the post-impact states @type colvec
     
     xn = x;
     

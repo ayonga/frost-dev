@@ -215,7 +215,6 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addDynamicsConstraint(obj);  
         
-        obj = addSystemConstraint(obj);
 
         obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata);
                 

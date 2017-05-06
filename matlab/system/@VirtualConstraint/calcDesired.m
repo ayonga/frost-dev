@@ -2,7 +2,7 @@ function yd = calcDesired(obj, t, x, dx, a, p)
     % calculate the desired outputs
     %
     % Parameters:
-    % t: the time @double
+    % t: the time @type double
     % x: the states @type colvec
     % dx: the first order derivatives @type colvec
     % a: the parameters of the desired output @type matrix

@@ -3,7 +3,6 @@ function obj = addUnilateralConstraint(obj, constr)
     % states and inputs
     %
     % Parameters:   
-    %  name: the name of the constraint @type char
     %  constr: the unilateral constraints @type UnilateralConstraint
 
     % validate input argument

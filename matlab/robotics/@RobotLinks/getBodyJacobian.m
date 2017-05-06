@@ -1,4 +1,4 @@
-function [varargout] = getBodyJacobian(obj, varargin)
+function [J] = getBodyJacobian(obj, frame, p)
     % Returns the symbolic representation of the body jacobians of
     % coordinate frames
     %
@@ -6,10 +6,13 @@ function [varargout] = getBodyJacobian(obj, varargin)
     % 
     %
     % Parameters:
-    % varargin: a cell array of coordinate frames @type cell
+    % frame: the list of coordinate frame of the point 
+    % @type cell
+    % p: the offset of the point from the origin of the frame 
+    % @type matrix
     % 
     % Return values:
-    % pos: the 6xnDof Jacobian matrix of a rigid coordinate frame @type SymExpression
+    % J: the 6xnDof Jacobian matrix of a rigid coordinate frame @type SymExpression
     %
     %
     % @note Syntax for ont point
@@ -21,33 +24,20 @@ function [varargout] = getBodyJacobian(obj, varargin)
     % >> [jac1,jac2] = getBodyJacobian(obj,{'Link1',[0,0,0.1]},{'Link2',[0.2,0,0.1]})
     
     
-    % the number of points (one less than the nargin)
-    n_pos = numel(varargin);
-    if n_pos > 0
-        c_str = cell(1,n_pos);
-        
-        
+    if nargin < 3
+        p = [];
+    end
+    c_str = getTwists(frame, p);
+    
+    jac = eval_math_fun('ComputeBodyJacobians',[c_str, {obj.numState}]);
+    
+    n_pos = length(frame);
+    if n_pos > 1
+        J = cell(1,n_pos);
         for i=1:n_pos
-            c_str{i}.gst0 = varargin{i}.gst0;
-            frame = varargin{i}.Reference;
-            while ~isprop(frame, 'TwistPairs') %isempty(frame.TwistPairs)
-                frame = frame.Reference;
-                if isempty(frame)
-                    error('The coordinate system is not fully defined.');
-                end
-            end
-            
-            c_str{i}.TwistPairs = frame.TwistPairs;
-            c_str{i}.ChainIndices = frame.ChainIndices;
-        end
-        
-        jac = eval_math_fun('ComputeBodyJacobians',[c_str, {obj.numState}]);
-        
-        varargout = cell(1,n_pos);
-        for i=1:n_pos
-            varargout{i} = jac(i,:);
+            J{i} = jac(i,:);
         end
     else
-        varargout = {};
+        J = jac(1,:);
     end
 end

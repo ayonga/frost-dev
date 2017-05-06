@@ -6,9 +6,9 @@ function right_stance_constraints(nlp, bounds, varargin)
     % relative degree 1 output
     domain.VirtualConstraints.velocity.imposeNLPConstraint(nlp, bounds.velocity.ep, 0);
     % tau boundary [0,1]
-    tau = domain.VirtualConstraints.velocity.PhaseFuncs{1};
-    addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'first', 0, 0, 'Nonlinear');
-    addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'last', 1, 1, 'Nonlinear');
+%     tau = domain.VirtualConstraints.velocity.PhaseFuncs{1};
+%     addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'first', 0, 0, 'Nonlinear');
+%     addNodeConstraint(nlp, tau, {'x','pvelocity'}, 'last', 1, 1, 'Nonlinear');
     
     % relative degree 2 outputs
     domain.VirtualConstraints.position.imposeNLPConstraint(nlp, [bounds.position.kp,bounds.position.kd], [1,1]);

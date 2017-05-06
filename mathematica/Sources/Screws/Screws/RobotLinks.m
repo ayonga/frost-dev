@@ -176,7 +176,7 @@ InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
     Cvec = Array[0&, {n,1}];
     For[i = 1, i <= n, ++i,
 	    For[k = 1, k <= n, ++k,
-	      Cvec[[i]] += 1/2 * w[[k]] *
+	      Cvec[[i]] -= 1/2 * w[[k]] *
 	      (D[M[[i,j]], q[[k]]]);
 	    ]
     ];
@@ -191,7 +191,7 @@ InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
     Cvec = Array[0&, {n,1}];
     For[i = 1, i <= n, ++i,
         For[k = 1, k <= n, ++k,
-          Cvec[[i]] += 1/2 * w[[k]] *
+          Cvec[[i]] -= 1/2 * w[[k]] *
           (D[M[[i,k]], q[[j]]]);
         ]
     ];
@@ -208,7 +208,7 @@ InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
     For[i = 1, i <= n, ++i,
         For[k = 1, k <= n, ++k,
           Cvec[[i]] += 1/2 * w[[k]] *
-          (- D[M[[j,k]], q[[i]]]);
+          (D[M[[j,k]], q[[i]]]);
         ]
     ];
     Cvec*w[[j]]

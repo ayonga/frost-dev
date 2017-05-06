@@ -15,21 +15,25 @@ assert(isvector(structs), 'Can only handle vector struct arrays');
 
 for i = 1:length(fields)
 	field = fields{i};
-	if length(structs) >= 1 && size(structs(1).(field), 2) > 1
-		% If it's not a vector, then concat with cells
-		% Or make it three dimensional???
-		catted.(field) = {structs.(field)};
+    if isstruct(structs(1).(field))
+        catted.(field) = horzcat_fields(horzcat(structs.(field)));
     else
-        if ensure_double && length(structs) > 1 && isnumeric(structs(1).(field))
-            raw = {structs.(field)};
-            for k = 1:length(raw)
-                raw{k} = double(raw{k});
-            end
-            catted.(field) = horzcat(raw{:});
+        if length(structs) >= 1 && size(structs(1).(field), 2) > 1
+            % If it's not a vector, then concat with cells
+            % Or make it three dimensional???
+            catted.(field) = {structs.(field)};
         else
-            catted.(field) = horzcat(structs.(field));
+            if ensure_double && length(structs) > 1 && isnumeric(structs(1).(field))
+                raw = {structs.(field)};
+                for k = 1:length(raw)
+                    raw{k} = double(raw{k});
+                end
+                catted.(field) = horzcat(raw{:});
+            else
+                catted.(field) = horzcat(structs.(field));
+            end
         end
-	end
+    end
 end
 
 end

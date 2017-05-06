@@ -1,10 +1,10 @@
 function obj = setEdgeProperties(obj, s, t, varargin)
 % Sets the values of edge properties
 %
+
 % Parameters:
-%  s,t: the name pairs of the source vertics and target vertices of the edge to be added. 
-%  They must be a cell string or a character array.
-%  @type cellstr
+%  s: the source node @type cellstr
+%  t: the target node @type cellstr
 %  PropName: a character vector specifiy the name of a vertex property 
 %  for the added vertices. It must be given as a ''Name''-''Value'' pairs.
 %  PropValue: the values of the vertex properties specified by the
@@ -20,6 +20,9 @@ function obj = setEdgeProperties(obj, s, t, varargin)
 % vertex properties. For mutilple nodes, use the array of structures instead of
 % the structure of arrays. Invalid fields in the structure will be ignored,
 % and missing properties will be added with their default values.
+%
+% @note (s,t) are the name pairs of the source vertics and target vertices
+% of the edge to be added. They must be a cell string or a character array.
 
 
 % check if the specified edges exist in the graph
