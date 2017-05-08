@@ -14,8 +14,6 @@ function obj = setParamValue(obj, varargin)
             field = update_fields{i};
             obj.params_.(field) = params.(field);
         end
-    else
-        warning('No matching parameter variable found.');
     end
     
 end

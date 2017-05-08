@@ -127,8 +127,9 @@ t0 = 0;
 tf = 10;
 eventnames = 'deltafinal';
 sim_opts = [];
+logger = SimLogger(flippy);
 tic
-flippy.simulate(t0, x0, tf, io_control, params, eventnames, sim_opts)
+flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
 toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator

@@ -29,7 +29,7 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
         % Returns the external input defined on the dynamical system.
         %
         % @type function_handle
-        ExternalOutputFun
+        ExternalInputFun
     end
     
     % regular properties
@@ -162,7 +162,7 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
             obj.Gvec.ConstraintWrench = struct();
             obj.Gvec.External = struct();
             
-            obj.ExternalOutputFun = str2func('nop');
+            obj.ExternalInputFun = str2func('nop');
         end
         
         function obj = setName(obj, name)

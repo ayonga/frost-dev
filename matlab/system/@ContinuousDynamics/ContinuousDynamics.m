@@ -189,7 +189,7 @@ classdef ContinuousDynamics < DynamicalSystem
     methods 
         
         % simulate the dynamical system
-        [sol] = simulate(obj, t0, x0, tf, controller, params, eventnames, options, varargin);
+        [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver);
         
         % check event functions for simulation
         [value, isterminal, direction] = checkGuard(obj, t, x, controller, params, eventfuncs);
@@ -207,13 +207,13 @@ classdef ContinuousDynamics < DynamicalSystem
         f = calcDriftVector(obj, x, dx)
         
         % calculate the dynamical equation
-        [xdot, extra] = calcDynamics(obj, t, x, controller, params);
+        [xdot, extra] = calcDynamics(obj, t, x, controller, params, logger);
         
         % first order system dynamical equation
-        [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params);
+        [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params, logger);
         
         % second order system dynamical equation
-        [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params);
+        [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params, logger);
         
         % compile symbolic expression related to the systems
         obj = compile(obj, export_path, varargin);        

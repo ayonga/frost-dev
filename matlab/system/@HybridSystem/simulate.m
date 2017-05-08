@@ -1,4 +1,4 @@
-function sol = simulate(obj, t0, x0, tf, options, varargin)
+function logger = simulate(obj, t0, x0, tf, options, varargin)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 
@@ -7,10 +7,17 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
     % tf: the terminating time @type double
     % options: the ODE options @type struct
     % varargin: extra simulation options
+    %
+    % Return values:
+    % logger: an array of simulation logger data @type SimLogger
     
     
-    
-    
+    sim_opts = struct(varargin{:});
+    if isfield(sim_opts,'NumCycle')
+        numcycle = sim_opts.NumCycle;
+    else
+        numcycle = 1;
+    end
     
     sim_graph = obj.Gamma;
     idx_no_in = find(indegree(sim_graph)==0,1);
@@ -27,16 +34,12 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
         t_domain_idx = [];
     end
     
-    sim_opts = struct(varargin{:});
-    if isfield(sim_opts,'NumCycle')
-        numcycle = sim_opts.NumCycle;
-    else
-        numcycle = 1;
-    end
+    
     
     
     % initialization
     cur_node_idx = s_domain_idx;
+    log_idx = 0;
     while (true)
         
         
@@ -71,10 +74,11 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
             eventnames{i} = assoc_edges.Guard{i}.EventName;
         end
         
-       
-        
+        log_idx = log_idx + 1;
+        logger(log_idx) = feval(obj.Options.Logger, cur_domain); %#ok<AGROW>
         % run the simulation
-        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,eventnames,options);
+        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
+            logger(log_idx),eventnames,options,obj.Options.OdeSolver);
         
         
         
@@ -89,8 +93,8 @@ function sol = simulate(obj, t0, x0, tf, options, varargin)
         cur_guard = cur_edge.Guard{1};
         cur_gurad_param = cur_edge.Param{1};
         % update states and time
-        t_f = sol.x(end);
-        x_f = sol.y(:,end);
+        t_f = sol.xe;
+        x_f = sol.ye;
         x0 = cur_guard.calcDiscreteMap(t_f, x_f, cur_node, cur_gurad_param);
         t0 = t_f;
         

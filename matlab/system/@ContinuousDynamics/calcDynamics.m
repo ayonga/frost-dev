@@ -1,4 +1,4 @@
-function [xdot, extra] = calcDynamics(obj, t, x, controller, params)
+function [xdot] = calcDynamics(obj, t, x, controller, params, logger)
     % calculate the dynamical equation dx 
     %
     % Parameters:
@@ -6,18 +6,14 @@ function [xdot, extra] = calcDynamics(obj, t, x, controller, params)
     % x: the states @type colvec
     % controller: the controller @type Controller
     % params: the parameter structure @type struct
+    % logger: the data logger object @type SimLogger
+    %
+    % Return values:
+    % xdot: the derivative of the system states @type colvec
     
     if strcmp(obj.Type,'FirstOrder')
-        if nargout > 1
-            [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params);
-        else
-            [xdot] = firstOrderDynamics(obj, t, x, controller, params);
-        end
+        [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger);
     else
-        if nargout > 1
-            [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params);
-        else
-            [xdot] = secondOrderDynamics(obj, t, x, controller, params);
-        end
+        [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger);
     end
 end

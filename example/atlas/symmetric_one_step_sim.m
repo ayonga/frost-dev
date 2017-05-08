@@ -72,7 +72,7 @@ x0 = [new_param{1}.q0;new_param{1}.dq0];
 % r_stance.simulate(0,x0,10,io_control,r_stance_param,'nsf',[]);
 
 tic
-atlas_flat.simulate(0, x0, [], [],'NumCycle',1)
+logger = atlas_flat.simulate(0, x0, [], [],'NumCycle',1);
 toc
 % 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
