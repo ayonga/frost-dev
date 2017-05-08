@@ -66,7 +66,7 @@ y1_name = 'vel';
 y1 = VirtualConstraint(flippy, ya1, y1_name,...
     'DesiredType','Constant',...
     'RelativeDegree',1,'OutputLabel',{'WristRoll'},'PhaseType','StateBased',...
-    p,'Holonomic',false);
+    'Holonomic',false);
 
 % % y2 
 % obj = addPositionOutput(obj, ...
@@ -109,7 +109,7 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy_move_2017_05_02_1711.yaml'];
+old_param_file = [cur,'/param/flippy_move_2017_05_02_1855.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 

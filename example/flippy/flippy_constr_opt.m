@@ -31,33 +31,36 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     
     wrist_3_link = plant.Links(getLinkIndices(plant, 'wrist_3_link'));
     wrist_3_frame = wrist_3_link.Reference;
-    % wrist_3_joint = obj.Joints(getJointIndices(obj, 'r_leg_akx'));
+
     EndEff = CoordinateFrame(...
         'Name','EndEff',...
         'Reference',wrist_3_frame,...
         'Offset',[0, 0, 0],...
         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
         );
-    p = getCartesianPosition(plant,EndEff);
+    p_endeff = getCartesianPosition(plant,EndEff);
     x = plant.States.x;
     dx = plant.States.dx;
     ddx = plant.States.ddx;
-    
+    % these are the wrist constraints on the end effector
+    q_wrist_func = SymFunction(['q_wrist_' plant.Name],x(end),{x});
+    addNodeConstraint(nlp, q_wrist_func, {'x'}, 'first', 0, 0, 'Nonlinear');
+    addNodeConstraint(nlp, q_wrist_func, {'x'}, 'last', pi, pi, 'Nonlinear');    
     
     n_node = nlp.NumNode;
-    p_z = p(3) - 1.0;
+    p_z = p_endeff(3) - 0.0;
     p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
-    addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.0, 0.03, 'Nonlinear');
+    addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.03, 0.03, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.2, 0.3, 'Nonlinear');
     
     
-    p_x = p(1);
+    p_x = p_endeff(1);
     p_x_func = SymFunction(['endeffx_sca_' plant.Name],p_x,{x});
     addNodeConstraint(nlp, p_x_func, {'x'}, 1, 0.4, 0.5, 'Nonlinear');
     addNodeConstraint(nlp, p_x_func, {'x'}, round(n_node), 0.4, 0.5, 'Nonlinear');
     
-    p_y = p(1);
+    p_y = p_endeff(2);
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
     addNodeConstraint(nlp, p_y_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), 0.0, 0.0, 'Nonlinear');
@@ -86,7 +89,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
                 - mu* (a_x*sin(o_y) + a_z*cos(o_y) + g*cos(o_y));
             
     a_slip_y_func = SymFunction(['endeffoy_sca_' plant.Name],a_slip_y,{x,dx,ddx});
-%     addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 'all', -1000, 0.0, 'Nonlinear');
+%     addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 'all', -Inf, 0.0, 'Nonlinear');
             
     a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
 %     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -1000, 0.0, 'Nonlinear');
