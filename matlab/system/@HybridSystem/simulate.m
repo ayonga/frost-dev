@@ -93,10 +93,8 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         cur_guard = cur_edge.Guard{1};
         cur_gurad_param = cur_edge.Param{1};
         % update states and time
-        t_f = sol.xe;
-        x_f = sol.ye;
-        x0 = cur_guard.calcDiscreteMap(t_f, x_f, cur_node, cur_gurad_param);
-        t0 = t_f;
+        [t0, x0] = cur_guard.calcDiscreteMap(sol.xe, sol.ye, cur_node, cur_gurad_param);
+        
         
         % determine the target node of the current edge, and set it to be
         % the current node

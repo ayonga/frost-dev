@@ -105,7 +105,7 @@ classdef DiscreteDynamics < DynamicalSystem
     
     % methods defined in separate files
     methods
-        xn = calcDiscreteMap(obj, t, x, varargin);
+        [tn, xn] = calcDiscreteMap(obj, t, x, varargin);
         
         nlp = IdentityMapConstraint(obj, nlp, src, tar, bounds, varargin);
     end

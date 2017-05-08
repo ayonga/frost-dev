@@ -166,7 +166,7 @@ classdef RigidImpact < DiscreteDynamics
         nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin);
         
         
-        [xn,lambda] = calcDiscreteMap(obj, t, x, varargin);
+        [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin);
         
         obj = compile(obj, export_path, varargin);
     end
