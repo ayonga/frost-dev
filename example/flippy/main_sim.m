@@ -109,10 +109,11 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy_move_2017_05_02_1855.yaml'];
+old_param_file = [cur,'/param/flippy_move_2017_05_09_1002.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the simulator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,10 +132,109 @@ logger = SimLogger(flippy);
 tic
 flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
 toc
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add line objects for animation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%     shoulder_link = flippy.Links(getLinkIndices(flippy, 'shoulder_link'));
+%     shoulder_frame = shoulder_link.Reference;
+%     
+%     shoulder = CoordinateFrame(...
+%         'Name','Shoulder',...
+%         'Reference',shoulder_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
+%     p_shoulder = getCartesianPosition(flippy,shoulder);
+%     
+%     upper_arm_link = flippy.Links(getLinkIndices(flippy, 'upper_arm_link'));
+%     upper_arm_frame = upper_arm_link.Reference;
+% 
+%     upperarm = CoordinateFrame(...
+%         'Name','UpperArm',...
+%         'Reference',upper_arm_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
+%     p_upperarm = getCartesianPosition(flippy,upperarm);
+%     
+%     forearm_link = flippy.Links(getLinkIndices(flippy, 'forearm_link'));
+%     forearm_frame = forearm_link.Reference;
+% 
+%     forearm = CoordinateFrame(...
+%         'Name','ForeArm',...
+%         'Reference',forearm_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
+%     p_forearm = getCartesianPosition(flippy,forearm);
+%     
+%     wrist_1_link = flippy.Links(getLinkIndices(flippy, 'wrist_1_link'));
+%     wrist_1_frame = wrist_1_link.Reference;
+% 
+%     wrist1 = CoordinateFrame(...
+%         'Name','Wrist1',...
+%         'Reference',wrist_1_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
+%     p_wrist1 = getCartesianPosition(flippy,wrist1);
+%     
+%     wrist_2_link = flippy.Links(getLinkIndices(flippy, 'wrist_2_link'));
+%     wrist_2_frame = wrist_2_link.Reference;
+% 
+%     wrist2 = CoordinateFrame(...
+%         'Name','Wrist2',...
+%         'Reference',wrist_2_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
+%     p_wrist2 = getCartesianPosition(flippy,wrist2);
+%     
+%     wrist_3_link = flippy.Links(getLinkIndices(flippy, 'wrist_3_link'));
+%     wrist_3_frame = wrist_3_link.Reference;
+% 
+%     wrist3 = CoordinateFrame(...
+%         'Name','Wrist3',...
+%         'Reference',wrist_3_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
+%     p_wrist3 = getCartesianPosition(flippy,wrist3);
+%     
+% % kin = struct;
+% % flippy_robot = Flippy(urdf_file);
+% ur5_arm = KinematicGroup('Name','UR5Arm','AllowDuplicate',true);
+% 
+% ur5_arm = ur5_arm.addKinematic(...
+%                 {p_shoulder(1),p_shoulder(2),p_shoulder(3),...
+%                 p_upperarm(1),p_upperarm(2),p_upperarm(3),...
+%                 p_forearm(1),p_forearm(2),p_forearm(3),...
+%                 p_wrist1(1),p_wrist1(2),p_wrist1(3),...
+%                 p_wrist2(1),p_wrist2(2),p_wrist2(3),...
+%                 p_wrist3(1),p_wrist3(2),p_wrist3(3)});
+% 
+%             line_objects(1).Kin = ur5_arm;
+%             line_objects(1).Color = 'r';
+%             line_objects(1).Style = '-o';
+%             line_objects(1).LineWidth = 6;
+%             line_objects(1).MarkerSize = 4;
+%             line_objects(1).NumPoint = 6;
+
+% flippy_robot.initialize();
+            
+% exportLineFunctions(flippy_robot, export_path);      
+
+% flippy_move = FlippyMove(flippy_robot);
+% flippy_move.Flow = cell(1,1);
+% flippy_move.Flow{1} = logger.flow;
+% flippy_robot.LineObjects = line_objects;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % export_file = fullfile(cur,'tmp','flippy_move.avi');
-% anim_obj = animator(flippy);
+% anim_obj = animator(flippy_move);
 % anim_obj.Options.ViewAngle=[39,24];
 % anim_obj.animate(flippy_move.Flow, export_file);
