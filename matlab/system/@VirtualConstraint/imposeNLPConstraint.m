@@ -101,7 +101,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
         t = SymVariable('t');
         k = SymVariable('k');
         T  = [SymVariable('t0');SymVariable('tf')];
-        nNode = SymVariable('N');
+        nNode = SymVariable('nNode');
         tsubs = T(1) + ((k-1)/(nNode-1))*(T(2)-T(1));
     end
     

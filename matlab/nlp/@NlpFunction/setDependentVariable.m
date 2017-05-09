@@ -11,7 +11,7 @@ function obj = setDependentVariable(obj, depvars)
         'The second argument must be a scalar or an array of NlpVariable objects.\n');
 
 
-    if ~isempty(obj.SymFun)
+    if isa(obj.SymFun,'SymFunction')
         vars = cellfun(@(x)flatten(x), obj.SymFun.Vars,'UniformOutput',false);        
         nvar1 = length([vars{:}]);
         nvar2 = sum([depvars.Dimension]);
