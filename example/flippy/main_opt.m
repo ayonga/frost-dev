@@ -21,8 +21,8 @@ bounds.time.tf.ub = 2;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 2;
 
-bounds.states.x.lb = [ -pi, -pi, 0, -pi, -pi, -pi];
-bounds.states.x.ub = [pi,  pi, pi, pi, pi, pi];
+bounds.states.x.lb = [ -pi/6, -pi, 0, -pi, -pi, -pi];
+bounds.states.x.ub = [ pi/6,  pi, pi, pi, pi, pi];
 bounds.states.dx.lb = -17*ones(6,1);
 bounds.states.dx.ub = 17*ones(6,1);
 bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000];
@@ -55,7 +55,8 @@ flippy.UserNlpConstraint = str2func('flippy_constr_opt');
 num_grid = 5;
 opts = struct(...%'ConstantTimeHorizon',nan(2,1),... %NaN - variable time, ~NaN, fixed time
     'DerivativeLevel',1,... % either 1 (only Jacobian) or 2 (both Jacobian and Hessian)
-    'EqualityConstraintBoundary',0); % non-zero positive small value will relax the equality constraints
+    'EqualityConstraintBoundary',0,...
+    'DistributeTimeVariable',false); % non-zero positive small value will relax the equality constraints
 nlp = TrajectoryOptimization('ur5opt', flippy, num_grid, bounds, opts);
 
 flippy_cost_opt(nlp, bounds);
@@ -99,5 +100,14 @@ solver = IpoptApplication(nlp);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Save param in a yaml file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% param_save_file = fullfile(cur,'param','flippy_move_2017_05_05_1730.yaml');
+param = cell(1,1);
+param{1}.name = 'FlippyFlipPlaceBurger';
+polydegree = flippy.VirtualConstraints.pos.PolyDegree;
+num2degree = flippy.VirtualConstraints.pos.Dimension;
+param{1}.a    = reshape(params.apos,polydegree+1,num2degree)';
+param{1}.p    = params.ppos;
+param{1}.v    = params.avel;
+param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
+param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
+% param_save_file = fullfile(cur,'param','flippy_move_2017_05_08_0930.yaml');
 % yaml_write_file(param_save_file,param);

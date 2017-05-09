@@ -48,7 +48,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     addNodeConstraint(nlp, q_wrist_func, {'x'}, 'last', pi, pi, 'Nonlinear');    
     
     n_node = nlp.NumNode;
-    p_z = p_endeff(3) - 0.0;
+    p_z = p_endeff(3);
     p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
     addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.03, 0.03, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
