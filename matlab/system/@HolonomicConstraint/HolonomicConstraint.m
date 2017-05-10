@@ -198,7 +198,7 @@ classdef HolonomicConstraint < handle
             hd = SymVariable(obj.ParamName, [dim,1]);
             obj.Param = hd;
             obj.Input = SymVariable(obj.InputName,[dim,1]);
-            obj.h_ = SymFunction(['h_' name], h-hd,...
+            obj.h_ = SymFunction(['h_' name '_' model.Name], h-hd,...
                 {x, hd});
             
             % parse the input options

@@ -16,8 +16,8 @@ function obj = setSymFun(obj, symfun)
     
 
     if ~isempty(obj.Dimension) && obj.Dimension~=0
-        assert(obj.Dimension == length(symfun),...
-            'The dimension of the symbolic expression (%d) does not match the dimension of the NLP function (%d).\n',obj.Dimension, length(symfun));
+%         assert(obj.Dimension == length(symfun),...
+%             'The dimension of the symbolic expression (%d) does not match the dimension of the NLP function (%d).\n',obj.Dimension, length(symfun));
     else
         obj.Dimension = length(symfun);
     end

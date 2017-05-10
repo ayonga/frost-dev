@@ -224,7 +224,7 @@ classdef NlpFunction < handle
             end
             
             if isfield(argin, 'SymFun')
-                if ~isempty(argin.SymFun)
+                if isa(argin.SymFun,'SymFunction')
                     obj = setSymFun(obj, argin.SymFun);
                 end                
             end

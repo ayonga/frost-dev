@@ -1,4 +1,4 @@
-function [xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
+function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
     % calculates the discrete map of the dynamical system that maps
     % xminus from xplus. Subclasses must implement this method by its
     % own.
@@ -12,6 +12,7 @@ function [xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
     % x: the pre-impact states @type colvec
     %
     % Return values:
+    % tn: the time after reset @type double
     % xn: the post-impact states @type colvec
     % lambda: the impulsive wrench @type struct
     
@@ -87,5 +88,6 @@ function [xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
         
     end
     
+    tn = t;
     xn = [qplus; dqplus];
 end

@@ -147,9 +147,29 @@ classdef IOFeedback < Controller
                 calc = logger.calc;
                 
                 calc.mu = mu;
-                calc.ya = y_a;
-                calc.yd = y_d;
-                calc.tau = tau;
+                
+                for i=1:ny
+                    y_i = y(i);
+                    output_name = y_i.Name;
+                    
+                    for j=1:y_i.RelativeDegree
+                        
+                        if j > 1
+                            ya_name = ['d' num2str(j-1) 'ya_' output_name];
+                            yd_name = ['d' num2str(j-1) 'yd_' output_name];
+                            tau_name = ['d' num2str(j-1) 'tau_' output_name];
+                        else
+                            ya_name = ['ya_' output_name];
+                            yd_name = ['yd_' output_name];
+                            tau_name = ['tau_' output_name];
+                        end
+                        calc.(ya_name) = y_a{i}{j};
+                        calc.(yd_name) = y_d{i}{j};
+                        calc.(tau_name) = tau{i}{j};
+                        
+                    end
+                
+                end
                 calc.u_ff = u_ff;
                 calc.u_fb = u_fb;
                 calc.u = u;
