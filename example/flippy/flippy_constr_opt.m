@@ -53,6 +53,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
     addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.03, 0.03, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
+%     addNodeConstraint(nlp, p_z_func, {'x'}, 'all', 0.0, 0.4, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.2, 0.3, 'Nonlinear');
     
     
@@ -65,7 +66,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
     addNodeConstraint(nlp, p_y_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), 0.0, 0.0, 'Nonlinear');
-%     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node/3), 0.05, 0.3, 'Nonlinear');
+    addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node/3), 0.05, 0.3, 'Nonlinear');
     
     %% these are slipping constraints being added
     wrist_3_link = plant.Links(getLinkIndices(plant, 'wrist_3_link'));
@@ -108,7 +109,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
 %                 - mu* (a_y*sin(theta) + a_z*cos(theta) + g*cos(theta))
             
     a_slip_y_func = SymFunction(['endeffoy_sca_' plant.Name],a_slip_y,{x,dx,ddx});
-    addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 'except-last', -Inf, 0.0, 'Nonlinear');
+    addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 1:round(0.8*n_node), -Inf, 0.0, 'Nonlinear');
             
     a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
 %     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -Inf, 0.0, 'Nonlinear');
