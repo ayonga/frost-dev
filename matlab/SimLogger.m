@@ -1,4 +1,4 @@
-classdef SimLogger < handle
+classdef SimLogger < handle & matlab.mixin.Copyable
     % A class for logging the internal data over time during a ODE
     % simulation process. 
     %
@@ -13,6 +13,10 @@ classdef SimLogger < handle
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
+    
+    methods
+        
+    end
     
     properties
         % recorded data at one time instant
@@ -116,16 +120,13 @@ classdef SimLogger < handle
         function flow = get.flow(obj)
             
             if isempty(obj.flow_)
-                % if the flow data has not been concatenated, concatenate
-                % first
+                % if the flow data has not been concatenated, then
+                % concatenate first
                 obj.flow_ = horzcat_fields(cell2mat(obj.calcs));
             end
             flow = obj.flow_;
         end
-        
-
-        function plot(obj)
-
-        end
     end
+    
+    
 end

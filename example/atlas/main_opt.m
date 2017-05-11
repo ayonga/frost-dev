@@ -111,8 +111,8 @@ nlp.update;
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-compileConstraint(nlp,[],[],export_path,{'dynamics_equation','intX','intXdot'});
-% compileObjective(nlp,[],[],export_path);
+% compileConstraint(nlp,[],[],export_path,{'dynamics_equation','intX','intXdot'});
+compileObjective(nlp,[],[],export_path);
 % compileConstraint(nlp,1,'output_boundary_RightStance',export_path);
 % compileConstraint(nlp,4,'xDiscreteMapRightImpact',export_path);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

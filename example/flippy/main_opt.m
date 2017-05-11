@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% FLIPPY robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% main_sim
+main_sim
 
 %!!!! update the limit of joint angles/velocity/acceleration
 bounds = flippy.getLimits();
@@ -64,11 +64,11 @@ flippy_cost_opt(nlp, bounds);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% nlp.update;
-% % exclude = {'dynamics_equation'};
+nlp.update;
+exclude = {'dynamics_equation','intX','intXdot','tCont','timeDuration','avelCont','aposCont'};
 % exclude = [];
-% compileConstraint(nlp,[],export_path,exclude);
-% compileObjective(nlp,[],export_path);
+compileConstraint(nlp,[],export_path,exclude);
+compileObjective(nlp,[],export_path);
 
 
 

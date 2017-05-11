@@ -28,14 +28,14 @@ flippy.configureDynamics();
 % wrist_3_link = flippy.Links(getLinkIndices(flippy, 'wrist_3_link'));
 % wrist_3_frame = wrist_3_link.Reference;
 % % wrist_3_joint = obj.Joints(getJointIndices(obj, 'r_leg_akx'));
-% EndEff = ContactFrame(...
+% EndEff = CoordinateFrame(...
 %     'Name','EndEff',...
 %     'Reference',wrist_3_frame,...
 %     'Offset',[0, 0, 0],...
 %     'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
 %     );
 % EndEff_contact = ToContactFrame(EndEff,'PlanarContactWithFriction');
-% flippy.addContact(EndEff);
+% flippy.addContact(EndEff_contact);
 
 
 % unilateral constraints???
@@ -89,9 +89,11 @@ y2_label = {'ShoulderPan',...
     'WristYaw',...
     'WristPitch'};
 y2_name = 'pos';
+t = SymVariable('t');
+tau = (t-p(2))/(p(1)-p(2));
 y2 = VirtualConstraint(flippy, ya_2, y2_name,...
     'DesiredType','Bezier','PolyDegree',6,...
-    'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','StateBased',...
+    'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','TimeBased',...
     'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true);
 flippy = addVirtualConstraint(flippy,y1);
 flippy = addVirtualConstraint(flippy,y2);
@@ -123,14 +125,14 @@ flippy.PostProcess = str2func('nop');% called after ode
 % flippy.UserNlpConstraint = str2func('nop');
 
 
-t0 = 0;
-tf = 10;
-eventnames = 'deltafinal';
-sim_opts = [];
-logger = SimLogger(flippy);
-tic
-flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
-toc
+% t0 = 0;
+% tf = 10;
+% eventnames = 'deltafinal';
+% sim_opts = [];
+% logger = SimLogger(flippy);
+% tic
+% flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
+% toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

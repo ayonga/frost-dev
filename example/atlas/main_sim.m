@@ -16,7 +16,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
 atlas = AtlasRobot(urdf);
-atlas.configureDynamics('DelayCoriolisSet',true);
+atlas.configureDynamics('DelayCoriolisSet',false);
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,7 +95,7 @@ x0 = [new_param{1}.q0;new_param{1}.dq0];
 % logger = SimLogger(r_stance);
 % r_stance.simulate(0,x0,[],io_control,r_stance_param,logger,'nsf')
 tic
-logger = atlas_flat.simulate(0, x0, [], [],'NumCycle',1);
+logger = atlas_flat.simulate(0, x0, [], [],'NumCycle',4);
 toc
 % 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
