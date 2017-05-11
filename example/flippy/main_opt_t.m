@@ -43,7 +43,7 @@ bounds.pos.kp = 100; % y2ddot = -kd*y2dot - kp*y2
 bounds.pos.kd = 20;
 
 
-flippy.UserNlpConstraint = str2func('flippy_constr_opt');
+flippy.UserNlpConstraint = str2func('flippy_constr_opt_t');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -12,7 +12,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% FLIPPY robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-urdf_file = fullfile(cur,'urdf','robot_only_arm.urdf');
+urdf_file = fullfile(cur,'urdf','robot_only_arm_noeff.urdf');
 %@note you could directly create an object, instead of making new subclass.
 base = get_base_dofs('fixed');
 flippy = RobotLinks(urdf_file,base);
@@ -22,10 +22,10 @@ flippy.configureDynamics();
 % obj.addHolonomicConstraints(constr);
 
 
-% unilateral constraints???
+% % unilateral constraints???
 q = flippy.States.x; % symbolic variable for joint configuration
-q_ee = q('ee_fixed_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
-delta_final =  - q_ee + pi; % 
+q_wr = q('wrist_3_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
+delta_final =  - q_wr + pi; % 
 u_delta_final = UnilateralConstraint(flippy,delta_final,'deltafinal','x'); %'x' represents joint configuration here, the delta_final is function of x
 
 % unilateral constraints will be automatically imposed as path constraint
@@ -42,15 +42,15 @@ addEvent(flippy, u_delta_final);
 % % virtual constraints???
 % tau
 p = SymVariable('p',[2,1]);
-tau = (q_ee-p(2))/(p(1)-p(2));
+tau = (q_wr-p(2))/(p(1)-p(2));
 
-% y1 = dq_ee
-ya1 = jacobian(q_ee, flippy.States.x)*flippy.States.dx;
-y1_name = 'vel';
-y1 = VirtualConstraint(flippy, ya1, y1_name,...
-    'DesiredType','Constant',...
-    'RelativeDegree',1,'OutputLabel',{'EndEffector'},'PhaseType','StateBased',...
-    'Holonomic',false);
+% % y1 = dq_ee
+% ya1 = jacobian(q_ee, flippy.States.x)*flippy.States.dx;
+% y1_name = 'vel';
+% y1 = VirtualConstraint(flippy, ya1, y1_name,...
+%     'DesiredType','Constant',...
+%     'RelativeDegree',1,'OutputLabel',{'EndEffector'},'PhaseType','StateBased',...
+%     'Holonomic',false);
 
 % % y2 
 y_sp = q('shoulder_pan_joint');
@@ -70,9 +70,9 @@ y2_label = {'ShoulderPan',...
 y2_name = 'pos';
 y2 = VirtualConstraint(flippy, ya_2, y2_name,...
     'DesiredType','Bezier','PolyDegree',6,...
-    'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','StateBased',...
-    'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true);
-flippy = addVirtualConstraint(flippy,y1);
+    'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','TimeBased',...
+    'Holonomic',true);
+% flippy = addVirtualConstraint(flippy,y1);
 flippy = addVirtualConstraint(flippy,y2);
 
 io_control  = IOFeedback('IO');
