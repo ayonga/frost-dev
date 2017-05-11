@@ -100,9 +100,9 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     if ~is_state_based
         t = SymVariable('t');
         k = SymVariable('k');
-        T  = [SymVariable('t0');SymVariable('tf')];
+        T  = SymVariable('t',[2,1]);
         nNode = SymVariable('nNode');
-        tsubs = T(1) + ((k-1)/(nNode-1))*(T(2)-T(1));
+        tsubs = T(1) + ((k-1)./(nNode-1)).*(T(2)-T(1));
     end
     
     y_fun = cell(rel_deg+1,1);
@@ -253,10 +253,11 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     else
         %% Time-based outputs, need to incoorporates the time variable
         ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
-        ddy = subs(ddy,t,tsubs);
+        
         for j=1:1:rel_deg
             ddy = ddy + ep(j)*(ya{j} - yd{j});
         end
+        ddy = subs(ddy,t,tsubs);
         
         if ~isnan(nlpOptions.ConstantTimeHorizon) % constant horizon
             ddy_fun= SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [x,dx,a], {T,k,nNode});
