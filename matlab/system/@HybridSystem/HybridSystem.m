@@ -70,10 +70,10 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         function VertexProperties = get.VertexProperties(~)
             
             VertexProperties = struct();
-            VertexProperties.Name =  {'Domain','Control','Param','IsTerminal'};
-            VertexProperties.Type = {{'ContinuousDynamics'},{'Controller'},{'struct'},{'logical'}};
-            VertexProperties.Attribute = {{},{},{},{'nonempty'}};
-            VertexProperties.DefaultValue =  {{[]},{[]},{[]},false};
+            VertexProperties.Name =  {'Domain','Control','Param'};
+            VertexProperties.Type = {{'ContinuousDynamics'},{'Controller'},{'struct'}};
+            VertexProperties.Attribute = {{},{},{}};
+            VertexProperties.DefaultValue =  {{[]},{[]},{[]}};
         end
         
         function EdgeProperties = get.EdgeProperties(~)
@@ -139,7 +139,17 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
             
             
         end
-
+        
+        function ret = isdag(obj)
+            % returns true if the directed graph is a directed acyclic
+            % graph
+            %
+            % @see ISDAG
+            
+            
+            ret = isdag(obj.Gamma);
+            
+        end
         function ret = isDirectedCycle(obj)
             % returns true if the underlying directed graph is a simple
             % directed cycle.
