@@ -9,7 +9,7 @@ function obj = setAuxdata(obj, auxdata)
     
     
     
-    if ~isempty(obj.SymFun)
+    if  isa(obj.SymFun,'SymFunction')
         
         assert(numel(auxdata) == numel(obj.SymFun.Params),...
             'The number of the constant parameters does not match.');

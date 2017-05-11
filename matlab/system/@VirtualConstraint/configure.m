@@ -168,10 +168,8 @@ function obj = configure(obj, varargin)
     
     obj.ActualFuncsName_ = cellfun(@(f)f.Name, ya_fun,'UniformOutput',false);
     obj.DesiredFuncsName_ = cellfun(@(f)f.Name, yd_fun,'UniformOutput',false);
-    if is_state_based
-        if ~no_tau
-            obj.PhaseFuncs = tau_fun;
-            obj.PhaseFuncsName_ = cellfun(@(f)f.Name, tau_fun,'UniformOutput',false);
-        end
+    if ~no_tau
+        obj.PhaseFuncs = tau_fun;
+        obj.PhaseFuncsName_ = cellfun(@(f)f.Name, tau_fun,'UniformOutput',false);
     end
 end
