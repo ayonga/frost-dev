@@ -146,13 +146,13 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             else
                 if is_holonomic
                     % holonomic virtual constraints
-                    y_fun{1} = SymFunction(['y_' name], y, [{T, model.States.x},a], {k,nNode});
+                    y_fun{1} = SymFunction(['y_' name], y, [{T}, {model.States.x},a], {k,nNode});
                     % add constraint at the first node
                     nlp = addNodeConstraint(nlp, y_fun{1}, [{'T','x'},a_name], 'first',...
                         0, 0, 'Nonlinear',{1,n_node});
                 else
                     % non-holonomic constraints
-                    y_fun{1} = SymFunction(['y_' name], y, [{T, model.States.x, model.States.dx}, a], {k,nNode});
+                    y_fun{1} = SymFunction(['y_' name], y, [{T}, {model.States.x}, {model.States.dx}, a], {k,nNode});
                     % add constraint at the first node
                     nlp = addNodeConstraint(nlp, y_fun{1}, [{'T','x','dx'},a_name], 'first',...
                         0, 0, 'Nonlinear',{1,n_node});
@@ -282,7 +282,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             end
             
         else
-            ddy_fun= SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [T, x,dx,a], {k,nNode});
+            ddy_fun= SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [{T}, x, dx, a], {k,nNode});
             
             for i=node_list
                 idx = node_list(i);
