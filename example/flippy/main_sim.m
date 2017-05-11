@@ -88,7 +88,7 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy7DOF_2017_05_11_0714.yaml'];
+old_param_file = [cur,'/param/flippy7DOF_2017_05_11_1102.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
@@ -96,9 +96,6 @@ old_param_file = [cur,'/param/flippy7DOF_2017_05_11_0714.yaml'];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the simulator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure(200);
-logger;
-plot(logger.flow.t,logger.flow.states.x(1:6,:))
 % you can assign these function handle to have additional processing
 % functions in the simulation
 flippy.PreProcess = str2func('nop'); %called before ode
@@ -115,6 +112,10 @@ tic
 flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
 toc
 
+%% Plot the Data
+figure(200);
+logger;
+plot(logger.flow.t,logger.flow.states.x(1:6,:))
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator

@@ -54,7 +54,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.03, 0.03, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
 %     addNodeConstraint(nlp, p_z_func, {'x'}, 'all', 0.0, 0.4, 'Nonlinear');
-    addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.2, 0.3, 'Nonlinear');
+    addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.1, 0.3, 'Nonlinear');
     
     
     p_x = p_endeff(1);
@@ -112,7 +112,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 1:round(0.8*n_node), -Inf, 0.0, 'Nonlinear');
             
     a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
-%     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -Inf, 0.0, 'Nonlinear');
+    addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -Inf, 0.0, 'Nonlinear');
     
     
 end

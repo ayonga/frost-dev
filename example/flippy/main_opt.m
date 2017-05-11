@@ -17,9 +17,9 @@ bounds = flippy.getLimits();
 bounds.time.t0.lb = 0; % starting time
 bounds.time.t0.ub = 0;
 bounds.time.tf.lb = 0.2; % terminating time
-bounds.time.tf.ub = 2;
+bounds.time.tf.ub = 1;
 bounds.time.duration.lb = 0.2; % duration (optional)
-bounds.time.duration.ub = 2;
+bounds.time.duration.ub = 1;
 
 bounds.states.x.lb = [ -pi/2, -pi, 0, -pi/2, pi/2, -pi, -pi];
 bounds.states.x.ub = [ pi/2,  0, pi, pi/2, pi/2, pi, pi];
@@ -32,8 +32,8 @@ bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000,1000];
 
 
 
-bounds.params.avel.lb = 4*pi;
-bounds.params.avel.ub = 4*pi;
+bounds.params.avel.lb = 2*pi;
+bounds.params.avel.ub = 10*pi;
 bounds.params.apos.lb = -100;
 bounds.params.apos.ub = 100;
 bounds.params.ppos.lb = [pi, 0];
@@ -125,5 +125,5 @@ param{1}.p    = params.ppos;
 param{1}.v    = params.avel;
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
-% param_save_file = fullfile(cur,'param','flippy7DOF_2017_05_11_0714.yaml');
+% param_save_file = fullfile(cur,'param','flippy7DOF_2017_05_11_1102.yaml');
 % yaml_write_file(param_save_file,param);
