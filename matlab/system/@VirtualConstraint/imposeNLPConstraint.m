@@ -100,9 +100,9 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     if ~is_state_based
         t = SymVariable('t');
         k = SymVariable('k');
-        T  = [SymVariable('t0');SymVariable('tf')];
+        T  = SymVariable('t',[2,1]);
         nNode = SymVariable('nNode');
-        tsubs = T(1) + ((k-1)/(nNode-1))*(T(2)-T(1));
+        tsubs = T(1) + ((k-1)./(nNode-1)).*(T(2)-T(1));
     end
     
     y_fun = cell(rel_deg+1,1);
@@ -146,13 +146,13 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             else
                 if is_holonomic
                     % holonomic virtual constraints
-                    y_fun{1} = SymFunction(['y_' name], y, [{T, model.States.x},a], {k,nNode});
+                    y_fun{1} = SymFunction(['y_' name], y, [{T}, {model.States.x},a], {k,nNode});
                     % add constraint at the first node
                     nlp = addNodeConstraint(nlp, y_fun{1}, [{'T','x'},a_name], 'first',...
                         0, 0, 'Nonlinear',{1,n_node});
                 else
                     % non-holonomic constraints
-                    y_fun{1} = SymFunction(['y_' name], y, [{T, model.States.x, model.States.dx}, a], {k,nNode});
+                    y_fun{1} = SymFunction(['y_' name], y, [{T}, {model.States.x}, {model.States.dx}, a], {k,nNode});
                     % add constraint at the first node
                     nlp = addNodeConstraint(nlp, y_fun{1}, [{'T','x','dx'},a_name], 'first',...
                         0, 0, 'Nonlinear',{1,n_node});
@@ -253,10 +253,11 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     else
         %% Time-based outputs, need to incoorporates the time variable
         ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
-        ddy = subs(ddy,t,tsubs);
+        
         for j=1:1:rel_deg
             ddy = ddy + ep(j)*(ya{j} - yd{j});
         end
+        ddy = subs(ddy,t,tsubs);
         
         if ~isnan(nlpOptions.ConstantTimeHorizon) % constant horizon
             ddy_fun= SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [x,dx,a], {T,k,nNode});
@@ -281,7 +282,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             end
             
         else
-            ddy_fun= SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [T, x,dx,a], {k,nNode});
+            ddy_fun= SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [{T}, x, dx, a], {k,nNode});
             
             for i=node_list
                 idx = node_list(i);
