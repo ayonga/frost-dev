@@ -1,6 +1,4 @@
 %% The main script to run the FLIPPY multi-contact walking simulation
-% 
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Specify project path
@@ -14,7 +12,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% FLIPPY robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-urdf_file = fullfile(cur,'urdf','robot_only_arm_noeff.urdf');
+urdf_file = fullfile(cur,'urdf','robot_only_arm.urdf');
 %@note you could directly create an object, instead of making new subclass.
 base = get_base_dofs('fixed');
 flippy = RobotLinks(urdf_file,base);
@@ -24,24 +22,10 @@ flippy.configureDynamics();
 % obj.addHolonomicConstraints(constr);
 
 
-% contacts???
-% wrist_3_link = flippy.Links(getLinkIndices(flippy, 'wrist_3_link'));
-% wrist_3_frame = wrist_3_link.Reference;
-% % wrist_3_joint = obj.Joints(getJointIndices(obj, 'r_leg_akx'));
-% EndEff = ContactFrame(...
-%     'Name','EndEff',...
-%     'Reference',wrist_3_frame,...
-%     'Offset',[0, 0, 0],...
-%     'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%     );
-% EndEff_contact = ToContactFrame(EndEff,'PlanarContactWithFriction');
-% flippy.addContact(EndEff);
-
-
 % unilateral constraints???
 q = flippy.States.x; % symbolic variable for joint configuration
-q_wr = q('wrist_3_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
-delta_final =  - q_wr + pi; % 
+q_ee = q('ee_fixed_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
+delta_final =  - q_ee + pi; % 
 u_delta_final = UnilateralConstraint(flippy,delta_final,'deltafinal','x'); %'x' represents joint configuration here, the delta_final is function of x
 
 % unilateral constraints will be automatically imposed as path constraint
@@ -58,36 +42,31 @@ addEvent(flippy, u_delta_final);
 % % virtual constraints???
 % tau
 p = SymVariable('p',[2,1]);
-tau = (q_wr-p(2))/(p(1)-p(2));
+tau = (q_ee-p(2))/(p(1)-p(2));
 
-% y1 = dq_wr
-ya1 = jacobian(q_wr, flippy.States.x)*flippy.States.dx;
+% y1 = dq_ee
+ya1 = jacobian(q_ee, flippy.States.x)*flippy.States.dx;
 y1_name = 'vel';
 y1 = VirtualConstraint(flippy, ya1, y1_name,...
     'DesiredType','Constant',...
-    'RelativeDegree',1,'OutputLabel',{'WristRoll'},'PhaseType','StateBased',...
+    'RelativeDegree',1,'OutputLabel',{'EndEffector'},'PhaseType','StateBased',...
     'Holonomic',false);
 
 % % y2 
-% obj = addPositionOutput(obj, ...
-%                 {model.KinObjects.ShoulderPan,...
-%                 model.KinObjects.ShoulderLift,...
-%                 model.KinObjects.Elbow,...
-%                 model.KinObjects.WristYaw,...
-%                 model.KinObjects.WristPitch}, ...
-%                 'Bezier6thOrder');
 y_sp = q('shoulder_pan_joint');
 y_sl = q('shoulder_lift_joint');
 y_el = q('elbow_joint');
 y_wp = q('wrist_1_joint');
 y_wy = q('wrist_2_joint');
-ya_2 = [y_sp; y_sl; y_el; y_wy; y_wp];
+y_wr = q('wrist_3_joint');
+ya_2 = [y_sp; y_sl; y_el; y_wy; y_wp; y_wr];
     
 y2_label = {'ShoulderPan',...
     'ShoulderLift',...
     'Elbow',...
     'WristYaw',...
-    'WristPitch'};
+    'WristPitch'...
+    'WristRoll'};
 y2_name = 'pos';
 y2 = VirtualConstraint(flippy, ya_2, y2_name,...
     'DesiredType','Bezier','PolyDegree',6,...
@@ -109,7 +88,7 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy_move_2017_05_09_1002.yaml'];
+old_param_file = [cur,'/param/flippy7DOF_2017_05_11_0714.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
@@ -117,6 +96,9 @@ old_param_file = [cur,'/param/flippy_move_2017_05_09_1002.yaml'];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the simulator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+figure(200);
+logger;
+plot(logger.flow.t,logger.flow.states.x(1:6,:))
 % you can assign these function handle to have additional processing
 % functions in the simulation
 flippy.PreProcess = str2func('nop'); %called before ode
@@ -132,105 +114,8 @@ logger = SimLogger(flippy);
 tic
 flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
 toc
+
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Add line objects for animation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%     shoulder_link = flippy.Links(getLinkIndices(flippy, 'shoulder_link'));
-%     shoulder_frame = shoulder_link.Reference;
-%     
-%     shoulder = CoordinateFrame(...
-%         'Name','Shoulder',...
-%         'Reference',shoulder_frame,...
-%         'Offset',[0, 0, 0],...
-%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%         );
-%     p_shoulder = getCartesianPosition(flippy,shoulder);
-%     
-%     upper_arm_link = flippy.Links(getLinkIndices(flippy, 'upper_arm_link'));
-%     upper_arm_frame = upper_arm_link.Reference;
-% 
-%     upperarm = CoordinateFrame(...
-%         'Name','UpperArm',...
-%         'Reference',upper_arm_frame,...
-%         'Offset',[0, 0, 0],...
-%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%         );
-%     p_upperarm = getCartesianPosition(flippy,upperarm);
-%     
-%     forearm_link = flippy.Links(getLinkIndices(flippy, 'forearm_link'));
-%     forearm_frame = forearm_link.Reference;
-% 
-%     forearm = CoordinateFrame(...
-%         'Name','ForeArm',...
-%         'Reference',forearm_frame,...
-%         'Offset',[0, 0, 0],...
-%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%         );
-%     p_forearm = getCartesianPosition(flippy,forearm);
-%     
-%     wrist_1_link = flippy.Links(getLinkIndices(flippy, 'wrist_1_link'));
-%     wrist_1_frame = wrist_1_link.Reference;
-% 
-%     wrist1 = CoordinateFrame(...
-%         'Name','Wrist1',...
-%         'Reference',wrist_1_frame,...
-%         'Offset',[0, 0, 0],...
-%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%         );
-%     p_wrist1 = getCartesianPosition(flippy,wrist1);
-%     
-%     wrist_2_link = flippy.Links(getLinkIndices(flippy, 'wrist_2_link'));
-%     wrist_2_frame = wrist_2_link.Reference;
-% 
-%     wrist2 = CoordinateFrame(...
-%         'Name','Wrist2',...
-%         'Reference',wrist_2_frame,...
-%         'Offset',[0, 0, 0],...
-%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%         );
-%     p_wrist2 = getCartesianPosition(flippy,wrist2);
-%     
-%     wrist_3_link = flippy.Links(getLinkIndices(flippy, 'wrist_3_link'));
-%     wrist_3_frame = wrist_3_link.Reference;
-% 
-%     wrist3 = CoordinateFrame(...
-%         'Name','Wrist3',...
-%         'Reference',wrist_3_frame,...
-%         'Offset',[0, 0, 0],...
-%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-%         );
-%     p_wrist3 = getCartesianPosition(flippy,wrist3);
-%     
-% % kin = struct;
-% % flippy_robot = Flippy(urdf_file);
-% ur5_arm = KinematicGroup('Name','UR5Arm','AllowDuplicate',true);
-% 
-% ur5_arm = ur5_arm.addKinematic(...
-%                 {p_shoulder(1),p_shoulder(2),p_shoulder(3),...
-%                 p_upperarm(1),p_upperarm(2),p_upperarm(3),...
-%                 p_forearm(1),p_forearm(2),p_forearm(3),...
-%                 p_wrist1(1),p_wrist1(2),p_wrist1(3),...
-%                 p_wrist2(1),p_wrist2(2),p_wrist2(3),...
-%                 p_wrist3(1),p_wrist3(2),p_wrist3(3)});
-% 
-%             line_objects(1).Kin = ur5_arm;
-%             line_objects(1).Color = 'r';
-%             line_objects(1).Style = '-o';
-%             line_objects(1).LineWidth = 6;
-%             line_objects(1).MarkerSize = 4;
-%             line_objects(1).NumPoint = 6;
-
-% flippy_robot.initialize();
-            
-% exportLineFunctions(flippy_robot, export_path);      
-
-% flippy_move = FlippyMove(flippy_robot);
-% flippy_move.Flow = cell(1,1);
-% flippy_move.Flow{1} = logger.flow;
-% flippy_robot.LineObjects = line_objects;
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

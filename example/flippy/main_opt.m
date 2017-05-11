@@ -21,12 +21,12 @@ bounds.time.tf.ub = 2;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 2;
 
-bounds.states.x.lb = [ -pi/6, -pi, 0, -pi, -pi, -pi];
-bounds.states.x.ub = [ pi/6,  pi, pi, pi, pi, pi];
-bounds.states.dx.lb = -17*ones(6,1);
-bounds.states.dx.ub = 17*ones(6,1);
-bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000];
-bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000];
+bounds.states.x.lb = [ -pi/2, -pi, 0, -pi/2, pi/2, -pi, -pi];
+bounds.states.x.ub = [ pi/2,  0, pi, pi/2, pi/2, pi, pi];
+bounds.states.dx.lb = -17*ones(7,1);
+bounds.states.dx.ub = 17*ones(7,1);
+bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000,1000];
+bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000,1000];
 
 
 
@@ -34,8 +34,6 @@ bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000];
 
 bounds.params.avel.lb = 4*pi;
 bounds.params.avel.ub = 4*pi;
-% bounds.params.pvel.lb = [pi, 0];
-% bounds.params.pvel.ub = [pi, 0];
 bounds.params.apos.lb = -100;
 bounds.params.apos.ub = 100;
 bounds.params.ppos.lb = [pi, 0];
@@ -65,11 +63,11 @@ flippy_cost_opt(nlp, bounds);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% nlp.update;
-% exclude = {'dynamics_equation'};
-% % exclude = [];
-% compileConstraint(nlp,[],export_path,exclude);
-% compileObjective(nlp,[],export_path);
+nlp.update;
+exclude = {'dynamics_equation'};
+% exclude = [];
+compileConstraint(nlp,[],export_path,exclude);
+compileObjective(nlp,[],export_path);
 
 
 
@@ -77,7 +75,7 @@ flippy_cost_opt(nlp, bounds);
 %%%% Link the NLP problem to a NLP solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 solver = IpoptApplication(nlp);
-
+solver.Options.ipopt.max_iter = 10000;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the optimization
@@ -89,6 +87,24 @@ solver = IpoptApplication(nlp);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Plot the basic result
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+xdata =zeros(1,nlp.NumNode);
+ydata =zeros(1,nlp.NumNode);
+zdata =zeros(1,nlp.NumNode);
+for i = 1:nlp.NumNode
+zdata(1,i) = endeffclearance_sca_ur5(states.x(:,i));
+ydata(1,i) = endeffy_sca_ur5(states.x(:,1));
+xdata(1,i) = endeffx_sca_ur5(states.x(:,1));
+end
+figure(301);
+% subplot(3,1,1),plot(xdata,ydata);
+% subplot(3,1,2),plot(ydata,zdata);
+% subplot(3,1,3),plot(xdata,zdata);
+plot3(xdata,ydata,zdata);grid on;
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run animation of the optimal trajectory
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,7 +112,7 @@ solver = IpoptApplication(nlp);
 % anim = animator(flippy);
 % anim.Options.ViewAngle=[39,24];
 % anim.animate(calcs,export_file)
-
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Save param in a yaml file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,5 +125,5 @@ param{1}.p    = params.ppos;
 param{1}.v    = params.avel;
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
-% param_save_file = fullfile(cur,'param','flippy_move_2017_05_09_1031.yaml');
+% param_save_file = fullfile(cur,'param','flippy7DOF_2017_05_11_0714.yaml');
 % yaml_write_file(param_save_file,param);
