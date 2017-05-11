@@ -64,8 +64,8 @@ flippy_cost_opt(nlp, bounds);
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 nlp.update;
-exclude = {'dynamics_equation'};
-% exclude = [];
+% exclude = {'dynamics_equation'};
+exclude = [];
 compileConstraint(nlp,[],export_path,exclude);
 compileObjective(nlp,[],export_path);
 

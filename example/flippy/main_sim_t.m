@@ -80,7 +80,7 @@ io_control  = IOFeedback('IO');
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% flippy.compile(export_path);
+flippy.compile(export_path);
 
 
 
@@ -88,7 +88,7 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy7DOF_2017_05_11_1102.yaml'];
+old_param_file = [cur,'/param/flippy6DOF_2017_05_02_1711.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 

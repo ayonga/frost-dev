@@ -80,7 +80,7 @@ io_control  = IOFeedback('IO');
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% flippy.compile(export_path);
+flippy.compile(export_path);
 
 
 
