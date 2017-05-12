@@ -44,7 +44,7 @@ addEvent(flippy, u_delta_final);
 % % virtual constraints???
 % tau
 p = SymVariable('p',[2,1]);
-tau = (q_wr-p(2))/(p(1)-p(2));
+% tau = (q_wr-p(2))/(p(1)-p(2));
 
 % % y1 = dq_ee
 % ya1 = jacobian(q_ee, flippy.States.x)*flippy.States.dx;
@@ -75,7 +75,7 @@ tau = (t-p(2))/(p(1)-p(2));
 y2 = VirtualConstraint(flippy, ya_2, y2_name,...
     'DesiredType','Bezier','PolyDegree',6,...
     'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','TimeBased',...
-    'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true);
+    'Holonomic',true);
 %flippy = addVirtualConstraint(flippy,y1);
 flippy = addVirtualConstraint(flippy,y2);
 

@@ -21,28 +21,28 @@ function nlp = flippy_constr_opt_t(nlp, bounds, varargin)
     % relative degree 2 outputs
     plant.VirtualConstraints.pos.imposeNLPConstraint(nlp, [bounds.pos.kp,bounds.pos.kd], [1,1]);
     % tau boundary [0,1]
-    tau = plant.VirtualConstraints.pos.PhaseFuncs{1};
-    t = SymVariable('t');
-    k = SymVariable('k');
-    T  = SymVariable('t',[2,1]);
-    nNode = SymVariable('nNode');
-    tsubs = T(1) + ((k-1)./(nNode-1)).*(T(2)-T(1));
-    tau_new = subs(tau,t,tsubs);
-    if ~isempty(plant.VirtualConstraints.pos.PhaseParams)
-        p = {SymVariable(tomatrix(plant.VirtualConstraints.pos.PhaseParams(:)))};
-        p_name = plant.VirtualConstraints.pos.PhaseParamName;
-    else
-        p = {};
-        p_name = {};
-    end
+%     tau = plant.VirtualConstraints.pos.PhaseFuncs{1};
+%     t = SymVariable('t');
+%     k = SymVariable('k');
+%     T  = SymVariable('t',[2,1]);
+%     nNode = SymVariable('nNode');
+%     tsubs = T(1) + ((k-1)./(nNode-1)).*(T(2)-T(1));
+%     tau_new = subs(tau,t,tsubs);
+%     if ~isempty(plant.VirtualConstraints.pos.PhaseParams)
+%         p = {SymVariable(tomatrix(plant.VirtualConstraints.pos.PhaseParams(:)))};
+%         p_name = plant.VirtualConstraints.pos.PhaseParamName;
+%     else
+%         p = {};
+%         p_name = {};
+%     end
     
-    tau_new_fun = SymFunction(['tau_bound_',plant.Name], tau_new, [{T},p],{k,nNode});
-    addNodeConstraint(nlp, tau_new_fun, [{'T'},p_name], 'first', 0, 0, 'Nonlinear',{1,nlp.NumNode});
-    addNodeConstraint(nlp, tau_new_fun, [{'T'},p_name], 'last', 1, 1, 'Nonlinear',{nlp.NumNode,nlp.NumNode});
+%     tau_new_fun = SymFunction(['tau_bound_',plant.Name], tau_new, [{T},p],{k,nNode});
+%     addNodeConstraint(nlp, tau_new_fun, [{'T'},p_name], 'first', 0, 0, 'Nonlinear',{1,nlp.NumNode});
+%     addNodeConstraint(nlp, tau_new_fun, [{'T'},p_name], 'last', 1, 1, 'Nonlinear',{nlp.NumNode,nlp.NumNode});
     
     wrist_3_link = plant.Links(getLinkIndices(plant, 'wrist_3_link'));
     wrist_3_frame = wrist_3_link.Reference;
-    EndEff = CoordinateFrame(...
+    Wrist3 = CoordinateFrame(...
         'Name','EndEff',...
         'Reference',wrist_3_frame,...
         'Offset',[0, 0, 0],...
@@ -126,7 +126,7 @@ function nlp = flippy_constr_opt_t(nlp, bounds, varargin)
     addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 1:round(0.8*n_node), -Inf, 0.0, 'Nonlinear');
             
     a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
-%     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -Inf, 0.0, 'Nonlinear');
+%     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 1:round(0.8*n_node), -Inf, 0.0, 'Nonlinear');
     
     
 end
