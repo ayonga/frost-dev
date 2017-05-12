@@ -14,6 +14,6 @@ function [params,x0] = loadParam(param_config_file)
     params.kvel = 10;
     params.kpos = [100,20]; %[kp,kd]
     
-    x0 = old_params.domain(1).x_plus([7:12 19:end]);
+    x0 = old_params.domain(1).x_plus;
     
 end
