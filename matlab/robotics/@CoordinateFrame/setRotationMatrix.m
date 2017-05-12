@@ -14,7 +14,8 @@ function obj = setRotationMatrix(obj,r)
             'The determinant of the rotation matrix must equal 1.');
         obj.R = r;
     end
-    
+    % remove small numbers generated from the rotation matrix
+    obj.R = roundn(obj.R,-9);
     % update the homogeneous transformation matrix
     obj.computeHomogeneousTransform();
 end

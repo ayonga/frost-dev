@@ -145,7 +145,7 @@ solver = IpoptApplication(nlp);
 % anim = animator(atlas);
 % anim.animate(calcs,export_file)
 
-
+[tspan, states, inputs, params] = exportSolution(nlp, sol);
 r_stance_param = struct_overlay(r_stance_param,params{1},{'AllowNew',true});
 atlas_flat = setVertexProperties(atlas_flat,'RightStance','Param',r_stance_param);
 l_stance_param = struct_overlay(l_stance_param,params{3},{'AllowNew',true});
