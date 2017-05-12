@@ -30,7 +30,7 @@ function yd = calcDesired(obj, t, x, dx, a, p)
     yd = cell(1,rel_deg+1);
     is_state_based = strcmp(obj.PhaseType, 'StateBased');
     
-    if obj.hasPhaseParam && is_state_based
+    if obj.hasPhaseParam 
         params = {a(:), p(:)};
     else
         params = {a(:)};
