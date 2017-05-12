@@ -1,4 +1,6 @@
 %% The main script to run the FLIPPY multi-contact walking simulation
+% 
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Specify project path
@@ -12,7 +14,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% FLIPPY robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-urdf_file = fullfile(cur,'urdf','robot_only_arm.urdf');
+urdf_file = fullfile(cur,'urdf','robot_only_arm_noeff.urdf');
 %@note you could directly create an object, instead of making new subclass.
 base = get_base_dofs('fixed');
 flippy = RobotLinks(urdf_file,base);
@@ -22,10 +24,24 @@ flippy.configureDynamics();
 % obj.addHolonomicConstraints(constr);
 
 
+% contacts???
+% wrist_3_link = flippy.Links(getLinkIndices(flippy, 'wrist_3_link'));
+% wrist_3_frame = wrist_3_link.Reference;
+% % wrist_3_joint = obj.Joints(getJointIndices(obj, 'r_leg_akx'));
+% EndEff = CoordinateFrame(...
+%     'Name','EndEff',...
+%     'Reference',wrist_3_frame,...
+%     'Offset',[0, 0, 0],...
+%     'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%     );
+% EndEff_contact = ToContactFrame(EndEff,'PlanarContactWithFriction');
+% flippy.addContact(EndEff_contact);
+
+
 % unilateral constraints???
 q = flippy.States.x; % symbolic variable for joint configuration
-q_ee = q('ee_fixed_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
-delta_final =  - q_ee + pi; % 
+q_wr = q('wrist_3_joint'); % waist roll joint. The following two referencing both works: q('wrist_3_joint') == q(6);
+delta_final =  - q_wr + pi; % 
 u_delta_final = UnilateralConstraint(flippy,delta_final,'deltafinal','x'); %'x' represents joint configuration here, the delta_final is function of x
 
 % unilateral constraints will be automatically imposed as path constraint
@@ -42,35 +58,42 @@ addEvent(flippy, u_delta_final);
 % % virtual constraints???
 % tau
 p = SymVariable('p',[2,1]);
-tau = (q_ee-p(2))/(p(1)-p(2));
+tau = (q_wr-p(2))/(p(1)-p(2));
 
-% y1 = dq_ee
-ya1 = jacobian(q_ee, flippy.States.x)*flippy.States.dx;
+% y1 = dq_wr
+ya1 = jacobian(q_wr, flippy.States.x)*flippy.States.dx;
 y1_name = 'vel';
 y1 = VirtualConstraint(flippy, ya1, y1_name,...
     'DesiredType','Constant',...
-    'RelativeDegree',1,'OutputLabel',{'EndEffector'},'PhaseType','StateBased',...
+    'RelativeDegree',1,'OutputLabel',{'WristRoll'},'PhaseType','StateBased',...
     'Holonomic',false);
 
 % % y2 
+% obj = addPositionOutput(obj, ...
+%                 {model.KinObjects.ShoulderPan,...
+%                 model.KinObjects.ShoulderLift,...
+%                 model.KinObjects.Elbow,...
+%                 model.KinObjects.WristYaw,...
+%                 model.KinObjects.WristPitch}, ...
+%                 'Bezier6thOrder');
 y_sp = q('shoulder_pan_joint');
 y_sl = q('shoulder_lift_joint');
 y_el = q('elbow_joint');
 y_wp = q('wrist_1_joint');
 y_wy = q('wrist_2_joint');
-y_wr = q('wrist_3_joint');
-ya_2 = [y_sp; y_sl; y_el; y_wy; y_wp; y_wr];
+ya_2 = [y_sp; y_sl; y_el; y_wy; y_wp];
     
 y2_label = {'ShoulderPan',...
     'ShoulderLift',...
     'Elbow',...
     'WristYaw',...
-    'WristPitch'...
-    'WristRoll'};
+    'WristPitch'};
 y2_name = 'pos';
+t = SymVariable('t');
+tau = (t-p(2))/(p(1)-p(2));
 y2 = VirtualConstraint(flippy, ya_2, y2_name,...
     'DesiredType','Bezier','PolyDegree',6,...
-    'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','StateBased',...
+    'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','TimeBased',...
     'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true);
 flippy = addVirtualConstraint(flippy,y1);
 flippy = addVirtualConstraint(flippy,y2);
@@ -80,7 +103,7 @@ io_control  = IOFeedback('IO');
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-flippy.compile(export_path);
+% flippy.compile(export_path);
 
 
 
@@ -88,11 +111,10 @@ flippy.compile(export_path);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy7DOF_2017_05_11_1102.yaml'];
+old_param_file = [cur,'/param/flippy_move_2017_05_02_1711.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
-%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the simulator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,24 +125,18 @@ flippy.PostProcess = str2func('nop');% called after ode
 % flippy.UserNlpConstraint = str2func('nop');
 
 
-t0 = 0;
-tf = 10;
-eventnames = 'deltafinal';
-sim_opts = [];
-logger = SimLogger(flippy);
-tic
-flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
-toc
-
-%% Plot the Data
-figure(200);
-logger;
-plot(logger.flow.t,logger.flow.states.x(1:6,:));
-%%
+% t0 = 0;
+% tf = 10;
+% eventnames = 'deltafinal';
+% sim_opts = [];
+% logger = SimLogger(flippy);
+% tic
+% flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
+% toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % export_file = fullfile(cur,'tmp','flippy_move.avi');
-% anim_obj = animator(flippy_move);
+% anim_obj = animator(flippy);
 % anim_obj.Options.ViewAngle=[39,24];
 % anim_obj.animate(flippy_move.Flow, export_file);

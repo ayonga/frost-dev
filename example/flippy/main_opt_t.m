@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% FLIPPY robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% main_sim
+main_sim
 
 %!!!! update the limit of joint angles/velocity/acceleration
 bounds = flippy.getLimits();
@@ -21,23 +21,25 @@ bounds.time.tf.ub = 1;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 1;
 
-bounds.states.x.lb = [ -pi/2, -pi, 0, -pi/2, pi/2, -pi, -pi];
-bounds.states.x.ub = [ pi/2,  0, pi, pi/2, pi/2, pi, pi];
-bounds.states.dx.lb = -17*ones(7,1);
-bounds.states.dx.ub = 17*ones(7,1);
-bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000,1000];
-bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000,1000];
+bounds.states.x.lb = [ -pi, -pi, 0, -pi, -pi, -pi]';
+bounds.states.x.ub = [pi,  pi, pi, pi, pi, pi];
+bounds.states.dx.lb = -17*ones(6,1);
+bounds.states.dx.ub = 17*ones(6,1);
+bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000];
+bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000];
 
 
 
 
 
-bounds.params.avel.lb = 2*pi;
-bounds.params.avel.ub = 10*pi;
+bounds.params.avel.lb = 4*pi;
+bounds.params.avel.ub = 4*pi;
+bounds.params.pvel.lb = [pi, 0];
+bounds.params.pvel.ub = [pi, 0];
 bounds.params.apos.lb = -100;
 bounds.params.apos.ub = 100;
-bounds.params.ppos.lb = [pi, 0];
-bounds.params.ppos.ub = [pi, 0];
+bounds.params.ppos.lb = [0, pi];
+bounds.params.ppos.ub = [0, pi];
 bounds.vel.ep = 10;% y1dot = -ep*y1
 bounds.pos.kp = 100; % y2ddot = -kd*y2dot - kp*y2
 bounds.pos.kd = 20;
@@ -50,11 +52,10 @@ flippy.UserNlpConstraint = str2func('flippy_constr_opt');
 %%%% Create a gait-optimization NLP based on the existing hybrid system
 %%%% model. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-num_grid = 5;
+num_grid = 10;
 opts = struct(...%'ConstantTimeHorizon',nan(2,1),... %NaN - variable time, ~NaN, fixed time
     'DerivativeLevel',1,... % either 1 (only Jacobian) or 2 (both Jacobian and Hessian)
-    'EqualityConstraintBoundary',0,...
-    'DistributeTimeVariable',false); % non-zero positive small value will relax the equality constraints
+    'EqualityConstraintBoundary',0); % non-zero positive small value will relax the equality constraints
 nlp = TrajectoryOptimization('ur5opt', flippy, num_grid, bounds, opts);
 
 flippy_cost_opt(nlp, bounds);
@@ -64,8 +65,8 @@ flippy_cost_opt(nlp, bounds);
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 nlp.update;
-% exclude = {'dynamics_equation'};
-exclude = [];
+exclude = {'dynamics_equation','intX','intXdot','tCont','timeDuration','avelCont','aposCont'};
+% exclude = [];
 compileConstraint(nlp,[],export_path,exclude);
 compileObjective(nlp,[],export_path);
 
@@ -75,7 +76,7 @@ compileObjective(nlp,[],export_path);
 %%%% Link the NLP problem to a NLP solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 solver = IpoptApplication(nlp);
-solver.Options.ipopt.max_iter = 10000;
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the optimization
@@ -87,21 +88,6 @@ solver.Options.ipopt.max_iter = 10000;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Plot the basic result
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-xdata =zeros(1,nlp.NumNode);
-ydata =zeros(1,nlp.NumNode);
-zdata =zeros(1,nlp.NumNode);
-for i = 1:nlp.NumNode
-zdata(1,i) = endeffclearance_sca_ur5(states.x(:,i));
-ydata(1,i) = endeffy_sca_ur5(states.x(:,1));
-xdata(1,i) = endeffx_sca_ur5(states.x(:,1));
-end
-figure(301);
-plot3(xdata,ydata,zdata);grid on;
-%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run animation of the optimal trajectory
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,18 +95,9 @@ plot3(xdata,ydata,zdata);grid on;
 % anim = animator(flippy);
 % anim.Options.ViewAngle=[39,24];
 % anim.animate(calcs,export_file)
-%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Save param in a yaml file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-param = cell(1,1);
-param{1}.name = 'FlippyFlipPlaceBurger';
-polydegree = flippy.VirtualConstraints.pos.PolyDegree;
-num2degree = flippy.VirtualConstraints.pos.Dimension;
-param{1}.a    = reshape(params.apos,num2degree,polydegree+1);
-param{1}.p    = params.ppos;
-param{1}.v    = params.avel;
-param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
-param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
-% param_save_file = fullfile(cur,'param','flippy7DOF_2017_05_11_1102.yaml');
+% param_save_file = fullfile(cur,'param','flippy_move_2017_05_03_1005.yaml');
 % yaml_write_file(param_save_file,param);
