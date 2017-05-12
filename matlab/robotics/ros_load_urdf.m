@@ -143,7 +143,7 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
                 end
                 
                 trans_ratio = xml_tran.getElementsByTagName('mechanicalReduction').item(0);
-                transmissions(index).MechanicalReduction = double(trans_ratio.getNodeType);
+                transmissions(index).MechanicalReduction = str2num(trans_ratio.getFirstChild.getData);
                 index = index+1;
             end
             
