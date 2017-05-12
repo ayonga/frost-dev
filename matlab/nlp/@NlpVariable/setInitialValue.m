@@ -32,8 +32,7 @@ function obj = setInitialValue(obj, x)
         lb_tmp(lb_tmp==-inf) = -1e5;
         ub_tmp(ub_tmp==inf)  = 1e5;
         
-        obj.InitialValue = (ub_tmp - lb_tmp)/2;
-        
+        obj.InitialValue = (ub_tmp + lb_tmp)/2;
     end
     
 end
