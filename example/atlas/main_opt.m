@@ -118,10 +118,10 @@ compileObjective(nlp,[],[],export_path);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-loadNodeInitialGuess(nlp.Phase(1),r_stance, r_stance_param);
-loadNodeInitialGuess(nlp.Phase(3),l_stance, l_stance_param);
-loadEdgeInitialGuess(nlp.Phase(2),r_stance,l_stance);
-loadEdgeInitialGuess(nlp.Phase(4),l_stance,r_stance);
+loadNodeInitialGuess(nlp.Phase(1),logger(1));
+loadNodeInitialGuess(nlp.Phase(3),logger(2));
+loadEdgeInitialGuess(nlp.Phase(2),logger(1),logger(2));
+loadEdgeInitialGuess(nlp.Phase(4),logger(2),logger(1));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Link the NLP problem to a NLP solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

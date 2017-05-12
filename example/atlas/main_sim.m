@@ -6,11 +6,11 @@
 %%%% Specify project path
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cur = fileparts(mfilename('fullpath'));
-addpath(genpath(cur));
 export_path = fullfile(cur, 'export');
 if ~exist(export_path,'dir')
     mkdir(export_path);
 end
+addpath(genpath(cur));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% ATLAS robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
