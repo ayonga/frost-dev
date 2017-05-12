@@ -1,4 +1,4 @@
-function nlp = flippy_constr_opt(nlp, bounds, varargin)
+function nlp = flippy_constr_opt_t(nlp, bounds, varargin)
     % add aditional custom constraints
     
     plant = nlp.Plant;
@@ -15,41 +15,55 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     
     
     
-    % relative degree 1 output
-    plant.VirtualConstraints.vel.imposeNLPConstraint(nlp, bounds.vel.ep, 0);
+%     % relative degree 1 output
+%     plant.VirtualConstraints.vel.imposeNLPConstraint(nlp, bounds.vel.ep, 0);
     
     % relative degree 2 outputs
     plant.VirtualConstraints.pos.imposeNLPConstraint(nlp, [bounds.pos.kp,bounds.pos.kd], [1,1]);
     % tau boundary [0,1]
-    tau = plant.VirtualConstraints.pos.PhaseFuncs{1};
-    addNodeConstraint(nlp, tau, {'x','ppos'}, 'first', 0, 0, 'Nonlinear');
-    addNodeConstraint(nlp, tau, {'x','ppos'}, 'last', 1, 1, 'Nonlinear');
+%     tau = plant.VirtualConstraints.pos.PhaseFuncs{1};
+%     t = SymVariable('t');
+%     k = SymVariable('k');
+%     T  = SymVariable('t',[2,1]);
+%     nNode = SymVariable('nNode');
+%     tsubs = T(1) + ((k-1)./(nNode-1)).*(T(2)-T(1));
+%     tau_new = subs(tau,t,tsubs);
+%     if ~isempty(plant.VirtualConstraints.pos.PhaseParams)
+%         p = {SymVariable(tomatrix(plant.VirtualConstraints.pos.PhaseParams(:)))};
+%         p_name = plant.VirtualConstraints.pos.PhaseParamName;
+%     else
+%         p = {};
+%         p_name = {};
+%     end
     
-    ee_link = plant.Links(getLinkIndices(plant, 'ee_link'));
-    ee_frame = ee_link.Reference;
-
-    EndEff = CoordinateFrame(...
+%     tau_new_fun = SymFunction(['tau_bound_',plant.Name], tau_new, [{T},p],{k,nNode});
+%     addNodeConstraint(nlp, tau_new_fun, [{'T'},p_name], 'first', 0, 0, 'Nonlinear',{1,nlp.NumNode});
+%     addNodeConstraint(nlp, tau_new_fun, [{'T'},p_name], 'last', 1, 1, 'Nonlinear',{nlp.NumNode,nlp.NumNode});
+    
+    wrist_3_link = plant.Links(getLinkIndices(plant, 'wrist_3_link'));
+    wrist_3_frame = wrist_3_link.Reference;
+    Wrist3 = CoordinateFrame(...
         'Name','EndEff',...
-        'Reference',ee_frame,...
+        'Reference',wrist_3_frame,...
         'Offset',[0, 0, 0],...
         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
         );
-    p_endeff = getCartesianPosition(plant,EndEff);
+    p_wrist3 = getCartesianPosition(plant,Wrist3);
     x = plant.States.x;
     dx = plant.States.dx;
     ddx = plant.States.ddx;
-    % these are the ee constraints on the end effector
-    q_endeff = SymFunction(['q_endeff_' plant.Name],x(end),{x});
-    addNodeConstraint(nlp, q_endeff, {'x'}, 'first', 0, 0, 'Nonlinear');
-    addNodeConstraint(nlp, q_endeff, {'x'}, 'last', pi, pi, 'Nonlinear');    
-    
+%     % these are the ee constraints on the end effector
+%     q_endeff = SymFunction(['q_endeff_' plant.Name],x(end),{x});
+%     addNodeConstraint(nlp, q_endeff, {'x'}, 'first', 0, 0, 'Nonlinear');
+%     addNodeConstraint(nlp, q_endeff, {'x'}, 'last', pi, pi, 'Nonlinear');    
+%     
     % these are the wrist constraints 
     q_wrist3 = SymFunction(['q_wrist3_' plant.Name],x(end-1),{x});
     addNodeConstraint(nlp, q_wrist3, {'x'}, 'first', 0, 0, 'Nonlinear');
     addNodeConstraint(nlp, q_wrist3, {'x'}, 'last', pi, pi, 'Nonlinear');   
     
     n_node = nlp.NumNode;
-    p_z = p_endeff(3);
+    p_z = p_wrist3(3);
     p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
     addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.03, 0.03, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
@@ -57,30 +71,30 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.1, 0.3, 'Nonlinear');
     
     
-    p_x = p_endeff(1);
+    p_x = p_wrist3(1);
     p_x_func = SymFunction(['endeffx_sca_' plant.Name],p_x,{x});
     addNodeConstraint(nlp, p_x_func, {'x'}, 1, 0.4, 0.45, 'Nonlinear');
     addNodeConstraint(nlp, p_x_func, {'x'}, round(n_node), 0.4, 0.45, 'Nonlinear');
     
-    p_y = p_endeff(2);
+    p_y = p_wrist3(2);
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
     addNodeConstraint(nlp, p_y_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node/3), 0.05, 0.3, 'Nonlinear');
     
     %% these are slipping constraints being added
-    wrist_3_link = plant.Links(getLinkIndices(plant, 'wrist_3_link'));
-    wrist_3_frame = wrist_3_link.Reference;
+%     wrist_3_link = plant.Links(getLinkIndices(plant, 'wrist_3_link'));
+%     wrist_3_frame = wrist_3_link.Reference;
 
-    Wrist3 = CoordinateFrame(...
-        'Name','EndEff',...
-        'Reference',wrist_3_frame,...
-        'Offset',[0, 0, 0],...
-        'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
-        );
+%     Wrist3 = CoordinateFrame(...
+%         'Name','EndEff',...
+%         'Reference',wrist_3_frame,...
+%         'Offset',[0, 0, 0],...
+%         'R',[0,0,0]... % z-axis is the normal axis, so no rotation required
+%         );
     
-%     p_wrist3 = getCartesianPosition(plant,Wrist3);
-    p_wrist3 = p_endeff;
+% %     p_wrist3 = getCartesianPosition(plant,Wrist3);
+%     p_wrist3 = p_wrist3;
     % get acceleration along x, y and z directions of end effector
     v_x = jacobian(p_wrist3(1), x)*dx ;
     v_y = jacobian(p_wrist3(2), x)*dx ;
@@ -112,7 +126,7 @@ function nlp = flippy_constr_opt(nlp, bounds, varargin)
     addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 1:round(0.8*n_node), -Inf, 0.0, 'Nonlinear');
             
     a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
-    addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 'all', -Inf, 0.0, 'Nonlinear');
+%     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 1:round(0.8*n_node), -Inf, 0.0, 'Nonlinear');
     
     
 end

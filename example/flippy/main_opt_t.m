@@ -21,12 +21,12 @@ bounds.time.tf.ub = 1;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 1;
 
-bounds.states.x.lb = [ -pi/2, -pi, 0, -pi/2, pi/2, -pi, -pi];
-bounds.states.x.ub = [ pi/2,  0, pi, pi/2, pi/2, pi, pi];
-bounds.states.dx.lb = -17*ones(7,1);
-bounds.states.dx.ub = 17*ones(7,1);
-bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000,1000];
-bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000,1000];
+bounds.states.x.lb = [ -pi/2, -pi, 0, -pi/2, pi/2, -pi];
+bounds.states.x.ub = [ pi/2,  0, pi, pi/2, pi/2, pi];
+bounds.states.dx.lb = -17*ones(6,1);
+bounds.states.dx.ub = 17*ones(6,1);
+bounds.states.ddx.lb = - [1000,1000,1000,1000,1000,1000];
+bounds.states.ddx.ub = [1000,1000,1000,1000,1000,1000];
 
 
 
@@ -43,7 +43,7 @@ bounds.pos.kp = 100; % y2ddot = -kd*y2dot - kp*y2
 bounds.pos.kd = 20;
 
 
-flippy.UserNlpConstraint = str2func('flippy_constr_opt');
+flippy.UserNlpConstraint = str2func('flippy_constr_opt_t');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,9 +118,9 @@ param{1}.name = 'FlippyFlipPlaceBurger';
 polydegree = flippy.VirtualConstraints.pos.PolyDegree;
 num2degree = flippy.VirtualConstraints.pos.Dimension;
 param{1}.a    = reshape(params.apos,num2degree,polydegree+1);
-param{1}.p    = params.ppos;
-param{1}.v    = params.avel;
+% param{1}.p    = params.ppos;
+% param{1}.v    = params.avel;
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
-% param_save_file = fullfile(cur,'param','flippy7DOF_2017_05_11_1102.yaml');
+% param_save_file = fullfile(cur,'param','flippy6DOF_2017_05_11_1102.yaml');
 % yaml_write_file(param_save_file,param);
