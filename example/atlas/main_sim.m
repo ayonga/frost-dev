@@ -6,11 +6,11 @@
 %%%% Specify project path
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cur = fileparts(mfilename('fullpath'));
-addpath(genpath(cur));
 export_path = fullfile(cur, 'export');
 if ~exist(export_path,'dir')
     mkdir(export_path);
 end
+addpath(genpath(cur));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% ATLAS robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,10 +52,10 @@ atlas_flat = setEdgeProperties(atlas_flat, srcs, tars, ...
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% r_stance.compile(export_path);
-% l_stance.compile(export_path);
-% r_impact.compile(export_path);
-% l_impact.compile(export_path);
+r_stance.compile(export_path);
+l_stance.compile(export_path);
+r_impact.compile(export_path);
+l_impact.compile(export_path);
 
 
 

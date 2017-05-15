@@ -67,6 +67,7 @@ end
             end
             
         end
+        drawnow;
     end
     %%
     

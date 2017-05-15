@@ -38,7 +38,11 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     if nargin < 8
         auxdata = [];
     else
-        if ~iscell(auxdata), auxdata = {auxdata}; end
+        if ~isempty(auxdata)
+            if ~iscell(auxdata), auxdata = {auxdata}; end
+        else
+            auxdata = [];
+        end
     end
     
     

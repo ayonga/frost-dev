@@ -18,8 +18,8 @@ addpath(fullfile(cur, 'matlab','robotics'));
 % Add useful custom functions path
 addpath(fullfile(cur, 'matlab','utils'));
 addpath_matlab_utilities('general', 'mex',...
-    'graphics', 'cwf', 'polynomial', 'sys', 'mathlink',...
-    'ros', 'sim', 'plot', 'validation');
+    'graphics', 'mathlink',...
+    'sim', 'plot');
 
 % Add third party packages/libraries path
 addpath(fullfile(cur, 'third'));
