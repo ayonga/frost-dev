@@ -15,7 +15,7 @@ function obj = setRotationMatrix(obj,r)
         obj.R = r;
     end
     % remove small numbers generated from the rotation matrix
-    obj.R = roundn(obj.R,-9);
+    obj.R = roundn(obj.R,-6);
     % update the homogeneous transformation matrix
     obj.computeHomogeneousTransform();
 end

@@ -6,6 +6,6 @@ function s = num2mathstr(x, varargin)
         s = num2str(x);
     else
         % x = roundn(x,-9);
-        s = num2str(x,'%.9f');
+        s = num2str(x,'%.6f');
     end
 end
