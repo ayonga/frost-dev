@@ -11,6 +11,12 @@ function obj = compile(obj, export_path, varargin)
     %   BuildMex: flag whether to MEX the exported file @type logical
     %   Namespace: the namespace of the function @type char
     
+    % Create export directory if it does not exst
+    if ~exist(export_path,'dir')
+        mkdir(export_path);
+        addpath(export_path);
+    end
+    
     % export the mass matrix
     if ~isempty(obj.Mmat)
         export(obj.Mmat,export_path,varargin{:});
