@@ -28,6 +28,8 @@ function file = export(f, varargin)
     ip.addParameter('ForceExport',false,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('BuildMex',true,@(x) isequal(x,true) || isequal(x,false));
     ip.addParameter('Namespace','SymExpression',@(x) ischar(x));
+    ip.addParameter('TemplateFile','',@(x) ischar(x));
+    ip.addParameter('TemplateHeader','',@(x) ischar(x));
     ip.parse(varargin{N+1:end});
     
     opts = ip.Results;
@@ -73,6 +75,18 @@ function file = export(f, varargin)
     cse_opts = struct();
     cse_opts.ExportDirectory = str2mathstr(export_path);
     cse_opts.Namespace= opts.Namespace;
+    if ~isempty(opts.TemplateFile)
+        [rel_path_template, filename_template, ext_template] = fileparts(opts.TemplateFile);
+        template_path = GetFullPath(rel_path_template);
+        template_path = strrep(template_path, '\','/');
+        cse_opts.TemplateFile = str2mathstr([template_path, '/', filename_template, ext_template]);
+    end
+    if ~isempty(opts.TemplateHeader)
+        [rel_path_template, filename_template, ext_template] = fileparts(opts.TemplateHeader);
+        template_path = GetFullPath(rel_path_template);
+        template_path = strrep(template_path, '\','/');
+        cse_opts.TemplateHeader = str2mathstr([template_path, '/', filename_template, ext_template]);
+    end
     % necessary settings
     cse_opts_str =  struct2assoc(cse_opts,'ConvertString',false);
     
