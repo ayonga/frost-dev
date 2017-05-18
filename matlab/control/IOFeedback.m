@@ -116,7 +116,12 @@ classdef IOFeedback < Controller
                 
                 % stack the partial derivatives of all outputs
                 y_indices = idx:idx+y_i.Dimension-1;
-                DLfy(y_indices,:) = y_a{i}{end} - y_d{i}{end};
+                
+                if strcmp(plant.VirtualConstraints.pos.PhaseType, 'TimeBased')
+                    DLfy(y_indices,:) = y_a{i}{end};
+                else
+                    DLfy(y_indices,:) = y_a{i}{end} - y_d{i}{end};
+                end
                 for j=1:y_i.RelativeDegree
                     mu(y_indices) = mu(y_indices) + K(j)*(y_a{i}{j}-y_d{i}{j});
                 end
@@ -135,7 +140,11 @@ classdef IOFeedback < Controller
             
             
             % feedforward controller
-            u_ff = - A_mat \ Lf_mat;
+            if strcmp(plant.VirtualConstraints.pos.PhaseType, 'TimeBased')
+                u_ff = - A_mat \ (Lf_mat - y_d{i}{end});
+            else
+                u_ff = - A_mat \ Lf_mat;
+            end
             % feedback controller
             u_fb = -A_mat \ mu;
             
