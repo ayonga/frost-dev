@@ -206,14 +206,19 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     else
         ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
     end
+    
+    ep_s = SymVariable('k',[rel_deg,1]);
+    
     for j=1:1:rel_deg
-        ddy = ddy + ep(j)*(ya{j} - yd{j});
+        ddy = ddy + ep_s(j)*(ya{j} - yd{j});
     end
     % Time-based outputs, need to incoorporates the time variable
     if ~is_state_based
         ddy = subs(ddy,t,tsubs);
     end
-    ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var], aux_var);
+    
+    
+    ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var], [aux_var,{ep_s}]);
         
         
         
@@ -270,7 +275,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
             'ub',ceq_err_bound,'Type','Nonlinear',...
             'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps]',...
-            'AuxData', {aux_data});
+            'AuxData', [aux_data,{ep}]);
         
     end
         
