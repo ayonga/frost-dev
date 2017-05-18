@@ -49,6 +49,13 @@ classdef RigidJoint < CoordinateFrame
         % @type struct        
         Limit
         
+        % A structure contains information about the actuator for the joint
+        %
+        % An empty property indicates the joint is not actuated.
+        %
+        % @type struct
+        Actuator
+        
     end
     
     properties (Hidden, SetAccess=protected, GetAccess=public)
@@ -96,14 +103,14 @@ classdef RigidJoint < CoordinateFrame
             argin = struct(varargin{:});
             
             % validate and assign the joint type
-            if isfield(argin, 'Type')
+            if isfield(argin, 'Type') && ~isempty(argin.Type)
                 obj = obj.setType(argin.Type);
             else
                 error('The joint type is not defined.');
             end
             
             % validate and assign the joint axis 
-            if isfield(argin, 'Axis')
+            if isfield(argin, 'Axis') && ~isempty(argin.Axis)
                 obj = obj.setAxis(argin.Axis);
             else
                 error('The joint rotatino axis is not defined.');
@@ -111,21 +118,21 @@ classdef RigidJoint < CoordinateFrame
             
             
             % validate and assign the child link
-            if isfield(argin, 'Child')
+            if isfield(argin, 'Child') && ~isempty(argin.Child)
                 obj = obj.setChild(argin.Child);
             else
                 error('The child link is not defined.');
             end
             
             % validate and assign the parent link
-            if isfield(argin, 'Parent')
+            if isfield(argin, 'Parent') && ~isempty(argin.Parent)
                 obj = obj.setParent(argin.Parent);
             else
                 error('The parent link is not defined.');
             end
             
             % validate and assign the physical limits
-            if isfield(argin, 'Limit')
+            if isfield(argin, 'Limit') && ~isempty(argin.Limit)
                 obj = obj.setLimit(argin.Limit);
             else
                 warning('The joint limits are not defined. Using default values.');
@@ -135,6 +142,11 @@ classdef RigidJoint < CoordinateFrame
                     'upper',inf,...
                     'velocity',inf);
                 obj = obj.setLimit(default_limit);
+            end
+            
+            % validate and assign the actuator info
+            if isfield(argin, 'Actuator') && ~isempty(argin.Actuator)
+                obj = obj.setActuator(argin.Actuator);
             end
         end
         
@@ -150,7 +162,9 @@ classdef RigidJoint < CoordinateFrame
         
         obj = setChild(obj, child);
         
-        obj = setLimit(obj, limit);
+        obj = setLimit(obj, varargin);
+        
+        obj = setActuator(obj, varargin);
         
         obj = setChainIndices(obj, indices);
         

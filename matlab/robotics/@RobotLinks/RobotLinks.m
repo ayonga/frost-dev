@@ -129,6 +129,7 @@ classdef RobotLinks < ContinuousDynamics
         
         obj = configureDynamics(obj, varargin);
         
+        obj = configureActuator(obj, dofs, actuators);
         
         
         [varargout] = getCartesianPosition(obj, frame, p);

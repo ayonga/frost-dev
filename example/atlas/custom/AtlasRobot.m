@@ -26,6 +26,13 @@ classdef AtlasRobot < RobotLinks
             
             obj = obj@RobotLinks(urdf,base);
             
+            act_joints = obj.Joints(arrayfun(@(x)~isempty(x.Actuator),obj.Joints));
+            act_joint_name = {act_joints.Name};
+            n_act = numel(act_joints);
+            actuators(n_act) =  struct('Inertia',0.001,'Ratio',1);
+            [actuators.Inertia] = deal(1);
+            [actuators.Ratio]   = deal(1);
+            obj.configureActuator(act_joint_name,actuators); 
             
             %% define contact frames
             lt = obj.lt;

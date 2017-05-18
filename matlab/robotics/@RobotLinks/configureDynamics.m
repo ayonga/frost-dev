@@ -22,8 +22,26 @@ function obj = configureDynamics(obj, varargin)
     fprintf('Evaluating the inertia matrix D(q): \t');
     tic
     De = eval_math_fun('InertiaMatrix',[links,{obj.numState}]);
+    
+    De_motor = zeros(obj.numState);
+    for i=1:obj.numState
+        if ~isempty(obj.Joints(i).Actuator) 
+            actuator = obj.Joints(i).Actuator;
+            
+            if ~isempty(actuator.Inertia) && ~isempty(actuator.Ratio)
+                % reflected motor inertia: I*r^2
+                De_motor(i,i) = actuator.Inertia * actuator.Ratio^2;
+                
+            end
+        end
+        
+    end
+    
+    De_full = De + De_motor;
+    obj.setMassMatrix(De_full);
+    
     toc
-    obj.setMassMatrix(De);
+    
     
     Qe = obj.States.x;
     dQe = obj.States.dx;

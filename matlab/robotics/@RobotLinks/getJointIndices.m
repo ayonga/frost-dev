@@ -14,7 +14,7 @@ function indices = getJointIndices(obj, joint_names)
     
     
     
-    if iscell(joint_names) 
+    if iscellstr(joint_names) 
         nj = numel(joint_names);
     
         indices = zeros(nj,1);
