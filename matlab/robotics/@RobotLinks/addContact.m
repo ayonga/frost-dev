@@ -15,6 +15,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     %  the negative y-axis  @type double
     %  Lb: the distance from the origin to the rolling edge along
     %  the positive y-axis  @type double
+    %  RefFrame: The frame describing the ground contact zero configuration.
     %
     % Optional fields of fric_coef:
     %  mu: the (static) coefficient of friction. @type double
@@ -22,17 +23,27 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     
     assert(isa(contact, 'ContactFrame'),...
         'The contact must be given as an object of ContactFrame class.');
+    
+    % Equivalent to grasp map in Murray Ch 5. Maps the wrench base into the
+    % nominal contact reference frame.
+    if (~isfield(geometry, 'RefFrame'))
+        geometry.RefFrame = eye(3);
+    end
+    ref = geometry.RefFrame;
+    G = [ref, zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
+    
     % compute the spatial position (cartesian position + Euler angles)
     pos = getCartesianPosition(obj, contact);
-    rpy = getEulerAngles(obj, contact);
+%     rpy = getEulerAngles(obj, contact);
+    rpy = getRelativeEulerAngles(obj, contact, ref);
     
     h = transpose([pos, rpy]); %effectively as transpose
     % extract the contrained elements
-    constr =  contact.WrenchBase' * h;
+    constr =  G' * h;
     % compute the body jacobian 
     jac = getBodyJacobian(obj, contact);
     % extract the contrained elements
-    constr_jac = contact.WrenchBase' * jac;
+    constr_jac = G' * jac;
     
     % label for the holonomic constraint
     label_full = cellfun(@(x)[contact.Name,x],...
