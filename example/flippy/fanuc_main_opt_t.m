@@ -21,12 +21,12 @@ bounds.time.tf.ub = 1;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 1;
 
-bounds.states.x.lb = [ -pi/2,     0, -pi/2, -pi/2, -pi/2,   0, 0];
-bounds.states.x.ub = [  pi/2,  pi/2,   0,   pi/2,  pi/2,  pi, 0];
+bounds.states.x.lb = [ -pi/2,     0, -pi/2, 0, -pi/2,   0, 0];
+bounds.states.x.ub = [  pi/2,  pi/2,   0,   0,  pi/2,  pi, 0];
 bounds.states.dx.lb = -17*ones(1,flippy.numState);
 bounds.states.dx.ub = 17*ones(1,flippy.numState);
-bounds.states.ddx.lb = - 1000*ones(1,flippy.numState);
-bounds.states.ddx.ub = 1000*ones(1,flippy.numState);
+bounds.states.ddx.lb = - 20*ones(1,flippy.numState);
+bounds.states.ddx.ub = 20*ones(1,flippy.numState);
 
 
 
@@ -123,5 +123,5 @@ else, param{1}.p = [1, 0];end
 param{1}.v    = [];
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
-% param_save_file = fullfile(cur,'param','fanuc_2017_05_16_1024.yaml');
+% param_save_file = fullfile(cur,'param','fanuc_2017_05_17_1731.yaml');
 % yaml_write_file(param_save_file,param);

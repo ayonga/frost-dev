@@ -101,7 +101,7 @@ function nlp = fanuc_constr_opt_t(nlp, bounds, varargin)
     % these are the ee constraints on the end effector
     q_endeffx = SymFunction(['q_endeffx_' plant.Name],o_x,{x});
     q_endeffy = SymFunction(['q_endeffy_' plant.Name],o_y,{x});
-    addNodeConstraint(nlp, q_endeffy, {'x'}, 'all', 0, 0, 'Nonlinear');
+%     addNodeConstraint(nlp, q_endeffy, {'x'}, 'all', 0, 0, 'Nonlinear');
 %     addNodeConstraint(nlp, q_endeff, {'x'}, 'first', 0, 0, 'Nonlinear');
 %     addNodeConstraint(nlp, q_endeff, {'x'}, 'last', pi, pi, 'Nonlinear'); 
     
