@@ -3,38 +3,44 @@ function result = simplespatulaplanner
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% some specifications
-num_node = 40;    % number of nodes
-mu = 0.26; % coefficient of restitution
+num_node = 30;    % number of nodes
+mu = 0.33; % coefficient of restitution
 g = 9.8; % gravity
-t_final = 0.43;
-wrist3joint_length = 0.09465;
+ wrist3joint_length = 0.09465;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% initial guess
 
-% x0 = [  0.1113    1.7876  -23.2287   0.0000 -0.2284   -3.6694  ...
-%       49.9838  0.0000  0.1229    1.9758  -23.2094   0.0000 -0.0058  ...
-%       -0.0941   -0.4041  0.0000 0.0000  -0.0000   -0.0000   -0.0000];
+x0 = [  0.43 0.1113    1.7876  -23.2287   0.0000 -0.2284   -3.6694  ...
+      49.9838  0.0000  0.1229    1.9758  -23.2094   0.0000 -0.0058  ...
+      -0.0941   -0.4041  0.0000 0.0000  -0.0000   -0.0000   -0.0000];
   
-% x0 = [    8.0710    4.7656   17.6843 0.0000  -4.8033   -3.8895  ...
+% x0 = [  0.43  8.0710    4.7656   17.6843 0.0000  -4.8033   -3.8895  ...
 %       19.9283  0.0000  -1.2500    0.1952   19.9472  0.0000  0.8169   ...
 %       0.3390  -10.8831  0.0000 0.0000 -0.0000   -0.0000   -0.0000 ];
     
-x0 = [   -2.1324    9.8200   32.9460   0.0000  3.0237   -7.5801 ...
-      35.1640   0.0000   -1.4176     0.9095   23.6561    -0.0000 ...
-      0.2200    0.2995   -11.9874    0.0000 ...
-      -0.0000    0.0000    0.0000    0.0000];
+% x0 = [ 0.43  -2.1324    9.8200   32.9460   0.0000  3.0237   -7.5801 ...
+%       35.1640   0.0000   -1.4176     0.9095   23.6561    -0.0000 ...
+%       0.2200    0.2995   -11.9874    0.0000 ...
+%       -0.0000    0.0000    0.0000    0.0000];
+
+  x0 = [0.5502      -3.4254    5.5150   -2.9595    0.5293   -0.0000...
+   34.1993  -38.1053   11.0640   -0.1926    0.0000 ...
+   39.7554   39.8863  -28.7704    3.3420   -0.0000...
+    0.1248    0.1533    0.1777   -0.0563    0.2518];
 
   % This is the solution for slipping constrants in two directions
-% x0 = [   -0.9835    2.0686   -1.2335    0.2261    0.0000 ...
+% x0 = [ 0.43  -0.9835    2.0686   -1.2335    0.2261    0.0000 ...
 %    10.9722   -8.6742    1.2113    0.2804    0.0000 ...
 %    37.0471   37.0491   21.0005  -11.5201   -0.0000 ...
 %    -0.1784   -0.0302    0.0319    0.0669   -1.3290 ];
   
 lb = -40*ones(size(x0));
+lb(1) = 0.33;
 ub =  40*ones(size(x0));
+ub(1) = 0.63;
 
 %% run this optimization
 options = optimset('MaxFunEvals',10000);
@@ -52,7 +58,8 @@ burger_zdot = [];
 burger_theta_xdot = [];
 burger_theta_ydot = [];
 
-ae = reshape(result,[4,5]);
+ae = reshape(result(2:end),[4,5]);
+t_final = result(1);
 timestamps = 0:0.01:t_final;
 for j=1:length(timestamps)
     ti = timestamps(j);
@@ -92,9 +99,11 @@ axis equal
 %%
     function [c,ceq] = mycon(x)
 
+    a = reshape(x(2:end),[4,length(x(2:end))/4]);
+    t_final = x(1);
     time = linspace(0,t_final,num_node);
 
-    a = reshape(x,[4,length(x)/4]);
+    
     c = [];
     ceq = [];
 
@@ -107,7 +116,7 @@ axis equal
             y = poly(t,a(1,:));
             z = poly(t,a(2,:));
             theta_x = poly(t,a(3,:));
-            theta_y = poly(t,a(4,:));
+%             theta_y = poly(t,a(4,:));
             
             % velocity
             ydot = poly_derivative(t,a(1,:));
@@ -115,7 +124,7 @@ axis equal
             theta_xdot = poly_derivative(t,a(3,:));
                         
             
-          c = [c ; - y; - z; theta_x - pi; y - 0.2 ; z - 0.25; ydot - 20; zdot - 20];
+          c = [c ; -y;  - z; theta_x - pi; -0.2 - theta_x; z - 0.15;  abs(ydot) - 20; abs(zdot) - 20];
           
           
         % acceleration constraints are satisfied for 80% of the trajectory
@@ -128,12 +137,12 @@ axis equal
             c = [c; 
                 a_z*sin(theta_x)-a_y*cos(theta_x)+g*sin(theta_x) ...
                 - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
-                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
-                - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-                abs(poly_derivative(t,a(3,:))) - 20;
-                abs(a_y) - 10;
-                abs(a_z) - 10;
-                abs(theta_x) - 10];
+%                 a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
+%                 - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+                abs(theta_xdot) - 20;
+                abs(a_y) - 30;
+                abs(a_z) - 30;
+                abs(theta_x) - 30];
           
           end
                                     
@@ -169,7 +178,8 @@ axis equal
     function f = objective(x)
       
         % calculating arc_length
-        a = reshape(x,[4,length(x)/4]);
+        a = reshape(x(2:end),[4,length(x(2:end))/4]);
+        t_final = x(1);
         time = linspace(0,t_final,num_node);
         f=0;
         y_dot = 0;
@@ -178,7 +188,7 @@ axis equal
             t = time(i);
             y_dot = poly_derivative(t,a(1,:));
         end
-        f=0;
+        f=t_final^2;
             
     end
 
