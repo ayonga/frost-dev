@@ -21,12 +21,12 @@ bounds.time.tf.ub = 1;
 bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 1;
 
-bounds.states.x.lb = [ -pi/2,     0, -pi/2, -pi/2, -pi/2,   0, 0];
-bounds.states.x.ub = [  pi/2,  pi/2,   0,   pi/2,  pi/2,  pi, 0];
+bounds.states.x.lb = [ -pi/2,     0, -pi/2, -pi/6, -pi/2,   0, 0];
+bounds.states.x.ub = [  pi/2,  pi/2,   0,   pi/6,  pi/2,  pi, 0];
 bounds.states.dx.lb = -17*ones(1,flippy.numState);
 bounds.states.dx.ub = 17*ones(1,flippy.numState);
-bounds.states.ddx.lb = - 1000*ones(1,flippy.numState);
-bounds.states.ddx.ub = 1000*ones(1,flippy.numState);
+bounds.states.ddx.lb = - 10*ones(1,flippy.numState);
+bounds.states.ddx.ub = 10*ones(1,flippy.numState);
 
 
 
@@ -63,11 +63,11 @@ flippy_cost_opt(nlp, bounds);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% nlp.update;
-% exclude = {'dynamics_equation'};
-% % exclude = [];
-% compileConstraint(nlp,[],export_path,exclude);
-% compileObjective(nlp,[],export_path);
+nlp.update;
+exclude = {'dynamics_equation'};
+% exclude = [];
+compileConstraint(nlp,[],export_path,exclude);
+compileObjective(nlp,[],export_path);
 
 
 
@@ -96,11 +96,14 @@ ydata =zeros(1,nlp.NumNode);
 zdata =zeros(1,nlp.NumNode);
 for i = 1:nlp.NumNode
 zdata(1,i) = endeffclearance_sca_LR(states.x(:,i));
-ydata(1,i) = endeffy_sca_LR(states.x(:,1));
-xdata(1,i) = endeffx_sca_LR(states.x(:,1));
+ydata(1,i) = endeffy_sca_LR(states.x(:,i));
+xdata(1,i) = endeffx_sca_LR(states.x(:,i));
 end
 figure(301);
 plot3(xdata,ydata,zdata);grid on;
+xlabel('x');
+ylabel('y');
+zlabel('z');axis equal
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run animation of the optimal trajectory
@@ -123,5 +126,5 @@ else, param{1}.p = [1, 0];end
 param{1}.v    = [];
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
-% param_save_file = fullfile(cur,'param','fanuc_2017_05_16_1024.yaml');
-% yaml_write_file(param_save_file,param);
+param_save_file = fullfile(cur,'param','fanuc_2017_05_18_2147.yaml');
+yaml_write_file(param_save_file,param);

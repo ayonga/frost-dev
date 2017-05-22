@@ -106,6 +106,7 @@ function obj = configure(obj, config, base)
                 idx = str_index({transmissions.Joint},dofs(i).Name);
                 if ~isempty(idx)
                     mechanicalReduction(i) = transmissions(idx).MechanicalReduction;
+                    dofs(i).Actuator.Ratio = mechanicalReduction(i);
                 end
             end
         end

@@ -92,7 +92,7 @@ io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/fanuc_2017_05_16_1024.yaml'];
+old_param_file = [cur,'/param/fanuc_2017_05_18_2147.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 

@@ -189,7 +189,7 @@ hold off
           c = [c ; 
                 %-y; 
                 -z; 
-                theta_x - pi; 
+                theta_x - pi;
                 y - 0.2; 
                 z - 0.25; 
                 norm([zdot,ydot])-4];  
