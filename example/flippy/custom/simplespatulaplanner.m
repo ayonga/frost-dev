@@ -1,4 +1,5 @@
 function result = simplespatulaplanner
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -8,6 +9,8 @@ mu = 0.26; % coefficient of restitution
 g = 9.8; % gravity
 t_final = 0.43;
 wrist3joint_length = 0.09465;
+W = .07; % width of spatula in meters 
+L = 0.09; % length of spatula in meters
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,10 +46,12 @@ result = fmincon(@objective,x0,[],[],[],[],lb,ub,@mycon,options);
 toc
 
 %%  plot this shit
+burger_x = [];
 burger_y = [];
 burger_z = [];
 burger_theta_x = [];
 burger_theta_y = [];
+burger_theta_z = [];
 burger_ydot = [];
 burger_zdot = [];
 burger_theta_xdot = [];
@@ -62,35 +67,70 @@ for j=1:length(timestamps)
     burger_theta_y = [burger_theta_y , poly(ti,ae(4,:))];
     burger_ydot = [burger_ydot , poly_derivative(ti,ae(1,:))];
     burger_zdot = [burger_zdot , poly_derivative(ti,ae(2,:))];
-    burger_theta_xdot = [burger_theta_xdot , poly_derivative(ti,ae(3,:))];
-	burger_theta_ydot = [burger_theta_ydot , poly_derivative(ti,ae(4,:))];
+    burger_theta_xdot = [burger_theta_xdot , poly_derivative(ti,ae(3,:))];          % consider preallocating for
+	burger_theta_ydot = [burger_theta_ydot , poly_derivative(ti,ae(4,:))];          % efficiency?  
+    
+    
+    
 end
+
+eul = [burger_theta_x, burger_theta_y, burger_theta_z];        % matrix of euler angles
+reshape(ans,[
+disp('euler angles')
+disp(eul)
+disp('end of euler angles')
 figure(1000);
 % plot(timestamps,burger_x);
 % plot(timestamps,burger_y,timestamps,burger_z,timestamps,burger_theta_x);
 
 subplot(2,3,1);
 plot(timestamps,burger_y,timestamps,burger_z);
+xlabel('time');
+ylabel('y and z positions of spatula center')
 legend('y','z');
 
 subplot(2,3,2);
 plot(timestamps,burger_theta_x);
+xlabel('time');
+ylabel('roll');
 legend('theta_x');
 
 subplot(2,3,4);
 plot(timestamps,burger_ydot,timestamps,burger_zdot);
+xlabel('time');
+ylabel('ydot and zdot');
 legend('ydot','zdot');
 
 subplot(2,3,5);
 plot(timestamps,burger_theta_xdot);
+xlabel('time');
+ylabel('theta_x dot')
 legend('theta_x dot');
 
 subplot(1,3,3);
 plot(burger_y,burger_z,'linewidth',2);
-axis equal
+xlabel('y position');
+ylabel('z position');
+title('z,y phase space of spatula trajectory');
+hold on 
 
+plot3(zeros(length(burger_y)), q_1y, q_1z, ':');
+plot3(zeros(length(burger_y)), q_4y, q_4z, '--');
+
+%{
+n = 50;
+XY = 10 * rand(2,n) - 5;
+for i=1:n
+    plot(XY(1,i),XY(2,i),'or','MarkerSize',5,'MarkerFaceColor','r')
+    axis([-5 5 -5 5])
+    pause(.1)
+%}
+
+hold off 
+axis equal
+ 
 %%
-    function [c,ceq] = mycon(x)
+function [c,ceq] = mycon(x)
 
     time = linspace(0,t_final,num_node);
 
@@ -108,14 +148,17 @@ axis equal
             z = poly(t,a(2,:));
             theta_x = poly(t,a(3,:));
             theta_y = poly(t,a(4,:));
+            %q_1y = y + 0.5*W.*cos(theta_x); 
+            %q_1z = z + 0.5*W.*sin(theta_x);
+            %q_4y = y - 0.5*W.*cos(theta_x);
+            %q_4z = z - 0.5*W.*sin(theta_x);
             
             % velocity
             ydot = poly_derivative(t,a(1,:));
             zdot = poly_derivative(t,a(2,:));
             theta_xdot = poly_derivative(t,a(3,:));
-                        
-            
-          c = [c ; - y; - z; theta_x - pi; y - 0.2 ; z - 0.25; ydot - 20; zdot - 20];
+        
+          c = [c ; - y; - z; theta_x - pi; y - 0.2 ; z - 0.25; norm([zdot,ydot])-4];
           
           
         % acceleration constraints are satisfied for 80% of the trajectory
@@ -130,7 +173,8 @@ axis equal
                 - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
                 a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
                 - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-                abs(poly_derivative(t,a(3,:))) - 20;
+                % abs(poly_derivative(t,a(3,:))) - 20;
+                abs(theta_xdot) - 20;
                 abs(a_y) - 10;
                 abs(a_z) - 10;
                 abs(theta_x) - 10];
@@ -144,7 +188,7 @@ axis equal
 %              abs(poly_derivative(t,a(3,:))) - 15 ;
 %              0.03 - poly(time(end)/2,a(2,:))
 %             abs(ydot) - 0.05
-              abs(poly_derivative(0.8*time(end),a(1,:))) - 0.05
+              abs(poly_derivative(0.8*time(end),a(1,:))) - 0.05             % ?????
                ];
         
         
@@ -178,7 +222,7 @@ axis equal
             t = time(i);
             y_dot = poly_derivative(t,a(1,:));
         end
-        f=0;
+        f=0; 
             
     end
 
@@ -205,6 +249,5 @@ axis equal
            out = t* out + (5-i)*(4-i) * a(i);
        end  
     end
-
+    
 end
-
