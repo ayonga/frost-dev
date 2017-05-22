@@ -26,11 +26,6 @@ x0 = [  0.43 0.1113    1.7876  -23.2287   0.0000 -0.2284   -3.6694  ...
 %       0.2200    0.2995   -11.9874    0.0000 ...
 %       -0.0000    0.0000    0.0000    0.0000];
 
-  x0 = [0.5502      -3.4254    5.5150   -2.9595    0.5293   -0.0000...
-   34.1993  -38.1053   11.0640   -0.1926    0.0000 ...
-   39.7554   39.8863  -28.7704    3.3420   -0.0000...
-    0.1248    0.1533    0.1777   -0.0563    0.2518];
-
   % This is the solution for slipping constrants in two directions
 % x0 = [ 0.43  -0.9835    2.0686   -1.2335    0.2261    0.0000 ...
 %    10.9722   -8.6742    1.2113    0.2804    0.0000 ...
@@ -121,14 +116,14 @@ axis equal
             % velocity
             ydot = poly_derivative(t,a(1,:));
             zdot = poly_derivative(t,a(2,:));
-            theta_xdot = poly_derivative(t,a(3,:));
+%             theta_xdot = poly_derivative(t,a(3,:));
                         
             
-          c = [c ; -y;  - z; theta_x - pi; -0.2 - theta_x; z - 0.15;  abs(ydot) - 20; abs(zdot) - 20];
+          c = [c ; -y;  - z; theta_x - pi; - theta_x;  abs(ydot) - 20; abs(zdot) - 20];
           
           
         % acceleration constraints are satisfied for 80% of the trajectory
-          if i< 0.80 * length(time)  
+          if i< 0.50 * length(time)  
               %acceleration
             a_y = poly_double_derivative(t,a(1,:));
             a_z = poly_double_derivative(t,a(2,:));
@@ -139,10 +134,11 @@ axis equal
                 - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
 %                 a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
 %                 - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-                abs(theta_xdot) - 20;
-                abs(a_y) - 30;
-                abs(a_z) - 30;
-                abs(theta_x) - 30];
+%                 abs(theta_xdot) - 20;
+%                 abs(a_y) - 30;
+%                 abs(a_z) - 30;
+%                 abs(theta_x) - 30
+                ];
           
           end
                                     
