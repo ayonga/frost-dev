@@ -41,7 +41,9 @@ classdef ContinuousDynamics < DynamicalSystem
         % pre-process function handle of the object before the simulation 
         %
         % @note The function handle should have the syntax:
-        % preProcess(sys, controller, params, varargin)
+        % params = preProcess(sys, t, x, controller, params, varargin)
+        %
+        %
         %
         % @type function_handle
         PreProcess
@@ -49,7 +51,7 @@ classdef ContinuousDynamics < DynamicalSystem
         % pre-process function handle of the object after the simulation 
         %
         % @note The function handle should have the syntax:
-        % postPorcess(sys, sol, controller, params, varargin)
+        % params = postPorcess(sys, sol, controller, params, varargin)
         %
         % @type function_handle
         PostProcess
@@ -99,8 +101,8 @@ classdef ContinuousDynamics < DynamicalSystem
             
             
             % do-nothing function handle by default
-            obj.PreProcess = str2func('nop');
-            obj.PostProcess = str2func('nop');
+            obj.PreProcess = [];
+            obj.PostProcess = [];
             obj.UserNlpConstraint = str2func('nop');
             
         end

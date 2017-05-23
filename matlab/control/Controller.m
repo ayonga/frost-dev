@@ -1,4 +1,4 @@
-classdef Controller
+classdef Controller < handle
     % This abstract class defines interfaces to configuration and
     % functionalities of different types of controllers
     %
