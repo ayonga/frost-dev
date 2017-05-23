@@ -40,7 +40,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     % extract the contrained elements
     constr =  G' * h;
     % compute the body jacobian 
-    jac = getSpatialJacobian(obj, contact);
+    jac = getBodyJacobian(obj, contact);
     % extract the contrained elements
     constr_jac = contact.WrenchBase' * jac;
     
