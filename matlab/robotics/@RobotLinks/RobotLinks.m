@@ -131,6 +131,7 @@ classdef RobotLinks < ContinuousDynamics
         
         obj = configureActuator(obj, dofs, actuators);
         
+        ang = getRelativeEulerAngles(obj, frame, R, p);
         
         [varargout] = getCartesianPosition(obj, frame, p);
         
