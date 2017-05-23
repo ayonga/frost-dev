@@ -26,7 +26,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     
     % Equivalent to grasp map in Murray Ch 5. Maps the wrench base into the
     % nominal contact reference frame.
-    if (~isfield(geometry, 'RefFrame'))
+    if nargin < 4 || (~isfield(geometry, 'RefFrame'))
         geometry.RefFrame = eye(3);
     end
     ref = geometry.RefFrame;
@@ -41,7 +41,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     % extract the contrained elements
     constr =  G' * h;
     % compute the body jacobian 
-    jac = getBodyJacobian(obj, contact);
+    jac = getSpatialJacobian(obj, contact);
     % extract the contrained elements
     constr_jac = G' * jac;
     
