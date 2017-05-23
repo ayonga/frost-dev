@@ -30,11 +30,10 @@ function obj = addContact(obj, contact, fric_coef, geometry)
         geometry.RefFrame = eye(3);
     end
     ref = geometry.RefFrame;
-    G = [ref, zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
+    G = [eye(3), zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
     
     % compute the spatial position (cartesian position + Euler angles)
     pos = getCartesianPosition(obj, contact);
-%     rpy = getEulerAngles(obj, contact);
     rpy = getRelativeEulerAngles(obj, contact, ref);
     
     h = transpose([pos, rpy]); %effectively as transpose
@@ -43,7 +42,7 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     % compute the body jacobian 
     jac = getSpatialJacobian(obj, contact);
     % extract the contrained elements
-    constr_jac = G' * jac;
+    constr_jac = contact.WrenchBase' * jac;
     
     % label for the holonomic constraint
     label_full = cellfun(@(x)[contact.Name,x],...
