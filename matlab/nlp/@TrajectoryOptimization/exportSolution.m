@@ -80,8 +80,12 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     params = struct();
     if ~isempty(param_names)        
         for j=1:length(param_names)
-            name = param_names{j};            
-            params.(name) = sol([vars.(name)(1).Indices]);
+            name = param_names{j};         
+            try
+                params.(name) = sol([vars.(name)(1).Indices]);
+            catch
+                continue;
+            end
         end
     end
             
