@@ -6,7 +6,7 @@ function result = simplespatulaplanner
 num_node = 30;    % number of nodes
 mu = 0.33; % coefficient of restitution
 g = 9.8; % gravity
- wrist3joint_length = 0.09465;
+wrist3joint_length = 0.09465;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -138,9 +138,9 @@ axis equal
                 a_z*sin(theta_x)-a_y*cos(theta_x)+g*sin(theta_x) ...
                 - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
 %                 a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
-%                 - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+ %               - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
                 abs(theta_xdot) - 20;
-                abs(a_y) - 30;
+                abs(a_y) - 15;
                 abs(a_z) - 30;
                 abs(theta_x) - 30];
           

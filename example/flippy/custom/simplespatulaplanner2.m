@@ -1,12 +1,12 @@
-function result = simplespatulaplanner
+function result = simplespatulaplanner2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% some specifications
 num_node = 40;    % number of nodes
-mu = 0.8; % coefficient of restitution
+mu = 0.05; % coefficient of restitution
 g = 9.8; % gravity
-t_final = 0.43;
+t_final = 0.13; %original: 0.43
 wrist3joint_length = 0.09465;
 y_pos_final = 0.02; % added final y position
 
@@ -62,7 +62,6 @@ for j=1:length(timestamps)
     ti = timestamps(j);
     burger_y = [burger_y , poly(ti,ae(1,:))];
     burger_z = [burger_z , poly(ti,ae(2,:))];
-    %spatula_right = (burger_y).*(cos(burger_theta_x)) + (burger_z).*(sin(burger_theta_x))
     burger_theta_x = [burger_theta_x , poly(ti,ae(3,:))];
     burger_theta_y = [burger_theta_y , poly(ti,ae(4,:))];
     burger_ydot = [burger_ydot , poly_derivative(ti,ae(1,:))];
@@ -71,11 +70,10 @@ for j=1:length(timestamps)
 	burger_theta_ydot = [burger_theta_ydot , poly_derivative(ti,ae(4,:))];
 end
 
-% creating spatula vertices (in 2D, yz-plane)
-q_1y = burger_y + 0.5*W.*cos(burger_theta_x);% y-coordinate of spatula vertex q_1
-%q_1y = q_1y/norm(q_1y,2); %normalize
+% creating spatula vertices
+q_1y = burger_y + 0.5*W.*cos(burger_theta_x); % y-coordinate of spatula vertex q_1
 q_1z = burger_z + 0.5*W.*sin(burger_theta_x);   % z-coordinate of spatula vertex q_1
-%q_1z = q_1z/norm(q_1z,2); %normalize
+ 
 q_1 = [q_1y, q_1z];
 %q_2 = 
 %q_3 =
@@ -85,8 +83,8 @@ q_4z = burger_z - 0.5*W.*sin(burger_theta_x);   % z-coordinate of spatula vertex
 %q_4z = q_4z/norm(q_4z,2); %normalize
 q_4 = [q_1y, q_1z]; 
 
-%disp('dist between q_1 and q_4')
-%disp(sqrt((q_1y - q_4y).^2 + (q_1z - q_4z).^2))
+disp('dist between q_1 and q_4')
+disp(sqrt((q_1y - q_4y).^2 + (q_1z - q_4z).^2))
 
 figure(1000);
 % plot(timestamps,burger_x);
@@ -99,10 +97,10 @@ ylabel('y and z positions of spatula center [m]')
 legend('y','z');
 
 subplot(2,3,2);
-plot(timestamps,burger_theta_x);
+plot(timestamps,burger_theta_x, timestamps, burger_theta_y);
 xlabel('time [sec]');
-ylabel('theta_x = roll [rad]');
-legend('theta_x');
+ylabel('theta_x and theta_y');
+legend('theta_x','theta_y');
 
 subplot(2,3,4);
 plot(timestamps,burger_ydot,timestamps,burger_zdot);
@@ -111,48 +109,36 @@ ylabel('ydot and zdot [m/s]');
 legend('ydot','zdot');
 
 subplot(2,3,5);
-plot(timestamps,burger_theta_xdot);
+plot(timestamps,burger_theta_xdot,timestamps,burger_theta_ydot);
 xlabel('time [sec]');
-ylabel('theta_x dot [rad/sec]')
-legend('theta_x dot');
+ylabel('theta_x dot and theta_y dot [rad/sec]')
+legend('theta_x dot','theta_y dot');
 
 subplot(1,3,3);
 plot(burger_y,burger_z,'linewidth',2,'color','k');
 xlabel('burger_y [m]');
 ylabel('burger_z [m]');
 title('z,y phase space of spatula trajectory');
-%axis equal
+axis equal
 hold on 
-plot(q_1y,q_1z,'LineWidth',2, 'color', 'm');  % position of near-left vertex
-plot(q_4y, q_4z,'LineWidth',2,'color','c');    % position of near-right vertex
+plot(q_1y,q_1z,'LineWidth',2, 'color', 'm');  % position of left center edge point
+plot(q_4y, q_4z,'LineWidth',2,'color','c');    % position of right center edge point
 hold off
 
 figure(2);
 plot3(zeros(length(burger_y)),burger_y,burger_z, 'linewidth',2,'color','k');
+% xlim([-.06,.06])
+% ylim([-.06,.06])
+% zlim([0,.15])
 xlabel('x pos');
 ylabel('y pos');
 zlabel('z pos');
 grid on
 hold on 
 
-
 plot3(zeros(length(burger_y)), q_1y, q_1z, 'LineWidth', 2,'color','m');
 plot3(zeros(length(burger_y)), q_4y, q_4z, 'LineWidth', 2, 'color', 'c');
-
-%{
-h = animatedline(ones(length(burger_y)), burger_y, burger_z);
-for k = 0:t_final
-    addpoints(h,burger_y,burger_z)
-    draw now
-    wait 1.0
-end
-th = [burger_theta_x, burger_theta_y, burger_theta_z];
-s = (SPATULA_WIDTH/2).*[cos(th[1]), sin(th[1])];
-X = x[1].*ones((2)) + array([s[0], -s[0]]);
-Y = x[2].*ones((2)) + array([s[1], -s[1]]);
-plot3(X, Y,timesteps);
-%}
-
+% axis equal
 hold off
 
 %%
@@ -183,66 +169,80 @@ hold off
             % velocity
             ydot = poly_derivative(t,a(1,:));
             zdot = poly_derivative(t,a(2,:));
-            theta_xdot = poly_derivative(t,a(3,:));
-            
+            theta_xdot = poly_derivative(t,a(3,:));            
           
           c = [c ; 
                 %-y; 
-                -z; 
-                theta_x - pi;
-                y - 0.2; 
-                z - 0.25; 
-                norm([zdot,ydot])-4];  
+                - z; 
+                %-theta_x;
+                %theta_x - pi;
+                %-theta_xdot;            
+                y - 0.2;        %original: 0.2
+                z - 0.2;   % original:0.25
+                norm([zdot,ydot]) - 4;
+                %q_4z  - 0.04;
+                %q_1z - 0.07;
+                %q_4y - 0.03;
+                ];  
          
           
         % acceleration constraints are satisfied for 80% of the trajectory
-          if i< 0.80 * length(time)  
+          if i< .15 * length(time)  
               %acceleration
             a_y = poly_double_derivative(t,a(1,:));
             a_z = poly_double_derivative(t,a(2,:));
+            a_theta_x =poly_double_derivative(t,a(3,:));
             a_x = 0;
           
             c = [c; 
                 a_z*sin(theta_x)-a_y*cos(theta_x)+g*sin(theta_x) ...
                 - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
-                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
-                - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-                abs(poly_derivative(t,a(3,:))) - 20;
-                abs(theta_xdot)-20;           
-                abs(a_y) - 10;
-                abs(a_z) - 10;
-                abs(poly(time(end),a(4,:))) - 0.5*pi];
-               
-            
-          
+%                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
+%               - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+%                  abs(theta_x) - 20;
+%                 abs(theta_xdot) - 10;          %original: 20 
+                abs(a_y) - 15;  %original: 30 
+                abs(a_z) - 15;  %original: 30 
+                abs(a_theta_x) - 10;
+%                 abs(poly(time(end),a(4,:))) - 0.5*pi];  %original: stops
+%                 q_4z - 0.05;
+%                 q_1z - 0.08;   %original: none
+%                 -y;
+%                 -z;
+%                 0.01 - z;    %orig: none 
+%                 y - 0.2;   %orig: none
+                z - 0.1;        %orig: none 
+                ];
+       
           end
-          
-                                    
+                           
         end
         
-        
-        c = [c; 
+         c = [c; 
 %              abs(poly_derivative(t,a(3,:))) - 15 ;
 %              0.03 - poly(time(end)/2,a(2,:))
 %             abs(ydot) - 0.05
-              abs(poly_derivative(0.8*time(end),a(1,:))) - 0.05             % ?????
-               ];
+               abs(poly_derivative(0.8*time(end),a(1,:))) - 0.08             
+                ];
         
         
         %% equality constraints
         ceq = [ceq;
                poly(time(end),a(1,:));
-               poly(time(end),a(2,:));
+               0.03 - poly(time(end),a(2,:));
                poly(time(end),a(3,:)) - pi;
                poly(time(1),a(1,:));
                poly(time(1),a(2,:));
-               poly(time(1),a(3,:))];
+               poly(time(1),a(3,:))
+               poly(time(1),a(4,:));
+               poly(time(end),a(4,:)) - pi/4;
+               ];
       
-        % to have a zero impact at touch down -- comment this if
-        % acceleration needs to be maintained till the end
-           ceq = [ ceq; 
-                  poly_derivative(time(end),a(1,:));
-                  poly_derivative(time(end),a(2,:))  ];
+%         to have a zero impact at touch down -- comment this if
+%         acceleration needs to be maintained till the end
+%            ceq = [ ceq; 
+%                  poly_derivative(time(end),a(1,:));
+%                  poly_derivative(time(end),a(2,:))  ];
                   
            
     end
@@ -286,34 +286,23 @@ hold off
            out = t* out + (5-i)*(4-i) * a(i);
        end  
     end
+%%
 
-%{
-%% 2d dynamic spatula
-spatula = [-0.5*W.*cos(burger_theta_x), 0.5*W.*sin(burger_theta_x);zeros(length(burger_y)), zeros(length(burger_y))];
-
-
-xmin = -10;
-xmax =105;
-ymin = -10;
-ymax = 10;
-%axis equal
-axis([xmin xmax ymin ymax])
-hold on
-
-
-N = 44;
-t = linspace(0,t_final,N); 
-trajectory = [burger_y,burger_z];
-scale = linspace(1,t_final,N);
-for i = 1:N
-    % object moving along projectile
-    h = fill(spatula(1,:) + t(i),spatula(2,:) + trajectory(i),'r');
-    hold on;
-    % scales the figure from 100% to 25%
-    fill(scale(i)*spatula(1,:) + t(i), scale(i)*spatula(2,:) + trajectory(i), 'r');
-    hold off;
-    pause(0.3)
+h = animatedline;
+x = linspace(0,t_final,length(burger_theta_y));
+for i = 1:5
+for k = 1:length(x)
+    addpoints(h, zeros(size(21)), q_1y(k), q_1z(k));
+    addpoints(h, zeros(size(21)), q_4y(k), q_4z(k));
+%     if mod(k,10)==0
+        drawnow 
+%     end
+    pause(0.15)
 end
-%}
+if i < 5
+clearpoints(h)
+end
+end
 
 end
+
