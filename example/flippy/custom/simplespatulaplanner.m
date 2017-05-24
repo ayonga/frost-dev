@@ -124,7 +124,7 @@ axis equal
             theta_xdot = poly_derivative(t,a(3,:));
                         
             
-          c = [c ; -y;  - z; theta_x - pi; -0.2 - theta_x; z - 0.15;  abs(ydot) - 20; abs(zdot) - 20];
+          c = [c ; -y;  - z; theta_x - pi; - theta_x;  abs(ydot) - 20; abs(zdot) - 20];
           
           
         % acceleration constraints are satisfied for 80% of the trajectory
@@ -138,11 +138,12 @@ axis equal
                 a_z*sin(theta_x)-a_y*cos(theta_x)+g*sin(theta_x) ...
                 - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
 %                 a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
- %               - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-                abs(theta_xdot) - 20;
-                abs(a_y) - 15;
-                abs(a_z) - 30;
-                abs(theta_x) - 30];
+%                 - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+%                 abs(theta_xdot) - 20;
+%                 abs(a_y) - 30;
+%                 abs(a_z) - 30;
+%                 abs(theta_x) - 30
+                ];
           
           end
                                     
