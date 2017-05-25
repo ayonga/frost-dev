@@ -95,7 +95,7 @@ Begin["`Private`"]
 SyntaxInformation[CseOptimizeExpression]={"ArgumentsPattern"->{_,OptionsPattern[]}};
 CseOptimizeExpression[expr_,OptionsPattern[]]:=
 	Block[{optExpr},
-	optExpr = Experimental`OptimizeExpression[expr,OptimizationLevel->OptionValue[OptimizationLevel]];
+	optExpr = Experimental`OptimizeExpression[expr,OptimizationLevel->OptionValue[OptimizationLevel],OptimizationSymbol->Global`t];
 	DecomposeBlock[optExpr]
 	];
 Options[CseOptimizeExpression]={OptimizationLevel-> 1};
@@ -113,13 +113,29 @@ ReplaceVariable[vars_,code_]:=
 SyntaxInformation[ConvertToRule]={"ArgumentsPattern"->{_}};
 ConvertToRule[code_]:= code/.Set-> Rule;
 
-SyntaxInformation[DeleteUnnecessoryExpr]={"ArgumentsPattern"->{_}};
+SyntaxInformation[ConvertToSet]={"ArgumentsPattern"->{_}};
+ConvertToSet[code_]:= code/.Rule-> Set;
+
 DeleteUnnecessoryExpr[code_]:=
 	Block[{unvars},
 	unvars=Cases[Cases[code,_Symbol,Infinity]//Tally,{_,2}][[All,1]];
 	Verbatim[Rule][Alternatives@@unvars,_]//DeleteCases[code,#,Infinity]//.Cases[code,#,Infinity]&
 	];
+(*
+
+TODO: Deleted unnecessory expression results in incorrect expression.
+*)
+DeleteUnnecessoryExpr[vars_,code_]:=
+	Block[{unvars, ruleCode, newCode, newVar},
+	ruleCode = ConvertToRule[code];
 	
+	unvars=Cases[Cases[ruleCode,_Symbol,Infinity]//Tally,{_,2}][[All,1]];
+	newCode = Verbatim[Rule][Alternatives@@unvars,_]//DeleteCases[ruleCode,#,Infinity]//.Cases[ruleCode,#,Infinity]&;
+	
+	newVar = Select[vars, Not@MemberQ[unvars, #] &];
+	newCode = ConvertToSet[newCode];
+	{newVar, newCode}
+	];
 	
 SyntaxInformation[GetSequenceExprMatlab]={"ArgumentsPattern"->{_}};
 GetSequenceExprMatlab[code_]:= code/.Hold[CompoundExpression[s___,f_]]:>s;
@@ -173,8 +189,11 @@ ExportToCpp[name_String,expr_,vars_, OptionsPattern[]]:=
                 result={"NULL"};
                 argoutDims[[i]]={0,0};(*empty matrix*)
                 ,
-                If[ListQ[First[oexpr]],
-				  {syms,code}=ReplaceVariable[First[oexpr],Last[oexpr]];
+                If[ListQ[First[oexpr]],  
+				  (*{syms,code}=DeleteUnnecessoryExpr[First[oexpr],Last[oexpr]];
+				  {syms,code}=ReplaceVariable[syms,code];*)
+				  syms = First[oexpr];
+				  code = Last[oexpr];
 				  subcode=code/.csubs;
 				  seq=GetSequenceExprCpp[subcode];
 				  final=GetFinalExprCpp[subcode];
