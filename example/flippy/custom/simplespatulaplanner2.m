@@ -4,9 +4,9 @@ function result = simplespatulaplanner2
 
 %% some specifications
 num_node = 40;    % number of nodes
-mu = 0.05; % coefficient of restitution
+mu = 0.15; % coefficient of friction
 g = 9.8; % gravity
-t_final = 0.13; %original: 0.43
+t_final = 0.4; %original: 0.43
 wrist3joint_length = 0.09465;
 y_pos_final = 0.02; % added final y position
 
@@ -37,8 +37,8 @@ x0 = [   -2.1324    9.8200   32.9460   0.0000  3.0237   -7.5801 ...
 %    37.0471   37.0491   21.0005  -11.5201   -0.0000 ...
 %    -0.1784   -0.0302    0.0319    0.0669   -1.3290 ];
   
-lb = -40*ones(size(x0));
-ub =  40*ones(size(x0));
+lb = -400*ones(size(x0));
+ub =  400*ones(size(x0));
 
 %% run this optimization
 options = optimset('MaxFunEvals',1000000);
@@ -47,10 +47,12 @@ result = fmincon(@objective,x0,[],[],[],[],lb,ub,@mycon,options);
 toc
 
 %%  plot this shit
+burger_x = [];
 burger_y = [];
 burger_z = [];
 burger_theta_x = [];
 burger_theta_y = [];
+burger_xdot = [];
 burger_ydot = [];
 burger_zdot = [];
 burger_theta_xdot = [];
@@ -58,8 +60,10 @@ burger_theta_ydot = [];
 
 ae = reshape(result,[4,5]);
 timestamps = 0:0.01:t_final;
+
 for j=1:length(timestamps)
     ti = timestamps(j);
+%     burger_x = [burger_x, poly(ti,ae(???)]
     burger_y = [burger_y , poly(ti,ae(1,:))];
     burger_z = [burger_z , poly(ti,ae(2,:))];
     burger_theta_x = [burger_theta_x , poly(ti,ae(3,:))];
@@ -71,20 +75,46 @@ for j=1:length(timestamps)
 end
 
 % creating spatula vertices
-q_1y = burger_y + 0.5*W.*cos(burger_theta_x); % y-coordinate of spatula vertex q_1
-q_1z = burger_z + 0.5*W.*sin(burger_theta_x);   % z-coordinate of spatula vertex q_1
- 
-q_1 = [q_1y, q_1z];
-%q_2 = 
-%q_3 =
-q_4y = burger_y - 0.5*W.*cos(burger_theta_x);  % y-coordinate of spatula vertex q_4
-%q_4y = q_4y/norm(q_4y,2); %normalize
-q_4z = burger_z - 0.5*W.*sin(burger_theta_x);   % z-coordinate of spatula vertex q_4
-%q_4z = q_4z/norm(q_4z,2); %normalize
-q_4 = [q_1y, q_1z]; 
+q_r_x = zeros(size(burger_y)); % x-coord of right edge point
+q_r_y = burger_y + 0.5*W.*cos(burger_theta_x); % y-coord of right edge point 
+q_r_z = burger_z + 0.5*W.*sin(burger_theta_x); % z-coord of right edge point
+q_r = [q_r_y, q_r_z]; % right edge point of spatula 
 
-disp('dist between q_1 and q_4')
-disp(sqrt((q_1y - q_4y).^2 + (q_1z - q_4z).^2))
+q_l_x = zeros(size(burger_y)); % x-coord of left edge point
+q_l_y = burger_y - 0.5*W.*cos(burger_theta_x);  % y-coord of left edge point
+q_l_z = burger_z - 0.5*W.*sin(burger_theta_x);   % z-coord of left edge point
+q_l = [q_r_y, q_r_z]; % left edge point of spatula
+
+q_f_x = 0.5*L.*cos(burger_theta_y);   % x-coord of front middle edge point
+q_f_y = burger_y; % y-coord of front middle edge point
+q_f_z = burger_z + 0.5*L.*sin(burger_theta_y); % z-coord of front middle edge point
+
+q_b_x = -0.5*L.*cos(burger_theta_y); % x-coord of back middle edge point
+q_b_y = burger_y; % y-coord of back middle edge point
+q_b_z = burger_z - 0.5*L .*sin(burger_theta_y); % z-coord of back middle edge point
+
+q_fr_x = q_r_x  + q_f_x; % x-coord of front right vertex 
+q_fr_y = q_r_y + q_f_y; % y-coord of front right vertex
+q_fr_z = q_r_z + q_f_z; % z-coord of front right vertex
+% q_fr = matrix(q_fr_x, q_fr_y, q_fr_z); % front right vertex
+
+q_br_x = q_r_x  + q_b_x; % x-coord of back right vertex 
+q_br_y = q_r_y + q_b_y; % y-coord of back right vertex
+q_br_z = q_r_z + q_b_z; % z-coord of back right vertex
+% q_br = [q_br_x, q_br_y, q_br_z];  % back right vertex
+
+q_fl_x = q_l_x  + q_f_x; % x-coord of front left vertex 
+q_fl_y = q_l_y + q_f_y; % y-coord of front left vertex
+q_fl_z = q_l_z + q_f_z; % z-coord of front left vertex
+% q_fl = [q_fl_x, q_fl_y, q_fl_z]; % front left vertex
+
+q_bl_x = q_l_x  + q_b_x; % x-coord of back left vertex 
+q_bl_y = q_l_y + q_b_y; % y-coord of back left vertex
+q_bl_z = q_l_z + q_b_z; % z-coord of back left vertex
+% q_bl = [q_bl_x, q_bl_y, q_bl_z]; % back left vertex
+
+% disp('dist between q_r and q_l')
+% disp(sqrt((q_r_y - q_l_y).^2 + (q_r_z - q_l_z).^2))
 
 figure(1000);
 % plot(timestamps,burger_x);
@@ -121,23 +151,35 @@ ylabel('burger_z [m]');
 title('z,y phase space of spatula trajectory');
 axis equal
 hold on 
-plot(q_1y,q_1z,'LineWidth',2, 'color', 'm');  % position of left center edge point
-plot(q_4y, q_4z,'LineWidth',2,'color','c');    % position of right center edge point
+plot(q_r_y, q_r_z, 'LineWidth', 2, 'color', 'm');  % position of left center edge point
+plot(q_l_y, q_l_z, 'LineWidth', 2, 'color', 'c');    % position of right center edge point
 hold off
 
 figure(2);
-plot3(zeros(length(burger_y)),burger_y,burger_z, 'linewidth',2,'color','k');
-% xlim([-.06,.06])
-% ylim([-.06,.06])
-% zlim([0,.15])
+plot3(zeros(length(burger_y)), burger_y, burger_z, 'linewidth',2, 'color', 'k');
+
 xlabel('x pos');
 ylabel('y pos');
 zlabel('z pos');
+
 grid on
 hold on 
 
-plot3(zeros(length(burger_y)), q_1y, q_1z, 'LineWidth', 2,'color','m');
-plot3(zeros(length(burger_y)), q_4y, q_4z, 'LineWidth', 2, 'color', 'c');
+% plotting the four corner vertices 
+plot3(q_bl_x, q_bl_y, q_bl_z, 'linewidth', 0.5, 'color', 'k');
+plot3(q_fl_x, q_fl_y, q_fl_z, 'linewidth', 0.5, 'color', 'k');
+plot3(q_fr_x, q_fr_y, q_fr_z,'linewidth', 0.5, 'color', 'k');
+plot3(q_br_x, q_br_y, q_br_z, 'linewidth', 0.5, 'color', 'k');
+
+plot3(zeros(length(burger_y)), q_r_y, q_r_z, 'LineWidth', 2, 'color', 'm'); % right edge point in magenta
+plot3(zeros(length(burger_y)), q_l_y, q_l_z, 'LineWidth', 2, 'color', 'c'); % left edge point in cyan
+plot3(q_f_x, q_f_y, q_f_z, 'LineWidth', 2, 'color', 'r'); % front middle edge point in red
+plot3(q_b_x, q_b_y, q_b_z, 'LineWidth', 2, 'color', 'g'); % back middle edge point in green
+
+% xlim([-.05,.05])
+% ylim([-.05,.05])
+% zlim([0,.25])
+
 % axis equal
 hold off
 
@@ -160,10 +202,13 @@ hold off
             z = poly(t,a(2,:));
             theta_x = poly(t,a(3,:));
             theta_y = poly(t,a(4,:));
-            q_1y = y + 0.5*W.*cos(theta_x);
-            q_1z = z + 0.5*W.*sin(theta_x);
-            q_4y = y - 0.5*W.*cos(theta_x);
-            q_4z = z - 0.5*W.*sin(theta_x);
+            q_r_y = y + 0.5*W.*cos(theta_x);
+            q_r_z = z + 0.5*W.*sin(theta_x);
+            q_l_y = y - 0.5*W.*cos(theta_x);
+            q_l_z = z - 0.5*W.*sin(theta_x);
+            q_f_z = z + 0.5*L.*sin(theta_y); % z-coord of front middle edge point
+            q_fl_z = q_l_z + q_f_z; % z-coord of front left vertex
+            q_fr_z = q_r_z + q_f_z; % z-coord of front right vertex
             
             
             % velocity
@@ -172,58 +217,60 @@ hold off
             theta_xdot = poly_derivative(t,a(3,:));            
           
           c = [c ; 
-                %-y; 
+                -y; 
                 - z; 
-                %-theta_x;
-                %theta_x - pi;
-                %-theta_xdot;            
-                y - 0.2;        %original: 0.2
-                z - 0.2;   % original:0.25
-                norm([zdot,ydot]) - 4;
-                %q_4z  - 0.04;
-                %q_1z - 0.07;
-                %q_4y - 0.03;
+                - q_fr_z;
+                - q_fl_z;
+                -theta_y;
+                theta_y - pi/4;
+%                 -theta_x;
+%                 theta_x - pi;
+                -theta_xdot;            
+                y - 0.1;        %original: 0.2
+                z - 0.15;   % original:0.25
+                norm([zdot,ydot]) - 5;
+%                 - q_l_z;
+%                 - q_r_z;
+%                 q_r_z  - 0.04;
+%                 q_r_z - 0.07;
+%                 q_l_y - 0.03;
                 ];  
-         
-          
+            
         % acceleration constraints are satisfied for 80% of the trajectory
-          if i< .15 * length(time)  
-              %acceleration
+          if i< 1.0 * length(time)  
+              % acceleration
             a_y = poly_double_derivative(t,a(1,:));
             a_z = poly_double_derivative(t,a(2,:));
             a_theta_x =poly_double_derivative(t,a(3,:));
             a_x = 0;
           
             c = [c; 
-                a_z*sin(theta_x)-a_y*cos(theta_x)+g*sin(theta_x) ...
-                - mu* (a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
-%                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
-%               - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-%                  abs(theta_x) - 20;
-%                 abs(theta_xdot) - 10;          %original: 20 
-                abs(a_y) - 15;  %original: 30 
-                abs(a_z) - 15;  %original: 30 
+                a_z*sin(theta_x)+a_y*cos(theta_x)+g*sin(theta_x) ...
+                - mu* (-a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
+               a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
+              - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+%                 abs(theta_x) - 20;
+                abs(theta_xdot) - 20; %original: 20 
+                abs(a_y) - 30; %original: 30 
+                abs(a_z) - 30; %original: 30 
                 abs(a_theta_x) - 10;
-%                 abs(poly(time(end),a(4,:))) - 0.5*pi];  %original: stops
-%                 q_4z - 0.05;
+%                 abs(poly(time(end),a(4,:))) - 0.5*pi;  %original: stops
+%                 q_4z - 0.05;  %original: none
 %                 q_1z - 0.08;   %original: none
 %                 -y;
 %                 -z;
-%                 0.01 - z;    %orig: none 
-%                 y - 0.2;   %orig: none
-                z - 0.1;        %orig: none 
                 ];
        
           end
                            
         end
         
-         c = [c; 
-%              abs(poly_derivative(t,a(3,:))) - 15 ;
-%              0.03 - poly(time(end)/2,a(2,:))
-%             abs(ydot) - 0.05
-               abs(poly_derivative(0.8*time(end),a(1,:))) - 0.08             
-                ];
+%          c = [c; 
+% %              abs(poly_derivative(t,a(3,:))) - 15 ;
+% %              0.03 - poly(time(end)/2,a(2,:))
+% %             abs(ydot) - 0.05
+%                abs(poly_derivative(0.8*time(end),a(1,:))) - 0.08;
+%                 ];
         
         
         %% equality constraints
@@ -235,15 +282,15 @@ hold off
                poly(time(1),a(2,:));
                poly(time(1),a(3,:))
                poly(time(1),a(4,:));
-               poly(time(end),a(4,:)) - pi/4;
+               poly(time(end),a(4,:)) - pi/6;
                ];
       
-%         to have a zero impact at touch down -- comment this if
-%         acceleration needs to be maintained till the end
+% %         to have a zero impact at touch down -- comment this if
+% %         acceleration needs to be maintained till the end
 %            ceq = [ ceq; 
 %                  poly_derivative(time(end),a(1,:));
 %                  poly_derivative(time(end),a(2,:))  ];
-                  
+%                   
            
     end
 
@@ -288,16 +335,31 @@ hold off
     end
 %%
 
-h = animatedline;
+h = animatedline('Color','[0.3 0.3 0.3]');
+h2 = animatedline('Color',[0.5 0.5 0.5]');
 x = linspace(0,t_final,length(burger_theta_y));
 for i = 1:5
 for k = 1:length(x)
-    addpoints(h, zeros(size(21)), q_1y(k), q_1z(k));
-    addpoints(h, zeros(size(21)), q_4y(k), q_4z(k));
-%     if mod(k,10)==0
-        drawnow 
-%     end
-    pause(0.15)
+%     addpoints(h,q_f_x(k), q_f_y(k), q_f_z(k));
+%     addpoints(h, zeros(size(21)), q_r_y(k), q_r_z(k));
+%     addpoints(h,q_b_x(k), q_b_y(k), q_b_z(k));
+%     addpoints(h, zeros(size(21)), q_l_y(k), q_l_z(k));
+%     addpoints(h,q_f_x(k), q_f_y(k), q_f_z(k));
+    addpoints(h2, q_r_x, q_r_y, q_r_z);
+    addpoints(h2, q_l_x, q_l_y, q_l_z);
+    addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
+    addpoints(h, q_fl_x(k), q_fl_y(k), q_fl_z(k));
+    addpoints(h, q_fr_x(k), q_fr_y(k), q_fr_z(k));
+    addpoints(h, q_br_x(k), q_br_y(k), q_br_z(k));
+    addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
+%      if mod(k,10)==0
+        drawnow
+        pause(0.1)
+        if i < 5
+            clearpoints(h)
+        end
+%      end
+    pause(0.1)
 end
 if i < 5
 clearpoints(h)
@@ -305,4 +367,3 @@ end
 end
 
 end
-
