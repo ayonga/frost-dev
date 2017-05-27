@@ -4,9 +4,9 @@ function result = simplespatulaplanner2
 
 %% some specifications
 num_node = 40;    % number of nodes
-mu = 0.15; % coefficient of friction
+mu = 0.3; % coefficient of friction
 g = 9.8; % gravity
-t_final = 0.4; %original: 0.43
+t_final = 0.4; %original: 0.4
 wrist3joint_length = 0.09465;
 y_pos_final = 0.02; % added final y position
 
@@ -37,8 +37,8 @@ x0 = [   -2.1324    9.8200   32.9460   0.0000  3.0237   -7.5801 ...
 %    37.0471   37.0491   21.0005  -11.5201   -0.0000 ...
 %    -0.1784   -0.0302    0.0319    0.0669   -1.3290 ];
   
-lb = -400*ones(size(x0));
-ub =  400*ones(size(x0));
+lb = -40*ones(size(x0));
+ub =  40*ones(size(x0));
 
 %% run this optimization
 options = optimset('MaxFunEvals',1000000);
@@ -214,15 +214,17 @@ hold off
             % velocity
             ydot = poly_derivative(t,a(1,:));
             zdot = poly_derivative(t,a(2,:));
-            theta_xdot = poly_derivative(t,a(3,:));            
+            theta_xdot = poly_derivative(t,a(3,:));
+            theta_ydot = poly_derivative(t,a(4,:));
           
           c = [c ; 
                 -y; 
                 - z; 
                 - q_fr_z;
                 - q_fl_z;
-                -theta_y;
+%                 -theta_y;
                 theta_y - pi/4;
+                - theta_ydot;
 %                 -theta_x;
 %                 theta_x - pi;
                 -theta_xdot;            
@@ -247,12 +249,12 @@ hold off
             c = [c; 
                 a_z*sin(theta_x)+a_y*cos(theta_x)+g*sin(theta_x) ...
                 - mu* (-a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
-               a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
-              - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+%                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
+%               - mu* (-a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
 %                 abs(theta_x) - 20;
                 abs(theta_xdot) - 20; %original: 20 
-                abs(a_y) - 30; %original: 30 
-                abs(a_z) - 30; %original: 30 
+                abs(a_y) - 15; %original: 30 
+                abs(a_z) - 15; %original: 30 
                 abs(a_theta_x) - 10;
 %                 abs(poly(time(end),a(4,:))) - 0.5*pi;  %original: stops
 %                 q_4z - 0.05;  %original: none
@@ -354,16 +356,23 @@ for k = 1:length(x)
     addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
 %      if mod(k,10)==0
         drawnow
-        pause(0.1)
+%         pause(0.1)
         if i < 5
             clearpoints(h)
         end
 %      end
-    pause(0.1)
+%     pause(0.1)
 end
 if i < 5
 clearpoints(h)
 end
 end
+% reshape(result,[4,5]);
+% csvwrite('/home/william/proj/git/simulation/paramfile.dat', result);
+% type paramfile.dat
+r = reshape(result,[4,5]);
+% csvwrite('/home/william/proj/git/simulation/paramfile.dat', r);
+% disp(r);
 
+dlmwrite('/home/william/proj/git/simulation/paramfile2.csv', r,'delimiter',',')
 end
