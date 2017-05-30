@@ -11,7 +11,7 @@ wrist3joint_length = 0.09465;
 y_pos_final = 0.02; % added final y position
 
 W = .07; % width of spatula in meters 
-L = 0.09; % length of spatula in meters
+L = 0.12; % length of spatula in meters
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,7 +87,7 @@ q_l = [q_r_y, q_r_z]; % left edge point of spatula
 
 q_f_x = 0.5*L.*cos(burger_theta_y);   % x-coord of front middle edge point
 q_f_y = burger_y; % y-coord of front middle edge point
-q_f_z = burger_z + 0.5*L.*sin(burger_theta_y); % z-coord of front middle edge point
+q_f_z = burger_z - 0.5*L.*sin(burger_theta_y); % z-coord of front middle edge point
 
 q_b_x = -0.5*L.*cos(burger_theta_y); % x-coord of back middle edge point
 q_b_y = burger_y; % y-coord of back middle edge point
