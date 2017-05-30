@@ -10,29 +10,23 @@ wrist3joint_length = 0.09465;
 % distance from mid point of spatula to its edge in x direction
 spatula_depth = 0.06; 
 t_min = 0.3;
-t_max = 0.3;
+t_max = 0.35;
 n_outputs = 5;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% initial guess
 
-  x0 = [0.3      -16.4445         0    3.1462         0    0.0000 ...
-         0         0         0         0         0 ...
-   -0.4403         0   -0.1888         0    0.0206 ...
-         0         0         0         0         0 ...
-   -6.2221         0   -3.3289         0    0.3500]; 
+  x0 = [0.3027        -7.9756         0   -0.0053         0   -0.3571   12.0154    ...
+      0   -0.0689         0   -1.0007   -6.3656         0   -0.0370 0   -0.5520  ...
+      1.5427         0   -0.0463         0   -0.8214    ...
+      0.0000         0    0.0206         0    0.3500 ]; 
 
   
 lb = -100*ones(size(x0));
 lb(1) = t_min;
-% lb(2:6) = 
-lb(7:11) = zeros(1,5);
-lb(17:21) = zeros(1,5);
 ub =  100*ones(size(x0));
 ub(1) = t_max;
-ub(7:11) = zeros(1,5);
-ub(17:21) = zeros(1,5);
 
 %% run this optimization
 % options = optimset('MaxFunEvals',10000);
@@ -99,10 +93,10 @@ axis equal
 axis([0 0.4 -0.2 0.2 -0.1 0.3])
 
 %%
-    function [c,ceq] = mycon(x)
+    function [c,ceq] = mycon(input)
 
-    a = reshape(x(2:end),[n_outputs,length(x(2:end))/n_outputs]);
-    t_final = x(1);
+    a = reshape(input(2:end),[n_outputs,length(input(2:end))/n_outputs]);
+    t_final = input(1);
     time = linspace(0,t_final,num_node);
 
     
@@ -133,8 +127,6 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
         thetadot_x_f = poly_derivative(time(end),a(4,:));
         thetadot_y_f = poly_derivative(time(end),a(5,:));
         
-        spatulaedge_z_i =  z_i - spatula_depth*sin(theta_y_i);
-        spatulaedge_z_f =  z_f - spatula_depth*sin(theta_y_f);
         
 %%  constraints
 
@@ -162,19 +154,19 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
             spatulaedge_z = z - spatula_depth*sin(theta_y);
 
 
-          c = [c ; -x;  -z; -xdot; zdot; abs(xdot) - 20; abs(zdot) - 20];
+          c = [c ; -x;  -xdot; zdot; abs(xdot) - 20; abs(zdot) - 20];
           
           
         % acceleration constraints are satisfied for 80% of the trajectory
           if i< 0.8 * length(time)  
               %acceleration
-%             a_x = poly_double_derivative(t,a(1,:));
-%             a_y = poly_double_derivative(t,a(2,:));
-%             a_z = poly_double_derivative(t,a(3,:));
+            a_x = poly_double_derivative(t,a(1,:));
+            a_y = poly_double_derivative(t,a(2,:));
+            a_z = poly_double_derivative(t,a(3,:));
           
             c = [c; 
-%                  -(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
-%                 + mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+                 -(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
+                + mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
                 %                     spatulaedge_z - 0.20;
                 ];
           
@@ -221,7 +213,7 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
             t = time(i);
             y_dot = poly_derivative(t,a(1,:));
         end
-        f=t_final^2;
+        f=0;
             
     end
 
