@@ -91,6 +91,13 @@ axis equal
 
 axis([0 0.4 -0.2 0.2 -0.1 0.3])
 
+%% save the result in a file
+    if exist('writecsvfile.m', 'file')
+        writecsvfile(result,n_outputs);
+    else
+        sprintf('Warning: file writecsvfile.m does not exist. Copy and save the following text in file name: writecsvfile.m in subfolder custom \n\n\n function writecsvfile(result,n_output) \n r = reshape(result(2:end),[n_output,n_output]); \n csvwrite(your file name with path,r); \n end')
+    end
+
 %%
     function [c,ceq] = mycon(input)
 
@@ -171,8 +178,8 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
                   a_z = poly_double_derivative(t,a(3,:));
                   
                   c = [c;
-                                       -(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
-                                      + mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+                          -(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
+                         + mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
                       %                     spatulaedge_z - 0.20;
                       ];
               end
