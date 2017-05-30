@@ -4,13 +4,13 @@ function result = simplespatulaplanner
 
 %% some specifications
 num_node = 30;    % number of nodes
-mu = 0.17; % coefficient of restitution
+mu = 0.17; % coefficient of restitution. original: 0.17
 g = 9.8; % gravity
 wrist3joint_length = 0.09465;
 % distance from mid point of spatula to its edge in x direction
 spatula_depth = 0.06; 
-t_min = 0.3;
-t_max = 0.35;
+t_min = 0.29; % original: 0.3
+t_max = 0.34; % original: 0.35
 n_outputs = 5;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +105,7 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
     t_final = input(1);
     time = linspace(0,t_final,num_node);
 
-    t_mid = 0.6*t_final;
+    t_mid = 0.6*t_final;  %original: 0.6
     
     c = [];
     ceq = [];
@@ -223,8 +223,8 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
                 theta_y_f + 0.1;   % final pitch angle
 %                 thetadot_y_i;     % intitial pitch velocity
                 x_i;            % initial x position
-                x_mid - 0.15;  % mid x position
-                x_f - 0.2;    % final x position
+                x_mid - 0.17;  % mid x position, orig: 0.15
+                x_f - 0.22;    % final x position, orig: 0.20
                 ];
                   
            
