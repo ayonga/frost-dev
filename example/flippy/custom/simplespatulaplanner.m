@@ -17,12 +17,11 @@ n_outputs = 5;
 
 %% initial guess
 
-  x0 = [0.3027        -7.9756         0   -0.0053         0   -0.3571   12.0154    ...
-      0   -0.0689         0   -1.0007   -6.3656         0   -0.0370 0   -0.5520  ...
-      1.5427         0   -0.0463         0   -0.8214    ...
-      0.0000         0    0.0206         0    0.3500 ]; 
+x0 = [    0.3059   27.8116         0   26.8203         0   96.2501   -9.5711         0   -8.9718      ...
+    0  -26.9055   -1.7519         0    0.6834         0   -1.8161    1.2891         0   -0.0931       ...
+    0   -1.1531    0.0000         0    0.0207         0    0.3500]; 
 
-  
+
 lb = -100*ones(size(x0));
 lb(1) = t_min;
 ub =  100*ones(size(x0));
@@ -99,6 +98,7 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
     t_final = input(1);
     time = linspace(0,t_final,num_node);
 
+    t_mid = 0.6*t_final;
     
     c = [];
     ceq = [];
@@ -127,6 +127,11 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
         thetadot_x_f = poly_derivative(time(end),a(4,:));
         thetadot_y_f = poly_derivative(time(end),a(5,:));
         
+        spatulaedge_z_f = z_f - spatula_depth*sin(theta_y_f);
+        
+        %% mid values
+        x_mid = poly(t_mid,a(1,:));
+        theta_y_mid = poly(t_mid,a(5,:));
         
 %%  constraints
 
@@ -154,27 +159,41 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
             spatulaedge_z = z - spatula_depth*sin(theta_y);
 
 
-          c = [c ; -x;  -xdot; zdot; abs(xdot) - 20; abs(zdot) - 20];
+          c = [c ; -x; -z; -xdot;  abs(xdot) - 20; abs(zdot) - 20];
           
           
         % acceleration constraints are satisfied for 80% of the trajectory
-          if i< 0.8 * length(time)  
+          if time(i) < t_mid  
               %acceleration
-            a_x = poly_double_derivative(t,a(1,:));
-            a_y = poly_double_derivative(t,a(2,:));
-            a_z = poly_double_derivative(t,a(3,:));
-          
-            c = [c; 
-                 -(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
-                + mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-                %                     spatulaedge_z - 0.20;
+              if time(i) < 0.8*t_mid
+                  a_x = poly_double_derivative(t,a(1,:));
+                  a_y = poly_double_derivative(t,a(2,:));
+                  a_z = poly_double_derivative(t,a(3,:));
+                  
+                  c = [c;
+                                       -(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
+                                      + mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+                      %                     spatulaedge_z - 0.20;
+                      ];
+              end
+            ceq = [ceq;
+                    spatulaedge_z;];
+          else
+              a_x = poly_double_derivative(t,a(1,:));
+              a_y = poly_double_derivative(t,a(2,:));
+              a_z = poly_double_derivative(t,a(3,:));
+            
+              c = [c; 
+                 (a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y)) ...
+                - mu* (a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
+%                                     - spatulaedge_z;
                 ];
           
           end
                   %% equality constraints
             ceq = [ceq;
                     y;
-                    spatulaedge_z;
+%                     spatulaedge_z;
                     theta_x;
                     ];
                                     
@@ -182,19 +201,23 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
 
         
         %% inequality terminal constraints
-%         c  = [ c;
-%                 
-%              ];
+        c  = [ c;
+                - spatulaedge_z_f + 0.03;
+%                 z_f - 0.2;
+%                 z_i - 0.2;
+             ];
          
         
         %% equality terminal constraints
         
         ceq = [ceq;
                 theta_y_i - 0.35; % initial pitch angle
-                theta_y_f - 0.02;         % final pitch angle
+                theta_y_mid - 0.02;         % mid pitch angle
+                theta_y_f + 0.1;   % final pitch angle
 %                 thetadot_y_i;     % intitial pitch velocity
-                x_i;
-                x_f - 0.15;
+                x_i;            % initial x position
+                x_mid - 0.15;  % mid x position
+                x_f - 0.2;    % final x position
                 ];
                   
            
