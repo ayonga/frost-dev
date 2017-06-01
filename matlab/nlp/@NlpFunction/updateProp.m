@@ -12,7 +12,7 @@ function obj = updateProp(obj, varargin)
     
     % set boundary values
     if all(isfield(argin, {'ub','lb'}))
-        obj =  setBoundary(obj, argin.lb, obj.ub);
+        obj =  setBoundary(obj, argin.lb, argin.ub);
     
     elseif isfield(argin, 'lb')
         obj =  setBoundary(obj, argin.lb, []);

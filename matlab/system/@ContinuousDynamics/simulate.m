@@ -1,4 +1,4 @@
-function [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver)
+function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver)
     % Simulate the dynamical system
     %
     % Parameters: 
@@ -126,7 +126,10 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventname
     end
 
     % pre-process
-    obj.PreProcess(obj, controller, params);
+    if ~isempty(obj.PreProcess)
+        params = obj.PreProcess(obj, t0, x0, controller, params);
+        obj.setParamValue(params);
+    end    
     
     % run the forward simulation
     sol = solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
@@ -138,7 +141,10 @@ function [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventname
         updateLastLog(logger);
     end
     % post-process
-    obj.PostProcess(obj, sol, controller, params);
+    if ~isempty(obj.PostProcess)
+        params = obj.PostProcess(obj, sol, controller, params);
+        obj.setParamValue(params);
+    end
     
     
 end
