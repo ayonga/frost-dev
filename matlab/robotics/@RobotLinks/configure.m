@@ -107,6 +107,7 @@ function obj = configure(obj, config, base)
                 if ~isempty(idx)
                     mechanicalReduction(i) = transmissions(idx).MechanicalReduction;
                     dofs(i).Actuator.Ratio = mechanicalReduction(i);
+                    dofs(i).Actuator.Inertia = transmissions(idx).Inertia;
                 end
             end
         end
@@ -121,11 +122,10 @@ function obj = configure(obj, config, base)
         
         obj.addInput('Control','u',u,gf);
     end
-    
+
     
     %% Configure and setup the forward kinematics of the robots
     obj = configureKinematics(obj, dofs, links);
-    
     
     %% add fixed joints as holonomic constraints
     % find the fixed joint indices
@@ -134,5 +134,5 @@ function obj = configure(obj, config, base)
     if ~isempty(fixed_joint_indices)
         obj = addFixedJoint(obj,fixed_joint_indices);
     end
-
+    
 end

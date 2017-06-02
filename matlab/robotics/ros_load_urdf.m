@@ -144,6 +144,13 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
                 
                 trans_ratio = xml_tran.getElementsByTagName('mechanicalReduction').item(0);
                 transmissions(index).MechanicalReduction = str2num(trans_ratio.getFirstChild.getData);
+                
+                % Ross - 6/2/2017
+                % Added support for urdf specified motorInertia
+                % URDF does not have a standard tag for motor inertia, so this will
+                % need to change if URDF adopts a standard later 
+                trans_inertia = xml_tran.getElementsByTagName('motorInertia').item(0);
+                transmissions(index).Inertia = str2num(trans_inertia.getFirstChild.getData);
                 index = index+1;
             end
             

@@ -6,7 +6,7 @@ function obj = configureActuator(obj, dofs, actuators)
     % @type cell
     % actuators: a structure array of actuator configuration @type struct
     %
-    % The actuator configuratioin may include the inertia and gear
+    % The actuator configuration may include the inertia and gear
     % ratio of the actuator.
     
     if iscellstr(dofs)
