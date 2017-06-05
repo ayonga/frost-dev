@@ -88,7 +88,7 @@ flippy.compile(export_path);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/flippy7DOF_2017_05_11_1102.yaml'];
+old_param_file = [cur,'/param/fanuc_2017_05_18_2147.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
