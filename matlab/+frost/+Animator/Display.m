@@ -41,7 +41,7 @@ classdef Display < handle
             
             obj.items = containers.Map;
             
-            for i = 1:length(obj.model.Joints)
+            for i = 7:length(obj.model.Joints)
                 name = ['Joint_', obj.model.Joints(i).Name];
                 obj.items(name) = frost.Animator.JointSphere(obj.ax, model, obj.model.Joints(i), name, varargin{:});
             end
@@ -51,7 +51,7 @@ classdef Display < handle
                 obj.items(name) = frost.Animator.LinkSphere(obj.ax, model, obj.model.Links(i), name, varargin{:});
             end
             
-            for i = 1:length(obj.model.Joints)
+            for i = 7:length(obj.model.Joints)
                 parentName = obj.model.Joints(i).Parent;
                 childName = obj.model.Joints(i).Child;
                 name = [parentName, '_to_', obj.model.Joints(i).Name];
