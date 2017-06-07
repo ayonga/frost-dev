@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!-- 
+	Author: Ross Hartley
+	Email:  rosshart@umich.edu
+    Date:   06/02/2017   
+	
+	Robot parameter values taken from:
+	Westervelt, Eric R., et al. Feedback control of dynamic bipedal robot locomotion. Vol. 28. CRC press, 2007.
+-->
+<robot name="five_link_walker" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Masses -->
+  <xacro:property name="MT" value="12" />
+  <xacro:property name="Mf" value="6.8" />
+  <xacro:property name="Mt" value="3.2" />
+  <!-- Lengths -->
+  <xacro:property name="lT" value="0.63" />
+  <xacro:property name="lf" value="0.4" />
+  <xacro:property name="lt" value="0.4" />
+  <!-- Inertias -->
+  <xacro:property name="IT" value="1.33" />
+  <xacro:property name="If" value="0.47" />
+  <xacro:property name="It" value="0.2" />
+  <!-- COM positions -->
+  <xacro:property name="pMT" value="0.24" />
+  <xacro:property name="pMf" value="0.11" />
+  <xacro:property name="pMt" value="0.24" />
+
+  <!-- Links -->
+  <xacro:torso cname="black" color="0 0 0 1" />
+  <xacro:thigh lr="right"  cname="blue" color="0 0 1 1" />
+  <xacro:thigh lr="left" cname="red" color="1 0 0 1" />
+  <xacro:shin lr="right" cname="blue" color="1 0 0 1" />
+  <xacro:shin lr="left"  cname="red" color="0 0 1 1" />
+
+  <!-- Joints -->
+  <xacro:q1 lr="left"/>
+  <xacro:q1 lr="right"/>
+  <xacro:q2 lr="left"/>
+  <xacro:q2 lr="right"/>
+  
+   <!-- Transmissions -->
+  <xacro:q1_trans lr="left"/>
+  <xacro:q1_trans lr="right"/>
+  <xacro:q2_trans lr="left"/>
+  <xacro:q2_trans lr="right"/>
+
+
+ <xacro:macro name="torso" params="cname color">
+    <link name="torso">
+      <inertial>
+        <origin xyz="0 0 ${pMT}" rpy="0 0 0" />
+	        <mass value="${MT}" />
+        	<inertia ixx="0"  ixy="0"  ixz="0" iyy="${IT}" iyz="0" izz="0" />
+      </inertial>
+      <visual>
+      	<origin xyz="0 0 ${lT/2}" />
+	      <geometry>
+	        <cylinder radius="0.025" length="${lT}"/>
+      	</geometry>
+        <material name="${cname}">
+          <color rgba="${color}" />
+        </material>
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="thigh" params="lr cname color">
+    <link name="${lr}_thigh">
+      <inertial>
+        <origin xyz="0 0 ${pMf}" rpy="0 0 0" />
+	        <mass value="${Mf}" />
+        	<inertia ixx="0"  ixy="0"  ixz="0" iyy="${If}" iyz="0" izz="0" />
+      </inertial>
+      <visual>
+      	<origin xyz="0 0 ${lf/2}" />
+	      <geometry>
+	        <cylinder radius="0.025" length="${lf}"/>
+      	</geometry>
+        <material name="${cname}">
+          <color rgba="${color}" />
+        </material>
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="shin" params="lr cname color">
+    <link name="${lr}_shin">
+      <inertial>
+        <origin xyz="0 0 ${pMt}" rpy="0 0 0" />
+	        <mass value="${Mt}" />
+        	<inertia ixx="0"  ixy="0"  ixz="0" iyy="${It}" iyz="0" izz="0" />
+      </inertial>
+      <visual>
+      	<origin xyz="0 0 ${lt/2}" />
+	      <geometry>
+	        <cylinder radius="0.025" length="${lt}"/>
+      	</geometry>
+        <material name="${cname}">
+          <color rgba="${color}" />
+        </material>
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="q1" params="lr">
+   <joint name="q1_${lr}" type="continuous">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/> 
+      <parent link="torso" />
+      <child link="${lr}_thigh" /> 
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="q2" params="lr">
+   <joint name="q2_${lr}" type="continuous">
+      <origin xyz="0 0 ${lf}" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/> 
+      <parent link="${lr}_thigh" />
+      <child link="${lr}_shin" /> 
+    </joint>
+  </xacro:macro>
+  
+  <xacro:macro name="q1_trans" params="lr">
+	<transmission name="q1_${lr}_trans" type="pr2_mechanism_model/SimpleTransmission">
+	  <joint name="q1_${lr}"/>
+	  <actuator name="q1_${lr}_motor"/>
+	  <mechanicalReduction>50</mechanicalReduction>
+	  <motorInertia>0.000332</motorInertia>
+	</transmission>
+  </xacro:macro>
+  
+  <xacro:macro name="q2_trans" params="lr">
+	<transmission name="q2_${lr}_trans" type="pr2_mechanism_model/SimpleTransmission">
+	  <joint name="q2_${lr}"/>
+	  <actuator name="q2_${lr}_motor"/>
+	  <mechanicalReduction>50</mechanicalReduction>
+	  <motorInertia>0.000332</motorInertia>
+	</transmission>
+  </xacro:macro>
+
+</robot>
+
+
+
+
+

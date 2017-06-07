@@ -14,22 +14,22 @@ function obj = addInputVariable(obj, bounds)
         switch i
             case 1
                 input = obj.Plant.Inputs.Control;
-                if isfield(bounds,'control')
-                    input_bounds = bounds.control;
+                if isfield(bounds,'Control')
+                    input_bounds = bounds.Control;
                 else
                     input_bounds = struct();
                 end
             case 2
                 input = obj.Plant.Inputs.ConstraintWrench;
-                if isfield(bounds,'wrench')
-                    input_bounds = bounds.wrench;
+                if isfield(bounds,'ConstraintWrench')
+                    input_bounds = bounds.ConstraintWrench;
                 else
                     input_bounds = struct();
                 end
             case 3
                 input = obj.Plant.Inputs.External;
-                if isfield(bounds,'external')
-                    input_bounds = bounds.external;
+                if isfield(bounds,'External')
+                    input_bounds = bounds.External;
                 else
                     input_bounds = struct();
                 end

@@ -30,6 +30,6 @@ function bounds = getLimits(obj)
     u_ub = double(gf'*[limits.effort]');
     u_lb = -u_ub;
     
-    bounds.inputs.u.lb = u_lb;
-    bounds.inputs.u.ub = u_ub;
+    bounds.inputs.Control.u.lb = u_lb;
+    bounds.inputs.Control.u.ub = u_ub;
 end
