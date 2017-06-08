@@ -12,16 +12,21 @@ spatula_depth = 0.06;
 spatula_width = 0.038;
 t_min = 0.2; % original: 0.3
 t_max = 1; % original: 0.35
-n_outputs = 5;
+n_outputs = 6;
+radius = 0.10;
+z_offset = 0.0;
+z_center = z_offset + radius;
+y_center = 0;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% initial guess
 
-x0 = [0.2199   -0.0444    0.1677   19.7316    0.6785    0.0099    0.0196    ...
-    0.4206   -5.8415    4.5122   -0.0044   -0.0028    0.6981   -0.4798 ...
-   13.0638    0.0006    0.0001   -0.8578    0.3692   -9.7416   -0.0000  ...
-   -0.0000   -0.0000    0.0340   -0.0000    0.0000]; 
+x0 = [  0.5004    0.0000    0.0989   -1.2098   -8.7310         0    0.7847  ...
+    -0.0000    1.3176    1.5375   11.1922         0    0.8727    0.0000     ...
+   -0.9250    0.0103   -7.6965         0    0.8153   -0.0000   -0.1194    ...
+   0.0012   -0.9960         0    0.7893    0.0000   -0.0000    0.0340 ...
+   -0.0000         0    0.7929]; 
 
 
 lb = -100*ones(size(x0));
@@ -48,7 +53,7 @@ burger_zdot = [];
 burger_theta_xdot = [];
 burger_theta_ydot = [];
 
-ae = reshape(result(2:end),[n_outputs,n_outputs]);
+ae = reshape(result(2:end),[n_outputs,n_outputs-1]);
 t_final = result(1);
 timestamps = 0:0.01:t_final;
 for j=1:length(timestamps)
@@ -107,7 +112,6 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
     t_final = input(1);
     time = linspace(0,t_final,num_node);
 
-    t_mid = 0.6*t_final;  %original: 0.6
     
     c = [];
     ceq = [];
@@ -139,11 +143,11 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
         spatulaedge_z_f = z_f - spatula_depth*sin(theta_y_f);
         
         %% mid values
-        x_mid = poly(t_mid,a(1,:));
-        y_mid = poly(t_mid,a(2,:));
-        theta_y_mid = poly(t_mid,a(5,:));
-        theta_x_mid = poly(t_mid,a(4,:));
-        
+%         x_mid = poly(t_mid,a(1,:));
+%         y_mid = poly(t_mid,a(2,:));
+%         theta_y_mid = poly(t_mid,a(5,:));
+%         theta_x_mid = poly(t_mid,a(4,:));
+%         
 %%  constraints
 
         for i=1:length(time)
@@ -164,49 +168,35 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
             theta_xdot = poly_derivative(t,a(4,:));
             theta_ydot = poly_derivative(t,a(5,:));
             
-            % spatula edge position
-            spatulaedge_x = x + spatula_depth*cos(theta_y);
-            spatulaedge_y = y + spatula_depth*sin(theta_z);
-            spatulaedge_z = z - spatula_depth*sin(theta_y);
-            spatulaedge_yz = z + spatula_width*sin(theta_x);
 
-          c = [c ; -z;  abs(xdot) - 20; abs(zdot) - 20; abs(theta_xdot) - 15];
-          
-            if t < t_mid
-%                 c = [c;];
-                
-                ceq = [ceq;
-                    spatulaedge_yz - 0.034];
-            end
-               
+          c = [c ; -z;  y; abs(zdot) - 20; abs(theta_xdot) - 20];
+                         
                   %% equality constraints
             ceq = [ceq;
                     x;
-                    theta_y;
                     theta_z;
-%                     spatulaedge_yz - 0.034;
+%                     theta_x + atan((y-y_center)/(z-z_center));
+                    (y - y_center)^2 + (z - z_center)^2 - radius^2
                     ];
                                     
         end
 
         
         %% inequality terminal constraints
-        c  = [ c;
-                 0.034 - spatulaedge_yz;
-%                 z_f - 0.2;
-%                 z_i - 0.2;
-             ];
          
         
         %% equality terminal constraints
         
         ceq = [ceq;
                 theta_x_i; % initial pitch angle
-                theta_x_mid + pi/3;         % mid pitch angle
+                theta_x_f + 0.8*pi/2;         % mid pitch angle
+                theta_y_i + 0.04654;
+                 theta_y_f + 0.1;
 %                 theta_x_f ;   % final pitch angle
-                y_i;
-                y_f + 0.15;
-                y_mid + 0.1;
+%                 y_i;
+%                 y_f + 0.15;
+%                 y_mid + 0.1;
+                z_i;
                 ];
                   
            
