@@ -156,7 +156,7 @@ plot(q_l_y, q_l_z, 'LineWidth', 2, 'color', 'c');    % position of right center 
 hold off
 
 figure(3);
-clf('reset');
+clf();
 % plot3(zeros(length(burger_y)), burger_y, burger_z, 'linewidth',2, 'color', 'k');
 
 xlabel('x pos');
@@ -229,11 +229,11 @@ hold off
 %                 -theta_x;
 %                 theta_x - pi;
                 -theta_xdot;            
-                y - 0.1;        %original: 0.2
-                z - 0.61*W;   % original:0.25
+                y - 0.1;        %original: 0.2   ... working for drop: 0.1
+                z - 0.61*W;   % original:0.25   ... working for drop: 0.61*W
                 norm([zdot,ydot]) - 5;
-%                 - q_l_z;
-%                 - q_r_z;
+%                 q_l_z - 0.01;
+%                 q_r_z - 0.08;
 %                 q_r_z  - 0.04;
 %                 q_r_z - 0.07;
 %                 q_l_y - 0.03;
@@ -257,9 +257,9 @@ hold off
 %                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
 %               - mu* (-a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
 %                 abs(theta_x) - 20;
-                abs(theta_xdot) - 20; %original: 20 c
-                abs(a_y) - 15; %original: 30 
-                abs(a_z) - 15; %original: 30 
+                abs(theta_xdot) - 20; %original: 20 ... working for drop: 20
+                abs(a_y) - 15; %original: 30... working for drop: 15
+                abs(a_z) - 15; %original: 30 ... working for drop: 15
                 abs(a_theta_x) - 10;
 %                 abs(poly(time(end),a(4,:))) - 0.5*pi;  %original: stops
 %                 q_4z - 0.05;  %original: none
@@ -282,9 +282,9 @@ hold off
         
         %% equality constraints
         ceq = [ceq;
-               poly(time(end),a(1,:)) - 0.1;
-               poly(time(end),a(2,:)) - 0.5*W;
-               poly(time(end),a(3,:)) - pi/2;
+               poly(time(end),a(1,:));    % sort of working for drop: 0.1
+               poly(time(end),a(2,:)) - 0.2*W;   %working for drop: 0.5*W
+               poly(time(end),a(3,:)) - pi/3;
                poly(time(1),a(1,:));
                poly(time(1),a(2,:));
                poly(time(1),a(3,:))
@@ -362,12 +362,12 @@ for i = 1:5
         addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
 %      if mod(k,10)==0
         drawnow
-        pause(0.1)
+        pause(0.05)
 if i < 5
 % clearpoints(h)
 %         end
      end
-    pause(0.1)
+    pause(0.05)
 end
 if i < 5
 clearpoints(h)
@@ -384,10 +384,10 @@ end
 
 %% save the result in a file
 % n_outputs = 5;
-shape = [4,5];
-    if exist('writecsvfileSP2.m', 'file')
-        writecsvfileSP2(t_final, result);
-    else
-        sprintf('Warning: file writecsvfile.m does not exist. Copy and save the following text in file name: writecsvfile.m in subfolder custom \n\n\n function writecsvfile(result,n_output) \n r = reshape(result(2:end),[n_output,n_output]); \n csvwrite(your file name with path,r); \n end')
-    end
+% shape = [4,5];
+if exist('writecsvfileSP2.m', 'file')
+    writecsvfileSP2(t_final, result);
+else
+    sprintf('Warning: file writecsvfileSP2.m does not exist. Copy and save the following text in file name: writecsvfile.m in subfolder custom \n\n\n function writecsvfile(result,n_output) \n r = reshape(result(2:end),[n_output,n_output]); \n csvwrite(your file name with path,r); \n end')
+end
 end
