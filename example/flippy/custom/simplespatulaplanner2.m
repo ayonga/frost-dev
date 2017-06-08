@@ -4,11 +4,11 @@ function result = simplespatulaplanner2
 
 %% some specifications
 num_node = 40;    % number of nodes
-mu = 0.3; % coefficient of friction
+mu = 0.5; % coefficient of friction
 g = 9.8; % gravity
-t_final = 0.4; %original: 0.4
+t_final = 0.18; %original: 0.4     working slip: 0.18,.19
 wrist3joint_length = 0.09465;
-y_pos_final = 0.02; % added final y position
+y_pos_final = 0.025; % added final y position     working (sort of) slip: 0.02
 
 W = .07; % width of spatula in meters 
 L = 0.12; % length of spatula in meters
@@ -155,8 +155,9 @@ plot(q_r_y, q_r_z, 'LineWidth', 2, 'color', 'm');  % position of left center edg
 plot(q_l_y, q_l_z, 'LineWidth', 2, 'color', 'c');    % position of right center edge point
 hold off
 
-figure(2);
-plot3(zeros(length(burger_y)), burger_y, burger_z, 'linewidth',2, 'color', 'k');
+figure(3);
+clf('reset');
+% plot3(zeros(length(burger_y)), burger_y, burger_z, 'linewidth',2, 'color', 'k');
 
 xlabel('x pos');
 ylabel('y pos');
@@ -171,10 +172,10 @@ plot3(q_fl_x, q_fl_y, q_fl_z, 'linewidth', 0.5, 'color', 'k');
 plot3(q_fr_x, q_fr_y, q_fr_z,'linewidth', 0.5, 'color', 'k');
 plot3(q_br_x, q_br_y, q_br_z, 'linewidth', 0.5, 'color', 'k');
 
-plot3(zeros(length(burger_y)), q_r_y, q_r_z, 'LineWidth', 2, 'color', 'm'); % right edge point in magenta
-plot3(zeros(length(burger_y)), q_l_y, q_l_z, 'LineWidth', 2, 'color', 'c'); % left edge point in cyan
-plot3(q_f_x, q_f_y, q_f_z, 'LineWidth', 2, 'color', 'r'); % front middle edge point in red
-plot3(q_b_x, q_b_y, q_b_z, 'LineWidth', 2, 'color', 'g'); % back middle edge point in green
+% plot3(zeros(length(burger_y)), q_r_y, q_r_z, 'LineWidth', 2, 'color', 'm'); % right edge point in magenta
+% plot3(zeros(length(burger_y)), q_l_y, q_l_z, 'LineWidth', 2, 'color', 'c'); % left edge point in cyan
+% plot3(q_f_x, q_f_y, q_f_z, 'LineWidth', 2, 'color', 'r'); % front middle edge point in red
+% plot3(q_b_x, q_b_y, q_b_z, 'LineWidth', 2, 'color', 'g'); % back middle edge point in green
 
 % xlim([-.05,.05])
 % ylim([-.05,.05])
@@ -229,7 +230,7 @@ hold off
 %                 theta_x - pi;
                 -theta_xdot;            
                 y - 0.1;        %original: 0.2
-                z - 0.15;   % original:0.25
+                z - 0.61*W;   % original:0.25
                 norm([zdot,ydot]) - 5;
 %                 - q_l_z;
 %                 - q_r_z;
@@ -247,12 +248,16 @@ hold off
             a_x = 0;
           
             c = [c; 
-                a_z*sin(theta_x)+a_y*cos(theta_x)+g*sin(theta_x) ...
-                - mu* (-a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
+                   -1*(a_z*sin(theta_x)+a_y*cos(theta_x)+g*sin(theta_x) ...
+                - mu* (-a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x)));
+               -1*(a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
+              - mu* (-a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y)));
+%                 a_z*sin(theta_x)+a_y*cos(theta_x)+g*sin(theta_x) ...
+%                 - mu* (-a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
 %                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
 %               - mu* (-a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
 %                 abs(theta_x) - 20;
-                abs(theta_xdot) - 20; %original: 20 
+                abs(theta_xdot) - 20; %original: 20 c
                 abs(a_y) - 15; %original: 30 
                 abs(a_z) - 15; %original: 30 
                 abs(a_theta_x) - 10;
@@ -277,14 +282,14 @@ hold off
         
         %% equality constraints
         ceq = [ceq;
-               poly(time(end),a(1,:));
-               0.03 - poly(time(end),a(2,:));
-               poly(time(end),a(3,:)) - pi;
+               poly(time(end),a(1,:)) - 0.1;
+               poly(time(end),a(2,:)) - 0.5*W;
+               poly(time(end),a(3,:)) - pi/2;
                poly(time(1),a(1,:));
                poly(time(1),a(2,:));
                poly(time(1),a(3,:))
                poly(time(1),a(4,:));
-               poly(time(end),a(4,:)) - pi/6;
+%                poly(time(end),a(4,:)) - pi/6;
                ];
       
 % %         to have a zero impact at touch down -- comment this if
@@ -337,31 +342,32 @@ hold off
     end
 %%
 
-h = animatedline('Color','[0.3 0.3 0.3]');
-h2 = animatedline('Color',[0.5 0.5 0.5]');
+h = animatedline('Color','r');
+% clf('reset');
+% h2 = animatedline('Color',[0.5 0.5 0.5]');
 x = linspace(0,t_final,length(burger_theta_y));
 for i = 1:5
-for k = 1:length(x)
+    for k = 1:length(x)
 %     addpoints(h,q_f_x(k), q_f_y(k), q_f_z(k));
 %     addpoints(h, zeros(size(21)), q_r_y(k), q_r_z(k));
 %     addpoints(h,q_b_x(k), q_b_y(k), q_b_z(k));
 %     addpoints(h, zeros(size(21)), q_l_y(k), q_l_z(k));
 %     addpoints(h,q_f_x(k), q_f_y(k), q_f_z(k));
-    addpoints(h2, q_r_x, q_r_y, q_r_z);
-    addpoints(h2, q_l_x, q_l_y, q_l_z);
-    addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
-    addpoints(h, q_fl_x(k), q_fl_y(k), q_fl_z(k));
-    addpoints(h, q_fr_x(k), q_fr_y(k), q_fr_z(k));
-    addpoints(h, q_br_x(k), q_br_y(k), q_br_z(k));
-    addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
+%     addpoints(h2, q_r_x, q_r_y, q_r_z);
+%     addpoints(h2, q_l_x, q_l_y, q_l_z);
+        addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
+        addpoints(h, q_fl_x(k), q_fl_y(k), q_fl_z(k));
+        addpoints(h, q_fr_x(k), q_fr_y(k), q_fr_z(k));
+        addpoints(h, q_br_x(k), q_br_y(k), q_br_z(k));
+        addpoints(h, q_bl_x(k), q_bl_y(k), q_bl_z(k));
 %      if mod(k,10)==0
         drawnow
-%         pause(0.1)
-        if i < 5
-            clearpoints(h)
-        end
-%      end
-%     pause(0.1)
+        pause(0.1)
+if i < 5
+% clearpoints(h)
+%         end
+     end
+    pause(0.1)
 end
 if i < 5
 clearpoints(h)
@@ -370,9 +376,18 @@ end
 % reshape(result,[4,5]);
 % csvwrite('/home/william/proj/git/simulation/paramfile.dat', result);
 % type paramfile.dat
-r = reshape(result,[4,5]);
+% r = reshape(result,[4,5]);
 % csvwrite('/home/william/proj/git/simulation/paramfile.dat', r);
 % disp(r);
 
-dlmwrite('/home/william/proj/git/simulation/paramfile2.csv', r,'delimiter',',')
+% dlmwrite('/home/william/proj/git/simulation/paramfileflip.csv', r,'delimiter',',')
+
+%% save the result in a file
+% n_outputs = 5;
+shape = [4,5];
+    if exist('writecsvfileSP2.m', 'file')
+        writecsvfileSP2(t_final, result);
+    else
+        sprintf('Warning: file writecsvfile.m does not exist. Copy and save the following text in file name: writecsvfile.m in subfolder custom \n\n\n function writecsvfile(result,n_output) \n r = reshape(result(2:end),[n_output,n_output]); \n csvwrite(your file name with path,r); \n end')
+    end
 end
