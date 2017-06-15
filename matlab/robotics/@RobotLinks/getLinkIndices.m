@@ -19,7 +19,7 @@ function indices = getLinkIndices(obj, link_names)
         if ~isempty(links_not_found)
            warning('the following link(s) not exist.');
            for k = 1:length(links_not_found)
-               disp('%s, ',link_names{links_not_found(k)});
+               fprintf('%s, \n',link_names{links_not_found(k)});
                indices_c(links_not_found(k)) = NaN;
            end
         end
@@ -30,7 +30,7 @@ function indices = getLinkIndices(obj, link_names)
         indices = str_index(all_link_name,link_names);
         if isempty(indices)
            warning('the following link not exists.');
-           disp('%s, ',link_names);
+           fprintf('%s, \n',link_names);
            indices = NaN;
            
         end

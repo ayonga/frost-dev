@@ -163,6 +163,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
         
         obj = configure(obj, bounds);
         
+        obj = updateVariableBounds(obj, bounds);
+        
         [obj] = update(obj);
         
         phase_idx = getPhaseIndex(obj, varargin);
