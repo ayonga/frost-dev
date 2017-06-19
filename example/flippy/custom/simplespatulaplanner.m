@@ -219,12 +219,12 @@ axis([0 0.4 -0.2 0.2 -0.1 0.3])
         
         ceq = [ceq;
                 theta_y_i - 0.35; % initial pitch angle
-                theta_y_mid - 0.02;         % mid pitch angle
-                theta_y_f + 0.1;   % final pitch angle
+                theta_y_mid - 0.1;         % mid pitch angle
+                theta_y_f + 0;   % final pitch angle
 %                 thetadot_y_i;     % intitial pitch velocity
                 x_i;            % initial x position
-                x_mid - 0.17;  % mid x position, orig: 0.15
-                x_f - 0.22;    % final x position, orig: 0.20
+                x_mid - 0.12;  % mid x position, orig: 0.15
+                x_f - 0.14;    % final x position, orig: 0.20
                 ];
                   
            
