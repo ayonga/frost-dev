@@ -204,7 +204,7 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = configureVariables(obj, bounds);
         
-        
+        obj = updateVariableBounds(obj, bounds);
         %% functions related to NLP constraints
         
         fcstr = directCollocation(obj, name, x, dx);

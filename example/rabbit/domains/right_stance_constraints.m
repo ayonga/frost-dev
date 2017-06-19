@@ -6,13 +6,14 @@ function right_stance_constraints(nlp, bounds, varargin)
     domain.VirtualConstraints.time.imposeNLPConstraint(nlp, [bounds.time.kp, bounds.time.kd], [1,1]);
     
     % tau boundary [0,1]
-    T  = SymVariable('t',[2,1]);
-    p = {SymVariable(tomatrix(domain.VirtualConstraints.time.PhaseParams(:)))};
-    p_name = domain.VirtualConstraints.time.PhaseParamName;
-    tau_0 = SymFunction(['tau_0_',domain.Name], T(1) - p{1}(2), [{T},p]);
-    tau_F = SymFunction(['tau_F_',domain.Name], T(2) - p{1}(1), [{T},p]);
-    addNodeConstraint(nlp, tau_0, [{'T'},p_name], 'first', 0, 0, 'Nonlinear');
-    addNodeConstraint(nlp, tau_F, [{'T'},p_name], 'last', 0, 0, 'Nonlinear');
+    T_name = nlp.OptVarTable.T(1).Name;
+    T  = SymVariable(lower(T_name),[nlp.OptVarTable.T(1).Dimension,1]);
+    p_name = nlp.OptVarTable.ptime(1).Name;
+    p  = SymVariable(lower(p_name),[nlp.OptVarTable.ptime(1).Dimension,1]);
+    tau_0 = SymFunction(['tau_0_',domain.Name], T(1) - p(2), {T,p});
+    tau_F = SymFunction(['tau_F_',domain.Name], T(2) - p(1), {T,p});
+    addNodeConstraint(nlp, tau_0, {T_name,p_name}, 'first', 0, 0, 'Linear');
+    addNodeConstraint(nlp, tau_F, {T_name,p_name}, 'last', 0, 0, 'Linear');
     
     % output boundary 
     y_pos = domain.VirtualConstraints.time;
@@ -38,7 +39,7 @@ function right_stance_constraints(nlp, bounds, varargin)
         'Dimension',1,...
         'lb', velocity_desired,...
         'ub', velocity_desired,...
-        'Type','Linear',...
+        'Type','Nonlinear',...
         'SymFun',avg_vel_fun,...
         'DepVariables',[nlp.OptVarTable.T(1); nlp.OptVarTable.x(1); nlp.OptVarTable.x(end)]);    
     

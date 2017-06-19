@@ -24,12 +24,14 @@ function bounds = getLimits(obj)
     bounds.states.ddx.lb = -10000*ones(obj.numState,1);
     bounds.states.ddx.ub = 10000*ones(obj.numState,1);
     
-    control = fieldnames(obj.Gmap.Control);
-    gf = obj.Gmap.Control.(control{1});
-    
-    u_ub = double(gf'*[limits.effort]');
-    u_lb = -u_ub;
-    
-    bounds.inputs.Control.u.lb = u_lb;
-    bounds.inputs.Control.u.ub = u_ub;
+    if isfield(obj.Inputs.Control,'u')
+        q_act_idx = arrayfun(@(x)~isempty(x.Actuator),obj.Joints);
+        effort = [limits.effort]';
+        
+        u_ub =  effort(q_act_idx);
+        u_lb = -effort(q_act_idx);
+        
+        bounds.inputs.Control.u.lb = u_lb;
+        bounds.inputs.Control.u.ub = u_ub;
+    end
 end

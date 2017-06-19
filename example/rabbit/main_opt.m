@@ -12,8 +12,8 @@ rabbit.configureDynamics('DelayCoriolisSet',true);
 % Define domains
 r_stance = RightStance(rabbit);
 l_stance = LeftStance(rabbit);
-r_impact = RightImpact(r_stance, l_stance);
-l_impact = LeftImpact(l_stance, r_stance);
+r_impact = RightImpact(r_stance);
+l_impact = LeftImpact(l_stance);
 
 % Define hybrid system
 rabbit_1step = HybridSystem('Rabbit_1step');
@@ -43,16 +43,9 @@ nlp = HybridTrajectoryOptimization('Rabbit_1step',rabbit_1step,num_grid,[],'Equa
 % Configure bounds 
 setBounds;
 nlp.configure(bounds);
-
+ 
 % Add costs
-cost = [];
-for i = 1:21
-    cost(i).Name = 'torque_cost';
-    cost(i).SymFun = u2r_fun;
-    cost(i).DepVariables = nlp.Phase(1).OptVarTable.u(i);
-end
-% addRunningCost(nlp.Phase(getPhaseIndex(nlp,'RightStance')),u2r_fun,'u');
-addCost(nlp.Phase(getPhaseIndex(nlp,'RightStance')),'torque_cost','all',cost);
+addRunningCost(nlp.Phase(getPhaseIndex(nlp,'RightStance')),u2r_fun,'u');
 
 % Update
 nlp.update;
@@ -77,9 +70,9 @@ solver = IpoptApplication(nlp);
 
 % Run Optimization
 tic
-% old = load('x0');
-% [sol, info] = optimize(solver, old.sol);
-[sol, info] = optimize(solver);
+old = load('x0');
+[sol, info] = optimize(solver, old.sol);
+% [sol, info] = optimize(solver);
 toc
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 
