@@ -73,6 +73,11 @@ classdef HolonomicConstraint < handle
         % @type SymFunction
         ConstrJac
         
+         % The Jacobian matrix of the holonomic constraitns
+        %
+        % @type SymFunction
+        ConstrJacDot
+        
         % The name of the parameter variable 'hd' associated with the
         % holonomic constraints
         %
@@ -92,6 +97,9 @@ classdef HolonomicConstraint < handle
         end
         function jac = get.ConstrJac(obj)
             jac = obj.Jh_;
+        end
+        function jacdot = get.ConstrJacDot(obj)
+            jacdot = obj.dJh_;
         end
         function name = get.ParamName(obj)
             name = ['p' obj.Name];
