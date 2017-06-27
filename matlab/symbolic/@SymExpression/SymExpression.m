@@ -482,8 +482,8 @@ classdef SymExpression < handle
             % A = SymExpression(A);
             
             % construct the operation string
-            sstr = ['ConjugateTranspose[' A.s ']'];
-            
+            %             sstr = ['ConjugateTranspose[' A.s ']'];
+            sstr = ['Transpose[' A.s ']'];
             % create a new object with the evaluated string
             B = SymExpression(sstr);
         end

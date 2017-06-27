@@ -111,8 +111,11 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
                 M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
         end
         % compute control inputs
-        u = calcControl(controller, t, x, vfc, gfc, obj, params, logger);
-        
+        if ~isempty(controller)
+            u = calcControl(controller, t, x, vfc, gfc, obj, params, logger);
+        else
+            u = zeros(size(Be,2),1);
+        end
         Gv_u = Be*u;
         obj.inputs_.Control.(control_name{1}) = u;
     end
