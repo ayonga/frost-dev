@@ -72,7 +72,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
         a_name = {};
     end
     
-    % phat variable parameters and its name in the var table of the NLP
+    % phase variable parameters and its name in the var table of the NLP
     if isa(obj.PhaseParams,'SymVariable')
         p_var = {SymVariable(tomatrix(obj.PhaseParams(:)))};
         p_name = obj.PhaseParamName;
@@ -80,6 +80,16 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
         p_var = {};
         p_name = {};
     end
+    
+    % offset variable parameters and its name in the var table of the NLP
+    if isa(obj.OffsetParams,'SymVariable')
+        c_var = {SymVariable(tomatrix(obj.OffsetParams(:)))};
+        c_name = obj.OffsetParamName;
+    else
+        c_var = {};
+        c_name = {};
+    end
+    
     
     % states and their name representation in the var table of the NLP
     switch model.Type
@@ -146,7 +156,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
         end
             
         % holonomic virtual constraints
-        y_fun{1} = SymFunction(['y_' name], y, [t_var, q_var, a_var, p_var], aux_var);
+        y_fun{1} = SymFunction(['y_' name], y, [t_var, q_var, a_var, p_var, c_var], aux_var);
         
         if ~isempty(aux_var)
             switch length(aux_var)
@@ -163,7 +173,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             aux_data = [];
         end
         % add constraint at the first node
-        nlp = addNodeConstraint(nlp, y_fun{1}, [t_name, q_name ,a_name, p_name], 'first',...
+        nlp = addNodeConstraint(nlp, y_fun{1}, [t_name, q_name ,a_name, p_name, c_name], 'first',...
             0, 0, 'Nonlinear', aux_data);
         
     end

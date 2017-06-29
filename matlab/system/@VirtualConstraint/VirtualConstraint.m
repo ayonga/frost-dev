@@ -26,6 +26,12 @@ classdef VirtualConstraint < handle
         % 
         % @type SymVariable
         OutputParams
+        
+        % The symbolic representation of offset of the actual outputs: ya =
+        % ya_orig + offset_params
+        % 
+        % @type SymVariable
+        OffsetParams
     end
     
     % properties must be determined by the users
@@ -126,6 +132,11 @@ classdef VirtualConstraint < handle
         % 
         % @type char
         OutputParamName
+        
+        % The name of the offset parameter variable
+        % 
+        % @type char
+        OffsetParamName
     end
     
     methods
@@ -143,6 +154,9 @@ classdef VirtualConstraint < handle
         end
         function name = get.OutputParamName(obj)
             name = ['a' obj.Name];
+        end
+        function name = get.OffsetParamName(obj)
+            name = ['c' obj.Name];
         end
     end
     
@@ -175,6 +189,11 @@ classdef VirtualConstraint < handle
         % @type logical
         hasPhaseParam = false;
         
+        
+        % An indicator that shows there is an offset in the actual outputs
+        %
+        % @type logical
+        hasOffset = false;
         
         % The actual outputs
         %
@@ -245,8 +264,8 @@ classdef VirtualConstraint < handle
             if isrow(ya) % convert to column vector if it is a row vector
                 ya = vertcat(ya(:));
             end
-            obj.ya_ = ya;
-            obj.Dimension = length(ya);
+            
+            
             
             
             % validates (name) argument
@@ -258,6 +277,20 @@ classdef VirtualConstraint < handle
             args = struct(varargin{:});
             assert(isscalar(args),...
                 'The values of optional properties are must be scalar data.');
+            
+            obj.Dimension = length(ya);
+            if isfield(args, 'HasOffset')
+                if args.HasOffset
+                    obj.hasOffset = true;
+                    offset = SymVariable(['c' obj.Name],[obj.Dimension,1]);
+                    obj.ya_ = ya + offset;
+                else
+                    obj.ya_ = ya;
+                end
+            else
+                obj.ya_ = ya;
+            end
+            
             
             
             % validate and assign the desired outputs
@@ -309,6 +342,8 @@ classdef VirtualConstraint < handle
             else
                 obj.configure();
             end
+            
+            
             
         end
         

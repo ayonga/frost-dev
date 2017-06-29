@@ -29,6 +29,10 @@ function obj = addVirtualConstraint(obj, constr)
             if ~isempty(c_obj.PhaseParams)
                 obj = addParam(obj, c_obj.PhaseParamName, c_obj.PhaseParams);
             end
+            % add offset parameters
+            if c_obj.hasOffset
+                obj = addParam(obj, c_obj.OffsetParamName, c_obj.OffsetParams);
+            end
         end
     
     end
