@@ -20,6 +20,10 @@ classdef VirtualConstraint < handle
         % @type integer
         Dimension 
         
+        % An indicator that shows there is an offset in the actual outputs
+        %
+        % @type logical
+        hasOffset = false;
         
         % The symbolic representation of parameter sets of the desired
         % outputs
@@ -190,10 +194,7 @@ classdef VirtualConstraint < handle
         hasPhaseParam = false;
         
         
-        % An indicator that shows there is an offset in the actual outputs
-        %
-        % @type logical
-        hasOffset = false;
+        
         
         % The actual outputs
         %
