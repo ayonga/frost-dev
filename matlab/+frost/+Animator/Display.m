@@ -109,6 +109,7 @@ classdef Display < handle
         
         function item = removeItem(obj, name)
             item = obj.items(name);
+            item.delete();
             obj.items.remove(name);
         end
     end
