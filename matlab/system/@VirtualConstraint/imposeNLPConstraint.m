@@ -228,7 +228,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
     end
     
     
-    ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var], [aux_var,{ep_s}]);
+    ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
         
         
         
@@ -251,6 +251,11 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
             p_deps = vars.(p_name)(param_index);
         else
             p_deps = {};
+        end
+        if ~isempty(c_name)
+            c_deps = vars.(c_name)(param_index);
+        else
+            c_deps = {};
         end
         
         if nlpOptions.DistributeTimeVariable
@@ -284,7 +289,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
         y_dynamics(i) = NlpFunction('Name',[obj.Name '_output_dynamics'],...
             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
             'ub',ceq_err_bound,'Type','Nonlinear',...
-            'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps]',...
+            'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]',...
             'AuxData', {[aux_data,{ep}]});
         
     end
