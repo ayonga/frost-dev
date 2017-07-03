@@ -7,7 +7,7 @@ Installation
 Prerequisites
 ==============
 
-FROST uses `MATLAB <https://www.mathworks.com/>`_ as the frontend interface, and uses `Wolfram Mathematica <https://www.wolfram.com/mathematica/>`_ as the backend symbolic computation engine. To use FROST, we require the following software to be installed apriori. 
+FROST uses `MATLAB <https://www.mathworks.com/>`_ as the frontend interface, and uses `Wolfram Mathematica <https://www.wolfram.com/mathematica/>`_ as the backend symbolic computation engine. To use FROST, we require the following software to be installed apriori.
 
 - **MATLAB R2015b or later**
 - **Mathematica 10.0 or later**
@@ -38,7 +38,7 @@ FROST is a collection of MATLAB functions and Mathematica packages. Hence, there
 
 Setup Default MEX Compiler
 ------------------------------
-The following instruction provides an example setup for the default mex compilers on different platforms. For more information, please refer to the official document on `www.mathworks.com <https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html>`_. 
+The following instruction provides an example setup for the default mex compilers on different platforms. For more information, please refer to the official document on `www.mathworks.com <https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html>`_.
 
 Linux
 ~~~~~~~~~~
@@ -47,12 +47,12 @@ Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04/16.04 LTS) is 
 First, install a suitable version of the `g++` compiler, for instance, we need g++-4.9 for Ubuntu16.04:
 
 .. code-block:: bash
-   
+
    $ sudo apt-get install g++-4.9
 ..
 
 Then change the symbolic link of the standard library in ``$matlabroot/sys/os/glnxa64`` to prevent unnecessary mismatch between compiler library and Matlab default library. To do this, run:
-  
+
 .. code:: bash
 
    $ cd $matlabroot/sys/os/glnxa64
@@ -80,7 +80,7 @@ If installing MinGW compiler via Add-On manager fails, you can also manually ins
 
 - After the installation, you will need to add the system enviroment variable ``MW_MINGW64_LOC`` and specify it to the directory where you installed, for example `C:\TDM-GCC-64`.
 
-.. warning:: Do not have ``space`` in the installation path of TDM-GCC compiler. The default path is recommended , for example `C:\TDM-GCC-64`.  
+.. warning:: Do not have ``space`` in the installation path of TDM-GCC compiler. The default path is recommended , for example `C:\TDM-GCC-64`.
 
 
 
@@ -91,9 +91,9 @@ MathLink
 
 FROST uses MathLink libraries to communicate with the Mathematica kernel from MATLAB. Thanks to the open-souce MATLAB package developed by `Ben Barrowes` called `Mathematica Symbolic Toolbox for MATLAB v2.0
 <https://www.mathworks.com/matlabcentral/fileexchange/6044-mathematica-symbolic-toolbox-for-matlab-version-2-0/>`_.
-This package could be downloaded directly from the MATLAB Add-Ons manager or the Mathworks file exchange website. 
+This package could be downloaded directly from the MATLAB Add-Ons manager or the Mathworks file exchange website.
 
-The original package has a certain restriction on the maximum length of the input string, which could cause the evaluation of some FROST functions fail. To remove this restriction, we modified the original code and shipped the modified version together with FROST. We also included pre-compiled MEX binaries, and the compiled .mex file for different machines (some yet to come). Please use the included MathLink instead of downloading it from other resources. 
+The original package has a certain restriction on the maximum length of the input string, which could cause the evaluation of some FROST functions fail. To remove this restriction, we modified the original code and shipped the modified version together with FROST. We also included pre-compiled MEX binaries, and the compiled .mex file for different machines (some yet to come). Please use the included MathLink instead of downloading it from other resources.
 
 Because this package uses the MathLink libraries of Mathematica during runtime, you must specifies the path of these libraries to your system path. To configure this environment variable:
 
@@ -102,7 +102,7 @@ Ubuntu (or Other Linux distributions)
 The easiest way to configure the ``LD_LIBRARY_PATH`` on your Linux machine for MATLAB would be add the following to your `~/.bashrc` configuration file. For instance, if the installed Mathematica version is `11.0`, then:
 
 .. code-block:: shell
-   
+
    LD_LIBRARY_PATH=/usr/local/Wolfram/Mathematica/11.0/SystemFiles/Links/MathLink/DeveloperKit/Linux-x86-64/CompilerAdditions:$LD_LIBRARY_PATH
    export LD_LIBRARY_PATH
 ..
@@ -142,7 +142,7 @@ If it is configured correctly, it should print out the following messages:
    Mathematica Kernel loading...
 
    ans =
-   
+
    11.0.0 for Linux x86 (64-bit) (July 28, 2016)
 ..
 
@@ -170,8 +170,3 @@ We have also the latest pre-compiled binaries for Win64 and Linux-64 systemsin t
 
 .. note:: FROST will automatically detects if **sparse2** function exists in its
  path. If true, it will use **sparse2**.
-
-
-
-
-

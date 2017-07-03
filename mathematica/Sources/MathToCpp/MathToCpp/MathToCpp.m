@@ -116,11 +116,12 @@ ConvertToRule[code_]:= code/.Set-> Rule;
 SyntaxInformation[ConvertToSet]={"ArgumentsPattern"->{_}};
 ConvertToSet[code_]:= code/.Rule-> Set;
 
-DeleteUnnecessoryExpr[code_]:=
+(*DeleteUnnecessoryExpr[code_]:=
 	Block[{unvars},
 	unvars=Cases[Cases[code,_Symbol,Infinity]//Tally,{_,2}][[All,1]];
 	Verbatim[Rule][Alternatives@@unvars,_]//DeleteCases[code,#,Infinity]//.Cases[code,#,Infinity]&
 	];
+*)
 (*
 
 TODO: Deleted unnecessory expression results in incorrect expression.
@@ -152,7 +153,7 @@ GetFinalExprCpp[code_]:= ReleaseHold[Map[Hold,N[code,15],{2}]/.Hold[CompoundExpr
 
 
 SyntaxInformation[ConvertToCForm]={"ArgumentsPattern"->{_}};
-ConvertToCForm[code_]:=StringReplace[ToString[CForm[#]],"Hold("~~ShortestMatch[a___]~~")":>a]&/@code;
+ConvertToCForm[code_]:=StringReplace[ToString[CForm[#]],"Hold("~~Longest[a___]~~")":>a]&/@code;
 
 SyntaxInformation[ExportToCpp]={"ArgumentsPattern"->{_,_,_,OptionsPattern[]}};
 ExportToCpp[name_String,expr_,vars_, OptionsPattern[]]:=
@@ -190,10 +191,10 @@ ExportToCpp[name_String,expr_,vars_, OptionsPattern[]]:=
                 argoutDims[[i]]={0,0};(*empty matrix*)
                 ,
                 If[ListQ[First[oexpr]],  
-				  (*{syms,code}=DeleteUnnecessoryExpr[First[oexpr],Last[oexpr]];
-				  {syms,code}=ReplaceVariable[syms,code];*)
-				  syms = First[oexpr];
-				  code = Last[oexpr];
+				  {syms,code}=DeleteUnnecessoryExpr[First[oexpr],Last[oexpr]];
+				  (*{syms,code}=ReplaceVariable[syms,code];*)
+				  (*syms = First[oexpr];
+				  code = Last[oexpr];*)
 				  subcode=code/.csubs;
 				  seq=GetSequenceExprCpp[subcode];
 				  final=GetFinalExprCpp[subcode];
