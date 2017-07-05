@@ -28,7 +28,7 @@ classdef Sphere < frost.Animator.DisplayItem
         function obj = Sphere(ax, model, frame, name, varargin)
             obj = obj@frost.Animator.DisplayItem(ax, model, name);
             obj.frame = frame;
-            obj.radius = 0.03;
+            obj.radius = 0.015;
             
             p = inputParser;
             addParameter(p, 'UseExported', false);
