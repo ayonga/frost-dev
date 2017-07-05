@@ -87,11 +87,13 @@ function obj = updateVariableBounds(obj, bounds)
                     updateVariableProp(obj, s_name,'all', 'x0',bounds.states.(s_name).x0);
                 end
                 if isfield(bounds.states.(s_name), 'initial')
-                    obj = updateVariableProp(obj, s_name, 'first', bounds.states.(s_name).initial);
+                    x0 = bounds.states.(s_name).initial;
+                    obj = updateVariableProp(obj, s_name, 'first', 'lb', x0, 'ub', x0, 'x0', x0);
                 end
                 
                 if isfield(bounds.states.(s_name), 'terminal')
-                    obj = updateVariableProp(obj, s_name, 'last', bounds.states.(s_name).terminal);
+                    xf = bounds.states.(s_name).terminal;
+                    obj = updateVariableProp(obj, s_name, 'last', 'lb', xf, 'ub', xf, 'x0', xf);
                 end
             end
         end
