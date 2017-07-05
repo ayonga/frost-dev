@@ -56,10 +56,21 @@ function obj = configure(obj, varargin)
     ya = obj.ya_;
     if is_holonomic
         % ya(x)
-        ya_fun{1} = SymFunction(['ya_' name], ya, model.States.x);
+        if obj.hasOffset
+            c = SymVariable(tomatrix(obj.OffsetParams(:)));
+            ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x,c});
+        else
+            ya_fun{1} = SymFunction(['ya_' name], ya, model.States.x);
+        end
     else
         % ya(x,dx)
-        ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x, model.States.dx});
+        if obj.hasOffset
+            c = SymVariable(tomatrix(obj.OffsetParams(:)));
+            ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x, model.States.dx, c});
+        else
+            ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x, model.States.dx});
+        end
+        
     end
     
     % substitute the time variable with phase variable tau: t -> tau

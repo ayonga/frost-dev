@@ -84,13 +84,13 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             validateGraph(obj, plant);
             
             % check if the graph is a simple directed cycle
-            if ~isDirectedCycle(plant)
-                % reorder nodes with its topological order 
-                g = reordernodes(plant.Gamma, toposort(plant.Gamma,'Order','Stable'));
-            else
-                g = plant.Gamma;
-            end
-            
+            %             if ~isDirectedCycle(plant)
+            %                 % reorder nodes with its topological order
+            %                 g = reordernodes(plant.Gamma, toposort(plant.Gamma,'Order','Stable'));
+            %             else
+            %                 g = plant.Gamma;
+            %             end
+            g = plant.Gamma;
             
             n_vertex = height(g.Nodes);
             n_edge = height(g.Edges);

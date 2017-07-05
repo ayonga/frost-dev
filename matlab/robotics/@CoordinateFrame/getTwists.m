@@ -12,15 +12,23 @@ function c_str = getTwists(obj, p)
     % Return values:
     % c_str: a cell array of twist information @type cell
     
-    n_pos = length(obj);
+    n_frame = length(obj);
+    n_pos   = n_frame;
     if nargin < 2
-        p = zeros(n_pos,3);
+        p = zeros(n_frame,3);
     else
         if isempty(p)
-            p = zeros(n_pos,3);
+            p = zeros(n_frame,3);
         else
-            validateattributes(p,{'double'},{'2d','real','size',[n_pos,3]},...
-                'getCartesianPosition','offset',3);
+            if n_frame == 1 % single frame
+                validateattributes(p,{'double'},{'2d','real','size',[NaN,3]},...
+                    'getCartesianPosition','offset',3);
+                % update the number of position
+                n_pos = size(p,1);
+            else % multiple frames
+                validateattributes(p,{'double'},{'2d','real','size',[n_frame,3]},...
+                    'getCartesianPosition','offset',3);
+            end
         end
     end
   
@@ -29,8 +37,15 @@ function c_str = getTwists(obj, p)
     
     
     for i=1:n_pos
-        c_str{i}.gst0 = obj(i).gst0*CoordinateFrame.RPToHomogeneous(eye(3), p(i,:));
-        ref = obj(i).Reference;
+        if n_frame > 1 % multiple frames
+            c_str{i}.gst0 = obj(i).gst0*CoordinateFrame.RPToHomogeneous(eye(3), p(i,:));
+            ref = obj(i).Reference;
+        else  % single frame
+            c_str{i}.gst0 = obj.gst0*CoordinateFrame.RPToHomogeneous(eye(3), p(i,:));
+            ref = obj.Reference;
+        end
+            
+        
         while ~isprop(ref,'TwistPairs')
             ref = ref.Reference;
             if isempty(ref)

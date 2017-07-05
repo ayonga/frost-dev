@@ -1,4 +1,4 @@
-function ya = calcActual(obj, x, dx)
+function ya = calcActual(obj, x, dx, offset)
     % calculate the actual outputs
     %
     % Parameters:
@@ -28,11 +28,18 @@ function ya = calcActual(obj, x, dx)
     if obj.Holonomic
         % holonomic virtual constraints
         % compute the actual output
-        ya{1} = feval(ya_funcs{1}, x);
+        if obj.hasOffset
+            ya{1} = feval(ya_funcs{1}, x, offset);
+        else
+            ya{1} = feval(ya_funcs{1}, x);
+        end
     else
-        % non-holonomic virtual constraints
-        ya{1} = feval(ya_funcs{1}, x, dx);
-        
+        if obj.hasOffset
+            % non-holonomic virtual constraints
+            ya{1} = feval(ya_funcs{1}, x, dx, offset);
+        else
+            ya{1} = feval(ya_funcs{1}, x, dx);
+        end
     end
     
     switch model_type
