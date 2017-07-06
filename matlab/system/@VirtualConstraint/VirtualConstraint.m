@@ -285,6 +285,7 @@ classdef VirtualConstraint < handle
                     obj.hasOffset = true;
                     offset = SymVariable(['c' obj.Name],[obj.Dimension,1]);
                     obj.ya_ = ya + offset;
+                    obj.OffsetParams = offset;
                 else
                     obj.ya_ = ya;
                 end
