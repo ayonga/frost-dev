@@ -202,6 +202,9 @@ classdef ContinuousDynamics < DynamicalSystem
         % set the group of drift vector fields F(x) or F(x,dx)
         obj = setDriftVector(obj, vf);
         
+        % Append a group of drift vector fields F(x) or F(x,dx)
+        obj = appendDriftVector(obj, vf);
+        
         % calculate the mass matrix
         M = calcMassMatrix(obj, x)
         
