@@ -102,8 +102,8 @@ old_param_file = [cur,'/param/fanuc_2017_05_18_2147.yaml'];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % you can assign these function handle to have additional processing
 % functions in the simulation
-flippy.PreProcess = str2func('nop'); %called before ode
-flippy.PostProcess = str2func('nop');% called after ode
+% flippy.PreProcess = str2func('nop'); %called before ode
+% flippy.PostProcess = str2func('nop');% called after ode
 % flippy.UserNlpConstraint = str2func('nop');
 
 
