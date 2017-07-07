@@ -49,9 +49,9 @@ function obj = configureDynamics(obj, varargin)
     %|@note !!! The minus sign !!!
     % Fvec appears at the right hand side (typically -C(q,dq)dq - G(q)
     % appears at the left hand side of the Euler-Lagrangian Equation)
-    Ce1 = cell(obj.numState,1);
-    Ce2 = cell(obj.numState,1);
-    Ce3 = cell(obj.numState,1);
+    Ce1 = cell(obj.numState,obj.numState);
+    Ce2 = cell(obj.numState,obj.numState);
+    Ce3 = cell(obj.numState,obj.numState);
     m = 100;
     fprintf('Evaluating the coriolis term C(q,dq)dq: \t');
     bs = '\b';
@@ -62,13 +62,23 @@ function obj = configureDynamics(obj, varargin)
     for i=1:obj.numState
         k = floor(((i-1)*3+1)*100/(3*obj.numState));
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
-        Ce1{i} = SymFunction(['Ce1_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart1',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
+        for j=1:obj.numState
+            Ce1{j,i} = SymFunction(['Ce1_vec',num2str(i),'_',num2str(j),'_',obj.Name],...
+                tomatrix(eval_math_fun('InertiaToCoriolisPart1',{De,Qe,dQe,i,j},[],'DelayedSet',delay_set)),{Qe,dQe});
+        end
         k = floor(((i-1)*3+2)*100/(3*obj.numState));
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
-        Ce2{i} = SymFunction(['Ce2_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart2',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
+        
+        for j=1:obj.numState
+            Ce2{j,i} = SymFunction(['Ce2_vec',num2str(i),'_',num2str(j),'_',obj.Name],...
+                tomatrix(eval_math_fun('InertiaToCoriolisPart2',{De,Qe,dQe,i,j},[],'DelayedSet',delay_set)),{Qe,dQe});
+        end
         k = floor(((i-1)*3+3)*100/(3*obj.numState));
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
-        Ce3{i} = SymFunction(['Ce3_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart3',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
+        for j=1:obj.numState
+            Ce3{j,i} = SymFunction(['Ce3_vec',num2str(i),'_',num2str(j),'_',obj.Name],...
+                tomatrix(eval_math_fun('InertiaToCoriolisPart3',{De,Qe,dQe,i,j},[],'DelayedSet',delay_set)),{Qe,dQe});
+        end
     end
     fprintf(1,sp(ones(1,40)));
     toc
@@ -77,7 +87,7 @@ function obj = configureDynamics(obj, varargin)
     fprintf('Evaluating the gravity vector G(q): \t');
     Ge = SymFunction(['Ge_vec_',obj.Name],-eval_math_fun('GravityVector',[links,{Qe}]),{Qe,dQe});
     
-    vf = [Ce1;Ce2;Ce3;{Ge}];
+    vf = [Ce1(:);Ce2(:);Ce3(:);{Ge}];
     tic
     obj.setDriftVector(vf);
     toc

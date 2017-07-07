@@ -46,6 +46,10 @@ ComputeEulerAngles::usage =
 	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
 the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
 
+ComputeRelativeEulerAngles::usage = 
+	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
+
 ComputeSpatialJacobians::usage = 
 	"ComputeSpatialJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] computes Jacobian of\
 the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Euler \
@@ -92,6 +96,8 @@ Begin["`Private`"]
 
 (* ::Section:: *)
 (* Private Constant *)
+
+
 I3=IdentityMatrix[3];
 Z3=ConstantArray[0,{3,3}];
 I4=IdentityMatrix[4];
@@ -227,12 +233,26 @@ ComputeBodyJacobians[args__,nDof_] :=
 	
 
 ToEulerAngles[gst_,gst0_] :=
-	Block[{R, R0, Rw, yaw, roll, pitch,q0subs},
+	Block[{R, R0, Rw, yaw, roll, pitch, q0subs},
 		(* compute rigid orientation*)
 		R = Screws`RigidOrientation[gst];
 		(* compute rigid orientation with initial tool configuration (q = 0) *)
 		R0 = Screws`RigidOrientation[gst0];
 		(* compute spatial orientation *)
+		Rw = R.Transpose[R0];
+		(* compute Euler angles *)
+		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
+		roll=ArcTan[Rw[[3,3]],Rw[[3,2]]];
+		pitch=ArcTan[Rw[[3,3]],-Rw[[3,1]]Cos[roll]];
+		
+		Return[{roll,pitch,yaw}];
+	];
+	
+ToRelativeEulerAngles[gst_,R0_] :=
+	Block[{R, Rw, yaw, roll, pitch},
+		(* compute rigid orientation*)
+		R = Screws`RigidOrientation[gst];
+	
 		Rw = R.Transpose[R0];
 		(* compute Euler angles *)
 		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
@@ -268,6 +288,17 @@ ComputeEulerAngles[args__] :=
 		pos = MapThread[ToEulerAngles,{gst,gst0}];
 		
 		
+		Return[pos];
+	];
+	
+ComputeRelativeEulerAngles[args__] :=
+	Block[{pos, gst, R, R0, Rw, argList = {args}},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		R0 = Map[#["R"] &, argList]; 		
+				
+		pos = MapThread[ToRelativeEulerAngles,{gst,R0}];
 		Return[pos];
 	];
 	

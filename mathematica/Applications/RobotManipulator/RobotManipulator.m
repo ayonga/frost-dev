@@ -1,5 +1,3 @@
-(* ::Package:: *)
-
 (* Wolfram Language Package *)
 
 (* :Title: RobotManipulator.m *)
@@ -114,6 +112,15 @@ grav = 9.81; (* the gravity constant*)
 
 (* ::Section:: *)
 (* Functions *)
+
+
+
+
+
+
+
+
+
 
 
 	
