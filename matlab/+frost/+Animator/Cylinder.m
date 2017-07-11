@@ -18,7 +18,7 @@ classdef Cylinder < frost.Animator.DisplayItem
         surface
     end
     
-    properties (Access = private)
+    properties (Access = public)
         radius
         n
     end
@@ -30,7 +30,7 @@ classdef Cylinder < frost.Animator.DisplayItem
     methods
         function obj = Cylinder(ax, model, frame, offset, name, varargin)
             obj = obj@frost.Animator.DisplayItem(ax, model, name);
-            obj.radius = 0.02;
+            obj.radius = 0.015;
             obj.n = 20;
             obj.frame = frame;
             obj.offset = offset;

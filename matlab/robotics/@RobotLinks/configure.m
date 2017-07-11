@@ -66,10 +66,10 @@ function obj = configure(obj, config, base)
             'The joints structure must have the following fields:\n %s',implode(fields,', '));
         joints = config.joints;
         if isfield(config,'transmissions')
-            fields = {'Joint','MechanicalReduction'};
+            fields = {'Joint','MechanicalReduction','Inertia'};
             assert(all(isfield(config.transmissions,fields)),...
                 'The transmissions structure must have the following fields:\n %s',implode(fields,', '));
-            transmissions = config.transimissions;
+            transmissions = config.transmissions;
         else
             transmissions = [];
         end
@@ -107,7 +107,11 @@ function obj = configure(obj, config, base)
                 if ~isempty(idx)
                     mechanicalReduction(i) = transmissions(idx).MechanicalReduction;
                     dofs(i).Actuator.Ratio = mechanicalReduction(i);
-                    dofs(i).Actuator.Inertia = transmissions(idx).Inertia;
+                    if isfield(transmissions(idx), 'Inertia')
+                        dofs(i).Actuator.Inertia = transmissions(idx).Inertia;
+                    else
+                        dofs(i).Actuator.Inertia = 0;
+                    end
                 end
             end
         end

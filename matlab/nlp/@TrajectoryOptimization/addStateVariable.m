@@ -39,11 +39,13 @@ function obj = addStateVariable(obj, bounds)
         % initial/ternimal points
         if isfield(bounds,s_name)
             if isfield(bounds.(s_name), 'initial')
-                obj = updateVariableProp(obj, s_name, 'first', bounds.(s_name).initial);
+                x0 = bounds.(s_name).initial;
+                obj = updateVariableProp(obj, s_name, 'first', 'lb',x0, 'ub', x0, 'x0', x0);
             end
             
             if isfield(bounds.(s_name), 'terminal')
-                obj = updateVariableProp(obj, s_name, 'last', bounds.(s_name).terminal);
+                xf = bounds.(s_name).terminal;
+                obj = updateVariableProp(obj, s_name, 'last', 'lb',xf, 'ub', xf, 'x0', xf);
             end
         end
     end

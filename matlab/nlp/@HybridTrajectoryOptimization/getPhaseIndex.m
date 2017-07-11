@@ -23,12 +23,20 @@ function phase_idx = getPhaseIndex(obj, varargin)
     switch nargin 
         case 2 % node
             node_id = findnode(obj.Gamma, varargin{1});
-            assert(node_id~=0,'There is no such edge exist!');
-            phase_idx = node_id*2-1;
+            if node_id==0
+                warning('There is no such node exist!');
+                phase_idx = [];
+            else
+                phase_idx = node_id*2-1;
+            end
         case 3 % edge
             edge_id = findedge(obj.Gamma, varargin{1}, varargin{2});
-            assert(edge_id~=0,'There is no such edge exist!');
-            phase_idx = edge_id*2;
+            if edge_id==0
+                warning('There is no such edge exist!');
+                phase_idx = [];
+            else
+                phase_idx = edge_id*2;
+            end
     end
     
     
