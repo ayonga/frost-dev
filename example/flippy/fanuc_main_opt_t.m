@@ -63,11 +63,11 @@ flippy_cost_opt(nlp, bounds);
 %%%% Compile and export optimization functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nlp.update;
-exclude = {'dynamics_equation'};
+% nlp.update;
+% % exclude = {'dynamics_equation'};
 % exclude = [];
-compileConstraint(nlp,[],export_path,exclude);
-compileObjective(nlp,[],export_path);
+% compileConstraint(nlp,[],export_path,exclude);
+% compileObjective(nlp,[],export_path);
 
 
 
@@ -75,7 +75,7 @@ compileObjective(nlp,[],export_path);
 %%%% Link the NLP problem to a NLP solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 solver = IpoptApplication(nlp);
-solver.Options.ipopt.max_iter = 10000;
+solver.Options.ipopt.max_iter = 1000;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the optimization

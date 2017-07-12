@@ -56,22 +56,22 @@ function nlp = fanuc_constr_opt_t(nlp, bounds, varargin)
     p_z = p_spatula(3) - 0.5297;
     p_z_func = SymFunction(['endeffclearance_sca_' plant.Name],p_z,{x});
     addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
-    addNodeConstraint(nlp, p_z_func, {'x'}, n_node, -0.0926, -0.0926, 'Nonlinear');
+    addNodeConstraint(nlp, p_z_func, {'x'}, n_node, -0.0, -0.0, 'Nonlinear');
 %     addNodeConstraint(nlp, p_z_func, {'x'}, 'all', 0.0, 0.4, 'Nonlinear');
     addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.1, 0.3, 'Nonlinear');
     
     
     p_x = p_spatula(1);
     p_x_func = SymFunction(['endeffx_sca_' plant.Name],p_x,{x});
-    addNodeConstraint(nlp, p_x_func, {'x'}, 1, 0.8734, 0.8734, 'Nonlinear');
-    addNodeConstraint(nlp, p_x_func, {'x'}, round(n_node), 0.7478, 0.7478, 'Nonlinear');
+    addNodeConstraint(nlp, p_x_func, {'x'}, 1, 0.734, 0.734, 'Nonlinear');
+    addNodeConstraint(nlp, p_x_func, {'x'}, round(n_node), 0.734, 0.734, 'Nonlinear');
     addNodeConstraint(nlp, p_x_func, {'x'}, 'except-terminal', 0.66, 0.89, 'Nonlinear');
     
     p_y = p_spatula(2);
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
     addNodeConstraint(nlp, p_y_func, {'x'}, 1, 0.0, 0.0, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), 0.0, 0.0, 'Nonlinear');
-    addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', 0.0, 0.08, 'Nonlinear');
+%     addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', 0.0, 0.2, 'Nonlinear');
     
     %% these are slipping constraints being added
 
