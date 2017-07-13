@@ -37,3 +37,46 @@ Opt.LoadInitialGuess(nlp,gait);
 Plot.plotZmp(gait);
 
 %%
+%%
+force_list = [5,10,15];
+names = {'res/gaits/push-5_00p'
+    'res/gaits/push-10_00p'
+    'res/gaits/push-15_00p'};
+for i=1:length(force_list)
+    
+    bounds.step1.push_force(1) = force_list(i);
+    nlp.Phase(1).Plant.UserNlpConstraint(nlp.Phase(1),bounds.step1);
+    
+    nlp.update();
+    
+    Opt.LoadInitialGuess(nlp,gait);
+    [gait, info, sol] = Opt.SolveProblem(nlp);
+    
+    if info.status == 0 || info.status==1 || info.status==-2
+        save(names{i},'gait','bounds','sol','info');
+    else
+        save([names{i},'_failed'],'gait','bounds','sol','info');
+    end
+end
+
+load('res/gaits/push-0_00p.mat')
+force_list = [-5,-10,-15];
+names = {'res/gaits/push-5_00m'
+    'res/gaits/push-10_00m'
+    'res/gaits/push-15_00m'};
+for i=1:length(force_list)
+    
+    bounds.step1.push_force(1) = force_list(i);
+    nlp.Phase(1).Plant.UserNlpConstraint(nlp.Phase(1),bounds.step1);
+    
+    nlp.update();
+    
+    Opt.LoadInitialGuess(nlp,gait);
+    [gait, info, sol] = Opt.SolveProblem(nlp);
+    
+    if info.status == 0 || info.status==1 || info.status==-2
+        save(names{i},'gait','bounds','sol','info');
+    else
+        save([names{i},'_failed'],'gait','bounds','sol','info');
+    end
+end

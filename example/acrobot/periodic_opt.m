@@ -20,8 +20,8 @@ nlp = Opt.LoadProblem(robot);
 [nlp, bounds]  = Opt.UpdateBounds(nlp, robot);
 
 %% 
-load('res/static_pose.mat')
-
+param = load('res/static_pose.mat');
+gait = param.gait;
 %%
 Opt.LoadInitialGuess(nlp,gait);
 %%
@@ -39,45 +39,55 @@ Opt.LoadInitialGuess(nlp,gait);
 Plot.plotZmp(gait);
 
 %%
-force_list = [5,10,15];
-names = {'res/gaits/push-5_00p'
-    'res/gaits/push-10_00p'
-    'res/gaits/push-15_00p'};
-for i=1:length(force_list)
-    
-    bounds.step1.push_force(1) = force_list(i);
-    nlp.Phase(1).Plant.UserNlpConstraint(nlp.Phase(1),bounds.step1);
-    
-    nlp.update();
-    
-    Opt.LoadInitialGuess(nlp,gait);
-    [gait, info, sol] = Opt.SolveProblem(nlp);
-    
-    if info.status == 0 || info.status==1 || info.status==-2
-        save(names{i},'gait','bounds','sol','info');
-    else
-        save([names{i},'_failed'],'gait','bounds','sol','info');
+Plot.plotOptStates(robot,nlp,gait);
+
+%%
+xcom_list = [-0.2, -0.15, -0.1, -0.05, 0];
+zcom_list = [0.45, 0.5, 0.55, 0.6, 0.65, 0.7];
+prefix = 'res/gaits/static_';
+for i=1:length(xcom_list)
+    for j=1:length(zcom_list)
+        name = [prefix,num2str(xcom_list(i)),'_',num2str(zcom_list(j))];
+        name = strrep(name,'.','-');
+        bounds.xcom.lb = xcom_list(i);
+        bounds.xcom.ub = xcom_list(i);
+        bounds.zcom.lb = zcom_list(j);
+        bounds.zcom.ub = zcom_list(j);
+        [nlp, bounds]  = Opt.UpdateBounds(nlp, robot, bounds);
+        Opt.LoadInitialGuess(nlp,param.gait);
+        
+        [gait, info, sol] = Opt.SolveProblem(nlp);
+        
+        if info.status == 0 || info.status==1 || info.status==-2
+            save(name,'gait','bounds','sol','info');
+        else
+            save([name,'_failed'],'gait','bounds','sol','info');
+        end
     end
+    
+end
+%%
+for i=1:length(xcom_list)
+    for j=1:length(zcom_list)
+        name = [prefix,num2str(xcom_list(i)),'_',num2str(zcom_list(j))];
+        name = strrep(name,'.','-');
+        bounds.xcom.lb = xcom_list(i);
+        bounds.xcom.ub = xcom_list(i);
+        bounds.zcom.lb = zcom_list(j);
+        bounds.zcom.ub = zcom_list(j);
+        [nlp, bounds]  = Opt.UpdateBounds(nlp, robot, bounds);
+        Opt.LoadInitialGuess(nlp,param.gait);
+        
+        [gait, info, sol] = Opt.SolveProblem(nlp);
+        
+        if info.status == 0 || info.status==1 || info.status==-2
+            save(name,'gait','bounds','sol','info');
+        else
+            save([name,'_failed'],'gait','bounds','sol','info');
+        end
+    end
+    
 end
 
-load('res/gaits/push-0_00p.mat')
-force_list = [-5,-10,-15];
-names = {'res/gaits/push-5_00m'
-    'res/gaits/push-10_00m'
-    'res/gaits/push-15_00m'};
-for i=1:length(force_list)
     
-    bounds.step1.push_force(1) = force_list(i);
-    nlp.Phase(1).Plant.UserNlpConstraint(nlp.Phase(1),bounds.step1);
     
-    nlp.update();
-    
-    Opt.LoadInitialGuess(nlp,gait);
-    [gait, info, sol] = Opt.SolveProblem(nlp);
-    
-    if info.status == 0 || info.status==1 || info.status==-2
-        save(names{i},'gait','bounds','sol','info');
-    else
-        save([names{i},'_failed'],'gait','bounds','sol','info');
-    end
-end

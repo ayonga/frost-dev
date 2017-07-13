@@ -3,7 +3,7 @@ function [gait, info, sol, solver] = SolveProblem(nlp)
     nlp.update();
 
     solver = IpoptApplication(nlp);
-    solver.Options.ipopt.max_iter = 100;
+    solver.Options.ipopt.max_iter = 300;
     
     
     [sol, info] = optimize(solver);

@@ -59,10 +59,16 @@ function bounds= GetBounds(sys)
     bounds.momentum_weight = 500;
     bounds.push_force = [0;0];
     bounds.xcom.lb = -0.2;
-    bounds.xcom.ub = -0.2;
-    bounds.zcom.lb = 0.6;
-    bounds.zcom.ub = 0.6;
+    bounds.xcom.ub = -0.0;
+    bounds.zcom.lb = 0.2;
+    bounds.zcom.ub = 0.7;
+    bounds.torso.lb = deg2rad(-45);
+    bounds.torso.ub = deg2rad(45);
     
+    bounds.rcom.lb = 0.3;
+    bounds.rcom.ub = 0.7;
+    bounds.thetacom.lb = deg2rad(72);
+    bounds.thetacom.ub = deg2rad(96);
     
     if is_hybrid
         model_bounds = bounds;
