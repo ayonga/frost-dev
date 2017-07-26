@@ -18,6 +18,7 @@ function f = export(obj, export_path, varargin)
     ip.addParameter('Namespace','SymFunction',@(x) ischar(x));
     ip.addParameter('TemplateFile','',@(x) ischar(x));
     ip.addParameter('TemplateHeader','',@(x) ischar(x));
+    ip.addParameter('noPrompt',false,@(x) islogical(x));
     ip.parse(varargin{:});
     
     opts = ip.Results;
