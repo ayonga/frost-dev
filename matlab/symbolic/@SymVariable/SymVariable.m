@@ -11,7 +11,7 @@ classdef SymVariable < SymExpression
     
     properties (Access=protected)
         % A list of character label of the symbolic variables
-        %eval_math(
+        %
         % @type cellstr
         label
     end
