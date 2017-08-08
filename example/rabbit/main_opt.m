@@ -2,8 +2,8 @@
 clear; clc;
 cur = pwd;
 addpath(genpath(cur));
-export_path = fullfile(cur, 'gen\');
-COMPILE = false;
+export_path = fullfile(cur, 'gen/');
+COMPILE = true;
 
 % Load model
 rabbit = RABBIT('urdf/five_link_walker.urdf');
@@ -52,12 +52,12 @@ nlp.update;
 
 %% Compile
 if COMPILE
-    if ~exist([export_path, 'opt\'])
-        mkdir([export_path, 'opt\'])
+    if ~exist([export_path, 'opt/'])
+        mkdir([export_path, 'opt/'])
     end
-    rabbit.ExportKinematics([export_path,'kinematics\']);
-    compileConstraint(nlp,[],[],[export_path, 'opt\']);
-    compileObjective(nlp,[],[],[export_path, 'opt\']);
+%     rabbit.ExportKinematics([export_path,'kinematics/']);
+    compileConstraint(nlp,[],[],[export_path, 'opt/']);
+    compileObjective(nlp,[],[],[export_path, 'opt/']);
 end
 
 % Example constraint removal
