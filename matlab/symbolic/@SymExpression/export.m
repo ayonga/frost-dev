@@ -30,6 +30,7 @@ function file = export(f, varargin)
     ip.addParameter('Namespace','SymExpression',@(x) ischar(x));
     ip.addParameter('TemplateFile','',@(x) ischar(x));
     ip.addParameter('TemplateHeader','',@(x) ischar(x));
+    ip.addParameter('noPrompt',false,@(x) islogical(x));
     ip.parse(varargin{N+1:end});
     
     opts = ip.Results;

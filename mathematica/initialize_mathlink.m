@@ -20,4 +20,6 @@ function initialize_mathlink()
     math(['$Path=DeleteDuplicates[Append[$Path,',str2mathstr(math_app_path),']];']);
     
     math('Needs["ExtraUtils`"]');
+    
+    eval_math('Needs["RobotManipulator`"];');
 end
