@@ -226,8 +226,7 @@ classdef truck < ContinuousDynamics
             bounds.states.x.x0 = [0;vf;0.1;0.1;0.0;0;0;0];
             
             % fixed initial condition
-            bounds.states.x.initial.lb = x0;
-            bounds.states.x.initial.ub = x0;
+            bounds.states.x.initial = x0;
             
             ddx_max = 100; %maximum acceleration
             bounds.states.dx.lb = [vf;-ddx_max;-ddx_max;-ddx_max;-r_max;-ddx_max;-p_max;-ddx_max];
