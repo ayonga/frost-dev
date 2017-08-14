@@ -19,7 +19,7 @@ function obj = configure(obj, varargin)
             if rel_deg > 1
                 M = model.Mmat;
                 F = sum(horzcat(model.Fvec{:}),2);
-                dX = M\F;
+                dX = tomatrix(M\F);
             else
                 dX = model.States.dx;
             end
@@ -30,7 +30,7 @@ function obj = configure(obj, varargin)
             if rel_deg > 2
                 M = model.Mmat;
                 F = sum(horzcat(model.Fvec{:}),2);
-                dX = M\F;
+                dX = tomatrix(M\F);
             else
                 dX = [model.States.dx;model.States.ddx];
             end
