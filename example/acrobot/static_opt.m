@@ -11,7 +11,7 @@ addpath(export_path);
 addpath('./tmp');
 %%
 [robot, sys] = Model.LoadModel();
-
+robot.UserNlpConstraint = @CstrFcns.StaticStepConstraints;
 
 %%
 nlp = Opt.LoadProblem(robot);
@@ -23,7 +23,7 @@ nlp = Opt.LoadProblem(robot);
 %% 
 param = load('res/static_pose.mat');
 gait = param.gait;
-%%
+%%foot_link
 Opt.LoadInitialGuess(nlp,gait);
 
 
@@ -36,7 +36,7 @@ Opt.LoadInitialGuess(nlp,gait);
 [conGUI] = Plot.LoadAnimator(robot, gait);
 
 %% 
-Plot.plotZmp(gait);
+Plot.plotZmp(robot,nlp,gait);
 
 %%
 Plot.plotOptStates(robot,nlp,gait);
@@ -53,10 +53,10 @@ for i=1:length(rcom_list)
         end
         name = [prefix,'r-',num2str(rcom_list(i)),'_th=',num2str(thcom_list(j))];
         name = strrep(name,'.','-');
-        bounds.rcom.lb = rcom_list(i);
-        bounds.rcom.ub = rcom_list(i);
-        bounds.thetacom.lb = deg2rad(thcom_list(j));
-        bounds.thetacom.ub = deg2rad(thcom_list(j));
+        bounds.rcom.lb = rcom_list(i)-0.02;
+        bounds.rcom.ub = rcom_list(i)+0.02;
+        bounds.thetacom.lb = deg2rad(thcom_list(j)-2);
+        bounds.thetacom.ub = deg2rad(thcom_list(j)+2);
         [nlp, bounds]  = Opt.UpdateBounds(nlp, robot, bounds);
         Opt.LoadInitialGuess(nlp,param.gait);
         
@@ -72,32 +72,7 @@ for i=1:length(rcom_list)
     end
     
 end
-%%
-% xcom_list = [-0.2, -0.15, -0.1, -0.05, 0];
-% zcom_list = [0.45, 0.5, 0.55, 0.6, 0.65, 0.7];
-% prefix = 'res/gaits/static_';
-% for i=1:length(xcom_list)
-%     for j=1:length(zcom_list)
-%         name = [prefix,num2str(xcom_list(i)),'_',num2str(zcom_list(j))];
-%         name = strrep(name,'.','-');
-%         bounds.xcom.lb = xcom_list(i);
-%         bounds.xcom.ub = xcom_list(i);
-%         bounds.zcom.lb = zcom_list(j);
-%         bounds.zcom.ub = zcom_list(j);
-%         [nlp, bounds]  = Opt.UpdateBounds(nlp, robot, bounds);
-%         Opt.LoadInitialGuess(nlp,param.gait);
-%         
-%         [gait, info, sol] = Opt.SolveProblem(nlp);
-%         
-%         if info.status == 0 || info.status==1 || info.status==-2
-%             save(name,'gait','bounds','sol','info');
-%         else
-%             keyboard
-%             save([name,'_failed'],'gait','bounds','sol','info');
-%         end
-%     end
-%     
-% end
+
 
     
     

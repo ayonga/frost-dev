@@ -1,19 +1,38 @@
-function plotZmp(gait)
+function plotZmp(model, nlp, gait)
     
     mu = 0.9;
     La = 0.;
     Lb = 0.2;
     ax = [];
     
-    if length(gait)==1
+    if length(gait)==1 && isa(nlp,'TrajectoryOptimization')
+        
+        t = gait.tspan;
+        
         force = gait.inputs.ffoot;
         q = gait.states.x;
-        t = gait.tspan;
     else
-        t = [gait(1).tspan,gait(3).tspan, gait(5).tspan];
-        q = [gait(1).states.x,gait(3).states.x, gait(5).states.x];
-        force = [gait(1).inputs.ffoot,gait(3).inputs.ffoot, gait(5).inputs.ffoot];
+        cont_domain_idx = find(cellfun(@(x)isa(x,'ContinuousDynamics'),{nlp.Phase.Plant}));
+        t = [];
+        q = []; force = [];
+        
+        for j=cont_domain_idx
+            t = [t,gait(j).tspan];
+            force = [force,gait(j).inputs.ffoot];
+            q = [q,gait(j).states.x];
+        end
+        
     end
+    
+    %     if length(gait)==1
+    %         force = gait.inputs.ffoot;
+    %         q = gait.states.x;
+    %         t = gait.tspan;
+    %     else
+    %         t = [gait(1).tspan,gait(3).tspan, gait(5).tspan];
+    %         q = [gait(1).states.x,gait(3).states.x, gait(5).states.x];
+    %         force = [gait(1).inputs.ffoot,gait(3).inputs.ffoot, gait(5).inputs.ffoot];
+    %     end
     
     f = figure(1);clf;
     f.Name = 'Friction Cone';

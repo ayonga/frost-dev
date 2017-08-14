@@ -23,24 +23,24 @@ function [robot, sys] = LoadModel()
     
     step1 = copy(robot);
     step2 = copy(robot);
-    step3 = copy(robot);
+%     step3 = copy(robot);
 
     sys = HybridSystem('AcrobotThreeStep');
     sys = addVertex(sys, 'step1', 'Domain', step1, ...
         'Control', io_control);
     sys = addVertex(sys, 'step2', 'Domain', step2, ...
         'Control', io_control);
-    sys = addVertex(sys, 'step3', 'Domain', step3, ...
-        'Control', io_control);
+%     sys = addVertex(sys, 'step3', 'Domain', step3, ...
+%         'Control', io_control);
     
     sw1 = RigidImpact('sw1',robot);
-    sw2 = RigidImpact('sw2',robot);
+%     sw2 = RigidImpact('sw2',robot);
     
     sys = addEdge(sys, 'step1','step2', 'Guard',sw1);
-    sys = addEdge(sys, 'step2','step3', 'Guard',sw2);
+%     sys = addEdge(sys, 'step2','step3', 'Guard',sw2);
     
     
     step1.UserNlpConstraint = @CstrFcns.Step1Constraints;
     step2.UserNlpConstraint = @CstrFcns.Step2Constraints;
-    step3.UserNlpConstraint = @CstrFcns.Step3Constraints;
+%     step3.UserNlpConstraint = @CstrFcns.Step3Constraints;
 end

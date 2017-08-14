@@ -13,7 +13,7 @@ classdef acrobot < RobotLinks
         function obj = acrobot()
             
             
-            base = get_base_dofs('planar');
+            base = get_base_dofs('fixed');
             
             config = struct();
             config.name = ['acrobot'];
@@ -53,8 +53,8 @@ classdef acrobot < RobotLinks
                 torso_link];
             
             ankle_limit = struct('effort',100,...
-                'lower',deg2rad(-45),...
-                'upper',deg2rad(45),...
+                'lower',deg2rad(-50),...
+                'upper',deg2rad(50),...
                 'velocity',3.14);
             
             ankle_joint = struct('Name','ankle',...

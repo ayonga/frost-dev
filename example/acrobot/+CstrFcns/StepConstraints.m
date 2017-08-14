@@ -4,35 +4,41 @@ function nlp = StepConstraints(nlp, bounds, varargin)
     %% virtual constraints
     nlp = CstrFcns.ImposeVirtualConstraint(nlp, bounds);
 
-
+    %% initial position
+    q0 = bounds.initialPos;
+    dq0 = bounds.initialVel;
+    
+    updateVariableProp(nlp,'x','first','lb',q0,'ub',q0,'x0',q0);
+    updateVariableProp(nlp,'dx','first','lb',dq0,'ub',dq0,'x0',dq0);
+    
     %% target position
     q0 = bounds.restPos;
     dq0 = bounds.restVel;
     ddq0 = bounds.restAcc;
 
-    %     updateVariableProp(nlp,'x','last','lb',q0,'ub',q0,'x0',q0);
-    updateVariableProp(nlp,'dx','all','lb',dq0,'ub',dq0,'x0',dq0);
-    updateVariableProp(nlp,'ddx','all','lb',ddq0,'ub',ddq0,'x0',ddq0);
-    
-    
+    updateVariableProp(nlp,'x','last','lb',q0,'ub',q0,'x0',q0);
+    updateVariableProp(nlp,'dx','last','lb',dq0,'ub',dq0,'x0',dq0);
+    updateVariableProp(nlp,'ddx','last','lb',ddq0,'ub',dq0,'x0',ddq0);
     %% pcom position
-    pcom = domain.getComPosition();
+    %     pcom = domain.getComPosition();
     %     constr_fun = SymFunction(['pcom_',domain.Name],pcom([1,3]),{domain.States.x});
     %     lb = [bounds.xcom.lb;bounds.zcom.lb];
     %     ub = [bounds.xcom.ub;bounds.zcom.ub];
     %     addNodeConstraint(nlp,constr_fun,{'x'},'all', lb, ub,'Nonlinear');
     
-    rcom = sqrt((pcom(1)+0.15).^2 + pcom(3).^2);
-    constr_fun = SymFunction(['rcom_',domain.Name],rcom,{domain.States.x});
-    lb = bounds.rcom.lb;
-    ub = bounds.rcom.ub;
-    addNodeConstraint(nlp,constr_fun,{'x'},'all', lb, ub,'Nonlinear');
-    
-    theta = atan2(pcom(3),(pcom(1)+0.15));
-    constr_fun = SymFunction(['theta_com_',domain.Name],theta,{domain.States.x});
-    lb = bounds.thetacom.lb;
-    ub = bounds.thetacom.ub;
-    addNodeConstraint(nlp,constr_fun,{'x'},'all', lb, ub,'Nonlinear');
+    %     rcom = sqrt((pcom(1)+0.15).^2 + pcom(3).^2);
+    %     constr_fun = SymFunction(['rcom_',domain.Name],rcom,{domain.States.x});
+    %     initial = bounds.rcom.initial;
+    %     addNodeConstraint(nlp,constr_fun,{'x'},'first', initial, initial,'Nonlinear');
+    %     terminal = bounds.rcom.terminal;
+    %     addNodeConstraint(nlp,constr_fun,{'x'},'last', terminal, terminal,'Nonlinear');
+    %
+    %     theta = atan2(pcom(3),(pcom(1)+0.15));
+    %     constr_fun = SymFunction(['theta_com_',domain.Name],theta,{domain.States.x});
+    %     initial = bounds.thetacom.initial;
+    %     addNodeConstraint(nlp,constr_fun,{'x'},'first', initial, initial,'Nonlinear');
+    %     terminal = bounds.thetacom.terminal;
+    %     addNodeConstraint(nlp,constr_fun,{'x'},'last', terminal, terminal,'Nonlinear');
     %% torso
     
     torso = CoordinateFrame('Name','torso',...

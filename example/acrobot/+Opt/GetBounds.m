@@ -49,26 +49,42 @@ function bounds= GetBounds(sys)
     bounds.zmp.ub = -0.1;
     
     
-    load('res/static_pose.mat','gait');
+    %     load('res/static_pose.mat','gait');
+    load('res/gaits/static_r-0-7_th=84.mat', 'gait');
     bounds.restPos = [zeros(3,1);gait.states.x(4:end,end)];
-    bounds.restVel = gait.states.dx(:,end);
-    bounds.restAcc = gait.states.ddx(:,end);
-    bounds.pos_weight = blkdiag(zeros(3),eye(3)*100);
-    bounds.vel_weight = blkdiag(zeros(3),eye(3)*20);
-    bounds.tor_weight = eye(3)*0.02;
+    bounds.restVel = zeros(6,1);
+    bounds.restAcc = zeros(6,1);
+    %     load('res/gaits/static_r-0-7_th=84.mat', 'gait');
+    bounds.initialPos = [zeros(3,1);gait.states.x(4:end,1)];
+    bounds.initialVel = gait.states.dx(:,1);
+    
+    
+    bounds.pos_weight = blkdiag(zeros(3),eye(3)*20000);
+    bounds.vel_weight = blkdiag(zeros(3),eye(3)*5000);
+    bounds.tor_weight = eye(3)*0.01;
     bounds.momentum_weight = 500;
+    bounds.zmp_weight = 1000;
+    
     bounds.push_force = [0;0];
     bounds.xcom.lb = -0.2;
     bounds.xcom.ub = -0.0;
     bounds.zcom.lb = 0.2;
     bounds.zcom.ub = 0.7;
-    bounds.torso.lb = deg2rad(-45);
-    bounds.torso.ub = deg2rad(45);
+    bounds.torso.lb = deg2rad(-50);
+    bounds.torso.ub = deg2rad(50);
     
     bounds.rcom.lb = 0.3;
     bounds.rcom.ub = 0.7;
     bounds.thetacom.lb = deg2rad(72);
     bounds.thetacom.ub = deg2rad(96);
+    
+    %     bounds.rcom.initial = 0.7;
+    %     bounds.rcom.terminal = 0.7;
+    %     bounds.thetacom.initial = deg2rad(84);
+    %     bounds.thetacom.terminal = deg2rad(84);
+    
+    
+    
     
     if is_hybrid
         model_bounds = bounds;
