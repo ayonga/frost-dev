@@ -3,7 +3,7 @@ clear; clc;
 cur = pwd;
 addpath(genpath(cur));
 export_path = fullfile(cur, 'gen\');
-COMPILE = false;
+COMPILE = true;
 
 % Load model
 rabbit = RABBIT('urdf/five_link_walker.urdf');
@@ -63,16 +63,16 @@ end
 % Example constraint removal
 % removeConstraint(nlp.Phase(1),'u_friction_cone_RightToe');
 
-%% Create Ipopt solver
+%% Create Ipopt solver 
 addpath(genpath(export_path));
 nlp.update;
 solver = IpoptApplication(nlp);
 
 % Run Optimization
 tic
-old = load('x0');
-[sol, info] = optimize(solver, old.sol);
-% [sol, info] = optimize(solver);
+% old = load('x0');
+% [sol, info] = optimize(solver, old.sol);
+[sol, info] = optimize(solver);
 toc
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 

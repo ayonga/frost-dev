@@ -40,4 +40,9 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
         value(i) = eventfuncs(i).calcConstraint(dep_val{:});
     end
     
+    % Ross (hack) -- don't commit this!!!
+    if (controller.s < 0.1)
+        value(1) = 0;
+    end
+    
 end
