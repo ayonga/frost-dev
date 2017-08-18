@@ -15,7 +15,7 @@ function obj = addEvent(obj, constr)
         c_name = c_obj.Name;
     
         if isfield(obj.EventFuncs, c_name)
-            error('The unilateral constraint (%s) has been already defined.\n',c_name);
+            error('The Event condition (%s) has been already defined.\n',c_name);
         else
             assert(c_obj.Dimension==1,'Each event function must be a scalar unilateral constraint function.');
             % add event function

@@ -26,18 +26,18 @@ function nlp = truck_opt_cost(nlp, bounds, varargin)
     ddya2 = Dya2*dx;
     
     
-    yd2_square = SymFunction('yd2_square',500*ya2.^2,{x});
+    yd2_square = SymFunction('yd2_square',tovector(500*ya2.^2),{x});
     nlp = addRunningCost(nlp, yd2_square, {'x'});
     
-    ddyd2_square = SymFunction('ddyd2_square',0.1*ddya2.^2,{x,dx});
+    ddyd2_square = SymFunction('ddyd2_square',tovector(0.1*ddya2.^2),{x,dx});
     nlp = addRunningCost(nlp, ddyd2_square, {'x','dx'});
     
-    alpha_last = SymFunction('alpha_last',100*ya2.^2,{x});
+    alpha_last = SymFunction('alpha_last',tovector(100*ya2.^2),{x});
     nlp = addNodeCost(nlp, alpha_last, {'x'},'last');
     
     
     % 6. norm(y) -> y[1]^2 + y[2]^2 + ... + y[n]^2 (remove the sqrt operator)
-    y_squre = SymFunction('y_square',0.1*x(3).^2,{x});
+    y_squre = SymFunction('y_square',tovector(0.1*x(3).^2),{x});
     nlp = addNodeCost(nlp, y_squre, 'x', 'all');
     
     % 7. var(u) @todo how to compute the mean value

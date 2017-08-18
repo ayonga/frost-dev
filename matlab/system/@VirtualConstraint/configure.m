@@ -19,7 +19,7 @@ function obj = configure(obj, varargin)
             if rel_deg > 1
                 M = model.Mmat;
                 F = sum(horzcat(model.Fvec{:}),2);
-                dX = M\F;
+                dX = tomatrix(M\F);
             else
                 dX = model.States.dx;
             end
@@ -30,7 +30,7 @@ function obj = configure(obj, varargin)
             if rel_deg > 2
                 M = model.Mmat;
                 F = sum(horzcat(model.Fvec{:}),2);
-                dX = M\F;
+                dX = tomatrix(M\F);
             else
                 dX = [model.States.dx;model.States.ddx];
             end
@@ -57,7 +57,7 @@ function obj = configure(obj, varargin)
     if is_holonomic
         % ya(x)
         if obj.hasOffset
-            c = {SymVariable(tomatrix(obj.OffsetParams(:)))};
+            c = SymVariable(tomatrix(obj.OffsetParams(:)));
             ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x,c});
         else
             ya_fun{1} = SymFunction(['ya_' name], ya, model.States.x);
@@ -65,7 +65,7 @@ function obj = configure(obj, varargin)
     else
         % ya(x,dx)
         if obj.hasOffset
-            c = {SymVariable(tomatrix(obj.OffsetParams(:)))};
+            c = SymVariable(tomatrix(obj.OffsetParams(:)));
             ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x, model.States.dx, c});
         else
             ya_fun{1} = SymFunction(['ya_' name], ya, {model.States.x, model.States.dx});

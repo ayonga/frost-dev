@@ -20,7 +20,7 @@ function obj = setAuxdata(obj, auxdata)
         for i=1:numel(auxdata)
             
             assert(nvar1(i) == nvar2(i),...
-                'The dimension of the $d-th parameter does not match.',i);
+                'The dimension of the %d-th parameter does not match.',i);
         end
     end
     

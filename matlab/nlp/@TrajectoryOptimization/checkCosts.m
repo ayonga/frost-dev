@@ -33,7 +33,8 @@ function [yc] = checkCosts(obj, x, output_file,permission)
             if cost.Dimension ~=0
                 dep_constr = getSummands(cost);
                 for ll = 1:numel(dep_constr)
-                    var = cellfun(@(v)x(v(:)),dep_constr(ll).DepIndices,'UniformOutput',false); % dependent variables
+                    dep_var = dep_constr(ll).DepVariables;
+                    var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
                     if isempty(dep_constr(ll).AuxData)
                         yc(j) = yc(j) + feval(dep_constr(ll).Funcs.Func, var{:});
                     else
