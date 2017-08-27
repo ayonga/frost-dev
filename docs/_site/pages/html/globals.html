@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="false ">
+<title>File Members | FROST</title>
+<link rel="stylesheet" href="http://localhost:4000/css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="http://localhost:4000/css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="http://localhost:4000/css/customstyles.css">
+<link rel="stylesheet" href="http://localhost:4000/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="http://localhost:4000/css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://localhost:4000/js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="http://localhost:4000/js/toc.js"></script>
+<script src="http://localhost:4000/js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="http://localhost:4000/images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="frost-dev" href="http://localhost:4000/feed.xml">
+
+<script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+   
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="http://localhost:4000/index.html">&nbsp;<span class="projectTitle"> FROST</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="http://localhost:4000/index.html">Home</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/introduction.html">Getting Started</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/html/inherits.html">API Documentation</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/news.html">Tutorial</a></li>
+                
+                
+                
+                <li><a href="https://github.com/ayonga/frost-dev/" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li>
+
+
+
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:ayonga27@gmail.com?subject=FROST feedback&body=I have some feedback about the File Members page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+
+</li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="http://localhost:4000/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'http://localhost:4000search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="File Members">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container", style="margin-top:50px">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">FROST </li>
+  
+  
+  
+      
+  
+  <li>
+      <a href="#">Main Page</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/inherits.html">Overview</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Classes</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/annotated.html">Class List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/classes.html">Class Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/hierarchy.html">Class Hierarchy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Members</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Methods</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_v.html#v">v</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Properties</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Files</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/files.html">File List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/globals.html">File Members</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Related Pages</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/todo.html">Todo List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/newfeat1_0.html">New features</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div> <!-- do not remove this div, it is closed by doxygen! -->
+  <script type="text/javascript" src="dynsections.js"></script>
+
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--<link href="customdoxygen.css" rel="stylesheet" type="text/css" />-->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:4000/css/jquery.smartmenus.bootstrap.css">
+  
+
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.min.js"></script>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.bootstrap.min.js"></script>
+  <script type="text/javascript" src="doxy-boot.js"></script>
+  <!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all file members with links to the files they belong to:</div>
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>addpath_matlab_utilities()
+: <a class="el" href="addpath__matlab__utilities_8m.html#a047b97609460bfc46253c6e4aa067788">addpath_matlab_utilities.m</a>
+</li>
+<li>array2str()
+: <a class="el" href="array2str_8m.html#aac45053a45106045a600adc360efb94e">array2str.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>blank_struct()
+: <a class="el" href="blank__struct_8m.html#a69e32a3670b645b3840dd133da5e4329">blank_struct.m</a>
+</li>
+<li>build_mex()
+: <a class="el" href="build__mex_8m.html#a8f240bc7290bcea9dcce22090b6ba481">build_mex.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>cell2str()
+: <a class="el" href="cell2str_8m.html#a3ce6f23b8f8fb7584a53d36719abce87">cell2str.m</a>
+</li>
+<li>cell2tensor()
+: <a class="el" href="cell2tensor_8m.html#a01003a026f1c06654b6c77f783cc37d6">cell2tensor.m</a>
+</li>
+<li>cellexpand()
+: <a class="el" href="cellexpand_8m.html#ac4416b0d06639b3c6f6ace6108923233">cellexpand.m</a>
+</li>
+<li>check_var_exist()
+: <a class="el" href="check__var__exist_8m.html#a973f5aa7f2c07e713fbd8debe9314e30">check_var_exist.m</a>
+</li>
+<li>clear_symbol()
+: <a class="el" href="clear__symbol_8m.html#a94aece146799104c4d63965ede115ada">clear_symbol.m</a>
+</li>
+<li>contiguous_indices()
+: <a class="el" href="contiguous__indices_8m.html#ad9afac85893b32a1e1d80786f881a2ce">contiguous_indices.m</a>
+</li>
+<li>create_object_array()
+: <a class="el" href="create__object__array_8m.html#acce88811f2e9ca3738028dcd57c37eb3">create_object_array.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>eval_math()
+: <a class="el" href="eval__math_8m.html#a5c3fd15a4544a45aca27359d24bcb5cc">eval_math.m</a>
+</li>
+<li>eval_math_fun()
+: <a class="el" href="eval__math__fun_8m.html#a586fe98b8c05aa7b6350ce9a9422fbe9">eval_math_fun.m</a>
+</li>
+<li>even_sample()
+: <a class="el" href="even__sample_8m.html#af6fcec858c91100e622ad0371ec188e6">even_sample.m</a>
+</li>
+<li>even_sample_fields()
+: <a class="el" href="even__sample__fields_8m.html#ad6489f72b1cf7b95a79a312b3486f8e3">even_sample_fields.m</a>
+</li>
+<li>extract_struct_slice()
+: <a class="el" href="extract__struct__slice_8m.html#a90450e44c59f069c2f0ffd4b8dc745e2">extract_struct_slice.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>general2math()
+: <a class="el" href="general2math_8m.html#ae86d974d8bbe0c35b44ba2950f98fe6e">general2math.m</a>
+</li>
+<li>general2str()
+: <a class="el" href="general2str_8m.html#ad9ab1321cead8451ecdbc9d5a8aa930e">general2str.m</a>
+</li>
+<li>get_base_dofs()
+: <a class="el" href="get__base__dofs_8m.html#a0de265953895aff98072b4ed21f1448f">get_base_dofs.m</a>
+</li>
+<li>getfieldd()
+: <a class="el" href="getfieldd_8m.html#a764f95954418427ad6a3622f79891817">getfieldd.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>hline()
+: <a class="el" href="hline_8m.html#a938c11cd202783bc1d04fa02006deb2b">hline.m</a>
+</li>
+<li>horzcat_domains()
+: <a class="el" href="horzcat__domains_8m.html#aeecc3217b9a25532930cca125a449dab">horzcat_domains.m</a>
+</li>
+<li>horzcat_fields()
+: <a class="el" href="horzcat__fields_8m.html#a54f9599b6d5180a3bc1647caf02f77c0">horzcat_fields.m</a>
+</li>
+<li>horzcat_fields_domains()
+: <a class="el" href="horzcat__fields__domains_8m.html#a930bb33692ce2bede234feed4cf71eba">horzcat_fields_domains.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>implode()
+: <a class="el" href="implode_8m.html#a4dc124f4c46ec0b6543d860d27ab3c64">implode.m</a>
+</li>
+<li>indent()
+: <a class="el" href="indent_8m.html#a4a4327f26e876fa79ba905add69473ce">indent.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>mat2math()
+: <a class="el" href="mat2math_8m.html#aee3abd0000043c37dfd9673214847b3a">mat2math.m</a>
+</li>
+<li>maxabs()
+: <a class="el" href="maxabs_8m.html#a53d4bd8e9309c166363d1f70a9185f40">maxabs.m</a>
+</li>
+<li>buildmex&gt;normalize()
+: <a class="el" href="build__mex_8m.html#a13431051772aacae1d24898c80cbb32c">build_mex.m</a>
+</li>
+<li>horzcatfields&gt;blank_struct()
+: <a class="el" href="horzcat__fields_8m.html#a7fb9bcd0d04b8731edd144a0affe6152">horzcat_fields.m</a>
+</li>
+<li>patchline&gt;parseInputs()
+: <a class="el" href="patchline_8m.html#ad3793a479f9c3f80f941fd057affdc8a">patchline.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>nop()
+: <a class="el" href="nop_8m.html#aff38c9a6f1f5b8385f4d25730b02e48f">nop.m</a>
+</li>
+<li>num2mathstr()
+: <a class="el" href="num2mathstr_8m.html#a29ce6212c24b8e3cbce9c487a400566e">num2mathstr.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>outputfcn()
+: <a class="el" href="outputfcn_8m.html#a0454651cb22a2b077da5daa74e2ca1e3">outputfcn.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>patchline()
+: <a class="el" href="patchline_8m.html#af86cd36e575a62a4d499b869338f6b77">patchline.m</a>
+</li>
+<li>plot_format()
+: <a class="el" href="plot__format_8m.html#aa8a7c483ff4483b0f588f17be0c3baab">plot_format.m</a>
+</li>
+<li>plot_save()
+: <a class="el" href="plot__save_8m.html#a66203d12164d70995555f253147c1472">plot_save.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>ros_load_urdf()
+: <a class="el" href="ros__load__urdf_8m.html#a2e44bd04d4b32472152a26e09e8b79e3">ros_load_urdf.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>set_fields()
+: <a class="el" href="set__fields_8m.html#a9807972fd5d96b4330f42f9445b57825">set_fields.m</a>
+</li>
+<li>set_options()
+: <a class="el" href="set__options_8m.html#ad1a6a99488109d41c509b60313cb0591">set_options.m</a>
+</li>
+<li>setfields()
+: <a class="el" href="setfields_8m.html#a8a4d1273ac3d203799665f45523708c3">setfields.m</a>
+</li>
+<li>sfigure()
+: <a class="el" href="sfigure_8m.html#a4ffccf8c2d3e3b1e106f1b292dfbede4">sfigure.m</a>
+</li>
+<li>split_data()
+: <a class="el" href="split__data_8m.html#a15c1a47855862b6f9972b888b8abcf0e">split_data.m</a>
+</li>
+<li>split_indices()
+: <a class="el" href="split__indices_8m.html#ab7a9158b411adfdbee92484c75c16860">split_indices.m</a>
+</li>
+<li>spring()
+: <a class="el" href="spring_8m.html#a4377c3b1b6ea4d69c6426c84a20ee787">spring.m</a>
+</li>
+<li>stopOutFun()
+: <a class="el" href="stopOutFun_8m.html#ae735af470da5d7f9c3d1a90662483604">stopOutFun.m</a>
+</li>
+<li>str2mathstr()
+: <a class="el" href="str2mathstr_8m.html#a19524b891d455b20019d82d83db4a3d6">str2mathstr.m</a>
+</li>
+<li>str_index()
+: <a class="el" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728">str_index.m</a>
+</li>
+<li>str_indices()
+: <a class="el" href="str__indices_8m.html#aa2be2e9d82b17da59dd163530f21eeaa">str_indices.m</a>
+</li>
+<li>struct2assoc()
+: <a class="el" href="struct2assoc_8m.html#a2c0986cc92eaaa457a3c1d80514dbca5">struct2assoc.m</a>
+</li>
+<li>struct2str()
+: <a class="el" href="struct2str_8m.html#ade5b9c6df5865f7aa227593a05f70a40">struct2str.m</a>
+</li>
+<li>struct_assign_loose()
+: <a class="el" href="struct__assign__loose_8m.html#aff85ca82b0b2cfd0407ef7b3a2a0b1c7">struct_assign_loose.m</a>
+</li>
+<li>struct_diff()
+: <a class="el" href="struct__diff_8m.html#afede1856411f35bc2283173a72dec9e6">struct_diff.m</a>
+</li>
+<li>struct_overlay()
+: <a class="el" href="struct__overlay_8m.html#a269d22bd975b0b74d8c6c135eb6edcf0">struct_overlay.m</a>
+</li>
+<li>struct_permute()
+: <a class="el" href="struct__permute_8m.html#a2db1a90bb17bbe0a3708b8a4c43efec7">struct_permute.m</a>
+</li>
+<li>system_trim()
+: <a class="el" href="system__trim_8m.html#ac8a7a16b2f4f31e225321ab6eece9b85">system_trim.m</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>vertcat_domains()
+: <a class="el" href="vertcat__domains_8m.html#ad55edb01e643e4af8181f229c5d5bf2a">vertcat_domains.m</a>
+</li>
+<li>vertcat_fields_domains()
+: <a class="el" href="vertcat__fields__domains_8m.html#aebbf795597dab4aed0e5b0bbb06c23cd">vertcat_fields_domains.m</a>
+</li>
+<li>vline()
+: <a class="el" href="vline_8m.html#a63eb265cf12d9b3de0486145d7fe1c03">vline.m</a>
+</li>
+</ul>
+</div><!-- contents -->
+
+  <footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2017 AMBER Lab. All rights reserved. <br />
+ Site last generated: Aug 27, 2017 <br />
+<p><img src="http://localhost:4000/images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-104404898-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>

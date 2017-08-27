@@ -1,0 +1,73 @@
+/* Custom */
+.memtitle {
+	font-size: 130% !important;
+	font-weight: bold !important;
+	background-color: inherit !important;
+	background-repeat: no-repeat !important;
+	line-height: 1 !important;
+	padding-top: 5px !important;
+	margin-top: 0px !important;
+}
+
+.memproto {
+	background-color: inherit !important;
+}
+
+
+.memname {
+        background-color: inherit !important;
+	border-color: transparent !important;
+}
+.memname td {
+        vertical-align: middle !important;
+	padding: 2px !important;
+	line-height: 1.2 !important;
+	border-color: transparent !important;
+}
+.params .paramname, .retval .paramname {
+        font-weight: bold !important;
+        padding-right: 30px !important;
+        vertical-align: middle !important;
+	padding: 0px !important;
+}
+
+.params {
+        background-color: inherit !important;
+	border-color: transparent !important;
+}
+.params td {
+        vertical-align: middle !important;
+	line-height: 1.4 !important;
+	border-color: transparent !important;
+	background-color: inherit !important;
+}
+
+table.mlabels {
+	max-width: 100% !important;
+	width: 100% !important;
+	border-color: transparent !important;
+	margin-bottom: 0px !important;
+	padding: 2px !important;
+}
+
+td.mlabels-left {
+	line-height: 1.0 !important;
+	border-color: transparent !important;
+	padding: 2px !important;
+}
+td.mlabels-right {
+	line-height: 1.0 !important;
+	border-color: transparent !important;
+	vertical-align: top !important;
+	padding: 2px !important;
+}
+
+table.memberdecls {
+	width: 100% !important;
+}
+
+body, table, div, p, dl {
+	font-size: 15px !important;
+}
+
+

@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="false ">
+<title>RigidImpact | FROST</title>
+<link rel="stylesheet" href="http://localhost:4000/css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="http://localhost:4000/css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="http://localhost:4000/css/customstyles.css">
+<link rel="stylesheet" href="http://localhost:4000/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="http://localhost:4000/css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://localhost:4000/js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="http://localhost:4000/js/toc.js"></script>
+<script src="http://localhost:4000/js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="http://localhost:4000/images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="frost-dev" href="http://localhost:4000/feed.xml">
+
+<script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+   
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="http://localhost:4000/index.html">&nbsp;<span class="projectTitle"> FROST</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="http://localhost:4000/index.html">Home</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/introduction.html">Getting Started</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/html/inherits.html">API Documentation</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/news.html">Tutorial</a></li>
+                
+                
+                
+                <li><a href="https://github.com/ayonga/frost-dev/" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li>
+
+
+
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:ayonga27@gmail.com?subject=FROST feedback&body=I have some feedback about the RigidImpact page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+
+</li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="http://localhost:4000/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'http://localhost:4000search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="RigidImpact">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container", style="margin-top:50px">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">FROST </li>
+  
+  
+  
+      
+  
+  <li>
+      <a href="#">Main Page</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/inherits.html">Overview</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Classes</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/annotated.html">Class List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/classes.html">Class Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/hierarchy.html">Class Hierarchy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Members</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Methods</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_v.html#v">v</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Properties</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Files</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/files.html">File List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/globals.html">File Members</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Related Pages</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/todo.html">Todo List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/newfeat1_0.html">New features</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div> <!-- do not remove this div, it is closed by doxygen! -->
+  <script type="text/javascript" src="dynsections.js"></script>
+
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--<link href="customdoxygen.css" rel="stylesheet" type="text/css" />-->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:4000/css/jquery.smartmenus.bootstrap.css">
+  
+
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.min.js"></script>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.bootstrap.min.js"></script>
+  <script type="text/javascript" src="doxy-boot.js"></script>
+  <!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="classRigidImpact-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">RigidImpact</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classRigidImpact.html" title="RigidImpact represents a rigid body impact map assuming that the impact is plastic and occurs instant...">RigidImpact</a> represents a rigid body impact map assuming that the impact is plastic and occurs instantaneously.  
+ <a href="classRigidImpact.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for RigidImpact:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classRigidImpact__inherit__graph.svg" width="174" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad034a57a960665c8aab6f70c46d9240a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#ad034a57a960665c8aab6f70c46d9240a">RigidImpact</a> (<a class="el" href="classchar.html">char</a> name,RigidLinks model,<a class="el" href="classchar.html">char</a> event)</td></tr>
+<tr class="memdesc:ad034a57a960665c8aab6f70c46d9240a"><td class="mdescLeft">&#160;</td><td class="mdescRight">the class constructin method  <a href="#ad034a57a960665c8aab6f70c46d9240a">More...</a><br /></td></tr>
+<tr class="separator:ad034a57a960665c8aab6f70c46d9240a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad925320584772e451f74e5df8435c53e"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#ad925320584772e451f74e5df8435c53e">addImpactConstraint</a> (<a class="el" href="classHolonomicConstraint.html">HolonomicConstraint</a> constr)</td></tr>
+<tr class="memdesc:ad925320584772e451f74e5df8435c53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an impact constraint to the rigid impact map.  <a href="#ad925320584772e451f74e5df8435c53e">More...</a><br /></td></tr>
+<tr class="separator:ad925320584772e451f74e5df8435c53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5864d9954d6b2bd598d9e60b39ec0f6"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#aa5864d9954d6b2bd598d9e60b39ec0f6">removeImpactConstraint</a> (<a class="el" href="classcellstr.html">cellstr</a> name)</td></tr>
+<tr class="memdesc:aa5864d9954d6b2bd598d9e60b39ec0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove impact (holonomic) constraints defined for the system.  <a href="#aa5864d9954d6b2bd598d9e60b39ec0f6">More...</a><br /></td></tr>
+<tr class="separator:aa5864d9954d6b2bd598d9e60b39ec0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa99b7bd8d4192fc556c30aa6b27c017c"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#aa99b7bd8d4192fc556c30aa6b27c017c">rigidImpactConstraint</a> (<a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> nlp,<a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> src,<a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> tar,<a class="el" href="classstruct.html">struct</a> bounds,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:aa99b7bd8d4192fc556c30aa6b27c017c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impose system specific constraints as NLP constraints for the trajectory optimization problem.  <a href="#aa99b7bd8d4192fc556c30aa6b27c017c">More...</a><br /></td></tr>
+<tr class="separator:aa99b7bd8d4192fc556c30aa6b27c017c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a032ee4d9f2a3841eebb2616172cbcea5"><td class="memItemLeft" align="right" valign="top">function [   tn ,   xn ,   lambda  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#a032ee4d9f2a3841eebb2616172cbcea5">calcDiscreteMap</a> (t,<a class="el" href="classcolvec.html">colvec</a> x, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a032ee4d9f2a3841eebb2616172cbcea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must implement this method by its own.  <a href="#a032ee4d9f2a3841eebb2616172cbcea5">More...</a><br /></td></tr>
+<tr class="separator:a032ee4d9f2a3841eebb2616172cbcea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d6578798073eab29e66b260d7d63a5"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#ab0d6578798073eab29e66b260d7d63a5">compile</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ab0d6578798073eab29e66b260d7d63a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#ab0d6578798073eab29e66b260d7d63a5">More...</a><br /></td></tr>
+<tr class="separator:ab0d6578798073eab29e66b260d7d63a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classDiscreteDynamics"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classDiscreteDynamics')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classDiscreteDynamics.html">DiscreteDynamics</a></td></tr>
+<tr class="memitem:af150bb07faed027a02346fc5c4aaba27 inherit pub_methods_classDiscreteDynamics"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteDynamics.html#af150bb07faed027a02346fc5c4aaba27">DiscreteDynamics</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name,<a class="el" href="classchar.html">char</a> event)</td></tr>
+<tr class="memdesc:af150bb07faed027a02346fc5c4aaba27 inherit pub_methods_classDiscreteDynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">the constructor function for <a class="el" href="classDiscreteDynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events...">DiscreteDynamics</a> class objects  <a href="classDiscreteDynamics.html#af150bb07faed027a02346fc5c4aaba27">More...</a><br /></td></tr>
+<tr class="separator:af150bb07faed027a02346fc5c4aaba27 inherit pub_methods_classDiscreteDynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a77ec98fb20b6df0d15fe864c22628f inherit pub_methods_classDiscreteDynamics"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteDynamics.html#a4a77ec98fb20b6df0d15fe864c22628f">addState</a> (<a class="el" href="classSymVariable.html">SymVariable</a> x,<a class="el" href="classSymVariable.html">SymVariable</a> xn,<a class="el" href="classSymVariable.html">SymVariable</a> dx,<a class="el" href="classSymVariable.html">SymVariable</a> dxn)</td></tr>
+<tr class="memdesc:a4a77ec98fb20b6df0d15fe864c22628f inherit pub_methods_classDiscreteDynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload the superclass <code>addState</code> method with fixed state fields  <a href="classDiscreteDynamics.html#a4a77ec98fb20b6df0d15fe864c22628f">More...</a><br /></td></tr>
+<tr class="separator:a4a77ec98fb20b6df0d15fe864c22628f inherit pub_methods_classDiscreteDynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace9e0a42dcc96c5828bab2e14fe9db29 inherit pub_methods_classDiscreteDynamics"><td class="memItemLeft" align="right" valign="top">function [   tn ,   xn  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteDynamics.html#ace9e0a42dcc96c5828bab2e14fe9db29">calcDiscreteMap</a> (<a class="el" href="classdouble.html">double</a> t,<a class="el" href="classcolvec.html">colvec</a> x,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ace9e0a42dcc96c5828bab2e14fe9db29 inherit pub_methods_classDiscreteDynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must implement this method by its own.  <a href="classDiscreteDynamics.html#ace9e0a42dcc96c5828bab2e14fe9db29">More...</a><br /></td></tr>
+<tr class="separator:ace9e0a42dcc96c5828bab2e14fe9db29 inherit pub_methods_classDiscreteDynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e456b72bca23bae715d212f1cf920a inherit pub_methods_classDiscreteDynamics"><td class="memItemLeft" align="right" valign="top">function <a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteDynamics.html#ad3e456b72bca23bae715d212f1cf920a">IdentityMapConstraint</a> (<a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> nlp,<a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> src,<a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> tar,<a class="el" href="classstruct.html">struct</a> bounds,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ad3e456b72bca23bae715d212f1cf920a inherit pub_methods_classDiscreteDynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impose system specific constraints as NLP constraints for the trajectory optimization problem.  <a href="classDiscreteDynamics.html#ad3e456b72bca23bae715d212f1cf920a">More...</a><br /></td></tr>
+<tr class="separator:ad3e456b72bca23bae715d212f1cf920a inherit pub_methods_classDiscreteDynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a5693f16166671aec61db6b88fb83cde9">addState</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add state variables of the dynamical system.  <a href="classDynamicalSystem.html#a5693f16166671aec61db6b88fb83cde9">More...</a><br /></td></tr>
+<tr class="separator:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a1e40a6d810f010012b9baa31d68cd6b3">addInput</a> (category, name, var, gf, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add input variables of the dynamical system.  <a href="classDynamicalSystem.html#a1e40a6d810f010012b9baa31d68cd6b3">More...</a><br /></td></tr>
+<tr class="separator:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#aa0a12e5b2dab2e82cf4eb0963232b36a">removeInput</a> (category, name)</td></tr>
+<tr class="memdesc:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove input variables of the dynamical system.  <a href="classDynamicalSystem.html#aa0a12e5b2dab2e82cf4eb0963232b36a">More...</a><br /></td></tr>
+<tr class="separator:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a8e90549435054b72ff63a320e24491f7">addParam</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add parameter variables of the dynamical system.  <a href="classDynamicalSystem.html#a8e90549435054b72ff63a320e24491f7">More...</a><br /></td></tr>
+<tr class="separator:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a84134aa9f80d4371b5c7042389b6c0ba">removeParam</a> (param_name)</td></tr>
+<tr class="memdesc:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove parameter variables of the dynamical system.  <a href="classDynamicalSystem.html#a84134aa9f80d4371b5c7042389b6c0ba">More...</a><br /></td></tr>
+<tr class="separator:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a2aa34f1a91ef223214ca2c0107e3b069">setParamValue</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the actual value of the system parameters  <a href="classDynamicalSystem.html#a2aa34f1a91ef223214ca2c0107e3b069">More...</a><br /></td></tr>
+<tr class="separator:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a41c2c076844b61cbd10f1796ef5b2c20">compile</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="classDynamicalSystem.html#a41c2c076844b61cbd10f1796ef5b2c20">More...</a><br /></td></tr>
+<tr class="separator:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a0159cd3624ed7282c0280b67739a83cc">DynamicalSystem</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class construction function.  <a href="classDynamicalSystem.html#a0159cd3624ed7282c0280b67739a83cc">More...</a><br /></td></tr>
+<tr class="separator:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ac2d532f9277eec4c2bd9fb257056c77e">setName</a> (name)</td></tr>
+<tr class="memdesc:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the name of the dynamical system  <a href="classDynamicalSystem.html#ac2d532f9277eec4c2bd9fb257056c77e">More...</a><br /></td></tr>
+<tr class="separator:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   var_group  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a48eaf6ea3ab14462c1a7cfa03206d3af">validateVarName</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unilateral (inequality) constraints on the dynamical system states and inputs.  <a href="classDynamicalSystem.html#a48eaf6ea3ab14462c1a7cfa03206d3af">More...</a><br /></td></tr>
+<tr class="separator:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a3f38330ce1a44879b0599e0584e147aa">setType</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
+<tr class="memdesc:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of the dynamical system.  <a href="classDynamicalSystem.html#a3f38330ce1a44879b0599e0584e147aa">More...</a><br /></td></tr>
+<tr class="separator:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ae2496bc8a16810854580b387818fdd30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmatrix.html">matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#ae2496bc8a16810854580b387818fdd30">R</a></td></tr>
+<tr class="memdesc:ae2496bc8a16810854580b387818fdd30"><td class="mdescLeft">&#160;</td><td class="mdescRight">The coordinate relabeling matrix.  <a href="#ae2496bc8a16810854580b387818fdd30">More...</a><br /></td></tr>
+<tr class="separator:ae2496bc8a16810854580b387818fdd30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classHolonomicConstraint.html">HolonomicConstraint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRigidImpact.html#aa0ebc04ff82ed12bcc7bb2175abf5a1a">ImpactConstraints</a></td></tr>
+<tr class="memdesc:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The impact constraints (holonomic)  <a href="#aa0ebc04ff82ed12bcc7bb2175abf5a1a">More...</a><br /></td></tr>
+<tr class="separator:aa0ebc04ff82ed12bcc7bb2175abf5a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classDiscreteDynamics"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classDiscreteDynamics')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classDiscreteDynamics.html">DiscreteDynamics</a></td></tr>
+<tr class="memitem:aaf749aa5fb24c4008794c782fa58c1f3 inherit pub_attribs_classDiscreteDynamics"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteDynamics.html#aaf749aa5fb24c4008794c782fa58c1f3">UserNlpConstraint</a></td></tr>
+<tr class="memdesc:aaf749aa5fb24c4008794c782fa58c1f3 inherit pub_attribs_classDiscreteDynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">A handle to a function called by a trajectory optimization NLP to enforce system specific constraints.  <a href="classDiscreteDynamics.html#aaf749aa5fb24c4008794c782fa58c1f3">More...</a><br /></td></tr>
+<tr class="separator:aaf749aa5fb24c4008794c782fa58c1f3 inherit pub_attribs_classDiscreteDynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b4b01a0efbc670cefdbe3ed4f70a65 inherit pub_attribs_classDiscreteDynamics"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDiscreteDynamics.html#a72b4b01a0efbc670cefdbe3ed4f70a65">EventName</a></td></tr>
+<tr class="memdesc:a72b4b01a0efbc670cefdbe3ed4f70a65 inherit pub_attribs_classDiscreteDynamics"><td class="mdescLeft">&#160;</td><td class="mdescRight">The event name that triggers the discrete dynamics.  <a href="classDiscreteDynamics.html#a72b4b01a0efbc670cefdbe3ed4f70a65">More...</a><br /></td></tr>
+<tr class="separator:a72b4b01a0efbc670cefdbe3ed4f70a65 inherit pub_attribs_classDiscreteDynamics"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#adc61a10791020cef1e8b6640fbd4e220">Name</a></td></tr>
+<tr class="memdesc:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique name identification of the system.  <a href="classDynamicalSystem.html#adc61a10791020cef1e8b6640fbd4e220">More...</a><br /></td></tr>
+<tr class="separator:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad13f1f77ca5f1d205aaf02b8223006be inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ad13f1f77ca5f1d205aaf02b8223006be">ExternalInputFun</a></td></tr>
+<tr class="memdesc:ad13f1f77ca5f1d205aaf02b8223006be inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the external input defined on the dynamical system.  <a href="classDynamicalSystem.html#ad13f1f77ca5f1d205aaf02b8223006be">More...</a><br /></td></tr>
+<tr class="separator:ad13f1f77ca5f1d205aaf02b8223006be inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a23faa51b2b643490ad554107a1c949c5">Type</a></td></tr>
+<tr class="memdesc:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The highest order of the state derivatives of the system.  <a href="classDynamicalSystem.html#a23faa51b2b643490ad554107a1c949c5">More...</a><br /></td></tr>
+<tr class="separator:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a6d5df3dd7741e0f4efc56a6b727cd4f8">States</a></td></tr>
+<tr class="memdesc:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains the symbolic representation of state variables.  <a href="classDynamicalSystem.html#a6d5df3dd7741e0f4efc56a6b727cd4f8">More...</a><br /></td></tr>
+<tr class="separator:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a5bd6eb3599c404320bc2e8a9ebcd7ae6">numState</a></td></tr>
+<tr class="memdesc:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total number of system states.  <a href="classDynamicalSystem.html#a5bd6eb3599c404320bc2e8a9ebcd7ae6">More...</a><br /></td></tr>
+<tr class="separator:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a5f85366dc922b01cba937c637f974f93">Inputs</a></td></tr>
+<tr class="memdesc:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains the symbolic representation of input variables.  <a href="classDynamicalSystem.html#a5f85366dc922b01cba937c637f974f93">More...</a><br /></td></tr>
+<tr class="separator:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ab3468418c7af6d1a29826c52fbb8a3f3">Params</a></td></tr>
+<tr class="memdesc:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parameters of the system.  <a href="classDynamicalSystem.html#ab3468418c7af6d1a29826c52fbb8a3f3">More...</a><br /></td></tr>
+<tr class="separator:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a830da5aafff9e09005dbfdf92fca7028">Gvec</a></td></tr>
+<tr class="memdesc:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct of input vector fields Gvec(x,u) <a class="el" href="classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="classDynamicalSystem.html#a830da5aafff9e09005dbfdf92fca7028">More...</a><br /></td></tr>
+<tr class="separator:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#abb47145f1dbc23468e77fbd4f63dfaf3">Gmap</a></td></tr>
+<tr class="memdesc:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct of input map Gmap(x) <a class="el" href="classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="classDynamicalSystem.html#abb47145f1dbc23468e77fbd4f63dfaf3">More...</a><br /></td></tr>
+<tr class="separator:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
+<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
+<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
+<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
+<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
+<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
+<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
+<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
+<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
+<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
+<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
+<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
+<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
+<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
+<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
+<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
+<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
+<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
+<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
+<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
+<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
+<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
+<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
+<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
+<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="classhandle.html#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
+<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
+<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
+<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
+<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
+<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
+<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
+<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   value  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a28065d40ff9cec20de0e49c61801c211">getValue</a> (vars)</td></tr>
+<tr class="memdesc:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the variables (vars) value that are stored during computing the dynamics  <a href="classDynamicalSystem.html#a28065d40ff9cec20de0e49c61801c211">More...</a><br /></td></tr>
+<tr class="separator:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5acd29436293588d02136412c3149c inherit pro_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   v_type  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#abb5acd29436293588d02136412c3149c">validateSystemType</a> (type)</td></tr>
+<tr class="memdesc:abb5acd29436293588d02136412c3149c inherit pro_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">validate if it is valid system type  <a href="classDynamicalSystem.html#abb5acd29436293588d02136412c3149c">More...</a><br /></td></tr>
+<tr class="separator:abb5acd29436293588d02136412c3149c inherit pro_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a3d3f49465f71ce92edcafa592925a170">t_</a></td></tr>
+<tr class="memdesc:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time.  <a href="classDynamicalSystem.html#a3d3f49465f71ce92edcafa592925a170">More...</a><br /></td></tr>
+<tr class="separator:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#aa9d64b145e769d1abe8fe74ee0f54af7">states_</a></td></tr>
+<tr class="memdesc:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The states.  <a href="classDynamicalSystem.html#aa9d64b145e769d1abe8fe74ee0f54af7">More...</a><br /></td></tr>
+<tr class="separator:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade263c814bb20851e716abd686795174 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ade263c814bb20851e716abd686795174">inputs_</a></td></tr>
+<tr class="memdesc:ade263c814bb20851e716abd686795174 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The inputs.  <a href="classDynamicalSystem.html#ade263c814bb20851e716abd686795174">More...</a><br /></td></tr>
+<tr class="separator:ade263c814bb20851e716abd686795174 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a31a12a8e598c2a650b0ae89e21188968">params_</a></td></tr>
+<tr class="memdesc:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parameters.  <a href="classDynamicalSystem.html#a31a12a8e598c2a650b0ae89e21188968">More...</a><br /></td></tr>
+<tr class="separator:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a55123ad63013e90cd3b6f309b85e2077">GmapName_</a></td></tr>
+<tr class="memdesc:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the Gmap functions.  <a href="classDynamicalSystem.html#a55123ad63013e90cd3b6f309b85e2077">More...</a><br /></td></tr>
+<tr class="separator:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a6ada83aae2363123232f41cc150b06d7">GvecName_</a></td></tr>
+<tr class="memdesc:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the Gvec functions.  <a href="classDynamicalSystem.html#a6ada83aae2363123232f41cc150b06d7">More...</a><br /></td></tr>
+<tr class="separator:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classRigidImpact.html" title="RigidImpact represents a rigid body impact map assuming that the impact is plastic and occurs instant...">RigidImpact</a> represents a rigid body impact map assuming that the impact is plastic and occurs instantaneously. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad034a57a960665c8aab6f70c46d9240a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad034a57a960665c8aab6f70c46d9240a">&#9670;&nbsp;</a></span>RigidImpact()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RigidImpact.RigidImpact </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RigidLinks&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the class constructin method </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the rigid impact dynamics </td></tr>
+    <tr><td class="paramname">model</td><td>the RigidLinks model object </td></tr>
+    <tr><td class="paramname">event</td><td>the event name of the rigid impact</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of model:</dt><dd></dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad925320584772e451f74e5df8435c53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad925320584772e451f74e5df8435c53e">&#9670;&nbsp;</a></span>addImpactConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = RigidImpact.addImpactConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classHolonomicConstraint.html">HolonomicConstraint</a>&#160;</td>
+          <td class="paramname"><em>constr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds an impact constraint to the rigid impact map. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constr</td><td>the expression of the constraints </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a032ee4d9f2a3841eebb2616172cbcea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a032ee4d9f2a3841eebb2616172cbcea5">&#9670;&nbsp;</a></span>calcDiscreteMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function [ <a class="el" href="classdouble.html">double</a> tn , <a class="el" href="classcolvec.html">colvec</a> xn , <a class="el" href="classstruct.html">struct</a> lambda  ] = RigidImpact.calcDiscreteMap </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcolvec.html">colvec</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculates the discrete map of the dynamical system that maps xminus from xplus. Subclasses must implement this method by its own. </p>
+<dl class="section note"><dt>Note</dt><dd>By default, this discrete map will be a Identity map. For specific discrete map, please implement as a subclass of this class</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the time instant </td></tr>
+    <tr><td class="paramname">x</td><td>the pre-impact states</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">tn</td><td>the time after reset </td></tr>
+    <tr><td class="paramname">xn</td><td>the post-impact states </td></tr>
+    <tr><td class="paramname">lambda</td><td>the impulsive wrench </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab0d6578798073eab29e66b260d7d63a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d6578798073eab29e66b260d7d63a5">&#9670;&nbsp;</a></span>compile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = RigidImpact.compile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classRigidImpact.html#ab0d6578798073eab29e66b260d7d63a5">compile</a> ( ..., StackVariable, File, ForceExport, BuildMex, Namespace ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5864d9954d6b2bd598d9e60b39ec0f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5864d9954d6b2bd598d9e60b39ec0f6">&#9670;&nbsp;</a></span>removeImpactConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = RigidImpact.removeImpactConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcellstr.html">cellstr</a>&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove impact (holonomic) constraints defined for the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the constraint</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="aa99b7bd8d4192fc556c30aa6b27c017c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa99b7bd8d4192fc556c30aa6b27c017c">&#9670;&nbsp;</a></span>rigidImpactConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function <a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a> nlp  = RigidImpact.rigidImpactConstraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a>&#160;</td>
+          <td class="paramname"><em>nlp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a>&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classTrajectoryOptimization.html">TrajectoryOptimization</a>&#160;</td>
+          <td class="paramname"><em>tar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
+          <td class="paramname"><em>bounds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Impose system specific constraints as NLP constraints for the trajectory optimization problem. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nlp</td><td>an trajectory optimization NLP object of the system</td></tr>
+    <tr><td class="paramname">src</td><td>the NLP of the source domain system</td></tr>
+    <tr><td class="paramname">tar</td><td>the NLP of the target domain system</td></tr>
+    <tr><td class="paramname">bounds</td><td>a struct data contains the boundary values </td></tr>
+    <tr><td class="paramname">varargin</td><td>extra argument </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa0ebc04ff82ed12bcc7bb2175abf5a1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ebc04ff82ed12bcc7bb2175abf5a1a">&#9670;&nbsp;</a></span>ImpactConstraints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RigidImpact.ImpactConstraints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The impact constraints (holonomic) </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="ae2496bc8a16810854580b387818fdd30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2496bc8a16810854580b387818fdd30">&#9670;&nbsp;</a></span>R</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RigidImpact.R</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The coordinate relabeling matrix. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has custom functionality when its value is changed. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/<a class="el" href="RigidImpact_8m.html">RigidImpact.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/<a class="el" href="robotics_2_0DRigidImpact_2calcDiscreteMap_8m.html">calcDiscreteMap.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/<a class="el" href="robotics_2_0DRigidImpact_2compile_8m.html">compile.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/<a class="el" href="rigidImpactConstraint_8m.html">rigidImpactConstraint.m</a></li>
+</ul>
+</div><!-- contents -->
+
+  <footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2017 AMBER Lab. All rights reserved. <br />
+ Site last generated: Aug 27, 2017 <br />
+<p><img src="http://localhost:4000/images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-104404898-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>

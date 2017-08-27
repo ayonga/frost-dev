@@ -1,0 +1,5 @@
+<map id="CoordinateFrame" name="CoordinateFrame">
+<area shape="rect" id="node3" href="$classRigidBody.html" title="A coordinate frame that is rigidly attached to the CoM position of a rigid link. In addition..." alt="" coords="5,155,88,181"/>
+<area shape="rect" id="node4" href="$classRigidJoint.html" title="A coordinate frame that is rigidly attached to the origin a rigid joint and the child link of the joi..." alt="" coords="112,155,192,181"/>
+<area shape="rect" id="node2" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="69,5,129,32"/>
+</map>

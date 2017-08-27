@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="false ">
+<title>Member List | FROST</title>
+<link rel="stylesheet" href="http://localhost:4000/css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="http://localhost:4000/css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="http://localhost:4000/css/customstyles.css">
+<link rel="stylesheet" href="http://localhost:4000/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="http://localhost:4000/css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://localhost:4000/js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="http://localhost:4000/js/toc.js"></script>
+<script src="http://localhost:4000/js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="http://localhost:4000/images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="frost-dev" href="http://localhost:4000/feed.xml">
+
+<script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+   
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="http://localhost:4000/index.html">&nbsp;<span class="projectTitle"> FROST</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="http://localhost:4000/index.html">Home</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/introduction.html">Getting Started</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/html/inherits.html">API Documentation</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/news.html">Tutorial</a></li>
+                
+                
+                
+                <li><a href="https://github.com/ayonga/frost-dev/" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li>
+
+
+
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:ayonga27@gmail.com?subject=FROST feedback&body=I have some feedback about the Member List page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+
+</li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="http://localhost:4000/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'http://localhost:4000search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="Member List">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container", style="margin-top:50px">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">FROST </li>
+  
+  
+  
+      
+  
+  <li>
+      <a href="#">Main Page</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/inherits.html">Overview</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Classes</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/annotated.html">Class List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/classes.html">Class Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/hierarchy.html">Class Hierarchy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Members</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Methods</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_v.html#v">v</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Properties</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Files</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/files.html">File List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/globals.html">File Members</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Related Pages</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/todo.html">Todo List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/newfeat1_0.html">New features</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div> <!-- do not remove this div, it is closed by doxygen! -->
+  <script type="text/javascript" src="dynsections.js"></script>
+
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--<link href="customdoxygen.css" rel="stylesheet" type="text/css" />-->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:4000/css/jquery.smartmenus.bootstrap.css">
+  
+
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.min.js"></script>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.bootstrap.min.js"></script>
+  <script type="text/javascript" src="doxy-boot.js"></script>
+  <!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">VirtualConstraint Member List</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This is the complete list of members for <a class="el" href="classVirtualConstraint.html">VirtualConstraint</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a10e009911e2ce31deb6daba2f01dfbe7">ActualFuncs</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#aca39c947d366575e13624e7a64f1d0f8">ActualFuncsName_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#af6d840a4c996cb0fda8f65253fced201">ActualOutput</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a391b1a7c4fd488b8d27dc3e41634033e">calcActual</a>(x, dx)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a2913971f86236dc7b2b88d6ae5470f08">calcDesired</a>(t, x, dx, a, p)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a4a3ada2a66ad2e034a41e5c75a5d5e0f">calcPhaseVariable</a>(t, x, dx, p)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a65358d8ab57f8df68d23bd751daec038">configure</a>(varargin)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a812b72dc64c38b7a397a05c36dca6189">DesiredFuncs</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a947efa4fa0b6ddb90902aba919027c10">DesiredFuncsName_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a61df04067c308e8716c28a5f92665d0c">DesiredOutput</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a33aacefbea123e22255eea4fe9bbd3cc">DesiredType</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a4ce8b733dab3e63aa7b4329037f71e8d">Dimension</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a38747bc9af2a4d545298b2067ec9f489">export</a>(export_path, varargin)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a6bba94adf28d6f9a0f8ed1cda38cec5b">hasOffset</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a14ee87fc821d23ab4002b35fe1126ae3">hasPhaseParam</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a92d5167605a61953faac5625a0975049">Holonomic</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#aa7f6ef010f64da23b636d6c82fc50114">imposeNLPConstraint</a>(nlp, ep, nzy)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#afe77e169d31659fbe64ca2ca0b5ee841">Model</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#aa7de8f687fe3d03642a41cc79da7a2bf">Name</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a34eac43abb0c5916de03c38bdf7e3e4f">OffsetParamName</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#af645bf44911f0e475e9b4a4f15543a27">OffsetParams</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#af9988b1eb3d52d72a601c362211dcb62">OutputFuncs</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#ac508db1dd019274fcf4ed9fd20c4a0f2">OutputFuncsName_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a9f69b2f08d30a90a53a95f74fa3ff607">OutputLabel</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a88f458eefd0772e353cf104b1629958f">OutputParamName</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a635a99fa7828b80ed7df7c2763b9bb44">OutputParams</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#acaa588b02d93048f0203f9b1e4d20b3a">PhaseFuncs</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#ac84f6f2afeeeca41a847364cfb6978e8">PhaseFuncsName_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a424c5f7cd56b4b63ff6cbf9218f2b559">PhaseParamName</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a1ed87743c12cf5ba9ff1ed29c35229f0">PhaseParams</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a51c6f80cc3b886946df9f8c0375bf1b0">PhaseType</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#ae3310be96ebcbe0015686739ddb1e9d9">PhaseVariable</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a2eb6228eea8c130811f86548865cb8b6">PolyDegree</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a2770abf9fe5d9ce314b91dc02b081a7f">RelativeDegree</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a2d9b989ee5b8dba81bfdc35173914b43">setDesiredType</a>(char type,integer degree)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a116435ae0ad5995eeee1e94d8cc1c429">setHolonomic</a>(logical type)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a99a3654483e6e5731a1128fc6c7f4e42">setOutputLabel</a>(cellstr label)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#ad1aa423ba581eed8aabd334d973701eb">setPhaseType</a>(char type)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a82bd0e7b5d079c02d09d037dbb9e6afa">setPhaseVariable</a>(SymExpression tau,SymVariable p)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#ac6015856ffc21c4345b5d50cbd4c73fc">setRelativeDegree</a>(integer degree)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a61e2915dc364ba14dbd61d8f32ceaa02">tau_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td><td class="entry"><a class="el" href="classhandle.html">handle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a5ae4c92b04f21694e287a5491467bdcf">validateName</a>(name)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#a1dc73a6977696a159d304490b3721b0a">VirtualConstraint</a>(DynamicalSystem model, ya,SymExpression name, varargin)</td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classVirtualConstraint.html#a3a64f81ec0b51fd1d3cad72019226d10">ya_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classVirtualConstraint.html#abaeb211959983c708c39561ceceaaf73">yd_</a></td><td class="entry"><a class="el" href="classVirtualConstraint.html">VirtualConstraint</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+</table></div><!-- contents -->
+
+  <footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2017 AMBER Lab. All rights reserved. <br />
+ Site last generated: Aug 27, 2017 <br />
+<p><img src="http://localhost:4000/images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-104404898-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>

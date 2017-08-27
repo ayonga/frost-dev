@@ -1,0 +1,5807 @@
+[
+
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/AbstractAnimator.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/AbstractAnimator_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/AnimatorPointOfView.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/AnimatorPointOfView_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/CLFQP.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/CLFQP_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@ContactFrame/ContactFrame.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/ContactFrame_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/ContinuousDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/ContinuousDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/Controller.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Controller_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/CoordinateFrame.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/CoordinateFrame_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Cylinder.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Cylinder_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DiscreteDynamics/DiscreteDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/DiscreteDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/DisplayItem.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/DisplayItem_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Display.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Display_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/DynamicalSystem.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/DynamicalSystem_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/HolonomicConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/HolonomicConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/HybridSystem.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/HybridSystem_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/HybridTrajectoryOptimization.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/HybridTrajectoryOptimization_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/IOFeedback.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/IOFeedback_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DiscreteDynamics/IdentityMapConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/IdentityMapConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/IpoptApplication.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/IpoptApplication_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/JointPD.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/JointPD_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/JointSphere.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/JointSphere_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Lines.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Lines_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/LinkSphere.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/LinkSphere_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/NlpFunction.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/NlpFunction_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/NlpVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/NlpVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/NonlinearProgram.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/NonlinearProgram_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/control/OutputPD.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/OutputPD_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Patch.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Patch_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Pyramid.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Pyramid_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Rectangler.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Rectangler_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/Ref.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Ref_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidBody/RigidBody.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/RigidBody_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/RigidImpact.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/RigidImpact_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/RigidJoint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/RigidJoint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/RobotLinks.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/RobotLinks_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/SimLogger.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/SimLogger_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/SolverApplication.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/SolverApplication_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/Sphere.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/Sphere_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/SymExpression.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/SymExpression_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymFunction/SymFunction.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/SymFunction_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymVariable/SymVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/SymVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator/TimeStepData.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/TimeStepData_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/TrajectoryOptimization.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/TrajectoryOptimization_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@UnilateralConstraint/UnilateralConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/UnilateralConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint/VirtualConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/VirtualConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/abs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/abs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/acos.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/acos_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/acosh.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/acosh_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/acot.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/acot_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/acoth.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/acoth_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/acsc.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/acsc_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/acsch.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/acsch_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addCollocationConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addCollocationConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/addContact.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addContact_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addCost.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addCost_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addDynamicsConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addDynamicsConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/addEdge.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addEdge_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/addEvent.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addEvent_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/addFixedJoint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addFixedJoint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/addHolonomicConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addHolonomicConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addInputVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addInputVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/addInput.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addInput_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/addJumpConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addJumpConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addNodeConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addNodeConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addNodeCost.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addNodeCost_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addParamVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addParamVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/addParam.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addParam_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addRunningCost.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addRunningCost_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addStateVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addStateVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/addState.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addState_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addTimeVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addTimeVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/addUnilateralConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addUnilateralConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/addVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/addVertex.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addVertex_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/addVirtualConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addVirtualConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/addpath_matlab_utilities.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/addpath__matlab__utilities_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/annotated",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/appendDriftVector.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/appendDriftVector_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/array2str.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/array2str_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/array2struct.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/array2struct_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/asec.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/asec_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/asech.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/asech_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/asin.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/asin_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/asinh.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/asinh_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/atan2.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/atan2_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/atan.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/atan_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/atanh.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/atanh_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/blank_struct.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/blank__struct_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mex/build_mex.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/build__mex_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint/calcActual.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcActual_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/calcConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint/calcDesired.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcDesired_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/calcDriftVector.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcDriftVector_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/calcDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/calcJacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcJacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/calcMassMatrix.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcMassMatrix_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint/calcPhaseVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/calcPhaseVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/cell2str.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/cell2str_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/cell2tensor.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/cell2tensor_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/cellexpand.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/cellexpand_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/checkFuncs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/checkFuncs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/checkGuard.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/checkGuard_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/check_var_exist.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/check__var__exist_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classCLFQP-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "CLFQP",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classCLFQP",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classContinuousDynamics-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "ContinuousDynamics",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classContinuousDynamics",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classController-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Controller",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classController",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classCoordinateFrame-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "CoordinateFrame",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classCoordinateFrame",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classDiscreteDynamics-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "DiscreteDynamics",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classDiscreteDynamics",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classDynamicalSystem-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "DynamicalSystem",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classDynamicalSystem",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classHolonomicConstraint-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "HolonomicConstraint",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classHolonomicConstraint",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classHybridSystem-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "HybridSystem",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classHybridSystem",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classHybridTrajectoryOptimization-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "HybridTrajectoryOptimization",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classHybridTrajectoryOptimization",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classIOFeedback-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "IOFeedback",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classIOFeedback",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classIpoptApplication-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "IpoptApplication",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classIpoptApplication",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classJointPD-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "JointPD",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classJointPD",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classNlpFunction-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "NlpFunction",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classNlpFunction",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classNlpVariable-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "NlpVariable",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classNlpVariable",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classNonlinearProgram-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "NonlinearProgram",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classNonlinearProgram",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classOutputPD-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "OutputPD",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classOutputPD",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRef-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Ref",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRef",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRigidBody-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "RigidBody",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRigidBody",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRigidImpact-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "RigidImpact",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRigidImpact",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRigidJoint-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "RigidJoint",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRigidJoint",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRobotLinks-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "RobotLinks",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classRobotLinks",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSimLogger-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SimLogger",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSimLogger",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSolverApplication-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SolverApplication",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSolverApplication",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSymExpression-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SymExpression",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSymExpression",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSymFunction-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SymFunction",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSymFunction",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSymVariable-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SymVariable",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classSymVariable",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classTrajectoryOptimization-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "TrajectoryOptimization",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classTrajectoryOptimization",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classUnilateralConstraint-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "UnilateralConstraint",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classUnilateralConstraint",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classVirtualConstraint-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "VirtualConstraint",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classVirtualConstraint",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/class_substitutes.c File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/class__substitutes_8c",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "cell",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classcell",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "cellstr",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classcellstr",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "char",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classchar",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "colvec",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classcolvec",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "digraph",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classdigraph",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "double",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classdouble",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Index",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classes",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Cylinder-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Cylinder",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Cylinder",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Display-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Display",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Display",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1DisplayItem-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.DisplayItem",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1DisplayItem",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1JointSphere-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.JointSphere",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1JointSphere",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Lines-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Lines",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Lines",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1LinkSphere-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.LinkSphere",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1LinkSphere",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Patch-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Patch",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Patch",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Pyramid-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Pyramid",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Pyramid",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Rectangler-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Rectangler",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Rectangler",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Sphere-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator.Sphere",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfrost_1_1Animator_1_1Sphere",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "function_handle",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classfunction__handle",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Member List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classhandle-members",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "handle",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classhandle",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "integer",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classinteger",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "logical",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classlogical",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "matrix",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classmatrix",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "rowvec",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classrowvec",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "sparsematrix",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classsparsematrix",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "struct",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classstruct",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "table",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classtable",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "varargin",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classvarargin",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "varargout",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/classvarargout",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/clearKernel.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/clearKernel_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/clear_symbol.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/clear__symbol_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/computeBodyJacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeBodyJacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/computeCartesianPosition.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeCartesianPosition_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/computeEulerAngle.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeEulerAngle_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/computeForwardKinematics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeForwardKinematics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/computeHomogeneousTransform.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeHomogeneousTransform_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/computeSpatialJacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeSpatialJacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/computeTwist.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/computeTwist_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/configureActuator.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/configureActuator_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/configureDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/configureDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/configureKinematics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/configureKinematics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/configureVariables.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/configureVariables_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/conj.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/conj_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/contiguous_indices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/contiguous__indices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/cos.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/cos_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/cosh.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/cosh_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/cot.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/cot_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/coth.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/coth_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/create_object_array.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/create__object__array_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/csc.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/csc_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/csch.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/csch_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/det.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/det_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Contributed Developers",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/developers",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/developers.c File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/developers_8c",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/diag.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/diag_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_00d9364eeeee95835738c2cd4d098638",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_04845840fa51ddffbfb49beb8b4addb2",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@UnilateralConstraint Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_098367e3c580f901c89d0feea616fcb3",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymFunction Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_0a140e08d9415bc7e97ec116391e792f",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_0c9cc704c875c27ad888a7b678530703",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@ContactFrame Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_2b2bf3f3525edab285db7b18ed484775",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_2c24fe77582c582d62b817c3066eb7d7",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_31dda3246fa6325ee57926d03bb0e4e9",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_363c7dd63633bc0b67762e7ff7b5a8f6",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_3fb71e5882efe1e46d90cb02506cc25e",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymVariable Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_4197360a9cde77785eac1af13b1e838d",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_448ef8bf4e3a4b5692e46b302d72f3ba",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/graphics Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_46f2ea372f72b22635fbae6e938f32f8",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/control Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_5736dbe4dc2fcc3245dba44078f89b83",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_57d9ede575b84f3b57e579579b7fd954",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_5b5e741a0bf653afaee9102588f8f8a0",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mex Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_65c1d8654d615bb7739129db8302c579",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_70fcf45972686018cf73f211242311ab",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_71ac8bf331dfb0d0b2cf3a6c27181b6e",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_79fcba314f1b5894de559c73a79fba47",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_8307883ef21a4b3cc2329a21b89f85d0",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_994597f4058024bbcc3e77acc84d07d8",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_a6548488ab8d6807084367ef7463cf2c",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_a813c33b8bff3545bea354ff690aca96",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DiscreteDynamics Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_aae9ed024c18b0f3ec98eb79fedc1403",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/plot Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_aec3ab3dab8f79334cf691ec0f5267db",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_b31fed340e5f5cd75048126b704bbbab",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_b7e7e63722ceb507f7cdf41ce403df99",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_beea40304aa0851d91904095a017dcbc",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_c02edb81d504ff3718d292053c4eabea",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_c325a112bee11c07459ec2765ac7d96b",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_ca95eb69727e0c988690c0668154c074",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_d3e68e044fbc3278c344699d251cad90",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_d51ab24587dc4d6935f37fd9707b0656",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidBody Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_d90ffde3e0ea594c50b54258b8dddc0d",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/+frost/+Animator Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_f4e148dc1781c82ddd1eda8382369934",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_fdba3f3ea5e8721cddb66cf833126086",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint Directory Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/dir_ff47d474602b251f5514d537e56cbf91",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/directCollocation.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/directCollocation_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/doxygen.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/doxygen_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/eval_math.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/eval__math_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/eval_math_fun.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/eval__math__fun_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/even_sample.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/even__sample_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/even_sample_fields.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/even__sample__fields_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/exp.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/exp_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/expm.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/expm_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymFunction/exportHessian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/exportHessian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymFunction/exportJacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/exportJacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/extract_struct_slice.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/extract__struct__slice_8m",
+"summary": ""
+}
+,
+
+
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/feval.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/feval_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "File List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/files",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/findBaseLink.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/findBaseLink_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/findEndEffector.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/findEndEffector_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/firstOrderDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/firstOrderDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_c",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_d",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_e",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_f",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_c",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_d",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_e",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_f",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_g",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_h",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_i",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_j",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_l",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_n",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_o",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_p",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_r",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_s",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_t",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_u",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Functions",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_func_v",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_g",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_h",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_i",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_j",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_l",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_n",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_o",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_p",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_r",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_s",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_t",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_u",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_v",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_c",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_d",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_e",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_f",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_g",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_h",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_i",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_j",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_l",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_n",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_o",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_p",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_r",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_s",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_t",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_u",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_v",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members - Variables",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_vars_y",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/functions_y",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/general2math.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/general2math_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/general2str.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/general2str_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getBodyJacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getBodyJacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getCartesianPosition.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getCartesianPosition_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getComPosition.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getComPosition_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getEulerAngles.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getEulerAngles_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@ContactFrame/getFrictionCone.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getFrictionCone_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/getInitialGuess.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getInitialGuess_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getJointIndices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getJointIndices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getLimits.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getLimits_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getLinkIndices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getLinkIndices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/getPhaseIndex.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getPhaseIndex_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getRelativeEulerAngles.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getRelativeEulerAngles_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getSpatialJacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getSpatialJacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/getTotalMass.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getTotalMass_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/getTwist.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getTwist_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/getTwists.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getTwists_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/getVarInfo.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getVarInfo_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@ContactFrame/getZMPConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getZMPConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/get_base_dofs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/get__base__dofs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/getfieldd.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/getfieldd_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "File Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/globals",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "File Members",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/globals_func",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Graph Legend",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/graph_legend",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/hessian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/hessian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Class Hierarchy",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/hierarchy",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/plot/hline.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/hline_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/horzcat_domains.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/horzcat__domains_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/horzcat_fields.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/horzcat__fields_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/horzcat_fields_domains.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/horzcat__fields__domains_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/implode.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/implode_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymVariable/ind2label.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/ind2label_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/indent.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/indent_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "FROST Matlab Code Documentation",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Getting started with the Documentation Theme for Jekyll",
+"tags": "getting_started",
+"keywords": "sample homepage",
+"url": "http://localhost:4000/index.html",
+"summary": "These brief instructions will help you get started quickly with the theme. The other topics in this help provide additional information and detail about working with other aspects of this theme and Jekyll."
+}
+,
+
+
+
+{
+"title": "Class Hierarchy",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/inherits",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/initialize.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/initialize_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Introduction",
+"tags": "",
+"keywords": "",
+"url": "http://localhost:4000/pages/introduction",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isempty.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isempty_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isfinite.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isfinite_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isinf.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isinf_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/ismatrix.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/ismatrix_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isnan.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isnan_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isscalar.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isscalar_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isvector.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isvector_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/isvectorform.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/isvectorform_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/jacobian.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/jacobian_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/kron.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/kron_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymVariable/label2ind.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/label2ind_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/linearize.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/linearize_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/loadDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/loadDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/log10.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/log10_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/log2.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/log2_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/log.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/log_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/mat2math.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/mat2math_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/maxabs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/maxabs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "About the theme author",
+"tags": "getting_started",
+"keywords": "documentation theme, jekyll, technical writers, help authoring tools, hat replacements",
+"url": "http://localhost:4000/pages/mydoc_about",
+"summary": "I have used this theme for projects that I've worked on as a professional technical writer."
+}
+,
+
+
+
+{
+"title": "frost Namespace Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/namespacefrost",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "frost.Animator Namespace Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/namespacefrost_1_1Animator",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Namespace List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/namespaces",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "New features in _ProjectName_ Version 1.0",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/newfeat1_0",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "New features in _ProjectName_ Version 2.0",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/newfeat2_0",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "New features in _ProjectName_ Version 2.1",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/newfeat2_1",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "News",
+"tags": "",
+"keywords": "news, blog, updates, release notes, announcements",
+"url": "http://localhost:4000/pages/news",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "News",
+"tags": "",
+"keywords": "news, blog, updates, release notes, announcements",
+"url": "http://localhost:4000/pages/news_archive",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/configure.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/nlp_2_0DHybridTrajectoryOptimization_2configure_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setType.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/nlp_2_0DNlpFunction_2setType_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/configure.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/nlp_2_0DTrajectoryOptimization_2configure_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/nonzeros.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/nonzeros_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/nop.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/nop_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/norm.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/norm_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/num2mathstr.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/num2mathstr_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/numel.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/numel_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/nzind.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/nzind_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/solver/@IpoptApplication/optimize.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/optimize_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/outputfcn.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/outputfcn_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Related Pages",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/pages",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/graphics/patchline.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/patchline_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/plot/plot_format.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/plot__format_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/plot/plot_save.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/plot__save_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/rank.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/rank_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/regConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/regConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/regObjective.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/regObjective_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/regVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/regVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/removeConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/removeContact.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeContact_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/removeCost.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeCost_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/removeEvent.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeEvent_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/removeHolonomicConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeHolonomicConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/removeInput.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeInput_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/removeParam.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeParam_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/removeUnilateralConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeUnilateralConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/removeVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/removeVirtualConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/removeVirtualConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/rigidImpactConstraint.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/rigidImpactConstraint_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/rmEdge.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/rmEdge_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/rmVertex.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/rmVertex_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@ContactFrame/setType.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/robotics_2_0DContactFrame_2setType_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/calcDiscreteMap.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/robotics_2_0DRigidImpact_2calcDiscreteMap_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidImpact/compile.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/robotics_2_0DRigidImpact_2compile_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setType.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/robotics_2_0DRigidJoint_2setType_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RobotLinks/configure.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/robotics_2_0DRobotLinks_2configure_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/ros_load_urdf.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/ros__load__urdf_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/saveDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/saveDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sec.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sec_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sech.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sech_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/secondOrderDynamics.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/secondOrderDynamics_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setActuator.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setActuator_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setAuxdata.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setAuxdata_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setAxis.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setAxis_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setChainIndices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setChainIndices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setChild.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setChild_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setDependentVariable.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setDependentVariable_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setDimension.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setDimension_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/setDriftVector.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setDriftVector_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/setEdgeProperties.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setEdgeProperties_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setFuncIndices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setFuncIndices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setFuncs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setFuncs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setHessianPattern.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setHessianPattern_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/setIndices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setIndices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidBody/setInertia.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setInertia_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpVariable/setInitialValue.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setInitialValue_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setJacobianPattern.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setJacobianPattern_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setLimit.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setLimit_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/setMassMatrix.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setMassMatrix_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidBody/setMass.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setMass_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setName.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setName_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/setOffset.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setOffset_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NonlinearProgram/setOption.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setOption_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/setParamValue.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setParamValue_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setParent.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setParent_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/setReference.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setReference_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@CoordinateFrame/setRotationMatrix.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setRotationMatrix_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@NlpFunction/setSymFun.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setSymFun_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/robotics/@RigidJoint/setTwistPairs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setTwistPairs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/setVertexProperties.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setVertexProperties_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/set_fields.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/set__fields_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/set_options.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/set__options_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/setfields.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/setfields_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/plot/sfigure.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sfigure_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sign.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sign_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sin.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sin_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sinh.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sinh_8m",
+"summary": ""
+}
+,
+
+
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/split_data.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/split__data_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/split_indices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/split__indices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/graphics/spring.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/spring_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sqrt.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sqrt_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/stopOutFun.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/stopOutFun_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/str2mathstr.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/str2mathstr_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/str_index.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/str__index_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/str_indices.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/str__indices_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/mathlink/struct2assoc.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/struct2assoc_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/struct2str.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/struct2str_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/struct_assign_loose.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/struct__assign__loose_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/struct_diff.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/struct__diff_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/struct_overlay.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/struct__overlay_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/struct_permute.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/struct__permute_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/subs.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/subs_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymVariable/subsrule.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/subsrule_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/sum.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/sum_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/export.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/symbolic_2_0DSymExpression_2export_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymFunction/export.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/symbolic_2_0DSymFunction_2export_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/symvar.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/symvar_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/compile.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system_2_0DContinuousDynamics_2compile_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DiscreteDynamics/calcDiscreteMap.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system_2_0DDiscreteDynamics_2calcDiscreteMap_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/compile.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system_2_0DDynamicalSystem_2compile_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/configure.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system_2_0DHolonomicConstraint_2configure_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint/configure.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system_2_0DVirtualConstraint_2configure_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@VirtualConstraint/export.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system_2_0DVirtualConstraint_2export_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/general/system_trim.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/system__trim_8m",
+"summary": ""
+}
+,
+
+
+
+
+
+
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/tan.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/tan_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/tanh.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/tanh_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Todo List",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/todo",
+"summary": ""
+}
+,
+
+
+
+
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/tril.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/tril_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymExpression/triu.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/triu_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/symbolic/@SymVariable/unique.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/unique_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/updateConstrProp.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/updateConstrProp_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/updateCostProp.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/updateCostProp_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/updateVariableProp.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/updateVariableProp_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/validateGraph.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/validateGraph_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/vertcat_domains.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/vertcat__domains_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/sim/vertcat_fields_domains.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/vertcat__fields__domains_8m",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "/home/ayonga/Dropbox/research/dzopt/frost/matlab/utils/plot/vline.m File Reference",
+"tags": "false",
+"keywords": "",
+"url": "http://localhost:4000/pages/html/vline_8m",
+"summary": ""
+}
+,
+
+
+
+
+
+{
+"title": "Sample post",
+"tags": "newsgetting_started",
+"keywords": "",
+"url": "http://localhost:4000/2016-02-26-sample-post-jekyll",
+"summary": "This is some summary frontmatter for my sample post."
+}
+,
+
+
+{
+"title": "Welcome to Jekyll!",
+"tags": "news",
+"keywords": "",
+"url": "http://localhost:4000/jekyll/update/2016-02-24-first-post",
+"summary": ""
+}
+,
+
+
+{
+"title": "Test post from last year",
+"tags": "news",
+"keywords": "",
+"url": "http://localhost:4000/jekyll/update/2015-04-12-test-post-last-year",
+"summary": ""
+}
+
+
+
+]

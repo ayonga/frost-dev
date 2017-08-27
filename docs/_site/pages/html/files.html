@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="false ">
+<title>File List | FROST</title>
+<link rel="stylesheet" href="http://localhost:4000/css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="http://localhost:4000/css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="http://localhost:4000/css/customstyles.css">
+<link rel="stylesheet" href="http://localhost:4000/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="http://localhost:4000/css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://localhost:4000/js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="http://localhost:4000/js/toc.js"></script>
+<script src="http://localhost:4000/js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="http://localhost:4000/images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="frost-dev" href="http://localhost:4000/feed.xml">
+
+<script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+   
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="http://localhost:4000/index.html">&nbsp;<span class="projectTitle"> FROST</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="http://localhost:4000/index.html">Home</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/introduction.html">Getting Started</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/html/inherits.html">API Documentation</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/news.html">Tutorial</a></li>
+                
+                
+                
+                <li><a href="https://github.com/ayonga/frost-dev/" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li>
+
+
+
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:ayonga27@gmail.com?subject=FROST feedback&body=I have some feedback about the File List page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+
+</li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="http://localhost:4000/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'http://localhost:4000search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="File List">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container", style="margin-top:50px">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">FROST </li>
+  
+  
+  
+      
+  
+  <li>
+      <a href="#">Main Page</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/inherits.html">Overview</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Classes</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/annotated.html">Class List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/classes.html">Class Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/hierarchy.html">Class Hierarchy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Members</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Methods</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_v.html#v">v</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Properties</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Files</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/files.html">File List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/globals.html">File Members</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Related Pages</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/todo.html">Todo List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/newfeat1_0.html">New features</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div> <!-- do not remove this div, it is closed by doxygen! -->
+  <script type="text/javascript" src="dynsections.js"></script>
+
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--<link href="customdoxygen.css" rel="stylesheet" type="text/css" />-->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:4000/css/jquery.smartmenus.bootstrap.css">
+  
+
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.min.js"></script>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.bootstrap.min.js"></script>
+  <script type="text/javascript" src="doxy-boot.js"></script>
+  <!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">File List</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">Here is a list of all files with brief descriptions:</div><div class="directory">
+<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span><span onclick="javascript:toggleLevel(3);">3</span><span onclick="javascript:toggleLevel(4);">4</span>]</div><table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><span id="img_0_" class="iconfopen" onclick="toggleFolder('0_')">&#160;</span><a class="el" href="dir_363c7dd63633bc0b67762e7ff7b5a8f6.html" target="_self">matlab</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_0_" class="arrow" onclick="toggleFolder('0_0_')">&#9660;</span><span id="img_0_0_" class="iconfopen" onclick="toggleFolder('0_0_')">&#160;</span><a class="el" href="dir_79fcba314f1b5894de559c73a79fba47.html" target="_self">+frost</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_0_0_" class="arrow" onclick="toggleFolder('0_0_0_')">&#9658;</span><span id="img_0_0_0_" class="iconfclosed" onclick="toggleFolder('0_0_0_')">&#160;</span><a class="el" href="dir_f4e148dc1781c82ddd1eda8382369934.html" target="_self">+Animator</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="AbstractAnimator_8m.html" target="_self">AbstractAnimator.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="AnimatorPointOfView_8m.html" target="_self">AnimatorPointOfView.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Cylinder_8m.html" target="_self">Cylinder.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Display_8m.html" target="_self">Display.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="DisplayItem_8m.html" target="_self">DisplayItem.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="JointSphere_8m.html" target="_self">JointSphere.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Lines_8m.html" target="_self">Lines.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="LinkSphere_8m.html" target="_self">LinkSphere.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Patch_8m.html" target="_self">Patch.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Pyramid_8m.html" target="_self">Pyramid.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Rectangler_8m.html" target="_self">Rectangler.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_11_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Sphere_8m.html" target="_self">Sphere.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_12_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="TimeStepData_8m.html" target="_self">TimeStepData.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_1_" class="arrow" onclick="toggleFolder('0_1_')">&#9660;</span><span id="img_0_1_" class="iconfopen" onclick="toggleFolder('0_1_')">&#160;</span><a class="el" href="dir_5736dbe4dc2fcc3245dba44078f89b83.html" target="_self">control</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="CLFQP_8m.html" target="_self">CLFQP.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Controller_8m.html" target="_self">Controller.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_2_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="IOFeedback_8m.html" target="_self">IOFeedback.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_3_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="JointPD_8m.html" target="_self">JointPD.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_4_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="OutputPD_8m.html" target="_self">OutputPD.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_2_" class="arrow" onclick="toggleFolder('0_2_')">&#9660;</span><span id="img_0_2_" class="iconfopen" onclick="toggleFolder('0_2_')">&#160;</span><a class="el" href="dir_c02edb81d504ff3718d292053c4eabea.html" target="_self">nlp</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_2_0_" class="arrow" onclick="toggleFolder('0_2_0_')">&#9658;</span><span id="img_0_2_0_" class="iconfclosed" onclick="toggleFolder('0_2_0_')">&#160;</span><a class="el" href="dir_d3e68e044fbc3278c344699d251cad90.html" target="_self">@HybridTrajectoryOptimization</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addJumpConstraint_8m.html" target="_self">addJumpConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2checkConstraints_8m.html" target="_self">checkConstraints.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2checkCosts_8m.html" target="_self">checkCosts.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2checkVariables_8m.html" target="_self">checkVariables.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2compileConstraint_8m.html" target="_self">compileConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2compileObjective_8m.html" target="_self">compileObjective.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="nlp_2_0DHybridTrajectoryOptimization_2configure_8m.html" target="_self">configure.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2exportSolution_8m.html" target="_self">exportSolution.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getPhaseIndex_8m.html" target="_self">getPhaseIndex.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="HybridTrajectoryOptimization_8m.html" target="_self">HybridTrajectoryOptimization.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2update_8m.html" target="_self">update.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_11_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridTrajectoryOptimization_2updateVariableBounds_8m.html" target="_self">updateVariableBounds.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_0_12_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="validateGraph_8m.html" target="_self">validateGraph.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_2_1_" class="arrow" onclick="toggleFolder('0_2_1_')">&#9658;</span><span id="img_0_2_1_" class="iconfclosed" onclick="toggleFolder('0_2_1_')">&#160;</span><a class="el" href="dir_31dda3246fa6325ee57926d03bb0e4e9.html" target="_self">@NlpFunction</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="checkFuncs_8m.html" target="_self">checkFuncs.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="NlpFunction_8m.html" target="_self">NlpFunction.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setAuxdata_8m.html" target="_self">setAuxdata.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNlpFunction_2setBoundary_8m.html" target="_self">setBoundary.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_4_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setDependentVariable_8m.html" target="_self">setDependentVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_5_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setDimension_8m.html" target="_self">setDimension.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_6_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setFuncIndices_8m.html" target="_self">setFuncIndices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_7_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setFuncs_8m.html" target="_self">setFuncs.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_8_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setHessianPattern_8m.html" target="_self">setHessianPattern.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_9_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setJacobianPattern_8m.html" target="_self">setJacobianPattern.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_10_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setName_8m.html" target="_self">setName.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_11_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setSymFun_8m.html" target="_self">setSymFun.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_12_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="nlp_2_0DNlpFunction_2setType_8m.html" target="_self">setType.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_1_13_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNlpFunction_2updateProp_8m.html" target="_self">updateProp.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_2_2_" class="arrow" onclick="toggleFolder('0_2_2_')">&#9658;</span><span id="img_0_2_2_" class="iconfclosed" onclick="toggleFolder('0_2_2_')">&#160;</span><a class="el" href="dir_2c24fe77582c582d62b817c3066eb7d7.html" target="_self">@NlpVariable</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="NlpVariable_8m.html" target="_self">NlpVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNlpVariable_2setBoundary_8m.html" target="_self">setBoundary.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setIndices_8m.html" target="_self">setIndices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setInitialValue_8m.html" target="_self">setInitialValue.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_2_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNlpVariable_2updateProp_8m.html" target="_self">updateProp.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_2_3_" class="arrow" onclick="toggleFolder('0_2_3_')">&#9658;</span><span id="img_0_2_3_" class="iconfclosed" onclick="toggleFolder('0_2_3_')">&#160;</span><a class="el" href="dir_00d9364eeeee95835738c2cd4d098638.html" target="_self">@NonlinearProgram</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNonlinearProgram_2compileConstraint_8m.html" target="_self">compileConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNonlinearProgram_2compileObjective_8m.html" target="_self">compileObjective.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getInitialGuess_8m.html" target="_self">getInitialGuess.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getVarInfo_8m.html" target="_self">getVarInfo.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_4_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="NonlinearProgram_8m.html" target="_self">NonlinearProgram.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_5_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="regConstraint_8m.html" target="_self">regConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_6_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="regObjective_8m.html" target="_self">regObjective.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_7_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="regVariable_8m.html" target="_self">regVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_8_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setOption_8m.html" target="_self">setOption.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_3_9_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DNonlinearProgram_2update_8m.html" target="_self">update.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_2_4_" class="arrow" onclick="toggleFolder('0_2_4_')">&#9658;</span><span id="img_0_2_4_" class="iconfclosed" onclick="toggleFolder('0_2_4_')">&#160;</span><a class="el" href="dir_d51ab24587dc4d6935f37fd9707b0656.html" target="_self">@TrajectoryOptimization</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addCollocationConstraint_8m.html" target="_self">addCollocationConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addConstraint_8m.html" target="_self">addConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addCost_8m.html" target="_self">addCost.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addDynamicsConstraint_8m.html" target="_self">addDynamicsConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addInputVariable_8m.html" target="_self">addInputVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addNodeConstraint_8m.html" target="_self">addNodeConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addNodeCost_8m.html" target="_self">addNodeCost.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addParamVariable_8m.html" target="_self">addParamVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addRunningCost_8m.html" target="_self">addRunningCost.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addStateVariable_8m.html" target="_self">addStateVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addTimeVariable_8m.html" target="_self">addTimeVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_11_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addVariable_8m.html" target="_self">addVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_12_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2checkConstraints_8m.html" target="_self">checkConstraints.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_13_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2checkCosts_8m.html" target="_self">checkCosts.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_14_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2checkVariables_8m.html" target="_self">checkVariables.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_15_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2compileConstraint_8m.html" target="_self">compileConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_16_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2compileObjective_8m.html" target="_self">compileObjective.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_17_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="nlp_2_0DTrajectoryOptimization_2configure_8m.html" target="_self">configure.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_18_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="configureVariables_8m.html" target="_self">configureVariables.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_19_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="directCollocation_8m.html" target="_self">directCollocation.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_20_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2exportSolution_8m.html" target="_self">exportSolution.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_21_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeConstraint_8m.html" target="_self">removeConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_22_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeCost_8m.html" target="_self">removeCost.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_23_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeVariable_8m.html" target="_self">removeVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_24_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="TrajectoryOptimization_8m.html" target="_self">TrajectoryOptimization.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_25_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2update_8m.html" target="_self">update.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_26_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="updateConstrProp_8m.html" target="_self">updateConstrProp.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_27_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="updateCostProp_8m.html" target="_self">updateCostProp.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_28_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DTrajectoryOptimization_2updateVariableBounds_8m.html" target="_self">updateVariableBounds.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_2_4_29_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="updateVariableProp_8m.html" target="_self">updateVariableProp.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_3_" class="arrow" onclick="toggleFolder('0_3_')">&#9660;</span><span id="img_0_3_" class="iconfopen" onclick="toggleFolder('0_3_')">&#160;</span><a class="el" href="dir_57d9ede575b84f3b57e579579b7fd954.html" target="_self">robotics</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_0_" class="arrow" onclick="toggleFolder('0_3_0_')">&#9658;</span><span id="img_0_3_0_" class="iconfclosed" onclick="toggleFolder('0_3_0_')">&#160;</span><a class="el" href="dir_2b2bf3f3525edab285db7b18ed484775.html" target="_self">@ContactFrame</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_0_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="ContactFrame_8m.html" target="_self">ContactFrame.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_0_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getFrictionCone_8m.html" target="_self">getFrictionCone.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_0_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getZMPConstraint_8m.html" target="_self">getZMPConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_0_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="robotics_2_0DContactFrame_2setType_8m.html" target="_self">setType.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_1_" class="arrow" onclick="toggleFolder('0_3_1_')">&#9658;</span><span id="img_0_3_1_" class="iconfclosed" onclick="toggleFolder('0_3_1_')">&#160;</span><a class="el" href="dir_8307883ef21a4b3cc2329a21b89f85d0.html" target="_self">@CoordinateFrame</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeBodyJacobian_8m.html" target="_self">computeBodyJacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeCartesianPosition_8m.html" target="_self">computeCartesianPosition.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeEulerAngle_8m.html" target="_self">computeEulerAngle.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeForwardKinematics_8m.html" target="_self">computeForwardKinematics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_4_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeHomogeneousTransform_8m.html" target="_self">computeHomogeneousTransform.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_5_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeSpatialJacobian_8m.html" target="_self">computeSpatialJacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_6_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="CoordinateFrame_8m.html" target="_self">CoordinateFrame.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_7_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getTwists_8m.html" target="_self">getTwists.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_8_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setOffset_8m.html" target="_self">setOffset.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_9_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setReference_8m.html" target="_self">setReference.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_1_10_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setRotationMatrix_8m.html" target="_self">setRotationMatrix.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_2_" class="arrow" onclick="toggleFolder('0_3_2_')">&#9658;</span><span id="img_0_3_2_" class="iconfclosed" onclick="toggleFolder('0_3_2_')">&#160;</span><a class="el" href="dir_d90ffde3e0ea594c50b54258b8dddc0d.html" target="_self">@RigidBody</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_2_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="RigidBody_8m.html" target="_self">RigidBody.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_2_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setInertia_8m.html" target="_self">setInertia.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_2_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setMass_8m.html" target="_self">setMass.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_3_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_3_" class="arrow" onclick="toggleFolder('0_3_3_')">&#9658;</span><span id="img_0_3_3_" class="iconfclosed" onclick="toggleFolder('0_3_3_')">&#160;</span><a class="el" href="dir_beea40304aa0851d91904095a017dcbc.html" target="_self">@RigidImpact</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_3_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="robotics_2_0DRigidImpact_2calcDiscreteMap_8m.html" target="_self">calcDiscreteMap.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_3_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="robotics_2_0DRigidImpact_2compile_8m.html" target="_self">compile.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_3_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="RigidImpact_8m.html" target="_self">RigidImpact.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_3_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="rigidImpactConstraint_8m.html" target="_self">rigidImpactConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_4_" class="arrow" onclick="toggleFolder('0_3_4_')">&#9658;</span><span id="img_0_3_4_" class="iconfclosed" onclick="toggleFolder('0_3_4_')">&#160;</span><a class="el" href="dir_04845840fa51ddffbfb49beb8b4addb2.html" target="_self">@RigidJoint</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="computeTwist_8m.html" target="_self">computeTwist.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getTwist_8m.html" target="_self">getTwist.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="RigidJoint_8m.html" target="_self">RigidJoint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setActuator_8m.html" target="_self">setActuator.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setAxis_8m.html" target="_self">setAxis.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setChainIndices_8m.html" target="_self">setChainIndices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setChild_8m.html" target="_self">setChild.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setLimit_8m.html" target="_self">setLimit.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setParent_8m.html" target="_self">setParent.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setTwistPairs_8m.html" target="_self">setTwistPairs.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_4_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="robotics_2_0DRigidJoint_2setType_8m.html" target="_self">setType.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_3_5_" class="arrow" onclick="toggleFolder('0_3_5_')">&#9658;</span><span id="img_0_3_5_" class="iconfclosed" onclick="toggleFolder('0_3_5_')">&#160;</span><a class="el" href="dir_b31fed340e5f5cd75048126b704bbbab.html" target="_self">@RobotLinks</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addContact_8m.html" target="_self">addContact.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addFixedJoint_8m.html" target="_self">addFixedJoint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="robotics_2_0DRobotLinks_2configure_8m.html" target="_self">configure.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="configureActuator_8m.html" target="_self">configureActuator.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_4_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="configureDynamics_8m.html" target="_self">configureDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_5_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="configureKinematics_8m.html" target="_self">configureKinematics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_6_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="findBaseLink_8m.html" target="_self">findBaseLink.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_7_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="findEndEffector_8m.html" target="_self">findEndEffector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_8_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getBodyJacobian_8m.html" target="_self">getBodyJacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_9_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getCartesianPosition_8m.html" target="_self">getCartesianPosition.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_10_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getComPosition_8m.html" target="_self">getComPosition.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_11_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getEulerAngles_8m.html" target="_self">getEulerAngles.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_12_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getJointIndices_8m.html" target="_self">getJointIndices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_13_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getLimits_8m.html" target="_self">getLimits.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_14_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getLinkIndices_8m.html" target="_self">getLinkIndices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_15_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getRelativeEulerAngles_8m.html" target="_self">getRelativeEulerAngles.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_16_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getSpatialJacobian_8m.html" target="_self">getSpatialJacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_17_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getTotalMass_8m.html" target="_self">getTotalMass.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_18_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeContact_8m.html" target="_self">removeContact.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_5_19_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="RobotLinks_8m.html" target="_self">RobotLinks.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_3_6_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="get__base__dofs_8m.html" target="_self">get_base_dofs.m</a></td><td class="desc">It returns the default configuration of the floating base coordinates of a robot manipulator </td></tr>
+<tr id="row_0_3_7_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="ros__load__urdf_8m.html" target="_self">ros_load_urdf.m</a></td><td class="desc">This function parse the ROS URDF file </td></tr>
+<tr id="row_0_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_4_" class="arrow" onclick="toggleFolder('0_4_')">&#9660;</span><span id="img_0_4_" class="iconfopen" onclick="toggleFolder('0_4_')">&#160;</span><a class="el" href="dir_5b5e741a0bf653afaee9102588f8f8a0.html" target="_self">solver</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_0_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_4_0_" class="arrow" onclick="toggleFolder('0_4_0_')">&#9658;</span><span id="img_0_4_0_" class="iconfclosed" onclick="toggleFolder('0_4_0_')">&#160;</span><a class="el" href="dir_c325a112bee11c07459ec2765ac7d96b.html" target="_self">@IpoptApplication</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_0_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="array2struct_8m.html" target="_self">array2struct.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_0_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="initialize_8m.html" target="_self">initialize.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_0_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="IpoptApplication_8m.html" target="_self">IpoptApplication.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_0_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="optimize_8m.html" target="_self">optimize.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_4_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="SolverApplication_8m.html" target="_self">SolverApplication.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_5_" class="arrow" onclick="toggleFolder('0_5_')">&#9660;</span><span id="img_0_5_" class="iconfopen" onclick="toggleFolder('0_5_')">&#160;</span><a class="el" href="dir_fdba3f3ea5e8721cddb66cf833126086.html" target="_self">symbolic</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_5_0_" class="arrow" onclick="toggleFolder('0_5_0_')">&#9658;</span><span id="img_0_5_0_" class="iconfclosed" onclick="toggleFolder('0_5_0_')">&#160;</span><a class="el" href="dir_ca95eb69727e0c988690c0668154c074.html" target="_self">@SymExpression</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="abs_8m.html" target="_self">abs.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="acos_8m.html" target="_self">acos.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="acosh_8m.html" target="_self">acosh.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="acot_8m.html" target="_self">acot.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="acoth_8m.html" target="_self">acoth.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="acsc_8m.html" target="_self">acsc.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="acsch_8m.html" target="_self">acsch.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="asec_8m.html" target="_self">asec.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="asech_8m.html" target="_self">asech.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="asin_8m.html" target="_self">asin.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="asinh_8m.html" target="_self">asinh.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_11_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="atan_8m.html" target="_self">atan.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_12_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="atan2_8m.html" target="_self">atan2.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_13_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="atanh_8m.html" target="_self">atanh.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_14_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="conj_8m.html" target="_self">conj.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_15_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cos_8m.html" target="_self">cos.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_16_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cosh_8m.html" target="_self">cosh.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_17_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cot_8m.html" target="_self">cot.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_18_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="coth_8m.html" target="_self">coth.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_19_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="csc_8m.html" target="_self">csc.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_20_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="csch_8m.html" target="_self">csch.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_21_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="det_8m.html" target="_self">det.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_22_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="diag_8m.html" target="_self">diag.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_23_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="exp_8m.html" target="_self">exp.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_24_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="expm_8m.html" target="_self">expm.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_25_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="symbolic_2_0DSymExpression_2export_8m.html" target="_self">export.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_26_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="feval_8m.html" target="_self">feval.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_27_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymExpression_2flatten_8m.html" target="_self">flatten.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_28_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="hessian_8m.html" target="_self">hessian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_29_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymExpression_2horzcat_8m.html" target="_self">horzcat.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_30_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isempty_8m.html" target="_self">isempty.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_31_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isfinite_8m.html" target="_self">isfinite.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_32_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isinf_8m.html" target="_self">isinf.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_33_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="ismatrix_8m.html" target="_self">ismatrix.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_34_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isnan_8m.html" target="_self">isnan.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_35_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isscalar_8m.html" target="_self">isscalar.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_36_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isvector_8m.html" target="_self">isvector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_37_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="isvectorform_8m.html" target="_self">isvectorform.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_38_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="jacobian_8m.html" target="_self">jacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_39_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="kron_8m.html" target="_self">kron.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_40_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="linearize_8m.html" target="_self">linearize.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_41_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="log_8m.html" target="_self">log.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_42_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="log10_8m.html" target="_self">log10.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_43_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="log2_8m.html" target="_self">log2.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_44_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="nonzeros_8m.html" target="_self">nonzeros.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_45_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="norm_8m.html" target="_self">norm.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_46_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="numel_8m.html" target="_self">numel.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_47_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="nzind_8m.html" target="_self">nzind.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_48_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="rank_8m.html" target="_self">rank.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_49_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sec_8m.html" target="_self">sec.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_50_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sech_8m.html" target="_self">sech.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_51_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sign_8m.html" target="_self">sign.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_52_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sin_8m.html" target="_self">sin.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_53_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sinh_8m.html" target="_self">sinh.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_54_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sqrt_8m.html" target="_self">sqrt.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_55_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="subs_8m.html" target="_self">subs.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_56_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sum_8m.html" target="_self">sum.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_57_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="SymExpression_8m.html" target="_self">SymExpression.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_58_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="symvar_8m.html" target="_self">symvar.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_59_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="tan_8m.html" target="_self">tan.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_60_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="tanh_8m.html" target="_self">tanh.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_61_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymExpression_2tomatrix_8m.html" target="_self">tomatrix.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_62_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymExpression_2tovector_8m.html" target="_self">tovector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_63_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="tril_8m.html" target="_self">tril.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_64_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="triu_8m.html" target="_self">triu.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_0_65_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymExpression_2vertcat_8m.html" target="_self">vertcat.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_5_1_" class="arrow" onclick="toggleFolder('0_5_1_')">&#9658;</span><span id="img_0_5_1_" class="iconfclosed" onclick="toggleFolder('0_5_1_')">&#160;</span><a class="el" href="dir_0a140e08d9415bc7e97ec116391e792f.html" target="_self">@SymFunction</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_1_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="symbolic_2_0DSymFunction_2export_8m.html" target="_self">export.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_1_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="exportHessian_8m.html" target="_self">exportHessian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_1_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="exportJacobian_8m.html" target="_self">exportJacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_1_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="SymFunction_8m.html" target="_self">SymFunction.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_5_2_" class="arrow" onclick="toggleFolder('0_5_2_')">&#9658;</span><span id="img_0_5_2_" class="iconfclosed" onclick="toggleFolder('0_5_2_')">&#160;</span><a class="el" href="dir_4197360a9cde77785eac1af13b1e838d.html" target="_self">@SymVariable</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymVariable_2flatten_8m.html" target="_self">flatten.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymVariable_2horzcat_8m.html" target="_self">horzcat.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="ind2label_8m.html" target="_self">ind2label.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="label2ind_8m.html" target="_self">label2ind.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="subsrule_8m.html" target="_self">subsrule.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="SymVariable_8m.html" target="_self">SymVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymVariable_2tomatrix_8m.html" target="_self">tomatrix.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymVariable_2tovector_8m.html" target="_self">tovector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="unique_8m.html" target="_self">unique.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_5_2_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DSymVariable_2vertcat_8m.html" target="_self">vertcat.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_6_" class="arrow" onclick="toggleFolder('0_6_')">&#9660;</span><span id="img_0_6_" class="iconfopen" onclick="toggleFolder('0_6_')">&#160;</span><a class="el" href="dir_448ef8bf4e3a4b5692e46b302d72f3ba.html" target="_self">system</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_0_" class="arrow" onclick="toggleFolder('0_6_0_')">&#9658;</span><span id="img_0_6_0_" class="iconfclosed" onclick="toggleFolder('0_6_0_')">&#160;</span><a class="el" href="dir_a6548488ab8d6807084367ef7463cf2c.html" target="_self">@ContinuousDynamics</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addEvent_8m.html" target="_self">addEvent.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addHolonomicConstraint_8m.html" target="_self">addHolonomicConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addUnilateralConstraint_8m.html" target="_self">addUnilateralConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addVirtualConstraint_8m.html" target="_self">addVirtualConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="appendDriftVector_8m.html" target="_self">appendDriftVector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcDriftVector_8m.html" target="_self">calcDriftVector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcDynamics_8m.html" target="_self">calcDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcMassMatrix_8m.html" target="_self">calcMassMatrix.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="checkGuard_8m.html" target="_self">checkGuard.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="clearKernel_8m.html" target="_self">clearKernel.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system_2_0DContinuousDynamics_2compile_8m.html" target="_self">compile.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_11_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="ContinuousDynamics_8m.html" target="_self">ContinuousDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_12_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="firstOrderDynamics_8m.html" target="_self">firstOrderDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_13_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="loadDynamics_8m.html" target="_self">loadDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_14_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeEvent_8m.html" target="_self">removeEvent.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_15_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeHolonomicConstraint_8m.html" target="_self">removeHolonomicConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_16_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeUnilateralConstraint_8m.html" target="_self">removeUnilateralConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_17_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeVirtualConstraint_8m.html" target="_self">removeVirtualConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_18_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="saveDynamics_8m.html" target="_self">saveDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_19_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="secondOrderDynamics_8m.html" target="_self">secondOrderDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_20_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setDriftVector_8m.html" target="_self">setDriftVector.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_21_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setMassMatrix_8m.html" target="_self">setMassMatrix.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_0_22_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DContinuousDynamics_2simulate_8m.html" target="_self">simulate.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_1_" class="arrow" onclick="toggleFolder('0_6_1_')">&#9658;</span><span id="img_0_6_1_" class="iconfclosed" onclick="toggleFolder('0_6_1_')">&#160;</span><a class="el" href="dir_aae9ed024c18b0f3ec98eb79fedc1403.html" target="_self">@DiscreteDynamics</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_1_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system_2_0DDiscreteDynamics_2calcDiscreteMap_8m.html" target="_self">calcDiscreteMap.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_1_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="DiscreteDynamics_8m.html" target="_self">DiscreteDynamics.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_1_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="IdentityMapConstraint_8m.html" target="_self">IdentityMapConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_2_" class="arrow" onclick="toggleFolder('0_6_2_')">&#9658;</span><span id="img_0_6_2_" class="iconfclosed" onclick="toggleFolder('0_6_2_')">&#160;</span><a class="el" href="dir_b7e7e63722ceb507f7cdf41ce403df99.html" target="_self">@DynamicalSystem</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addInput_8m.html" target="_self">addInput.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addParam_8m.html" target="_self">addParam.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addState_8m.html" target="_self">addState.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system_2_0DDynamicalSystem_2compile_8m.html" target="_self">compile.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="DynamicalSystem_8m.html" target="_self">DynamicalSystem.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeInput_8m.html" target="_self">removeInput.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="removeParam_8m.html" target="_self">removeParam.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_2_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setParamValue_8m.html" target="_self">setParamValue.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_3_" class="arrow" onclick="toggleFolder('0_6_3_')">&#9658;</span><span id="img_0_6_3_" class="iconfclosed" onclick="toggleFolder('0_6_3_')">&#160;</span><a class="el" href="dir_ff47d474602b251f5514d537e56cbf91.html" target="_self">@HolonomicConstraint</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcConstraint_8m.html" target="_self">calcConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcJacobian_8m.html" target="_self">calcJacobian.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system_2_0DHolonomicConstraint_2configure_8m.html" target="_self">configure.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="HolonomicConstraint_8m.html" target="_self">HolonomicConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_3_4_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHolonomicConstraint_2imposeNLPConstraint_8m.html" target="_self">imposeNLPConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_4_" class="arrow" onclick="toggleFolder('0_6_4_')">&#9658;</span><span id="img_0_6_4_" class="iconfclosed" onclick="toggleFolder('0_6_4_')">&#160;</span><a class="el" href="dir_71ac8bf331dfb0d0b2cf3a6c27181b6e.html" target="_self">@HybridSystem</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addEdge_8m.html" target="_self">addEdge.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addVertex_8m.html" target="_self">addVertex.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="HybridSystem_8m.html" target="_self">HybridSystem.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="rmEdge_8m.html" target="_self">rmEdge.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="rmVertex_8m.html" target="_self">rmVertex.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setEdgeProperties_8m.html" target="_self">setEdgeProperties.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setVertexProperties_8m.html" target="_self">setVertexProperties.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_4_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DHybridSystem_2simulate_8m.html" target="_self">simulate.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_5_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_5_" class="arrow" onclick="toggleFolder('0_6_5_')">&#9658;</span><span id="img_0_6_5_" class="iconfclosed" onclick="toggleFolder('0_6_5_')">&#160;</span><a class="el" href="dir_098367e3c580f901c89d0feea616fcb3.html" target="_self">@UnilateralConstraint</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_5_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="UnilateralConstraint_8m.html" target="_self">UnilateralConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_6_6_" class="arrow" onclick="toggleFolder('0_6_6_')">&#9658;</span><span id="img_0_6_6_" class="iconfclosed" onclick="toggleFolder('0_6_6_')">&#160;</span><a class="el" href="dir_a813c33b8bff3545bea354ff690aca96.html" target="_self">@VirtualConstraint</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcActual_8m.html" target="_self">calcActual.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcDesired_8m.html" target="_self">calcDesired.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="calcPhaseVariable_8m.html" target="_self">calcPhaseVariable.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system_2_0DVirtualConstraint_2configure_8m.html" target="_self">configure.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system_2_0DVirtualConstraint_2export_8m.html" target="_self">export.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_0DVirtualConstraint_2imposeNLPConstraint_8m.html" target="_self">imposeNLPConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_6_6_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="VirtualConstraint_8m.html" target="_self">VirtualConstraint.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_7_" class="arrow" onclick="toggleFolder('0_7_')">&#9660;</span><span id="img_0_7_" class="iconfopen" onclick="toggleFolder('0_7_')">&#160;</span><a class="el" href="dir_3fb71e5882efe1e46d90cb02506cc25e.html" target="_self">utils</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_0_" class="arrow" onclick="toggleFolder('0_7_0_')">&#9658;</span><span id="img_0_7_0_" class="iconfclosed" onclick="toggleFolder('0_7_0_')">&#160;</span><a class="el" href="dir_994597f4058024bbcc3e77acc84d07d8.html" target="_self">general</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="array2str_8m.html" target="_self">array2str.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="blank__struct_8m.html" target="_self">blank_struct.m</a></td><td class="desc">STRUCT_BLANK Simple function to copy struture (fields, no data) of given structure For parsing into struct arrays. Will make a struct array of (ros, cols), or same size as elem if no args specified </td></tr>
+<tr id="row_0_7_0_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cell2str_8m.html" target="_self">cell2str.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cellexpand_8m.html" target="_self">cellexpand.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="contiguous__indices_8m.html" target="_self">contiguous_indices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="create__object__array_8m.html" target="_self">create_object_array.m</a></td><td class="desc">Creates an array of <a class="el" href="classNlpFunction.html" title="This class provides a data structure for a optimization function. This function could be either a con...">NlpFunction</a> objects </td></tr>
+<tr id="row_0_7_0_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="extract__struct__slice_8m.html" target="_self">extract_struct_slice.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="general2str_8m.html" target="_self">general2str.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="getfieldd_8m.html" target="_self">getfieldd.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="implode_8m.html" target="_self">implode.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_10_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="indent_8m.html" target="_self">indent.m</a></td><td class="desc">Using sprintf for sprintf: <a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/249016">http://www.mathworks.com/matlabcentral/newsreader/view_thread/249016</a> </td></tr>
+<tr id="row_0_7_0_11_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="maxabs_8m.html" target="_self">maxabs.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_12_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="nop_8m.html" target="_self">nop.m</a></td><td class="desc">NOP NOP Do nothing </td></tr>
+<tr id="row_0_7_0_13_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Ref_8m.html" target="_self">Ref.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_14_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="set__fields_8m.html" target="_self">set_fields.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_15_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="set__options_8m.html" target="_self">set_options.m</a></td><td class="desc">Sets the options value by parsing input arguments </td></tr>
+<tr id="row_0_7_0_16_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="setfields_8m.html" target="_self">setfields.m</a></td><td class="desc">Set the name of functions for the domain </td></tr>
+<tr id="row_0_7_0_17_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="split__data_8m.html" target="_self">split_data.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_18_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="split__indices_8m.html" target="_self">split_indices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_19_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="str__index_8m.html" target="_self">str_index.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_20_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="str__indices_8m.html" target="_self">str_indices.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_21_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="struct2str_8m.html" target="_self">struct2str.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_22_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="struct__assign__loose_8m.html" target="_self">struct_assign_loose.m</a></td><td class="desc">Makes sure that mis-matching field names and order do not screw up a struct array. Useful for loading YAML files </td></tr>
+<tr id="row_0_7_0_23_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="struct__diff_8m.html" target="_self">struct_diff.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_24_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="struct__overlay_8m.html" target="_self">struct_overlay.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_25_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="struct__permute_8m.html" target="_self">struct_permute.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_0_26_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="system__trim_8m.html" target="_self">system_trim.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_1_" class="arrow" onclick="toggleFolder('0_7_1_')">&#9658;</span><span id="img_0_7_1_" class="iconfclosed" onclick="toggleFolder('0_7_1_')">&#160;</span><a class="el" href="dir_46f2ea372f72b22635fbae6e938f32f8.html" target="_self">graphics</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_1_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="patchline_8m.html" target="_self">patchline.m</a></td><td class="desc">Plot lines as patches (efficiently) </td></tr>
+<tr id="row_0_7_1_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="spring_8m.html" target="_self">spring.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_2_" class="arrow" onclick="toggleFolder('0_7_2_')">&#9658;</span><span id="img_0_7_2_" class="iconfclosed" onclick="toggleFolder('0_7_2_')">&#160;</span><a class="el" href="dir_70fcf45972686018cf73f211242311ab.html" target="_self">mathlink</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_2_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cell2tensor_8m.html" target="_self">cell2tensor.m</a></td><td class="desc">Convert a cell array to a Mathematica tensor </td></tr>
+<tr id="row_0_7_2_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="check__var__exist_8m.html" target="_self">check_var_exist.m</a></td><td class="desc">A wrapper function that checks if a variable has been assigned to a value in Mathematica </td></tr>
+<tr id="row_0_7_2_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="clear__symbol_8m.html" target="_self">clear_symbol.m</a></td><td class="desc">A wrapper function that clears a symbol specified by the character <code>var</code> </td></tr>
+<tr id="row_0_7_2_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="eval__math_8m.html" target="_self">eval_math.m</a></td><td class="desc">A wrapper function that calls the mathlink function to evaluate the expression specified by <code>expr</code> </td></tr>
+<tr id="row_0_7_2_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="eval__math__fun_8m.html" target="_self">eval_math_fun.m</a></td><td class="desc">Evaluate symbolic function eval_math_fun(fun,x1,...,xn) evaluates the symbolic function 'fun' at the given arguments x1, ..., xn </td></tr>
+<tr id="row_0_7_2_5_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="general2math_8m.html" target="_self">general2math.m</a></td><td class="desc">Convert a general expression to a Mathematica expression </td></tr>
+<tr id="row_0_7_2_6_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="mat2math_8m.html" target="_self">mat2math.m</a></td><td class="desc">Converts a 2-D matrix to a string that will be read as a matrix (tensor) in Mathematica </td></tr>
+<tr id="row_0_7_2_7_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="num2mathstr_8m.html" target="_self">num2mathstr.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_2_8_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="str2mathstr_8m.html" target="_self">str2mathstr.m</a></td><td class="desc">Converts a Matlab string to a Mathematica string </td></tr>
+<tr id="row_0_7_2_9_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="struct2assoc_8m.html" target="_self">struct2assoc.m</a></td><td class="desc">Converts a Matlab structure into a string that describes an expression for Mathematica association </td></tr>
+<tr id="row_0_7_3_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_3_" class="arrow" onclick="toggleFolder('0_7_3_')">&#9658;</span><span id="img_0_7_3_" class="iconfclosed" onclick="toggleFolder('0_7_3_')">&#160;</span><a class="el" href="dir_65c1d8654d615bb7739129db8302c579.html" target="_self">mex</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_3_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="build__mex_8m.html" target="_self">build_mex.m</a></td><td class="desc">Compile C/C++ files to Matlab MEX files for Windows, MacOS and Linux (Tested on Ubuntu 14.04) </td></tr>
+<tr id="row_0_7_4_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_4_" class="arrow" onclick="toggleFolder('0_7_4_')">&#9658;</span><span id="img_0_7_4_" class="iconfclosed" onclick="toggleFolder('0_7_4_')">&#160;</span><a class="el" href="dir_aec3ab3dab8f79334cf691ec0f5267db.html" target="_self">plot</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_4_0_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="hline_8m.html" target="_self">hline.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_4_1_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="plot__format_8m.html" target="_self">plot_format.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_4_2_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="plot__save_8m.html" target="_self">plot_save.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_4_3_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="sfigure_8m.html" target="_self">sfigure.m</a></td><td class="desc">SFIGURE Create figure window (minus annoying focus-theft) </td></tr>
+<tr id="row_0_7_4_4_" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="vline_8m.html" target="_self">vline.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_0_7_5_" class="arrow" onclick="toggleFolder('0_7_5_')">&#9658;</span><span id="img_0_7_5_" class="iconfclosed" onclick="toggleFolder('0_7_5_')">&#160;</span><a class="el" href="dir_0c9cc704c875c27ad888a7b678530703.html" target="_self">sim</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="even__sample_8m.html" target="_self">even_sample.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_1_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="even__sample__fields_8m.html" target="_self">even_sample_fields.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_2_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="horzcat__domains_8m.html" target="_self">horzcat_domains.m</a></td><td class="desc">Horizontally concatenate vectors resulting from a multi-domain ODE integration. Eliminate non-unique points by excluding points in between each data set (for steps 1 .. N-1, remove last point, so it's right continuous*) useful for interpolation. Since it's varargin, call via argument expansion: </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<p>horzcat_domains(data.steps.ts) horzcat(dataCell{:}) </p>
+</blockquote>
+</blockquote>
+<p>Example: </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<p>horzcat_domains([1, 2, 3; 10, 20, 30], [3, 4, 5, 6; 30, 40, 50 60]) </p>
+</blockquote>
+</blockquote>
+<p>1 2 3 4 5 6 10 20 30 40 50 60 For now, this will reject any empty matrices, since that doesn't make sense since an initial condition is always present. Can test resulting thing with (there should be no indices) </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<p>[row, col] = find(diff(results, 1, 2) == 0); [row, col] </p>
+</blockquote>
+</blockquote>
+</td></tr>
+<tr id="row_0_7_5_3_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="horzcat__fields_8m.html" target="_self">horzcat_fields.m</a></td><td class="desc">Take a struct array and return one structure with all fields horizcontall concatenated </td></tr>
+<tr id="row_0_7_5_4_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="horzcat__fields__domains_8m.html" target="_self">horzcat_fields_domains.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_5_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="outputfcn_8m.html" target="_self">outputfcn.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_6_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="stopOutFun_8m.html" target="_self">stopOutFun.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_5_7_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="vertcat__domains_8m.html" target="_self">vertcat_domains.m</a></td><td class="desc">Vertically concatenate vectors resulting from a multi-domain ODE integration. Eliminate non-unique points by excluding points in between each data set (for steps 1 .. N-1, remove last point, so it's right continuous*) useful for interpolation. Since it's varargin, call via argument expansion: </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<p>horzcat_domains(data.steps.ts) horzcat(dataCell{:}) </p>
+</blockquote>
+</blockquote>
+<p>Example: </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<p>horzcat_domains([1, 2, 3; 10, 20, 30], [3, 4, 5, 6; 30, 40, 50 60]) </p>
+</blockquote>
+</blockquote>
+<p>1 2 3 4 5 6 10 20 30 40 50 60 For now, this will reject any empty matrices, since that doesn't make sense since an initial condition is always present. Can test resulting thing with (there should be no indices) </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<p>[row, col] = find(diff(results, 1, 2) == 0); [row, col] </p>
+</blockquote>
+</blockquote>
+</td></tr>
+<tr id="row_0_7_5_8_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="vertcat__fields__domains_8m.html" target="_self">vertcat_fields_domains.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_7_6_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="addpath__matlab__utilities_8m.html" target="_self">addpath_matlab_utilities.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_8_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="class__substitutes_8c.html" target="_self">class_substitutes.c</a></td><td class="desc"></td></tr>
+<tr id="row_0_9_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="developers_8c.html" target="_self">developers.c</a></td><td class="desc"></td></tr>
+<tr id="row_0_10_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="doxygen_8m.html" target="_self">doxygen.m</a></td><td class="desc"></td></tr>
+<tr id="row_0_11_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="SimLogger_8m.html" target="_self">SimLogger.m</a></td><td class="desc"></td></tr>
+</table>
+</div><!-- directory -->
+</div><!-- contents -->
+
+  <footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2017 AMBER Lab. All rights reserved. <br />
+ Site last generated: Aug 27, 2017 <br />
+<p><img src="http://localhost:4000/images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-104404898-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>

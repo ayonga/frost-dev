@@ -24,13 +24,13 @@ addpath_matlab_utilities('general', 'mex',...
 % Add third party packages/libraries path
 addpath(fullfile(cur, 'third'));
 addpath_thirdparty_packages('GetFullPath',...
-   'yaml', 'mathlink','ipopt','sparse2');
+   'mathlink','ipopt','sparse2');
 
 addpath(fullfile(cur, 'mathematica'));
 initialize_mathlink();
 
 addpath(fullfile(cur, 'example'));
 
-warning('Restart Matlab to use the Snake yaml library.');
+% warning('Restart Matlab to use the Snake yaml library.');
 % addpath(fullfile(cur, 'docs'));
 end

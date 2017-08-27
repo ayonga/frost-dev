@@ -1,0 +1,5 @@
+<map id="RigidImpact" name="RigidImpact">
+<area shape="rect" id="node2" href="$classDiscreteDynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="17,155,147,181"/>
+<area shape="rect" id="node3" href="$classDynamicalSystem.html" title="A superclass for continuous/discrete dynamic systems. " alt="" coords="17,80,147,107"/>
+<area shape="rect" id="node4" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="5,5,65,32"/>
+</map>

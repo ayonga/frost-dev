@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="false ">
+<title>ContinuousDynamics | FROST</title>
+<link rel="stylesheet" href="http://localhost:4000/css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="http://localhost:4000/css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="http://localhost:4000/css/customstyles.css">
+<link rel="stylesheet" href="http://localhost:4000/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="http://localhost:4000/css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://localhost:4000/js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="http://localhost:4000/js/toc.js"></script>
+<script src="http://localhost:4000/js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="http://localhost:4000/images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="frost-dev" href="http://localhost:4000/feed.xml">
+
+<script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+   
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="http://localhost:4000/index.html">&nbsp;<span class="projectTitle"> FROST</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="http://localhost:4000/index.html">Home</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/introduction.html">Getting Started</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/html/inherits.html">API Documentation</a></li>
+                
+                
+                
+                <li><a href="http://localhost:4000/pages/news.html">Tutorial</a></li>
+                
+                
+                
+                <li><a href="https://github.com/ayonga/frost-dev/" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li>
+
+
+
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:ayonga27@gmail.com?subject=FROST feedback&body=I have some feedback about the ContinuousDynamics page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+
+</li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="http://localhost:4000/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'http://localhost:4000search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="ContinuousDynamics">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container", style="margin-top:50px">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">FROST </li>
+  
+  
+  
+      
+  
+  <li>
+      <a href="#">Main Page</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/inherits.html">Overview</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Classes</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/annotated.html">Class List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/classes.html">Class Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/hierarchy.html">Class Hierarchy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Members</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Methods</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_func_v.html#v">v</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Class Properties</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars.html#a">a</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_c.html#c">c</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_d.html#d">d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_e.html#e">e</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_f.html#f">f</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_g.html#g">g</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_h.html#h">h</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_i.html#i">i</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_j.html#j">j</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_l.html#l">l</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_m.html#m">m</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_n.html#n">n</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_o.html#o">o</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_p.html#p">p</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_r.html#r">r</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_s.html#s">s</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_t.html#t">t</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_u.html#u">u</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_v.html#v">v</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="http://localhost:4000/pages/html/functions_vars_y.html#y">y</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Files</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/files.html">File List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/globals.html">File Members</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Related Pages</a>
+      <ul>
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/todo.html">Todo List</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="http://localhost:4000/pages/html/newfeat1_0.html">New features</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div> <!-- do not remove this div, it is closed by doxygen! -->
+  <script type="text/javascript" src="dynsections.js"></script>
+
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--<link href="customdoxygen.css" rel="stylesheet" type="text/css" />-->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:4000/css/jquery.smartmenus.bootstrap.css">
+  
+
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.min.js"></script>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery.smartmenus.bootstrap.min.js"></script>
+  <script type="text/javascript" src="doxy-boot.js"></script>
+  <!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="classContinuousDynamics-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">ContinuousDynamics</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Continuous state dynamic system governed by differential equations.  
+ <a href="classContinuousDynamics.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for ContinuousDynamics:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classContinuousDynamics__inherit__graph.svg" width="174" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af9e99f30ba6a82407044abbb050b5926"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#af9e99f30ba6a82407044abbb050b5926">ContinuousDynamics</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:af9e99f30ba6a82407044abbb050b5926"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class construction function.  <a href="#af9e99f30ba6a82407044abbb050b5926">More...</a><br /></td></tr>
+<tr class="separator:af9e99f30ba6a82407044abbb050b5926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff10703c67780c0db8ed9e3ec7efce86"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#aff10703c67780c0db8ed9e3ec7efce86">addState</a> (<a class="el" href="classSymVariable.html">SymVariable</a> x,<a class="el" href="classSymVariable.html">SymVariable</a> dx,<a class="el" href="classSymVariable.html">SymVariable</a> ddx)</td></tr>
+<tr class="memdesc:aff10703c67780c0db8ed9e3ec7efce86"><td class="mdescLeft">&#160;</td><td class="mdescRight">overload the superclass <code>addState</code> method with fixed state fields  <a href="#aff10703c67780c0db8ed9e3ec7efce86">More...</a><br /></td></tr>
+<tr class="separator:aff10703c67780c0db8ed9e3ec7efce86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a284ca05e06218c00a940fecc09e0579a"><td class="memItemLeft" align="right" valign="top">function   sol  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a284ca05e06218c00a940fecc09e0579a">simulate</a> (t0, x0, tf, controller, params, logger, eventnames, options, solver)</td></tr>
+<tr class="memdesc:a284ca05e06218c00a940fecc09e0579a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate the dynamical system.  <a href="#a284ca05e06218c00a940fecc09e0579a">More...</a><br /></td></tr>
+<tr class="separator:a284ca05e06218c00a940fecc09e0579a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37641d1e24d081f8abfa48edb7178009"><td class="memItemLeft" align="right" valign="top">function [   value ,   isterminal ,   direction  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a37641d1e24d081f8abfa48edb7178009">checkGuard</a> (t, x, controller, params, eventfuncs)</td></tr>
+<tr class="memdesc:a37641d1e24d081f8abfa48edb7178009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect the guard condition (event trigger)  <a href="#a37641d1e24d081f8abfa48edb7178009">More...</a><br /></td></tr>
+<tr class="separator:a37641d1e24d081f8abfa48edb7178009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96582f36192dbea82471d37d3282baae"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a96582f36192dbea82471d37d3282baae">setMassMatrix</a> (M)</td></tr>
+<tr class="memdesc:a96582f36192dbea82471d37d3282baae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mass matrix M(x) of the system.  <a href="#a96582f36192dbea82471d37d3282baae">More...</a><br /></td></tr>
+<tr class="separator:a96582f36192dbea82471d37d3282baae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73744f7ca20a5e5236e62e95a3ffb03"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#af73744f7ca20a5e5236e62e95a3ffb03">setDriftVector</a> (vf)</td></tr>
+<tr class="memdesc:af73744f7ca20a5e5236e62e95a3ffb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the drift vector field Fvec(x) or Fvec(x,dx) of the system.  <a href="#af73744f7ca20a5e5236e62e95a3ffb03">More...</a><br /></td></tr>
+<tr class="separator:af73744f7ca20a5e5236e62e95a3ffb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41080f0f0d100d4c82468620f7031e4"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#af41080f0f0d100d4c82468620f7031e4">appendDriftVector</a> (vf)</td></tr>
+<tr class="memdesc:af41080f0f0d100d4c82468620f7031e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append additional vf to the drift vector field Fvec(x) or Fvec(x,dx) of the system.  <a href="#af41080f0f0d100d4c82468620f7031e4">More...</a><br /></td></tr>
+<tr class="separator:af41080f0f0d100d4c82468620f7031e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5321379a982e627d57e53c0a0c8e812"><td class="memItemLeft" align="right" valign="top">function   M  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#aa5321379a982e627d57e53c0a0c8e812">calcMassMatrix</a> (x)</td></tr>
+<tr class="memdesc:aa5321379a982e627d57e53c0a0c8e812"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the mass matrix Mmat(x)  <a href="#aa5321379a982e627d57e53c0a0c8e812">More...</a><br /></td></tr>
+<tr class="separator:aa5321379a982e627d57e53c0a0c8e812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b5e507c832801f55ecf6d37c4b8c12"><td class="memItemLeft" align="right" valign="top">function   f  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#ae5b5e507c832801f55ecf6d37c4b8c12">calcDriftVector</a> (x, dx)</td></tr>
+<tr class="memdesc:ae5b5e507c832801f55ecf6d37c4b8c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the mass matrix Fvec(x) or Fvec(x,dx)  <a href="#ae5b5e507c832801f55ecf6d37c4b8c12">More...</a><br /></td></tr>
+<tr class="separator:ae5b5e507c832801f55ecf6d37c4b8c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c05543bd3911efefad7081a5154cb7d"><td class="memItemLeft" align="right" valign="top">function [   xdot ,   extra  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a4c05543bd3911efefad7081a5154cb7d">calcDynamics</a> (t, x, controller, params, logger)</td></tr>
+<tr class="memdesc:a4c05543bd3911efefad7081a5154cb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the dynamical equation dx  <a href="#a4c05543bd3911efefad7081a5154cb7d">More...</a><br /></td></tr>
+<tr class="separator:a4c05543bd3911efefad7081a5154cb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa645e704698f10fdd196c2ee4869cbcf"><td class="memItemLeft" align="right" valign="top">function [   xdot ,   extra  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#aa645e704698f10fdd196c2ee4869cbcf">firstOrderDynamics</a> (t, x, controller, params, logger)</td></tr>
+<tr class="memdesc:aa645e704698f10fdd196c2ee4869cbcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the dynamical equation of the first order dynamical system  <a href="#aa645e704698f10fdd196c2ee4869cbcf">More...</a><br /></td></tr>
+<tr class="separator:aa645e704698f10fdd196c2ee4869cbcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ffe08f1e6d76271c15eff4be36b3326"><td class="memItemLeft" align="right" valign="top">function [   xdot ,   extra  ] =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a1ffe08f1e6d76271c15eff4be36b3326">secondOrderDynamics</a> (t, x, controller, params, logger)</td></tr>
+<tr class="memdesc:a1ffe08f1e6d76271c15eff4be36b3326"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the dynamical equation of the second order dynamical system  <a href="#a1ffe08f1e6d76271c15eff4be36b3326">More...</a><br /></td></tr>
+<tr class="separator:a1ffe08f1e6d76271c15eff4be36b3326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac389e7676e01a69551e4781c347f5545"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#ac389e7676e01a69551e4781c347f5545">compile</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ac389e7676e01a69551e4781c347f5545"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#ac389e7676e01a69551e4781c347f5545">More...</a><br /></td></tr>
+<tr class="separator:ac389e7676e01a69551e4781c347f5545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4523e490df3a075d15a7b485c10a545"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#ad4523e490df3a075d15a7b485c10a545">addEvent</a> (constr)</td></tr>
+<tr class="memdesc:ad4523e490df3a075d15a7b485c10a545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds event function for the dynamical system states and inputs.  <a href="#ad4523e490df3a075d15a7b485c10a545">More...</a><br /></td></tr>
+<tr class="separator:ad4523e490df3a075d15a7b485c10a545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6bc760cfac462147b6a21eb51709b9d"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#ad6bc760cfac462147b6a21eb51709b9d">removeEvent</a> (name)</td></tr>
+<tr class="memdesc:ad6bc760cfac462147b6a21eb51709b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove event functions defined for the system.  <a href="#ad6bc760cfac462147b6a21eb51709b9d">More...</a><br /></td></tr>
+<tr class="separator:ad6bc760cfac462147b6a21eb51709b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d1118311b8a10c28e7afa393c4d7e0"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a74d1118311b8a10c28e7afa393c4d7e0">addHolonomicConstraint</a> (constr)</td></tr>
+<tr class="memdesc:a74d1118311b8a10c28e7afa393c4d7e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a holonomic constraint to the dynamical system.  <a href="#a74d1118311b8a10c28e7afa393c4d7e0">More...</a><br /></td></tr>
+<tr class="separator:a74d1118311b8a10c28e7afa393c4d7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0af469d3203035b9a744a93ab87bc75"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#af0af469d3203035b9a744a93ab87bc75">removeHolonomicConstraint</a> (name)</td></tr>
+<tr class="memdesc:af0af469d3203035b9a744a93ab87bc75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove holonomic constraints defined for the system.  <a href="#af0af469d3203035b9a744a93ab87bc75">More...</a><br /></td></tr>
+<tr class="separator:af0af469d3203035b9a744a93ab87bc75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2203c072f06ba310bb461ccd14e71106"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a2203c072f06ba310bb461ccd14e71106">addUnilateralConstraint</a> (constr)</td></tr>
+<tr class="memdesc:a2203c072f06ba310bb461ccd14e71106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unilateral (inequality) constraints on the dynamical system states and inputs.  <a href="#a2203c072f06ba310bb461ccd14e71106">More...</a><br /></td></tr>
+<tr class="separator:a2203c072f06ba310bb461ccd14e71106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc1301579d874d0ec45d487d3bb1034"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a0dc1301579d874d0ec45d487d3bb1034">removeUnilateralConstraint</a> (name)</td></tr>
+<tr class="memdesc:a0dc1301579d874d0ec45d487d3bb1034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove unilateral constraints defined for the system.  <a href="#a0dc1301579d874d0ec45d487d3bb1034">More...</a><br /></td></tr>
+<tr class="separator:a0dc1301579d874d0ec45d487d3bb1034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a465a9c47611f69e2453e021cbab86c1c"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a465a9c47611f69e2453e021cbab86c1c">addVirtualConstraint</a> (constr)</td></tr>
+<tr class="memdesc:a465a9c47611f69e2453e021cbab86c1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a set of virtual constraints to the dynamical system.  <a href="#a465a9c47611f69e2453e021cbab86c1c">More...</a><br /></td></tr>
+<tr class="separator:a465a9c47611f69e2453e021cbab86c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101a25c42035613de961df61364b4045"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a101a25c42035613de961df61364b4045">removeVirtualConstraint</a> (name)</td></tr>
+<tr class="memdesc:a101a25c42035613de961df61364b4045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove virtual constraints defined for the system.  <a href="#a101a25c42035613de961df61364b4045">More...</a><br /></td></tr>
+<tr class="separator:a101a25c42035613de961df61364b4045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2740bf3996d34bda0f093c446a177a8a"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a2740bf3996d34bda0f093c446a177a8a">saveDynamics</a> (path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a2740bf3996d34bda0f093c446a177a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#a2740bf3996d34bda0f093c446a177a8a">More...</a><br /></td></tr>
+<tr class="separator:a2740bf3996d34bda0f093c446a177a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a459ef15c5ab5b3776aad1251101fecc7"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a459ef15c5ab5b3776aad1251101fecc7">loadDynamics</a> (path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a459ef15c5ab5b3776aad1251101fecc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#a459ef15c5ab5b3776aad1251101fecc7">More...</a><br /></td></tr>
+<tr class="separator:a459ef15c5ab5b3776aad1251101fecc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace03392737b4f191dc90f13efb27a970"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#ace03392737b4f191dc90f13efb27a970">clearKernel</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ace03392737b4f191dc90f13efb27a970"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#ace03392737b4f191dc90f13efb27a970">More...</a><br /></td></tr>
+<tr class="separator:ace03392737b4f191dc90f13efb27a970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a5693f16166671aec61db6b88fb83cde9">addState</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add state variables of the dynamical system.  <a href="classDynamicalSystem.html#a5693f16166671aec61db6b88fb83cde9">More...</a><br /></td></tr>
+<tr class="separator:a5693f16166671aec61db6b88fb83cde9 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a1e40a6d810f010012b9baa31d68cd6b3">addInput</a> (category, name, var, gf, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add input variables of the dynamical system.  <a href="classDynamicalSystem.html#a1e40a6d810f010012b9baa31d68cd6b3">More...</a><br /></td></tr>
+<tr class="separator:a1e40a6d810f010012b9baa31d68cd6b3 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#aa0a12e5b2dab2e82cf4eb0963232b36a">removeInput</a> (category, name)</td></tr>
+<tr class="memdesc:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove input variables of the dynamical system.  <a href="classDynamicalSystem.html#aa0a12e5b2dab2e82cf4eb0963232b36a">More...</a><br /></td></tr>
+<tr class="separator:aa0a12e5b2dab2e82cf4eb0963232b36a inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a8e90549435054b72ff63a320e24491f7">addParam</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add parameter variables of the dynamical system.  <a href="classDynamicalSystem.html#a8e90549435054b72ff63a320e24491f7">More...</a><br /></td></tr>
+<tr class="separator:a8e90549435054b72ff63a320e24491f7 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a84134aa9f80d4371b5c7042389b6c0ba">removeParam</a> (param_name)</td></tr>
+<tr class="memdesc:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove parameter variables of the dynamical system.  <a href="classDynamicalSystem.html#a84134aa9f80d4371b5c7042389b6c0ba">More...</a><br /></td></tr>
+<tr class="separator:a84134aa9f80d4371b5c7042389b6c0ba inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a2aa34f1a91ef223214ca2c0107e3b069">setParamValue</a> (<a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the actual value of the system parameters  <a href="classDynamicalSystem.html#a2aa34f1a91ef223214ca2c0107e3b069">More...</a><br /></td></tr>
+<tr class="separator:a2aa34f1a91ef223214ca2c0107e3b069 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a41c2c076844b61cbd10f1796ef5b2c20">compile</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="classDynamicalSystem.html#a41c2c076844b61cbd10f1796ef5b2c20">More...</a><br /></td></tr>
+<tr class="separator:a41c2c076844b61cbd10f1796ef5b2c20 inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a0159cd3624ed7282c0280b67739a83cc">DynamicalSystem</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class construction function.  <a href="classDynamicalSystem.html#a0159cd3624ed7282c0280b67739a83cc">More...</a><br /></td></tr>
+<tr class="separator:a0159cd3624ed7282c0280b67739a83cc inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ac2d532f9277eec4c2bd9fb257056c77e">setName</a> (name)</td></tr>
+<tr class="memdesc:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the name of the dynamical system  <a href="classDynamicalSystem.html#ac2d532f9277eec4c2bd9fb257056c77e">More...</a><br /></td></tr>
+<tr class="separator:ac2d532f9277eec4c2bd9fb257056c77e inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   var_group  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a48eaf6ea3ab14462c1a7cfa03206d3af">validateVarName</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="memdesc:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unilateral (inequality) constraints on the dynamical system states and inputs.  <a href="classDynamicalSystem.html#a48eaf6ea3ab14462c1a7cfa03206d3af">More...</a><br /></td></tr>
+<tr class="separator:a48eaf6ea3ab14462c1a7cfa03206d3af inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a3f38330ce1a44879b0599e0584e147aa">setType</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
+<tr class="memdesc:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of the dynamical system.  <a href="classDynamicalSystem.html#a3f38330ce1a44879b0599e0584e147aa">More...</a><br /></td></tr>
+<tr class="separator:a3f38330ce1a44879b0599e0584e147aa inherit pub_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1737a884325d663560dbd1fd60833e19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a1737a884325d663560dbd1fd60833e19">PreProcess</a></td></tr>
+<tr class="memdesc:a1737a884325d663560dbd1fd60833e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">pre-process function handle of the object before the simulation  <a href="#a1737a884325d663560dbd1fd60833e19">More...</a><br /></td></tr>
+<tr class="separator:a1737a884325d663560dbd1fd60833e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ee3c4dc87ba0991e8814ac374aa08b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a77ee3c4dc87ba0991e8814ac374aa08b">PostProcess</a></td></tr>
+<tr class="memdesc:a77ee3c4dc87ba0991e8814ac374aa08b"><td class="mdescLeft">&#160;</td><td class="mdescRight">pre-process function handle of the object after the simulation  <a href="#a77ee3c4dc87ba0991e8814ac374aa08b">More...</a><br /></td></tr>
+<tr class="separator:a77ee3c4dc87ba0991e8814ac374aa08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f79672603b97e08193ffe0cfdfefca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a41f79672603b97e08193ffe0cfdfefca">UserNlpConstraint</a></td></tr>
+<tr class="memdesc:a41f79672603b97e08193ffe0cfdfefca"><td class="mdescLeft">&#160;</td><td class="mdescRight">A handle to a function called by a trajectory optimization NLP to enforce system specific constraints.  <a href="#a41f79672603b97e08193ffe0cfdfefca">More...</a><br /></td></tr>
+<tr class="separator:a41f79672603b97e08193ffe0cfdfefca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee11fb678da530e7401ac432a06aca8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a3ee11fb678da530e7401ac432a06aca8">Flow</a></td></tr>
+<tr class="memdesc:a3ee11fb678da530e7401ac432a06aca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The flow (trajectory) from the dynamical system simulation.  <a href="#a3ee11fb678da530e7401ac432a06aca8">More...</a><br /></td></tr>
+<tr class="separator:a3ee11fb678da530e7401ac432a06aca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ccc79d44ed84450075e3759928d637"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#af4ccc79d44ed84450075e3759928d637">Mmat</a></td></tr>
+<tr class="memdesc:af4ccc79d44ed84450075e3759928d637"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mass matrix Mmat(x)  <a href="#af4ccc79d44ed84450075e3759928d637">More...</a><br /></td></tr>
+<tr class="separator:af4ccc79d44ed84450075e3759928d637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95dde08141dc7ff34e4a25bb9e4b6807"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcell.html">cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a95dde08141dc7ff34e4a25bb9e4b6807">Fvec</a></td></tr>
+<tr class="memdesc:a95dde08141dc7ff34e4a25bb9e4b6807"><td class="mdescLeft">&#160;</td><td class="mdescRight">The cell array of the drift vector fields Fvec(x) <a class="el" href="classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="#a95dde08141dc7ff34e4a25bb9e4b6807">More...</a><br /></td></tr>
+<tr class="separator:a95dde08141dc7ff34e4a25bb9e4b6807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c43bbd658e9ffb215a1021938b450ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a5c43bbd658e9ffb215a1021938b450ea">HolonomicConstraints</a></td></tr>
+<tr class="memdesc:a5c43bbd658e9ffb215a1021938b450ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">The holonomic constraints of the dynamical system.  <a href="#a5c43bbd658e9ffb215a1021938b450ea">More...</a><br /></td></tr>
+<tr class="separator:a5c43bbd658e9ffb215a1021938b450ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa46f578076f504540c0ce1878f2a1212"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#aa46f578076f504540c0ce1878f2a1212">UnilateralConstraints</a></td></tr>
+<tr class="memdesc:aa46f578076f504540c0ce1878f2a1212"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unilateral constraints of the dynamical system.  <a href="#aa46f578076f504540c0ce1878f2a1212">More...</a><br /></td></tr>
+<tr class="separator:aa46f578076f504540c0ce1878f2a1212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a159690101a5448de27b4baa75bd60e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#a2a159690101a5448de27b4baa75bd60e">VirtualConstraints</a></td></tr>
+<tr class="memdesc:a2a159690101a5448de27b4baa75bd60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The virtual constraints of the dynamical system.  <a href="#a2a159690101a5448de27b4baa75bd60e">More...</a><br /></td></tr>
+<tr class="separator:a2a159690101a5448de27b4baa75bd60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e98fd2962dbc050effd7a099b5418c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#ac9e98fd2962dbc050effd7a099b5418c">EventFuncs</a></td></tr>
+<tr class="memdesc:ac9e98fd2962dbc050effd7a099b5418c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The event functions.  <a href="#ac9e98fd2962dbc050effd7a099b5418c">More...</a><br /></td></tr>
+<tr class="separator:ac9e98fd2962dbc050effd7a099b5418c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacb47f952f8f4ff56febc4b3aee3049"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classContinuousDynamics.html#adacb47f952f8f4ff56febc4b3aee3049">MmatDx</a></td></tr>
+<tr class="memdesc:adacb47f952f8f4ff56febc4b3aee3049"><td class="mdescLeft">&#160;</td><td class="mdescRight">The left hand side of the dynamical equation: M(x)dx or M(x)ddx.  <a href="#adacb47f952f8f4ff56febc4b3aee3049">More...</a><br /></td></tr>
+<tr class="separator:adacb47f952f8f4ff56febc4b3aee3049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#adc61a10791020cef1e8b6640fbd4e220">Name</a></td></tr>
+<tr class="memdesc:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique name identification of the system.  <a href="classDynamicalSystem.html#adc61a10791020cef1e8b6640fbd4e220">More...</a><br /></td></tr>
+<tr class="separator:adc61a10791020cef1e8b6640fbd4e220 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad13f1f77ca5f1d205aaf02b8223006be inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfunction__handle.html">function_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ad13f1f77ca5f1d205aaf02b8223006be">ExternalInputFun</a></td></tr>
+<tr class="memdesc:ad13f1f77ca5f1d205aaf02b8223006be inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the external input defined on the dynamical system.  <a href="classDynamicalSystem.html#ad13f1f77ca5f1d205aaf02b8223006be">More...</a><br /></td></tr>
+<tr class="separator:ad13f1f77ca5f1d205aaf02b8223006be inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a23faa51b2b643490ad554107a1c949c5">Type</a></td></tr>
+<tr class="memdesc:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The highest order of the state derivatives of the system.  <a href="classDynamicalSystem.html#a23faa51b2b643490ad554107a1c949c5">More...</a><br /></td></tr>
+<tr class="separator:a23faa51b2b643490ad554107a1c949c5 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a6d5df3dd7741e0f4efc56a6b727cd4f8">States</a></td></tr>
+<tr class="memdesc:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains the symbolic representation of state variables.  <a href="classDynamicalSystem.html#a6d5df3dd7741e0f4efc56a6b727cd4f8">More...</a><br /></td></tr>
+<tr class="separator:a6d5df3dd7741e0f4efc56a6b727cd4f8 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a5bd6eb3599c404320bc2e8a9ebcd7ae6">numState</a></td></tr>
+<tr class="memdesc:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total number of system states.  <a href="classDynamicalSystem.html#a5bd6eb3599c404320bc2e8a9ebcd7ae6">More...</a><br /></td></tr>
+<tr class="separator:a5bd6eb3599c404320bc2e8a9ebcd7ae6 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a5f85366dc922b01cba937c637f974f93">Inputs</a></td></tr>
+<tr class="memdesc:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains the symbolic representation of input variables.  <a href="classDynamicalSystem.html#a5f85366dc922b01cba937c637f974f93">More...</a><br /></td></tr>
+<tr class="separator:a5f85366dc922b01cba937c637f974f93 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ab3468418c7af6d1a29826c52fbb8a3f3">Params</a></td></tr>
+<tr class="memdesc:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parameters of the system.  <a href="classDynamicalSystem.html#ab3468418c7af6d1a29826c52fbb8a3f3">More...</a><br /></td></tr>
+<tr class="separator:ab3468418c7af6d1a29826c52fbb8a3f3 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a830da5aafff9e09005dbfdf92fca7028">Gvec</a></td></tr>
+<tr class="memdesc:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct of input vector fields Gvec(x,u) <a class="el" href="classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="classDynamicalSystem.html#a830da5aafff9e09005dbfdf92fca7028">More...</a><br /></td></tr>
+<tr class="separator:a830da5aafff9e09005dbfdf92fca7028 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#abb47145f1dbc23468e77fbd4f63dfaf3">Gmap</a></td></tr>
+<tr class="memdesc:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The struct of input map Gmap(x) <a class="el" href="classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>.  <a href="classDynamicalSystem.html#abb47145f1dbc23468e77fbd4f63dfaf3">More...</a><br /></td></tr>
+<tr class="separator:abb47145f1dbc23468e77fbd4f63dfaf3 inherit pub_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
+<tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
+<tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
+<tr class="separator:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">notify</a></td></tr>
+<tr class="memdesc:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a notice that a specific event is occurring on a specified handle object or array of handle objects.  <a href="classhandle.html#a8cfc3dab9d3ecc55b0b3449c2c7afd6f">More...</a><br /></td></tr>
+<tr class="separator:a8cfc3dab9d3ecc55b0b3449c2c7afd6f inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">delete</a></td></tr>
+<tr class="memdesc:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object destructor method that is called when the object's lifecycle ends.  <a href="classhandle.html#a1d55d41c7af285b8fe7ab17ed5e176f6">More...</a><br /></td></tr>
+<tr class="separator:a1d55d41c7af285b8fe7ab17ed5e176f6 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">disp</a></td></tr>
+<tr class="memdesc:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object disp method which is called by the display method. See the MATLAB disp function.  <a href="classhandle.html#adedb524cfbdf6a5d946cc57ef6745099">More...</a><br /></td></tr>
+<tr class="separator:adedb524cfbdf6a5d946cc57ef6745099 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">display</a></td></tr>
+<tr class="memdesc:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle object display method called when MATLAB software interprets an expression returning a handle object that is not terminated by a semicolon. See the MATLAB display function.  <a href="classhandle.html#a2e26be32e99b2b98db18bb538638b814">More...</a><br /></td></tr>
+<tr class="separator:a2e26be32e99b2b98db18bb538638b814 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">findobj</a></td></tr>
+<tr class="memdesc:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds objects matching the specified conditions from the input array of handle objects.  <a href="classhandle.html#a000398ac90dd973b4618c739e6fd64a9">More...</a><br /></td></tr>
+<tr class="separator:a000398ac90dd973b4618c739e6fd64a9 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">findprop</a></td></tr>
+<tr class="memdesc:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a meta.property objects associated with the specified property name.  <a href="classhandle.html#ab4b410e2df940296c9d2563898c951fe">More...</a><br /></td></tr>
+<tr class="separator:ab4b410e2df940296c9d2563898c951fe inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">fields</a></td></tr>
+<tr class="memdesc:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties.  <a href="classhandle.html#ad9c0557345e68bd933889c28b2a9484b">More...</a><br /></td></tr>
+<tr class="separator:ad9c0557345e68bd933889c28b2a9484b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">fieldnames</a></td></tr>
+<tr class="memdesc:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a cell array of string containing the names of public properties. See the MATLAB fieldnames function.  <a href="classhandle.html#a7086577f3953d4bd9ce17b07c4f6e141">More...</a><br /></td></tr>
+<tr class="separator:a7086577f3953d4bd9ce17b07c4f6e141 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">isvalid</a></td></tr>
+<tr class="memdesc:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a logical array in which elements are true if the corresponding elements in the input array are valid handles. This method is Sealed so you cannot override it in a handle subclass.  <a href="classhandle.html#a72617e83dc9643b61ed8af63e5058ccf">More...</a><br /></td></tr>
+<tr class="separator:a72617e83dc9643b61ed8af63e5058ccf inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">eq</a></td></tr>
+<tr class="memdesc:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relational functions example. See details for more information.  <a href="classhandle.html#a2fb018cd603a5ced1783bfb20c6cce86">More...</a><br /></td></tr>
+<tr class="separator:a2fb018cd603a5ced1783bfb20c6cce86 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acd9b55f206750374c4dfca508cfff084">transpose</a></td></tr>
+<tr class="memdesc:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transposes the elements of the handle object array.  <a href="classhandle.html#acd9b55f206750374c4dfca508cfff084">More...</a><br /></td></tr>
+<tr class="separator:acd9b55f206750374c4dfca508cfff084 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">permute</a></td></tr>
+<tr class="memdesc:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rearranges the dimensions of the handle object array. See the MATLAB permute function.  <a href="classhandle.html#a6dc9f59313af54f392d8e273d71ace7b">More...</a><br /></td></tr>
+<tr class="separator:a6dc9f59313af54f392d8e273d71ace7b inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">reshape</a></td></tr>
+<tr class="memdesc:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">hanges the dimensions of the handle object array to the specified dimensions. See the MATLAB reshape function.  <a href="classhandle.html#acef58ae5e52255411835a4fcaf2edd49">More...</a><br /></td></tr>
+<tr class="separator:acef58ae5e52255411835a4fcaf2edd49 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">sort</a></td></tr>
+<tr class="memdesc:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">ort the handle objects in any array in ascending or descending order.  <a href="classhandle.html#ad11b0be4c173a9d31122c1298eb96a97">More...</a><br /></td></tr>
+<tr class="separator:ad11b0be4c173a9d31122c1298eb96a97 inherit pub_attribs_classhandle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   value  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a28065d40ff9cec20de0e49c61801c211">getValue</a> (vars)</td></tr>
+<tr class="memdesc:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the variables (vars) value that are stored during computing the dynamics  <a href="classDynamicalSystem.html#a28065d40ff9cec20de0e49c61801c211">More...</a><br /></td></tr>
+<tr class="separator:a28065d40ff9cec20de0e49c61801c211 inherit pro_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5acd29436293588d02136412c3149c inherit pro_methods_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top">function   v_type  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#abb5acd29436293588d02136412c3149c">validateSystemType</a> (type)</td></tr>
+<tr class="memdesc:abb5acd29436293588d02136412c3149c inherit pro_methods_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">validate if it is valid system type  <a href="classDynamicalSystem.html#abb5acd29436293588d02136412c3149c">More...</a><br /></td></tr>
+<tr class="separator:abb5acd29436293588d02136412c3149c inherit pro_methods_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classDynamicalSystem"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classDynamicalSystem')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classDynamicalSystem.html">DynamicalSystem</a></td></tr>
+<tr class="memitem:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdouble.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a3d3f49465f71ce92edcafa592925a170">t_</a></td></tr>
+<tr class="memdesc:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time.  <a href="classDynamicalSystem.html#a3d3f49465f71ce92edcafa592925a170">More...</a><br /></td></tr>
+<tr class="separator:a3d3f49465f71ce92edcafa592925a170 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#aa9d64b145e769d1abe8fe74ee0f54af7">states_</a></td></tr>
+<tr class="memdesc:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The states.  <a href="classDynamicalSystem.html#aa9d64b145e769d1abe8fe74ee0f54af7">More...</a><br /></td></tr>
+<tr class="separator:aa9d64b145e769d1abe8fe74ee0f54af7 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade263c814bb20851e716abd686795174 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ade263c814bb20851e716abd686795174">inputs_</a></td></tr>
+<tr class="memdesc:ade263c814bb20851e716abd686795174 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The inputs.  <a href="classDynamicalSystem.html#ade263c814bb20851e716abd686795174">More...</a><br /></td></tr>
+<tr class="separator:ade263c814bb20851e716abd686795174 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a31a12a8e598c2a650b0ae89e21188968">params_</a></td></tr>
+<tr class="memdesc:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The parameters.  <a href="classDynamicalSystem.html#a31a12a8e598c2a650b0ae89e21188968">More...</a><br /></td></tr>
+<tr class="separator:a31a12a8e598c2a650b0ae89e21188968 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a55123ad63013e90cd3b6f309b85e2077">GmapName_</a></td></tr>
+<tr class="memdesc:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the Gmap functions.  <a href="classDynamicalSystem.html#a55123ad63013e90cd3b6f309b85e2077">More...</a><br /></td></tr>
+<tr class="separator:a55123ad63013e90cd3b6f309b85e2077 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_classDynamicalSystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstruct.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a6ada83aae2363123232f41cc150b06d7">GvecName_</a></td></tr>
+<tr class="memdesc:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_classDynamicalSystem"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the Gvec functions.  <a href="classDynamicalSystem.html#a6ada83aae2363123232f41cc150b06d7">More...</a><br /></td></tr>
+<tr class="separator:a6ada83aae2363123232f41cc150b06d7 inherit pro_attribs_classDynamicalSystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Continuous state dynamic system governed by differential equations. </p>
+<p>It could be either a </p><dl class="section user"><dt>first order system with the form</dt><dd><p class="formulaDsp">
+\begin{eqnarray*} Mmat(x)\dot{x}= Fvec(x) + Gvec(x,u) \end{eqnarray*}
+</p>
+ </dd></dl>
+<dl class="section user"><dt>or a second order system with the form</dt><dd><p class="formulaDsp">
+\begin{eqnarray*} Mmat(x)\ddot{x}= Fvec(x,\dot{x}) + Gvec(x,u) \end{eqnarray*}
+</p>
+</dd></dl>
+<p>Further, if the inputs (u) are affine, the system can be written as </p><dl class="section user"><dt>either for first order system of the form</dt><dd><p class="formulaDsp">
+\begin{eqnarray*} Mmat(x)\dot{x}= Fvec(x) + Gmap(x) u \end{eqnarray*}
+</p>
+ </dd></dl>
+<dl class="section user"><dt>or a second order system of the form</dt><dd><p class="formulaDsp">
+\begin{eqnarray*} Mmat(x)\ddot{x}= Fvec(x,\dot{x}) + Gmap(x) u \end{eqnarray*}
+</p>
+</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>ayonga </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2017-02-26</dd></dl>
+<p>Copyright (c) 2016, AMBER Lab All right reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted only in compliance with the BSD 3-Clause license, see <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a> </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af9e99f30ba6a82407044abbb050b5926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e99f30ba6a82407044abbb050b5926">&#9670;&nbsp;</a></span>ContinuousDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.ContinuousDynamics </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The class construction function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>the type of the system </td></tr>
+    <tr><td class="paramname">name</td><td>the name of the system </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad4523e490df3a075d15a7b485c10a545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4523e490df3a075d15a7b485c10a545">&#9670;&nbsp;</a></span>addEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.addEvent </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>constr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds event function for the dynamical system states and inputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constr</td><td>the event function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a74d1118311b8a10c28e7afa393c4d7e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d1118311b8a10c28e7afa393c4d7e0">&#9670;&nbsp;</a></span>addHolonomicConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.addHolonomicConstraint </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>constr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a holonomic constraint to the dynamical system. </p>
+<dl class="section note"><dt>Note</dt><dd>Any holonomic constraint introduces a set of constrained wrenchs to the system (Lagrangian multiplier).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constr</td><td>the expression of the constraints </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aff10703c67780c0db8ed9e3ec7efce86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff10703c67780c0db8ed9e3ec7efce86">&#9670;&nbsp;</a></span>addState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.addState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSymVariable.html">SymVariable</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSymVariable.html">SymVariable</a>&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSymVariable.html">SymVariable</a>&#160;</td>
+          <td class="paramname"><em>ddx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>overload the superclass <code>addState</code> method with fixed state fields </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the state variables </td></tr>
+    <tr><td class="paramname">dx</td><td>the first order derivative of state variables </td></tr>
+    <tr><td class="paramname">ddx</td><td>the second order derivative of state variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2203c072f06ba310bb461ccd14e71106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2203c072f06ba310bb461ccd14e71106">&#9670;&nbsp;</a></span>addUnilateralConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.addUnilateralConstraint </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>constr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds unilateral (inequality) constraints on the dynamical system states and inputs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constr</td><td>the unilateral constraints </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a465a9c47611f69e2453e021cbab86c1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a465a9c47611f69e2453e021cbab86c1c">&#9670;&nbsp;</a></span>addVirtualConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.addVirtualConstraint </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>constr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a set of virtual constraints to the dynamical system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constr</td><td>the <a class="el" href="classVirtualConstraint.html" title="VirtualConstraint: represents a group of virtual constraints of a dynamical systems. ">VirtualConstraint</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af41080f0f0d100d4c82468620f7031e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af41080f0f0d100d4c82468620f7031e4">&#9670;&nbsp;</a></span>appendDriftVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.appendDriftVector </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>vf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Append additional vf to the drift vector field Fvec(x) or Fvec(x,dx) of the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vf</td><td>the f(x)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ae5b5e507c832801f55ecf6d37c4b8c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b5e507c832801f55ecf6d37c4b8c12">&#9670;&nbsp;</a></span>calcDriftVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   f  = ContinuousDynamics.calcDriftVector </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>dx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculates the mass matrix Fvec(x) or Fvec(x,dx) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the state variables </td></tr>
+    <tr><td class="paramname">dx</td><td>the first order derivative of state variables </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>This calculation is slow due to multiple function invoke. Better ideas to improve the speed? </dd></dl>
+
+</div>
+</div>
+<a id="a4c05543bd3911efefad7081a5154cb7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c05543bd3911efefad7081a5154cb7d">&#9670;&nbsp;</a></span>calcDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function <a class="el" href="classcolvec.html">colvec</a> xdot  = ContinuousDynamics.calcDynamics </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>controller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>logger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculate the dynamical equation dx </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the time instant </td></tr>
+    <tr><td class="paramname">x</td><td>the states </td></tr>
+    <tr><td class="paramname">controller</td><td>the controller </td></tr>
+    <tr><td class="paramname">params</td><td>the parameter structure </td></tr>
+    <tr><td class="paramname">logger</td><td>the data logger object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">xdot</td><td>the derivative of the system states </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5321379a982e627d57e53c0a0c8e812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5321379a982e627d57e53c0a0c8e812">&#9670;&nbsp;</a></span>calcMassMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   M  = ContinuousDynamics.calcMassMatrix </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculates the mass matrix Mmat(x) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the state variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a37641d1e24d081f8abfa48edb7178009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37641d1e24d081f8abfa48edb7178009">&#9670;&nbsp;</a></span>checkGuard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function [   value ,   isterminal ,   direction  ] = ContinuousDynamics.checkGuard </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>controller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>eventfuncs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Detect the guard condition (event trigger) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the absolute time </td></tr>
+    <tr><td class="paramname">x</td><td>the system states </td></tr>
+    <tr><td class="paramname">controller</td><td>the controller </td></tr>
+    <tr><td class="paramname">params</td><td>the parameter structure </td></tr>
+    <tr><td class="paramname">eventfuncs</td><td>a list of event function</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of eventfuncs:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ace03392737b4f191dc90f13efb27a970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace03392737b4f191dc90f13efb27a970">&#9670;&nbsp;</a></span>clearKernel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.clearKernel </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classContinuousDynamics.html#ace03392737b4f191dc90f13efb27a970">clearKernel</a> ( export_path, StackVariable, File, ForceExport, BuildMex, Namespace, NoPrompt ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> export_path</span> the path to export the file</li>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+<li><span class="paramname"> NoPrompt</span> answer yes to all prompts</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac389e7676e01a69551e4781c347f5545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac389e7676e01a69551e4781c347f5545">&#9670;&nbsp;</a></span>compile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.compile </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classContinuousDynamics.html#ac389e7676e01a69551e4781c347f5545">compile</a> ( ..., StackVariable, File, ForceExport, BuildMex, Namespace, NoPrompt ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+<li><span class="paramname"> NoPrompt</span> answer yes to all prompts</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa645e704698f10fdd196c2ee4869cbcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa645e704698f10fdd196c2ee4869cbcf">&#9670;&nbsp;</a></span>firstOrderDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function <a class="el" href="classcolvec.html">colvec</a> xdot  = ContinuousDynamics.firstOrderDynamics </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>controller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>logger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculate the dynamical equation of the first order dynamical system </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the time instant </td></tr>
+    <tr><td class="paramname">x</td><td>the states </td></tr>
+    <tr><td class="paramname">controller</td><td>the controller </td></tr>
+    <tr><td class="paramname">params</td><td>the parameter structure </td></tr>
+    <tr><td class="paramname">logger</td><td>the data logger object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">xdot</td><td>the derivative of the system states</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of logger:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a459ef15c5ab5b3776aad1251101fecc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a459ef15c5ab5b3776aad1251101fecc7">&#9670;&nbsp;</a></span>loadDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.loadDynamics </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classContinuousDynamics.html#a459ef15c5ab5b3776aad1251101fecc7">loadDynamics</a> ( ..., export_path, StackVariable, File, ForceExport, BuildMex, Namespace, NoPrompt ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> export_path</span> the path to export the file</li>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+<li><span class="paramname"> NoPrompt</span> answer yes to all prompts</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad6bc760cfac462147b6a21eb51709b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6bc760cfac462147b6a21eb51709b9d">&#9670;&nbsp;</a></span>removeEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.removeEvent </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove event functions defined for the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the constraint</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="af0af469d3203035b9a744a93ab87bc75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0af469d3203035b9a744a93ab87bc75">&#9670;&nbsp;</a></span>removeHolonomicConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.removeHolonomicConstraint </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove holonomic constraints defined for the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the constraint</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a0dc1301579d874d0ec45d487d3bb1034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc1301579d874d0ec45d487d3bb1034">&#9670;&nbsp;</a></span>removeUnilateralConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.removeUnilateralConstraint </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove unilateral constraints defined for the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the constraint</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a101a25c42035613de961df61364b4045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a101a25c42035613de961df61364b4045">&#9670;&nbsp;</a></span>removeVirtualConstraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.removeVirtualConstraint </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove virtual constraints defined for the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the constraint</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a2740bf3996d34bda0f093c446a177a8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2740bf3996d34bda0f093c446a177a8a">&#9670;&nbsp;</a></span>saveDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.saveDynamics </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classContinuousDynamics.html#a2740bf3996d34bda0f093c446a177a8a">saveDynamics</a> ( ..., export_path, StackVariable, File, ForceExport, BuildMex, Namespace, NoPrompt ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> export_path</span> the path to export the file</li>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+<li><span class="paramname"> NoPrompt</span> answer yes to all prompts</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1ffe08f1e6d76271c15eff4be36b3326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ffe08f1e6d76271c15eff4be36b3326">&#9670;&nbsp;</a></span>secondOrderDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function <a class="el" href="classcolvec.html">colvec</a> xdot  = ContinuousDynamics.secondOrderDynamics </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>controller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>logger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculate the dynamical equation of the second order dynamical system </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the time instant </td></tr>
+    <tr><td class="paramname">x</td><td>the states </td></tr>
+    <tr><td class="paramname">controller</td><td>the controller </td></tr>
+    <tr><td class="paramname">params</td><td>the parameter structure </td></tr>
+    <tr><td class="paramname">logger</td><td>the data logger object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">xdot</td><td>the derivative of the system states</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of logger:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="af73744f7ca20a5e5236e62e95a3ffb03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af73744f7ca20a5e5236e62e95a3ffb03">&#9670;&nbsp;</a></span>setDriftVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.setDriftVector </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>vf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the drift vector field Fvec(x) or Fvec(x,dx) of the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vf</td><td>the f(x)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a96582f36192dbea82471d37d3282baae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96582f36192dbea82471d37d3282baae">&#9670;&nbsp;</a></span>setMassMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = ContinuousDynamics.setMassMatrix </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the mass matrix M(x) of the system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>the mass matrix M(x)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of M:</dt><dd></dd></dl>
+<dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a284ca05e06218c00a940fecc09e0579a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a284ca05e06218c00a940fecc09e0579a">&#9670;&nbsp;</a></span>simulate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function [ <a class="el" href="classstruct.html">struct</a> sol , <a class="el" href="classstruct.html">struct</a> params  ] = ContinuousDynamics.simulate </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>x0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>controller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>eventnames</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>solver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulate the dynamical system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t0</td><td>the starting time instant </td></tr>
+    <tr><td class="paramname">x0</td><td>the initial states </td></tr>
+    <tr><td class="paramname">tf</td><td>the terminating time instant </td></tr>
+    <tr><td class="paramname">controller</td><td>the controller for the dynamical system </td></tr>
+    <tr><td class="paramname">params</td><td>extra parameters </td></tr>
+    <tr><td class="paramname">logger</td><td>the data logger object </td></tr>
+    <tr><td class="paramname">eventnames</td><td>the name of eventnames to be used </td></tr>
+    <tr><td class="paramname">options</td><td>simulation options of hybrid system </td></tr>
+    <tr><td class="paramname">solver</td><td>the ODE solver</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">sol</td><td>a structure contains the integration result of the ODE solver</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Required fields of logger:</dt><dd></dd></dl>
+
+<p class="reference">References <a class="el" href="outputfcn_8m.html#a0454651cb22a2b077da5daa74e2ca1e3">outputfcn()</a>, and <a class="el" href="str__index_8m.html#ab170addc2d158868c611f86ec68ff728">str_index()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac9e98fd2962dbc050effd7a099b5418c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9e98fd2962dbc050effd7a099b5418c">&#9670;&nbsp;</a></span>EventFuncs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.EventFuncs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The event functions. </p>
+<p>The event functions are often subset of the unilateral constraints defined on the system. For flexibility, we define them separately.</p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="a3ee11fb678da530e7401ac432a06aca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ee11fb678da530e7401ac432a06aca8">&#9670;&nbsp;</a></span>Flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.Flow</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The flow (trajectory) from the dynamical system simulation. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="a95dde08141dc7ff34e4a25bb9e4b6807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95dde08141dc7ff34e4a25bb9e4b6807">&#9670;&nbsp;</a></span>Fvec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.Fvec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The cell array of the drift vector fields Fvec(x) <a class="el" href="classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a...">SymFunction</a>. </p>
+<p>We split the Fvec into many sub-vectors Fvec[i], such that </p><p class="formulaDsp">
+\begin{eqnarray*} Fvec = \sum_i^N Fvec[i] \end{eqnarray*}
+</p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="a5c43bbd658e9ffb215a1021938b450ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c43bbd658e9ffb215a1021938b450ea">&#9670;&nbsp;</a></span>HolonomicConstraints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.HolonomicConstraints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The holonomic constraints of the dynamical system. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="af4ccc79d44ed84450075e3759928d637"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4ccc79d44ed84450075e3759928d637">&#9670;&nbsp;</a></span>Mmat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.Mmat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The mass matrix Mmat(x) </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="adacb47f952f8f4ff56febc4b3aee3049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adacb47f952f8f4ff56febc4b3aee3049">&#9670;&nbsp;</a></span>MmatDx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.MmatDx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The left hand side of the dynamical equation: M(x)dx or M(x)ddx. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has the MATLAB attribute <code>Hidden</code> set to true. </dd>
+<dd>
+This property has non-standard access specifiers: <code>SetAccess = Private, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="a77ee3c4dc87ba0991e8814ac374aa08b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77ee3c4dc87ba0991e8814ac374aa08b">&#9670;&nbsp;</a></span>PostProcess</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.PostProcess</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>pre-process function handle of the object after the simulation </p>
+<dl class="section user"><dt>The function handle should have the syntax</dt><dd>params = postPorcess(sys, sol, controller, params, varargin) </dd></dl>
+
+</div>
+</div>
+<a id="a1737a884325d663560dbd1fd60833e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1737a884325d663560dbd1fd60833e19">&#9670;&nbsp;</a></span>PreProcess</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.PreProcess</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>pre-process function handle of the object before the simulation </p>
+<dl class="section user"><dt>The function handle should have the syntax</dt><dd>params = preProcess(sys, t, x, controller, params, varargin) </dd></dl>
+
+</div>
+</div>
+<a id="aa46f578076f504540c0ce1878f2a1212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa46f578076f504540c0ce1878f2a1212">&#9670;&nbsp;</a></span>UnilateralConstraints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.UnilateralConstraints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The unilateral constraints of the dynamical system. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<a id="a41f79672603b97e08193ffe0cfdfefca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41f79672603b97e08193ffe0cfdfefca">&#9670;&nbsp;</a></span>UserNlpConstraint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.UserNlpConstraint</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A handle to a function called by a trajectory optimization NLP to enforce system specific constraints. </p>
+<dl class="section user"><dt>The function handle should have the syntax</dt><dd>userNlpConstraint(nlp, bounds, varargin) </dd></dl>
+
+</div>
+</div>
+<a id="a2a159690101a5448de27b4baa75bd60e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a159690101a5448de27b4baa75bd60e">&#9670;&nbsp;</a></span>VirtualConstraints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContinuousDynamics.VirtualConstraints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The virtual constraints of the dynamical system. </p>
+<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
+<dd>
+<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="ContinuousDynamics_8m.html">ContinuousDynamics.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="addEvent_8m.html">addEvent.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="addHolonomicConstraint_8m.html">addHolonomicConstraint.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="addUnilateralConstraint_8m.html">addUnilateralConstraint.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="addVirtualConstraint_8m.html">addVirtualConstraint.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="appendDriftVector_8m.html">appendDriftVector.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="calcDriftVector_8m.html">calcDriftVector.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="calcDynamics_8m.html">calcDynamics.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="calcMassMatrix_8m.html">calcMassMatrix.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="checkGuard_8m.html">checkGuard.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="clearKernel_8m.html">clearKernel.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="system_2_0DContinuousDynamics_2compile_8m.html">compile.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="firstOrderDynamics_8m.html">firstOrderDynamics.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="loadDynamics_8m.html">loadDynamics.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="removeEvent_8m.html">removeEvent.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="removeHolonomicConstraint_8m.html">removeHolonomicConstraint.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="removeUnilateralConstraint_8m.html">removeUnilateralConstraint.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="removeVirtualConstraint_8m.html">removeVirtualConstraint.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="saveDynamics_8m.html">saveDynamics.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="secondOrderDynamics_8m.html">secondOrderDynamics.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="setDriftVector_8m.html">setDriftVector.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="setMassMatrix_8m.html">setMassMatrix.m</a></li>
+<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@ContinuousDynamics/<a class="el" href="_0DContinuousDynamics_2simulate_8m.html">simulate.m</a></li>
+</ul>
+</div><!-- contents -->
+
+  <footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2017 AMBER Lab. All rights reserved. <br />
+ Site last generated: Aug 27, 2017 <br />
+<p><img src="http://localhost:4000/images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-104404898-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>
