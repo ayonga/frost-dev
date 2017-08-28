@@ -9,6 +9,14 @@ base_path = fileparts(mfilename('fullpath'));
 for i = 1:nargin
     dep = varargin{i};
     
+    if strcmp(dep,'yaml')
+        jcp = fullfile(prefdir,'javaclasspath.txt');
+        jcpID = fopen(jcp,'a');
+        fprintf(jcpID,...
+            ['\n',fullfile(pwd,'third','yaml','snakeyaml-1.10.jar')]...
+            );
+        fclose(jcpID);
+    end
     % Check then add path
     dep_path = fullfile(base_path, dep);
     assert(isdir(dep_path), 'Invalid dependency (directory does not exist): %s', dep_path);

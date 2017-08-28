@@ -39,5 +39,6 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
         % compute the value of the event function
         value(i) = eventfuncs(i).calcConstraint(dep_val{:});
     end
+   
     
 end

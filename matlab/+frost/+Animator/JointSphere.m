@@ -27,7 +27,7 @@ classdef JointSphere < frost.Animator.Sphere
     methods
         function obj = JointSphere(ax, model, jointFrame, name, varargin)
             obj = obj@frost.Animator.Sphere(ax, model, jointFrame, name, varargin{:});
-            obj.radius = 0.03;
+            obj.radius = 0.02;
             obj.length = 0.15;
             
             p = inputParser;

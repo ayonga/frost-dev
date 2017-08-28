@@ -94,16 +94,17 @@ function obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin)
     
     %% the event function constraint for the source domain
     event_list = fieldnames(src.Plant.EventFuncs);  % all events
-    % find the index of the event associated with the edge
-    event_idx = str_index(edge.Plant.EventName,event_list);
-    % extract the event function object using the index
-    event_obj = src.Plant.EventFuncs.(event_list{event_idx});
-    % impose the NLP constraints (unilateral constraints)
-    event_obj.imposeNLPConstraint(src);
-    % update the upper bound at the last node to be zero (to ensure equality)
-    event_cstr_name = event_obj.ConstrExpr.Name;
-    updateConstrProp(src,event_cstr_name,'last','ub',0);
-    
+    if ~isempty(event_list)
+        % find the index of the event associated with the edge
+        event_idx = str_index(edge.Plant.EventName,event_list);
+        % extract the event function object using the index
+        event_obj = src.Plant.EventFuncs.(event_list{event_idx});
+        % impose the NLP constraints (unilateral constraints)
+        event_obj.imposeNLPConstraint(src);
+        % update the upper bound at the last node to be zero (to ensure equality)
+        event_cstr_name = event_obj.ConstrExpr.Name;
+        updateConstrProp(src,event_cstr_name,'last','ub',0);
+    end
     
     %% call the system constraint callback method for the discrete dyamics
     plant = edge.Plant;
