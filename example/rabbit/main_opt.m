@@ -55,7 +55,7 @@ if COMPILE
     if ~exist([export_path, 'opt/'])
         mkdir([export_path, 'opt/'])
     end
-%     rabbit.ExportKinematics([export_path,'kinematics/']);
+    rabbit.ExportKinematics([export_path,'kinematics/']);
     compileConstraint(nlp,[],[],[export_path, 'opt/']);
     compileObjective(nlp,[],[],[export_path, 'opt/']);
 end
