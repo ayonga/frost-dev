@@ -1,5 +1,0 @@
-<map id="SymExpression" name="SymExpression">
-<area shape="rect" id="node3" href="$classSymFunction.html" title="This class wraps a symbolic expression with additional information for the convenience of compiling a..." alt="" coords="5,155,104,181"/>
-<area shape="rect" id="node4" href="$classSymVariable.html" title="An object that represents a list of symbolic variables. " alt="" coords="128,155,224,181"/>
-<area shape="rect" id="node2" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="85,5,145,32"/>
-</map>

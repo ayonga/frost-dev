@@ -1,6 +1,0 @@
-<map id="frost::Animator::Sphere" name="frost::Animator::Sphere">
-<area shape="rect" id="node4" href="$classfrost_1_1Animator_1_1JointSphere.html" title="Sphere depicting joints and axis of rotation for frost.Animator.Display. " alt="" coords="5,229,191,256"/>
-<area shape="rect" id="node5" href="$classfrost_1_1Animator_1_1LinkSphere.html" title="Sphere depicting center of mass of a rigid link for frost.Animator.Display. " alt="" coords="215,229,397,256"/>
-<area shape="rect" id="node2" href="$classfrost_1_1Animator_1_1DisplayItem.html" title="Abstract class for items in frost.Animator.Display. " alt="" coords="109,80,295,107"/>
-<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="172,5,232,32"/>
-</map>

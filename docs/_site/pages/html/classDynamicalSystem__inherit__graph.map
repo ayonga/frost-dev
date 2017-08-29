@@ -1,7 +1,0 @@
-<map id="DynamicalSystem" name="DynamicalSystem">
-<area shape="rect" id="node4" href="$classContinuousDynamics.html" title="Continuous state dynamic system governed by differential equations. " alt="" coords="5,155,152,181"/>
-<area shape="rect" id="node6" href="$classDiscreteDynamics.html" title="Discrete event dynamic system governed by discrete transition map and triggered by discrete events..." alt="" coords="176,155,307,181"/>
-<area shape="rect" id="node2" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="83,5,143,32"/>
-<area shape="rect" id="node5" href="$classRobotLinks.html" title="A class with basic model descriptions and functionalities of the multi&#45;link rigid&#45;body robot platform..." alt="" coords="35,229,123,256"/>
-<area shape="rect" id="node7" href="$classRigidImpact.html" title="RigidImpact represents a rigid body impact map assuming that the impact is plastic and occurs instant..." alt="" coords="195,229,287,256"/>
-</map>

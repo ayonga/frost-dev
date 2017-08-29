@@ -1,6 +1,0 @@
-<map id="frost::Animator::Patch" name="frost::Animator::Patch">
-<area shape="rect" id="node4" href="$classfrost_1_1Animator_1_1Pyramid.html" title="Patch depicting a 3d Pyramid for frost.Animator.Display. " alt="" coords="5,229,169,256"/>
-<area shape="rect" id="node5" href="$classfrost_1_1Animator_1_1Rectangler.html" title="Patch depicting a 3d rectangler for frost.Animator.Display. " alt="" coords="194,229,373,256"/>
-<area shape="rect" id="node2" href="$classfrost_1_1Animator_1_1DisplayItem.html" title="Abstract class for items in frost.Animator.Display. " alt="" coords="91,80,278,107"/>
-<area shape="rect" id="node3" href="$classhandle.html" title="Matlab&#39;s base handle class (documentation generation substitute) " alt="" coords="155,5,215,32"/>
-</map>
