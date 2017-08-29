@@ -29,11 +29,11 @@ entries:
       type: homepage
 
     - title: Introduction
-      url: /mydoc_introduction.html
+      url: /pages/introduction.html
       output: web, pdf
 
-    - title: Supported features
-      url: /mydoc_supported_features.html
+    - title: Installation
+      url: /pages/installation.html
       output: web, pdf
 
     - title: About the theme author
