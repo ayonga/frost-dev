@@ -92,7 +92,7 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
         if isempty(Je)
             vfc = [
                 dq;
-                M \ (Fv + Gv_ext)];
+                M \ (Fv)];
             gfc = [
                 zeros(size(Be));
                 M \ Be];
@@ -102,7 +102,7 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
             % f(x)
             vfc = [
                 dq;
-                M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv + Gv_ext) - transpose(Je) * (XiInv \ Jedot * dq))];
+                M \ ((Ie-transpose(Je) * (XiInv \ (Je / M))) * (Fv) - transpose(Je) * (XiInv \ Jedot * dq))];
             
             
             % g(x)

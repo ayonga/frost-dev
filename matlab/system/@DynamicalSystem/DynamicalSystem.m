@@ -24,7 +24,7 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
     end
     
     
-    properties (SetAccess=protected)
+    properties 
         
         % Returns the external input defined on the dynamical system.
         %
