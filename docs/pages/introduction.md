@@ -45,3 +45,15 @@ systems using advanced direct collocation algorithms.
 
 
 
+``` tex
+@inproceedings{Hereid2017FROST,
+  title = {FROST: Fast Robot Optimization and Simulation Toolkit},
+  author = {Hereid, Ayonga and Ames, Aaron D.},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2017},
+  address = {Vancouver, BC, Canada},
+  month = sep,
+  organization = {IEEE/RSJ},
+  month_numeric = {9}
+}
+```
