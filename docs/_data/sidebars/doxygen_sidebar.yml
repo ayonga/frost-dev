@@ -55,107 +55,107 @@ entries:
 
         - title: a
           output: web, pdf
-          url: /pages/html/functions.html#a
+          url: /pages/html/functions.html
 
         #- title: b
         #  output: web, pdf
-        #  url: /pages/html/functions_b.html#b
+        #  url: /pages/html/functions_b.html
 
         - title: c
           output: web, pdf
-          url: /pages/html/functions_c.html#c
+          url: /pages/html/functions_c.html
 
         - title: d
           output: web, pdf
-          url: /pages/html/functions_d.html#d
+          url: /pages/html/functions_d.html
 
         - title: e
           output: web, pdf
-          url: /pages/html/functions_e.html#e
+          url: /pages/html/functions_e.html
 
         - title: f
           output: web, pdf
-          url: /pages/html/functions_f.html#f
+          url: /pages/html/functions_f.html
 
         - title: g
           output: web, pdf
-          url: /pages/html/functions_g.html#g
+          url: /pages/html/functions_g.html
 
         - title: h
           output: web, pdf
-          url: /pages/html/functions_h.html#h
+          url: /pages/html/functions_h.html
 
         - title: i
           output: web, pdf
-          url: /pages/html/functions_i.html#i
+          url: /pages/html/functions_i.html
 
         - title: j
           output: web, pdf
-          url: /pages/html/functions_j.html#j
+          url: /pages/html/functions_j.html
 
         #- title: k
         #  output: web, pdf
-        #  url: /pages/html/functions_k.html#k
+        #  url: /pages/html/functions_k.html
 
         - title: l
           output: web, pdf
-          url: /pages/html/functions_l.html#l
+          url: /pages/html/functions_l.html
 
         - title: m
           output: web, pdf
-          url: /pages/html/functions_m.html#m
+          url: /pages/html/functions_m.html
 
         - title: n
           output: web, pdf
-          url: /pages/html/functions_n.html#n
+          url: /pages/html/functions_n.html
 
         - title: o
           output: web, pdf
-          url: /pages/html/functions_o.html#o
+          url: /pages/html/functions_o.html
 
         - title: p
           output: web, pdf
-          url: /pages/html/functions_p.html#p
+          url: /pages/html/functions_p.html
 
         #- title: q
         #  output: web, pdf
-        #  url: /pages/html/functions_q.html#q
+        #  url: /pages/html/functions_q.html
 
         - title: r
           output: web, pdf
-          url: /pages/html/functions_r.html#r
+          url: /pages/html/functions_r.html
 
         - title: s
           output: web, pdf
-          url: /pages/html/functions_s.html#s
+          url: /pages/html/functions_s.html
 
         - title: t
           output: web, pdf
-          url: /pages/html/functions_t.html#t
+          url: /pages/html/functions_t.html
 
         - title: u
           output: web, pdf
-          url: /pages/html/functions_u.html#u
+          url: /pages/html/functions_u.html
 
         - title: v
           output: web, pdf
-          url: /pages/html/functions_v.html#v
+          url: /pages/html/functions_v.html
 
         #- title: w
         #  output: web, pdf
-        #  url: /pages/html/functions_w.html#w
+        #  url: /pages/html/functions_w.html
 
         #- title: x
         #  output: web, pdf
-        #  url: /pages/html/functions_x.html#x
+        #  url: /pages/html/functions_x.html
 
         - title: y
           output: web, pdf
-          url: /pages/html/functions_y.html#y
+          url: /pages/html/functions_y.html
 
         #- title: z
         #  output: web, pdf
-        #  url: /pages/html/functions_z.html#z
+        #  url: /pages/html/functions_z.html
 
 
 
@@ -167,107 +167,107 @@ entries:
 
         - title: a
           output: web, pdf
-          url: /pages/html/functions_func.html#a
+          url: /pages/html/functions_func.html
 
         #- title: b
         #  output: web, pdf
-        #  url: /pages/html/functions_func_b.html#b
+        #  url: /pages/html/functions_func_b.html
 
         - title: c
           output: web, pdf
-          url: /pages/html/functions_func_c.html#c
+          url: /pages/html/functions_func_c.html
 
         - title: d
           output: web, pdf
-          url: /pages/html/functions_func_d.html#d
+          url: /pages/html/functions_func_d.html
 
         - title: e
           output: web, pdf
-          url: /pages/html/functions_func_e.html#e
+          url: /pages/html/functions_func_e.html
 
         - title: f
           output: web, pdf
-          url: /pages/html/functions_func_f.html#f
+          url: /pages/html/functions_func_f.html
 
         - title: g
           output: web, pdf
-          url: /pages/html/functions_func_g.html#g
+          url: /pages/html/functions_func_g.html
 
         - title: h
           output: web, pdf
-          url: /pages/html/functions_func_h.html#h
+          url: /pages/html/functions_func_h.html
 
         - title: i
           output: web, pdf
-          url: /pages/html/functions_func_i.html#i
+          url: /pages/html/functions_func_i.html
 
         - title: j
           output: web, pdf
-          url: /pages/html/functions_func_j.html#j
+          url: /pages/html/functions_func_j.html
 
         #- title: k
         #  output: web, pdf
-        #  url: /pages/html/functions_func_k.html#k
+        #  url: /pages/html/functions_func_k.html
 
         - title: l
           output: web, pdf
-          url: /pages/html/functions_func_l.html#l
+          url: /pages/html/functions_func_l.html
 
         - title: m
           output: web, pdf
-          url: /pages/html/functions_func_m.html#m
+          url: /pages/html/functions_func_m.html
 
         - title: n
           output: web, pdf
-          url: /pages/html/functions_func_n.html#n
+          url: /pages/html/functions_func_n.html
 
         - title: o
           output: web, pdf
-          url: /pages/html/functions_func_o.html#o
+          url: /pages/html/functions_func_o.html
 
         - title: p
           output: web, pdf
-          url: /pages/html/functions_func_p.html#p
+          url: /pages/html/functions_func_p.html
 
         #- title: q
         #  output: web, pdf
-        #  url: /pages/html/functions_func_q.html#q
+        #  url: /pages/html/functions_func_q.html
 
         - title: r
           output: web, pdf
-          url: /pages/html/functions_func_r.html#r
+          url: /pages/html/functions_func_r.html
 
         - title: s
           output: web, pdf
-          url: /pages/html/functions_func_s.html#s
+          url: /pages/html/functions_func_s.html
 
         - title: t
           output: web, pdf
-          url: /pages/html/functions_func_t.html#t
+          url: /pages/html/functions_func_t.html
 
         - title: u
           output: web, pdf
-          url: /pages/html/functions_func_u.html#u
+          url: /pages/html/functions_func_u.html
 
         - title: v
           output: web, pdf
-          url: /pages/html/functions_func_v.html#v
+          url: /pages/html/functions_func_v.html
 
         #- title: w
         #  output: web, pdf
-        #  url: /pages/html/functions_func_w.html#w
+        #  url: /pages/html/functions_func_w.html
 
         #- title: x
         #  output: web, pdf
-        #  url: /pages/html/functions_func_x.html#x
+        #  url: /pages/html/functions_func_x.html
 
         #- title: y
         #  output: web, pdf
-        #  url: /pages/html/functions_func_y.html#y
+        #  url: /pages/html/functions_func_y.html
 
         #- title: z
         #  output: web, pdf
-        #  url: /pages/html/functions_func_z.html#z
+        #  url: /pages/html/functions_func_z.html
 
 
 
@@ -279,107 +279,107 @@ entries:
 
         - title: a
           output: web, pdf
-          url: /pages/html/functions_vars.html#a
+          url: /pages/html/functions_vars.html
 
         #- title: b
         #  output: web, pdf
-        #  url: /pages/html/functions_vars_b.html#b
+        #  url: /pages/html/functions_vars_b.html
 
         - title: c
           output: web, pdf
-          url: /pages/html/functions_vars_c.html#c
+          url: /pages/html/functions_vars_c.html
 
         - title: d
           output: web, pdf
-          url: /pages/html/functions_vars_d.html#d
+          url: /pages/html/functions_vars_d.html
 
         - title: e
           output: web, pdf
-          url: /pages/html/functions_vars_e.html#e
+          url: /pages/html/functions_vars_e.html
 
         - title: f
           output: web, pdf
-          url: /pages/html/functions_vars_f.html#f
+          url: /pages/html/functions_vars_f.html
 
         - title: g
           output: web, pdf
-          url: /pages/html/functions_vars_g.html#g
+          url: /pages/html/functions_vars_g.html
 
         - title: h
           output: web, pdf
-          url: /pages/html/functions_vars_h.html#h
+          url: /pages/html/functions_vars_h.html
 
         - title: i
           output: web, pdf
-          url: /pages/html/functions_vars_i.html#i
+          url: /pages/html/functions_vars_i.html
 
         - title: j
           output: web, pdf
-          url: /pages/html/functions_vars_j.html#j
+          url: /pages/html/functions_vars_j.html
 
         #- title: k
         #  output: web, pdf
-        #  url: /pages/html/functions_vars_k.html#k
+        #  url: /pages/html/functions_vars_k.html
 
         - title: l
           output: web, pdf
-          url: /pages/html/functions_vars_l.html#l
+          url: /pages/html/functions_vars_l.html
 
         - title: m
           output: web, pdf
-          url: /pages/html/functions_vars_m.html#m
+          url: /pages/html/functions_vars_m.html
 
         - title: n
           output: web, pdf
-          url: /pages/html/functions_vars_n.html#n
+          url: /pages/html/functions_vars_n.html
 
         - title: o
           output: web, pdf
-          url: /pages/html/functions_vars_o.html#o
+          url: /pages/html/functions_vars_o.html
 
         - title: p
           output: web, pdf
-          url: /pages/html/functions_vars_p.html#p
+          url: /pages/html/functions_vars_p.html
 
         #- title: q
         #  output: web, pdf
-        #  url: /pages/html/functions_vars_q.html#q
+        #  url: /pages/html/functions_vars_q.html
 
         - title: r
           output: web, pdf
-          url: /pages/html/functions_vars_r.html#r
+          url: /pages/html/functions_vars_r.html
 
         - title: s
           output: web, pdf
-          url: /pages/html/functions_vars_s.html#s
+          url: /pages/html/functions_vars_s.html
 
         - title: t
           output: web, pdf
-          url: /pages/html/functions_vars_t.html#t
+          url: /pages/html/functions_vars_t.html
 
         - title: u
           output: web, pdf
-          url: /pages/html/functions_vars_u.html#u
+          url: /pages/html/functions_vars_u.html
 
         - title: v
           output: web, pdf
-          url: /pages/html/functions_vars_v.html#v
+          url: /pages/html/functions_vars_v.html
 
         #- title: w
         #  output: web, pdf
-        #  url: /pages/html/functions_vars_w.html#w
+        #  url: /pages/html/functions_vars_w.html
 
         #- title: x
         #  output: web, pdf
-        #  url: /pages/html/functions_vars_x.html#x
+        #  url: /pages/html/functions_vars_x.html
 
         - title: y
           output: web, pdf
-          url: /pages/html/functions_vars_y.html#y
+          url: /pages/html/functions_vars_y.html
 
         #- title: z
         #  output: web, pdf
-        #  url: /pages/html/functions_vars_z.html#z
+        #  url: /pages/html/functions_vars_z.html
 
   - title: Files
     output: web, pdf

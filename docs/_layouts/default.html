@@ -12,7 +12,7 @@
     <!-- Content Row -->
     <div class="row">
         {% assign content_col_size = "col-md-12" %}
-        {% unless page.hide_sidebar %}
+        {% unless page.hide_sidebar != nil %}
             <!-- Sidebar Column -->
             <div class="col-md-3" id="tg-sb-sidebar">
                 {% include sidebar.html %}

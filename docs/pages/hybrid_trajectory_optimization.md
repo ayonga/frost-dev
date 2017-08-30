@@ -1,0 +1,3 @@
+---
+title: Hybrid Trajectory Optimization
+---

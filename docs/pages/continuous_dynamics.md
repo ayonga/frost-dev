@@ -1,0 +1,3 @@
+---
+title: Continuous Dynamical System
+---

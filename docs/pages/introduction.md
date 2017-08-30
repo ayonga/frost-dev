@@ -41,7 +41,7 @@ systems using advanced direct collocation algorithms.
 
 
 
-
+{% include image.html file="/images/frost_overview.png" max-width="850" alt="FROST Overview" caption="The block diagram illustration of the FROST architecture." %}
 
 
 
