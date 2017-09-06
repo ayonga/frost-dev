@@ -1,18 +1,9 @@
-function nlp = fanuc_constr_opt_t(nlp, bounds, varargin)
+function nlp = fanuc_constr_opt_drop_t(nlp, bounds, varargin)
     % add aditional custom constraints
     
     plant = nlp.Plant;
     
-    
-    % event
-    % extract the event function object using the index
-%     event_obj = plant.EventFuncs.deltafinal;
-    % impose the NLP constraints (unilateral constraints)
-%     event_obj.imposeNLPConstraint(nlp);
-    % update the upper bound at the last node to be zero (to ensure equality)
-%     event_cstr_name = event_obj.ConstrExpr.Name;
-%     updateConstrProp(nlp,event_cstr_name,'last','ub',0);
-    
+        
     % relative degree 2 outputs
     % imposing this constraint is very important for getting the apos
     % matrix correct
@@ -24,12 +15,12 @@ function nlp = fanuc_constr_opt_t(nlp, bounds, varargin)
     ddx = plant.States.ddx;
    
     
-    q_pan = SymFunction(['q_pan_' plant.Name],x(1),{x});
-    q_lift= SymFunction(['q_lift_' plant.Name],x(2),{x});
-    q_elb = SymFunction(['q_elb_' plant.Name],x(3),{x});
-    q_wy = SymFunction(['q_wy_' plant.Name],x(4),{x});
-    q_wp = SymFunction(['q_wp_' plant.Name],x(5),{x});
-    q_wr = SymFunction(['q_wr_' plant.Name],x(6),{x});
+%     q_pan = SymFunction(['q_pan_' plant.Name],x(1),{x});
+%     q_lift= SymFunction(['q_lift_' plant.Name],x(2),{x});
+%     q_elb = SymFunction(['q_elb_' plant.Name],x(3),{x});
+%     q_wy = SymFunction(['q_wy_' plant.Name],x(4),{x});
+%     q_wp = SymFunction(['q_wp_' plant.Name],x(5),{x});
+%     q_wr = SymFunction(['q_wr_' plant.Name],x(6),{x});
  
     % these are the wrist constraints
 %     q_spatula = SymFunction(['q_spatula_' plant.Name],x(end-1),{x});
@@ -99,7 +90,7 @@ function nlp = fanuc_constr_opt_t(nlp, bounds, varargin)
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
     addNodeConstraint(nlp, p_y_func, {'x'}, 1, -0.00, 0.00, 'Nonlinear');
     addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), -0.00, 0.00, 'Nonlinear');
-%     addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', -0.4, 0.00, 'Nonlinear');
+    addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', -1, 0.0, 'Nonlinear');
 % %     addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', 0.0, 0.2, 'Nonlinear');
     
     %% these are slipping constraints being added
@@ -153,32 +144,39 @@ function nlp = fanuc_constr_opt_t(nlp, bounds, varargin)
     
     addNodeConstraint(nlp, o_endeffx, {'x'}, 'all', -pi, pi , 'Nonlinear');
     addNodeConstraint(nlp, o_endeffy, {'x'}, 'all', -pi/2, pi/2, 'Nonlinear');
-    addNodeConstraint(nlp, o_endeffz, {'x'}, 'all', -1.4, 1.4, 'Nonlinear');
+    addNodeConstraint(nlp, o_endeffz, {'x'}, 'all', -pi/2, pi/2, 'Nonlinear');
+%     addNodeConstraint(nlp, o_endeffz, {'x'}, 'all', -1.4, 1.4, 'Nonlinear');
     
 %     addNodeConstraint(nlp, o_endeffy, {'x'}, 'all', -1.4, 1.4, 'Nonlinear');
     addNodeConstraint(nlp, o_endeffy, {'x'}, 'first', -0.00, 0.00, 'Nonlinear');
 %     addNodeConstraint(nlp, o_endeffy, {'x'}, 'last',   0.00, 0.6, 'Nonlinear');
     addNodeConstraint(nlp, o_endeffx, {'x'}, 'first', -0.00, 0.00, 'Nonlinear');
-    addNodeConstraint(nlp, o_endeffx, {'x'}, 'last',  -pi,- 2.9 * pi /3, 'Nonlinear'); 
+    % use only negative rotation for now -- clockwise -- right handed
+    addNodeConstraint(nlp, o_endeffx, {'x'}, 'last',  -pi, - 2 * pi /3, 'Nonlinear'); 
+%     addNodeConstraint(nlp, o_endeffx, {'x'}, 'except-terminal',  -pi + 0.05, 0, 'Nonlinear');
+
     addNodeConstraint(nlp, o_endeffz, {'x'}, 'all', 0, 0, 'Nonlinear'); 
 %     addNodeConstraint(nlp, o_endeffy, {'x'}, 'all', 0, 0, 'Nonlinear'); 
     
 %     % these are the slipping constraints
-    a_slip_y = - a_z*sin(o_x) - a_y*cos(o_x) - g*sin(o_x) ...
+    a_slip_positive_y = - a_z*sin(o_x) - a_y*cos(o_x) - g*sin(o_x) ...
                 - mu* ( - a_y*sin(o_x) + a_z*cos(o_x) + g*cos(o_x) );
-    a_slip_x = a_z*sin(o_y) - a_x*cos(o_y) + g*sin(o_y) ...
+    a_slip_negative_y = a_z*sin(o_x) + a_y*cos(o_x) + g*sin(o_x) ...
+                - mu* ( - a_y*sin(o_x) + a_z*cos(o_x) + g*cos(o_x) );
+    a_slip_positive_x = a_z*sin(o_y) - a_x*cos(o_y) + g*sin(o_y) ...
+                - mu* (  a_x*sin(o_y) + a_z*cos(o_y) + g*cos(o_y));
+    a_slip_negative_x = - a_z*sin(o_y) + a_x*cos(o_y) - g*sin(o_y) ...
                 - mu* (  a_x*sin(o_y) + a_z*cos(o_y) + g*cos(o_y));
             
-            %                 a_z*sin(theta_x)+a_y*cos(theta_x)+g*sin(theta_x) ...
-%                 - mu* (-a_y*sin(theta_x) + a_z*cos(theta_x) + g*cos(theta_x));
-%                a_z*sin(theta_y)-a_x*cos(theta_y)+g*sin(theta_y) ...
-%               - mu* (-a_x*sin(theta_y) + a_z*cos(theta_y) + g*cos(theta_y));
-
-    a_slip_y_func = SymFunction(['endeffoy_sca_' plant.Name],a_slip_y,{x,dx,ddx});
-    addNodeConstraint(nlp, a_slip_y_func, {'x','dx','ddx'}, 1:round(0.7*n_node), -Inf, 0.0, 'Nonlinear');
+    a_slip_positivey_func = SymFunction(['endeffslipoy_positive_sca_' plant.Name],a_slip_positive_y,{x,dx,ddx});
+    addNodeConstraint(nlp, a_slip_positivey_func, {'x','dx','ddx'}, 1:round(0.6*n_node), -Inf, 0.0, 'Nonlinear');
+    a_slip_negativey_func = SymFunction(['endeffslipoy_negative_sca_' plant.Name],a_slip_negative_y,{x,dx,ddx});
+    addNodeConstraint(nlp, a_slip_negativey_func, {'x','dx','ddx'}, 1:round(0.6*n_node), -Inf, 0.0, 'Nonlinear');
             
-%     a_slip_x_func = SymFunction(['endeffox_sca_' plant.Name],a_slip_x,{x,dx,ddx});
-%     addNodeConstraint(nlp, a_slip_x_func, {'x','dx','ddx'}, 1:round(0.7*n_node), -Inf, 0.0, 'Nonlinear');
     
+%     a_slip_positivex_func = SymFunction(['endeffslipox_positive_sca_' plant.Name],a_slip_positive_x,{x,dx,ddx});
+%     addNodeConstraint(nlp, a_slip_positivex_func, {'x','dx','ddx'}, 1:round(0.7*n_node), -Inf, 0.0, 'Nonlinear');
+%     a_slip_negativex_func = SymFunction(['endeffslipox_negative_sca_' plant.Name],a_slip_negative_x,{x,dx,ddx});
+%     addNodeConstraint(nlp, a_slip_negativex_func, {'x','dx','ddx'}, 1:round(0.7*n_node), -Inf, 0.0, 'Nonlinear');    
     
 end

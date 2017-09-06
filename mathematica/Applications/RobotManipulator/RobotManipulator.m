@@ -52,6 +52,10 @@ ComputeRelativeEulerAngles::usage =
 	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
 the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
 
+ComputeRelativeRigidOrientation::usage =
+    "ComputeRelativeRotationMatrix[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional rotation matrices specified by the frames";
+
 ComputeSpatialJacobians::usage = 
 	"ComputeSpatialJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] computes Jacobian of\
 the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Euler \
@@ -245,13 +249,24 @@ ToRelativeEulerAngles[gst_,R0_] :=
 	Block[{R, Rw, yaw, roll, pitch},
 		(* compute rigid orientation*)
 		R = Screws`RigidOrientation[gst];
-	
+
 		Rw = R.Transpose[R0];
+
+T1 = ArcTan[Rw[[3,3]],Rw[[3,2]]];
+C2 = Sqrt[Rw[[1,1]]^2 + Rw[[2,1]]^2];
+T2 = ArcTan[C2,-Rw[[3,1]]];
+S1 = Sin[T1];
+C1 = Cos[T1];
+T3 = ArcTan[C1*Rw[[2,2]]-S1*Rw[[2,3]],S1*Rw[[1,3]]-C1*Rw[[1,2]]];
+	
+roll =  T1;
+pitch =  T2;
+yaw =  T3;
 		(* compute Euler angles *)
-		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
-		roll=ArcTan[Rw[[3,3]],Rw[[3,2]]];
-		pitch=ArcTan[Rw[[3,3]],-Rw[[3,1]]Cos[roll]];
-		
+		(*yaw=ArcTan[Rw[[3,3]],Rw[[3,2]]];
+		roll=ArcTan[Rw[[1,1]],Rw[[2,1]]];
+		pitch=ArcTan[Sqrt[Rw[[3,2]]^2+Rw[[3,3]]^2],-Rw[[3,1]]];
+		*)
 		Return[{roll,pitch,yaw}];
 	];
 	
@@ -293,6 +308,33 @@ ComputeRelativeEulerAngles[args__] :=
 				
 		pos = MapThread[ToRelativeEulerAngles,{gst,R0}];
 		Return[pos];
+	];
+
+ComputeRelativeRigidOrientation[args__] :=
+	Block[{orientationmatrix, gst, R, R0, Rw, argList = {args}},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		R0 = Map[#["R"] &, argList]; 		
+        R = Screws`RigidOrientation[gst];
+		Rw = R.Transpose[R0];
+		orientationmatrix = MapThread[Rw.{{0},{0},{1}},{}];
+		Return[orientationmatrix];
+	];
+
+ComputeFrictionConeCosine[args__] :=
+	Block[{orientationmatrix, pos, a, gst, R, R0, Rw, argList = {args}},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		R0 = Map[#["R"] &, argList];
+        a  = Map[#["a"] &, argList]; 		
+				
+		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
+        a_norm = Sqrt[a[[1]]^2 + a[[2]]^2 + a[[1]]^2];
+        pos = orientationmatrix * {{0},{0},{1}};
+        a = a / a_norm;
+		Return[pos.a];
 	];
 	
 ComputeSpatialJacobians[args__,nDof_] :=
