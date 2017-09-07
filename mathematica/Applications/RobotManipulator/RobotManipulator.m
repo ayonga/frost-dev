@@ -270,6 +270,15 @@ yaw =  T3;
 		Return[{roll,pitch,yaw}];
 	];
 	
+ToRelativeRigidOrientation[gst_,R0_] :=
+	Block[{R, Rw, yaw, roll, pitch},
+		(* compute rigid orientation*)
+		R = Screws`RigidOrientation[gst];
+
+		Rw = R.Transpose[R0];
+
+		Return[Rw];
+	];
 
 
 
@@ -318,7 +327,7 @@ ComputeRelativeRigidOrientation[args__] :=
 		R0 = Map[#["R"] &, argList]; 		
         R = Screws`RigidOrientation[gst];
 		Rw = R.Transpose[R0];
-		orientationmatrix = MapThread[Rw.{{0},{0},{1}},{}];
+		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
 		Return[orientationmatrix];
 	];
 
@@ -332,7 +341,7 @@ ComputeFrictionConeCosine[args__] :=
 				
 		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
         a_norm = Sqrt[a[[1]]^2 + a[[2]]^2 + a[[1]]^2];
-        pos = orientationmatrix * {{0},{0},{1}};
+        pos = orientationmatrix . {{0},{0},{1}};
         a = a / a_norm;
 		Return[pos.a];
 	];

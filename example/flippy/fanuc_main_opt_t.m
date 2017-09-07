@@ -6,10 +6,21 @@
 %%%% FLIPPY robot model object
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % main_sim
+% pick the optmization type and the initial guess parameters
 load_initial_guess = 1;
-initial_guess_file = [cur,'/param/fanuc_6DOF_optimal_drop_2017_09_05_0920.yaml'];
-    
-
+traj_type = 3; % 1 = translate 2 = pickup 3 = drop 
+switch(traj_type)
+    case 1
+        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_trans_2017_09_06_0932.yaml'];
+        fanuc_constr_opt_str = 'fanuc_constr_opt_trans_t';
+    case 2
+        initial_guess_file = [cur,'/param/fanuc_6DOF_optimal_drop_2017_09_05_0920.yaml'];
+        fanuc_constr_opt_str = 'fanuc_constr_opt_pickup_t';
+    case 3
+        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_drop_2017_09_07_1449.yaml'];
+        fanuc_constr_opt_str = 'fanuc_constr_opt_drop_t';
+end
+%%
 %!!!! update the limit of joint angles/velocity/acceleration
 bounds = flippy.getLimits();
 
@@ -20,12 +31,12 @@ bounds = flippy.getLimits();
 bounds.time.t0.lb = 0; % starting time
 bounds.time.t0.ub = 0;
 bounds.time.tf.lb = 0.2; % terminating time
-bounds.time.tf.ub = 0.6;
+bounds.time.tf.ub = 1.0;
 bounds.time.duration.lb = 0.2; % duration (optional)
-bounds.time.duration.ub = 0.6;
+bounds.time.duration.ub = 1.0;
 
-bounds.states.x.lb = [ -pi/2,   -pi/6,  -pi/2,  -pi, -pi/2,   - pi ];
-bounds.states.x.ub = [  pi/2,  2*pi/3,   pi/2,   pi,  pi/2,     pi ];
+bounds.states.x.lb = [ -pi/2,   -pi/6,  -pi/2,  -pi, -pi/2,   - 2*pi ];
+bounds.states.x.ub = [  pi/2,  2*pi/3,   pi/2,   pi,  pi/2,     2*pi ];
 bounds.states.dx.lb = -40*ones(1,flippy.numState);
 bounds.states.dx.ub =  40*ones(1,flippy.numState);
 bounds.states.ddx.lb = -1000*ones(1,flippy.numState);
@@ -42,7 +53,7 @@ bounds.pos.kp = 1; % y2ddot = -kd*y2dot - kp*y2
 bounds.pos.kd = 0.1;
 
 
-flippy.UserNlpConstraint = str2func('fanuc_constr_opt_drop_t');
+flippy.UserNlpConstraint = str2func(fanuc_constr_opt_str);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -74,7 +85,7 @@ flippy_cost_opt(nlp, bounds);
 %%%% Link the NLP problem to a NLP solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 solver = IpoptApplication(nlp);
-solver.Options.ipopt.max_iter = 1000;
+solver.Options.ipopt.max_iter = 5000;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the optimization
@@ -150,5 +161,5 @@ param{1}.v    = [];
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
 param{1}.sol = sol;
-param_save_file = fullfile(cur,'param','fanuc_6DOF_2017_09_05_1215.yaml');
+param_save_file = fullfile(cur,'param','fanuc_6DOF_2017_09_07_1449.yaml');
 yaml_write_file(param_save_file,param);
