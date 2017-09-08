@@ -3,20 +3,17 @@ title: Installation
 sidebar: home_sidebar
 ---
 
-# Download FROST #
 
-FROST is an open-source toolbox hosted on GitHub. To download the source code,
-run
+## Getting Started ##
 
-``` shell
-$ git clone https://github.com/ayonga/frost-dev.git frost-dev
-```
 
-Alternatively, you could download the archived **zip** file directly from
-this [link](https://github.com/ayonga/frost-dev/archive/master.zip).
+FROST is a collection of MATLAB functions and Mathematica packages. Hence, there
+is no need to build the source code. However, the Mathematica package will
+export project-specific symbolic expressions to C++ source code which needs to
+be compiled as *.MEX files for MATLAB. This requires a proper MATLAB MEX
+compiler for C++ before using FROST.
 
-# Prerequisites #
-
+## Prerequisites ##
 
 FROST uses [MATLAB](https://www.mathworks.com/) as the frontend interface, and
 uses [Wolfram Mathematica](https://www.wolfram.com/mathematica/>) as the backend
@@ -29,18 +26,28 @@ be installed apriori.
 {% include note.html content="FROST uses certain functions that are not supported
 by older versions of MATLAB and Mathematica." %}
 
+## Download FROST ##
 
-# Getting Started #
+FROST is an open-source toolbox hosted on GitHub. To download the source code,
+run
+
+``` shell
+$ git clone https://github.com/ayonga/frost-dev.git frost-dev
+```
+
+Alternatively, you could download the archived **zip** file directly from
+this [link](https://github.com/ayonga/frost-dev/archive/master.zip).
 
 
-FROST is a collection of MATLAB functions and Mathematica packages. Hence, there
-is no need to build the source code. However, the Mathematica package will
-export project-specific symbolic expressions to C++ source code which needs to
-be compiled as *.MEX files for MATLAB. This requires a proper MATLAB MEX
-compiler for C++ before using FROST.
+
+## System Configuration ##
 
 
-## Setup Default MEX Compiler ##
+
+
+
+
+### Setup Default MEX Compiler ###
 
 The following instruction provides an example setup for the default mex
 compilers on different platforms. For more information, please refer to the
@@ -48,7 +55,7 @@ official document
 on
 [www.mathworks.com](https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html).
 
-### Linux ###
+#### Linux ####
 
 Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04/16.04 LTS) is
 relatively straight-fowrad. However, the default ``g++`` compiler might not be
@@ -78,7 +85,7 @@ $ sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so libstdc++.so.6
 software is installed. Please replace it with the actual path of the
 directory. To find the folder, run `matlabroot` within MATLAB." %}
 
-### Windows ###
+#### Windows ####
 
 There are multiple compilers can be used on Windows machines. The following
 instruction uses MinGW as an example on a Windows10 machine (VC++ is supported
@@ -108,7 +115,7 @@ TDM-GCC compiler. The default path is recommended , for example
 
 
 
-## MathLink ##
+### MathLink ###
 
 
 FROST uses MathLink libraries to communicate with the Mathematica kernel from
@@ -129,7 +136,7 @@ Because this package uses the MathLink libraries of Mathematica during runtime,
 you must specifies the path of these libraries to your system path. To configure
 this environment variable:
 
-### Ubuntu (or Other Linux distributions) ###
+#### Ubuntu (or Other Linux distributions) ####
 
 The easiest way to configure the `LD_LIBRARY_PATH` on your Linux machine for
 MATLAB would be add the following to your `~/.bashrc` configuration file. For
@@ -144,7 +151,7 @@ export LD_LIBRARY_PATH
 {% include note.html content="Please change the version in the above script as
 the same as your installed Mathmetica version." %}
 
-### Windows ###
+#### Windows ####
 
 
 Setting up the library path on Windows PC sometimes very complicated, and not
@@ -168,15 +175,14 @@ close this window, as it will close the running kernel." %}
 
 ### Test ###
 
-To test if MathLink toolbox can sucessfully run, you can go to
-`"frost-dev/third/mathlink/"`, and call the function `initialize_mathlink()`
-from MATLAB. I.e.,
+To test if MathLink toolbox can sucessfully run, call the FROST initialization
+function from MATLAB. I.e.,
 
 ``` matlab
->> initialize_mathlink();
+>> frost_addpath();
 ```
 
-If it is configured correctly, it should print out the following messages:
+If the Mathlink package is configured correctly, this function should print out the following messages:
 
 ``` matlab
 Mathematica Kernel loading...
@@ -187,7 +193,7 @@ ans =
 ```
 
 
-## IPOPT ##
+### IPOPT ###
 
 We use [IPOPT](https://projects.coin-or.org/Ipopt/) as the default solver for
 nonlinear constrained optimization problems. To
@@ -202,8 +208,8 @@ downloaded from the above link in FROST package. Therefore, you do not need to
 download IPOPT, unless if you prefer to use other version of IPOPT." %}
 
 
-## SuitSparse ##
-----------
+### SuitSparse ###
+
 
 The [SuitSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) is not a
 required package to run FROST. However, the **sparse2** function comes with the

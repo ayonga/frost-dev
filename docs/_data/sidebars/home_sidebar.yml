@@ -40,15 +40,19 @@ entries:
       output: web, pdf
       url: /pages/symbolic_overview.html
 
+    - title: Utility Functions
+      output: web, pdf
+      url: /pages/symbolic_utility.html
+
     - title: Symbolic Variables
       output: web, pdf
       url: /pages/symbolic_vars.html
 
-    - title: Symbolic Operations
+    - title: Symbolic Expressions
       output: web, pdf
       url: /pages/symbolic_syntax.html
 
-    - title: Exporting
+    - title: Exporting Symbolic Functions
       output: web, pdf
       url: /pages/export_syms.html
 

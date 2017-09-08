@@ -6,6 +6,13 @@ layout: default
    <h1 class="post-title-main">{{ page.title }}</h1>
 </div>
 
+{% if page.author %}
+<div class="author">
+    Author: <b>{{page.author}}</b>
+</div>
+<hr>
+{% endif %}
+
 {% if page.simple_map == true %}
 
 <script>
@@ -51,7 +58,7 @@ layout: default
         {% assign projectTags = site.data.tags.allowed-tags %}
         {% for tag in page.tags %}
         {% if projectTags contains tag %}
-        <a href="{{ "/tags/tag_" | append: tag | append: ".html" |  prepend: site.url}}" class="btn btn-default navbar-btn cursorNorm" role="button">{{page.tagName}}{{tag}}</a>
+        <a href="{{ "/pages/tags/tag_" | append: tag | append: ".html" |  prepend: site.url}}" class="btn btn-default navbar-btn cursorNorm" role="button">{{page.tagName}}{{tag}}</a>
         {% endif %}
         {% endfor %}
         {% endif %}
