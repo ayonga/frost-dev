@@ -330,21 +330,6 @@ ComputeRelativeRigidOrientation[args__] :=
 		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
 		Return[orientationmatrix];
 	];
-
-ComputeFrictionConeCosine[args__] :=
-	Block[{orientationmatrix, pos, a, gst, R, R0, Rw, argList = {args}},
-		
-		(* first compute the forward kinematics *)
-		gst = ComputeForwardKinematics[args];
-		R0 = Map[#["R"] &, argList];
-        a  = Map[#["a"] &, argList]; 		
-				
-		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
-        a_norm = Sqrt[a[[1]]^2 + a[[2]]^2 + a[[1]]^2];
-        pos = orientationmatrix . {{0},{0},{1}};
-        a = a / a_norm;
-		Return[pos.a];
-	];
 	
 ComputeSpatialJacobians[args__,nDof_] :=
 	Block[{argList = {args}, np, i, Je, twist,curIndices,
