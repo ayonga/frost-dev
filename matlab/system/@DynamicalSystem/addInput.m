@@ -89,12 +89,12 @@ function obj = addInput(obj, category, name, var, gf, varargin)
             end
             
             sfun_gv = SymFunction([name '_vec_', obj.Name], s_gf*var, {obj.States.x,var});
-            
+            obj.GmapName_.(category).(name) = sfun_gf.Name;
         else
             assert(nc==1,...
                 'The input vector must be a column vector.');
             sfun_gf = [];
-            
+            obj.GmapName_.(category).(name) = '';
             if isa(s_gf, 'SymFunction') % given as a SymFunction directly
                 assert(length(s_gf.Vars)==2 && s_gf.Vars{1} == obj.States.x && s_gf.Vars{2}==var,...
                     'The SymFunction (gf) must be a function of states (x) and input (%d).',name);
@@ -109,7 +109,7 @@ function obj = addInput(obj, category, name, var, gf, varargin)
         obj.Inputs.(category).(name) = var;
         obj.Gmap.(category).(name) = sfun_gf;
         obj.Gvec.(category).(name) = sfun_gv;
-        obj.GmapName_.(category).(name) = sfun_gf.Name;
+        
         obj.GvecName_.(category).(name) = sfun_gv.Name;
         obj.inputs_.(category).(name) = nan(length(var),1);
     end
