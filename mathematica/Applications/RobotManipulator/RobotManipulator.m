@@ -252,20 +252,21 @@ ToRelativeEulerAngles[gst_,R0_] :=
 
 		Rw = R.Transpose[R0];
 
-T1 = ArcTan[Rw[[3,3]],Rw[[3,2]]];
-C2 = Sqrt[Rw[[1,1]]^2 + Rw[[2,1]]^2];
-T2 = ArcTan[C2,-Rw[[3,1]]];
-S1 = Sin[T1];
-C1 = Cos[T1];
-T3 = ArcTan[C1*Rw[[2,2]]-S1*Rw[[2,3]],S1*Rw[[1,3]]-C1*Rw[[1,2]]];
+        T1 = ArcTan[Rw[[3,3]],Rw[[3,2]]];
+        C2 = Sqrt[Rw[[1,1]]^2 + Rw[[2,1]]^2];
+        T2 = ArcTan[C2,-Rw[[3,1]]];
+        S1 = Sin[T1];
+        C1 = Cos[T1];
+        T3 = ArcTan[C1*Rw[[2,2]]-S1*Rw[[2,3]],S1*Rw[[1,3]]-C1*Rw[[1,2]]];
 	
-roll =  T1;
-pitch =  T2;
-yaw =  T3;
-		(* compute Euler angles *)
-		(*yaw=ArcTan[Rw[[3,3]],Rw[[3,2]]];
-		roll=ArcTan[Rw[[1,1]],Rw[[2,1]]];
-		pitch=ArcTan[Sqrt[Rw[[3,2]]^2+Rw[[3,3]]^2],-Rw[[3,1]]];
+        roll =  T1;
+        pitch =  T2;
+        yaw =   T3;
+
+		(* old code: compute Euler angles *)(*
+		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
+		roll=ArcTan[Rw[[3,3]],Rw[[3,2]]];
+		pitch=ArcTan[Rw[[3,3]],-Rw[[3,1]]Cos[roll]];
 		*)
 		Return[{roll,pitch,yaw}];
 	];
