@@ -1,5 +1,8 @@
 function nlp = fanuc_constr_opt_drop_t(nlp, bounds, varargin)
-    % add aditional custom constraints
+%%  Specify burger location. Starting position of spatula is 2cm above burger location
+    p_start = [0.75, -0.0, 0.11];
+    
+    %% add aditional custom constraints
     
     plant = nlp.Plant;
     
@@ -54,23 +57,25 @@ function nlp = fanuc_constr_opt_drop_t(nlp, bounds, varargin)
     basez_offset_wrt_origin =  0.3381; % to make base bottom zero
     p_z = p_spatula(3) - basez_offset_wrt_origin;
     p_z_func = SymFunction(['endeffz_sca_' plant.Name],p_z,{x});
-    addNodeConstraint(nlp, p_z_func, {'x'}, 1, 0.12, 0.12, 'Nonlinear');
-    addNodeConstraint(nlp, p_z_func, {'x'}, n_node, 0.17, 0.20, 'Nonlinear');
+    pz_spatula = p_start(3)+0.02; % 2cm above burger location
+    addNodeConstraint(nlp, p_z_func, {'x'}, 'first', pz_spatula, pz_spatula, 'Nonlinear');
+    % end z position is randomly picked
+    addNodeConstraint(nlp, p_z_func, {'x'}, 'last', 0.17, 0.20, 'Nonlinear');
 %     addNodeConstraint(nlp, p_z_func, {'x'}, 'all', 0.11, 0.4, 'Nonlinear');
 %     addNodeConstraint(nlp, p_z_func, {'x'}, round(n_node/2), 0.1, 0.3, 'Nonlinear');
 %     
 %% This is x position of end effector
     p_x = p_spatula(1);
     p_x_func = SymFunction(['endeffx_sca_' plant.Name],p_x,{x});
-    addNodeConstraint(nlp, p_x_func, {'x'}, 1, 0.749, 0.751, 'Nonlinear');
-    addNodeConstraint(nlp, p_x_func, {'x'}, round(n_node), 0.749, 0.751, 'Nonlinear');
+    addNodeConstraint(nlp, p_x_func, {'x'}, 1, p_start(1), p_start(1), 'Nonlinear');
+    addNodeConstraint(nlp, p_x_func, {'x'}, round(n_node), p_start(1), p_start(1), 'Nonlinear');
 %     addNodeConstraint(nlp, p_x_func, {'x'}, 'except-terminal', 0.734, 0.734, 'Nonlinear');
 %% This is y position of end effector
     p_y = p_spatula(2);
     p_y_func = SymFunction(['endeffy_sca_' plant.Name],p_y,{x});
-    addNodeConstraint(nlp, p_y_func, {'x'}, 1, -0.00, 0.00, 'Nonlinear');
-    addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), -0.00, 0.00, 'Nonlinear');
-    addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', -1, 0.03, 'Nonlinear');
+    addNodeConstraint(nlp, p_y_func, {'x'}, 1, p_start(2), p_start(2), 'Nonlinear');
+    addNodeConstraint(nlp, p_y_func, {'x'}, round(n_node), p_start(2), p_start(2), 'Nonlinear');
+%     addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', -1+p_start(2), 0.03+p_start(2), 'Nonlinear');
 % %     addNodeConstraint(nlp, p_y_func, {'x'}, 'except-terminal', 0.0, 0.2, 'Nonlinear');
     
     %% these are slipping constraints being added
@@ -107,7 +112,7 @@ function nlp = fanuc_constr_opt_drop_t(nlp, bounds, varargin)
     
     R_vec_spatula = getRelativeRigidOrientation(plant,spatula);
             
-    normal_vector_spatula = R_vec_spatula([3,6,9]);
+    normal_vector_spatula = R_vec_spatula([3,6,9]); %last column of R matrix
     
     dot_product_normal_to_acceleration = normal_vector_spatula ...
                                          * [a_x;
@@ -116,7 +121,7 @@ function nlp = fanuc_constr_opt_drop_t(nlp, bounds, varargin)
 
 	normal_vector = SymFunction(['normal_vector_' plant.Name],normal_vector_spatula,{x});
     addNodeConstraint(nlp, normal_vector, {'x'}, 'first', [-0.01,-0.01,0.9], [0.01,0.01,1], 'Nonlinear');
-%     addNodeConstraint(nlp, normal_vector, {'x'}, 'last', [0,0,-1], [0,0,-1], 'Nonlinear');
+    addNodeConstraint(nlp, normal_vector, {'x'}, 'last', [-0.5,-0.5,-1], [0.5,0.5,-0.7], 'Nonlinear');
     
     slipping_func = SymFunction(['slipping_sca_' plant.Name],dot_product_normal_to_acceleration,{x,dx,ddx});
     addNodeConstraint(nlp, slipping_func, {'x','dx','ddx'}, 1:round(0.7*n_node), cos(mu), 1, 'Nonlinear');

@@ -2,7 +2,7 @@ function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
     
 %%  Specify the starting and the ending position
     p_start = [0.75, -0.2, 0.13];
-    p_end = [0.1, 0.55, 0.25];
+    p_end = [0.2, 0.55, 0.25];
 %%  Specify the starting and the ending orienation
     o_start = [0,0,0];
     o_end   = [0,0,atan2(p_end(2),p_end(1))];
@@ -121,7 +121,7 @@ function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
 %     addNodeConstraint(nlp, az_func, {'x','dx','ddx'}, 'first', -Inf, Inf, 'Nonlinear');
     
 
-    g = 9.81; % acceleration due to gravity - a constant
+    g = -9.81; % acceleration due to gravity - a constant
     mu = 0.36; % coefficient of restitution
     
     R_vec_spatula = getRelativeRigidOrientation(plant,spatula);
@@ -131,7 +131,7 @@ function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
     dot_product_normal_to_acceleration = normal_vector_spatula ...
                                          * [a_x;
                                             a_y;
-                                            a_z+g] / sqrt(a_x^2 + a_y^2 + (a_z+g)^2);
+                                            a_z-g] / sqrt(a_x^2 + a_y^2 + (a_z-g)^2);
 
     slipping_func = SymFunction(['slipping_sca_' plant.Name],dot_product_normal_to_acceleration,{x,dx,ddx});
     addNodeConstraint(nlp, slipping_func, {'x','dx','ddx'}, 1:n_node, cos(mu), 1, 'Nonlinear');

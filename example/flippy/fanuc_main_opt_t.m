@@ -17,7 +17,7 @@ switch(traj_type)
         initial_guess_file = [cur,'/param/fanuc_6DOF_optimal_drop_2017_09_05_0920.yaml'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_pickup_t';
     case 3
-        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_drop_2017_09_07_1449.yaml'];
+        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_flip_2017_09_07_1449.yaml'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_drop_t';
 end
 %%
@@ -37,8 +37,8 @@ bounds.time.duration.ub = 1.0;
 
 bounds.states.x.lb = [ -pi/2,   -pi/6,  -pi/2,  -pi, -pi/2,   - 2*pi ];
 bounds.states.x.ub = [  pi/2,  2*pi/3,   pi/2,   pi,  pi/2,     2*pi ];
-bounds.states.dx.lb = -40*ones(1,flippy.numState);
-bounds.states.dx.ub =  40*ones(1,flippy.numState);
+bounds.states.dx.lb = -17*ones(1,flippy.numState);
+bounds.states.dx.ub =  17*ones(1,flippy.numState);
 bounds.states.ddx.lb = -1000*ones(1,flippy.numState);
 bounds.states.ddx.ub =  1000*ones(1,flippy.numState);
 
@@ -161,5 +161,5 @@ param{1}.v    = [];
 param{1}.x_plus = [states.x(:,1);states.dx(:,1)]';
 param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
 param{1}.sol = sol;
-param_save_file = fullfile(cur,'param','fanuc_6DOF_2017_09_07_1449.yaml');
+param_save_file = fullfile(cur,'param','fanuc_6DOF_2017_09_07_1655.yaml');
 yaml_write_file(param_save_file,param);

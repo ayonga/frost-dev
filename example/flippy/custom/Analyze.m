@@ -33,7 +33,7 @@ for i = 1:datasize(2)
     slipdata(1,i) = slipping_sca_LR(x,dx,ddx);
     axdata(1,i) = endeffax_sca_LR(x,dx,ddx);
     aydata(1,i) = endeffay_sca_LR(x,dx,ddx);
-    azdata(1,i) = endeffaz_sca_LR(x,dx,ddx) -9.81;
+    azdata(1,i) = endeffaz_sca_LR(x,dx,ddx) +9.81;
     normalvectordata(:,i) = normal_vector_LR(x);
 end
 
@@ -55,22 +55,22 @@ plot(t,oxdata,t,oydata,t,ozdata);legend('orientation x','orientation y','orienta
 subplot(241);
 
 
-figure(403);grid on;
+figure(403);
 for i =1:datasize(2)
-    l=i;figure(403);
+    l=i;figure(403);subplot(131);grid on;axis equal;
     plot3(xdata(1:l),ydata(1:l),zdata(1:l));
     pause(0.2);
 end
 figure(403);
 for i =1:datasize(2)
-    l=i;figure(403);
+    l=i;figure(403);subplot(132);axis equal;
     quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
         normalvectordata(1,1:l),normalvectordata(2,1:l),normalvectordata(3,1:l));
     pause(0.2);
 end
 figure(403);
 for i =1:datasize(2)
-    l=i;figure(403);
+    l=i;figure(403);subplot(133);axis equal;
     quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
         axdata(1:l),aydata(1:l),azdata(1:l));
     pause(0.2);

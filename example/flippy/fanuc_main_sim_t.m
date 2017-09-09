@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/fanuc_6DOF_optimal_drop_2017_09_05_0920.yaml'];
+old_param_file = [cur,'/param/fanuc_6DOF_2017_09_07_1655.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
