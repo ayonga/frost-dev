@@ -24,7 +24,7 @@ function nlp = imposeNLPConstraint(obj, nlp)
             % enforce \ddot{h}(x,dx,ddx) = 0 at all nodes
             nlp = addNodeConstraint(nlp, obj.ddh_, {'x','dx','ddx'}, 'all',...
                 0, 0, 'Nonlinear');
-        elseif strcmp(obj.Type, 'FirstOrder') % the first order system
+        elseif strcmp(obj.Model.Type 'FirstOrder') % the first order system
             % enforce \dot{h}(x,dx) = J(x)dx = 0 at the first node
             nlp = addNodeConstraint(nlp, obj.dh_, {'x'}, 'first',...
                 0, 0, 'Nonlinear');
