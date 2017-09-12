@@ -80,7 +80,7 @@ defaults:
       type: "pages"
     values:
       layout: "page"
-      comments: false
+      comments: true
       search: true
       sidebar: home_sidebar
       topnav: topnav

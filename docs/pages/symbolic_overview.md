@@ -2,7 +2,7 @@
 title: Symbolic Math Toolbox Overview
 tags: [symbolic]
 keywords: Symbolic Math Toolbox Mathematica Mathlink
-excerpt: An overview about the FROST's custom symbolic math toolbox
+summary: An overview about the FROST's custom symbolic math toolbox
 ---
 
 ## Overview ##

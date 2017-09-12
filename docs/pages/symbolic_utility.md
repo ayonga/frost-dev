@@ -2,7 +2,7 @@
 title: Utility Functions for Symbolic Math Toolbox
 tags: [symbolic, utility]
 keywords: Symbolic Math Toolbox Mathematica Mathlink eval_math eval_math_fun 
-excerpt: A tutorial about the utility functions of FROST symbolic math toolbox 
+summary: A tutorial about the utility functions of FROST symbolic math toolbox 
 author: Ayonga Hereid
 ---
 
