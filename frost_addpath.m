@@ -31,6 +31,6 @@ initialize_mathlink();
 
 addpath(fullfile(cur, 'example'));
 
-warning('Restart Matlab to use the Snake yaml library.');
+% warning('Restart Matlab to use the Snake yaml library.');
 % addpath(fullfile(cur, 'docs'));
 end
