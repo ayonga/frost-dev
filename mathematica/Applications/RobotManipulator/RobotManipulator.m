@@ -52,6 +52,10 @@ ComputeRelativeEulerAngles::usage =
 	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
 the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
 
+ComputeRelativeRigidOrientation::usage =
+    "ComputeRelativeRotationMatrix[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional rotation matrices specified by the frames";
+
 ComputeSpatialJacobians::usage = 
 	"ComputeSpatialJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] computes Jacobian of\
 the 6-dimensional spatial positions (3-dimension rigid position + 3-dimension Euler \
@@ -245,16 +249,37 @@ ToRelativeEulerAngles[gst_,R0_] :=
 	Block[{R, Rw, yaw, roll, pitch},
 		(* compute rigid orientation*)
 		R = Screws`RigidOrientation[gst];
-	
+
 		Rw = R.Transpose[R0];
-		(* compute Euler angles *)
+
+        T1 = ArcTan[Rw[[3,3]],Rw[[3,2]]];
+        C2 = Sqrt[Rw[[1,1]]^2 + Rw[[2,1]]^2];
+        T2 = ArcTan[C2,-Rw[[3,1]]];
+        S1 = Sin[T1];
+        C1 = Cos[T1];
+        T3 = ArcTan[C1*Rw[[2,2]]-S1*Rw[[2,3]],S1*Rw[[1,3]]-C1*Rw[[1,2]]];
+	
+        roll =  T1;
+        pitch =  T2;
+        yaw =   T3;
+
+		(* old code: compute Euler angles *)(*
 		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
 		roll=ArcTan[Rw[[3,3]],Rw[[3,2]]];
 		pitch=ArcTan[Rw[[3,3]],-Rw[[3,1]]Cos[roll]];
-		
+		*)
 		Return[{roll,pitch,yaw}];
 	];
 	
+ToRelativeRigidOrientation[gst_,R0_] :=
+	Block[{R, Rw, yaw, roll, pitch},
+		(* compute rigid orientation*)
+		R = Screws`RigidOrientation[gst];
+
+		Rw = R.Transpose[R0];
+
+		Return[Rw];
+	];
 
 
 
@@ -293,6 +318,18 @@ ComputeRelativeEulerAngles[args__] :=
 				
 		pos = MapThread[ToRelativeEulerAngles,{gst,R0}];
 		Return[pos];
+	];
+
+ComputeRelativeRigidOrientation[args__] :=
+	Block[{orientationmatrix, gst, R, R0, Rw, argList = {args}},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		R0 = Map[#["R"] &, argList]; 		
+        R = Screws`RigidOrientation[gst];
+		Rw = R.Transpose[R0];
+		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
+		Return[orientationmatrix];
 	];
 	
 ComputeSpatialJacobians[args__,nDof_] :=

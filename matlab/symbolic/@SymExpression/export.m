@@ -102,7 +102,7 @@ function file = export(f, varargin)
     % build mex file
     if opts.BuildMex
         build_mex(export_path,filename);
-        file = fullfile(export_path,filename,'.cc');       
+        file = fullfile(export_path,[filename,'.cc']);       
     else
         file = [];
     end

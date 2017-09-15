@@ -3,7 +3,7 @@ function [snakeYaml] = yaml_init()
 
 snakeYaml = fullfile(fileparts(mfilename('fullpath')), 'snakeyaml-1.10.jar');
 
-if ~any(strcmp(snakeYaml, javaclasspath('-dynamic')))
+if ~any(strcmp(snakeYaml, javaclasspath('-all')))
     javaaddpath(snakeYaml);
 end
 

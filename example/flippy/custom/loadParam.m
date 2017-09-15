@@ -17,4 +17,6 @@ if ~isfield(old_params.domain(1),{'old_params.domain(1)'}), params.avel = old_pa
     
     x0 = old_params.domain(1).x_plus;
     
+    params.sol = old_params.domain(1).sol;
+    
 end
