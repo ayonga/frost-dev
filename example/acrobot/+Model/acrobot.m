@@ -13,7 +13,7 @@ classdef acrobot < RobotLinks
         function obj = acrobot()
             
             
-            base = get_base_dofs('fixed');
+            base = get_base_dofs('planar');
             
             config = struct();
             config.name = ['acrobot'];

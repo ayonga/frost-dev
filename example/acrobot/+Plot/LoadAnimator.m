@@ -1,14 +1,25 @@
 function [conGUI] = LoadAnimator(robot, gait, varargin)
     
-    np = length(gait);
     
-    t = [];
-    q = [];
-    for i=1:2:np
-        t = [t, gait(i).tspan]; %#ok<*AGROW>
-        q = [q, gait(i).states.x];
+    if isa(gait, 'SimLogger')
+        np = length(gait);
+        
+        t = [];
+        q = [];
+        for i=1:2:np
+            t = [t, gait(i).flow.t]; %#ok<*AGROW>
+            q = [q, gait(i).flow.states.x];
+        end
+    else
+        np = length(gait);
+        
+        t = [];
+        q = [];
+        for i=1:2:np
+            t = [t, gait(i).tspan]; %#ok<*AGROW>
+            q = [q, gait(i).states.x];
+        end
     end
-
     %     if length(gait) == 1
     %         t = gait.tspan;
     %         q = gait.states.x;
