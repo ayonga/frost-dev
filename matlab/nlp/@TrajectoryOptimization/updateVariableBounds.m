@@ -52,11 +52,14 @@ function obj = updateVariableBounds(obj, bounds)
             end
             
             if isfield(bounds.time,'duration')
-                if isfield(bounds.time.duration,'lb')
+                if isfield(bounds.time.duration,'lb') && isfield(bounds.time.duration,'ub')
+                    updateConstrProp(obj, 'timeDuration','first', 'lb', ...
+                        bounds.time.duration.lb, 'ub', ...
+                        bounds.time.duration.ub);
+                elseif isfield(bounds.time.duration,'lb')
                     updateConstrProp(obj, 'timeDuration','first', 'lb', ...
                         bounds.time.duration.lb);
-                end
-                if isfield(bounds.time.duration,'ub')
+                elseif isfield(bounds.time.duration,'ub')
                     updateConstrProp(obj, 'timeDuration','first', 'ub', ...
                         bounds.time.duration.ub);
                 end
