@@ -8,17 +8,20 @@
 % main_sim
 % pick the optmization type and the initial guess parameters
 load_initial_guess = 1;
-traj_type = 3; % 1 = translate 2 = pickup 3 = drop 
+traj_type = 2; % 1 = translate 2 = pickup 3 = drop 4 = joint to joint
 switch(traj_type)
     case 1
-        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_trans_2017_09_06_0932.yaml'];
+        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_trans_2017_09_07_1655.yaml'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_trans_t';
     case 2
-        initial_guess_file = [cur,'/param/fanuc_6DOF_optimal_drop_2017_09_05_0920.yaml'];
+        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_trans_2017_09_07_1655.yaml'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_pickup_t';
     case 3
         initial_guess_file = [cur,'/param/fanuc_6DOF_guess_flip_2017_09_07_1449.yaml'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_drop_t';
+    case 4
+        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_flip_2017_09_07_1449.yaml'];
+        fanuc_constr_opt_str = 'fanuc_constr_opt_j2j_t';
 end
 %%
 %!!!! update the limit of joint angles/velocity/acceleration
@@ -30,17 +33,17 @@ bounds = flippy.getLimits();
 %'ConstantTimeHorizon=[0,T]', where T is the fixed time duration
 bounds.time.t0.lb = 0; % starting time
 bounds.time.t0.ub = 0;
-bounds.time.tf.lb = 0.2; % terminating time
+bounds.time.tf.lb = 0.1; % terminating time
 bounds.time.tf.ub = 1.0;
-bounds.time.duration.lb = 0.2; % duration (optional)
+bounds.time.duration.lb = 0.1; % duration (optional)
 bounds.time.duration.ub = 1.0;
 
-bounds.states.x.lb = [ -pi/2,   -pi/6,  -pi/2,  -pi, -pi/2,   - 2*pi ];
-bounds.states.x.ub = [  pi/2,  2*pi/3,   pi/2,   pi,  pi/2,     2*pi ];
-bounds.states.dx.lb = -17*ones(1,flippy.numState);
-bounds.states.dx.ub =  17*ones(1,flippy.numState);
-bounds.states.ddx.lb = -1000*ones(1,flippy.numState);
-bounds.states.ddx.ub =  1000*ones(1,flippy.numState);
+bounds.states.x.lb = [ -pi/2,   -pi/6,  -pi/2,  -pi, -pi/2,   - pi ];
+bounds.states.x.ub = [  2*pi/3,  2*pi/3,   pi/2,   pi,  pi/2,    pi ];
+bounds.states.dx.lb = -16*ones(1,flippy.numState);
+bounds.states.dx.ub =  16*ones(1,flippy.numState);
+bounds.states.ddx.lb = -800*ones(1,flippy.numState);
+bounds.states.ddx.ub =  800*ones(1,flippy.numState);
 
 bounds.inputs.Control.u.lb = - ones(1,flippy.numState)*Inf;
 bounds.inputs.Control.u.ub = ones(1,flippy.numState)*Inf;
@@ -49,8 +52,8 @@ bounds.inputs.Control.u.ub = ones(1,flippy.numState)*Inf;
 bounds.params.apos.lb = -600;
 bounds.params.apos.ub = 600;
 % bounds.vel.ep = 10;% y1dot = -ep*y1
-bounds.pos.kp = 1; % y2ddot = -kd*y2dot - kp*y2
-bounds.pos.kd = 0.1;
+bounds.pos.kp = 10; % y2ddot = -kd*y2dot - kp*y2
+bounds.pos.kd = 2;
 
 
 flippy.UserNlpConstraint = str2func(fanuc_constr_opt_str);
@@ -86,6 +89,7 @@ flippy_cost_opt(nlp, bounds);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 solver = IpoptApplication(nlp);
 solver.Options.ipopt.max_iter = 5000;
+solver.Options.ipopt.tol = 1e-3;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the optimization
@@ -163,3 +167,5 @@ param{1}.x_minus = [states.x(:,end);states.dx(:,end)]';
 param{1}.sol = sol;
 param_save_file = fullfile(cur,'param','fanuc_6DOF_2017_09_07_1655.yaml');
 yaml_write_file(param_save_file,param);
+
+writecsvfilebezier(param{1}.p(1),param{1}.a);
