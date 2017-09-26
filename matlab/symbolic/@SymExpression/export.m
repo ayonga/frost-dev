@@ -1,4 +1,4 @@
-function file = export(f, varargin)
+function file = export(obj, varargin)
     % Export the symbolic expression of functions to C/C++ source
     % files and build them as MEX files.
     %
@@ -12,7 +12,7 @@ function file = export(f, varargin)
     %   Namespace: the namespace of the function @type string
     %
     % Return values:
-    % h: a function handle to the exported function @type function_handle
+    %   file: the full file name of the exported function @type char
     
     eval_math('Needs["MathToCpp`"];');
 
@@ -20,7 +20,7 @@ function file = export(f, varargin)
 
     % process inputs
     N = getSyms(varargin);
-    exprs = {f, varargin{1:N}};    
+    exprs = {obj, varargin{1:N}};    
     
     ip = inputParser;
     ip.addParameter('Vars',{},@isVars);

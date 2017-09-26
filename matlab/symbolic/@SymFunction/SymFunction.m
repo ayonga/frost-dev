@@ -132,7 +132,8 @@ classdef SymFunction < SymExpression
             obj.Status.FunctionExported = false;
             obj.Status.JacobianExported = false;
             obj.Status.HessianExported  = false;
-            
+            obj.Status.FunctionSaved    = false;
+            obj.Status.FunctionLoaded   = false;
         end
         
         
@@ -157,5 +158,9 @@ classdef SymFunction < SymExpression
         [J,Js] = exportJacobian(obj, export_path, varargin);
         
         [H,Hs] = exportHessian(obj, export_path, varargin);
+        
+        file = save(obj, export_path, varargin);
+        
+        obj = load(obj, file_path);
     end
 end

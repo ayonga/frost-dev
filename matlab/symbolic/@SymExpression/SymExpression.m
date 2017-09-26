@@ -781,5 +781,9 @@ classdef SymExpression < handle
             
             M = eval_math(A.s);
         end
+        
+        obj = save(obj, file);
+        file = export(obj, varargin);
+        obj = load(obj, file);
     end
 end
