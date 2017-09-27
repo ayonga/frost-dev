@@ -1,12 +1,11 @@
 function obj = configure(obj)
-    % compiles the derivatives and Jacobian of the actual/desired
+    % configure the derivatives and Jacobian of the actual/desired
     % outputs functions
     
     model = obj.Model;
     x = model.States.x;
     dx = model.States.dx;
     
-    name = obj.Name;
     if isempty(obj.DerivativeOrder)
         obj.DerivativeOrder = 2;
     end
@@ -23,42 +22,32 @@ function obj = configure(obj)
         end
         ddx = model.States.ddx;
         dh = Jh * dx;
-        obj.dh_ = SymFunction(['dh_' name '_' model.Name], dh, {x,dx});
+        obj.dh_ = SymFunction(obj.dh_name, dh, {x,dx});
         
         dJh = jacobian(dh, x);
-        obj.dJh_ = SymFunction(['dJh_' name '_' model.Name], dJh, {x, dx});
+        obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x, dx});
         ddh = Jh*ddx + dJh*dx;
-        obj.ddh_ = SymFunction(['ddh_' name '_' model.Name], ddh, {x, dx, ddx});
+        obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, ddx});
         
-        obj.dh_name = obj.dh_.Name;
-        obj.ddh_name = obj.ddh_.Name;
-        obj.dJh_name = obj.dJh_.Name;
     else
         if order == 2
             M = model.Mmat;
             F = sum(horzcat(model.Fvec{:}),2);
             dX = M\F;
             dh = Jh * dX;
-            obj.dh_ = SymFunction(['dh_' name '_' model.Name], dh, {x});
+            obj.dh_ = SymFunction(obj.dh_name, dh, {x});
             
             dJh = jacobian(dh, x);
-            obj.dJh_ = SymFunction(['dJh_' name '_' model.Name], dJh, {x});
+            obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x});
             ddh = dJh*dx;
-            obj.ddh_ = SymFunction(['ddh_' name '_' model.Name], ddh, {x, dx});
-            obj.dh_name = obj.dh_.Name;
-            obj.ddh_name = obj.ddh_.Name;
-            obj.dJh_name = obj.dJh_.Name;
+            obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx});
         else
             dh = Jh * dx;
-            obj.dh_ = SymFunction(['dh_' name '_' model.Name], dh, {x,dx});
-            obj.dh_name = obj.dh_.Name;
+            obj.dh_ = SymFunction(obj.dh_name, dh, {x,dx});
         end
         
         
     end
-    
-    obj.h_name = obj.h_.Name;
-    obj.Jh_name = obj.Jh_.Name;
     
             
 end

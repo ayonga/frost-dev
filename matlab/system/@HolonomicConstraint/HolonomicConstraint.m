@@ -91,6 +91,7 @@ classdef HolonomicConstraint < handle
         InputName
     end
     
+    %% GET methods
     methods 
         function cstr = get.ConstrExpr(obj)
             cstr = obj.h_;
@@ -107,8 +108,39 @@ classdef HolonomicConstraint < handle
         function name = get.InputName(obj)
             name = ['f' obj.Name];
         end
+        function name = get.h_name(obj)
+            name = ['h_' obj.Name '_' obj.Model.Name];
+        end
+        
+        function name = get.Jh_name(obj)
+            name = ['Jh_' obj.Name '_' obj.Model.Name];
+        end
+        
+        function name = get.dh_name(obj)
+            name = ['dJh_' obj.Name '_' obj.Model.Name];
+        end
+        
+        function name = get.dJh_name(obj)
+            name = ['dh_' obj.Name '_' obj.Model.Name];
+        end
+        
+        function name = get.ddh_name(obj)
+            name = ['ddh_' obj.Name '_' obj.Model.Name];
+        end
     end
     
+    properties (Dependent)
+        
+        h_name
+        
+        Jh_name
+        
+        dh_name
+        
+        dJh_name
+        
+        ddh_name
+    end
     
     properties (Access = protected)
         % The dynamical system model
@@ -121,33 +153,28 @@ classdef HolonomicConstraint < handle
         %
         % @type SymFunction
         h_
-        h_name
         
         % The Jacobian matrix of the holonomic constraint expression
         %
         % @type SymFunction
         Jh_
-        Jh_name
         
         % The first order derivative of the holonomic constraint expression
         %
         % @type SymFunction
         dh_
-        dh_name
         % The first order derivative of the Jacobian matrix of the
         % holonomic constraint expression
         % 
         %
         % @type SymFunction
         dJh_
-        dJh_name
         
         % The second order derivatives of the holonomic constraints
         % expression
         %
         % @type SymFunction
         ddh_
-        ddh_name
     end
     
     
@@ -171,8 +198,10 @@ classdef HolonomicConstraint < handle
             % name: the name of the virtual constraints @type char
             % @type SymExpression
             % varargin: optional parameters. In details
-            %  ConstrLabel: 
-            %  Jacobian:
+            %  ConstrLabel: labels for constraints @type cellstr
+            %  Jacobian: the custom Jacobian matrix @type SymExpression
+            %  DerivativeOrder: the degree of holonomic constraints 
+            %  @type integer
             
             
             
@@ -192,6 +221,10 @@ classdef HolonomicConstraint < handle
             validateName(obj, name);
             obj.Name = name;
             
+            if isempty(h)
+                return;
+            end
+            
             
             % validate (ya) argument
             validateattributes(h,{'SymExpression'},...
@@ -206,8 +239,7 @@ classdef HolonomicConstraint < handle
             hd = SymVariable(obj.ParamName, [dim,1]);
             obj.Param = hd;
             obj.Input = SymVariable(obj.InputName,[dim,1]);
-            obj.h_ = SymFunction(['h_' name '_' model.Name], h-hd,...
-                {x, hd});
+            obj.h_ = SymFunction(obj.h_name, h-hd, {x, hd});
             
             % parse the input options
             args = struct(varargin{:});
@@ -255,6 +287,12 @@ classdef HolonomicConstraint < handle
         [Jh, dJh] = calcJacobian(obj, x, dx);
         
         h = calcConstraint(obj, x);
+        
+        % save the symbolic expressions
+        saveExpression(obj, export_path, varargin);
+        
+        % load the symbolic expressions
+        obj = loadExpression(obj, file_path, varargin);
     end
     
     
@@ -286,6 +324,8 @@ classdef HolonomicConstraint < handle
         end
         
         
+        
+        
         % Jacobian matrix
         function obj = setJacobian(obj, jac)
             % sets the Jacobian matrix of the holonomic constraints if it
@@ -302,7 +342,7 @@ classdef HolonomicConstraint < handle
             else
                 jac = jacobian(obj.h_, model.States.x);
             end
-            obj.Jh_ = SymFunction(['Jh_' obj.Name '_' model.Name], jac, {model.States.x});
+            obj.Jh_ = SymFunction(obj.Jh_name, jac, {model.States.x});
         end
         
         % RelativeDegree

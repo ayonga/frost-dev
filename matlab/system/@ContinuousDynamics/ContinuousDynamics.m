@@ -248,10 +248,10 @@ classdef ContinuousDynamics < DynamicalSystem
         obj = removeVirtualConstraint(obj, name);
         
         % save the mathematica objects in a file
-        obj = saveDynamics(obj, path, varargin);
+        obj = saveDynamics(obj, export_path, varargin);
         
         % load the mathematica objects from a file
-        obj = loadDynamics(obj, path, varargin);
+        obj = loadDynamics(obj, file_path, varargin);
         
         % clear mathematica kernel of all variables
         obj = clearKernel(obj, varargin);

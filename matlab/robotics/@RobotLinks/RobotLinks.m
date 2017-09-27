@@ -106,7 +106,7 @@ classdef RobotLinks < ContinuousDynamics
     %% methods defined in seperate files
     methods
         
-        obj = addContact(obj, contact, fric_coef, geometry);     
+        obj = addContact(obj, contact, fric_coef, geometry, load_path)  
         
         obj = addFixedJoint(obj, fixed_joints);
         

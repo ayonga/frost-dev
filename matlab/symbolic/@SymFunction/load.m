@@ -13,9 +13,8 @@ function obj = load(obj, file_path)
         file_path = pwd;
     end
     
-    filename = fullfile(file_path, obj.Name);
     
-    obj = obj.load@SymExpression(filename);
+    obj = obj.load@SymExpression(file_path, obj.Name);
     
     obj.Status.FunctionLoaded = true;
 end  

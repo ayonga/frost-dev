@@ -6,17 +6,16 @@ function obj = compile(obj, export_path, varargin)
     %  export_path: the path to export the file @type char
     %  varargin: variable input parameters @type varargin
     %   StackVariable: whether to stack variables into one @type logical
-    %   File: the (full) file name of exported file @type char
     %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
     %   Namespace: the namespace of the function @type char
     %   NoPrompt: answer yes to all prompts
     
-    opts = struct(varargin{:});
-    noPrompt = false;
-    if isfield(opts, 'noPrompt')
-        noPrompt = opts.noPrompt;
-    end
+    %     opts = struct(varargin{:});
+    %     noPrompt = false;
+    %     if isfield(opts, 'noPrompt')
+    %         noPrompt = opts.noPrompt;
+    %     end
     
     % Create export directory if it does not exst
     if ~exist(export_path,'dir')
@@ -31,19 +30,20 @@ function obj = compile(obj, export_path, varargin)
     
     % export the drift vector
     if ~isempty(obj.FvecName_)
-        if ~noPrompt
-            prompt = 'Compiling the drift vector often takes very long time. Do you wish to CONTINUE? Y/N [Y]: ';
-            str = input(prompt,'s');
-        else
-            str = 'Y';
-        end
-        
-        if isempty(str)
-            str = 'Y';
-        end
-        if strcmpi(str,'Y')           
-            cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
-        end
+        %         if ~noPrompt
+        %             prompt = 'Compiling the drift vector often takes very long time. Do you wish to CONTINUE? Y/N [Y]: ';
+        %             str = input(prompt,'s');
+        %         else
+        %             str = 'Y';
+        %         end
+        %
+        %         if isempty(str)
+        %             str = 'Y';
+        %         end
+        %         if strcmpi(str,'Y')
+        %             cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
+        %         end
+        cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
     end
     
     

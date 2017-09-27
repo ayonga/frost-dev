@@ -1,38 +1,41 @@
-function obj = saveDynamics(obj, path, varargin)
-    % export the symbolic expressions of the system dynamics matrices and
-    % vectors and compile as MEX files.
+function obj = saveDynamics(obj, export_path, varargin)
+    % save the symbolic expression of system dynamical equations to a MX
+    % binary files
     %
     % Parameters:
     %  export_path: the path to export the file @type char
     %  varargin: variable input parameters @type varargin
-    %   StackVariable: whether to stack variables into one @type logical
-    %   File: the (full) file name of exported file @type char
     %   ForceExport: force the export @type logical
-    %   BuildMex: flag whether to MEX the exported file @type logical
-    %   Namespace: the namespace of the function @type char
-    %   NoPrompt: answer yes to all prompts
     
-    saveString = ['DumpSave[','"',path,'"',','];
-    saveString = [saveString,...
-        eval_math('Select[Names["Global`*"], StringMatchQ[#, "symvar*"] &]')];
-    saveString = [saveString,'];'];
-    eval_math(saveString);
-    
-    return;
-    
-    saveString = ['DumpSave[','"',path,'"',',{',obj.Mmat.s];
-    
-    for i=1:length(obj.Fvec)
-        saveString = [saveString,',',obj.Fvec{i}.s];
+    % Create export directory if it does not exst
+    if ~exist(export_path,'dir')
+        mkdir(export_path);
+        addpath(export_path);
     end
-    saveString = [saveString,...
-        ',',obj.Gmap.Control.u.s,...
-        ',',obj.States.x.s,...
-        ',',obj.States.dx.s,...
-        ',',obj.States.ddx.s,...
-        ',',obj.Inputs.u.s,...
-        '}];'];
     
-    eval_math(saveString);
+    % export the mass matrix
+    if ~isempty(obj.Mmat)
+        save(obj.Mmat,export_path,varargin{:});
+        save(obj.MmatDx,export_path,varargin{:});
+    end
     
+    % export the drift vector
+    if ~isempty(obj.FvecName_)
+        cellfun(@(x)save(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
+    end
+    
+    
+    
+    % export the holonomic constraints    
+    h_constrs = fieldnames(obj.HolonomicConstraints);
+    if ~isempty(h_constrs)
+        for i=1:length(h_constrs)
+            constr = h_constrs{i};
+            saveExpression(obj.HolonomicConstraints.(constr),export_path,varargin{:});
+           
+        end
+        
+    end
+    
+    saveDynamics@DynamicalSystem(obj,export_path,varargin{:});
 end

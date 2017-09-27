@@ -13,7 +13,6 @@ function file = save(obj, export_path, varargin)
     if nargin < 2
         export_path = pwd;
     end
-    filename = fullfile(export_path, obj.Name);
     
     
     ip = inputParser;
@@ -30,7 +29,7 @@ function file = save(obj, export_path, varargin)
    
     
 
-    file = obj.save@SymExpression(filename);
+    file = obj.save@SymExpression(export_path, obj.Name);
     
     obj.Status.FunctionSaved = true;
 end  

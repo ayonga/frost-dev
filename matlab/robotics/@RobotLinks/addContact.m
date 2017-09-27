@@ -1,4 +1,4 @@
-function obj = addContact(obj, contact, fric_coef, geometry)
+function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     % Adds contact constraints for the robot manipulator
     %
     % Parameters:
@@ -29,34 +29,53 @@ function obj = addContact(obj, contact, fric_coef, geometry)
     if nargin < 4 || (~isfield(geometry, 'RefFrame'))
         geometry.RefFrame = eye(3);
     end
-    ref = geometry.RefFrame;
-    G = [eye(3), zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
     
-    % compute the spatial position (cartesian position + Euler angles)
-    pos = getCartesianPosition(obj, contact);
-    rpy = getRelativeEulerAngles(obj, contact, ref);
-    
-    h = transpose([pos, rpy]); %effectively as transpose
-    % extract the contrained elements
-    constr =  G' * h;
-    % compute the body jacobian 
-    jac = getBodyJacobian(obj, contact);
-    % extract the contrained elements
-    constr_jac = contact.WrenchBase' * jac;
-    
-    % label for the holonomic constraint
-    label_full = cellfun(@(x)[contact.Name,x],...
-        {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
-    for i=size(contact.WrenchBase,2):-1:1
-        label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
+    if nargin < 5
+        
+        ref = geometry.RefFrame;
+        G = [eye(3), zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
+        
+        % compute the spatial position (cartesian position + Euler angles)
+        pos = getCartesianPosition(obj, contact);
+        rpy = getRelativeEulerAngles(obj, contact, ref);
+        
+        h = transpose([pos, rpy]); %effectively as transpose
+        % extract the contrained elements
+        constr =  G' * h;
+        % compute the body jacobian
+        jac = getBodyJacobian(obj, contact);
+        % extract the contrained elements
+        constr_jac = contact.WrenchBase' * jac;
+        
+        % label for the holonomic constraint
+        label_full = cellfun(@(x)[contact.Name,x],...
+            {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
+        for i=size(contact.WrenchBase,2):-1:1
+            label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
+        end
+        
+        % create a holonomic constraint object
+        contact_constr = HolonomicConstraint(obj,...
+            constr, contact.Name,...
+            'Jacobian',constr_jac,...
+            'ConstrLabel',{label},...
+            'DerivativeOrder',2);
+        
+        
+    else
+        % create an empty holonomic constraint object first with correct
+        % name
+        contact_constr = HolonomicConstraint(obj, [], contact.Name);
+        
+         % label for the holonomic constraint
+        label_full = cellfun(@(x)[contact.Name,x],...
+            {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
+        for i=size(contact.WrenchBase,2):-1:1
+            label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
+        end
+        contact_constr.loadExpression(load_path, 'ConstrLabel',{label},...
+            'DerivativeOrder',2);
     end
-    
-    % create a holonomic constraint object
-    contact_constr = HolonomicConstraint(obj,...
-        constr, contact.Name,...
-        'Jacobian',constr_jac,...
-        'ConstrLabel',{label},...
-        'DerivativeOrder',2);
     
     % add as a set of holonomic constraints
     obj = addHolonomicConstraint(obj, contact_constr);
