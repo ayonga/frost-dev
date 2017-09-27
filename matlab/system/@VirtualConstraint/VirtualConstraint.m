@@ -396,7 +396,7 @@ classdef VirtualConstraint < handle
         configure(obj, varargin);
         
         % calculates the actual outputs
-        varargout = calcActual(obj, x, dx);
+        varargout = calcActual(obj, x, dx, offset);
             
         % calculates the desired outputs
         varargout = calcDesired(obj, t, x, dx, a, p);

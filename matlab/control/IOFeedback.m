@@ -66,6 +66,7 @@ classdef IOFeedback < Controller
             % partial derivative of the highest order of derivative (y^n-1) w.r.t.
             % the state variable 'x'
             DLfy = zeros(dim_y,length(x));   % A = DLfy*gfc; Lf = DLfy*vfc;
+            ddy = zeros(dim_y,1);
             mu = zeros(dim_y,1);    % The derivatives mu = k(1) y + k(2) y' + ... k(n) y^(n-1)
             idx = 1; % indexing of outputs
             for i=1:ny
@@ -75,8 +76,15 @@ classdef IOFeedback < Controller
                 
                 % calculate the actual outputs
                 %         [y_a{i}{:}] = calcActual(y_i,q,dq);
-                y_a{i} = calcActual(y_i,q,dq);
+                offset_param = y_i.OffsetParamName;
+                if y_i.hasOffset
+                    offset = params.(offset_param);
+                    y_a{i} = calcActual(y_i, q, dq, offset);
+                else
+                    y_a{i} = calcActual(y_i, q, dq);
+                end
                 % extract the parameter values
+               
                 output_param = y_i.OutputParamName; % desired output parameters
                 phase_param  = y_i.PhaseParamName;  % phase variable parameters
                 
@@ -111,7 +119,26 @@ classdef IOFeedback < Controller
                     assert(length(K) == y_i.RelativeDegree,...
                         'The expected length of the control gain parameter ''k'' is: %d\n', y_i.RelativeDegree);
                 else
-                    error('The control gain %s has not been specified in the ''params'' argument.\n', control_param);
+                    if isfield(params, 'epsilon')
+                        ep = params.epsilon;
+                        switch y_i.RelativeDegree
+                            case 1
+                                K = ep;
+                            case 2
+                                K = [ep^2, 2*ep];
+                            case 3
+                                K = [ep^3, 3*ep^2, 3*ep];
+                            case 4
+                                K = [ep^4, 4*ep^3, 6*ep^2, 4*ep];
+                            otherwise
+                                error('Please specify the control gain explicitly.');
+                        end
+                    
+                    else
+                        error('The control gain %s has not been specified in the ''params'' argument.\n', control_param);
+                    end
+                    
+                    
                 end
                 
                 % stack the partial derivatives of all outputs
@@ -119,6 +146,7 @@ classdef IOFeedback < Controller
                 
                 if strcmp(y_i.PhaseType, 'TimeBased')
                     DLfy(y_indices,:) = y_a{i}{end};
+                    ddy(y_indices) = y_d{i}{end};
                 else
                     DLfy(y_indices,:) = y_a{i}{end} - y_d{i}{end};
                 end
@@ -141,7 +169,7 @@ classdef IOFeedback < Controller
             
             % feedforward controller
             if strcmp(y_i.PhaseType, 'TimeBased')
-                u_ff = - A_mat \ (Lf_mat - y_d{i}{end});
+                u_ff = - A_mat \ (Lf_mat - ddy);
             else
                 u_ff = - A_mat \ Lf_mat;
             end
