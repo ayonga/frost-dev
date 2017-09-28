@@ -120,8 +120,11 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
         % compile symbolic expression
         obj = compile(obj, export_path, varargin);
         
-        % export symbolic expression to MX binary
+        % load symbolix expressions of system dynamics
         obj = loadDynamics(obj, export_path, varargin);
+        
+        % export symbolic expression to MX binary
+        obj = saveExpression(obj, export_path, varargin);
     end
     
     

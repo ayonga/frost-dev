@@ -33,7 +33,7 @@ function nlp = imposeNLPConstraint(obj, nlp)
                 0, 0, 'Nonlinear');
         end
         
-    else % if the second derivative of the objaint does not exist
+    else % if the second derivative of the object does not exist
         % enforce \dot{h}(x,dx) = J(x)dx at all nodes
         nlp = addNodeConstraint(nlp, obj.dh_, {'x','dx'}, 'all',...
             0, 0, 'Nonlinear');

@@ -65,7 +65,7 @@ classdef RobotLinks < ContinuousDynamics
     methods
         
         
-        function obj = RobotLinks(config, base)
+        function obj = RobotLinks(config, base, load_path)
             % The class constructor function
             %
             %
@@ -82,12 +82,19 @@ classdef RobotLinks < ContinuousDynamics
             % function
             obj = obj@ContinuousDynamics('SecondOrder');
             
+            if nargin ==1 
+                % the base joint is not specified, use default
+                fprintf('The floating base coordinates are not configured. \n');
+                fprintf('Setting it to the default 6 DOF floating base configuration ...\n');
+                base = get_base_dofs('floating');
+            end
+            
+            if nargin < 3
+                load_path = [];
+            end
+            
             if nargin > 0
-                if nargin > 1
-                    configure(obj, config, base);
-                else
-                    configure(obj, config);
-                end
+                configure(obj, config, base, load_path);
             end
             
         end
@@ -106,9 +113,9 @@ classdef RobotLinks < ContinuousDynamics
     %% methods defined in seperate files
     methods
         
-        obj = addContact(obj, contact, fric_coef, geometry, load_path)  
+        obj = addContact(obj, contact, fric_coef, geometry, load_path);
         
-        obj = addFixedJoint(obj, fixed_joints);
+        obj = addFixedJoint(obj, fixed_joints, load_path);
         
         obj = removeContact(obj, contact);
         
@@ -123,9 +130,9 @@ classdef RobotLinks < ContinuousDynamics
         indices = getJointIndices(obj, joint_names);
         
         
-        obj = configure(obj, config, base)
+        obj = cconfigure(obj, config, base, load_path);
         
-        obj = configureKinematics(obj, dofs, links)
+        obj = configureKinematics(obj, dofs, links);
         
         obj = configureDynamics(obj, varargin);
         
@@ -146,6 +153,8 @@ classdef RobotLinks < ContinuousDynamics
         pos = getComPosition(obj);
         
         bounds = getLimits(obj);
+        
+        obj = loadDynamics(obj,file_path,skip_load_vf,extra_fvecs);
     end
     
     

@@ -214,32 +214,11 @@ classdef HolonomicConstraint < handle
                 {'scalar'},...
                 'HolonomicConstraint','model');
             obj.Model = model;
-            x = model.States.x;
-            
+            x = model.States.x;           
             
             % validates (name) argument
             validateName(obj, name);
             obj.Name = name;
-            
-            if isempty(h)
-                return;
-            end
-            
-            
-            % validate (ya) argument
-            validateattributes(h,{'SymExpression'},...
-                {'nonempty','vector'},...
-                'HolonomicConstraint','h');            
-            if isrow(h) % convert to column vector if it is a row vector
-                h = vertcat(h(:));
-            end
-            dim = length(h);
-            obj.Dimension = dim;
-            
-            hd = SymVariable(obj.ParamName, [dim,1]);
-            obj.Param = hd;
-            obj.Input = SymVariable(obj.InputName,[dim,1]);
-            obj.h_ = SymFunction(obj.h_name, h-hd, {x, hd});
             
             % parse the input options
             args = struct(varargin{:});
@@ -247,20 +226,66 @@ classdef HolonomicConstraint < handle
                 'The values of optional properties are must be scalar data.');
             
             
+            if ~isempty(h)
+                % validate (ya) argument
+                validateattributes(h,{'SymExpression'},...
+                    {'nonempty','vector'},...
+                    'HolonomicConstraint','h');
+                if isrow(h) % convert to column vector if it is a row vector
+                    h = vertcat(h(:));
+                end
+            elseif isfield(args, 'LoadPath') && ~isempty(args.LoadPath)
+                h = SymExpression([]);
+                h = load(h, args.LoadPath, obj.h_name);
+            else
+                error(['Unable to create the HolonomicConstraint object. ',...
+                    'Either the expression is empty or the load path is not specified.'],...
+                    'HolonomicConstraint');
+            end
+            
+            if isfield(args, 'LoadPath') && ~isempty(args.LoadPath)
+                is_loaded = true;
+            else
+                is_loaded = false;
+            end
+            
+            dim = length(h);
+            obj.Dimension = dim;
+            
+            hd = SymVariable(obj.ParamName, [dim,1]);
+            obj.Param = hd;
+            obj.Input = SymVariable(obj.InputName,[dim,1]);
+            
+            if is_loaded % the loaded expression is h:= h_a - h_d
+                obj.h_ = SymFunction(obj.h_name, h, {x, hd}); 
+            else
+                obj.h_ = SymFunction(obj.h_name, h-hd, {x, hd});
+            end
+           
+            
             % validate and assign the desired outputs
             if isfield(args, 'ConstrLabel')
                 obj.setConstrLabel(args.ConstrLabel);
             end
             
-            if isfield(args, 'Jacobian')
-                obj.setJacobian(args.Jacobian);
+            if is_loaded
+                Jh = SymFunction(obj.Jh_name, [], {model.States.x});
+                obj.Jh_ = load(Jh,args.LoadPath);
+            else
+                if isfield(args, 'Jacobian')
+                    obj.setJacobian(args.Jacobian);
+                end
             end
             
             if isfield(args, 'DerivativeOrder')
                 obj.setDerivativeOrder(args.DerivativeOrder);
             end
             
-            obj.configure();
+            if is_loaded
+                obj.configure(args.LoadPath);
+            else
+                obj.configure();
+            end
             
             
             
@@ -278,7 +303,7 @@ classdef HolonomicConstraint < handle
     methods
         
         % configure and compile the holonomic constraints
-        obj = configure(obj);
+        obj = configure(obj, load_path);
         
         % enforce as NLP constraints
         nlp = imposeNLPConstraint(obj, nlp);
@@ -291,8 +316,6 @@ classdef HolonomicConstraint < handle
         % save the symbolic expressions
         saveExpression(obj, export_path, varargin);
         
-        % load the symbolic expressions
-        obj = loadExpression(obj, file_path, varargin);
     end
     
     

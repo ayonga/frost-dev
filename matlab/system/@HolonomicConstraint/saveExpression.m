@@ -1,6 +1,6 @@
 function obj = saveExpression(obj, export_path, varargin)
-    % export the symbolic expressions of the constraints matrices and
-    % vectors and compile as MEX files.
+    % export the symbolic expressions of the constraints matrices to MX
+    % binary files
     %
     % Parameters:
     %  export_path: the path to export the file @type char

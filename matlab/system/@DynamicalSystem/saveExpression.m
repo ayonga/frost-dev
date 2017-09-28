@@ -1,4 +1,4 @@
-function obj = saveDynamics(obj, export_path, varargin)
+function obj = saveExpression(obj, export_path, varargin)
     % save the symbolic expression of system dynamical equations to a MX
     % binary files
     %

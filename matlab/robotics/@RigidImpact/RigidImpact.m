@@ -97,7 +97,7 @@ classdef RigidImpact < DiscreteDynamics
             obj.R = R;
         end
         
-        function obj = addImpactConstraint(obj, constr)
+        function obj = addImpactConstraint(obj, constr, load_path)
             % Adds an impact constraint to the rigid impact map
             %
             %
@@ -110,6 +110,10 @@ classdef RigidImpact < DiscreteDynamics
                 {},'RigidImpact', 'ImpactConstraint');
             
             n_constr = numel(constr);
+            
+            if nargin < 3
+                load_path = [];
+            end
             
             for i=1:n_constr
                 c_obj = constr(i);
@@ -125,7 +129,11 @@ classdef RigidImpact < DiscreteDynamics
                     % add constant parameters
                     % obj = addParam(obj, c_obj.ParamName, c_obj.Param);
                     Jh = c_obj.ConstrJac;
-                    obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
+                    if isempty(load_path)
+                        obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
+                    else
+                        obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh), load_path);
+                    end
                 end
                 
             end
@@ -169,6 +177,8 @@ classdef RigidImpact < DiscreteDynamics
         [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin);
         
         obj = compile(obj, export_path, varargin);
+
+        obj = saveExpression(obj, export_path, varargin);
     end
     
 end

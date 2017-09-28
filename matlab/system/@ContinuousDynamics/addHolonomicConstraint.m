@@ -1,9 +1,11 @@
-function obj = addHolonomicConstraint(obj, constr)
+function obj = addHolonomicConstraint(obj, constr, load_path)
     % Adds a holonomic constraint to the dynamical system
     %
     %
     % Parameters:
     % constr: the expression of the constraints @type HolonomicConstraint
+    % load_path: the path from which the symbolic expressions for the
+    % input map can be loaded @type char
     %
     % @note Any holonomic constraint introduces a set of constrained
     % wrenchs to the system (Lagrangian multiplier).
@@ -28,7 +30,11 @@ function obj = addHolonomicConstraint(obj, constr)
             % add constant parameters
             obj = addParam(obj, c_obj.ParamName, c_obj.Param);
             Jh = c_obj.ConstrJac;
-            obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
+            if ~exist('load_path','var')
+                obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
+            else
+                obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh),'LoadPath',load_path);
+            end
         end
     
     end

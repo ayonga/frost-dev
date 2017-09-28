@@ -1,4 +1,4 @@
-function obj = configure(obj, config, base)
+function obj = configure(obj, config, base, load_path)
     % configures the robot manipulator objects from the configuration
     % (struct or URDF/YAML) file 
     %
@@ -11,25 +11,19 @@ function obj = configure(obj, config, base)
             
     
     % configure base joint for the model
-    if nargin < 3
-        % the base joint is not specified, use default
-        fprintf('The floating base coordinates are not configured. \n');
-        fprintf('Setting it to the default 6 DOF floating base configuration ...\n');
-        base_dofs = get_base_dofs('floating');
+    
+    if ischar(base)
+        base_dofs = get_base_dofs(base);
+    elseif isstruct(base)
+        fields = {'Name','Type','Offset','R','Axis','Parent','Child'};
+        assert(all(isfield(base,fields)),...
+            'The base dof structure must have the following fields:\n %s',implode(fields,', '));
+        base_dofs = base;
+    elseif isempty(base)
+        base_dofs = base;
     else
-        if ischar(base)
-            base_dofs = get_base_dofs(base);
-        elseif isstruct(base)
-            fields = {'Name','Type','Offset','R','Axis','Parent','Child'};
-            assert(all(isfield(base,fields)),...
-                'The base dof structure must have the following fields:\n %s',implode(fields,', '));
-            base_dofs = base;
-        elseif isempty(base)
-            base_dofs = base;
-        else
-            error(['The second argument must be either a character vector of ',...
-                'the type of the floating base coordinates, or a structure array of base DOFs.'])
-        end
+        error(['The second argument must be either a character vector of ',...
+            'the type of the floating base coordinates, or a structure array of base DOFs.'])
     end
             
             
@@ -98,6 +92,9 @@ function obj = configure(obj, config, base)
     
     obj.addState(x,dx,ddx);
     
+    
+    
+    
     if ~isempty(transmissions)
         % Add joint actuator inputs
         mechanicalReduction = zeros(1,numel(dofs));
@@ -123,8 +120,11 @@ function obj = configure(obj, config, base)
         gf(mechanicalReduction~=0,:) = diag(mechanicalReduction(mechanicalReduction~=0));
         
         u = SymVariable('u',[nact,1],{actuated_joints.Name});
-        
-        obj.addInput('Control','u',u,gf);
+        if isempty(load_path)
+            obj.addInput('Control','u',u,gf);
+        else
+            obj.addInput('Control','u',u,gf,'LoadPath',load_path);
+        end
     end
 
     
@@ -136,7 +136,11 @@ function obj = configure(obj, config, base)
     fixed_joint_indices = str_index('fixed',{obj.Joints.Type});
     % enforce holonomic constraints
     if ~isempty(fixed_joint_indices)
-        obj = addFixedJoint(obj,fixed_joint_indices);
+        if isempty(load_path)
+            obj = addFixedJoint(obj,fixed_joint_indices);
+        else
+            obj = addFixedJoint(obj,fixed_joint_indices,load_path);
+        end
     end
     
 end

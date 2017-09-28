@@ -1,4 +1,4 @@
-function nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
+function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     % impose virtual constraints as NLP constraints in the trajectory
     % optimization problem 'nlp' of the dynamical system 
     %

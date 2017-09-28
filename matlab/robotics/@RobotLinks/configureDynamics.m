@@ -49,6 +49,7 @@ function obj = configureDynamics(obj, varargin)
     %|@note !!! The minus sign !!!
     % Fvec appears at the right hand side (typically -C(q,dq)dq - G(q)
     % appears at the left hand side of the Euler-Lagrangian Equation)
+    tic
     Ce1 = cell(obj.numState,1);
     Ce2 = cell(obj.numState,1);
     Ce3 = cell(obj.numState,1);
@@ -74,11 +75,12 @@ function obj = configureDynamics(obj, varargin)
     toc
     % We add dQe as dependent variables to the gravity vector in order to have a same structure
     % as the corilios forces
+    tic
     fprintf('Evaluating the gravity vector G(q): \t');
     Ge = SymFunction(['Ge_vec_',obj.Name],-eval_math_fun('GravityVector',[links,{Qe}]),{Qe,dQe});
-    
-    vf = [Ce1;Ce2;Ce3;{Ge}];
-    tic
-    obj.setDriftVector(vf);
     toc
+    vf = [Ce1;Ce2;Ce3;{Ge}];
+    
+    obj.setDriftVector(vf);
+    
 end

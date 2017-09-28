@@ -258,26 +258,33 @@ classdef VirtualConstraint < handle
                 'VirtualConstraint','model');
             obj.Model = model;
             
-            % validate (ya) argument
-            validateattributes(ya,{'SymExpression'},...
-                {'nonempty','vector'},...
-                'VirtualConstraint','ya');            
-            if isrow(ya) % convert to column vector if it is a row vector
-                ya = vertcat(ya(:));
-            end
-            
-            
-            
-            
             % validates (name) argument
             validateName(obj, name);
             obj.Name = name;
             
-            
-            
             args = struct(varargin{:});
             assert(isscalar(args),...
                 'The values of optional properties are must be scalar data.');
+            
+            if ~isempty(ya)
+                % validate (ya) argument
+                validateattributes(ya,{'SymExpression'},...
+                    {'nonempty','vector'},...
+                    'VirtualConstraint','ya');
+                if isrow(ya) % convert to column vector if it is a row vector
+                    ya = vertcat(ya(:));
+                end
+            elseif isfield(args, 'LoadPath')
+                ya = SymExpression([]);
+                ya = load(ya, args.LoadPath, ['ya_' obj.Name '_' model.Name]);
+            else
+                error(['Unable to create the VirtualConstraint object. ',...
+                    'Either the expression is empty or the load path is not specified.'],...
+                    'VirtualConstraint');
+            end
+            
+            
+            
             
             obj.Dimension = length(ya);
             if isfield(args, 'HasOffset')
@@ -339,10 +346,16 @@ classdef VirtualConstraint < handle
                 error('Please determine whether the virtual constraint is holonomic (Holonomic) or not.');
             end
             
-            if isfield(args, 'ExtraConfig')
-                obj.configure(args.ExtraConfig{:});
+            if isfield(args, 'LoadPath') && ~isempty(args.LoadPath)
+                load_path = args.LoadPath;
             else
-                obj.configure();
+                load_path = [];
+            end
+            
+            if isfield(args, 'ExtraConfig')
+                obj.configure(load_path, args.ExtraConfig{:});
+            else
+                obj.configure(load_path);
             end
             
             
@@ -393,7 +406,7 @@ classdef VirtualConstraint < handle
         export(obj, export_path, varargin);
         
         % configure symbolic expression
-        configure(obj, varargin);
+        configure(obj, load_path, varargin);
         
         % calculates the actual outputs
         varargout = calcActual(obj, x, dx, offset);
@@ -405,7 +418,10 @@ classdef VirtualConstraint < handle
         varargout = calcPhaseVariable(obj, t, x, dx, p);
         
         % enforce as NLP constraints
-        nlp = imposeNLPConstraint(obj, nlp, ep, nzy)
+        nlp = imposeNLPConstraint(obj, nlp, ep, nzy);
+        
+        % save symbolic expressions
+        saveExpression(obj, export_path, varargin);
     end
     
     

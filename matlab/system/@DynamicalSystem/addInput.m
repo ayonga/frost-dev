@@ -59,23 +59,30 @@ function obj = addInput(obj, category, name, var, gf, varargin)
                 error('The third argument must be a positive integer, cellstr or a vector SymVaribale object.');
         end
         
-        % Convert to SymExpression if the input argument is not
-        if ~isa(gf,'SymExpression') 
-            s_gf = SymExpression(gf);
-        else
-            s_gf = gf;
-        end
+        % parse the option, (assume it is affine by default)
+        ip = inputParser;
+        ip.addParameter('Affine',true,@(x) isequal(x,true) || isequal(x,false));
+        ip.addParameter('LoadPath',[],@(x) ischar(x));
+        ip.parse(varargin{:});    
+        opts = ip.Results;
         
+        % Convert to SymExpression if the input argument is not
+        if isempty(opts.LoadPath)
+            if ~isa(gf,'SymExpression')
+                s_gf = SymExpression(gf);
+            else
+                s_gf = gf;
+            end
+        else
+            s_gf = SymExpression([]);
+            s_gf = load(s_gf, opts.LoadPath, [name '_map_', obj.Name]);
+        end
         % check the size of the gf
         [nr,nc] = size(s_gf);
         assert(nr==obj.numState,...
             'The input map must have the same number of rows as the number of states (%d).',obj.numState);
-            
-        % parse the option, (assume it is affine by default)
-        ip = inputParser;
-        ip.addParameter('Affine',true,@(x) isequal(x,true) || isequal(x,false));
-        ip.parse(varargin{:});    
-        opts = ip.Results;
+        
+        
         
         if opts.Affine % The input is affine to the system
             assert(nc==length(var),...
@@ -87,8 +94,12 @@ function obj = addInput(obj, category, name, var, gf, varargin)
             else % given as a SymExpression, then create a new SymFunction
                 sfun_gf = SymFunction([name '_map_', obj.Name], s_gf, {obj.States.x});
             end
-            
-            sfun_gv = SymFunction([name '_vec_', obj.Name], s_gf*var, {obj.States.x,var});
+            if isempty(opts.LoadPath)
+                sfun_gv = SymFunction([name '_vec_', obj.Name], s_gf*var, {obj.States.x,var});
+            else
+                sfun_gv = SymFunction([name '_vec_', obj.Name], [], {obj.States.x,var});
+                sfun_gv = load(sfun_gv, opts.LoadPath);
+            end
             obj.GmapName_.(category).(name) = sfun_gf.Name;
         else
             assert(nc==1,...

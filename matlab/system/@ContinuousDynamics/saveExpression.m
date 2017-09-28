@@ -1,4 +1,4 @@
-function obj = saveDynamics(obj, export_path, varargin)
+function obj = saveExpression(obj, export_path, varargin)
     % save the symbolic expression of system dynamical equations to a MX
     % binary files
     %
@@ -37,5 +37,15 @@ function obj = saveDynamics(obj, export_path, varargin)
         
     end
     
-    saveDynamics@DynamicalSystem(obj,export_path,varargin{:});
+    % export the virtual constraints       
+    v_constrs = fieldnames(obj.VirtualConstraints);
+    if ~isempty(v_constrs)
+        for i=1:length(v_constrs)
+            constr = v_constrs{i};
+            saveExpression(obj.VirtualConstraints.(constr),export_path,varargin{:});
+        end
+        
+    end
+    
+    saveExpression@DynamicalSystem(obj,export_path,varargin{:});
 end

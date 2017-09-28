@@ -28,8 +28,8 @@ function obj = load(obj, file_path, filename)
     
     eval_math([obj.s '=Import[FileNameJoin[{' str2mathstr(file_path),',',str2mathstr(filename) '}]];']);
     
-    file = fullfile(file_path,filename);  
-    fprintf('A symbolic expression from %s.\n', file);
+    %     file = fullfile(file_path,filename);
+    %     fprintf('Loading symbolic expression from %s.\n', file);
     
 end  
     

@@ -1,11 +1,9 @@
-function obj = loadDynamics(obj, file_path, mmat_name, mmat_ddx_name, vf_names, skip_load_vf)
+function obj = loadDynamics(obj, file_path, vf_names, skip_load_vf)
     % load the symbolic expression of system dynamical equations from MX
     % binary files for fast loading
     %
     % Parameters:
     %  file_path: the path to the files @type char
-    %  mmat_name: the name of the mass matrix Mmat @type char
-    %  mmat_ddx_name: the name of Mmat*ddx @type char
     %  vf_names: the names of the drift vectors Fvec @type cellstr
     %  skip_load_vf: indicates whether to skip the loading of drift vectors
     %  which could takes a long time @type logical
@@ -17,13 +15,8 @@ function obj = loadDynamics(obj, file_path, mmat_name, mmat_ddx_name, vf_names, 
         return;
     end
     
-    if isempty(mmat_name)
-        mmat_name = ['Mmat_',obj.Name];
-    end
-    if isempty(mmat_ddx_name)
-        mmat_ddx_name = ['MmatDx_' obj.Name];
-    end
-    
+    mmat_name = ['Mmat_',obj.Name];
+    mmat_ddx_name = ['MmatDx_' obj.Name];
     Mmat = SymFunction(mmat_name,[],{x});
     Mmat = load(Mmat,file_path);
     if strcmp(obj.Type,'SecondOrder') 
@@ -57,7 +50,7 @@ function obj = loadDynamics(obj, file_path, mmat_name, mmat_ddx_name, vf_names, 
     
     
     
-    % export the drift vector
+    % load the drift vector
     if nargin > 4
         if nargin < 6
             skip_load_vf = false;

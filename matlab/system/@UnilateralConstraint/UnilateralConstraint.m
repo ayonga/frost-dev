@@ -1,10 +1,6 @@
 classdef UnilateralConstraint < handle
-    % HolonomicConstraint: represents a group of holonomic constraints of a
-    % dynamical systems.
-    %
-    % A holonomic constraint is defined as a function of state variables
-    % that equals to constants, i.e., 
-    %   h(x) == hd
+    % UnilateralConstraint represents a scalar or vector inequality
+    % constraints should be imposed on the continuous dynamical systems
     %
     % @author ayonga @date 2017-04-20
     %

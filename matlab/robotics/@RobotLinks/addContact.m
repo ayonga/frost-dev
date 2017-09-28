@@ -31,6 +31,10 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     end
     
     if nargin < 5
+       load_path = []; 
+    end
+    
+    if isempty(load_path)
         
         ref = geometry.RefFrame;
         G = [eye(3), zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
@@ -60,25 +64,28 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
             'Jacobian',constr_jac,...
             'ConstrLabel',{label},...
             'DerivativeOrder',2);
-        
+        % add as a set of holonomic constraints
+        obj = addHolonomicConstraint(obj, contact_constr);
         
     else
-        % create an empty holonomic constraint object first with correct
-        % name
-        contact_constr = HolonomicConstraint(obj, [], contact.Name);
-        
-         % label for the holonomic constraint
+        % label for the holonomic constraint
         label_full = cellfun(@(x)[contact.Name,x],...
             {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
         for i=size(contact.WrenchBase,2):-1:1
             label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
         end
-        contact_constr.loadExpression(load_path, 'ConstrLabel',{label},...
+        % create an empty holonomic constraint object first with correct
+        % name
+        contact_constr = HolonomicConstraint(obj, ...
+            [], contact.Name,...
+            'LoadPath',load_path,...
+            'ConstrLabel',{label},...
             'DerivativeOrder',2);
+        % add as a set of holonomic constraints
+        obj = addHolonomicConstraint(obj, contact_constr, load_path);
     end
     
-    % add as a set of holonomic constraints
-    obj = addHolonomicConstraint(obj, contact_constr);
+    
     % the contact wrench input vector
     f_name = contact_constr.InputName;
     f = obj.Inputs.ConstraintWrench.(f_name);

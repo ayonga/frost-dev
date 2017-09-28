@@ -1,4 +1,4 @@
-function obj = clearKernel(obj, varargin)
+function obj = compile(obj, export_path, varargin)
     % export the symbolic expressions of the system dynamics matrices and
     % vectors and compile as MEX files.
     %
@@ -10,10 +10,12 @@ function obj = clearKernel(obj, varargin)
     %   ForceExport: force the export @type logical
     %   BuildMex: flag whether to MEX the exported file @type logical
     %   Namespace: the namespace of the function @type char
-    %   NoPrompt: answer yes to all prompts
     
     
-    % Create export directory if it does not exst
-    eval_math('Clear["Global`*"];');
+    
+    cellfun(@(x)compile(x,export_path,varargin{:}), ...
+        obj.Gamma.Nodes.Domain, 'UniformOutput',false);
+    cellfun(@(x)compile(x,export_path,varargin{:}), ...
+        obj.Gamma.Edges.Guard, 'UniformOutput',false);
     
 end
