@@ -51,8 +51,8 @@ function obj = loadDynamics(obj, file_path, vf_names, skip_load_vf)
     
     
     % load the drift vector
-    if nargin > 4
-        if nargin < 6
+    if nargin > 2
+        if nargin < 4
             skip_load_vf = false;
         end
         if ~iscell(vf_names), vf_names = {vf_names}; end

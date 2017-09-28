@@ -21,7 +21,7 @@ function obj = saveExpression(obj, export_path, varargin)
     
     % export the drift vector
     if ~isempty(obj.FvecName_)
-        cellfun(@(x)save(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
+        cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
     end
     
     
@@ -48,4 +48,9 @@ function obj = saveExpression(obj, export_path, varargin)
     end
     
     saveExpression@DynamicalSystem(obj,export_path,varargin{:});
+    
+    
+    function save_funcs(x, export_path, varargin)        
+        if ~isempty(x), save(x,export_path, varargin{:}); end
+    end
 end

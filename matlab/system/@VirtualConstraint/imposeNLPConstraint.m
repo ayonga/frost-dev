@@ -26,6 +26,10 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     % relative degree 2 virtual constraints, we only enforce y being zero
     % at the first node.
     
+    if nargin < 5
+        load_path = [];
+    end
+    
     % local variables for speed
     rel_deg = obj.RelativeDegree;
     is_holonomic = obj.Holonomic;
@@ -51,6 +55,9 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     else
         warning('The coefficient vector (ep) of outputs are not defined. Use 1 for all derivatives.');
         ep = ones(1,rel_deg);
+        for l= 1:rel_deg
+            ep(l) = nchoosek(rel_deg,l-1)*10^(rel_deg - l + 1);
+        end
     end
     if nargin > 3
         validateattributes(nzy, {'double'},...
@@ -58,6 +65,8 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             'VirtualConstraint.imposeNLPConstraint','nzy');
     else
         nzy = ones(1,rel_deg);
+        
+        
     end
     
     % the name suffix of functions
@@ -149,15 +158,20 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     
     %% y(x,a,p) = 0
     if nzy(1)==1
-        y = ya{1} - yd{1};
-        if ~is_state_based
-            %% Time-based outputs, need to incoorporates the time variable
-            y = subs(y,t,tsubs);
-        end
+        if isempty(load_path)
+            y = ya{1} - yd{1};
+            if ~is_state_based
+                %% Time-based outputs, need to incoorporates the time variable
+                y = subs(y,t,tsubs);
+            end
             
-        % holonomic virtual constraints
-        y_fun{1} = SymFunction(['y_' name], y, [t_var, q_var, a_var, p_var, c_var], aux_var);
-        
+            % holonomic virtual constraints
+            y_fun{1} = SymFunction(['y_' name], y, [t_var, q_var, a_var, p_var, c_var], aux_var);
+        else
+            % holonomic virtual constraints
+            y_fun{1} = SymFunction(['y_' name], [], [t_var, q_var, a_var, p_var, c_var], aux_var);
+            y_fun{1} = load(y_fun{1},load_path);
+        end
         if ~isempty(aux_var)
             switch length(aux_var)
                 case 2
@@ -185,12 +199,17 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
         for i=2:rel_deg     
             if nzy(i) == 1
                 %% state-based output, no need to use time variable
-                dy = ya{i} - yd{i};
-                if ~is_state_based
-                    %% Time-based outputs, need to incoorporates the time variable
-                    dy = subs(dy,t,tsubs);
+                if isempty(load_path)
+                    dy = ya{i} - yd{i};
+                    if ~is_state_based
+                        %% Time-based outputs, need to incoorporates the time variable
+                        dy = subs(dy,t,tsubs);
+                    end
+                    y_fun{i} = SymFunction(['d' num2str(i-1) 'y_' name], dy, [t_var, x_var, a_var, p_var], aux_var);
+                else
+                    y_fun{i} = SymFunction(['d' num2str(i-1) 'y_' name], [], [t_var, x_var, a_var, p_var], aux_var);
+                    y_fun{i} = load(y_fun{i}, load_path);
                 end
-                y_fun{i} = SymFunction(['d' num2str(i-1) 'y_' name], dy, [t_var, x_var, a_var, p_var], aux_var);
                 % add constraint at the first node
                 
                 nlp = addNodeConstraint(nlp, y_fun{i}, [t_name, x_name ,a_name, p_name], 'first',...
@@ -210,26 +229,33 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     
     y_dynamics(1,n_node) = NlpFunction();
     
-    % state-based output, no need to use time variable
-    if is_state_based
-        ddy = (ya{rel_deg+1} - yd{rel_deg+1})*dX;
-    else
-        ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
-    end
-    
-    ep_s = SymVariable('k',[rel_deg,1]);
-    
-    for j=1:1:rel_deg
-        ddy = ddy + ep_s(j)*(ya{j} - yd{j});
-    end
-    % Time-based outputs, need to incoorporates the time variable
-    if ~is_state_based
-        ddy = subs(ddy,t,tsubs);
-    end
-    
-    
-    ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+    if isempty(load_path)
+        % state-based output, no need to use time variable
+        if is_state_based
+            ddy = (ya{rel_deg+1} - yd{rel_deg+1})*dX;
+        else
+            ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
+        end
         
+        ep_s = SymVariable('k',[rel_deg,1]);
+        
+        for j=1:1:rel_deg
+            ddy = ddy + ep_s(j)*(ya{j} - yd{j});
+        end
+        % Time-based outputs, need to incoorporates the time variable
+        if ~is_state_based
+            ddy = subs(ddy,t,tsubs);
+        end
+        
+        
+        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+    else        
+        ep_s = SymVariable('k',[rel_deg,1]);
+        
+        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+        ddy_fun = load(ddy_fun, load_path);
+        
+    end
         
         
         
@@ -295,12 +321,12 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     end
         
         
-        
-            
+    obj.OutputFuncs = [y_fun;{ddy_fun}];
+    %     obj.OutputFuncsName_ = cellfun(@(f)f.Name, obj.OutputFuncs,'UniformOutput',false);
     
     % add output dynamics at all nodes
     % add dynamical equation constraints
     nlp = addConstraint(nlp,[obj.Name '_output_dynamics'],'all',y_dynamics);
-        
+    
     
 end

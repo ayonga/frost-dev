@@ -121,18 +121,11 @@ classdef IOFeedback < Controller
                 else
                     if isfield(params, 'epsilon')
                         ep = params.epsilon;
-                        switch y_i.RelativeDegree
-                            case 1
-                                K = ep;
-                            case 2
-                                K = [ep^2, 2*ep];
-                            case 3
-                                K = [ep^3, 3*ep^2, 3*ep];
-                            case 4
-                                K = [ep^4, 4*ep^3, 6*ep^2, 4*ep];
-                            otherwise
-                                error('Please specify the control gain explicitly.');
+                        K = ones(1, y_i.RelativeDegree);
+                        for l= 1:y_i.RelativeDegree
+                            K(l) = nchoosek(y_i.RelativeDegree,l-1)*ep^(y_i.RelativeDegree - l + 1); 
                         end
+                        
                     
                     else
                         error('The control gain %s has not been specified in the ''params'' argument.\n', control_param);

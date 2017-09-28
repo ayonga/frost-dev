@@ -42,6 +42,17 @@ classdef RigidImpact < DiscreteDynamics
         %
         % @type SymFunction
         Mmat
+        
+        % The reset map constraint for the joint configuration
+        %
+        % @type SymFunction
+        xMap
+        
+        
+        % The reset map constraint for the joint velocity
+        %
+        % @type SymFunction
+        dxMap
     end
     
     methods
@@ -97,6 +108,71 @@ classdef RigidImpact < DiscreteDynamics
             obj.R = R;
         end
         
+        function obj  = configure(obj, load_path)
+            % configure the reset map expression for the rigid impact
+            % object
+            %
+            % Parameters:
+            %  load_path: the path from which the symbolic experssion can
+            %  be load @type char
+            
+            
+            if nargin < 2, load_path = []; end;
+            
+            
+            
+            x = obj.States.x;
+            xn = obj.States.xn;
+            dx = obj.States.dx;
+            dxn = obj.States.dxn;
+            
+                
+            % the configuration only depends on the relabeling matrix
+            if ~isempty(load_path)
+                obj.xMap = SymFunction(['xDiscreteMap' obj.Name],[],{x,xn});
+                obj.xMap = load(obj.xMap, load_path);
+                
+                obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],[],{dx,dxn});
+                obj.dxMap = load(obj.dxMap, load_path);
+            else
+                obj.xMap = SymFunction(['xDiscreteMap' obj.Name],obj.R*x-xn,{x,xn});
+                
+                cstr_name = fieldnames(obj.ImpactConstraints);
+                
+                % the velocities determined by the impact constraints
+                if isempty(cstr_name)
+                    % by default, identity map
+                    
+                    obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],obj.R*dx-dxn,{dx,dxn});
+                    
+                else
+                    %% impact constraints
+                    cstr = obj.ImpactConstraints;
+                    n_cstr = numel(cstr_name);
+                    nx  = length(x);
+                    % initialize the Jacobian matrix
+                    Gvec = zeros(nx,1);
+                    deltaF = cell(1, n_cstr);
+                    input_name = cell(1,n_cstr);
+                    for i=1:n_cstr
+                        c_name = cstr_name{i};
+                        input_name{i} = cstr.(c_name).InputName;
+                        Gvec = Gvec + obj.Gvec.ConstraintWrench.(input_name{i});
+                        deltaF{i} = obj.Inputs.ConstraintWrench.(input_name{i});
+                    end
+                    
+                    % D(q) -> D(q^+)
+                    M = subs(obj.Mmat, x, xn);
+                    Gvec = subs(Gvec, x, xn);
+                    % D(q^+)*(dq^+ - R*dq^-) = sum(J_i'(q^+)*deltaF_i)
+                    delta_dq = M*(dxn - obj.R*dx) - Gvec;
+                    obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],delta_dq,[{dx},{xn},{dxn},deltaF]);
+                    
+                    
+                end
+            end
+        end
+        
         function obj = addImpactConstraint(obj, constr, load_path)
             % Adds an impact constraint to the rigid impact map
             %
@@ -132,11 +208,13 @@ classdef RigidImpact < DiscreteDynamics
                     if isempty(load_path)
                         obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
                     else
-                        obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh), load_path);
+                        obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh), 'LoadPath', load_path);
                     end
                 end
                 
             end
+            
+            obj  = configure(obj, load_path);
             
             
         end
@@ -165,6 +243,8 @@ classdef RigidImpact < DiscreteDynamics
                     error('The impact constraint (%s) does not exist.\n',constr);
                 end
             end
+            
+            obj  = configure(obj);
         end
         
         

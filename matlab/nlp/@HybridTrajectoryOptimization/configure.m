@@ -25,7 +25,7 @@ function obj = configure(obj, bounds, varargin)
             end
         end
         idx = 2*i - 1;
-        obj.Phase(idx) = configure(obj.Phase(idx),node_bounds);
+        obj.Phase(idx) = configure(obj.Phase(idx),node_bounds, varargin{:});
         
         
         

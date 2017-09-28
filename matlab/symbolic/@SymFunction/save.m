@@ -26,11 +26,7 @@ function file = save(obj, export_path, varargin)
     if obj.Status.FunctionSaved && ~opts.ForceExport        
         return;
     end
-   
-    
-
     file = obj.save@SymExpression(export_path, obj.Name);
-    
     obj.Status.FunctionSaved = true;
 end  
     

@@ -418,7 +418,7 @@ classdef VirtualConstraint < handle
         varargout = calcPhaseVariable(obj, t, x, dx, p);
         
         % enforce as NLP constraints
-        nlp = imposeNLPConstraint(obj, nlp, ep, nzy);
+        nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path);
         
         % save symbolic expressions
         saveExpression(obj, export_path, varargin);

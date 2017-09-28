@@ -24,8 +24,17 @@ function obj = saveExpression(obj, export_path, varargin)
     
     % The mass matrix will be exported by the continuoud dynamics object,
     % but call it here again will not re-export if it has been exported.
-    if ~isempty(obj.Mmat)
-        save(obj.Mmat,export_path,varargin{:});
+    %     if ~isempty(obj.Mmat)
+    %         save(obj.Mmat,export_path,varargin{:});
+    %     end
+    
+    
+    if ~isempty(obj.xMap)
+        save(obj.xMap,export_path,varargin{:});
+    end
+    
+    if ~isempty(obj.dxMap)
+        save(obj.dxMap,export_path,varargin{:});
     end
     
     % call superclass method

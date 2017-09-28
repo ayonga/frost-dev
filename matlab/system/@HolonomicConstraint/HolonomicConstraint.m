@@ -116,11 +116,11 @@ classdef HolonomicConstraint < handle
             name = ['Jh_' obj.Name '_' obj.Model.Name];
         end
         
-        function name = get.dh_name(obj)
+        function name = get.dJh_name(obj)
             name = ['dJh_' obj.Name '_' obj.Model.Name];
         end
         
-        function name = get.dJh_name(obj)
+        function name = get.dh_name(obj)
             name = ['dh_' obj.Name '_' obj.Model.Name];
         end
         

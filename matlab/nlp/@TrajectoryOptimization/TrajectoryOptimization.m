@@ -180,7 +180,7 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         [obj] = update(obj);
         
-        obj = configure(obj, bounds);
+        obj = configure(obj, bounds, varargin);
         
         compileConstraint(obj, constr, export_path, exclude, varargin);
         

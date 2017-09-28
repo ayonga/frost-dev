@@ -23,14 +23,14 @@ function obj = setSymFun(obj, symfun)
     end
     
     
-    if ~isempty(obj.DepVariables)
-        vars = cellfun(@(x)flatten(x), symfun.Vars,'UniformOutput',false);        
-        nvar1 = length([vars{:}]);
-        nvar2 = sum([obj.DepVariables.Dimension]);
-        
-        assert(nvar1 == nvar2,...
-            'The dimensions of the dependent variables do not match.');
-    end
+    %     if ~isempty(obj.DepVariables)
+    %         vars = cellfun(@(x)flatten(x), symfun.Vars,'UniformOutput',false);
+    %         nvar1 = length([vars{:}]);
+    %         nvar2 = sum([obj.DepVariables.Dimension]);
+    %
+    %         assert(nvar1 == nvar2,...
+    %             'The dimensions of the dependent variables do not match.');
+    %     end
 
     
     if ~isempty(obj.AuxData)

@@ -161,7 +161,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
 
         validateGraph(~, plant);
         
-        obj = configure(obj, bounds);
+        obj = configure(obj, bounds, varargin);
         
         obj = updateVariableBounds(obj, bounds);
         
