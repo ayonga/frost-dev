@@ -1,5 +1,6 @@
 ---
 title: 
+subTitle: Fast Robot Optimization and Simulation Toolkit
 permalink: index.html
 hide_sidebar: false
 toc: false
@@ -7,64 +8,109 @@ editme: false
 comments: false
 ---
 
-{% include image.html file="/images/frost_splash.png" %}
 
-FROST: Fast Robot Optimization and Simulation Toolkit
-=====================================================
+<section id="home">
+    <!-- Header -->
+    <div class="intro-header">
 
+	<div class="container">
 
+	    <div class="row">
+		<div class="col-lg-12">
+		    <div class="intro-message">
+			<h1>FROST</h1>
+			<h3>{{ page.subTitle }}</h3>
+			<hr class="intro-divider">
+			<ul class="list-inline intro-social-buttons">							
+			    <li>
+				<a href="https://github.com/ayonga/frost-dev" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+			    </li>
+			    <li>
+				<a href="http://www.bipedalrobotics.com/" class="btn btn-default btn-lg"><i class="fa fa-cog fa-fw"></i> <span class="network-name">AMBER Lab</span></a>
+			    </li>
+			</ul>
+		    </div>
+		</div>
+	    </div>
 
+	</div>
+	<!-- /.container -->
 
-Introduction
-------------
-
-<a href="#" data-toggle="tooltip"
-data-original-title="{{site.data.glossary.frost}}">FROST</a> (**F**ast **R**obot
-**O**ptimization and **S**imulation **T**oolkit) an open-source MATLAB toolkit
-developed by [AMBER Lab](https://http://www.bipedalrobotics.com/) for dynamical
-system modeling, trajectory optimization and model-based control design of
-robotic systems, with a special focus in dynamic locomotion whose dynamics is
-hybrid in nature. The design objective of <a href="#" data-toggle="tooltip"
-data-original-title="{{site.data.glossary.frost}}">FROST</a> is to provide a
-unified software environment for developing model based control and motion
-planning algorithms based
-on
-[Hybrid Zero Dynamics](http://web.eecs.umich.edu/faculty/grizzle/web-book.html)
-framework for robotic systems. 
-
-
-Structure and Functionality
----------------------------
-
-
-
-
-* <a href="#" data-toggle="tooltip"
-data-original-title="{{site.data.glossary.frost}}">FROST</a>
-uses [directed graphs](https://www.mathworks.com/help/matlab/ref/digraph.html)
-to describe the underlying discrete structure of hybrid system models, which
-renders it capable of representing a wide variety of robotic systems.
-* <a href="#" data-toggle="tooltip"
-data-original-title="{{site.data.glossary.frost}}">FROST</a> is equipped with a
-custom symbolic math toolbox in MATLAB using Wolfram Mathematica, enables users
-to rapidly prototype the mathematical model of robot kinematics and dynamics and
-generate optimized code of symbolic expressions to boost the speed of
-optimization and simulation.
-* <a href="#" data-toggle="tooltip"
-data-original-title="{{site.data.glossary.frost}}">FROST</a> utilizes virtual
-constraint based motion planning and feedback controllers for robotic systems to
-exploit the full-order dynamics of the model for agile and dynamic behaviors.
-* <a href="#" data-toggle="tooltip"
-data-original-title="{{site.data.glossary.frost}}">FROST</a> provides a fast and
-tractable framework for planning optimal trajectories of hybrid dynamical
-systems using advanced direct collocation algorithms.
+    </div>
+    <!-- /.intro-header -->
+</section>
 
 
+<div class="row">
+    <!-- <div class="col-md-12">
+         <h4 class="page-header"></h4>
+         </div> -->
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-tree fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>Tutorial</h4>
+                <p>Getting started with the FROST tutorials.</p>
+                <a href="pages/introduction.html" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-car fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>Documentation</h4>
+                <p>FROST is written in MATLAB. See detailed API documentation here.</p>
+                <a href="pages/html/inherits.html" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-support fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>News</h4>
+                <p>See most recent updates of FROST here.</p>
+                <a href="pages/news.html" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-database fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>License</h4>
+                <p>FROST is a BSD-3 clause open-source project.</p>
+                <a href="pages/license.html" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-{% include image.html file="/images/frost_overview.png" alt="FROST Overview" caption="The block diagram illustration of the FROST architecture." %}
 
 
-### To cite FROST, use the following bibtex entry: ###
+
+## If you would like to cite FROST, we suggest the following BibTeX citation: ##
 
 
 ``` tex
@@ -80,228 +126,18 @@ systems using advanced direct collocation algorithms.
 }
 ```
 
-## Getting Started ##
+## Related Publications ##
 
-FROST is a collection of MATLAB functions and Mathematica packages. Hence, there
-is no need to build the source code. However, the Mathematica package will
-export project-specific symbolic expressions to C++ source code which needs to
-be compiled as *.MEX files for MATLAB. This requires a proper MATLAB MEX
-compiler for C++ before using FROST.
 
-## Prerequisites ##
 
-FROST uses [MATLAB](https://www.mathworks.com/) as the frontend interface, and
-uses [Wolfram Mathematica](https://www.wolfram.com/mathematica/>) as the backend
-symbolic computation engine. To use FROST, we require the following software to
-be installed apriori.
 
-- **MATLAB R2015b or later**
-- **Mathematica 10.0 or later**
-
-{% include note.html content="FROST uses certain functions that are not supported
-by older versions of MATLAB and Mathematica." %}
-
-## Download FROST ##
-
-FROST is an open-source toolbox hosted on GitHub. To download the source code,
-run
-
-``` shell
-$ git clone https://github.com/ayonga/frost-dev.git frost-dev
-```
-
-Alternatively, you could download the archived **zip** file directly from
-this [link](https://github.com/ayonga/frost-dev/archive/master.zip).
-
-
-
-## System Configuration ##
-
-
-
-
-
-
-### Setup Default MEX Compiler ###
-
-The following instruction provides an example setup for the default mex
-compilers on different platforms. For more information, please refer to the
-official document
-on
-[www.mathworks.com](https://www.mathworks.com/help/matlab/matlab_external/changing-default-compiler.html).
-
-#### Linux ####
-
-Setting up MEX compiler for Linux systems (tested on Ubuntu 14.04/16.04 LTS) is
-relatively straight-fowrad. However, the default ``g++`` compiler might not be
-supported by MATLAB, which sometimes causes unnecessary errors (e.g., g++5.4 is
-case sensitive). Please visit [https://www.mathworks.com/support/compilers.html]
-(https://www.mathworks.com/support/compilers.html) to find out the supported and
-compatiable compilers for your MATLAB version.
-
-First, install a suitable version of the `g++` compiler, for instance, we need
-g++-4.9 for Ubuntu16.04:
-
-``` shell
-$ sudo apt-get install g++-4.9
-```
-
-Then change the symbolic link of the standard library in
-`$matlabroot/sys/os/glnxa64` to prevent unnecessary mismatch between compiler
-library and Matlab default library. To do this, run:
-  
-``` shell
-$ cd $matlabroot/sys/os/glnxa64
-$ sudo mv libstdc++.so.6 libstdc++.so.6.bak
-$ sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so libstdc++.so.6
-```
-
-{% include tip.html content="`$matlabroot` is the directory where the MATLAB
-software is installed. Please replace it with the actual path of the
-directory. To find the folder, run `matlabroot` within MATLAB." %}
-
-#### Windows ####
-
-There are multiple compilers can be used on Windows machines. The following
-instruction uses MinGW as an example on a Windows10 machine (VC++ is supported
-for Windows7&8).
-
-1. Install via MATLAB Add-Ons manager:
-
-    On newer version of MATLAB (after MATLAB2015b), you can install MinGW
-    support directly from the Add-Ons manager. Simply search for MinGW, and
-    click `install`.
-
-2. Directly install from TDM-GCC:
-
-    If installing MinGW compiler via Add-On manager fails, you can also manually
-    install the compiler from the
-    official [TDM-GCC](http://tdm-gcc.tdragon.net/about) website.
-
-    * Go to the [download](http://tdm-gcc.tdragon.net/download>) page, and download the version that works on your Windows PC. Please download the 64-bit version if possible.
-    * After finished downloading, simply run the executable binary to install TDM-GCC compiler.
-    * After the installation, you will need to add the system enviroment variable `MW_MINGW64_LOC` and specify it to the directory where you installed, for example `C:\TDM-GCC-64`.
-    
-{% include warning.html content="Do not have `space` in the installation path of
-TDM-GCC compiler. The default path is recommended , for example
-`C:\TDM-GCC-64`." %}
-
-
-
-
-
-### MathLink ###
-
-
-FROST uses MathLink libraries to communicate with the Mathematica kernel from
-MATLAB. Thanks to the open-souce MATLAB package developed by `Ben Barrowes`
-called
-[Mathematica Symbolic Toolbox for MATLAB v2.0](https://www.mathworks.com/matlabcentral/fileexchange/6044-mathematica-symbolic-toolbox-for-matlab-version-2-0/).
-This package could be downloaded directly from the MATLAB Add-Ons manager or the
-Mathworks file exchange website.
-
-The original package has a certain restriction on the maximum length of the
-input string, which could cause the evaluation of some FROST functions fail. To
-remove this restriction, we modified the original code and shipped the modified
-version together with FROST. We also included pre-compiled MEX binaries, and the
-compiled `.mex` file for different machines (some yet to come). Please use the
-included MathLink instead of downloading it from other resources.
-
-Because this package uses the MathLink libraries of Mathematica during runtime,
-you must specifies the path of these libraries to your system path. To configure
-this environment variable:
-
-#### Ubuntu (or Other Linux distributions) ####
-
-The easiest way to configure the `LD_LIBRARY_PATH` on your Linux machine for
-MATLAB would be add the following to your `~/.bashrc` configuration file. For
-instance, if the installed Mathematica version is `11.0`, then:
-
-``` shell
-LD_LIBRARY_PATH=/usr/local/Wolfram/Mathematica/11.0/SystemFiles/Links/MathLink/DeveloperKit/Linux-x86-64/CompilerAdditions:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH
-```
-   
-
-{% include note.html content="Please change the version in the above script as
-the same as your installed Mathmetica version." %}
-
-#### Windows ####
-
-
-Setting up the library path on Windows PC sometimes very complicated, and not
-always work. Therefore, we copied the all required the static/dynamic library
-files to the folder where the mathlink source file resides.
-
-We also includes a pre-compiled MEX binary on Windows machine. To use the
-pre-compiled binary, you must include the path to Wolfram Mathematica kernal
-executables to your system path.
-
-To include the Wolfram path, edit your PATH variable (user) on your system
-enviroment variables manager. The path to be added should looks like:
-
-``` shell
-C:Program Files\Wolfram Research\Mathematica\11.0\
-```
-
-{% include note.html content="When you first time call `math` function from
-Matlab, there will appear a new console window of the Mathematica kernel. Do not
-close this window, as it will close the running kernel." %}
-
-### Test ###
-
-To test if MathLink toolbox can sucessfully run, call the FROST initialization
-function from MATLAB. I.e.,
-
-``` matlab
->> frost_addpath();
-```
-
-If the Mathlink package is configured correctly, this function should print out the following messages:
-
-``` matlab
-Mathematica Kernel loading...
-ans =
-
-    11.0.0 for Linux x86 (64-bit) (July 28, 2016)
-
-```
-
-
-### IPOPT ###
-
-We use [IPOPT](https://projects.coin-or.org/Ipopt/) as the default solver for
-nonlinear constrained optimization problems. To
-use [IPOPT](https://projects.coin-or.org/Ipopt/) from MATLAB, it is sufficient
-to directly use the precompiled mex files for IPOPT Matlabinterface
-from [www.coin-or.org](http://www.coin-or.org/download/binary/Ipopt/). The most
-recent version of IPOPT as of writing this document is 3.11.8.
-
-
-{% include note.html content="We have included the latest pre-compiled binaries
-downloaded from the above link in FROST package. Therefore, you do not need to
-download IPOPT, unless if you prefer to use other version of IPOPT." %}
-
-
-### SuitSparse ###
-
-
-The [SuitSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) is not a
-required package to run FROST. However, the **sparse2** function comes with the
-SuitSparse can be used as the replancement of Matlab's **sparse** function. The
-former provides up to 2~3 times faster computation speed when compared to the
-latter.
-
-
-{% include note.html content="We have also included the latest pre-compiled
-binaries for Win64 and Linux-64 systems in the FROST package. Therefore, there
-is no need to install and compile it by your own." %}
-
-
-{% include tip.html content="FROST will automatically detects if **sparse2**
- function exists in its path. If true, it will use **sparse2**."%}
-
-
-
-
-
+<ul>
+    <li>
+        <section id="citation">
+            <div class="text-justify">
+                <span style="color: #7a8288;"><span id="Hereid20163D"><u>A. Hereid</u>, E. A. Cousineau, C. M. Hubicki, and A. D. Ames, 
+                    “<b>3D Dynamic Walking With Underactuated Humanoid Robots: A Direct Collocation Framework for Optimizing Hybrid Zero Dynamics</b>,” in <i>2016 IEEE International Conference on Robotics and Automation (ICRA)</i>, Stockholm, Sweden, 2016, pp. 1447–1454. </span></span>
+            </div>   
+        </section>
+    </li>
+</ul>

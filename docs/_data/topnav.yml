@@ -5,12 +5,12 @@ topnav:
   items:
     - title: Home
       url: /index.html
-    - title: Getting Started
-      url: /pages/introduction.html
-    - title: API Documentation
-      url: /pages/html/inherits.html
     - title: Tutorial
-      url: /pages/news.html
+      url: /pages/introduction.html
+    - title: Documentation
+      url: /pages/html/inherits.html
+    #- title: Tutorial
+    #  url: /pages/news.html
     - title: GitHub
       external_url: https://github.com/ayonga/frost-dev/
 #Topnav dropdowns
