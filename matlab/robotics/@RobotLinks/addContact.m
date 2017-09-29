@@ -24,10 +24,16 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     assert(isa(contact, 'ContactFrame'),...
         'The contact must be given as an object of ContactFrame class.');
     
+    if nargin < 3
+        fric_coef = [];
+    end
     % Equivalent to grasp map in Murray Ch 5. Maps the wrench base into the
     % nominal contact reference frame.
-    if nargin < 4 || (~isfield(geometry, 'RefFrame'))
-        geometry.RefFrame = eye(3);
+    if nargin < 4 
+        geometry = [];
+        if ((~isfield(geometry, 'RefFrame')) && ~isempty(geometry))
+            geometry.RefFrame = eye(3);
+        end
     end
     
     if nargin < 5
@@ -93,7 +99,7 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     
     % if the friction coefficients are given, enforce friction cone
     % constraints
-    if nargin > 2
+    if ~isempty(fric_coef)
         % get the friction cone constraint
         [friction_cone, fc_label, auxdata] = getFrictionCone(contact, f, fric_coef);
         
@@ -108,7 +114,7 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     
     % if the contact geometry is given, enforce zero moment point
     % constraints
-    if nargin > 3
+    if ~isempty(geometry)
         % get the friction cone constraint
         [zmp, zmp_label, auxdata] = getZMPConstraint(contact, f, geometry);
         

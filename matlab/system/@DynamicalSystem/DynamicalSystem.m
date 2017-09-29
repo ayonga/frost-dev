@@ -180,9 +180,23 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
         end
         
         
+        function ret= isParam(obj, name)
+            % 
+            %
+            % Parameters:
+            %  name: the name string of the variable @type char
+            
+            if isfield(obj.Params, name)
+                ret = true;
+            else
+                ret = false;
+            end
+            
+        end
+        
         function var_group= validateVarName(obj, name)
-            % Adds unilateral (inequality) constraints on the dynamical system
-            % states and inputs
+            % Validate the group and category of the variables specified by
+            % the input 'name'
             %
             % Parameters:
             %  name: the name string of the variable @type char
@@ -198,7 +212,7 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
             elseif isfield(obj.Params, name) % check if it is a parameter variables
                 var_group = {'Params',''}; 
             else
-                error('The variable (%s) does not belong to any of the variable groups.', name);
+                var_group = {'',''};
             end
             
         end

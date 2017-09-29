@@ -94,11 +94,23 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     [cstr.AuxData] = deal(auxdata);
     for i=1:n_node
         idx = node_list(i);
-        dep_vars = cellfun(@(x)vars.(x)(idx),deps,'UniformOutput',false);
+        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, idx),deps,'UniformOutput',false);
         cstr(i).DepVariables = vertcat(dep_vars{:});
     end
     
     
     
     obj = addConstraint(obj,func.Name,nodes,cstr);
+    
+    function var = get_dep_vars(plant, vars, options, x, idx)
+        
+        if strcmp('x','T') && ~options.DistributeTimeVariable % time variable
+            var = vars.(x)(1);
+        elseif isParam(plant, x) && ~options.DistributeParameters
+            var = vars.(x)(1);
+        else
+            var = vars.(x)(idx);
+        end
+        
+    end
 end
