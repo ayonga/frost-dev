@@ -139,10 +139,11 @@ function obj = updateVariableBounds(obj, bounds)
         for j = 1:length(param_names)
             p_name = param_names{j};
             if isfield(bounds.params,p_name)
-                if isfield(bounds.params.(p_name),'lb')
+                if isfield(bounds.params.(p_name),'lb') && isfield(bounds.params.(p_name),'ub')
+                    updateVariableProp(obj, p_name,node, 'lb',bounds.params.(p_name).lb, 'ub',bounds.params.(p_name).ub);
+                elseif isfield(bounds.params.(p_name),'lb')
                     updateVariableProp(obj, p_name,node, 'lb',bounds.params.(p_name).lb);
-                end
-                if isfield(bounds.params.(p_name),'ub')
+                elseif isfield(bounds.params.(p_name),'ub')
                     updateVariableProp(obj, p_name,node, 'ub',bounds.params.(p_name).ub);
                 end
                 if isfield(bounds.params.(p_name),'x0')
