@@ -22,6 +22,9 @@ function [sol, info] = optimize(obj, x0)
     opts.cl = vertcat(obj.Constraint.LowerBound);
     opts.cu = vertcat(obj.Constraint.UpperBound);
     opts.ipopt = obj.Options.ipopt;
+    if isfield(obj.Options,'zl'), opts.zl = obj.Options.zl; end;
+    if isfield(obj.Options,'zu'), opts.zu = obj.Options.zu; end;
+    if isfield(obj.Options,'lambda'), opts.lambda = obj.Options.lambda; end;
     
     
     
