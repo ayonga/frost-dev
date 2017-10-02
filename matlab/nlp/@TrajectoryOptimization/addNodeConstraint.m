@@ -104,7 +104,7 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     
     function var = get_dep_vars(plant, vars, options, x, idx)
         
-        if strcmp('x','T') && ~options.DistributeTimeVariable % time variable
+        if strcmp(x,'T') && ~options.DistributeTimeVariable % time variable
             var = vars.(x)(1);
         elseif isParam(plant, x) && ~options.DistributeParameters
             var = vars.(x)(1);
