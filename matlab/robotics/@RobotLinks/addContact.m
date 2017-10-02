@@ -41,8 +41,11 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     end
     
     if isempty(load_path)
-        
-        ref = geometry.RefFrame;
+        if isempty(geometry)
+            ref = eye(3);
+        else
+            ref = geometry.RefFrame;
+        end
         G = [eye(3), zeros(3,3); zeros(3,3), ref] * contact.WrenchBase;
         
         % compute the spatial position (cartesian position + Euler angles)

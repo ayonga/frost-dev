@@ -7,12 +7,12 @@ topnav:
       url: /index.html
     - title: Tutorial
       url: /pages/introduction.html
-    - title: Documentation
+    - title: API Documentation
       url: /pages/html/inherits.html
-    #- title: Tutorial
-    #  url: /pages/news.html
-    - title: GitHub
-      external_url: https://github.com/ayonga/frost-dev/
+    - title: News
+      url: /pages/news.html
+    #- title: GitHub
+    #  external_url: https://github.com/ayonga/frost-dev/
 #Topnav dropdowns
 #topnav_dropdowns:
 #- title: Topnav dropdowns

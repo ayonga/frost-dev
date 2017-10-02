@@ -62,7 +62,7 @@ function obj = addInput(obj, category, name, var, gf, varargin)
         % parse the option, (assume it is affine by default)
         ip = inputParser;
         ip.addParameter('Affine',true,@(x) isequal(x,true) || isequal(x,false));
-        ip.addParameter('LoadPath',[],@(x) ischar(x));
+        ip.addParameter('LoadPath',[],@(x) ischar(x) || isempty(x));
         ip.parse(varargin{:});    
         opts = ip.Results;
         
