@@ -22,7 +22,7 @@ function obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin)
     
     % create a NlpFunction for 'edge' NLP, but use the NlpVariables from
     % 'src' and 'tar' NLPs.
-    if ~src.Options.DistributeTimeVariable
+    if src.Options.DistributeTimeVariable
         src_time_node = src.NumNode;
     else
         src_time_node = 1;
