@@ -2,8 +2,12 @@ function right_stance_constraints(nlp, bounds, varargin)
     
     domain = nlp.Plant;
 
+    p = inputParser;
+    addParameter(p, 'LoadPath', '');
+    parse(p, varargin{:});
+    load_path = p.Results.LoadPath;
     % relative degree 2 outputs
-    domain.VirtualConstraints.time.imposeNLPConstraint(nlp, [bounds.time.kp, bounds.time.kd], [1,1]);
+    domain.VirtualConstraints.time.imposeNLPConstraint(nlp, [bounds.time.kp, bounds.time.kd], [1,1], load_path);
     
     % tau boundary [0,1]
     T_name = nlp.OptVarTable.T(1).Name;

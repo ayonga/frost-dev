@@ -3,17 +3,28 @@ clear; clc;
 cur = pwd;
 addpath(genpath(cur));
 export_path = fullfile(cur, 'gen/');
+% if load_path is empty, it will not load any expression.
+% if non-empty and assigned valid directory, then symbolic expressions will
+% be loaded  from the MX binary files from the given directory.
+load_path = [];%fullfile(cur, 'gen/sym');
+delay_set = true;
 COMPILE = true;
 
 % Load model
 rabbit = RABBIT('urdf/five_link_walker.urdf');
-rabbit.configureDynamics('DelayCoriolisSet',true);
+if isempty(load_path)
+    rabbit.configureDynamics('DelayCoriolisSet',true);
+else
+    % load symbolic expression for the dynamics equations
+    rabbit.loadDynamics(load_path, delay_set);
+end
+
 
 % Define domains
-r_stance = RightStance(rabbit);
-l_stance = LeftStance(rabbit);
-r_impact = RightImpact(r_stance);
-l_impact = LeftImpact(l_stance);
+r_stance = RightStance(rabbit, load_path);
+% l_stance = LeftStance(rabbit, load_path);
+r_impact = RightImpact(r_stance, load_path);
+% l_impact = LeftImpact(l_stance, load_path);
 
 % Define hybrid system
 rabbit_1step = HybridSystem('Rabbit_1step');
@@ -42,7 +53,14 @@ nlp = HybridTrajectoryOptimization('Rabbit_1step',rabbit_1step,num_grid,[],'Equa
 
 % Configure bounds 
 setBounds;
-nlp.configure(bounds);
+
+% load some optimization related expressions here
+if ~isempty(load_path)
+    nlp.configure(bounds, 'LoadPath',load_path);
+else
+    nlp.configure(bounds);
+end
+
  
 % Add costs
 addRunningCost(nlp.Phase(getPhaseIndex(nlp,'RightStance')),u2r_fun,'u');
@@ -50,6 +68,14 @@ addRunningCost(nlp.Phase(getPhaseIndex(nlp,'RightStance')),u2r_fun,'u');
 % Update
 nlp.update;
 
+
+% save expressions after you run the optimization. It will save all required
+% expressions
+% do not need to save expressions if the model configuration is not
+% changed. Adding custom constraints does not require saving any
+% expressions.
+% load_path = fullfile(cur, 'gen/sym');
+% rabbit_1step.saveExpression(load_path);
 %% Compile
 if COMPILE
     if ~exist([export_path, 'opt/'])

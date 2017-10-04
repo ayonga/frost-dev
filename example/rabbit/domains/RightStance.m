@@ -1,7 +1,7 @@
  % Right Stance Domain 
  %
  % Contact: Right Toe
-function domain = RightStance(model)
+function domain = RightStance(model, load_path)
     % construct the right stance domain of RABBIT
     %
     % Parameters:
@@ -22,12 +22,14 @@ function domain = RightStance(model)
     right_sole = ToContactFrame(domain.ContactPoints.RightToe,...
         'PointContactWithFriction');
     fric_coef.mu = 0.6;
-    domain = addContact(domain,right_sole,fric_coef);
+    % load symbolic expressions for contact (holonomic) constraints
+    domain = addContact(domain,right_sole,fric_coef, [], load_path);
     
     % add event
     % height of non-stance foot (left toe)
     p_nsf = getCartesianPosition(domain, domain.ContactPoints.LeftToe);
     h_nsf = UnilateralConstraint(domain,p_nsf(3),'leftFootHeight','x');
+    % often very simple, no need to load expression. Compute them directly
     domain = addEvent(domain, h_nsf);
    
     % phase variable: time
@@ -50,10 +52,11 @@ function domain = RightStance(model)
                 'q2_right',...
                 'q1_left',...
                 'q2_left'};
-    
+    % optional: load expression for virtual constraints while creating
     y2 = VirtualConstraint(domain,ya_2,'time','DesiredType','Bezier','PolyDegree',5,...
         'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','TimeBased',...
-        'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true);
+        'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true,...
+        'LoadPath', load_path);
     
     domain = addVirtualConstraint(domain,y2);
     

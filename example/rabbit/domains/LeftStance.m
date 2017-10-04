@@ -1,7 +1,7 @@
  % Left Stance Domain 
  %
  % Contact: Left Toe
-function domain = LeftStance(model)
+function domain = LeftStance(model, load_path)
     % construct the right stance domain of RABBIT
     %
     % Parameters:
@@ -22,7 +22,7 @@ function domain = LeftStance(model)
     left_sole = ToContactFrame(domain.ContactPoints.LeftToe,...
         'PointContactWithFriction');
     fric_coef.mu = 0.6;
-    domain = addContact(domain,left_sole,fric_coef);
+    domain = addContact(domain,left_sole,fric_coef, [], load_path);
     
     % add event
     % height of non-stance foot (right toe)
@@ -53,7 +53,8 @@ function domain = LeftStance(model)
     
     y2 = VirtualConstraint(domain,ya_2,'time','DesiredType','Bezier','PolyDegree',5,...
         'RelativeDegree',2,'OutputLabel',{y2_label},'PhaseType','TimeBased',...
-        'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true);
+        'PhaseVariable',tau,'PhaseParams',p,'Holonomic',true,...
+        'LoadPath',load_path);
     
     domain = addVirtualConstraint(domain,y2);
     
