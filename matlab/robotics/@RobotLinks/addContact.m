@@ -41,7 +41,7 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
     end
     
     if isempty(load_path)
-        if isempty(geometry)
+        if isempty(geometry) || ~isfield(geometry, 'RefFrame')
             ref = eye(3);
         else
             ref = geometry.RefFrame;
