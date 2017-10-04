@@ -33,8 +33,7 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for DynamicalSystem:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classDynamicalSystem__inherit__graph.svg" width="312" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classDynamicalSystem__inherit__graph.svg" width="312" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -60,14 +59,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a41c2c076844b61cbd10f1796ef5b2c20"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a41c2c076844b61cbd10f1796ef5b2c20">compile</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a41c2c076844b61cbd10f1796ef5b2c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#a41c2c076844b61cbd10f1796ef5b2c20">More...</a><br /></td></tr>
 <tr class="separator:a41c2c076844b61cbd10f1796ef5b2c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade51cca82a739ed3dc6862b6b9474e09"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ade51cca82a739ed3dc6862b6b9474e09">loadDynamics</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="separator:ade51cca82a739ed3dc6862b6b9474e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f20a20050efa99d11ea3f73cfeefdcb"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a8f20a20050efa99d11ea3f73cfeefdcb">saveExpression</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a8f20a20050efa99d11ea3f73cfeefdcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">save the symbolic expression of system dynamical equations to a MX binary files  <a href="#a8f20a20050efa99d11ea3f73cfeefdcb">More...</a><br /></td></tr>
+<tr class="separator:a8f20a20050efa99d11ea3f73cfeefdcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0159cd3624ed7282c0280b67739a83cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a0159cd3624ed7282c0280b67739a83cc">DynamicalSystem</a> (<a class="el" href="classchar.html">char</a> type,<a class="el" href="classchar.html">char</a> name)</td></tr>
 <tr class="memdesc:a0159cd3624ed7282c0280b67739a83cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class construction function.  <a href="#a0159cd3624ed7282c0280b67739a83cc">More...</a><br /></td></tr>
 <tr class="separator:a0159cd3624ed7282c0280b67739a83cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2d532f9277eec4c2bd9fb257056c77e"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#ac2d532f9277eec4c2bd9fb257056c77e">setName</a> (name)</td></tr>
 <tr class="memdesc:ac2d532f9277eec4c2bd9fb257056c77e"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the name of the dynamical system  <a href="#ac2d532f9277eec4c2bd9fb257056c77e">More...</a><br /></td></tr>
 <tr class="separator:ac2d532f9277eec4c2bd9fb257056c77e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a20d1893b2a0ceb4119dcb9a154627c"><td class="memItemLeft" align="right" valign="top">function   ret  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a0a20d1893b2a0ceb4119dcb9a154627c">isParam</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
+<tr class="separator:a0a20d1893b2a0ceb4119dcb9a154627c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48eaf6ea3ab14462c1a7cfa03206d3af"><td class="memItemLeft" align="right" valign="top">function   var_group  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a48eaf6ea3ab14462c1a7cfa03206d3af">validateVarName</a> (<a class="el" href="classchar.html">char</a> name)</td></tr>
-<tr class="memdesc:a48eaf6ea3ab14462c1a7cfa03206d3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds unilateral (inequality) constraints on the dynamical system states and inputs.  <a href="#a48eaf6ea3ab14462c1a7cfa03206d3af">More...</a><br /></td></tr>
+<tr class="memdesc:a48eaf6ea3ab14462c1a7cfa03206d3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate the group and category of the variables specified by the input <code>name</code>  <a href="#a48eaf6ea3ab14462c1a7cfa03206d3af">More...</a><br /></td></tr>
 <tr class="separator:a48eaf6ea3ab14462c1a7cfa03206d3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f38330ce1a44879b0599e0584e147aa"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicalSystem.html#a3f38330ce1a44879b0599e0584e147aa">setType</a> (<a class="el" href="classchar.html">char</a> type)</td></tr>
 <tr class="memdesc:a3f38330ce1a44879b0599e0584e147aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of the dynamical system.  <a href="#a3f38330ce1a44879b0599e0584e147aa">More...</a><br /></td></tr>
@@ -289,8 +295,9 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a class="code" href="classDynamicalSystem.html#a1e40a6d810f010012b9baa31d68cd6b3">addInput</a> ( ...,  [ <span class="stringliteral">&quot;Affine&quot;</span>, Affine_value ] ) </div></div><!-- fragment --><p> <em>Named Parameters for varargin:</em></p><ul>
+<div class="fragment"><div class="line"><a class="code" href="classDynamicalSystem.html#a1e40a6d810f010012b9baa31d68cd6b3">addInput</a> ( ...,  [ <span class="stringliteral">&quot;Affine&quot;</span>, Affine_value ] [, <span class="stringliteral">&quot;LoadPath&quot;</span>, LoadPath_value ] ) </div></div><!-- fragment --><p> <em>Named Parameters for varargin:</em></p><ul>
 <li><span class="paramname"> Affine</span> Affine ( <b>Default:</b> <code>true</code> )</li>
+<li><span class="paramname"> LoadPath</span> LoadPath ( <b>Default:</b> <code>[]</code> )</li>
 </ul>
 
 </div>
@@ -420,6 +427,60 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0a20d1893b2a0ceb4119dcb9a154627c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a20d1893b2a0ceb4119dcb9a154627c">&#9670;&nbsp;</a></span>isParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">function ret = DynamicalSystem.isParam </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade51cca82a739ed3dc6862b6b9474e09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade51cca82a739ed3dc6862b6b9474e09">&#9670;&nbsp;</a></span>loadDynamics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function obj = DynamicalSystem.loadDynamics </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa0a12e5b2dab2e82cf4eb0963232b36a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa0a12e5b2dab2e82cf4eb0963232b36a">&#9670;&nbsp;</a></span>removeInput()</h2>
 
@@ -481,6 +542,46 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a8f20a20050efa99d11ea3f73cfeefdcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f20a20050efa99d11ea3f73cfeefdcb">&#9670;&nbsp;</a></span>saveExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = DynamicalSystem.saveExpression </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>save the symbolic expression of system dynamical equations to a MX binary files </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classDynamicalSystem.html#a8f20a20050efa99d11ea3f73cfeefdcb">saveExpression</a> ( ..., ForceExport ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -626,7 +727,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Adds unilateral (inequality) constraints on the dynamical system states and inputs. </p>
+<p>Validate the group and category of the variables specified by the input <code>name</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>the name string of the variable </td></tr>
@@ -650,9 +751,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the external input defined on the dynamical system. </p>
-<dl class="section note"><dt>Note</dt><dd>This property has non-standard access specifiers: <code>SetAccess = Protected, GetAccess = Public</code> </dd>
-<dd>
-<a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html">Matlab documentation of property attributes.</a> </dd></dl>
 
 </div>
 </div>
@@ -974,13 +1072,14 @@ This property has non-standard access specifiers: <code>SetAccess = Protected, G
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="DynamicalSystem_8m.html">DynamicalSystem.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="addInput_8m.html">addInput.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="addParam_8m.html">addParam.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="addState_8m.html">addState.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="system_2_0DDynamicalSystem_2compile_8m.html">compile.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="removeInput_8m.html">removeInput.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="removeParam_8m.html">removeParam.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="setParamValue_8m.html">setParamValue.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="DynamicalSystem_8m.html">DynamicalSystem.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="addInput_8m.html">addInput.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="addParam_8m.html">addParam.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="addState_8m.html">addState.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="system_2_0DDynamicalSystem_2compile_8m.html">compile.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="removeInput_8m.html">removeInput.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="removeParam_8m.html">removeParam.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="system_2_0DDynamicalSystem_2saveExpression_8m.html">saveExpression.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@DynamicalSystem/<a class="el" href="setParamValue_8m.html">setParamValue.m</a></li>
 </ul>
 </div><!-- contents -->

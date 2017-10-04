@@ -31,8 +31,7 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for HybridTrajectoryOptimization:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classHybridTrajectoryOptimization__inherit__graph.svg" width="202" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classHybridTrajectoryOptimization__inherit__graph.svg" width="202" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -46,9 +45,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adb58e04362bdeb6fbcf7ccd7abe39446"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridTrajectoryOptimization.html#adb58e04362bdeb6fbcf7ccd7abe39446">validateGraph</a> (plant)</td></tr>
 <tr class="memdesc:adb58e04362bdeb6fbcf7ccd7abe39446"><td class="mdescLeft">&#160;</td><td class="mdescRight">validate the directed graph of the hybrid system model  <a href="#adb58e04362bdeb6fbcf7ccd7abe39446">More...</a><br /></td></tr>
 <tr class="separator:adb58e04362bdeb6fbcf7ccd7abe39446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab24a8ba344e2e3aae6347a668fc906e6"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridTrajectoryOptimization.html#ab24a8ba344e2e3aae6347a668fc906e6">configure</a> (<a class="el" href="classstruct.html">struct</a> bounds)</td></tr>
-<tr class="memdesc:ab24a8ba344e2e3aae6347a668fc906e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the trajectory optimizatino NLP problem  <a href="#ab24a8ba344e2e3aae6347a668fc906e6">More...</a><br /></td></tr>
-<tr class="separator:ab24a8ba344e2e3aae6347a668fc906e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b5e68133299757347873d595488031"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridTrajectoryOptimization.html#ae6b5e68133299757347873d595488031">configure</a> (<a class="el" href="classstruct.html">struct</a> bounds, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ae6b5e68133299757347873d595488031"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the trajectory optimizatino NLP problem  <a href="#ae6b5e68133299757347873d595488031">More...</a><br /></td></tr>
+<tr class="separator:ae6b5e68133299757347873d595488031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead93790f7cbbacc88368cf430599c10"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridTrajectoryOptimization.html#aead93790f7cbbacc88368cf430599c10">updateVariableBounds</a> (<a class="el" href="classstruct.html">struct</a> bounds)</td></tr>
 <tr class="memdesc:aead93790f7cbbacc88368cf430599c10"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the boundary conditions of the optimization variable by updating corresponding NLP variables.  <a href="#aead93790f7cbbacc88368cf430599c10">More...</a><br /></td></tr>
 <tr class="separator:aead93790f7cbbacc88368cf430599c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -548,8 +547,8 @@ If <code>cost</code> is emtpy, then it will compile all cost functions.</dd></dl
 
 </div>
 </div>
-<a id="ab24a8ba344e2e3aae6347a668fc906e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab24a8ba344e2e3aae6347a668fc906e6">&#9670;&nbsp;</a></span>configure()</h2>
+<a id="ae6b5e68133299757347873d595488031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6b5e68133299757347873d595488031">&#9670;&nbsp;</a></span>configure()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,8 +557,18 @@ If <code>cost</code> is emtpy, then it will compile all cost functions.</dd></dl
           <td class="memname">function   obj  = HybridTrajectoryOptimization.configure </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
-          <td class="paramname"><em>bounds</em></td><td>)</td>
+          <td class="paramname"><em>bounds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -714,18 +723,18 @@ If <code>cost</code> is emtpy, then it will compile all cost functions.</dd></dl
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="HybridTrajectoryOptimization_8m.html">HybridTrajectoryOptimization.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="addJumpConstraint_8m.html">addJumpConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2checkConstraints_8m.html">checkConstraints.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2checkCosts_8m.html">checkCosts.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2checkVariables_8m.html">checkVariables.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2compileConstraint_8m.html">compileConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2compileObjective_8m.html">compileObjective.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="nlp_2_0DHybridTrajectoryOptimization_2configure_8m.html">configure.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2exportSolution_8m.html">exportSolution.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="getPhaseIndex_8m.html">getPhaseIndex.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2update_8m.html">update.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2updateVariableBounds_8m.html">updateVariableBounds.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="validateGraph_8m.html">validateGraph.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="HybridTrajectoryOptimization_8m.html">HybridTrajectoryOptimization.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="addJumpConstraint_8m.html">addJumpConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2checkConstraints_8m.html">checkConstraints.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2checkCosts_8m.html">checkCosts.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2checkVariables_8m.html">checkVariables.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2compileConstraint_8m.html">compileConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2compileObjective_8m.html">compileObjective.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="nlp_2_0DHybridTrajectoryOptimization_2configure_8m.html">configure.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2exportSolution_8m.html">exportSolution.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="getPhaseIndex_8m.html">getPhaseIndex.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2update_8m.html">update.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="_0DHybridTrajectoryOptimization_2updateVariableBounds_8m.html">updateVariableBounds.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@HybridTrajectoryOptimization/<a class="el" href="validateGraph_8m.html">validateGraph.m</a></li>
 </ul>
 </div><!-- contents -->

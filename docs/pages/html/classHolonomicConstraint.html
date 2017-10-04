@@ -32,8 +32,7 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for HolonomicConstraint:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classHolonomicConstraint__inherit__graph.svg" width="155" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classHolonomicConstraint__inherit__graph.svg" width="155" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -41,9 +40,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a95d2ad5df31adb8428d377e7836a5134"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a95d2ad5df31adb8428d377e7836a5134">HolonomicConstraint</a> (<a class="el" href="classDynamicalSystem.html">DynamicalSystem</a> model, h,<a class="el" href="classSymExpression.html">SymExpression</a> name, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:a95d2ad5df31adb8428d377e7836a5134"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor function.  <a href="#a95d2ad5df31adb8428d377e7836a5134">More...</a><br /></td></tr>
 <tr class="separator:a95d2ad5df31adb8428d377e7836a5134"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9c028b9f49ae6364a3ab17f19284657"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#ac9c028b9f49ae6364a3ab17f19284657">configure</a> ()</td></tr>
-<tr class="memdesc:ac9c028b9f49ae6364a3ab17f19284657"><td class="mdescLeft">&#160;</td><td class="mdescRight">compiles the derivatives and Jacobian of the actual/desired outputs functions  <a href="#ac9c028b9f49ae6364a3ab17f19284657">More...</a><br /></td></tr>
-<tr class="separator:ac9c028b9f49ae6364a3ab17f19284657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2120aa79f63609be2ab43f48517616aa"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a2120aa79f63609be2ab43f48517616aa">configure</a> (load_path)</td></tr>
+<tr class="memdesc:a2120aa79f63609be2ab43f48517616aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the derivatives and Jacobian of the actual/desired outputs functions  <a href="#a2120aa79f63609be2ab43f48517616aa">More...</a><br /></td></tr>
+<tr class="separator:a2120aa79f63609be2ab43f48517616aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cba0406869a20c8c31a0226d13889fc"><td class="memItemLeft" align="right" valign="top">function   nlp  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a0cba0406869a20c8c31a0226d13889fc">imposeNLPConstraint</a> (nlp)</td></tr>
 <tr class="memdesc:a0cba0406869a20c8c31a0226d13889fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">impose holonomic objaints as NLP objaints in the trajectory optimization problem <code>nlp</code> of the dynamical system  <a href="#a0cba0406869a20c8c31a0226d13889fc">More...</a><br /></td></tr>
 <tr class="separator:a0cba0406869a20c8c31a0226d13889fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -53,6 +52,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a248466644f6bdd63de118092dd4e48c9"><td class="memItemLeft" align="right" valign="top">function   h  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a248466644f6bdd63de118092dd4e48c9">calcConstraint</a> (<a class="el" href="classcolvec.html">colvec</a> x)</td></tr>
 <tr class="memdesc:a248466644f6bdd63de118092dd4e48c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the holonomic constraints  <a href="#a248466644f6bdd63de118092dd4e48c9">More...</a><br /></td></tr>
 <tr class="separator:a248466644f6bdd63de118092dd4e48c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a681b00e459e7aecdf9b223c8bf488548"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a681b00e459e7aecdf9b223c8bf488548">saveExpression</a> (export_path, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:a681b00e459e7aecdf9b223c8bf488548"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the constraints matrices to MX binary files  <a href="#a681b00e459e7aecdf9b223c8bf488548">More...</a><br /></td></tr>
+<tr class="separator:a681b00e459e7aecdf9b223c8bf488548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7118d5aac5feaa12bf5634226ee7ebb"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#ac7118d5aac5feaa12bf5634226ee7ebb">export</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:ac7118d5aac5feaa12bf5634226ee7ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the constraints matrices and vectors and compile as MEX files.  <a href="#ac7118d5aac5feaa12bf5634226ee7ebb">More...</a><br /></td></tr>
 <tr class="separator:ac7118d5aac5feaa12bf5634226ee7ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,6 +106,16 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:af74e7ca1aa9d3c3809adda7fb618e196"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classchar.html">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#af74e7ca1aa9d3c3809adda7fb618e196">InputName</a></td></tr>
 <tr class="memdesc:af74e7ca1aa9d3c3809adda7fb618e196"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name othe input variables (external forces, etc.) associated with the holonomic constraints.  <a href="#af74e7ca1aa9d3c3809adda7fb618e196">More...</a><br /></td></tr>
 <tr class="separator:af74e7ca1aa9d3c3809adda7fb618e196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395a92350d24d68e4571f5d7fd2f1fe1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a395a92350d24d68e4571f5d7fd2f1fe1">h_name</a></td></tr>
+<tr class="separator:a395a92350d24d68e4571f5d7fd2f1fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6998dbb2d3b2d1e1b020a17191b31b3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a6998dbb2d3b2d1e1b020a17191b31b3d">Jh_name</a></td></tr>
+<tr class="separator:a6998dbb2d3b2d1e1b020a17191b31b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00300243391d1143f2d1d4f5e282ed54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a00300243391d1143f2d1d4f5e282ed54">dh_name</a></td></tr>
+<tr class="separator:a00300243391d1143f2d1d4f5e282ed54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8676c2ea59aefa0b30433b9367b869f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#ab8676c2ea59aefa0b30433b9367b869f">dJh_name</a></td></tr>
+<tr class="separator:ab8676c2ea59aefa0b30433b9367b869f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a647bc7ab7290e15b62e04b70fcde6039"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a647bc7ab7290e15b62e04b70fcde6039">ddh_name</a></td></tr>
+<tr class="separator:a647bc7ab7290e15b62e04b70fcde6039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classhandle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhandle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhandle.html">handle</a></td></tr>
 <tr class="memitem:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">addlistener</a></td></tr>
 <tr class="memdesc:aa72d46799b8792edbf8acb7349680c15 inherit pub_attribs_classhandle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listener for the specified event and assigns a callback function to execute when the event occurs.  <a href="classhandle.html#aa72d46799b8792edbf8acb7349680c15">More...</a><br /></td></tr>
@@ -159,28 +171,17 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a9dba1ed38783c9a3ceb95bbb7ee1ff01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a9dba1ed38783c9a3ceb95bbb7ee1ff01">h_</a></td></tr>
 <tr class="memdesc:a9dba1ed38783c9a3ceb95bbb7ee1ff01"><td class="mdescLeft">&#160;</td><td class="mdescRight">The holonomic constraint expression.  <a href="#a9dba1ed38783c9a3ceb95bbb7ee1ff01">More...</a><br /></td></tr>
 <tr class="separator:a9dba1ed38783c9a3ceb95bbb7ee1ff01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a149f80af00216877f46ba2717dc14712"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a149f80af00216877f46ba2717dc14712">h_name</a></td></tr>
-<tr class="separator:a149f80af00216877f46ba2717dc14712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a468d277ee420352367a406c7061bf5ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a468d277ee420352367a406c7061bf5ca">Jh_</a></td></tr>
 <tr class="memdesc:a468d277ee420352367a406c7061bf5ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Jacobian matrix of the holonomic constraint expression.  <a href="#a468d277ee420352367a406c7061bf5ca">More...</a><br /></td></tr>
 <tr class="separator:a468d277ee420352367a406c7061bf5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094fea29b825458ec1a73f92b250b45a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a094fea29b825458ec1a73f92b250b45a">Jh_name</a></td></tr>
-<tr class="separator:a094fea29b825458ec1a73f92b250b45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39860a25e0f96f65b364d7e30880e331"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a39860a25e0f96f65b364d7e30880e331">dh_</a></td></tr>
-<tr class="memdesc:a39860a25e0f96f65b364d7e30880e331"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first order derivative of the holonomic constraint expression.  <a href="#a39860a25e0f96f65b364d7e30880e331">More...</a><br /></td></tr>
+<tr class="memdesc:a39860a25e0f96f65b364d7e30880e331"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first order derivative of the holonomic constraint expression The first order derivative of the Jacobian matrix of the holonomic constraint expression.  <a href="#a39860a25e0f96f65b364d7e30880e331">More...</a><br /></td></tr>
 <tr class="separator:a39860a25e0f96f65b364d7e30880e331"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00300243391d1143f2d1d4f5e282ed54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a00300243391d1143f2d1d4f5e282ed54">dh_name</a></td></tr>
-<tr class="memdesc:a00300243391d1143f2d1d4f5e282ed54"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first order derivative of the Jacobian matrix of the holonomic constraint expression.  <a href="#a00300243391d1143f2d1d4f5e282ed54">More...</a><br /></td></tr>
-<tr class="separator:a00300243391d1143f2d1d4f5e282ed54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c6a57ec3df80de599e87ff4c013898c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a6c6a57ec3df80de599e87ff4c013898c">dJh_</a></td></tr>
 <tr class="separator:a6c6a57ec3df80de599e87ff4c013898c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab37e3f7b7629e4d38d4831bf65796695"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#ab37e3f7b7629e4d38d4831bf65796695">dJh_name</a></td></tr>
-<tr class="separator:ab37e3f7b7629e4d38d4831bf65796695"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e01d9c9d90d2c80321da91442d37ea4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSymFunction.html">SymFunction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a1e01d9c9d90d2c80321da91442d37ea4">ddh_</a></td></tr>
 <tr class="memdesc:a1e01d9c9d90d2c80321da91442d37ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The second order derivatives of the holonomic constraints expression.  <a href="#a1e01d9c9d90d2c80321da91442d37ea4">More...</a><br /></td></tr>
 <tr class="separator:a1e01d9c9d90d2c80321da91442d37ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c7f5d49f1174e9588bffa65412cc073"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHolonomicConstraint.html#a6c7f5d49f1174e9588bffa65412cc073">ddh_name</a></td></tr>
-<tr class="separator:a6c7f5d49f1174e9588bffa65412cc073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classHolonomicConstraint.html" title="HolonomicConstraint: represents a group of holonomic constraints of a dynamical systems. ">HolonomicConstraint</a>: represents a group of holonomic constraints of a dynamical systems. </p>
@@ -242,9 +243,10 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">model</td><td>the dynamical system model in which the virtual constraints are defined </td></tr>
     <tr><td class="paramname">h</td><td>the symbolic expression of the constraints </td></tr>
     <tr><td class="paramname">name</td><td>the name of the virtual constraints</td></tr>
-    <tr><td class="paramname">varargin</td><td>optional parameters. In details <div class="fragment"><div class="line"><a class="code" href="classHolonomicConstraint.html#a95d2ad5df31adb8428d377e7836a5134">HolonomicConstraint</a> ( ..., <a class="code" href="classHolonomicConstraint.html#a4eee0f5161b424880dbe972de383cc9c">ConstrLabel</a>, Jacobian ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
-<li><span class="paramname"> ConstrLabel</span></li>
-<li><span class="paramname"> Jacobian</span></li>
+    <tr><td class="paramname">varargin</td><td>optional parameters. In details <div class="fragment"><div class="line"><a class="code" href="classHolonomicConstraint.html#a95d2ad5df31adb8428d377e7836a5134">HolonomicConstraint</a> ( ..., <a class="code" href="classHolonomicConstraint.html#a4eee0f5161b424880dbe972de383cc9c">ConstrLabel</a>, Jacobian, <a class="code" href="classHolonomicConstraint.html#a3f51199905782709c4c2b2c4aca354d5">DerivativeOrder</a> ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ConstrLabel</span> labels for constraints</li>
+<li><span class="paramname"> Jacobian</span> the custom Jacobian matrix</li>
+<li><span class="paramname"> DerivativeOrder</span> the degree of holonomic constraints</li>
 </ul>
 </td></tr>
   </table>
@@ -332,8 +334,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac9c028b9f49ae6364a3ab17f19284657"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9c028b9f49ae6364a3ab17f19284657">&#9670;&nbsp;</a></span>configure()</h2>
+<a id="a2120aa79f63609be2ab43f48517616aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2120aa79f63609be2ab43f48517616aa">&#9670;&nbsp;</a></span>configure()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -341,13 +343,20 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">function   obj  = HolonomicConstraint.configure </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>load_path</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>compiles the derivatives and Jacobian of the actual/desired outputs functions </p>
+<p>configure the derivatives and Jacobian of the actual/desired outputs functions </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">load_path</td><td>the path from which symbolic expressions can be loaded</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
 
 </div>
@@ -424,6 +433,46 @@ Protected Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nlp</td><td>the trajectory optimization NLP </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a681b00e459e7aecdf9b223c8bf488548"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a681b00e459e7aecdf9b223c8bf488548">&#9670;&nbsp;</a></span>saveExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = HolonomicConstraint.saveExpression </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the constraints matrices to MX binary files </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classHolonomicConstraint.html#a681b00e459e7aecdf9b223c8bf488548">saveExpression</a> ( ..., ForceExport ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>
@@ -670,25 +719,18 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6c7f5d49f1174e9588bffa65412cc073"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c7f5d49f1174e9588bffa65412cc073">&#9670;&nbsp;</a></span>ddh_name</h2>
+<a id="a647bc7ab7290e15b62e04b70fcde6039"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a647bc7ab7290e15b62e04b70fcde6039">&#9670;&nbsp;</a></span>ddh_name</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HolonomicConstraint.ddh_name</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>[readonly] </dd></dl>
 
 </div>
 </div>
@@ -731,7 +773,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The first order derivative of the holonomic constraint expression. </p>
+<p>The first order derivative of the holonomic constraint expression The first order derivative of the Jacobian matrix of the holonomic constraint expression. </p>
 
 </div>
 </div>
@@ -740,22 +782,13 @@ Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HolonomicConstraint.dh_name</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>The first order derivative of the Jacobian matrix of the holonomic constraint expression. </p>
+<dl class="section note"><dt>Note</dt><dd>[readonly] </dd></dl>
 
 </div>
 </div>
@@ -800,25 +833,18 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab37e3f7b7629e4d38d4831bf65796695"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab37e3f7b7629e4d38d4831bf65796695">&#9670;&nbsp;</a></span>dJh_name</h2>
+<a id="ab8676c2ea59aefa0b30433b9367b869f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8676c2ea59aefa0b30433b9367b869f">&#9670;&nbsp;</a></span>dJh_name</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HolonomicConstraint.dJh_name</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>[readonly] </dd></dl>
 
 </div>
 </div>
@@ -846,25 +872,18 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a149f80af00216877f46ba2717dc14712"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a149f80af00216877f46ba2717dc14712">&#9670;&nbsp;</a></span>h_name</h2>
+<a id="a395a92350d24d68e4571f5d7fd2f1fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395a92350d24d68e4571f5d7fd2f1fe1">&#9670;&nbsp;</a></span>h_name</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HolonomicConstraint.h_name</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>[readonly] </dd></dl>
 
 </div>
 </div>
@@ -932,25 +951,18 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a094fea29b825458ec1a73f92b250b45a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a094fea29b825458ec1a73f92b250b45a">&#9670;&nbsp;</a></span>Jh_name</h2>
+<a id="a6998dbb2d3b2d1e1b020a17191b31b3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6998dbb2d3b2d1e1b020a17191b31b3d">&#9670;&nbsp;</a></span>Jh_name</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HolonomicConstraint.Jh_name</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>[readonly] </dd></dl>
 
 </div>
 </div>
@@ -1038,10 +1050,11 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="HolonomicConstraint_8m.html">HolonomicConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="calcConstraint_8m.html">calcConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="calcJacobian_8m.html">calcJacobian.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="system_2_0DHolonomicConstraint_2configure_8m.html">configure.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="_0DHolonomicConstraint_2imposeNLPConstraint_8m.html">imposeNLPConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="HolonomicConstraint_8m.html">HolonomicConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="calcConstraint_8m.html">calcConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="calcJacobian_8m.html">calcJacobian.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="system_2_0DHolonomicConstraint_2configure_8m.html">configure.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="_0DHolonomicConstraint_2imposeNLPConstraint_8m.html">imposeNLPConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HolonomicConstraint/<a class="el" href="system_2_0DHolonomicConstraint_2saveExpression_8m.html">saveExpression.m</a></li>
 </ul>
 </div><!-- contents -->

@@ -122,12 +122,13 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         [zmp, zmp_label, auxdata] = getZMPConstraint(contact, f, geometry);
         
         % create an unilateral constraint object
-        zmp_cstr = UnilateralConstraint(obj, zmp,...
-            ['zmp' contact.Name], f_name, ...
-            'ConstrLabel',{zmp_label(:)'},...
-            'AuxData',auxdata);
-        % add as a set of unilateral constraitns
-        obj = addUnilateralConstraint(obj, zmp_cstr);
-        
+        if ~isempty(zmp)
+            zmp_cstr = UnilateralConstraint(obj, zmp,...
+                ['zmp' contact.Name], f_name, ...
+                'ConstrLabel',{zmp_label(:)'},...
+                'AuxData',auxdata);
+            % add as a set of unilateral constraitns
+            obj = addUnilateralConstraint(obj, zmp_cstr);
+        end
     end
 end

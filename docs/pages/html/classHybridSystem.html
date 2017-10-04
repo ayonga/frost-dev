@@ -31,8 +31,7 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for HybridSystem:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classHybridSystem__inherit__graph.svg" width="174" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classHybridSystem__inherit__graph.svg" width="174" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -73,6 +72,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab535b3e8d0e8c28d4ca7d96eb665f6d3"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridSystem.html#ab535b3e8d0e8c28d4ca7d96eb665f6d3">simulate</a> (<a class="el" href="classdouble.html">double</a> t0,<a class="el" href="classcolvec.html">colvec</a> x0,<a class="el" href="classdouble.html">double</a> tf, logger,<a class="el" href="classstruct.html">struct</a> options, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:ab535b3e8d0e8c28d4ca7d96eb665f6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate the hybrid dynamical system.  <a href="#ab535b3e8d0e8c28d4ca7d96eb665f6d3">More...</a><br /></td></tr>
 <tr class="separator:ab535b3e8d0e8c28d4ca7d96eb665f6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9128954df4fee958c7a15ab34ca1376"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridSystem.html#aa9128954df4fee958c7a15ab34ca1376">compile</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:aa9128954df4fee958c7a15ab34ca1376"><td class="mdescLeft">&#160;</td><td class="mdescRight">export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files.  <a href="#aa9128954df4fee958c7a15ab34ca1376">More...</a><br /></td></tr>
+<tr class="separator:aa9128954df4fee958c7a15ab34ca1376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc157026d8eab8c2cb380c6800feef9"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHybridSystem.html#acfc157026d8eab8c2cb380c6800feef9">saveExpression</a> (<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:acfc157026d8eab8c2cb380c6800feef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">save the symbolic expression of system dynamical equations to a MX binary files  <a href="#acfc157026d8eab8c2cb380c6800feef9">More...</a><br /></td></tr>
+<tr class="separator:acfc157026d8eab8c2cb380c6800feef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -261,6 +266,50 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa9128954df4fee958c7a15ab34ca1376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9128954df4fee958c7a15ab34ca1376">&#9670;&nbsp;</a></span>compile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = HybridSystem.compile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>export the symbolic expressions of the system dynamics matrices and vectors and compile as MEX files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classHybridSystem.html#aa9128954df4fee958c7a15ab34ca1376">compile</a> ( ..., StackVariable, File, ForceExport, BuildMex, Namespace ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> StackVariable</span> whether to stack variables into one</li>
+<li><span class="paramname"> File</span> the (full) file name of exported file</li>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+<li><span class="paramname"> BuildMex</span> flag whether to MEX the exported file</li>
+<li><span class="paramname"> Namespace</span> the namespace of the function</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab81a75f3f3591bb45468142da8bbaa34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab81a75f3f3591bb45468142da8bbaa34">&#9670;&nbsp;</a></span>isdag()</h2>
 
@@ -383,6 +432,46 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section user"><dt>Generated fields of obj:</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="acfc157026d8eab8c2cb380c6800feef9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfc157026d8eab8c2cb380c6800feef9">&#9670;&nbsp;</a></span>saveExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function   obj  = HybridSystem.saveExpression </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classchar.html">char</a>&#160;</td>
+          <td class="paramname"><em>export_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvarargin.html">varargin</a>&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>save the symbolic expression of system dynamical equations to a MX binary files </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">export_path</td><td>the path to export the file </td></tr>
+    <tr><td class="paramname">varargin</td><td>variable input parameters <div class="fragment"><div class="line"><a class="code" href="classHybridSystem.html#acfc157026d8eab8c2cb380c6800feef9">saveExpression</a> ( ..., ForceExport ) </div></div><!-- fragment --> <em>Required Parameters for varargin:</em><ul>
+<li><span class="paramname"> ForceExport</span> force the export</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -714,13 +803,15 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="HybridSystem_8m.html">HybridSystem.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="addEdge_8m.html">addEdge.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="addVertex_8m.html">addVertex.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="rmEdge_8m.html">rmEdge.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="rmVertex_8m.html">rmVertex.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="setEdgeProperties_8m.html">setEdgeProperties.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="setVertexProperties_8m.html">setVertexProperties.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="_0DHybridSystem_2simulate_8m.html">simulate.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="HybridSystem_8m.html">HybridSystem.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="addEdge_8m.html">addEdge.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="addVertex_8m.html">addVertex.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="system_2_0DHybridSystem_2compile_8m.html">compile.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="rmEdge_8m.html">rmEdge.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="rmVertex_8m.html">rmVertex.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="system_2_0DHybridSystem_2saveExpression_8m.html">saveExpression.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="setEdgeProperties_8m.html">setEdgeProperties.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="setVertexProperties_8m.html">setVertexProperties.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/system/@HybridSystem/<a class="el" href="_0DHybridSystem_2simulate_8m.html">simulate.m</a></li>
 </ul>
 </div><!-- contents -->

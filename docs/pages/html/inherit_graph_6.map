@@ -14,7 +14,7 @@
 <area shape="rect" id="node33" href="$classSimLogger.html" title="A class for logging the internal data over time during a ODE simulation process. " alt="" coords="182,132,266,159"/>
 <area shape="rect" id="node34" href="$classSolverApplication.html" title="SolverApplication defines an abstract interface class for NLP solvers. " alt="" coords="163,436,285,463"/>
 <area shape="rect" id="node36" href="$classSymExpression.html" title="An object that represents a symbolic expression in Mathematica. " alt="" coords="167,588,281,615"/>
-<area shape="rect" id="node39" href="$classUnilateralConstraint.html" title="HolonomicConstraint: represents a group of holonomic constraints of a dynamical systems. " alt="" coords="155,639,293,665"/>
+<area shape="rect" id="node39" href="$classUnilateralConstraint.html" title="UnilateralConstraint represents a scalar or vector inequality constraints should be imposed on the co..." alt="" coords="155,639,293,665"/>
 <area shape="rect" id="node40" href="$classVirtualConstraint.html" title="VirtualConstraint: represents a group of virtual constraints of a dynamical systems. " alt="" coords="165,689,283,716"/>
 <area shape="rect" id="node3" href="$classCLFQP.html" title="This class defines a class of Control Lyapunov Functions (CLFs) that use quadratic programming (QP) ..." alt="" coords="427,461,494,488"/>
 <area shape="rect" id="node4" href="$classIOFeedback.html" title="This class defines the classic input&#45;output feedback linearization controller. " alt="" coords="414,512,507,539"/>

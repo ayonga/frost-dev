@@ -32,8 +32,7 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for TrajectoryOptimization:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classTrajectoryOptimization__inherit__graph.svg" width="164" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classTrajectoryOptimization__inherit__graph.svg" width="164" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -44,9 +43,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36dfddcedc7d4ad9f263f85eb18374cd"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrajectoryOptimization.html#a36dfddcedc7d4ad9f263f85eb18374cd">update</a> ()</td></tr>
 <tr class="memdesc:a36dfddcedc7d4ad9f263f85eb18374cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the NLP problems before load it to NLP solver.  <a href="#a36dfddcedc7d4ad9f263f85eb18374cd">More...</a><br /></td></tr>
 <tr class="separator:a36dfddcedc7d4ad9f263f85eb18374cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d8fadd709dd87f689533d0ea1d7e74c"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrajectoryOptimization.html#a0d8fadd709dd87f689533d0ea1d7e74c">configure</a> (<a class="el" href="classstruct.html">struct</a> bounds)</td></tr>
-<tr class="memdesc:a0d8fadd709dd87f689533d0ea1d7e74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the trajectory optimizatino NLP problem  <a href="#a0d8fadd709dd87f689533d0ea1d7e74c">More...</a><br /></td></tr>
-<tr class="separator:a0d8fadd709dd87f689533d0ea1d7e74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4a8959d0d05c7682255499170c48235"><td class="memItemLeft" align="right" valign="top">function   obj  =&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrajectoryOptimization.html#ab4a8959d0d05c7682255499170c48235">configure</a> (<a class="el" href="classstruct.html">struct</a> bounds, <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
+<tr class="memdesc:ab4a8959d0d05c7682255499170c48235"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the trajectory optimizatino NLP problem  <a href="#ab4a8959d0d05c7682255499170c48235">More...</a><br /></td></tr>
+<tr class="separator:ab4a8959d0d05c7682255499170c48235"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9e9df4331fad718ff37fad935f7ad45"><td class="memItemLeft" align="right" valign="top">function &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrajectoryOptimization.html#ae9e9df4331fad718ff37fad935f7ad45">compileConstraint</a> (<a class="el" href="classcellstr.html">cellstr</a> constr,<a class="el" href="classchar.html">char</a> export_path,<a class="el" href="classcellstr.html">cellstr</a> exclude,<a class="el" href="classvarargin.html">varargin</a> <a class="el" href="classvarargin.html">varargin</a>)</td></tr>
 <tr class="memdesc:ae9e9df4331fad718ff37fad935f7ad45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and export symbolic expression and derivatives of all NLP functions.  <a href="#ae9e9df4331fad718ff37fad935f7ad45">More...</a><br /></td></tr>
 <tr class="separator:ae9e9df4331fad718ff37fad935f7ad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1037,8 +1036,8 @@ This method can be used to add any terminal cost function by specify 'nodes' as 
 
 </div>
 </div>
-<a id="a0d8fadd709dd87f689533d0ea1d7e74c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d8fadd709dd87f689533d0ea1d7e74c">&#9670;&nbsp;</a></span>configure()</h2>
+<a id="ab4a8959d0d05c7682255499170c48235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4a8959d0d05c7682255499170c48235">&#9670;&nbsp;</a></span>configure()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1047,8 +1046,18 @@ This method can be used to add any terminal cost function by specify 'nodes' as 
           <td class="memname">function   obj  = TrajectoryOptimization.configure </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classstruct.html">struct</a>&#160;</td>
-          <td class="paramname"><em>bounds</em></td><td>)</td>
+          <td class="paramname"><em>bounds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>varargin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1610,35 +1619,35 @@ This method can be used to add any terminal cost function by specify 'nodes' as 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="TrajectoryOptimization_8m.html">TrajectoryOptimization.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addCollocationConstraint_8m.html">addCollocationConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addConstraint_8m.html">addConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addCost_8m.html">addCost.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addDynamicsConstraint_8m.html">addDynamicsConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addInputVariable_8m.html">addInputVariable.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addNodeConstraint_8m.html">addNodeConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addNodeCost_8m.html">addNodeCost.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addParamVariable_8m.html">addParamVariable.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addRunningCost_8m.html">addRunningCost.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addStateVariable_8m.html">addStateVariable.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addTimeVariable_8m.html">addTimeVariable.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addVariable_8m.html">addVariable.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2checkConstraints_8m.html">checkConstraints.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2checkCosts_8m.html">checkCosts.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2checkVariables_8m.html">checkVariables.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2compileConstraint_8m.html">compileConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2compileObjective_8m.html">compileObjective.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="nlp_2_0DTrajectoryOptimization_2configure_8m.html">configure.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="configureVariables_8m.html">configureVariables.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="directCollocation_8m.html">directCollocation.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2exportSolution_8m.html">exportSolution.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="removeConstraint_8m.html">removeConstraint.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="removeCost_8m.html">removeCost.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="removeVariable_8m.html">removeVariable.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2update_8m.html">update.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="updateConstrProp_8m.html">updateConstrProp.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="updateCostProp_8m.html">updateCostProp.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2updateVariableBounds_8m.html">updateVariableBounds.m</a></li>
-<li>/home/ayonga/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="updateVariableProp_8m.html">updateVariableProp.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="TrajectoryOptimization_8m.html">TrajectoryOptimization.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addCollocationConstraint_8m.html">addCollocationConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addConstraint_8m.html">addConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addCost_8m.html">addCost.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addDynamicsConstraint_8m.html">addDynamicsConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addInputVariable_8m.html">addInputVariable.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addNodeConstraint_8m.html">addNodeConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addNodeCost_8m.html">addNodeCost.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addParamVariable_8m.html">addParamVariable.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addRunningCost_8m.html">addRunningCost.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addStateVariable_8m.html">addStateVariable.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addTimeVariable_8m.html">addTimeVariable.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="addVariable_8m.html">addVariable.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2checkConstraints_8m.html">checkConstraints.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2checkCosts_8m.html">checkCosts.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2checkVariables_8m.html">checkVariables.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2compileConstraint_8m.html">compileConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2compileObjective_8m.html">compileObjective.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="nlp_2_0DTrajectoryOptimization_2configure_8m.html">configure.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="configureVariables_8m.html">configureVariables.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="directCollocation_8m.html">directCollocation.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2exportSolution_8m.html">exportSolution.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="removeConstraint_8m.html">removeConstraint.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="removeCost_8m.html">removeCost.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="removeVariable_8m.html">removeVariable.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2update_8m.html">update.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="updateConstrProp_8m.html">updateConstrProp.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="updateCostProp_8m.html">updateCostProp.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="_0DTrajectoryOptimization_2updateVariableBounds_8m.html">updateVariableBounds.m</a></li>
+<li>/home/ayonga/.dropboxes/business/Dropbox/research/dzopt/frost/matlab/nlp/@TrajectoryOptimization/<a class="el" href="updateVariableProp_8m.html">updateVariableProp.m</a></li>
 </ul>
 </div><!-- contents -->
