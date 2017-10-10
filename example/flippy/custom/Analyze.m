@@ -59,19 +59,19 @@ figure(403);
 for i =1:datasize(2)
     l=i;figure(403);subplot(131);grid on;axis equal;
     plot3(xdata(1:l),ydata(1:l),zdata(1:l));
-    pause(0.05);
+    pause(0.01);
 end
 figure(403);
 for i =1:datasize(2)
     l=i;figure(403);subplot(132);axis equal;
     quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
         normalvectordata(1,1:l),normalvectordata(2,1:l),normalvectordata(3,1:l));
-    pause(0.05);
+    pause(0.01);
 end
 figure(403);
 for i =1:datasize(2)
     l=i;figure(403);subplot(133);axis equal;
     quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
         axdata(1:l),aydata(1:l),azdata(1:l));
-    pause(0.05);
+    pause(0.01);
 end
