@@ -161,5 +161,13 @@ function nlp = fanuc_constr_opt_drop_t(nlp, bounds, varargin)
 
     rslipping_func = SymFunction(['rslipping_sca_' plant.Name],dot_product_normal_to_racceleration,{x,dx,ddx});
     addNodeConstraint(nlp, rslipping_func, {'x','dx','ddx'}, 1:inflection_node, cos(mu), 1, 'Nonlinear');
-     
+
+    %%
+    plant = nlp.Plant;
+    u = plant.Inputs.Control.u;
+    
+    u2r = tovector(norm(u).^2);
+    u2r_fun = SymFunction(['torque_' plant.Name],u2r,{u});
+    addRunningCost(nlp,u2r_fun,{'u'});
+
 end
