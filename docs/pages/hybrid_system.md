@@ -1,5 +1,9 @@
 ---
 title: Hybrid Dynamical System Model
+tags: [system]
+keywords: HybridSystem, digraph
+summary: A generic description of the hybrid system model
+author: Ayonga Hereid
 ---
 
 Mathematical Definition
