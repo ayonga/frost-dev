@@ -131,10 +131,10 @@ function obj = addCollocationConstraint(obj)
             
             
            
-        case 'Trapzoidal'
+        case 'Trapezoidal'
             % collocation constraints are enforced at all nodes except
             % the last node
-            node_list = 1:1:n_node-1;
+            node_list = 1:1:nNode-1;
             
             
             tr_int_x = directCollocation(obj, 'x', plant.States.x, plant.States.dx);
@@ -184,7 +184,7 @@ function obj = addCollocationConstraint(obj)
                 end
             end
             % add to the NLP constraints table
-            obj = addConstraint(obj,'intX','interior',int_x_cstr);
+            obj = addConstraint(obj,'intX','except-last',int_x_cstr);
             
             if strcmp(plant.Type,'SecondOrder') 
                 % gets the symbolic expression (function) of the
@@ -235,14 +235,78 @@ function obj = addCollocationConstraint(obj)
                 end
                 
                 % add to the NLP constraints table
-                obj = addConstraint(obj,'intXdot','interior',int_dx_cstr);
+                obj = addConstraint(obj,'intXdot','except-last',int_dx_cstr);
                 
             end
             
         case 'PseudoSpectral'
-            node_list = 1:1:n_node;
-            %| @todo implement pseudospectral method
-            error('Not yet implementeded.');
+            % PS constraint is only enforced at the single node 
+            
+            ps_int_x = directCollocation(obj, 'x', plant.States.x, plant.States.dx);
+            % construct a structure of the collocation constraint
+            int_x_cstr = struct();
+            int_x_cstr.Name = deal(ps_int_x.Name);
+            int_x_cstr.Dimension = nNode*nState;
+            int_x_cstr.lb = -ceq_err_bound;
+            int_x_cstr.ub = ceq_err_bound;
+            int_x_cstr.SymFun = ps_int_x;
+            
+            if obj.Options.DistributeTimeVariable
+                warning('There is no need to distribute time variable with PseudoSpectral method. Set ''DistributeTimeVariable'' option to ''false''.');
+            end
+            if isnan(obj.Options.ConstantTimeHorizon)
+                int_x_cstr.Type = 'Nonlinear';
+                
+                dep_x = [vars.x'; vars.dx'];
+                int_x_cstr.DepVariables = [vars.T(1);... % time
+                    dep_x(:)]; % states
+                
+            else
+                int_x_cstr.Type = 'Linear';
+                % Both the constant time duration and the number of
+                % node being auxilary constants
+                int_x_cstr.AuxData = {obj.Options.ConstantTimeHorizon};
+                % specify the dependent variables
+                dep_x = [vars.x'; vars.dx'];
+                int_x_cstr.DepVariables = dep_x(:); % states
+            end
+            % add to the NLP constraints table
+            obj = addConstraint(obj,'intX','first',int_x_cstr);
+            
+            if strcmp(plant.Type,'SecondOrder') 
+                % gets the symbolic expression (function) of the
+                % collocation constraints
+                ps_int_dx = directCollocation(obj, 'dx', plant.States.dx, plant.States.ddx);
+                % construct a structure of the collocation constraint
+                int_dx_cstr = struct();
+                int_dx_cstr.Name = deal(ps_int_dx.Name);
+                int_dx_cstr.Dimension = nNode*nState;
+                int_dx_cstr.lb = -ceq_err_bound;
+                int_dx_cstr.ub = ceq_err_bound;
+                int_dx_cstr.SymFun = ps_int_dx;
+                
+                if obj.Options.DistributeTimeVariable
+                    warning('There is no need to distribute time variable with PseudoSpectral method. Set ''DistributeTimeVariable'' option to ''false''.');
+                end
+                if isnan(obj.Options.ConstantTimeHorizon)
+                    int_dx_cstr.Type = 'Nonlinear';
+                    
+                    dep_dx = [vars.dx'; vars.ddx'];
+                    int_dx_cstr.DepVariables = [vars.T(1);... % time
+                        dep_dx(:)]; % states
+                    
+                else
+                    int_dx_cstr.Type = 'Linear';
+                    % Both the constant time duration and the number of
+                    % node being auxilary constants
+                    int_dx_cstr.AuxData = {obj.Options.ConstantTimeHorizon};
+                    % specify the dependent variables
+                    dep_dx = [vars.dx'; vars.ddx'];
+                    int_dx_cstr.DepVariables = dep_dx(:); % states
+                end
+                % add to the NLP constraints table
+                obj = addConstraint(obj,'intXdot','first',int_dx_cstr);
+            end
         otherwise
             error('Unsupported collocation scheme');
     end

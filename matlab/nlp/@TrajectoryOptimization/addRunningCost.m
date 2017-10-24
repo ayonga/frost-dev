@@ -22,81 +22,102 @@ function obj = addRunningCost(obj, func, deps, auxdata)
     
     T  = [SymVariable('t0');SymVariable('tf')];
     Ts = T(2) - T(1);
-    N = SymVariable('nNode');
+    % N = SymVariable('nNode');
+    w = SymVariable('w'); % weight
+    
+    if isnan(obj.Options.ConstantTimeHorizon)    
+        s_dep_vars = [{T},func.Vars];
+        deps = [{'T'},deps(:)'];
+        s_dep_params = [func.Params,{w}];
+    else
+        s_dep_vars = func.Vars;
+        s_dep_params = [func.Params,{T,w}];
+    end
     
     
-    
+    cost_integral = SymFunction([func.Name,'_integral'],...
+        tovector(w.*Ts.*func), s_dep_vars, s_dep_params);
     
     
     cost(nNode) = struct();
     [cost.Name] = deal(func.Name);
     [cost.Dimension] = deal(1);
+    [cost.SymFun] = deal(cost_integral);
     % [cost.Type] = deal('Nonlinear');
     
     
-    if isnan(obj.Options.ConstantTimeHorizon)
     
-        s_dep_vars = [{T},func.Vars];
-        s_dep_params = [func.Params,{N}];
-        [cost.AuxData] = deal([auxdata,{nNode}]);
-    else
-        s_dep_vars = func.Vars;
-        s_dep_params = [func.Params,{T,N}];
-        [cost.AuxData] = deal([auxdata, {obj.Options.ConstantTimeHorizon, nNode}]);
-    end
+    
+    % configure weights
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson'
-            cost_terminal = SymFunction([func.Name,'_terminal'],...
-                tovector(((Ts./(N-1))./6).*func), s_dep_vars, s_dep_params);
-            cost_interior = SymFunction([func.Name,'_interior'],...
-                tovector((2.*(Ts./(N-1))./3).*func), s_dep_vars, s_dep_params);
-            
-            % first node
-            cost(1).SymFun = cost_terminal;
-            if isnan(obj.Options.ConstantTimeHorizon)
-                dep_vars = [{vars.T(1)},cellfun(@(x)vars.(x)(1),deps,'UniformOutput',false)];
-            else
-                dep_vars = cellfun(@(x)vars.(x)(1),deps,'UniformOutput',false);
-            end
-            cost(1).DepVariables = vertcat(dep_vars{:});
-            
-            % last node
-            cost(nNode).SymFun = cost_terminal;
-            if isnan(obj.Options.ConstantTimeHorizon)
-                if obj.Options.DistributeTimeVariable
-                    dep_vars = [{vars.T(nNode)},cellfun(@(x)vars.(x)(nNode),deps,'UniformOutput',false)];
-                else
-                    dep_vars = [{vars.T(1)},cellfun(@(x)vars.(x)(nNode),deps,'UniformOutput',false)];
-                end
-            else
-                dep_vars = cellfun(@(x)vars.(x)(nNode),deps,'UniformOutput',false);                
-            end
-            cost(nNode).DepVariables = vertcat(dep_vars{:});
-            
-            
+            nGrid = floor(nNode/2);
             % nlp function for interior nodes
-            for i=2:nNode-1
-                if obj.Options.DistributeTimeVariable
-                    node_time = i;
+            for i=1:nNode
+                if i==1 || i==nNode
+                    weight = 1/(6*nGrid);
                 else
-                    node_time = 1;
+                    weight = 2/(3*nGrid);
                 end
-                cost(i).SymFun = cost_interior;
-                if isnan(obj.Options.ConstantTimeHorizon)
-                    dep_vars = [{vars.T(node_time)},cellfun(@(x)vars.(x)(i),deps,'UniformOutput',false)];
+                
+                if isnan(obj.Options.ConstantTimeHorizon)                    
+                    cost(i).AuxData = [auxdata,{weight}];
                 else
-                    dep_vars = cellfun(@(x)vars.(x)(i),deps,'UniformOutput',false);
+                    cost(i).AuxData = [auxdata, {obj.Options.ConstantTimeHorizon, weight}];
                 end
-                cost(i).DepVariables = vertcat(dep_vars{:});
             end
-        case 'Trapzoidal'
-            error('Not yet implemented.')
+        case 'Trapezoidal'
+            nGrid = nNode - 1;
+            % nlp function for interior nodes
+            for i=1:nNode
+                if i==1 || i==nNode
+                    weight = 1/(2*nGrid);
+                else
+                    weight = 1/(1*nGrid);
+                end
+                
+                if isnan(obj.Options.ConstantTimeHorizon)                    
+                    cost(i).AuxData = [auxdata,{weight}];
+                else
+                    cost(i).AuxData = [auxdata, {obj.Options.ConstantTimeHorizon, weight}];
+                end
+            end
             
         case 'PseudoSpectral'
-            error('Not yet implemented.')
+            t = sym('t');
+            p = legendreP(nNode-1,t);
+            dp = jacobian(p,t);
+            
+            roots = vpasolve(dp*(1-t)*(1+t)==0);
+            
+            for i = 1:nNode
+                weight = double(1/((nNode-1)*nNode*(subs(p,t,roots(i)))^2));
+                
+                if isnan(obj.Options.ConstantTimeHorizon)                    
+                    cost(i).AuxData = [auxdata,{weight}];
+                else
+                    cost(i).AuxData = [auxdata, {obj.Options.ConstantTimeHorizon, weight}];
+                end
+            end
     end
     
-    
+    % dependent variables
+    for i = 1:nNode
+        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, i),deps,'UniformOutput',false);
+        cost(i).DepVariables = vertcat(dep_vars{:});
+    end
     
     obj = addCost(obj,func.Name,'all',cost);
+    
+    function var = get_dep_vars(plant, vars, options, x, idx)
+        
+        if strcmp(x,'T') && ~options.DistributeTimeVariable % time variable
+            var = vars.(x)(1);
+        elseif isParam(plant, x) && ~options.DistributeParameters
+            var = vars.(x)(1);
+        else
+            var = vars.(x)(idx);
+        end
+        
+    end
 end

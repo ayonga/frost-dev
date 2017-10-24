@@ -105,7 +105,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             
             
             ip = inputParser;
-            ip.addParameter('CollocationScheme','HermiteSimpson',@(x)validatestring(x,{'HermiteSimpson','Trapzoidal','PseudoSpectral'}));
+            ip.addParameter('CollocationScheme','HermiteSimpson',@(x)~isempty(validatestring(x,{'HermiteSimpson','Trapezoidal','PseudoSpectral'})));
             ip.addParameter('DistributeParameters',true,@(x)validateattributes(x,{'logical'},{}));
             ip.addParameter('DistributeTimeVariable',true,@(x)validateattributes(x,{'logical'},{}));
             ip.addParameter('ConstantTimeHorizon',nan(2,1),@(x)validateattributes(x,{'double'},{'real','nonnegative','column','numel',2,'increasing'}));
@@ -140,7 +140,7 @@ classdef TrajectoryOptimization < NonlinearProgram
             switch obj.Options.CollocationScheme
                 case 'HermiteSimpson'
                     n_node = N*2 + 1;
-                case 'Trapzoidal'
+                case 'Trapezoidal'
                     n_node = N + 1;
                 case 'PseudoSpectral'
                     n_node = N + 1;

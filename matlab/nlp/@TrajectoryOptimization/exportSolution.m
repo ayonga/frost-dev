@@ -13,11 +13,6 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     
     
     
-    
-    states = struct();
-    inputs = struct();
-    params = struct();
-    
     vars = obj.OptVarTable;
     if obj.NumNode > 1
         if isnan(obj.Options.ConstantTimeHorizon)
@@ -32,6 +27,13 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
             case 'Trapezoidal'
                 tspan = T(1):(T(2)-T(1))/(obj.NumNode-1):(T(2));
             case 'PseudoSpectral'
+                
+                t = sym('t');
+                p = legendreP(obj.NumNode-1,t);
+                dp = jacobian(p,t);
+                
+                roots = double(vpasolve(dp*(1-t)*(1+t)==0));
+                tspan = roots(:)'.*(T(2)-T(1))/2+(T(2)+T(1))/2;
             otherwise
                 error('Undefined integration scheme.');
         end

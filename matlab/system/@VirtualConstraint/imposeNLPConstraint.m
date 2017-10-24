@@ -47,6 +47,10 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
         'nlp');
     nlpOptions = nlp.Options;
     n_node     = nlp.NumNode;
+    %%
+    if strcmp(nlpOptions.CollocationScheme,'PseudoSpectral')
+        error('The PseudoSpectral is incompatible with virtual constraints.');
+    end
     
     if nargin > 2
         validateattributes(ep, {'double'},...

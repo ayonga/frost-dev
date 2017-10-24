@@ -12,7 +12,7 @@ function fcstr = directCollocation(obj, name, x, dx)
     Ts = T(2) - T(1);
     N = SymVariable('nNode');
     numState = length(x);
-    
+    nNode = obj.NumNode;
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson'
             
@@ -33,7 +33,7 @@ function fcstr = directCollocation(obj, name, x, dx)
             
                 
                 
-        case 'Trapzoidal'
+        case 'Trapezoidal'
             xn = SymVariable('xn',[numState,1]);
             dxn = SymVariable('dxn',[numState,1]);
             
@@ -45,6 +45,50 @@ function fcstr = directCollocation(obj, name, x, dx)
                 fcstr = SymFunction(['tr_int_' name],int_x,{x,dx,xn,dxn},{T,N});
             end
             
+        case 'PseudoSpectral'
+            t = sym('t');
+            p = legendreP(nNode-1,t);
+            dp = jacobian(p,t);
+            
+            roots = vpasolve(dp*(1-t)*(1+t)==0);
+            
+            D_LGL = zeros(nNode);
+            for i=1:nNode
+                for j=1:nNode
+                    if i==j
+                        if j== 1
+                            D_LGL(i,j) = - (nNode-1)*(nNode)/4;
+                        elseif j==nNode
+                            D_LGL(i,j) = (nNode-1)*(nNode)/4;
+                        else
+                            D_LGL(i,j) = 0;
+                        end
+                    else
+                        D_LGL(i,j) = subs(p,t,roots(i))/(subs(p,t,roots(j))*(roots(i) - roots(j)));
+                    end
+                end
+            end
+            
+            KD_LGL = kron(D_LGL, eye(numState));
+            
+            xn = cell(1,nNode);
+            dxn = cell(1,nNode);
+            
+            for i=1:nNode
+                xn{i} = SymVariable(['x',num2str(i)],[numState,1]);
+                dxn{i} = SymVariable(['dx',num2str(i)],[numState,1]);
+            end
+            
+            X = transpose(flatten([xn{:}]));
+            dX = transpose(flatten([dxn{:}]));
+            int_x = dX.*(Ts./2) - KD_LGL*X;
+            
+            dep = [xn;dxn];
+            if isnan(obj.Options.ConstantTimeHorizon)
+                fcstr = SymFunction(['ps_int_' name],int_x,[{T},dep(:)']);
+            else
+                fcstr = SymFunction(['ps_int_' name],int_x,dep(:)',{T});
+            end
     end
 
 end
