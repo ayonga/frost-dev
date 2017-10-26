@@ -13,6 +13,8 @@ function obj = configure(obj, load_path)
     model = obj.Model;
     x = model.States.x;
     dx = model.States.dx;
+    hd = obj.Param;
+    
     
     if isempty(obj.DerivativeOrder)
         obj.DerivativeOrder = 2;
@@ -26,6 +28,8 @@ function obj = configure(obj, load_path)
     end
     Jh = obj.Jh_;
         
+    
+    
     if strcmp(model.Type,'SecondOrder')
         if order ~= 2
             assert('The holonomic constraint of the second-order system must be 2.');
@@ -37,8 +41,8 @@ function obj = configure(obj, load_path)
             
             dJh = jacobian(dh, x);
             obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x, dx});
-            ddh = Jh*ddx + dJh*dx;
-            obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, ddx});
+            ddh = Jh*ddx + dJh*dx + obj.dh_ + obj.h_;
+            obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, ddx, hd});
         else
             ddx = model.States.ddx;
             dh = SymFunction(obj.dh_name, [], {x,dx});
@@ -48,7 +52,7 @@ function obj = configure(obj, load_path)
             dJh = SymFunction(obj.dJh_name, [], {x,dx});
             obj.dJh_ = load(dJh, load_path);
             
-            ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx});
+            ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx, hd});
             obj.ddh_ = load(ddh, load_path);
         end
     else
@@ -62,11 +66,11 @@ function obj = configure(obj, load_path)
                 
                 dJh = jacobian(dh, x);
                 obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x});
-                ddh = dJh*dx;
-                obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx});
+                ddh = dJh*dx + obj.dh_ + obj.h_;
+                obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, hd});
             else
-                dh = Jh * dx;
-                obj.dh_ = SymFunction(obj.dh_name, dh, {x,dx});
+                dh = Jh * dx + obj.h_;
+                obj.dh_ = SymFunction(obj.dh_name, dh, {x, dx, hd});
             end
         else
             if order == 2
@@ -77,12 +81,12 @@ function obj = configure(obj, load_path)
                 dJh = SymFunction(obj.dJh_name, [], {x});
                 obj.dJh_ = load(dJh, load_path);
                 
-                ddh = SymFunction(obj.ddh_name, [], {x, dx});
+                ddh = SymFunction(obj.ddh_name, [], {x, dx, hd});
                 obj.ddh_ = load(ddh, load_path);
                 
                 
             else
-                dh = SymFunction(obj.dh_name, [], {x,dx});
+                dh = SymFunction(obj.dh_name, [], {x,dx, hd});
                 obj.dh_ = load(dh, load_path);
             end
             
