@@ -10,12 +10,16 @@ function obj = setRotationMatrix(obj,r)
         %         rpy = rad2deg(r);
         obj.R = rotz(r(3)) * roty(r(2)) * rotx(r(1));
     elseif all(size(r)==[3,3])
-        assert(abs(det(r))-1 <= 1e-6,...
-            'The determinant of the rotation matrix must equal 1.');
+        if isnumeric(r)
+            assert(abs(det(r))-1 <= 1e-6,...
+                'The determinant of the rotation matrix must equal 1.');
+        end
         obj.R = r;
     end
     % remove small numbers generated from the rotation matrix
-    obj.R = roundn(obj.R,-6);
+    if isnumeric(r)
+        obj.R = roundn(obj.R,-6);
+    end
     % update the homogeneous transformation matrix
     obj.computeHomogeneousTransform();
 end
