@@ -65,7 +65,7 @@ function obj = configure(obj, config, base, load_path, varargin)
             'The joints structure must have the following fields:\n %s',implode(fields,', '));
         joints = config.joints;
         if isfield(config,'transmissions')
-            fields = {'Joint','MechanicalReduction','Inertia'};
+            fields = {'Joint','MechanicalReduction'};
             assert(all(isfield(config.transmissions,fields)),...
                 'The transmissions structure must have the following fields:\n %s',implode(fields,', '));
             transmissions = config.transmissions;
