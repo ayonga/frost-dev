@@ -1,5 +1,5 @@
 function nlp = translate(nlp, bounds, varargin)
-
+if numel(varargin)<1
     p_A = [-0.2, 0.8, 0.25]; % this is point A
     p_B = [0.4, 0.8, 0.25];  % this is point B
     %% starting and ending position
@@ -8,23 +8,39 @@ function nlp = translate(nlp, bounds, varargin)
     %%  Specify the starting and the ending orienation
     o_start   = [0,0,pi/2];
     o_end = [0,0,pi/2];
+else
+    pose_start = varargin{1};
+    pose_end = varargin{2};
+    %% starting and ending position
+    p_start = pose_start.position;
+    p_end = pose_end.position;
+    %%  Specify the starting and the ending orienation
+    o_start   = pose_start.orientation;
+    o_end = pose_end.orientation;
     
+    qstart = varargin{3};
+end
+    
+    spatula_specs = getSpatulaSpecs();
+
 %%
     % add aditional custom constraints
     
     plant = nlp.Plant;
     
-        
-    % relative degree 2 outputs
-    % imposing this constraint is very important for getting the apos
-    % matrix correct
-    plant.VirtualConstraints.pos.imposeNLPConstraint(nlp, [bounds.pos.kp,bounds.pos.kd], [1,1]);
 
     %% configuration constraints
     x = plant.States.x;
     dx = plant.States.dx;
     ddx = plant.States.ddx;
 
+    %% configuration constraints
+    if ~isempty(qstart)
+        q_init_L = qstart -0.01;
+        q_init_U = qstart +0.01;
+        configq = SymFunction(['configq_' plant.Name],x,{x});
+        addNodeConstraint(nlp, configq, {'x'}, 'first', q_init_L, q_init_U, 'Nonlinear');
+    end    
     %%
     spatula_link = plant.Links(getLinkIndices(plant, 'link_6'));
 
@@ -33,8 +49,8 @@ function nlp = translate(nlp, bounds, varargin)
     spatula = CoordinateFrame(...
         'Name','SpatulaTool',...
         'Reference',spatula_tool_frame,...
-        'Offset',[-0.014 0.0 0.208],... 
-        'R',[0,-2 * pi/3,-23*pi/180]... 
+        'Offset',spatula_specs.Offset,... 
+        'R',spatula_specs.R ... 
         );
     
     p_spatula = getCartesianPosition(plant,spatula);
@@ -132,12 +148,5 @@ function nlp = translate(nlp, bounds, varargin)
     addNodeConstraint(nlp, o_endeffz, {'x'}, 'first', o_start(3), o_start(3), 'Nonlinear'); 
     addNodeConstraint(nlp, o_endeffz, {'x'}, 'last', o_end(3), o_end(3), 'Nonlinear'); 
     
-%% Costs are added here
-    
-    u = plant.Inputs.Control.u;
-    
-    u2r = tovector(norm(u).^2);
-    u2r_fun = SymFunction(['torque_' plant.Name],u2r,{u});
-    addRunningCost(nlp,u2r_fun,{'u'});
-    
+
 end

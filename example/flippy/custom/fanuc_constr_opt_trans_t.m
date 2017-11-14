@@ -1,8 +1,8 @@
 function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
-    A2B =0;
-    p_A = [-0.2, 0.8, 0.25]; % this is point A
+    A2B =1;
+    p_A = [-0.2, 0.6, 0.25]; % this is point A
     o_A = [0,0,pi/2];        % this is orientation A
-    p_B = [0.8, -0.3, 0.25];  % this is point B
+    p_B = [0.55, 0.14, 0.25];  % this is point B
     o_B = [0,0,0];            % this is orientation B
 %%  Specify the starting and the ending position
     if A2B

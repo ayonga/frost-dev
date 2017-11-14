@@ -13,11 +13,17 @@ function ret = getBehaviorName(type)
     switch(type)
         case 'trans'
             ret =  'translate';
-        case 'flip'
-            ret =  'flip';
+        case 'p2p'
+            ret =  'pose2pose';
+        case 'flipdrop'
+            ret =  'flipdrop';
+        case 'scoop'
+            ret =  'scoop';
         case 'pickup'
             ret = 'pickup';
         case 'j2j'
             ret = 'joint2joint';
+        case default
+            error('Invalid behavior type');
     end
 end

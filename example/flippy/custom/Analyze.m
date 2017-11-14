@@ -1,8 +1,10 @@
-function Analyze(flow)
-
+function Analyze(flow,varargin)
+if nargin == 2
+    params = varargin{1};
+%     amat = reshape(params.apos);
+end
 if nargin < 1
-    t = logger.flow.t;
-    states = logger.flow.states;
+    error('Atleast one input required');
 end
 t  = flow.t;
 datasize = size(t);
@@ -59,19 +61,19 @@ figure(403);
 for i =1:datasize(2)
     l=i;figure(403);subplot(131);grid on;axis equal;
     plot3(xdata(1:l),ydata(1:l),zdata(1:l));
-    pause(0.01);
+    pause(0.001);
 end
 figure(403);
 for i =1:datasize(2)
     l=i;figure(403);subplot(132);axis equal;
     quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
         normalvectordata(1,1:l),normalvectordata(2,1:l),normalvectordata(3,1:l));
-    pause(0.01);
+    pause(0.001);
 end
 figure(403);
 for i =1:datasize(2)
     l=i;figure(403);subplot(133);axis equal;
     quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
         axdata(1:l),aydata(1:l),azdata(1:l));
-    pause(0.01);
+    pause(0.001);
 end

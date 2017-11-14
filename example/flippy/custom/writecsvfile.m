@@ -3,5 +3,7 @@ function writecsvfile(Behavior)
     for i=1:Behavior.nSubBehaviors
         r=[r;Behavior.SubBehavior(i).optimization_result];
     end
-    csvwrite('/home/shishirny/repos/flippyws/src/grillbot/miso_simulation/config/FlippyBehaviorParameters.csv',r);
+
+    filename = '/home/shishirny/repos/flippyws/src/grillbot/miso_simulation/config/FlippyBehaviorParameters.csv';
+    dlmwrite(filename,r,'delimiter', ',','precision',16);
 end

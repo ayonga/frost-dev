@@ -8,7 +8,7 @@
 % main_sim
 % pick the optmization type and the initial guess parameters
 load_initial_guess = 0;
-traj_type = 1; % 1 = translate 2 = scoop 3 = pickup 4 = drop 5 = joint to joint
+traj_type = 4; % 1 = translate 2 = scoop 3 = pickup 4 = drop 5 = joint to joint
 switch(traj_type)
     case 1
         initial_guess_file = [cur,'/param/fanuc_6DOF_trans_guess_15nodes.yaml'];
@@ -20,7 +20,7 @@ switch(traj_type)
         initial_guess_file = [cur,'/param/fanuc_6DOF_guess_pickup_2017_09_07_1655.yaml'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_pickup_t';
     case 4
-        initial_guess_file = [cur,'/param/fanuc_6DOF_guess_flip_2017_09_07_1449.yaml'];
+        initial_guess_file = [cur,'/param/flipdrop/10/fanuc_6DOF_guess_flipdrop_grids_10_start_0p7x0y0p17z_end_0p66x0y0p13z'];
         fanuc_constr_opt_str = 'fanuc_constr_opt_drop_t';
     case 5
         initial_guess_file = [cur,'/param/fanuc_6DOF_guess_flip_2017_09_07_1449.yaml'];
@@ -36,13 +36,13 @@ bounds = flippy.getLimits();
 %'ConstantTimeHorizon=[0,T]', where T is the fixed time duration
 bounds.time.t0.lb = 0; % starting time
 bounds.time.t0.ub = 0;
-bounds.time.tf.lb = 1.0; % terminating time
+bounds.time.tf.lb = 0.2; % terminating time
 bounds.time.tf.ub = 5.0;
-bounds.time.duration.lb = 1.0; % duration (optional)
+bounds.time.duration.lb = 0.2; % duration (optional)
 bounds.time.duration.ub = 5.0;
 
-bounds.states.x.lb = [ -pi/2,   -pi/2,  -1,  -pi, -2,   - pi ]; % -1.09 for joint 3 is the minimum limit
-bounds.states.x.ub = [  2.8,  2*pi/3,   pi/2,   pi, 2,    pi ];
+bounds.states.x.lb = [ -pi/2,   -pi/2,  -1,  -pi, -2,   - 2*pi ]; % -1.09 for joint 3 is the minimum limit
+bounds.states.x.ub = [  2.8,  2*pi/3,   pi/2,   pi, 2,    2*pi ];
 bounds.states.dx.lb = -16*ones(1,flippy.numState);
 bounds.states.dx.ub =  16*ones(1,flippy.numState);
 bounds.states.ddx.lb = -800*ones(1,flippy.numState);
@@ -55,8 +55,8 @@ bounds.inputs.Control.u.ub = ones(1,flippy.numState)*Inf;
 bounds.params.apos.lb = -600;
 bounds.params.apos.ub = 600;
 % bounds.vel.ep = 10;% y1dot = -ep*y1
-bounds.pos.kp = 10; % y2ddot = -kd*y2dot - kp*y2
-bounds.pos.kd = 2;
+bounds.pos.kp = 200; % y2ddot = -kd*y2dot - kp*y2
+bounds.pos.kd = 10;
 
 
 flippy.UserNlpConstraint = str2func(fanuc_constr_opt_str);
@@ -66,7 +66,7 @@ flippy.UserNlpConstraint = str2func(fanuc_constr_opt_str);
 %%%% Create a gait-optimization NLP based on the existing hybrid system
 %%%% model. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-num_grid = 15;
+num_grid = 5;
 opts = struct(...%'ConstantTimeHorizon',nan(2,1),... %NaN - variable time, ~NaN, fixed time
     'DerivativeLevel',1,... % either 1 (only Jacobian) or 2 (both Jacobian and Hessian)
     'EqualityConstraintBoundary',0,...
@@ -171,4 +171,8 @@ param{1}.sol = sol;
 param_save_file = fullfile(cur,'param','fanuc_6DOF_2017_09_07_1655.yaml');
 yaml_write_file(param_save_file,param);
 
-writecsvfilebezier(param{1}.p(1),param{1}.a);
+%%
+Behavior.nSubBehaviors = 1;
+Behavior.SubBehavior(1).optimization_result = [param{1}.p, zeros(1,5);param{1}.a];
+
+writecsvfile(Behavior);
