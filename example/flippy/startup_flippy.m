@@ -79,7 +79,6 @@ y2 = VirtualConstraint(flippy, ya_2, y2_name,...
 %flippy = addVirtualConstraint(flippy,y1);
 flippy = addVirtualConstraint(flippy,y2);
 
-io_control  = IOFeedback('IO');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)

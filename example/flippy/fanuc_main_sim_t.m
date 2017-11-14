@@ -25,6 +25,9 @@ tf = params.ppos(1);
 eventnames = 'deltafinal';
 sim_opts = [];
 logger = SimLogger(flippy);
+
+io_control  = IOFeedback('IO');
+
 tic
 flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
 toc
