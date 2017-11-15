@@ -3,7 +3,7 @@
 *~
 *.asv
 *.#*
-
+*.mx
 ## image files
 *.png
 *.svg
