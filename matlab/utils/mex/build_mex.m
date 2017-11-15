@@ -52,14 +52,8 @@ function [status] = build_mex(build_dir, src_files, varargin)
         % check if an already compiled MEX file exists
         if exist(fullfile(build_dir,[src_files{i},'.',mex_ext]), 'file')
             mexFile = dir(fullfile(build_dir,[src_files{i},'.',mex_ext]));
-	    lang = getenv('LANG');
-        if ~isempty(lang)
-            mexDate = datetime(mexFile.date,'Locale',lang,'InputFormat','dd-MMMM-yyyy HH:mm:ss');
-            srcData = datetime(src_file.date,'Locale',lang,'InputFormat','dd-MMMM-yyyy HH:mm:ss');
-        else
-            mexDate = datetime(mexFile.date,'InputFormat','dd-MMMM-yyyy HH:mm:ss');
-            srcData = datetime(src_file.date,'InputFormat','dd-MMMM-yyyy HH:mm:ss');
-        end
+            mexDate = datetime(mexFile.datenum,'ConvertFrom','datenum');
+            srcData = datetime(src_file.datenum,'ConvertFrom','datenum');
             
             % abort build process if the MEX file is newer than the source file
             if mexDate > srcData
