@@ -112,8 +112,10 @@ classdef RigidJoint < CoordinateFrame
             % validate and assign the joint axis 
             if isfield(argin, 'Axis') && ~isempty(argin.Axis)
                 obj = obj.setAxis(argin.Axis);
+            elseif strcmp(obj.Type, 'fixed')
+                obj = obj.setAxis([0,0,1]);
             else
-                error('The joint rotatino axis is not defined.');
+                error('The joint rotation axis is not defined.');
             end
             
             
