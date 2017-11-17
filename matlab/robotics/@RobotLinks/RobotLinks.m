@@ -77,10 +77,6 @@ classdef RobotLinks < ContinuousDynamics
             % Return values:
             % obj: an object of this class
             
-            parser = inputParser;
-            addOptional(parser,'removeFixedJoints',false)
-            parse(parser, varargin{:});
-            parser_results = parser.Results;
             
             % construct the object by calling superclass constructor
             % function

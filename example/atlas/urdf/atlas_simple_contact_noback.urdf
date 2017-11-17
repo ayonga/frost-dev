@@ -402,7 +402,7 @@
     <parent link="l_uleg"/>
     <child link="l_lleg"/>
     <dynamics damping="0.1" friction="0"/>
-    <limit effort="220" effort_max="220" effort_min="-300" lower="0" upper="2.38569" velocity="12"/>
+    <limit effort="220" effort_max="220" effort_min="-300" lower="0.1" upper="2.38569" velocity="12"/>
     <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10" soft_upper_limit="12.3857"/>
   </joint>
   <joint name="r_leg_akx" type="revolute">
@@ -456,7 +456,7 @@
     <parent link="r_uleg"/>
     <child link="r_lleg"/>
     <dynamics damping="0.1" friction="0"/>
-    <limit effort="220" effort_max="220" effort_min="-300" lower="0" upper="2.38569" velocity="12"/>
+    <limit effort="220" effort_max="220" effort_min="-300" lower="0.1" upper="2.38569" velocity="12"/>
     <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10" soft_upper_limit="12.3857"/>
   </joint>
   <transmission name="back_bkz_trans" type="pr2_mechanism_model/SimpleTransmission">

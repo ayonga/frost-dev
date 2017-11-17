@@ -1,106 +1,76 @@
-%% The main script to run the ATLAS flat-footedwalking simulation
-% 
-%
+% Main script
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Specify project path
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-cur = fileparts(mfilename('fullpath'));
-export_path = fullfile(cur, 'export');
-if ~exist(export_path,'dir')
-    mkdir(export_path);
-end
-addpath(genpath(cur));
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% ATLAS robot model object
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Setting up path
+clear; close all; clc;
+restoredefaultpath; matlabrc;
+
+% specify the path to the FROST
+frost_path  = '../../';
+addpath(frost_path);
+frost_addpath; % initialize FROST
+export_path = 'gen/opt'; % path to export compiled C++ and MEX files
+utils.init_path(export_path);
+%% robot model settings
+cur = utils.get_root_path();
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
-atlas = AtlasRobot(urdf);
-atlas.configureDynamics('DelayCoriolisSet',false);
 
+% some options
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%% Hybrid system model for the flat-footed walking of ATLAS
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% flat-footed wakling:
-% RightStance -> LeftImpact -> LeftStance -> RightImpact
-%      ^                                         |
-%      |_________________________________________|
-r_stance = RightStance(atlas);
-l_stance = LeftStance(atlas);
-r_impact = RightImpact(r_stance);
-l_impact = LeftImpact(l_stance);
+% if 'delay_set' is true, the computation of system dynamics (Coriolis
+% vector) will be delayed. Delaying this operation will save significant
+% loading time.
+delay_set = true;
 
-io_control  = IOFeedback('IO');
+% if 'load_sym' is true, it will load symbolic expressions from previously
+% save external files instead of re-compute them. It reduce the loading
+% time by 7-10 faster. 
+% Set it to false for the first time, and save expressions after loaded the
+% model. 
+load_sym  = true; % if true, it will load symbolic expression from 
+if load_sym    
+    load_path   = 'gen/sym'; % path to export binary Mathematica symbolic expression (MX) files
+    utils.init_path(load_path);
+else
+    load_path   = []; 
+end
+%% load robot model
+% load the robot model
+robot = sys.LoadModel(urdf, load_path, delay_set);
 
-atlas_flat = HybridSystem('AtlasFlatWalking');
-atlas_flat = addVertex(atlas_flat, 'RightStance', 'Domain', r_stance, ...
-    'Control', io_control);
-atlas_flat = addVertex(atlas_flat, 'LeftStance', 'Domain', l_stance, ...
-    'Control', io_control);
-
-srcs = {'RightStance'
-    'LeftStance'};
-
-tars = {'LeftStance'
-    'RightStance'};
-
-atlas_flat = addEdge(atlas_flat, srcs, tars);
-atlas_flat = setEdgeProperties(atlas_flat, srcs, tars, ...
-    'Guard', {l_impact, r_impact});
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Compile and export model specific functions
-%%%% (uncomment the following lines when run it for the first time.)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-r_stance.compile(export_path);
-l_stance.compile(export_path);
-r_impact.compile(export_path);
-l_impact.compile(export_path);
+% load hybrid system
+system = sys.LoadSystem(robot, load_path);
 
 
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%% Load Parameters
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/params_2016-07-01T13-17-04-00.yaml'];
+%% Compile stuff if needed (only need to run for the first time)
+system.compile(export_path);
 
-new_param = loadOldParam(old_param_file, atlas);
-
-
+%% load optimal gait (and parameters)
+param = load('local/good_gait.mat');
 % right-stance parameters
-r_stance_param = struct;
-r_stance_param.avelocity = new_param{1}.v;
-r_stance_param.pvelocity = new_param{1}.p;
-r_stance_param.aposition = new_param{1}.a;
-r_stance_param.pposition = new_param{1}.p;
-r_stance_param.kvelocity = 10;
-r_stance_param.kposition = [100,20];
-atlas_flat = setVertexProperties(atlas_flat,'RightStance','Param',r_stance_param);
+r_stance_param = param.gait(1).params;
+r_stance_param.epsilon = 10;
+system = setVertexProperties(system,'RightStance','Param',r_stance_param);
 % left-stance parameters
-l_stance_param = struct;
-l_stance_param.avelocity = new_param{2}.v;
-l_stance_param.pvelocity = new_param{2}.p;
-l_stance_param.aposition = new_param{2}.a;
-l_stance_param.pposition = new_param{2}.p;
-l_stance_param.kvelocity = 10;
-l_stance_param.kposition = [100,20];
-atlas_flat = setVertexProperties(atlas_flat,'LeftStance','Param',l_stance_param);
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%% Run the simulator
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% xf = [new_param{2}.qf;new_param{1}.dqf];
-% x0 = r_impact.calcDiscreteMap(0,xf);
-x0 = [new_param{1}.q0;new_param{1}.dq0];
-% run the single domain first (no hybrid system model)
-% logger = SimLogger(r_stance);
-% r_stance.simulate(0,x0,[],io_control,r_stance_param,logger,'nsf')
+l_stance_param = param.gait(3).params;
+l_stance_param.epsilon = 10;
+system = setVertexProperties(system,'LeftStance','Param',l_stance_param);
+
+%% configure pre process function
+r_stance =system.Gamma.Nodes.Domain{1};
+r_stance.PreProcess = @sim.RightStancePreProcess;
+l_stance =system.Gamma.Nodes.Domain{2};
+l_stance.PreProcess = @sim.LeftStancePreProcess;
+%% run simulation
+x0 = [param.gait(1).states.x(:,1);param.gait(1).states.dx(:,1)];
 tic
-logger = atlas_flat.simulate(0, x0, [], [],'NumCycle',4);
+logger = system.simulate(0, x0, [], [],'NumCycle',4);
 toc
-% 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%% Run the animator
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% export_file = fullfile(cur,'tmp','atlas_multi_contact_walking.avi');
-% anim_obj = animator(atlas);
-% anim_obj.animate(atlas_multiwalk.Flow, export_file);
+
+%% animation
+anim = plot.LoadSimAnimator(robot, logger, 'SkipExporting',true);
+
+%% you can also plot the states and torques
+plot.plotSimStates(system,logger);
+plot.plotSimTorques(system,logger);

@@ -95,20 +95,20 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             joints(index).Child  = char(child.getAttribute('link'));
             
             if ~strcmp(joints(index).Type, 'fixed')
-                joints(index).Axis = str2num(axis.getAttribute('xyz'));
-                limit = xml_joint.getElementsByTagName('limit').item(0);
-                joints(index).Limit = struct();
-                if ~isempty(limit)
-                    joints(index).Limit.effort = str2double(limit.getAttribute('effort'));
-                    joints(index).Limit.lower = str2double(limit.getAttribute('lower'));
-                    joints(index).Limit.upper = str2double(limit.getAttribute('upper'));
-                    joints(index).Limit.velocity = str2double(limit.getAttribute('velocity'));
-                else
-                    joints(index).Limit.effort = 0;
-                    joints(index).Limit.lower = 0;
-                    joints(index).Limit.upper = 0;
-                    joints(index).Limit.velocity = 0;
-                end
+                joints(index).Axis = str2num(axis.getAttribute('xyz'));                
+            end
+            limit = xml_joint.getElementsByTagName('limit').item(0);
+            joints(index).Limit = struct();
+            if ~isempty(limit)
+                joints(index).Limit.effort = str2double(limit.getAttribute('effort'));
+                joints(index).Limit.lower = str2double(limit.getAttribute('lower'));
+                joints(index).Limit.upper = str2double(limit.getAttribute('upper'));
+                joints(index).Limit.velocity = str2double(limit.getAttribute('velocity'));
+            else
+                joints(index).Limit.effort = 0;
+                joints(index).Limit.lower = 0;
+                joints(index).Limit.upper = 0;
+                joints(index).Limit.velocity = 0;
             end
             index = index + 1;
         end

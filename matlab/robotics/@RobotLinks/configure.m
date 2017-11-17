@@ -131,7 +131,7 @@ function obj = configure(obj, config, base, load_path, varargin)
                         joints(joints_with_fixed_parent(k)).R = H(1:3, 1:3);
                     end
                 end
-                joints_to_remove = horzcat(joints_to_remove, i);
+                joints_to_remove = horzcat(joints_to_remove, i); %#ok<*AGROW>
                 links_to_remove = horzcat(links_to_remove, child_index);
             end
         end
