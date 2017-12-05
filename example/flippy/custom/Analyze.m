@@ -1,7 +1,8 @@
 function Analyze(flow,varargin)
 if nargin == 2
-    params = varargin{1};
-%     amat = reshape(params.apos);
+    anim = varargin{1};
+else
+    anim = true;
 end
 if nargin < 1
     error('Atleast one input required');
@@ -56,24 +57,25 @@ subplot(224);
 plot(t,oxdata,t,oydata,t,ozdata);legend('orientation x','orientation y','orientation z');
 subplot(241);
 
-
-figure(403);
-for i =1:datasize(2)
-    l=i;figure(403);subplot(131);grid on;axis equal;
-    plot3(xdata(1:l),ydata(1:l),zdata(1:l));
-    pause(0.001);
-end
-figure(403);
-for i =1:datasize(2)
-    l=i;figure(403);subplot(132);axis equal;
-    quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
-        normalvectordata(1,1:l),normalvectordata(2,1:l),normalvectordata(3,1:l));
-    pause(0.001);
-end
-figure(403);
-for i =1:datasize(2)
-    l=i;figure(403);subplot(133);axis equal;
-    quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
-        axdata(1:l),aydata(1:l),azdata(1:l));
-    pause(0.001);
+if anim
+    figure(403);
+    for i =1:datasize(2)
+        l=i;figure(403);subplot(131);grid on;axis equal;
+        plot3(xdata(1:l),ydata(1:l),zdata(1:l));
+        pause(0.001);
+    end
+    figure(403);
+    for i =1:datasize(2)
+        l=i;figure(403);subplot(132);axis equal;
+        quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
+            normalvectordata(1,1:l),normalvectordata(2,1:l),normalvectordata(3,1:l));
+        pause(0.001);
+    end
+    figure(403);
+    for i =1:datasize(2)
+        l=i;figure(403);subplot(133);axis equal;
+        quiver3(xdata(1:l),ydata(1:l),zdata(1:l),...
+            axdata(1:l),aydata(1:l),azdata(1:l));
+        pause(0.001);
+    end
 end

@@ -42,7 +42,7 @@ function nlp = commonConstraints(nlp, bounds, varargin)
 %     addConstraint(nlp,output_constraints.Name,'last',output_constraints);
     
     %% Costs are added here
-    nlp = ConfigureCollisionConstraints(nlp);
+%     nlp = ConfigureCollisionConstraints(nlp);
         
 %     w = SymVariable('w',[2,1]);
     w = SymVariable('w');
@@ -50,14 +50,14 @@ function nlp = commonConstraints(nlp, bounds, varargin)
     u = plant.Inputs.Control.u;
     
 %     % only control input u
-%     u2r = tovector(norm(u).^2);
-%     u2r_fun = SymFunction(['torque_' plant.Name],u2r,{u});
-%     addRunningCost(nlp,u2r_fun,{'u'});
+    u2r = tovector(norm(u).^2);
+    u2r_fun = SymFunction(['torque_' plant.Name],u2r,{u});
+    addRunningCost(nlp,u2r_fun,{'u'});
     
-    % control input u and collision variable w
-    u2r_w = tovector(norm(u).^2) - tovector(w.^2) + 100*w;
-    u2r_wfun = SymFunction(['torquew_' plant.Name],u2r_w,{u,w});
-    addRunningCost(nlp,u2r_wfun,{'u','w'});
+%     % control input u and collision variable w
+%     u2r_w = tovector(norm(u).^2) - tovector(w.^2) + 100*w;
+%     u2r_wfun = SymFunction(['torquew_' plant.Name],u2r_w,{u,w});
+%     addRunningCost(nlp,u2r_wfun,{'u','w'});
 
     % only collision variable
 %     w2r   = tovector(w(1)*w(2));

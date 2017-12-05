@@ -8,7 +8,7 @@
 % main_sim
 % pick the optmization type and the initial guess parameters
 load_initial_guess = 0;
-traj_type = 4; % 1 = translate 2 = scoop 3 = pickup 4 = drop 5 = joint to joint
+traj_type = 1; % 1 = translate 2 = scoop 3 = pickup 4 = drop 5 = joint to joint
 switch(traj_type)
     case 1
         initial_guess_file = [cur,'/param/fanuc_6DOF_trans_guess_15nodes.yaml'];
@@ -37,14 +37,14 @@ bounds = flippy.getLimits();
 bounds.time.t0.lb = 0; % starting time
 bounds.time.t0.ub = 0;
 bounds.time.tf.lb = 0.2; % terminating time
-bounds.time.tf.ub = 5.0;
+bounds.time.tf.ub = 3.0;
 bounds.time.duration.lb = 0.2; % duration (optional)
-bounds.time.duration.ub = 5.0;
+bounds.time.duration.ub = 3.0;
 
-bounds.states.x.lb = [ -pi/2,   -pi/2,  -1,  -pi, -2,   - 2*pi ]; % -1.09 for joint 3 is the minimum limit
-bounds.states.x.ub = [  2.8,  2*pi/3,   pi/2,   pi, 2,    2*pi ];
-bounds.states.dx.lb = -16*ones(1,flippy.numState);
-bounds.states.dx.ub =  16*ones(1,flippy.numState);
+bounds.states.x.lb = [ -pi/2,   -pi/2,  -1,  -0.9*pi, -2,   - 2*pi ]; % -1.09 for joint 3 is the minimum limit
+bounds.states.x.ub = [  2.8,  2*pi/3,   pi/2,   0.9*pi, 2,    2*pi ];
+bounds.states.dx.lb = -10*ones(1,flippy.numState);
+bounds.states.dx.ub =  10*ones(1,flippy.numState);
 bounds.states.ddx.lb = -800*ones(1,flippy.numState);
 bounds.states.ddx.ub =  800*ones(1,flippy.numState);
 
@@ -66,7 +66,7 @@ flippy.UserNlpConstraint = str2func(fanuc_constr_opt_str);
 %%%% Create a gait-optimization NLP based on the existing hybrid system
 %%%% model. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-num_grid = 5;
+num_grid = 10;
 opts = struct(...%'ConstantTimeHorizon',nan(2,1),... %NaN - variable time, ~NaN, fixed time
     'DerivativeLevel',1,... % either 1 (only Jacobian) or 2 (both Jacobian and Hessian)
     'EqualityConstraintBoundary',0,...

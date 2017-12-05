@@ -1,9 +1,9 @@
 function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
-    A2B =1;
-    p_A = [-0.2, 0.6, 0.25]; % this is point A
+    A2B =0;
+    p_A = [0.4, 0.8, 0.25]; % this is point A
     o_A = [0,0,pi/2];        % this is orientation A
-    p_B = [0.55, 0.14, 0.25];  % this is point B
-    o_B = [0,0,0];            % this is orientation B
+    p_B = [-0.2, 0.8, 0.25];  % this is point B
+    o_B = [0,0,pi/2];            % this is orientation B
 %%  Specify the starting and the ending position
     if A2B
         p_start = p_A;
@@ -115,9 +115,9 @@ function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
     addNodeConstraint(nlp, vy_func, {'x','dx'}, 'last', 0, 0, 'Nonlinear');
     addNodeConstraint(nlp, vz_func, {'x','dx'}, 'last', 0, 0, 'Nonlinear');
 
-    addNodeConstraint(nlp, vx_func, {'x','dx'}, 'except-terminal', -0.7, 0.7, 'Nonlinear');
-    addNodeConstraint(nlp, vy_func, {'x','dx'}, 'except-terminal', -0.7, 0.7, 'Nonlinear');
-    addNodeConstraint(nlp, vz_func, {'x','dx'}, 'except-terminal', -0.7, 0.7, 'Nonlinear');
+    addNodeConstraint(nlp, vx_func, {'x','dx'}, 'except-terminal', -0.6, 0.6, 'Nonlinear');
+    addNodeConstraint(nlp, vy_func, {'x','dx'}, 'except-terminal', -0.6, 0.6, 'Nonlinear');
+    addNodeConstraint(nlp, vz_func, {'x','dx'}, 'except-terminal', -0.6, 0.6, 'Nonlinear');
 
     % acceleration functions
 %     ax_func = SymFunction(['endeffax_sca_' plant.Name],a_x,{x,dx,ddx});
@@ -135,6 +135,9 @@ function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
     R_vec_spatula = getRelativeRigidOrientation(plant,spatula);
             
     normal_vector_spatula = R_vec_spatula([3,6,9]);
+%     tangent_vector_spatula_x = R_vec_spatula([1,4,7]);
+%     tangent_vector_spatula_y = R_vec_spatula([2,5,8]);
+    
     
     dot_product_normal_to_acceleration = normal_vector_spatula ...
                                          * [a_x;
@@ -147,7 +150,13 @@ function nlp = fanuc_constr_opt_trans_t(nlp, bounds, varargin)
     
 %     normal_vector = SymFunction(['normal_vector_' plant.Name],normal_vector_spatula,{x});
 %     addNodeConstraint(nlp, normal_vector, {'x'}, 'all', [0,0,0.2], [1,1,1], 'Nonlinear');
-    
+
+%     tangent_vector_spatula_x = SymFunction(['tangent_vector_x_' plant.Name],tangent_vector_spatula_x,{x});
+%     addNodeConstraint(nlp, tangent_vector_spatula_x, {'x'}, 'all', [0,0,0.2], [1,1,1], 'Nonlinear');
+% 
+%     tangent_vector_spatula_y = SymFunction(['tangent_vector_y_' plant.Name],tangent_vector_spatula_y,{x});
+%     addNodeConstraint(nlp, tangent_vector_spatula_y, {'x'}, 'all', [0,0,0.2], [1,1,1], 'Nonlinear');
+
     
     % get orientation of the end effector in terms of euler angles
     orientation = getRelativeEulerAngles(plant,spatula);
@@ -249,7 +258,7 @@ b_left = y_pos_left; % mean of gaussian
 c_left = 100; % attenuation factor higher the value of c more slender is the sigmoid
 sigmoid_value_left = depth_near_left + a_left * exp((p_y - b_left) * c_left) / (exp((p_y - b_left) * c_left) + 1) - p_x;
 sigmoid_func_left = SymFunction(['sigmoid_sca_left_' plant.Name],sigmoid_value_left,{x});
-addNodeConstraint(nlp, sigmoid_func_left, {'x'}, 'all', 0, Inf, 'Nonlinear');
+% addNodeConstraint(nlp, sigmoid_func_left, {'x'}, 'all', 0, Inf, 'Nonlinear');
 
 % grill right border is defined via sigmoid
 depth_far_right = 1; % far edge of right border of the grill
@@ -260,7 +269,7 @@ b_right = y_pos_right; % mean of gaussian
 c_right = 100; % attenuation factor higher the value of c more slender is the sigmoid
 sigmoid_value_right = depth_near_right + a_right * exp(-(p_y - b_right) * c_right) / (exp(-(p_y - b_right) * c_right) + 1) - p_x;
 sigmoid_func_right = SymFunction(['sigmoid_sca_right_' plant.Name],sigmoid_value_right,{x});
-addNodeConstraint(nlp, sigmoid_func_right, {'x'}, 'all', 0, Inf, 'Nonlinear');
+% addNodeConstraint(nlp, sigmoid_func_right, {'x'}, 'all', 0, Inf, 'Nonlinear');
 
 
 %% Costs are added here

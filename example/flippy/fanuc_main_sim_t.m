@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/fanuc_6DOF_2017_09_07_1655.yaml'];
+old_param_file = [cur,'/param/fanuc_6DOF_2017_09_07_1655B2A.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 
@@ -22,19 +22,21 @@ old_param_file = [cur,'/param/fanuc_6DOF_2017_09_07_1655.yaml'];
 
 t0 = 0;
 tf = params.ppos(1);
+params.epsilon = 10;
 eventnames = 'deltafinal';
-sim_opts = [];
+sim_opts=[];
 logger = SimLogger(flippy);
 
-io_control  = IOFeedback('IO');
-
+% control  = IOFeedback('IO');
+control = CLFCBFQP('CLFCBF',flippy,params);
+    
 tic
-flippy.simulate(t0, x0, tf, io_control, params, logger, eventnames, sim_opts);
+flippy.simulate(t0, x0, tf, control, params, logger, eventnames, sim_opts);
 toc
 
 %% Plot the Data
 
-Analyze(logger.flow);
+Analyze(logger.flow,false);
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Run the animator

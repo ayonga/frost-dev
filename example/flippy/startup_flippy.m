@@ -1,5 +1,6 @@
 
 flippy_export = false;
+activate_barrier = true;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Specify project path
@@ -79,10 +80,72 @@ y2 = VirtualConstraint(flippy, ya_2, y2_name,...
 %flippy = addVirtualConstraint(flippy,y1);
 flippy = addVirtualConstraint(flippy,y2);
 
+%% Add barrier functions here
+%% CBF Constraints
+x = flippy.States.x;
+dx = flippy.States.dx;
+ddx = flippy.States.ddx;
+
+spatula_link = flippy.Links(getLinkIndices(flippy, 'link_6'));
+spatula_specs = getSpatulaSpecs();
+spatula_tool_frame = spatula_link.Reference;
+
+spatula = CoordinateFrame(...
+    'Name','SpatulaTool',...
+    'Reference',spatula_tool_frame,...
+    'Offset',spatula_specs.Offset,...
+    'R',spatula_specs.R ...
+    );
+
+b_spatula = getCartesianPosition(flippy,spatula);
+
+b_x = b_spatula(1);
+jac_x = jacobian(b_x, x);
+v_x = jac_x*dx;
+
+b_y = b_spatula(2);
+jac_y = jacobian(b_y, x);
+v_y = jac_y*dx;
+
+b_z = b_spatula(3);
+jac_z = jacobian(b_z, x);
+v_z = jac_z*dx;
+
+%% This is the formula for CBF constraints -- please note
+% eta_bdot = F_b eta_b + G_b mu_b
+% mu_b = - K_p eta_b
+% nth derivative is when the control input is supposed to appear
+% therefore
+% B^(nth derivative) = L_fL_ffB + L_gL_ffB u >= mu_b 
+
+eta_barrier_x = [b_x;v_x];
+eta_barrier_x_func = SymFunction('eta_barrier_x',eta_barrier_x,{x,dx});
+
+DLf_barrier_x = [jacobian(v_x,x), jac_x];
+DLf_barrier_x_func = SymFunction('DLf_barrier_x',DLf_barrier_x,{x,dx});
+
+eta_barrier_y = [b_y;v_y];
+eta_barrier_y_func = SymFunction('eta_barrier_y',eta_barrier_y,{x,dx});
+
+DLf_barrier_y = [jacobian(v_y,x), jac_y];
+DLf_barrier_y_func = SymFunction('DLf_barrier_y',DLf_barrier_y,{x,dx});
+
+eta_barrier_z = [b_z;v_z];
+eta_barrier_z_func = SymFunction('eta_barrier_z',eta_barrier_z,{x,dx});
+
+DLf_barrier_z = [jacobian(v_z,x), jac_z];
+DLf_barrier_z_func = SymFunction('DLf_barrier_z',DLf_barrier_z,{x,dx});
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Compile and export model specific functions
 %%%% (uncomment the following lines when run it for the first time.)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if flippy_export
     flippy.compile(export_path);
+    export(eta_barrier_x_func,export_path);
+    export(DLf_barrier_x_func,export_path);
+    export(eta_barrier_y_func,export_path);
+    export(DLf_barrier_y_func,export_path);
+    export(eta_barrier_z_func,export_path);
+    export(DLf_barrier_z_func,export_path);
 end

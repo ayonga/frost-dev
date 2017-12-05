@@ -15,32 +15,32 @@ function [flow] = plotSubBehavior(nlp,sol)
         flow.nlp = nlp;
         flow.sol = sol;
         
-        %% collision check variables
-        vars = nlp.OptVarTable;
-        windices = horzcat(vars.w.Indices);
-        w = sol(windices);
-        
-        dim = min(size(w));
-        
-        plot(405);
-        if dim == 1
-            subplot(2,1,1);
-            bar(w');
-            subplot(2,1,2);
-            bar((100-w)');
-        else
-            for i=1:dim
-                subplot(dim,1,i);
-                bar(w(i,:)');
-            end
-        end
-        flow.w = w;
+%         %% collision check variables
+%         vars = nlp.OptVarTable;
+%         windices = horzcat(vars.w.Indices);
+%         w = sol(windices);
+%         
+%         dim = min(size(w));
+%         
+%         plot(405);
+%         if dim == 1
+%             subplot(2,1,1);
+%             bar(w');
+%             subplot(2,1,2);
+%             bar((100-w)');
+%         else
+%             for i=1:dim
+%                 subplot(dim,1,i);
+%                 bar(w(i,:)');
+%             end
+%         end
+%         flow.w = w;
 
         %%
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %%% plot the basic result
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        Analyze(flow,params);
+        Analyze(flow);
 
 
      

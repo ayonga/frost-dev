@@ -54,7 +54,7 @@ Behavior = validateTranslateBehaviorBox(Behavior, boxes, pose_home, pose_start, 
 
 %% The main script to run the burger behavior optimization
 
-load_initial_guess = false; % not sure if this should allowed
+load_initial_guess = true; % not sure if this should allowed
 if load_initial_guess
     disp('Load initial guess enabled.');
 end
@@ -80,7 +80,7 @@ num_grid = 10;
         fanuc_constr_opt_str = 'commonConstraints';
         flippy.UserNlpConstraint = str2func(fanuc_constr_opt_str);
 
-        disp(['Optimizing the subbehavior: ',Behavior.SubBehavior(i).name]);
+        disp(['Optimizing the subbehavior: ',Behavior.SubBehavior(i).description]);
         
         [guess_file, solution_in_file, save_file] = ...
             findNearestGuessFile(cur,num_grid,sub_behavior);
@@ -97,78 +97,6 @@ num_grid = 10;
         
         nlp = configureFlippyConstraints(nlp,bounds,sub_behavior);
         
-        %%%%%%%%%%%%%%%%%%%%%% update the constraint properties with initial and final points %%%%%%%%%%%
-%         p_start = pose_start.position;
-%         p_end = pose_end.position;
-%         
-%         px = p_start(1);        py = p_start(2);        pz = p_start(3);
-%         pxe = p_end(1);         pye = p_end(2);         pze = p_end(3);
-%         
-%         arginpx.lb = px;
-%         arginpx.ub = px;
-%         updateConstrProp(nlp,'endeffx_sca_LR','first',arginpx);
-%         arginpy.lb = py;
-%         arginpy.ub = py;
-%         updateConstrProp(nlp,'endeffy_sca_LR','first',arginpy);
-%         arginpz.lb = pz;
-%         arginpz.ub = pz;
-%         updateConstrProp(nlp,'endeffz_sca_LR','first',arginpz);
-%         
-%         arginpxe.lb = pxe;
-%         arginpxe.ub = pxe;
-%         updateConstrProp(nlp,'endeffx_sca_LR','last',arginpxe);
-%         arginpye.lb = pye;
-%         arginpye.ub = pye;
-%         updateConstrProp(nlp,'endeffy_sca_LR','last',arginpye);
-%         arginpze.lb = pze;
-%         arginpze.ub = pze;
-%         updateConstrProp(nlp,'endeffz_sca_LR','last',arginpze);
-%         
-%         % constraining the orientations
-%         o_start = pose_start.orientation;
-%         o_end = pose_end.orientation;
-%         ox = o_start(1);        oy = o_start(2);        oz = o_start(3);
-%         oxe = o_end(1);         oye = o_end(2);         oze = o_end(3);
-%         
-%         arginox.lb = ox;
-%         arginox.ub = ox;
-%         updateConstrProp(nlp,'o_endeffx_LR','first',arginox);
-%         arginoy.lb = oy;
-%         arginoy.ub = oy;
-%         updateConstrProp(nlp,'o_endeffy_LR','first',arginoy);
-%         arginoz.lb = oz;
-%         arginoz.ub = oz;
-%         updateConstrProp(nlp,'o_endeffz_LR','first',arginoz);
-%         arginoxe.lb = oxe;
-%         arginoxe.ub = oxe;
-%         updateConstrProp(nlp,'o_endeffx_LR','last',arginoxe);
-%         arginoye.lb = oye;
-%         arginoye.ub = oye;
-%         updateConstrProp(nlp,'o_endeffy_LR','last',arginoye);
-%         arginoze.lb = oze;
-%         arginoze.ub = oze;
-%         updateConstrProp(nlp,'o_endeffz_LR','last',arginoze);
-%         
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         %%%% Box constraints in each subregion
-%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         n_node = nlp.NumNode;
-%         p_min = Behavior.SubBehavior(i).box.p_min;
-%         p_max = Behavior.SubBehavior(i).box.p_max;
-%         
-%         pxmin = p_min(1);        pymin = p_min(2);        pzmin = p_min(3);
-%         pxmax = p_max(1);         pymax = p_max(2);         pzmax = p_max(3);
-%         
-%         arginboxpx.lb = pxmin;
-%         arginboxpx.ub = pxmax;
-%         updateConstrProp(nlp,'endeffx_sca_LR',2:n_node-1,arginboxpx);
-%         arginboxpy.lb = pymin;
-%         arginboxpy.ub = pymax;
-%         updateConstrProp(nlp,'endeffy_sca_LR',2:n_node-1,arginboxpy);
-%         arginboxpz.lb = pzmin;
-%         arginboxpz.ub = pzmax;
-%         updateConstrProp(nlp,'endeffz_sca_LR',2:n_node-1,arginboxpz);
-%         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %%%% Link the NLP problem to a NLP solver
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,11 +109,23 @@ num_grid = 10;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         if load_initial_guess && ~isempty(guess_file)
             [params,~] = loadParam(guess_file);
-            [sol, info] = optimize(solver, params.sol);
+            [dimVars, ~,~] = getVarInfo(nlp);
+            if size(params.sol,1) == dimVars
+                x0 = params.sol;
+            else
+                warning('Initial guess file not used. Incorrect number of variables');
+                x0 = [];
+            end
         else
-            [sol, info] = optimize(solver);
+            x0 = [];
         end
 
+        if isempty(x0)
+            [sol, info] = optimize(solver);
+        else
+            [sol, info] = optimize(solver, x0);
+        end
+            
         %%
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Export and Plot the trajectory %
