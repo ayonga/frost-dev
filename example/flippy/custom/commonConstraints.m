@@ -42,7 +42,7 @@ function nlp = commonConstraints(nlp, bounds, varargin)
 %     addConstraint(nlp,output_constraints.Name,'last',output_constraints);
     
     %% Costs are added here
-%     nlp = ConfigureCollisionConstraints(nlp);
+    nlp = ConfigureCollisionConstraints(nlp);
         
 %     w = SymVariable('w',[2,1]);
     w = SymVariable('w');

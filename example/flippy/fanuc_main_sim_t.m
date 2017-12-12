@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Load Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-old_param_file = [cur,'/param/fanuc_6DOF_2017_09_07_1655B2A.yaml'];
+old_param_file = [cur,'/param/scoop/10/fanuc_6DOF_guess_scoop_grids_10_start_0p56x0y0p11z_end_0p68x0y0p09z.yaml'];
 
 [params,x0] = loadParam(old_param_file);
 

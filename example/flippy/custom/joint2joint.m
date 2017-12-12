@@ -39,7 +39,7 @@ end
     end 
     if ~isempty(dqstart)
         configdq = SymFunction(['configdq_' plant.Name],dx,{dx});
-        addNodeConstraint(nlp, configdq, {'dx'}, 'first', -0.03, 0.03, 'Nonlinear');
+%         addNodeConstraint(nlp, configdq, {'dx'}, 'first', -0.03, 0.03, 'Nonlinear');
         addNodeConstraint(nlp, configdq, {'dx'}, 'last', -0.02, 0.02, 'Nonlinear');
     end    
 

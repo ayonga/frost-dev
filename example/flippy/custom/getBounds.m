@@ -68,9 +68,9 @@ function bounds = getBounds(flippy,behavior_name)
             % time duration
             bounds.time.t0.lb = 0; % starting time
             bounds.time.t0.ub = 0;
-            bounds.time.tf.lb = 0.12; % terminating time
+            bounds.time.tf.lb = 0.15; % terminating time
             bounds.time.tf.ub = 1.0;
-            bounds.time.duration.lb = 0.12; % duration (optional)
+            bounds.time.duration.lb = 0.15; % duration (optional)
             bounds.time.duration.ub = 1.0;
         case 'pickup'
             % position, velocity, and acceleration
@@ -83,10 +83,10 @@ function bounds = getBounds(flippy,behavior_name)
             % time duration
             bounds.time.t0.lb = 0; % starting time
             bounds.time.t0.ub = 0;
-            bounds.time.tf.lb = 0.05; % terminating time
-            bounds.time.tf.ub = 1.0;
-            bounds.time.duration.lb = 0.05; % duration (optional)
-            bounds.time.duration.ub = 1.0;
+            bounds.time.tf.lb = 0.06; % terminating time
+            bounds.time.tf.ub = 0.5;
+            bounds.time.duration.lb = 0.06; % duration (optional)
+            bounds.time.duration.ub = 0.5;
         case 'flipdrop'
             % position, velocity, and acceleration
             bounds.states.x.lb = [ -pi/2,   -pi/2,  -1,  -2*pi/3, 0,   - 2*pi ]; % -1.09 for joint 3 is the minimum limit

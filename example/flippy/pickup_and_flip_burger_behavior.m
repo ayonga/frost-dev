@@ -58,7 +58,7 @@ Behavior = validatePickAndFlipBehaviorBox(Behavior, boxes, pose_home, pose_start
 
 %% The main script to run the burger behavior optimization
 
-load_initial_guess = false; % not sure if this should allowed
+load_initial_guess = true; % not sure if this should allowed
 if load_initial_guess
     disp('Load initial guess enabled');
 end

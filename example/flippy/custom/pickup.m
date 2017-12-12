@@ -38,8 +38,8 @@ end
         dq_init_U = dqstart +0.1;
         configdq = SymFunction(['configdq_' plant.Name],dx,{dx});
 %         addNodeConstraint(nlp, configdq, {'dx'}, 'first', dq_init_L, dq_init_U, 'Nonlinear');
-        addNodeConstraint(nlp, configdq, {'dx'}, 'first', -0.03, 0.03, 'Nonlinear');
-        addNodeConstraint(nlp, configdq, {'dx'}, 'last', -0.02, 0.02, 'Nonlinear');
+%         addNodeConstraint(nlp, configdq, {'dx'}, 'first', -0.03, 0.03, 'Nonlinear');
+        addNodeConstraint(nlp, configdq, {'dx'}, 'last', -0.1, 0.1, 'Nonlinear');
     end
     %%
     spatula_link = plant.Links(getLinkIndices(plant, 'link_6'));

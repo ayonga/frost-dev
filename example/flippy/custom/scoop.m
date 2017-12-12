@@ -46,8 +46,8 @@ end
         dq_init_U = dqstart +0.05;
         configdq = SymFunction(['configdq_' plant.Name],dx,{dx});
 %         addNodeConstraint(nlp, configdq, {'dx'}, 'first', dq_init_L, dq_init_U, 'Nonlinear');
-        addNodeConstraint(nlp, configdq, {'dx'}, 'first', -0.03, 0.03, 'Nonlinear');
-        addNodeConstraint(nlp, configdq, {'dx'}, 'last', -0.02, 0.02, 'Nonlinear');
+%         addNodeConstraint(nlp, configdq, {'dx'}, 'first', -0.4, 0.4, 'Nonlinear');
+%         addNodeConstraint(nlp, configdq, {'dx'}, 'last', -0.4, 0.4, 'Nonlinear');
     end    
     %%
     spatula_link = plant.Links(getLinkIndices(plant, 'link_6'));
@@ -114,14 +114,14 @@ end
     o_endeffy = SymFunction(['o_endeffy_' plant.Name],o_y,{x});
     o_endeffz = SymFunction(['o_endeffz_' plant.Name],o_z,{x});
 
-    addNodeConstraint(nlp, o_endeffx, {'x'}, 'except-terminal', o_start(1)-0.1, o_start(1)+0.1, 'Nonlinear');
+    addNodeConstraint(nlp, o_endeffx, {'x'}, 'except-terminal', o_start(1)-0.2, o_start(1)+0.2, 'Nonlinear');
     addNodeConstraint(nlp, o_endeffx, {'x'}, 'first', o_start(1), o_start(1), 'Nonlinear');
     addNodeConstraint(nlp, o_endeffx, {'x'}, 'last',   o_burger_location(1), o_burger_location(1), 'Nonlinear');
 
     addNodeConstraint(nlp, o_endeffy, {'x'}, 'first', o_start(2), o_start(2), 'Nonlinear');
     addNodeConstraint(nlp, o_endeffy, {'x'}, 'last',   o_burger_location(2), o_burger_location(2), 'Nonlinear');
 
-    addNodeConstraint(nlp, o_endeffz, {'x'}, 'all', o_start(3)-0.1, o_start(3)+0.1, 'Nonlinear'); 
+    addNodeConstraint(nlp, o_endeffz, {'x'}, 'all', o_start(3)-0.2, o_start(3)+0.2, 'Nonlinear'); 
     addNodeConstraint(nlp, o_endeffz, {'x'}, 'first', o_start(3), o_start(3), 'Nonlinear');
     addNodeConstraint(nlp, o_endeffz, {'x'}, 'last',   o_burger_location(3), o_burger_location(3), 'Nonlinear');
     

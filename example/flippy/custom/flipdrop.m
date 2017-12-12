@@ -26,7 +26,7 @@ end
 %%  Specify burger location. Starting position of spatula is 2cm above burger location
 
     n_node = nlp.NumNode;
-    inflection_node = round(0.6*n_node);
+    inflection_node = round(0.65*n_node);
   
     %% configuration constraints
     
@@ -173,7 +173,7 @@ end
 	front_vector = SymFunction(['front_vector_' plant.Name],front_vector_spatula,{x});
     
     %     addNodeConstraint(nlp, normal_vector, {'x'}, 'first', [-0.1,-0.1,0.9], [0.1,0.1,1], 'Nonlinear');
-    addNodeConstraint(nlp, normal_vector, {'x'}, 'last', [-0.5,0.0,-1], [0.0,0.5,-0.8], 'Nonlinear');
+    addNodeConstraint(nlp, normal_vector, {'x'}, 'last', [-0.5,-0.5,-1], [0.0,0.5,-0.8], 'Nonlinear');
     addNodeConstraint(nlp, front_vector, {'x'}, 'all', [0.6,-1,-1], [1,1,1], 'Nonlinear');
     
     slipping_func = SymFunction(['slipping_sca_' plant.Name],dot_product_normal_to_acceleration,{x,dx,ddx});

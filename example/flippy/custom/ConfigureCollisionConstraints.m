@@ -70,7 +70,7 @@ function nlp = ConfigureCollisionConstraints(nlp, planeobstacleobject)
     %% create the w struct inorder to create collision checker
 %     nw = nPlanes*(nstate+1);
     nw = nSubRegions;
-    nw = 1;
+%     nw = 2;
     w = SymVariable('w',[nw,1]);
    
     % creating lambda struct
@@ -82,25 +82,25 @@ function nlp = ConfigureCollisionConstraints(nlp, planeobstacleobject)
 
     nlp.addVariable('w', 'all', w_var);
     
-    for i = 1:nSubRegions
-        SubRegion = Region.SubRegion(i);
-        for j = 1:SubRegion.nPlanes
-            point = SubRegion.Planes(j).point;
-            normal = SubRegion.Planes(j).normal;
-            if i == 2
-                collision_linear_constraints = (p_spatula - point)*normal' + w;
-            else
-                collision_linear_constraints = (p_spatula - point)*normal' + (-w+100);
-            end
-                
-            collision_linear_constraints_func = SymFunction(['collision_constraints_',...
-                num2str(i),...
-                num2str(j),...
-                plant.Name],collision_linear_constraints,{x,w});
-            
-            addNodeConstraint(nlp,collision_linear_constraints_func,{'x','w'},'all',0,Inf,'Linear');
-        end
-    end
+%     for i = 1:nSubRegions
+%         SubRegion = Region.SubRegion(i);
+%         for j = 1:SubRegion.nPlanes
+%             point = SubRegion.Planes(j).point;
+%             normal = SubRegion.Planes(j).normal;
+%             if i == 2
+%                 collision_linear_constraints = (p_spatula - point)*normal' + w;
+%             else
+%                 collision_linear_constraints = (p_spatula - point)*normal' + (-w+100);
+%             end
+%                 
+%             collision_linear_constraints_func = SymFunction(['collision_constraints_',...
+%                 num2str(i),...
+%                 num2str(j),...
+%                 plant.Name],collision_linear_constraints,{x,w});
+%             
+%             addNodeConstraint(nlp,collision_linear_constraints_func,{'x','w'},'all',0,Inf,'Linear');
+%         end
+%     end
     
 %     w_sum = w(1)+w(2);
 % %     w_sum = -w+100;
