@@ -80,9 +80,9 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
     
     param_names = fieldnames(plant.Params);
     params = struct();
-    if ~isempty(param_names)        
+    if ~isempty(param_names)
         for j=1:length(param_names)
-            name = param_names{j};         
+            name = param_names{j};
             try
                 params.(name) = sol([vars.(name)(1).Indices]);
             catch
