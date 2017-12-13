@@ -27,7 +27,7 @@ delay_set = true;
 % time by 7-10 faster. 
 % Set it to false for the first time, and save expressions after loaded the
 % model. 
-load_sym  = true; % if true, it will load symbolic expression from 
+load_sym  = false; % if true, it will load symbolic expression from 
 if load_sym    
     load_path   = 'gen/sym'; % path to export binary Mathematica symbolic expression (MX) files
     utils.init_path(load_path);
@@ -39,20 +39,20 @@ end
 robot = sys.LoadModel(urdf, load_path, delay_set);
 
 % load hybrid system
-system = sys.LoadSystem(robot, load_path);
+system = sys.LoadStandingSystem(robot, load_path);
 
 %% Load optimization problem
 % get the boundary values, needs to be manually set all boundaries.
-bounds = opt.GetBounds(robot);
+bounds = opt.GetStandingBounds(robot);
 
 % load problem
-nlp = opt.LoadProblem(system, bounds, load_path);
+nlp = opt.LoadStandingProblem(system, bounds, load_path);
 
 %% Compile stuff if needed (only need to run for the first time)
 compileObjective(nlp,[],[],export_path);
 
 % % exclude dynamics_equations
-% compileConstraint(nlp,[],[],export_path,{'dynamics_equation'}); 
+compileConstraint(nlp,[],[],export_path,{'dynamics_equation'}); 
 
 % % compile everything
 compileConstraint(nlp,[],[],export_path);
@@ -88,7 +88,7 @@ system.saveExpression(load_path); % run this after loaded the optimization probl
 
 
 %% you can update bounds without reloading the problem. It is much much faster!!!
-bounds = opt.GetBounds(robot);
+bounds = opt.GetStandingBounds(robot);
 opt.updateVariableBounds(nlp, bounds);
 
 % removeConstraint(nlp.Phase(1),'u_friction_cone_RightSole');

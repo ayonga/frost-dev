@@ -12,10 +12,13 @@ function obj = compile(obj, export_path, varargin)
     %   Namespace: the namespace of the function @type char
     
     
+    if ~isempty(obj.Gamma.Nodes)
+        cellfun(@(x)compile(x,export_path,varargin{:}), ...
+            obj.Gamma.Nodes.Domain, 'UniformOutput',false);
+    end
     
-    cellfun(@(x)compile(x,export_path,varargin{:}), ...
-        obj.Gamma.Nodes.Domain, 'UniformOutput',false);
-    cellfun(@(x)compile(x,export_path,varargin{:}), ...
-        obj.Gamma.Edges.Guard, 'UniformOutput',false);
-    
+    if ~isempty(obj.Gamma.Edges)
+        cellfun(@(x)compile(x,export_path,varargin{:}), ...
+            obj.Gamma.Edges.Guard, 'UniformOutput',false);
+    end
 end

@@ -7,10 +7,14 @@ function obj = saveExpression(obj, export_path, varargin)
     %  varargin: variable input parameters @type varargin
     %   ForceExport: force the export @type logical
     
-    cellfun(@(x)saveExpression(x,export_path,varargin{:}), ...
-        obj.Gamma.Nodes.Domain, 'UniformOutput',false);
-    cellfun(@(x)saveExpression(x,export_path,varargin{:}), ...
-        obj.Gamma.Edges.Guard, 'UniformOutput',false);
+    if ~isempty(obj.Gamma.Nodes)
+        cellfun(@(x)saveExpression(x,export_path,varargin{:}), ...
+            obj.Gamma.Nodes.Domain, 'UniformOutput',false);
+    end
     
+    if ~isempty(obj.Gamma.Edges)
+        cellfun(@(x)saveExpression(x,export_path,varargin{:}), ...
+            obj.Gamma.Edges.Guard, 'UniformOutput',false);
+    end
     
 end
