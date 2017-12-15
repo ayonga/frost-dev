@@ -82,6 +82,25 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
         logger = [];
     end
     
+    if nargin > 8 && ~isempty(options)
+        validateattributes(options, {'struct'},...
+            {},'ContinuousDynamics.simulate','options',9);
+        odeopts = odeset(odeopts, options);
+    end
+
+    if nargin > 9 && ~isempty(solver)
+        validateattributes(solver, {'function_handle'},...
+            {},'ContinuousDynamics.simulate','solver',10);
+    else
+        solver = @ode45;
+    end
+
+    % pre-process
+    if ~isempty(obj.PreProcess)
+        params = obj.PreProcess(obj, t0, x0, controller, params);
+        obj.setParamValue(params);
+    end    
+    
     % configure the event functions
     if nargin > 7 && ~isempty(eventnames)
         events_list = fieldnames(obj.EventFuncs);
@@ -109,27 +128,6 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
             end
         end
     end
-    
-    
-    
-    if nargin > 8 && ~isempty(options)
-        validateattributes(options, {'struct'},...
-            {},'ContinuousDynamics.simulate','options',9);
-        odeopts = odeset(odeopts, options);
-    end
-
-    if nargin > 9 && ~isempty(solver)
-        validateattributes(solver, {'function_handle'},...
-            {},'ContinuousDynamics.simulate','solver',10);
-    else
-        solver = @ode45;
-    end
-
-    % pre-process
-    if ~isempty(obj.PreProcess)
-        params = obj.PreProcess(obj, t0, x0, controller, params);
-        obj.setParamValue(params);
-    end    
     
     % run the forward simulation
     sol = solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
