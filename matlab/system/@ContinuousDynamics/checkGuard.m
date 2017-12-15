@@ -17,7 +17,7 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
     % if any of the event function is input-dependent, then call
     % calcDynamics method.
     if any([eventfuncs.InputDependent])
-        calcDynamics(obj, t, x, controller, params);
+        calcDynamics(obj, t, x, controller, params, []);
     else
         if strcmp(obj.Type,'FirstOrder')
             obj.t_ = t;
