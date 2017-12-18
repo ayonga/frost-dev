@@ -1,6 +1,9 @@
 
 cur = fileparts(mfilename('fullpath'));
 export_path = fullfile(cur,'export');
+if ~exist(export_path)
+    mkdir(export_path);
+end
 addpath(export_path);
 
 
