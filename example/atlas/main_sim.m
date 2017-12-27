@@ -20,14 +20,14 @@ urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
 % if 'delay_set' is true, the computation of system dynamics (Coriolis
 % vector) will be delayed. Delaying this operation will save significant
 % loading time.
-delay_set = true;
+delay_set = false;
 
 % if 'load_sym' is true, it will load symbolic expressions from previously
 % save external files instead of re-compute them. It reduce the loading
 % time by 7-10 faster. 
 % Set it to false for the first time, and save expressions after loaded the
 % model. 
-load_sym  = true; % if true, it will load symbolic expression from 
+load_sym  = false; % if true, it will load symbolic expression from 
 if load_sym    
     load_path   = 'gen/sym'; % path to export binary Mathematica symbolic expression (MX) files
     utils.init_path(load_path);
