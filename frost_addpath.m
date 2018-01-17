@@ -24,7 +24,7 @@ addpath_matlab_utilities('general', 'mex',...
 % Add third party packages/libraries path
 addpath(fullfile(cur, 'third'));
 addpath_thirdparty_packages('GetFullPath',...
-   'mathlink','ipopt','sparse2','yaml');
+   'mathlink','ipopt','sparse2','yaml','snopt');
 
 addpath(fullfile(cur, 'mathematica'));
 initialize_mathlink();
