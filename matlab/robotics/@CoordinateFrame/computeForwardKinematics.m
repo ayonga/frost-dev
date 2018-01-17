@@ -6,7 +6,7 @@ function g = computeForwardKinematics(obj)
     % g: the forward transformation matrix under the coordinate
     % system @type SymExpression
     
-    frame = obj.Reference;
+    frame = obj;
     while ~isprop(frame, 'TwistPairs') %isempty(frame.TwistPairs)
         frame = frame.Reference;
         if isempty(frame)

@@ -9,7 +9,7 @@ function Jac = computeSpatialJacobian(obj, nDof)
     % Return values:
     % Jac: the Jacobian matrix @type SymExpression
     
-    frame = obj.Reference;
+    frame = obj;
     while ~isprop(frame, 'TwistPairs') %isempty(frame.TwistPairs)
         frame = frame.Reference;
         if isempty(frame)

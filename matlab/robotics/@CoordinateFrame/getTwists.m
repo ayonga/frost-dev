@@ -39,10 +39,10 @@ function c_str = getTwists(obj, p)
     for i=1:n_pos
         if n_frame > 1 % multiple frames
             c_str{i}.gst0 = obj(i).gst0*CoordinateFrame.RPToHomogeneous(eye(3), p(i,:));
-            ref = obj(i).Reference;
+            ref = obj(i);
         else  % single frame
             c_str{i}.gst0 = obj.gst0*CoordinateFrame.RPToHomogeneous(eye(3), p(i,:));
-            ref = obj.Reference;
+            ref = obj;
         end
             
         
