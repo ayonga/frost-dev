@@ -11,6 +11,7 @@ addpath(frost_path);
 frost_addpath; % initialize FROST
 export_path = 'gen/opt'; % path to export compiled C++ and MEX files
 utils.init_path(export_path);
+addpath('gen/sim');
 %% robot model settings
 cur = utils.get_root_path();
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
@@ -38,7 +39,7 @@ end
 % load the robot model
 robot = sys.LoadModel(urdf, load_path, delay_set);
 
-% load hybrid system
+%% load hybrid system
 system = sys.LoadSystem(robot, load_path);
 
 
@@ -69,7 +70,7 @@ logger = system.simulate(0, x0, [], [],'NumCycle',4);
 toc
 
 %% animation
-anim = plot.LoadSimAnimator(robot, logger, 'SkipExporting',true);
+anim = plot.LoadSimAnimator(robot, logger, 'SkipExporting',false);
 
 %% you can also plot the states and torques
 plot.plotSimStates(system,logger);

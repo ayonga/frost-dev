@@ -26,7 +26,7 @@ function robot = LoadModel(urdf, load_path, delay_set)
     for i=1:6
         base(i).Limit = limits(i);
     end
-    robot = RobotLinks(urdf, base, load_path, 'removeFixedJoints', false);
+    robot = AtlasModel(urdf, base, load_path);
     
     
     
