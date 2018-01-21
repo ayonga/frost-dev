@@ -18,7 +18,7 @@ function [sol, info] = optimize(obj, x0)
     cmul = 0*clow;
     cstate = 0*clow;
     
-    olow = 0;
+    olow = -inf;
     oupp = inf;
     omul = 0;
     ostate = 0;
@@ -43,8 +43,10 @@ function [sol, info] = optimize(obj, x0)
     
     [~, ~, Objrow] = userFunc(x0, obj.Objective, obj.Constraint, dimVars, obj.Options.UseMexSparse);
     
+    gradientStructure = @()SnoptGradientStructure(obj.Objective, dimVars, obj.Options.UseMexSparse);
     jacobianStructure = @()SnoptJacobianStructure(obj.Constraint, dimVars, obj.Options.UseMexSparse);
-    [iJ, jJ] = find(jacobianStructure());
+    J = [jacobianStructure();gradientStructure()];
+    [iJ, jJ] = find(J);
         
     [sol, info] = snopt( x0, xlow, xupp, xmul, xstate, ...
                          Flow, Fupp, Fmul, Fstate, ...
@@ -62,7 +64,7 @@ function [F, J, Objrow] = userFunc(x, objective, constraint, dimVars, use_mex)
     
     F = [Fcon; Fobj];
     J = [Jcon; Jobj];
-    
+    drawnow;
     % Specify which are correspond to the objective function
     Objrow = length(Fcon) + 1;    
 end
@@ -167,8 +169,31 @@ end
                 J_val, 1, dimVars, objective.nnzJac);
         end
     end
-    %%
     
+    %% objective Gradient structure
+    function [J] = SnoptGradientStructure(objective, dimVars, use_mex)
+        % nested function that commputes the sparsity structure of the
+        % first-order derivatives (Jacobian) of the constraints of the NLP
+        % problem
+        %
+        % Parameters:
+        %  constraint: a structure of arrays that contains the information
+        %  of all constraints
+        %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
+        
+        if use_mex
+            J = sparse2(objective.nzJacRows, objective.nzJacCols,...
+                ones(objective.nnzJac,1), 1, ...
+                dimVars, objective.nnzJac);
+        else
+            J = sparse(objective.nzJacRows, objective.nzJacCols,...
+                ones(objective.nnzJac,1), 1, ...
+                dimVars, objective.nnzJac);
+        
+        end
+    end
     %% constraints Jacobian
     function [J] = SnoptJacobian(x, constraint, dimVars, use_mex)
         % nested function that commputes the first-order derivatives

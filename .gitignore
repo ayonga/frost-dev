@@ -39,6 +39,8 @@
 &.mexmaci64
 *.o
 *.hh
+*.pdb
+*.9
 ## temp files from adigator
 #.DS_Store
 

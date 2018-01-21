@@ -71,7 +71,7 @@ nlp = regConstraint(nlp,constrs);
 nlp.update;
 nlp.compileConstraint(export_path);
 nlp.compileObjective(export_path);
-
+% 
 extraOpts.fixed_variable_treatment = 'RELAX_BOUNDS';
 extraOpts.point_perturbation_radius = 0;
 extraOpts.jac_c_constant        = 'yes';
@@ -80,7 +80,10 @@ extraOpts.derivative_test = 'first-order';
 extraOpts.derivative_test_perturbation = 1e-7;
 
 solverApp = IpoptApplication(nlp, extraOpts);
+[sol, info] = optimize(solverApp);
 
-
+solverApp = SnoptApplication(nlp);
+nlp051.spc = which('nlp051.spc');
+snspec(nlp051.spc);
 
 [sol, info] = optimize(solverApp);

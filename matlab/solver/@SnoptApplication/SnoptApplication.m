@@ -1,5 +1,5 @@
 classdef SnoptApplication < SolverApplication
-    % SnoptApplication defines an interface application class for IPOPT solvers
+    % SnoptApplication defines an interface application class for SNOPT solvers
     % 
     %
     % @author Jacob Reher @date 11/9/2017
@@ -52,8 +52,8 @@ classdef SnoptApplication < SolverApplication
             % snopt options
             options.initialguess = 'typical';
             
-            % default IPOPT options
-            options.snopt.name = 'Cassie';
+            % default SNOPT options
+            options.snopt.name = nlp.Name;
             
             if nargin > 1
                 options.snopt = struct_overlay(options.snopt,new_opts,{'AllowNew',true});
