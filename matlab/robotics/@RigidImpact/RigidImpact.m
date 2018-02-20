@@ -36,7 +36,7 @@ classdef RigidImpact < DiscreteDynamics
     
     end
     
-    properties (Access=private)
+    properties (Access=public)
         
         % The mass matrix of the RigidLinks object
         %
