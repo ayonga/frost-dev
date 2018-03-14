@@ -122,7 +122,7 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
             end
             if any(event_indices)
                 
-                eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices~=0),'UniformOutput',false);
+                eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices),'UniformOutput',false);
                 eventfuncs = vertcat(eventfuncs{:});
                 odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, controller, params, eventfuncs));
             end

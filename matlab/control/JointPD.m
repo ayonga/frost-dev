@@ -54,7 +54,7 @@ classdef JointPD < Controller
             dqerr = dqa - dqd;
             
             % feedback controller
-            u = - obj.Params.kp*qerr - obj.Params.kd*dqerr;
+            u = - obj.Param.kp*qerr - obj.Param.kd*dqerr;
             
             
             if ~isempty(logger)
