@@ -10,7 +10,7 @@ function bounds = GetBounds(model, speed)
     
     
     
-    model_bounds.options.enforceVirtualConstraints = false;
+    model_bounds.options.enforceVirtualConstraints = true;
     
     % fixed joint constraint wrench
     model_bounds.inputs.ConstraintWrench.fqfixed.lb = -10000;

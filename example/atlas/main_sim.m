@@ -9,9 +9,9 @@ restoredefaultpath; matlabrc;
 frost_path  = '../../';
 addpath(frost_path);
 frost_addpath; % initialize FROST
-export_path = 'gen/opt'; % path to export compiled C++ and MEX files
+export_path = 'gen/sim'; % path to export compiled C++ and MEX files
 utils.init_path(export_path);
-addpath('gen/sim');
+% addpath('gen/sim');
 %% robot model settings
 cur = utils.get_root_path();
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
@@ -21,7 +21,7 @@ urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
 % if 'delay_set' is true, the computation of system dynamics (Coriolis
 % vector) will be delayed. Delaying this operation will save significant
 % loading time.
-delay_set = false;
+delay_set = true;
 
 % if 'load_sym' is true, it will load symbolic expressions from previously
 % save external files instead of re-compute them. It reduce the loading
@@ -48,7 +48,7 @@ system = sys.LoadSystem(robot, load_path);
 system.compile(export_path);
 
 %% load optimal gait (and parameters)
-param = load('local/good_gait.mat');
+param = load('local/tmp_gait.mat');
 % right-stance parameters
 r_stance_param = param.gait(1).params;
 r_stance_param.epsilon = 10;
@@ -70,7 +70,7 @@ logger = system.simulate(0, x0, [], [],'NumCycle',4);
 toc
 
 %% animation
-anim = plot.LoadSimAnimator(robot, logger, 'SkipExporting',false);
+anim = plot.LoadSimAnimator(robot, logger, 'SkipExporting',true);
 
 %% you can also plot the states and torques
 plot.plotSimStates(system,logger);

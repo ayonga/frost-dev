@@ -27,7 +27,7 @@ delay_set = true;
 % time by 7-10 faster. 
 % Set it to false for the first time, and save expressions after loaded the
 % model. 
-load_sym  = true; % if true, it will load symbolic expression from 
+load_sym  = false; % if true, it will load symbolic expression from 
 if load_sym    
     load_path   = 'gen/sym'; % path to export binary Mathematica symbolic expression (MX) files
     utils.init_path(load_path);
@@ -71,13 +71,11 @@ compileConstraint(nlp,[],[],export_path);
 % 
 % compileConstraint(nlp,2,'dxDiscreteMapLeftImpact',export_path);
 % compileConstraint(nlp,4,'dxDiscreteMapRightImpact',export_path);
-% compileConstraint(nlp,[],{'tCont'
-%     'timeDuration'
-%     'pqfixedCont'
-%     'pRightSoleCont'
-%     'pLeftSoleCont'
-%     'apositionCont'
-%     'ppositionCont'},export_path);
+compileConstraint(nlp,[],{'y_position_RightStance'
+    'd1y_position_RightStance'
+    'position_output_dynamics'
+    'y_position_LeftStance'
+    'd1y_position_LeftStance'},export_path);
 % compileConstraint(nlp,'RightStance',{...
 %     'step_distance_RightStance'},export_path);
 %% Save expression (only need to run for the first time)
@@ -98,7 +96,7 @@ opt.updateVariableBounds(nlp, bounds);
 
 
 %% update initial condition if use pre-existing gaits
-param = load('local/good_gait.mat');
+param = load('local/tmp_gait.mat');
 opt.updateInitCondition(nlp,param.gait);
 
 
@@ -114,7 +112,7 @@ opt.updateInitCondition(nlp,param.gait);
 
 
 %% save
-save('local/good_gait.mat','gait','sol','info','bounds');
+save('local/tmp_gait.mat','gait','sol','info','bounds');
 
 
 
