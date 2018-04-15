@@ -2,18 +2,21 @@
 clear; clc;
 cur = pwd;
 addpath(genpath(cur));
+
+addpath('../../');
+frost_addpath;
 export_path = fullfile(cur, 'gen/');
 % if load_path is empty, it will not load any expression.
 % if non-empty and assigned valid directory, then symbolic expressions will
 % be loaded  from the MX binary files from the given directory.
 load_path = [];%fullfile(cur, 'gen/sym');
-delay_set = true;
+delay_set = false;
 COMPILE = true;
 
 % Load model
 rabbit = RABBIT('urdf/five_link_walker.urdf');
 if isempty(load_path)
-    rabbit.configureDynamics('DelayCoriolisSet',true);
+    rabbit.configureDynamics('DelayCoriolisSet',delay_set);
 else
     % load symbolic expression for the dynamics equations
     rabbit.loadDynamics(load_path, delay_set);
