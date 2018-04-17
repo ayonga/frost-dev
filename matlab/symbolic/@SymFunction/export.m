@@ -50,12 +50,17 @@ function f = export(obj, export_path, varargin)
     else
         params = obj.Params;
     end
-    opts = rmfield(opts,'StackVariable');
     
     
-    export_opts = opts;   
-    export_opts.Vars = [vars, params];
+    
+    export_opts = opts;  
+    if opts.StackVariable
+        export_opts.Vars = [flatten(vars{:}),flatten(params{:})];
+    else
+        export_opts.Vars = [vars, params];
+    end
     export_opts.File = fullfile(export_path, obj.Name);
+    export_opts = rmfield(export_opts,'StackVariable');
     % The argument list cannot be empty. Use dummy variable
     if isempty(export_opts.Vars)
         export_opts.Vars = SymVariable('var'); 
