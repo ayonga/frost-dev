@@ -23,7 +23,7 @@ function [obj] = compileObjective(obj, phase, cost, export_path, exclude, vararg
     
     opts = struct(varargin{:});
     % overwrite non-changable options
-    opts.StackVariable = false;
+    %opts.StackVariable = false;
     opts.Namespace = obj.Name;
 
     if isempty(phase)

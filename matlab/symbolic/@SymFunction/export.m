@@ -40,6 +40,7 @@ function f = export(obj, export_path, varargin)
     if ~isempty(obj.Vars) && opts.StackVariable
         vars = cellfun(@(x)flatten(x), obj.Vars,'UniformOutput',false);
         vars = {[vars{:}]};
+        vars = flatten(vars{:});
     else
         vars = obj.Vars;
     end
@@ -47,18 +48,15 @@ function f = export(obj, export_path, varargin)
     if ~isempty(obj.Params) && opts.StackVariable
         params = cellfun(@(x)flatten(x), obj.Params,'UniformOutput',false);
         params = {[params{:}]};
+        params = flatten(params{:});
     else
         params = obj.Params;
     end
     
     
     
-    export_opts = opts;  
-    if opts.StackVariable
-        export_opts.Vars = [flatten(vars{:}),flatten(params{:})];
-    else
-        export_opts.Vars = [vars, params];
-    end
+    export_opts = opts;
+    export_opts.Vars = [vars, params];
     export_opts.File = fullfile(export_path, obj.Name);
     export_opts = rmfield(export_opts,'StackVariable');
     % The argument list cannot be empty. Use dummy variable
