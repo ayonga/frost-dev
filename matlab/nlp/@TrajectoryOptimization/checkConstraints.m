@@ -35,10 +35,11 @@ function [yc, cl, cu] = checkConstraints(obj, x, tol, output_file, permission)
         for k=1:n_node         
             constr = constr_array(k);
             if constr.Dimension ~=0
-                fprintf(f_id, '***************************************\n');
+                fprintf(f_id, '******************************************************************************\n');
+                fprintf(f_id, 'Domain: %s \t', obj.Name);
                 fprintf(f_id, 'Constraint: %s \t', constr_name);
                 fprintf(f_id, 'Node: %d \n', k);
-                fprintf(f_id, '---------------------------------------\n');
+                fprintf(f_id, '------------------------------------------------------------------------------\n');
                 dep_constr = getSummands(constr);
                 cl{j,k} = constr.LowerBound;
                 cu{j,k} = constr.UpperBound;
