@@ -31,9 +31,9 @@ function robot = LoadModel(urdf, load_path, delay_set)
     
     
     if isempty(load_path)
-        configureDynamics(robot, 'DelayCoriolisSet', delay_set);
+        configureDynamics(robot, 'DelayCoriolisSet', delay_set, 'OmitCoriolisSet', true);
     else
-        loadDynamics(robot, load_path, delay_set);
+        loadDynamics(robot, load_path, delay_set, 'OmitCoriolisSet', true);
     end
 end
 
