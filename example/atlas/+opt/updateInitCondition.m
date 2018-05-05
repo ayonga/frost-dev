@@ -7,11 +7,16 @@ function [nlp] = updateInitCondition(nlp, init_params)
             end
 
             for k = 1:nlp.Phase(i).NumNode
-                if any(size(init_params(i).states.(fields{j})(:,k)) ~= size(nlp.Phase(i).OptVarTable.(fields{j})(k).InitialValue))
+                if k > size(init_params(i).states.(fields{j}),2)
+                    l = size(init_params(i).states.(fields{j}),2);
+                else
+                    l = k;
+                end
+                if any(size(init_params(i).states.(fields{j})(:,l)) ~= size(nlp.Phase(i).OptVarTable.(fields{j})(k).InitialValue))
                     continue;
                 end
                 
-                nlp.Phase(i).updateVariableProp(fields{j}, k, 'x0', init_params(i).states.(fields{j})(:,k));
+                nlp.Phase(i).updateVariableProp(fields{j}, k, 'x0', init_params(i).states.(fields{j})(:,l));
             end
         end
 
@@ -22,11 +27,16 @@ function [nlp] = updateInitCondition(nlp, init_params)
             end
 
             for k = 1:nlp.Phase(i).NumNode
-                if any(size(init_params(i).inputs.(fields{j})(:,k)) ~= size(nlp.Phase(i).OptVarTable.(fields{j})(k).InitialValue))
+                if k > size(init_params(i).inputs.(fields{j}),2)
+                    l = size(init_params(i).inputs.(fields{j}),2);
+                else
+                    l = k;
+                end
+                if any(size(init_params(i).inputs.(fields{j})(:,l)) ~= size(nlp.Phase(i).OptVarTable.(fields{j})(k).InitialValue))
                     continue;
                 end
                 
-                nlp.Phase(i).updateVariableProp(fields{j}, k, 'x0', init_params(i).inputs.(fields{j})(:,k));
+                nlp.Phase(i).updateVariableProp(fields{j}, k, 'x0', init_params(i).inputs.(fields{j})(:,l));
             end
         end
 
@@ -47,7 +57,7 @@ function [nlp] = updateInitCondition(nlp, init_params)
         end
 
         if any(ismember(nlp.Phase(i).OptVarTable.Properties.VariableNames, 'T'))
-            T = [init_params(i).tspan(1); init_params(i).tspan(end)] - init_params(i).tspan(1);
+            T = [init_params(i).tspan(1); init_params(i).tspan(end)];% - init_params(i).tspan(1);
             if nlp.Phase(i).Options.DistributeTimeVariable
                 nlp.Phase(i).updateVariableProp('T', 'all', 'x0', T);
             else

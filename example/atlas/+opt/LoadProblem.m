@@ -16,8 +16,8 @@ function nlp  = LoadProblem(system, bounds, load_path)
     right_impact = system.Gamma.Edges.Guard{2};
     right_impact.UserNlpConstraint = @opt.callback.RightImpactConstraints; % right impact
     
-    num_grid.RightStance = 10;
-    num_grid.LeftStance = 10;
+    num_grid.RightStance = 15;
+    num_grid.LeftStance = 15;
     
     options = {'CollocationScheme','HermiteSimpson',...
         'EqualityConstraintBoundary', 1e-4,...
