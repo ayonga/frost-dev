@@ -24,11 +24,15 @@ function [new_gait, sol, info, total_time] = solve(nlp, x0, info)
         solver.Options.lambda = info.lambda;
     end
     
-    solver.Options.ipopt.acceptable_tol = 1e-2;
-    solver.Options.ipopt.acceptable_constr_viol_tol = 1e-4;
-    solver.Options.ipopt.acceptable_dual_inf_tol = 1e-2;
-    solver.Options.ipopt.acceptable_compl_inf_tol = 1e-2;
+    %     solver.Options.ipopt.acceptable_tol = 1e-2;
+    %     solver.Options.ipopt.acceptable_constr_viol_tol = 1e-4;
+    %     solver.Options.ipopt.acceptable_dual_inf_tol = 1e-2;
+    %     solver.Options.ipopt.acceptable_compl_inf_tol = 1e-2;
+    %
     
+    solver.Options.ipopt.print_timing_statistics = 'yes';
+    solver.Options.ipopt.nlp_lower_bound_inf = -1e6;
+    solver.Options.ipopt.nlp_upper_bound_inf = 1e6;
     % Run the optimization
     start_time = tic();
     if nargin < 2

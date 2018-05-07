@@ -112,6 +112,7 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     func_struct.Names = arrayfun(@(x) x.Name, deps_array, 'UniformOutput', false);
     func_struct.Funcs = arrayfun(@(x) x.Funcs.Func, deps_array, 'UniformOutput', false);
     func_struct.JacFuncs = arrayfun(@(x) x.Funcs.Jac, deps_array, 'UniformOutput', false);  
+    func_struct.JacStructFuncs = arrayfun(@(x) x.Funcs.JacStruct, deps_array, 'UniformOutput', false);  
     dep_indices = arrayfun(@(x) getDepIndices(x), deps_array, 'UniformOutput', false);
     func_struct.DepIndices = dep_indices;%cellfun(@(x)(vertcat(x)),dep_indices,'UniformOutput',false);
     func_struct.AuxData = arrayfun(@(x) x.AuxData, deps_array, 'UniformOutput', false);
