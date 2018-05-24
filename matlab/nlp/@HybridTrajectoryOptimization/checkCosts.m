@@ -1,6 +1,10 @@
 function [yc] = checkCosts(obj, x, output_file)
     % Check the value of const function 
     
+    if ~iscolumn(x)
+        x = x.';
+    end
+    
     phase = obj.Phase;
     %     phase_var_indices = obj.PhaseVarIndices;
     n_phase = length(phase);
