@@ -24,8 +24,8 @@ function [J,Js] = exportJacobian(obj, export_path, varargin)
     opts = ip.Results;
     
     if obj.Status.JacobianExported && ~opts.ForceExport
-        J = fullfile(export_path, obj.Funcs.Hess);
-        Js = fullfile(export_path, obj.Funcs.HessStruct);
+        J = fullfile(export_path, obj.Funcs.Jac);
+        Js = fullfile(export_path, obj.Funcs.JacStruct);
         return;
     end
 
