@@ -5,7 +5,8 @@ function obj = setType(obj, type)
     % type: the contact type @type char
     
     
-    valid_types = {'PointContactWithFriction',...
+    valid_types = {'PlanarPointContactWithFriction',...
+        'PointContactWithFriction',...
         'PointContactWithoutFriction',...
         'LineContactWithFriction',...
         'LineContactWithoutFriction',...
@@ -16,6 +17,9 @@ function obj = setType(obj, type)
     
     I = eye(6);
     switch obj.Type
+        case 'PlanarPointContactWithFriction'
+            % x, z
+            obj.WrenchBase = I(:,[1,3]);
         case 'PointContactWithFriction'
             % x, y, z
             obj.WrenchBase = I(:,[1,2,3]);

@@ -32,6 +32,27 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
     
     fun_name = ['u_friction_cone_', obj.Name];
     switch obj.Type
+        case 'PlanarPointContactWithFriction'
+            % x, y, z
+            constr = [f(2); % fz >= 0
+                f(1) + (mu/sqrt(2))*f(2);
+                -f(1) + (mu/sqrt(2))*f(2)];
+            
+            % create a symbolic function object
+            f_constr = SymFunction(fun_name,...
+                constr,{f},{mu});
+            
+            % create the label text
+            label = {'normal_force';
+                'friction_x_pos';
+                'friction_x_neg';
+                };
+            
+            % validate the provided static friction coefficient
+            validateattributes(fric_coef.mu,{'double'},...
+                {'scalar','real','>=',0},...
+                'ContactFrame.getFrictionCone','mu');
+            auxdata = {fric_coef.mu};
         case 'PointContactWithFriction'
             % x, y, z
             constr = [f(3); % fz >= 0
