@@ -28,6 +28,9 @@ comments: false
 			    <li>
 				<a href="http://www.bipedalrobotics.com/" class="btn btn-default btn-lg"><i class="fa fa-cog fa-fw"></i> <span class="network-name">AMBER Lab</span></a>
 			    </li>
+                <li>
+				<a href="https://www.biped.solutions/" class="btn btn-default btn-lg"><i class="fa fa-cog fa-fw"></i> <span class="network-name">UMich BipedLab</span></a>
+			    </li>
 			</ul>
 		    </div>
 		</div>

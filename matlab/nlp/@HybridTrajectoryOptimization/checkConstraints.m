@@ -5,6 +5,10 @@ function [yc, cl, cu] = checkConstraints(obj, x, tol, output_file)
         tol = 1e-3;
     end
     
+    if ~iscolumn(x)
+        x = x.';
+    end
+    
     phase = obj.Phase;
     % phase_var_indices = obj.PhaseVarIndices;
     n_phase = length(phase);

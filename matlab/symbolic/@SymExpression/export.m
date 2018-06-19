@@ -93,6 +93,7 @@ function file = export(obj, varargin)
     
     funcs = cell2tensor(cellfun(@(x)tomatrix(x), exprs, 'UniformOutput', false));
     
+    fprintf('Generating: %s.cc\n', filename);
     
     eval_math(['ExportToCpp[' str2mathstr(filename) ',' funcs ',' args ', Normal@',cse_opts_str,']']);
     
