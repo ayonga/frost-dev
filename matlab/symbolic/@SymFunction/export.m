@@ -34,6 +34,10 @@ function f = export(obj, export_path, varargin)
         return;
     end
         
+%     if exist(fullfile(export_path, [obj.Name, '.mexw64']), 'file')
+%         f = fullfile(export_path, obj.Name);
+%         return;
+%     end
     
     
     

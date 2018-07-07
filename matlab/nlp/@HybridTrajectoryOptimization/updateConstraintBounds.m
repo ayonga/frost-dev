@@ -9,18 +9,26 @@ function obj = updateConstraintBounds(obj, bounds, varargin)
     g = obj.Gamma;
     n_vertex = height(g.Nodes);
     
-    
+   
     for i=1:n_vertex
         idx = 2*i - 1;
         node_name = g.Nodes.Name{i};
         if isfield(bounds, node_name)
-            plant = obj.Phase(idx).Plant;
-            plant.UserNlpConstraint(obj.Phase(idx), bounds.(node_name), varargin{:});
+            updateConstraintBounds(obj.Phase(idx),bounds.(node_name),varargin{:});
         end
+        
+        % find the associated edge
+        next = successors(g, i);
+        if ~isempty(next)
+            edge = findedge(g,i,next);
+            edge_name = g.Edges.Guard{edge}.Name;
+            if isfield(bounds, edge_name)
+                updateConstraintBounds(obj.Phase(idx+1),bounds.(edge_name),varargin{:});
+            end
+        end
+        
+        
     end
-    
-   
-    
     
     
 end

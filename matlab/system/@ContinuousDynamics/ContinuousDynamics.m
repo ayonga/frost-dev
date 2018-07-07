@@ -103,7 +103,7 @@ classdef ContinuousDynamics < DynamicalSystem
             % do-nothing function handle by default
             obj.PreProcess = [];
             obj.PostProcess = [];
-            obj.UserNlpConstraint = str2func('nop');
+            obj.UserNlpConstraint = [];
             
         end
         

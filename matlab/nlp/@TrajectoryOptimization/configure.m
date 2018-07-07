@@ -55,5 +55,7 @@ function obj = configure(obj, bounds, varargin)
     end
     % impose the system specific constraints (such as holonomic
     % constraints and unilateral constraints)
-    plant.UserNlpConstraint(obj, bounds, varargin{:});
+    if ~isempty(plant.UserNlpConstraint)
+        plant.UserNlpConstraint(obj, bounds, varargin{:});
+    end
 end
