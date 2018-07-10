@@ -1,4 +1,4 @@
-function obj = updateConstraintBounds(obj, bounds, varargin)
+function obj = updateConstraintBounds(obj, varargin)
     % This function updates the boundary conditions of the custom
     % optimization constraints
     %
@@ -10,7 +10,7 @@ function obj = updateConstraintBounds(obj, bounds, varargin)
    
     plant = obj.Plant;
     if ~isempty(plant.UserNlpConstraint)
-        plant.UserNlpConstraint(obj, bounds, varargin{:});
+        plant.UserNlpConstraint(obj, varargin{:});
     end
     
     
