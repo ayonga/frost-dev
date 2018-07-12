@@ -85,9 +85,9 @@ function fcstr = directCollocation(obj, name, x, dx)
             
             dep = [xn;dxn];
             if isnan(obj.Options.ConstantTimeHorizon)
-                fcstr = SymFunction(['ps_int_' name],int_x,[{T},dep(:)']);
+                fcstr = SymFunction(['ps_int_' name '_' obj.Name],int_x,[{T},dep(:)']);
             else
-                fcstr = SymFunction(['ps_int_' name],int_x,dep(:)',{T});
+                fcstr = SymFunction(['ps_int_' name '_' obj.Name],int_x,dep(:)',{T});
             end
     end
 
