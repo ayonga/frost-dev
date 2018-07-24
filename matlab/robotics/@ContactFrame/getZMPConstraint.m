@@ -41,6 +41,28 @@ function [f_constr, label, auxdata] = getZMPConstraint(obj, f, geometry)
     fun_name = ['u_zmp_', obj.Name];
     
     switch obj.Type
+        case 'PlanarLineContactWithFriction'
+            % x, y, z, roll, yaw
+            zmp = [la*f(2) - f(3);  % la*fz > mx
+                lb*f(2) + f(3)];    % mx > -lb*fz
+            
+            % create a symbolic function object
+            f_constr = SymFunction(fun_name,...
+                zmp,{f},{[la;lb]});
+            
+            % create the label text
+            label = {'roll_pos';
+                'roll_neg';
+                };
+            
+            % validate the provided static friction coefficient
+            validateattributes(geometry.la,{'double'},...
+                {'scalar','real','>=',0},...
+                'ContactFrame.getZMPConstraint','la');
+            validateattributes(geometry.lb,{'double'},...
+                {'scalar','real','>=',0},...
+                'ContactFrame.getZMPConstraint','lb');
+            auxdata = [geometry.la;geometry.lb];
         case 'PointContactWithFriction'
             % x, y, z
             f_constr = []; % no zmp constraints
