@@ -100,7 +100,7 @@ classdef SymVariable < SymExpression
             
             
             if nargin == 3
-                obj.setLabel(label);                
+                obj.setLabel(n, label);                
             end
         end
         

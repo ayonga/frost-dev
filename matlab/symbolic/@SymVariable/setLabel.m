@@ -1,4 +1,4 @@
-function obj = setLabel(obj, label)
+function obj = setLabel(obj, n, label)
     % Flatten the symbolic expression
 
     
