@@ -154,7 +154,7 @@ classdef RobotLinks < ContinuousDynamics
         
         bounds = getLimits(obj);
         
-        obj = loadDynamics(obj,file_path,skip_load_vf,extra_fvecs);
+        obj = loadDynamics(obj,file_path,skip_load_vf,extra_fvecs,varargin);
     end
     
     

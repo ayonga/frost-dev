@@ -95,7 +95,7 @@ classdef IOFeedback < Controller
                     error('The parameter %s has not been specified in the ''params'' argument.\n', output_param);
                 end
                 
-                if ~isempty(phase_param)
+                if y_i.hasPhaseParam
                     if isfield(params,phase_param)
                         p = params.(phase_param);
                     else

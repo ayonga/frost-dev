@@ -7,11 +7,12 @@ function obj = removeConstraint(obj, label)
     % @see addConstraint
     
     
-    assert(~isempty(str_index(label,obj.ConstrTable.Properties.VariableNames)),...
-        'Cannot delete ''%s'' from the table because it does not exist.\n',label);
-    
     % warning('Removing the constraint (%s) from the constraist table.\n',label);
-    obj.ConstrTable.(label) = [];
+    if (~isempty(str_index(label,obj.ConstrTable.Properties.VariableNames)))
+        obj.ConstrTable.(label) = [];
+    else
+        warning('Cannot delete ''%s'' from the table because it does not exist.\n',label);
+    end
     
     
 end

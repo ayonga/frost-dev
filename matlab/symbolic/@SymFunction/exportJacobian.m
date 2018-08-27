@@ -24,14 +24,24 @@ function [J,Js] = exportJacobian(obj, export_path, varargin)
     opts = ip.Results;
     
     if obj.Status.JacobianExported && ~opts.ForceExport
-        J = fullfile(export_path, obj.Funcs.Hess);
-        Js = fullfile(export_path, obj.Funcs.HessStruct);
+        J = fullfile(export_path, obj.Funcs.Jac);
+        Js = fullfile(export_path, obj.Funcs.JacStruct);
         return;
     end
 
     if nargin < 2
         export_path = pwd;
     end
+    
+%     if exist(fullfile(export_path, [obj.Funcs.Jac, '.mexw64']), 'file')
+%         J = fullfile(export_path, obj.Funcs.Jac);
+%         return;
+%     end
+%     
+%     if exist(fullfile(export_path, [obj.Funcs.JacStruct, '.mexw64']), 'file')
+%         J = fullfile(export_path, obj.Funcs.JacStruct);
+%         return;
+%     end
     
     if ~isempty(obj.Vars) && opts.StackVariable
         vars = cellfun(@(x)flatten(x), obj.Vars,'UniformOutput',false);

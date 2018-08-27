@@ -59,10 +59,12 @@ classdef IpoptApplication < SolverApplication
             options.ipopt.linear_solver    = 'ma57';
             options.ipopt.ma57_automatic_scaling = 'yes';
             options.ipopt.linear_scaling_on_demand = 'no';
-            % options.ipopt.recalc_y = 'yes';
-            % options.ipopt.recalc_y_feas_tol = 1e-3;
-            % options.ipopt.bound_relax_factor = 1e-3;
-            % options.ipopt.fixed_variable_treatment = 'RELAX_BOUNDS';
+            options.ipopt.ma57_pre_alloc = 2;
+            %             options.ipopt.alpha_for_y = 'bound-mult';
+            options.ipopt.recalc_y = 'yes';
+            options.ipopt.recalc_y_feas_tol = 1e-3;
+            %             options.ipopt.bound_relax_factor = 1e-3;
+            %             options.ipopt.fixed_variable_treatment = 'RELAX_BOUNDS';
             %             options.ipopt.derivative_test = 'first-order';
             %             options.ipopt.point_perturbation_radius = 0;
             %             options.ipopt.derivative_test_perturbation = 1e-8;

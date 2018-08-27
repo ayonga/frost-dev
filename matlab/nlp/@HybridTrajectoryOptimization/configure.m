@@ -53,6 +53,16 @@ function obj = configure(obj, bounds, varargin)
         next = successors(g,i);
         
         if ~isempty(next)
+            edge = findedge(g,i,next);
+            edge_name = g.Edges.Guard{edge}.Name;
+            edge_bounds = struct();
+            if nargin > 1
+                if ~isempty(bounds)
+                    if isfield(bounds, edge_name)
+                        edge_bounds = bounds.(edge_name);
+                    end
+                end
+            end
             src_idx = 2*i-1;
             src = obj.Phase(src_idx);
             
@@ -62,7 +72,7 @@ function obj = configure(obj, bounds, varargin)
             tar_idx = 2*next - 1;
             tar = obj.Phase(tar_idx);
             
-            addJumpConstraint(obj, edge, src, tar, bounds, varargin{:});
+            addJumpConstraint(obj, edge, src, tar, edge_bounds, varargin{:});
         end
     end
     

@@ -76,7 +76,7 @@ classdef SymVariable < SymExpression
                         assert(isnumeric(n),...
                             'SymExpression:invalidDimension',...
                             'The second argument must be numeric values that specify',...
-                            'the dimensions of the generated symbolic vector or matrix');
+                            'the dimensionssetLabel of the generated symbolic vector or matrix');
                         
                         switch numel(n)
                             case 0
@@ -100,13 +100,7 @@ classdef SymVariable < SymExpression
             
             
             if nargin == 3
-                assert(iscellstr(label) && numel(label)==prod(n),...
-                    'The (label) must be a cellstr array of the same number of elements as the SymVariables.');
-                assert(iscolumn(obj),...
-                    'The (label) only works with column vector.');
-                
-                obj.label = label;
-                
+                obj.setLabel(n, label);                
             end
         end
         
