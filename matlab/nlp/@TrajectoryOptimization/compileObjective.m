@@ -44,12 +44,21 @@ function compileObjective(obj, cost, export_path, exclude, varargin)
         end
         cost_array = obj.CostTable.(cost{i});
         
-        % We use the fact that for each objective function there could
-        % be multiple SymFunction objects (running cost) associated
-        % with
+        
         cost_array = cost_array(~arrayfun(@(x)x.Dimension==0,cost_array));
-        deps_array_cell = arrayfun(@(x)getSummands(x), cost_array, 'UniformOutput', false);
-        func_array = vertcat(deps_array_cell{:});
+        
+        % % % % % % % This is no longer true! % % % % % % 
+        % % We use the fact that for each objective function there could
+        % % be multiple SymFunction objects (running cost) associated
+        % % with
+        %         deps_array_cell = arrayfun(@(x)getSummands(x), cost_array, 'UniformOutput', false);
+        %         func_array = vertcat(deps_array_cell{:});
+        % % % % % % % % % % % % %% % % % % % % % % % % % % 
+        
+        % We use the fact that for each constraint there is only one
+        % SymFunction object associated with.
+        func_array = getSummands(cost_array(1));
+        
         arrayfun(@(x)export(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
         
         % first order derivatives (Jacobian)
