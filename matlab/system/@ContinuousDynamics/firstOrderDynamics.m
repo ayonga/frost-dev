@@ -26,6 +26,8 @@ function [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger)
     
     
     %% get the external input
+    % initialize the Gv_ext vector
+    Gv_ext = zeros(nx,1);
     f_ext_name = fieldnames(obj.Inputs.External);
     if ~isempty(f_ext_name)              % if external inputs are defined
         n_ext = length(f_ext_name);
@@ -86,7 +88,7 @@ function [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger)
     %% calculate the constrained vector fields and control inputs
     control_name = fieldnames(obj.Inputs.Control);
     if ~isempty(control_name)
-        Be = feval(obj.GmapName_.Control.(control_name{1}),q);
+        Be = feval(obj.GmapName_.Control.(control_name{1}),x);
         Ie    = eye(nx);
         
         if isempty(Je)
@@ -104,7 +106,12 @@ function [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger)
             gfc =  M \ (Ie - transpose(Je)* (XiInv \ (Jedot / M))) * Be;
         end
         % compute control inputs
-        u = calcControl(controller, t, x, vfc, gfc, obj, params, logger);
+       
+        if ~isempty(controller)
+            u = calcControl(controller, t, x, vfc, gfc, obj, params, logger);
+        else
+            u = zeros(size(Be,2),1);
+        end
         
         Gv_u = Be*u;
         obj.inputs_.Control.(control_name{1}) = u;
