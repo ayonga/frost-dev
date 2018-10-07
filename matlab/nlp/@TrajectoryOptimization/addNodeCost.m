@@ -1,4 +1,4 @@
-function obj = addNodeCost(obj, func, deps, nodes, auxdata)
+function obj = addNodeCost(obj, func, deps, nodes, auxdata, load_path)
     % Add a cost function that only depends on variables at a particular
     % node. The input argument ''nodes'' will specify at which nodes the
     % function is defined. 
@@ -27,9 +27,8 @@ function obj = addNodeCost(obj, func, deps, nodes, auxdata)
     vars   = obj.OptVarTable;
     if ~iscell(deps), deps = {deps}; end
     
-    siz = size(func);
-    assert(isa(func,'SymFunction') && prod(siz)==1,...
-        'The second argument must be a scalar SymFunction object.'); %#ok<PSIZE>
+    assert(isa(func,'SymFunction'),...
+        'The second argument must be a SymFunction object.'); %#ok<PSIZE>
         
     
     
@@ -39,6 +38,16 @@ function obj = addNodeCost(obj, func, deps, nodes, auxdata)
         if ~iscell(auxdata), auxdata = {auxdata}; end
     end
     
+    if nargin < 6
+        load_path = [];
+    end
+    
+    if ~isempty(load_path)
+        load(func,load_path);
+    end
+    siz = size(func);
+    assert(prod(siz)==1,...
+        'The cost function must be a scalar function.'); %#ok<PSIZE>
     
     
     if ischar(nodes)

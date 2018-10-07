@@ -1,4 +1,4 @@
-function obj = addRunningCost(obj, func, deps, auxdata)
+function obj = addRunningCost(obj, func, deps, auxdata, load_path)
     % Add a running cost to the problem
     %
     % Parameters:
@@ -12,12 +12,16 @@ function obj = addRunningCost(obj, func, deps, auxdata)
     vars   = obj.OptVarTable;
     if ~iscell(deps), deps = {deps}; end
     
-    siz = size(func);
-    assert(isa(func,'SymFunction') && prod(siz)==1,...
-        'The second argument must be a scalar SymFunction object.'); %#ok<PSIZE>
+    assert(isa(func,'SymFunction'),...
+        'The second argument must be a SymFunction object.'); %#ok<PSIZE>
     
     if nargin < 4
         auxdata = [];
+    else
+        if ~iscell(auxdata), auxdata = {auxdata}; end
+    end
+    if nargin < 5
+        load_path = [];
     end
     
     T  = [SymVariable('t0');SymVariable('tf')];
@@ -34,10 +38,18 @@ function obj = addRunningCost(obj, func, deps, auxdata)
         s_dep_params = [func.Params,{T,w}];
     end
     
+    if isempty(load_path)
+        cost_integral = SymFunction([func.Name,'_integral'],...
+            tovector(w.*Ts.*func), s_dep_vars, s_dep_params);
+    else
+        cost_integral = SymFunction([func.Name,'_integral'],...
+            [], s_dep_vars, s_dep_params);
+        load(cost_integral,load_path);
+    end
     
-    cost_integral = SymFunction([func.Name,'_integral'],...
-        tovector(w.*Ts.*func), s_dep_vars, s_dep_params);
-    
+    siz = size(cost_integral);
+    assert(prod(siz)==1,...
+        'The cost function must be a scalar function.'); %#ok<PSIZE>
     
     cost(nNode) = struct();
     [cost.Name] = deal(func.Name);

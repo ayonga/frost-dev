@@ -228,7 +228,7 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addCost(obj, label, nodes, cost_array);
         
-        obj = addRunningCost(obj, func, deps, auxdata);
+        obj = addRunningCost(obj, func, deps, auxdata, load_path);
         
         obj = addNodeCost(obj, func, deps, node, auxdata);
         
