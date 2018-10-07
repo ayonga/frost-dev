@@ -13,10 +13,10 @@ function saveExpression(obj, export_path, varargin)
     cellfun(@(x)save_funcs(x,export_path, varargin{:}), obj.DesiredFuncs, ...
         'UniformOutput',false);
     
-    if ~isempty(obj.OutputFuncs)
-        cellfun(@(x)save_funcs(x,export_path, varargin{:}), obj.OutputFuncs, ...
-            'UniformOutput',false);
-    end
+    %     if ~isempty(obj.OutputFuncs)
+    %         cellfun(@(x)save_funcs(x,export_path, varargin{:}), obj.OutputFuncs, ...
+    %             'UniformOutput',false);
+    %     end
     
     if ~isempty(obj.tau_)
         cellfun(@(x)save_funcs(x,export_path, varargin{:}), obj.PhaseFuncs, ...
