@@ -36,6 +36,11 @@ classdef VirtualConstraint < handle
         % 
         % @type SymVariable
         OffsetParams
+                
+        % An indicator that shows there is a parameter variable for phase
+        %
+        % @type logical
+        hasPhaseParam = false;
     end
     
     % properties must be determined by the users
@@ -187,11 +192,7 @@ classdef VirtualConstraint < handle
         %
         % @type SymExpression
         tau_
-        
-        % An indicator that shows there is a parameter variable for phase
-        %
-        % @type logical
-        hasPhaseParam = false;
+
         
         
         
