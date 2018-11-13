@@ -25,6 +25,11 @@ classdef VirtualConstraint < handle
         % @type logical
         hasOffset = false;
         
+        % An indicator that shows there is a parameter variable for phase
+        %
+        % @type logical
+        hasPhaseParam = false;
+        
         % The symbolic representation of parameter sets of the desired
         % outputs
         % 
@@ -187,11 +192,6 @@ classdef VirtualConstraint < handle
         %
         % @type SymExpression
         tau_
-        
-        % An indicator that shows there is a parameter variable for phase
-        %
-        % @type logical
-        hasPhaseParam = false;
         
         
         
