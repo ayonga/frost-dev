@@ -221,7 +221,7 @@ classdef AbstractAnimator < handle
         
         function [center, radius, yaw] = GetCenter(obj, t, x)            
             center = [0,0,0];
-            radius = 2;
+            radius = 3;
             yaw = 0;
         end
         
