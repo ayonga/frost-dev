@@ -134,36 +134,36 @@ conGUI.anim = anim;
 
 
 %% test SNOPT
-%% Create Ipopt solver 
-addpath(genpath(export_path));
-nlp.update;
-solver = SnoptApplication(nlp);
-rabbit_nlp.spc = which('rabbit.spc');
-snspec (rabbit_nlp.spc);
-% Run Optimization
-tic
-% old = load('x0');
-% [sol, info] = optimize(solver, old.sol);
-[sol_sn, info_sn] = optimize(solver);
-toc
-[tspan_sn, states_sn, inputs_sn, params_sn] = exportSolution(nlp, sol_sn);
-
-%% Animation
-q_log_R = states_sn{1}.x; % Right stance
-q_log_L = q_log_R([1:3,6:7,4:5],:); % symmetric Left stance
-q_log_L(1:3,:) = q_log_L(1:3,:) + repmat((q_log_R(1:3,end)-q_log_R(1:3,1)),1,21);
-
-t_log_R = tspan_sn{1};
-t_log_L = t_log_R + t_log_R(end);
-
-q_log = [q_log_R, q_log_L];
-t_log = [t_log_R, t_log_L];
-
-anim = Animator.FiveLinkAnimator(t_log, q_log);
-anim.pov = Animator.AnimatorPointOfView.West;
-anim.Animate(true);
-anim.isLooping = false;
-anim.updateWorldPosition = true;
-anim.endTime = 20;
-conGUI = Animator.AnimatorControls();
-conGUI.anim = anim;
+% %% Create Ipopt solver 
+% addpath(genpath(export_path));
+% nlp.update;
+% solver = SnoptApplication(nlp);
+% rabbit_nlp.spc = which('rabbit.spc');
+% snspec (rabbit_nlp.spc);
+% % Run Optimization
+% tic
+% % old = load('x0');
+% % [sol, info] = optimize(solver, old.sol);
+% [sol_sn, info_sn] = optimize(solver);
+% toc
+% [tspan_sn, states_sn, inputs_sn, params_sn] = exportSolution(nlp, sol_sn);
+% 
+% %% Animation
+% q_log_R = states_sn{1}.x; % Right stance
+% q_log_L = q_log_R([1:3,6:7,4:5],:); % symmetric Left stance
+% q_log_L(1:3,:) = q_log_L(1:3,:) + repmat((q_log_R(1:3,end)-q_log_R(1:3,1)),1,21);
+% 
+% t_log_R = tspan_sn{1};
+% t_log_L = t_log_R + t_log_R(end);
+% 
+% q_log = [q_log_R, q_log_L];
+% t_log = [t_log_R, t_log_L];
+% 
+% anim = Animator.FiveLinkAnimator(t_log, q_log);
+% anim.pov = Animator.AnimatorPointOfView.West;
+% anim.Animate(true);
+% anim.isLooping = false;
+% anim.updateWorldPosition = true;
+% anim.endTime = 20;
+% conGUI = Animator.AnimatorControls();
+% conGUI.anim = anim;
