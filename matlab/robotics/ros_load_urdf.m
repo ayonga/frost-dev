@@ -47,8 +47,16 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             izz = str2double(inertia.getAttribute('izz'));
             
             links(index).Mass = str2double(mass.getAttribute('value'));
-            links(index).Offset = str2num(origin.getAttribute('xyz')); %#ok<*ST2NM>
-            rpy = str2num(origin.getAttribute('rpy'));
+            %%% To handle the case where inertial frame is the same as body
+            % frame. (in URDF, this is normally ignored)
+            try
+               links(index).Offset = str2num(origin.getAttribute('xyz'));
+               rpy = str2num(origin.getAttribute('rpy'));
+            catch
+               links(index).Offset = zeros(1,3);
+               rpy = zeros(1,3);
+            end
+           
             if isempty(rpy)
                 links(index).R = zeros(1,3);
             else
