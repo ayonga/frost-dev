@@ -13,9 +13,9 @@ function obj = setMassMatrix(obj, M)
         [nr,nc] = size(M);
         assert(nr==obj.numState && nc==obj.numState,...
             'The size of the mass matrix should be (%d x %d).',obj.numState,obj.numState);
-        if isa(M,'SymFunction')
-            assert(length(M.Vars)==1 && M.Vars{1} == x,...
+        assert((length(M.Vars)==1 && M.Vars{1} == x) || isempty(M.Vars),...
                 'The SymFunction (M) must be a function of only states (x).');
+        if isa(M,'SymFunction')            
             obj.Mmat = M;
         else
             M = SymExpression(M);
