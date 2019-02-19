@@ -51,9 +51,11 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     if ischar(nodes)
         switch nodes
             case 'first'
-                node_list = 1;
+                node_list = 1;    
             case 'last'
                 node_list = nNode;
+            case 'terminal'
+                node_list = [1 nNode];
             case 'except-first'
                 node_list = 2:nNode;
             case 'except-last'

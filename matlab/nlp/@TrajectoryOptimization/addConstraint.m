@@ -27,6 +27,8 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
                 node_list = 1;
             case 'last'
                 node_list = obj.NumNode;
+            case 'terminal'
+                node_list = [1 obj.NumNode];
             case 'except-first'
                 node_list = 2:obj.NumNode;
             case 'except-last'
