@@ -203,6 +203,8 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         
         obj = simulate(obj, t0, x0, tf, logger, options, varargin);
         
+        obj = simulate_stand(obj, t0, x0, tf, logger, options, varargin,alpha,min,max);
+        
         obj = compile(obj, export_path, varargin);
         
         obj = saveExpression(obj, export_path, varargin);

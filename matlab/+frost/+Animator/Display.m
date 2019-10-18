@@ -102,6 +102,17 @@ classdef Display < handle
             end
         end
         
+           function updateNum(obj, x,ft)
+            valueSet = obj.items.values();
+            for i = 1:length(valueSet)
+                if strcmp(valueSet{i}.name,'torsoForce')
+                valueSet{i}.update(x,ft);
+                else
+                    valueSet{i}.update(x);
+                end
+            end
+        end
+        
         function addItem(obj, item)
             name = item.name;
             obj.items(name) = item;

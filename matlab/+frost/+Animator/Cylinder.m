@@ -75,6 +75,8 @@ classdef Cylinder < frost.Animator.DisplayItem
             obj.surface.ZData = z;
         end
         
+        
+        
         function obj = updateFaceColor(obj, color)
             obj.surface.FaceColor = color;
         end

@@ -1,4 +1,4 @@
-function [value, isterminal, direction] = checkGuard(obj, t, x, controller, params, eventfuncs,aplha,min,max)
+function [value, isterminal, direction] = checkGuard_stand(obj, t, x, controller, params, eventfuncs,alpha,min,max)
     % Detect the guard condition (event trigger)
     %
     % Parameters:
@@ -17,7 +17,7 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, controller, para
     % if any of the event function is input-dependent, then call
     % calcDynamics method.
     if any([eventfuncs.InputDependent])
-        calcDynamics(obj, t, x, controller, params, []);
+        calcDynamics_stand(obj, t, x, controller, params, [],alpha,min,max);
     else
         if strcmp(obj.Type,'FirstOrder')
             obj.t_ = t;

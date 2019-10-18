@@ -17,6 +17,8 @@ function obj = setInitialValue(obj, x)
             if isrow(x)
                 x = transpose(x);
             end
+%             obj
+%             obj.Dimension
             validateattributes(x,{'double'},...
                 {'vector','numel',obj.Dimension,'real'},...
                 'NlpVariable.setInitialValue','InitialValue');

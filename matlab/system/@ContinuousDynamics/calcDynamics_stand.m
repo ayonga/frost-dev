@@ -1,4 +1,4 @@
-function [xdot] = calcDynamics(obj, t, x, controller, params, logger)
+function [xdot] = calcDynamics_stand(obj, t, x, controller, params, logger,alpha,min,max)
     % calculate the dynamical equation dx 
     %
     % Parameters:
@@ -14,7 +14,7 @@ function [xdot] = calcDynamics(obj, t, x, controller, params, logger)
     if strcmp(obj.Type,'FirstOrder')
         [xdot] = firstOrderDynamics(obj, t, x, controller, params, logger);
     else
-        [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger);
+        [xdot] = secondOrderDynamics_stand(obj, t, x, controller, params, logger,alpha,min,max);
     end
 end
 

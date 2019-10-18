@@ -1,5 +1,6 @@
-function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver)
-    % Simulate the dynamical system
+function [sol, params] = simulate_stand(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver,alpha,min,max)
+global switchCont    
+% Simulate the dynamical system
     %
     % Parameters: 
     % t0: the starting time instant @type double
@@ -124,13 +125,16 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
                 
                 eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices),'UniformOutput',false);
                 eventfuncs = vertcat(eventfuncs{:});
-                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, controller, params, eventfuncs));
+                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard_stand(obj, t, x, controller, params, eventfuncs,alpha,min,max));
             end
         end
     end
     
     % run the forward simulation
-    sol = solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
+    if strcmp(obj.Name,'stand')
+        'pause';
+    end
+    sol = solver(@(t, x) calcDynamics_stand(obj, t, x, controller, params, logger,alpha,min,max), ...
         [t0, tf], x0, odeopts);
     
     % calculate the dynamics at the guard 
@@ -152,7 +156,7 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
 %             sol_try.ie=1;
 %             sol=sol_try;
 %         end
-        calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
+        calcDynamics_stand(obj, sol.xe, sol.ye, controller, params, logger,alpha,min,max);
         updateLastLog(logger);
     end
     % post-process

@@ -105,6 +105,16 @@ classdef IOFeedback < Controller
                     p = [];
                 end
                 % calculate the desired outputs
+                if(t> 18)
+                    'lll';
+                    
+                end
+                %% delete
+                if strcmp(obj.Name,'stand')
+%                     t=t-0.1491;
+                    jui='t';
+                end
+                %%
                 y_d{i} = calcDesired(y_i, t, q, dq, a, p);
                 % calculate the phase variable
                 tau{i} = calcPhaseVariable(y_i, t, q, dq, p);
@@ -151,7 +161,7 @@ classdef IOFeedback < Controller
             end
             
             
-            
+%             DLfy(y_indices,:) = y_a{i}{end} - y_d{i}{end}; %delete
             
             
             % decoupling matrix
@@ -166,6 +176,9 @@ classdef IOFeedback < Controller
             else
                 u_ff = - A_mat \ Lf_mat;
             end
+            
+%             u_ff = - A_mat \ Lf_mat; %delete
+            
             % feedback controller
             u_fb = -A_mat \ mu;
             
@@ -205,6 +218,7 @@ classdef IOFeedback < Controller
                 calc.u = u;
 
                 logger.calc = calc;
+                
             end
             
         end

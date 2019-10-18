@@ -190,11 +190,19 @@ classdef ContinuousDynamics < DynamicalSystem
     %% methods defined in external files
     methods 
         
+        %calculate torque
+        [u,u_ff,u_fb]=torqueDebug(obj,controller,params,traj,time,u_opt,alpha,max,min)
+        
         % simulate the dynamical system
         [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver);
         
+        [sol] = simulate_stand(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver,alpha,max,min);
+
+        
         % check event functions for simulation
         [value, isterminal, direction] = checkGuard(obj, t, x, controller, params, eventfuncs);
+        
+        [value, isterminal, direction] = checkGuard_stand(obj, t, x, controller, params, eventfuncs,alpha,min,max);
         
         % set the mass matrix M(x)
         obj = setMassMatrix(obj, M);
@@ -217,11 +225,14 @@ classdef ContinuousDynamics < DynamicalSystem
         % calculate the dynamical equation
         [xdot, extra] = calcDynamics(obj, t, x, controller, params, logger);
         
+        [xdot, extra] = calcDynamics_stand(obj, t, x, controller, params, logger,alpha,min,max);
         % first order system dynamical equation
         [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params, logger);
         
         % second order system dynamical equation
         [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params, logger);
+        
+        [xdot, extra] = secondOrderDynamics_stand(obj, t, x, controller, params, logger, alpha, min, max);
         
         % compile symbolic expression related to the systems
         obj = compile(obj, export_path, varargin);        

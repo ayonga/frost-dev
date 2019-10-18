@@ -116,21 +116,21 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         % add as a set of unilateral constraitns
         obj = addUnilateralConstraint(obj, fc_cstr);
     end
-    
-    % if the contact geometry is given, enforce zero moment point
-    % constraints
-    if ~isempty(geometry)
-        % get the friction cone constraint
-        [zmp, zmp_label, auxdata] = getZMPConstraint(contact, f, geometry);
-        
-        % create an unilateral constraint object
-        if ~isempty(zmp)
-            zmp_cstr = UnilateralConstraint(obj, zmp,...
-                ['zmp' contact.Name], f_name, ...
-                'ConstrLabel',{zmp_label(:)'},...
-                'AuxData',auxdata);
-            % add as a set of unilateral constraitns
-            obj = addUnilateralConstraint(obj, zmp_cstr);
-        end
-    end
+    %%
+%     % if the contact geometry is given, enforce zero moment point
+%     % constraints
+%     if ~isempty(geometry)
+%         % get the friction cone constraint
+%         [zmp, zmp_label, auxdata] = getZMPConstraint(contact, f, geometry);
+%         
+%         % create an unilateral constraint object
+%         if ~isempty(zmp)
+%             zmp_cstr = UnilateralConstraint(obj, zmp,...
+%                 ['zmp' contact.Name], f_name, ...
+%                 'ConstrLabel',{zmp_label(:)'},...
+%                 'AuxData',auxdata);
+%             % add as a set of unilateral constraitns
+%             obj = addUnilateralConstraint(obj, zmp_cstr);
+%         end
+%     end
 end

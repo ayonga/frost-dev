@@ -192,8 +192,10 @@ classdef CLFQP < Controller
             LfVetau = eta'*(F_mat'*Pep+Pep*F_mat)*eta+0.3660*ep*Veta+2*eta'*Pep*G_mat*Lf_mat-2*eta'*Pep*G_mat*ddy;
             
             Hmat = A_mat' * A_mat;
-            
-            % feedforward controller
+%             Hmat=diag([34 3 2 5 1 8 56 8 1 2 3 34]);
+%             ub=[90,192,219,219,180,350,350,180,219,219,192,90];
+%             lb=-ub;
+%             % feedforward controller
             if strcmp(y_i.PhaseType, 'TimeBased')
                 bmat = Lf_mat'*A_mat - ddy'*A_mat;
 %                 u_ff = - A_mat \ (Lf_mat - ddy);
@@ -210,7 +212,7 @@ classdef CLFQP < Controller
 %             u_fb = A_mat \ mu;
 %             u = u_ff + u_fb;
             
-            u = quadprog(Hmat,bmat,LgVetau,-LfVetau,[],[],[],[],[],options);
+            u = quadprog(Hmat,bmat,LgVetau,-LfVetau,[],[],[],[],[],options)
 %             disp(max(u - uqp))
             % feedback controller
 

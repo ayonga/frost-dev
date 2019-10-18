@@ -181,6 +181,8 @@ function [f_constr, label, auxdata] = getZMPConstraint(obj, f, geometry)
                 {'scalar','real','>=',0},...
                 'ContactFrame.getZMPConstraint','Lb');
             auxdata = [geometry.la;geometry.lb;geometry.La;geometry.Lb];
+            
+                
     end
     
 end

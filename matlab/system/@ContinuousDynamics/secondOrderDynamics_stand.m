@@ -1,4 +1,4 @@
-function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
+function [xdot] = secondOrderDynamics_stand(obj, t, x, controller, params, logger, alpha,min,max)
     % calculate the dynamical equation of the second order dynamical system
     %
     % Parameters:
@@ -25,11 +25,14 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
     M = calcMassMatrix(obj, q);
     Fv = calcDriftVector(obj, q, dq);
     
-    
+    global standUp
     
     
     %% get the external input
     % initialize the Gv_ext vector
+    if strcmp(obj.Name,'stand')
+        'pause';
+    end
     Gv_ext = zeros(nx,1);
     f_ext_name = fieldnames(obj.Inputs.External);
     if ~isempty(f_ext_name)              % if external inputs are defined
@@ -41,6 +44,7 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
             % g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
             f_ext = obj.ExternalInputFun(obj, f_name, t, q, dq, params, logger);
+            
             % compute the Gvec, and add it up
             Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),q,f_ext);
             
@@ -60,7 +64,7 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
         % initialize the Jacobian matrix
         Je = zeros(cdim,nx);
         Jedot = zeros(cdim,nx);
-     
+        
         idx = 1;
         for i=1:n_cstr
             cstr = h_cstr(i);
@@ -69,10 +73,9 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
             [Jh,dJh] = calcJacobian(cstr,q,dq);
             cstr_indices = idx:idx+cstr.Dimension-1;
             tol = 1e-2;
-            if norm(Jh*dq) > tol
-               
-                warning('The holonomic constraint %s violated.', h_cstr_name{i});
-            end            
+%             if norm(Jh*dq) > tol
+%                 warning('The holonomic constraint %s violated.', h_cstr_name{i});
+%             end            
             Je(cstr_indices,:) = Jh;
             Jedot(cstr_indices,:) = dJh; 
             idx = idx + cstr.Dimension;
@@ -81,7 +84,6 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
         Je = [];
         Jedot = [];
     end
-    
     
     
     %% calculate the constrained vector fields and control inputs
@@ -114,29 +116,32 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
         end
         % compute control inputs
         if ~isempty(controller)
-            u = calcControl(controller, t, x, vfc, gfc, obj, params, logger);
+%             u = calcControl(controller, t, x, vfc, gfc, obj, params, logger,alpha,min,max);
+           if standUp || strcmp(obj.Name,'slowDown')   %if strcmp(alpha{10},'standUp')
+               u_eva=ExoController.standController(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
+           else
+%            u_eva=ExoController.torqueGroundReactionForce(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
+           u_eva=ExoController.torqueGroundReactionForce_Final(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
+%             u_eva=ExoController.standDomainTime(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
+%              u_eva=ExoController.standDomainPhase(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
+
+           end
+            u=u_eva(1:12);
+%             
         else
             u = zeros(size(Be,2),1);
         end
-%         if strcmp(obj.Name,'stand')
-%             x;
-%             u;
-%         end
-
-
-
         Gv_u = Be*u;
         obj.inputs_.Control.(control_name{1}) = u;
     end
-    
-    %%
-   
     %% calculate constraint wrench of holonomic constraints
     Gv = Gv_ext + Gv_u;
     % Calculate constrained forces
     Gv_c = zeros(nx,1);
     if ~isempty(h_cstr_name)
         lambda = -XiInv \ (Jedot * dq + Je * (M \ (Fv + Gv)));
+%         lambda-u_eva(13:end);
+        lambda=u_eva(13:end);
         % the constrained wrench inputs
         Gv_c = transpose(Je)*lambda;
         
@@ -159,8 +164,9 @@ function [xdot] = secondOrderDynamics(obj, t, x, controller, params, logger)
     % the system dynamics
     xdot = [dq; 
         M \ (Fv + Gv)];
+    xdot=[dq;inv(M)*(Fv+Be*u+Je'*lambda+Gv_ext)];
     obj.states_.ddx = xdot(nx+1:end);
-   % xdot=[xdot(7:nx);xdot((nx+7):end)];
+%     xdot=[xdot(7:nx);xdot((nx+7):end)];
     
     
     if ~isempty(logger)

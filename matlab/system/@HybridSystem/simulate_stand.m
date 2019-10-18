@@ -1,4 +1,4 @@
-function logger = simulate(obj, t0, x0, tf, options, varargin)
+function logger = simulate_stand(obj, t0, x0, tf, options, varargin,alpha,min,max)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 
@@ -10,7 +10,7 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
     %
     % Return values:
     % logger: an array of simulation logger data @type SimLogger
-    
+    global m x1 x2
     
     sim_opts = struct(varargin{:});
     if isfield(sim_opts,'NumCycle')
@@ -76,11 +76,12 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         
         log_idx = log_idx + 1;
         logger(log_idx) = feval(obj.Options.Logger, cur_domain); %#ok<AGROW>
+ 
         % run the simulation
-         sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
-            logger(log_idx),eventnames,options,obj.Options.OdeSolver);
+         sol = cur_domain.simulate_stand(t0,x0,tf,cur_control,cur_param,...
+            logger(log_idx),eventnames,options,obj.Options.OdeSolver,alpha,min,max);
         
-        
+
         
         
         % check the index of the triggered edge
@@ -94,6 +95,12 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         cur_gurad_param = cur_edge.Param{1};
         % update states and time
         [t0, x0] = cur_guard.calcDiscreteMap(sol.xe, sol.ye, cur_node, cur_gurad_param);
+        
+        if strcmp(cur_node.Name{1},'standBlend')
+            m=logger(2).flow.mu(3,end);
+            x1=logger(2).flow.mu(1,end);
+            x2=logger(2).flow.mu(2,end);
+        end
         
         
         % determine the target node of the current edge, and set it to be
@@ -110,6 +117,7 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         
         % if the next node is the starting node of the graph, it indicates
         % that one full cycle is completed.
+%         cur_node_idx=1;
         if cur_node_idx == s_domain_idx
             numcycle = numcycle - 1;
             % if the number of cycles achieved, then terminate the simulation
