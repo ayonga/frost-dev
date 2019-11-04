@@ -87,14 +87,13 @@ function obj = addInput(obj, category, name, var, gf, varargin)
         if opts.Affine % The input is affine to the system
             assert(nc==length(var),...
                 'The input map must have the same number of coloumns as the number of input variables (%d).',length(var));
-            
-            if isa(s_gf, 'SymFunction') % given as a SymFunction directly                
+            if isa(s_gf, 'SymFunction') % given as a SymFunction directly              
                 sfun_gf = s_gf;
+                assert((length(s_gf.Vars)==1 && s_gf.Vars{1} == obj.States.x) || isempty(s_gf.Vars),...
+                    'The SymFunction (gf) must be a function of only states (x).');
             else % given as a SymExpression, then create a new SymFunction
                 sfun_gf = SymFunction([name '_map_', obj.Name], s_gf, {obj.States.x});
             end
-            assert((length(sfun_gf.Vars)==1 && sfun_gf.Vars{1} == obj.States.x) || isempty(sfun_gf.Vars),...
-                'The SymFunction (gf) must be a function of only states (x).');
             if isempty(opts.LoadPath)
                 sfun_gv = SymFunction([name '_vec_', obj.Name], s_gf*var, {obj.States.x,var});
             else
@@ -107,12 +106,11 @@ function obj = addInput(obj, category, name, var, gf, varargin)
                 'The input vector must be a column vector.');
             sfun_gf = [];
             obj.GmapName_.(category).(name) = '';
-            assert((length(s_gf.Vars)==2 && s_gf.Vars{1} == obj.States.x && s_gf.Vars{2}==var) || ...
-                (length(s_gf.Vars)==1 && s_gf.Vars{1} == var),...
-                'The SymFunction (gf) must be a function of states (x) and input (%d).',name);
-            if isa(s_gf, 'SymFunction') % given as a SymFunction directly
-                
+            if isa(s_gf, 'SymFunction') % given as a SymFunction directly                
                 sfun_gv = s_gf;
+                assert((length(s_gf.Vars)==2 && s_gf.Vars{1} == obj.States.x && s_gf.Vars{2}==var) || ...
+                    (length(s_gf.Vars)==1 && s_gf.Vars{1} == var),...
+                    'The SymFunction (gf) must be a function of states (x) and input (%d).',name);
             else % given as a SymExpression, then create a new SymFunction
                 sfun_gv = SymFunction([name '_vec_', obj.Name], s_gf, {obj.States.x,var});
             end

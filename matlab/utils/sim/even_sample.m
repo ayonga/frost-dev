@@ -9,7 +9,7 @@ dt = 1/fs;
 
 if length(ts) == 1
     %!!!HACK So interp1 won't complain
-    ts = [ts, ts + eps];
+    ts = [ts, ts + 1e10*eps];
     xs = [xs, xs];
 end
 % Stretch by time factor so things stay at the desired frameIndex rate
@@ -21,7 +21,13 @@ tis = ts(1):dt:ts(end);
 if tis(end) ~= ts(end)
     tis(end + 1) = ts(end);
 end
-xis = interp1(ts, xs', tis)';
+
+[tu, idx] = unique(ts);
+xu = xs(:, idx);
+
+% xis = interp1(ts, xs', tis)';
+xis = interp1(tu, xu', tis)';
+
 
 % return the interpolated data
 Et = tis;
