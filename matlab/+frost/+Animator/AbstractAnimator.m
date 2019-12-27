@@ -56,7 +56,7 @@ classdef AbstractAnimator < handle
     end
     
     methods
-        function obj = AbstractAnimator(display, t, x,ft, varargin)
+        function obj = AbstractAnimator(display, t, x, varargin)
             %             if exist('f', 'var')
             %                 obj.fig = f;
             %                 obj.axs = axes(obj.fig);
@@ -71,7 +71,7 @@ classdef AbstractAnimator < handle
             
             obj.t_all = t;
             obj.x_all = x;
-            obj.ft_all=ft;
+          
             
             obj.startTime = t(1);
             obj.currentTime = obj.startTime;
@@ -134,11 +134,11 @@ classdef AbstractAnimator < handle
             if obj.currentTime >= obj.endTime
                 obj.currentTime = obj.endTime;
                 x = GetData(obj, obj.currentTime);
-                ft=GetExtForce(obj, obj.currentTime);
+               
                 
                 notify(obj, 'newTimeStep', frost.Animator.TimeStepData(obj.currentTime, x));
                 
-                obj.Draw(obj.currentTime, x,ft);
+                obj.Draw(obj.currentTime, x);
                 obj.HandleAxis(obj.currentTime, x);
                 
                 notify(obj, 'reachedEnd', frost.Animator.TimeStepData(obj.currentTime, x));
@@ -152,11 +152,11 @@ classdef AbstractAnimator < handle
                 end
             else
                 x = GetData(obj, obj.currentTime);
-                ft=GetExtForce(obj, obj.currentTime);
+%                 ft=GetExtForce(obj, obj.currentTime);
                 
                 notify(obj, 'newTimeStep', frost.Animator.TimeStepData(obj.currentTime, x));
                 
-                obj.Draw(obj.currentTime, x,ft);
+                obj.Draw(obj.currentTime, x);
                 obj.HandleAxis(obj.currentTime, x);
                 
                 if ~Freeze
@@ -208,11 +208,11 @@ classdef AbstractAnimator < handle
             end
         end
         
-        function Draw(obj, t, x,ft)
+        function Draw(obj, t, x)
             
 %             obj.display.update(x,ft);
             
-            obj.display.updateNum(x,ft);
+            obj.display.updateNum(x);
             
             
             [center, radius, ~] = GetCenter(obj, t, x);
@@ -274,46 +274,46 @@ classdef AbstractAnimator < handle
         end
         
         
-            function ft = GetExtForce(obj, t)
-            t_start = obj.t_all(1);
-            t_end = obj.t_all(end);
-            delta_t = t_end - t_start;
-            
-            
-            
-            if t < t_start || t > t_end
-                val = floor((t - t_start) / delta_t);
-                t = t - val * delta_t;
-            end
-            
-            if t < t_start
-                t = t_start;
-            elseif t > t_end
-                t = t_end;
-            end
-            
-            n = length(obj.t_all);
-            ft = obj.ft_all(:, 1); % Default
-            
-            a = 1;
-            b = n;
-            
-            while (a <= b)
-                c = floor((a + b) / 2);
-                
-                if t < obj.t_all(c)
-                    ft = obj.ft_all(:, c);
-                    b = c - 1;
-                elseif t > obj.t_all(c)
-                    a = c + 1;
-                else
-                    ft = obj.ft_all(:, c);
-                    break;
-                end
-            end
-            
-            
-        end
+%             function ft = GetExtForce(obj, t)
+%             t_start = obj.t_all(1);
+%             t_end = obj.t_all(end);
+%             delta_t = t_end - t_start;
+%             
+%             
+%             
+%             if t < t_start || t > t_end
+%                 val = floor((t - t_start) / delta_t);
+%                 t = t - val * delta_t;
+%             end
+%             
+%             if t < t_start
+%                 t = t_start;
+%             elseif t > t_end
+%                 t = t_end;
+%             end
+%             
+%             n = length(obj.t_all);
+%             ft = obj.ft_all(:, 1); % Default
+%             
+%             a = 1;
+%             b = n;
+%             
+%             while (a <= b)
+%                 c = floor((a + b) / 2);
+%                 
+%                 if t < obj.t_all(c)
+%                     ft = obj.ft_all(:, c);
+%                     b = c - 1;
+%                 elseif t > obj.t_all(c)
+%                     a = c + 1;
+%                 else
+%                     ft = obj.ft_all(:, c);
+%                     break;
+%                 end
+%             end
+%             
+%             
+%         end
     end
     
     events

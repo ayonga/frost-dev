@@ -114,11 +114,14 @@ function logger = simulate_stand(obj, t0, x0, tf, options, varargin,alpha,min,ma
         
         
         
+        if cur_node_idx==3
+            cur_node_idx=1;
+        end
         
         % if the next node is the starting node of the graph, it indicates
         % that one full cycle is completed.
 %         cur_node_idx=1;
-        if cur_node_idx == s_domain_idx
+          if cur_node_idx == s_domain_idx
             numcycle = numcycle - 1;
             % if the number of cycles achieved, then terminate the simulation
             % loop

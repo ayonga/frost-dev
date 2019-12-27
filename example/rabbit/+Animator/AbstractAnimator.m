@@ -37,6 +37,7 @@ classdef AbstractAnimator < handle
             else
                 obj.fig = figure();
                 obj.axs = axes(obj.fig);
+                
             end
             
             obj.speed = 1;
@@ -154,6 +155,9 @@ classdef AbstractAnimator < handle
             if obj.pov ~= Animator.AnimatorPointOfView.Free
                 view(obj.axs, hAngle, vAngle);
             end
+            hold on
+            line([0.5 0.5], [0,0.05]); hold on;
+line([0.5 0.5+1.2],[0.05 0.05])
         end
     end
     

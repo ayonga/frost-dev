@@ -17,13 +17,21 @@ bounds.RightStance.time.t0.lb = 0;
 bounds.RightStance.time.t0.ub = 0;
 bounds.RightStance.time.t0.x0 = 0;
 
-bounds.RightStance.time.tf.lb = 0.25;
-bounds.RightStance.time.tf.ub = 0.75;
-bounds.RightStance.time.tf.x0 = 0.75;
+% bounds.RightStance.time.tf.lb = 0.25;
+% bounds.RightStance.time.tf.ub = 0.75;
+% bounds.RightStance.time.tf.x0 = 0.75;
 
-bounds.RightStance.time.duration.lb = 0.25;
-bounds.RightStance.time.duration.ub = 0.75;
-bounds.RightStance.time.duration.x0 = 0.75;
+% bounds.RightStance.time.duration.lb = 0.25;
+% bounds.RightStance.time.duration.ub = 0.75;
+% bounds.RightStance.time.duration.x0 = 0.75;
+
+bounds.RightStance.time.tf.lb = 1;
+bounds.RightStance.time.tf.ub = 2;
+bounds.RightStance.time.tf.x0 = 1;
+
+bounds.RightStance.time.duration.lb = 1;
+bounds.RightStance.time.duration.ub = 2;
+bounds.RightStance.time.duration.x0 = 1;
 
 bounds.RightStance.inputs.ConstraintWrench.fRightToe.lb = -1000;
 bounds.RightStance.inputs.ConstraintWrench.fRightToe.ub = 1000;

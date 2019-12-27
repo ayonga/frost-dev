@@ -5,7 +5,7 @@ function guard = RightImpact(domain, load_path)
     guard = RigidImpact('RightImpact',domain,'leftFootHeight');
     
     % Relabeling Matrix
-    guard.R = guard.R(:,[1:3,6:7,4:5]);
+    %guard.R = guard.R(:,[1:3,6:7,4:5]);
     
     % set the impact constraint
     % we will compute the impact map every time you add an impact
