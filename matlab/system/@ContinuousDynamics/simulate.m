@@ -70,7 +70,7 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
     end
     
     % configure the ODE options
-    odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-6,'AbsTol',1e-6);
+    odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-5,'AbsTol',1e-5);
     
     if nargin > 6 && ~isempty(logger)
         validateattributes(logger, {'SimLogger'},...
@@ -130,30 +130,24 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
     end
     
     % run the forward simulation
+%     tf = params.ptime(1);
     sol = solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
         [t0, tf], x0, odeopts);
     
     % calculate the dynamics at the guard 
     if isfield(sol,'xe') && ~isempty(sol.xe)
-%         tf_try=ceil(sol.xe);
-%         tf_round=round(sol.xe);
-%         if abs(tf_round-sol.xe) >0.3
-%             if strcmp(obj.Name, 'RightSS') && mod(tf_try,2) ~=1
-%                 pause
-%                 fprintf('something is wrong right transition')
-%             elseif strcmp(obj.Name, 'LeftSS') && mod(tf_try,2) ==1
-%                 pause
-%                 fprintf('something is wrong: left transition')
-%             end
-%             sol_try=solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
-%                 [sol.xe, tf_try], sol.ye, odeopts);
-%             sol_try.xe=sol_try.x(end);
-%             sol_try.ye=sol_try.y(:,end);
-%             sol_try.ie=1;
-%             sol=sol_try;
-%         end
-        calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
-        updateLastLog(logger);
+      calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
+      updateLastLog(logger);
+      disp('Impact Detected!')
+    else
+      sol.xe = sol.x(end);
+      sol.ye = sol.y(:,end);
+%       if tf == params.ptime(1)
+      sol.ie = 1;
+%       end
+      calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
+      updateLastLog(logger);
+      disp('End of Phase!')
     end
     % post-process
     if ~isempty(obj.PostProcess)

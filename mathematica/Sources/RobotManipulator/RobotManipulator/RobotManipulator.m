@@ -176,7 +176,7 @@ PotentialEnergy[robotLinks__] :=
 		masses = Map[GetMass[#]&, links];
 		
 		(* sum up the gravity potential energy of links *)
-		Ve = Sum[grav*masses[[i]]*linkPos[[i,3]],{i,1,Length[links]}];
+		Ve = ToVectorForm[Sum[grav*masses[[i]]*linkPos[[i,3]],{i,1,Length[links]}]];
 		
 		Return[Ve];
 	];	

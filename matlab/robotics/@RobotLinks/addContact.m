@@ -58,7 +58,8 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         % compute the body jacobian
         jac_pos = jacobian(pos,obj.States.x); % directly use partial derivatives for position
         jac_rot = getBodyJacobian(obj, contact);
-        jac = [jac_pos;jac_rot(4:6,:)];
+        %         jac = [jac_pos;jac_rot(4:6,:)];
+        jac = jac_rot;
         % extract the contrained elements
         constr_jac = contact.WrenchBase' * jac;
         

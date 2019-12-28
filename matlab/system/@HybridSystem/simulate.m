@@ -75,14 +75,34 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         end
         
         log_idx = log_idx + 1;
-        logger(log_idx) = feval(obj.Options.Logger, cur_domain); %#ok<AGROW>
-        % run the simulation
+        logger(log_idx) = feval(obj.Options.Logger, cur_domain); 
+        disp(['Simulating ',cur_domain.Name]);
+	% run the simulation
          sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
             logger(log_idx),eventnames,options,obj.Options.OdeSolver);
+
         
+% if strcmp(obj.Gamma.Nodes.Domain{cur_node_idx}.VirtualConstraints.time.PhaseType, 'TimeBased')
+%     if cur_node_idx == 1
+%         tend_prev = 0;
+%     else
+%         tend_prev = t0;
+%         t0 = 0;
+%     end
+%     tf = cur_param.ptime(1);
+%     % run the simulation
+%     sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
+%         logger(log_idx),eventnames,options,obj.Options.OdeSolver);
+%     sol.xe = sol.xe + tend_prev;
+%     sol.x = sol.x + tend_prev;
+% else
+%     % run the simulation
+%     sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
+%         logger(log_idx),eventnames,options,obj.Options.OdeSolver);
+% end
+
         
-        
-        
+       
         % check the index of the triggered edge
         cur_edge  = assoc_edges(unique(sol.ie), :);
         assert(height(cur_edge)<=1,...
@@ -92,6 +112,10 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         end
         cur_guard = cur_edge.Guard{1};
         cur_gurad_param = cur_edge.Param{1};
+        
+        disp(['Calculating Impact Map at Guard, ', cur_edge.Guard{1}.Name]);
+%         disp()
+
         % update states and time
         [t0, x0] = cur_guard.calcDiscreteMap(sol.xe, sol.ye, cur_node, cur_gurad_param);
         
