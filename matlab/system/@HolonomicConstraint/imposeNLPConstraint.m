@@ -13,6 +13,8 @@ function nlp = imposeNLPConstraint(obj, nlp)
     % h(x)-hd = 0 is enforced at the first node
     nlp = addNodeConstraint(nlp, obj.h_, {'x',p_name}, 'first',...
         0, 0, 'Nonlinear');
+%         nlp = addNodeConstraint(nlp, obj.h_, {'x',p_name}, 'all',...
+%         0, 0, 'Nonlinear');
     
     if ~isempty(obj.ddh_) % if the second derivative of the object exists
         
@@ -21,6 +23,8 @@ function nlp = imposeNLPConstraint(obj, nlp)
             % enforce \dot{h}(x,dx) = J(x)dx = 0 at the first node
             nlp = addNodeConstraint(nlp, obj.dh_, {'x','dx'}, 'first',...
                 0, 0, 'Nonlinear');
+%                         nlp = addNodeConstraint(nlp, obj.dh_, {'x','dx'}, 'all',...
+%                 0, 0, 'Nonlinear');
             % enforce \ddot{h}(x,dx,ddx) = 0 at all nodes
             nlp = addNodeConstraint(nlp, obj.ddh_, {'x','dx','ddx',p_name}, 'all',...
                 0, 0, 'Nonlinear');

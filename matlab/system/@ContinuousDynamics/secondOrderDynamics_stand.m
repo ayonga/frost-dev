@@ -49,12 +49,16 @@ if ~isempty(f_ext_name)              % if external inputs are defined
         % get the Gvec function object
         % g_fun = obj.Gvec.External.(f_name);
         % call the callback function to get the external input
+
         f_ext = obj.ExternalInputFun(obj, f_name, t, q, dq, params, logger);
         
         % compute the Gvec, and add it up
-        if ~original
-            f_ext=[f_ext;0];
-        end
+%         if ~original
+%             f_ext=[f_ext;0];
+%         end
+ if length(f_ext)==1
+     'wrong size'
+ end
         Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),q,f_ext);
         
         % store the external inputs into the object private data
@@ -124,13 +128,14 @@ if ~isempty(control_name)
             M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
     end
     %%
-    if alpha{14}
+    if alpha.controllerModel.exist
+        sysCtrl=alpha.controllerModel.sys;
         if strcmp(obj.Name,'sit')
-            objCtrl=alpha{16}.Gamma.Nodes(1,:).Domain{1};
+            objCtrl=sysCtrl.Gamma.Nodes(1,:).Domain{1};
         elseif strcmp(obj.Name,'stand')
-            objCtrl=alpha{16}.Gamma.Nodes(2,:).Domain{1};
+            objCtrl=sysCtrl.Gamma.Nodes(2,:).Domain{1};
         elseif strcmp(obj.Name,'slowDown')
-            objCtrl=alpha{16}.Gamma.Nodes(3,:).Domain{1};
+            objCtrl=sysCtrl.Gamma.Nodes(3,:).Domain{1};
         end
         extF_name=obj.GvecName_.External.(f_name);
         BeF_name=obj.GmapName_.Control.(control_name{1});
@@ -176,12 +181,9 @@ if ~isempty(control_name)
 end
 %% calculate constraint wrench of holonomic constraints
 if original
-    Gv = Gv_ext + Gv_u;
-else
-    %     Fext_sim=feval(obj.GvecName_.External.(f_name),q,u_eva(end-1:end));
-    %     Gv= Fext_sim + Gv_u;
-    %     obj.inputs_.External.(f_name) = u_eva(end-3:end-2);
-    %     Gv = Gv_ext + Gv_u;
+    Gv = Gv_ext + Gv_u; %if the optimizer did not find the user force
+else   %if the optimizer found the user force
+    
     Gv_ext = zeros(nx,1);
     f_ext_name = fieldnames(obj.Inputs.External);
     if ~isempty(f_ext_name)              % if external inputs are defined
@@ -192,7 +194,7 @@ else
             % get the Gvec function object
             % g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
-            f_ext = u_eva(end-4:end-3);
+            f_ext = u_eva(end-8:end-6); %grabbing the user force from the qp solution
             
             % compute the Gvec, and add it up
             
