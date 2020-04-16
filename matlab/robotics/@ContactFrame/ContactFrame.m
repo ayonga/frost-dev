@@ -86,7 +86,7 @@ classdef  (InferiorClasses = {?CoordinateFrame})  ContactFrame < CoordinateFrame
 
     % methods defined in exteral files
     methods
-        obj = setType(obj, type);;
+        obj = setType(obj, type);
 
         [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef);
 

@@ -49,12 +49,7 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
             break;
         end
         
-        if ~isempty(t_domain_idx) 
-            if cur_node_idx == t_domain_idx
-                % if 'cur_node_idx' reaches the terminal node, terminate the simulation
-                break;
-            end
-        end
+        
         
         % the current node in the graph
         cur_node = sim_graph.Nodes(cur_node_idx,:);
@@ -75,28 +70,15 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         end
         
         log_idx = log_idx + 1;
-        logger(log_idx) = feval(obj.Options.Logger, cur_domain); 
+        logger(log_idx) = feval(obj.Options.Logger, cur_domain);  %#ok<AGROW>
         
         disp(['Simulating ',cur_domain.Name]);
         
-        if strcmp(obj.Gamma.Nodes.Domain{cur_node_idx}.VirtualConstraints.time.PhaseType, 'TimeBased')
-          if cur_node_idx == 1
-            tend_prev = 0;
-          else
-            tend_prev = t0;
-            t0 = 0;
-          end
-          tf = cur_param.ptime(1);
-          % run the simulation
-          sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
-          logger(log_idx),eventnames,options,obj.Options.OdeSolver);
-          sol.xe = sol.xe + tend_prev;
-          sol.x = sol.x + tend_prev;
-        else
-          % run the simulation
-          sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
-          logger(log_idx),eventnames,options,obj.Options.OdeSolver);
-        end
+        
+        
+        % run the simulation
+        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
+            logger(log_idx),eventnames,options,obj.Options.OdeSolver);
 
         
        
@@ -116,6 +98,15 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         % update states and time
         [t0, x0] = cur_guard.calcDiscreteMap(sol.xe, sol.ye, cur_node, cur_gurad_param);
         
+        if t0 >= tf
+            break;
+        end
+        if ~isempty(t_domain_idx) 
+            if cur_node_idx == t_domain_idx
+                % if 'cur_node_idx' reaches the terminal node, terminate the simulation
+                break;
+            end
+        end
         
         % determine the target node of the current edge, and set it to be
         % the current node

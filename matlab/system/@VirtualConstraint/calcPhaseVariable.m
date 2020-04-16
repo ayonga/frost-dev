@@ -23,16 +23,7 @@ function tau = calcPhaseVariable(obj, t, x, dx, p)
     
     rel_deg = obj.RelativeDegree;
     tau = cell(1,rel_deg+1);
-    if strcmp(obj.PhaseType, 'TimeBased')
-        tau{1} = (t - p(2)) / (p(1) - p(2));
-        [tau{2:rel_deg+1}] = deal(1);
-        disp(['Current Tau value is ', num2str(tau{1})])
-        return;
-    else % StateBased
-        if isempty(obj.tau_)
-            return;
-        end
-    end
+    
     
     model_type = obj.Model.Type;
     tau_funcs = obj.PhaseFuncsName_;
@@ -45,17 +36,25 @@ function tau = calcPhaseVariable(obj, t, x, dx, p)
         params = {};
     end
     
-    switch model_type
-        case 'FirstOrder'
-            states = {x};
-        case 'SecondOrder'
-            states = {x,dx};
+    
+    
+    if strcmp(obj.PhaseType, 'TimeBased')
+        states = {t};
+    else % StateBased
+        switch model_type
+            case 'FirstOrder'
+                states = {x};
+            case 'SecondOrder'
+                states = {x,dx};
+        end
     end
     
+    tau{1} = feval(tau_funcs{1}, states{1}, params{:});
+    if tau{1} > 1.2
+        tau{1} = 1.2;
+    end
     
-    
-    tau{1} = feval(tau_funcs{1}, x, params{:});
-    disp(['Current Tau value is ', num2str(tau{1})])
+    %     disp(['Current Tau value is ', num2str(tau{1})])
     
     if rel_deg > 1
         for i=2:rel_deg
