@@ -1,4 +1,4 @@
-function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
+function [name, links, joints, transmissions] = ros_load_urdf(urdf_file, N)
     % This function parse the ROS URDF file
     %
     % @note At this moment, this parser only support the 'link' and 'joint'
@@ -12,6 +12,10 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
     
     
     urdf = xmlread(urdf_file);
+    
+    if nargin < 2
+        N = 5;
+    end
     
     xml_robot = urdf.getElementsByTagName('robot').item(0);
     assert(~isempty(xml_robot),['The provided URDF file does not contains ',...
@@ -39,18 +43,18 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             inertia   = inertial.getElementsByTagName('inertia').item(0);
             
             
-            ixx = str2double(inertia.getAttribute('ixx'));
-            ixy = str2double(inertia.getAttribute('ixy'));
-            ixz = str2double(inertia.getAttribute('ixz'));
-            iyy = str2double(inertia.getAttribute('iyy'));
-            iyz = str2double(inertia.getAttribute('iyz'));
-            izz = str2double(inertia.getAttribute('izz'));
+            ixx = round(str2double(inertia.getAttribute('ixx')),N);
+            ixy = round(str2double(inertia.getAttribute('ixy')),N);
+            ixz = round(str2double(inertia.getAttribute('ixz')),N);
+            iyy = round(str2double(inertia.getAttribute('iyy')),N);
+            iyz = round(str2double(inertia.getAttribute('iyz')),N);
+            izz = round(str2double(inertia.getAttribute('izz')),N);
             
-            links(index).Mass = str2double(mass.getAttribute('value'));
+            links(index).Mass = round(str2double(mass.getAttribute('value')),N);
             %%% To handle the case where inertial frame is the same as body
             % frame. (in URDF, this is normally ignored)
             try
-               links(index).Offset = str2num(origin.getAttribute('xyz'));
+               links(index).Offset = round(str2num(origin.getAttribute('xyz')),N);
                rpy = str2num(origin.getAttribute('rpy'));
             catch
                links(index).Offset = zeros(1,3);
@@ -92,7 +96,7 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
             child = xml_joint.getElementsByTagName('child').item(0);
             
             
-            joints(index).Offset = str2num(origin.getAttribute('xyz'));
+            joints(index).Offset = round(str2num(origin.getAttribute('xyz')),N); %#ok<*ST2NM>
             rpy = str2num(origin.getAttribute('rpy'));
             if isempty(rpy)
                 joints(index).R = zeros(1,3);
@@ -164,7 +168,7 @@ function [name, links, joints, transmissions] = ros_load_urdf(urdf_file)
                     % need to change if URDF adopts a standard later
                     trans_inertia = xml_tran.getElementsByTagName('motorInertia').item(0);
                     if ~isempty(trans_inertia)
-                        transmissions(index).Inertia = str2num(trans_inertia.getFirstChild.getData);
+                        transmissions(index).Inertia = round(str2num(trans_inertia.getFirstChild.getData),N);
                     else
                         transmissions(index).Inertia = 0;
                     end

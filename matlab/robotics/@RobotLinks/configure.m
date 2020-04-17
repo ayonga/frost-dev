@@ -8,7 +8,8 @@ function obj = configure(obj, config, base, load_path, varargin)
     % coordinates  @type struct
     
     parser = inputParser;
-    addOptional(parser,'removeFixedJoints',false)
+    addOptional(parser,'removeFixedJoints',false);
+    addOptional(parser,'roundN',6);
     parse(parser, varargin{:});
     parser_results = parser.Results;
     
@@ -45,7 +46,7 @@ function obj = configure(obj, config, base, load_path, varargin)
             obj.ConfigFile = config_file;
             
             % load model from the URDF file
-            [name, links, joints, transmissions] = ros_load_urdf(config_file);
+            [name, links, joints, transmissions] = ros_load_urdf(config_file,parser_results.roundN);
             obj.Name = name;
         else
             error('Invalid configuration file type detected: %s.\n',file_ext(2:end));
