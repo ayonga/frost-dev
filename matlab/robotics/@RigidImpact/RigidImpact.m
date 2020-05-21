@@ -51,7 +51,7 @@ classdef RigidImpact < DiscreteDynamics
         
         % The reset map constraint for the joint velocity
         %
-        % @type SymFunction
+        % @type cell
         dxMap
     end
     
@@ -117,7 +117,7 @@ classdef RigidImpact < DiscreteDynamics
             %  be load @type char
             
             
-            if nargin < 2, load_path = []; end;
+            if nargin < 2, load_path = []; end
             
             
             
@@ -126,18 +126,43 @@ classdef RigidImpact < DiscreteDynamics
             dx = obj.States.dx;
             dxn = obj.States.dxn;
             
+            cstr_name = fieldnames(obj.ImpactConstraints);
                 
             % the configuration only depends on the relabeling matrix
             if ~isempty(load_path)
                 obj.xMap = SymFunction(['xDiscreteMap' obj.Name],[],{x,xn});
                 obj.xMap = load(obj.xMap, load_path);
                 
-                obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],[],{dx,dxn});
-                obj.dxMap = load(obj.dxMap, load_path);
+                if isempty(cstr_name)
+                    obj.dxMap{1} = SymFunction(['dxDiscreteMap' obj.Name],[],{dx,dxn});
+                    obj.dxMap{1} = load(obj.dxMap, load_path);
+                else
+                    n_cstr = numel(cstr_name);
+                    n_mmat = numel(obj.Mmat);
+                    
+                    
+                    %% impact constraints
+                    cstr = obj.ImpactConstraints;
+                    deltaF = cell(1, n_cstr);
+                    input_name = cell(1,n_cstr);
+                    for i=1:n_cstr
+                        c_name = cstr_name{i};
+                        input_name{i} = cstr.(c_name).InputName;
+                        deltaF{i} = obj.Inputs.ConstraintWrench.(input_name{i});
+                    end
+                    
+                    n_fun = n_mmat + n_cstr;
+                    for i=1:n_fun
+                        f_name = ['dxDiscreteMap' num2str(i) '_' obj.Name];
+                        obj.dxMap{i} = SymFunction(f_name,[],[{dx},{x},{dxn},deltaF]);
+                        obj.dxMap{i} = load(obj.dxMap{i}, load_path);
+                    end
+                    
+                end
             else
                 obj.xMap = SymFunction(['xDiscreteMap' obj.Name],obj.R*x-xn,{x,xn});
                 
-                cstr_name = fieldnames(obj.ImpactConstraints);
+                
                 
                 % the velocities determined by the impact constraints
                 if isempty(cstr_name)
@@ -146,27 +171,33 @@ classdef RigidImpact < DiscreteDynamics
                     obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],obj.R*dx-dxn,{dx,dxn});
                     
                 else
+                    n_cstr = numel(cstr_name);
+                    n_mmat = numel(obj.Mmat);
                     %% impact constraints
                     cstr = obj.ImpactConstraints;
-                    n_cstr = numel(cstr_name);
-                    nx  = length(x);
-                    % initialize the Jacobian matrix
-                    Gvec = zeros(nx,1);
+                    Gvec = cell(1, n_cstr);
                     deltaF = cell(1, n_cstr);
                     input_name = cell(1,n_cstr);
                     for i=1:n_cstr
                         c_name = cstr_name{i};
                         input_name{i} = cstr.(c_name).InputName;
-                        Gvec = Gvec + obj.Gvec.ConstraintWrench.(input_name{i});
+                        Gvec{i} = obj.Gvec.ConstraintWrench.(input_name{i});
                         deltaF{i} = obj.Inputs.ConstraintWrench.(input_name{i});
                     end
                     
                     % D(q) -> D(q^+)
-                    M = subs(obj.Mmat, x, xn);
-                    Gvec = subs(Gvec, x, xn);
                     % D(q^+)*(dq^+ - R*dq^-) = sum(J_i'(q^+)*deltaF_i)
-                    delta_dq = M*(dxn - obj.R*dx) - Gvec;
-                    obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],delta_dq,[{dx},{xn},{dxn},deltaF]);
+                    
+                    dx_d = (dxn - obj.R*dx);
+                    for i=1:n_mmat
+                        f_name = ['dxDiscreteMap' num2str(i) '_' obj.Name];
+                        obj.dxMap{i} = SymFunction(f_name,...
+                            ['Normal[SparseArray[' obj.Mmat{i}.s '].SparseArray[' dx_d.s ']]'],[{dx},{x},{dxn},deltaF]);                        
+                    end
+                    for i=1:n_cstr
+                        f_name = ['dxDiscreteMap' num2str(i+n_mmat) '_' obj.Name];
+                        obj.dxMap{i+n_mmat} = SymFunction(f_name,Gvec{i},[{dx},{x},{dxn},deltaF]);
+                    end
                     
                     
                 end

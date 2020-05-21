@@ -24,18 +24,37 @@ function nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin)
         
         addNodeConstraint(nlp, obj.dxMap, {'dx','dxn'}, 'first', 0, 0, 'Linear');
     else
+        vars   = nlp.OptVarTable;
+        dep_vars = [vars.dx(1);vars.xn(1);vars.dxn(1)];
+        numState = vars.dx(1).Dimension;
         %% impact constraints
         cstr = obj.ImpactConstraints;
         n_cstr = numel(cstr_name);
-        input_name = cell(1,n_cstr);
         for i=1:n_cstr
             c_name = cstr_name{i};
-            input_name{i} = cstr.(c_name).InputName;
+            input_name = cstr.(c_name).InputName;
+            dep_vars = [dep_vars;vars.(input_name)(1)];
         end
         
+        n_fun = numel(obj.dxMap);
         
         
-        addNodeConstraint(nlp, obj.dxMap, ['dx','xn', 'dxn', input_name], 'first', 0, 0, 'Linear');
+        dep_funcs(n_fun,1) = NlpFunction();   % preallocation
+        for i=1:n_fun
+            dep_funcs(i) = NlpFunction('Name',obj.dxMap{i}.Name,...
+                'Dimension',numState,'SymFun',obj.dxMap{i},...
+                'DepVariables',dep_vars);
+        end
+      
+        
+        dxMap_cstr_fun = NlpFunction('Name','dxMap',...
+            'Dimension',numState,'lb',0,'ub',0,...
+            'Type','Nonlinear','Summand',dep_funcs);
+        
+        % add dynamical equation constraints
+        addConstraint(nlp,'dxMap','first',dxMap_cstr_fun);
+        
+        
         
     end
     

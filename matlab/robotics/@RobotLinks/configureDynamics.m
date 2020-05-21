@@ -26,9 +26,23 @@ function obj = configureDynamics(obj, varargin)
     end
     
     % set the inertia matrix 
-    fprintf('Evaluating the inertia matrix D(q): \t');
     tic
-    De = eval_math_fun('InertiaMatrix',[links,{obj.numState}]);
+    %     De = eval_math_fun('InertiaMatrix',[links,{obj.numState}]);
+    n_link = length(links);
+    De = cell(n_link,1);
+    m = 100;
+    fprintf('Evaluating the inertia matrix D(q): \t');
+    bs = '\b';
+    sp = ' ';
+    msg = '%d percents completed.\n'; % carriage return included in case error interrupts loop
+    msglen = length(msg)-3; % compensate for conversion character and carriage return
+    fprintf(1,sp(ones(1,ceil(log10(m+1))+msglen)));
+    
+    for i=1:n_link
+        k = floor(i*100/n_link);
+        fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
+        De{i} = eval_math_fun('InertiaMatrixByLink',[links(i),{obj.numState}]);
+    end
     
     De_motor = zeros(obj.numState);
     for i=1:obj.numState
@@ -37,15 +51,14 @@ function obj = configureDynamics(obj, varargin)
             
             if ~isempty(actuator.Inertia) && ~isempty(actuator.Ratio)
                 % reflected motor inertia: I*r^2
-                De_motor(i,i) = actuator.Inertia * actuator.Ratio^2;
-                
+                De_motor(i,i) = actuator.Inertia * actuator.Ratio^2;                
             end
-        end
-        
+        end        
     end
     
-    De_full = De + De_motor;
-    obj.setMassMatrix(De_full);
+    %     fprintf(1,sp(ones(1,40)));
+    Mmat_full = [De; {De_motor}];
+    obj.setMassMatrix(Mmat_full);
     
     toc
     
@@ -64,26 +77,39 @@ function obj = configureDynamics(obj, varargin)
         vf = {Ge};
     else
         tic
-        Ce1 = cell(obj.numState,1);
-        Ce2 = cell(obj.numState,1);
-        Ce3 = cell(obj.numState,1);
+        n_mass_mat = numel(obj.Mmat);
+        n_dof      = obj.numState;
+        Ce1 = cell(n_mass_mat*n_dof,1);
+        Ce2 = cell(n_mass_mat*n_dof,1);
+        Ce3 = cell(n_mass_mat*n_dof,1);
         m = 100;
         fprintf('Evaluating the coriolis term C(q,dq)dq: \t');
         bs = '\b';
         sp = ' ';
-        msg = '%d percents completed…\n'; % carriage return included in case error interrupts loop
+        msg = '%d percents completed.\n'; % carriage return included in case error interrupts loop
         msglen = length(msg)-3; % compensate for conversion character and carriage return
         fprintf(1,sp(ones(1,ceil(log10(m+1))+msglen)));
-        for i=1:obj.numState
-            k = floor(((i-1)*3+1)*100/(3*obj.numState));
-            fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
-            Ce1{i} = SymFunction(['Ce1_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart1',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
-            k = floor(((i-1)*3+2)*100/(3*obj.numState));
-            fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
-            Ce2{i} = SymFunction(['Ce2_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart2',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
-            k = floor(((i-1)*3+3)*100/(3*obj.numState));
-            fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
-            Ce3{i} = SymFunction(['Ce3_vec',num2str(i),'_',obj.Name],eval_math_fun('InertiaToCoriolisPart3',{De,Qe,dQe,i},[],'DelayedSet',delay_set),{Qe,dQe});
+        for i=1:n_mass_mat
+            for j=1:n_dof
+                k = floor(((i-1)*(j-1)*3+1)*100/(3*n_mass_mat*n_dof));
+                fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
+                Ce1{(i-1)*n_dof+j} = SymFunction(...
+                    ['Ce1_vec_L',num2str(i),'_J',num2str(j),'_', obj.Name],...
+                    eval_math_fun('InertiaToCoriolisPart1New',{Mmat_full{i},Qe,dQe,j},[],'DelayedSet',delay_set),...
+                    {Qe,dQe});
+                k = floor(((i-1)*(j-1)*3+2)*100/(3*n_mass_mat*n_dof));
+                fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
+                Ce2{(i-1)*n_dof+j} = SymFunction(...
+                    ['Ce2_vec_L',num2str(i),'_J',num2str(j),'_', obj.Name],...
+                    eval_math_fun('InertiaToCoriolisPart2New',{Mmat_full{i},Qe,dQe,j},[],'DelayedSet',delay_set),...
+                    {Qe,dQe});
+                k = floor(((i-1)*(j-1)*3+3)*100/(3*n_mass_mat*n_dof));
+                fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
+                Ce3{(i-1)*n_dof+j} = SymFunction(...
+                    ['Ce3_vec_L',num2str(i),'_J',num2str(j),'_', obj.Name],...
+                    eval_math_fun('InertiaToCoriolisPart3New',{Mmat_full{i},Qe,dQe,j},[],'DelayedSet',delay_set),...
+                    {Qe,dQe});
+            end
         end
         fprintf(1,sp(ones(1,40)));
         toc

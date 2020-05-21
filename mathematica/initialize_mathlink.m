@@ -21,5 +21,5 @@ function initialize_mathlink()
     
     math('Needs["ExtraUtils`"]');
     
-    eval_math('Needs["RobotManipulator`"];');
+    eval_math('Get["RobotManipulator`"];');
 end

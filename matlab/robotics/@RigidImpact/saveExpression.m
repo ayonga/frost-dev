@@ -34,9 +34,13 @@ function obj = saveExpression(obj, export_path, varargin)
     end
     
     if ~isempty(obj.dxMap)
-        save(obj.dxMap,export_path,varargin{:});
+        cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.dxMap,'UniformOutput',false);
     end
     
     % call superclass method
     saveExpression@DiscreteDynamics(obj, export_path, varargin{:});
+    
+    function save_funcs(x, export_path, varargin)        
+        if ~isempty(x), save(x,export_path, varargin{:}); end
+    end
 end

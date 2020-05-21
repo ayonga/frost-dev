@@ -7,6 +7,13 @@ function obj = loadDynamics(obj,file_path,skip_load_vf,extra_fvecs,varargin)
     %  skip_load_vf: skip loading the drift vectors @type logical
     %  extra_fvecs: list of extra drift vectors @type cellstr
     
+    
+    n_mmat = length(obj.Links)+1;
+    for i=1:n_mmat
+        mmat_names{i} = ['Mmat' num2str(i) '_' obj.Name];
+        mmat_ddx_names{i} = ['MmatDx' num2str(i) '_' obj.Name];
+    end
+    
     if nargin < 4
         extra_fvecs = {};
     end
@@ -45,5 +52,5 @@ function obj = loadDynamics(obj,file_path,skip_load_vf,extra_fvecs,varargin)
     if nargin < 3
         skip_load_vf = false;
     end
-    loadDynamics@ContinuousDynamics(obj, file_path, vf_names, skip_load_vf);
+    loadDynamics@ContinuousDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names, skip_load_vf);
 end

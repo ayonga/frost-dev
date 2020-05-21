@@ -51,7 +51,7 @@ function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
         
         
         % inertia matrix
-        De = feval(obj.Mmat.Name, q);
+        De = calcMassMatrix(obj,q);
         
         % % Compute Dynamically Consistent Contact Null-Space from Lagrange
         % % Multiplier Formulation

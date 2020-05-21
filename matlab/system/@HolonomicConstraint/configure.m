@@ -36,13 +36,13 @@ function obj = configure(obj, load_path)
         end
         if isempty(load_path)
             ddx = model.States.ddx;
-            dh = Jh * dx;
-            obj.dh_ = SymFunction(obj.dh_name, dh, {x,dx});
+            % dh = Jh * dx;
+            obj.dh_ = SymFunction(obj.dh_name, ['Normal[SparseArray[' Jh.s '].SparseArray[' dx.s ']]'], {x,dx});
             
-            dJh = jacobian(dh, x);
+            dJh = jacobian(obj.dh_, x);
             obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x, dx});
-            ddh = Jh*ddx + dJh*dx + obj.dh_ + obj.h_;
-            obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, ddx, hd});
+            % ddh = Jh*ddx + dJh*dx + obj.dh_ + obj.h_;
+            obj.ddh_ = SymFunction(obj.ddh_name, ['Normal[SparseArray[' Jh.s '].SparseArray[' ddx.s '] + SparseArray[' dJh.s '].SparseArray[' dx.s ']] + ' obj.dh_.s ' + ' obj.h_.s ], {x, dx, ddx, hd});
         else
             ddx = model.States.ddx;
             dh = SymFunction(obj.dh_name, [], {x,dx});

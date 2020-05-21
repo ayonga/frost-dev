@@ -152,6 +152,18 @@ classdef CoordinateFrame < handle
                 zeros(3), R];
         end
        
+        function gst = RigidInverse(g)
+            R = CoordinateFrame.RigidOrientation(g);
+            p = CoordinateFrame.RigidPosition(g);
+            
+            if isa(p,'SymExpression')
+                gst = [transpose(R),-transpose(R)*tomatrix(p);
+                    zeros(1,3),1];
+            else
+                gst = [transpose(R),-transpose(R)*p;
+                    zeros(1,3),1];
+            end
+        end
         
         function R = RigidOrientation(g)
             % extract the rigid orientation from the homogeneous
@@ -185,6 +197,8 @@ classdef CoordinateFrame < handle
                 p(3),0,-p(1);
                 -p(2),p(1),0];
         end
+        
+        
     end
     
     %% The following methods are not fast enough compared to counterpart Mathematica implementation.
@@ -203,4 +217,6 @@ classdef CoordinateFrame < handle
         
         c_str = getTwists(obj, p);
     end
+    
+    
 end

@@ -29,7 +29,8 @@ function obj = compile(obj, export_path, varargin)
     % The mass matrix will be exported by the continuoud dynamics object,
     % but call it here again will not re-export if it has been exported.
     if ~isempty(obj.Mmat)
-        export(obj.Mmat,export_path,varargin{:});
+        cellfun(@(x)export(x,export_path,varargin{:}),obj.Mmat,'UniformOutput',false);
+        %         export(obj.Mmat,export_path,varargin{:});
     end
     
     % call superclass method

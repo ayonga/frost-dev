@@ -4,7 +4,6 @@
  *	RobotLinks.m - robot kinematics package using Screws.m
  *
  *		    Richard Murray and Sudipto Sur
- *				   
  *	     Division of Engineering and Applied Science
  *		  California Institute of Technology
  *			  Pasadena, CA 91125
@@ -25,7 +24,7 @@
  *   Split off code from Screws.m
  *)
 
-BeginPackage["RobotLinks`", {"Screws`"}];(* "pbar`"}];*)
+BeginPackage["RobotLinks`", {"Screws`","ExtraUtils`"}];(* "pbar`"}];*)
 
 RevoluteTwist::usage=
  "RevoluteTwist[q,w] gives the 6-vector corresponding to point q on \
@@ -79,6 +78,7 @@ PrismaticTwist[q_,w_]:= Flatten[{w, {0,0,0}}];
 ForwardKinematics[args__, gst0_]:= 
   Module[
     { g, i,
+      $MaxExtraPrecision=6,
       argList = {args},		(* turn arguments into a real list *)
       n = Length[{args}]	(* decide on the number of joints *)
     },
@@ -93,7 +93,7 @@ ForwardKinematics[args__, gst0_]:=
     ];      
 
     (* Finish by multiplying by the initial tool configuration *)
-    g . gst0
+    Chop[g . gst0]
   ];
 			
 
@@ -120,7 +120,7 @@ SpatialJacobian[args__, gst0_]:=
     ];      
 
     (* Return the Jacobian *)
-    Transpose[Js]
+    Transpose[Chop[Js]]
   ];
 			
 BodyJacobian[args__, gst0_]:= 
@@ -145,7 +145,7 @@ BodyJacobian[args__, gst0_]:=
     ];      
 
     (* Return the Jacobian *)
-    Transpose[Jb]
+    Transpose[Chop[Jb]]
   ];
 
 InertiaToCoriolis[M_, theta_, omega_] :=
@@ -164,7 +164,7 @@ InertiaToCoriolis[M_, theta_, omega_] :=
         ]
       ]
     ];
-    Cmat
+    Chop@Cmat
   ];
   
 InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
@@ -180,7 +180,7 @@ InertiaToCoriolisPart1[M_, theta_, omega_, col_] :=
 	      (D[M[[i,j]], q[[k]]]);
 	    ]
     ];
-    Cvec*w[[j]]
+    Chop[Cvec*w[[j]]]
   ];	
 InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
   Module[
@@ -195,7 +195,7 @@ InertiaToCoriolisPart2[M_, theta_, omega_, col_] :=
           (D[M[[i,k]], q[[j]]]);
         ]
     ];
-    Cvec*w[[j]]
+    Chop[Cvec*w[[j]]]
   ];	
   
 InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
@@ -207,11 +207,11 @@ InertiaToCoriolisPart3[M_, theta_, omega_, col_] :=
     Cvec = Array[0&, {n,1}];
     For[i = 1, i <= n, ++i,
         For[k = 1, k <= n, ++k,
-          Cvec[[i]] -= 1/2 * w[[k]] *
-          (- D[M[[j,k]], q[[i]]]);
+          Cvec[[i]] += 1/2 * w[[k]] *
+          (D[M[[j,k]], q[[i]]]);
         ]
     ];
-    Cvec*w[[j]]
+    Chop[Cvec*w[[j]]]
   ];	
 
 End[];

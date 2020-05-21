@@ -25,7 +25,7 @@ function obj = compile(obj, export_path, varargin)
     
     % export the mass matrix
     if ~isempty(obj.Mmat)
-        export(obj.Mmat,export_path,varargin{:});
+        cellfun(@(x)export(x,export_path,varargin{:}),obj.Mmat,'UniformOutput',false);
     end
     
     % export the drift vector
