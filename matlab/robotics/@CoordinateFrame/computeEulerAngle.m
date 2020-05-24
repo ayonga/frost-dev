@@ -18,7 +18,7 @@ function rpy = computeEulerAngle(obj)
     % compute Euler angles
     yaw = atan2(RotW(2,1),RotW(1,1));
     roll = atan2(RotW(3,2),RotW(3,3));
-    pitch = atan2(-RotW(3,1) * cos(roll),RotW(3,3));
+    pitch = atan2(-RotW(3,1) .* cos(roll),RotW(3,3));
     
     rpy = [roll; pitch; yaw];
 end

@@ -42,7 +42,7 @@ function obj = configure(obj, load_path)
             dJh = jacobian(obj.dh_, x);
             obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x, dx});
             % ddh = Jh*ddx + dJh*dx + obj.dh_ + obj.h_;
-            obj.ddh_ = SymFunction(obj.ddh_name, ['Normal[SparseArray[' Jh.s '].SparseArray[' ddx.s '] + SparseArray[' dJh.s '].SparseArray[' dx.s ']] + ' obj.dh_.s ' + ' obj.h_.s ], {x, dx, ddx, hd});
+            obj.ddh_ = SymFunction(obj.ddh_name, ['Normal[SparseArray[' Jh.s '].SparseArray[' ddx.s '] + SparseArray[' dJh.s '].SparseArray[' dx.s ']]'], {x, dx, ddx});
         else
             ddx = model.States.ddx;
             dh = SymFunction(obj.dh_name, [], {x,dx});
@@ -52,7 +52,7 @@ function obj = configure(obj, load_path)
             dJh = SymFunction(obj.dJh_name, [], {x,dx});
             obj.dJh_ = load(dJh, load_path);
             
-            ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx, hd});
+            ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx});
             obj.ddh_ = load(ddh, load_path);
         end
     else
@@ -66,11 +66,11 @@ function obj = configure(obj, load_path)
                 
                 dJh = jacobian(dh, x);
                 obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x});
-                ddh = dJh*dx + obj.dh_ + obj.h_;
-                obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, hd});
+                ddh = dJh*dx;
+                obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx});
             else
-                dh = Jh * dx + obj.h_;
-                obj.dh_ = SymFunction(obj.dh_name, dh, {x, dx, hd});
+                dh = Jh * dx;
+                obj.dh_ = SymFunction(obj.dh_name, dh, {x, dx});
             end
         else
             if order == 2
@@ -81,12 +81,12 @@ function obj = configure(obj, load_path)
                 dJh = SymFunction(obj.dJh_name, [], {x});
                 obj.dJh_ = load(dJh, load_path);
                 
-                ddh = SymFunction(obj.ddh_name, [], {x, dx, hd});
+                ddh = SymFunction(obj.ddh_name, [], {x, dx});
                 obj.ddh_ = load(ddh, load_path);
                 
                 
             else
-                dh = SymFunction(obj.dh_name, [], {x,dx, hd});
+                dh = SymFunction(obj.dh_name, [], {x,dx});
                 obj.dh_ = load(dh, load_path);
             end
             

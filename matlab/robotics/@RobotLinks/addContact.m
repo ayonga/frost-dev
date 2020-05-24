@@ -50,7 +50,7 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         
         % compute the spatial position (cartesian position + Euler angles)
         pos = getCartesianPosition(obj, contact);
-        rpy = getEulerAngles(obj, contact);
+        rpy = getRelativeEulerAngles(obj, contact, ref);
         
         h = transpose([pos, rpy]); %effectively as transpose
         % extract the contrained elements
@@ -61,8 +61,8 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         %         jac = [jac_pos;jac_rot(4:6,:)];
         jac = jac_rot;
         % extract the contrained elements
-        idx = sum(contact.WrenchBase)';
-        constr_jac = jac(idx,:);
+        idx = sum(contact.WrenchBase,2);
+        constr_jac = jac(find(idx),:); %#ok<FNDSB>
         
         % label for the holonomic constraint
         label_full = cellfun(@(x)[contact.Name,x],...
