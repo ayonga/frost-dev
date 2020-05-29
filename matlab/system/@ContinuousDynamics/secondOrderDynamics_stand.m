@@ -36,7 +36,7 @@ global standUp original
 
 %% get the external input
 % initialize the Gv_ext vector
-if strcmp(obj.Name,'stand')
+if strcmp(obj.Name,'slowDown')
     'pause';
 end
 Gv_ext = zeros(nx,1);
@@ -154,7 +154,7 @@ if ~isempty(control_name)
     %%
     % compute control inputs
     if ~isempty(controller)
-        %             u = calcControl(controller, t, x, vfc, gfc, obj, params, logger,alpha,min,max);
+%                     u = calcControl(controller, t, x, vfc, gfc, obj, params, logger,alpha,min,max);
         if standUp || strcmp(obj.Name,'slowDown')   %if strcmp(alpha{10},'standUp')
             u_eva=ExoController.standController(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,original,f_ext_ctrl);
         else
@@ -194,8 +194,9 @@ else   %if the optimizer found the user force
             % get the Gvec function object
             % g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
-            f_ext = u_eva(end-8:end-6); %grabbing the user force from the qp solution
-            
+%             f_ext = u_eva(end-8:end-6); %grabbing the user force from the qp solution
+            f_ext = u_eva(end-2:end); %grabbing the user force from the qp solution
+
             % compute the Gvec, and add it up
             
             Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),q,f_ext);
@@ -210,6 +211,7 @@ end
 Gv_c = zeros(nx,1);
 if ~isempty(h_cstr_name)
     lambda = -XiInv \ (Jedot * dq + Je * (M \ (Fv + Gv)));
+
 %         if original
 %                 lambda_ctrl=u_eva(13:end);
 %         else
