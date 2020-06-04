@@ -77,7 +77,6 @@ while (true)
     log_idx = log_idx + 1;
     logger(log_idx) = feval(obj.Options.Logger, cur_domain); %#ok<AGROW>
     virt_constr=struct2array(cur_domain.VirtualConstraints);
-    if strcmp(virt_constr.PhaseParamName,'ptrajectoryStand')&& strcmp(cur_domain.Name,'standKnee')
         cur_param.ptrajectoryStand=ExoCalculations.TauReset(cur_param.ptrajectoryStand(1),cur_param.ptrajectoryStand(2),logger(2).flow.t(1));
     end
     % run the simulation
@@ -117,9 +116,9 @@ while (true)
     
     
     
-    if cur_node_idx==4
-        cur_node_idx=1;
-    end
+%     if cur_node_idx==4
+%         cur_node_idx=1;
+%     end
     
     % if the next node is the starting node of the graph, it indicates
     % that one full cycle is completed.
