@@ -91,10 +91,7 @@ function obj = configure(obj, config, base, load_path, varargin)
     
     %% Remove fixed joints
     if parser_results.removeFixedJoints
-        Rz = @(th) [cos(th), -sin(th), 0; sin(th), cos(th), 0; 0,0,1];
-        Ry = @(th) [cos(th), 0, sin(th); 0, 1, 0; -sin(th), 0, cos(th)];
-        Rx = @(th) [1,0,0; 0, cos(th), -sin(th); 0, sin(th), cos(th)];
-        Rot = @(q) Rz(q(3))*Ry(q(2))*Rx(q(1));
+        
         joints_to_remove = [];
         links_to_remove = [];
         for i = 1:length(joints)
@@ -208,4 +205,15 @@ function obj = configure(obj, config, base, load_path, varargin)
         end
     end
     
+    
+    function R = Rot(q)
+        Rz = @(th) [cos(th), -sin(th), 0; sin(th), cos(th), 0; 0,0,1];
+        Ry = @(th) [cos(th), 0, sin(th); 0, 1, 0; -sin(th), 0, cos(th)];
+        Rx = @(th) [1,0,0; 0, cos(th), -sin(th); 0, sin(th), cos(th)];
+        if isvector(q)
+            R = Rz(q(3))*Ry(q(2))*Rx(q(1));
+        else
+            R = q;
+        end
+    end
 end
