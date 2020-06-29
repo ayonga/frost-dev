@@ -49,16 +49,16 @@ if ~isempty(f_ext_name)              % if external inputs are defined
         % get the Gvec function object
         % g_fun = obj.Gvec.External.(f_name);
         % call the callback function to get the external input
-
+        
         f_ext = obj.ExternalInputFun(obj, f_name, t, q, dq, params, logger);
         
         % compute the Gvec, and add it up
-%         if ~original
-%             f_ext=[f_ext;0];
-%         end
- if length(f_ext)==1
-     'wrong size'
- end
+        %         if ~original
+        %             f_ext=[f_ext;0];
+        %         end
+        if length(f_ext)==1
+            'wrong size'
+        end
         Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),q,f_ext);
         
         % store the external inputs into the object private data
@@ -130,16 +130,32 @@ if ~isempty(control_name)
     %%
     if alpha.controllerModel.exist
         sysCtrl=alpha.controllerModel.sys;
-        if strcmp(obj.Name,'sit')
+        if alpha.domain.fiveNodes
+            if strcmp(obj.Name,'sit')
+                objCtrl=sysCtrl.Gamma.Nodes(1,:).Domain{1};
+            elseif strcmp(obj.Name,'standZMP')
+                objCtrl=sysCtrl.Gamma.Nodes(2,:).Domain{1};
+            elseif strcmp(obj.Name,'standVert')
+                objCtrl=sysCtrl.Gamma.Nodes(3,:).Domain{1};
+            elseif strcmp(obj.Name,'slowDown')
+                objCtrl=sysCtrl.Gamma.Nodes(4,:).Domain{1};
+            end
+        elseif alpha.domain.stabilizeDomain
             objCtrl=sysCtrl.Gamma.Nodes(1,:).Domain{1};
-        elseif strcmp(obj.Name,'stand')
-            objCtrl=sysCtrl.Gamma.Nodes(2,:).Domain{1};
-        elseif strcmp(obj.Name,'slowDown')
-            objCtrl=sysCtrl.Gamma.Nodes(3,:).Domain{1};
         end
         extF_name=obj.GvecName_.External.(f_name);
         BeF_name=obj.GmapName_.Control.(control_name{1});
-        [M_ctrl,Fv_ctrl,Je_ctrl,Jedot_ctrl,Be_ctrl,Gv_ext_ctrl,f_ext_ctrl]=ExoController.secondOrderDynamicsControllerModel(objCtrl, t, x, controller, params, logger, alpha,min,max,original,extF_name,BeF_name );
+        info.controller=controller;
+        info.params=params;
+        info.logger=logger;
+        info.alpha=alpha;
+        info.min=min;
+        info.max=max;
+        info.original=original;
+        info.extF_name=extF_name;
+        info.BeF_name=BeF_name;
+        [M_ctrl,Fv_ctrl,Je_ctrl,Jedot_ctrl,Be_ctrl,Gv_ext_ctrl,f_ext_ctrl]=ExoController.secondOrderDynamicsControllerModel(objCtrl, t, x, info);
+   
     else
         M_ctrl=M;
         Fv_ctrl=Fv;
@@ -148,26 +164,27 @@ if ~isempty(control_name)
         Be_ctrl=Be;
         Gv_ext_ctrl=Gv_ext;
         f_ext_ctrl=f_ext;
+        objCtrl=obj;
     end
-        
-        
+    
+    
     %%
     % compute control inputs
     if ~isempty(controller)
-%                     u = calcControl(controller, t, x, vfc, gfc, obj, params, logger,alpha,min,max);
+        %                     u = calcControl(controller, t, x, vfc, gfc, obj, params, logger,alpha,min,max);
         if standUp || strcmp(obj.Name,'slowDown')   %if strcmp(alpha{10},'standUp')
-            u_eva=ExoController.standController(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,original,f_ext_ctrl);
+            u_eva=ExoController.standController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,original,f_ext_ctrl);
         else
             if original
                 %            u_eva=ExoController.torqueGroundReactionForce(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
-                u_eva=ExoController.torqueGroundReactionForce_Final(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max);
+                u_eva=ExoController.torqueGroundReactionForce_Final(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max);
                 %             u_eva=ExoController.standDomainTime(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
                 %              u_eva=ExoController.standDomainPhase(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
             else
                 
-%                 u_eva=ExoController.torqueGroundReactionForce_Slack(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
-                u_eva=ExoController.torqueGroundReactionForce_Slack_ZMP(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
-
+                %                 u_eva=ExoController.torqueGroundReactionForce_Slack(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
+                u_eva=ExoController.torqueGroundReactionForce_Slack_ZMP(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
+                
             end
         end
         u=u_eva(1:12);
@@ -194,9 +211,9 @@ else   %if the optimizer found the user force
             % get the Gvec function object
             % g_fun = obj.Gvec.External.(f_name);
             % call the callback function to get the external input
-%             f_ext = u_eva(end-8:end-6); %grabbing the user force from the qp solution
+            %             f_ext = u_eva(end-8:end-6); %grabbing the user force from the qp solution
             f_ext = u_eva(end-2:end); %grabbing the user force from the qp solution
-
+            
             % compute the Gvec, and add it up
             
             Gv_ext = Gv_ext + feval(obj.GvecName_.External.(f_name),q,f_ext);
@@ -211,14 +228,14 @@ end
 Gv_c = zeros(nx,1);
 if ~isempty(h_cstr_name)
     lambda = -XiInv \ (Jedot * dq + Je * (M \ (Fv + Gv)));
-
-%         if original
-%                 lambda_ctrl=u_eva(13:end);
-%         else
-%                 lambda_ctrl=u_eva(13:end-4);
-%         end
+    
+    %         if original
+    %                 lambda_ctrl=u_eva(13:end);
+    %         else
+    %                 lambda_ctrl=u_eva(13:end-4);
+    %         end
     % the constrained wrench inputs
-%     lambda=lambda_ctrl;
+    %     lambda=lambda_ctrl;
     Gv_c = transpose(Je)*lambda;
     
     % extract and store

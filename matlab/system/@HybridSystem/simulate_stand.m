@@ -119,9 +119,9 @@ while (true)
     
     
     
-%     if cur_node_idx==4
-%         cur_node_idx=1;
-%     end
+    if cur_node_idx==4
+        cur_node_idx=1;
+    end
 %     
     % if the next node is the starting node of the graph, it indicates
     % that one full cycle is completed.
