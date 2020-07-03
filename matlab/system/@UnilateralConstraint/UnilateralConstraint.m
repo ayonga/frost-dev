@@ -94,6 +94,8 @@ classdef UnilateralConstraint < handle
                 if strcmp(tmp{1},'Inputs')
                     input_dep = true;
                     vars{i} = model.(tmp{1}).(tmp{2}).(deps{i});
+                elseif strcmp(tmp{1},'time')
+                    vars{i}=deps{i};
                 else
                     vars{i} = model.(tmp{1}).(deps{i});
                 end

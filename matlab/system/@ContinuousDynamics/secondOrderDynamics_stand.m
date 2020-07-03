@@ -135,7 +135,7 @@ if ~isempty(control_name)
                 objCtrl=sysCtrl.Gamma.Nodes(1,:).Domain{1};
             elseif strcmp(obj.Name,'standZMP')
                 objCtrl=sysCtrl.Gamma.Nodes(2,:).Domain{1};
-            elseif strcmp(obj.Name,'standVert')
+            elseif strcmp(obj.Name,'standKnee')
                 objCtrl=sysCtrl.Gamma.Nodes(3,:).Domain{1};
             elseif strcmp(obj.Name,'slowDown')
                 objCtrl=sysCtrl.Gamma.Nodes(4,:).Domain{1};

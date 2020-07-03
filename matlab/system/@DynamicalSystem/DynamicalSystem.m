@@ -211,6 +211,8 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
                 var_group = {'Inputs','External'};
             elseif isfield(obj.Params, name) % check if it is a parameter variables
                 var_group = {'Params',''}; 
+            elseif strcmp('time', name)
+                var_group = {'time',''}; 
             else
                 var_group = {'',''};
             end
@@ -265,6 +267,8 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
                         value{i} = obj.inputs_.(tmp{2}).(vars{i});
                     case 'Params'
                         value{i} = obj.params_.(vars{i});
+                    case 'time'
+                        value{i}=obj.t_;
                 end
             end
         end
