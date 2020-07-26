@@ -30,7 +30,7 @@ obj.states_.dx = dq;
 M = calcMassMatrix(obj, q);
 Fv = calcDriftVector(obj, q, dq);
 
-global standUp original
+global standUp original optimizerUserForce
 
 % original=1;
 
@@ -133,12 +133,14 @@ if ~isempty(control_name)
         if alpha.domain.fiveNodes
             if strcmp(obj.Name,'sit')
                 objCtrl=sysCtrl.Gamma.Nodes(1,:).Domain{1};
-            elseif strcmp(obj.Name,'standZMP')
+            elseif strcmp(obj.Name,'sit2')
                 objCtrl=sysCtrl.Gamma.Nodes(2,:).Domain{1};
-            elseif strcmp(obj.Name,'standKnee')
+            elseif strcmp(obj.Name,'standZMP')
                 objCtrl=sysCtrl.Gamma.Nodes(3,:).Domain{1};
-            elseif strcmp(obj.Name,'slowDown')
+            elseif strcmp(obj.Name,'standVert') || strcmp(obj.Name,'standKnee')
                 objCtrl=sysCtrl.Gamma.Nodes(4,:).Domain{1};
+            elseif strcmp(obj.Name,'slowDown')
+                objCtrl=sysCtrl.Gamma.Nodes(5,:).Domain{1};
             end
         elseif alpha.domain.stabilizeDomain
             objCtrl=sysCtrl.Gamma.Nodes(1,:).Domain{1};
@@ -167,6 +169,7 @@ if ~isempty(control_name)
         objCtrl=obj;
     end
     
+%     f_ext_ctrl=zeros(3,1);
     
     %%
     % compute control inputs
@@ -197,7 +200,7 @@ if ~isempty(control_name)
     
 end
 %% calculate constraint wrench of holonomic constraints
-if original
+if optimizerUserForce
     Gv = Gv_ext + Gv_u; %if the optimizer did not find the user force
 else   %if the optimizer found the user force
     

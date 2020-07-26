@@ -77,10 +77,14 @@ while (true)
     log_idx = log_idx + 1;
     logger(log_idx) = feval(obj.Options.Logger, cur_domain); %#ok<AGROW>
     virt_constr=struct2array(cur_domain.VirtualConstraints);
-    switchCont_e=0;
+%     if  ~strcmp(cur_domain.Name,'sit2')
+%         switchCont_e=0;
+%     end
     if ~strcmp(cur_domain.Name,'slowDown') && any(strcmp(fieldnames(virt_constr),'PhaseParamName')) && strcmp(virt_constr.PhaseParamName,'ptrajectoryStand')&& strcmp(cur_domain.Name,'standKnee') && isfield(cur_param,'ptrajectoryStand')
-        cur_param.ptrajectoryStand=ExoCalculations.TauReset(cur_param.ptrajectoryStand(1),cur_param.ptrajectoryStand(2),logger(2).flow.t(1));
-        switchCont_e=1;
+        cur_param.ptrajectoryStand=ExoCalculations.TauReset(cur_param.ptrajectoryStand(1),cur_param.ptrajectoryStand(2),logger(3).flow.t(1));
+        %switchCont_e=1;
+    elseif  ~strcmp(cur_domain.Name,'sit2')
+         switchCont_e=0;
     end
     % run the simulation
     sol = cur_domain.simulate_stand(t0,x0,tf,cur_control,cur_param,...
@@ -119,10 +123,10 @@ while (true)
     
     
     
-    if cur_node_idx==4
-        cur_node_idx=1;
-    end
-%     
+%         if cur_node_idx==3
+%             cur_node_idx=1;
+%         end
+    % %
     % if the next node is the starting node of the graph, it indicates
     % that one full cycle is completed.
     %         cur_node_idx=1;
