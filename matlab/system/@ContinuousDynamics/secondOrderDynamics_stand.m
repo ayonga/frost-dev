@@ -30,7 +30,7 @@ obj.states_.dx = dq;
 M = calcMassMatrix(obj, q);
 Fv = calcDriftVector(obj, q, dq);
 
-global standUp original optimizerUserForce
+global standUp original optimizerUserForce zeroUserForce asynchronousTorque spasticity
 
 % original=1;
 
@@ -157,7 +157,7 @@ if ~isempty(control_name)
         info.extF_name=extF_name;
         info.BeF_name=BeF_name;
         [M_ctrl,Fv_ctrl,Je_ctrl,Jedot_ctrl,Be_ctrl,Gv_ext_ctrl,f_ext_ctrl]=ExoController.secondOrderDynamicsControllerModel(objCtrl, t, x, info);
-   
+        
     else
         M_ctrl=M;
         Fv_ctrl=Fv;
@@ -169,7 +169,7 @@ if ~isempty(control_name)
         objCtrl=obj;
     end
     
-%     f_ext_ctrl=zeros(3,1);
+    %     f_ext_ctrl=zeros(3,1);
     
     %%
     % compute control inputs
@@ -186,7 +186,7 @@ if ~isempty(control_name)
             else
                 
                 %                 u_eva=ExoController.torqueGroundReactionForce_Slack(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
-                u_eva=ExoController.torqueGroundReactionForce_Slack_ZMP(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
+                [u_eva,lambda]=ExoController.torqueGroundReactionForce_Slack_ZMP(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
                 
             end
         end
@@ -195,13 +195,26 @@ if ~isempty(control_name)
     else
         u = zeros(size(Be_ctrl,2),1);
     end
-    Gv_u = Be_ctrl*u;
+    
+    if asynchronousTorque % evaluating what happens if the motor can only provide 15% less of torque
+%          u(7:end)=u(7:end)*0.85;
+       u(9)=u(9)*0.85;
+%          u(10)=u(10)*0.85;       
+    end
+   if spasticity
+        u(9)=u(9)+100;
+         u(3)=u(3)+25;
+   end
+    Gv_u = Be*u;
     obj.inputs_.Control.(control_name{1}) = u;
     
 end
 %% calculate constraint wrench of holonomic constraints
 if optimizerUserForce
     Gv = Gv_ext + Gv_u; %if the optimizer did not find the user force
+elseif zeroUserForce
+    Gv=Gv_u; %running test case where the user provides zero force
+    obj.inputs_.External.(f_name) = zeros(3,1);
 else   %if the optimizer found the user force
     
     Gv_ext = zeros(nx,1);

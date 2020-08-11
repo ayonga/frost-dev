@@ -122,7 +122,7 @@ while (true)
     end
     
     
-    
+%     
 %         if cur_node_idx==3
 %             cur_node_idx=1;
 %         end
