@@ -127,7 +127,7 @@ if ~isempty(control_name)
             zeros(size(Be));
             M \ (Ie - transpose(Je)* (XiInv \ (Je / M))) * Be];
     end
-    %%
+    %% grabbing the controller model
     if alpha.controllerModel.exist
         sysCtrl=alpha.controllerModel.sys;
         if alpha.domain.fiveNodes
@@ -169,26 +169,15 @@ if ~isempty(control_name)
         objCtrl=obj;
     end
     
-    %     f_ext_ctrl=zeros(3,1);
+
     
     %%
     % compute control inputs
     if ~isempty(controller)
-        %                     u = calcControl(controller, t, x, vfc, gfc, obj, params, logger,alpha,min,max);
         if standUp || strcmp(obj.Name,'slowDown')   %if strcmp(alpha{10},'standUp')
             u_eva=ExoController.standController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,original,f_ext_ctrl);
         else
-            if original
-                %            u_eva=ExoController.torqueGroundReactionForce(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
-                u_eva=ExoController.torqueGroundReactionForce_Final(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max);
-                %             u_eva=ExoController.standDomainTime(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
-                %              u_eva=ExoController.standDomainPhase(obj, t,params,logger, q, dq, Je,Jedot, M, Be, Fv, Gv_ext, alpha,min,max);
-            else
-                
-                %                 u_eva=ExoController.torqueGroundReactionForce_Slack(obj, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
-                [u_eva,lambda]=ExoController.torqueGroundReactionForce_Slack_ZMP(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
-                
-            end
+             [u_eva,lambda]=ExoController.torqueGroundReactionForce_Slack_ZMP(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
         end
         u=u_eva(1:12);
         %
@@ -197,13 +186,15 @@ if ~isempty(control_name)
     end
     
     if asynchronousTorque % evaluating what happens if the motor can only provide 15% less of torque
-%          u(7:end)=u(7:end)*0.85;
-       u(9)=u(9)*0.85;
-%          u(10)=u(10)*0.85;       
+%           u(7:end)=u(7:end)*0.85; %all right motors
+%       u(9)=u(9)*0.85; %right knee
+%          u(10)=u(10)*0.85; %right hip 
+
+u(1:6)=u(1:6)*0.85; %all left motors
     end
    if spasticity
-        u(9)=u(9)+100;
-         u(3)=u(3)+25;
+        u(9)=u(9)+15; %right knee
+     u(3)=u(3)+15; % left knee
    end
     Gv_u = Be*u;
     obj.inputs_.Control.(control_name{1}) = u;
