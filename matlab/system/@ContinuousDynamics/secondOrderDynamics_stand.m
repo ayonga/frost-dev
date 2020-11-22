@@ -177,8 +177,12 @@ if ~isempty(control_name)
         if standUp || strcmp(obj.Name,'slowDown')   %if strcmp(alpha{10},'standUp')
             u_eva=ExoController.standController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,original,f_ext_ctrl);
         else
+            if alpha.controller.simple
+                [u_eva,lambda]=ExoController.simpleStandingController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
+            else
              [u_eva,lambda]=ExoController.torqueGroundReactionForce_Slack_ZMP(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
-        end
+            end
+            end
         u=u_eva(1:12);
         %
     else
@@ -186,11 +190,11 @@ if ~isempty(control_name)
     end
     
     if asynchronousTorque % evaluating what happens if the motor can only provide 15% less of torque
-%           u(7:end)=u(7:end)*0.85; %all right motors
-%       u(9)=u(9)*0.85; %right knee
-%          u(10)=u(10)*0.85; %right hip 
+      u(9)=u(9)*0.85; %right knee
+         u(10)=u(10)*0.85; %right hip 
 
-u(1:6)=u(1:6)*0.85; %all left motors
+%           u(7:end)=u(7:end)*0.85; %all right motors
+% u(1:6)=u(1:6)*0.85; %all left motors
     end
    if spasticity
         u(9)=u(9)+15; %right knee
