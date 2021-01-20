@@ -34,7 +34,12 @@ function obj = saveExpression(obj, export_path, varargin)
     end
     
     if ~isempty(obj.dxMap)
-        cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.dxMap,'UniformOutput',false);
+        if iscell(obj.dxMap)
+            cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.dxMap,'UniformOutput',false);
+        elseif isa(obj.dxMap,'SymFunction')
+            save(obj.dxMap,export_path,varargin{:});
+        end
+            
     end
     
     % call superclass method

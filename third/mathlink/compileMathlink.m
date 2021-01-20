@@ -5,7 +5,7 @@ function [] = compileMathlink()
 % We recommend you to use the compiled *.mex* files included.
 
 
-Mathematica_path = '/usr/local/Wolfram/Mathematica/11.0/SystemFiles/';
+Mathematica_path = '/usr/local/Wolfram/Mathematica/12.0/SystemFiles/';
 
 mex(['-I', Mathematica_path, 'Links/MathLink/DeveloperKit/Linux-x86-64/CompilerAdditions/'], ...
     ['-L', Mathematica_path, 'Links/MathLink/DeveloperKit/Linux-x86-64/CompilerAdditions/'], ...
