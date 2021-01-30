@@ -135,7 +135,7 @@ classdef RigidImpact < DiscreteDynamics
                 
                 if isempty(cstr_name)
                     obj.dxMap{1} = SymFunction(['dxDiscreteMap' obj.Name],[],{dx,dxn});
-                    obj.dxMap{1} = load(obj.dxMap, load_path);
+                    obj.dxMap{1} = load(obj.dxMap{1}, load_path);
                 else
                     n_cstr = numel(cstr_name);
                     n_mmat = numel(obj.Mmat);
@@ -168,7 +168,7 @@ classdef RigidImpact < DiscreteDynamics
                 if isempty(cstr_name)
                     % by default, identity map
                     
-                    obj.dxMap = SymFunction(['dxDiscreteMap' obj.Name],obj.R*dx-dxn,{dx,dxn});
+                    obj.dxMap{1} = SymFunction(['dxDiscreteMap' obj.Name],obj.R*dx-dxn,{dx,dxn});
                     
                 else
                     n_cstr = numel(cstr_name);

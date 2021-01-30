@@ -58,7 +58,7 @@ function obj = configure(obj, load_path)
             
             kp = SymVariable('kp');
             kd = SymVariable('kd');
-            ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx},{kp,kd});
+            ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx, hd},{kp,kd});
             obj.ddh_ = load(ddh, load_path);
         end
     else

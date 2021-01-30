@@ -22,7 +22,7 @@ function nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin)
         % by default, identity map
         
         
-        addNodeConstraint(nlp, obj.dxMap, {'dx','dxn'}, 'first', 0, 0, 'Linear');
+        addNodeConstraint(nlp, obj.dxMap{1}, {'dx','dxn'}, 'first', 0, 0, 'Linear');
     else
         vars   = nlp.OptVarTable;
         dep_vars = [vars.dx(1);vars.xn(1);vars.dxn(1)];
