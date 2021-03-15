@@ -10,7 +10,8 @@ function logger = simulate_stand(obj, t0, x0, tf, options, varargin,alpha,min,ma
 %
 % Return values:
 % logger: an array of simulation logger data @type SimLogger
-global m x1 x2 switchCont_e
+global  switchCont_e
+% global m x1 x2
 
 sim_opts = struct(varargin{:});
 if isfield(sim_opts,'NumCycle')
@@ -105,12 +106,12 @@ while (true)
     % update states and time
     [t0, x0] = cur_guard.calcDiscreteMap(sol.xe, sol.ye, cur_node, cur_gurad_param);
     
-    if strcmp(cur_node.Name{1},'standBlend')
-        m=logger(2).flow.mu(3,end);
-        x1=logger(2).flow.mu(1,end);
-        x2=logger(2).flow.mu(2,end);
-    end
-    
+% %     if strcmp(cur_node.Name{1},'standBlend')
+% %         m=logger(2).flow.mu(3,end);
+% %         x1=logger(2).flow.mu(1,end);
+% %         x2=logger(2).flow.mu(2,end);
+% %     end
+% %     
     
     % determine the target node of the current edge, and set it to be
     % the current node
@@ -122,10 +123,10 @@ while (true)
     end
     
     
-%     
-        if cur_node_idx==5
-            cur_node_idx=1;
-        end
+%uncomment if you want to stop the simulation at the domain number that's equated to cur_node_idx     
+%         if cur_node_idx==5
+%             cur_node_idx=1;
+%         end
     % %
     % if the next node is the starting node of the graph, it indicates
     % that one full cycle is completed.

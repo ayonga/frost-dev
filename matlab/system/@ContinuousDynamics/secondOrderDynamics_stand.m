@@ -30,9 +30,10 @@ obj.states_.dx = dq;
 M = calcMassMatrix(obj, q);
 Fv = calcDriftVector(obj, q, dq);
 
-global standUp original optimizerUserForce zeroUserForce asynchronousTorque spasticity
+global standUp  optimizerUserForce zeroUserForce asynchronousTorque spasticity
+% % global original
 
-% original=1;
+
 
 %% get the external input
 % initialize the Gv_ext vector
@@ -52,10 +53,7 @@ if ~isempty(f_ext_name)              % if external inputs are defined
         
         f_ext = obj.ExternalInputFun(obj, f_name, t, q, dq, params, logger);
         
-        % compute the Gvec, and add it up
-        %         if ~original
-        %             f_ext=[f_ext;0];
-        %         end
+     
         if length(f_ext)==1
             'wrong size'
         end
@@ -151,9 +149,9 @@ if ~isempty(control_name)
         info.params=params;
         info.logger=logger;
         info.alpha=alpha;
-        info.min=min;
-        info.max=max;
-        info.original=original;
+% %         info.min=min;
+% %         info.max=max;
+% %         info.original=original;
         info.extF_name=extF_name;
         info.BeF_name=BeF_name;
         [M_ctrl,Fv_ctrl,Je_ctrl,Jedot_ctrl,Be_ctrl,Gv_ext_ctrl,f_ext_ctrl]=ExoController.secondOrderDynamicsControllerModel(objCtrl, t, x, info);
@@ -175,7 +173,7 @@ if ~isempty(control_name)
     % compute control inputs
     if ~isempty(controller)
         if standUp || strcmp(obj.Name,'slowDown')   %if strcmp(alpha{10},'standUp')
-            u_eva=ExoController.standController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,original,f_ext_ctrl);
+            u_eva=ExoController.standController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, Gv_ext_ctrl, alpha,min,max,f_ext_ctrl);
         else
             if alpha.controller.simple
                 [u_eva,lambda]=ExoController.simpleStandingController(objCtrl, t,params,logger, q, dq, Je_ctrl,Jedot_ctrl, M_ctrl, Be_ctrl, Fv_ctrl, f_ext_ctrl, alpha,min,max);
@@ -206,7 +204,7 @@ if ~isempty(control_name)
 end
 %% calculate constraint wrench of holonomic constraints
 if optimizerUserForce
-    Gv = Gv_ext + Gv_u; %if the optimizer did not find the user force
+    Gv = Gv_ext + Gv_u; %if the QP in controller did not find the user force
 elseif zeroUserForce
     Gv=Gv_u; %running test case where the user provides zero force
     obj.inputs_.External.(f_name) = zeros(3,1);

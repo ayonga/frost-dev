@@ -1,5 +1,4 @@
 function [sol, params] = simulate_stand(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver,alpha,min,max)
-global switchCont    
 % Simulate the dynamical system
     %
     % Parameters: 
