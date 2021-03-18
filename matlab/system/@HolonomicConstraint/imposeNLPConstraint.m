@@ -19,15 +19,15 @@ function nlp = imposeNLPConstraint(obj, nlp)
        
         if strcmp(obj.Model.Type,'SecondOrder') % the second order system
             % enforce \dot{h}(x,dx) = J(x)dx = 0 at the first node
-%             nlp = addNodeConstraint(nlp, obj.dh_, {'x','dx'}, 'all',...
-%                 0, 0, 'Nonlinear');
+            nlp = addNodeConstraint(nlp, obj.dh_, {'x','dx'}, 'first',...
+                0, 0, 'Nonlinear');
             % enforce \ddot{h}(x,dx,ddx) = 0 at all nodes
             nlp = addNodeConstraint(nlp, obj.ddh_, {'x','dx','ddx',p_name}, 'all',...
-                0, 0, 'Nonlinear',{40000,200});
+                0, 0, 'Nonlinear',{0,0});
         elseif strcmp(obj.Model.Type, 'FirstOrder') % the first order system
             % enforce \dot{h}(x,dx) = J(x)dx = 0 at the first node
-%             nlp = addNodeConstraint(nlp, obj.dh_, {'x'}, 'all',...
-%                 0, 0, 'Nonlinear');
+            %             nlp = addNodeConstraint(nlp, obj.dh_, {'x'}, 'all',...
+            %                 0, 0, 'Nonlinear');
             % enforce \ddot{h}(x,dx,ddx) = 0 at all nodes
             nlp = addNodeConstraint(nlp, obj.ddh_, {'x','dx'},'all',...
                 0, 0, 'Nonlinear');

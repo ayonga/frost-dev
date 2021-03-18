@@ -50,16 +50,20 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         
         % compute the spatial position (cartesian position + Euler angles)
         pos = getCartesianPosition(obj, contact);
-        rpy = getRelativeEulerAngles(obj, contact, ref);
+        %         rpy = getRelativeEulerAngles(obj, contact, ref);
+        rpy = getEulerAngles(obj, contact);
         
         h = transpose([pos, rpy]); %effectively as transpose
         % extract the contrained elements
         constr =  G' * h;
         % compute the body jacobian
-        %         jac_pos = jacobian(pos,obj.States.x); % directly use partial derivatives for position
         jac_rot = getBodyJacobian(obj, contact);
-        %         jac = [jac_pos;jac_rot(4:6,:)];
-        jac = jac_rot;
+        if strcmp(contact.Type,'PointContactWithFriction') || strcmp(contact.Type,'PointContactWithoutFriction')
+            jac_pos = jacobian(pos,obj.States.x); % directly use partial derivatives for position
+            jac = [jac_pos;jac_rot(4:6,:)];
+        else
+            jac = jac_rot;
+        end
         % extract the contrained elements
         idx = sum(contact.WrenchBase,2);
         constr_jac = jac(find(idx),:); %#ok<FNDSB>
