@@ -290,6 +290,8 @@ classdef RigidImpact < DiscreteDynamics
         obj = compile(obj, export_path, varargin);
 
         obj = saveExpression(obj, export_path, varargin);
+        
+        M = calcMassMatrix(obj, x);
     end
     
 end
