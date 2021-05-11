@@ -31,13 +31,15 @@ function obj = loadDynamics(obj,file_path,skip_load_vf,extra_fvecs,varargin)
         end
     end
     if ~omit_set
-        ce_names1 = cell(obj.numState,1);
-        ce_names2 = cell(obj.numState,1);
-        ce_names3 = cell(obj.numState,1);
-        for i=1:obj.numState
-            ce_names1{i} = ['Ce1_vec',num2str(i),'_',obj.Name];
-            ce_names2{i} = ['Ce2_vec',num2str(i),'_',obj.Name];
-            ce_names3{i} = ['Ce3_vec',num2str(i),'_',obj.Name];
+        ce_names1 = cell(obj.numState*n_mmat,1);
+        ce_names2 = cell(obj.numState*n_mmat,1);
+        ce_names3 = cell(obj.numState*n_mmat,1);
+        for i=1:n_mmat
+            for j=1:obj.numState
+                ce_names1{(i-1)*obj.numState+j} = ['Ce1_vec_L',num2str(i),'_J',num2str(j),'_', obj.Name];
+                ce_names2{(i-1)*obj.numState+j} = ['Ce2_vec_L',num2str(i),'_J',num2str(j),'_', obj.Name];
+                ce_names3{(i-1)*obj.numState+j} = ['Ce3_vec_L',num2str(i),'_J',num2str(j),'_', obj.Name];
+            end
         end
     else
         ce_names1 = {};
