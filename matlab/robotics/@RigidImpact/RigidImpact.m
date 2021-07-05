@@ -196,7 +196,7 @@ classdef RigidImpact < DiscreteDynamics
                     end
                     for i=1:n_cstr
                         f_name = ['dxDiscreteMap' num2str(i+n_mmat) '_' obj.Name];
-                        obj.dxMap{i+n_mmat} = SymFunction(f_name,Gvec{i},[{dx},{x},{dxn},deltaF]);
+                        obj.dxMap{i+n_mmat} = SymFunction(f_name,-Gvec{i},[{dx},{x},{dxn},deltaF]);
                     end
                     
                     
