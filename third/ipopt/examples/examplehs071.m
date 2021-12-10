@@ -24,6 +24,8 @@ function [x, info] = examplehs071
   options.lambda = [1 1];
   
   % Set the IPOPT options.
+  options.ipopt.linear_solver = 'ma86';
+  options.ipopt.print_level = 5;
   options.ipopt.mu_strategy = 'adaptive';
   options.ipopt.tol         = 1e-7;
   

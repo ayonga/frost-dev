@@ -1,43 +1,12 @@
-/*
-**  MATLAB-to-Mathematica MathLink Connection
-**  Version 2.0
-**
-**  Author:			Benjamin E. Barrowes (barrowes@alum.mit.edu)
-**  Date:			6 October 2004
-**  File:                       math.c
-**  Description:                The MathLink MEX resource.
-**  Platform:                   Linux, windows, others(?)
-**
-**  Version History
-**      1.0 - Initial port for MATLAB 3.5 on the Macintosh
-**      1.1 - Modifications for MATLAB 4.0 on all platforms
-**		1.2 - Modifications to support K&R compilers and MATLAB 4.1
-**				(Mac and Unix - Windows to come on next version)
-**				This file only supports MATLAB 4.x. Support for
-**				MATLAB 3.5 is implemented by the file math35.c.
-**      2.0 - Updated to work with Mathematica 4.2/5.0 and Matlab 7.0 (R14), at
-**                      least on x86 Linux
-**
-**
-**  Prior version
-**  Version 1.2
-**  Author:			Douglas B. Stein (doug@wri.com)
-**  Date:			17 January 1994
-**  File:           math41.c
-**  Description:    The MathLink MEX resource.
-**  Platform:       Macintosh
-**
-**
-*/
+// See README.md.
 
 enum {false,true};
 
-#include <mathlink.h>
+#include <assert.h>
+#include <wstp.h>
 #include <math.h>
 #include <matrix.h>
 #include <mex.h>
-#include <stdlib.h>
-#include <string.h>
 
 typedef unsigned char Boolean;
 #ifndef NULL
@@ -48,10 +17,7 @@ typedef unsigned char Boolean;
 Boolean registeredExitFunction = false;
 Boolean first_time = true;
 Boolean swapEOL = false;
-MLINK mlp = NULL;
-MLENV env;
-int error;
-
+WSLINK mlp = NULL;
 
 /* Named constants */
 #define MEXARGUMENTERROR            0
@@ -83,8 +49,8 @@ static void GetArrayFromMathematica( int nlhs, mxArray *plhs[],
                                      int nrhs, const mxArray*prhs[] );
 static void MatToStr(const mxArray *mat, char **str);
 static void StrToMat(char *str, mxArray **mat);
-static int  WaitForReturnPacket(MLINK mlp);
-static void HandleMathLinkError(MLINK mlp, mxArray **mat);
+static int  WaitForReturnPacket(WSLINK mlp);
+static void HandleMathLinkError(WSLINK mlp, mxArray **mat);
 static void SwapLineTerminators(char *str, unsigned int len);
 #else
 extern mexmain();
@@ -106,7 +72,7 @@ static SwapLineTerminators();
 void mexFunction( int nlhs, mxArray *plhs[], 
 		  int nrhs, const mxArray*prhs[] )
 #else
-     mexFunction(nlhs, plhs, nrhs, prhs)
+void mexFunction(nlhs, plhs, nrhs, prhs)
      int nlhs, nrhs;
      mxArray *plhs[], *prhs[];
 #endif
@@ -200,52 +166,15 @@ Boolean OpenMathLink( int nlhs, mxArray *plhs[],
   Boolean     processedArgs = false;
     
 
-  /****************************************************************/
-  /* For Windows (thanks Radovan Palik)
-   *
-   * Mathematica 6 kernel loading
-   *-----------------------------
-   * ad1: set direct path to your MathKernel.exe
-   *       no more stupid windows
-   * ad2: set path to runkernel.bat
-   *        universal, but 2 windows appears... :-(
-   * ad3: remove argv[2] and set argc=2
-   *        very universal :-)
-   *        choose MathKernel.exe in dialog
-   */ 
-  //argc = 3;
-  //argv[0] = "-linklaunch";
-  //argv[1] = "-linkname";
-  //argv[2] = "C:\\Program Files\\Wolfram Research\\Mathematica\\11.0\\MathKernel.exe";
-    
-  /****************************************************************/
-  /* works for mathematica 7.0.0 and matlab R2009b */
   argc = 6;
   argv[0] = "MathLinkMex";
-  argv[1] = "-linkname";      
-  argv[2] = "MathKernel -mathlink";
-  /* MAC, set argv[2] to point to your MathKernel, e.g.,
-     argv[2] = "/Applications/Mathematica.app/Contents/MacOS/MathKernel -mathlink";        
-  */
-  /* (Tested on R14SP2 and MMA5.2 by GJE. Thanks!) */
+  argv[1] = "-linkname";      argv[2] = "MathKernel -mathlink";
   argv[3] = "-linkmode";      argv[4] = "Launch";
   argv[5] = "-linkprotocol";  argv[6] = "Pipes";
 
-  /****************************************************************/
-/* works for mathematica 5.2 and older */
-/*   argc = 6; */
-/*   argv[0] = "MathLinkMex"; */
-/*   argv[1] = "-linkname";       */
-/*   argv[2] = "math -mathlink"; */
-/*   /\* MAC, set argv[2] to point to your MathKernel, e.g., */
-/*   argv[2] = "'/Applications/Mathematica5.2/Mathematica 5.2.app/Contents/MacOS/MathKernel' -mathlink" */
-/*   *\/ */
-/*   /\* (Tested on R14SP2 and MMA5.2 by GJE. Thanks!) *\/ */
-/*   argv[3] = "-linkmode";      argv[4] = "Launch"; */
-/*   argv[5] = "-linkprotocol";  argv[6] = "Pipes"; */
 
-
-
+  
+  
   swapEOL = false;
   
   MatToStr(prhs[0], &commandStr);
@@ -262,23 +191,15 @@ Boolean OpenMathLink( int nlhs, mxArray *plhs[],
     if (!strcmp(swapOpt, SWAPEOLSTRING)) swapEOL = true;
     processedArgs = true;
   }
+  
+  WSENV ep;
+  WSLINK lp;
+  int error;
 
-  /****************************************************************/
-  /* works for mathematica 7.0.0 and matlab R2009b */
-  env = MLInitialize(0);
-  if(env == (MLENV)0)
-    mexErrMsgTxt( " unable to initialize the MathLink environment ");
-  mlp = MLOpenArgcArgv(env, argc, argv, &error);
-  if(mlp == (MLINK)0 || error != MLEOK)
-    mexErrMsgTxt("         unable to create the link ");
-  MLActivate(mlp);
+  ep = WSInitialize((WSEnvironmentParameter)0);
+  assert(ep != (WSENV)0);
 
-
-  /****************************************************************/
-/* works for mathematica 5.2 and older */
-/*   mlp = MLOpen(argc, argv); */
-
-
+  mlp = WSOpenArgcArgv(ep, argc, argv, &error);
 
   if (processedArgs) {
     free(argv[2]);
@@ -289,27 +210,27 @@ Boolean OpenMathLink( int nlhs, mxArray *plhs[],
   free(commandStr);
     
   if (mlp == NULL) {
-    mexErrMsgTxt("MathLink connection unexpectedly NULL! 1");
+    mexErrMsgTxt("MathLink connection unexpectedly NULL!");
   }
     
   first_time = false;
   mexPrintf("Mathematica Kernel loading...\n");
     
   /* now preload some convenient definitions into the Mathematica kernel */
-  MLPutFunction(mlp, "ToExpression", 1);
-  MLPutFunction(mlp, "StringJoin", 5);
-  MLPutString(mlp, "MathToMATLAB::badform = \"Second argument to math() not expressible as a MATLAB array.\";");
-  MLPutString(mlp, "MATLABQ[x_]:=VectorQ[x,NumberQ[N[#]]&]||MatrixQ[x,NumberQ[N[#]]&];");
-  MLPutString(mlp, "MathToMATLAB[x_?MATLABQ] := MATLABArray[N[x]];");
-  MLPutString(mlp, "MathToMATLAB[x_] := (Message[MathToMATLAB::badform];$Failed);");
-  MLPutString(mlp, "SetOptions[ToString, PageWidth->80];");
-  MLEndPacket(mlp);
+  WSPutFunction(mlp, "ToExpression", 1);
+  WSPutFunction(mlp, "StringJoin", 5);
+  WSPutString(mlp, "MathToMATLAB::badform = \"Second argument to math() not expressible as a MATLAB array.\";");
+  WSPutString(mlp, "MATLABQ[x_]:=VectorQ[x,NumberQ[N[#]]&]||MatrixQ[x,NumberQ[N[#]]&];");
+  WSPutString(mlp, "MathToMATLAB[x_?MATLABQ] := MATLABArray[N[x]];");
+  WSPutString(mlp, "MathToMATLAB[x_] := (Message[MathToMATLAB::badform];$Failed);");
+  WSPutString(mlp, "SetOptions[ToString, PageWidth->80];");
+  WSEndPacket(mlp);
   mlres = WaitForReturnPacket(mlp);
 
   if (!mlres) {
     HandleMathLinkError(mlp, &plhs[0]);
   }
-  MLNewPacket(mlp);
+  WSNewPacket(mlp);
     
   return processedArgs;
 }
@@ -322,7 +243,7 @@ void CloseMathLink(void)
 #endif
 {
   if (!first_time) {
-    MLClose(mlp);
+    WSClose(mlp);
     mlp = NULL;
     first_time = true;
     mexPrintf("Mathematica Kernel quitting per your request...\n");
@@ -344,28 +265,28 @@ void MathLinkStringEval( int nlhs, mxArray *plhs[],
   int     mlres;
   char    *inStr = NULL;
   char    *outStr = NULL;
-  int     len;
+  long    len;
 
   if (mlp == NULL)
-    mexErrMsgTxt("MathLink connection unexpectedly NULL! 2");
+    mexErrMsgTxt("MathLink connection unexpectedly NULL!");
         
   MatToStr(prhs[0], &inStr);
 
-  MLPutFunction(mlp, "ToString", 1);
-  MLPutFunction(mlp, "ToExpression", 1);
-  MLPutString(mlp, inStr);
-  mlres = MLEndPacket(mlp);
+  WSPutFunction(mlp, "ToString", 1);
+  WSPutFunction(mlp, "ToExpression", 1);
+  WSPutString(mlp, inStr);
+  mlres = WSEndPacket(mlp);
   free(inStr);
     
   mlres = WaitForReturnPacket(mlp);
   if (mlres) {
-    MLGetByteString(mlp, (const unsigned char **)&outStr, &len, '\0');
+    WSGetByteString(mlp, (const unsigned char **)&outStr, &len, '\0');
     StrToMat(outStr, &plhs[0]);
-    MLDisownString(mlp, outStr);
+    WSReleaseString(mlp, outStr);
   } else {
     HandleMathLinkError(mlp, &plhs[0]);
   }
-  MLNewPacket(mlp);
+  WSNewPacket(mlp);
 
   return;
 }
@@ -395,7 +316,7 @@ void PutArrayToMathematica( int nlhs, mxArray *plhs[],
   heads[0] = "List"; heads[1] = "List"; heads[2] = "Complex";
 
   if (mlp == NULL)
-    mexErrMsgTxt("MathLink connection unexpectedly NULL! 3");
+    mexErrMsgTxt("MathLink connection unexpectedly NULL!");
         
   MatToStr(prhs[1], &nameStr);
 
@@ -427,13 +348,13 @@ void PutArrayToMathematica( int nlhs, mxArray *plhs[],
       }
   }
     
-  MLPutFunction(mlp, "CompoundExpression", 2);
-  MLPutFunction(mlp, "Set", 2);
-  MLPutSymbol(mlp, nameStr);
-  MLPutDoubleArray(mlp, data, dims, heads, depth);
+  WSPutFunction(mlp, "CompoundExpression", 2);
+  WSPutFunction(mlp, "Set", 2);
+  WSPutSymbol(mlp, nameStr);
+  WSPutDoubleArray(mlp, data, dims, heads, depth);
   free(data);
-  MLPutSymbol(mlp, "Null");
-  mlres = MLEndPacket(mlp);
+  WSPutSymbol(mlp, "Null");
+  mlres = WSEndPacket(mlp);
     
   mlres = WaitForReturnPacket(mlp);
 
@@ -442,7 +363,7 @@ void PutArrayToMathematica( int nlhs, mxArray *plhs[],
   } else {
     HandleMathLinkError(mlp, &plhs[0]);
   }
-  MLNewPacket(mlp);
+  WSNewPacket(mlp);
     
   free(nameStr);
   return;
@@ -467,20 +388,20 @@ void GetArrayFromMathematica( int nlhs, mxArray *plhs[],
   int     row, col;
 
   if (mlp == NULL)
-    mexErrMsgTxt("MathLink connection unexpectedly NULL! 4");
+    mexErrMsgTxt("MathLink connection unexpectedly NULL!");
         
   MatToStr(prhs[1], &nameStr);
 
-  MLPutFunction(mlp, "MathToMATLAB", 1);
-  MLPutFunction(mlp, "ToExpression", 1);
-  MLPutString(mlp, nameStr);
-  mlres = MLEndPacket(mlp);
+  WSPutFunction(mlp, "MathToMATLAB", 1);
+  WSPutFunction(mlp, "ToExpression", 1);
+  WSPutString(mlp, nameStr);
+  mlres = WSEndPacket(mlp);
     
   mlres = WaitForReturnPacket(mlp);
 
-  if ((MLGetType(mlp) == MLTKFUNC) &&
-      (MLCheckFunction(mlp, "MATLABArray", &argcount))) {
-    mlres = mlres && MLGetDoubleArray(mlp, &data, &dims, &heads, &depth);
+  if ((WSGetType(mlp) == WSTKFUNC) &&
+      (WSCheckFunction(mlp, "MATLABArray", &argcount))) {
+    mlres = mlres && WSGetDoubleArray(mlp, &data, &dims, &heads, &depth);
 /*     mexPrintf("\n\n depth=%d \n\n",depth); */
     if (mlres) {
       switch (depth) {
@@ -526,14 +447,14 @@ void GetArrayFromMathematica( int nlhs, mxArray *plhs[],
       default:
         mexPrintf("MATLAB can handle only 1D or 2D arrays!\n");
       }
-      MLDisownDoubleArray(mlp, data, dims, heads, depth);
+      WSReleaseDoubleArray(mlp, data, dims, heads, depth);
     } else {
       HandleMathLinkError(mlp, &plhs[0]);
     }
   } else {
     StrToMat("$Failed", &plhs[0]);
   }
-  MLNewPacket(mlp);
+  WSNewPacket(mlp);
     
   free(nameStr);
   return;
@@ -580,20 +501,20 @@ void StrToMat(char *str, mxArray **mat)
 
 static
 #ifdef __STDC__
-int WaitForReturnPacket(MLINK mlp)
+int WaitForReturnPacket(WSLINK mlp)
 #else
      WaitForReturnPacket(mlp)
-     MLINK mlp;
+     WSLINK mlp;
 #endif
 {
   int mlres;
   unsigned int len;
   char *msgStr, *destStr;
-  int  msglen;
+  long msglen;
 
-  while ((mlres = MLNextPacket(mlp)) && (mlres != RETURNPKT)) {
+  while ((mlres = WSNextPacket(mlp)) && (mlres != RETURNPKT)) {
     if (mlres == TEXTPKT) {
-      MLGetByteString(mlp, (const unsigned char **)&msgStr, &msglen, '\0');
+      WSGetByteString(mlp, (const unsigned char **)&msgStr, &msglen, '\0');
       if (!swapEOL)
         mexPrintf("%s\n", msgStr); /* easy case */
       else { /* need to copy before mutating the string */
@@ -607,24 +528,24 @@ int WaitForReturnPacket(MLINK mlp)
         } else /* couldn't copy - should at least output string as is */
           mexPrintf("%s\n", msgStr);
       }
-      MLDisownString(mlp, msgStr);
+      WSReleaseString(mlp, msgStr);
     }
-    MLNewPacket(mlp);
+    WSNewPacket(mlp);
   }
   return mlres;
 }
 
 static
 #ifdef __STDC__
-void HandleMathLinkError(MLINK mlp, mxArray **mat)
+void HandleMathLinkError(WSLINK mlp, mxArray **mat)
 #else
      HandleMathLinkError(mlp, mat)
-     MLINK mlp;
+     WSLINK mlp;
      mxArray **mat;
 #endif
 {
-  mexPrintf("%s\n", MLErrorMessage(mlp));
-  MLClearError(mlp);
+  mexPrintf("%s\n", WSErrorMessage(mlp));
+  WSClearError(mlp);
   StrToMat("$Failed", mat);
   return;
 }
