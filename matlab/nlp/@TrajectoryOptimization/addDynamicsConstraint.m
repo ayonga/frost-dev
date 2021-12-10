@@ -12,19 +12,23 @@ function obj = addDynamicsConstraint(obj)
     
     % M(x)dx or M(x)ddx
       
-    
-    mdx_cstr_fun(nNode) = NlpFunction();   % preallocation
+    n_mmat = numel(plant.Mmat);
+    mdx_cstr_fun(n_mmat,nNode) = NlpFunction();   % preallocation
     if strcmp(plant.Type,'SecondOrder') %second order system
         for i=node_list
-            mdx_cstr_fun(i) = NlpFunction('Name','MmatDDx',...
-                'Dimension',numState,'SymFun',plant.MmatDx,...
-                'DepVariables',[vars.x(i);vars.ddx(i)]);
+            for j=1:n_mmat
+                mdx_cstr_fun(j,i) = NlpFunction('Name',plant.MmatDx{j}.Name,...
+                    'Dimension',numState,'SymFun',plant.MmatDx{j},...
+                    'DepVariables',[vars.x(i);vars.ddx(i)]);
+            end
         end
     else                         %first order system
         for i=node_list
-            mdx_cstr_fun(i) = NlpFunction('Name','MmatDx',...
-                'Dimension',numState,'SymFun',plant.MmatDx,...
-                'DepVariables',[vars.x(i);vars.dx(i)]);
+            for j=1:n_mmat
+                mdx_cstr_fun(j,i) = NlpFunction('Name',plant.MmatDx{j}.Name,...
+                    'Dimension',numState,'SymFun',plant.MmatDx{j},...
+                    'DepVariables',[vars.x(i);vars.dx(i)]);
+            end
         end
     end
     
@@ -108,7 +112,7 @@ function obj = addDynamicsConstraint(obj)
     % functions
     dynamics_cstr_fun(nNode) = NlpFunction();   % preallocation
     for i=node_list
-        dep_funcs = [mdx_cstr_fun(i); % M(x)dx (or M(x)ddx)
+        dep_funcs = [mdx_cstr_fun(:,i); % M(x)dx (or M(x)ddx)
             Fvec_cstr_fun(:,i); % Fvec(x) or Fvec(x,dx)
             Gvec_control_fun(:,i); % Gvec(x,u);
             Gvec_wrench_fun(:,i);

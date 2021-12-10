@@ -90,8 +90,8 @@ classdef ContinuousDynamics < DynamicalSystem
             
             
             obj.Fvec = cell(0);
-            obj.Mmat = [];
-            obj.MmatDx = [];
+            obj.Mmat = cell(0);
+            obj.MmatDx = cell(0);
             
             obj.HolonomicConstraints = struct();
             obj.UnilateralConstraints= struct();
@@ -143,7 +143,7 @@ classdef ContinuousDynamics < DynamicalSystem
         
         % The mass matrix Mmat(x) 
         %
-        % @type SymFunction
+        % @type cell
         Mmat
         
         
@@ -254,7 +254,7 @@ classdef ContinuousDynamics < DynamicalSystem
         obj = saveExpression(obj, export_path, varargin);
         
         % load the mathematica objects from a file
-        obj = loadDynamics(obj, file_path, vf_names, skip_load_vf);
+        obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names, skip_load_vf);
         
         % clear mathematica kernel of all variables
         obj = clearKernel(obj, varargin);
@@ -266,7 +266,7 @@ classdef ContinuousDynamics < DynamicalSystem
         
         % The left hand side of the dynamical equation: M(x)dx or M(x)ddx
         %
-        % @type SymFunction
+        % @type cell
         MmatDx
         
         

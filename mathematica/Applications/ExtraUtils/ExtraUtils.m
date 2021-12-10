@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Wolfram Language Package *)
 
 (* :Title: ExtraUtils *)
@@ -14,6 +16,8 @@ This package provides custom commonly used functions.
 
 BeginPackage["ExtraUtils`",{"GeneralUtilities`","SnakeYaml`","ComputerArithmetic`"}]
 (* Exported symbols added here with SymbolName::usage *) 
+
+ExprRound::usage="ExprRound[expr] rounds all real numbers in an expression."
 
 ToMatrixForm::usage="ToMatrixForm[expr] converts expr to Matrix form (two dimensional tensor)."
 ToVectorForm::usage="ToVectorForm[expr] converts expr to Vector form (one dimensional tensor)."
@@ -164,6 +168,11 @@ CRound[expr_?NumberQ, n_:-5] := Round[expr, 10^n];
 CRound[expr_, n_:-5] := expr;
 CRoundEx[expr_, n_:-5] := Map[CRound[#, n]&, expr, {-1}];
 
+
+
+
+(* ExprRound[expr_, n_:-5] := N[expr/.x_Real:>Round[x, 10^n]]; *)
+ExprRound[expr_, n_:-5] := expr;
 
 
 (*From:http://mathworld.wolfram.com/BlockDiagonalMatrix.html*)

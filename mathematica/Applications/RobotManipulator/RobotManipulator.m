@@ -21,6 +21,8 @@ GravityVector::usage =
 	
 InertiaMatrix::usage = 
 	"InertiaMatrix[robotLinks, robotJoints] computes the inertia matrix of the robot model."	
+InertiaMatrixByLink::usage = 
+	"InertiaMatrix[robotLinks, robotJoints] computes the inertia matrix of the robot model."	
 
 
 
@@ -88,7 +90,15 @@ with respect to the parent joint coordinates.";
 *)
 
 
-
+InertiaToCoriolisPart1New::usage=
+ "InertiaToCoriolisPart1[M, theta, omega, col] computes the col-th column of the first part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart2New::usage=
+ "InertiaToCoriolisPart2[M, theta, omega, col] computes the col-th column of the second part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart3New::usage=
+ "InertiaToCoriolisPart3[M, theta, omega, col] computes the col-th column of the thrid part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
 
 ComputeForwardKinematics::usage = 
 	"ComputeForwardKinematics[{twists$1,gst0$1},...,{twists$N,gst0$N}] \
@@ -120,7 +130,58 @@ grav = 9.81; (* the gravity constant*)
 (* Functions *)
 
 
-	
+InertiaToCoriolisPart1New[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+	Cvec = Table[
+		{Sum[
+			-1/2 * w[[k]] * (D[M[[i,j]], q[[k]]])
+			,
+			{k,n}
+		]}
+		,
+		{i,n}
+	];
+    Chop[Cvec * w[[j]]]
+  ];	
+InertiaToCoriolisPart2New[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Table[
+		{Sum[
+			-1/2 * w[[k]] * (D[M[[i,k]], q[[j]]]) 
+			,
+			{k,n}
+		]}
+		,
+		{i,n}
+	];
+    Chop[Cvec * w[[j]]]
+  ];	
+  
+InertiaToCoriolisPart3New[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Table[
+		Sum[
+			1/2 * w[[k]] * (D[M[[j,k]], q[[i]]]) 
+			,
+			{k,n}
+		]
+		,
+		{i,n}
+	];
+    Chop[Cvec*w[[j]]]
+  ];	
 	
 
 
@@ -133,6 +194,22 @@ please include the motor inertia information when call InertiaMatrix[] function.
 NOTE: the provided motor inertia value should be the reflected inertia value at 
 the joint side = original actuator inertia * gear ratio ^2.
 *)
+InertiaMatrixByLink[robotLink__,nDof_] :=
+	Block[{MM, link, Je, De, i},
+		
+		link = {robotLink};
+
+		(* the mass/inertia matrix *)
+		MM = SparseArray@Map[ExtraUtils`BlockDiagonalMatrix[{I3*GetMass[#],GetInertia[#]}]&, link];
+		
+		(* compute body jacobians of each link CoM position *)
+		Je = SparseArray[ComputeBodyJacobians[robotLink, nDof]];
+		
+		De = Normal[Dot[SparseArray@Transpose[Je[[1]]],SparseArray[MM[[1]]],Je[[1]]]];
+
+		Return[De];
+	];
+
 InertiaMatrix[robotLinks__,nDof_] :=
 	Block[{MM, links, Je, De, i},
 		
@@ -144,7 +221,7 @@ InertiaMatrix[robotLinks__,nDof_] :=
 		(* compute body jacobians of each link CoM position *)
 		Je = ComputeBodyJacobians[robotLinks, nDof];
 		
-		De = Sum[Transpose[Je[[i]]].MM[[i]].Je[[i]],{i,1,Length[links]}];
+		De = Sum[Dot[Transpose[Je[[i]]],MM[[i]],Je[[i]]],{i,1,Length[links]}];
 		
 		
 		Return[De];
@@ -399,21 +476,21 @@ ComputeForwardKinematics[args__] :=
 
 
 	
-GetInertia[arg_?AssociationQ]:= Rationalize@arg["Inertia"];
+GetInertia[arg_?AssociationQ]:= arg["Inertia"];
 
 
-GetMass[arg_?AssociationQ]:= Rationalize@arg["Mass"];
+GetMass[arg_?AssociationQ]:= arg["Mass"];
 
 
-GetPosition[arg_?AssociationQ] := Rationalize@Flatten@arg["Offset"];
+GetPosition[arg_?AssociationQ] := Flatten@arg["Offset"];
 
 
-GetRotationMatrix[arg_?AssociationQ]:= Rationalize@arg["R"];
+GetRotationMatrix[arg_?AssociationQ]:= arg["R"];
 
 
-GetGST0[arg_?AssociationQ]:= Rationalize@arg["gst0"];
+GetGST0[arg_?AssociationQ]:= arg["gst0"];
 
-GetTwist[arg_?AssociationQ]:= Rationalize@arg["TwistPairs"];
+GetTwist[arg_?AssociationQ]:= arg["TwistPairs"];
 
 GetChainIndices[arg_?AssociationQ]:= Flatten@{arg["ChainIndices"]};
 

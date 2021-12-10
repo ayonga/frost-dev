@@ -241,22 +241,24 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
         end
         
-        ep_s = SymVariable('k',[rel_deg,1]);
+        %         ep_s = SymVariable('k',[rel_deg,1]);
         
-        for j=1:1:rel_deg
-            ddy = ddy + ep_s(j)*(ya{j} - yd{j});
-        end
+        %         for j=1:1:rel_deg
+        %             ddy = ddy + ep_s(j)*(ya{j} - yd{j});
+        %         end
         % Time-based outputs, need to incoorporates the time variable
         if ~is_state_based
             ddy = subs(ddy,t,tsubs);
         end
         
         
-        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+        %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var]);
     else        
-        ep_s = SymVariable('k',[rel_deg,1]);
+        %         ep_s = SymVariable('k',[rel_deg,1]);
         
-        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+        %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var]);
         ddy_fun = load(ddy_fun, load_path);
         
     end
@@ -320,7 +322,8 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
             'ub',ceq_err_bound,'Type','Nonlinear',...
             'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]',...
-            'AuxData', {[aux_data,{ep}]});
+            'AuxData', {aux_data});
+        %             'AuxData', {[aux_data,{ep}]});
         
     end
         

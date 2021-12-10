@@ -30,7 +30,7 @@ classdef Cylinder < frost.Animator.DisplayItem
     methods
         function obj = Cylinder(ax, model, frame, offset, name, varargin)
             obj = obj@frost.Animator.DisplayItem(ax, model, name);
-            obj.radius = 0.015;
+            
             obj.n = 20;
             obj.frame = frame;
             obj.offset = offset;
@@ -39,7 +39,9 @@ classdef Cylinder < frost.Animator.DisplayItem
             addParameter(p, 'UseExported', false);
             addParameter(p, 'ExportPath', '');
             addParameter(p, 'SkipExporting', false);
+            addParameter(p, 'Radius', 0.015);
             parse(p, varargin{:});
+            obj.radius = p.Results.Radius;
             
             if p.Results.UseExported
                 if p.Results.SkipExporting == false

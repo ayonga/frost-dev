@@ -81,24 +81,32 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
                 -f(1) + (mu/sqrt(2))*f(3);
                 f(2) + (mu/sqrt(2))*f(3);
                 -f(2) + (mu/sqrt(2))*f(3)];
+%                 f(4) + gamma * f(3);       % -gamma * fz < wz
+%                 -f(4) + gamma * f(3)];     % wz < gamma * fz
             
             % create a symbolic function object
             f_constr = SymFunction(fun_name,...
-                constr,{f},{mu});
+                constr,{f},{[mu]});
             
             % create the label text
             label = {'normal_force';
                 'friction_x_pos';
                 'friction_x_neg';
                 'friction_y_pos';
-                'friction_y_neg';
-                };
+                'friction_y_neg'};
+%                 'tor_firction_neg';
+%                 'tor_firction_pos';
+%                 };
             
             % validate the provided static friction coefficient
             validateattributes(fric_coef.mu,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getFrictionCone','mu');
-            auxdata = {fric_coef.mu};
+            % validate the provided torsional friction coefficient
+            %             validateattributes(fric_coef.gamma,{'double'},...
+            %                 {'scalar','real','>=',0},...
+            %                 'ContactFrame.getFrictionCone','gamma');
+            auxdata = [fric_coef.mu];
         case 'PointContactWithoutFriction'
             % z
             constr = f;

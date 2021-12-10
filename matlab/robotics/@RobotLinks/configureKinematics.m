@@ -47,13 +47,15 @@ function obj = configureKinematics(obj, dofs, links)
         
     % update the forward kinematics (homogeneous transformation) of the
     % rigid joints
+    base_frame = CoordinateFrame('Name','base','Offset',[0;0;0],'R',[0;0;0]);
     for i=1:length(kin_tree)
         kin_branch = kin_tree{i};
         for j=1:numel(kin_branch)
             if j > 1
                 dof_obj(kin_branch(j)).setReference(dof_obj(kin_branch(j-1)));
             else
-                dof_obj(kin_branch(j)).setReference(dof_obj(kin_branch(j)));
+                %                 dof_obj(kin_branch(j)).setReference(dof_obj(kin_branch(j)));
+                dof_obj(kin_branch(j)).setReference(base_frame);
             end
             dof_obj(kin_branch(j)).setChainIndices(kin_branch(1:j));
             dof_obj(kin_branch(j)).computeHomogeneousTransform();
