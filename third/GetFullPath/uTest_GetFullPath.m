@@ -10,11 +10,11 @@ function uTest_GetFullPath(doSpeed)  %#ok<INUSD>
 % OUTPUT:
 %   On failure the test stops with an error.
 %
-% Tested: Matlab 6.5, 7.7, 7.8, 7.13, WinXP/32, Win7/64
-% Author: Jan Simon, Heidelberg, (C) 2009-2012 matlab.THISYEAR(a)nMINUSsimon.de
+% Tested: Matlab 2009a, 2015b(32/64), 2016b, 2018b, Win7/10
+% Author: Jan Simon, Heidelberg, (C) 2009-2021 matlab.2010(a)n(MINUS)simon.de
 
-% $JRev: R-r V:039 Sum:IH0Cf8UBV1d9 Date:15-Jan-2013 01:06:12 $
-% $License: BSD $
+% $JRev: R-z V:047 Sum:gsL04SbtxY61 Date:02-May-2021 23:40:15 $
+% $License: BSD (use/copy/change/redistribute on own risk, mention the author) $
 % $File: Tools\UnitTests_\uTest_GetFullPath.m $
 % History:
 % 024: 25-Oct-2009 16:48, BUGFIX: Tests of rejected bad input were too lazy.
@@ -24,16 +24,35 @@ function uTest_GetFullPath(doSpeed)  %#ok<INUSD>
 %      The former version treated "\\?\C:\<longpath>\file" as UNC path and
 %      replied "\\?\UNC\?\C:\<longpath>\file". Fixed now.
 % 039: 08-Jan-2013 07:54, 'fat', 'lean', 'auto' type.
+% 047: 02-May-2021 22:58, Check string input.
 
 % Initialize: ==================================================================
 FuncName  = mfilename;
 FSep      = filesep;
+
+% Restore folder on error - onCleanup since Matlab 7.6:
+MatlabV = [100, 1] * sscanf(version, '%d.', 2);
+backDir = cd;
+if MatlabV >= 706
+   Cleanup(backDir);
+   restoreFolder = onCleanup(@Cleanup);
+end
+
+hasStringType = (MatlabV > 901);
+
+% Change to a reproducible location:
+cd(prefdir);
+% Alternatives:
+% cd(fileparts(mfilename('fullpath')));
+% cd(tempdir);
+% cd('\\server\share');
+cd_ = cd;
+
 whichFunc = which('GetFullPath');
 ErrID     = ['JSimon:', FuncName, ':Failed'];
 isWindows = ispc;
 
 [dum, fName, fExt] = fileparts(whichFunc);  %#ok<ASGLU>
-examined           = [fName, fExt];
    
 if isWindows
    magicLong = '\\?\';
@@ -47,22 +66,6 @@ end
 % Do the work: =================================================================
 disp(['==== Test GetFullPath  ', datestr(now, 0), ...
    char(10), '  Function: ', whichFunc]);
-
-% Restore folder on error - onCleanup since Matlab 7.6:
-backDir = cd;
-if [100, 1] * sscanf(version, '%d.', 2) >= 706
-   Cleanup(backDir);
-   restoreFolder = onCleanup(@Cleanup);
-end
-
-% Change to a reproducible location:
-cd(prefdir);
-% Alternatives:
-% cd(fileparts(mfilename('fullpath')));
-% cd(tempdir);
-% cd('\\server\share');
-
-cd_ = cd;
 fprintf('  Working path: %s\n', cd_);
 
 % Known answer tests: ----------------------------------------------------------
@@ -161,8 +164,8 @@ for iTest = 1:size(TestSet, 1)
    if strcmpi(Got, Want)
       fprintf('  ok:  [%s]\n    => [%s]\n', In_, Want_);
    else
-      error(ErrID, 'Failed!\nInput:  [%s]\nWanted: [%s]\nOutput: [%s]', ...
-         In_, Want_, Got_);
+      error(ErrID, ['Failed!', char(10), 'Input:  [%s]', char(10), ...
+         'Wanted: [%s]', char(10), 'Output: [%s]'], In_, Want_, Got_);
    end
 end
 
@@ -217,11 +220,11 @@ for i = depth:-1:2
             '  Expected:            [%s]\n'], testStr, cf, cf2);
          error([FuncName, ': GetFullPath with folder failed']);
       end
-   catch
-      if isempty(lasterr)
+   catch ME
+      if isempty(ME.message)
          error(ErrID, [FuncName, ': GetFullPath crashed?!']);
       else
-         error(ErrID, lasterr);
+         error(ErrID, ME.message);
       end
    end
 end
@@ -245,11 +248,11 @@ for i = depth:-1:2
             '  Expected:            [%s]\n'], testStr, cf, cf2);
          error(ErrID, [FuncName, ': GetFullPath with folder failed']);
       end
-   catch
-      if isempty(lasterr)
+   catch ME
+      if isempty(ME.message)
          error(ErrID, [FuncName, ': GetFullPath crashed?!']);
       else
-         error(ErrID, lasterr);
+         error(ErrID, ME.message);
       end
    end
 end
@@ -274,11 +277,11 @@ for i = depth:-1:2
             '  Expected:            [%s]\n'], testStr, cf, cf2);
          error([FuncName, ': GetFullPath with folder failed']);
       end
-   catch
-      if isempty(lasterr)
+   catch ME
+      if isempty(ME.message)
          error(ErrID, [FuncName, ': GetFullPath crashed?!']);
       else
-         error(ErrID, lasterr);
+         error(ErrID, ME.message);
       end
    end
 end
@@ -303,11 +306,11 @@ for i = depth:-1:2
             '  Expected:            [%s]\n'], testStr, cf, cf2);
          error([FuncName, ': GetFullPath with folder failed']);
       end
-   catch
-      if isempty(lasterr)
+   catch ME
+      if isempty(ME.message)
          error(ErrID, [FuncName, ': GetFullPath crashed?!']);
       else
-         error(ErrID, lasterr);
+         error(ErrID, ME.message);
       end
    end
 end
@@ -329,18 +332,18 @@ for i = depth:-1:1
             '  Expected:            [%s]\n'], testStr, cf, cf2);
          error([FuncName, ': GetFullPath with folder failed']);
       end
-   catch
-      if isempty(lasterr)
+   catch ME
+      if isempty(ME.message)
          error(ErrID, [FuncName, ': GetFullPath crashed?!']);
       else
-         error(ErrID, lasterr);
+         error(ErrID, ME.message);
       end
    end
 end
 
 % Check magic prefix under Windows: --------------------------------------------
 if isWindows
-   fprintf('\n== Test Magic prefix under Windows:\n');
+   fprintf('\n== Magic prefix under Windows:\n');
    MAX_PATH = 260;
    
    % Test data folders do not need to exist:
@@ -376,14 +379,17 @@ if isWindows
       end
       
       if strcmp(leanPath, leanWant) == 0
+         fprintf(2, 'Expected: [%s]\nObtained: [%s]\n', leanWant, leanPath);
          error(ErrID, '%s: Unexpected name for lean style?! [%s]', ...
             mfilename, leanPath);
       end
       if strcmp(autoPath, autoWant) == 0
+         fprintf(2, 'Expected: [%s]\nObtained: [%s]\n', autoWant, autoPath);
          error(ErrID, '%s: Unexpected prefix for short name?! [%s]', ...
             mfilename, leanPath);
       end
       if strcmp(fatPath, fatWant) == 0
+         fprintf(2, 'Expected: [%s]\nObtained: [%s]\n', fatWant, fatPath);
          error(ErrID, '%s: Unexpected prefix for fat style?! [%s]', ...
             mfilename, fatPath);
       end
@@ -398,11 +404,28 @@ else
    fprintf('\n== No magic prefix test under Linux/MacOS\n');
 end
 
+% Test STRING input: -----------------------------------------------------------
+if hasStringType
+   fprintf('\n== STRING input:\n');
+   TestData = {'', 'asd', {'', ''}, {'bsd'; 'asd'}};
+   for iTest = 1:size(TestData, 1)
+      CharOut   = GetFullPath(TestData{iTest});
+      StringOut = GetFullPath(string(TestData{iTest}));
+      
+      if ~isequal(CharOut, convertStringsToChars(StringOut))
+         fprintf(2, 'Failed for string input:\n');
+         disp(TestData{iTest, 2})
+         error(ErrID, '%s: Failed for STRING input.', mfilename);
+      end
+   end
+   fprintf('  ok\n');
+end
+
 % Goodbye: ---------------------------------------------------------------------
 cd(backDir);
-fprintf('\n== %s passed the tests\n', examined);
+fprintf('\n== GetFullPath passed the tests.\n');
 
-% return;
+end
 
 % ******************************************************************************
 function F = CleanReply(F_in)
@@ -439,7 +462,12 @@ else
    F = fullfile(C{:}, FSep);
 end
 
-% return;
+% FULLFILE('C:', '\') replies 'C:\\' in Matlab 2015b. Manual fix:
+if length(F) == 4 && strcmp(F(2:4), ':\\')
+   F = F(1:3);
+end
+
+end
 
 % ******************************************************************************
 function CStr = Str2Cell_L(Str, Sep)
@@ -455,13 +483,14 @@ if hasDataRead
    if strcmp(Sep, '\')
       Sep = '\\';
    end
-   CStr = dataread('string', Str, '%s', 'delimiter', Sep, 'whitespace', '');
+   CStr = dataread('string', ...
+      Str, '%s', 'delimiter', Sep, 'whitespace', '');  %#ok<DDTRD>
    CStr = reshape(CStr, 1, numel(CStr));
 else
    CStr = regexp(Str, Sep, 'split');
 end
 
-% return;
+end
 
 % ******************************************************************************
 function Cleanup(Arg)
@@ -472,4 +501,4 @@ else
    cd(currentFolder);
 end
 
-% return;
+end

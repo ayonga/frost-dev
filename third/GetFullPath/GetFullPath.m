@@ -8,18 +8,18 @@ function File = GetFullPath(File, Style)
 %
 % FullName = GetFullPath(Name, Style)
 % INPUT:
-%   Name:  String or cell string, absolute or relative name of a file or
-%          folder. The path need not exist. Unicode strings, UNC paths and long
+%   Name:  CHAR vector, cell string or strin, absolute or relative name of a
+%          file or folder. The path need not exist. Unicode, UNC paths and long
 %          names are supported.
-%   Style: Style of the output as string, optional, default: 'auto'.
+%   Style: Style of the output as CHAR vector, optional, default: 'auto'.
 %          'auto': Add '\\?\' or '\\?\UNC\' for long names on demand.
 %          'lean': Magic string is not added.
 %          'fat':  Magic string is added for short names also.
 %          The Style is ignored when not running under Windows.
 %
 % OUTPUT:
-%   FullName: Absolute canonical path name as string or cell string.
-%          For empty strings the current directory is replied.
+%   FullName: Absolute canonical path name as CHAR vector or cell string.
+%          If name is '', the current directory is replied.
 %          '\\?\' or '\\?\UNC' is added on demand.
 %
 % NOTE: The M- and the MEX-version create the same results, the faster MEX
@@ -54,14 +54,22 @@ function File = GetFullPath(File, Style)
 %   Download:  http://www.n-simon.de/mex
 % Run the unit-test uTest_GetFullPath after compiling.
 %
-% Tested: Matlab 6.5, 7.7, 7.8, 7.13, WinXP/32, Win7/64
+% Alternatives:
+%   .NET (thanks Urs), more features, ~50 times slower
+%     FInfo    = System.IO.FileInfo(File);
+%     FullFile = char(FInfo.FullName)
+%   Java, ~6 times slower, does not convert realtive paths:
+%     javaF    = java.io.File(File);
+%     FullFile = javaF.getAbsolutePath()
+%
+% Tested: Matlab 2009a, 2015b(32/64), 2016b, 2018b, Win7/10
 %         Compiler: LCC2.4/3.8, BCC5.5, OWC1.8, MSVC2008/2010
 % Assumed Compatibility: higher Matlab versions
-% Author: Jan Simon, Heidelberg, (C) 2009-2013 matlab.THISYEAR(a)nMINUSsimon.de
+% Author: Jan Simon, Heidelberg, (C) 2009-2021 matlab.2010(a)n(MINUS)simon.de
 %
 % See also: CD, FULLFILE, FILEPARTS.
 
-% $JRev: R-G V:032 Sum:7Xd/JS0+yfax Date:15-Jan-2013 01:06:12 $
+% $JRev: R-U V:046 Sum:bivvMoNgkjmz Date:03-May-2021 22:54:45 $
 % $License: BSD (use/copy/change/redistribute on own risk, mention the author) $
 % $UnitTest: uTest_GetFullPath $
 % $File: Tools\GLFile\GetFullPath.m $
@@ -81,6 +89,8 @@ function File = GetFullPath(File, Style)
 %      The former version treated "\\?\C:\<longpath>\file" as UNC path and
 %      replied "\\?\UNC\?\C:\<longpath>\file".
 % 032: 12-Jan-2013 21:16, 'auto', 'lean' and 'fat' style.
+% 038: 19-May-2019 17:25, BUGFIX, Thanks HHang Li, "File(7:..." -> "File(8:..."
+% 044: 02-May-2021 17:47. File name can be a STRING.
 
 % Initialize: ==================================================================
 % Do the work: =================================================================
@@ -94,7 +104,7 @@ function File = GetFullPath(File, Style)
 % - Mex calls Windows API function GetFullPath.
 % - Mex is much faster.
 
-% Magix prefix for long Windows names:
+% Magic prefix for long Windows names:
 if nargin < 2
    Style = 'auto';
 end
@@ -102,11 +112,23 @@ end
 % Handle cell strings:
 % NOTE: It is faster to create a function @cell\GetFullPath.m under Linux, but
 % under Windows this would shadow the fast C-Mex.
-if isa(File, 'cell')
-   for iC = 1:numel(File)
-      File{iC} = GetFullPath(File{iC}, Style);
+if ~ischar(File)
+   if isa(File, 'cell')
+      for iC = 1:numel(File)
+         File{iC} = GetFullPath(File{iC}, Style);
+      end
+      return;
+      
+   elseif isa(File, 'string')
+      for iC = 1:numel(File)
+         File(iC) = GetFullPath(File{iC}, Style);
+      end
+      return;
+      
+   elseif ~isempty(File)  % Non-empty inputs must be strings
+      error(['JSimon:', mfilename, ':BadTypeInput1'], ...
+         '*** %s: File name must be: CHAR, cell string or string.', mfilename);
    end
-   return;
 end
 
 % Check this once only:
@@ -117,14 +139,14 @@ MAX_PATH = 260;
 persistent hasDataRead
 if isempty(hasDataRead)
    % Test this once only - there is no relation to the existence of DATAREAD!
-   %if isWIN
-   %   Show a warning, if the slower Matlab version is used - commented, because
-   %   this is not a problem and it might be even useful when the MEX-folder is
-   %   not inlcuded in the path yet.
-   %   warning('JSimon:GetFullPath:NoMex', ...
-   %      ['GetFullPath: Using slow Matlab-version instead of fast Mex.', ...
-   %       char(10), 'Compile: InstallMex GetFullPath.c']);
-   %end
+   if isWIN
+     % Show a warning, if the slower Matlab version is used - commented, because
+     % this is not a problem and it might be even useful when the MEX-folder is
+     % not inlcuded in the path yet.
+     warning(['JSimon:', mfilename, ':NoMex'], ...
+        ['GetFullPath: Using slower Matlab-version instead of fast Mex.', ...
+         char(10), 'Compile: InstallMex GetFullPath.c']);
+   end
    
    % DATAREAD is deprecated in 2011b, but still available. In Matlab 6.5, REGEXP
    % does not know the 'split' command, therefore DATAREAD is preferred:
@@ -132,28 +154,19 @@ if isempty(hasDataRead)
 end
 
 if isempty(File)  % Accept empty matrix as input:
-   if ischar(File) || isnumeric(File)
-      File = cd;
-      return;
-   else
-      error(['JSimon:', mfilename, ':BadTypeInput1'], ...
-         ['*** ', mfilename, ': Input must be a string or cell string']);
-   end
+   File = cd;
+   return;
 end
 
-if ischar(File) == 0  % Non-empty inputs must be strings
-   error(['JSimon:', mfilename, ':BadTypeInput1'], ...
-      ['*** ', mfilename, ': Input must be a string or cell string']);
-end
-
-if isWIN  % Windows: --------------------------------------------------------
+if isWIN  % Windows: -----------------------------------------------------------
    FSep = '\';
    File = strrep(File, '/', FSep);
    
    % Remove the magic key on demand, it is appended finally again:
    if strncmp(File, '\\?\', 4)
       if strncmpi(File, '\\?\UNC\', 8)
-         File = ['\', File(7:length(File))];  % Two leading backslashes!
+         % [BUGFIX] 19-May-2019, Thanks HHang Li, "File(7:..." -> "File(8:..."
+         File = ['\', File(8:length(File))];  % Two leading backslashes!
       else
          File = File(5:length(File));
       end
@@ -197,10 +210,12 @@ if isWIN  % Windows: --------------------------------------------------------
             File = ThePath;
          else
             try
-               File = cd(cd(File));
-            catch    % No MException to support Matlab6.5...
+               backCD = cd;
+               File   = cd(cd(File));
+               cd(backCD);
+            catch ME
                if exist(File, 'dir')  % No idea what could cause an error then!
-                  rethrow(lasterror);
+                  rethrow(ME);
                else  % Reply "K:\" for not existing disk:
                   File = [File, FSep];
                end
@@ -233,7 +248,7 @@ end
 
 % Care for "\." and "\.." - no efficient algorithm, but the fast Mex is
 % recommended at all!
-if ~isempty(strfind(File, [FSep, '.']))
+if ~isempty(strfind(File, [FSep, '.']))  %#ok<STREMP>
    if isWIN
       if strncmp(File, '\\', 2)  % UNC path
          index = strfind(File, '\');
@@ -308,7 +323,7 @@ end
 if isWIN
    if ~ischar(Style)
       error(['JSimon:', mfilename, ':BadTypeInput2'], ...
-         ['*** ', mfilename, ': Input must be a string or cell string']);
+         '*** %s: Input must be a CHAR vector or cell string', mfilename);
    end
    
    if (strncmpi(Style, 'a', 1) && length(File) >= MAX_PATH) || ...
@@ -323,4 +338,4 @@ if isWIN
    end
 end
 
-% return;
+end

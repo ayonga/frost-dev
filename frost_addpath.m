@@ -21,8 +21,8 @@ function frost_addpath()
 
     % Add third party packages/libraries path
     addpath(fullfile(cur, 'third'));
-    addpath_thirdparty_packages('GetFullPath', ...
-        'mathlink', 'ipopt', 'sparse2', 'yaml', 'snopt');
+    addpath_thirdparty_packages(...
+        'mathlink', 'ipopt', 'sparse2','GetFullPath');
 
     addpath(fullfile(cur, 'mathematica'));
     initialize_mathlink();

@@ -96,12 +96,12 @@ end
 addpath(genpath(export_path));
 nlp.update;
 solver = IpoptApplication(nlp);
-
+x0 = nlp.getInitialGuess('typical');
 % Run Optimization
 tic
 % old = load('x0');
 % [sol, info] = optimize(solver, old.sol);
-[sol, info] = optimize(solver);
+[sol, info] = optimize(solver,rand(size(x0)));
 toc
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 gait = struct(...
