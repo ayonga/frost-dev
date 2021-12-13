@@ -3,11 +3,11 @@ function initialize_mathlink()
     
      
     
-    cur = fileparts(mfilename('fullpath'));
+    math_app_path = fileparts(mfilename('fullpath'));
     
     math('$Version')
     
-    math_app_path = fullfile(cur,'Applications');
+    %     math_app_path = fullfile(cur);
     
     if ispc
         % For windows, use ''/' instead of '\'. Otherwise mathematica does

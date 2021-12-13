@@ -1,8 +1,0 @@
-Resources[
-    Version[1],
-    ExecutionBuildCommand["<<Screws`"],
-    Paclet[
-        PacletFolder["Screws"],
-        FunctionPaclet[False]
-    ]
-]

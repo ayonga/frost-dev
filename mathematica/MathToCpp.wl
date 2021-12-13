@@ -1,47 +1,53 @@
-(* Wolfram Language Package *)
+(* ::Package:: *)
 
-(* Created by the Wolfram Workbench Sep 18, 2016 *)
+(* ::Title:: *)
+(*Mathematica Expression to C/C++ Code*)
 
-(*********CseOptimization: Simplify Expression via Common Subexpression Elimination Technique(CSE) ***********)
-(* Developed and maintained by Ayonga Hereid @ AMBER Lab*)
+
+(* ::Author:: *)
+(*Ayonga Hereid*)
+
+
+(* ::Abstract:: *)
+(*Simplify and convert Mathematica expressions to optimized C/C++ source code.*)
+
 
 BeginPackage["MathToCpp`",{"ExtraUtils`","Experimental`"}]
-(* Exported symbols added here with SymbolName::usage *) 
 
-ExportToCpp::usage="ExportToCpp[name,expr,vars,options] optimizes expressions using CSE and export the resulting code
-into C++ file.
+ExportToCpp::usage="ExportToCpp[name,expr,vars,options] optimizes expressions using CSE and export the resulting code into C++ file."
 
-Inputs:
+(*
+::Inputs:: 
 name -> A string contains the file name of the exported C++ files (name.cc and name.hh).
 expr -> The expression that planned to be exported, ONLY supports 1-dimensional (scaler, vector) and 2-dimensional list (matrix).
 vars -> The list of symbolic variables in the exported expression.
 varnames -> The variable names represents symbolic variables in C++ code.
 options -> Additional options defined below. They could be defined by SetOptions function outside of the function call.
 
-Options:
+::Options:: 
 ExportDirectory -> Export directory for file (default: '.')
 TemplateFile -> Absolute path to the template file of C++ source code.
 TemplateHeader -> Absolute path to the template file of C++ header file.
 Namespace(optional) -> Defines a namespace for the exported C++ function (only for standard C++ application, not defined for Matlab's mex function).
 behavior(optional) -> Defines a sub-namespace for the exported C++ function (only for standard C++ application, not defined for Matlab's mex function).
-                       ";
+*)                       
 
 
-          
-ExportWithGradient::usage="ExportWithGradient[name,expr,vars,const] exports the expr and its first order Jacobian w.r.t. vars in two
-seperate files f_name and J_name. 
-
-Inputs:
+ExportWithGradient::usage="ExportWithGradient[name,expr,vars,const] exports the expr and its first order Jacobian w.r.t. vars in two seperate files f_name and J_name." 
+(*
+::Inputs::
 name -> A string contains the file name of the exported C++ files. 
         f_name.cc and f_name.hh: exported files for the expr;
         J_name.cc and J_name.hh: exported files for the first order Jacobian.
         Js_name.cc and Js_name.hh: exported files of the two vectors consisting of row/column indices of nonzero elements of the first order Jacobian.
 expr -> A vector form expression to be exported.
 vars -> A list of dependent variables.
-const (optional) -> A list of constant that are used in the function."
+const (optional) -> A list of constant that are used in the function.
+*)
 
-ExportWithHessian::usage="ExportWithGradient[name,expr,vars,const] exports the expr and its first and second order Jacobian w.r.t. vars.
-Inputs:
+ExportWithHessian::usage="ExportWithGradient[name,expr,vars,const] exports the expr and its first and second order Jacobian w.r.t. vars."
+(*
+::Inputs::
 name -> A string contains the file name of the exported C++ files. 
         f_name.cc and f_name.hh: exported files for the expr;
         J_name.cc and J_name.hh: exported files of the vector of nonzero elements of the first order Jacobian.
@@ -50,55 +56,56 @@ name -> A string contains the file name of the exported C++ files.
         Hs_name.cc and Hs_name.hh: exported files of the two vectors consisting of row/column indices of nonzero elements of the second order Jacobian.
 expr -> A vector form expression to be exported.
 vars -> A list of dependent variables.
-const (optional) -> A list of constant that are used in the function."
+const (optional) -> A list of constant that are used in the function.
+*)
 
 
-CseOptimizeExpression::usage="CseOptimizeExpression[expr] 
+CseOptimizeExpression::usage = "CseOptimizeExpression[expr] 
 Eliminates common subexpressions in 'expr', and return a Decomposed Block in Hold form.
 @param expr: an symbolic expression to be simplified.
 @return the simplified CompoundExpression in decomposed block with HoldForm attributes.
 @option OptimizationLevel: The level of optimization, choose from 0, 1, 2. The higher value gives more optimized code.
-";
+"; 
 
-DecomposeBlock::usage="DecomposeBlock[Block] decomposes the 'Block' in hold into two parts: 
-'vars' - a list of local variables, and 'code' - CompoundExpression of the 'Block' in Hold form";
+DecomposeBlock::usage = "DecomposeBlock[Block] decomposes the 'Block' in hold into two parts: 
+'vars' - a list of local variables, and 'code' - CompoundExpression of the 'Block' in Hold form"; 
 
-ReplaceVariable::usage="ReplaceVariable[vars,code] replaces 'vars' in code to some 
+ReplaceVariable::usage = "ReplaceVariable[vars,code] replaces 'vars' in code to some 
 readible symbols."
 
-ConvertToRule::usage="ConvertToRule[code] replaces Set in expression 'code' to 
+ConvertToRule::usage = "ConvertToRule[code] replaces Set in expression 'code' to 
 subsititution rules."
 
-DeleteUnnecessoryExpr::usage="DeleteUnnecessoryExpr[code] deletes some sub expression 
+DeleteUnnecessoryExpr::usage = "DeleteUnnecessoryExpr[code] deletes some sub expression 
 in the 'code' that appears only once, and replace those subvariables with the 
 original expressions in the following expression (it should have only one expression
-that use the subvaribale.)";
+that use the subvaribale.)"; 
 
-GetSequenceExprMatlab::usage="GetSequenceExprMatlab[code] decomposes the compound expression 'code into two parts and
-return 'seq' - sequenced expression except the last one.";
-GetFinalExprMatlab::usage="GetFinalExprMatlab[code] decomposes the compound expression 'code into two parts and
-return 'final' - the last expression.";
+GetSequenceExprMatlab::usage = "GetSequenceExprMatlab[code] decomposes the compound expression 'code into two parts and
+return 'seq' - sequenced expression except the last one."; 
 
-GetSequenceExprCpp::usage="GetSequenceExprCpp[code] decomposes the compound expression 'code into two parts and
-return 'seq' - sequenced expression except the last one.";
-GetFinalExprCpp::usage="GetFinalExprCpp[code] decomposes the compound expression 'code into two parts and
-return 'final' - the last expression.";
+GetFinalExprMatlab::usage = "GetFinalExprMatlab[code] decomposes the compound expression 'code into two parts and
+return 'final' - the last expression."; 
 
-ConvertToCForm::usage="ConvertToCForm[code] Convert CompoundedExpressions into string of C++ code (CForm)."
+GetSequenceExprCpp::usage = "GetSequenceExprCpp[code] decomposes the compound expression 'code into two parts and
+return 'seq' - sequenced expression except the last one."; 
 
-             
+GetFinalExprCpp::usage = "GetFinalExprCpp[code] decomposes the compound expression 'code into two parts and
+return 'final' - the last expression."; 
+
+ConvertToCForm::usage = "ConvertToCForm[code] Convert CompoundedExpressions into string of C++ code (CForm)."
+
+
 Begin["`Private`"]
+
 (* Implementation of the package *)
-
-
-
 SyntaxInformation[CseOptimizeExpression]={"ArgumentsPattern"->{_,OptionsPattern[]}};
 CseOptimizeExpression[expr_,OptionsPattern[]]:=
 	Block[{optExpr},
 	optExpr = Experimental`OptimizeExpression[expr,OptimizationLevel->OptionValue[OptimizationLevel],OptimizationSymbol->Global`t];
 	DecomposeBlock[optExpr]
 	];
-Options[CseOptimizeExpression]={OptimizationLevel-> 1};
+Options[CseOptimizeExpression]={OptimizationLevel-> 0};
 
 SyntaxInformation[DecomposeBlock]={"ArgumentsPattern"->{_}};
 DecomposeBlock[block_]:=

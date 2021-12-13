@@ -1,8 +1,0 @@
-Resources[
-    Version[1],
-    ExecutionBuildCommand["<<URDFParser`"],
-    Paclet[
-        PacletFolder["URDFParser"],
-        FunctionPaclet[False]
-    ]
-]

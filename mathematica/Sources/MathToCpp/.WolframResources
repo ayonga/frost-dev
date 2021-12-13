@@ -1,8 +1,0 @@
-Resources[
-    Version[1],
-    ExecutionBuildCommand["<<MathToCpp`"],
-    Paclet[
-        PacletFolder["MathToCpp"],
-        FunctionPaclet[False]
-    ]
-]

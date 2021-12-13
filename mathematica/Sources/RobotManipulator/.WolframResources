@@ -1,8 +1,0 @@
-Resources[
-    Version[1],
-    ExecutionBuildCommand["<<RobotManipulator`"],
-    Paclet[
-        PacletFolder["RobotManipulator"],
-        FunctionPaclet[False]
-    ]
-]

@@ -1,8 +1,0 @@
-Resources[
-    Version[1],
-    ExecutionBuildCommand["<<ExtraUtils`"],
-    Paclet[
-        PacletFolder["ExtraUtils"],
-        FunctionPaclet[False]
-    ]
-]

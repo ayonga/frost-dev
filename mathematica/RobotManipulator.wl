@@ -1,14 +1,16 @@
-(* Wolfram Language Package *)
+(* ::Package:: *)
 
-(* :Title: RobotManipulator.m *)
+(* ::Title:: *)
+(*RobotManipulator*)
+
+
+(* ::Author:: *)
+(*Ayonga Hereid*)
+
 
 BeginPackage["RobotManipulator`",{"Screws`","RobotLinks`","ExtraUtils`"}]
 (* Exported symbols added here with SymbolName::usage *) 
 
-
-InitializeModel::usage = 
-	"InitializeModel[robotJoints, q] initializes a model from an URDF file, with a specified \
-model type (either floating or planar). "
 
 PotentialEnergy::usage = 
 	"PotentialEnergy[robotLinks,robotJoints] compute the potential energy of the mechanical \
@@ -18,6 +20,8 @@ GravityVector::usage =
 	"GravityVector[q,robotLinks,robotJoints] computes the gravity vector of the robot model."
 	
 InertiaMatrix::usage = 
+	"InertiaMatrix[robotLinks, robotJoints] computes the inertia matrix of the robot model."	
+InertiaMatrixByLink::usage = 
 	"InertiaMatrix[robotLinks, robotJoints] computes the inertia matrix of the robot model."	
 
 
@@ -45,6 +49,14 @@ the 3-dimensional cartesian positions specified by the frames and relative offse
 ComputeEulerAngles::usage = 
 	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
 the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
+
+ComputeRelativeEulerAngles::usage = 
+	"ComputeEularAngles[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
+
+ComputeRelativeRigidOrientation::usage =
+    "ComputeRelativeRotationMatrix[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n}] computes \
+the 3-dimensional rotation matrices specified by the frames";
 
 ComputeSpatialJacobians::usage = 
 	"ComputeSpatialJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] computes Jacobian of\
@@ -78,7 +90,15 @@ with respect to the parent joint coordinates.";
 *)
 
 
-
+InertiaToCoriolisPart1New::usage=
+ "InertiaToCoriolisPart1[M, theta, omega, col] computes the col-th column of the first part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart2New::usage=
+ "InertiaToCoriolisPart2[M, theta, omega, col] computes the col-th column of the second part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
+InertiaToCoriolisPart3New::usage=
+ "InertiaToCoriolisPart3[M, theta, omega, col] computes the col-th column of the thrid part of the Coriolis vector given the \
+  inertia matrix, M, a list of the joint variables, theta, and a list of joint velocities, omega";
 
 ComputeForwardKinematics::usage = 
 	"ComputeForwardKinematics[{twists$1,gst0$1},...,{twists$N,gst0$N}] \
@@ -92,6 +112,8 @@ Begin["`Private`"]
 
 (* ::Section:: *)
 (* Private Constant *)
+
+
 I3=IdentityMatrix[3];
 Z3=ConstantArray[0,{3,3}];
 I4=IdentityMatrix[4];
@@ -108,16 +130,58 @@ grav = 9.81; (* the gravity constant*)
 (* Functions *)
 
 
-
-
-
-
-
-
-
-
-
-	
+InertiaToCoriolisPart1New[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+	Cvec = Table[
+		{Sum[
+			-1/2 * w[[k]] * (D[M[[i,j]], q[[k]]])
+			,
+			{k,n}
+		]}
+		,
+		{i,n}
+	];
+    Chop[Cvec * w[[j]]]
+  ];	
+InertiaToCoriolisPart2New[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Table[
+		{Sum[
+			-1/2 * w[[k]] * (D[M[[i,k]], q[[j]]]) 
+			,
+			{k,n}
+		]}
+		,
+		{i,n}
+	];
+    Chop[Cvec * w[[j]]]
+  ];	
+  
+InertiaToCoriolisPart3New[M_, theta_, omega_, col_] :=
+  Module[
+    {Cvec, i, k, n = Length[M],q,w,j=IntegerPart[col]},
+	q = Flatten[theta];
+	w = Flatten[omega];
+    (* Brute force calculation *)
+    Cvec = Table[
+		Sum[
+			1/2 * w[[k]] * (D[M[[j,k]], q[[i]]]) 
+			,
+			{k,n}
+		]
+		,
+		{i,n}
+	];
+    Chop[Cvec*w[[j]]]
+  ];	
 	
 
 
@@ -130,6 +194,22 @@ please include the motor inertia information when call InertiaMatrix[] function.
 NOTE: the provided motor inertia value should be the reflected inertia value at 
 the joint side = original actuator inertia * gear ratio ^2.
 *)
+InertiaMatrixByLink[robotLink__,nDof_] :=
+	Block[{MM, link, Je, De, i},
+		
+		link = {robotLink};
+
+		(* the mass/inertia matrix *)
+		MM = SparseArray@Map[ExtraUtils`BlockDiagonalMatrix[{I3*GetMass[#],GetInertia[#]}]&, link];
+		
+		(* compute body jacobians of each link CoM position *)
+		Je = SparseArray[ComputeBodyJacobians[robotLink, nDof]];
+		
+		De = Normal[Dot[SparseArray@Transpose[Je[[1]]],SparseArray[MM[[1]]],Je[[1]]]];
+
+		Return[De];
+	];
+
 InertiaMatrix[robotLinks__,nDof_] :=
 	Block[{MM, links, Je, De, i},
 		
@@ -141,7 +221,7 @@ InertiaMatrix[robotLinks__,nDof_] :=
 		(* compute body jacobians of each link CoM position *)
 		Je = ComputeBodyJacobians[robotLinks, nDof];
 		
-		De = Sum[Transpose[Je[[i]]].MM[[i]].Je[[i]],{i,1,Length[links]}];
+		De = Sum[Dot[Transpose[Je[[i]]],MM[[i]],Je[[i]]],{i,1,Length[links]}];
 		
 		
 		Return[De];
@@ -187,7 +267,7 @@ GravityVector[robotLinks__,q_] :=
 		V = PotentialEnergy[robotLinks];
 		
 		(* take partial derivatives to get the gravity vector *)
-		ge = ExtraUtils`Vec[D[Flatten[V],{Flatten[q],1}]];
+		ge = Transpose@{[D[Flatten[V],{Flatten[q],1}]]};
 		
 		Return[ge];
 	];
@@ -227,13 +307,13 @@ ComputeBodyJacobians[args__,nDof_] :=
 	
 
 ToEulerAngles[gst_,gst0_] :=
-	Block[{R, R0, Rw, yaw, roll, pitch,q0subs},
+	Block[{R, R0, Rw, yaw, roll, pitch, q0subs},
 		(* compute rigid orientation*)
 		R = Screws`RigidOrientation[gst];
 		(* compute rigid orientation with initial tool configuration (q = 0) *)
 		R0 = Screws`RigidOrientation[gst0];
 		(* compute spatial orientation *)
-		Rw = R.Transpose[R0];
+		Rw = R . Transpose[R0];
 		(* compute Euler angles *)
 		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
 		roll=ArcTan[Rw[[3,3]],Rw[[3,2]]];
@@ -242,6 +322,41 @@ ToEulerAngles[gst_,gst0_] :=
 		Return[{roll,pitch,yaw}];
 	];
 	
+ToRelativeEulerAngles[gst_,R0_] :=
+	Block[{R, Rw, yaw, roll, pitch},
+		(* compute rigid orientation*)
+		R = Screws`RigidOrientation[gst];
+
+		Rw = R . Transpose[R0];
+
+        T1 = ArcTan[Rw[[3,3]],Rw[[3,2]]];
+        C2 = Sqrt[Rw[[1,1]]^2 + Rw[[2,1]]^2];
+        T2 = ArcTan[C2,-Rw[[3,1]]];
+        S1 = Sin[T1];
+        C1 = Cos[T1];
+        T3 = ArcTan[C1*Rw[[2,2]]-S1*Rw[[2,3]],S1*Rw[[1,3]]-C1*Rw[[1,2]]];
+	
+        roll =  T1;
+        pitch =  T2;
+        yaw =   T3;
+
+		(* old code: compute Euler angles *)(*
+		yaw=ArcTan[Rw[[1,1]],Rw[[2,1]]];
+		roll=ArcTan[Rw[[3,3]],Rw[[3,2]]];
+		pitch=ArcTan[Rw[[3,3]],-Rw[[3,1]]Cos[roll]];
+		*)
+		Return[{roll,pitch,yaw}];
+	];
+	
+ToRelativeRigidOrientation[gst_,R0_] :=
+	Block[{R, Rw, yaw, roll, pitch},
+		(* compute rigid orientation*)
+		R = Screws`RigidOrientation[gst];
+
+		Rw = R . Transpose[R0];
+
+		Return[Rw];
+	];
 
 
 
@@ -269,6 +384,29 @@ ComputeEulerAngles[args__] :=
 		
 		
 		Return[pos];
+	];
+	
+ComputeRelativeEulerAngles[args__] :=
+	Block[{pos, gst, R, R0, Rw, argList = {args}},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		R0 = Map[#["R"] &, argList]; 		
+				
+		pos = MapThread[ToRelativeEulerAngles,{gst,R0}];
+		Return[pos];
+	];
+
+ComputeRelativeRigidOrientation[args__] :=
+	Block[{orientationmatrix, gst, R, R0, Rw, argList = {args}},
+		
+		(* first compute the forward kinematics *)
+		gst = ComputeForwardKinematics[args];
+		R0 = Map[#["R"] &, argList]; 		
+        R = Screws`RigidOrientation[gst];
+		Rw = R . Transpose[R0];
+		orientationmatrix = MapThread[ToRelativeRigidOrientation,{gst,R0}];
+		Return[orientationmatrix];
 	];
 	
 ComputeSpatialJacobians[args__,nDof_] :=
@@ -338,21 +476,21 @@ ComputeForwardKinematics[args__] :=
 
 
 	
-GetInertia[arg_?AssociationQ]:= Rationalize@arg["Inertia"];
+GetInertia[arg_?AssociationQ]:= arg["Inertia"];
 
 
-GetMass[arg_?AssociationQ]:= Rationalize@arg["Mass"];
+GetMass[arg_?AssociationQ]:= arg["Mass"];
 
 
-GetPosition[arg_?AssociationQ] := Rationalize@Flatten@arg["Offset"];
+GetPosition[arg_?AssociationQ] := Flatten@arg["Offset"];
 
 
-GetRotationMatrix[arg_?AssociationQ]:= Rationalize@arg["R"];
+GetRotationMatrix[arg_?AssociationQ]:= arg["R"];
 
 
-GetGST0[arg_?AssociationQ]:= Rationalize@arg["gst0"];
+GetGST0[arg_?AssociationQ]:= arg["gst0"];
 
-GetTwist[arg_?AssociationQ]:= Rationalize@arg["TwistPairs"];
+GetTwist[arg_?AssociationQ]:= arg["TwistPairs"];
 
 GetChainIndices[arg_?AssociationQ]:= Flatten@{arg["ChainIndices"]};
 
@@ -559,7 +697,7 @@ GetChainIndices[robotJoints_] :=
 	
 
 GetTwistPairs[robotJoints_,q_] :=
-	Block[{xi, chainIndices, chains, i, j, qvec = ExtraUtils`Vec[q]},
+	Block[{xi, chainIndices, chains, i, j, qvec = ExtraUtils`ToMatrixForm@ExtraUtils`ToVectorForm[q]},
 		
 					
 		(* compute twist for each coordinates (joints) *)
@@ -609,9 +747,9 @@ ComputeTwists[robotJoints_] :=
 
 (* Basic rotation matrices *)
 
-RotX[q_]:=ExtraUtils`CRoundEx[N@{{1,0,0},{0,Cos[q],-Sin[q]},{0,Sin[q],Cos[q]}}];
-RotY[q_]:=ExtraUtils`CRoundEx[N@{{Cos[q],0,Sin[q]},{0,1,0},{-Sin[q],0,Cos[q]}}];
-RotZ[q_]:=ExtraUtils`CRoundEx[N@{{Cos[q],-Sin[q],0},{Sin[q],Cos[q],0},{0,0,1}}];	
+RotX[q_]:=ExprRound[N@{{1,0,0},{0,Cos[q],-Sin[q]},{0,Sin[q],Cos[q]}}];
+RotY[q_]:=ExprRound[N@{{Cos[q],0,Sin[q]},{0,1,0},{-Sin[q],0,Cos[q]}}];
+RotZ[q_]:=ExprRound[N@{{Cos[q],-Sin[q],0},{Sin[q],Cos[q],0},{0,0,1}}];	
 	
 	
 End[]
