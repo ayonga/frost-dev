@@ -91,12 +91,15 @@ end
             
             % calculate constraints
             if isempty(constraint.AuxData{i})
-                C(constraint.FuncIndices{i}) = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var{:});
+                val = feval(constraint.Funcs{i}, var{:});
             else
-                C(constraint.FuncIndices{i})  = C(constraint.FuncIndices{i}) + feval(constraint.Funcs{i}, var{:}, constraint.AuxData{i}{:});
+                val = feval(constraint.Funcs{i}, var{:}, constraint.AuxData{i}{:});
             end
+            if size(val,1) ~= length(constraint.FuncIndices{i})
+                error('Error. \nThe output size of function %s is incorrect.',constraint.Names{i})
+            end
+            C(constraint.FuncIndices{i}) = C(constraint.FuncIndices{i}) + val;
         end
-        
     end
     %%
     
