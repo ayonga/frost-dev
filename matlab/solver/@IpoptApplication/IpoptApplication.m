@@ -69,8 +69,11 @@ classdef IpoptApplication < SolverApplication
             %             options.ipopt.point_perturbation_radius = 0;
             %             options.ipopt.derivative_test_perturbation = 1e-8;
             % options.ipopt.derivative_test_print_all = 'yes';
+            options.ipopt.print_level = 5;
+            options.ipopt.print_timing_statistics = 'yes';
+            %             options.ipopt.print_options_documentation = 'yes';
 
-
+            
             if nlp.Options.DerivativeLevel == 2 
                 % user-defined Hessian function is provide
                 options.ipopt.hessian_approximation = 'exact';
