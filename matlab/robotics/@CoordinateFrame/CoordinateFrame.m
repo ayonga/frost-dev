@@ -135,8 +135,10 @@ classdef CoordinateFrame < handle
         
         function gst = RPToHomogeneous(R,p)
             % Convert a rotation + translation to a homogeneous matrix
-            
-            gst = [R,p';
+            if isrow(p)
+                p = p';
+            end
+            gst = [R,p;
                 zeros(1,3),1];
         end
         
@@ -198,7 +200,70 @@ classdef CoordinateFrame < handle
                 -p(2),p(1),0];
         end
         
+        function adV = LieBracket(V)
+            % the notation is different from the MR book.
+            assert(isvector(V) && length(V)==6,...
+                'The twist vector must be a 6x1 vector.');
+            
+            v = V(1:3);
+            w = V(4:6);
+            v_bracket = CoordinateFrame.AxisToSkew(v);
+            w_bracket = CoordinateFrame.AxisToSkew(w);
+            adV = [w_bracket, v_bracket; zeros(3), w_bracket];
+        end
         
+        function T = TwistExp(V, theta)
+            assert(isvector(V) && length(V)==6,...
+                'The twist vector must be a 6x1 vector.');
+            assert(isscalar(theta),...
+                'The theta must be a scalar.');
+            
+            v = V(1:3);
+            w = V(4:6);
+            
+            if isrow(v)
+                v = v';
+            end
+            if isrow(w)
+                w = w';
+            end
+            if isa(theta,'SymExpression')
+                if norm(w) == 0 % w = [0,0,0]
+                    R = eye(3);
+                    p = tomatrix(theta)*v;
+                else
+                    R = CoordinateFrame.SkewExp(w,theta);
+                    S = CoordinateFrame.AxisToSkew(w);
+                    %                     p = (tomatrix(theta)*eye(3) + tomatrix((1-cos(theta))) * S + tomatrix(theta-sin(theta)) * (S * S)) * v;
+                    p = (eye(3) - R)*S*v + w*(transpose(w)*v)*theta;
+                end
+            else
+                if norm(w) == 0 % w = [0,0,0]
+                    R = eye(3);
+                    p = theta.*v;
+                else
+                    R = CoordinateFrame.SkewExp(w,theta);
+                    S = CoordinateFrame.AxisToSkew(w);
+                    p = (eye(3) - R)*S*v + w*(transpose(w)*v)*theta;
+                end
+            end
+            T = CoordinateFrame.RPToHomogeneous(R,p);
+        end
+        
+        function R = SkewExp(v, theta)
+            
+            assert(isvector(v) && length(v)==3,...
+                'The twist vector must be a 3x1 vector.');
+            assert(isscalar(theta),...
+                'The theta must be a scalar.');
+            
+            S = CoordinateFrame.AxisToSkew(v);
+            if isa(theta,'SymExpression')
+                R = eye(3) + tomatrix(sin(theta))*S + tomatrix(1-cos(theta)) * (S * S);
+            else
+                R = eye(3) + sin(theta)*S + (1-cos(theta)) * (S * S);
+            end
+        end
     end
     
     %% The following methods are not fast enough compared to counterpart Mathematica implementation.
