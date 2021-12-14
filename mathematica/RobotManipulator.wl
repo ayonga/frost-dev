@@ -267,7 +267,7 @@ GravityVector[robotLinks__,q_] :=
 		V = PotentialEnergy[robotLinks];
 		
 		(* take partial derivatives to get the gravity vector *)
-		ge = Transpose@{[D[Flatten[V],{Flatten[q],1}]]};
+		ge = ToMatrixForm@ToVectorForm[D[Flatten[V],{Flatten[q],1}]];
 		
 		Return[ge];
 	];

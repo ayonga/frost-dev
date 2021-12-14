@@ -26,6 +26,12 @@ classdef RigidBody < CoordinateFrame
         
     end
     
+    properties (Dependent)
+        % The spatial inertia of the rigit link
+        %
+        % @type matrix
+        SpatialInertia
+    end
     
     methods
         
@@ -74,7 +80,9 @@ classdef RigidBody < CoordinateFrame
         
         
         
-            
+        function G = get.SpatialInertia(obj)
+            G = [obj.Mass*eye(3), zeros(3); zeros(3), obj.Inertia];
+        end
         
     end
     
