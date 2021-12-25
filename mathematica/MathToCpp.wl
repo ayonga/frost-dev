@@ -105,7 +105,7 @@ CseOptimizeExpression[expr_,OptionsPattern[]]:=
 	optExpr = Experimental`OptimizeExpression[expr,OptimizationLevel->OptionValue[OptimizationLevel],OptimizationSymbol->Global`t];
 	DecomposeBlock[optExpr]
 	];
-Options[CseOptimizeExpression]={OptimizationLevel-> 0};
+Options[CseOptimizeExpression]={OptimizationLevel-> 1};
 
 SyntaxInformation[DecomposeBlock]={"ArgumentsPattern"->{_}};
 DecomposeBlock[block_]:=
