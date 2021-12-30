@@ -1,4 +1,4 @@
-function obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names, skip_load_vf)
+function obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names, varargin)
     % load the symbolic expression of system dynamical equations from MX
     % binary files for fast loading
     %
@@ -8,6 +8,13 @@ function obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names
     %  skip_load_vf: indicates whether to skip the loading of drift vectors
     %  which could takes a long time @type logical
     
+    
+    opts = struct(varargin{:});
+    if isfield(opts, 'DelayCoriolisSet')
+        delay_set = opts.DelayCoriolisSet;
+    else
+        delay_set = false;
+    end
     
     x = obj.States.x;
     % load the mass matrix using the default name 
@@ -52,9 +59,6 @@ function obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names
     
     % load the drift vector
     if nargin > 4
-        if nargin < 6
-            skip_load_vf = false;
-        end
         if ~iscell(vf_names), vf_names = {vf_names}; end
         vf = cell(size(vf_names));
         for i=1:numel(vf_names)
@@ -64,7 +68,7 @@ function obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names
             else                         % first order system
                 sfun_vf = SymFunction(vf_names{i},[],{obj.States.x});
             end
-            if ~isempty(vf_names{i}) && ~skip_load_vf
+            if ~isempty(vf_names{i}) && ~delay_set
                 sfun_vf = load(sfun_vf, file_path);
             end
             vf{i} = sfun_vf;

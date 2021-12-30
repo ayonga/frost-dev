@@ -63,20 +63,23 @@ classdef NonlinearProgram < handle
     %% Public methods
     methods
         
-        function obj = NonlinearProgram(name)
+        function obj = NonlinearProgram(name, option)
             % The default class constructor function
             %
             % Parameters: 
             %  name: the name of the problem
+            %  option: the options
             
-            if nargin > 0
-                validateattributes(name, {'char'},...
-                    {'scalartext'},'NonlinearProgram','name');
-                obj.Name = name;
+            arguments
+                name char {mustBeTextScalar}
+                option.DerivativeLevel {mustBeMember(option.DerivativeLevel, {0,1,2})} = 1
+                option.EqualityConstraintBoundary double {mustBePositive} = 0
             end
+            
+            obj.Name = name;
             % default options
-            obj.Options = struct('DerivativeLevel', 1, ...
-                'EqualityConstraintBoundary', 0);
+            obj.Options = struct('DerivativeLevel', option.DerivativeLevel, ...
+                'EqualityConstraintBoundary', option.EqualityConstraintBoundary);
             
             
             

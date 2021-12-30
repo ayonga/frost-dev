@@ -76,6 +76,31 @@ function obj = configure(obj, config, base, load_path, varargin)
     end
     
     
+    % remove links with zero mass and inertia
+    link_indices_to_remove = [];
+    for i=1:numel(links)
+        link = links(i);
+        if link.Mass == 0 && all(all(link.Inertia == zeros(3)))
+            link_indices_to_remove = [link_indices_to_remove,i];
+        end
+    end
+    if ~isempty(link_indices_to_remove)
+        links(link_indices_to_remove) = [];
+    end
+    
+    % remove joints with no child links (except base coordinates)
+    joint_indices_to_remove = [];
+    for i=1:numel(joints)
+        joint = joints(i);
+        child_index = str_index(joint.Child,{links.Name});
+        if isempty(child_index)
+            joint_indices_to_remove = [joint_indices_to_remove,i];
+        end
+    end
+    if ~isempty(joint_indices_to_remove)
+        joints(joint_indices_to_remove) = [];
+    end
+    
     if ~isempty(base_dofs) 
         % non-fixed base coordiantes
         base_dofs(end).Child = findBaseLink(obj,joints);
@@ -125,19 +150,19 @@ function obj = configure(obj, config, base, load_path, varargin)
                 links(parent_index).Inertia = J1 + J2;
                 links(parent_index).R = [0,0,0];
                 % Find and remove the fixed joint and all children links
-                fixed_joint_children_indices = find(strcmp({links.Name}, joints(i).Child));
-                for j = 1:length(fixed_joint_children_indices)
-                    child_link = links(fixed_joint_children_indices);
-                    joints_with_fixed_parent = find(strcmp({joints.Parent}, child_link.Name));
-                    for k = 1:length(joints_with_fixed_parent)
-                        joints(joints_with_fixed_parent(k)).Parent = links(parent_index).Name;
-                        H01 = [R_jot, p_jot; zeros(1,3), 1];
-                        H12 = [Rot(joints(joints_with_fixed_parent(k)).R), joints(joints_with_fixed_parent(k)).Offset'; zeros(1,3), 1];
-                        H = H01*H12;
-                        joints(joints_with_fixed_parent(k)).Offset = H(1:3, end)';
-                        joints(joints_with_fixed_parent(k)).R = H(1:3, 1:3);
-                    end
+                %                 fixed_joint_children_indices = find(strcmp({links.Name}, joints(i).Child));
+                %                 for j = 1:length(fixed_joint_children_indices)
+                child_link = links(child_index);
+                joints_with_fixed_parent = find(strcmp({joints.Parent}, child_link.Name));
+                for k = 1:length(joints_with_fixed_parent)
+                    joints(joints_with_fixed_parent(k)).Parent = links(parent_index).Name;
+                    H01 = [R_jot, p_jot; zeros(1,3), 1];
+                    H12 = [Rot(joints(joints_with_fixed_parent(k)).R), joints(joints_with_fixed_parent(k)).Offset'; zeros(1,3), 1];
+                    H = H01*H12;
+                    joints(joints_with_fixed_parent(k)).Offset = H(1:3, end)';
+                    joints(joints_with_fixed_parent(k)).R = H(1:3, 1:3);
                 end
+                %                 end
                 joints_to_remove = horzcat(joints_to_remove, i); %#ok<*AGROW>
                 links_to_remove = horzcat(links_to_remove, child_index);
             end
