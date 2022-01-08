@@ -89,6 +89,7 @@ classdef SymFunction < SymExpression
             obj.Name = name;
             
             obj.Funcs = struct(...
+                'Func', obj.Name,...
                 'Jac', ['J_' obj.Name],...
                 'JacStruct', ['Js_' obj.Name],...
                 'Hess', ['H_' obj.Name],...
@@ -126,7 +127,29 @@ classdef SymFunction < SymExpression
                 % obj.Params = tovector([params{:}]);
             else
                 obj.Params = {};
+                params = {};
             end
+            
+            s = symvar(expr);
+            symvars = [];
+            if ~isempty(vars)
+                for i=1:numel(vars)
+                    symvars = [flatten(vars{i}), symvars]; %#ok<*AGROW>
+                end
+            end
+            if ~isempty(params)
+                for i=1:numel(params)
+                    symvars = [flatten(params{i}), symvars]; %#ok<*AGROW>
+                end
+            end
+            symvars = transpose(symvars);
+            for i=1:length(s)
+                ret = char(eval_math_fun('MemberQ',{symvars,s(i)}));
+                if strcmp(ret, 'False')
+                    error('missingSymbol: All symbolic variables in the expression must be defined either as `vars` or `params`.')
+                end
+            end
+            
             
             obj.Status = struct();
             obj.Status.FunctionExported = false;

@@ -2,20 +2,29 @@ function obj = removeEvent(obj, name)
     % Remove event functions defined for the system
     %
     % Parameters:
-    % name: the name of the constraint @type cellstr
+    % name: the name of the event @type cellstr
     
-    assert(ischar(name) || iscellstr(name), ...
-        'The name must be a character vector or cellstr.');
-    if ischar(name), name = cellstr(name); end
+    arguments
+        obj ContinuousDynamics
+    end
+    arguments (Repeating)
+        name char
+    end
+    
+    if isempty(name)
+        return
+    end
     
     
     for i=1:length(name)
-        constr = name{i};
+        event_name = name{i};
         
-        if isfield(obj.EventFuncs, constr)
-            obj.EventFuncs = rmfield(obj.EventFuncs,constr);
+        if isfield(obj.EventFuncs, event_name)
+            event = obj.EventFuncs.(event_name);
+            obj.EventFuncs = rmfield(obj.EventFuncs,event_name);            
+            delete(event);
         else
-            error('The event (%s) does not exist.\n',constr);
+            error('The event (%s) does not exist.\n',event_name);
         end
     end
 end

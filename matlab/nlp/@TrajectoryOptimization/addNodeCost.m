@@ -1,4 +1,4 @@
-function obj = addNodeCost(obj, func, deps, nodes, auxdata, load_path)
+function obj = addNodeCost(obj, nodes, func, deps, auxdata)
     % Add a cost function that only depends on variables at a particular
     % node. The input argument ''nodes'' will specify at which nodes the
     % function is defined. 
@@ -20,34 +20,17 @@ function obj = addNodeCost(obj, func, deps, nodes, auxdata, load_path)
     % node: an indicator of 'first' or 'last' node @type char
     % auxdata: auxilary constant data to be feed in the function 
     % @type double
-    
+    arguments
+        obj        
+        nodes
+        func
+        deps (:,1) cell
+        auxdata cell = {}
+    end
     
     % basic information of NLP decision variables
-    nNode  = obj.NumNode;
+    
     vars   = obj.OptVarTable;
-    if ~iscell(deps), deps = {deps}; end
-    
-    assert(isa(func,'SymFunction'),...
-        'The second argument must be a SymFunction object.'); %#ok<PSIZE>
-        
-    
-    
-    if nargin < 5
-        auxdata = [];
-    else
-        if ~iscell(auxdata), auxdata = {auxdata}; end
-    end
-    
-    if nargin < 6
-        load_path = [];
-    end
-    
-    if ~isempty(load_path)
-        load(func,load_path);
-    end
-    siz = size(func);
-    assert(prod(siz)==1,...
-        'The cost function must be a scalar function.'); %#ok<PSIZE>
     
     
     if ischar(nodes)
@@ -55,44 +38,54 @@ function obj = addNodeCost(obj, func, deps, nodes, auxdata, load_path)
             case 'first'
                 node_list = 1;
             case 'last'
-                node_list = nNode;
+                node_list = obj.NumNode;
+            case 'terminal'
+                node_list = [1 obj.NumNode];
             case 'except-first'
-                node_list = 2:nNode;
+                node_list = 2:obj.NumNode;
             case 'except-last'
-                node_list = 1:nNode-1;
+                node_list = 1:obj.NumNode-1;
             case 'except-terminal'
-                node_list = 2:nNode-1;
+                node_list = 2:obj.NumNode-1;
             case 'all'
-                node_list = 1:nNode;
+                node_list = 1:obj.NumNode;
             case 'cardinal'
-                node_list = 1:2:nNode;
+                node_list = 1:2:obj.NumNode;
             case 'interior'
-                node_list = 2:2:nNode-1;
+                node_list = 2:2:obj.NumNode-1;
             otherwise
                 error('Unknown node type.');
         end
+    elseif isnumeric(nodes)
+        mustBeInteger(nodes);
+        mustBeInRange(nodes,1,obj.NumNode);
+        node_list = nodes;
     else
-        if ~isnumeric(nodes)
-            error(['The node must be specified as a list or following supported characters:\n',...
-                '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
-        else
-            node_list = nodes;
-        end
+        error(['The node must be specified as a list of integers or following supported characters:\n',...
+            '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
     end
     
+      
     n_node = numel(node_list);
-    cost(n_node) = struct();
-    [cost.Name] = deal(func.Name);
-    [cost.Dimension] = deal(1);
-    [cost.SymFun] = deal(func);
-    [cost.AuxData] = deal(auxdata);
+    cost = repmat(NlpFunction(),n_node,1);
     for i=1:n_node
         idx = node_list(i);
-        dep_vars = cellfun(@(x)vars.(x)(idx),deps,'UniformOutput',false);
-        cost(i).DepVariables = vertcat(dep_vars{:});
+        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, idx),deps,'UniformOutput',false);        
+        cost(i) = NlpFunction(func, [dep_vars{:}], 'AuxData', auxdata);
     end
     
     
+    obj = addCost(obj,nodes,cost);
     
-    obj = addCost(obj,func.Name,nodes,cost);
+    function var = get_dep_vars(plant, vars, options, x, idx)
+        
+        if strcmp(x,'T') && ~options.DistributeTimeVariable % time variable
+            var = vars.(x)(1);
+        elseif isParam(plant, x) && ~options.DistributeParameters
+            var = vars.(x)(1);
+        else
+            var = vars.(x)(idx);
+        end
+        
+    end
 end

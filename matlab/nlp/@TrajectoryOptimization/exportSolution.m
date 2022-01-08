@@ -50,7 +50,7 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
         states.(name) = sol([vars.(name).Indices]);
     end
     inputs = struct();
-    input_names = fieldnames(plant.Inputs.Control);
+    input_names = fieldnames(plant.Inputs);
     if ~isempty(input_names)        
         for j=1:length(input_names)
             name = input_names{j};            
@@ -58,23 +58,23 @@ function [tspan, states, inputs, params] = exportSolution(obj, sol)
         end
     end
     
-    input_names = fieldnames(plant.Inputs.ConstraintWrench);
-    if ~isempty(input_names)        
-        for j=1:length(input_names)
-            name = input_names{j};            
-            inputs.(name) = sol([vars.(name).Indices]);
-        end
-    end
-    
-    
-    input_names = fieldnames(plant.Inputs.External);
-    
-    if ~isempty(input_names)        
-        for j=1:length(input_names)
-            name = input_names{j};            
-            inputs.(name) = sol([vars.(name).Indices]);
-        end
-    end
+    %     input_names = fieldnames(plant.Inputs.ConstraintWrench);
+    %     if ~isempty(input_names)
+    %         for j=1:length(input_names)
+    %             name = input_names{j};
+    %             inputs.(name) = sol([vars.(name).Indices]);
+    %         end
+    %     end
+    %
+    %
+    %     input_names = fieldnames(plant.Inputs.External);
+    %
+    %     if ~isempty(input_names)
+    %         for j=1:length(input_names)
+    %             name = input_names{j};
+    %             inputs.(name) = sol([vars.(name).Indices]);
+    %         end
+    %     end
     
     
     

@@ -1,23 +1,26 @@
-function obj = removeParam(obj, param_name)
+function obj = removeParam(obj, param_names)
     % Remove parameter variables of the dynamical system
     %
     % Parameters:
-    %  param_name: the name of the parameter variables to be removed 
-    %  @type cellstr
+    %  param_names (repeatable): the parameter variables to be removed
     
+    arguments
+        obj DynamicalSystem        
+    end
     
-    assert(ischar(param_name) || iscellstr(param_name), ...
-        'The parameter name must be a character vector or cellstr.');
-    if ischar(param_name), param_name = cellstr(param_name); end
+    arguments (Repeating)
+        param_names char
+    end
     
-    
-    for i=1:length(param_name)
-        p = param_name{i};
+    for i=1:length(param_names)
+        name = param_names{i};
         
-        if isfield(obj.Params, p)
-            obj.Params = rmfield(obj.Params,p);
+        if isfield(obj.Params, name)
+            obj.Params = rmfield(obj.Params,name);
+            obj.params_ = rmfield(obj.params_,name);
         else
-            error('A parameter variable name (%s) does not exist.\n',p);
+            warning('A parameter variable name (%s) does not exist.\n',p);
         end
     end
+    
 end

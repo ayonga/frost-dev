@@ -191,8 +191,8 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             aux_data = [];
         end
         % add constraint at the first node
-        nlp = addNodeConstraint(nlp, y_fun{1}, [t_name, q_name ,a_name, p_name, c_name], 'first',...
-            0, 0, 'Nonlinear', aux_data);
+        nlp = addNodeConstraint(nlp, 'first', y_fun{1}, [t_name, q_name ,a_name, p_name, c_name],...
+            0, 0, aux_data);
         
     end
     
@@ -216,8 +216,8 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
                 end
                 % add constraint at the first node
                 
-                nlp = addNodeConstraint(nlp, y_fun{i}, [t_name, x_name ,a_name, p_name], 'first',...
-                    0, 0, 'Nonlinear', aux_data);
+                nlp = addNodeConstraint(nlp, 'first', y_fun{i}, [t_name, x_name ,a_name, p_name], ...
+                    0, 0, aux_data);
             end
         end
     end
@@ -228,11 +228,9 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     %% the highest order derivatives imposed at all nodes (feedback linearization) 
     node_list = 1:1:n_node;
     dim = obj.Dimension;
-    vars   = nlp.OptVarTable;
-    ceq_err_bound = nlpOptions.EqualityConstraintBoundary;   
+    vars   = nlp.OptVarTable; 
     
-    y_dynamics(1,n_node) = NlpFunction();
-    
+    y_dynamics = repmat(NlpFunction.empty(),n_node,1);
     if isempty(load_path)
         % state-based output, no need to use time variable
         if is_state_based
@@ -318,11 +316,15 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
         x_deps = cellfun(@(x)vars.(x)(idx),x_name,'UniformOutput',false);
         dx_deps = cellfun(@(x)vars.(x)(idx),dx_name,'UniformOutput',false);
         
-        y_dynamics(i) = NlpFunction('Name',[obj.Name '_output_dynamics'],...
-            'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
-            'ub',ceq_err_bound,'Type','Nonlinear',...
-            'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]',...
+        dep_vars = [t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]';
+        y_dynamics(i) = NlpFunction(ddy_fun, dep_vars, 'lb', 0, 'ub', 0,...
             'AuxData', {aux_data});
+        
+        %         y_dynamics(i) = NlpFunction('Name',[obj.Name '_output_dynamics'],...
+        %             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
+        %             'ub',ceq_err_bound,'Type','Nonlinear',...
+        %             'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]',...
+        %             'AuxData', {aux_data});
         %             'AuxData', {[aux_data,{ep}]});
         
     end
@@ -333,7 +335,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     
     % add output dynamics at all nodes
     % add dynamical equation constraints
-    nlp = addConstraint(nlp,[obj.Name '_output_dynamics'],'all',y_dynamics);
+    nlp = addConstraint(nlp,'all',y_dynamics);
     
     
 end

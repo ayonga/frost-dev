@@ -1,4 +1,4 @@
-function [tn, xn] = calcDiscreteMap(obj, t, x, varargin)
+function [tn, varargout] = calcDiscreteMap(obj, t, states)
     % calculates the discrete map of the dynamical system that maps
     % xminus from xplus. Subclasses must implement this method by its
     % own.
@@ -9,14 +9,20 @@ function [tn, xn] = calcDiscreteMap(obj, t, x, varargin)
     %
     % Parameters:
     % t: the time instant @type double
-    % x: the pre-impact states @type colvec
-    % varargin: extra argument @type varargin
+    % x (repeatable): the pre-impact states @type colvec
     %
     % Return values:    
     % tn: the time after reset @type double
     % xn: the post-impact states @type colvec
+    arguments
+        obj DiscreteDynamics
+        t double {mustBeNonnegative}
+    end
+    arguments (Repeating)
+        states double
+    end
     
     tn = t;
-    xn = x;
+    varargout = states;
     
 end

@@ -54,29 +54,36 @@ classdef  (InferiorClasses = {?CoordinateFrame})  ContactFrame < CoordinateFrame
     methods
         
         
-        function obj = ContactFrame(varargin)
+        function obj = ContactFrame(argin)
             % The class constructor function
             %
             % Parameters:
             %  varargin: variable nama-value pair input arguments, in detail:
             %    Name: the name of the frame @type char
             %    Reference: the reference frame @type CoordinateFrame
-            %    Offset: the offset of the origin @type rowvec
+            %    P: the offset of the origin @type rowvec
             %    R: the rotation matrix or the Euler angles @type rowvec
             %    Type: the type of the contact @type char
             
-            
-            % consruct the superclass object first
-            obj = obj@CoordinateFrame(varargin{:});
-            if nargin == 0
-                return;
+            arguments
+                argin.Name char = ''
+                argin.Reference = []
+                argin.P (1,3) double {mustBeReal} = zeros(1,3)
+                argin.R double {mustBeReal} = eye(3)
+                argin.Type char = ''
+                argin.AxIndices double = []
             end
             
-            argin = struct(varargin{:});
+            % consruct the superclass object first
+            argin_sup = rmfield(argin,{'Type','AxIndices'});
+            argin_cell = namedargs2cell(argin_sup);
+            % consruct the superclass object first
+            obj = obj@CoordinateFrame(argin_cell{:});
+            
             
             % validate and assign the contact type
             if isfield(argin, 'Type')
-                obj = obj.setType(argin.Type);
+                obj = obj.setType(argin.Type, argin.AxIndices);
             else
                 error('The contact type is not defined.');
             end
@@ -86,7 +93,7 @@ classdef  (InferiorClasses = {?CoordinateFrame})  ContactFrame < CoordinateFrame
 
     % methods defined in exteral files
     methods
-        obj = setType(obj, type);
+        obj = setType(obj, type, ax_indices);
 
         [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef);
 

@@ -1,34 +1,29 @@
-function obj = addParam(obj, varargin)
-    % Add parameter variables of the dynamical system
+function obj = addParam(obj, params)
+    % addParam(obj, params) adds parameters to the dynamical
+    % system
     %
     % Parameters:
-    %  varargin: the name-value pairs (or struct) of the system
-    %  parameters
+    %  params (repeatable): the parameter variables
     
-    params = struct(varargin{:});
+    arguments
+        obj DynamicalSystem        
+    end
     
-    assert(all(cellfun(@(x)isa(x,'SymVariable'),struct2cell(params))), ...
-        'The parameter fields must be a SymVariable object.');
+    arguments (Repeating)
+        params ParamVariable
+    end
     
-    new_params = fieldnames(params);
     
-    for i=1:length(new_params)
-        new_param = new_params{i};
+    for i=1:length(params)
+        name = params{i}.Name;
         
-        assert(isempty(regexp(new_param, '\W', 'once')) || ~isempty(regexp(new_param, '\$', 'once')),...
-            'Invalid symbol string, can NOT contain special characters.');
-        
-        assert(isempty(regexp(new_param, '_', 'once')),...
-            'Invalid symbol string, can NOT contain ''_''.');
-        
-        assert(~isempty(regexp(new_param, '^[a-z]\w*', 'match')),...
-            'First letter must be lowercase character.');
-                    
-        if isfield(obj.Params, new_param)
-            error('The parameter (%s) has been already defined.\n',new_param);
+        if isfield(obj.Params, name)
+            warning('The states (%s) has been already defined.\n',name);
         else
-            obj.Params.(new_param) = params.(new_param);
-            obj.params_.(new_param) = nan(size(params.(new_param)));
+            obj.Params.(name) = params{i};            
+            obj.params_.(name) = params{i}.Value;
         end
     end
+    
+    
 end

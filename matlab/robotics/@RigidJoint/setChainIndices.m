@@ -5,11 +5,9 @@ function obj = setChainIndices(obj, indices)
     % Parameters:
     % indices: the index vector @type rowvec
     
-    assert(isvector(indices) & isequal(fix(indices),indices),...
-        'The indices vector must be a positive integers.');
-    
-    if iscolumn(indices)
-        indices = transpose(indices);
+    arguments
+        obj
+        indices (1,:) double {mustBeVector,mustBeInteger}
     end
     
     obj.ChainIndices = indices;

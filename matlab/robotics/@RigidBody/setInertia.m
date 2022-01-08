@@ -3,8 +3,10 @@ function obj = setInertia(obj, inertia)
     %
     % Parameters:
     % inertia: the inertia matrix @type matrix
+    arguments
+        obj
+        inertia (3,3) double {mustBeReal, mustBeNonNan} = zeros(3)
+    end
     
-    assert(isreal(inertia) && all(size(inertia)==[3,3]),...
-        'The inertia of the link must be a 3x3 positive real matrix.');
     obj.Inertia = inertia;
 end

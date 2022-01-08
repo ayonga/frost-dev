@@ -20,7 +20,7 @@ function Jac = computeBodyJacobian(obj, nDof)
     twists = frame.TwistPairs;
     indices = frame.ChainIndices;
     
-    Jz = eval_math_fun('BodyJacobian',[twists,{obj.gst0}]);
+    Jz = eval_math_fun('BodyJacobian',[twists,{obj.T0}]);
     
     Jac = SymExpression(zeros(6,nDof));
     Jac(:,indices) = Jz;

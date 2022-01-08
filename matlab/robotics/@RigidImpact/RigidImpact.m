@@ -13,10 +13,11 @@ classdef RigidImpact < DiscreteDynamics
     % modification, are permitted only in compliance with the BSD 3-Clause
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
+    properties (Constant, Hidden)
+        g = [0;0;9.81]
+    end
     
     properties 
-        
-        
         % The coordinate relabeling matrix
         %
         % @type matrix
@@ -29,30 +30,10 @@ classdef RigidImpact < DiscreteDynamics
         % The impact constraints (holonomic)
         %
         % @type HolonomicConstraint
-        ImpactConstraints
+        ImpactConstraints    
         
+        PostImpactModel
         
-        
-    
-    end
-    
-    properties (Access=public)
-        
-        % The mass matrix of the RigidLinks object
-        %
-        % @type SymFunction
-        Mmat
-        
-        % The reset map constraint for the joint configuration
-        %
-        % @type SymFunction
-        xMap
-        
-        
-        % The reset map constraint for the joint velocity
-        %
-        % @type cell
-        dxMap
     end
     
     methods
@@ -65,234 +46,61 @@ classdef RigidImpact < DiscreteDynamics
             % model: the RigidLinks model object @type RigidLinks
             % event: the event name of the rigid impact @type char
             
+          
+            
+            obj = obj@DiscreteDynamics(name, 'SecondOrder', event);
+            
             validateattributes(model,{'RobotLinks'},{},...
                 'RigidImpact','model',2);
             
-            if nargin > 2
-                superargs = {'SecondOrder', name, event};
-            else
-                superargs = {'SecondOrder', name};
+            obj.Dimension = model.Dimension;
+            
+            
+            bounds = model.getBounds();
+            
+                        
+            obj.configureSystemStates(bounds.states);
+            
+            v = cell(1,obj.Dimension);
+            vn = cell(1,obj.Dimension);
+            f = cell(1,obj.Dimension);
+            for i = 1:obj.Dimension
+                v{i} = StateVariable(['v',num2str(i)],6);
+                vn{i} = StateVariable(['vn',num2str(i)],6);
+                f{i} = StateVariable(['f',num2str(i)],6,[],[]);
             end
             
-            
-            obj = obj@DiscreteDynamics(superargs{:});
-            
-            validateattributes(model,{'RobotLinks'},{},...
-                'RigidImpact','model',2);
-            
-            obj.ImpactConstraints = struct();
+            obj.addState(v{:},vn{:},f{:});
             
             
-           
-            nx = model.numState;
             
-            x = model.States.x;
-            dx = model.States.dx;
-            label = x.label;
-            xn = SymVariable('xn',[nx,1],label);
-            dxn = SymVariable('dxn',[nx,1],label);
+            obj.ImpactConstraints = model.HolonomicConstraints;
             
-            obj = addState(obj, x, xn, dx, dxn);
+            constrs = fieldnames(obj.ImpactConstraints);
+            for i=1:length(constrs)
+                constr = obj.ImpactConstraints.(constrs{i});
+                f = model.Inputs.(constr.f_name);
+                obj.addInput(f);
+            end
             
-            obj.R = eye(nx);
-            obj.Mmat = model.Mmat;
+            obj.R = eye(obj.Dimension);
+            obj.PostImpactModel = model;
             
-            obj.UserNlpConstraint = @obj.rigidImpactConstraint;
         end
         
-        function obj = set.R(obj, R)
+        function set.R(obj, R)
             
-%             validateattributes(R,{'numeric'},...
-%                 {'2d','size',[obj.numState,obj.numState],'integer'},...
-%                 'RigidImpact','R');
+            validateattributes(R,{'numeric'},...
+                {'2d','size',[obj.Dimension,obj.Dimension],'integer'},...
+                'RigidImpact','R');
             obj.R = R;
         end
         
-        function obj  = configure(obj, load_path)
-            % configure the reset map expression for the rigid impact
-            % object
-            %
-            % Parameters:
-            %  load_path: the path from which the symbolic experssion can
-            %  be load @type char
-            
-            
-            if nargin < 2, load_path = []; end
-            
-            
-            
-            x = obj.States.x;
-            xn = obj.States.xn;
-            dx = obj.States.dx;
-            dxn = obj.States.dxn;
-            
-            cstr_name = fieldnames(obj.ImpactConstraints);
-                
-            % the configuration only depends on the relabeling matrix
-            if ~isempty(load_path)
-                obj.xMap = SymFunction(['xDiscreteMap' obj.Name],[],{x,xn});
-                obj.xMap = load(obj.xMap, load_path);
-                
-                if isempty(cstr_name)
-                    obj.dxMap{1} = SymFunction(['dxDiscreteMap' obj.Name],[],{dx,dxn});
-                    obj.dxMap{1} = load(obj.dxMap{1}, load_path);
-                else
-                    n_cstr = numel(cstr_name);
-                    n_mmat = numel(obj.Mmat);
-                    
-                    
-                    %% impact constraints
-                    cstr = obj.ImpactConstraints;
-                    deltaF = cell(1, n_cstr);
-                    input_name = cell(1,n_cstr);
-                    for i=1:n_cstr
-                        c_name = cstr_name{i};
-                        input_name{i} = cstr.(c_name).InputName;
-                        deltaF{i} = obj.Inputs.ConstraintWrench.(input_name{i});
-                    end
-                    
-                    n_fun = n_mmat + n_cstr;
-                    for i=1:n_fun
-                        f_name = ['dxDiscreteMap' num2str(i) '_' obj.Name];
-                        obj.dxMap{i} = SymFunction(f_name,[],[{dx},{x},{dxn},deltaF]);
-                        obj.dxMap{i} = load(obj.dxMap{i}, load_path);
-                    end
-                    
-                end
-            else
-                obj.xMap = SymFunction(['xDiscreteMap' obj.Name],obj.R*x-xn,{x,xn});
-                
-                
-                
-                % the velocities determined by the impact constraints
-                if isempty(cstr_name)
-                    % by default, identity map
-                    
-                    obj.dxMap{1} = SymFunction(['dxDiscreteMap' obj.Name],obj.R*dx-dxn,{dx,dxn});
-                    
-                else
-                    n_cstr = numel(cstr_name);
-                    n_mmat = numel(obj.Mmat);
-                    %% impact constraints
-                    cstr = obj.ImpactConstraints;
-                    Gvec = cell(1, n_cstr);
-                    deltaF = cell(1, n_cstr);
-                    input_name = cell(1,n_cstr);
-                    for i=1:n_cstr
-                        c_name = cstr_name{i};
-                        input_name{i} = cstr.(c_name).InputName;
-                        Gvec{i} = obj.Gvec.ConstraintWrench.(input_name{i});
-                        deltaF{i} = obj.Inputs.ConstraintWrench.(input_name{i});
-                    end
-                    
-                    % D(q) -> D(q^+)
-                    % D(q^+)*(dq^+ - R*dq^-) = sum(J_i'(q^+)*deltaF_i)
-                    
-                    dx_d = (dxn - obj.R*dx);
-                    for i=1:n_mmat
-                        f_name = ['dxDiscreteMap' num2str(i) '_' obj.Name];
-                        obj.dxMap{i} = SymFunction(f_name,...
-                            ['Normal[SparseArray[' obj.Mmat{i}.s '].SparseArray[' dx_d.s ']]'],[{dx},{x},{dxn},deltaF]);                        
-                    end
-                    for i=1:n_cstr
-                        f_name = ['dxDiscreteMap' num2str(i+n_mmat) '_' obj.Name];
-                        obj.dxMap{i+n_mmat} = SymFunction(f_name,-Gvec{i},[{dx},{x},{dxn},deltaF]);
-                    end
-                    
-                    
-                end
-            end
-        end
         
-        function obj = addImpactConstraint(obj, constr, load_path)
-            % Adds an impact constraint to the rigid impact map
-            %
-            %
-            % Parameters:
-            % constr: the expression of the constraints @type HolonomicConstraint
-            
-            
-            % validate input argument
-            validateattributes(constr, {'HolonomicConstraint'},...
-                {},'RigidImpact', 'ImpactConstraint');
-            
-            n_constr = numel(constr);
-            
-            if nargin < 3
-                load_path = [];
-            end
-            
-            for i=1:n_constr
-                c_obj = constr(i);
-                c_name = c_obj.Name;
-                
-                if isfield(obj.ImpactConstraints, c_name)
-                    error('The impact constraint (%s) has been already defined.\n',c_name);
-                else
-                    
-                    % add virtual constraint
-                    obj.ImpactConstraints.(c_name) = c_obj;
-                    
-                    % add constant parameters
-                    % obj = addParam(obj, c_obj.ParamName, c_obj.Param);
-                    Jh = c_obj.ConstrJac;
-                    if isempty(load_path)
-                        obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh));
-                    else
-                        obj = addInput(obj, 'ConstraintWrench', c_obj.InputName, c_obj.Input, transpose(Jh), 'LoadPath', load_path);
-                    end
-                end
-                
-            end
-            
-            obj  = configure(obj, load_path);
-            
-            
-        end
-        
-        
-        function obj = removeImpactConstraint(obj, name)
-            % Remove impact (holonomic) constraints defined for the system
-            %
-            % Parameters:
-            % name: the name of the constraint @type cellstr
-            
-            assert(ischar(name) || iscellstr(name), ...
-                'The name must be a character vector or cellstr.');
-            if ischar(name), name = cellstr(name); end
-            
-            
-            for i=1:length(name)
-                constr = name{i};
-                
-                if isfield(obj.ImpactConstraints, constr)
-                    c_obj = obj.ImpactConstraints.(constr);
-                    obj.ImpactConstraints = rmfield(obj.ImpactConstraints,constr);
-                    % obj = removeParam(obj,c_obj.ParamName);
-                    obj = removeInput(obj,'ConstraintWrench',c_obj.InputName);
-                else
-                    error('The impact constraint (%s) does not exist.\n',constr);
-                end
-            end
-            
-            obj  = configure(obj);
-        end
         
         
     end
     
-    methods
-        nlp = rigidImpactConstraint(obj, nlp, src, tar, bounds, varargin);
-        
-        
-        [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin);
-        
-        obj = compile(obj, export_path, varargin);
-
-        obj = saveExpression(obj, export_path, varargin);
-        
-        M = calcMassMatrix(obj, x);
-    end
     
 end
 

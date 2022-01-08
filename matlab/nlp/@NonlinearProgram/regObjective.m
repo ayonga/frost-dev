@@ -21,13 +21,13 @@ function [obj] = regObjective(obj, funcs)
             'Each variable must be an object of ''NlpFunction'' class or inherited subclasses');
         
         % remove empty (Dimension==0) objects from the the array
-        funcs = funcs(~cellfun(@(x)x.Dimension==0,funcs));
+        funcs = funcs(~cellfun(@(x)isempty(x.Dimension),funcs));
         % contecate to the variable array
         obj.CostArray = [obj.CostArray; vertcat(funcs{:})];
     
     elseif isa(funcs, 'NlpFunction')
         % remove empty (Dimension==0) objects from the the array
-        funcs = funcs(~arrayfun(@(x)x.Dimension==0,funcs));
+        funcs = funcs(~arrayfun(@(x)isempty(x.Dimension),funcs));
         
         % contecate to the variable array
         obj.CostArray = [obj.CostArray; funcs(:)];
@@ -36,7 +36,7 @@ function [obj] = regObjective(obj, funcs)
         % convert table content to an array
         funcs = transpose(table2array(funcs));
         % remove empty (Dimension==0) objects from the the array
-        funcs = funcs(~arrayfun(@(x)x.Dimension==0,funcs));
+        funcs = funcs(~arrayfun(@(x)isempty(x.Dimension),funcs));
         
         % contecate to the variable array
         obj.CostArray = [obj.CostArray; funcs(:)];

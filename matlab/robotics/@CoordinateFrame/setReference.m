@@ -9,5 +9,5 @@ function obj = setReference(obj, ref)
     obj.Reference = ref;
     
     % update the homogeneous transformation matrix
-    obj.computeHomogeneousTransform();
+    obj.updateTransform();
 end

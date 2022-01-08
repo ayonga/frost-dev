@@ -1,26 +1,30 @@
-function obj = addEvent(obj, constr)
-    % Adds event function for the dynamical system states and inputs
+function obj = addEvent(obj, events)
+    % Adds event function for the dynamical system 
     %
     % Parameters:   
-    %  constr: the event function @type UnilateralConstraint
+    %  events: the event function @type EventFunction
 
-    % validate input argument
-    validateattributes(constr, {'UnilateralConstraint'},...
-        {},'ContinuousDynamics', 'EventFuncs');
+    arguments
+        obj ContinuousDynamics
+    end
+    arguments (Repeating)
+        events EventFunction
+    end
     
-    n_constr = numel(constr);
+    if isempty(events)
+        return;
+    end
     
-    for i=1:n_constr
-        c_obj = constr(i);
-        c_name = c_obj.Name;
+    n_events = numel(events);
     
-        if isfield(obj.EventFuncs, c_name)
-            error('The Event condition (%s) has been already defined.\n',c_name);
+    for i=1:n_events
+        event = events{i};
+        event_name = event.Name;
+    
+        if isfield(obj.EventFuncs, event_name)
+            warning('The Event condition (%s) has been already defined.\n',event_name);
         else
-            assert(c_obj.Dimension==1,'Each event function must be a scalar unilateral constraint function.');
-            % add event function
-            obj.EventFuncs.(c_name) = c_obj;
-            
+            obj.EventFuncs.(event_name) = event;
         end
     
     end

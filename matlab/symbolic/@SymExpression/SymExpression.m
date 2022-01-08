@@ -25,6 +25,20 @@ classdef SymExpression < handle
         s
     end
     
+    properties (Dependent)
+        Dimension
+        
+        Expression
+    end
+    
+    methods
+        function dim = get.Dimension(obj)
+            dim = dimension(obj);
+        end
+        function s = get.Expression(obj)
+            s = eval_math([obj.s]);
+        end
+    end
     
     methods
         
@@ -44,52 +58,53 @@ classdef SymExpression < handle
             end
             
             
-            opts = struct(varargin{:});
-            if isfield(opts,'DelayedSet')
-                if opts.DelayedSet == true
-                    delayed_set = true;
-                elseif opts.DelayedSet == false
-                    delayed_set = false;
-                else
-                    error('A logical value is expected.');
-                end
-            else
-                delayed_set = false;
-            end
+            %             opts = struct(varargin{:});
+            %             if isfield(opts,'DelayedSet')
+            %                 if opts.DelayedSet == true
+            %                     delayed_set = true;
+            %                 elseif opts.DelayedSet == false
+            %                     delayed_set = false;
+            %                 else
+            %                     error('A logical value is expected.');
+            %                 end
+            %             else
+            %                 delayed_set = false;
+            %             end
             
             
             
             
             
             if ~isa(x, 'SymExpression')
-                if isempty(x)
-                    obj.f = '{}';
-                else
-                    switch class(x)
-                        case 'char'
-                            obj.f = general2math(x,'ConvertString',false);
-                        case 'string'
-                            obj.f = general2math(x,'ConvertString',true);
-                        case 'double'
-                            
-                            obj.f = general2math(x);
-                        case 'cell'
-                            obj.f = general2math(x,'ConvertString',false);
-                        case 'struct'
-                            obj.f = general2math(x,'ConvertString',true);
-                        otherwise
-                            error('SymExpression:invalidInputType',...
-                                'Invalid input argument data type.');
-                    end
+                %                 if isempty(x)
+                %                     obj.f = '{}';
+                %                 else
+                switch class(x)
+                    case 'char'
+                        obj.f = general2math(x,'ConvertString',false);
+                    case 'string'
+                        obj.f = general2math(x,'ConvertString',true);
+                    case 'double'
+                        
+                        obj.f = general2math(x);
+                    case 'cell'
+                        obj.f = general2math(x,'ConvertString',false);
+                    case 'struct'
+                        obj.f = general2math(x,'ConvertString',true);
+                    otherwise
+                        error('SymExpression:invalidInputType',...
+                            'Invalid input argument data type.');
                 end
+                %                 end
                 obj.s = eval_math('Unique[symvar$]');
-                if delayed_set
-                    % delayed set the formula to the symbol
-                    eval_math([obj.s ':=' obj.f ';']);
-                else
-                    % set the formula to the symbol
-                    eval_math([obj.s '=' obj.f ';']);
-                end
+                %                 if delayed_set
+                %                     % delayed set the formula to the symbol
+                %                     eval_math([obj.s ':=' obj.f ';']);
+                %                 else
+                %                     % set the formula to the symbol
+                %                     eval_math([obj.s '=' obj.f ';']);
+                %                 end
+                eval_math([obj.s '=' obj.f ';']);
             else
                 obj.f = formula(x);
                 obj.s = x.s;
@@ -105,14 +120,10 @@ classdef SymExpression < handle
         function delete(~)
             % object destruction function
             
-            %             eval_math([obj.s '=.;']);
+            %             eval_math(['Clear[',obj.s,'];']);
         end
         
-        function display(obj, namestr) %#ok<INUSD,DISPLAY>
-            % Display the symbolic expression
-            
-            eval_math([obj.s])
-        end
+        
         
         function y = argnames(~)
             % Symbolic function input variables
@@ -151,10 +162,39 @@ classdef SymExpression < handle
             
             
             
-            y = max(size(A));
+            y = max(dimension(A));
         end
         
         function varargout = size(A)
+            if isempty(A.s)
+                y = [0,0];
+            else
+                ret = eval_math(['Dimensions[',A.s,']']);
+            
+                y = cellfun(@(x)x, eval(ret));
+                
+                if isempty(y)
+                    y = [1, 1];
+                elseif isscalar(y) && y~=0
+                    y = [1, y];
+                elseif y == 0
+                    y = [0, 0];
+                end
+            end
+            
+            
+            if nargout == 0
+                varargout{1} = y;
+            elseif nargout == 1
+                varargout{1} = y;
+            else
+                varargout = num2cell(ones(1,nargout));
+                varargout([1:numel(y)]) = num2cell(y);
+            end
+            
+        end
+        
+        function varargout = dimension(A,d)
             % The size of the symbolic expression tensor
             %
             % @see NUMEL, LENGTH
@@ -178,8 +218,9 @@ classdef SymExpression < handle
                 end
             end
             
-            
-            
+            if nargin > 1
+                y = y(d);
+            end
             
             if nargout == 0
                 varargout{1} = y;
@@ -189,6 +230,8 @@ classdef SymExpression < handle
                 varargout = num2cell(ones(1,nargout));
                 varargout([1:numel(y)]) = num2cell(y);
             end
+            
+            
         end
         
         function status = islist(A)
@@ -606,7 +649,7 @@ classdef SymExpression < handle
                             
                         else
                             for i=1:numel(ids)
-                                [n,m] = ind2sub(size(L),ids(i));
+                                [n,m] = ind2sub(dimension(L),ids(i));
                                 sstr = [L.s,'[[',num2str(n),',', num2str(m),']]'];
                                 eval_math([sstr '= ' general2math(R(i)) ';']);
                             end
@@ -633,7 +676,7 @@ classdef SymExpression < handle
                     sstr = [L.s,'[[',ind{1},',',ind{2},']]'];
                     eval_math([sstr '=' B.s]); 
                 otherwise
-                    error('SymExpression:subsref', ...
+                    error('SymExpression:subsasgn', ...
                         'Not a supported subscripted reference.');
             end
             % create a new object with the evaluated string
@@ -740,7 +783,7 @@ classdef SymExpression < handle
             % Convert inputs to SymExpression
             x = SymExpression(x);
             
-            sz = size(x);
+            sz = dimension(x);
             k = varargin{1};
             n = varargin{2};
             if n < length(sz) && k==n

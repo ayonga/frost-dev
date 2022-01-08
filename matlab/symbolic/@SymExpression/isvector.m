@@ -4,7 +4,7 @@ function y = isvector(X)
     % Convert inputs to SymExpression
     % X = SymExpression(X);
     
-    siz = size(X);
+    siz = dimension(X);
     if numel(siz) == 1
         y = true;
     elseif numel(siz)==2 && (siz(1)==1 || siz(2)==1)

@@ -14,16 +14,6 @@ classdef TrajectoryOptimization < NonlinearProgram
     % license, see
     % http://www.opensource.org/licenses/bsd-license.php
     
-    %% Public properties
-    properties (Access = public)
-    end
-    
-    properties (Hidden, Constant)
-        % The default number of collocation grids
-        %
-        % @type double
-        DefaultNumberOfGrid = 10;
-    end
     
     %% Protected properties
     properties (SetAccess = protected)
@@ -72,7 +62,7 @@ classdef TrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = TrajectoryOptimization(name, plant, num_grid, bounds, varargin)
+        function obj = TrajectoryOptimization(name, plant, num_grid, bounds, options)
             % The constructor function
             %
             % Parameters:
@@ -84,35 +74,39 @@ classdef TrajectoryOptimization < NonlinearProgram
             % NLP variables @type struct
             % varargin: user-defined options for the problem @type varargin
             
-            if nargin > 0
-                name = {name};
-            else
-                name = {};
+            arguments
+                name char {mustBeTextScalar}
+                plant DynamicalSystem
+                num_grid double {mustBeInteger,mustBeNonnegative,mustBeScalarOrEmpty} = 10
+                bounds struct = struct()
+                options.DerivativeLevel {mustBeMember(options.DerivativeLevel, [0,1,2])} = 1
+                options.EqualityConstraintBoundary double {mustBeNonnegative} = 0
+                options.CollocationScheme char {mustBeMember(options.CollocationScheme, {'HermiteSimpson','Trapezoidal','PseudoSpectral'})} = 'HermiteSimpson'
+                options.DistributeParameters logical = false
+                options.DistributeTimeVariable logical = false
+                options.ConstantTimeHorizon (2,1) double {mustBeReal} = nan(2,1)
+                options.SkipConfigure logical = false
             end
             
             % call superclass constructor
-            obj = obj@NonlinearProgram(name{:});
+            sup_opts = struct('DerivativeLevel', options.DerivativeLevel, ...
+                'EqualityConstraintBoundary', options.EqualityConstraintBoundary);
+            sup_opts_cell = namedargs2cell(sup_opts);
+            obj = obj@NonlinearProgram(name, sup_opts_cell{:});
             
             if nargin == 0
                 return;
             end
             
-            % check the type of the plant
-            validateattributes(plant,{'DynamicalSystem'},...
-                {},'TrajectoryOptimization','plant');
+            
             % The dynamical system of interest
             obj.Plant = plant;
             
-            
-            ip = inputParser;
-            ip.addParameter('CollocationScheme','HermiteSimpson',@(x)~isempty(validatestring(x,{'HermiteSimpson','Trapezoidal','PseudoSpectral'})));
-            ip.addParameter('DistributeParameters',true,@(x)validateattributes(x,{'logical'},{}));
-            ip.addParameter('DistributeTimeVariable',true,@(x)validateattributes(x,{'logical'},{}));
-            ip.addParameter('ConstantTimeHorizon',nan(2,1),@(x)validateattributes(x,{'double'},{'real','nonnegative','column','numel',2,'increasing'}));
-            ip.addParameter('DerivativeLevel',1,@(x)validateattributes(x,{'double'},{'scalar','integer','<=',2,'>=',0}));
-            ip.addParameter('EqualityConstraintBoundary',0,@(x)validateattributes(x,{'double'},{'real','nonnegative','<=',1e-2}));
-            ip.parse(varargin{:});
-            obj = obj.setOption(ip.Results);
+            if ~isnan(options.ConstantTimeHorizon)
+                assert(options.ConstantTimeHorizon(1) < options.ConstantTimeHorizon(2), 'The time horizon must be an increasing order');
+                assert(options.ConstantTimeHorizon(1) > 0, 'The time horizon must be positive');
+            end
+            obj = obj.setOption(options);
             
                    
             
@@ -125,15 +119,8 @@ classdef TrajectoryOptimization < NonlinearProgram
             
             
             % the default number of grids
-            N = TrajectoryOptimization.DefaultNumberOfGrid;
-            if nargin > 2
-                if ~isempty(num_grid)
-                    % if non-default number of grids is specified, use that
-                    validateattributes(num_grid,{'double'},...
-                        {'scalar','integer','nonnegative'},...
-                        'TrajectoryOptimization','NumGrid',3);
-                    N = num_grid;
-                end
+            if ~isempty(num_grid)
+                N = num_grid;
             end
             % determine actual number of nodes based on the different
             % collocation scheme
@@ -159,10 +146,8 @@ classdef TrajectoryOptimization < NonlinearProgram
             obj.CostTable   = cell2table(cell(n_node,0),...
                 'RowNames',col_names);
             
-            if nargin > 3
-                if ~isempty(bounds)
-                    obj = configure(obj, bounds);
-                end
+            if ~options.SkipConfigure
+                obj = configure(obj, bounds);
             end
         end
         
@@ -188,7 +173,7 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         %% functions related to NLP variables
         
-        obj = addVariable(obj, label, nodes, varargin);
+        obj = addVariable(obj, nodes, varargin);
         
         obj = removeVariable(obj, label);
         
@@ -204,6 +189,8 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = configureVariables(obj, bounds);
         
+        obj = configureConstraints(obj, bounds, varargin);
+        
         obj = updateVariableBounds(obj, bounds);
         
         obj = updateConstraintBounds(obj, varargin)
@@ -215,7 +202,6 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = addCollocationConstraint(obj);
         
-        obj = addDynamicsConstraint(obj);  
         
 
         obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata);

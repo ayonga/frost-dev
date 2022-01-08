@@ -18,14 +18,14 @@ function [obj] = regVariable(obj, vars)
             'Each variable must be an object of ''NlpVariable'' class');
         
         % remove empty (Dimension==0) objects from the the array
-        vars = vars(~cellfun(@(x)x.Dimension==0,vars));
+        vars = vars(~cellfun(@(x)isempty(x.Dimension),vars));
         % contecate to the variable array
         obj.VariableArray = [obj.VariableArray; vertcat(vars{:})];
     
     elseif isa(vars, 'NlpVariable')
         
         % remove empty (Dimension==0) objects from the the array
-        vars = vars(~arrayfun(@(x)x.Dimension==0,vars));
+        vars = vars(~arrayfun(@(x)isempty(x.Dimension),vars));
         
         % contecate to the variable array
         obj.VariableArray = [obj.VariableArray; vars(:)];
@@ -34,7 +34,7 @@ function [obj] = regVariable(obj, vars)
         % convert table content to an array
         vars = transpose(table2array(vars));
         % remove empty (Dimension==0) objects from the the array
-        vars = vars(~arrayfun(@(x)x.Dimension==0,vars));
+        vars = vars(~arrayfun(@(x)isempty(x.Dimension),vars));
         
         % contecate to the variable array
         obj.VariableArray = [obj.VariableArray; vars(:)];

@@ -13,28 +13,15 @@ function pos = computeCartesianPosition(obj, p)
     % pos: the symbolic expression of the cartesian position
     % @type SymExpression
     
-    if nargin > 1
-        if iscolumn(p)
-            p = p';
-        end
-        % validate if it is a numeric 1x3 vector
-        validateattributes(p, {'numeric'},{'size',[1,3]});
-    else
-        p = [];
+    arguments
+        obj
+        p (3,1) double = zeros(3,1)
     end
     
     % compute the transformation matrix of the origin
     gst = obj.computeForwardKinematics();
-    
-    if ~isempty(p) % if p is given
-        % compute the relative transformation from the current
-        % frame origin
-        g0 = CoordinateFrame.RPToHomogeneous(eye(3),p);
-        % multiply to the transformation matrix to the frame origin
-        g = gst * g0;
-    else
-        g = gst;
-    end
+    g0 = CoordinateFrame.RPToHomogeneous(eye(3),p);
+    g = gst * g0;
     
     pos = CoordinateFrame.RigidPosition(g);
 end

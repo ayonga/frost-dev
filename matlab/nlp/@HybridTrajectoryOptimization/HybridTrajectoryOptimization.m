@@ -44,7 +44,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     %% Public methods
     methods (Access = public)
         
-        function obj = HybridTrajectoryOptimization(name, plant, num_grid, bounds, varargin)
+        function obj = HybridTrajectoryOptimization(name, plant, num_grid, bounds, options)
             % The constructor function
             %
             % Parameters:
@@ -56,29 +56,32 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             % NLP variables @type struct
             % options: user-defined options for the problem @type struct
             
-            if nargin > 0
-                name = {name};
-            else
-                name = {};
+            arguments
+                name char
+                plant HybridSystem
+                num_grid struct
+                bounds struct
+                options.DerivativeLevel {mustBeMember(options.DerivativeLevel, [0,1,2])} = 1
+                options.EqualityConstraintBoundary double {mustBeNonnegative} = 0
+                options.CollocationScheme char {mustBeMember(options.CollocationScheme, {'HermiteSimpson','Trapezoidal','PseudoSpectral'})} = 'HermiteSimpson'
+                options.DistributeParameters logical = false
+                options.DistributeTimeVariable logical = false
+                options.ConstantTimeHorizon (2,1) double {mustBeReal} = nan(2,1)
             end
             
+            sup_opts = struct('DerivativeLevel', options.DerivativeLevel, ...
+                'EqualityConstraintBoundary', options.EqualityConstraintBoundary);
+            sup_opts_cell = namedargs2cell(sup_opts);
             % call superclass constructor
-            obj = obj@NonlinearProgram(name{:});
-            
-            if nargin == 0
-                return;
-            end       
-            
+            obj = obj@NonlinearProgram(name, sup_opts_cell{:});
             
             
             % if non-default options are specified, overwrite the default
             % options.
-            obj.setOption(varargin{:});
-            
-            % check the type of the plant
-            validateattributes(plant,{'HybridSystem'},{},...
-                'HybridTrajectoryOptimization','plant',2);
-            
+            %             obj.setOption(options);
+            options.SkipConfigure = true;
+            opts_cell = namedargs2cell(options);
+                        
             % validate the plant being able to use for a hybrid trajectory
             % optimization
             validateGraph(obj, plant);
@@ -97,7 +100,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             assert(n_edge==n_vertex || n_edge+1==n_vertex);
             n_phase = n_vertex + n_edge;
             
-            phase(n_phase) = TrajectoryOptimization();
+            %             phase(n_phase) = TrajectoryOptimization();
             
             for i=1:n_vertex
                 % node name as the NLP name
@@ -120,8 +123,13 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                 % construct a standard trajectory optimization problem for
                 % the continuous dynamics
                 idx = 2*i-1;
+                if isfield(bounds, node_name)
+                    node_bounds = bounds.(node_name);
+                else
+                    node_bounds = [];
+                end
                 phase(idx) = TrajectoryOptimization(node_name,...
-                    node_system, node_ngrid, [], varargin{:});
+                    node_system, node_ngrid, node_bounds, opts_cell{:});  %#ok<*AGROW>
                 
                 % find the associated edge
                 next = successors(g, i);
@@ -129,8 +137,13 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                     edge = findedge(g,i,next);
                     edge_name = g.Edges.Guard{edge}.Name;
                     edge_system = g.Edges.Guard{edge};
+                    if isfield(bounds, edge_name)
+                        edge_bounds = bounds.(edge_name);
+                    else
+                        edge_bounds = [];
+                    end
                     phase(idx+1) = TrajectoryOptimization(edge_name,...
-                        edge_system, 0, [], varargin{:});
+                        edge_system, 0, edge_bounds, opts_cell{:});
                 end
                 
                 

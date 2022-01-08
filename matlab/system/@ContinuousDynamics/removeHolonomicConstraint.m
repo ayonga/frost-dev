@@ -4,22 +4,36 @@ function obj = removeHolonomicConstraint(obj, name)
     % Parameters:
     % name: the name of the constraint @type cellstr
     
-    assert(ischar(name) || iscellstr(name), ...
-        'The name must be a character vector or cellstr.');
-    if ischar(name), name = cellstr(name); end
+    arguments
+        obj ContinuousDynamics
+    end
+    arguments (Repeating)
+        name char
+    end
     
+    if isempty(name)
+        return
+    end
+    n_constr = numel(name);
+    param_names = cell(1,n_constr);
+    input_names = cell(1,n_constr);
     
-    for i=1:length(name)
+    for i=1:n_constr
         constr = name{i};
         
         if isfield(obj.HolonomicConstraints, constr)
             c_obj = obj.HolonomicConstraints.(constr);
             obj.HolonomicConstraints = rmfield(obj.HolonomicConstraints,constr);
-            obj = removeParam(obj,c_obj.ParamName);
-            obj = removeInput(obj,'ConstraintWrench',c_obj.InputName);
+            param_names{i} = c_obj.p_name;
+            input_names{i} = c_obj.f_name;
         else
             error('The holonomic constraint (%s) does not exist.\n',constr);
         end
     end
+    
+    
+    obj = removeParam(obj,param_names{:});
+    obj = removeInput(obj,input_names{:});
+    
 end
     

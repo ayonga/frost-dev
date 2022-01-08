@@ -12,7 +12,7 @@ classdef NlpVariable < handle
     % http://www.opensource.org/licenses/bsd-license.php
     
     
-    properties (SetAccess = protected)
+    properties (SetAccess=protected)
         % A string that specifies the name of the optimization variable
         %
         % @type char
@@ -26,7 +26,20 @@ classdef NlpVariable < handle
         % inputs 'u'. The 'dimension' specifies the length of this vector.
         %
         % @type integer @default 0
-        Dimension = 0;
+        Dimension 
+        
+        
+        % The lower limit of the optimization variable
+        %
+        % @type colvec
+        LowerBound
+        
+        % The upper limit of the optimization variable
+        %
+        % @type colvec
+        UpperBound
+        
+        
         
         % The typical value of the variable
         %
@@ -41,16 +54,6 @@ classdef NlpVariable < handle
         % @type colvec
         InitialValue
         
-        % The lower limit of the optimization variable
-        %
-        % @type colvec
-        LowerBound
-        
-        % The upper limit of the optimization variable
-        %
-        % @type colvec
-        UpperBound
-        
         % The index of the current variable in an array of NlpVariable
         % objects
         %
@@ -61,7 +64,8 @@ classdef NlpVariable < handle
     
     
     methods
-        function obj = NlpVariable(varargin)
+        
+        function obj = NlpVariable(var, props)
             % The class constructor function
             %
             % Parameters:
@@ -72,68 +76,40 @@ classdef NlpVariable < handle
             %   ub: upper limit @type colvec
             %   x0: a typical value of the variable @type colvec
             
+            arguments
+                var BoundedVariable = BoundedVariable.empty()
+                props.Name char {mustBeValidVariableName}
+                props.Dimension double {mustBeInteger,mustBeNonnegative,mustBeScalarOrEmpty} 
+                props.lb (:,1) double {mustBeReal,mustBeNonNan} = []
+                props.ub (:,1) double {mustBeReal,mustBeNonNan} = []
+                props.x0 (:,1) double {mustBeReal,mustBeNonNan} = []
+            end
             
             % if no input argument, create an empty object
-            if nargin == 0
-                return;
-            end
+            %             if nargin == 0
+            %                 return;
+            %             end
             
-            
-            % update property values using the input arguments
-            % load default values if not specified explicitly
-            
-            argin = struct(varargin{:});
-            % check name type
-            if isfield(argin, 'Name')
-                assert(ischar(argin.Name), 'The name must be a string.');
-            
-                % validate name string
-                assert(isempty(regexp(argin.Name, '\W', 'once')),...
-                    'NlpVariable:invalidNameStr', ...
-                    'Invalid name string, it CANNOT contain special characters.');
+            if ~isempty(var)
+                obj.Name = var.Name;
+                obj.Dimension = prod(var.Dimension);
+                obj.LowerBound = var.LowerBound(:);
+                obj.UpperBound = var.UpperBound(:);
+            else
+                if isfield(props,'Name')
+                    obj.Name = props.Name;
+                end
                 
-                obj.Name = argin.Name;
-            else
-                if ~isstruct(varargin{1})
-                    error('The ''Name'' must be specified in the argument list.');
-                else
-                    error('The input structure must have a ''Name'' field');
+                if isfield(props, 'Dimension')
+                    obj.Dimension = props.Dimension;
                 end
             end
+                
+            
+                        
+            updateProp(obj, 'lb', props.lb, 'ub', props.ub, 'x0', props.x0);
             
             
-            
-            % set the dimension to be 1 by default
-            if isfield(argin, 'Dimension')
-                assert(isscalar(argin.Dimension) && argin.Dimension >=0 ...
-                    && rem(argin.Dimension,1)==0 && isreal(argin.Dimension), ...
-                    'The dimension must be a scalar positive value.');
-                obj.Dimension = argin.Dimension;
-            else
-                if ~isstruct(varargin{1})
-                    error('The ''Dimension'' must be specified in the argument list.');
-                else
-                    error('The input structure must have a ''Dimension'' field');
-                end
-            end
-            
-            % set boundary values
-            if all(isfield(argin, {'ub','lb'}))
-                obj =  setBoundary(obj, argin.lb, argin.ub);
-            elseif isfield(argin, 'lb')
-                obj =  setBoundary(obj, argin.lb, inf);
-            elseif isfield(argin, 'ub')
-                obj =  setBoundary(obj, -inf, argin.ub);
-            else
-                obj =  setBoundary(obj, -inf, inf);
-            end
-            
-            % set typical initial value
-            if isfield(argin, 'x0')
-                obj = setInitialValue(obj, argin.x0);
-            else
-                obj = setInitialValue(obj);
-            end
         end
         
         
@@ -146,12 +122,10 @@ classdef NlpVariable < handle
     
     %% methods defined in external files
     methods
-        obj = setIndices(obj, index);
+        obj = setIndices(obj, index);                
         
-        obj = setBoundary(obj, lowerbound, upperbound);
-        
-        obj = setInitialValue(obj, x);
-        
-        obj = updateProp(obj, varargin);
+        obj = updateProp(obj, prop);
     end
+    
+    
 end

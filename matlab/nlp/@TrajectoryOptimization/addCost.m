@@ -1,4 +1,4 @@
-function obj = addCost(obj, label, nodes, cost_array)
+function obj = addCost(obj, nodes, cost_array, label)
     % Add NLP object functions
     %
     %
@@ -12,10 +12,20 @@ function obj = addCost(obj, label, nodes, cost_array)
     %
     % @note 
     
+    arguments
+        obj
+        nodes
+        cost_array (:,1) NlpFunction        
+        label char = ''
+    end
     
+    if isempty(label)
+        label = cost_array(1).Name;
+    else
+        mustBeValidVariableName(label);
+    end
     
-    
-    cstr_names = obj.CostTable.Properties.VariableNames;
+    cost_names = obj.CostTable.Properties.VariableNames;
     
 %     if ismember(label,cstr_names)
 %         warning('The NLP cost functions (%s) already exist.\n Overwriting the existing cost function.', label);
@@ -28,6 +38,8 @@ function obj = addCost(obj, label, nodes, cost_array)
                 node_list = 1;
             case 'last'
                 node_list = obj.NumNode;
+            case 'terminal'
+                node_list = [1 obj.NumNode];
             case 'except-first'
                 node_list = 2:obj.NumNode;
             case 'except-last'
@@ -43,13 +55,13 @@ function obj = addCost(obj, label, nodes, cost_array)
             otherwise
                 error('Unknown node type.');
         end
+    elseif isnumeric(nodes)
+        mustBeInteger(nodes);
+        mustBeInRange(nodes,1,obj.NumNode);
+        node_list = nodes;
     else
-        if ~isnumeric(nodes)
-            error(['The node must be specified as a list or following supported characters:\n',...
-                '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
-        else
-            node_list = nodes;
-        end
+        error(['The node must be specified as a list of integers or following supported characters:\n',...
+            '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
     end
     
     
@@ -58,21 +70,16 @@ function obj = addCost(obj, label, nodes, cost_array)
         length(cost_array),length(node_list));
     
     % create empty NlpVariable array
-    if isa(cost_array,'NlpFunction')
-        costs = repmat(NlpFunction(),obj.NumNode,1);
-        for j=1:numel(node_list)
-            costs(node_list(j)) = cost_array(j);
-        end
-    elseif isstruct(cost_array)
-        
-        costs = repmat(NlpFunction(),obj.NumNode,1);
-        for j=1:numel(node_list)
-            costs(node_list(j)) = NlpFunction(cost_array(j));
-        end
+    costs = repmat(NlpFunction(),obj.NumNode,1);
+    for j=1:numel(node_list)
+        assert(length(cost_array(j)) == 1,...
+            'The cost function %s must be a scalar function.',...
+            cost_array(j).Name);
+        costs(node_list(j)) = cost_array(j);
     end
     
     % add to the cost function table
-    if ismember(label,cstr_names)
+    if ismember(label,cost_names)
         obj.CostTable.(label)(node_list) = costs(node_list);
     else
         obj.CostTable.(label) = costs;

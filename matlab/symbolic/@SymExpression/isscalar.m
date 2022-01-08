@@ -4,7 +4,7 @@ function y = isscalar(X)
     % Convert inputs to SymExpression
     % X = SymExpression(X);
     
-    siz = size(X);
+    siz = dimension(X);
     
     if prod(siz) == 1
         y = true;

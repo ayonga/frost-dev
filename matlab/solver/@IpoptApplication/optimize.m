@@ -176,6 +176,10 @@ end
             J = sparse(constraint.nzJacRows, constraint.nzJacCols,...
                 J_val, constraint.Dimension, dimVars, constraint.nnzJac);
         end
+        
+        if ~isempty(find(isnan(J), 1))
+            error('NaN detected.');
+        end
     end
     %%
     

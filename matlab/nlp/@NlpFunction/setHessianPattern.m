@@ -28,7 +28,6 @@ function obj = setHessianPattern(obj, hes_sp, sp_form)
     dimDeps = sum([obj.DepVariables.Dimension]);
 
     if isempty(hes_sp)
-        obj.Type = NlpFunction.LINEAR;
         obj.HessPattern.Rows = [];
         obj.HessPattern.Cols = [];
     else

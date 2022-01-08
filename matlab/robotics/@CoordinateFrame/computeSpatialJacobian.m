@@ -20,7 +20,7 @@ function Jac = computeSpatialJacobian(obj, nDof)
     twists = frame.TwistPairs;
     indices = frame.ChainIndices;
     
-    Jz = eval_math_fun('SpatialJacobian',[twists,{obj.gst0}]);
+    Jz = eval_math_fun('SpatialJacobian',[twists,{obj.T0}]);
     
     Jac = SymExpression(zeros(6,nDof));
     Jac(:,indices) = Jz;

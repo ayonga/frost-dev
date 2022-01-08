@@ -43,7 +43,7 @@ classdef Display < handle
             obj.items = containers.Map;
             
             %             for i = 1:length(obj.model.Joints)
-            %                 if i > 1 && all(obj.model.Joints(i).Offset == [0,0,0])
+            %                 if i > 1 && all(obj.model.Joints(i).P == [0,0,0])
             %                     continue; % skip if the joint offset is zero
             %                 end
             %                 name = ['Joint_', obj.model.Joints(i).Name];
@@ -64,16 +64,16 @@ classdef Display < handle
                 if ~ismember(parentName,links) 
                     continue;
                 end
-                if i > 1 && all(obj.model.Joints(i).Offset == [0,0,0])
+                if i > 1 && all(obj.model.Joints(i).P == [0,0,0])
                     continue; % skip if the joint offset is zero
                 end
                 
                 name = ['Link_', parentName, '_to_', obj.model.Joints(i).Name];
                 frame = CoordinateFrame('Name',obj.model.Joints(i).Reference.Name,...
                     'Reference',obj.model.Joints(i).Reference,...
-                    'Offset',[0,0,0],...
+                    'P',[0,0,0],...
                     'R',[0,0,0]);
-                offset = obj.model.Joints(i).Offset;
+                offset = obj.model.Joints(i).P;
                 obj.items(name) = frost.Animator.Cylinder(obj.axs, model, frame, offset, name, varargin{:});
                 
                 

@@ -5,22 +5,30 @@ function obj = setDependentVariable(obj, depvars)
     %  depvars: an array of dependent variables @type
     %  NlpVariables
 
-
-    assert(isa(depvars,'NlpVariable'),...
-        'NlpFunction:incorrectDataType',...
-        'The second argument must be a scalar or an array of NlpVariable objects.\n');
-
-
-    if isa(obj.SymFun,'SymFunction')
-        vars = cellfun(@(x)flatten(x), obj.SymFun.Vars,'UniformOutput',false);        
-        nvar1 = length([vars{:}]);
-        nvar2 = sum([depvars.Dimension]);
-        
-        assert(nvar1 == nvar2,...
-            'The dimensions of the dependent variables do not match.');
+    arguments
+        obj
+        depvars (:,1) NlpVariable
     end
     
-    obj.DepVariables = depvars(:);
+
+    if ~isempty(obj.SymFun)
+        
+        assert(length(depvars) == numel(obj.SymFun.Vars),...
+            'The number of the constant parameters does not match.');
+        
+        nvar1 = cellfun(@(x)length(x), obj.SymFun.Vars);        
+        nvar2 = arrayfun(@(x)x.Dimension, depvars); 
+        
+        for i=1:numel(depvars)
+            
+            assert(nvar1(i) == nvar2(i),...
+                'The dimension of the %d-th dependent variable does not match.',i);
+        end
+        
+        
+    end
+    
+    obj.DepVariables = depvars;
 
     
     

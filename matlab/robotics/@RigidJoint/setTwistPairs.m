@@ -2,7 +2,7 @@ function obj = setTwistPairs(obj, dofs, q)
     % set the twist paris of all precedent joints
     %
     % Parameters:
-    % dofs: the array of rigid joints @type RigitJoint
+    % dofs: the array of rigid joints @type RigidJoint
     % q: the symbolic variabls of rigid joints @type SymVariable
     
     assert(length(dofs)==length(q),...
@@ -18,11 +18,7 @@ function obj = setTwistPairs(obj, dofs, q)
     twist_pairs = cell(1,n_paris);
     for i=1:n_paris
         idx = indices(i);
-        twist = dofs(idx).Twist;
-        if isempty(twist)
-            computeTwist(dofs(idx));
-            twist = dofs(idx).Twist;
-        end
+        twist = dofs(idx).SpatialTwistAxis;
         
         t_s = mat2math(twist);
         q_s = char(q(idx));

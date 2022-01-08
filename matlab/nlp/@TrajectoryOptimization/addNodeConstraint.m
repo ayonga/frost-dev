@@ -1,4 +1,4 @@
-function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
+function obj = addNodeConstraint(obj, nodes, func, deps, lb, ub, auxdata)
     % Add NLP constraint function that only depends on variables at a
     % particular node. The input argument ''nodes'' will specify at which
     % nodes the function is defined.
@@ -18,91 +18,68 @@ function obj = addNodeConstraint(obj, func, deps, nodes, lb, ub, type, auxdata)
     % nodes: an indicator of 'first' or 'last' node @type char
     % lb: the lower bound of the constraints @type colvec
     % ub: the upper bound of the constraints @type colvec
-    % type: the type of the constraints (''Linear'' or ''Nonlinear'') @type char
     % auxdata: auxilary constant data to be feed in the function 
     % @type double
     
+    arguments
+        obj        
+        nodes
+        func
+        deps (:,1) cell
+        lb (:,1) double {mustBeReal,mustBeNonNan} = []
+        ub (:,1) double {mustBeReal,mustBeNonNan} = []
+        auxdata cell = {}
+    end
+    
     
     % basic information of NLP decision variables
-    nNode  = obj.NumNode;
     vars   = obj.OptVarTable;
-    if ~iscell(deps), deps = {deps}; end
-    
-    validateattributes(func, {'SymFunction'},{'vector'},...
-        'TrajectoryOptimization.addNodeConstraint','func');
-    
-    if nargin < 7
-        type = 'Nonlinear';
-    end
-
-    if nargin < 8
-        auxdata = [];
-    else
-        if ~isempty(auxdata)
-            if ~iscell(auxdata), auxdata = {auxdata}; end
-        else
-            auxdata = [];
-        end
-    end
-    
-    
-    
     
     if ischar(nodes)
         switch nodes
             case 'first'
-                node_list = 1;    
+                node_list = 1;
             case 'last'
-                node_list = nNode;
+                node_list = obj.NumNode;
             case 'terminal'
-                node_list = [1 nNode];
+                node_list = [1 obj.NumNode];
             case 'except-first'
-                node_list = 2:nNode;
+                node_list = 2:obj.NumNode;
             case 'except-last'
-                node_list = 1:nNode-1;
+                node_list = 1:obj.NumNode-1;
             case 'except-terminal'
-                node_list = 2:nNode-1;
+                node_list = 2:obj.NumNode-1;
             case 'all'
-                node_list = 1:nNode;
+                node_list = 1:obj.NumNode;
             case 'cardinal'
-                node_list = 1:2:nNode;
+                node_list = 1:2:obj.NumNode;
             case 'interior'
-                node_list = 2:2:nNode-1;
+                node_list = 2:2:obj.NumNode-1;
             otherwise
                 error('Unknown node type.');
         end
+    elseif isnumeric(nodes)
+        mustBeInteger(nodes);
+        mustBeInRange(nodes,1,obj.NumNode);
+        node_list = nodes;
     else
-        if ~isnumeric(nodes)
-            error(['The node must be specified as a list or following supported characters:\n',...
-                '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
-        else
-            node_list = nodes;
-        end
+        error(['The node must be specified as a list of integers or following supported characters:\n',...
+            '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
     end
     
-    eq_index = (lb==ub); % upper/lower bounds are the same
-    % relax the lower bound
-    lb(eq_index) = lb(eq_index) - obj.Options.EqualityConstraintBoundary;
-    % relax the upper bound
-    ub(eq_index) = ub(eq_index) + obj.Options.EqualityConstraintBoundary;
+       
     
     n_node = numel(node_list);
-    cstr(n_node) = struct();
-    [cstr.lb] = deal(lb);
-    [cstr.ub] = deal(ub);
-    [cstr.Type] = deal(type);
-    [cstr.Name] = deal(func.Name);
-    [cstr.SymFun] = deal(func);
-    [cstr.AuxData] = deal(auxdata);
+    constr = repmat(NlpFunction(),n_node,1);
     for i=1:n_node
         idx = node_list(i);
-        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, idx),deps,'UniformOutput',false);
-        cstr(i).DepVariables = vertcat(dep_vars{:});
+        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, idx),deps,'UniformOutput',false);        
+        constr(i) = NlpFunction(func, [dep_vars{:}], 'lb', lb, 'ub', ub, 'AuxData', auxdata);
     end
     
     
     
-    obj = addConstraint(obj,func.Name,nodes,cstr);
+    obj = addConstraint(obj, node_list, constr);
     
     function var = get_dep_vars(plant, vars, options, x, idx)
         

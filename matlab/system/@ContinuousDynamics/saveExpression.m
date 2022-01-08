@@ -7,16 +7,24 @@ function obj = saveExpression(obj, export_path, varargin)
     %  varargin: variable input parameters @type varargin
     %   ForceExport: force the export @type logical
     
-    % Create export directory if it does not exst
-    if ~exist(export_path,'dir')
-        mkdir(export_path);
-        addpath(export_path);
+    arguments
+        obj 
+        export_path char {mustBeFolder}
     end
+    arguments (Repeating)
+        varargin
+    end
+    
+    % Create export directory if it does not exst
+    %     if ~exist(export_path,'dir')
+    %         mkdir(export_path);
+    %         addpath(export_path);
+    %     end
     
     % export the mass matrix
     if ~isempty(obj.Mmat)
         cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.Mmat,'UniformOutput',false);
-        cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.MmatDx,'UniformOutput',false);
+        %         cellfun(@(x)save_funcs(x,export_path,varargin{:}),obj.MmatDx,'UniformOutput',false);
     end
     
     % export the drift vector
@@ -37,17 +45,18 @@ function obj = saveExpression(obj, export_path, varargin)
         
     end
     
+    
     % export the virtual constraints       
-    v_constrs = fieldnames(obj.VirtualConstraints);
-    if ~isempty(v_constrs)
-        for i=1:length(v_constrs)
-            constr = v_constrs{i};
-            saveExpression(obj.VirtualConstraints.(constr),export_path,varargin{:});
+    events = fieldnames(obj.EventFuncs);
+    if ~isempty(events)
+        for i=1:length(events)
+            event = events{i};
+            saveExpression(obj.EventFuncs.(event),export_path,varargin{:});
         end
         
     end
     
-    saveExpression@DynamicalSystem(obj,export_path,varargin{:});
+    %     saveExpression@DynamicalSystem(obj,export_path,varargin{:});
     
     
     function save_funcs(x, export_path, varargin)        

@@ -28,6 +28,12 @@ classdef RigidJoint < CoordinateFrame
         % @type rowvec
         Axis
         
+        
+        % The twist axis of the joint in the body (joint) frame
+        %
+        % @type rowvec
+        TwistAxis
+        
         % The name of the child link
         %
         % @type char
@@ -56,6 +62,35 @@ classdef RigidJoint < CoordinateFrame
         % @type struct
         Actuator
         
+        % The objects of the following joints
+        %
+        % @type array
+        ChildJoints 
+        
+    end
+    
+    properties (Hidden, SetAccess=public, GetAccess=public)
+        
+        q (1,1) double
+        
+        dq (1,1) double
+        
+        ddq (1,1) double
+        
+        V (6,1) double
+        
+        dV (6,1) double 
+        
+        Vm (6,1) double
+        
+        dVm (6,1) double
+        
+        G (6,6) double  
+        
+        Gm (6,6) double
+        
+        F (6,1) double
+        
     end
     
     properties (Hidden, SetAccess=protected, GetAccess=public)
@@ -65,20 +100,66 @@ classdef RigidJoint < CoordinateFrame
         %
         % @type rowvec
         ChainIndices
-        
-        % The twist from the base frame
-        %
-        % @type rowvec
-        Twist
-        
+                
         % The twist pairs of all precedent joints (coordinate frame)
         %
         % @type SymExpression
         TwistPairs
     end
+    
+    properties (Hidden, Dependent)
+        
+        % The twist axis of the joint in the spatial (world) frame
+        %
+        % @type rowvec
+        SpatialTwistAxis
+        
+    end
+    
+    
+    methods
+        function obj = updateTwistAxis(obj)
+            % returns the twist vector of the rigid joint
+            %
+            %
+            
+            
+            switch obj.Type
+                case 'prismatic'
+                    obj.TwistAxis = transpose([obj.Axis,zeros(1,3)]);
+                case {'revolute','continuous'}
+                    obj.TwistAxis = transpose([zeros(1,3),obj.Axis]);
+                case 'fixed'
+                    obj.TwistAxis = zeros(6,1);
+                otherwise
+                    obj.TwistAxis = nan(6,1);
+            end
+            
+            
+        end
+        
+        function xi_s = get.SpatialTwistAxis(obj)
+            % computes the twist from the base frame
+            %
+            
+            xi_b = obj.TwistAxis;
+            
+            if isempty(obj.T0)
+                error('Please defined the transformation parameters (R,p) first.');
+            else
+                adj = CoordinateFrame.RigidAdjoint(obj.T0);
+                xi_s = transpose(adj*xi_b);
+            end
+            
+        end
+        
+    end
+    
+    
+    
     methods
         
-        function obj = RigidJoint(varargin)
+        function obj = RigidJoint(argin)
             % The class constructor function
             %
             % Parameters:
@@ -92,63 +173,51 @@ classdef RigidJoint < CoordinateFrame
             %    Child: the child link frame @type RigidLink
             %    Limit: the joint physical limits @type struct
             
-            
+            arguments
+                argin.Name char = ''
+                argin.Reference = []
+                argin.P (1,3) double {mustBeReal} = zeros(1,3)
+                argin.R double {mustBeReal} = eye(3)
+                argin.Type char {mustBeMember(argin.Type, {'','prismatic', 'revolute', 'continuous', 'fixed'})} = ''
+                argin.Axis double {mustBeReal} = nan(1,3)
+                argin.Child char = ''
+                argin.Parent char = ''
+                argin.Limit struct = struct()
+                argin.Actuator struct = struct()
+            end
            
-            
+            argin_sup = rmfield(argin,{'Type','Axis','Child','Parent','Limit','Actuator'});
+            argin_cell = namedargs2cell(argin_sup);
             % consruct the superclass object first
-            obj = obj@CoordinateFrame(varargin{:});
-            if nargin == 0
-                return;
-            end
-            argin = struct(varargin{:});
+            obj = obj@CoordinateFrame(argin_cell{:});
+                  
             
-            % validate and assign the joint type
-            if isfield(argin, 'Type') && ~isempty(argin.Type)
-                obj = obj.setType(argin.Type);
-            else
-                error('The joint type is not defined.');
-            end
+            obj.Type = argin.Type;            
+            obj = obj.setAxis(argin.Axis);
+            obj.Child = argin.Child;
+            obj.Parent = argin.Parent;
             
-            % validate and assign the joint axis 
-            if isfield(argin, 'Axis') && ~isempty(argin.Axis)
-                obj = obj.setAxis(argin.Axis);
-            elseif strcmp(obj.Type, 'fixed')
-                obj = obj.setAxis([0,0,1]);
-            else
-                error('The joint rotation axis is not defined.');
-            end
-            
-            
-            % validate and assign the child link
-            if isfield(argin, 'Child') && ~isempty(argin.Child)
-                obj = obj.setChild(argin.Child);
-            else
-                error('The child link is not defined.');
-            end
-            
-            % validate and assign the parent link
-            if isfield(argin, 'Parent') && ~isempty(argin.Parent)
-                obj = obj.setParent(argin.Parent);
-            else
-                error('The parent link is not defined.');
-            end
-            
+                      
             % validate and assign the physical limits
-            if isfield(argin, 'Limit') && ~isempty(argin.Limit)
-                obj = obj.setLimit(argin.Limit);
+            if ~isempty(fieldnames(argin.Limit))
+                limits = namedargs2cell(argin.Limit);
+                obj = obj.setLimit(limits{:});
             else
-                warning('The joint limits are not defined. Using default values.');
+                %                 warning('The joint limits are not defined. Using default values.');
                 default_limit = struct(...
                     'effort',0,...
                     'lower',-inf,...
                     'upper',inf,...
                     'velocity',inf);
-                obj = obj.setLimit(default_limit);
+                %                 display(default_limit);
+                limits = namedargs2cell(default_limit);
+                obj = obj.setLimit(limits{:});
             end
             
             % validate and assign the actuator info
-            if isfield(argin, 'Actuator') && ~isempty(argin.Actuator)
-                obj = obj.setActuator(argin.Actuator);
+            if ~isempty(fieldnames(argin.Actuator))
+                acts = namedargs2cell(argin.Actuator);
+                obj = obj.setActuator(acts{:});
             end
         end
         
@@ -157,23 +226,17 @@ classdef RigidJoint < CoordinateFrame
     %% methods defined in external files
     methods
         obj = setAxis(obj, axis);
+                
+        obj = setLimit(obj, param);
         
-        obj = setType(obj, type);
-        
-        obj = setParent(obj, parent);
-        
-        obj = setChild(obj, child);
-        
-        obj = setLimit(obj, varargin);
-        
-        obj = setActuator(obj, varargin);
+        obj = setActuator(obj, param);
         
         obj = setChainIndices(obj, indices);
-        
-        xi = getTwist(obj);
         
         obj = computeTwist(obj);
         
         obj = setTwistPairs(obj, dofs, q);
+        
+        obj = addChildJoints(obj, joint);
     end
 end

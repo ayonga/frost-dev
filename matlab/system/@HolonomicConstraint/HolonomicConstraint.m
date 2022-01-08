@@ -6,9 +6,9 @@ classdef HolonomicConstraint < handle
     % that equals to constants, i.e., 
     %   h(x) == hd
     %
-    % @author ayonga @date 2017-04-20
+    % @author ayonga @date 2021-12-19
     %
-    % Copyright (c) 2016-2017, AMBER Lab
+    % Copyright (c) 2021, Cyberbotics Lab
     % All right reserved.
     %
     % Redistribution and use in source and binary forms, with or without
@@ -19,32 +19,23 @@ classdef HolonomicConstraint < handle
     
     % properties determined internally
     properties (SetAccess=protected, GetAccess=public)
-       % The dimension of the virtual constraints
+        % The dimension of the virtual constraints
         %
         % @type integer
-        Dimension 
+        Dimension
         
-        % The symbolic representation of constant parameter value 'hd' that
-        % the holonomic constraints associated wtih.
-        %
-        % @type SymVariable
-        Param
         
-        % The symbolic representation of the input variables associated
-        % with the holonomic constraints
+        
+        % The type (FirstOrder or SecondOrder) of the system
         %
-        % @type SymVariable
-        Input
-    end
-    
-    % properties must be determined by the users
-    properties (SetAccess=protected, GetAccess=public)
+        % @type char
+        SystemType
+        
+        
         % The name of the virtual constraints 
         %
         % @type char
         Name
-        
-        
         
         
         % The label of the holonomic constraint
@@ -52,13 +43,17 @@ classdef HolonomicConstraint < handle
         % @type char
         ConstrLabel
         
-        % The highest order of derivatives to enforce the holonomic
-        % constraints. This is the same as the relative degree of a virtual
-        % constraint.
-        % 
-        % @type integer
-        DerivativeOrder
         
+        % The parameter variable 'hd' associated with the
+        % holonomic constraints
+        %
+        % @type ParamVariable
+        Params
+        
+        % The relative degree of the holonomic constraints
+        %
+        % @type StateVariable
+        RelativeDegree
     end
 
     
@@ -78,17 +73,7 @@ classdef HolonomicConstraint < handle
         % @type SymFunction
         ConstrJacDot
         
-        % The name of the parameter variable 'hd' associated with the
-        % holonomic constraints
-        %
-        % @type char
-        ParamName
         
-        % The name othe input variables (external forces, etc.) associated
-        % with the holonomic constraints
-        %
-        % @type char
-        InputName
     end
     
     %% GET methods
@@ -102,34 +87,11 @@ classdef HolonomicConstraint < handle
         function jacdot = get.ConstrJacDot(obj)
             jacdot = obj.dJh_;
         end
-        function name = get.ParamName(obj)
-            name = ['p' obj.Name];
-        end
-        function name = get.InputName(obj)
-            name = ['f' obj.Name];
-        end
-        function name = get.h_name(obj)
-            name = ['h_' obj.Name '_' obj.Model.Name];
-        end
         
-        function name = get.Jh_name(obj)
-            name = ['Jh_' obj.Name '_' obj.Model.Name];
-        end
         
-        function name = get.dJh_name(obj)
-            name = ['dJh_' obj.Name '_' obj.Model.Name];
-        end
-        
-        function name = get.dh_name(obj)
-            name = ['dh_' obj.Name '_' obj.Model.Name];
-        end
-        
-        function name = get.ddh_name(obj)
-            name = ['ddh_' obj.Name '_' obj.Model.Name];
-        end
     end
     
-    properties (Dependent)
+    properties (SetAccess=protected, GetAccess=public)
         
         h_name
         
@@ -140,13 +102,13 @@ classdef HolonomicConstraint < handle
         dJh_name
         
         ddh_name
+        
+        p_name
+        
+        f_name
     end
     
     properties (Access = protected)
-        % The dynamical system model
-        %
-        % @type DynamicalSystem
-        Model
         
         
         % The holonomic constraint expression
@@ -188,107 +150,79 @@ classdef HolonomicConstraint < handle
     
     methods
         
-        function obj = HolonomicConstraint(model, h, name, varargin)
+        function obj = HolonomicConstraint(name, expr, model, options)
             % The class constructor function
             %
-            % Parameters:
-            % model: the dynamical system model in which the virtual
-            % constraints are defined @type DynamicalSystem
-            % h: the symbolic expression of the constraints
+            % Parameters:            
             % name: the name of the virtual constraints @type char
-            % @type SymExpression
-            % varargin: optional parameters. In details
+            % expr: the symbolic expression of the constraints
+            % model: the dynamical system model in which the unilateral
+            % constraints are defined @type DynamicalSystem
+            % options: name-value paired optional parameters. In details
             %  ConstrLabel: labels for constraints @type cellstr
             %  Jacobian: the custom Jacobian matrix @type SymExpression
-            %  DerivativeOrder: the degree of holonomic constraints 
-            %  @type integer
+            %  LoadPath: the path from which to load the symbolic
+            %  expressions from @type char
+            %  RelativeDegree: the relative degree of the constraints @type
+            %  integer
             
-            
-            
-            if nargin == 0
-                return;
+            arguments
+                name char {HolonomicConstraint.validateName(name)}
+                expr (:,1) SymExpression {mustBeVector}
+                model ContinuousDynamics 
+                options.ConstrLabel (:,1) cell
+                options.Jacobian (:,:) SymExpression 
+                options.LoadPath char = ''
+                options.RelativeDegree {mustBeMember(options.RelativeDegree,[1,2])} 
             end
             
-            % validate (model) argument
-            validateattributes(model, {'ContinuousDynamics'},...
-                {'scalar'},...
-                'HolonomicConstraint','model');
-            obj.Model = model;
-            x = model.States.x;           
             
-            % validates (name) argument
-            validateName(obj, name);
+            
+            
             obj.Name = name;
+            obj.SystemType = model.Type;
             
-            % parse the input options
-            args = struct(varargin{:});
-            assert(isscalar(args),...
-                'The values of optional properties are must be scalar data.');
+            obj.h_name = ['h_' name '_' model.Name];
+            obj.Jh_name = ['Jh_' name '_' model.Name];
+            obj.dh_name = ['dh_' name '_' model.Name];
+            obj.dJh_name = ['dJh_' name '_' model.Name];
+            obj.ddh_name = ['ddh_' name '_' model.Name];
+            obj.p_name = ['p',name];
+            obj.f_name = ['f',name];
             
+            obj.Dimension = length(expr);
             
-            if ~isempty(h)
-                % validate (ya) argument
-                validateattributes(h,{'SymExpression'},...
-                    {'nonempty','vector'},...
-                    'HolonomicConstraint','h');
-                if isrow(h) % convert to column vector if it is a row vector
-                    h = vertcat(h(:));
-                end
-            elseif isfield(args, 'LoadPath') && ~isempty(args.LoadPath)
-                h = SymExpression([]);
-                h = load(h, args.LoadPath, obj.h_name);
-            else
-                error(['Unable to create the HolonomicConstraint object. ',...
-                    'Either the expression is empty or the load path is not specified.'],...
-                    'HolonomicConstraint');
-            end
+            hd = ParamVariable(obj.p_name, [obj.Dimension,1]);
+            obj.Params = hd;
+            obj.h_ = SymFunction(obj.h_name, expr-hd, {model.States.x, hd});
             
-            if isfield(args, 'LoadPath') && ~isempty(args.LoadPath)
-                is_loaded = true;
-            else
-                is_loaded = false;
-            end
-            
-            dim = length(h);
-            obj.Dimension = dim;
-            
-            hd = SymVariable(obj.ParamName, [dim,1]);
-            obj.Param = hd;
-            obj.Input = SymVariable(obj.InputName,[dim,1]);
-            
-            if is_loaded % the loaded expression is h:= h_a - h_d
-                obj.h_ = SymFunction(obj.h_name, h, {x, hd}); 
-            else
-                obj.h_ = SymFunction(obj.h_name, h-hd, {x, hd});
-            end
            
+            if isfield(options, 'Jacobian')
+                obj.setJacobian(options.Jacobian, model);
+            end
             
             % validate and assign the desired outputs
-            if isfield(args, 'ConstrLabel')
-                obj.setConstrLabel(args.ConstrLabel);
+            if isfield(options, 'ConstrLabel')
+                obj.setConstrLabel(options.ConstrLabel);
             end
             
-            if is_loaded
-                Jh = SymFunction(obj.Jh_name, [], {model.States.x});
-                obj.Jh_ = load(Jh,args.LoadPath);
+            if isfield(options, 'RelativeDegree')
+                if strcmp(model.Type,'SecondOrder')
+                    assert(options.RelativeDegree, ['The relative degree of ',... 
+                        'holonomic constraints for a second-order system must be 2.'])
+                end
+                obj.RelativeDegree = options.RelativeDegree;
             else
-                if isfield(args, 'Jacobian')
-                    obj.setJacobian(args.Jacobian);
+                switch model.Type
+                    case 'FristOrder'
+                        obj.RelativeDegree = 1;
+                    case 'SecondOrder'
+                        obj.RelativeDegree = 2;
                 end
             end
             
-            if isfield(args, 'DerivativeOrder')
-                obj.setDerivativeOrder(args.DerivativeOrder);
-            end
             
-            if is_loaded
-                obj.configure(args.LoadPath);
-            else
-                obj.configure();
-            end
-            
-            
-            
+            obj.configure(model, options.LoadPath);
         end
         
         
@@ -303,7 +237,7 @@ classdef HolonomicConstraint < handle
     methods
         
         % configure and compile the holonomic constraints
-        obj = configure(obj, load_path);
+        obj = configure(obj, model, load_path);
         
         % enforce as NLP constraints
         nlp = imposeNLPConstraint(obj, nlp);
@@ -338,11 +272,16 @@ classdef HolonomicConstraint < handle
             
             
             export(obj.h_,export_path, varargin{:});
+            
             export(obj.Jh_,export_path, varargin{:});
             
             if ~isempty(obj.dJh_)
                 export(obj.dJh_,export_path, varargin{:});
             end
+            
+            %             export(obj.dh_,export_path, varargin{:});
+            
+            %             export(obj.ddh_,export_path, varargin{:});
             
         end
         
@@ -350,42 +289,31 @@ classdef HolonomicConstraint < handle
         
         
         % Jacobian matrix
-        function obj = setJacobian(obj, jac)
+        function obj = setJacobian(obj, jac, model)
             % sets the Jacobian matrix of the holonomic constraints if it
             % is provided directly by the users
             %
             % Parameters:
             % jac: the jacobian matrix @type SymExpression
             
-            model = obj.Model;
-            if nargin > 1
-                validateattributes(jac,{'SymExpression'},...
-                    {'2d','size',[obj.Dimension,model.numState]},...
-                    'HolonomicConstraint','Jacobian');
-            else
-                jac = jacobian(obj.h_, model.States.x);
+            arguments
+                obj 
+                jac (:,:) SymExpression
+                model DynamicalSystem
             end
+            
+            %             validateattributes(jac,{'2d','dimension',[obj.Dimension,model.Dimension]},...
+            %                 'HolonomicConstraint','Size:wroingJacobianSize');
+         
+            [nr,nc] = dimension(jac);
+            assert(nr==obj.Dimension || nc==model.Dimension,...
+                'HolonomicConstraint:wrongJacobianSize: The provided jacobian dimension should be (%d x %d).',...
+                obj.Dimension,model.Dimension);
+            
             obj.Jh_ = SymFunction(obj.Jh_name, jac, {model.States.x});
+            
         end
         
-        % RelativeDegree
-        function obj = setDerivativeOrder(obj, degree)
-            % sets the highest derivative order of holonomic constraints in
-            % order to enforce as bilateral constraints of the system
-            % 
-            % Parameters:
-            % degree: derivative order @type integer
-            
-            if degree == 1
-                error('Currently we do not support J(x)dx = 0 type of holonomic constraitns.')
-            end
-            
-            validateattributes(degree, {'double'},...
-                {'nonempty','scalar','positive','integer','>=',1,'<=',2},...
-                'HolonomicConstraint','DerivativeOrder');
-            obj.DerivativeOrder = degree;
-             
-        end
         
         % OutputLabel
         function obj = setConstrLabel(obj, label)
@@ -394,31 +322,29 @@ classdef HolonomicConstraint < handle
             % Parameters:
             % label: the cell array of labels @type cellstr
             
-            validateattributes(label,{'cell'},...
-                {'nonempty','numel',obj.Dimension,'row'},...
-                'HolonomicConstraint','ConstrLabel');
-            cellfun( @(x) validateattributes(...
-                x, {'char'},{}), label);
+            arguments
+                obj 
+                label (1,:) cell {iscellstr(label)}
+            end
             
             obj.ConstrLabel = label;
         end
         
-        
+    end
+    methods (Static)
         % Name
-        function name = validateName(~, name)
-            validateattributes(name, {'char'},...
-                {'nonempty','scalartext'},...
-                'HolonomicConstraint','Name');
-            
-            assert(isempty(regexp(name, '\W', 'once')) || ~isempty(regexp(name, '\$', 'once')),...
-                'HolonomicConstraint:invalidSymbol', ...
-                'Invalid symbol string, can NOT contain special characters.');
+        function validateName(name)
+            arguments
+                name {mustBeValidVariableName}
+            end
             
             assert(isempty(regexp(name, '_', 'once')),...
                 'HolonomicConstraint:invalidSymbol', ...
                 'Invalid symbol string, can NOT contain ''_''.');
             
         end
+        
+        
     end
 end
 

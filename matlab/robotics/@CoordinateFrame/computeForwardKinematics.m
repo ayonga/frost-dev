@@ -16,6 +16,6 @@ function g = computeForwardKinematics(obj)
     
     twists = frame.TwistPairs;
     
-    g = eval_math_fun('ForwardKinematics',[twists,{obj.gst0}]);
+    g = eval_math_fun('ForwardKinematics',[twists,{obj.T0}]);
     
 end

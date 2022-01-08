@@ -21,28 +21,42 @@ function [obj] = regConstraint(obj, funcs)
             'Each variable must be an object of ''NlpFunction'' class or inherited subclasses');
         
         % remove empty (Dimension==0) objects from the the array
-        funcs = funcs(~cellfun(@(x)x.Dimension==0,funcs));
+        funcs = funcs(~cellfun(@(x)isempty(x.Dimension),funcs));
         % contecate to the variable array
-        obj.ConstrArray = [obj.ConstrArray; vertcat(funcs{:})];
+        funcs = vertcat(funcs{:});
     
     elseif isa(funcs, 'NlpFunction')
         % remove empty (Dimension==0) objects from the the array
-        funcs = funcs(~arrayfun(@(x)x.Dimension==0,funcs));
+        funcs = funcs(~arrayfun(@(x)isempty(x.Dimension),funcs));
         
-        % contecate to the variable array
-        obj.ConstrArray = [obj.ConstrArray; funcs(:)];
     elseif istable(funcs)
         
         % convert table content to an array
         funcs = transpose(table2array(funcs));
         % remove empty (Dimension==0) objects from the the array
-        funcs = funcs(~arrayfun(@(x)x.Dimension==0,funcs));
-        
-        % contecate to the variable array
-        obj.ConstrArray = [obj.ConstrArray; funcs(:)];
+        funcs = funcs(~arrayfun(@(x)isempty(x.Dimension),funcs));
         
     else
         error('Unsupported variable type found: %s\n', class(funcs));
     end
     
+    
+    if obj.Options.EqualityConstraintBoundary > 0
+        for i=1:numel(funcs)
+            lb = funcs(i).LowerBound;
+            ub = funcs(i).UpperBound;
+            eq_index = (lb==ub); % upper/lower bounds are the same
+            % relax the lower bound
+            lb(eq_index) = lb(eq_index) - obj.Options.EqualityConstraintBoundary;
+            % relax the upper bound
+            ub(eq_index) = ub(eq_index) + obj.Options.EqualityConstraintBoundary;
+            
+            if ~isempty(eq_index)
+                funcs(i).updateProp('lb',lb,'ub',ub');
+            end
+        end
+    end
+        
+    % contecate to the variable array
+    obj.ConstrArray = [obj.ConstrArray; funcs(:)];
 end

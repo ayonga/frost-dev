@@ -1,17 +1,25 @@
-function obj = addVariable(obj, label, nodes, varargin)
+function obj = addVariable(obj, nodes, varargin)
     % Adds NLP decision variables 
     %
     % Parameters:
-    % label: the label name (column) of the variable @type char
     % nodes: the node list of the variable @type rowvec
     % varargin: variable input arguments for property values non-empty
     % NlpVariables @copydoc NlpVariable::updateProp
     % 
     % @see NlpVariable, removeVariable
     
+    if isa(varargin{1}, 'BoundedVariable')
+        var_obj = varargin{1};
+        label = var_obj.Name;
+        var_props = struct(varargin{2:end});
+    else
+        var_obj = [];
+        var_props = struct(varargin{:});        
+        label = var_props.Name;
+    end
     
     
-    varnames = obj.OptVarTable.Properties.VariableNames;
+    %     varnames = obj.OptVarTable.Properties.VariableNames;
 
     %     if ismember(label,varnames)
     %         warning('The NLP variable (%s) already exists.\n Overwriting the existing NLP variable.', label);
@@ -45,16 +53,23 @@ function obj = addVariable(obj, label, nodes, varargin)
                 '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
         else
             node_list = nodes;
+            assert(max(nodes) <= obj.NumNode, 'The maximum value of the node exceeds the number of nodes available.');
         end
     end
     
     % create empty NlpVariable array
-    var = repmat(NlpVariable(),obj.NumNode,1);
+    vars = repmat(NlpVariable(),obj.NumNode,1);
+    
+    var_props = namedargs2cell(var_props);
     for i=node_list
-        var(i) = NlpVariable(varargin{:});
+        if isempty(var_obj)
+            vars(i) = NlpVariable(var_props{:});
+        else
+            vars(i) = NlpVariable(var_obj, var_props{:});            
+        end
     end
     % add to the decision variable table
-    obj.OptVarTable.(label) = var;
+    obj.OptVarTable.(label) = vars;
     
 
 

@@ -8,13 +8,6 @@ function obj = addCollocationConstraint(obj)
     nNode  = obj.NumNode;
     vars   = obj.OptVarTable;
     plant  = obj.Plant;
-    nState = plant.numState;
-    
-    
-    
-    ceq_err_bound = obj.Options.EqualityConstraintBoundary;
-    
-    
     
     
     
@@ -22,21 +15,15 @@ function obj = addCollocationConstraint(obj)
         case 'HermiteSimpson' % Hermite-Simpson Scheme
             % collocation constraints are enforced at all interior nodes
             node_list = 2:2:nNode-1;
+            n_node = numel(node_list);
             
-            hs_int_x = directCollocation(obj, 'x', plant.States.x, plant.States.dx);
+            hs_int_x = directCollocation(obj, ['x_',plant.Name], plant.Dimension);
             % construct a structure array of collocation constraints
-            int_x_cstr(numel(node_list)) = struct();
-            [int_x_cstr.Name] = deal(hs_int_x.Name);
-            [int_x_cstr.Dimension] = deal(2*nState);
-            [int_x_cstr.lb] = deal(-ceq_err_bound);
-            [int_x_cstr.ub] = deal(ceq_err_bound);
-            [int_x_cstr.SymFun] = deal(hs_int_x);
+            int_x_cstr = repmat(NlpFunction(),n_node,1);
+            
             
             
             if isnan(obj.Options.ConstantTimeHorizon)
-                [int_x_cstr.Type] = deal('Nonlinear');
-                % The number of node being auxilary constant
-                [int_x_cstr.AuxData] = deal({nNode});
                 % specify the dependent variables
                 for i=1:numel(node_list)
                     idx = node_list(i);
@@ -46,51 +33,40 @@ function obj = addCollocationConstraint(obj)
                         node_time = 1;
                     end
                     
-                    int_x_cstr(i).DepVariables = [vars.T(node_time);... % time
+                    dep_vars = [vars.T(node_time);... % time
                         vars.x(idx-1);vars.dx(idx-1);...      % states at previous cardinal node
                         vars.x(idx);vars.dx(idx);...          % states at a interior node
                         vars.x(idx+1);vars.dx(idx+1)];        % states at next cardinal node
-                    
+                    int_x_cstr(i) = NlpFunction(hs_int_x, dep_vars, 'lb', 0, 'ub', 0, 'AuxData', {nNode});
                     
                 end
             else
-                [int_x_cstr.Type] = deal('Linear');
-                % Both the constant time duration and the number of
-                % node being auxilary constants
-                [int_x_cstr.AuxData] = deal({obj.Options.ConstantTimeHorizon, nNode});
                 % specify the dependent variables
                 for i=1:numel(node_list)
                     idx = node_list(i);
                     
-                    int_x_cstr(i).DepVariables = [...
+                    dep_vars = [...
                         vars.x(idx-1);vars.dx(idx-1);...      % states at previous cardinal node
                         vars.x(idx);vars.dx(idx);...         % states at a interior node
                         vars.x(idx+1);vars.dx(idx+1)];        % states at next cardinal node
                     
-                    
+                    int_x_cstr(i) = NlpFunction(hs_int_x, dep_vars, 'lb', 0, 'ub', 0, ...
+                        'AuxData', {obj.Options.ConstantTimeHorizon, nNode});
                     
                 end
             end
             % add to the NLP constraints table
-            obj = addConstraint(obj,'intX','interior',int_x_cstr);
+            obj = addConstraint(obj,'interior',int_x_cstr);
             
             if strcmp(plant.Type,'SecondOrder') 
                 % gets the symbolic expression (function) of the
                 % collocation constraints
-                hs_int_dx = directCollocation(obj, 'dx', plant.States.dx, plant.States.ddx);
-                int_dx_cstr(numel(node_list)) = struct();
-                [int_dx_cstr.Name] = deal(hs_int_dx.Name);
-                [int_dx_cstr.Dimension] = deal(nState*2);
-                [int_dx_cstr.lb] = deal(-ceq_err_bound);
-                [int_dx_cstr.ub] = deal(ceq_err_bound);
-                [int_dx_cstr.SymFun] = deal(hs_int_dx);
+                hs_int_dx = directCollocation(obj, ['dx_',plant.Name], plant.Dimension);
+                int_dx_cstr = repmat(NlpFunction(),n_node,1);
                 
                 
                 
                 if isnan(obj.Options.ConstantTimeHorizon)
-                    % The number of node being auxilary constant
-                    [int_dx_cstr.AuxData] = deal({nNode});
-                    [int_dx_cstr.Type] = deal('Nonlinear');
                     % specify the dependent variables
                     for i=1:numel(node_list)
                         idx = node_list(i);
@@ -100,32 +76,27 @@ function obj = addCollocationConstraint(obj)
                             node_time = 1;
                         end
                         
-                        int_dx_cstr(i).DepVariables = [vars.T(node_time);... % time
+                        dep_vars = [vars.T(node_time);... % time
                             vars.dx(idx-1);vars.ddx(idx-1);...      % states at previous cardinal node
                             vars.dx(idx); vars.ddx(idx);...         % states at a interior node
                             vars.dx(idx+1);vars.ddx(idx+1)];        % states at next cardinal node
-                        
+                        int_dx_cstr(i) = NlpFunction(hs_int_dx, dep_vars, 'lb', 0, 'ub', 0, 'AuxData', {nNode});
                     end
                 else
-                    [int_dx_cstr.Type] = deal('Linear');
-                    % Both the constant time duration and the number of
-                    % node being auxilary constants
-                    [int_dx_cstr.AuxData] = deal({obj.Options.ConstantTimeHorizon, nNode});
                     % specify the dependent variables
                     for i=1:numel(node_list)
                         idx = node_list(i);
-                        
-                        
-                        int_dx_cstr(i).DepVariables = [...
+                        dep_vars = [...
                             vars.dx(idx-1);vars.ddx(idx-1);...      % states at previous cardinal node
                             vars.dx(idx); vars.ddx(idx);...         % states at a interior node
                             vars.dx(idx+1);vars.ddx(idx+1)];        % states at next cardinal node
-                        
+                        int_dx_cstr(i) = NlpFunction(hs_int_dx, dep_vars, 'lb', 0, 'ub', 0, ...
+                            'AuxData', {obj.Options.ConstantTimeHorizon, nNode});
                     end
                 end
                 
                 % add to the NLP constraints table
-                obj = addConstraint(obj,'intXdot','interior',int_dx_cstr);
+                obj = addConstraint(obj,'interior',int_dx_cstr);
             end
                 
             
@@ -135,22 +106,15 @@ function obj = addCollocationConstraint(obj)
             % collocation constraints are enforced at all nodes except
             % the last node
             node_list = 1:1:nNode-1;
+            n_node = numel(node_list);
             
-            
-            tr_int_x = directCollocation(obj, 'x', plant.States.x, plant.States.dx);
+            tr_int_x = directCollocation(obj, ['x_',plant.Name], plant.Dimension);
             % construct a structure array of collocation constraints
-            int_x_cstr(numel(node_list)) = struct();
-            [int_x_cstr.Name] = deal(tr_int_x.Name);
-            [int_x_cstr.Dimension] = deal(nState);
-            [int_x_cstr.lb] = deal(-ceq_err_bound);
-            [int_x_cstr.ub] = deal(ceq_err_bound);
-            [int_x_cstr.SymFun] = deal(tr_int_x);
+            int_x_cstr = repmat(NlpFunction(),n_node,1);
+            
             
             
             if isnan(obj.Options.ConstantTimeHorizon)
-                [int_x_cstr.Type] = deal('Nonlinear');
-                % The number of node being auxilary constant
-                [int_x_cstr.AuxData] = deal({nNode});
                 % specify the dependent variables
                 for i=1:numel(node_list)
                     idx = node_list(i);
@@ -160,49 +124,37 @@ function obj = addCollocationConstraint(obj)
                         node_time = 1;
                     end
                     
-                    int_x_cstr(i).DepVariables = [vars.T(node_time);... % time
+                    dep_vars = [vars.T(node_time);... % time
                         vars.x(idx);vars.dx(idx);...          % states at a interior node
                         vars.x(idx+1);vars.dx(idx+1)];        % states at next cardinal node
-                    
+                    int_x_cstr(i) = NlpFunction(tr_int_x, dep_vars, 'lb', 0, 'ub', 0, 'AuxData', {nNode});
                     
                 end
             else
-                [int_x_cstr.Type] = deal('Linear');
-                % Both the constant time duration and the number of
-                % node being auxilary constants
-                [int_x_cstr.AuxData] = deal({obj.Options.ConstantTimeHorizon, nNode});
                 % specify the dependent variables
                 for i=1:numel(node_list)
                     idx = node_list(i);
                     
-                    int_x_cstr(i).DepVariables = [...
+                    dep_vars = [...
                         vars.x(idx);vars.dx(idx);...         % states at a interior node
                         vars.x(idx+1);vars.dx(idx+1)];        % states at next cardinal node
                     
-                    
+                    int_x_cstr(i) = NlpFunction(tr_int_x, dep_vars, 'lb', 0, 'ub', 0, ...
+                        'AuxData', {obj.Options.ConstantTimeHorizon, nNode});
                     
                 end
             end
             % add to the NLP constraints table
-            obj = addConstraint(obj,'intX','except-last',int_x_cstr);
+            obj = addConstraint(obj,'except-last',int_x_cstr);
             
             if strcmp(plant.Type,'SecondOrder') 
                 % gets the symbolic expression (function) of the
                 % collocation constraints
-                tr_int_dx = directCollocation(obj, 'dx', plant.States.dx, plant.States.ddx);
-                int_dx_cstr(numel(node_list)) = struct();
-                [int_dx_cstr.Name] = deal(tr_int_dx.Name);
-                [int_dx_cstr.Dimension] = deal(nState);
-                [int_dx_cstr.lb] = deal(-ceq_err_bound);
-                [int_dx_cstr.ub] = deal(ceq_err_bound);
-                [int_dx_cstr.SymFun] = deal(tr_int_dx);
-                
+                tr_int_dx = directCollocation(obj, ['dx_',plant.Name], plant.Dimension);
+                int_dx_cstr = repmat(NlpFunction(),n_node,1);
                 
                 
                 if isnan(obj.Options.ConstantTimeHorizon)
-                    % The number of node being auxilary constant
-                    [int_dx_cstr.AuxData] = deal({nNode});
-                    [int_dx_cstr.Type] = deal('Nonlinear');
                     % specify the dependent variables
                     for i=1:numel(node_list)
                         idx = node_list(i);
@@ -212,100 +164,78 @@ function obj = addCollocationConstraint(obj)
                             node_time = 1;
                         end
                         
-                        int_dx_cstr(i).DepVariables = [vars.T(node_time);... % time
+                        dep_vars = [vars.T(node_time);... % time
                             vars.dx(idx); vars.ddx(idx);...         % states at a interior node
                             vars.dx(idx+1);vars.ddx(idx+1)];        % states at next cardinal node
-                        
+                        int_dx_cstr(i) = NlpFunction(tr_int_dx, dep_vars, 'lb', 0, 'ub', 0, 'AuxData', {nNode});
                     end
                 else
-                    [int_dx_cstr.Type] = deal('Linear');
-                    % Both the constant time duration and the number of
-                    % node being auxilary constants
-                    [int_dx_cstr.AuxData] = deal({obj.Options.ConstantTimeHorizon, nNode});
                     % specify the dependent variables
                     for i=1:numel(node_list)
                         idx = node_list(i);
                         
                         
-                        int_dx_cstr(i).DepVariables = [...
+                        dep_vars = [...
                             vars.dx(idx); vars.ddx(idx);...         % states at a interior node
                             vars.dx(idx+1);vars.ddx(idx+1)];        % states at next cardinal node
-                        
+                        int_dx_cstr(i) = NlpFunction(tr_int_dx, dep_vars, 'lb', 0, 'ub', 0,  ...
+                            'AuxData', {obj.Options.ConstantTimeHorizon, nNode});
                     end
                 end
                 
                 % add to the NLP constraints table
-                obj = addConstraint(obj,'intXdot','except-last',int_dx_cstr);
+                obj = addConstraint(obj,'except-last',int_dx_cstr);
                 
             end
             
         case 'PseudoSpectral'
             % PS constraint is only enforced at the single node 
             
-            ps_int_x = directCollocation(obj, 'x', plant.States.x, plant.States.dx);
+            ps_int_x = directCollocation(obj, ['x_',plant.Name], plant.Dimension);
             % construct a structure of the collocation constraint
-            int_x_cstr = struct();
-            int_x_cstr.Name = deal(ps_int_x.Name);
-            int_x_cstr.Dimension = nNode*nState;
-            int_x_cstr.lb = -ceq_err_bound;
-            int_x_cstr.ub = ceq_err_bound;
-            int_x_cstr.SymFun = ps_int_x;
             
             if obj.Options.DistributeTimeVariable
                 warning('There is no need to distribute time variable with PseudoSpectral method. Set ''DistributeTimeVariable'' option to ''false''.');
             end
             if isnan(obj.Options.ConstantTimeHorizon)
-                int_x_cstr.Type = 'Nonlinear';
                 
                 dep_x = [vars.x'; vars.dx'];
-                int_x_cstr.DepVariables = [vars.T(1);... % time
+                dep_vars = [vars.T(1);... % time
                     dep_x(:)]; % states
-                
+                int_x_cstr = NlpFunction(ps_int_x, dep_vars, 'lb', 0, 'ub', 0);
             else
-                int_x_cstr.Type = 'Linear';
-                % Both the constant time duration and the number of
-                % node being auxilary constants
-                int_x_cstr.AuxData = {obj.Options.ConstantTimeHorizon};
                 % specify the dependent variables
                 dep_x = [vars.x'; vars.dx'];
-                int_x_cstr.DepVariables = dep_x(:); % states
+                dep_vars = dep_x(:);
+                int_x_cstr = NlpFunction(ps_int_x, dep_vars, 'lb', 0, 'ub', 0, ...
+                    'AuxData',{obj.Options.ConstantTimeHorizon});
             end
+            
+            
+            
             % add to the NLP constraints table
-            obj = addConstraint(obj,'intX','first',int_x_cstr);
+            obj = addConstraint(obj,'first',int_x_cstr);
             
             if strcmp(plant.Type,'SecondOrder') 
-                % gets the symbolic expression (function) of the
-                % collocation constraints
-                ps_int_dx = directCollocation(obj, 'dx', plant.States.dx, plant.States.ddx);
-                % construct a structure of the collocation constraint
-                int_dx_cstr = struct();
-                int_dx_cstr.Name = deal(ps_int_dx.Name);
-                int_dx_cstr.Dimension = nNode*nState;
-                int_dx_cstr.lb = -ceq_err_bound;
-                int_dx_cstr.ub = ceq_err_bound;
-                int_dx_cstr.SymFun = ps_int_dx;
-                
+                ps_int_dx = directCollocation(obj, ['dx_',plant.Name], plant.Dimension);
                 if obj.Options.DistributeTimeVariable
                     warning('There is no need to distribute time variable with PseudoSpectral method. Set ''DistributeTimeVariable'' option to ''false''.');
                 end
                 if isnan(obj.Options.ConstantTimeHorizon)
-                    int_dx_cstr.Type = 'Nonlinear';
                     
                     dep_dx = [vars.dx'; vars.ddx'];
-                    int_dx_cstr.DepVariables = [vars.T(1);... % time
+                    dep_vars = [vars.T(1);... % time
                         dep_dx(:)]; % states
-                    
+                    int_dx_cstr = NlpFunction(ps_int_dx, dep_vars, 'lb', 0, 'ub', 0);
                 else
-                    int_dx_cstr.Type = 'Linear';
-                    % Both the constant time duration and the number of
-                    % node being auxilary constants
-                    int_dx_cstr.AuxData = {obj.Options.ConstantTimeHorizon};
                     % specify the dependent variables
                     dep_dx = [vars.dx'; vars.ddx'];
-                    int_dx_cstr.DepVariables = dep_dx(:); % states
+                    dep_vars = dep_dx(:); % states
+                    int_dx_cstr = NlpFunction(ps_int_dx, dep_vars, 'lb', 0, 'ub', 0, ...
+                        'AuxData',{obj.Options.ConstantTimeHorizon});
                 end
                 % add to the NLP constraints table
-                obj = addConstraint(obj,'intXdot','first',int_dx_cstr);
+                obj = addConstraint(obj,'first',int_dx_cstr);
             end
         otherwise
             error('Unsupported collocation scheme');

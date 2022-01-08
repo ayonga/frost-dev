@@ -4,12 +4,19 @@ function obj = removeUnilateralConstraint(obj, name)
     % Parameters:
     % name: the name of the constraint @type cellstr
     
-    assert(ischar(name) || iscellstr(name), ...
-        'The name must be a character vector or cellstr.');
-    if ischar(name), name = cellstr(name); end
+    arguments
+        obj ContinuousDynamics
+    end
+    arguments (Repeating)
+        name char
+    end
+    
+    if isempty(name)
+        return
+    end
     
     
-    for i=1:length(name)
+    for i=1:numel(name)
         constr = name{i};
         
         if isfield(obj.UnilateralConstraints, constr)

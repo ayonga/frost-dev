@@ -1,4 +1,4 @@
-function obj = setType(obj, type)
+function obj = setType(obj, type, ax_indices)
     % Sets the contact type
     %
     % Parameters:
@@ -12,7 +12,8 @@ function obj = setType(obj, type)
         'LineContactWithFriction',...
         'LineContactWithoutFriction',...
         'PlanarContactWithFriction',...
-        'PlanarContactWithoutFriction'};
+        'PlanarContactWithoutFriction',...
+        'Custom'};
     
     obj.Type = validatestring(type,valid_types);
     
@@ -42,6 +43,9 @@ function obj = setType(obj, type)
         case 'PlanarContactWithoutFriction'
             % z, roll, pitch,
             obj.WrenchBase = I(:,[3,4,5]);
+        case 'Custom'
+            assert(~isempty(ax_indices),'The indices of contact axes must be given when defining a custom contact.');
+            obj.WrenchBase = I(:,ax_indices);
     end
     
 end

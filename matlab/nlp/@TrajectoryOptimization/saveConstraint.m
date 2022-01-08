@@ -44,11 +44,11 @@ function saveConstraint(obj, constr, export_path, exclude, varargin)
         % SymFunction object associated with.
         
         % first find out non-empty NlpFunction objects
-        constr_array = constr_array(~arrayfun(@(x)x.Dimension==0,constr_array));
+        constr_array = constr_array(~arrayfun(@(x)isempty(x.Dimension),constr_array));
         % then just use the first one
-        deps_array = getSummands(constr_array(1));
+        %         deps_array = getSummands(constr_array(1));
         
-        arrayfun(@(x)save(x.SymFun, export_path, varargin{:}), deps_array, 'UniformOutput', false);
+        arrayfun(@(x)save(x.SymFun, export_path, varargin{:}), constr_array, 'UniformOutput', false);
         
         
     end

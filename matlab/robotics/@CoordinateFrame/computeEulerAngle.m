@@ -12,7 +12,7 @@ function rpy = computeEulerAngle(obj)
     % compute rigid orientation
     Rot = CoordinateFrame.RigidOrientation(gst);
     % compute rigid orientation with initial tool configuration (q = 0)
-    Rot0 = CoordinateFrame.RigidOrientation(obj.gst0);
+    Rot0 = CoordinateFrame.RigidOrientation(obj.T0);
     % compute spatial orientation
     RotW = Rot * transpose(Rot0);
     % compute Euler angles

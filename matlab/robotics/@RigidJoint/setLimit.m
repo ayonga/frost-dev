@@ -1,8 +1,8 @@
-function obj = setLimit(obj, varargin)
+function obj = setLimit(obj, param)
     % set the physical limits of the rigid joints
     %
     % Parameters:
-    % varargin: varaiable input arguments. In detail:
+    % param: name-value pair input arguments. In detail:
     %  effort: the actuation effort @type double
     %  lower: the lower bound of the joint displacement @type double 
     %  upper: the upper bound of the joint displacement @type double 
@@ -14,23 +14,22 @@ function obj = setLimit(obj, varargin)
     %     assert(all(isfield(limit,{'effort','lower','upper','velocity'})),...
     %         'The input struct should have the following fields: \n %s',implode({'effort','lower','upper','velocity'},', '));
     
+    arguments
+        obj
+        param.effort double {mustBeScalarOrEmpty,mustBeReal,mustBeNonnegative} 
+        param.lower double {mustBeScalarOrEmpty,mustBeReal,mustBeNonNan} 
+        param.upper double {mustBeScalarOrEmpty,mustBeReal,mustBeNonNan} 
+        param.velocity double {mustBeScalarOrEmpty,mustBeReal,mustBeNonnegative} 
+    end
     
-    ip = inputParser;
-    ip.addParameter('effort',[],@(x)validateattributes(x,{'double'},{'scalar','real','nonnegative'}));
-    ip.addParameter('lower',[],@(x)validateattributes(x,{'double'},{'scalar','real'}));
-    ip.addParameter('upper',[],@(x)validateattributes(x,{'double'},{'scalar','real'}));
-    ip.addParameter('velocity',[],@(x)validateattributes(x,{'double'},{'scalar','real','nonnegative'}));
-    ip.parse(varargin{:});
-    
-    limit = ip.Results;
     
     if isempty(obj.Limit)
         obj.Limit = struct('effort',[],'lower',[],'upper',[],'velocity',[]);
     end
     fields = fieldnames(obj.Limit);
     for i=1:length(fields)
-        if ~isempty(limit.(fields{i}))
-            obj.Limit.(fields{i}) = ip.Results.(fields{i});
+        if isfield(param, fields{i})
+            obj.Limit.(fields{i}) = param.(fields{i});
         end
     end
     

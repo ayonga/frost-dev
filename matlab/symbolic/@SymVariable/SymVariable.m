@@ -15,7 +15,17 @@ classdef SymVariable < SymExpression
         % @type cellstr
         label
     end
+
+    properties (Dependent)
+        Label
+    end
     
+    methods
+        function l = get.Label(obj)
+            l = obj.label;
+        end
+    end
+        
     
     methods
         
@@ -28,6 +38,7 @@ classdef SymVariable < SymExpression
             % label: the label of the variables @type cellstr
             % 
             % check the number of input arguments
+            
             narginchk(0,3);
             
             
@@ -82,7 +93,7 @@ classdef SymVariable < SymExpression
                             case 0
                                 str = x;
                             case 1
-                                str = eval_math([' Map[Symbol,Table[ToString[', x,...
+                                str = eval_math(['ToMatrixForm@Map[Symbol,Table[ToString[', x,...
                                     ']<>"$"<>ToString[i], {i, ', num2str(n(1)), '}]]']);
                             case 2
                                 str = eval_math([' Map[Symbol,Table[',...
@@ -98,15 +109,19 @@ classdef SymVariable < SymExpression
             end  
             obj = obj@SymExpression(str);
             
-            
-            if nargin == 3
-                obj.setLabel(n, label);                
+            %             obj = tomatrix(obj); % always build column vector object
+            if nargin == 3 && ~isempty(label)
+                obj.setLabel(label);                
             end
         end
         
     end
     
-    methods (Hidden = true)
+    methods
+        obj = setLabel(obj, label);
+    end
+    
+    methods 
         
         function C = subsasgn(L,Idx,R)
             % Subscripted assignment for a sym array.
@@ -120,11 +135,17 @@ classdef SymVariable < SymExpression
             
             %             error('Non implemented for SymExpression class.');
             if length(Idx)>1
-                error('SymExpression objects do not allow nested indexing. Assign intermediate values to variables instead.');
+                error('SymVariable objects do not allow nested indexing. Assign intermediate values to variables instead.');
             end
-            if ~strcmp(Idx.type,'()')
-                error('Invalid indexing assignment.');
+            if strcmp(Idx.type,'{}')
+                error('Brace indexing is not supported for variables of this type.');
             end
+            
+            if strcmp(Idx.type, '.')
+                C = builtin('subsasgn', L, Idx, R);
+                return;
+            end
+            
             if ~isempty(R)
                 B = SymExpression(R);
             end
@@ -151,7 +172,7 @@ classdef SymVariable < SymExpression
                             L.label = subsasgn(L.label,Idx,R);
                         else
                             for i=1:numel(ids)
-                                [n,m] = ind2sub(size(L),ids(i));
+                                [n,m] = ind2sub(dimension(L),ids(i));
                                 sstr = [L.s,'[[',num2str(n),',', num2str(m),']]'];
                                 eval_math([sstr '= ' general2math(R(i)) ';']);
                             end
@@ -178,7 +199,7 @@ classdef SymVariable < SymExpression
                     sstr = [L.s,'[[',ind{1},',',ind{2},']]'];
                     eval_math([sstr '=' B.s]); 
                 otherwise
-                    error('SymExpression:subsref', ...
+                    error('SymExpression:subsasgn', ...
                         'Not a supported subscripted reference.');
             end
             % create a new object with the evaluated string
@@ -211,15 +232,15 @@ classdef SymVariable < SymExpression
             %
             
             
-            % if length(Idx)>1
-            %    error('SymExpression objects do not allow nested indexing. Assign intermediate values to variables instead.');
-            % end
+            %             if length(Idx)>1
+            %                 error('SymVariable objects do not allow nested indexing. Assign intermediate values to variables instead.');
+            %             end
             
             
             switch Idx(1).type
                 case '.'
                     B = builtin('subsref', L, Idx);
-                  
+
                 case '()'
                         
                     
@@ -273,7 +294,7 @@ classdef SymVariable < SymExpression
                 case '{}'
                     % No support for indexing using '{}'
                     error('SymExpression:subsref', ...
-                        'Not a supported subscripted reference.');
+                        'Brace indexing is not supported for variables of this type.');
                 otherwise
                     error('SymExpression:subsref', ...
                         'Not a supported subscripted reference.');

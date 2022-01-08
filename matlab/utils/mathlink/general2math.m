@@ -18,8 +18,8 @@ function [expr] = general2math(x, varargin)
     elseif isnumeric(x)
         if isscalar(x)
             expr = num2mathstr(x,varargin{:});
-        elseif isempty(x)
-            expr = '{}';
+            %         elseif isempty(x)
+            %             expr = '{}';
         else
             expr = mat2math(x, varargin{:});
         end

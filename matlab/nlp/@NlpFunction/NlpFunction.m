@@ -20,28 +20,7 @@ classdef NlpFunction < handle
     
     properties (SetAccess = protected, GetAccess = public)
         
-        % This property specifies whether the function is the linear
-        % function of dependent variables
-        %
-        % @type logical
-        Type
         
-        % An identification of the object
-        %
-        % @type char
-        Name
-        
-        
-        % An array of dependent NLP variables
-        %
-        % @type NlpVariable
-        DepVariables
-                
-        % An array of summand NlpFunctions that are to be summed up to get
-        % the current NLP function
-        %
-        % @type NlpFunction
-        SummandFunctions
         
         % Stores the indices of the function
         %
@@ -156,16 +135,59 @@ classdef NlpFunction < handle
         UpperBound
         
         
+        % An array of dependent NLP variables
+        %
+        % @type NlpVariable
+        DepVariables
+        
+        
         % It gives a quick access to the dimension of the function output
         % without actually evaluating the function
         %
         % @type integer @default 0
-        Dimension = 0
+        Dimension 
+        
+        % An identification of the object
+        %
+        % @type char
+        Name
+    end
+    
+    properties (Dependent)
+        
+        % This property specifies whether the function is the linear
+        % function of dependent variables
+        %
+        % @type logical
+        Type
+    end
+        
+    methods
+        
+        function type = get.Type(obj)
+            
+            if ~isempty(obj.SymFun)
+                f = obj.SymFun;
+                x = vertcat(f.Vars{:});
+                jac = jacobian(f,x);
+                if ~isempty(f.Params)
+                    jac = subs(jac,f.Params,obj.AuxData);
+                end
+                
+                if isempty(symvar(jac))% if jacobian consists of all constant (no symbolic variables)
+                    type = 'Linear';
+                else
+                    type = 'Nonlinear';
+                end
+            else
+                type = 'Nonlinear';
+            end
+        end
     end
     
     
     methods
-        function obj = NlpFunction(varargin)
+        function obj = NlpFunction(func, depvars, props)
             % The class constructor function.
             %
             % Parameters:       
@@ -177,117 +199,61 @@ classdef NlpFunction < handle
             % @attention The 'auxdata' argument must be an 1-dimensional
             % vector of constants.
             
+            arguments
+                func = []
+                depvars (:,1) NlpVariable = NlpVariable.empty()
+                props.lb (:,1) double {mustBeReal,mustBeNonNan} = []
+                props.ub (:,1) double {mustBeReal,mustBeNonNan} = []
+                props.AuxData cell = {}
+            end
+                
                         
             % MATLAB suggests a class must support the no input argument
             % constructor syntax.
-            if nargin == 0
-                return;
-            end
+            %             if nargin == 0
+            %                 return;
+            %             end
             
-            
-            
-            
-            argin = struct(varargin{:});
-            % check name type
-            if isfield(argin, 'Name')
-                obj = setName(obj, argin.Name);
-            else
-                if ~isstruct(varargin{1})
-                    error('The ''Name'' must be specified in the argument list.');
-                else
-                    error('The input structure must have a ''Name'' field');
+            if ~isempty(func)
+                switch class(func)
+                    case 'SymFunction'
+                        mustBeVector(func);
+                        obj.Name = func.Name;
+                        obj.Dimension = length(func);
+                        obj.SymFun = func;
+                        funcs_name = func.Funcs;
+                        funcs_name.Func = func.Name;
+                        obj.Funcs = funcs_name;
+                    case 'struct'
+                        mustBeValidVariableName(func.Name);
+                        obj.Name = func.Name;
+                        mustBeInteger(func.Dimension);
+                        mustBePositive(func.Dimension);
+                        mustBeScalarOrEmpty(func.Dimension);
+                        obj.Dimension = func.Dimension;
+                        funcs_name = rmfield(func,{'Name','Dimension'});
+                        setFuncs(obj, funcs_name);
+                    otherwise
+                        error('The first argument must be a SymFunction object or a struct variable');
                 end
-            end
-            
-            if isfield(argin, 'Type')
-                if ~isempty(argin.Type)
-                    obj = setType(obj, argin.Type);
-                end
-            end            
-            
-            if isfield(argin, 'Dimension')
-                if ~isempty(argin.Dimension)
-                    obj = setDimension(obj, argin.Dimension);
-                end
-            end
-            
-            if isfield(argin, 'DepVariables')
-                if ~isempty(argin.DepVariables)
-                    obj = setDependentVariable(obj, argin.DepVariables);
-                end
-            end
-            
-            if isfield(argin, 'Funcs')
-                if ~isempty(argin.Funcs)
-                    obj = setFuncs(obj, argin.Funcs);
-                end
-            end
-            
-            if isfield(argin, 'SymFun')
-                if isa(argin.SymFun,'SymFunction')
-                    obj = setSymFun(obj, argin.SymFun);
-                end                
+                
             end
             
             
-            % set boundary values
-            if all(isfield(argin, {'ub','lb'}))
-                obj =  setBoundary(obj, argin.lb, argin.ub);
-            elseif isfield(argin, 'lb')
-                obj =  setBoundary(obj, argin.lb, inf);
-            elseif isfield(argin, 'ub')
-                obj =  setBoundary(obj, -inf, argin.ub);
-            else
-                obj =  setBoundary(obj, -inf, inf);
+            if ~isempty(depvars)
+                obj = setDependentVariable(obj, depvars);
             end
+         
             
             
-            if isfield(argin, 'AuxData')
-                if ~isempty(argin.AuxData)
-                    obj = setAuxdata(obj, argin.AuxData);
-                end
-            end
             
-            if isfield(argin, 'Summand')
-                if ~isempty(argin.Summand)
-                    obj = setSummands(obj, argin.Summand);
-                end
-            end
+            props_cell = namedargs2cell(props);
+            % set properties
+            updateProp(obj, props_cell{:});
+            
         end
         
-        function funcs = getSummands(obj)
-            % Returns the object of the dependent function
-            %
-            % For most of the function object, the dependent object is
-            % itself.
-            %
-            % Return values: 
-            % funcs: the summand function objects @type NlpFunction
-            
-            if isempty(obj.SummandFunctions)
-                funcs = obj;
-            else
-                funcs = arrayfun(@(x)getSummands(x), obj.SummandFunctions,...
-                    'UniformOutput', false);
-                funcs = vertcat(funcs{:});
-            end
-            
-        end
-
-        function obj = setSummands(obj, summands)
-            % Sets dependent objects of the Nlp Function
-            %
-            % Parameters:
-            % summands: the summand function objects @type NlpFunction
-            
-            
-            if ~isa(summands,'NlpFunction')
-                error('NlpFunctionSum:invalidObject', ...
-                    'There exist non-NlpFunction objects in the dependent functions list.');
-            end
-            
-            obj.SummandFunctions = summands(:);
-        end
+       
         
         function indices = getDepIndices(obj)
             % Returns the indices of the dependent variables
@@ -309,9 +275,6 @@ classdef NlpFunction < handle
     %% methods defined in external files
     methods
     
-        obj = setName(obj, name);
-        
-        obj = setType(obj, type);
         
         obj = setAuxdata(obj, auxdata);
         
@@ -323,19 +286,15 @@ classdef NlpFunction < handle
         
         obj = setDependentVariable(obj, depvars);
         
-        obj = setBoundary(obj, lowerbound, upperbound);
         
-        obj = updateProp(obj, varargin);
+        obj = updateProp(obj, props);
         
         val = checkFuncs(obj, x, derivative_level);
         
-        obj = setDimension(obj, dim);
         
         obj = setFuncIndices(obj, index);
         
         obj = setFuncs(obj, funcs);
-        
-        obj = setSymFun(obj, symfun);
-        
+                
     end
 end

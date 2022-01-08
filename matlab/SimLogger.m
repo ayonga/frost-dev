@@ -3,9 +3,9 @@ classdef SimLogger < handle & matlab.mixin.Copyable
     % simulation process. 
     %
     %
-    % @author Ayonga Hereid @date 2016-09-26
+    % @author Ayonga Hereid @date 2021-12-24
     %
-    % Copyright (c) 2016, AMBER Lab
+    % Copyright (c) 2021, Cyberbotics Lab
     % All right reserved.
     %
     % Redistribution and use in source and binary forms, with or without

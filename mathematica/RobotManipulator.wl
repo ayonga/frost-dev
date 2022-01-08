@@ -38,10 +38,6 @@ ComputeBodyJacobians::usage =
 	"ComputeBodyJacobians[{frame1,offset1,rpy1},...,{frame$n,offset$n,rpy$n},nDof] \
 Compute the body jacobian of the point that is rigidly attached to the frame with a given offset."; 
 
-
-
-
-
 ComputeCartesianPositions::usage = 
 	"ComputeCartesianPositions[{frame1,offset1, rpy1},...,{frame$n,offset$n,rpy$n}] computes \
 the 3-dimensional cartesian positions specified by the frames and relative offset vectors";
@@ -205,7 +201,7 @@ InertiaMatrixByLink[robotLink__,nDof_] :=
 		(* compute body jacobians of each link CoM position *)
 		Je = SparseArray[ComputeBodyJacobians[robotLink, nDof]];
 		
-		De = Normal[Dot[SparseArray@Transpose[Je[[1]]],SparseArray[MM[[1]]],Je[[1]]]];
+		De = Normal[Dot[SparseArray@Transpose[Je[[1]]],SparseArray[MM[[1]]],SparseArray@Je[[1]]]];
 
 		Return[De];
 	];
@@ -228,6 +224,8 @@ InertiaMatrix[robotLinks__,nDof_] :=
 	];
 InertiaMatrix::inequal = 
 	"The length of given motor inertia `1` is not equal to the number of joints `2`.";
+
+
 
 ComputeComPosition[robotLinks__] :=
 	Block[{links,linkPos, masses, pcom, i},
@@ -285,7 +283,7 @@ ComputeBodyJacobians[args__,nDof_] :=
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			twist = GetTwist[argList[[i]]]; 
 			(* the relative offset of the point from the origin of the frame (in the frame coordinates). *)
-			gs0   = GetGST0[argList[[i]]];
+			gs0   = GetT0[argList[[i]]];
 			
 			
 			(* initialize the Jacobian with fixed length (ndof) *)
@@ -423,7 +421,7 @@ ComputeSpatialJacobians[args__,nDof_] :=
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			twist = GetTwist[argList[[i]]]; 
 			(* the relative offset of the point from the origin of the frame (in the frame coordinates). *)
-			gs0   = GetGST0[argList[[i]]];
+			gs0   = GetT0[argList[[i]]];
 			
 			
 			
@@ -459,7 +457,7 @@ ComputeForwardKinematics[args__] :=
 			(* a string represents the name of the link on which the point is rigidly attached to.*)
 			twist = GetTwist[argList[[i]]]; 
 			(* the relative offset of the point from the origin of the frame (in the frame coordinates). *)
-			gs0   = GetGST0[argList[[i]]];
+			gs0   = GetT0[argList[[i]]];
 			
 			(* compute forward kinematics *)
 			If[ExtraUtils`EmptyQ[twist], (* the link is the base link *)
@@ -482,13 +480,13 @@ GetInertia[arg_?AssociationQ]:= arg["Inertia"];
 GetMass[arg_?AssociationQ]:= arg["Mass"];
 
 
-GetPosition[arg_?AssociationQ] := Flatten@arg["Offset"];
+GetPosition[arg_?AssociationQ] := Flatten@arg["P"];
 
 
 GetRotationMatrix[arg_?AssociationQ]:= arg["R"];
 
 
-GetGST0[arg_?AssociationQ]:= arg["gst0"];
+GetT0[arg_?AssociationQ]:= arg["T0"];
 
 GetTwist[arg_?AssociationQ]:= arg["TwistPairs"];
 

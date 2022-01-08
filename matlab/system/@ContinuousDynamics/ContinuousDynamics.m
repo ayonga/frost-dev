@@ -4,21 +4,21 @@ classdef ContinuousDynamics < DynamicalSystem
     % It could be either a
     % first order system with the form:
     % \f{eqnarray*}{
-    % Mmat(x)\dot{x}= Fvec(x) + Gvec(x,u)
+    % Mmat(x)\dot{x} + Fvec(x) = Gvec(x)
     % \f}
     % or a second order system with the form:
     % \f{eqnarray*}{
-    % Mmat(x)\ddot{x}= Fvec(x,\dot{x}) + Gvec(x,u)
+    % Mmat(q)\ddot{q} + Fvec(q,\dot{q}) = Gvec(q,u)
     % \f}
     % 
     % Further, if the inputs (u) are affine, the system can be written as
     % either for first order system of the form:
     % \f{eqnarray*}{
-    % Mmat(x)\dot{x}= Fvec(x) + Gmap(x) u
+    % Mmat(x)\dot{x} + Fvec(x) = Gmap(x) u
     % \f}
     % or a second order system of the form:
     % \f{eqnarray*}{
-    % Mmat(x)\ddot{x}= Fvec(x,\dot{x}) + Gmap(x) u
+    % Mmat(x)\ddot{x} + Fvec(x,\dot{x}) = Gmap(x) u
     % \f}
     %    
     %
@@ -46,7 +46,7 @@ classdef ContinuousDynamics < DynamicalSystem
         %
         %
         % @type function_handle
-        PreProcess
+        PreIntegrationCallback 
         
         % pre-process function handle of the object after the simulation 
         %
@@ -54,91 +54,18 @@ classdef ContinuousDynamics < DynamicalSystem
         % params = postPorcess(sys, sol, controller, params, varargin)
         %
         % @type function_handle
-        PostProcess
+        PostIntegrationCallback
         
-        % A handle to a function called by a trajectory optimization NLP to
-        % enforce system specific constraints. 
-        %
-        % @note The function handle should have the syntax:
-        % userNlpConstraint(nlp, bounds, varargin)
+        
+        % function to compute the system dynamics
         %
         % @type function_handle
-        UserNlpConstraint
-    end
-    
-    
-    
-    
-    
-    %%
-    methods
-        function obj = ContinuousDynamics(type, name)
-            % The class construction function
-            %
-            % Parameters:            
-            % type: the type of the system @type char
-            % name: the name of the system @type char
-            
-            if nargin > 1
-                superargs = {type, name};
-            else
-                superargs = {type};
-            end
-            
-            obj = obj@DynamicalSystem(superargs{:});
-            
-            
-            
-            obj.Fvec = cell(0);
-            obj.Mmat = cell(0);
-            obj.MmatDx = cell(0);
-            
-            obj.HolonomicConstraints = struct();
-            obj.UnilateralConstraints= struct();
-            obj.VirtualConstraints = struct();
-            obj.EventFuncs = struct();
-        
-            
-            
-            % do-nothing function handle by default
-            obj.PreProcess = [];
-            obj.PostProcess = [];
-            obj.UserNlpConstraint = [];
-            
-        end
-        
-        
-        function obj = addState(obj, x, dx, ddx)
-            % overload the superclass 'addState' method with fixed state
-            % fields
-            % 
-            % Parameters:
-            % x: the state variables @type SymVariable
-            % dx: the first order derivative of state variables @type SymVariable
-            % ddx: the second order derivative of state variables @type SymVariable
-            
-            if strcmp(obj.Type,'FirstOrder')
-                obj = addState@DynamicalSystem(obj,'x',x,'dx',dx);
-            elseif strcmp(obj.Type, 'SecondOrder')
-                obj = addState@DynamicalSystem(obj,'x',x,'dx',dx,'ddx',ddx);
-            else
-                error('Please define the type of the system first.');
-            end
-        
-        end
-        
+        calcDynamics
         
     end
     
     %%
     properties (SetAccess=protected)
-        
-        
-        % The flow (trajectory) from the dynamical system simulation
-        %
-        % @type struct
-        Flow
-        
         
         
         % The mass matrix Mmat(x) 
@@ -161,18 +88,14 @@ classdef ContinuousDynamics < DynamicalSystem
         % The holonomic constraints of the dynamical system
         %
         % @type struct
-        HolonomicConstraints
+        HolonomicConstraints = struct()
         
         
         % The unilateral constraints of the dynamical system
         %
         % @type struct
-        UnilateralConstraints
+        UnilateralConstraints = struct()
         
-        % The virtual constraints of the dynamical system
-        %
-        % @type struct
-        VirtualConstraints
         
         % The event functions
         %
@@ -181,95 +104,133 @@ classdef ContinuousDynamics < DynamicalSystem
         % them separately.
         %
         % @type struct
-        EventFuncs
+        EventFuncs = struct()
         
     end
     
     
     
-    %% methods defined in external files
-    methods 
+    %%
+    methods
+        function obj = ContinuousDynamics(name, type)
+            % ContinuousDynamics(type, name, ...) construct a
+            % ContinuousDynamics class object
+            %
+            % Parameters:            
+            % name: the name of the system @type char            
+            % dim: the dimension of the configuration space the
+            % system (i.e., degrees of freedom) @type integer            
+            % options.Eventname: the event name associated with the discrete map 
+            % @type char
+            % options.UserNlpConstraint: the function handle to enforce
+            % user-defined NLP constraints @type function_handle
+            
+            arguments
+                name char {mustBeValidVariableName}
+                type char {mustBeMember(type,{'FirstOrder','SecondOrder'})}  
+            end
+            
+            obj = obj@DynamicalSystem(name, type);
+            
+            switch type
+                case 'FirstOrder'
+                    obj.calcDynamics = @(obj,t,x,logger)firstOrderDynamics(obj,t,x,logger);
+                case 'SecondOrder'
+                    obj.calcDynamics = @(obj,t,x,logger)secondOrderDynamics(obj,t,x,logger);
+            end
+        end
         
-        % simulate the dynamical system
-        [sol] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver);
         
-        % check event functions for simulation
-        [value, isterminal, direction] = checkGuard(obj, t, x, controller, params, eventfuncs);
-        
-        % set the mass matrix M(x)
-        obj = setMassMatrix(obj, M);
-        
-        % set the group of drift vector fields F(x) or F(x,dx)
-        obj = setDriftVector(obj, vf);
-        
-        % Append a group of drift vector fields F(x) or F(x,dx)
-        obj = appendDriftVector(obj, vf);
-        
-        % calculate the mass matrix
-        M = calcMassMatrix(obj, x)
-        
-        % calculate the drift vector
-        f = calcDriftVector(obj, x, dx)
-        
-        % get the symbolic expression of the whole drift vector
-        f = getDriftVector(obj)
-        
-        % calculate the dynamical equation
-        [xdot, extra] = calcDynamics(obj, t, x, controller, params, logger);
-        
-        % first order system dynamical equation
-        [xdot, extra] = firstOrderDynamics(obj, t, x, controller, params, logger);
-        
-        % second order system dynamical equation
-        [xdot, extra] = secondOrderDynamics(obj, t, x, controller, params, logger);
-        
-        % compile symbolic expression related to the systems
-        obj = compile(obj, export_path, varargin);        
-        
-        % add event functions
-        obj = addEvent(obj, constr);
-        
-        % remove event functions
-        obj = removeEvent(obj, name);
-        
-        % add holonomic constraints
-        obj = addHolonomicConstraint(obj, constr, load_path);
-        
-        % remove holonomic constraints
-        obj = removeHolonomicConstraint(obj, name);
-        
-        % add unilateral constraints
-        obj = addUnilateralConstraint(obj, constr);
-        
-        % remove unilateral constraints
-        obj = removeUnilateralConstraint(obj, name);
-        
-        % add virtual constraints
-        obj = addVirtualConstraint(obj, constr);
-        
-        % remove virtual constraints
-        obj = removeVirtualConstraint(obj, name);
-        
-        % save the mathematica objects in a file
-        obj = saveExpression(obj, export_path, varargin);
-        
-        % load the mathematica objects from a file
-        obj = loadDynamics(obj, file_path, mmat_names, mmat_ddx_names, vf_names, skip_load_vf);
-        
-        % clear mathematica kernel of all variables
-        obj = clearKernel(obj, varargin);
+        function obj = configureSystemStates(obj, bounds)
+            
+            if isempty(obj.Dimension) || obj.Dimension <= 0
+                error('Failed to configure system states. The system dimension is either undefined or non-positive.');
+            end
+            dim = obj.Dimension;
+            
+            switch obj.Type
+                case 'FirstOrder'
+                    if isfield(bounds,'x')
+                        lb = bounds.x.lb;
+                        ub = bounds.x.ub;
+                    else
+                        lb = [];
+                        ub = [];
+                    end
+                    x = StateVariable('x', dim, lb, ub);
+                    setAlias(x,'Position and Velocity');
+                    
+                    
+                    if isfield(bounds,'dx')
+                        lb = bounds.dx.lb;
+                        ub = bounds.dx.ub;
+                    else
+                        lb = [];
+                        ub = [];
+                    end
+                    dx = StateVariable('dx', dim, lb, ub);
+                    setAlias(dx, 'Velocity and Acceleration');
+                    
+                    
+                    obj.addState(x,dx);
+                    
+                case 'SecondOrder'
+                    
+                    if isfield(bounds,'x')
+                        lb = bounds.x.lb;
+                        ub = bounds.x.ub;
+                    else
+                        lb = [];
+                        ub = [];
+                    end
+                    x = StateVariable('x', dim, lb, ub);
+                    setAlias(x, 'Position');
+                    
+                    
+                    if isfield(bounds,'dx')
+                        lb = bounds.dx.lb;
+                        ub = bounds.dx.ub;
+                    else
+                        lb = [];
+                        ub = [];
+                    end
+                    dx = StateVariable('dx', dim, lb, ub);
+                    setAlias(dx, 'Velocity');
+                    
+                    
+                    if isfield(bounds,'ddx')
+                        lb = bounds.ddx.lb;
+                        ub = bounds.ddx.ub;
+                    else
+                        lb = [];
+                        ub = [];
+                    end
+                    ddx = StateVariable('ddx', dim, lb, ub);
+                    setAlias(ddx, 'Acceleration');
+                    
+                    obj.addState(x,dx,ddx);
+                otherwise
+                    error('Failed to configure system states. The system type is either undefined or incorrect.');
+            end
+            
+        end
         
         
     end
-    %% private properties
-    properties (Hidden, SetAccess=private)
+    
+    
+    methods
+        function set.calcDynamics(obj, func)
+            assert(isa(func,'function_handle'),'The callback function must be a function handle');
+            assert(nargin(func) == 4, 'The callback function must have exactly four (model, t, x, logger) inputs.');
+            %             assert(nargout(func) == 1, 'The callback function must have exactly one (xdot) output');
+            obj.calcDynamics = func;
+        end
         
-        % The left hand side of the dynamical equation: M(x)dx or M(x)ddx
-        %
-        % @type cell
-        MmatDx
-        
-        
+    end
+    
+    methods
+        nlp = imposeNLPConstraint(obj, nlp, varargin);
     end
     
     properties (Access=private, Hidden)
@@ -284,5 +245,30 @@ classdef ContinuousDynamics < DynamicalSystem
         FvecName_
     end
     
+    methods (Static)
+        function validateMassMatrix(obj, M)
+            [nr,nc] = dimension(M);
+            assert(nr==obj.Dimension && nc==obj.Dimension,...
+                'The size of the mass matrix should be (%d x %d).',obj.Dimension,obj.Dimension);
+            x = obj.States.x;
+            assert((length(M.Vars)==1 && M.Vars{1} == x) ,...
+                'The SymFunction (M) must be a function of only the state variable `x`.');
+        end
+        
+        function validateDriftVector(obj, F)
+            [nr,nc] = dimension(F);
+            assert(nr==obj.Dimension && nc==1,...
+                'The size of the drift vector (%s) should be (%d x %d).',F.Name, obj.Dimension, 1);
+            
+            vars = F.Vars;
+            if strcmp(obj.Type,'SecondOrder') % second order system
+                assert(length(vars)==2 && vars{1} == obj.States.x && vars{2}==obj.States.dx,...
+                    'The SymFunction (%s) must be a function of states (x) and (dx).',F.Name);
+            else % first order system
+                assert(length(vars)==1 && vars{1} == obj.States.x,...
+                    'The SymFunction (%s) must be a function of states (x).',F.Name);
+            end
+        end
+    end
 end
 

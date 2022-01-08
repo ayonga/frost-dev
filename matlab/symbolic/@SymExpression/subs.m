@@ -82,8 +82,8 @@ function Y = subs(S,old,new)
                 old_s.s, '->', new_s.s, ...
                 ' |>']);
         elseif isa(old,'SymExpression')
-            siz_o = size(old);
-            siz_n = size(new);
+            siz_o = dimension(old);
+            siz_n = dimension(new);
             
             assert(prod(siz_o) == prod(siz_n),...
                 'The sizes of the second and third argument must be the same.');

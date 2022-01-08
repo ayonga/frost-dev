@@ -13,18 +13,22 @@ function [Jh,dJh] = calcJacobian(obj, x, dx)
     
     
     
-    switch obj.Model.Type
+    switch obj.SystemType
         case 'FirstOrder'
-            if obj.DerivativeOrder == 1
-                Jh = feval(obj.Jh_name, x);
-                dJh = [];
-            else
-                Jh = feval(obj.Jh_name, x);
-                dJh = feval(obj.dJh_name, x);
+            Jh = feval(obj.Jh_name, x);
+            if nargout > 1
+                switch obj.RelativeDegree
+                    case 1
+                        dJh = [];
+                    case 2
+                        dJh = feval(obj.dJh_name, x);
+                end
             end
         case 'SecondOrder'
             Jh = feval(obj.Jh_name, x);
-            dJh = feval(obj.dJh_name, x, dx);
+            if nargout > 1
+                dJh = feval(obj.dJh_name, x, dx);
+            end
     end
     
     

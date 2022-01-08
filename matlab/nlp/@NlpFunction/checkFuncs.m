@@ -51,11 +51,20 @@ function val = checkFuncs(obj, x, derivative_level)
     
     assert(~isempty(j_value),...
         'All-zero Jacobian entries found.');
+    
+    assert(~isnan(f_value),...
+        'NaN value detected in the return value of the function: %s',obj.Name);
+    assert(~isnan(j_value),...
+        'NaN value detected in the jacobian of the function: %s',obj.Name);
+    
+    
     if derivative_level == 2
-        if obj.Type == NlpFunction.LINEAR
+        assert(~isnan(h_value),...
+            'NaN value detected in the jacobian of the function: %s',obj.Name);
+        if strcmp(obj.Type, 'Linear')
             assert(isempty(h_value),...
                 'Non-zero Hessian entries found for the Linear constraints.');
-        elseif obj.Type == NlpFunction.NONLINEAR
+        elseif strcmp(obj.Type,'Nonlinear')
             assert(~isempty(h_value),...
                 'All-zero Hessian entries found for the Non-Linear constraints.');
         end

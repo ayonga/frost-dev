@@ -70,25 +70,24 @@ function obj = updateVariableBounds(obj, bounds)
     
     % states as the decision variables
     if isfield(bounds,'states')
-        if isa(obj.Plant,'ContinuousDynamics')
-            state_names = {'x','dx','ddx'};
-        elseif isa(obj.Plant,'DiscreteDynamics')
-            state_names = {'x','dx','xn','dxn'};
-        else
-            state_names = {};
-        end
+        state_names = fieldnames(obj.Plant.States);        
         for i=1:length(state_names)
             s_name = state_names{i};
             if isfield(bounds.states,s_name)
+                lb = []; 
+                ub = [];
+                x0 = [];
                 if isfield(bounds.states.(s_name),'lb')
-                    updateVariableProp(obj, s_name,'all', 'lb',bounds.states.(s_name).lb);
+                    lb = bounds.states.(s_name).lb;
                 end
                 if isfield(bounds.states.(s_name),'ub')
-                    updateVariableProp(obj, s_name,'all', 'ub',bounds.states.(s_name).ub);
+                    ub = bounds.states.(s_name).ub;
                 end
                 if isfield(bounds.states.(s_name),'x0')
-                    updateVariableProp(obj, s_name,'all', 'x0',bounds.states.(s_name).x0);
-                end
+                    ub = bounds.states.(s_name).x0;
+                end                
+                updateVariableProp(obj, s_name,'all', 'lb',lb,'ub',ub,'x0',x0);
+                
                 if isfield(bounds.states.(s_name), 'initial')
                     x0 = bounds.states.(s_name).initial;
                     obj = updateVariableProp(obj, s_name, 'first', 'lb', x0, 'ub', x0, 'x0', x0);
@@ -104,32 +103,29 @@ function obj = updateVariableBounds(obj, bounds)
     
     % inputs as the decision variables
     if isfield(bounds,'inputs')
-        input_groups = {'Control','ConstraintWrench','External'};
-        for i=1:3
-            input_group = input_groups{i};
-            if ~isfield(bounds.inputs, input_group)
-                continue;
-            end
-            input_names = fieldnames(obj.Plant.Inputs.(input_group));
-            for j = 1:length(input_names)
-                i_name = input_names{j};
-                if isfield(bounds.inputs.(input_group),i_name)
-                    if isfield(bounds.inputs.(input_group).(i_name),'lb')
-                        updateVariableProp(obj, i_name,'all', 'lb',bounds.inputs.(input_group).(i_name).lb);
-                    end
-                    if isfield(bounds.inputs.(input_group).(i_name),'ub')
-                        updateVariableProp(obj, i_name,'all', 'ub',bounds.inputs.(input_group).(i_name).ub);
-                    end
-                    if isfield(bounds.inputs.(input_group).(i_name),'x0')
-                        updateVariableProp(obj, i_name,'all', 'x0',bounds.inputs.(input_group).(i_name).x0);
-                    end
+        input_names = fieldnames(obj.Plant.Inputs);
+        for j = 1:length(input_names)
+            i_name = input_names{j};
+            if isfield(bounds.inputs,i_name)
+                lb = []; 
+                ub = [];
+                x0 = [];
+                if isfield(bounds.inputs.(i_name),'lb')
+                    lb = bounds.inputs.(i_name).lb;
                 end
+                if isfield(bounds.inputs.(i_name),'ub')
+                    ub = bounds.inputs.(i_name).ub;
+                end
+                if isfield(bounds.inputs.(i_name),'x0')
+                    ub = bounds.inputs.(i_name).x0;
+                end                
+                updateVariableProp(obj, i_name,'all', 'lb',lb,'ub',ub,'x0',x0);
             end
         end
     end
     
     % parameters as the decision variables
-    if ~isempty(fieldnames(obj.Plant.Params)) && isfield(bounds,'params')
+    if isfield(bounds,'params')
         param_names = fieldnames(obj.Plant.Params);
         if obj.Options.DistributeParameters
             node = 1:obj.NumNode;
@@ -139,16 +135,19 @@ function obj = updateVariableBounds(obj, bounds)
         for j = 1:length(param_names)
             p_name = param_names{j};
             if isfield(bounds.params,p_name)
-                if isfield(bounds.params.(p_name),'lb') && isfield(bounds.params.(p_name),'ub')
-                    updateVariableProp(obj, p_name,node, 'lb',bounds.params.(p_name).lb, 'ub',bounds.params.(p_name).ub);
-                elseif isfield(bounds.params.(p_name),'lb')
-                    updateVariableProp(obj, p_name,node, 'lb',bounds.params.(p_name).lb);
-                elseif isfield(bounds.params.(p_name),'ub')
-                    updateVariableProp(obj, p_name,node, 'ub',bounds.params.(p_name).ub);
+                lb = []; 
+                ub = [];
+                x0 = [];
+                if isfield(bounds.params.(p_name),'lb')
+                    lb = bounds.params.(p_name).lb;
+                end
+                if isfield(bounds.params.(p_name),'ub')
+                    ub = bounds.params.(p_name).ub;
                 end
                 if isfield(bounds.params.(p_name),'x0')
-                    updateVariableProp(obj, p_name,node, 'x0',bounds.params.(p_name).x0);
-                end
+                    ub = bounds.params.(p_name).x0;
+                end                
+                updateVariableProp(obj, p_name, node, 'lb',lb,'ub',ub,'x0',x0);
             end
         end
     end

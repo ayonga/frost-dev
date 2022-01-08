@@ -14,37 +14,57 @@ classdef CoordinateFrame < handle
         % The name of the coordinate frame
         %
         % @type char
-        Name
-        
+        Name char        
         
         % The parent reference coordinate frame
         %
         % @type CoordinateFrame
-        Reference
+        Reference CoordinateFrame
         
-        % The offset of the origin of the frame from the origin of the
-        % reference frame
+        % The position vector of the frame origin in the reference frame
         %
         % @type rowvec
-        Offset
+        P (1,3) double = zeros(1,3)
         
-        % The rotation matrix of the frame w.r.t. the reference frame
+        % The orientation of the frame in the reference frame
         %
         % @type matrix
-        R
+        R (3,3) double = eye(3)
     end
     
-    properties (Hidden, SetAccess=protected, GetAccess=public)
-        % The homogeneous transformation from the base coordinate
+    properties (SetAccess=protected, GetAccess=public, Hidden)
+        % The homogeneous transformation matrix of the frame w.r.t. the
+        % reference frame
         %
         % @type matrix
-        gst0
+        T (4,4) double
         
+        % The homogeneous transformation matrix of the reference frame
+        % w.r.t. this frame
+        %
+        % @type matrix
+        Tinv (4,4) double
+        
+        % The homogeneous transformation from the world coordinate at the
+        % home position (i.e., q=0)
+        %
+        % @type matrix
+        T0 (4,4) double
+        
+        % The homogeneous transformation to the world coordinate at the
+        % home position (i.e., q=0)
+        %
+        % @type matrix
+        T0inv (4,4) double
     end
+    
+    
+    
+    
     
     methods
         
-        function obj = CoordinateFrame(varargin)
+        function obj = CoordinateFrame(argin)
             % The class constructor function
             %
             % Parameters:
@@ -54,52 +74,27 @@ classdef CoordinateFrame < handle
             %    Offset: the offset of the origin @type rowvec
             %    R: the rotation matrix or the Euler angles @type rowvec
             
-            % if no input argument, create an empty object
-            if nargin == 0
-                return;
+            arguments
+                argin.Name char = ''
+                argin.Reference = []
+                argin.P double {mustBeReal} = zeros(1,3)
+                argin.R double {mustBeReal} = eye(3)
             end
             
-            % update property values using the input arguments
-            % load default values if not specified explicitly            
-            argin = struct(varargin{:});
+            obj.Name = argin.Name;
+            
+            obj.setOffset(argin.P);
+            obj.setRotationMatrix(argin.R);
             
             
-            % validate and assign the name
-            if isfield(argin, 'Name')
-                assert(ischar(argin.Name), 'The name must be a character array.');
-            
-                % validate name string
-                
-                obj.Name = argin.Name;
-            else
-                if ~isstruct(varargin{1})
-                    error('The ''Name'' must be specified in the argument list.');
-                else
-                    error('The input structure must have a ''Name'' field');
-                end
+            if ~isempty(argin.Reference)
+                assert(isa(argin.Reference,'CoordinateFrame'),...
+                    'The reference frame must be a CoordinateFrame object.');
+                obj.Reference = argin.Reference;
             end
+                       
+            obj.updateTransform();
             
-            
-            % validate and assign the reference frame
-            if isfield(argin, 'Reference')
-                obj = obj.setReference(argin.Reference);
-            end
-            
-            % validate and assign the offset
-            if isfield(argin, 'Offset')
-                obj = obj.setOffset(argin.Offset);
-            else
-                warning('The offset vector is not defined. Using zero offset [0,0,0].');
-                obj = obj.setOffset(zeros(1,3));
-            end
-            
-            % validate and assign the Euler angles
-            if isfield(argin, 'R')
-                obj = obj.setRotationMatrix(argin.R);
-            else
-                warning('The rotation angles are not defined. Using zero angles [0,0,0].');
-                obj = obj.setRotationMatrix(zeros(1,3));
-            end
         end
         
         function obj = ToContactFrame(obj, type)
@@ -108,28 +103,36 @@ classdef CoordinateFrame < handle
             % Parameters:
             % type: the contact type @type char
             
-            obj_struc = struct(...
+            obj_args = namedargs2cell(struct(...
                 'Name', obj.Name,...
                 'Reference', obj.Reference,...
                 'R', obj.R,...
-                'Offset',obj.Offset,...
-                'Type',type);
-            obj = ContactFrame(obj_struc);
+                'P',obj.P,...
+                'Type',type));
+            
+            obj = ContactFrame(obj_args{:});
+        end
+        
+        function obj = updateTransform(obj)
+            
+            
+            
+            obj.T = CoordinateFrame.RPToHomogeneous(obj.R, obj.P);
+            obj.Tinv = CoordinateFrame.RigidInverse(obj.T);
+            
+            if isempty(obj.Reference)
+                gst_0 = eye(4);
+            else
+                gst_0 = obj.Reference.T0;
+            end
+            
+            obj.T0 = gst_0*obj.T;
+            obj.T0inv = CoordinateFrame.RigidInverse(obj.T0);
         end
         
     end
     
-    %% methods defined in external files
-    methods
-        obj = setReference(obj, ref);
-        
-        obj = setOffset(obj, offset);
-        
-        obj = setRotationMatrix(obj,r);
-        
-        obj = computeHomogeneousTransform(obj);
-        
-    end
+    
     
     methods (Static)
         

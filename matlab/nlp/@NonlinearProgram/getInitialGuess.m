@@ -12,6 +12,9 @@ function [x0] = getInitialGuess(obj, method)
     %  variables.
     %  'previous': returns the previous solution as the initial guess
     
+    if nargin < 2
+        method = 'typical';
+    end
     
     switch method
         case 'typical' %

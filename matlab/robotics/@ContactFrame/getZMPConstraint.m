@@ -62,7 +62,7 @@ function [f_constr, label, auxdata] = getZMPConstraint(obj, f, geometry)
             validateattributes(geometry.lb,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getZMPConstraint','lb');
-            auxdata = [geometry.la;geometry.lb];
+            auxdata = {[geometry.la;geometry.lb]};
         case 'PointContactWithFriction'
             % x, y, z
             f_constr = []; % no zmp constraints
@@ -94,7 +94,7 @@ function [f_constr, label, auxdata] = getZMPConstraint(obj, f, geometry)
             validateattributes(geometry.lb,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getZMPConstraint','lb');
-            auxdata = [geometry.la;geometry.lb];
+            auxdata = {[geometry.la;geometry.lb]};
         case 'LineContactWithoutFriction'
             % z, roll
             zmp = [la*f(1) - f(2);  % la*fz > mx
@@ -148,7 +148,7 @@ function [f_constr, label, auxdata] = getZMPConstraint(obj, f, geometry)
             validateattributes(geometry.Lb,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getZMPConstraint','Lb');
-            auxdata = [geometry.la;geometry.lb;geometry.La;geometry.Lb];
+            auxdata = {[geometry.la;geometry.lb;geometry.La;geometry.Lb]};
         case 'PlanarContactWithoutFriction'
             % z, roll, pitch,
             zmp = [la*f(1) - f(2);  % la*fz > mx
@@ -180,7 +180,7 @@ function [f_constr, label, auxdata] = getZMPConstraint(obj, f, geometry)
             validateattributes(geometry.Lb,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getZMPConstraint','Lb');
-            auxdata = [geometry.la;geometry.lb;geometry.La;geometry.Lb];
+            auxdata = {[geometry.la;geometry.lb;geometry.La;geometry.Lb]};
     end
     
 end

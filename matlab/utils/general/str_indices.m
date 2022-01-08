@@ -3,6 +3,6 @@
 %> @note From amber_classic/core/matlab/util
 function [indices] = str_indices(needles, haystack, varargin)
 
-indices = cellfun(@(needle) find(strcmp(needle, haystack), 1), needles, varargin{:});
+indices = cellfun(@(needle) find(strcmp(needle, haystack), 1), needles, varargin{:}, 'UniformOutput',false);
 
 end

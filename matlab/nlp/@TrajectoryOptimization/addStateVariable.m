@@ -16,35 +16,31 @@ function obj = addStateVariable(obj, bounds)
     for j=1:length(state_names)
         
         s_name = state_names{j};
-        
-        var = struct();
-        var.Name = s_name;
-        siz = size(states.(s_name));
-        var.Dimension = prod(siz); %#ok<PSIZE>
+        state_var = states.(s_name);
         if isfield(bounds,s_name)
-            if isfield(bounds.(s_name),'lb')
-                var.lb = bounds.(s_name).lb;
+            state_bound = bounds.(s_name);
+            lb = [];
+            ub = [];
+            x0 = [];
+            if isfield(state_bound,'lb')
+                lb = state_bound.lb;
             end
-            if isfield(bounds.(s_name),'ub')
-                var.ub = bounds.(s_name).ub;
+            if isfield(state_bound,'ub')
+                ub = state_bound.ub;
             end
-            if isfield(bounds.(s_name),'x0')
-                var.x0 = bounds.(s_name).x0;
+            if isfield(state_bound,'x0')
+                x0 = state_bound.x0;
             end
-        end
-        % state variables are defined at all nodes
-        obj = addVariable(obj, s_name, 'all', var);
-        
-        % check if there are limiting conditions for states at the
-        % initial/ternimal points
-        if isfield(bounds,s_name)
-            if isfield(bounds.(s_name), 'initial')
-                x0 = bounds.(s_name).initial;
+            % state variables are defined at all nodes
+            obj = addVariable(obj, 'all', state_var, 'lb', lb, 'ub', ub, 'x0', x0);
+               
+            if isfield(state_bound, 'initial')
+                x0 = state_bound.initial;
                 obj = updateVariableProp(obj, s_name, 'first', 'lb',x0, 'ub', x0, 'x0', x0);
             end
             
-            if isfield(bounds.(s_name), 'terminal')
-                xf = bounds.(s_name).terminal;
+            if isfield(state_bound, 'terminal')
+                xf = state_bound.terminal;
                 obj = updateVariableProp(obj, s_name, 'last', 'lb',xf, 'ub', xf, 'x0', xf);
             end
         end

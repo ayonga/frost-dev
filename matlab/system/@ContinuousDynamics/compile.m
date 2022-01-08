@@ -17,11 +17,19 @@ function obj = compile(obj, export_path, varargin)
     %         noPrompt = opts.noPrompt;
     %     end
     
-    % Create export directory if it does not exst
-    if ~exist(export_path,'dir')
-        mkdir(export_path);
-        addpath(export_path);
+    arguments
+        obj 
+        export_path char {mustBeFolder}
     end
+    arguments (Repeating)
+        varargin
+    end
+    
+    %     % Create export directory if it does not exst
+    %     if ~exist(export_path,'dir')
+    %         mkdir(export_path);
+    %         addpath(export_path);
+    %     end
     
     % export the mass matrix
     if ~isempty(obj.Mmat)
@@ -29,20 +37,7 @@ function obj = compile(obj, export_path, varargin)
     end
     
     % export the drift vector
-    if ~isempty(obj.FvecName_)
-        %         if ~noPrompt
-        %             prompt = 'Compiling the drift vector often takes very long time. Do you wish to CONTINUE? Y/N [Y]: ';
-        %             str = input(prompt,'s');
-        %         else
-        %             str = 'Y';
-        %         end
-        %
-        %         if isempty(str)
-        %             str = 'Y';
-        %         end
-        %         if strcmpi(str,'Y')
-        %             cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
-        %         end
+    if ~isempty(obj.Fvec)
         cellfun(@(x)export(x,export_path,varargin{:}),obj.Fvec,'UniformOutput',false);
     end
     
@@ -52,8 +47,8 @@ function obj = compile(obj, export_path, varargin)
     h_constrs = fieldnames(obj.HolonomicConstraints);
     if ~isempty(h_constrs)
         for i=1:length(h_constrs)
-            constr = h_constrs{i};
-            export(obj.HolonomicConstraints.(constr),export_path,varargin{:});
+            input = h_constrs{i};
+            export(obj.HolonomicConstraints.(input),export_path,varargin{:});
            
         end
         
@@ -63,20 +58,19 @@ function obj = compile(obj, export_path, varargin)
     u_constrs = fieldnames(obj.UnilateralConstraints);
     if ~isempty(u_constrs)
         for i=1:length(u_constrs)
-            constr = u_constrs{i};
-            export(obj.UnilateralConstraints.(constr),export_path,varargin{:});
+            input = u_constrs{i};
+            export(obj.UnilateralConstraints.(input),export_path,varargin{:});
         end
         
     end
     
     % export the virtual constraints       
-    v_constrs = fieldnames(obj.VirtualConstraints);
-    if ~isempty(v_constrs)
-        for i=1:length(v_constrs)
-            constr = v_constrs{i};
-            export(obj.VirtualConstraints.(constr),export_path,varargin{:});
-        end
-        
+    inputs = fieldnames(obj.Inputs);
+    if ~isempty(inputs)
+        for i=1:length(inputs)
+            input = inputs{i};
+            export(obj.Inputs.(input),export_path,varargin{:});
+        end        
     end
     
     % export the event functions
@@ -89,6 +83,6 @@ function obj = compile(obj, export_path, varargin)
     end
     
     % call superclass method
-    compile@DynamicalSystem(obj, export_path, varargin{:});
+    %     compile@DynamicalSystem(obj, export_path, varargin{:});
     
 end

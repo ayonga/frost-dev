@@ -1,4 +1,4 @@
-function obj = setActuator(obj, varargin)
+function obj = setActuator(obj, param)
     % set the physical limits of the rigid joints
     %
     % Parameters:
@@ -8,27 +8,36 @@ function obj = setActuator(obj, varargin)
     
     % set the actuator to empty (remove actuation) if no argument is
     % detected
-    if nargin == 1
+    
+    arguments
+        obj
+        param.RotorInertia double {mustBeScalarOrEmpty,mustBeReal,mustBeNonnegative,mustBeFinite}
+        param.GearRatio double {mustBeScalarOrEmpty,mustBeReal,mustBePositive,mustBeFinite}
+    end
+    
+    
+    if isempty(fieldnames(param))
         obj.Actuator = [];
         return;
     end
     
-    ip = inputParser;
-    ip.addParameter('Inertia',[],@(x)validateattributes(x,{'double'},{'scalar','real','finite','nonnegative'}));
-    ip.addParameter('Ratio',[],@(x)validateattributes(x,{'double'},{'scalar','real','finite','positive'}));
-    ip.parse(varargin{:});
-    
     if isempty(obj.Actuator)
-        obj.Actuator = struct('Inertia',[],'Ratio',[]);
+        obj.Actuator = struct('RotorInertia',[],'GearRatio',[]);
+    end
+    
+    fields = fieldnames(obj.Actuator);
+    for i=1:length(fields)
+        if isfield(param, fields{i})
+            obj.Actuator.(fields{i}) = param.(fields{i});
+        end
+    end
+    if isfield(param,'RotorInertia')
+        B_j = obj.TwistAxis;
+        obj.Gm = diag(obj.Actuator.RotorInertia * B_j);
+    else
+        obj.Gm = zeros(6);
     end
     
     
-    if ~isempty(ip.Results.Inertia)
-        obj.Actuator.Inertia = ip.Results.Inertia;
-    end
-    
-    if ~isempty(ip.Results.Ratio)
-        obj.Actuator.Ratio = ip.Results.Ratio;
-    end
     
 end

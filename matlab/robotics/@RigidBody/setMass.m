@@ -3,8 +3,10 @@ function obj = setMass(obj, mass)
     %
     % Parameters:
     % mass: the link mass @type double
+    arguments
+        obj
+        mass (1,1) double {mustBeReal, mustBeNonnegative, mustBeNonNan} = 0
+    end
     
-    assert(isreal(mass) && mass >= 0,...
-        'The mass of the link must be a positive real scalar value.');
     obj.Mass = mass;
 end

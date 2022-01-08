@@ -25,7 +25,7 @@ function [J] = getSpatialJacobian(obj, frame, p)
         p = [];
     end
     c_str = getTwists(frame, p);
-    jac = eval_math_fun('ComputeSpatialJacobians',[c_str, {obj.numState}]);
+    jac = eval_math_fun('ComputeSpatialJacobians',[c_str, {obj.Dimension}]);
         
     n_pos = length(frame);
     if n_pos > 1

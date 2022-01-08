@@ -21,8 +21,8 @@ function bounds = getLimits(obj)
     bounds.states.dx.lb = dq_lb;
     bounds.states.dx.ub = dq_ub;
     
-    bounds.states.ddx.lb = -10000*ones(obj.numState,1);
-    bounds.states.ddx.ub = 10000*ones(obj.numState,1);
+    bounds.states.ddx.lb = -10000*ones(obj.Dimension,1);
+    bounds.states.ddx.ub = 10000*ones(obj.Dimension,1);
     
     if isfield(obj.Inputs.Control,'u')
         q_act_idx = arrayfun(@(x)~isempty(x.Actuator),obj.Joints);

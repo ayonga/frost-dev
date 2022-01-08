@@ -106,7 +106,7 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
             %             validateattributes(fric_coef.gamma,{'double'},...
             %                 {'scalar','real','>=',0},...
             %                 'ContactFrame.getFrictionCone','gamma');
-            auxdata = [fric_coef.mu];
+            auxdata = {fric_coef.mu};
         case 'PointContactWithoutFriction'
             % z
             constr = f;
@@ -118,7 +118,7 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
             % create the label text
             label = {'normal_force';
                 };
-            auxdata = [];
+            auxdata = {};
         case 'LineContactWithFriction'
             % x, y, z, roll, yaw
             constr = [f(3); % fz >= 0
@@ -152,7 +152,7 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
             validateattributes(fric_coef.gamma,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getFrictionCone','gamma');
-            auxdata = [fric_coef.mu; fric_coef.gamma];
+            auxdata = {[fric_coef.mu; fric_coef.gamma]};
         case 'LineContactWithoutFriction'
             % z, roll
             constr = f;
@@ -163,7 +163,7 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
             % create the label text
             label = {'normal_force';
                 };
-            auxdata = [];
+            auxdata = {};
         case 'PlanarContactWithFriction'
             % x, y, z, roll, pitch, yaw
             constr = [f(3); % fz >= 0
@@ -197,7 +197,7 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
             validateattributes(fric_coef.gamma,{'double'},...
                 {'scalar','real','>=',0},...
                 'ContactFrame.getFrictionCone','gamma');
-            auxdata = [fric_coef.mu; fric_coef.gamma];
+            auxdata = {[fric_coef.mu; fric_coef.gamma]};
         case 'PlanarContactWithoutFriction'
             % z, roll, pitch,
             constr = f;
@@ -208,7 +208,7 @@ function [f_constr,label,auxdata] = getFrictionCone(obj, f, fric_coef)
             % create the label text
             label = {'normal_force';
                 };
-            auxdata = [];
+            auxdata = {};
     end
     
     

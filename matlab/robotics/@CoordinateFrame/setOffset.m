@@ -8,12 +8,14 @@ function obj = setOffset(obj, offset)
     if iscolumn(offset)
         offset = offset';
     end
+    if isnumeric(offset)
+        offset = roundn(offset,-6);
+    end
     
-    offset = roundn(offset,-6);
     % validate if it is a numeric 1x3 vector
-    validateattributes(offset, {'numeric'},{'size',[1,3]});
-    obj.Offset = offset;
+    validateattributes(offset, {'numeric'}, {'size',[1,3]});
+    obj.P = offset;
     
     % update the homogeneous transformation matrix
-    obj.computeHomogeneousTransform();
+    obj.updateTransform();
 end

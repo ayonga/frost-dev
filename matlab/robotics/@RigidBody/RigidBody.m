@@ -16,12 +16,12 @@ classdef RigidBody < CoordinateFrame
         % The mass of the rigid link
         %
         % @type double
-        Mass
+        Mass (1,1) double
         
         % The inertia of the rigid link
         %
         % @type matrix
-        Inertia
+        Inertia (3,3) double
         
         
     end
@@ -36,7 +36,7 @@ classdef RigidBody < CoordinateFrame
     methods
         
         
-        function obj = RigidBody(varargin)
+        function obj = RigidBody(argin)
             % The class constructor function
             %
             % Parameters:
@@ -48,31 +48,22 @@ classdef RigidBody < CoordinateFrame
             %    Mass: the mass of the link @type double
             %    Inertia: the inertia of the link @type matrix
             
-            
-            
-            
+            arguments
+                argin.Name char = ''
+                argin.Reference = []
+                argin.P (1,3) double {mustBeReal} = zeros(1,3)
+                argin.R double {mustBeReal} = eye(3)
+                argin.Mass (1,1) double {mustBeReal, mustBeNonnegative, mustBeNonNan} = 0
+                argin.Inertia (3,3) double {mustBeReal, mustBeNonNan} = zeros(3)
+            end
+            argin_sup = rmfield(argin,{'Mass','Inertia'});
+            argin_cell = namedargs2cell(argin_sup);
             % consruct the superclass object first
-            obj = obj@CoordinateFrame(varargin{:});
-            if nargin == 0
-                return;
-            end
-            argin = struct(varargin{:});
+            obj = obj@CoordinateFrame(argin_cell{:});
             
-            % validate and assign the link mass
-            if isfield(argin, 'Mass')
-                obj = obj.setMass(argin.Mass);
-            else
-                warning('The mass is not defined. Using zero mass.');
-                obj = obj.setMass(0);
-            end
+            obj.Mass = argin.Mass;
+            obj.Inertia = argin.Inertia;
             
-            % validate and assign the joint inertia 
-            if isfield(argin, 'Inertia')
-                obj = obj.setInertia(argin.Inertia);
-            else
-                warning('The inertia matrix is not defined. Using zero inertia matrix.');
-                obj = obj.setInertia(zeros(3));
-            end
             
         end
         
@@ -81,7 +72,9 @@ classdef RigidBody < CoordinateFrame
         
         
         function G = get.SpatialInertia(obj)
-            G = [obj.Mass*eye(3), zeros(3); zeros(3), obj.Inertia];
+            G = [...
+                obj.Mass*eye(3), zeros(3); 
+                zeros(3),        obj.Inertia];
         end
         
     end

@@ -1,56 +1,44 @@
-function obj = configure(obj, load_path)
+function obj = configure(obj, model, load_path)
     % configure the derivatives and Jacobian of the actual/desired
     % outputs functions
     %
     % Parameters:
+    %  obj: the object itself
+    %  model: the associated dynamics system model @type DynamicalSystem
     %  load_path: the path from which symbolic expressions can be loaded
     %  @type char
     
-    if ~exist('load_path','var')
-        load_path = [];
-    end
     
-    model = obj.Model;
     x = model.States.x;
     dx = model.States.dx;
-    hd = obj.Param;
     
-    
-    if isempty(obj.DerivativeOrder)
-        obj.DerivativeOrder = 2;
-    end
-    order = obj.DerivativeOrder;
-    
-    if isempty(load_path)
+    if ~isempty(load_path)
+        Jh = SymFunction(obj.Jh_name, [], {x});
+        load(Jh,load_path);
+        obj.setJacobian(Jh, model);
+    else
         if isempty(obj.Jh_)
-            obj.setJacobian();
+            jac = jacobian(obj.h_, x);
+            obj.Jh_ = SymFunction(obj.Jh_name, jac, {x});
         end
     end
+    
     Jh = obj.Jh_;
-        
     
-    
-    if strcmp(model.Type,'SecondOrder')
-        if order ~= 2
-            assert('The holonomic constraint of the second-order system must be 2.');
-        end
+    if strcmp(obj.SystemType,'SecondOrder')
         if isempty(load_path)
-            ddx = model.States.ddx;
+            
             dh = Jh * dx;
-            %             obj.dh_ = SymFunction(obj.dh_name, ['Normal[SparseArray[' Jh.s '].SparseArray[' dx.s ']]'], {x,dx});
             obj.dh_ = SymFunction(obj.dh_name,dh,{x,dx});
             
             dJh = jacobian(obj.dh_, x);
             obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x, dx});
+            
+            ddx = model.States.ddx;
             ddh = Jh*ddx + dJh*dx;% + obj.dh_ + obj.h_;
             obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx, ddx});
-            %             kp = SymVariable('kp');
-            %             kd = SymVariable('kd');
-            %             obj.ddh_ = SymFunction(obj.ddh_name, ...
-            %                 ['Normal[SparseArray[' Jh.s '].SparseArray[' ddx.s '] + SparseArray[' dJh.s '].SparseArray[' dx.s '] + ' kd.s '*SparseArray[' obj.dh_.s '] + ' kp.s '*SparseArray[' obj.h_.s ']]'], ...
-            %                 {x, dx, ddx, hd},{kp,kd});
+            
         else
-            ddx = model.States.ddx;
             dh = SymFunction(obj.dh_name, [], {x,dx});
             obj.dh_ = load(dh, load_path);
             
@@ -58,23 +46,23 @@ function obj = configure(obj, load_path)
             dJh = SymFunction(obj.dJh_name, [], {x,dx});
             obj.dJh_ = load(dJh, load_path);
             
-            %             kp = SymVariable('kp');
-            %             kd = SymVariable('kd');
-            %             ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx, hd},{kp,kd});
+            
+            ddx = model.States.ddx;
             ddh = SymFunction(obj.ddh_name, [], {x, dx, ddx});
             obj.ddh_ = load(ddh, load_path);
         end
     else
         if isempty(load_path)
-            if order == 2
-                M = model.Mmat;
-                F = sum(horzcat(model.Fvec{:}),2);
+            if obj.RelativeDegree == 2
+                M = model.getMassMatrix();
+                F = model.getDriftVector();
                 dX = M\F;
                 dh = Jh * dX;
                 obj.dh_ = SymFunction(obj.dh_name, dh, {x});
                 
                 dJh = jacobian(dh, x);
                 obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x});
+                
                 ddh = dJh*dx;
                 obj.ddh_ = SymFunction(obj.ddh_name, ddh, {x, dx});
             else
@@ -82,7 +70,7 @@ function obj = configure(obj, load_path)
                 obj.dh_ = SymFunction(obj.dh_name, dh, {x, dx});
             end
         else
-            if order == 2
+            if obj.RelativeDegree == 2
                 dh = SymFunction(obj.dh_name, [], {x});
                 obj.dh_ = load(dh, load_path);
                 
@@ -102,6 +90,7 @@ function obj = configure(obj, load_path)
         end
         
     end
+    
     
             
 end

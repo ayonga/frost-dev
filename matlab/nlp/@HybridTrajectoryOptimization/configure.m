@@ -25,7 +25,7 @@ function obj = configure(obj, bounds, varargin)
             end
         end
         idx = 2*i - 1;
-        obj.Phase(idx) = configure(obj.Phase(idx),node_bounds, varargin{:});
+        obj.Phase(idx) = configureVariables(obj.Phase(idx),node_bounds, varargin{:});
         
         
         
@@ -76,6 +76,39 @@ function obj = configure(obj, bounds, varargin)
         end
     end
     
-    
+    for i=1:n_vertex
+        node_name = g.Nodes.Name{i};
+        % boundary values
+        node_bounds = struct();
+        if nargin > 1
+            if ~isempty(bounds)
+                if isfield(bounds, node_name)
+                    node_bounds = bounds.(node_name);
+                end
+            end
+        end
+        idx = 2*i - 1;
+        obj.Phase(idx) = configureConstraints(obj.Phase(idx),node_bounds, varargin{:});
+        
+        
+        
+        % find the associated edge
+        next = successors(g, i);
+        if ~isempty(next)
+            edge = findedge(g,i,next);
+            edge_name = g.Edges.Guard{edge}.Name;
+            edge_bounds = struct();
+            if nargin > 1
+                if ~isempty(bounds)
+                    if isfield(bounds, edge_name)
+                        edge_bounds = bounds.(edge_name);
+                    end
+                end
+            end
+            obj.Phase(idx+1) = configureConstraints(obj.Phase(idx+1),edge_bounds,varargin{:});
+        end
+        
+        
+    end
     
 end

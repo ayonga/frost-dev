@@ -1,4 +1,4 @@
-function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
+function [tn, xn, lambda] = calcDiscreteMap(obj, t, x, varargin)
     % calculates the discrete map of the dynamical system that maps
     % xminus from xplus. Subclasses must implement this method by its
     % own.
@@ -19,7 +19,7 @@ function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
     R = obj.R;
     cstr_name = fieldnames(obj.ImpactConstraints);
     
-    nx = obj.numState;
+    nx = obj.Dimension;
     qminus = x(1:nx);
     dqminus = x(nx+1:end);
     
@@ -51,7 +51,7 @@ function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
         
         
         % inertia matrix
-        De = calcMassMatrix(obj,q);
+        De = calcMassMatrix(obj.PostImpactModel,q);
         
         % % Compute Dynamically Consistent Contact Null-Space from Lagrange
         % % Multiplier Formulation
@@ -68,7 +68,7 @@ function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
         b = [De*dq; zeros(nImpConstr,1)];
         y = A\b;
         
-        ImpF = y((obj.numState+1):end);
+        ImpF = y((obj.Dimension+1):end);
         
         idx = 1;
         for i=1:n_cstr
@@ -76,12 +76,12 @@ function [tn, xn,lambda] = calcDiscreteMap(obj, t, x, varargin)
             cstr_indices = idx:idx+c_obj.Dimension-1;
             
             % calculate the Jacobian
-            lambda.(c_obj.InputName) = ImpF(cstr_indices);
+            lambda.(c_obj.f_name) = ImpF(cstr_indices);
             idx = idx + c_obj.Dimension;
         end
         
         
-        dqplus = y(1:obj.numState);
+        dqplus = y(1:obj.Dimension);
         
         
         qplus  = q;

@@ -1,4 +1,4 @@
-function obj = addRunningCost(obj, func, deps, auxdata, load_path)
+function obj = addRunningCost(obj, func, deps, auxdata)
     % Add a running cost to the problem
     %
     % Parameters:
@@ -6,23 +6,17 @@ function obj = addRunningCost(obj, func, deps, auxdata, load_path)
     % deps: a list of dependent variables @type cellstr
     % auxdata: auxilary constant data to be feed in the function 
     % @type double
+    arguments
+        obj        
+        func (1,1) SymFunction
+        deps (:,1) cell
+        auxdata cell = {}
+    end
     
     % basic information of NLP decision variables
-    nNode  = obj.NumNode;
+    
     vars   = obj.OptVarTable;
-    if ~iscell(deps), deps = {deps}; end
     
-    assert(isa(func,'SymFunction'),...
-        'The second argument must be a SymFunction object.'); %#ok<PSIZE>
-    
-    if nargin < 4
-        auxdata = [];
-    else
-        if ~iscell(auxdata), auxdata = {auxdata}; end
-    end
-    if nargin < 5
-        load_path = [];
-    end
     
     T  = [SymVariable('t0');SymVariable('tf')];
     Ts = T(2) - T(1);
@@ -36,28 +30,18 @@ function obj = addRunningCost(obj, func, deps, auxdata, load_path)
     else
         s_dep_vars = func.Vars;
         s_dep_params = [func.Params,{T,w}];
+        auxdata = [auxdata, {obj.Options.ConstantTimeHorizon}];
     end
     
-    if isempty(load_path)
-        cost_integral = SymFunction([func.Name,'_integral'],...
+    cost_integral = SymFunction([func.Name,'_integral'],...
             tovector(w.*Ts.*func), s_dep_vars, s_dep_params);
-    else
-        cost_integral = SymFunction([func.Name,'_integral'],...
-            [], s_dep_vars, s_dep_params);
-        load(cost_integral,load_path);
+    
+    nNode = obj.NumNode;
+    cost = repmat(NlpFunction(),nNode,1);
+    for i=1:nNode
+        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, i),deps,'UniformOutput',false);        
+        cost(i) = NlpFunction(cost_integral, [dep_vars{:}]);
     end
-    
-    siz = size(cost_integral);
-    assert(prod(siz)==1,...
-        'The cost function must be a scalar function.'); %#ok<PSIZE>
-    
-    cost(nNode) = struct();
-    [cost.Name] = deal(func.Name);
-    [cost.Dimension] = deal(1);
-    [cost.SymFun] = deal(cost_integral);
-    % [cost.Type] = deal('Nonlinear');
-    
-    
     
     
     % configure weights
@@ -70,13 +54,8 @@ function obj = addRunningCost(obj, func, deps, auxdata, load_path)
                     weight = 1/(6*nGrid);
                 else
                     weight = 2/(3*nGrid);
-                end
-                
-                if isnan(obj.Options.ConstantTimeHorizon)                    
-                    cost(i).AuxData = [auxdata,{weight}];
-                else
-                    cost(i).AuxData = [auxdata, {obj.Options.ConstantTimeHorizon, weight}];
-                end
+                end                
+                setAuxdata(cost(i), [auxdata,{weight}]);
             end
         case 'Trapezoidal'
             nGrid = nNode - 1;
@@ -88,11 +67,7 @@ function obj = addRunningCost(obj, func, deps, auxdata, load_path)
                     weight = 1/(1*nGrid);
                 end
                 
-                if isnan(obj.Options.ConstantTimeHorizon)                    
-                    cost(i).AuxData = [auxdata,{weight}];
-                else
-                    cost(i).AuxData = [auxdata, {obj.Options.ConstantTimeHorizon, weight}];
-                end
+                setAuxdata(cost(i), [auxdata,{weight}]);
             end
             
         case 'PseudoSpectral'
@@ -105,21 +80,12 @@ function obj = addRunningCost(obj, func, deps, auxdata, load_path)
             for i = 1:nNode
                 weight = double(1/((nNode-1)*nNode*(subs(p,t,roots(i)))^2));
                 
-                if isnan(obj.Options.ConstantTimeHorizon)                    
-                    cost(i).AuxData = [auxdata,{weight}];
-                else
-                    cost(i).AuxData = [auxdata, {obj.Options.ConstantTimeHorizon, weight}];
-                end
+                setAuxdata(cost(i), [auxdata,{weight}]);
             end
     end
     
-    % dependent variables
-    for i = 1:nNode
-        dep_vars = cellfun(@(x)get_dep_vars(obj.Plant, vars, obj.Options, x, i),deps,'UniformOutput',false);
-        cost(i).DepVariables = vertcat(dep_vars{:});
-    end
     
-    obj = addCost(obj,func.Name,'all',cost);
+    obj = addCost(obj,'all',cost);
     
     function var = get_dep_vars(plant, vars, options, x, idx)
         

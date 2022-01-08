@@ -16,8 +16,9 @@ function compileConstraint(obj, export_path, varargin)
     
     
     
-    deps_array_cell = arrayfun(@(x)getSummands(x), obj.ConstrArray, 'UniformOutput', false);
-    func_array = vertcat(deps_array_cell{:});
+    %     deps_array_cell = arrayfun(@(x)getSummands(x), obj.ConstrArray, 'UniformOutput', false);
+    %     func_array = vertcat(deps_array_cell{:});
+    func_array = obj.ConstrArray;
     arrayfun(@(x)export(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
     
     % first order derivatives (Jacobian)

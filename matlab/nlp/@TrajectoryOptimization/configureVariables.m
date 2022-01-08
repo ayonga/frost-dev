@@ -18,7 +18,7 @@ function obj = configureVariables(obj, bounds)
             
             
     %% configure NLP decision variables
-    if any(isnan(obj.Options.ConstantTimeHorizon)) && obj.NumNode ~= 1
+    if obj.NumNode > 1
         % add time as decision variables if the problem does not
         % use constant time horizon
         if ~isfield(bounds,'time')
@@ -40,13 +40,15 @@ function obj = configureVariables(obj, bounds)
     obj.addStateVariable(states);
     
     % inputs as the decision variables
-    if ~isfield(bounds,'inputs')
-        warning('No boundary value for input variables defined.')
-        inputs = struct();
-    else
-        inputs = bounds.inputs;
+    if ~isempty(fieldnames(obj.Plant.Inputs))
+        if ~isfield(bounds,'inputs')
+            warning('No boundary value for input variables defined.')
+            inputs = struct();
+        else
+            inputs = bounds.inputs;
+        end
+        obj.addInputVariable(inputs);
     end
-    obj.addInputVariable(inputs);
     
     % parameters as the decision variables
     if ~isempty(fieldnames(obj.Plant.Params))

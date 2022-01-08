@@ -42,7 +42,7 @@ function obj = addTimeVariable(obj, bounds)
     % determines the nodes at which the variables to be defined.
     if obj.Options.DistributeTimeVariable
         % time variables are defined at all nodes if distributes the weightes
-        obj = addVariable(obj, 'T', 'all', t_var);
+        obj = addVariable(obj, 'all', t_var);
         
         % add an equality constraint between the time variable at
         % neighboring nodes to make sure they are same
@@ -51,22 +51,17 @@ function obj = addTimeVariable(obj, bounds)
         t_cont = SymFunction('tCont',Ti-Tn,{Ti,Tn});
         
         % create an array of constraints structure
-        t_cstr(obj.NumNode-1) = struct();
-        [t_cstr.Name] = deal(t_cont.Name);
-        [t_cstr.Dimension] = deal(2);
-        [t_cstr.lb] = deal(0);
-        [t_cstr.ub] = deal(0);
-        [t_cstr.Type] = deal('Linear');
-        [t_cstr.SymFun] = deal(t_cont);
+        constr = repmat(NlpFunction(),obj.NumNode-1,1);
         for i=1:obj.NumNode-1
-            t_cstr(i).DepVariables = [obj.OptVarTable.T(i);obj.OptVarTable.T(i+1)];
+            dep_vars = [obj.OptVarTable.T(i);obj.OptVarTable.T(i+1)];
+            constr(i) = NlpFunction(t_cont, dep_vars, 'lb', 0, 'ub', 0);            
         end
         
         % add to the NLP constraints table
-        obj = addConstraint(obj,'tCont','except-last',t_cstr);
+        obj = addConstraint(obj,'except-last',t_cstr);
     else
         % otherwise only define at the first node
-        obj = addVariable(obj, 'T', 'first', t_var);
+        obj = addVariable(obj, 'first', t_var);
     end
     
     if isfield(bounds,'duration')
@@ -85,7 +80,7 @@ function obj = addTimeVariable(obj, bounds)
             ub = inf;
         end
         
-        addNodeConstraint(obj, timeDuration, 'T', 'first', lb, ub, 'Linear');
+        addNodeConstraint(obj, 'first', timeDuration, {'T'}, lb, ub);
    
     end
     

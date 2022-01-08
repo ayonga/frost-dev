@@ -16,167 +16,141 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
     properties (SetAccess=protected)
         
         
-        % The unique name identification of the system
+        % The type of the system (FirstOrder or SecondOrder)
         %
         % @type char
-        Name
+        Type char 
         
-    end
-    
-    
-    properties 
-        
-        % Returns the external input defined on the dynamical system.
+                               
+        % An array of state variables of the system
         %
-        % @type function_handle
-        ExternalInputFun
-    end
-    
-    % regular properties
-    properties (SetAccess=protected)
-        % The highest order of the state derivatives of the system
         %
-        % @note The system could be either a 'FirstOrder' system or a
-        % 'SecondOrder' system.
-        %
-        % @type char
-        Type
-        
-        
-        
-        % A structure that contains the symbolic representation of state
-        % variables
-        %
-        % Required fields of States:
-        %  x: the state variables x(t) @type SymVariable
-        %  dx: the first order derivatives of X, i.e. xdot(t)
-        %  @type SymVariable
-        %
-        % Optional fields of States:
-        %  ddx: the second order derivatives of X , i.e. xddot(t) 
-        %  @type SymVariable
-        %
-        % @type struct
-        States
-        
-        % The total number of system states
-        %
-        % @type double
-        numState
-        
-        % A structure that contains the symbolic representation of input
-        % variables
-        %
-        % We categorized input signals into three different groups: 
-        % Control: the control input
-        % ConstraintWrench: the constrained wrench from any bilateral
-        % (holonomic or nonholonomic) constraints
-        % External: other external inputs, such as disturbance, etc.
+        % Additional states can be added to the list, but will not be
+        % integrated in simulation (will be collocated in optimization)
         % 
         % @type struct
-        Inputs
+        States struct = struct()
+        
+        
+        % An array of state variables of the system
+        %
+        % 
+        % @type struct
+        Inputs struct = struct()
         
         % The parameters of the system
         %
         % @type struct
-        Params
+        Params struct = struct()
         
-        
-        % The struct of input vector fields Gvec(x,u) SymFunction
+        % The time variable of the system
         %
-        % @type struct
-        Gvec
+        % @type SymVariable
+        Time BoundedVariable 
         
-        % The struct of input map Gmap(x) SymFunction
-        %
-        % @type struct
-        Gmap
         
     end
     
-    
+    properties
+        
+        
+        % The unique name identification of the system
+        %
+        % @type char
+        Name char
+        
+        % The dimension of the configuration space (i.e., degrees of
+        % freedom)
+        %
+        % @type integer
+        Dimension double 
+        
+        % A handle to a function called by a trajectory optimization NLP to
+        % enforce system specific constraints. 
+        %
+        %
+        % @type function_handle
+        CustomNLPConstraint 
+        
+    end
     
     % methods defined in external files
     methods 
         
         % Add state variables
-        obj = addState(obj, varargin);
+        obj = addState(obj, states);
+        
+        % Remove state variables
+        obj = removeState(obj, state_names);
         
         % Add input variables
-        obj = addInput(obj, category, name, var, gf, varargin);
+        obj = addInput(obj, inputs);
         
         % Remove input variables
-        obj = removeInput(obj, category, name);
+        obj = removeInput(obj, input_names);
         
         % Add parameter variables
-        obj = addParam(obj, varargin);
+        obj = addParam(obj, params);
         
         % Remove parameter variables
-        obj = removeParam(obj, param_name);
-        
-        % set values for parameter variables
-        obj = setParamValue(obj, varargin);
-        
-        % compile symbolic expression
-        obj = compile(obj, export_path, varargin);
-        
-        % load symbolix expressions of system dynamics
-        obj = loadDynamics(obj, export_path, varargin);
-        
-        % export symbolic expression to MX binary
-        obj = saveExpression(obj, export_path, varargin);
+        obj = removeParam(obj, param_names);
+       
+        % Obtain the limits of system variables
+        bounds= getBounds(obj);
     end
     
+    methods (Abstract)
+        nlp = imposeNLPConstraint(obj, nlp, varargin);
+    end
     
     methods
-        function obj = DynamicalSystem(type, name)
+        function obj = DynamicalSystem(name, type)
             % The class construction function
             %
             % Parameters:
-            % type: the type of the system @type char
             % name: the name of the system @type char
+            % type: the system time (Discrete or Continuous) @type char
             
-            
-            
-            obj.Type = obj.validateSystemType(type);
-            if nargin > 1
-                assert(isvarname(name),...
-                    'The name of the system must be a valid variable name vector.');
-                obj.Name = name;
+            arguments
+                name char {mustBeValidVariableName}
+                type char {mustBeMember(type,{'FirstOrder','SecondOrder'})}  
             end
             
-            % initialize the properties
-            obj.States = struct();
-            obj.Inputs = struct();
-            obj.Inputs.Control = struct();
-            obj.Inputs.ConstraintWrench = struct();
-            obj.Inputs.External = struct();
-            
-            obj.inputs_.Control = struct();
-            obj.inputs_.ConstraintWrench = struct();
-            obj.inputs_.External = struct();
-            
-            obj.Params = struct();
-            
-            obj.Gmap = struct();
-            obj.Gmap.Control = struct();
-            obj.Gmap.ConstraintWrench = struct();
-            obj.Gmap.External = struct();
-            
-            obj.Gvec = struct();
-            obj.Gvec.Control = struct();
-            obj.Gvec.ConstraintWrench = struct();
-            obj.Gvec.External = struct();
-            
-            obj.ExternalInputFun = str2func('nop');
+            obj.Name = name;
+            obj.Type = type;       
+            obj.Time = BoundedVariable('t',1,0,inf);
+            setAlias(obj.Time, 'Time');
         end
         
-        function obj = setName(obj, name)
-            % set the name of the dynamical system
-            
-            assert(isvarname(name),...
-                'The name of the system must be a valid variable name vector.');
+        function set.Name(obj, name)
+           
+            arguments
+                obj
+                name {mustBeValidVariableName}
+            end
             obj.Name = name;
+            
+        end
+        
+        function set.Dimension(obj, dim)
+            
+            arguments
+                obj
+                dim (1,1) {mustBeInteger,mustBePositive}
+            end
+                       
+            obj.Dimension  = dim;
+            
+        end
+        
+        function set.CustomNLPConstraint(obj, func)
+            
+            arguments
+                obj DynamicalSystem
+                func (1,1) function_handle
+            end
+            
+            obj.CustomNLPConstraint = func;
         end
         
         
@@ -195,60 +169,47 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
         end
         
         function var_group= validateVarName(obj, name)
-            % Validate the group and category of the variables specified by
-            % the input 'name'
+            % validateVarName(obj, name_str) validates the group and
+            % category of the variables specified by the argument 'name'
             %
-            % Parameters:
-            %  name: the name string of the variable @type char
+            % validateVarName:
+            %  name: the name of the variable @type char
+            
+            arguments
+                obj DynamicalSystem
+                name char
+            end
             
             if isfield(obj.States, name) % check if it is a state variables
-                var_group = {'States',''};
-            elseif isfield(obj.Inputs.Control, name) % check if it is a control input variables
-                var_group = {'Inputs','Control'};
-            elseif isfield(obj.Inputs.ConstraintWrench, name) % check if it is a control input variables
-                var_group = {'Inputs','ConstraintWrench'};
-            elseif isfield(obj.Inputs.External, name) % check if it is a control input variables
-                var_group = {'Inputs','External'};
+                var_group = 'States';
+            elseif isfield(obj.Inputs, name) % check if it is a control input variables
+                var_group = 'Inputs';
             elseif isfield(obj.Params, name) % check if it is a parameter variables
-                var_group = {'Params',''}; 
+                var_group = 'Params'; 
+            elseif strcmp(name, 't')
+                var_group = 'Time';
             else
-                var_group = {'',''};
+                var_group = [];
             end
             
         end
         
         
-        function obj = setType(obj, type)
-            % Sets the type of the dynamical system
-            %
-            % Parameters: 
-            % type: the system type @type char
-            
-            obj.Type = obj.validateSystemType(type);
-        end
         
-        
-        %         function new = clone(obj, new)
-        %             % Copies the value of properties of the object to a new object
-        %
-        %             prop_list = properties(obj);
-        %
-        %             for i=1:numel(prop_list)
-        %                 prop = prop_list{i};
-        %
-        %                 if isprop(new, prop) && ~strcmp(prop,'Name')
-        %                     new.(prop) = obj.(prop);
-        %                 end
-        %             end
-        %
-        %         end
     end
     
-    methods (Access=protected)
+    methods 
        
         function value = getValue(obj, vars)
             % returns the variables (vars) value that are stored during
             % computing the dynamics
+            arguments
+                obj
+            end
+            
+            arguments (Repeating)
+                vars char
+            end
             
             if ~iscell(vars), vars = {vars}; end
             
@@ -258,28 +219,29 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
             
             for i=1:n_vars
                 tmp = var_group{i};
-                switch tmp{1}
+                switch tmp
                     case 'States'
                         value{i} = obj.states_.(vars{i});
                     case 'Inputs'
-                        value{i} = obj.inputs_.(tmp{2}).(vars{i});
+                        value{i} = obj.inputs_.(vars{i});
                     case 'Params'
                         value{i} = obj.params_.(vars{i});
+                    case 'Time'
+                        value{i} = obj.t_;
+                    otherwise
+                        error('(%s) is an undefined variable of the system (%s).',vars{i}.Name, obj.Name);
                 end
             end
+            
         end
         
-        function v_type = validateSystemType(~, type)
-            % validate if it is valid system type
-            
-            v_type = validatestring(type,{'FirstOrder','SecondOrder'});
-        end
+        
     
         
     end
     
     % The values for the system variables
-    properties(Access=protected,Hidden)
+    properties(SetAccess=protected,Hidden)
         
         % The time 
         %
@@ -289,28 +251,18 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
         % The states
         %
         % @type struct
-        states_
+        states_ = struct()
         
         % The inputs
         %
         % @type struct
-        inputs_
+        inputs_ = struct()
         
         % The parameters
         %
         % @type struct
-        params_
+        params_ = struct()
         
-        
-        % The name of the Gmap functions
-        %
-        % @type struct
-        GmapName_
-        
-        % The name of the Gvec functions
-        %
-        % @type struct
-        GvecName_
     end
 end
 

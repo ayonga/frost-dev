@@ -10,5 +10,5 @@ function obj = setType(obj, type)
         'fixed'};
     
     obj.Type = validatestring(type,valid_types);
-    
+    obj.updateTwistAxis();
 end

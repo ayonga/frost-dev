@@ -15,8 +15,9 @@ function compileObjective(obj, export_path, varargin)
 %     opts.StackVariable = false;
     opts.Namespace = obj.Name;
     
-    deps_array_cell = arrayfun(@(x)getSummands(x), obj.CostArray, 'UniformOutput', false);
-    func_array = vertcat(deps_array_cell{:});
+    %     deps_array_cell = arrayfun(@(x)getSummands(x), obj.CostArray, 'UniformOutput', false);
+    %     func_array = vertcat(deps_array_cell{:});
+    func_array = obj.CostArray;
     arrayfun(@(x)export(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
     
     % first order derivatives (Jacobian)

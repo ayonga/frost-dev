@@ -1,4 +1,4 @@
-function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, eventnames, options, solver)
+function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
     % Simulate the dynamical system
     %
     % Parameters: 
@@ -16,100 +16,36 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
     % sol: a structure contains the integration result of the ODE solver
     % @type struct
     
-    if nargin > 1 && ~isempty(t0)
-        validateattributes(t0,{'double'},...
-            {'scalar','nonnegative','real'},...
-            'ContinuousDynamics.simulate','t0',2);        
-    else
-        % default initial time
-        t0 = 0;
+    arguments
+        obj ContinuousDynamics
+        x0 (:,1) double {mustBeNonNan,mustBeReal} = zeros(2*obj.Dimension,1)
+        t0 = 0
+        tf = 100
+        eventnames (:,1) cell {iscellstr(eventnames)} = {}
+        options struct = struct()
     end
     
     
-    if strcmp(obj.Type, 'FirstOrder')
-        nx = obj.numState;
-    else
-        % second order system
-        nx = 2*obj.numState;
-    end
-    if nargin > 2 && ~isempty(x0)
-        % validate the initial states
-        validateattributes(x0,{'double'},...
-            {'vector','numel',nx,'real'},...
-            'ContinuousDynamics.simulate','x0',3);        
-    else
-        % default zero initial condition
-        warning('Starting the simulation with zero initial condition!')
-        x0 = zeros(nx,1);
-    end
-    
-    
-    if nargin > 3 && ~isempty(tf)
-        validateattributes(tf,{'double'},...
-            {'scalar','positive','real'},...
-            'ContinuousDynamics.simulate','tf',4);        
-    else
-        % default terminal time
-        tf = t0 + 100;
-    end
-    
-    % validate the controller object
-    if nargin > 4 && ~isempty(controller)
-        validateattributes(controller, {'Controller'},...
-            {},'ContinuousDynamics.simulate','controller',5);
-    else
-        controller = [];
-    end
-    % validate the parameter structure
-    if nargin > 5 && ~isempty(params)
-        validateattributes(params, {'struct'},...
-            {},'ContinuousDynamics.simulate','params',6);
-        obj.setParamValue(params);
-    else
-        params = [];
-    end
+    logger = SimLogger(obj);
     
     % configure the ODE options
     odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-5,'AbsTol',1e-5);
-    
-    if nargin > 6 && ~isempty(logger)
-        validateattributes(logger, {'SimLogger'},...
-            {},'ContinuousDynamics.simulate','options',7);
-        odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
-        logger.initialize();
-        logger.static.params     = obj.params_;
-    else
-        logger = [];
-    end
-    
-    if nargin > 8 && ~isempty(options)
-        validateattributes(options, {'struct'},...
-            {},'ContinuousDynamics.simulate','options',9);
-        odeopts = odeset(odeopts, options);
-    end
-
-    if nargin > 9 && ~isempty(solver)
-        validateattributes(solver, {'function_handle'},...
-            {},'ContinuousDynamics.simulate','solver',10);
+    odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
+    odeopts = odeset(odeopts, options);
+   
+    if isfield(options, 'solver')
+        solver = options.solver;
     else
         solver = @ode45;
     end
-
-    % pre-process
-    if ~isempty(obj.PreProcess)
-        params = obj.PreProcess(obj, t0, x0, controller, params);
-        obj.setParamValue(params);
-    end    
     
     % configure the event functions
-    if nargin > 7 && ~isempty(eventnames)
+    if ~isempty(eventnames)
         events_list = fieldnames(obj.EventFuncs);
-        if isempty(events_list)
+        defined_events = struct2array(obj.EventFuncs);
+        if isempty(defined_events)
             warning('There is no event function defined for the system.');
         else
-            if ~iscell(eventnames), eventnames = {eventnames}; end
-            assert(iscellstr(eventnames),...
-                'The list of eventnames name must be a character vector or a cell array of character vectors.');
             event_indices = zeros(numel(eventnames),1);
             for i=1:numel(eventnames)
                 idx = str_index(eventnames{i}, events_list);
@@ -120,39 +56,43 @@ function [sol, params] = simulate(obj, t0, x0, tf, controller, params, logger, e
                     event_indices(i) = idx;
                 end
             end
-            if any(event_indices)
-                
-                eventfuncs = cellfun(@(x)obj.EventFuncs.(x),events_list(event_indices),'UniformOutput',false);
-                eventfuncs = vertcat(eventfuncs{:});
-                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, controller, params, eventfuncs));
+            if any(event_indices)                
+                eventfuncs = defined_events(event_indices);
+                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, eventfuncs));
             end
         end
     end
     
+    
+    % pre-process
+    if ~isempty(obj.PreIntegrationCallback)
+        obj.PreIntegrationCallback(obj, t0, x0);
+    end
+    
+    
     % run the forward simulation
 %     tf = params.ptime(1);
-    sol = solver(@(t, x) calcDynamics(obj, t, x, controller, params, logger), ...
+    sol = solver(@(t, x) obj.calcDynamics(obj, t, x, logger), ...
         [t0, tf], x0, odeopts);
     
     % calculate the dynamics at the guard 
     if isfield(sol,'xe') && ~isempty(sol.xe)
-      calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
-      updateLastLog(logger);
-      disp('Impact Detected!')
+        obj.calcDynamics(obj, sol.xe, sol.ye,logger);
+        updateLastLog(logger);
+        disp('Impact Detected!')
     else
-      sol.xe = sol.x(end);
-      sol.ye = sol.y(:,end);
-%       if tf == params.ptime(1)
-      sol.ie = 1;
-%       end
-      calcDynamics(obj, sol.xe, sol.ye, controller, params, logger);
-      updateLastLog(logger);
-      disp('End of Phase!')
+        sol.xe = sol.x(end);
+        sol.ye = sol.y(:,end);
+        %       if tf == params.ptime(1)
+        sol.ie = 1;
+        %       end
+        obj.calcDynamics(obj, sol.xe, sol.ye, logger);
+        updateLastLog(logger);
+        disp('End of Phase!')
     end
     % post-process
-    if ~isempty(obj.PostProcess)
-        params = obj.PostProcess(obj, sol, controller, params);
-        obj.setParamValue(params);
+    if ~isempty(obj.PostIntegrationCallback)
+        obj.PostIntegrationCallback(obj, sol.x(end), sol.y(:,end));
     end
     
     

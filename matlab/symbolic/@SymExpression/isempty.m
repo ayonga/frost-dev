@@ -4,7 +4,12 @@ function y = isempty(X)
     % Convert inputs to SymExpression
     % X = SymExpression(X);
     
-    siz = size(X);
+    y = builtin('isempty',X);
+    if y
+        return;
+    end
+    
+    siz = dimension(X);
     
     if prod(siz) == 0
         y = true;

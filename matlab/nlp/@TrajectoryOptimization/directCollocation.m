@@ -1,4 +1,4 @@
-function fcstr = directCollocation(obj, name, x, dx)
+function fcstr = directCollocation(obj, name, numState)
     % Return the SymFunction object of the direct collocation constraint
     % given the state (x) and derivatives (dx).
     %
@@ -8,11 +8,14 @@ function fcstr = directCollocation(obj, name, x, dx)
     % dx: the derivative of states @type SymVariable
     
     
-    T  = [SymVariable('t0');SymVariable('tf')];
+    %     T  = [SymVariable('t0');SymVariable('tf')];
+    T = SymVariable('t',[2,1]);
     Ts = T(2) - T(1);
     N = SymVariable('nNode');
-    numState = length(x);
+    %     numState = length(x);
     nNode = obj.NumNode;
+    x = SymVariable('x',[numState,1]);
+    dx = SymVariable('dx',[numState,1]);
     switch obj.Options.CollocationScheme
         case 'HermiteSimpson'
             

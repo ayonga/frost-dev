@@ -45,7 +45,7 @@ function compileObjective(obj, cost, export_path, exclude, varargin)
         cost_array = obj.CostTable.(cost{i});
         
         
-        cost_array = cost_array(~arrayfun(@(x)x.Dimension==0,cost_array));
+        func_array = cost_array(~arrayfun(@(x)isempty(x.Dimension),cost_array));
         
         % % % % % % % This is no longer true! % % % % % % 
         % % We use the fact that for each objective function there could
@@ -57,7 +57,7 @@ function compileObjective(obj, cost, export_path, exclude, varargin)
         
         % We use the fact that for each constraint there is only one
         % SymFunction object associated with.
-        func_array = getSummands(cost_array(1));
+        %         func_array = getSummands(cost_array(1));
         
         arrayfun(@(x)export(x.SymFun, export_path, opts), func_array, 'UniformOutput', false);
         

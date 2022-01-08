@@ -20,27 +20,23 @@ classdef VirtualConstraint < handle
         % @type integer
         Dimension 
         
-        % An indicator that shows there is an offset in the actual outputs
-        %
-        % @type logical
-        hasOffset = false;
         
         % An indicator that shows there is a parameter variable for phase
         %
         % @type logical
-        hasPhaseParam = false;
+        hasPhaseParam logical = false;
         
         % The symbolic representation of parameter sets of the desired
         % outputs
         % 
-        % @type SymVariable
+        % @type ParamVariable
         OutputParams
         
-        % The symbolic representation of offset of the actual outputs: ya =
-        % ya_orig + offset_params
-        % 
-        % @type SymVariable
-        OffsetParams
+        
+        % The symbolic representation of parameters of the phase variable
+        %
+        % @type ParamVariable
+        PhaseParams
     end
     
     % properties must be determined by the users
@@ -51,10 +47,6 @@ classdef VirtualConstraint < handle
         Name
         
         
-        % The symbolic representation of parameters of the phase variable
-        %
-        % @type SymVariable
-        PhaseParams
         
         
         % The label of the virtual constraint
@@ -142,10 +134,6 @@ classdef VirtualConstraint < handle
         % @type char
         OutputParamName
         
-        % The name of the offset parameter variable
-        % 
-        % @type char
-        OffsetParamName
     end
     
     methods
@@ -163,9 +151,6 @@ classdef VirtualConstraint < handle
         end
         function name = get.OutputParamName(obj)
             name = ['a' obj.Name];
-        end
-        function name = get.OffsetParamName(obj)
-            name = ['c' obj.Name];
         end
     end
     
@@ -228,7 +213,7 @@ classdef VirtualConstraint < handle
     
     methods
         
-        function obj = VirtualConstraint(model, ya, name, varargin)
+        function obj = VirtualConstraint(name, expr, model, options)
             % The class constructor function
             %
             % Parameters:
@@ -246,119 +231,78 @@ classdef VirtualConstraint < handle
             %  OutputLabel:
             %
             
-            
-            
-            if nargin == 0
-                return;
+            arguments
+                name char {VirtualConstraint.validateName(name)}
+                expr (:,1) SymExpression {mustBeVector}
+                model ContinuousDynamics 
+                options.DesiredType char {mustBeMember(options.DesiredType,{'Bezier','CWF','ECWF','MinJerk','Constant'})}
+                options.PolyDegree double {mustBeInteger,mustBeGreaterThan(options.PolyDegree,1),mustBeScalarOrEmpty}
+                options.OutputLabel (:,1) cell
+                options.RelativeDegree {mustBeMember(options.RelativeDegree,[1,2])} 
+                options.PhaseType
+                options.PhaseVariable 
+                options.IsHolonomic logical = false
+                
             end
+            
             
             % validate (model) argument
-            validateattributes(model, {'DynamicalSystem'},...
-                {'scalar'},...
-                'VirtualConstraint','model');
             obj.Model = model;
-            
-            % validates (name) argument
-            validateName(obj, name);
             obj.Name = name;
+            obj.ya_ = expr;
+            obj.Dimension = length(expr);
             
-            args = struct(varargin{:});
-            assert(isscalar(args),...
-                'The values of optional properties are must be scalar data.');
-            
-            if ~isempty(ya)
-                % validate (ya) argument
-                validateattributes(ya,{'SymExpression'},...
-                    {'nonempty','vector'},...
-                    'VirtualConstraint','ya');
-                if isrow(ya) % convert to column vector if it is a row vector
-                    ya = vertcat(ya(:));
-                end
-            elseif isfield(args, 'LoadPath')
-                ya = SymExpression([]);
-                ya = load(ya, args.LoadPath, ['ya_' obj.Name '_' model.Name]);
-            else
-                error(['Unable to create the VirtualConstraint object. ',...
-                    'Either the expression is empty or the load path is not specified.'],...
-                    'VirtualConstraint');
-            end
-            
-            
-            
-            
-            obj.Dimension = length(ya);
-            if isfield(args, 'HasOffset')
-                if args.HasOffset
-                    obj.hasOffset = true;
-                    offset = SymVariable(['c' obj.Name],[obj.Dimension,1]);
-                    obj.ya_ = ya + offset;
-                    obj.OffsetParams = offset;
-                else
-                    obj.ya_ = ya;
-                end
-            else
-                obj.ya_ = ya;
-            end
-            
+           
+                        
             
             
             % validate and assign the desired outputs
             
             
-            if isfield(args, 'DesiredType')
+            if isfield(options, 'DesiredType')
                 if isfield(args, 'PolyDegree')
-                    obj.setDesiredType(args.DesiredType, args.PolyDegree);
+                    obj.setDesiredType(options.DesiredType, options.PolyDegree);
                 else
-                    obj.setDesiredType(args.DesiredType);
+                    obj.setDesiredType(options.DesiredType);
                 end
             else
                 error('The desired output function type (DesiredType) must be given.');
             end
             
             if isfield(args, 'OutputLabel')
-                obj.setOutputLabel(args.OutputLabel);
+                obj.setOutputLabel(options.OutputLabel);
             end
             
             if isfield(args, 'RelativeDegree')
-                obj.setRelativeDegree(args.RelativeDegree);
+                obj.setRelativeDegree(options.RelativeDegree);
             else
                 error('The relative degree of the virtual constraints (RelativeDegree) must be defined.');
             end
             
             if isfield(args, 'PhaseType')
-                obj.setPhaseType(args.PhaseType);
+                obj.setPhaseType(options.PhaseType);
             else
                 error('The type of phase variable (PhaseType) must be given.');
             end
             
             if isfield(args, 'PhaseVariable')
                 if isfield(args, 'PhaseParams')
-                    obj.setPhaseVariable(args.PhaseVariable, args.PhaseParams);
+                    obj.setPhaseVariable(options.PhaseVariable, options.PhaseParams);
                 else
-                    obj.setPhaseVariable(args.PhaseVariable);
+                    obj.setPhaseVariable(options.PhaseVariable);
                 end
             end
             
             
             if isfield(args, 'Holonomic')
-                obj.setHolonomic(args.Holonomic);
+                obj.setHolonomic(options.Holonomic);
             else
                 error('Please determine whether the virtual constraint is holonomic (Holonomic) or not.');
             end
             
-            if isfield(args, 'LoadPath') && ~isempty(args.LoadPath)
-                load_path = args.LoadPath;
-            else
-                load_path = [];
-            end
-            
-            if isfield(args, 'ExtraConfig')
-                obj.configure(load_path, args.ExtraConfig{:});
-            else
-                obj.configure(load_path);
-            end
             
             
+            obj.configure
             
         end
         
@@ -391,7 +335,7 @@ classdef VirtualConstraint < handle
             end
             
             % construct the parameter set for the desired outputs
-            a = SymVariable(['a' obj.Name],[n_output,n_param]);   
+            a = ParamVariable(['a' obj.Name],[n_output,n_param]);   
             if strcmp(type, 'Bezier')
                 yd = eval_math_fun('DesiredFunction',{str2mathstr(type),n_output,a, order});
             else
@@ -466,11 +410,11 @@ classdef VirtualConstraint < handle
             % type: the function type @type char
             % degree: the degree of polynomials @type integer
             
-            type = validatestring(type, ...
-                {'Bezier','CWF','ECWF','MinJerk','Constant'},...
-                'VirtualConstraint','DesiredType');
+            %             type = validatestring(type, ...
+            %                 {'Bezier','CWF','ECWF','MinJerk','Constant'},...
+            %                 'VirtualConstraint','DesiredType');
             obj.DesiredType = type;
-            if nargin > 2
+            if strcmp(type,'Bezier')
                 validateattributes(degree,{'double'},...
                     {'integer','positive','>',1,'scalar'},...
                     'VirtualConstraint','PolyDegree');
@@ -542,7 +486,9 @@ classdef VirtualConstraint < handle
             end
             
         end
-        
+    end
+    
+    methods (Static)
         % Name
         function name = validateName(~, name)
             validateattributes(name, {'char'},...

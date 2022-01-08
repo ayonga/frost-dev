@@ -1,4 +1,4 @@
-function obj = updateProp(obj, varargin)
+function obj = updateProp(obj, props)
     % This function updates the properties of the class object based on the
     % input name-value pair arguments.
     %
@@ -8,26 +8,48 @@ function obj = updateProp(obj, varargin)
     %   ub: upper limit @type colvec
     %  @type rowvec
     
-    argin = struct(varargin{:});
+    arguments
+        obj
+        props.lb (:,1) double {mustBeReal,mustBeNonNan} = []
+        props.ub (:,1) double {mustBeReal,mustBeNonNan} = []
+        props.AuxData cell = {}
+    end
     
     % set boundary values
-    if all(isfield(argin, {'ub','lb'}))
-        obj =  setBoundary(obj, argin.lb, argin.ub);
-    
-    elseif isfield(argin, 'lb')
-        obj =  setBoundary(obj, argin.lb, []);
-    
-    
-    elseif isfield(argin, 'ub')
-        obj =  setBoundary(obj, [], argin.ub);
+    lowerbound = props.lb;
+    if ~isempty(lowerbound)
+        % expand the lower/upper limits if they are given as scalar values
+        if isscalar(lowerbound)
+            lowerbound = lowerbound*ones(obj.Dimension,1);
+        else
+            assert(length(lowerbound) == obj.Dimension, ...
+                'The `lb` must be a scalar or a vector with the length that equals the dimension of the `NlpVariable` object.');           
+        end
+        
+        obj.LowerBound = lowerbound;
     end
     
-    if isfield(argin, 'AuxData') && ~isempty(argin.AuxData)
-        obj = setAuxdata(obj, argin.AuxData);
+    upperbound = props.ub;
+    if ~isempty(upperbound)
+        if isscalar(upperbound)
+            upperbound = upperbound*ones(obj.Dimension,1);
+        else
+            assert(length(upperbound) == obj.Dimension, ...
+                'The `ub` must be a scalar or a vector with the length that equals the dimension of the `NlpVariable` object.');             
+        end
+        % specifies lower/upper limits
+        
+        obj.UpperBound = upperbound;        
     end
     
-    if isfield(argin, 'SymFun')
-        obj = setSymFun(obj, argin.SymFun);
+    if ~isempty(obj.UpperBound) && ~isempty(obj.LowerBound)
+        assert(any(obj.UpperBound >= obj.LowerBound),...
+            'The lowerbound is greater than the upper bound. Variable name: %s\n', obj.Name);
     end
+    
+    if ~isempty(props.AuxData)
+        obj = setAuxdata(obj, props.AuxData);
+    end
+    
     
 end

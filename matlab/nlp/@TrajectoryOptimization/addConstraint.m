@@ -1,4 +1,4 @@
-function obj = addConstraint(obj, label, nodes, cstr_array)
+function obj = addConstraint(obj, nodes, cstr_array, label)
     % Add NLP constraints constraints
     %
     %
@@ -11,9 +11,19 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
     % @see NlpFunction, removeConstraint
     %
     % @note 
+        
+    arguments
+        obj
+        nodes
+        cstr_array (:,1) NlpFunction        
+        label char = ''
+    end
     
-    
-    
+    if isempty(label)
+        label = cstr_array(1).Name;
+    else
+        mustBeValidVariableName(label);
+    end
     
     cstr_names = obj.ConstrTable.Properties.VariableNames;
     
@@ -44,13 +54,13 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
             otherwise
                 error('Unknown node type.');
         end
+    elseif isnumeric(nodes)
+        mustBeInteger(nodes);
+        mustBeInRange(nodes,1,obj.NumNode);
+        node_list = nodes;
     else
-        if ~isnumeric(nodes)
-            error(['The node must be specified as a list or following supported characters:\n',...
-                '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
-        else
-            node_list = nodes;
-        end
+        error(['The node must be specified as a list of integers or following supported characters:\n',...
+            '%s'],implode({'first','last','all','except-first','except-last','except-terminal', 'cardinal', 'interior'},','));
     end
     
     
@@ -59,17 +69,9 @@ function obj = addConstraint(obj, label, nodes, cstr_array)
         length(cstr_array),length(node_list));
     
     % create empty NlpVariable array
-    if isa(cstr_array,'NlpFunction')
-        constr = repmat(NlpFunction(),obj.NumNode,1);
-        for j=1:numel(node_list)
-            constr(node_list(j)) = cstr_array(j);
-        end
-    elseif isstruct(cstr_array)
-        
-        constr = repmat(NlpFunction(),obj.NumNode,1);
-        for j=1:numel(node_list)
-            constr(node_list(j)) = NlpFunction(cstr_array(j));
-        end
+    constr = repmat(NlpFunction(),obj.NumNode,1);
+    for j=1:numel(node_list)        
+        constr(node_list(j)) = cstr_array(j);
     end
     
     % add to the constraints table
