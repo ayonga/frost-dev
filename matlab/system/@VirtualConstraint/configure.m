@@ -4,7 +4,7 @@ function obj = configure(obj, load_path, varargin)
     
     % local variables for speed
     rel_deg = obj.RelativeDegree;
-    is_holonomic = obj.Holonomic;
+    is_holonomic = obj.IsHolonomic;
     is_state_based = strcmp(obj.PhaseType, 'StateBased');
     model = obj.Model;
     t = SymVariable('t');
@@ -61,21 +61,11 @@ function obj = configure(obj, load_path, varargin)
     ya = obj.ya_;
     if is_holonomic
         % ya(x)
-        if obj.hasOffset
-            c = SymVariable(tomatrix(obj.OffsetParams(:)));
-            deps = {model.States.x,c};
-        else
-            deps = model.States.x;
-        end
+        deps = model.States.x;
         ya_fun{1} = SymFunction(['ya_' name], ya, deps);            
     else
         % ya(x,dx)
-        if obj.hasOffset
-            c = SymVariable(tomatrix(obj.OffsetParams(:)));
-            deps = {model.States.x, model.States.dx, c};            
-        else
-            deps = {model.States.x, model.States.dx};
-        end
+        deps = {model.States.x, model.States.dx};
         ya_fun{1} = SymFunction(['ya_' name], ya, deps);
     end
     

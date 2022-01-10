@@ -4,8 +4,9 @@ function obj = configureDynamics(obj, load_path)
     % Parameters:
     % varargin: extra options @type varargin
     
-    if nargin < 2
-        load_path = [];
+    arguments
+        obj
+        load_path = []
     end
     
     
@@ -29,9 +30,14 @@ function obj = configureDynamics(obj, load_path)
     msglen = length(msg)-3; % compensate for conversion character and carriage return
     fprintf(1,sp(ones(1,ceil(log10(m+1))+msglen)));
     
-    for i=1:n_link        
-        M = eval_math_fun('InertiaMatrixByLink',[links(i),{obj.Dimension}]);
-        De{i} = SymFunction(['Mmat_L',num2str(i),'_',obj.Name], M, {obj.States.x});
+    for i=1:n_link   
+        if ~isempty(load_path)
+            M = SymFunction(['Mmat_L',num2str(i),'_',obj.Name], [], {obj.States.x});
+            De{i}  = load(M,load_path);
+        else
+            M = eval_math_fun('InertiaMatrixByLink',[links(i),{obj.Dimension}]);
+            De{i} = SymFunction(['Mmat_L',num2str(i),'_',obj.Name], M, {obj.States.x});
+        end
         k = floor(i*100/n_link);
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
     end
@@ -39,16 +45,22 @@ function obj = configureDynamics(obj, load_path)
     M_motor = zeros(obj.Dimension);
     GearRatio = zeros(1,obj.Dimension);
     for i=1:obj.Dimension
-        if ~isempty(obj.Joints(i).Actuator) 
+        if ~isempty(obj.Joints(i).Actuator)
             actuator = obj.Joints(i).Actuator;
             GearRatio(i) = actuator.GearRatio;
             if ~isempty(actuator.RotorInertia) && ~isempty(actuator.GearRatio)
                 % reflected motor inertia: I*r^2
-                M_motor(i,i) = actuator.RotorInertia * actuator.GearRatio^2;                
+                M_motor(i,i) = actuator.RotorInertia * actuator.GearRatio^2;
             end
-        end        
+        end
     end
-    De_motor = SymFunction(['Mmat_Rotor_',obj.Name], SymExpression(M_motor), {obj.States.x});
+    if ~isempty(load_path)
+        De_motor = SymFunction(['Mmat_Rotor_',obj.Name], [], {obj.States.x});
+        De_motor = load(De_motor,load_path);
+    else        
+        
+        De_motor = SymFunction(['Mmat_Rotor_',obj.Name], SymExpression(M_motor), {obj.States.x});
+    end
     %     fprintf(1,sp(ones(1,40)));
     Mmat_full = [De; {De_motor}];
     obj.setMassMatrix(Mmat_full{:});

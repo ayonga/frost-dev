@@ -106,6 +106,12 @@ classdef ContinuousDynamics < DynamicalSystem
         % @type struct
         EventFuncs = struct()
         
+        
+        % The virtual constraints
+        %
+        %
+        % @type struct
+        VirtualConstraints
     end
     
     
@@ -139,6 +145,9 @@ classdef ContinuousDynamics < DynamicalSystem
                     obj.calcDynamics = @(obj,t,x,logger)secondOrderDynamics(obj,t,x,logger);
             end
         end
+        
+        
+        
         
         
         function obj = configureSystemStates(obj, bounds)

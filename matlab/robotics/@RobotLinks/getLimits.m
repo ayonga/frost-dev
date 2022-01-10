@@ -24,14 +24,14 @@ function bounds = getLimits(obj)
     bounds.states.ddx.lb = -10000*ones(obj.Dimension,1);
     bounds.states.ddx.ub = 10000*ones(obj.Dimension,1);
     
-    if isfield(obj.Inputs.Control,'u')
+    if isfield(obj.Inputs,'torque')
         q_act_idx = arrayfun(@(x)~isempty(x.Actuator),obj.Joints);
         effort = [limits.effort]';
         
         u_ub =  effort(q_act_idx);
         u_lb = -effort(q_act_idx);
         
-        bounds.inputs.Control.u.lb = u_lb;
-        bounds.inputs.Control.u.ub = u_ub;
+        bounds.inputs.torque.lb = u_lb;
+        bounds.inputs.torque.ub = u_ub;
     end
 end

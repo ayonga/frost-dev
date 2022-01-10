@@ -32,7 +32,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     
     % local variables for speed
     rel_deg = obj.RelativeDegree;
-    is_holonomic = obj.Holonomic;
+    is_holonomic = obj.IsHolonomic;
     is_state_based = strcmp(obj.PhaseType, 'StateBased');
     model = obj.Model;
     ya = obj.ActualFuncs;
@@ -57,7 +57,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             {'vector','numel',rel_deg,'positive','real'},...
             'VirtualConstraint.imposeNLPConstraint','ep');
     else
-        warning('The coefficient vector (ep) of outputs are not defined. Use 1 for all derivatives.');
+        %         warning('The coefficient vector (ep) of outputs are not defined. Use 1 for all derivatives.');
         ep = ones(1,rel_deg);
         for l= 1:rel_deg
             ep(l) = nchoosek(rel_deg,l-1)*10^(rel_deg - l + 1);
@@ -69,8 +69,6 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             'VirtualConstraint.imposeNLPConstraint','nzy');
     else
         nzy = ones(1,rel_deg);
-        
-        
     end
     
     % the name suffix of functions
@@ -95,14 +93,14 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     end
     
     % offset variable parameters and its name in the var table of the NLP
-    if isa(obj.OffsetParams,'SymVariable')
-        c_var = {SymVariable(tomatrix(obj.OffsetParams(:)))};
-        c_name = obj.OffsetParamName;
-    else
-        c_var = {};
-        c_name = {};
-    end
-    
+    %     if isa(obj.OffsetParams,'SymVariable')
+    %         c_var = {SymVariable(tomatrix(obj.OffsetParams(:)))};
+    %         c_name = obj.OffsetParamName;
+    %     else
+    %         c_var = {};
+    %         c_name = {};
+    %     end
+    %
     
     % states and their name representation in the var table of the NLP
     switch model.Type
@@ -170,10 +168,10 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             end
             
             % holonomic virtual constraints
-            y_fun{1} = SymFunction(['y_' name], y, [t_var, q_var, a_var, p_var, c_var], aux_var);
+            y_fun{1} = SymFunction(['y_' name], y, [t_var, q_var, a_var, p_var], aux_var);
         else
             % holonomic virtual constraints
-            y_fun{1} = SymFunction(['y_' name], [], [t_var, q_var, a_var, p_var, c_var], aux_var);
+            y_fun{1} = SymFunction(['y_' name], [], [t_var, q_var, a_var, p_var], aux_var);
             y_fun{1} = load(y_fun{1},load_path);
         end
         if ~isempty(aux_var)
@@ -191,7 +189,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             aux_data = [];
         end
         % add constraint at the first node
-        nlp = addNodeConstraint(nlp, 'first', y_fun{1}, [t_name, q_name ,a_name, p_name, c_name],...
+        nlp = addNodeConstraint(nlp, 'first', y_fun{1}, [t_name, q_name ,a_name, p_name],...
             0, 0, aux_data);
         
     end
@@ -230,7 +228,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     dim = obj.Dimension;
     vars   = nlp.OptVarTable; 
     
-    y_dynamics = repmat(NlpFunction.empty(),n_node,1);
+    y_dynamics = repmat(NlpFunction(),n_node,1);
     if isempty(load_path)
         % state-based output, no need to use time variable
         if is_state_based
@@ -251,12 +249,12 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
         
         
         %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
-        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var]);
+        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var], [aux_var]);
     else        
         %         ep_s = SymVariable('k',[rel_deg,1]);
         
         %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
-        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var]);
+        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var], [aux_var]);
         ddy_fun = load(ddy_fun, load_path);
         
     end
@@ -282,11 +280,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
         else
             p_deps = {};
         end
-        if ~isempty(c_name)
-            c_deps = vars.(c_name)(param_index);
-        else
-            c_deps = {};
-        end
+        
         
         if nlpOptions.DistributeTimeVariable
             time_index = idx;
@@ -316,9 +310,9 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
         x_deps = cellfun(@(x)vars.(x)(idx),x_name,'UniformOutput',false);
         dx_deps = cellfun(@(x)vars.(x)(idx),dx_name,'UniformOutput',false);
         
-        dep_vars = [t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]';
+        dep_vars = [t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps]';
         y_dynamics(i) = NlpFunction(ddy_fun, dep_vars, 'lb', 0, 'ub', 0,...
-            'AuxData', {aux_data});
+            'AuxData', aux_data);
         
         %         y_dynamics(i) = NlpFunction('Name',[obj.Name '_output_dynamics'],...
         %             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...

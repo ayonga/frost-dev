@@ -1,4 +1,4 @@
-function ya = calcActual(obj, x, dx, offset)
+function ya = calcActual(obj, x, dx)
     % calculate the actual outputs
     %
     % Parameters:
@@ -25,21 +25,12 @@ function ya = calcActual(obj, x, dx, offset)
     rel_deg = obj.RelativeDegree;
     ya = cell(1,rel_deg+1);
     
-    if obj.Holonomic
+    if obj.IsHolonomic
         % holonomic virtual constraints
         % compute the actual output
-        if obj.hasOffset
-            ya{1} = feval(ya_funcs{1}, x, offset);
-        else
-            ya{1} = feval(ya_funcs{1}, x);
-        end
+        ya{1} = feval(ya_funcs{1}, x);
     else
-        if obj.hasOffset
-            % non-holonomic virtual constraints
-            ya{1} = feval(ya_funcs{1}, x, dx, offset);
-        else
-            ya{1} = feval(ya_funcs{1}, x, dx);
-        end
+        ya{1} = feval(ya_funcs{1}, x, dx);
     end
     
     switch model_type

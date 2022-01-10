@@ -56,6 +56,16 @@ function obj = saveExpression(obj, export_path, varargin)
         
     end
     
+    v_constrs = fieldnames(obj.UnilateralConstraints);
+    if ~isempty(v_constrs)
+        for i=1:length(v_constrs)
+            constr = v_constrs{i};
+            saveExpression(obj.UnilateralConstraints.(constr),export_path,varargin{:});
+        end
+        
+    end
+    
+    
     %     saveExpression@DynamicalSystem(obj,export_path,varargin{:});
     
     

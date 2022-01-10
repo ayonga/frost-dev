@@ -78,7 +78,7 @@ classdef VirtualConstraint < handle
         % nonholonomic constraints
         %
         % @type logical
-        Holonomic
+        IsHolonomic
 
         
         % The maximum degree of the polynomial function
@@ -213,7 +213,7 @@ classdef VirtualConstraint < handle
     
     methods
         
-        function obj = VirtualConstraint(name, expr, model, options)
+        function obj = VirtualConstraint(name, expr, model, derivatives, options)
             % The class constructor function
             %
             % Parameters:
@@ -235,14 +235,20 @@ classdef VirtualConstraint < handle
                 name char {VirtualConstraint.validateName(name)}
                 expr (:,1) SymExpression {mustBeVector}
                 model ContinuousDynamics 
+            end
+            arguments (Repeating)
+                derivatives SymExpression
+            end
+            arguments
                 options.DesiredType char {mustBeMember(options.DesiredType,{'Bezier','CWF','ECWF','MinJerk','Constant'})}
                 options.PolyDegree double {mustBeInteger,mustBeGreaterThan(options.PolyDegree,1),mustBeScalarOrEmpty}
                 options.OutputLabel (:,1) cell
-                options.RelativeDegree {mustBeMember(options.RelativeDegree,[1,2])} 
-                options.PhaseType
-                options.PhaseVariable 
-                options.IsHolonomic logical = false
-                
+                options.RelativeDegree double {mustBeInteger,mustBePositive} 
+                options.PhaseType char {mustBeMember(options.PhaseType,{'StateBased','TimeBased'})} 
+                options.PhaseVariable (1,1) SymExpression {mustBeScalarOrEmpty}
+                options.PhaseParams ParamVariable
+                options.IsHolonomic logical = true
+                options.LoadPath char = ''
             end
             
             
@@ -251,8 +257,6 @@ classdef VirtualConstraint < handle
             obj.Name = name;
             obj.ya_ = expr;
             obj.Dimension = length(expr);
-            
-           
                         
             
             
@@ -260,7 +264,7 @@ classdef VirtualConstraint < handle
             
             
             if isfield(options, 'DesiredType')
-                if isfield(args, 'PolyDegree')
+                if isfield(options, 'PolyDegree')
                     obj.setDesiredType(options.DesiredType, options.PolyDegree);
                 else
                     obj.setDesiredType(options.DesiredType);
@@ -269,24 +273,24 @@ classdef VirtualConstraint < handle
                 error('The desired output function type (DesiredType) must be given.');
             end
             
-            if isfield(args, 'OutputLabel')
+            if isfield(options, 'OutputLabel')
                 obj.setOutputLabel(options.OutputLabel);
             end
             
-            if isfield(args, 'RelativeDegree')
+            if isfield(options, 'RelativeDegree')
                 obj.setRelativeDegree(options.RelativeDegree);
             else
                 error('The relative degree of the virtual constraints (RelativeDegree) must be defined.');
             end
             
-            if isfield(args, 'PhaseType')
+            if isfield(options, 'PhaseType')
                 obj.setPhaseType(options.PhaseType);
             else
                 error('The type of phase variable (PhaseType) must be given.');
             end
             
-            if isfield(args, 'PhaseVariable')
-                if isfield(args, 'PhaseParams')
+            if isfield(options, 'PhaseVariable')
+                if isfield(options, 'PhaseParams')
                     obj.setPhaseVariable(options.PhaseVariable, options.PhaseParams);
                 else
                     obj.setPhaseVariable(options.PhaseVariable);
@@ -294,15 +298,15 @@ classdef VirtualConstraint < handle
             end
             
             
-            if isfield(args, 'Holonomic')
-                obj.setHolonomic(options.Holonomic);
+            if isfield(options, 'IsHolonomic')
+                obj.setHolonomic(options.IsHolonomic);
             else
                 error('Please determine whether the virtual constraint is holonomic (Holonomic) or not.');
             end
             
             
             
-            obj.configure
+            obj.configure(options.LoadPath, derivatives);
             
         end
         
@@ -454,7 +458,7 @@ classdef VirtualConstraint < handle
             validateattributes(type, {'logical'},...
                 {'nonempty','scalar'},...
                 'VirtualConstraint','Holonomic');
-            obj.Holonomic = type;
+            obj.IsHolonomic = type;
             
             if ~type % nonholonomic
                 if strcmp(obj.Model.Type,'FirstOrder')
@@ -490,7 +494,7 @@ classdef VirtualConstraint < handle
     
     methods (Static)
         % Name
-        function name = validateName(~, name)
+        function name = validateName(name)
             validateattributes(name, {'char'},...
                 {'nonempty','scalartext'},...
                 'VirtualConstraint','Name');

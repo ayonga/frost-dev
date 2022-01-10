@@ -68,41 +68,29 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         idx = sum(contact.WrenchBase,2);
         constr_jac = jac(find(idx),:); %#ok<FNDSB>
         
-        % label for the holonomic constraint
-        label_full = cellfun(@(x)[contact.Name,x],...
-            {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
-        for i=size(contact.WrenchBase,2):-1:1
-            label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
-        end
-        
-        % create a holonomic constraint object
-        contact_constr = HolonomicConstraint(contact.Name,...
-            constr, obj,...
-            'Jacobian',constr_jac,...
-            'ConstrLabel',{label},...
-            'RelativeDegree',2);
-        % add as a set of holonomic constraints
-        obj = addHolonomicConstraint(obj, contact_constr);
-        
     else
-        % label for the holonomic constraint
-        label_full = cellfun(@(x)[contact.Name,x],...
-            {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
-        for i=size(contact.WrenchBase,2):-1:1
-            label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
-        end
+        
         % create an empty holonomic constraint object first with correct
-        % name
-        contact_constr = HolonomicConstraint(obj, ...
-            [], contact.Name,...
-            'LoadPath',load_path,...
-            'ConstrLabel',{label},...
-            'DerivativeOrder',2);
-        % add as a set of holonomic constraints
-        obj = addHolonomicConstraint(obj, contact_constr, load_path);
+        % name        
+        h = SymFunction(['h_',contact.Name,'_',obj.Name],[],{obj.States.x});
+        constr = load(h,load_path);
+        Jh = SymFunction(['Jh_',contact.Name,'_',obj.Name],[],{obj.States.x});
+        constr_jac = load(Jh,load_path);
     end
     
-    
+     % label for the holonomic constraint
+     label_full = cellfun(@(x)[contact.Name,x],...
+         {'PosX','PosY','PosZ','Roll','Pitch','Yaw'},'UniformOutput',false);
+     for i=size(contact.WrenchBase,2):-1:1
+         label{i} = label_full{find(contact.WrenchBase(:,i))};         %#ok<FNDSB>
+     end
+    contact_constr = HolonomicConstraint(contact.Name,...
+        constr, obj,...
+        'Jacobian',constr_jac,...
+        'ConstrLabel',{label},...
+        'RelativeDegree',2);
+    % add as a set of holonomic constraints
+    obj = addHolonomicConstraint(obj, contact_constr);
     % the contact wrench input vector
     f_name = contact_constr.f_name;
     f = obj.Inputs.(f_name);

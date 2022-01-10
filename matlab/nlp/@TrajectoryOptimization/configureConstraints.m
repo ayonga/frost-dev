@@ -56,6 +56,20 @@ function obj = configureConstraints(obj, bounds, varargin)
     %         end
     %     end
     
+    %     if isprop(plant,'VirtualConstraints')
+    %         h_constr = plant.VirtualConstraints;
+    %         h_constr_names = fieldnames(h_constr);
+    %         n_h_constr = length(h_constr_names);
+    %         if n_h_constr > 0
+    %             for i=1:n_h_constr
+    %                 constr_name = h_constr_names{i};
+    %                 constr = h_constr.(constr_name);
+    %
+    %                 obj = imposeNLPConstraint(constr,obj);
+    %             end
+    %         end
+    %     end
+    
     inputs = plant.Inputs;
     input_names = fieldnames(inputs);
     n_input = length(input_names);

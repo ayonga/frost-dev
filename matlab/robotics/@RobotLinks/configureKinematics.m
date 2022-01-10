@@ -71,6 +71,12 @@ function obj = configureKinematics(obj, dofs, links)
     
     obj.Joints = dofs_obj;
 
+    joint_name = {obj.Joints.Name}';
+    setLabel(obj.States.x, joint_name);
+    setLabel(obj.States.dx, joint_name);
+    setLabel(obj.States.ddx, joint_name);
+    
+    
     child_joints = [obj.Joints.ChildJoints];
     child_joints_name = {child_joints.Name};
     joints_name = {obj.Joints.Name};

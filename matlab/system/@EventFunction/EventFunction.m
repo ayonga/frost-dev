@@ -150,6 +150,31 @@ classdef EventFunction < handle
             
         end
         
+        function saveExpression(obj, export_path, varargin)
+            % export the symbolic expressions of the constraints and
+            % compile as MEX files.
+            %
+            % Parameters:
+            %  export_path: the path to export the file @type char
+            %  varargin: variable input parameters @type varargin
+            %   Vars: a list of symbolic variables @type SymVariable
+            %   File: the (full) file name of exported file @type char
+            %   ForceExport: force the export @type logical
+            %   BuildMex: flag whether to MEX the exported file @type logical
+            %   Namespace: the namespace of the function @type char
+            
+            arguments
+                obj EventFunction
+                export_path char {mustBeFolder}
+            end
+            arguments (Repeating)
+                varargin
+            end
+            
+            save(obj.h_,export_path, varargin{:});
+            
+        end
+        
         function nlp = imposeNLPConstraint(obj, nlp, varargin)
             % impose holonomic objaints as NLP objaints in the trajectory
             % optimization problem 'nlp' of the dynamical system
