@@ -67,6 +67,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                 options.DistributeParameters logical = false
                 options.DistributeTimeVariable logical = false
                 options.ConstantTimeHorizon (2,1) double {mustBeReal} = nan(2,1)
+                options.LoadPath char = ''
+                options.SkipConfigure logical = false
             end
             
             sup_opts = struct('DerivativeLevel', options.DerivativeLevel, ...
@@ -170,11 +172,11 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
     
     %% methods defined in external files
     methods
-        obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin);
+        obj = addJumpConstraint(obj, edge, src, tar, bounds);
 
         validateGraph(~, plant);
         
-        obj = configure(obj, bounds, varargin);
+        obj = configure(obj, bounds);
         
         obj = updateVariableBounds(obj, bounds);
         

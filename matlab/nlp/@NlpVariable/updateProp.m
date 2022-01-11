@@ -66,7 +66,7 @@ function obj = updateProp(obj, props)
             lb_tmp(lb_tmp==-inf) = -1e4;
             ub_tmp(ub_tmp==inf)  = 1e4;
             
-            obj.InitialValue = (ub_tmp - lb_tmp).*rand(obj.Dimenion,1) + lb_tmp;
+            obj.InitialValue = (ub_tmp - lb_tmp).*rand(obj.Dimension,1) + lb_tmp;
         end
     end
     

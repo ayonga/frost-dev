@@ -82,13 +82,15 @@ function Y = subs(S,old,new)
                 old_s.s, '->', new_s.s, ...
                 ' |>']);
         elseif isa(old,'SymExpression')
-            siz_o = dimension(old);
-            siz_n = dimension(new);
+            old_s = SymExpression(old);
+            new_s = SymExpression(new);
+            siz_o = dimension(old_s);
+            siz_n = dimension(new_s);
             
             assert(prod(siz_o) == prod(siz_n),...
                 'The sizes of the second and third argument must be the same.');
-            old_s = flatten(SymExpression(old));
-            new_s = flatten(SymExpression(new));
+            old_s = flatten(old_s);
+            new_s = flatten(new_s);
             rarray = arrayfun(@(x,y)['First@' x.s '->First@' y.s], old_s, new_s ,'UniformOutput',false);
             srule = SymExpression(['<| ', ...
                 implode(rarray,', '), ...

@@ -206,6 +206,8 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         obj = compile(obj, export_path, varargin);
         
         obj = saveExpression(obj, export_path, varargin);
+        
+        bounds= getBounds(obj);
     end
     
     %% Private methods

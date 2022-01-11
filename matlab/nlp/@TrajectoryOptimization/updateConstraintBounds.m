@@ -1,4 +1,4 @@
-function obj = updateConstraintBounds(obj, varargin)
+function obj = updateConstraintBounds(obj, bounds, varargin)
     % This function updates the boundary conditions of the custom
     % optimization constraints
     %

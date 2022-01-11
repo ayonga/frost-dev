@@ -1,4 +1,4 @@
-function obj = configure(obj, bounds, varargin)
+function obj = configure(obj, bounds)
     % configure the trajectory optimizatino NLP problem
     %
     % This process will add NLP variables based on the information of the
@@ -13,5 +13,5 @@ function obj = configure(obj, bounds, varargin)
     obj = obj.configureVariables(bounds);
         
     % configure NLP constraints
-    obj = configureConstraints(obj, bounds, varargin{:});
+    obj = configureConstraints(obj, bounds);
 end

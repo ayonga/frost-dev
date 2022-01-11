@@ -1,4 +1,4 @@
-function obj = addJumpConstraint(obj, edge, src, tar, bounds, varargin)
+function obj = addJumpConstraint(obj, edge, src, tar, bounds)
     % Add jump constraints between the edge and neighboring two nodes
     % (source and target) 
     %

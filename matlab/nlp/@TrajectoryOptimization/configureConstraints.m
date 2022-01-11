@@ -1,4 +1,4 @@
-function obj = configureConstraints(obj, bounds, varargin)
+function obj = configureConstraints(obj, bounds)
 
     plant = obj.Plant;
     %| @note If the number of node equals 1, then the system is
@@ -78,14 +78,14 @@ function obj = configureConstraints(obj, bounds, varargin)
             input_name = input_names{i};
             input = inputs.(input_name);
             if ~isempty(input.CustomNLPConstraint)
-                input.CustomNLPConstraint(input, obj, bounds, varargin{:});
+                input.CustomNLPConstraint(input, obj, bounds);
             end
         end
     end
     % impose the system specific constraints (such as holonomic
     % constraints and unilateral constraints)
     if ~isempty(plant.CustomNLPConstraint)
-        plant.CustomNLPConstraint(obj, bounds, varargin{:});
+        plant.CustomNLPConstraint(obj, bounds);
     end
     
     obj.update();

@@ -85,6 +85,7 @@ classdef TrajectoryOptimization < NonlinearProgram
                 options.DistributeParameters logical = false
                 options.DistributeTimeVariable logical = false
                 options.ConstantTimeHorizon (2,1) double {mustBeReal} = nan(2,1)
+                options.LoadPath char = ''
                 options.SkipConfigure logical = false
             end
             
@@ -189,7 +190,7 @@ classdef TrajectoryOptimization < NonlinearProgram
         
         obj = configureVariables(obj, bounds);
         
-        obj = configureConstraints(obj, bounds, varargin);
+        obj = configureConstraints(obj, bounds);
         
         obj = updateVariableBounds(obj, bounds);
         

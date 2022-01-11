@@ -39,7 +39,7 @@ function obj = updateConstraintBounds(obj, bounds, varargin)
                 tar_idx = 2*next - 1;
                 tar = obj.Phase(tar_idx);
                 
-                updateConstraintBounds(edge, src, tar, bounds.(edge_name),varargin{:});
+                updateConstraintBounds(edge, bounds.(edge_name),varargin{:});
             end
         end
     end
