@@ -31,17 +31,17 @@ function [yc] = checkCosts(obj, x, output_file,permission)
         for k=1:n_node         
             cost = cost_array(k);
             if cost.Dimension ~=0
-                dep_constr = getSummands(cost);
-                for ll = 1:numel(dep_constr)
-                    dep_var = dep_constr(ll).DepVariables;
-                    var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
-                    if isempty(dep_constr(ll).AuxData)
-                        yc(j) = yc(j) + feval(dep_constr(ll).Funcs.Func, var{:});
-                    else
-                        yc(j) = yc(j) + feval(dep_constr(ll).Funcs.Func, var{:}, dep_constr(ll).AuxData{:});
-                    end
-                    
+                %                 dep_constr = getSummands(cost);
+                %                 for ll = 1:numel(dep_constr)
+                dep_var = cost.DepVariables;
+                var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
+                if isempty(cost.AuxData)
+                    yc(j) = feval(cost.Funcs.Func, var{:});
+                else
+                    yc(j) = feval(cost.Funcs.Func, var{:}, cost.AuxData{:});
                 end
+                    
+                %                 end
             end
         end
         fprintf(f_id,'%12s \t %12.8E\n',cost_name,yc(j));

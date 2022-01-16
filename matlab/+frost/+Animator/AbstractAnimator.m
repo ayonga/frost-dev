@@ -143,6 +143,7 @@ classdef AbstractAnimator < handle
                 if obj.isLooping
                     if ~Freeze
                         obj.currentTime = obj.startTime;
+                        obj.display.reset();
                     end
                 else
                     obj.isPlaying = false;
@@ -221,7 +222,7 @@ classdef AbstractAnimator < handle
         
         function [center, radius, yaw] = GetCenter(obj, t, x)            
             center = [0,0,0];
-            radius = 3;
+            radius = 2;
             yaw = 0;
         end
         

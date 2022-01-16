@@ -22,11 +22,13 @@ classdef DiscreteDynamics < DynamicalSystem
         % @type EventFunction
         Event
         
-        
+    
+        % function to compute the system dynamics
+        %
+        % @type function_handle
+        calcDiscreteMap
+    
     end
-    
-    
-    
     
     methods
         
@@ -41,11 +43,14 @@ classdef DiscreteDynamics < DynamicalSystem
             arguments
                 name char {mustBeValidVariableName}
                 type char {mustBeMember(type,{'FirstOrder','SecondOrder'})} 
-                event EventFunction
+                event = []
             end
             
             obj = obj@DynamicalSystem(name, type);
-            setEvent(obj, event);
+            if ~isempty(event)
+                setEvent(obj, event);
+            end
+            obj.calcDiscreteMap = @(obj, t, x)calcIdentityMap(obj, t, x);
         end
         
         
@@ -66,6 +71,10 @@ classdef DiscreteDynamics < DynamicalSystem
             end
             dim = obj.Dimension;
             
+            if nargin < 2
+                bounds = struct();
+            end
+
             switch obj.Type
                 case 'FirstOrder'
                     if isfield(bounds,'x')
@@ -119,12 +128,19 @@ classdef DiscreteDynamics < DynamicalSystem
             end
             
         end
+        
+        function set.calcDiscreteMap(obj, func)
+            assert(isa(func,'function_handle'),'The callback function must be a function handle');
+            assert(nargin(func) >= 2, 'The callback function must have at least two (model, t, states) inputs.');
+            %             assert(nargout(func) >= 1, 'The callback function must have at least one (tn, states_n) output');
+            obj.calcDiscreteMap = func;
+        end
     end
     
     
     % methods defined in separate files
     methods
-        [tn, varargout] = calcDiscreteMap(obj, t, states);        
+        [tn, xn] = calcIdentityMap(obj, t, x);        
         
         obj = compile(obj, export_path, varargin);
         

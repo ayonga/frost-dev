@@ -58,7 +58,7 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
             end
             if any(event_indices)                
                 eventfuncs = defined_events(event_indices);
-                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, eventfuncs));
+                odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, eventfuncs, logger));
             end
         end
     end
@@ -78,6 +78,9 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
     % calculate the dynamics at the guard 
     if isfield(sol,'xe') && ~isempty(sol.xe)
         obj.calcDynamics(obj, sol.xe, sol.ye,logger);
+        if any(event_indices)  
+            checkGuard(obj, sol.xe, sol.ye, eventfuncs, logger);
+        end
         updateLastLog(logger);
         disp('Impact Detected!')
     else
@@ -87,6 +90,9 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
         sol.ie = 1;
         %       end
         obj.calcDynamics(obj, sol.xe, sol.ye, logger);
+        if any(event_indices)  
+            checkGuard(obj, sol.xe, sol.ye, eventfuncs, logger);
+        end
         updateLastLog(logger);
         disp('End of Phase!')
     end

@@ -85,7 +85,7 @@ classdef RigidImpact < DiscreteDynamics
             
             obj.R = eye(obj.Dimension);
             obj.PostImpactModel = model;
-            
+            obj.calcDiscreteMap = @calcImpactMap;
         end
         
         function set.R(obj, R)

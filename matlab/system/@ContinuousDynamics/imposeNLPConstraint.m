@@ -45,7 +45,7 @@ function nlp = imposeNLPConstraint(obj, nlp, varargin)
     end
     
     
-    dyn_eqn_func = SymFunction('dynamics_equation',Mmat*dX + Fvec - Gv,deps);
+    dyn_eqn_func = SymFunction(['dynamics_equation_',obj.Name],Mmat*dX + Fvec - Gv,deps);
     
     
     deps_name = cellfun(@(x)x.Name, deps, 'UniformOutput',false);

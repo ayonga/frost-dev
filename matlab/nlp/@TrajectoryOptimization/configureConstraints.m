@@ -45,14 +45,16 @@ function obj = configureConstraints(obj, bounds)
             end
         end
     end
-    %     u_constr = plant.EventFuncs;
-    %     u_constr_names = fieldnames(u_constr);
-    %     n_u_constr = length(u_constr_names);
-    %     if n_u_constr > 0
-    %         for i=1:n_u_constr
-    %             constr_name = u_constr_names{i};
-    %             constr = u_constr.(constr_name);
-    %             obj = imposeNLPConstraint(constr, obj);
+    %     if isprop(plant,'EventFuncs')
+    %         u_constr = plant.EventFuncs;
+    %         u_constr_names = fieldnames(u_constr);
+    %         n_u_constr = length(u_constr_names);
+    %         if n_u_constr > 0
+    %             for i=1:n_u_constr
+    %                 constr_name = u_constr_names{i};
+    %                 constr = u_constr.(constr_name);
+    %                 obj = imposeNLPConstraint(constr, obj, false, bounds);
+    %             end
     %         end
     %     end
     

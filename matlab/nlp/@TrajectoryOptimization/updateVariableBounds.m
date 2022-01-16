@@ -84,7 +84,7 @@ function obj = updateVariableBounds(obj, bounds)
                     ub = bounds.states.(s_name).ub;
                 end
                 if isfield(bounds.states.(s_name),'x0')
-                    ub = bounds.states.(s_name).x0;
+                    x0 = bounds.states.(s_name).x0;
                 end                
                 updateVariableProp(obj, s_name,'all', 'lb',lb,'ub',ub,'x0',x0);
                 
@@ -117,7 +117,7 @@ function obj = updateVariableBounds(obj, bounds)
                     ub = bounds.inputs.(i_name).ub;
                 end
                 if isfield(bounds.inputs.(i_name),'x0')
-                    ub = bounds.inputs.(i_name).x0;
+                    x0 = bounds.inputs.(i_name).x0;
                 end                
                 updateVariableProp(obj, i_name,'all', 'lb',lb,'ub',ub,'x0',x0);
             end
@@ -145,9 +145,9 @@ function obj = updateVariableBounds(obj, bounds)
                     ub = bounds.params.(p_name).ub;
                 end
                 if isfield(bounds.params.(p_name),'x0')
-                    ub = bounds.params.(p_name).x0;
+                    x0 = bounds.params.(p_name).x0;
                 end                
-                updateVariableProp(obj, p_name, node, 'lb',lb,'ub',ub,'x0',x0);
+                updateVariableProp(obj, p_name, node, 'lb',lb(:),'ub',ub(:),'x0',x0(:));
             end
         end
     end

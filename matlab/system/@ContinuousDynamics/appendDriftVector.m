@@ -14,7 +14,7 @@ function obj = appendDriftVector(obj, Fvec)
     end
     
     
-    obj.Fvec = [obj.Fvec; Fvec];
-    obj.FvecName_ = [obj.FvecName_; cellfun(@(f)f.Name, Fvec,'UniformOutput',false)];
+    obj.Fvec = [obj.Fvec, Fvec];
+    obj.FvecName_ = [obj.FvecName_, cellfun(@(f)f.Name, Fvec,'UniformOutput',false)];
 
 end

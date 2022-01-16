@@ -156,6 +156,10 @@ classdef ContinuousDynamics < DynamicalSystem
                 error('Failed to configure system states. The system dimension is either undefined or non-positive.');
             end
             dim = obj.Dimension;
+
+            if nargin < 2
+                bounds = struct();
+            end
             
             switch obj.Type
                 case 'FirstOrder'

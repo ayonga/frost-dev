@@ -1,4 +1,4 @@
-function [value, isterminal, direction] = checkGuard(obj, t, x, eventfuncs)
+function [value, isterminal, direction] = checkGuard(obj, t, x, eventfuncs, logger)
     % Detect the guard condition (event trigger)
     %
     % Parameters:
@@ -39,6 +39,6 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, eventfuncs)
         % compute the value of the event function
         value(i) = calcEvent(eventfuncs(i), obj);
     end
-   
+    logger.calc.event = value;
     
 end

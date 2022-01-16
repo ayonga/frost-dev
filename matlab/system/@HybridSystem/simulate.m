@@ -1,4 +1,4 @@
-function logger = simulate(obj, t0, x0, tf, options, varargin)
+function logger = simulate(obj, x0, t0, tf, options, varargin)
     % Simulate the hybrid dynamical system
     %
     % Parameters: 
@@ -11,7 +11,20 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
     % Return values:
     % logger: an array of simulation logger data @type SimLogger
     
-    
+    arguments
+        obj HybridSystem
+        x0 (:,1) double {mustBeNonNan,mustBeReal} 
+        t0 = 0
+        tf = 100
+        options struct = struct()
+    end
+    arguments (Repeating)
+        varargin
+    end
+
+
+    obj.Options = struct_overlay(obj.Options, options, {'AllowNew',true});
+
     sim_opts = struct(varargin{:});
     if isfield(sim_opts,'NumCycle')
         numcycle = sim_opts.NumCycle;
@@ -55,8 +68,8 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         cur_node = sim_graph.Nodes(cur_node_idx,:);
         % the current domain defined on the node
         cur_domain  = cur_node.Domain{1};
-        cur_control = cur_node.Control{1};
-        cur_param   = cur_node.Param{1}; 
+        %         cur_control = cur_node.Control{1};
+        %         cur_param   = cur_node.Param{1};
         % find successors nodes
         successor_nodes = successors(sim_graph, cur_node_idx);
         % find edges that may be triggered at the current node
@@ -66,20 +79,19 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
         n_edges = height(assoc_edges);
         eventnames = cell(1,n_edges);
         for i=1:n_edges
-            eventnames{i} = assoc_edges.Guard{i}.EventName;
+            eventnames{i} = assoc_edges.Guard{i}.Event.Name;
         end
         
         log_idx = log_idx + 1;
-        logger(log_idx) = feval(obj.Options.Logger, cur_domain);  %#ok<AGROW>
+        %         logger(log_idx) = feval(obj.Options.Logger, cur_domain);  %#ok<AGROW>
         
         disp(['Simulating ',cur_domain.Name]);
         
         
         
         % run the simulation
-        sol = cur_domain.simulate(t0,x0,tf,cur_control,cur_param,...
-            logger(log_idx),eventnames,options,obj.Options.OdeSolver);
-
+        [sol, logger_domain] = cur_domain.simulate(x0,t0,tf,eventnames,obj.Options);
+        logger(log_idx) = logger_domain;
         
        
         % check the index of the triggered edge
@@ -90,13 +102,13 @@ function logger = simulate(obj, t0, x0, tf, options, varargin)
             break;
         end
         cur_guard = cur_edge.Guard{1};
-        cur_gurad_param = cur_edge.Param{1};
+        %         cur_gurad_param = cur_edge.Param{1};
         
         disp(['Calculating Impact Map at Guard, ', cur_edge.Guard{1}.Name]);
-%         disp()
+        %         disp()
 
         % update states and time
-        [t0, x0] = cur_guard.calcDiscreteMap(sol.xe, sol.ye, cur_node, cur_gurad_param);
+        [t0, x0] = cur_guard.calcDiscreteMap(cur_guard, sol.xe, sol.ye);
         
         if t0 >= tf
             break;

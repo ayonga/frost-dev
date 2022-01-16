@@ -147,10 +147,10 @@ classdef VirtualConstraint < handle
             yd = obj.yd_;
         end
         function name = get.PhaseParamName(obj)
-            name = ['p' obj.Name];
+            name = obj.PhaseParams.Name;
         end
         function name = get.OutputParamName(obj)
-            name = ['a' obj.Name];
+            name = obj.OutputParams.Name;
         end
     end
     
@@ -385,7 +385,7 @@ classdef VirtualConstraint < handle
             if ischar(label), label = {label}; end
             
             validateattributes(label,{'cell'},...
-                {'nonempty','numel',obj.Dimension,'row'},...
+                {'nonempty','numel',obj.Dimension,'column'},...
                 'VirtualConstraint','Label');
             cellfun( @(x) validateattributes(...
                 x, {'char'},{}), label);

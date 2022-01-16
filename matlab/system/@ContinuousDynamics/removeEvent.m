@@ -20,9 +20,9 @@ function obj = removeEvent(obj, name)
         event_name = name{i};
         
         if isfield(obj.EventFuncs, event_name)
-            event = obj.EventFuncs.(event_name);
+            %             event = obj.EventFuncs.(event_name);
             obj.EventFuncs = rmfield(obj.EventFuncs,event_name);            
-            delete(event);
+            %             delete(event);
         else
             error('The event (%s) does not exist.\n',event_name);
         end

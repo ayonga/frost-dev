@@ -70,7 +70,7 @@ function [H,Hs] = exportHessian(obj, export_path, varargin)
     hess_symbol = hess.s;
     lambda_symbol = lambda.s;
     
-    cmd = ['Sum[' lambda_symbol '[[i]]*LowerTriangularize@' hess_symbol '[[i, ;;]], {i,' num2str(nexpr) '}]'];
+    cmd = ['Sum[' lambda_symbol '[[i,1]]*LowerTriangularize@' hess_symbol '[[i, ;;]], {i,' num2str(nexpr) '}]'];
     hess_sum = SymExpression(cmd);
     
     hess_nonzeros = nonzeros(hess_sum);

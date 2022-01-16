@@ -13,7 +13,13 @@ classdef EventFunction < handle
     % http://www.opensource.org/licenses/bsd-license.php
     
     
-    
+    properties
+        % a callback function for custom event function
+        CustomEventFunc
+        
+        % a callback function for custom nlp constraints function
+        CustomNLPConstraint
+    end
     
     
     methods
@@ -175,7 +181,7 @@ classdef EventFunction < handle
             
         end
         
-        function nlp = imposeNLPConstraint(obj, nlp, varargin)
+        function nlp = imposeNLPConstraint(obj, nlp, bounds)
             % impose holonomic objaints as NLP objaints in the trajectory
             % optimization problem 'nlp' of the dynamical system
             %
@@ -185,23 +191,30 @@ classdef EventFunction < handle
             arguments
                 obj EventFunction
                 nlp TrajectoryOptimization
-            end
-            arguments (Repeating)
-                varargin
+                bounds = []
             end
             
             if ~isempty(obj.AuxData)
-                nlp = addNodeConstraint(nlp, 'last', obj.h_, obj.DepLists,...
-                    0, 0, obj.AuxData);
+                nlp = addNodeConstraint(nlp, 'all', obj.h_, obj.DepLists,...
+                    0, inf, obj.AuxData);
+                nlp = updateConstrProp(nlp, obj.h_.Name, 'last', ...
+                    'lb',0,'ub',0,'AuxData',obj.AuxData);
             else
-                nlp = addNodeConstraint(nlp, 'last', obj.h_, obj.DepLists, ...
-                    0, 0);
+                nlp = addNodeConstraint(nlp, 'all', obj.h_, obj.DepLists, ...
+                    0, inf);
+                
+                nlp = updateConstrProp(nlp, obj.h_.Name, 'last', ...
+                    'lb',0,'ub',0);
             end
             
             
+            if ~isempty(obj.CustomNLPConstraint)
+                obj.CustomNLPConstraint(obj, nlp, bounds);
+            end
+            
         end
         
-        function f = calcEvent(obj, model)
+        function val = calcEvent(obj, model)
             % calculate the unilateral constraints
             %
             % Parameters:
@@ -214,9 +227,12 @@ classdef EventFunction < handle
             dep_val = getValue(model,obj.DepLists);
             
             if isempty(obj.AuxData)
-                f = feval(obj.h_.Name, dep_val{:});
+                val = feval(obj.h_.Name, dep_val{:});
             else
-                f = feval(obj.h_.Name, dep_val{:}, obj.AuxData{:});
+                val = feval(obj.h_.Name, dep_val{:}, obj.AuxData{:});
+            end
+            if ~isempty(obj.CustomEventFunc)
+                val = obj.CustomEventFunc(obj, model, val, dep_val);                
             end
         end
         
@@ -230,6 +246,19 @@ classdef EventFunction < handle
             end
         end
         
+        function set.CustomEventFunc(obj, func)              
+            assert(isa(func,'function_handle'),'The callback function must be a function handle');
+            assert(nargin(func) == 4, 'The callback function must have exactly four (event, model, val, dep_val) inputs.');
+            assert(nargout(func) >= 1, 'The callback function must have at least one (f) output');
+            obj.CustomEventFunc = func;
+        end       
+        
+        function set.CustomNLPConstraint(obj, func)              
+            assert(isa(func,'function_handle'),'The callback function must be a function handle');
+            assert(nargin(func) == 3, 'The callback function must have at exactly three (event, nlp, bounds) inputs.');
+            %             assert(nargout(func) >= 1, 'The callback function must have at least one (f) output');
+            obj.CustomNLPConstraint = func;
+        end 
     end
     
     

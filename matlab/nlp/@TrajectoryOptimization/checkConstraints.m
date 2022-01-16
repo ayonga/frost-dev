@@ -40,20 +40,19 @@ function [yc, cl, cu] = checkConstraints(obj, x, tol, output_file, permission)
                 fprintf(f_id, 'Constraint: %s \t', constr_name);
                 fprintf(f_id, 'Node: %d \n', k);
                 fprintf(f_id, '------------------------------------------------------------------------------\n');
-                dep_constr = getSummands(constr);
+                %                 dep_constr = getSummands(constr);
                 cl{j,k} = constr.LowerBound;
                 cu{j,k} = constr.UpperBound;
                 yc_ll = zeros(constr.Dimension,1);
-                for ll = 1:numel(dep_constr)
-                    dep_var = dep_constr(ll).DepVariables;
-                    var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
-                    if isempty(dep_constr(ll).AuxData)
-                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, var{:});
-                    else
-                        yc_ll = yc_ll + feval(dep_constr(ll).Funcs.Func, var{:}, dep_constr(ll).AuxData{:});
-                    end
-                    
+                dep_var = constr.DepVariables;
+                var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
+                if isempty(constr.AuxData)
+                    yc_ll = feval(constr.Funcs.Func, var{:});
+                else
+                    yc_ll = feval(constr.Funcs.Func, var{:}, constr.AuxData{:});
                 end
+                    
+                
                 
                 yc{j,k} = yc_ll;
                 fprintf(f_id,'%12s %12s %12s\n','Lower','Constraint','Upper');

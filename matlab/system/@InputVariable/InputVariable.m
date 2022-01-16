@@ -115,8 +115,8 @@ classdef InputVariable < BoundedVariable
                 model DynamicalSystem
             end
             [nr,nc] = dimension(gmap);
-            assert(nr==model.Dimension && nc==obj.Dimension(1),...
-                'The size of the gmap should be (%d x %d).',model.Dimension,obj.Dimension);
+            err_msg = sprintf('The size of the gmap should be (%d x %d).',model.Dimension,obj.Dimension);
+            assert(nr==model.Dimension && nc==obj.Dimension(1),err_msg);
             
             obj.Gmap = SymFunction(['gmap_',obj.Name],gmap,{model.States.x});
         end

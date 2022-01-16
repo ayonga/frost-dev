@@ -83,7 +83,7 @@ function obj = addJumpConstraint(obj, edge, src, tar, bounds)
         % extract the event function object using the index
         event_obj = edge.Plant.Event;
         % impose the NLP constraints (unilateral constraints)
-        event_obj.imposeNLPConstraint(src);
+        event_obj.imposeNLPConstraint(src, bounds);
         % update the upper bound at the last node to be zero (to ensure equality)
         %         event_cstr_name = event_obj.ConstrExpr.Name;
         %         updateConstrProp(src,event_cstr_name,'last','ub',0);
