@@ -102,6 +102,10 @@ classdef Display < handle
             end
         end
         
+        function reset(obj, x)
+            % do nothing
+        end
+        
         function addItem(obj, item)
             name = item.name;
             obj.items(name) = item;

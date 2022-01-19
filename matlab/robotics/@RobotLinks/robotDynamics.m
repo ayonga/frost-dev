@@ -1,4 +1,4 @@
-function [xdot] = secondOrderDynamics(obj, t, x, logger)
+function [xdot] = robotDynamics(obj, t, x, logger)
     % calculate the dynamical equation of the second order dynamical system
     %
     % Parameters:
@@ -12,6 +12,7 @@ function [xdot] = secondOrderDynamics(obj, t, x, logger)
     if nargin < 4
         logger = [];
     end
+    
     
     % extract the state variables into x and dx
     nx = obj.Dimension;
@@ -101,33 +102,35 @@ function [xdot] = secondOrderDynamics(obj, t, x, logger)
             idx = idx + cstr.Dimension;
         end
     end
-%     if isempty(Je)
-%         ddq = ddq_free;
-%     else
-%         gamma = Jedot*dq;
-%         tol = 1e-8;
-%         ddq = ddq_free;
-%         n_c = size(Je,1);
-%         lambda = zeros(n_c,1);
-%         lambda_k = zeros(n_c,1);
-%         mu = 1e-6;
-%         L = lagrangian(ddq, ddq_free, lambda, lambda_k, M, Je, gamma, mu, alpha);
-%         while L > tol
-%             K = [-mu*eye(n_c), Je;
-%                 Je', M];
-%             b = [-gamma + alpha - mu*lambda_k;
-%                 M*ddq_free];
-%             
-%             
-%         end
-%         
-%     end
-        
+    
+    %     if isempty(Je)
+    %         ddq = ddq_free;
+    %     else
+    %         gamma = Jedot*dq;
+    %         tol = 1e-8;
+    %         ddq = ddq_free;
+    %         n_c = size(Je,1);
+    %         lambda = zeros(n_c,1);
+    %         lambda_k = zeros(n_c,1);
+    %         mu = 1e-6;
+    %         L = lagrangian(ddq, ddq_free, lambda, lambda_k, M, Je, gamma, mu, alpha);
+    %         while L > tol
+    %             K = [-mu*eye(n_c), Je;
+    %                 Je', M];
+    %             b = [-gamma + alpha - mu*lambda_k;
+    %                 M*ddq_free];
+    %
+    %
+    %         end
+    %
+    %     end
+    
     % the system dynamics
     xdot = [dq; 
         ddq];
     obj.states_.ddx = ddq;
     
+    % log data
     if ~isempty(logger)
         calc = logger.calc;
         calc.t       = t;
@@ -136,13 +139,15 @@ function [xdot] = secondOrderDynamics(obj, t, x, logger)
         logger.calc  = calc;
     end
     
-%     function L = lagrangian(ddq, ddq_free, lambda, lambda_k, M, Je, gamma, mu, alpha)
-%         if nargin < 9
-%             alpha = zeros(size(ddq));
-%         end
-%         delta_ddq = ddq - ddq_free;
-%         delta_lambda = lambda - lambda_k;
-%         L = (1/2)*sqrt(delta_ddq'*M*delta_ddq) + lambda'*(Je*ddq + gamma - alpha) - ...
-%             (mu/2)*sqrt(delta_lambda'*delta_lambda);
-%     end
+    
+    %     function L = lagrangian(ddq, ddq_free, lambda, lambda_k, M, Je, gamma, mu, alpha)
+    %         if nargin < 9
+    %             alpha = zeros(size(ddq));
+    %         end
+    %         delta_ddq = ddq - ddq_free;
+    %         delta_lambda = lambda - lambda_k;
+    %         L = (1/2)*sqrt(delta_ddq'*M*delta_ddq) + lambda'*(Je*ddq + gamma - alpha) - ...
+    %             (mu/2)*sqrt(delta_lambda'*delta_lambda);
+    %     end
 end
+

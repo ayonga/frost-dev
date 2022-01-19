@@ -1,4 +1,4 @@
-function [tn, xn, lambda] = calcImpactMap(obj, t, x, varargin)
+function [tn, xn, lambda] = calcImpactMap(obj, t, x)
     % calculates the discrete map of the dynamical system that maps
     % xminus from xplus. Subclasses must implement this method by its
     % own.

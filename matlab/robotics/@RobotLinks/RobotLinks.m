@@ -264,6 +264,8 @@ classdef RobotLinks < ContinuousDynamics
             % function
             obj = obj@ContinuousDynamics(name, 'SecondOrder');
             obj.Dimension = ndof;
+            obj.calcDynamics = @(obj,t,x,logger)robotDynamics(obj,t,x,logger);
+            
             
             obj.ConfigFile = config_file;
             

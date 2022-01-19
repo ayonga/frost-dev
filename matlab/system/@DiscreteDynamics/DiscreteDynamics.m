@@ -131,7 +131,7 @@ classdef DiscreteDynamics < DynamicalSystem
         
         function set.calcDiscreteMap(obj, func)
             assert(isa(func,'function_handle'),'The callback function must be a function handle');
-            assert(nargin(func) >= 2, 'The callback function must have at least two (model, t, states) inputs.');
+            assert(nargin(func) >= 3, 'The callback function must have at least two (model, t, states) inputs.');
             %             assert(nargout(func) >= 1, 'The callback function must have at least one (tn, states_n) output');
             obj.calcDiscreteMap = func;
         end

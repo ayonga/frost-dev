@@ -70,10 +70,10 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         function VertexProperties = get.VertexProperties(~)
             
             VertexProperties = struct();
-            VertexProperties.Name =  {'Domain','Control','Param'};
-            VertexProperties.Type = {{'ContinuousDynamics'},{'Controller'},{'struct'}};
+            VertexProperties.Name =  {'Domain','Param', 'Weights'};
+            VertexProperties.Type = {{'ContinuousDynamics'}, {'struct'}, {'numeric'}};
             VertexProperties.Attribute = {{},{},{}};
-            VertexProperties.DefaultValue =  {{[]},{[]},{[]}};
+            VertexProperties.DefaultValue =  {{[]},{[]},NaN};
         end
         
         function EdgeProperties = get.EdgeProperties(~)
