@@ -67,7 +67,7 @@ classdef SymFunction < SymExpression
     
     methods
         
-        function obj = SymFunction(name, expr, vars, params)
+        function obj = SymFunction(name, expr, vars, params, skip_check)
             % The class constructor function.
             %
             % Parameters:       
@@ -82,6 +82,9 @@ classdef SymFunction < SymExpression
             
             obj = obj@SymExpression(expr);
             
+            if nargin < 5
+                skip_check = false;
+            end
             
             
             % validate name string
@@ -130,26 +133,27 @@ classdef SymFunction < SymExpression
                 params = {};
             end
             
-            s = symvar(expr);
-            symvars = [];
-            if ~isempty(vars)
-                for i=1:numel(vars)
-                    symvars = [flatten(vars{i}), symvars]; %#ok<*AGROW>
+            if ~skip_check
+                s = symvar(expr);
+                symvars = [];
+                if ~isempty(vars)
+                    for i=1:numel(vars)
+                        symvars = [flatten(vars{i}), symvars]; %#ok<*AGROW>
+                    end
+                end
+                if ~isempty(params)
+                    for i=1:numel(params)
+                        symvars = [flatten(params{i}), symvars]; %#ok<*AGROW>
+                    end
+                end
+                symvars = transpose(symvars);
+                for i=1:length(s)
+                    ret = char(eval_math_fun('MemberQ',{symvars,s(i)}));
+                    if strcmp(ret, 'False')
+                        error('missingSymbol: All symbolic variables in the expression must be defined either as `vars` or `params`.')
+                    end
                 end
             end
-            if ~isempty(params)
-                for i=1:numel(params)
-                    symvars = [flatten(params{i}), symvars]; %#ok<*AGROW>
-                end
-            end
-            symvars = transpose(symvars);
-            for i=1:length(s)
-                ret = char(eval_math_fun('MemberQ',{symvars,s(i)}));
-                if strcmp(ret, 'False')
-                    error('missingSymbol: All symbolic variables in the expression must be defined either as `vars` or `params`.')
-                end
-            end
-            
             
             obj.Status = struct();
             obj.Status.FunctionExported = false;

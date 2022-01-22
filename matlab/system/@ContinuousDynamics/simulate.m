@@ -61,6 +61,8 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
                 odeopts = odeset(odeopts, 'Events',@(t, x) checkGuard(obj, t, x, eventfuncs, logger));
             end
         end
+    else
+        event_indices = [];
     end
     
     

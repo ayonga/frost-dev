@@ -35,8 +35,8 @@ function obj = configureDynamics(obj, load_path)
             M = SymFunction(['Mmat_L',num2str(i),'_',obj.Name], [], {obj.States.x});
             De{i}  = load(M,load_path);
         else
-            M = eval_math_fun('InertiaMatrixByLink',[links(i),{obj.Dimension}]);
-            De{i} = SymFunction(['Mmat_L',num2str(i),'_',obj.Name], M, {obj.States.x});
+            M = eval_math_fun('InertiaMatrixByLink',[links(i),{obj.Dimension}],{},'DelayedSet',true);
+            De{i} = SymFunction(['Mmat_L',num2str(i),'_',obj.Name], M, {obj.States.x},{},true);
         end
         k = floor(i*100/n_link);
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
@@ -62,8 +62,11 @@ function obj = configureDynamics(obj, load_path)
         De_motor = SymFunction(['Mmat_Rotor_',obj.Name], SymExpression(M_motor), {obj.States.x});
     end
     %     fprintf(1,sp(ones(1,40)));
-    Mmat_full = [De; {De_motor}];
-    obj.setMassMatrix(Mmat_full{:});
+    Mlist = [De; {De_motor}];
+    %     obj.setMassMatrix(Mmat_full{:});
+   
+    obj.Mmat = Mlist;
+    obj.MmatName_ = cellfun(@(f)f.Name, Mlist,'UniformOutput',false);
     
     toc
     

@@ -58,18 +58,18 @@ classdef SymExpression < handle
             end
             
             
-            %             opts = struct(varargin{:});
-            %             if isfield(opts,'DelayedSet')
-            %                 if opts.DelayedSet == true
-            %                     delayed_set = true;
-            %                 elseif opts.DelayedSet == false
-            %                     delayed_set = false;
-            %                 else
-            %                     error('A logical value is expected.');
-            %                 end
-            %             else
-            %                 delayed_set = false;
-            %             end
+            opts = struct(varargin{:});
+            if isfield(opts,'DelayedSet')
+                if opts.DelayedSet == true
+                    delayed_set = true;
+                elseif opts.DelayedSet == false
+                    delayed_set = false;
+                else
+                    error('A logical value is expected.');
+                end
+            else
+                delayed_set = false;
+            end
             
             
             
@@ -97,14 +97,14 @@ classdef SymExpression < handle
                 end
                 %                 end
                 obj.s = eval_math('Unique[symvar$]');
-                %                 if delayed_set
-                %                     % delayed set the formula to the symbol
-                %                     eval_math([obj.s ':=' obj.f ';']);
-                %                 else
-                %                     % set the formula to the symbol
-                %                     eval_math([obj.s '=' obj.f ';']);
-                %                 end
-                eval_math([obj.s '=' obj.f ';']);
+                if delayed_set
+                    % delayed set the formula to the symbol
+                    eval_math([obj.s ':=' obj.f ';']);
+                else
+                    % set the formula to the symbol
+                    eval_math([obj.s '=' obj.f ';']);
+                end
+                %                 eval_math([obj.s '=' obj.f ';']);
             else
                 obj.f = formula(x);
                 obj.s = x.s;

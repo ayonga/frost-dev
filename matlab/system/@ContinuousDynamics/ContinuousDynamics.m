@@ -246,7 +246,7 @@ classdef ContinuousDynamics < DynamicalSystem
         nlp = imposeNLPConstraint(obj, nlp, varargin);
     end
     
-    properties (Access=private, Hidden)
+    properties (Access=protected, Hidden)
         % The function name of the Mmat
         %
         % @type char

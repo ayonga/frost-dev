@@ -66,7 +66,7 @@ classdef InputVariable < BoundedVariable
                dim {mustBeInteger,mustBePositive,mustBeScalarOrEmpty} = []
                lb  double = []
                ub  double = []
-               cat char {mustBeMember(cat,{'','Control','ConstraintWrench','External', 'JointWrench'})} = ''
+               cat char {mustBeMember(cat,{'','Control','ConstraintWrench','External', 'JointWrench', 'ContactWrench'})} = ''
            end
            %                opts.Alias char = ''
            %                opts.Labels (:,:) cell = {}
