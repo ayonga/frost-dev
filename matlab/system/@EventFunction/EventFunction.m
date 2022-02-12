@@ -214,7 +214,7 @@ classdef EventFunction < handle
             
         end
         
-        function val = calcEvent(obj, model)
+        function val = calcEvent(obj, model, t, t0)
             % calculate the unilateral constraints
             %
             % Parameters:
@@ -232,7 +232,7 @@ classdef EventFunction < handle
                 val = feval(obj.h_.Name, dep_val{:}, obj.AuxData{:});
             end
             if ~isempty(obj.CustomEventFunc)
-                val = obj.CustomEventFunc(obj, model, val, dep_val);                
+                val = obj.CustomEventFunc(obj, model, val, dep_val, t, t0);                
             end
         end
         
@@ -248,8 +248,8 @@ classdef EventFunction < handle
         
         function set.CustomEventFunc(obj, func)              
             assert(isa(func,'function_handle'),'The callback function must be a function handle');
-            assert(nargin(func) == 4, 'The callback function must have exactly four (event, model, val, dep_val) inputs.');
-            assert(nargout(func) >= 1, 'The callback function must have at least one (f) output');
+            assert(nargin(func) == 6, 'The callback function must have exactly four (event, model, val, dep_val, t, t0) inputs.');
+            %             assert(nargout(func) >= 1, 'The callback function must have at least one (f) output');
             obj.CustomEventFunc = func;
         end       
         

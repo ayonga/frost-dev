@@ -89,11 +89,11 @@ function [xdot] = robotDynamics(obj, t, x, logger)
     if isempty(Je)
         ddq = ddq_free;
     else
-        Xi = Je * (M \ transpose(Je));
-        lambda = -Xi \ (Jedot * dq + Je * ddq_free);
-        P = eye(nx) - M\(transpose(Je)/Xi)*Je;
-        %         ddq = M\(-Fv+Gv+Je'*lambda);
-        ddq = P*ddq_free;
+        XiInv = Je * (M \ transpose(Je));
+        lambda = -XiInv \ (Jedot * dq + Je * ddq_free);
+        %         P = eye(nx) - M\(transpose(Je)/XiInv)*Je;
+        ddq = M\(-Fv+Gv+Je'*lambda);
+        %         ddq = P*ddq_free;
         idx = 1;
         for i=1:n_cstr
             cstr = h_cstr(i);

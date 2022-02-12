@@ -57,8 +57,19 @@ classdef NonlinearProgram < handle
     properties 
         % The solution of the NLP problem
         Sol
+        
+        % The info of the solution
+        Info
     end
     
+    properties 
+        x_i
+        
+        f_i
+        
+        info_i
+        
+    end
     
     %% Public methods
     methods

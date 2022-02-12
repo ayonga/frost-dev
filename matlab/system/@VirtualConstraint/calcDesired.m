@@ -45,25 +45,33 @@ function yd = calcDesired(obj, t, x, dx, a, p)
             states = {x,dx};
     end
     
+    tau = calcPhaseVariable(obj, t, x, dx, p);
+    if tau{1} < 0
+        s = 1;
+    elseif tau{1} > 1
+        s = obj.NumSegment;
+    else
+        s = discretize(tau{1},0:1/obj.NumSegment:1);
+    end
     % compute the derivatives
     if is_state_based
         
-        yd{1} = feval(yd_funcs{1}, x, params{:});
+        yd{1} = feval(yd_funcs{1,s}, x, params{:});
         if rel_deg > 1
             for i=2:rel_deg
-                yd{i} = feval(yd_funcs{i}, states{:}, params{:});    %#ok<*AGROW>
+                yd{i} = feval(yd_funcs{i,s}, states{:}, params{:});    %#ok<*AGROW>
             end
         end
-        yd{rel_deg+1} = feval(yd_funcs{rel_deg+1}, states{:}, params{:});
+        yd{rel_deg+1} = feval(yd_funcs{rel_deg+1,s}, states{:}, params{:});
         
     else
-        yd{1} = feval(yd_funcs{1}, t, params{:});
+        yd{1} = feval(yd_funcs{1,s}, t, params{:});
         if rel_deg > 1
             for i=2:rel_deg
-                yd{i} = feval(yd_funcs{i}, t, params{:});    %#ok<*AGROW>
+                yd{i} = feval(yd_funcs{i,s}, t, params{:});    %#ok<*AGROW>
             end
         end
-        yd{rel_deg+1} = feval(yd_funcs{rel_deg+1}, t, params{:});
+        yd{rel_deg+1} = feval(yd_funcs{rel_deg+1,s}, t, params{:});
     end
     
 end

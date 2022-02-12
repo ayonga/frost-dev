@@ -11,7 +11,7 @@ function frost_addpath()
     addpath(fullfile(cur, 'matlab', 'nlp'));
     addpath(fullfile(cur, 'matlab', 'solver'));
     addpath(fullfile(cur, 'matlab', 'system'));
-    addpath(fullfile(cur, 'matlab', 'control'));
+    %     addpath(fullfile(cur, 'matlab', 'control'));
     addpath(fullfile(cur, 'matlab', 'robotics'));
     % Add useful custom functions path
     addpath(fullfile(cur, 'matlab', 'utils'));

@@ -37,7 +37,7 @@ function [value, isterminal, direction] = checkGuard(obj, t, x, eventfuncs, logg
         
         
         % compute the value of the event function
-        value(i) = calcEvent(eventfuncs(i), obj);
+        value(i) = calcEvent(eventfuncs(i), obj, t, obj.t0);
     end
     logger.calc.event = value;
     

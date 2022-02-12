@@ -79,12 +79,23 @@ classdef VirtualConstraint < handle
         %
         % @type logical
         IsHolonomic
-
         
-        % The maximum degree of the polynomial function
+        % the number of knots for a B-spline
         %
         % @type integer
-        PolyDegree
+        NumKnotPoint
+        
+        % The number of control points for a B-spline or Bezier spline
+        %
+        % @type integer
+        NumControlPoint
+        
+        
+        % The number of segments
+        %
+        % @type integer
+        NumSegment
+        
         
         % The actual outputs
         %
@@ -240,11 +251,12 @@ classdef VirtualConstraint < handle
                 derivatives SymExpression
             end
             arguments
-                options.DesiredType char {mustBeMember(options.DesiredType,{'Bezier','CWF','ECWF','MinJerk','Constant'})}
-                options.PolyDegree double {mustBeInteger,mustBeGreaterThan(options.PolyDegree,1),mustBeScalarOrEmpty}
+                options.DesiredType char {mustBeMember(options.DesiredType,{'Bezier','CWF','ECWF','MinJerk','Constant','BSpline'})} = 'Bezier'
+                options.NumKnotPoint double {mustBeInteger,mustBeGreaterThan(options.NumKnotPoint,1),mustBeScalarOrEmpty} = 11 %m+1
+                options.NumControlPoint double {mustBeInteger,mustBeGreaterThan(options.NumControlPoint,1),mustBeScalarOrEmpty} = 7 %n+1
                 options.OutputLabel (:,1) cell
-                options.RelativeDegree double {mustBeInteger,mustBePositive} 
-                options.PhaseType char {mustBeMember(options.PhaseType,{'StateBased','TimeBased'})} 
+                options.RelativeDegree double {mustBeInteger,mustBePositive} = 2
+                options.PhaseType char {mustBeMember(options.PhaseType,{'StateBased','TimeBased'})} = 'TimeBased'
                 options.PhaseVariable (1,1) SymExpression {mustBeScalarOrEmpty}
                 options.PhaseParams ParamVariable
                 options.IsHolonomic logical = true
@@ -257,37 +269,22 @@ classdef VirtualConstraint < handle
             obj.Name = name;
             obj.ya_ = expr;
             obj.Dimension = length(expr);
-                        
-            
-            
+            obj.RelativeDegree = options.RelativeDegree;
+            obj.PhaseType = options.PhaseType;
+            obj.NumKnotPoint = options.NumKnotPoint;
+            obj.NumControlPoint = options.NumControlPoint;
+            obj.DesiredType = options.DesiredType;
             % validate and assign the desired outputs
+                        
+            [yd, a] = obj.getDesiredOutput();
             
-            
-            if isfield(options, 'DesiredType')
-                if isfield(options, 'PolyDegree')
-                    obj.setDesiredType(options.DesiredType, options.PolyDegree);
-                else
-                    obj.setDesiredType(options.DesiredType);
-                end
-            else
-                error('The desired output function type (DesiredType) must be given.');
-            end
+            obj.yd_ = yd;
+            obj.OutputParams = a;
             
             if isfield(options, 'OutputLabel')
                 obj.setOutputLabel(options.OutputLabel);
             end
-            
-            if isfield(options, 'RelativeDegree')
-                obj.setRelativeDegree(options.RelativeDegree);
-            else
-                error('The relative degree of the virtual constraints (RelativeDegree) must be defined.');
-            end
-            
-            if isfield(options, 'PhaseType')
-                obj.setPhaseType(options.PhaseType);
-            else
-                error('The type of phase variable (PhaseType) must be given.');
-            end
+                        
             
             if isfield(options, 'PhaseVariable')
                 if isfield(options, 'PhaseParams')
@@ -318,15 +315,17 @@ classdef VirtualConstraint < handle
             
             
     methods (Access = private)
-        function [yd,a] = getDesiredOutput(obj, type, n_output, order)
+        function [yd,a] = getDesiredOutput(obj)
             % Returns the symbolic expression for the desired outputs
-            switch type
+            obj.NumSegment = 1; % default number
+            switch obj.DesiredType
                 case 'Constant'
                     n_param = 1;
                 case 'Bezier'
-                    n_param = order + 1;
-                    assert(~isempty(order),...
-                        'Must specify the order of the Bezier polynomials.');
+                    n_param = obj.NumControlPoint;
+                case 'BSpline'
+                    n_param = obj.NumControlPoint; % number of control point + 1
+                    obj.NumSegment = (obj.NumKnotPoint - 1) - 2*(obj.NumKnotPoint - obj.NumControlPoint - 1); % (m-1) - 2*(m-n-1)
                 case 'CWF'
                     n_param = 5;
                 case 'ECWF'
@@ -337,15 +336,20 @@ classdef VirtualConstraint < handle
                     error('Undefined function type for the desired output.');
                     
             end
-            
+            n_output = obj.Dimension;
             % construct the parameter set for the desired outputs
-            a = ParamVariable(['a' obj.Name],[n_output,n_param]);   
-            if strcmp(type, 'Bezier')
-                yd = eval_math_fun('DesiredFunction',{str2mathstr(type),n_output,a, order});
+            a = ParamVariable(['a' obj.Name],[n_output,n_param]);  
+            yd = cell(1, obj.NumSegment);
+            if strcmp(obj.DesiredType, 'Bezier')
+                tmp = eval_math_fun('DesiredFunction',{str2mathstr(obj.DesiredType),n_output, a, obj.NumControlPoint-1});
+            elseif strcmp(obj.DesiredType, 'BSpline')
+                tmp = eval_math_fun('DesiredFunction',{str2mathstr(obj.DesiredType),n_output, a, obj.NumKnotPoint-1, obj.NumControlPoint-1});
             else
-                yd = eval_math_fun('DesiredFunction',{str2mathstr(type),n_output,a});
+                tmp = eval_math_fun('DesiredFunction',{str2mathstr(obj.DesiredType),n_output, a});
             end
-            
+            for i=1:obj.NumSegment
+                yd{i} = tmp(:,i);
+            end
         end
     end
     
@@ -393,58 +397,8 @@ classdef VirtualConstraint < handle
             obj.OutputLabel = label;
         end
         
-        % PhaseType
-        function obj = setPhaseType(obj, type)
-            % sets the type of the phase variable
-            %
-            % Parameters:
-            % type: type of the phase variable @type char
-            
-            
-            type = validatestring(type, {'StateBased','TimeBased'},...
-                'VirtualConstraint','PhaseType');
-            obj.PhaseType = type;
-        end
 
-        % DesiredType
-        function obj = setDesiredType(obj, type, degree)
-            % sets the function type of the desired outputs
-            %
-            % Parameters:
-            % type: the function type @type char
-            % degree: the degree of polynomials @type integer
-            
-            %             type = validatestring(type, ...
-            %                 {'Bezier','CWF','ECWF','MinJerk','Constant'},...
-            %                 'VirtualConstraint','DesiredType');
-            obj.DesiredType = type;
-            if strcmp(type,'Bezier')
-                validateattributes(degree,{'double'},...
-                    {'integer','positive','>',1,'scalar'},...
-                    'VirtualConstraint','PolyDegree');
-                obj.PolyDegree = degree;
-                [yd, a] = obj.getDesiredOutput(type, obj.Dimension, degree);
-            else
-                [yd, a] = obj.getDesiredOutput(type, obj.Dimension);
-            end
-            
-            obj.yd_ = yd;
-            obj.OutputParams = a;
-        end
 
-        % RelativeDegree
-        function obj = setRelativeDegree(obj, degree)
-            % sets the relative degree of the virtual constraints
-            % 
-            % Parameters:
-            % degree: relative degree of outputs @type integer
-            
-            validateattributes(degree, {'double'},...
-                {'nonempty','scalar','positive','integer'},...
-                'VirtualConstraint','RelativeDegree');
-            obj.RelativeDegree = degree;
-             
-        end
 
         % Holonomic
         function obj = setHolonomic(obj, type)

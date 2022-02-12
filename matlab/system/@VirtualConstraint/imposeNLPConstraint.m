@@ -161,7 +161,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     %% y(x,a,p) = 0
     if nzy(1)==1
         if isempty(load_path)
-            y = ya{1} - yd{1};
+            y = ya{1} - yd{1, 1};
             if ~is_state_based
                 %% Time-based outputs, need to incoorporates the time variable
                 y = subs(y,t,tsubs);
@@ -202,7 +202,7 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
             if nzy(i) == 1
                 %% state-based output, no need to use time variable
                 if isempty(load_path)
-                    dy = ya{i} - yd{i};
+                    dy = ya{i} - yd{i, 1};
                     if ~is_state_based
                         %% Time-based outputs, need to incoorporates the time variable
                         dy = subs(dy,t,tsubs);
@@ -221,115 +221,119 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
     end
         
         
-        
+    obj.OutputFuncs = y_fun;
     
     %% the highest order derivatives imposed at all nodes (feedback linearization) 
-    node_list = 1:1:n_node;
-    dim = obj.Dimension;
-    vars   = nlp.OptVarTable; 
-    
-    y_dynamics = repmat(NlpFunction(),n_node,1);
-    if isempty(load_path)
-        % state-based output, no need to use time variable
-        if is_state_based
-            ddy = (ya{rel_deg+1} - yd{rel_deg+1})*dX;
-        else
-            ddy = ya{rel_deg+1}*dX - yd{rel_deg+1};
-        end
+    start_nodes = ceil(1:(n_node-1)/obj.NumSegment:n_node);
+    start_nodes = start_nodes(1:end-1);
+    end_nodes   = floor(1:(n_node-1)/obj.NumSegment:n_node);
+    end_nodes   = end_nodes(2:end);
+    for s = 1:obj.NumSegment
+        node_list = start_nodes(s):1:end_nodes(s);
+        vars   = nlp.OptVarTable;
         
-        %         ep_s = SymVariable('k',[rel_deg,1]);
-        
-        %         for j=1:1:rel_deg
-        %             ddy = ddy + ep_s(j)*(ya{j} - yd{j});
-        %         end
-        % Time-based outputs, need to incoorporates the time variable
-        if ~is_state_based
-            ddy = subs(ddy,t,tsubs);
-        end
-        
-        
-        %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
-        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var], [aux_var]);
-    else        
-        %         ep_s = SymVariable('k',[rel_deg,1]);
-        
-        %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
-        ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var], [aux_var]);
-        ddy_fun = load(ddy_fun, load_path);
-        
-    end
-        
-        
-        
-        
-    for i=node_list
-        idx = node_list(i);
-        if nlpOptions.DistributeParameters
-            param_index = idx;
-        else
-            param_index = 1;
-        end
-        
-        if ~isempty(a_name)
-            a_deps = vars.(a_name)(param_index);
-        else
-            a_deps = {};
-        end
-        if ~isempty(p_name)
-            p_deps = vars.(p_name)(param_index);
-        else
-            p_deps = {};
-        end
-        
-        
-        if nlpOptions.DistributeTimeVariable
-            time_index = idx;
-        else
-            time_index = 1;
-        end
-        
-        if ~isempty(t_name)
-            t_deps = vars.(t_name)(time_index);
-        else
-            t_deps = {};
-        end
-        if ~isempty(aux_var)
-            switch length(aux_var)
-                case 2
-                    % k, nNode
-                    aux_data = {idx,n_node};
-                    
-                case 3
-                    % T, k, nNode
-                    aux_data = {nlpOptions.ConstantTimeHorizon, idx,n_node};
-                    
+        y_dynamics = repmat(NlpFunction(),length(node_list),1);
+        if isempty(load_path)
+            % state-based output, no need to use time variable
+            if is_state_based
+                ddy = (ya{rel_deg+1} - yd{rel_deg+1, s})*dX;
+            else
+                ddy = ya{rel_deg+1}*dX - yd{rel_deg+1, s};
             end
+            
+            %         ep_s = SymVariable('k',[rel_deg,1]);
+            
+            %         for j=1:1:rel_deg
+            %             ddy = ddy + ep_s(j)*(ya{j} - yd{j});
+            %         end
+            % Time-based outputs, need to incoorporates the time variable
+            if ~is_state_based
+                ddy = subs(ddy,t,tsubs);
+            end
+            
+            
+            %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], ddy, [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+            ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_s',num2str(s),'_', name], ddy, [t_var, x_var, dx_var, a_var, p_var], [aux_var]);
         else
-            aux_data = [];
+            %         ep_s = SymVariable('k',[rel_deg,1]);
+            
+            %         ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_' name], [], [t_var, x_var, dx_var, a_var, p_var, c_var], [aux_var,{ep_s}]);
+            ddy_fun = SymFunction(['d' num2str(rel_deg) 'y_s',num2str(s),'_', name], [], [t_var, x_var, dx_var, a_var, p_var], [aux_var]);
+            ddy_fun = load(ddy_fun, load_path);
+            
         end
-        x_deps = cellfun(@(x)vars.(x)(idx),x_name,'UniformOutput',false);
-        dx_deps = cellfun(@(x)vars.(x)(idx),dx_name,'UniformOutput',false);
         
-        dep_vars = [t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps]';
-        y_dynamics(i) = NlpFunction(ddy_fun, dep_vars, 'lb', 0, 'ub', 0,...
-            'AuxData', aux_data);
         
-        %         y_dynamics(i) = NlpFunction('Name',[obj.Name '_output_dynamics'],...
-        %             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
-        %             'ub',ceq_err_bound,'Type','Nonlinear',...
-        %             'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]',...
-        %             'AuxData', {aux_data});
-        %             'AuxData', {[aux_data,{ep}]});
         
+        
+        for i=1:length(node_list)
+            idx = node_list(i);
+            if nlpOptions.DistributeParameters
+                param_index = idx;
+            else
+                param_index = 1;
+            end
+            
+            if ~isempty(a_name)
+                a_deps = vars.(a_name)(param_index);
+            else
+                a_deps = {};
+            end
+            if ~isempty(p_name)
+                p_deps = vars.(p_name)(param_index);
+            else
+                p_deps = {};
+            end
+            
+            
+            if nlpOptions.DistributeTimeVariable
+                time_index = idx;
+            else
+                time_index = 1;
+            end
+            
+            if ~isempty(t_name)
+                t_deps = vars.(t_name)(time_index);
+            else
+                t_deps = {};
+            end
+            if ~isempty(aux_var)
+                switch length(aux_var)
+                    case 2
+                        % k, nNode
+                        aux_data = {idx,n_node};
+                        
+                    case 3
+                        % T, k, nNode
+                        aux_data = {nlpOptions.ConstantTimeHorizon, idx,n_node};
+                        
+                end
+            else
+                aux_data = [];
+            end
+            x_deps = cellfun(@(x)vars.(x)(idx),x_name,'UniformOutput',false);
+            dx_deps = cellfun(@(x)vars.(x)(idx),dx_name,'UniformOutput',false);
+            
+            dep_vars = [t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps]';
+            y_dynamics(i) = NlpFunction(ddy_fun, dep_vars, 'lb', 0, 'ub', 0,...
+                'AuxData', aux_data);
+            
+            %         y_dynamics(i) = NlpFunction('Name',[obj.Name '_output_dynamics'],...
+            %             'Dimension',dim,'SymFun',ddy_fun,'lb',-ceq_err_bound,...
+            %             'ub',ceq_err_bound,'Type','Nonlinear',...
+            %             'DepVariables',[t_deps, x_deps{:}, dx_deps{:}, a_deps, p_deps, c_deps]',...
+            %             'AuxData', {aux_data});
+            %             'AuxData', {[aux_data,{ep}]});
+            
+        end
+        
+        
+        obj.OutputFuncs = [obj.OutputFuncs;{ddy_fun}];
+        %     obj.OutputFuncsName_ = cellfun(@(f)f.Name, obj.OutputFuncs,'UniformOutput',false);
+        
+        % add output dynamics at all nodes
+        % add dynamical equation constraints
+        nlp = addConstraint(nlp,node_list,y_dynamics);
+    
     end
-        
-        
-    obj.OutputFuncs = [y_fun;{ddy_fun}];
-    %     obj.OutputFuncsName_ = cellfun(@(f)f.Name, obj.OutputFuncs,'UniformOutput',false);
-    
-    % add output dynamics at all nodes
-    % add dynamical equation constraints
-    nlp = addConstraint(nlp,'all',y_dynamics);
-    
-    
 end
