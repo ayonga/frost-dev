@@ -114,7 +114,9 @@ classdef ContinuousDynamics < DynamicalSystem
         VirtualConstraints
     end
     
-    
+    properties (Hidden, Access = private)
+        t0
+    end
     
     %%
     methods

@@ -34,7 +34,7 @@ function [sol, info] = optimize(obj, x0)
     Funcs.gradient          = @(x)IpoptGradient(x, obj.Objective, dimVars, obj.Options.UseMexSparse);
     Funcs.jacobian          = @(x)IpoptJacobian(x, obj.Constraint, dimVars, obj.Options.UseMexSparse);
     Funcs.jacobianstructure = @()IpoptJacobianStructure(obj.Constraint, dimVars, obj.Options.UseMexSparse);
-    
+    Funcs.iterfunc          = @(x, f, info)IpoptIterFunc(nlp, x, f, info);
     if strcmpi(opts.ipopt.hessian_approximation, 'exact')
         
         Funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
@@ -47,8 +47,19 @@ function [sol, info] = optimize(obj, x0)
     
     [sol, info] = ipopt(x0, Funcs, opts);
     
-end    
+    nlp.Sol = sol;
+    nlp.Info = info;
     
+end    
+    % iteration function
+    
+    function ret = IpoptIterFunc(nlp, x, f, info)
+        % iteration function
+        nlp.x_i = x;
+        nlp.f_i = f;
+        nlp.info_i = info;    
+        ret = true;
+    end
     %% objective function
     function f = IpoptObjective(x, objective)
         % nested function that commputes the objective function of the

@@ -70,7 +70,7 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
     if ~isempty(obj.PreIntegrationCallback)
         obj.PreIntegrationCallback(obj, t0, x0);
     end
-    
+    obj.t0 = t0;
     
     % run the forward simulation
 %     tf = params.ptime(1);

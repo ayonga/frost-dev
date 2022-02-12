@@ -50,7 +50,11 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         
         % compute the spatial position (cartesian position + Euler angles)
         pos = getCartesianPosition(obj, contact);
-        rpy = getRelativeEulerAngles(obj, contact, ref);
+        if strcmp(contact.Type,'PointContactWithFriction') || strcmp(contact.Type,'PointContactWithoutFriction')
+            rpy = SymExpression([0,0,0]);
+        else
+            rpy = getRelativeEulerAngles(obj, contact, ref);
+        end
         %         rpy = getEulerAngles(obj, contact);
         
         h = transpose([pos, rpy]); %effectively as transpose

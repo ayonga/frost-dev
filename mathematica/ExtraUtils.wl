@@ -60,6 +60,15 @@ DesiredFunction::usage = "DesiredFunction[Type, N, a] returns the desired output
 Begin["`Private`"]
 
 (* Implementation of the package *)
+BSplineExpr[m_,n_,a_]:=Block[
+	{G,T,F,Tlist, p=m-n-1},
+	Tlist = Join[Table[0,{k,p+1}],Table[k/(m-2*p),{k,m-2*p-1}],Table[1,{k,p+1}]];
+	T[i_]:=Part[Tlist,i+1];
+	F[t_,k_,0] := If[t>=T[k] && t <T[k+1], 1, 0];
+	F[t_,i_,j_]:=If[T[i+j]-T[i]!=0,(t-T[i])/(T[i+j]-T[i])*F[t, i,j-1],0] + If[T[i+j+1]-T[i+1]!=0,(T[i+j+1]-t)/(T[i+j+1]-T[i+1])*F[t,i+1,j-1], 0];
+	G[t_]:=Transpose@Table[Simplify[F[t,i,p],Assumptions->t>=T[p+j]&&t<T[p+j+1]],{i,0,n},{j,0,m-2*p-1}];
+	G[Global`t] . a
+];
 
 DesiredFunction::badargs = "Undefined Function Type"; 
 
@@ -85,8 +94,14 @@ DesiredFunction["MinJerk", N_, a_] :=
 		^ 3 - 15 * (Global`t / a[[#, 3]]) ^ 4 + 6 * (Global`t / a[[#, 3]]) ^ 
 		5)}& /@ Range[N]; 
 
+
+DesiredFunction["BSpline", N_, a_, m_, n_] := 
+	BSplineExpr[m,n,a[[#]]]&/@Range[N];
+	
 DesiredFunction[type_?StringQ, ___] :=
-	(Message[DesiredFunction::badargs]; $Failed); 
+	(Message[DesiredFunction::badargs]; $Failed);
+	
+
 
 
 SyntaxInformation[ToVectorForm] = {"ArgumentsPattern" -> {_}}; 
