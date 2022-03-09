@@ -1,4 +1,4 @@
-function [A_G_fun, A_G_dot_fun] = getCMM(obj, export_path)
+function [h_G_fun, A_G_fun, A_G_dot_fun] = getCMM(obj, export_path)
     % 
     % 
     % Note: spatial twist = [linear; angular]
@@ -12,6 +12,8 @@ function [A_G_fun, A_G_dot_fun] = getCMM(obj, export_path)
     
     % compute homogeneous transformationi from the world frame to the CoM
     % frame        
+    %     r_toe_frame = right_toe_frame(obj);
+    %     pos = getCartesianPosition(obj, r_toe_frame);
     p_com = obj.getComPosition();
     R_com = eye(3);
     T_com = [R_com, transpose(p_com); 0 0 0 1];
@@ -23,6 +25,7 @@ function [A_G_fun, A_G_dot_fun] = getCMM(obj, export_path)
     
     
     A_G_fun = cell(1,n_link);
+    h_G_fun = cell(1,n_link);
     
     m = 100;
     fprintf('Computing symbolic expression of the centroidal momemtum matrix h_G(q): \t');
@@ -41,20 +44,25 @@ function [A_G_fun, A_G_dot_fun] = getCMM(obj, export_path)
         % CoM frame
         T_w_to_link = computeForwardKinematics(obj.Links(i));
         T_link_to_w = CoordinateFrame.RigidInverse(T_w_to_link);
-        T_link_to_frame = T_link_to_w*T_com;  
+        T_link_to_frame = T_link_to_w*T_com;
         
         % compute adjoint transformation matrix
         AdT_link_to_frame = CoordinateFrame.RigidAdjoint(T_link_to_frame);
         
-        % compute the spatial momumtum of each link in the CoM frame coordinate
-        A_G_i = AdT_link_to_frame*h_b;
-        A_G_fun{i} = SymFunction(['cmm_L',num2str(i),'_',obj.Name],A_G_i,{x});
+        %         T_w_to_link = computeForwardKinematics(obj.Links(i));
+        %         T_com_to_link = CoordinateFrame.RigidInverse(T_com)*T_w_to_link;
+        %         AdT_com_to_link = CoordinateFrame.RigidAdjoint(T_com_to_link);
         
+        % compute the spatial momumtum of each link in the CoM frame coordinate
+        A_G_i = transpose(AdT_link_to_frame)*h_b;
+        A_G_fun{i} = SymFunction(['cmm_L',num2str(i),'_',obj.Name],A_G_i,{x});
+        h_G_fun{i} = SymFunction(['Hc_L',num2str(i),'_',obj.Name],A_G_i*dx,{x,dx});
+        %                 h_G = h_G + A_G_i*dx;
         
         k = floor(i*100/n_link);
         fprintf(1,[bs(mod(0:2*(ceil(log10(k+1))+msglen)-1,2)+1) msg],k);
     end
-    
+    %     h_G_fun = SymFunction(['h_g_', obj.Name], h_G, {x, dx});
     
     A_G_dot_fun = cell(1,n_link);
 %     m = 100;
@@ -75,8 +83,9 @@ function [A_G_fun, A_G_dot_fun] = getCMM(obj, export_path)
 
     
     if nargin > 1 && ~isempty(export_path)
+%         export(h_G_fun,export_path);
         cellfun(@(x)export(x,export_path),A_G_fun,'UniformOutput',false);        
-        
+        cellfun(@(x)export(x,export_path),h_G_fun,'UniformOutput',false); 
 %         cellfun(@(x)export(x,export_path),A_G_dot_fun,'UniformOutput',false);   
     end
     
