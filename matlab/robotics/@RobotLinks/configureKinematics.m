@@ -35,7 +35,7 @@ function obj = configureKinematics(obj, dofs, links)
         while ~isempty(c_index)
             dofs_obj(kin_branch(1)).setReference(dofs_obj(c_index));
             
-            dofs_obj(c_index).addChildJoints(dofs_obj(kin_branch(1)));
+            dofs_obj(c_index).addChildJoints(dofs_obj(kin_branch(1)), kin_branch(1));
             
             kin_branch = [c_index,kin_branch]; 
         
@@ -46,7 +46,8 @@ function obj = configureKinematics(obj, dofs, links)
         
         kin_branch = [];
     end
-   
+    
+    obj.JointIndices = unique([kin_tree{:}]);
     % update the forward kinematics (homogeneous transformation) of the
     % rigid joints
     base_frame = CoordinateFrame('Name','base','P',[0;0;0],'R',[0;0;0]);

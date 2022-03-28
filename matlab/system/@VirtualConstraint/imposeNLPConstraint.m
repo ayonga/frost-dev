@@ -213,7 +213,20 @@ function nlp = imposeNLPConstraint(obj, nlp, ep, nzy, load_path)
                     y_fun{i} = load(y_fun{i}, load_path);
                 end
                 % add constraint at the first node
-                
+                if ~isempty(aux_var)
+                    switch length(aux_var)
+                        case 2
+                            % k, nNode
+                            aux_data = {1,n_node};
+                            
+                        case 3
+                            % T, k, nNode
+                            aux_data = {nlpOptions.ConstantTimeHorizon, 1, n_node};
+                            
+                    end
+                else
+                    aux_data = [];
+                end
                 nlp = addNodeConstraint(nlp, 'first', y_fun{i}, [t_name, x_name ,a_name, p_name], ...
                     0, 0, aux_data);
             end

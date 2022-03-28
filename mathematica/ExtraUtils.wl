@@ -90,9 +90,12 @@ DesiredFunction["Bezier", N_, a_, M_] :=
 		(M - j), {j, 0, M}]}& /@ Range[N]; 
 
 DesiredFunction["MinJerk", N_, a_] :=
-	{a[[#, 2]] + (a[[#, 1]] - a[[#, 2]]) * (10 * (Global`t / a[[#, 3]]) 
+	{a[[#, 1]] + (a[[#, 2]] - a[[#, 1]]) * (10 * (Global`t / a[[#, 3]]) 
 		^ 3 - 15 * (Global`t / a[[#, 3]]) ^ 4 + 6 * (Global`t / a[[#, 3]]) ^ 
 		5)}& /@ Range[N]; 
+		
+DesiredFunction["Cubic", N_, a_] :=
+	{ -4*a[[#, 1]] * (Global`t-1/2)^2+(-a[[#, 2]]+a[[#, 1]])}& /@ Range[N]; 
 
 
 DesiredFunction["BSpline", N_, a_, m_, n_] := 

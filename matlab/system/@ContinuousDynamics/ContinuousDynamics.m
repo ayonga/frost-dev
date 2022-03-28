@@ -242,6 +242,7 @@ classdef ContinuousDynamics < DynamicalSystem
             obj.calcDynamics = func;
         end
         
+        [Je, Jedot] = calcConstraintsJacobian(obj, q, dq);
     end
     
     methods

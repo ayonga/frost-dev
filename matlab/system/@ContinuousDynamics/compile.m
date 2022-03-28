@@ -65,6 +65,16 @@ function obj = compile(obj, export_path, varargin)
     end
     
     % export the virtual constraints       
+    v_constrs = fieldnames(obj.VirtualConstraints);
+    if ~isempty(v_constrs)
+        for i=1:length(v_constrs)
+            input = v_constrs{i};
+            export(obj.VirtualConstraints.(input),export_path,varargin{:});
+        end
+        
+    end
+    
+    % export the input maps    
     inputs = fieldnames(obj.Inputs);
     if ~isempty(inputs)
         for i=1:length(inputs)

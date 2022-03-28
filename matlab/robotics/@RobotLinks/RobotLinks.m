@@ -51,7 +51,7 @@ classdef RobotLinks < ContinuousDynamics
         Joints
         
        
-       
+        JointIndices
     end
     
     properties (Hidden,SetAccess=protected, GetAccess=public)

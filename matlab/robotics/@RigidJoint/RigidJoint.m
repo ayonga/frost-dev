@@ -67,6 +67,8 @@ classdef RigidJoint < CoordinateFrame
         % @type array
         ChildJoints 
         
+        ChildJointIndices
+        
     end
     
     properties (Hidden, SetAccess=public, GetAccess=public)
@@ -237,6 +239,6 @@ classdef RigidJoint < CoordinateFrame
         
         obj = setTwistPairs(obj, dofs, q);
         
-        obj = addChildJoints(obj, joint);
+        obj = addChildJoints(obj, joint, joint_index);
     end
 end

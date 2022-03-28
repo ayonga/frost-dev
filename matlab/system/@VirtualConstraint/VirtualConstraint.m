@@ -251,7 +251,7 @@ classdef VirtualConstraint < handle
                 derivatives SymExpression
             end
             arguments
-                options.DesiredType char {mustBeMember(options.DesiredType,{'Bezier','CWF','ECWF','MinJerk','Constant','BSpline'})} = 'Bezier'
+                options.DesiredType char {mustBeMember(options.DesiredType,{'Bezier','CWF','ECWF','MinJerk','Constant','BSpline','Cubic'})} = 'Bezier'
                 options.NumKnotPoint double {mustBeInteger,mustBeGreaterThan(options.NumKnotPoint,1),mustBeScalarOrEmpty} = 11 %m+1
                 options.NumControlPoint double {mustBeInteger,mustBeGreaterThan(options.NumControlPoint,1),mustBeScalarOrEmpty} = 7 %n+1
                 options.OutputLabel (:,1) cell
@@ -332,6 +332,8 @@ classdef VirtualConstraint < handle
                     n_param = 7;
                 case 'MinJerk'
                     n_param = 3;
+                case 'Cubic'
+                    n_param = 2;
                 otherwise
                     error('Undefined function type for the desired output.');
                     
