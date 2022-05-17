@@ -30,9 +30,14 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
     
     % configure the ODE options
     odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-5,'AbsTol',1e-5);
-    odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
+    
     odeopts = odeset(odeopts, options);
    
+    if isfield(options, 'disp') && ~isempty(options.disp)
+        odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger,options.disp));
+    else
+        odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
+    end
     if isfield(options, 'solver')
         solver = options.solver;
     else
@@ -100,7 +105,7 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
     end
     % post-process
     if ~isempty(obj.PostIntegrationCallback)
-        obj.PostIntegrationCallback(obj, sol.x(end), sol.y(:,end));
+        obj.PostIntegrationCallback(obj, sol.x, sol.y);
     end
     
     

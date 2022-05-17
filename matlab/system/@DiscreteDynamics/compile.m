@@ -27,7 +27,9 @@ function obj = compile(obj, export_path, varargin)
     
     
     % export the event functions
-    export(obj.Event,export_path,varargin{:});
+    if ~isempty(obj.Event)
+        export(obj.Event,export_path,varargin{:});
+    end
     
     % call superclass method
     %     compile@DynamicalSystem(obj, export_path, varargin{:});

@@ -1,4 +1,4 @@
-function status = outputfcn(ts, xs, flag, logger)
+function status = outputfcn(ts, xs, flag, logger, disp)
 
     
     t = [];
@@ -9,6 +9,7 @@ function status = outputfcn(ts, xs, flag, logger)
         case []
             % The last point is what will be stored
             t = ts(end);
+            
         case 'done'
             % Do nothing
     end
@@ -16,6 +17,12 @@ function status = outputfcn(ts, xs, flag, logger)
     if ~isempty(t)
         % Retrieve latest calculation from ODE solver
         status = updateLog(logger);
+        if nargin > 4
+            disp.update(xs(1:length(xs)/2,end));
+            drawnow;
+%             pause(0.01);
+        end
     end
-
+    
+    
 end

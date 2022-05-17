@@ -93,6 +93,7 @@ function [xdot] = secondOrderDynamics(obj, t, x, logger)
         P = eye(nx) - M\(transpose(Je)/Xi)*Je;
         %         ddq = M\(-Fv+Gv+Je'*lambda);
         ddq = P*ddq_free;
+        idx = 1;
         for i=1:n_cstr
             cstr = h_cstr(i);
             cstr_indices = idx:idx+cstr.Dimension-1;

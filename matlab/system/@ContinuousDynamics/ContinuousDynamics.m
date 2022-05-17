@@ -111,7 +111,7 @@ classdef ContinuousDynamics < DynamicalSystem
         %
         %
         % @type struct
-        VirtualConstraints
+        VirtualConstraints = struct()
     end
     
     properties (Hidden, Access = private)

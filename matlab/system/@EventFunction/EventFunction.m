@@ -194,22 +194,24 @@ classdef EventFunction < handle
                 bounds = []
             end
             
-            if ~isempty(obj.AuxData)
-                nlp = addNodeConstraint(nlp, 'all', obj.h_, obj.DepLists,...
-                    0, inf, obj.AuxData);
-                nlp = updateConstrProp(nlp, obj.h_.Name, 'last', ...
-                    'lb',0,'ub',0,'AuxData',obj.AuxData);
-            else
-                nlp = addNodeConstraint(nlp, 'all', obj.h_, obj.DepLists, ...
-                    0, inf);
-                
-                nlp = updateConstrProp(nlp, obj.h_.Name, 'last', ...
-                    'lb',0,'ub',0);
-            end
+            
             
             
             if ~isempty(obj.CustomNLPConstraint)
                 obj.CustomNLPConstraint(obj, nlp, bounds);
+            else
+                if ~isempty(obj.AuxData)
+                    nlp = addNodeConstraint(nlp, 'all', obj.h_, obj.DepLists,...
+                        0, inf, obj.AuxData);
+                    nlp = updateConstrProp(nlp, obj.h_.Name, 'last', ...
+                        'lb',0,'ub',0,'AuxData',obj.AuxData);
+                else
+                    nlp = addNodeConstraint(nlp, 'all', obj.h_, obj.DepLists, ...
+                        0, inf);
+                    
+                    nlp = updateConstrProp(nlp, obj.h_.Name, 'last', ...
+                        'lb',0,'ub',0);
+                end
             end
             
         end

@@ -166,11 +166,7 @@ classdef AbstractAnimator < handle
     methods
         function HandleAxis(obj, t, x)
             [center, radius, yaw] = GetCenter(obj, t, x);
-            if length(radius) == 1
-                axis(obj.axs, [center(1)-radius, center(1)+radius, center(2)-radius, center(2)+radius,center(3)-radius/3, center(3)+radius]);
-            else
-                axis(obj.axs, radius);
-            end
+            
             
             hAngle = 0;
             vAngle = 0;
@@ -201,6 +197,11 @@ classdef AbstractAnimator < handle
             end
             
             if obj.pov ~= frost.Animator.AnimatorPointOfView.Free
+                if length(radius) == 1
+                    axis(obj.axs, [center(1)-radius, center(1)+radius, center(2)-radius, center(2)+radius,center(3)-radius/3, center(3)+radius]);
+                else
+                    axis(obj.axs, radius);
+                end
                 view(obj.axs, hAngle, vAngle);
             end
         end
@@ -222,7 +223,7 @@ classdef AbstractAnimator < handle
         
         function [center, radius, yaw] = GetCenter(obj, t, x)            
             center = [0,0,0];
-            radius = 5;
+            radius = 2;
             yaw = 0;
         end
         
