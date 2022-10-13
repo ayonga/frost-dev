@@ -38,7 +38,7 @@ RationalizeEx::usage = "RationalizeEx[expr] loosely rationalizes any expression 
 
 RationalizeAny::usage = "RationalizeAny[value] converts `value` to an expression and use RationalizeEx"; 
 
-BlockDiagonalMatrix::usage = "BlockDiagonalMatrix[b:{__?MatrixQ}] creates block diagonal matrx."; 
+BlockDiagonalMatrixCustom::usage = "BlockDiagonalMatrixCustom[b:{__?MatrixQ}] creates block diagonal matrx."; 
 
 EnsureDirectoryExists::usage = "EnsureDirectoryExists[dir] ensure directory exists, if not create one."; 
 
@@ -204,7 +204,7 @@ ParallelFullSimplify[A_] := FullSimplify[A];
 
 (*From:http://mathworld.wolfram.com/BlockDiagonalMatrix.html*)
 
-BlockDiagonalMatrix[b : {__?MatrixQ}] := Block[{r, c, n = Length[b], 
+BlockDiagonalMatrixCustom[b : {__?MatrixQ}] := Block[{r, c, n = Length[b], 
 	i, j},
 	{r, c} = Transpose[Dimensions /@ b];
 	ArrayFlatten[

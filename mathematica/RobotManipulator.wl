@@ -196,7 +196,7 @@ InertiaMatrixByLink[robotLink__,nDof_] :=
 		link = {robotLink};
 
 		(* the mass/inertia matrix *)
-		MM = SparseArray@Map[ExtraUtils`BlockDiagonalMatrix[{I3*GetMass[#],GetInertia[#]}]&, link];
+		MM = SparseArray@Map[ExtraUtils`BlockDiagonalMatrixCustom[{I3*GetMass[#],GetInertia[#]}]&, link];
 		
 		(* compute body jacobians of each link CoM position *)
 		Je = SparseArray[ComputeBodyJacobians[robotLink, nDof]];
@@ -212,7 +212,7 @@ InertiaMatrix[robotLinks__,nDof_] :=
 		links = {robotLinks};
 		
 		(* the mass/inertia matrix *)
-		MM = Map[ExtraUtils`BlockDiagonalMatrix[{I3*GetMass[#],GetInertia[#]}]&, links];
+		MM = Map[ExtraUtils`BlockDiagonalMatrixCustom[{I3*GetMass[#],GetInertia[#]}]&, links];
 		
 		(* compute body jacobians of each link CoM position *)
 		Je = ComputeBodyJacobians[robotLinks, nDof];
