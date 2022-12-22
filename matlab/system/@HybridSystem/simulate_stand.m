@@ -123,8 +123,8 @@ while (true)
     end
     
     
-%uncomment if you want to stop the simulation at the domain number that's equated to cur_node_idx     
-%         if cur_node_idx==5
+% %uncomment if you want to stop the simulation at the domain number that's equated to cur_node_idx     
+%         if cur_node_idx==3
 %             cur_node_idx=1;
 %         end
     % %
