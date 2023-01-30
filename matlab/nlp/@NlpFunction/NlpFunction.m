@@ -168,7 +168,8 @@ classdef NlpFunction < handle
             
             if ~isempty(obj.SymFun)
                 f = obj.SymFun;
-                x = vertcat(f.Vars{:});
+                s = reshape(f.Vars{:},[],1);
+                x = vertcat(s{:});
                 jac = jacobian(f,x);
                 if ~isempty(f.Params)
                     jac = subs(jac,f.Params,obj.AuxData);
@@ -260,7 +261,8 @@ classdef NlpFunction < handle
             %
             % Return values:
             % indices: the indices of dependent variables @type colvec
-            indices = {obj.DepVariables.Indices};
+            temp = reshape({obj.DepVariables.Indices},[],1);
+            indices = vertcat(temp{:});
         end
         
         

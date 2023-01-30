@@ -21,7 +21,7 @@ function compileConstraint(obj, constr, export_path, exclude, varargin)
     
     opts = struct(varargin{:});
     % overwrite non-changable options
-    %opts.StackVariable = false;
+    opts.StackVariable = true;
     opts.Namespace = obj.Name;
     
     if isempty(constr)

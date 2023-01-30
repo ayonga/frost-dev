@@ -12,8 +12,9 @@ function compileObjective(obj, export_path, varargin)
     
     opts = struct(varargin{:});
     % overwrite non-changable options
-%     opts.StackVariable = false;
+    opts.StackVariable = true;
     opts.Namespace = obj.Name;
+
     
     %     deps_array_cell = arrayfun(@(x)getSummands(x), obj.CostArray, 'UniformOutput', false);
     %     func_array = vertcat(deps_array_cell{:});

@@ -46,7 +46,7 @@ function [J,Js] = exportJacobian(obj, export_path, varargin)
     if ~isempty(obj.Vars) && opts.StackVariable
         vars = cellfun(@(x)flatten(x), obj.Vars,'UniformOutput',false);
         vars = {[vars{:}]};
-        vars = flatten(vars{:});
+        vars = {flatten(vars{:})};
     elseif isempty(obj.Vars)
         error('The dependent variables CANNOT be empty.');
     else
@@ -56,7 +56,7 @@ function [J,Js] = exportJacobian(obj, export_path, varargin)
     if ~isempty(obj.Params) && opts.StackVariable
         params = cellfun(@(x)flatten(x), obj.Params,'UniformOutput',false);
         params = {[params{:}]};
-        params = flatten(params{:});
+        params = {flatten(params{:})};
     else
         params = obj.Params;
     end

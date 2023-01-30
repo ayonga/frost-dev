@@ -153,7 +153,8 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
             
             jac_pattern = func_array(i).JacPattern;
             % retrieve the indices of dependent variables
-            dep_indices = vertcat(func_struct.DepIndices{i}{:});
+            %             dep_indices = vertcat(func_struct.DepIndices{i}{:});
+            dep_indices = func_struct.DepIndices{i};
             func_indics = func_struct.FuncIndices{i};
             
             %| @note The JacPattern gives the indices of non-zero Jacobian

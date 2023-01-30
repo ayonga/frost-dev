@@ -71,13 +71,14 @@ end
         
         f = 0;
         for i = 1:objective.numFuncs
-            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            %             var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = x(objective.DepIndices{i});
             %cellfun(@(x)a(x{:}]),ind)
             % calculate cost value
             if isempty(objective.AuxData{i})
-                f = f + feval(objective.Funcs{i}, var{:});
+                f = f + feval(objective.Funcs{i}, var);
             else
-                f = f + feval(objective.Funcs{i}, var{:}, objective.AuxData{i}{:});
+                f = f + feval(objective.Funcs{i}, var, objective.AuxData{i});
             end
             
         end
@@ -98,13 +99,13 @@ end
         % preallocation
         C   = zeros(constraint.Dimension,1);
         for i = 1:constraint.numFuncs
-            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
-            
+            %             var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = x(constraint.DepIndices{i});
             % calculate constraints
             if isempty(constraint.AuxData{i})
-                val = feval(constraint.Funcs{i}, var{:});
+                val = feval(constraint.Funcs{i}, var);
             else
-                val = feval(constraint.Funcs{i}, var{:}, constraint.AuxData{i}{:});
+                val = feval(constraint.Funcs{i}, var, constraint.AuxData{i});
             end
             if size(val,1) ~= length(constraint.FuncIndices{i})
                 error('Error. \nThe output size of function %s is incorrect.',constraint.Names{i})
@@ -131,13 +132,13 @@ end
         % preallocation
         J_val   = zeros(objective.nnzJac,1);
         for i = 1:objective.numFuncs
-            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
-            
+            %             var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = x(objective.DepIndices{i});
             % calculate gradient
             if isempty(objective.AuxData{i})
-                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var{:});
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var);
             else
-                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var{:}, objective.AuxData{i}{:});
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var, objective.AuxData{i});
             end
             
         end
@@ -168,13 +169,13 @@ end
         % preallocation
         J_val   = zeros(constraint.nnzJac,1);
         for i = 1:constraint.numFuncs
-            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
-            
+            %             var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = x(constraint.DepIndices{i});
             % calculate Jacobian
             if isempty(constraint.AuxData{i})
-                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var{:});
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var);
             else
-                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var{:}, constraint.AuxData{i}{:});
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var, constraint.AuxData{i});
             end
             
         end
@@ -242,16 +243,16 @@ end
         
         % compute the Hessian for objective function
         for i = 1:objective.numFuncs
-            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
-            
+            %             var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = x(objective.DepIndices{i});
             if ~isempty(objective.nzHessIndices{i})
                 % if the function is a linear function, then the Hessian of
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(objective.AuxData{i})
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma);
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma);
                 else
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma, objective.AuxData{i}{:});
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma, objective.AuxData{i});
                 end
             end
             
@@ -267,7 +268,8 @@ end
         hes_constr   = zeros(constraint.nnzHess,1);
         % compute the Hessian for constraints
         for i = 1:constraint.numFuncs
-            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            %             var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = x(constraint.DepIndices{i});
             lambda_i = lambda(constraint.FuncIndices{i});
             
             if ~isempty(constraint.nzHessIndices{i})
@@ -275,9 +277,9 @@ end
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(constraint.AuxData{i})
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i);
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i);
                 else
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i, constraint.AuxData{i}{:});
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i, constraint.AuxData{i});
                 end
             end
             

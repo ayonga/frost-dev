@@ -106,7 +106,7 @@ classdef SymFunction < SymExpression
                     assert(all(cellfun(@(x)isa(x,'SymVariable'), vars)),...
                         'SymFunction:invalidVariables', ...
                         'The dependent variables must be valid SymVariable objects.');
-                    obj.Vars = vars;
+                    obj.Vars = reshape(vars,[],1);
                 else
                     obj.Vars = {};
                 end
@@ -122,7 +122,7 @@ classdef SymFunction < SymExpression
                     assert(all(cellfun(@(x)isa(x,'SymVariable'), params)),...
                         'SymFunction:invalidVariables', ...
                         'The dependent variables must be valid SymVariable objects.');
-                    obj.Params = params;
+                    obj.Params = reshape(params,[],1);
                 else
                     obj.Params = {};
                 end
@@ -164,7 +164,15 @@ classdef SymFunction < SymExpression
         end
         
         
-        
+        %         function obj = stackVarsParams(obj)
+        %
+        %             vars = obj.Vars;
+        %             if ~iscell(vars), vars = {vars}; end
+        %             obj.Vars = {vertcat(vars{:})};
+        %             params = obj.Params;
+        %             if ~iscell(params), params = {params}; end
+        %             obj.Params = {vertcat(params{:})};
+        %         end
         
     end
     
