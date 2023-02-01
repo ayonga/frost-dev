@@ -33,18 +33,18 @@ function right_stance_constraints(nlp, bounds, varargin)
     addNodeConstraint(nlp, floor(nlp.NumNode/2),nlp.Plant.EventFuncs.nsf_height.ConstrExpr, {'x'}, 0.1, Inf);
     
    
-    x = domain.States.x;
-    dx = domain.States.dx;
-    l_toe_frame = left_toe_frame(domain);
-    pos = getCartesianPosition(domain, l_toe_frame);  
-    J_pos = jacobian(pos([1,3]), x);
-    vel = J_pos * dx;
-    constraint_func = SymFunction(['impact_velocity_',l_toe_frame.Name], vel, {x, dx});
-    
-        % impact swing foot velocity
-    % (Make sure foot goes downward and slightly backward)
-    lb = bounds.custom.footVelocityEnd.lb;
-    ub = bounds.custom.footVelocityEnd.ub;
-    addNodeConstraint(nlp, nlp.NumNode-2:nlp.NumNode, constraint_func, {'x','dx'}, lb, ub);
+%     x = domain.States.x;
+%     dx = domain.States.dx;
+%     l_toe_frame = left_toe_frame(domain);
+%     pos = getCartesianPosition(domain, l_toe_frame);  
+%     J_pos = jacobian(pos([1,3]), x);
+%     vel = J_pos * dx;
+%     constraint_func = SymFunction(['impact_velocity_',l_toe_frame.Name], vel, {x, dx});
+%     
+%         % impact swing foot velocity
+%     % (Make sure foot goes downward and slightly backward)
+%     lb = bounds.custom.footVelocityEnd.lb;
+%     ub = bounds.custom.footVelocityEnd.ub;
+%     addNodeConstraint(nlp, nlp.NumNode-2:nlp.NumNode, constraint_func, {'x','dx'}, lb, ub);
         
 end
