@@ -256,13 +256,18 @@ classdef NlpFunction < handle
         
        
         
-        function indices = getDepIndices(obj)
+        function indices = getDepIndices(obj, useStackedVariable)
             % Returns the indices of the dependent variables
             %
             % Return values:
             % indices: the indices of dependent variables @type colvec
-            temp = reshape({obj.DepVariables.Indices},[],1);
-            indices = vertcat(temp{:});
+            
+            if useStackedVariable
+                temp = reshape({obj.DepVariables.Indices},[],1);
+                indices = vertcat(temp{:});
+            else
+                indices = {obj.DepVariables.Indices};
+            end
         end
         
         

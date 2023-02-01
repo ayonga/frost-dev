@@ -24,8 +24,7 @@ function obj = setAuxdata(obj, auxdata)
         end
     end
     
-    auxdata = reshape(auxdata,[],1);
-    obj.AuxData = vertcat(auxdata{:});
+    obj.AuxData = auxdata;
     
     
 end

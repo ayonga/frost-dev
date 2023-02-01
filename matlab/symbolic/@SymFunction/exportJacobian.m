@@ -64,7 +64,7 @@ function [J,Js] = exportJacobian(obj, export_path, varargin)
     
     
     export_opts = opts;   
-    export_opts.Vars = [vars, params];
+    export_opts.Vars = [vars; params];
   
     
     

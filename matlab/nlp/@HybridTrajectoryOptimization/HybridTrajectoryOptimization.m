@@ -63,6 +63,7 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
                 bounds struct
                 options.DerivativeLevel {mustBeMember(options.DerivativeLevel, [0,1,2])} = 1
                 options.EqualityConstraintBoundary double {mustBeNonnegative} = 0
+                options.StackVariable logical = false
                 options.CollocationScheme char {mustBeMember(options.CollocationScheme, {'HermiteSimpson','Trapezoidal','PseudoSpectral'})} = 'HermiteSimpson'
                 options.DistributeParameters logical = false
                 options.DistributeTimeVariable logical = false
@@ -72,7 +73,8 @@ classdef HybridTrajectoryOptimization < NonlinearProgram
             end
             
             sup_opts = struct('DerivativeLevel', options.DerivativeLevel, ...
-                'EqualityConstraintBoundary', options.EqualityConstraintBoundary);
+                'EqualityConstraintBoundary', options.EqualityConstraintBoundary,...
+                'StackVariable',options.StackVariable);
             sup_opts_cell = namedargs2cell(sup_opts);
             % call superclass constructor
             obj = obj@NonlinearProgram(name, sup_opts_cell{:});

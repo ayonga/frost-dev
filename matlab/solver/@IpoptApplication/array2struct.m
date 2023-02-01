@@ -113,7 +113,8 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     func_struct.Funcs = arrayfun(@(x) x.Funcs.Func, func_array, 'UniformOutput', false);
     func_struct.JacFuncs = arrayfun(@(x) x.Funcs.Jac, func_array, 'UniformOutput', false);  
     func_struct.JacStructFuncs = arrayfun(@(x) x.Funcs.JacStruct, func_array, 'UniformOutput', false);  
-    dep_indices = arrayfun(@(x) getDepIndices(x), func_array, 'UniformOutput', false);
+
+    dep_indices = arrayfun(@(x) getDepIndices(x, obj.Nlp.Options.StackVariable), func_array, 'UniformOutput', false);
     func_struct.DepIndices = dep_indices;%cellfun(@(x)(vertcat(x)),dep_indices,'UniformOutput',false);
     func_struct.AuxData = arrayfun(@(x) x.AuxData, func_array, 'UniformOutput', false);
     func_struct.FuncIndices = arrayfun(@(x) x.FuncIndices, func_array, 'UniformOutput', false);
@@ -153,8 +154,11 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
             
             jac_pattern = func_array(i).JacPattern;
             % retrieve the indices of dependent variables
-            %             dep_indices = vertcat(func_struct.DepIndices{i}{:});
-            dep_indices = func_struct.DepIndices{i};
+            if obj.Nlp.Options.StackVariable
+                dep_indices = func_struct.DepIndices{i};
+            else
+                dep_indices = vertcat(func_struct.DepIndices{i}{:});
+            end
             func_indics = func_struct.FuncIndices{i};
             
             %| @note The JacPattern gives the indices of non-zero Jacobian

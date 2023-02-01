@@ -85,12 +85,14 @@ classdef NonlinearProgram < handle
                 name char {mustBeTextScalar}
                 options.DerivativeLevel {mustBeMember(options.DerivativeLevel, [0,1,2])} = 1
                 options.EqualityConstraintBoundary double {mustBeGreaterThanOrEqual(options.EqualityConstraintBoundary,0)} = 0
+                options.StackVariable logical {} = true
             end
             
             obj.Name = name;
             % default options
             obj.Options = struct('DerivativeLevel', options.DerivativeLevel, ...
-                'EqualityConstraintBoundary', options.EqualityConstraintBoundary);
+                'EqualityConstraintBoundary', options.EqualityConstraintBoundary, ...
+                'StackVariable', options.StackVariable);
             
             
             

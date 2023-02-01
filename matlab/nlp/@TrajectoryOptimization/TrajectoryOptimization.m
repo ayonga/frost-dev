@@ -81,6 +81,7 @@ classdef TrajectoryOptimization < NonlinearProgram
                 bounds struct = struct()
                 options.DerivativeLevel {mustBeMember(options.DerivativeLevel, [0,1,2])} = 1
                 options.EqualityConstraintBoundary double {mustBeNonnegative} = 0
+                options.StackVariable logical = true
                 options.CollocationScheme char {mustBeMember(options.CollocationScheme, {'HermiteSimpson','Trapezoidal','PseudoSpectral'})} = 'HermiteSimpson'
                 options.DistributeParameters logical = false
                 options.DistributeTimeVariable logical = false
@@ -91,7 +92,8 @@ classdef TrajectoryOptimization < NonlinearProgram
             
             % call superclass constructor
             sup_opts = struct('DerivativeLevel', options.DerivativeLevel, ...
-                'EqualityConstraintBoundary', options.EqualityConstraintBoundary);
+                'EqualityConstraintBoundary', options.EqualityConstraintBoundary,...
+                'StackVariable',options.StackVariable);
             sup_opts_cell = namedargs2cell(sup_opts);
             obj = obj@NonlinearProgram(name, sup_opts_cell{:});
             

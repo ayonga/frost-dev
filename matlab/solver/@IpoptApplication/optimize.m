@@ -29,16 +29,28 @@ function [sol, info] = optimize(obj, x0)
     
     
     Funcs = struct();
-    Funcs.objective         = @(x)IpoptObjective(x, obj.Objective);
-    Funcs.constraints       = @(x)IpoptConstraints(x, obj.Constraint);
-    Funcs.gradient          = @(x)IpoptGradient(x, obj.Objective, dimVars, obj.Options.UseMexSparse);
-    Funcs.jacobian          = @(x)IpoptJacobian(x, obj.Constraint, dimVars, obj.Options.UseMexSparse);
+    if nlp.Options.StackVariable
+        Funcs.objective         = @(x)IpoptObjectiveStacked(x, obj.Objective);
+        Funcs.constraints       = @(x)IpoptConstraintsStacked(x, obj.Constraint);
+        Funcs.gradient          = @(x)IpoptGradientStacked(x, obj.Objective, dimVars, obj.Options.UseMexSparse);
+        Funcs.jacobian          = @(x)IpoptJacobianStacked(x, obj.Constraint, dimVars, obj.Options.UseMexSparse);        
+    else
+        Funcs.objective         = @(x)IpoptObjective(x, obj.Objective);
+        Funcs.constraints       = @(x)IpoptConstraints(x, obj.Constraint);
+        Funcs.gradient          = @(x)IpoptGradient(x, obj.Objective, dimVars, obj.Options.UseMexSparse);
+        Funcs.jacobian          = @(x)IpoptJacobian(x, obj.Constraint, dimVars, obj.Options.UseMexSparse);   
+    end
     Funcs.jacobianstructure = @()IpoptJacobianStructure(obj.Constraint, dimVars, obj.Options.UseMexSparse);
     Funcs.iterfunc          = @(x, f, info)IpoptIterFunc(nlp, x, f, info);
+
     if strcmpi(opts.ipopt.hessian_approximation, 'exact')
-        
-        Funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
-            obj.Objective, obj.Constraint, dimVars,obj.Options.UseMexSparse);
+        if nlp.Options.StackVariable
+            Funcs.hessian           = @(x, sigma, lambda)IpoptHessianStacked(x, sigma, lambda, ...
+                obj.Objective, obj.Constraint, dimVars,obj.Options.UseMexSparse);
+        else
+            Funcs.hessian           = @(x, sigma, lambda)IpoptHessian(x, sigma, lambda, ...
+                obj.Objective, obj.Constraint, dimVars,obj.Options.UseMexSparse);
+        end
         Funcs.hessianstructure  = @()IpoptHessianStructure(obj.Objective, ...
             obj.Constraint, dimVars,obj.Options.UseMexSparse);
         
@@ -71,14 +83,37 @@ end
         
         f = 0;
         for i = 1:objective.numFuncs
-            %             var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            %             var = x(objective.DepIndices{i});
+            
+            % calculate cost value
+            if isempty(objective.AuxData{i})
+                f = f + feval(objective.Funcs{i}, var{:});
+            else
+                f = f + feval(objective.Funcs{i}, var{:}, objective.AuxData{i}{:});
+            end
+            
+        end
+        drawnow;
+    end
+
+    function f = IpoptObjectiveStacked(x, objective)
+        % nested function that commputes the objective function of the
+        % NLP problem
+        %
+        % Parameters:
+        %  objective: a structure of arrays that contains the information
+        %  of all subfunction of the objective.
+        
+        f = 0;
+        for i = 1:objective.numFuncs
             var = x(objective.DepIndices{i});
-            %cellfun(@(x)a(x{:}]),ind)
+            
             % calculate cost value
             if isempty(objective.AuxData{i})
                 f = f + feval(objective.Funcs{i}, var);
             else
-                f = f + feval(objective.Funcs{i}, var, objective.AuxData{i});
+                f = f + feval(objective.Funcs{i}, var, [objective.AuxData{i}{:}]);
             end
             
         end
@@ -99,13 +134,38 @@ end
         % preallocation
         C   = zeros(constraint.Dimension,1);
         for i = 1:constraint.numFuncs
-            %             var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            
+            % calculate constraints
+            if isempty(constraint.AuxData{i})
+                val = feval(constraint.Funcs{i}, var{:});
+            else
+                val = feval(constraint.Funcs{i}, var{:}, constraint.AuxData{i}{:});
+            end
+            if size(val,1) ~= length(constraint.FuncIndices{i})
+                error('Error. \nThe output size of function %s is incorrect.',constraint.Names{i})
+            end
+            C(constraint.FuncIndices{i}) = C(constraint.FuncIndices{i}) + val;
+        end
+    end
+
+    function [C] = IpoptConstraintsStacked(x, constraint)
+        % nested function that commputes the constraints of the NLP problem
+        %
+        % Parameters:
+        %  constraint: a structure of arrays that contains the information
+        %  of all constraints
+        
+        
+        % preallocation
+        C   = zeros(constraint.Dimension,1);
+        for i = 1:constraint.numFuncs
             var = x(constraint.DepIndices{i});
             % calculate constraints
             if isempty(constraint.AuxData{i})
                 val = feval(constraint.Funcs{i}, var);
             else
-                val = feval(constraint.Funcs{i}, var, constraint.AuxData{i});
+                val = feval(constraint.Funcs{i}, var, [constraint.AuxData{i}{:}]);
             end
             if size(val,1) ~= length(constraint.FuncIndices{i})
                 error('Error. \nThe output size of function %s is incorrect.',constraint.Names{i})
@@ -132,13 +192,49 @@ end
         % preallocation
         J_val   = zeros(objective.nnzJac,1);
         for i = 1:objective.numFuncs
-            %             var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            
+            % calculate gradient
+            if isempty(objective.AuxData{i})
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var{:});
+            else
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var{:}, objective.AuxData{i}{:});
+            end
+            
+        end
+        
+        % construct the sparse jacobian matrix
+        if use_mex
+            J = sparse2(objective.nzJacRows, objective.nzJacCols,...
+                J_val, 1, dimVars, objective.nnzJac);
+        else
+            J = sparse(objective.nzJacRows, objective.nzJacCols,...
+                J_val, 1, dimVars, objective.nnzJac);
+        end
+    end
+
+    function [J] = IpoptGradientStacked(x, objective, dimVars, use_mex)
+        % nested function that commputes the first-order derivatives
+        % (gradient) of the objective function of the NLP problem
+        %
+        % Parameters:
+        %  objective: a structure of arrays that contains the information
+        %  of all subfunction of the objective.
+        %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
+        
+        
+        
+        % preallocation
+        J_val   = zeros(objective.nnzJac,1);
+        for i = 1:objective.numFuncs
             var = x(objective.DepIndices{i});
             % calculate gradient
             if isempty(objective.AuxData{i})
                 J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var);
             else
-                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var, objective.AuxData{i});
+                J_val(objective.nzJacIndices{i}) = feval(objective.JacFuncs{i}, var, [objective.AuxData{i}{:}]);
             end
             
         end
@@ -169,13 +265,51 @@ end
         % preallocation
         J_val   = zeros(constraint.nnzJac,1);
         for i = 1:constraint.numFuncs
-            %             var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            
+            % calculate Jacobian
+            if isempty(constraint.AuxData{i})
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var{:});
+            else
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var{:}, constraint.AuxData{i}{:});
+            end
+            
+        end
+        
+        % construct the sparse jacobian matrix
+        if use_mex
+            J = sparse2(constraint.nzJacRows, constraint.nzJacCols,...
+                J_val, constraint.Dimension, dimVars, constraint.nnzJac);
+        else
+            J = sparse(constraint.nzJacRows, constraint.nzJacCols,...
+                J_val, constraint.Dimension, dimVars, constraint.nnzJac);
+        end
+        
+        if ~isempty(find(isnan(J), 1))
+            error('NaN detected.');
+        end
+    end
+
+    function [J] = IpoptJacobianStacked(x, constraint, dimVars, use_mex)
+        % nested function that commputes the first-order derivatives
+        % (Jacobian) of the constraints of the NLP problem
+        %
+        % Parameters:
+        %  constraint: a structure of arrays that contains the information
+        %  of all constraints
+        %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
+        
+        % preallocation
+        J_val   = zeros(constraint.nnzJac,1);
+        for i = 1:constraint.numFuncs
             var = x(constraint.DepIndices{i});
             % calculate Jacobian
             if isempty(constraint.AuxData{i})
                 J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var);
             else
-                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var, constraint.AuxData{i});
+                J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var, [constraint.AuxData{i}{:}]);
             end
             
         end
@@ -243,16 +377,16 @@ end
         
         % compute the Hessian for objective function
         for i = 1:objective.numFuncs
-            %             var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
-            var = x(objective.DepIndices{i});
+            var = cellfun(@(v)x(v(:)),objective.DepIndices{i},'UniformOutput',false); % dependent variables
+            
             if ~isempty(objective.nzHessIndices{i})
                 % if the function is a linear function, then the Hessian of
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(objective.AuxData{i})
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma);
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma);
                 else
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma, objective.AuxData{i});
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma, objective.AuxData{i}{:});
                 end
             end
             
@@ -268,7 +402,81 @@ end
         hes_constr   = zeros(constraint.nnzHess,1);
         % compute the Hessian for constraints
         for i = 1:constraint.numFuncs
-            %             var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            var = cellfun(@(v)x(v(:)),constraint.DepIndices{i},'UniformOutput',false); % dependent variables
+            
+            lambda_i = lambda(constraint.FuncIndices{i});
+            
+            if ~isempty(constraint.nzHessIndices{i})
+                % if the function is a linear function, then the Hessian of
+                % such function is zero. In other words, the non-zero
+                % indices should be empty.
+                if isempty(constraint.AuxData{i})
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i);
+                else
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i, constraint.AuxData{i}{:});
+                end
+            end
+            
+        end
+        
+          
+        if use_mex
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+                hes_constr, dimVars, dimVars, constraint.nnzHess);
+        else
+            H_constr = sparse(constraint.nzHessRows,constraint.nzHessRows,...
+                hes_constr, dimVars, dimVars, constraint.nnzHess);
+        end
+        
+        H_ret = H_objective + H_constr;
+    end
+
+    function [H_ret] = IpoptHessianStacked(x, sigma, lambda, ...
+            objective, constraint, dimVars, use_mex)
+        % nested function that commputes the second-order derivatives
+        % (Hessian) of the Lagrangian of the NLP problem
+        %
+        % Parameters:
+        %  objective: a structure of arrays that contains the information
+        %  of all subfunction of the objective.
+        %  constraint: a structure of arrays that contains the information
+        %  of all constraints
+        %  dimVars: the dimension of the NLP variables
+        %  use_mex: indicates to use mex version of ''sparse'' function 
+        %  @type logical
+        
+        
+        
+        % preallocation
+        hes_objective   = zeros(objective.nnzHess,1);
+        
+        % compute the Hessian for objective function
+        for i = 1:objective.numFuncs
+            
+            var = x(objective.DepIndices{i});
+            if ~isempty(objective.nzHessIndices{i})
+                % if the function is a linear function, then the Hessian of
+                % such function is zero. In other words, the non-zero
+                % indices should be empty.
+                if isempty(objective.AuxData{i})
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma);
+                else
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma, [objective.AuxData{i}{:}]);
+                end
+            end
+            
+        end
+        if use_mex
+            H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+                hes_objective, dimVars, dimVars, objective.nnzHess);
+        else
+            H_objective = sparse(objective.nzHessRows,objective.nzHessRows,...
+                hes_objective, dimVars, dimVars, objective.nnzHess);
+        end
+        % preallocation
+        hes_constr   = zeros(constraint.nnzHess,1);
+        % compute the Hessian for constraints
+        for i = 1:constraint.numFuncs
             var = x(constraint.DepIndices{i});
             lambda_i = lambda(constraint.FuncIndices{i});
             
@@ -279,7 +487,7 @@ end
                 if isempty(constraint.AuxData{i})
                     hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i);
                 else
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i, constraint.AuxData{i});
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i, [constraint.AuxData{i}{:}]);
                 end
             end
             

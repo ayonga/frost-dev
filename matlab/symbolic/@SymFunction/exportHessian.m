@@ -75,7 +75,7 @@ function [H,Hs] = exportHessian(obj, export_path, varargin)
     
     hess_nonzeros = nonzeros(hess_sum);
     export_opts.File = fullfile(export_path, obj.Funcs.Hess);
-    export_opts.Vars = [vars, params, {lambda}];
+    export_opts.Vars = [vars; params; {lambda}];
     H = export(hess_nonzeros, export_opts);
     
     

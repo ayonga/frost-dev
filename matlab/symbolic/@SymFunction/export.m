@@ -60,7 +60,7 @@ function f = export(obj, export_path, varargin)
     
     
     export_opts = opts;
-    export_opts.Vars = [vars, params];
+    export_opts.Vars = [vars; params];
     export_opts.File = fullfile(export_path, obj.Name);
     export_opts = rmfield(export_opts,'StackVariable');
     % The argument list cannot be empty. Use dummy variable
