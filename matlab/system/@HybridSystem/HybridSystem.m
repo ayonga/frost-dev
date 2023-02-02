@@ -33,6 +33,9 @@ classdef HybridSystem < handle & matlab.mixin.Copyable
         % @type char @default ''
         Name
         
+        % @type char
+        Type
+
         % The directed graph that describes the hybrid dynamical system
         % structure
         %

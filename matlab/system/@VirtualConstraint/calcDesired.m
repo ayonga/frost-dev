@@ -28,15 +28,7 @@ function yd = calcDesired(obj, t, x, dx, a, p)
         'The functions for desired outputs are not defined. Please run compile(obj, varargin) first.');
     rel_deg = obj.RelativeDegree;
     yd = cell(1,rel_deg+1);
-    is_state_based = strcmp(obj.PhaseType, 'StateBased');
-    
-    if obj.hasPhaseParam 
-        params = {a(:), p(:)};
-    else
-        params = {a(:)};
-    end
-    
-    
+    is_state_based = strcmp(obj.PhaseType, 'StateBased'); 
     
     switch model_type
         case 'FirstOrder'
@@ -45,7 +37,14 @@ function yd = calcDesired(obj, t, x, dx, a, p)
             states = {x,dx};
     end
     
-    tau = calcPhaseVariable(obj, t, x, dx, p);
+    if obj.hasPhaseParam 
+        params = {a(:), p(:)};
+        tau = calcPhaseVariable(obj, t, x, dx, p);
+    else
+        params = {a(:)};
+        tau = calcPhaseVariable(obj, t, x, dx);
+    end
+
     if tau{1} < 0
         s = 1;
     elseif tau{1} > 1

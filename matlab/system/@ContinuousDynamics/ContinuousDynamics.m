@@ -51,12 +51,20 @@ classdef ContinuousDynamics < DynamicalSystem
         % pre-process function handle of the object after the simulation 
         %
         % @note The function handle should have the syntax:
-        % params = postPorcess(sys, sol, controller, params, varargin)
+        % params = postProcess(sys, sol, controller, params, varargin)
         %
         % @type function_handle
         PostIntegrationCallback
         
-        
+        % output function to update the result computed in one cycle
+        %
+        % @note The function handle should have the syntax: (required by odeset)
+        % status = OutPutFcn(t, x, flag, varargin)
+        % with flag: 'init', [], 'done'
+        %
+        % @type function_handle
+        OutPutFcn
+
         % function to compute the system dynamics
         %
         % @type function_handle

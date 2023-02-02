@@ -4,6 +4,7 @@ restoredefaultpath;
 addpath('../../');
 frost_addpath();
 addpath(genpath("model"));
+export_path = 'gen/';
 %%
 [rabbit, rabbit_1step] = load_model('urdf/five_link_walker.urdf');
 
@@ -12,7 +13,7 @@ nlp = load_problem(rabbit_1step);
 
 %% Compile symbolic expressions to C source code and mex libraries.
 COMPILE = 1;
-export_path = 'gen/';
+
 if COMPILE
     if ~isfolder([export_path, 'opt/'])
         mkdir([export_path, 'opt/'])
@@ -24,10 +25,14 @@ if COMPILE
     end
     compile(rabbit_1step,[export_path, 'sim/']);
     export(rabbit_1step.Gamma.Nodes.Domain{1}.VirtualConstraints.Outputs, [export_path, 'sim/']);
+
+    if ~isfolder([export_path, 'sym/'])
+        mkdir([export_path, 'sym/'])
+    end
+    rabbit_1step.saveExpression('gen/sym');
 end
-rabbit_1step.saveExpression('gen/sym');
 %% Run the optimization using IPOPT
-addpath('gen/opt');
+addpath([export_path, 'opt/']);
 nlp.update;
 opts.linear_solver = 'ma57';
 solver = IpoptApplication(nlp, opts);

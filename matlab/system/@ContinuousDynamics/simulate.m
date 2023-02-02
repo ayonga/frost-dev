@@ -32,12 +32,17 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
     odeopts = odeset('MaxStep', 1e-2,'RelTol',1e-5,'AbsTol',1e-5);
     
     odeopts = odeset(odeopts, options);
-   
-    if isfield(options, 'disp') && ~isempty(options.disp)
-        odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger,options.disp));
-    else
-        odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
-    end
+    
+    %%% display animation during the simulation
+%     if isfield(options, 'disp') && ~isempty(options.disp)
+%         odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger,options.disp,obj));
+%     else
+%         odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)outputfcn(t,x,flag,logger));
+%     end
+    odeopts = odeset(odeopts, 'OutputFcn', @(t,x,flag)obj.OutPutFcn(t,x,flag,logger,options,obj));
+    
+
+    % choose the ODE solver
     if isfield(options, 'solver')
         solver = options.solver;
     else
@@ -88,7 +93,8 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
         if any(event_indices)  
             checkGuard(obj, sol.xe, sol.ye, eventfuncs, logger);
         end
-        updateLastLog(logger);
+        obj.OutPutFcn(sol.xe, sol.ye, 'done', logger, options, obj);
+        
         disp('Impact Detected!')
     else
         sol.xe = sol.x(end);
@@ -100,7 +106,7 @@ function [sol, logger] = simulate(obj, x0, t0, tf, eventnames, options)
         if any(event_indices)  
             checkGuard(obj, sol.xe, sol.ye, eventfuncs, logger);
         end
-        updateLastLog(logger);
+        obj.OutPutFcn(sol.xe, sol.ye, 'done', logger, options, obj);
         disp('End of Phase!')
     end
     % post-process

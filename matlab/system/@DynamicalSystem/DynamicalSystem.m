@@ -207,8 +207,8 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
                 obj
             end
             
-            arguments (Repeating)
-                vars char
+            arguments % (Repeating)
+                vars % char
             end
             
             if ~iscell(vars), vars = {vars}; end
@@ -225,7 +225,8 @@ classdef (Abstract) DynamicalSystem < handle & matlab.mixin.Copyable
                     case 'Inputs'
                         value{i} = obj.inputs_.(vars{i});
                     case 'Params'
-                        value{i} = obj.params_.(vars{i});
+                        % value{i} = obj.params_.(vars{i});
+                        value{i} = obj.Params.(vars{i}).Value;
                     case 'Time'
                         value{i} = obj.t_;
                     otherwise
