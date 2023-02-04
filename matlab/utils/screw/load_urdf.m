@@ -103,9 +103,10 @@ function [name, links, joints, transmissions] = load_urdf(urdf_file, round_numbe
             joints(index).Parent = char(parent.getAttribute('link'));
             joints(index).Child  = char(child.getAttribute('link'));
             
-            if ~strcmp(joints(index).Type, 'fixed')
-                joints(index).Axis = str2num(axis.getAttribute('xyz'));                
-            end
+            %             if ~strcmp(joints(index).Type, 'fixed')
+            joints(index).Axis = str2num(axis.getAttribute('xyz'));
+            %             end
+            
             limit = xml_joint.getElementsByTagName('limit').item(0);
             joints(index).Limit = struct('effort',0,...
                 'lower',0,...

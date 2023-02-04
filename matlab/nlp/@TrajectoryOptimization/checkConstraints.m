@@ -46,10 +46,19 @@ function [yc, cl, cu] = checkConstraints(obj, x, tol, output_file, permission)
                 yc_ll = zeros(constr.Dimension,1);
                 dep_var = constr.DepVariables;
                 var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
-                if isempty(constr.AuxData)
-                    yc_ll = feval(constr.Funcs.Func, var{:});
+
+                if obj.Options.StackVariable
+                    if isempty(constr.AuxData)
+                        yc_ll = feval(constr.Funcs.Func, vertcat(var{:}));
+                    else
+                        yc_ll = feval(constr.Funcs.Func, vertcat(var{:}), vertcat(constr.AuxData{:}));
+                    end
                 else
-                    yc_ll = feval(constr.Funcs.Func, var{:}, constr.AuxData{:});
+                    if isempty(constr.AuxData)
+                        yc_ll = feval(constr.Funcs.Func, var{:});
+                    else
+                        yc_ll = feval(constr.Funcs.Func, var{:}, constr.AuxData{:});
+                    end
                 end
                     
                 

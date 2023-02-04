@@ -285,9 +285,9 @@ end
                 J_val, constraint.Dimension, dimVars, constraint.nnzJac);
         end
         
-        if ~isempty(find(isnan(J), 1))
-            error('NaN detected.');
-        end
+        %         if ~isempty(find(isnan(J), 1))
+        %             error('NaN detected.');
+        %         end
     end
 
     function [J] = IpoptJacobianStacked(x, constraint, dimVars, use_mex)
@@ -311,7 +311,9 @@ end
             else
                 J_val(constraint.nzJacIndices{i}) = feval(constraint.JacFuncs{i}, var, [constraint.AuxData{i}{:}]);
             end
-            
+            %             if ~isempty(find(isnan(J_val(constraint.nzJacIndices{i})), 1))
+            %                 error('NaN detected.');
+            %             end
         end
         
         % construct the sparse jacobian matrix
@@ -323,9 +325,9 @@ end
                 J_val, constraint.Dimension, dimVars, constraint.nnzJac);
         end
         
-        if ~isempty(find(isnan(J), 1))
-            error('NaN detected.');
-        end
+        %         if ~isempty(find(isnan(J), 1))
+        %             error('NaN detected.');
+        %         end
     end
     %%
     
