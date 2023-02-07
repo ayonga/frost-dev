@@ -64,7 +64,7 @@ classdef AtlasModel < RobotLinks
             
             % call superclass constructor with custom configuration model
             obj = obj@RobotLinks(config, base, 'LoadPath',load_path,...
-                'RemoveFixedJoints',false);
+                'RemoveFixedJoints',true);
             
             
        end

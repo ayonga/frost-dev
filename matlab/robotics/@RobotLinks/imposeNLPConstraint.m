@@ -125,15 +125,13 @@ function nlp = imposeNLPConstraint(obj, nlp, varargin)
         f = obj.States.(f_name);
         if ~isempty(joint.Actuator)
             act = joint.Actuator;
-            if ~isempty(act)
                 
-                B_i = joint.TwistAxis;
-                Vm = B_i*act.GearRatio*dx(j_idx);
-                dVm= adV(Vm) * (Vm) + B_i*act.GearRatio*ddx(j_idx);
-                fexpr = f + ...
-                    B_i.*((act.GearRatio)*(joint.Gm * dVm - transpose(adV(Vm)) * (joint.Gm * Vm)));
-                
-            end
+            B_i = joint.TwistAxis;
+            Vm = B_i*act.GearRatio*dx(j_idx);
+            dVm= adV(Vm) * (Vm) + B_i*act.GearRatio*ddx(j_idx);
+            fexpr = f + ...
+                B_i.*((act.GearRatio)*(joint.Gm * dVm - transpose(adV(Vm)) * (joint.Gm * Vm)));
+               
         else
             fexpr = f;
         end

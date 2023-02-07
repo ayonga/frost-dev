@@ -10,7 +10,7 @@ function [gait, sol, info, total_time] = solve(nlp, x0, info)
     solver.Options.ipopt.dual_inf_tol = 1e-2;
     solver.Options.ipopt.constr_viol_tol = 1e-5;
     solver.Options.ipopt.compl_inf_tol = 1e-2;
-    solver.Options.ipopt.max_iter = 1000;
+    solver.Options.ipopt.max_iter = 10000;
     solver.Options.ipopt.linear_solver = 'ma57';
     %%% Only use this if contraints are the same
     if nargin > 2
