@@ -60,9 +60,9 @@ classdef JointSphere < frost.Animator.Sphere
             ax_world = obj.func_axis(x0);
             
             position = obj.func_center(x0);
-            p1 = ax_world.*obj.length/2 + position;
-            p2 = -ax_world.*obj.length/2 + position;
-            obj.line = plot3(obj.ax, [p1(1), p2(1)], [p1(2), p2(2)], [p1(3), p2(3)], 'g');
+            p1 = ax_world.*obj.length + position;
+            p2 = position;
+            obj.line = plot3(obj.ax, [p1(1), p2(1)], [p1(2), p2(2)], [p1(3), p2(3)], 'r-.>');
             
             obj.surface.FaceColor = 'red';
         end
@@ -72,8 +72,8 @@ classdef JointSphere < frost.Animator.Sphere
             ax_world = obj.func_axis(x);
             
             position = obj.func_center(x);
-            p1 = ax_world.*obj.length/2 + position;
-            p2 = -ax_world.*obj.length/2 + position;
+            p1 = ax_world.*obj.length + position;
+            p2 = position;
             obj.line.XData = [p1(1), p2(1)];
             obj.line.YData = [p1(2), p2(2)];
             obj.line.ZData = [p1(3), p2(3)];

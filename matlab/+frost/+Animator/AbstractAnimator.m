@@ -90,7 +90,7 @@ classdef AbstractAnimator < handle
             
             % Define Terrain
             if isempty(varargin)
-                [terrain.Tx, terrain.Ty] = meshgrid(-10:1:10, -10:1:10);
+                [terrain.Tx, terrain.Ty] = meshgrid(-2:1:2, -2:1:2);
                 terrain.Tz = 0.*terrain.Tx;
             else
                 terrain = varargin{1};
