@@ -24,12 +24,12 @@ function obj = addRunningCost(obj, func, deps, auxdata)
     w = SymVariable('w'); % weight
     
     if isnan(obj.Options.ConstantTimeHorizon)    
-        s_dep_vars = [{T},func.Vars];
-        deps = [{'T'},deps(:)'];
-        s_dep_params = [func.Params,{w}];
+        s_dep_vars = [{T};func.Vars];
+        deps = [{'T'};deps(:)];
+        s_dep_params = [func.Params;{w}];
     else
         s_dep_vars = func.Vars;
-        s_dep_params = [func.Params,{T,w}];
+        s_dep_params = [func.Params;{T};{w}];
         auxdata = [auxdata, {obj.Options.ConstantTimeHorizon}];
     end
     

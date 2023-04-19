@@ -68,7 +68,7 @@ function obj = addContact(obj, contact, fric_coef, geometry, load_path)
         %         else
         %             jac = jac_rot;
         %         end
-        % extract the contrained elements
+        %         extract the contrained elements
         idx = sum(contact.WrenchBase,2);
         constr_jac = jac(find(idx),:); %#ok<FNDSB>
         
