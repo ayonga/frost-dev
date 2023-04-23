@@ -1,5 +1,6 @@
-classdef Sphere < frost.Animator.DisplayItem
-    % Sphere object for frost.Animator.Display
+classdef CoMSphere < frost.Animator.Sphere
+    % Sphere depicting joints and axis of rotation for
+    % frost.Animator.Display
     % 
     % @author omar @date 2017-06-01
     % 
@@ -11,24 +12,27 @@ classdef Sphere < frost.Animator.DisplayItem
     % license, see
     % http://www.opensource.org/licenses/BSD-3-Clause
     
-    properties (SetAccess = protected, GetAccess = protected)
-        frame
-        surface
+    properties (SetAccess = private, GetAccess = protected)
+        line
     end
     
     properties (Access = public)
-        radius
+        length
     end
     
-    properties (GetAccess = public, SetAccess = protected)
-        func_center
+    properties (GetAccess = public, SetAccess = private)
+        func_axis
     end
     
     methods
-        function obj = Sphere(ax, model, frame, name, varargin)
-            obj = obj@frost.Animator.DisplayItem(ax, model, name);
-            obj.frame = frame;
-            obj.radius = 0.02;
+        function obj = CoMSphere(ax, model, varargin)
+            
+            name = ['p_com_',model.Name];
+            obj = obj@frost.Animator.Sphere(ax, model, model.Joints(1), name, varargin{:});
+
+            obj.radius = 0.1;
+            obj.surface.FaceColor = 'green';
+            
             
             p = inputParser;
             addParameter(p, 'UseExported', false);
@@ -36,9 +40,10 @@ classdef Sphere < frost.Animator.DisplayItem
             addParameter(p, 'SkipExporting', false);
             parse(p, varargin{:});
             
+            
             if p.Results.UseExported
                 if p.Results.SkipExporting == false
-                    expr = getCartesianPosition(obj.model, obj.frame).';
+                    expr = model.getComPosition().';
                     symFunc = SymFunction([obj.name, '_sphere_center'], expr, {model.States.x});
                     symFunc.export(p.Results.ExportPath);
                 end
@@ -57,20 +62,9 @@ classdef Sphere < frost.Animator.DisplayItem
             obj.surface = surf(obj.ax, xs*obj.radius + position(1),...
                 ys*obj.radius + position(2),...
                 zs*obj.radius + position(3),...
-                'FaceColor', 'black', 'EdgeColor', 'none');
+                'FaceColor', obj.surface.FaceColor, 'EdgeColor', 'black');
         end
         
-        function obj = update(obj, x)
-            position = obj.func_center(x);
-            
-            [xs, ys, zs] = sphere(10);
-            obj.surface.XData = xs*obj.radius + position(1);
-            obj.surface.YData = ys*obj.radius + position(2);
-            obj.surface.ZData = zs*obj.radius + position(3);
-        end
         
-        function obj = delete(obj)
-            delete(obj.surface);
-        end
     end
 end

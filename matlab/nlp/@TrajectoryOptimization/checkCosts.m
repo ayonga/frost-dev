@@ -35,12 +35,19 @@ function [yc] = checkCosts(obj, x, output_file,permission)
                 %                 for ll = 1:numel(dep_constr)
                 dep_var = cost.DepVariables;
                 var = arrayfun(@(v)x(v.Indices(:)),dep_var,'UniformOutput',false); % dependent variables
-                if isempty(cost.AuxData)
-                    yc(j) = feval(cost.Funcs.Func, var{:});
+                if obj.Options.StackVariable
+                    if isempty(cost.AuxData)
+                        yc(j) = feval(cost.Funcs.Func, vertcat(var{:}));
+                    else
+                        yc(j) = feval(cost.Funcs.Func, vertcat(var{:}), vertcat(cost.AuxData{:}));
+                    end
                 else
-                    yc(j) = feval(cost.Funcs.Func, var{:}, cost.AuxData{:});
+                    if isempty(cost.AuxData)
+                        yc(j) = feval(cost.Funcs.Func, var{:});
+                    else
+                        yc(j) = feval(cost.Funcs.Func, var{:}, cost.AuxData{:});
+                    end
                 end
-                    
                 %                 end
             end
         end

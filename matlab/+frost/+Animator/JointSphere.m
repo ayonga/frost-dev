@@ -27,8 +27,8 @@ classdef JointSphere < frost.Animator.Sphere
     methods
         function obj = JointSphere(ax, model, jointFrame, name, varargin)
             obj = obj@frost.Animator.Sphere(ax, model, jointFrame, name, varargin{:});
-            obj.radius = 0.02;
-            obj.length = 0.15;
+            obj.radius = 0.04;
+            obj.length = 0.1;
             
             p = inputParser;
             addParameter(p, 'UseExported', false);
@@ -62,7 +62,7 @@ classdef JointSphere < frost.Animator.Sphere
             position = obj.func_center(x0);
             p1 = ax_world.*obj.length + position;
             p2 = position;
-            obj.line = plot3(obj.ax, [p1(1), p2(1)], [p1(2), p2(2)], [p1(3), p2(3)], 'r-.>');
+            obj.line = plot3(obj.ax, [p1(1), p2(1)], [p1(2), p2(2)], [p1(3), p2(3)], 'r-.');
             
             obj.surface.FaceColor = 'red';
         end

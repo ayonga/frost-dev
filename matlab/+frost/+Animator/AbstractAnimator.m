@@ -164,6 +164,14 @@ classdef AbstractAnimator < handle
     end
     
     methods
+        function obj = setData(obj,t,x)
+            obj.t_all = t;
+            obj.x_all = x;
+            
+            obj.startTime = t(1);
+            obj.currentTime = obj.startTime;
+            obj.endTime = t(end);
+        end
         function HandleAxis(obj, t, x)
             [center, radius, yaw] = GetCenter(obj, t, x);
             
@@ -196,7 +204,7 @@ classdef AbstractAnimator < handle
                     vAngle = vAngle + 45;
             end
             if length(radius) == 1
-                axis(obj.axs, [center(1)-radius, center(1)+radius, center(2)-radius, center(2)+radius,center(3)-radius/3, center(3)+radius]);
+                axis(obj.axs, [center(1)-radius, center(1)+radius, center(2)-radius, center(2)+radius,center(3)-0.5, center(3)+2]);
             else
                 axis(obj.axs, radius);
             end
@@ -223,7 +231,7 @@ classdef AbstractAnimator < handle
         
         function [center, radius, yaw] = GetCenter(obj, t, x)            
             center = [0,0,0];
-            radius = 3;
+            radius = 1.5;
             yaw = 0;
         end
         
