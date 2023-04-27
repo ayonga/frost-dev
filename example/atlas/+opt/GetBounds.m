@@ -82,7 +82,7 @@ function bounds = GetBounds(model, system, speed)
     
     
     % feedback control gain for virtual constraints
-    bounds.RightStance.options.enforceVirtualConstraints = false;
+    bounds.RightStance.options.enforceVirtualConstraints = true;
     bounds.RightStance.gains.kp = 100;
     bounds.RightStance.gains.kd = 20;
 

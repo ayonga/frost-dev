@@ -12,7 +12,7 @@ export_path = 'gen/';
 nlp = load_problem(rabbit_1step);
 
 %% Compile symbolic expressions to C source code and mex libraries.
-COMPILE = 1;
+COMPILE = 0;
 
 if COMPILE
     if ~isfolder([export_path, 'opt/'])
@@ -35,6 +35,9 @@ end
 addpath([export_path, 'opt/']);
 nlp.update;
 opts.linear_solver = 'ma57';
+% opts.derivative_test = 'second-order';
+% opts.derivative_test_tol = 1e-3;
+% opts.max_iter = 96;
 solver = IpoptApplication(nlp, opts);
 x0 = nlp.getInitialGuess('typical');
 % Run Optimization

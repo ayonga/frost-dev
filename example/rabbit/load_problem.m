@@ -6,7 +6,8 @@ function nlp = load_problem(model)
     num_grid.LeftStance = 10;
     nlp = HybridTrajectoryOptimization('Rabbit_1step',model,num_grid,bounds,...
         'EqualityConstraintBoundary',1e-8,...
-        'StackVariable',true);
+        'StackVariable',true,...
+        'DerivativeLevel',1);
     
     r_stance = model.Gamma.Nodes.Domain{1};
     

@@ -386,18 +386,18 @@ end
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(objective.AuxData{i})
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma);
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.HessFuncs{i}, var{:}, sigma);
                 else
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var{:}, sigma, objective.AuxData{i}{:});
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.HessFuncs{i}, var{:}, objective.AuxData{i}{:}, sigma);
                 end
             end
             
         end
         if use_mex
-            H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+            H_objective = sparse2(objective.nzHessRows,objective.nzHessCols,...
                 hes_objective, dimVars, dimVars, objective.nnzHess);
         else
-            H_objective = sparse(objective.nzHessRows,objective.nzHessRows,...
+            H_objective = sparse(objective.nzHessRows,objective.nzHessCols,...
                 hes_objective, dimVars, dimVars, objective.nnzHess);
         end
         % preallocation
@@ -413,9 +413,9 @@ end
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(constraint.AuxData{i})
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i);
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.HessFuncs{i}, var{:}, lambda_i);
                 else
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var{:}, lambda_i, constraint.AuxData{i}{:});
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.HessFuncs{i}, var{:}, constraint.AuxData{i}{:}, lambda_i);
                 end
             end
             
@@ -423,10 +423,10 @@ end
         
           
         if use_mex
-            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessCols,...
                 hes_constr, dimVars, dimVars, constraint.nnzHess);
         else
-            H_constr = sparse(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse(constraint.nzHessRows,constraint.nzHessCols,...
                 hes_constr, dimVars, dimVars, constraint.nnzHess);
         end
         
@@ -461,18 +461,18 @@ end
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(objective.AuxData{i})
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma);
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.HessFuncs{i}, var, sigma);
                 else
-                    hes_objective(objective.nzHessIndices{i}) = feval(objective.hess_Funcs{i}, var, sigma, [objective.AuxData{i}{:}]);
+                    hes_objective(objective.nzHessIndices{i}) = feval(objective.HessFuncs{i}, var, [objective.AuxData{i}{:}], sigma);
                 end
             end
             
         end
         if use_mex
-            H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+            H_objective = sparse2(objective.nzHessRows,objective.nzHessCols,...
                 hes_objective, dimVars, dimVars, objective.nnzHess);
         else
-            H_objective = sparse(objective.nzHessRows,objective.nzHessRows,...
+            H_objective = sparse(objective.nzHessRows,objective.nzHessCols,...
                 hes_objective, dimVars, dimVars, objective.nnzHess);
         end
         % preallocation
@@ -487,9 +487,9 @@ end
                 % such function is zero. In other words, the non-zero
                 % indices should be empty.
                 if isempty(constraint.AuxData{i})
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i);
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.HessFuncs{i}, var, lambda_i);
                 else
-                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.hess_Funcs{i}, var, lambda_i, [constraint.AuxData{i}{:}]);
+                    hes_constr(constraint.nzHessIndices{i}) = feval(constraint.HessFuncs{i}, var, [constraint.AuxData{i}{:}], lambda_i);
                 end
             end
             
@@ -497,10 +497,10 @@ end
         
           
         if use_mex
-            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessCols,...
                 hes_constr, dimVars, dimVars, constraint.nnzHess);
         else
-            H_constr = sparse(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse(constraint.nzHessRows,constraint.nzHessCols,...
                 hes_constr, dimVars, dimVars, constraint.nnzHess);
         end
         
@@ -524,18 +524,18 @@ end
         %  @type logical
         
         if use_mex
-            H_objective = sparse2(objective.nzHessRows,objective.nzHessRows,...
+            H_objective = sparse2(objective.nzHessRows,objective.nzHessCols,...
                 ones(objective.nnzHess,1), dimVars, dimVars, objective.nnzHess);
             
             
-            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse2(constraint.nzHessRows,constraint.nzHessCols,...
                 ones(constraint.nnzHess,1), dimVars, dimVars, constraint.nnzHess);
         else
-            H_objective = sparse(objective.nzHessRows,objective.nzHessRows,...
+            H_objective = sparse(objective.nzHessRows,objective.nzHessCols,...
                 ones(objective.nnzHess,1), dimVars, dimVars, objective.nnzHess);
             
             
-            H_constr = sparse(constraint.nzHessRows,constraint.nzHessRows,...
+            H_constr = sparse(constraint.nzHessRows,constraint.nzHessCols,...
                 ones(constraint.nnzHess,1), dimVars, dimVars, constraint.nnzHess);
         end
         
