@@ -134,10 +134,10 @@ classdef RobotLinks < ContinuousDynamics
             
             % remove links with zero mass and inertia
             link_indices_to_remove = [];
-            for joint_index=1:numel(links)
-                link = links(joint_index);
+            for link_index=1:numel(links)
+                link = links(link_index);
                 if link.Mass == 0 && all(all(link.Inertia == zeros(3)))
-                    link_indices_to_remove = [link_indices_to_remove,joint_index]; %#ok<*AGROW>
+                    link_indices_to_remove = [link_indices_to_remove,link_index]; %#ok<*AGROW>
                 end
             end
             if ~isempty(link_indices_to_remove)

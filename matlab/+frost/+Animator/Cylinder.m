@@ -39,7 +39,7 @@ classdef Cylinder < frost.Animator.DisplayItem
             addParameter(p, 'UseExported', false);
             addParameter(p, 'ExportPath', '');
             addParameter(p, 'SkipExporting', false);
-            addParameter(p, 'Radius', 0.015);
+            addParameter(p, 'Radius', 0.03);
             parse(p, varargin{:});
             obj.radius = p.Results.Radius;
             
