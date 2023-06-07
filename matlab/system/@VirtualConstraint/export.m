@@ -17,7 +17,7 @@ function export(obj, export_path, varargin)
     cellfun(@(x)export_funcs(x,export_path, varargin{:}), obj.DesiredFuncs, ...
         'UniformOutput',false);
     
-    if ~isempty(obj.tau_)
+    if ~isempty(obj.PhaseFuncs)
         cellfun(@(x)export_funcs(x,export_path, varargin{:}), obj.PhaseFuncs, ...
             'UniformOutput',false);
     end
