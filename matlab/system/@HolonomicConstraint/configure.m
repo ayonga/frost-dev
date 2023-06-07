@@ -32,6 +32,10 @@ function obj = configure(obj, model, load_path)
             obj.dh_ = SymFunction(obj.dh_name,dh,{x,dx});
             
             dJh = jacobian(obj.dh_, x);
+            % dt = 1e-3;
+            % x_n = x+dx.*dt;
+            % Jh_n = subs(obj.Jh_,x,x_n);
+            % dJh = (Jh_n - obj.Jh_)./dt;
             obj.dJh_ = SymFunction(obj.dJh_name, dJh, {x, dx});
             
             ddx = model.States.ddx;

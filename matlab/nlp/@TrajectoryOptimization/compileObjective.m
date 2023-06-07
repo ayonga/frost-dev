@@ -42,6 +42,9 @@ function compileObjective(obj, cost, export_path, exclude, varargin)
                 continue;
             end
         end
+        if isempty(obj.CostTable)
+            break;
+        end
         cost_array = obj.CostTable.(cost{i});
         
         
