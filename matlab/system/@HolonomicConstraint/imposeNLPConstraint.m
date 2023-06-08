@@ -9,7 +9,7 @@ function nlp = imposeNLPConstraint(obj, nlp)
     p_name = obj.Params.Name;
     
     % h(x)-hd = 0 is enforced at the first node
-    nlp = addNodeConstraint(nlp, 'first', obj.h_, {'x',p_name},...
+    nlp = addNodeConstraint(nlp, 'all', obj.h_, {'x',p_name},...
         0, 0);
     
     if ~isempty(obj.ddh_) % if the second derivative of the object exists
@@ -17,7 +17,7 @@ function nlp = imposeNLPConstraint(obj, nlp)
         switch obj.SystemType
             case 'SecondOrder' % the second order system
                 % enforce \dot{h}(x,dx) = J(x)dx = 0 at the first node
-                nlp = addNodeConstraint(nlp, 'first', obj.dh_, {'x','dx'},...
+                nlp = addNodeConstraint(nlp, 'all', obj.dh_, {'x','dx'},...
                     0, 0);
                 % enforce \ddot{h}(x,dx,ddx) = 0 at all nodes
                 nlp = addNodeConstraint(nlp, 'all', obj.ddh_, {'x','dx','ddx'}, ...
