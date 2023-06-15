@@ -2,13 +2,14 @@ clc;
 clear
 
 
-MATH_VER = '12.3';  %NOTE: change it to currently installed Wolfram Mathematica version
+MATH_VER = '13.2';  %NOTE: change it to currently installed Wolfram Mathematica version
 
 %%
 
-if ismac      %NOTE: add `ws_comp_dir` (get below) to your LD_LIBRARY_PATH path
+if ismac      %NOTE: add `ws_comp_dir` (get below) to your DYLD_LIBRARY_PATH path
     ws_comp_dir = '/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-x86-64/CompilerAdditions';
-    wslib=fullfile(ws_comp_dir, 'wstp.framework');%'libWSTPi4.a');
+    wslib=fullfile(ws_comp_dir, 'libWSTPi4.a');
+
 
 elseif isunix %NOTE: add `ws_comp_dir` (get below) to your LD_LIBRARY_PATH path
     ws_comp_dir = fullfile('/usr/local/Wolfram/Mathematica/',MATH_VER,'SystemFiles/Links/WSTP/DeveloperKit/Linux-x86-64/CompilerAdditions');
@@ -29,7 +30,11 @@ end
 %%
 
 %make command
-command=sprintf('mex -D__STDC__ -v -I%s %s %s', ws_comp_dir, 'math.c', wslib);
+if ismac
+    command=sprintf('mex -D__STDC__ -v -I%s %s %s', ws_comp_dir, 'math.cxx', wslib);
+else
+    command=sprintf('mex -D__STDC__ -v -I%s %s %s', ws_comp_dir, 'math.c', wslib);
+end
 %compile
 eval(command)
 

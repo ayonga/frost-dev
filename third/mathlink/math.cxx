@@ -1,9 +1,9 @@
 // See README.md.
 
-enum {false,true};
+// enum {false,true};
 
 #include <assert.h>
-#include <wstp.h>
+#include "wstp.h"
 #include <math.h>
 #include <matrix.h>
 #include <mex.h>
@@ -167,11 +167,18 @@ Boolean OpenMathLink( int nlhs, mxArray *plhs[],
   Boolean     processedArgs = false;
     
 
+  char av0[] = "MathLinkMex";
+  char av1[] = "-linkname";
+  char av2[] = "/Applications/Mathematica.app/Contents/MacOS/WolframKernel -wstp";
+  char av3[] = "-linkmode";
+  char av4[] = "Launch";
+  char av5[] = "-linkprotocol";  
+  char av6[] = "Pipes";
   argc = 6;
-  argv[0] = "MathLinkMex";
-  argv[1] = "-linkname";      argv[2] = "MathKernel -mathlink";
-  argv[3] = "-linkmode";      argv[4] = "Launch";
-  argv[5] = "-linkprotocol";  argv[6] = "Pipes";
+  argv[0] = av0;
+  argv[1] = av1;      argv[2] = av2;
+  argv[3] = av3;      argv[4] = av4;
+  argv[5] = av5;      argv[6] = av6;
 
 
   
@@ -266,7 +273,7 @@ void MathLinkStringEval( int nlhs, mxArray *plhs[],
   int     mlres;
   char    *inStr = NULL;
   char    *outStr = NULL;
-  long    len;
+  int    len;
 
   if (mlp == NULL)
     mexErrMsgTxt("MathLink connection unexpectedly NULL!");
@@ -306,7 +313,7 @@ void PutArrayToMathematica( int nlhs, mxArray *plhs[],
   char    *nameStr = NULL;
   double    *data, *currPtr, *realPtr, *imagPtr;
   long    dims[3];
-  char    *heads[3];
+  const char    *heads[3];
   long    depth;
   int     row, col;
 
@@ -388,6 +395,8 @@ void GetArrayFromMathematica( int nlhs, mxArray *plhs[],
   long    depth, argcount;
   int     row, col;
 
+  char fail[] = "$Failed";
+
   if (mlp == NULL)
     mexErrMsgTxt("MathLink connection unexpectedly NULL!");
         
@@ -453,7 +462,7 @@ void GetArrayFromMathematica( int nlhs, mxArray *plhs[],
       HandleMathLinkError(mlp, &plhs[0]);
     }
   } else {
-    StrToMat("$Failed", &plhs[0]);
+    StrToMat(fail, &plhs[0]);
   }
   WSNewPacket(mlp);
     
@@ -511,7 +520,7 @@ int WaitForReturnPacket(WSLINK mlp)
   int mlres;
   unsigned int len;
   char *msgStr, *destStr;
-  long msglen;
+  int msglen;
 
   while ((mlres = WSNextPacket(mlp)) && (mlres != RETURNPKT)) {
     if (mlres == TEXTPKT) {
@@ -545,9 +554,10 @@ void HandleMathLinkError(WSLINK mlp, mxArray **mat)
      mxArray **mat;
 #endif
 {
+  char fail[] = "$Failed";
   mexPrintf("%s\n", WSErrorMessage(mlp));
   WSClearError(mlp);
-  StrToMat("$Failed", mat);
+  StrToMat(fail, mat);
   return;
 }
 
