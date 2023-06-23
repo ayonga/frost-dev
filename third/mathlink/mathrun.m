@@ -7,7 +7,7 @@ MATH_VER = '13.2';  %NOTE: change it to currently installed Wolfram Mathematica 
 %%
 
 if ismac      %NOTE: add `ws_comp_dir` (get below) to your DYLD_LIBRARY_PATH path
-    ws_comp_dir = '/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-ARM64/CompilerAdditions';
+    ws_comp_dir = '/Applications/Mathematica.app/Contents/SystemFiles/Links/WSTP/DeveloperKit/MacOSX-X86-64/CompilerAdditions';
     wslib=fullfile(ws_comp_dir, 'libWSTPi4.a');
 
 
