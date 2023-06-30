@@ -12,7 +12,7 @@ export_path = 'gen/';
 nlp = load_problem(rabbit_1step);
 
 %% Compile symbolic expressions to C source code and mex libraries.
-COMPILE = 0;
+COMPILE = 1;
 
 if COMPILE
     if ~isfolder([export_path, 'opt/'])
@@ -44,7 +44,7 @@ x0 = nlp.getInitialGuess('typical');
 tic
 % old = load('x0');
 % [sol, info] = optimize(solver, old.sol);
-[sol, info] = optimize(solver,rand(size(x0)));
+[sol, info] = optimize(solver,x0);
 toc
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 gait = struct(...
