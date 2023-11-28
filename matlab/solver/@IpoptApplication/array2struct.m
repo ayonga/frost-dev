@@ -124,11 +124,20 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
     func_struct.nzJacIndices = cell(func_struct.numFuncs,1);
     
     % if user-defined Hessian functions are provided
-    if derivative_level == 2         
+    if derivative_level == 2      
+        %         n_deps = length(func_array);
+        %         for i=1:n_deps
+        %             if isempty(func_array(i).HessPattern)
+        %                 js = feval(func_array(i).Funcs.HessStruct,0);
+        %                 if ~isempty(js)
+        %                     func_array(i) = setHessianPattern(func_array(i),js,'IndexForm');
+        %                 end
+        %             end
+        %         end
         func_struct.HessFuncs =  arrayfun(@(x) x.Funcs.Hess, func_array, 'UniformOutput', false);
         func_struct.nnzHess = sum([func_array.nnzHess]);
-        func_struct.nzHessRows = ones(func_struct.nnzHess,1);
-        func_struct.nzHessCols = ones(func_struct.nnzHess,1);
+        func_struct.nzHessRows = zeros(func_struct.nnzHess,1);
+        func_struct.nzHessCols = zeros(func_struct.nnzHess,1);
         func_struct.nzHessIndices = cell(func_struct.numFuncs,1);
     end
     
@@ -180,14 +189,24 @@ function func_struct = array2struct(obj, func_array, type, derivative_level)
                 % of the Jacobian of the current function
                 if isempty(func_array(i).HessPattern)
                     hs = feval(func_array(i).Funcs.HesStruct,0);
+                    hessian = sparse2(hs(:,1),hs(:,2),...
+                        ones(size(hs,1),1));
+                    if ~istril(hessian)
+                        pause
+                    end
                     func_array(i) = setHessianPattern(func_array(i),hs,'IndexForm');
                     hess_pattern = func_array(i).HessPattern;
                 else
                     hess_pattern = func_array(i).HessPattern;
                 end
-                
-                func_struct.nzHessRows(hes_index) = dep_indices(hess_pattern.Rows);
-                func_struct.nzHessCols(hes_index) = dep_indices(hess_pattern.Cols);
+                % retrieve the indices of dependent variables
+                if obj.Nlp.Options.StackVariable
+                    dep_indices = func_struct.DepIndices{i};
+                else
+                    dep_indices = vertcat(func_struct.DepIndices{i}{:});
+                end
+                func_struct.nzHessRows(hes_index) = max(dep_indices(hess_pattern.Rows),dep_indices(hess_pattern.Cols));
+                func_struct.nzHessCols(hes_index) = min(dep_indices(hess_pattern.Cols),dep_indices(hess_pattern.Cols));
             end
         end
     end

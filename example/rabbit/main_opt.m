@@ -35,13 +35,16 @@ end
 addpath([export_path, 'opt/']);
 nlp.update;
 opts.linear_solver = 'ma57';
+% opts.derivative_test = 'second-order';
+% opts.derivative_test_tol = 1e-3;
+% opts.max_iter = 96;
 solver = IpoptApplication(nlp, opts);
 x0 = nlp.getInitialGuess('typical');
 % Run Optimization
 tic
 % old = load('x0');
 % [sol, info] = optimize(solver, old.sol);
-[sol, info] = optimize(solver,rand(size(x0)));
+[sol, info] = optimize(solver,x0);
 toc
 [tspan, states, inputs, params] = exportSolution(nlp, sol);
 gait = struct(...
