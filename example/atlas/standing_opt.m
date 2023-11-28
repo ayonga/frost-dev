@@ -15,6 +15,13 @@ utils.init_path(export_path);
 cur = utils.get_root_path();
 urdf = fullfile(cur,'urdf','atlas_simple_contact_noback.urdf');
 
+% some options
+
+% if 'delay_set' is true, the computation of system dynamics (Coriolis
+% vector) will be delayed. Delaying this operation will save significant
+% loading time.
+delay_set = true;
+
 % if 'load_sym' is true, it will load symbolic expressions from previously
 % save external files instead of re-compute them. It reduce the loading
 % time by 7-10 faster. 
@@ -29,23 +36,23 @@ else
 end
 %% load robot model
 % load the robot model
-robot = sys.LoadModel(urdf, load_path);
+robot = sys.LoadModel(urdf, load_path, delay_set);
 
 % load hybrid system
-system = sys.LoadSystem(robot, load_path);
+system = sys.LoadStandingSystem(robot, load_path);
 
 %% Load optimization problem
 % get the boundary values, needs to be manually set all boundaries.
-bounds = opt.GetBounds(robot, system);
+bounds = opt.GetStandingBounds(robot);
 
 % load problem
-nlp = opt.LoadProblem(system, bounds, load_path);
+nlp = opt.LoadStandingProblem(system, bounds, load_path);
 
 %% Compile stuff if needed (only need to run for the first time)
 compileObjective(nlp,[],[],export_path);
 
 % % exclude dynamics_equations
-% compileConstraint(nlp,[],[],export_path,{'dynamics_equation'}); 
+compileConstraint(nlp,[],[],export_path,{'dynamics_equation'}); 
 
 % % compile everything
 compileConstraint(nlp,[],[],export_path);
@@ -64,11 +71,13 @@ compileConstraint(nlp,[],[],export_path);
 % 
 % compileConstraint(nlp,2,'dxDiscreteMapLeftImpact',export_path);
 % compileConstraint(nlp,4,'dxDiscreteMapRightImpact',export_path);
-% compileConstraint(nlp,[],{'y_position_RightStance'
-%     'd1y_position_RightStance'
-%     'position_output_dynamics'
-%     'y_position_LeftStance'
-%     'd1y_position_LeftStance'},export_path);
+% compileConstraint(nlp,[],{'tCont'
+%     'timeDuration'
+%     'pqfixedCont'
+%     'pRightSoleCont'
+%     'pLeftSoleCont'
+%     'apositionCont'
+%     'ppositionCont'},export_path);
 % compileConstraint(nlp,'RightStance',{...
 %     'step_distance_RightStance'},export_path);
 %% Save expression (only need to run for the first time)
@@ -79,8 +88,8 @@ system.saveExpression(load_path); % run this after loaded the optimization probl
 
 
 %% you can update bounds without reloading the problem. It is much much faster!!!
-bounds = opt.GetBounds(robot, system);
-opt.updateBounds(nlp, bounds);
+bounds = opt.GetStandingBounds(robot);
+opt.updateVariableBounds(nlp, bounds);
 
 % removeConstraint(nlp.Phase(1),'u_friction_cone_RightSole');
 % removeConstraint(nlp.Phase(1),'u_zmp_RightSole');
@@ -100,27 +109,26 @@ opt.updateInitCondition(nlp,param.gait);
 %[gait, sol, info] = opt.solve(nlp, sol); % if use previous solution "sol"
 % 3. warm start using use existing solutoin as the initial guess
 %[gait, sol, info] = opt.solve(nlp, sol, info); % if use previous solution "sol"
-[gait, sol, info,total_time] = opt.solve(nlp);
+[gait, sol, info] = opt.solve(nlp);
 
 
 
 %% save
-save('local/good_gait_vc.mat','gait','sol','info','bounds');
+save('local/good_gait.mat','gait','sol','info','bounds');
 
 
 
 %% animation
-gait(3).tspan = gait(3).tspan + gait(1).tspan(end);
-anim = plot.LoadOptAnimator(robot, gait,'SkipExporting',false);
+anim = plot.LoadOptAnimator(robot, gait,'SkipExporting',true);
 
 
 
 %% you can check the violation of constraints/variables and the value of each cost function by calling the following functions.
-tol = 1e0;
+tol = 1e-3;
 checkConstraints(nlp,sol,tol,'local/constr_check.txt') % 
-% checkVariables(nlp,sol,tol,'local/var_check.txt') % 
+checkVariables(nlp,sol,tol,'local/var_check.txt') % 
 
-% checkCosts(nlp,sol,'local/cost_check.txt') % 
+checkCosts(nlp,sol,'local/cost_check.txt') % 
 
 
 
