@@ -55,7 +55,7 @@ classdef AbstractAnimator < handle
     end
     
     methods
-        function obj = AbstractAnimator(display, t, x, varargin)
+        function obj = AbstractAnimator(display, t, x, terrain)
             %             if exist('f', 'var')
             %                 obj.fig = f;
             %                 obj.axs = axes(obj.fig);
@@ -89,11 +89,9 @@ classdef AbstractAnimator < handle
             obj.tmr.TimerFcn = @(~, ~) obj.Animate();
             
             % Define Terrain
-            if isempty(varargin)
+            if isempty(terrain)
                 [terrain.Tx, terrain.Ty] = meshgrid(-3:1:3, -3:1:3);
                 terrain.Tz = 0.*terrain.Tx;
-            else
-                terrain = varargin{1};
             end
             obj.ground = surf(terrain.Tx,terrain.Ty,terrain.Tz,'FaceColor',[0.5 0.8 0.5]); hold on;
         end
@@ -231,7 +229,7 @@ classdef AbstractAnimator < handle
         
         function [center, radius, yaw] = GetCenter(obj, t, x)            
             center = [0,0,0];
-            radius = 1.5;
+            radius = 6;
             yaw = 0;
         end
         
