@@ -19,6 +19,9 @@ classdef EventFunction < handle
         
         % a callback function for custom nlp constraints function
         CustomNLPConstraint
+
+        % a parameters
+        params
     end
     
     
@@ -40,7 +43,7 @@ classdef EventFunction < handle
             %  AuxData: 
             
             arguments                
-                func (1,1) SymFunction
+                func SymFunction
                 model ContinuousDynamics
                 options.AuxData (1,:) cell
             end
